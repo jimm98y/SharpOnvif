@@ -1,0 +1,24 @@
+{
+  "ExtendedData": {
+    "inputs": [
+      "https://www.onvif.org/ver10/pacs/accesscontrol.wsdl"
+    ],
+    "collectionTypes": [
+      "System.Array",
+      "System.Collections.Generic.Dictionary`2"
+    ],
+    "namespaceMappings": [
+      "*, OnvifAccessControl"
+    ],
+    "references": [
+      "System.ServiceModel, {System.ServiceModel.Primitives, 4.10.3}",
+      "System.ServiceModel.Duplex, {System.ServiceModel.Duplex, 4.10.3}",
+      "System.ServiceModel.Http, {System.ServiceModel.Http, 4.10.3}",
+      "System.ServiceModel.NetTcp, {System.ServiceModel.NetTcp, 4.10.3}",
+      "System.ServiceModel.Primitives, {System.ServiceModel.Primitives, 4.10.3}",
+      "System.ServiceModel.Security, {System.ServiceModel.Security, 4.10.3}"
+    ],
+    "targetFramework": "netstandard2.0",
+    "typeReuseMode": "All"
+  }
+}

@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpONVIF", "SharpONVIF\SharpONVIF.csproj", "{A20F8492-04D3-458E-9201-7F77137A5795}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvif", "SharpONVIF\SharpOnvif.csproj", "{A20F8492-04D3-458E-9201-7F77137A5795}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifWCF", "SharpOnvifWCF\SharpOnvifWCF.csproj", "{8E12DF27-DD12-4C7A-A3A1-CD8F1380A93E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{A20F8492-04D3-458E-9201-7F77137A5795}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A20F8492-04D3-458E-9201-7F77137A5795}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A20F8492-04D3-458E-9201-7F77137A5795}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E12DF27-DD12-4C7A-A3A1-CD8F1380A93E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E12DF27-DD12-4C7A-A3A1-CD8F1380A93E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E12DF27-DD12-4C7A-A3A1-CD8F1380A93E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E12DF27-DD12-4C7A-A3A1-CD8F1380A93E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

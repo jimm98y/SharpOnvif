@@ -13,17 +13,17 @@ using System.Net.Http;
 using System.Security.Cryptography;
 using System.Xml.Linq;
 
-namespace SharpONVIF
+namespace SharpOnvif
 {
     /// <summary>
-    /// ONVIF client.
+    /// Onvif client.
     /// </summary>
     /// <remarks>
-    /// This ONVIF client is implemented by hand instead of relying upon the WSDL service reference, because the auto-generated
+    /// This Onvif client is implemented by hand instead of relying upon the WSDL service reference, because the auto-generated
     ///  clients tend to have compatibility issues due to the way they implement the contract. These issues are difficult to
     ///  solve and require elaborate preprocessing/postprocessing of the incoming/outgoing messages. 
     /// </remarks>
-    public class ONVIFClient : IDisposable
+    public class OnvifClient : IDisposable
     {
         private class UdpState
         {
@@ -38,7 +38,7 @@ namespace SharpONVIF
         public const string ONVIF_DISCOVERY_ADDRESS_IPv4 = "239.255.255.250"; // only IPv4 networks are currently supported
         public const int ONVIF_DISCOVERY_PORT = 3702;
 
-        private static SemaphoreSlim _discoverySlim = new SemaphoreSlim(1);
+        private static readonly SemaphoreSlim _discoverySlim = new SemaphoreSlim(1);
         private bool disposedValue;
         private readonly string _userName;
         private readonly string _password;
@@ -50,11 +50,11 @@ namespace SharpONVIF
         /// <summary>
         /// Ctor.
         /// </summary>
-        /// <param name="onvifUrl">ONVIF URI.</param>
+        /// <param name="onvifUrl">Onvif URI.</param>
         /// <param name="userName">User name.</param>
         /// <param name="password">Password.</param>
-        /// <exception cref="ArgumentNullException">Thrown when ONVIF URI is null. Call <see cref="DiscoverAsync(string, int, int)"/> to get the URI, or get the correct URI from the camera documentation.</exception>
-        public ONVIFClient(string onvifUrl, string userName = null, string password = null)
+        /// <exception cref="ArgumentNullException">Thrown when Onvif URI is null. Call <see cref="DiscoverAsync(string, int, int)"/> to get the URI, or get the correct URI from the camera documentation.</exception>
+        public OnvifClient(string onvifUrl, string userName = null, string password = null)
         {
             _onvifUrl = onvifUrl ?? throw new ArgumentNullException(nameof(onvifUrl));
             _userName = userName;
@@ -314,10 +314,12 @@ namespace SharpONVIF
             {
                 using (UdpClient client = new UdpClient(endPoint))
                 {
-                    UdpState s = new UdpState();
-                    s.Endpoint = endPoint;
-                    s.Client = client;
-                    s.Result = devices;
+                    UdpState s = new UdpState
+                    {
+                        Endpoint = endPoint,
+                        Client = client,
+                        Result = devices
+                    };
 
                     client.BeginReceive(DiscoveryMessageReceived, s);
 
