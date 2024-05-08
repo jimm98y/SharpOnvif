@@ -16,10 +16,17 @@ namespace SharpOnvifWCF
     /// </summary>
     public static class OnvifHelper
     {
-        public static void ConfigureAuthentication(ServiceEndpoint endpoint, string userName, string password)
+        public static IEndpointBehavior CreateAuthenticationBehavior(string userName, string password)
         {
-            var passwordDigestBehavior = new PasswordDigestBehavior(userName, password);
-            endpoint.EndpointBehaviors.Add(passwordDigestBehavior);
+            return new PasswordDigestBehavior(userName, password);
+        }
+
+        public static void SetAuthentication(ServiceEndpoint endpoint, IEndpointBehavior authenticationBehavior)
+        {
+            if (!endpoint.EndpointBehaviors.Contains(authenticationBehavior))
+            {
+                endpoint.EndpointBehaviors.Add(authenticationBehavior);
+            }
         }
 
         public static Binding CreateBinding()
