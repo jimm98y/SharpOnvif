@@ -43,7 +43,7 @@ namespace SharpOnvifWCF
             }
         }
 
-        public async Task<OnvifDeviceMgmt.GetServicesResponse> GetServicesAsync(bool includeCapability = true)
+        public async Task<OnvifDeviceMgmt.GetServicesResponse> GetServicesAsync(bool includeCapability = false)
         {
             using (var deviceClient = new OnvifDeviceMgmt.DeviceClient(
                 OnvifHelper.CreateBinding(),
@@ -120,7 +120,12 @@ namespace SharpOnvifWCF
                 return profiles;
             }
         }
-        
+
+        public Task<OnvifMedia.MediaUri> GetStreamUriAsync(OnvifMedia.Profile profile)
+        {
+            return GetStreamUriAsync(profile.token);
+        }
+
         public async Task<OnvifMedia.MediaUri> GetStreamUriAsync(string profileToken)
         {
             string mediaUrl = await GetServiceUriAsync(ONVIF_MEDIA).ConfigureAwait(false);
@@ -191,6 +196,7 @@ namespace SharpOnvifWCF
 
         public async Task<OnvifEvents.SubscribeResponse1> BasicSubscribeAsync(string onvifEventListenerUri, int timeoutInMinutes = 60)
         {
+            // Basic events need an exception in Windows Firewall + VS must run as Admin
             string eventUri = await GetServiceUriAsync(ONVIF_EVENTS);
             using (OnvifEvents.NotificationProducerClient notificationProducerClient = new OnvifEvents.NotificationProducerClient(
                             OnvifHelper.CreateBinding(),
@@ -276,6 +282,10 @@ namespace SharpOnvifWCF
         #endregion // Utility
     }
 
+    /// <summary>
+    /// Simple Onvif event listener.
+    /// </summary>
+    /// <remarks>Basic events need an exception in Windows Firewall + VS must run as Admin.</remarks>
     public class SimpleOnvifEventListener : IDisposable
     {
         private bool _disposedValue;
@@ -290,8 +300,7 @@ namespace SharpOnvifWCF
             this._onEvent = onEvent ?? throw new ArgumentNullException(nameof(onEvent));
             this._port = port;
 
-            string host = "+";
-            string httpUri = GetHttpUri(host, port);
+            string httpUri = GetHttpUri("+", port);
             Listener.Prefixes.Add(httpUri);
             Listener.Start();
             _listenerTask = Task.Run(async () =>
@@ -301,23 +310,32 @@ namespace SharpOnvifWCF
                     HttpListenerContext ctx = await Listener.GetContextAsync();
                     using (HttpListenerResponse resp = ctx.Response)
                     {
-                        string data = GetRequestPostData(ctx.Request);
-                        int cameraID = 0;
-
-                        // ctx.Request.RawUrl should be somthing like "/0/"
-                        if (int.TryParse(ctx.Request.RawUrl.TrimStart('/').TrimEnd('/'), out cameraID))
+                        try
                         {
-                            ProcessNotification(cameraID, data);
-                        }
+                            string data = GetRequestPostData(ctx.Request);
+                            int cameraID = 0;
 
-                        resp.StatusCode = (int)HttpStatusCode.OK;
-                        resp.StatusDescription = "Status OK";
+                            // ctx.Request.RawUrl should be somthing like "/0/"
+                            if (int.TryParse(ctx.Request.RawUrl.TrimStart('/').TrimEnd('/'), out cameraID))
+                            {
+                                ProcessNotification(cameraID, data);
+                            }
+                        }
+                        catch(Exception ex)
+                        {
+                            Debug.WriteLine(ex.Message);
+                        }
+                        finally
+                        {
+                            resp.StatusCode = (int)HttpStatusCode.OK;
+                            resp.StatusDescription = "Status OK";
+                        }
                     }
                 }
             });
         }
 
-        public string GetOnvifEventListenerUri(string host, int cameraID)
+        public string GetOnvifEventListenerUri(string host, int cameraID = 0)
         {
             return $"{GetHttpUri(host, _port)}{cameraID}/";
         }
