@@ -30,12 +30,12 @@ namespace SharpOnvif
             public UdpClient Client { get; set; }
             public IPEndPoint Endpoint { get; set; }
             public IList<string> Result { get; set; }
+            public Action<string> Callback { get; set; }
         }
 
-        private const int ONVIF_BROADCAST_PORT = 54567; // any free port
         public const int ONVIF_BROADCAST_TIMEOUT = 4000; // 4s timeout
 
-        public const string ONVIF_DISCOVERY_ADDRESS_IPv4 = "239.255.255.250"; // only IPv4 networks are currently supported
+        public static string OnvifDiscoveryAddress = "239.255.255.250"; // only IPv4 networks are currently supported
         public const int ONVIF_DISCOVERY_PORT = 3702;
 
         private static readonly SemaphoreSlim _discoverySlim = new SemaphoreSlim(1);
@@ -274,17 +274,17 @@ namespace SharpOnvif
         }
 
         #region Discovery
-
         /// <summary>
         /// Discover ONVIF devices in the local network.
         /// </summary>
         /// <param name="ipAddress">IP address of the network interface to use (IP of the host computer).</param>
+        /// <param name="onDeviceDiscovered">Callback to be called when a new device is discovered.</param>
         /// <param name="broadcastTimeout"><see cref="ONVIF_BROADCAST_TIMEOUT"/>.</param>
-        /// <param name="broadcastPort">Broadcast port - <see cref="ONVIF_BROADCAST_PORT"/>.</param>
+        /// <param name="broadcastPort">Broadcast port - 0 to let the OS choose any free port.</param>
         /// <returns>A list of discovered devices.</returns>
-        public static async Task<IList<string>> DiscoverAsync(string ipAddress, int broadcastTimeout = ONVIF_BROADCAST_TIMEOUT, int broadcastPort = ONVIF_BROADCAST_PORT)
+        public static async Task<IList<string>> DiscoverAsync(string ipAddress, Action<string> onDeviceDiscovered = null, int broadcastTimeout = ONVIF_BROADCAST_TIMEOUT, int broadcastPort = 0)
         {
-            if(ipAddress == null)
+            if (ipAddress == null)
                 return new List<string>();
 
             await _discoverySlim.WaitAsync();
@@ -308,7 +308,7 @@ namespace SharpOnvif
 
             IList<string> devices = new List<string>();
             IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse(ipAddress), broadcastPort);
-            IPEndPoint multicastEndpoint = new IPEndPoint(IPAddress.Parse(ONVIF_DISCOVERY_ADDRESS_IPv4), ONVIF_DISCOVERY_PORT);
+            IPEndPoint multicastEndpoint = new IPEndPoint(IPAddress.Parse(OnvifDiscoveryAddress), ONVIF_DISCOVERY_PORT);
 
             try
             {
@@ -318,7 +318,8 @@ namespace SharpOnvif
                     {
                         Endpoint = endPoint,
                         Client = client,
-                        Result = devices
+                        Result = devices,
+                        Callback = onDeviceDiscovered
                     };
 
                     client.BeginReceive(DiscoveryMessageReceived, s);
@@ -356,6 +357,19 @@ namespace SharpOnvif
                 if (deviceEndpoint != null)
                 {
                     devices.Add(deviceEndpoint);
+
+                    var callback = ((UdpState)result.AsyncState).Callback;
+                    if (callback != null)
+                    {
+                        try
+                        {
+                            callback.Invoke(deviceEndpoint);
+                        }
+                        catch (Exception ex)
+                        {
+                            Debug.WriteLine(ex.Message);
+                        }
+                    }
                 }
                 client.BeginReceive(DiscoveryMessageReceived, result.AsyncState);
             }
