@@ -237,14 +237,16 @@ namespace SharpOnvifWCF
             return eventXml.Contains("RuleEngine/CellMotionDetector/Motion");
         }
 
-        public static bool IsMotionDetected(string eventXml)
+        public static bool? IsMotionDetected(string eventXml)
         {
-            return IsMotionEvent(eventXml) && eventXml.Contains("SimpleItem Name=\"IsMotion\" Value=\"true\"");
+            if (!IsMotionEvent(eventXml)) return null;
+            return eventXml.Contains("SimpleItem Name=\"IsMotion\" Value=\"true\"");
         }
 
-        public static bool IsMotionDetected(NotificationMessageHolderType message)
+        public static bool? IsMotionDetected(NotificationMessageHolderType message)
         {
-            return IsMotionEvent(message.Topic.Any.First().Value) && message.Message.InnerXml.Contains("SimpleItem Name=\"IsMotion\" Value=\"true\"");
+            if (!IsMotionEvent(message.Topic.Any.First().Value)) return null;
+            return message.Message.InnerXml.Contains("SimpleItem Name=\"IsMotion\" Value=\"true\"");
         }
 
         private static bool IsTamperEvent(string eventXml)
@@ -255,14 +257,16 @@ namespace SharpOnvifWCF
             return eventXml.Contains("RuleEngine/TamperDetector/Tamper");
         }
 
-        public static bool IsTamperDetected(string eventXml)
+        public static bool? IsTamperDetected(string eventXml)
         {
-            return IsTamperEvent(eventXml) && eventXml.Contains("SimpleItem Name=\"IsTamper\" Value=\"true\"");
+            if (!IsTamperEvent(eventXml)) return null;
+            return eventXml.Contains("SimpleItem Name=\"IsTamper\" Value=\"true\"");
         }
 
-        public static bool IsTamperDetected(NotificationMessageHolderType message)
+        public static bool? IsTamperDetected(NotificationMessageHolderType message)
         {
-            return IsMotionEvent(message.Topic.Any.First().Value) && message.Message.InnerXml.Contains("SimpleItem Name=\"IsTamper\" Value=\"true\"");
+            if (!IsTamperEvent(message.Topic.Any.First().Value)) return null;
+            return message.Message.InnerXml.Contains("SimpleItem Name=\"IsTamper\" Value=\"true\"");
         }
 
         #endregion // Common events
