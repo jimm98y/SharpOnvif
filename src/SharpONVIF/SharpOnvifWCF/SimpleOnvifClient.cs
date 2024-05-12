@@ -163,7 +163,7 @@ namespace SharpOnvifWCF
 
         public Task<OnvifEvents.PullMessagesResponse> PullPointPullMessagesAsync(OnvifEvents.CreatePullPointSubscriptionResponse subscribeResponse, int timeoutInSeconds = 60, int maxMessages = 100)
         {
-            return PullPointPullMessagesAsync(subscribeResponse.SubscriptionReference.Address.Value);
+            return PullPointPullMessagesAsync(subscribeResponse.SubscriptionReference.Address.Value, timeoutInSeconds, maxMessages);
         }
 
         public async Task<OnvifEvents.PullMessagesResponse> PullPointPullMessagesAsync(string subscriptionReferenceAddress, int timeoutInSeconds = 60, int maxMessages = 100)
