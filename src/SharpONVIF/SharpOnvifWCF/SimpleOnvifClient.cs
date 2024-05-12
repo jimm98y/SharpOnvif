@@ -1,5 +1,4 @@
-﻿using SharpOnvifWCF;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -220,6 +219,8 @@ namespace SharpOnvifWCF
 
         #endregion // Basic subscription
 
+        #region Common events
+
         private static bool IsMotionEvent(string eventXml)
         {
             if(string.IsNullOrEmpty(eventXml))
@@ -245,6 +246,8 @@ namespace SharpOnvifWCF
         {
             return IsTamperEvent(eventXml) && eventXml.Contains("SimpleItem Name=\"IsTamper\" Value=\"true\"");
         }
+
+        #endregion // Common events
 
         #endregion // Events
 
@@ -347,7 +350,7 @@ namespace SharpOnvifWCF
             {
                 if (disposing)
                 {
-                    Listener.Stop();
+                    Listener.Close();
                 }
                 _disposedValue = true;
             }
