@@ -1,7 +1,9 @@
-﻿using System;
+﻿using OnvifEvents;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.ServiceModel.Description;
 using System.Threading.Tasks;
@@ -240,6 +242,11 @@ namespace SharpOnvifWCF
             return IsMotionEvent(eventXml) && eventXml.Contains("SimpleItem Name=\"IsMotion\" Value=\"true\"");
         }
 
+        public static bool IsMotionDetected(NotificationMessageHolderType message)
+        {
+            return IsMotionEvent(message.Topic.Any.First().Value) && message.Message.InnerXml.Contains("SimpleItem Name=\"IsMotion\" Value=\"true\"");
+        }
+
         private static bool IsTamperEvent(string eventXml)
         {
             if(string.IsNullOrEmpty(eventXml))
@@ -251,6 +258,11 @@ namespace SharpOnvifWCF
         public static bool IsTamperDetected(string eventXml)
         {
             return IsTamperEvent(eventXml) && eventXml.Contains("SimpleItem Name=\"IsTamper\" Value=\"true\"");
+        }
+
+        public static bool IsTamperDetected(NotificationMessageHolderType message)
+        {
+            return IsMotionEvent(message.Topic.Any.First().Value) && message.Message.InnerXml.Contains("SimpleItem Name=\"IsTamper\" Value=\"true\"");
         }
 
         #endregion // Common events
