@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.ServiceModel.Description;
 using System.Threading.Tasks;
 
@@ -55,27 +54,6 @@ namespace SharpOnvifWCF.Client
             }
         }
 
-        private async Task<string> GetServiceUriAsync(string ns)
-        {
-            if (_supportedServices == null)
-            {
-                var services = await GetServicesAsync().ConfigureAwait(false);
-                Dictionary<string, string> supportedServices = new Dictionary<string, string>();
-                foreach (var service in services.Service)
-                {
-                    supportedServices.Add(service.Namespace.ToLowerInvariant(), service.XAddr);
-                }
-
-                _supportedServices = supportedServices;
-            }
-
-            string uri;
-            if (_supportedServices.TryGetValue(ns, out uri))
-                return uri;
-            else
-                throw new NotSupportedException($"The device does not support {ns} sevice!");
-        }
-
         public async Task<OnvifDeviceMgmt.SystemDateTime> GetSystemDateAndTimeAsync()
         {
             using (var deviceClient = new OnvifDeviceMgmt.DeviceClient(
@@ -120,11 +98,6 @@ namespace SharpOnvifWCF.Client
             }
         }
 
-        public Task<OnvifMedia.MediaUri> GetStreamUriAsync(OnvifMedia.Profile profile)
-        {
-            return GetStreamUriAsync(profile.token);
-        }
-
         public async Task<OnvifMedia.MediaUri> GetStreamUriAsync(string profileToken)
         {
             string mediaUrl = await GetServiceUriAsync(ONVIF_MEDIA).ConfigureAwait(false);
@@ -163,11 +136,6 @@ namespace SharpOnvifWCF.Client
 
                 return subscribeResponse;
             }
-        }
-
-        public Task<PullMessagesResponse> PullPointPullMessagesAsync(CreatePullPointSubscriptionResponse subscribeResponse, int timeoutInSeconds = 60, int maxMessages = 100)
-        {
-            return PullPointPullMessagesAsync(subscribeResponse.SubscriptionReference.Address.Value, timeoutInSeconds, maxMessages);
         }
 
         public async Task<PullMessagesResponse> PullPointPullMessagesAsync(string subscriptionReferenceAddress, int timeoutInSeconds = 60, int maxMessages = 100)
@@ -219,11 +187,6 @@ namespace SharpOnvifWCF.Client
             }
         }
 
-        public Task<RenewResponse1> BasicSubscriptionRenewAsync(SubscribeResponse1 subscribeResponse, int timeoutInMinutes = 5)
-        {
-            return BasicSubscriptionRenewAsync(subscribeResponse.SubscribeResponse.SubscriptionReference.Address.Value, timeoutInMinutes);
-        }
-
         public async Task<RenewResponse1> BasicSubscriptionRenewAsync(string subscriptionReferenceAddress, int timeoutInMinutes = 5)
         {
             using (SubscriptionManagerClient subscriptionManagerClient = new SubscriptionManagerClient(
@@ -239,23 +202,34 @@ namespace SharpOnvifWCF.Client
 
                 return renewResult;
             }
-        }        
+        }
 
         #endregion // Basic subscription
 
         #endregion // Events
 
-        #region Discovery
-
-        public static async Task<IList<string>> DiscoverAsync(string ipAddress, Action<string> progress = null)
-        {
-            var devices = await OnvifHelper.DiscoverAsync(ipAddress, progress);
-            return devices;
-        }
-
-        #endregion // Discovery
-
         #region Utility
+
+        private async Task<string> GetServiceUriAsync(string ns)
+        {
+            if (_supportedServices == null)
+            {
+                var services = await GetServicesAsync().ConfigureAwait(false);
+                Dictionary<string, string> supportedServices = new Dictionary<string, string>();
+                foreach (var service in services.Service)
+                {
+                    supportedServices.Add(service.Namespace.ToLowerInvariant(), service.XAddr);
+                }
+
+                _supportedServices = supportedServices;
+            }
+
+            string uri;
+            if (_supportedServices.TryGetValue(ns, out uri))
+                return uri;
+            else
+                throw new NotSupportedException($"The device does not support {ns} sevice!");
+        }
 
         private static string GetTimeoutInSeconds(int timeoutInSeconds)
         {
