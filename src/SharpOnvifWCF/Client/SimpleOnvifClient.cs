@@ -219,6 +219,28 @@ namespace SharpOnvifWCF.Client
             }
         }
 
+        public Task<RenewResponse1> BasicSubscriptionRenewAsync(SubscribeResponse1 subscribeResponse, int timeoutInMinutes = 5)
+        {
+            return BasicSubscriptionRenewAsync(subscribeResponse.SubscribeResponse.SubscriptionReference.Address.Value, timeoutInMinutes);
+        }
+
+        public async Task<RenewResponse1> BasicSubscriptionRenewAsync(string subscriptionReferenceAddress, int timeoutInMinutes = 5)
+        {
+            using (SubscriptionManagerClient subscriptionManagerClient = new SubscriptionManagerClient(
+                            OnvifHelper.CreateBinding(),
+                            OnvifHelper.CreateEndpointAddress(subscriptionReferenceAddress)))
+            {
+                OnvifHelper.SetAuthentication(subscriptionManagerClient.Endpoint, _auth);
+
+                var renewResult = await subscriptionManagerClient.RenewAsync(new Renew()
+                {
+                    TerminationTime = GetTimeoutInMinutes(timeoutInMinutes),
+                }).ConfigureAwait(false);
+
+                return renewResult;
+            }
+        }        
+
         #endregion // Basic subscription
 
         #endregion // Events
