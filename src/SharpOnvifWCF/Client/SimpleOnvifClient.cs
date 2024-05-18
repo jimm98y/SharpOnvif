@@ -113,8 +113,6 @@ namespace SharpOnvifWCF.Client
 
         #endregion // Media
 
-        #region Events
-
         #region Pull Point subscription
 
         public async Task<CreatePullPointSubscriptionResponse> PullPointSubscribeAsync(int initialTerminationTimeInMinutes = 5)
@@ -230,8 +228,6 @@ namespace SharpOnvifWCF.Client
         }
 
         #endregion // Basic subscription
-
-        #endregion // Events
 
         #region Utility
 
