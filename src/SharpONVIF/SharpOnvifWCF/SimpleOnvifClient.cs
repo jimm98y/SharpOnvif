@@ -233,7 +233,7 @@ namespace SharpOnvifWCF
             if(string.IsNullOrEmpty(eventXml))
                 return false;
 
-            return eventXml.Contains("RuleEngine/CellMotionDetector/Motion");
+            return eventXml.Contains("RuleEngine/CellMotionDetector/Motion") && eventXml.Contains("SimpleItem Name=\"IsMotion\"");
         }
 
         public static bool? IsMotionDetected(string eventXml)
@@ -244,8 +244,7 @@ namespace SharpOnvifWCF
 
         public static bool? IsMotionDetected(NotificationMessageHolderType message)
         {
-            if (!IsMotionEvent(message.Topic.Any.First().Value)) return null;
-            return message.Message.InnerXml.Contains("SimpleItem Name=\"IsMotion\" Value=\"true\"");
+            return IsMotionDetected(string.Concat(message.Topic.Any.First().Value, message.Message.InnerXml));
         }
 
         private static bool IsTamperEvent(string eventXml)
@@ -253,7 +252,7 @@ namespace SharpOnvifWCF
             if(string.IsNullOrEmpty(eventXml))
                 return false;
 
-            return eventXml.Contains("RuleEngine/TamperDetector/Tamper");
+            return eventXml.Contains("RuleEngine/TamperDetector/Tamper") && eventXml.Contains("SimpleItem Name=\"IsTamper\"");
         }
 
         public static bool? IsTamperDetected(string eventXml)
@@ -264,8 +263,7 @@ namespace SharpOnvifWCF
 
         public static bool? IsTamperDetected(NotificationMessageHolderType message)
         {
-            if (!IsTamperEvent(message.Topic.Any.First().Value)) return null;
-            return message.Message.InnerXml.Contains("SimpleItem Name=\"IsTamper\" Value=\"true\"");
+            return IsTamperDetected(string.Concat(message.Topic.Any.First().Value, message.Message.InnerXml));
         }
 
         #endregion // Common events
