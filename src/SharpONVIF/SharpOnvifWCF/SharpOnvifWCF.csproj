@@ -5,31 +5,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\SharpOnvifWCF.AccessControl\SharpOnvifWCF.AccessControl.csproj" />
-	  <ProjectReference Include="..\SharpOnvifWCF.AccessRules\SharpOnvifWCF.AccessRules.csproj" />
-	  <ProjectReference Include="..\SharpOnvifWCF.ActionEngine\SharpOnvifWCF.ActionEngine.csproj" />
-	  <ProjectReference Include="..\SharpOnvifWCF.AdvancedSecurity\SharpOnvifWCF.AdvancedSecurity.csproj" />
-	  <ProjectReference Include="..\SharpOnvifWCF.Analytics\SharpOnvifWCF.Analytics.csproj" />
-	  <ProjectReference Include="..\SharpOnvifWCF.AppMgmt\SharpOnvifWCF.AppMgmt.csproj" />
-	  <ProjectReference Include="..\SharpOnvifWCF.AuthenticationBehavior\SharpOnvifWCF.AuthenticationBehavior.csproj" />
-	  <ProjectReference Include="..\SharpOnvifWCF.Credential\SharpOnvifWCF.Credential.csproj" />
-	  <ProjectReference Include="..\SharpOnvifWCF.DeviceIO\SharpOnvifWCF.DeviceIO.csproj" />
 	  <ProjectReference Include="..\SharpOnvifWCF.DeviceMgmt\SharpOnvifWCF.DeviceMgmt.csproj" />
-	  <ProjectReference Include="..\SharpOnvifWCF.Display\SharpOnvifWCF.Display.csproj" />
-	  <ProjectReference Include="..\SharpOnvifWCF.DoorControl\SharpOnvifWCF.DoorControl.csproj" />
 	  <ProjectReference Include="..\SharpOnvifWCF.Events\SharpOnvifWCF.Events.csproj" />
-	  <ProjectReference Include="..\SharpOnvifWCF.Imaging\SharpOnvifWCF.Imaging.csproj" />
 	  <ProjectReference Include="..\SharpOnvifWCF.Media2\SharpOnvifWCF.Media2.csproj" />
 	  <ProjectReference Include="..\SharpOnvifWCF.Media\SharpOnvifWCF.Media.csproj" />
-	  <ProjectReference Include="..\SharpOnvifWCF.Provisioning\SharpOnvifWCF.Provisioning.csproj" />
-	  <ProjectReference Include="..\SharpOnvifWCF.PTZ\SharpOnvifWCF.PTZ.csproj" />
-	  <ProjectReference Include="..\SharpOnvifWCF.Receiver\SharpOnvifWCF.Receiver.csproj" />
-	  <ProjectReference Include="..\SharpOnvifWCF.Recording\SharpOnvifWCF.Recording.csproj" />
-	  <ProjectReference Include="..\SharpOnvifWCF.Replay\SharpOnvifWCF.Replay.csproj" />
-	  <ProjectReference Include="..\SharpOnvifWCF.Schedule\SharpOnvifWCF.Schedule.csproj" />
-	  <ProjectReference Include="..\SharpOnvifWCF.Search\SharpOnvifWCF.Search.csproj" />
-	  <ProjectReference Include="..\SharpOnvifWCF.Thermal\SharpOnvifWCF.Thermal.csproj" />
-	  <ProjectReference Include="..\SharpOnvifWCF.Uplink\SharpOnvifWCF.Uplink.csproj" />
 	</ItemGroup>
 
 </Project>

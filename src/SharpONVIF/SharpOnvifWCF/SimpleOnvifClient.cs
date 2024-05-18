@@ -146,17 +146,17 @@ namespace SharpOnvifWCF
 
         #region Pull Point subscription
 
-        public async Task<OnvifEvents.CreatePullPointSubscriptionResponse> PullPointSubscribeAsync(int initialTerminationTimeInMinutes = 5)
+        public async Task<CreatePullPointSubscriptionResponse> PullPointSubscribeAsync(int initialTerminationTimeInMinutes = 5)
         {
             string eventUri = await GetServiceUriAsync(ONVIF_EVENTS);
-            using (OnvifEvents.EventPortTypeClient eventPortTypeClient = new OnvifEvents.EventPortTypeClient(
+            using (EventPortTypeClient eventPortTypeClient = new EventPortTypeClient(
                             OnvifHelper.CreateBinding(),
                             OnvifHelper.CreateEndpointAddress(eventUri)))
             {
                 OnvifHelper.SetAuthentication(eventPortTypeClient.Endpoint, _auth);
 
                 var subscribeResponse = await eventPortTypeClient.CreatePullPointSubscriptionAsync(
-                    new OnvifEvents.CreatePullPointSubscriptionRequest()
+                    new CreatePullPointSubscriptionRequest()
                     {
                         InitialTerminationTime = GetTimeoutInMinutes(initialTerminationTimeInMinutes)
                     }).ConfigureAwait(false);
@@ -167,23 +167,23 @@ namespace SharpOnvifWCF
             }
         }
 
-        public Task<OnvifEvents.PullMessagesResponse> PullPointPullMessagesAsync(OnvifEvents.CreatePullPointSubscriptionResponse subscribeResponse, int timeoutInMinutes = 5, int maxMessages = 100)
+        public Task<PullMessagesResponse> PullPointPullMessagesAsync(CreatePullPointSubscriptionResponse subscribeResponse, int timeoutInSeconds = 60, int maxMessages = 100)
         {
-            return PullPointPullMessagesAsync(subscribeResponse.SubscriptionReference.Address.Value, timeoutInMinutes, maxMessages);
+            return PullPointPullMessagesAsync(subscribeResponse.SubscriptionReference.Address.Value, timeoutInSeconds, maxMessages);
         }
 
-        public async Task<OnvifEvents.PullMessagesResponse> PullPointPullMessagesAsync(string subscriptionReferenceAddress, int timeoutInMinutes = 5, int maxMessages = 100)
+        public async Task<PullMessagesResponse> PullPointPullMessagesAsync(string subscriptionReferenceAddress, int timeoutInSeconds = 60, int maxMessages = 100)
         {
-            using (OnvifEvents.PullPointSubscriptionClient pullPointClient =
-                new OnvifEvents.PullPointSubscriptionClient(
+            using (PullPointSubscriptionClient pullPointClient =
+                new PullPointSubscriptionClient(
                     OnvifHelper.CreateBinding(),
                     OnvifHelper.CreateEndpointAddress(subscriptionReferenceAddress)))
             {
                 OnvifHelper.SetAuthentication(pullPointClient.Endpoint, _auth);
 
                 var messages = await pullPointClient.PullMessagesAsync(
-                    new OnvifEvents.PullMessagesRequest(
-                        GetTimeoutInMinutes(timeoutInMinutes), 
+                    new PullMessagesRequest(
+                        GetTimeoutInSeconds(timeoutInSeconds), 
                         maxMessages, 
                         Array.Empty<System.Xml.XmlElement>())).ConfigureAwait(false);
 
@@ -195,22 +195,22 @@ namespace SharpOnvifWCF
 
         #region Basic subscription
 
-        public async Task<OnvifEvents.SubscribeResponse1> BasicSubscribeAsync(string onvifEventListenerUri, int timeoutInMinutes = 5)
+        public async Task<SubscribeResponse1> BasicSubscribeAsync(string onvifEventListenerUri, int timeoutInMinutes = 5)
         {
             // Basic events need an exception in Windows Firewall + VS must run as Admin
             string eventUri = await GetServiceUriAsync(ONVIF_EVENTS);
-            using (OnvifEvents.NotificationProducerClient notificationProducerClient = new OnvifEvents.NotificationProducerClient(
+            using (NotificationProducerClient notificationProducerClient = new NotificationProducerClient(
                             OnvifHelper.CreateBinding(),
                             OnvifHelper.CreateEndpointAddress(eventUri)))
             {
                 OnvifHelper.SetAuthentication(notificationProducerClient.Endpoint, _auth);
 
-                var subscriptionResult = await notificationProducerClient.SubscribeAsync(new OnvifEvents.Subscribe()
+                var subscriptionResult = await notificationProducerClient.SubscribeAsync(new Subscribe()
                 {
                     InitialTerminationTime = GetTimeoutInMinutes(timeoutInMinutes),
-                    ConsumerReference = new OnvifEvents.EndpointReferenceType() 
+                    ConsumerReference = new EndpointReferenceType() 
                     { 
-                        Address = new OnvifEvents.AttributedURIType() 
+                        Address = new AttributedURIType() 
                         { 
                             Value = onvifEventListenerUri
                         } 
@@ -230,13 +230,13 @@ namespace SharpOnvifWCF
             if(string.IsNullOrEmpty(eventXml))
                 return false;
 
-            return eventXml.Contains("RuleEngine/CellMotionDetector/Motion") && eventXml.Contains("SimpleItem Name=\"IsMotion\"");
+            return eventXml.ToLowerInvariant().Contains("RuleEngine/CellMotionDetector/Motion".ToLowerInvariant()) && eventXml.ToLowerInvariant().Contains("SimpleItem Name=\"IsMotion\"".ToLowerInvariant());
         }
 
         public static bool? IsMotionDetected(string eventXml)
         {
             if (!IsMotionEvent(eventXml)) return null;
-            return eventXml.Contains("SimpleItem Name=\"IsMotion\" Value=\"true\"");
+            return eventXml.ToLowerInvariant().Contains("SimpleItem Name=\"IsMotion\" Value=\"true\"".ToLowerInvariant());
         }
 
         public static bool? IsMotionDetected(NotificationMessageHolderType message)
@@ -249,13 +249,13 @@ namespace SharpOnvifWCF
             if(string.IsNullOrEmpty(eventXml))
                 return false;
 
-            return eventXml.Contains("RuleEngine/TamperDetector/Tamper") && eventXml.Contains("SimpleItem Name=\"IsTamper\"");
+            return eventXml.ToLowerInvariant().Contains("RuleEngine/TamperDetector/Tamper".ToLowerInvariant()) && eventXml.ToLowerInvariant().Contains("SimpleItem Name=\"IsTamper\"".ToLowerInvariant());
         }
 
         public static bool? IsTamperDetected(string eventXml)
         {
             if (!IsTamperEvent(eventXml)) return null;
-            return eventXml.Contains("SimpleItem Name=\"IsTamper\" Value=\"true\"");
+            return eventXml.ToLowerInvariant().Contains("SimpleItem Name=\"IsTamper\" Value=\"true\"".ToLowerInvariant());
         }
 
         public static bool? IsTamperDetected(NotificationMessageHolderType message)
