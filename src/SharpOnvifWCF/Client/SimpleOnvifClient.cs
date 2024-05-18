@@ -157,6 +157,19 @@ namespace SharpOnvifWCF.Client
             }
         }
 
+        public async Task<UnsubscribeResponse1> PullPointUnsubscribeAsync(string subscriptionReferenceAddress)
+        {
+            using (PullPointSubscriptionClient pullPointClient =
+                new PullPointSubscriptionClient(
+                    OnvifHelper.CreateBinding(),
+                    OnvifHelper.CreateEndpointAddress(subscriptionReferenceAddress)))
+            {
+                OnvifHelper.SetAuthentication(pullPointClient.Endpoint, _auth);
+                var unsubscribeResponse = await pullPointClient.UnsubscribeAsync(new Unsubscribe()).ConfigureAwait(false);
+                return unsubscribeResponse;
+            }
+        }
+
         #endregion // Pull Point subscription
 
         #region Basic subscription
@@ -201,6 +214,18 @@ namespace SharpOnvifWCF.Client
                 }).ConfigureAwait(false);
 
                 return renewResult;
+            }
+        }
+
+        public async Task<UnsubscribeResponse1> BasicSubscriptionUnsubscribeAsync(string subscriptionReferenceAddress)
+        {
+            using (SubscriptionManagerClient subscriptionManagerClient = new SubscriptionManagerClient(
+                            OnvifHelper.CreateBinding(),
+                            OnvifHelper.CreateEndpointAddress(subscriptionReferenceAddress)))
+            {
+                OnvifHelper.SetAuthentication(subscriptionManagerClient.Endpoint, _auth);
+                var unsubscribeResult = await subscriptionManagerClient.UnsubscribeAsync(new Unsubscribe()).ConfigureAwait(false);
+                return unsubscribeResult;
             }
         }
 
