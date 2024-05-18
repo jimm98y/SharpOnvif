@@ -99,7 +99,6 @@ namespace SharpOnvifWCF
                 cameraTime.UTCDateTime.Date.Day,
                 cameraTime.UTCDateTime.Time.Hour,
                 cameraTime.UTCDateTime.Time.Minute,
-                cameraTime.UTCDateTime.Time.Minute,
                 cameraTime.UTCDateTime.Time.Second,
                 DateTimeKind.Utc
                 );
