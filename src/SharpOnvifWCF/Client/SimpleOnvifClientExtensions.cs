@@ -21,10 +21,5 @@ namespace SharpOnvifWCF.Client
         {
             return client.BasicSubscriptionRenewAsync(subscribeResponse.SubscribeResponse.SubscriptionReference.Address.Value, timeoutInMinutes);
         }
-
-        public static Task<IList<string>> DiscoverAsync(this SimpleOnvifClient client, string ipAddress, Action<string> progress = null)
-        {
-            return OnvifHelper.DiscoverAsync(ipAddress, progress);
-        }
     }
 }
