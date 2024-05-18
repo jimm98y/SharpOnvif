@@ -2,13 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Net;
 using System.ServiceModel.Description;
 using System.Threading.Tasks;
 
-namespace SharpOnvifWCF
+namespace SharpOnvifWCF.Client
 {
     public class SimpleOnvifClient
     {
@@ -21,14 +19,14 @@ namespace SharpOnvifWCF
 
         public SimpleOnvifClient(string onvifUri, string userName, string password)
         {
-            if (string.IsNullOrWhiteSpace(onvifUri)) 
+            if (string.IsNullOrWhiteSpace(onvifUri))
                 throw new ArgumentNullException(nameof(onvifUri));
 
             if (string.IsNullOrWhiteSpace(userName) || string.IsNullOrWhiteSpace(password))
                 throw new ArgumentNullException("User name or password must not be empty!");
 
-            this._onvifUri = onvifUri;
-            this._auth = OnvifHelper.CreateAuthenticationBehavior(userName, password);
+            _onvifUri = onvifUri;
+            _auth = OnvifHelper.CreateAuthenticationBehavior(userName, password);
         }
 
         #region Device Management
@@ -77,7 +75,7 @@ namespace SharpOnvifWCF
             else
                 throw new NotSupportedException($"The device does not support {ns} sevice!");
         }
-        
+
         public async Task<OnvifDeviceMgmt.SystemDateTime> GetSystemDateAndTimeAsync()
         {
             using (var deviceClient = new OnvifDeviceMgmt.DeviceClient(
@@ -85,11 +83,11 @@ namespace SharpOnvifWCF
                 OnvifHelper.CreateEndpointAddress(_onvifUri)))
             {
                 OnvifHelper.SetAuthentication(deviceClient.Endpoint, _auth);
-                var cameraTime = await deviceClient.GetSystemDateAndTimeAsync().ConfigureAwait(false); 
+                var cameraTime = await deviceClient.GetSystemDateAndTimeAsync().ConfigureAwait(false);
                 return cameraTime;
             }
         }
-        
+
         public async Task<DateTime> GetSystemDateAndTimeUtcAsync()
         {
             var cameraTime = await GetSystemDateAndTimeAsync().ConfigureAwait(false);
@@ -183,8 +181,8 @@ namespace SharpOnvifWCF
 
                 var messages = await pullPointClient.PullMessagesAsync(
                     new PullMessagesRequest(
-                        GetTimeoutInSeconds(timeoutInSeconds), 
-                        maxMessages, 
+                        GetTimeoutInSeconds(timeoutInSeconds),
+                        maxMessages,
                         Array.Empty<System.Xml.XmlElement>())).ConfigureAwait(false);
 
                 return messages;
@@ -208,12 +206,12 @@ namespace SharpOnvifWCF
                 var subscriptionResult = await notificationProducerClient.SubscribeAsync(new Subscribe()
                 {
                     InitialTerminationTime = GetTimeoutInMinutes(timeoutInMinutes),
-                    ConsumerReference = new EndpointReferenceType() 
-                    { 
-                        Address = new AttributedURIType() 
-                        { 
+                    ConsumerReference = new EndpointReferenceType()
+                    {
+                        Address = new AttributedURIType()
+                        {
                             Value = onvifEventListenerUri
-                        } 
+                        }
                     }
                 }).ConfigureAwait(false);
 
@@ -227,7 +225,7 @@ namespace SharpOnvifWCF
 
         private static bool IsMotionEvent(string eventXml)
         {
-            if(string.IsNullOrEmpty(eventXml))
+            if (string.IsNullOrEmpty(eventXml))
                 return false;
 
             return eventXml.ToLowerInvariant().Contains("RuleEngine/CellMotionDetector/Motion".ToLowerInvariant()) && eventXml.ToLowerInvariant().Contains("SimpleItem Name=\"IsMotion\"".ToLowerInvariant());
@@ -246,7 +244,7 @@ namespace SharpOnvifWCF
 
         private static bool IsTamperEvent(string eventXml)
         {
-            if(string.IsNullOrEmpty(eventXml))
+            if (string.IsNullOrEmpty(eventXml))
                 return false;
 
             return eventXml.ToLowerInvariant().Contains("RuleEngine/TamperDetector/Tamper".ToLowerInvariant()) && eventXml.ToLowerInvariant().Contains("SimpleItem Name=\"IsTamper\"".ToLowerInvariant());
@@ -290,104 +288,5 @@ namespace SharpOnvifWCF
         }
 
         #endregion // Utility
-    }
-
-    /// <summary>
-    /// Simple Onvif event listener.
-    /// </summary>
-    /// <remarks>Basic events need an exception in Windows Firewall + VS must run as Admin.</remarks>
-    public class SimpleOnvifEventListener : IDisposable
-    {
-        private bool _disposedValue;
-        private readonly Action<int, string> _onEvent;
-        private readonly int _port;
-        private readonly Task _listenerTask;
-
-        public HttpListener Listener { get; } = new HttpListener();
-
-        public SimpleOnvifEventListener(Action<int, string> onEvent, int port = 9999)
-        {
-            this._onEvent = onEvent ?? throw new ArgumentNullException(nameof(onEvent));
-            this._port = port;
-
-            string httpUri = GetHttpUri("+", port);
-            Listener.Prefixes.Add(httpUri);
-            Listener.Start();
-            _listenerTask = Task.Run(async () =>
-            {
-                while (!_disposedValue)
-                {
-                    HttpListenerContext ctx = await Listener.GetContextAsync();
-                    using (HttpListenerResponse resp = ctx.Response)
-                    {
-                        try
-                        {
-                            string data = GetRequestPostData(ctx.Request);
-                            int cameraID = 0;
-
-                            // ctx.Request.RawUrl should be somthing like "/0/"
-                            if (int.TryParse(ctx.Request.RawUrl.TrimStart('/').TrimEnd('/'), out cameraID))
-                            {
-                                ProcessNotification(cameraID, data);
-                            }
-                        }
-                        catch(Exception ex)
-                        {
-                            Debug.WriteLine(ex.Message);
-                        }
-                        finally
-                        {
-                            resp.StatusCode = (int)HttpStatusCode.OK;
-                            resp.StatusDescription = "Status OK";
-                        }
-                    }
-                }
-            });
-        }
-
-        public string GetOnvifEventListenerUri(string host, int cameraID = 0)
-        {
-            return $"{GetHttpUri(host, _port)}{cameraID}/";
-        }
-
-        private static string GetHttpUri(string host, int port)
-        {
-            return $"http://{host}:{port}/";
-        }
-
-        private void ProcessNotification(int cameraID, string data)
-        {
-            _onEvent.Invoke(cameraID, data);
-        }
-
-        private static string GetRequestPostData(HttpListenerRequest request)
-        {
-            if (!request.HasEntityBody)
-                return string.Empty;
-
-            using (Stream body = request.InputStream)
-            {
-                using (var reader = new StreamReader(body, request.ContentEncoding))
-                    return reader.ReadToEnd();
-            }
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!_disposedValue)
-            {
-                if (disposing)
-                {
-                    Listener.Close();
-                }
-                _disposedValue = true;
-            }
-        }
-
-        public void Dispose()
-        {
-            Dispose(disposing: true);
-            GC.SuppressFinalize(this);
-        }
     }
 }
