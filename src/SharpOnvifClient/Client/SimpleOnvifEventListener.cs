@@ -4,7 +4,7 @@ using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace SharpOnvifWCF.Client
+namespace SharpOnvifClient.Client
 {
     /// <summary>
     /// Simple Onvif event listener.

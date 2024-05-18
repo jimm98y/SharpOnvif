@@ -1,10 +1,10 @@
-﻿using SharpOnvifWCF.Security;
+﻿using SharpOnvifClient.Security;
 using System.Net;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 
-namespace SharpOnvifWCF
+namespace SharpOnvifClient
 {
     /// <summary>
     /// Helper class for the WCF auto-generated stubs.

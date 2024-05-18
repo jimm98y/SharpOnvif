@@ -3,7 +3,7 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Dispatcher;
 
-namespace SharpOnvifWCF.Security
+namespace SharpOnvifClient.Security
 {
     public class PasswordDigestHeaderInspector : IClientMessageInspector
     {

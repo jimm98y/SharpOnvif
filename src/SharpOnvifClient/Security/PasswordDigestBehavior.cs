@@ -3,7 +3,7 @@ using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Dispatcher;
 
-namespace SharpOnvifWCF.Security
+namespace SharpOnvifClient.Security
 {
     public class PasswordDigestBehavior : IEndpointBehavior
     {

@@ -5,9 +5,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\SharpOnvifWCF.DeviceMgmt\SharpOnvifClient.DeviceMgmt.csproj" />
-	  <ProjectReference Include="..\SharpOnvifWCF.Events\SharpOnvifClient.Events.csproj" />
-	  <ProjectReference Include="..\SharpOnvifWCF.Media\SharpOnvifClient.Media.csproj" />
+	  <ProjectReference Include="..\SharpOnvifClient.DeviceMgmt\SharpOnvifClient.DeviceMgmt.csproj" />
+	  <ProjectReference Include="..\SharpOnvifClient.Events\SharpOnvifClient.Events.csproj" />
+	  <ProjectReference Include="..\SharpOnvifClient.Media\SharpOnvifClient.Media.csproj" />
 	</ItemGroup>
 
 </Project>

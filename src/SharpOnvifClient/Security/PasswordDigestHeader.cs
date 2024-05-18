@@ -5,7 +5,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace SharpOnvifWCF.Security
+namespace SharpOnvifClient.Security
 {
     /// <summary>
     /// Security header for the Digest authentication.

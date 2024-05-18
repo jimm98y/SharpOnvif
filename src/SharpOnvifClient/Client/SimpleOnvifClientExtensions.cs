@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SharpOnvifWCF.Client
+namespace SharpOnvifClient.Client
 {
     public static class SimpleOnvifClientExtensions
     {
