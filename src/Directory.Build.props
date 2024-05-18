@@ -1,0 +1,27 @@
+<Project>
+	<PropertyGroup>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+		<Nullable>disable</Nullable>
+		<Title>$(ProjectName)</Title>
+		<Version>0.0.1</Version>
+		<Authors>Lukas Volf</Authors>
+		<Copyright>MIT</Copyright>
+		<PackageProjectUrl>https://github.com/jimm98y/SharpOnvif</PackageProjectUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryUrl>https://github.com/jimm98y/SharpOnvif</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>onvif;camera;netstandard20</PackageTags>
+		<NeutralLanguage>en-US</NeutralLanguage>
+		<AssemblyVersion>0.0.1</AssemblyVersion>
+		<FileVersion>0.0.1</FileVersion>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<Description>A C# API to read, write and create MP4 files. No native dependencies, portable netstandard2.0. Supports H264/H265 for video and AAC for audio. Ported into C# from Java mp4parser.</Description>
+	</PropertyGroup>
+	<ItemGroup>
+		<None Include="..\..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+</Project>
