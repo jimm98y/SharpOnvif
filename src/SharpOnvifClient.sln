@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient", "SharpOnvifWCF\SharpOnvifClient.csproj", "{8E12DF27-DD12-4C7A-A3A1-CD8F1380A93E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient", "SharpOnvifClient\SharpOnvifClient.csproj", "{8E12DF27-DD12-4C7A-A3A1-CD8F1380A93E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.AccessControl", "SharpOnvifClient.AccessControl\SharpOnvifClient.AccessControl.csproj", "{ED1917A2-3CCC-41A2-BA83-C3995E76755D}"
 EndProject
