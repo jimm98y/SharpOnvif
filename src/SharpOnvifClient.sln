@@ -5,55 +5,55 @@ VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient", "SharpOnvifWCF\SharpOnvifClient.csproj", "{8E12DF27-DD12-4C7A-A3A1-CD8F1380A93E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.AccessControl", "SharpOnvifWCF.AccessControl\SharpOnvifClient.AccessControl.csproj", "{ED1917A2-3CCC-41A2-BA83-C3995E76755D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.AccessControl", "SharpOnvifClient.AccessControl\SharpOnvifClient.AccessControl.csproj", "{ED1917A2-3CCC-41A2-BA83-C3995E76755D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.AccessRules", "SharpOnvifWCF.AccessRules\SharpOnvifClient.AccessRules.csproj", "{DA2F2742-352F-4C39-AA1E-6A82CEBF3B1F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.AccessRules", "SharpOnvifClient.AccessRules\SharpOnvifClient.AccessRules.csproj", "{DA2F2742-352F-4C39-AA1E-6A82CEBF3B1F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.ActionEngine", "SharpOnvifWCF.ActionEngine\SharpOnvifClient.ActionEngine.csproj", "{ACEF81F2-C9AB-4762-BE03-D95061AE4ACB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.ActionEngine", "SharpOnvifClient.ActionEngine\SharpOnvifClient.ActionEngine.csproj", "{ACEF81F2-C9AB-4762-BE03-D95061AE4ACB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.AdvancedSecurity", "SharpOnvifWCF.AdvancedSecurity\SharpOnvifClient.AdvancedSecurity.csproj", "{D1DC9B07-C413-4977-8ECA-454C11F298CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.AdvancedSecurity", "SharpOnvifClient.AdvancedSecurity\SharpOnvifClient.AdvancedSecurity.csproj", "{D1DC9B07-C413-4977-8ECA-454C11F298CF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.Analytics", "SharpOnvifWCF.Analytics\SharpOnvifClient.Analytics.csproj", "{E3DFB6D7-4593-40AE-A8FA-4A81BBC6891E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.Analytics", "SharpOnvifClient.Analytics\SharpOnvifClient.Analytics.csproj", "{E3DFB6D7-4593-40AE-A8FA-4A81BBC6891E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.AppMgmt", "SharpOnvifWCF.AppMgmt\SharpOnvifClient.AppMgmt.csproj", "{71756C80-CBB8-4BD8-A1CA-EA2C86A6DFAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.AppMgmt", "SharpOnvifClient.AppMgmt\SharpOnvifClient.AppMgmt.csproj", "{71756C80-CBB8-4BD8-A1CA-EA2C86A6DFAF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.AuthenticationBehavior", "SharpOnvifWCF.AuthenticationBehavior\SharpOnvifClient.AuthenticationBehavior.csproj", "{06E62602-DDE7-4472-A43F-B8BAE17E210D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.AuthenticationBehavior", "SharpOnvifClient.AuthenticationBehavior\SharpOnvifClient.AuthenticationBehavior.csproj", "{06E62602-DDE7-4472-A43F-B8BAE17E210D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.Credential", "SharpOnvifWCF.Credential\SharpOnvifClient.Credential.csproj", "{705CE7F0-C6DE-418A-AA07-CD848651EE64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.Credential", "SharpOnvifClient.Credential\SharpOnvifClient.Credential.csproj", "{705CE7F0-C6DE-418A-AA07-CD848651EE64}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.DeviceIO", "SharpOnvifWCF.DeviceIO\SharpOnvifClient.DeviceIO.csproj", "{D274AA0B-1894-4D4F-A0D4-BA7839B4C73C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.DeviceIO", "SharpOnvifClient.DeviceIO\SharpOnvifClient.DeviceIO.csproj", "{D274AA0B-1894-4D4F-A0D4-BA7839B4C73C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.DeviceMgmt", "SharpOnvifWCF.DeviceMgmt\SharpOnvifClient.DeviceMgmt.csproj", "{10D0921B-BC3B-4BFE-A4B6-2033CD8810C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.DeviceMgmt", "SharpOnvifClient.DeviceMgmt\SharpOnvifClient.DeviceMgmt.csproj", "{10D0921B-BC3B-4BFE-A4B6-2033CD8810C6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.Display", "SharpOnvifWCF.Display\SharpOnvifClient.Display.csproj", "{1384BE46-1CEA-4AF6-A51B-156E45B1D082}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.Display", "SharpOnvifClient.Display\SharpOnvifClient.Display.csproj", "{1384BE46-1CEA-4AF6-A51B-156E45B1D082}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.DoorControl", "SharpOnvifWCF.DoorControl\SharpOnvifClient.DoorControl.csproj", "{735B70C1-CD80-4674-A218-4E6B3249A2A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.DoorControl", "SharpOnvifClient.DoorControl\SharpOnvifClient.DoorControl.csproj", "{735B70C1-CD80-4674-A218-4E6B3249A2A3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.Events", "SharpOnvifWCF.Events\SharpOnvifClient.Events.csproj", "{75AAB37D-258A-4151-A4C8-33BC98B66382}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.Events", "SharpOnvifClient.Events\SharpOnvifClient.Events.csproj", "{75AAB37D-258A-4151-A4C8-33BC98B66382}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.Imaging", "SharpOnvifWCF.Imaging\SharpOnvifClient.Imaging.csproj", "{99071A0E-1E79-426B-8D79-AF01B636C198}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.Imaging", "SharpOnvifClient.Imaging\SharpOnvifClient.Imaging.csproj", "{99071A0E-1E79-426B-8D79-AF01B636C198}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.Media", "SharpOnvifWCF.Media\SharpOnvifClient.Media.csproj", "{C384E35A-2BF3-4F06-9E8C-0272AA0984BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.Media", "SharpOnvifClient.Media\SharpOnvifClient.Media.csproj", "{C384E35A-2BF3-4F06-9E8C-0272AA0984BA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.Media2", "SharpOnvifWCF.Media2\SharpOnvifClient.Media2.csproj", "{E134ABE9-032F-42EA-B6B2-6AD05B84B5B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.Media2", "SharpOnvifClient.Media2\SharpOnvifClient.Media2.csproj", "{E134ABE9-032F-42EA-B6B2-6AD05B84B5B3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.Provisioning", "SharpOnvifWCF.Provisioning\SharpOnvifClient.Provisioning.csproj", "{CA2161FC-7DFC-4360-A944-307B447A9105}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.Provisioning", "SharpOnvifClient.Provisioning\SharpOnvifClient.Provisioning.csproj", "{CA2161FC-7DFC-4360-A944-307B447A9105}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.PTZ", "SharpOnvifWCF.PTZ\SharpOnvifClient.PTZ.csproj", "{9FBA628C-C72D-4C23-870B-5A5D05E39B7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.PTZ", "SharpOnvifClient.PTZ\SharpOnvifClient.PTZ.csproj", "{9FBA628C-C72D-4C23-870B-5A5D05E39B7B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.Receiver", "SharpOnvifWCF.Receiver\SharpOnvifClient.Receiver.csproj", "{7D9F1FD2-5778-43F6-BD3D-7C629E2B2A98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.Receiver", "SharpOnvifClient.Receiver\SharpOnvifClient.Receiver.csproj", "{7D9F1FD2-5778-43F6-BD3D-7C629E2B2A98}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.Recording", "SharpOnvifWCF.Recording\SharpOnvifClient.Recording.csproj", "{4C3BA679-FDF1-41AC-A5E4-E779CDFEA5FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.Recording", "SharpOnvifClient.Recording\SharpOnvifClient.Recording.csproj", "{4C3BA679-FDF1-41AC-A5E4-E779CDFEA5FC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.Replay", "SharpOnvifWCF.Replay\SharpOnvifClient.Replay.csproj", "{9CED469B-3965-48C3-A1DC-D3D13158F6A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.Replay", "SharpOnvifClient.Replay\SharpOnvifClient.Replay.csproj", "{9CED469B-3965-48C3-A1DC-D3D13158F6A2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.Schedule", "SharpOnvifWCF.Schedule\SharpOnvifClient.Schedule.csproj", "{8219ED24-B375-45A6-9B8F-AB603FAE2FA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.Schedule", "SharpOnvifClient.Schedule\SharpOnvifClient.Schedule.csproj", "{8219ED24-B375-45A6-9B8F-AB603FAE2FA5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.Search", "SharpOnvifWCF.Search\SharpOnvifClient.Search.csproj", "{678B0750-41F0-4635-9BF0-F22FCD1B3946}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.Search", "SharpOnvifClient.Search\SharpOnvifClient.Search.csproj", "{678B0750-41F0-4635-9BF0-F22FCD1B3946}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.Thermal", "SharpOnvifWCF.Thermal\SharpOnvifClient.Thermal.csproj", "{A4BC1D0F-C34C-4F3A-87DB-EE949D75B8E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.Thermal", "SharpOnvifClient.Thermal\SharpOnvifClient.Thermal.csproj", "{A4BC1D0F-C34C-4F3A-87DB-EE949D75B8E1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.Uplink", "SharpOnvifWCF.Uplink\SharpOnvifClient.Uplink.csproj", "{0FDED12F-314A-40D0-AD74-9A6BAC62EF39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifClient.Uplink", "SharpOnvifClient.Uplink\SharpOnvifClient.Uplink.csproj", "{0FDED12F-314A-40D0-AD74-9A6BAC62EF39}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DCDA6E77-4517-4502-BF7A-197087B4E78B}"
 	ProjectSection(SolutionItems) = preProject
