@@ -1,0 +1,39 @@
+{
+  "ExtendedData": {
+    "inputs": [
+      "https://www.onvif.org/ver10/pacs/doorcontrol.wsdl"
+    ],
+    "collectionTypes": [
+      "System.Array",
+      "System.Collections.Generic.Dictionary`2"
+    ],
+    "namespaceMappings": [
+      "*, OnvifDoorControl"
+    ],
+    "references": [
+      "dotnet-Microsoft.XmlSerializer.Generator, {Microsoft.XmlSerializer.Generator, 8.0.0}",
+      "Microsoft.Bcl.AsyncInterfaces, {Microsoft.Bcl.AsyncInterfaces, 5.0.0}",
+      "Microsoft.Extensions.ObjectPool, {Microsoft.Extensions.ObjectPool, 5.0.10}",
+      "System.Buffers, {System.Buffers, 4.5.1}",
+      "System.Formats.Asn1, {System.Formats.Asn1, 6.0.0}",
+      "System.Memory, {System.Memory, 4.5.4}",
+      "System.Numerics.Vectors, {System.Numerics.Vectors, 4.5.0}",
+      "System.Reflection.DispatchProxy, {System.Reflection.DispatchProxy, 4.7.1}",
+      "System.Runtime.CompilerServices.Unsafe, {System.Runtime.CompilerServices.Unsafe, 4.5.3}",
+      "System.Security.AccessControl, {System.Security.AccessControl, 6.0.0}",
+      "System.Security.Cryptography.Cng, {System.Security.Cryptography.Cng, 5.0.0}",
+      "System.Security.Cryptography.Pkcs, {System.Security.Cryptography.Pkcs, 6.0.1}",
+      "System.Security.Cryptography.Xml, {System.Security.Cryptography.Xml, 6.0.1}",
+      "System.Security.Principal.Windows, {System.Security.Principal.Windows, 5.0.0}",
+      "System.ServiceModel, {System.ServiceModel.Primitives, 4.10.3}",
+      "System.ServiceModel.Duplex, {System.ServiceModel.Duplex, 4.10.3}",
+      "System.ServiceModel.Http, {System.ServiceModel.Http, 4.10.3}",
+      "System.ServiceModel.NetTcp, {System.ServiceModel.NetTcp, 4.10.3}",
+      "System.ServiceModel.Primitives, {System.ServiceModel.Primitives, 4.10.3}",
+      "System.ServiceModel.Security, {System.ServiceModel.Security, 4.10.3}",
+      "System.Threading.Tasks.Extensions, {System.Threading.Tasks.Extensions, 4.5.4}"
+    ],
+    "targetFramework": "netstandard2.0",
+    "typeReuseMode": "All"
+  }
+}

@@ -167,12 +167,12 @@ namespace SharpOnvifWCF
             }
         }
 
-        public Task<OnvifEvents.PullMessagesResponse> PullPointPullMessagesAsync(OnvifEvents.CreatePullPointSubscriptionResponse subscribeResponse, int timeoutInSeconds = 60, int maxMessages = 100)
+        public Task<OnvifEvents.PullMessagesResponse> PullPointPullMessagesAsync(OnvifEvents.CreatePullPointSubscriptionResponse subscribeResponse, int timeoutInMinutes = 5, int maxMessages = 100)
         {
-            return PullPointPullMessagesAsync(subscribeResponse.SubscriptionReference.Address.Value, timeoutInSeconds, maxMessages);
+            return PullPointPullMessagesAsync(subscribeResponse.SubscriptionReference.Address.Value, timeoutInMinutes, maxMessages);
         }
 
-        public async Task<OnvifEvents.PullMessagesResponse> PullPointPullMessagesAsync(string subscriptionReferenceAddress, int timeoutInSeconds = 60, int maxMessages = 100)
+        public async Task<OnvifEvents.PullMessagesResponse> PullPointPullMessagesAsync(string subscriptionReferenceAddress, int timeoutInMinutes = 5, int maxMessages = 100)
         {
             using (OnvifEvents.PullPointSubscriptionClient pullPointClient =
                 new OnvifEvents.PullPointSubscriptionClient(
@@ -183,7 +183,7 @@ namespace SharpOnvifWCF
 
                 var messages = await pullPointClient.PullMessagesAsync(
                     new OnvifEvents.PullMessagesRequest(
-                        GetTimeoutInSeconds(timeoutInSeconds), 
+                        GetTimeoutInMinutes(timeoutInMinutes), 
                         maxMessages, 
                         Array.Empty<System.Xml.XmlElement>())).ConfigureAwait(false);
 
@@ -195,7 +195,7 @@ namespace SharpOnvifWCF
 
         #region Basic subscription
 
-        public async Task<OnvifEvents.SubscribeResponse1> BasicSubscribeAsync(string onvifEventListenerUri, int timeoutInMinutes = 60)
+        public async Task<OnvifEvents.SubscribeResponse1> BasicSubscribeAsync(string onvifEventListenerUri, int timeoutInMinutes = 5)
         {
             // Basic events need an exception in Windows Firewall + VS must run as Admin
             string eventUri = await GetServiceUriAsync(ONVIF_EVENTS);
@@ -205,18 +205,15 @@ namespace SharpOnvifWCF
             {
                 OnvifHelper.SetAuthentication(notificationProducerClient.Endpoint, _auth);
 
-                var subscriptionResult = await notificationProducerClient.SubscribeAsync(new OnvifEvents.SubscribeRequest()
+                var subscriptionResult = await notificationProducerClient.SubscribeAsync(new OnvifEvents.Subscribe()
                 {
-                    Subscribe = new OnvifEvents.Subscribe()
-                    {
-                        InitialTerminationTime = GetTimeoutInMinutes(timeoutInMinutes),
-                        ConsumerReference = new OnvifEvents.EndpointReferenceType() 
+                    InitialTerminationTime = GetTimeoutInMinutes(timeoutInMinutes),
+                    ConsumerReference = new OnvifEvents.EndpointReferenceType() 
+                    { 
+                        Address = new OnvifEvents.AttributedURIType() 
                         { 
-                            Address = new OnvifEvents.AttributedURIType() 
-                            { 
-                                Value = onvifEventListenerUri
-                            } 
-                        }
+                            Value = onvifEventListenerUri
+                        } 
                     }
                 }).ConfigureAwait(false);
 
