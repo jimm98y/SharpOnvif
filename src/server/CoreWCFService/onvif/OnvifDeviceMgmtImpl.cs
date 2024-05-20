@@ -5,6 +5,7 @@ using System;
 
 namespace CoreWCFService.onvif
 {
+    [DisableMustUnderstandValidationAttribute]
     public class OnvifDeviceMgmtImpl : Device
     {
         public void AddIPAddressFilter(IPAddressFilter IPAddressFilter)
@@ -296,7 +297,28 @@ namespace CoreWCFService.onvif
         [return: MessageParameter(Name = "Scopes")]
         public GetScopesResponse GetScopes(GetScopesRequest request)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return new GetScopesResponse()
+            {
+                Scopes = new Scope[]
+                {
+                    new Scope()
+                    {
+                        ScopeDef = ScopeDefinition.Fixed,
+                        ScopeItem = "onvif://www.onvif.org/type/video_encoder"
+                    },
+                    new Scope()
+                    {
+                        ScopeDef = ScopeDefinition.Fixed,
+                        ScopeItem = "onvif://www.onvif.org/Profile/Streaming"
+                    },
+                    new Scope()
+                    {
+                        ScopeDef = ScopeDefinition.Fixed,
+                        ScopeItem = "onvif://www.onvif.org/Profile/G"
+                    }
+                }
+            };
         }
 
         [return: MessageParameter(Name = "Capabilities")]
