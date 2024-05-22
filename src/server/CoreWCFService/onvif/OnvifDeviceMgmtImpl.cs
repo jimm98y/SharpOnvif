@@ -5,90 +5,90 @@ using System;
 
 namespace CoreWCFService.onvif
 {
-    [DisableMustUnderstandValidationAttribute]
+    [DisableMustUnderstandValidation]
     public class OnvifDeviceMgmtImpl : Device
     {
-        public void AddIPAddressFilter(IPAddressFilter IPAddressFilter)
+        public virtual void AddIPAddressFilter(IPAddressFilter IPAddressFilter)
         {
             throw new NotImplementedException();
         }
 
-        public AddScopesResponse AddScopes(AddScopesRequest request)
+        public virtual AddScopesResponse AddScopes(AddScopesRequest request)
         {
             throw new NotImplementedException();
         }
 
         [return: MessageParameter(Name = "NvtCertificate")]
-        public CreateCertificateResponse CreateCertificate(CreateCertificateRequest request)
+        public virtual CreateCertificateResponse CreateCertificate(CreateCertificateRequest request)
         {
             throw new NotImplementedException();
         }
 
-        public void CreateDot1XConfiguration(Dot1XConfiguration Dot1XConfiguration)
+        public virtual void CreateDot1XConfiguration(Dot1XConfiguration Dot1XConfiguration)
         {
             throw new NotImplementedException();
         }
 
         [return: MessageParameter(Name = "Token")]
-        public string CreateStorageConfiguration(StorageConfigurationData StorageConfiguration)
+        public virtual string CreateStorageConfiguration(StorageConfigurationData StorageConfiguration)
         {
             throw new NotImplementedException();
         }
 
-        public CreateUsersResponse CreateUsers(CreateUsersRequest request)
+        public virtual CreateUsersResponse CreateUsers(CreateUsersRequest request)
         {
             throw new NotImplementedException();
         }
 
-        public DeleteCertificatesResponse DeleteCertificates(DeleteCertificatesRequest request)
+        public virtual DeleteCertificatesResponse DeleteCertificates(DeleteCertificatesRequest request)
         {
             throw new NotImplementedException();
         }
 
-        public DeleteDot1XConfigurationResponse DeleteDot1XConfiguration(DeleteDot1XConfigurationRequest request)
+        public virtual DeleteDot1XConfigurationResponse DeleteDot1XConfiguration(DeleteDot1XConfigurationRequest request)
         {
             throw new NotImplementedException();
         }
 
-        public DeleteGeoLocationResponse DeleteGeoLocation(DeleteGeoLocationRequest request)
+        public virtual DeleteGeoLocationResponse DeleteGeoLocation(DeleteGeoLocationRequest request)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteStorageConfiguration(string Token)
+        public virtual void DeleteStorageConfiguration(string Token)
         {
             throw new NotImplementedException();
         }
 
-        public DeleteUsersResponse DeleteUsers(DeleteUsersRequest request)
+        public virtual DeleteUsersResponse DeleteUsers(DeleteUsersRequest request)
         {
             throw new NotImplementedException();
         }
 
         [return: MessageParameter(Name = "PolicyFile")]
-        public BinaryData GetAccessPolicy()
+        public virtual BinaryData GetAccessPolicy()
         {
             throw new NotImplementedException();
         }
 
-        public GetAuthFailureWarningConfigurationResponse GetAuthFailureWarningConfiguration(GetAuthFailureWarningConfigurationRequest request)
+        public virtual GetAuthFailureWarningConfigurationResponse GetAuthFailureWarningConfiguration(GetAuthFailureWarningConfigurationRequest request)
         {
             throw new NotImplementedException();
         }
 
-        public GetAuthFailureWarningOptionsResponse GetAuthFailureWarningOptions(GetAuthFailureWarningOptionsRequest request)
+        public virtual GetAuthFailureWarningOptionsResponse GetAuthFailureWarningOptions(GetAuthFailureWarningOptionsRequest request)
         {
             throw new NotImplementedException();
         }
 
         [return: MessageParameter(Name = "CACertificate")]
-        public GetCACertificatesResponse GetCACertificates(GetCACertificatesRequest request)
+        public virtual GetCACertificatesResponse GetCACertificates(GetCACertificatesRequest request)
         {
             throw new NotImplementedException();
         }
 
         [return: MessageParameter(Name = "Capabilities")]
-        public GetCapabilitiesResponse GetCapabilities(GetCapabilitiesRequest request)
+        public virtual GetCapabilitiesResponse GetCapabilities(GetCapabilitiesRequest request)
         {
             //throw new NotImplementedException();
             return new GetCapabilitiesResponse()
@@ -132,170 +132,203 @@ namespace CoreWCFService.onvif
         }
 
         [return: MessageParameter(Name = "CertificateInformation")]
-        public GetCertificateInformationResponse GetCertificateInformation(GetCertificateInformationRequest request)
+        public virtual GetCertificateInformationResponse GetCertificateInformation(GetCertificateInformationRequest request)
         {
             throw new NotImplementedException();
         }
 
         [return: MessageParameter(Name = "NvtCertificate")]
-        public GetCertificatesResponse GetCertificates(GetCertificatesRequest request)
+        public virtual GetCertificatesResponse GetCertificates(GetCertificatesRequest request)
         {
             throw new NotImplementedException();
         }
 
         [return: MessageParameter(Name = "CertificateStatus")]
-        public GetCertificatesStatusResponse GetCertificatesStatus(GetCertificatesStatusRequest request)
+        public virtual GetCertificatesStatusResponse GetCertificatesStatus(GetCertificatesStatusRequest request)
         {
             throw new NotImplementedException();
         }
 
         [return: MessageParameter(Name = "Enabled")]
-        public bool GetClientCertificateMode()
+        public virtual bool GetClientCertificateMode()
         {
             throw new NotImplementedException();
         }
 
-        public GetDeviceInformationResponse GetDeviceInformation(GetDeviceInformationRequest request)
+        public virtual GetDeviceInformationResponse GetDeviceInformation(GetDeviceInformationRequest request)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return new GetDeviceInformationResponse()
+            {
+                FirmwareVersion = "1.0",
+                HardwareId = "1.0",
+                Manufacturer = "Lukas Volf",
+                Model = "1",
+                SerialNumber = "1"
+            };
         }
 
         [return: MessageParameter(Name = "DiscoveryMode")]
-        public DiscoveryMode GetDiscoveryMode()
+        public virtual DiscoveryMode GetDiscoveryMode()
         {
             throw new NotImplementedException();
         }
 
         [return: MessageParameter(Name = "DNSInformation")]
-        public DNSInformation GetDNS()
+        public virtual DNSInformation GetDNS()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return new DNSInformation()
+            {
+                FromDHCP = false,
+                DNSManual = new IPAddress[]
+                {
+                    new IPAddress()
+                    {
+                        IPv4Address = "8.8.8.8"
+                    }
+                } 
+            };
         }
 
         [return: MessageParameter(Name = "Capabilities")]
-        public GetDot11CapabilitiesResponse GetDot11Capabilities(GetDot11CapabilitiesRequest request)
+        public virtual GetDot11CapabilitiesResponse GetDot11Capabilities(GetDot11CapabilitiesRequest request)
         {
             throw new NotImplementedException();
         }
 
         [return: MessageParameter(Name = "Status")]
-        public Dot11Status GetDot11Status(string InterfaceToken)
+        public virtual Dot11Status GetDot11Status(string InterfaceToken)
         {
             throw new NotImplementedException();
         }
 
         [return: MessageParameter(Name = "Dot1XConfiguration")]
-        public Dot1XConfiguration GetDot1XConfiguration(string Dot1XConfigurationToken)
+        public virtual Dot1XConfiguration GetDot1XConfiguration(string Dot1XConfigurationToken)
         {
             throw new NotImplementedException();
         }
 
         [return: MessageParameter(Name = "Dot1XConfiguration")]
-        public GetDot1XConfigurationsResponse GetDot1XConfigurations(GetDot1XConfigurationsRequest request)
+        public virtual GetDot1XConfigurationsResponse GetDot1XConfigurations(GetDot1XConfigurationsRequest request)
         {
             throw new NotImplementedException();
         }
 
         [return: MessageParameter(Name = "DPAddress")]
-        public GetDPAddressesResponse GetDPAddresses(GetDPAddressesRequest request)
+        public virtual GetDPAddressesResponse GetDPAddresses(GetDPAddressesRequest request)
         {
             throw new NotImplementedException();
         }
 
         [return: MessageParameter(Name = "DynamicDNSInformation")]
-        public DynamicDNSInformation GetDynamicDNS()
+        public virtual DynamicDNSInformation GetDynamicDNS()
         {
             throw new NotImplementedException();
         }
 
-        public GetEndpointReferenceResponse GetEndpointReference(GetEndpointReferenceRequest request)
+        public virtual GetEndpointReferenceResponse GetEndpointReference(GetEndpointReferenceRequest request)
         {
             throw new NotImplementedException();
         }
 
         [return: MessageParameter(Name = "Location")]
-        public GetGeoLocationResponse GetGeoLocation(GetGeoLocationRequest request)
+        public virtual GetGeoLocationResponse GetGeoLocation(GetGeoLocationRequest request)
         {
             throw new NotImplementedException();
         }
 
         [return: MessageParameter(Name = "HostnameInformation")]
-        public HostnameInformation GetHostname()
+        public virtual HostnameInformation GetHostname()
         {
             throw new NotImplementedException();
         }
 
         [return: MessageParameter(Name = "IPAddressFilter")]
-        public IPAddressFilter GetIPAddressFilter()
+        public virtual IPAddressFilter GetIPAddressFilter()
         {
             throw new NotImplementedException();
         }
 
         [return: MessageParameter(Name = "NetworkGateway")]
-        public NetworkGateway GetNetworkDefaultGateway()
+        public virtual NetworkGateway GetNetworkDefaultGateway()
         {
             throw new NotImplementedException();
         }
 
         [return: MessageParameter(Name = "NetworkInterfaces")]
-        public GetNetworkInterfacesResponse GetNetworkInterfaces(GetNetworkInterfacesRequest request)
+        public virtual GetNetworkInterfacesResponse GetNetworkInterfaces(GetNetworkInterfacesRequest request)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return new GetNetworkInterfacesResponse()
+            {
+                NetworkInterfaces = new NetworkInterface[]
+                {
+                    new NetworkInterface() 
+                    {
+                        Enabled = true,
+                        Info = new NetworkInterfaceInfo()
+                        {
+                            Name = "eth0"
+                        }
+                    },
+                }
+            };
         }
 
         [return: MessageParameter(Name = "NetworkProtocols")]
-        public GetNetworkProtocolsResponse GetNetworkProtocols(GetNetworkProtocolsRequest request)
+        public virtual GetNetworkProtocolsResponse GetNetworkProtocols(GetNetworkProtocolsRequest request)
         {
             throw new NotImplementedException();
         }
 
         [return: MessageParameter(Name = "NTPInformation")]
-        public NTPInformation GetNTP()
+        public virtual NTPInformation GetNTP()
         {
             throw new NotImplementedException();
         }
 
-        public GetPasswordComplexityConfigurationResponse GetPasswordComplexityConfiguration(GetPasswordComplexityConfigurationRequest request)
+        public virtual GetPasswordComplexityConfigurationResponse GetPasswordComplexityConfiguration(GetPasswordComplexityConfigurationRequest request)
         {
             throw new NotImplementedException();
         }
 
-        public GetPasswordComplexityOptionsResponse GetPasswordComplexityOptions(GetPasswordComplexityOptionsRequest request)
+        public virtual GetPasswordComplexityOptionsResponse GetPasswordComplexityOptions(GetPasswordComplexityOptionsRequest request)
         {
             throw new NotImplementedException();
         }
 
-        public GetPasswordHistoryConfigurationResponse GetPasswordHistoryConfiguration(GetPasswordHistoryConfigurationRequest request)
+        public virtual GetPasswordHistoryConfigurationResponse GetPasswordHistoryConfiguration(GetPasswordHistoryConfigurationRequest request)
         {
             throw new NotImplementedException();
         }
 
         [return: MessageParameter(Name = "Pkcs10Request")]
-        public GetPkcs10RequestResponse GetPkcs10Request(GetPkcs10RequestRequest request)
+        public virtual GetPkcs10RequestResponse GetPkcs10Request(GetPkcs10RequestRequest request)
         {
             throw new NotImplementedException();
         }
 
         [return: MessageParameter(Name = "RelayOutputs")]
-        public GetRelayOutputsResponse GetRelayOutputs(GetRelayOutputsRequest request)
+        public virtual GetRelayOutputsResponse GetRelayOutputs(GetRelayOutputsRequest request)
         {
             throw new NotImplementedException();
         }
 
         [return: MessageParameter(Name = "RemoteDiscoveryMode")]
-        public DiscoveryMode GetRemoteDiscoveryMode()
+        public virtual DiscoveryMode GetRemoteDiscoveryMode()
         {
             throw new NotImplementedException();
         }
 
         [return: MessageParameter(Name = "RemoteUser")]
-        public RemoteUser GetRemoteUser()
+        public virtual RemoteUser GetRemoteUser()
         {
             throw new NotImplementedException();
         }
 
         [return: MessageParameter(Name = "Scopes")]
-        public GetScopesResponse GetScopes(GetScopesRequest request)
+        public virtual GetScopesResponse GetScopes(GetScopesRequest request)
         {
             //throw new NotImplementedException();
             return new GetScopesResponse()
@@ -322,13 +355,13 @@ namespace CoreWCFService.onvif
         }
 
         [return: MessageParameter(Name = "Capabilities")]
-        public DeviceServiceCapabilities GetServiceCapabilities()
+        public virtual DeviceServiceCapabilities GetServiceCapabilities()
         {
             throw new NotImplementedException();
         }
 
         [return: MessageParameter(Name = "Service")]
-        public GetServicesResponse GetServices(GetServicesRequest request)
+        public virtual GetServicesResponse GetServices(GetServicesRequest request)
         {
             return new GetServicesResponse()
             {
@@ -349,25 +382,25 @@ namespace CoreWCFService.onvif
         }
 
         [return: MessageParameter(Name = "StorageConfiguration")]
-        public StorageConfiguration GetStorageConfiguration(string Token)
+        public virtual StorageConfiguration GetStorageConfiguration(string Token)
         {
             throw new NotImplementedException();
         }
 
         [return: MessageParameter(Name = "StorageConfigurations")]
-        public GetStorageConfigurationsResponse GetStorageConfigurations(GetStorageConfigurationsRequest request)
+        public virtual GetStorageConfigurationsResponse GetStorageConfigurations(GetStorageConfigurationsRequest request)
         {
             throw new NotImplementedException();
         }
 
         [return: MessageParameter(Name = "BackupFiles")]
-        public GetSystemBackupResponse GetSystemBackup(GetSystemBackupRequest request)
+        public virtual GetSystemBackupResponse GetSystemBackup(GetSystemBackupRequest request)
         {
             throw new NotImplementedException();
         }
 
         [return: MessageParameter(Name = "SystemDateAndTime")]
-        public SystemDateTime GetSystemDateAndTime()
+        public virtual SystemDateTime GetSystemDateAndTime()
         {
             var now = System.DateTime.UtcNow;
             return new SystemDateTime()
@@ -392,252 +425,252 @@ namespace CoreWCFService.onvif
         }
 
         [return: MessageParameter(Name = "SystemLog")]
-        public SystemLog GetSystemLog(SystemLogType LogType)
+        public virtual SystemLog GetSystemLog(SystemLogType LogType)
         {
             throw new NotImplementedException();
         }
 
         [return: MessageParameter(Name = "SupportInformation")]
-        public SupportInformation GetSystemSupportInformation()
+        public virtual SupportInformation GetSystemSupportInformation()
         {
             throw new NotImplementedException();
         }
 
-        public GetSystemUrisResponse GetSystemUris(GetSystemUrisRequest request)
+        public virtual GetSystemUrisResponse GetSystemUris(GetSystemUrisRequest request)
         {
             throw new NotImplementedException();
         }
 
         [return: MessageParameter(Name = "User")]
-        public GetUsersResponse GetUsers(GetUsersRequest request)
+        public virtual GetUsersResponse GetUsers(GetUsersRequest request)
         {
             throw new NotImplementedException();
         }
 
         [return: MessageParameter(Name = "WsdlUrl")]
-        public GetWsdlUrlResponse GetWsdlUrl(GetWsdlUrlRequest request)
+        public virtual GetWsdlUrlResponse GetWsdlUrl(GetWsdlUrlRequest request)
         {
             throw new NotImplementedException();
         }
 
         [return: MessageParameter(Name = "ZeroConfiguration")]
-        public NetworkZeroConfiguration GetZeroConfiguration()
+        public virtual NetworkZeroConfiguration GetZeroConfiguration()
         {
             throw new NotImplementedException();
         }
 
-        public LoadCACertificatesResponse LoadCACertificates(LoadCACertificatesRequest request)
+        public virtual LoadCACertificatesResponse LoadCACertificates(LoadCACertificatesRequest request)
         {
             throw new NotImplementedException();
         }
 
-        public LoadCertificatesResponse LoadCertificates(LoadCertificatesRequest request)
+        public virtual LoadCertificatesResponse LoadCertificates(LoadCertificatesRequest request)
         {
             throw new NotImplementedException();
         }
 
-        public LoadCertificateWithPrivateKeyResponse LoadCertificateWithPrivateKey(LoadCertificateWithPrivateKeyRequest request)
+        public virtual LoadCertificateWithPrivateKeyResponse LoadCertificateWithPrivateKey(LoadCertificateWithPrivateKeyRequest request)
         {
             throw new NotImplementedException();
         }
 
-        public void RemoveIPAddressFilter(IPAddressFilter IPAddressFilter)
+        public virtual void RemoveIPAddressFilter(IPAddressFilter IPAddressFilter)
         {
             throw new NotImplementedException();
         }
 
-        public RemoveScopesResponse RemoveScopes(RemoveScopesRequest request)
+        public virtual RemoveScopesResponse RemoveScopes(RemoveScopesRequest request)
         {
             throw new NotImplementedException();
         }
 
-        public RestoreSystemResponse RestoreSystem(RestoreSystemRequest request)
+        public virtual RestoreSystemResponse RestoreSystem(RestoreSystemRequest request)
         {
             throw new NotImplementedException();
         }
 
         [return: MessageParameter(Name = "Networks")]
-        public ScanAvailableDot11NetworksResponse ScanAvailableDot11Networks(ScanAvailableDot11NetworksRequest request)
+        public virtual ScanAvailableDot11NetworksResponse ScanAvailableDot11Networks(ScanAvailableDot11NetworksRequest request)
         {
             throw new NotImplementedException();
         }
 
         [return: MessageParameter(Name = "AuxiliaryCommandResponse")]
-        public string SendAuxiliaryCommand(string AuxiliaryCommand)
+        public virtual string SendAuxiliaryCommand(string AuxiliaryCommand)
         {
             throw new NotImplementedException();
         }
 
-        public void SetAccessPolicy(BinaryData PolicyFile)
+        public virtual void SetAccessPolicy(BinaryData PolicyFile)
         {
             throw new NotImplementedException();
         }
 
-        public void SetAuthFailureWarningConfiguration(bool Enabled, int MonitorPeriod, int MaxAuthFailures)
+        public virtual void SetAuthFailureWarningConfiguration(bool Enabled, int MonitorPeriod, int MaxAuthFailures)
         {
             throw new NotImplementedException();
         }
 
-        public SetCertificatesStatusResponse SetCertificatesStatus(SetCertificatesStatusRequest request)
+        public virtual SetCertificatesStatusResponse SetCertificatesStatus(SetCertificatesStatusRequest request)
         {
             throw new NotImplementedException();
         }
 
-        public void SetClientCertificateMode(bool Enabled)
+        public virtual void SetClientCertificateMode(bool Enabled)
         {
             throw new NotImplementedException();
         }
 
-        public void SetDiscoveryMode(DiscoveryMode DiscoveryMode)
+        public virtual void SetDiscoveryMode(DiscoveryMode DiscoveryMode)
         {
             throw new NotImplementedException();
         }
 
-        public SetDNSResponse SetDNS(SetDNSRequest request)
+        public virtual SetDNSResponse SetDNS(SetDNSRequest request)
         {
             throw new NotImplementedException();
         }
 
-        public void SetDot1XConfiguration(Dot1XConfiguration Dot1XConfiguration)
+        public virtual void SetDot1XConfiguration(Dot1XConfiguration Dot1XConfiguration)
         {
             throw new NotImplementedException();
         }
 
-        public SetDPAddressesResponse SetDPAddresses(SetDPAddressesRequest request)
+        public virtual SetDPAddressesResponse SetDPAddresses(SetDPAddressesRequest request)
         {
             throw new NotImplementedException();
         }
 
-        public SetDynamicDNSResponse SetDynamicDNS(SetDynamicDNSRequest request)
+        public virtual SetDynamicDNSResponse SetDynamicDNS(SetDynamicDNSRequest request)
         {
             throw new NotImplementedException();
         }
 
-        public SetGeoLocationResponse SetGeoLocation(SetGeoLocationRequest request)
+        public virtual SetGeoLocationResponse SetGeoLocation(SetGeoLocationRequest request)
         {
             throw new NotImplementedException();
         }
 
-        public void SetHashingAlgorithm(string Algorithm)
+        public virtual void SetHashingAlgorithm(string Algorithm)
         {
             throw new NotImplementedException();
         }
 
-        public SetHostnameResponse SetHostname(SetHostnameRequest request)
-        {
-            throw new NotImplementedException();
-        }
-
-        [return: MessageParameter(Name = "RebootNeeded")]
-        public bool SetHostnameFromDHCP(bool FromDHCP)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetIPAddressFilter(IPAddressFilter IPAddressFilter)
-        {
-            throw new NotImplementedException();
-        }
-
-        public SetNetworkDefaultGatewayResponse SetNetworkDefaultGateway(SetNetworkDefaultGatewayRequest request)
+        public virtual SetHostnameResponse SetHostname(SetHostnameRequest request)
         {
             throw new NotImplementedException();
         }
 
         [return: MessageParameter(Name = "RebootNeeded")]
-        public bool SetNetworkInterfaces(string InterfaceToken, NetworkInterfaceSetConfiguration NetworkInterface)
+        public virtual bool SetHostnameFromDHCP(bool FromDHCP)
         {
             throw new NotImplementedException();
         }
 
-        public SetNetworkProtocolsResponse SetNetworkProtocols(SetNetworkProtocolsRequest request)
+        public virtual void SetIPAddressFilter(IPAddressFilter IPAddressFilter)
         {
             throw new NotImplementedException();
         }
 
-        public SetNTPResponse SetNTP(SetNTPRequest request)
+        public virtual SetNetworkDefaultGatewayResponse SetNetworkDefaultGateway(SetNetworkDefaultGatewayRequest request)
         {
             throw new NotImplementedException();
         }
 
-        public void SetPasswordComplexityConfiguration(int MinLen, int Uppercase, int Number, int SpecialChars, bool BlockUsernameOccurrence, bool PolicyConfigurationLocked)
+        [return: MessageParameter(Name = "RebootNeeded")]
+        public virtual bool SetNetworkInterfaces(string InterfaceToken, NetworkInterfaceSetConfiguration NetworkInterface)
         {
             throw new NotImplementedException();
         }
 
-        public void SetPasswordHistoryConfiguration(bool Enabled, int Length)
+        public virtual SetNetworkProtocolsResponse SetNetworkProtocols(SetNetworkProtocolsRequest request)
         {
             throw new NotImplementedException();
         }
 
-        public void SetRelayOutputSettings(string RelayOutputToken, RelayOutputSettings Properties)
+        public virtual SetNTPResponse SetNTP(SetNTPRequest request)
         {
             throw new NotImplementedException();
         }
 
-        public void SetRelayOutputState(string RelayOutputToken, RelayLogicalState LogicalState)
+        public virtual void SetPasswordComplexityConfiguration(int MinLen, int Uppercase, int Number, int SpecialChars, bool BlockUsernameOccurrence, bool PolicyConfigurationLocked)
         {
             throw new NotImplementedException();
         }
 
-        public void SetRemoteDiscoveryMode(DiscoveryMode RemoteDiscoveryMode)
+        public virtual void SetPasswordHistoryConfiguration(bool Enabled, int Length)
         {
             throw new NotImplementedException();
         }
 
-        public void SetRemoteUser(RemoteUser RemoteUser)
+        public virtual void SetRelayOutputSettings(string RelayOutputToken, RelayOutputSettings Properties)
         {
             throw new NotImplementedException();
         }
 
-        public SetScopesResponse SetScopes(SetScopesRequest request)
+        public virtual void SetRelayOutputState(string RelayOutputToken, RelayLogicalState LogicalState)
         {
             throw new NotImplementedException();
         }
 
-        public void SetStorageConfiguration(StorageConfiguration StorageConfiguration)
+        public virtual void SetRemoteDiscoveryMode(DiscoveryMode RemoteDiscoveryMode)
         {
             throw new NotImplementedException();
         }
 
-        public void SetSystemDateAndTime(SetDateTimeType DateTimeType, bool DaylightSavings, TimeZone TimeZone, DateTime UTCDateTime)
+        public virtual void SetRemoteUser(RemoteUser RemoteUser)
         {
             throw new NotImplementedException();
         }
 
-        public void SetSystemFactoryDefault(FactoryDefaultType FactoryDefault)
+        public virtual SetScopesResponse SetScopes(SetScopesRequest request)
         {
             throw new NotImplementedException();
         }
 
-        public SetUserResponse SetUser(SetUserRequest request)
+        public virtual void SetStorageConfiguration(StorageConfiguration StorageConfiguration)
         {
             throw new NotImplementedException();
         }
 
-        public void SetZeroConfiguration(string InterfaceToken, bool Enabled)
+        public virtual void SetSystemDateAndTime(SetDateTimeType DateTimeType, bool DaylightSavings, TimeZone TimeZone, DateTime UTCDateTime)
         {
             throw new NotImplementedException();
         }
 
-        public StartFirmwareUpgradeResponse StartFirmwareUpgrade(StartFirmwareUpgradeRequest request)
+        public virtual void SetSystemFactoryDefault(FactoryDefaultType FactoryDefault)
         {
             throw new NotImplementedException();
         }
 
-        public StartSystemRestoreResponse StartSystemRestore(StartSystemRestoreRequest request)
+        public virtual SetUserResponse SetUser(SetUserRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual void SetZeroConfiguration(string InterfaceToken, bool Enabled)
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual StartFirmwareUpgradeResponse StartFirmwareUpgrade(StartFirmwareUpgradeRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual StartSystemRestoreResponse StartSystemRestore(StartSystemRestoreRequest request)
         {
             throw new NotImplementedException();
         }
 
         [return: MessageParameter(Name = "Message")]
-        public string SystemReboot()
+        public virtual string SystemReboot()
         {
             throw new NotImplementedException();
         }
 
         [return: MessageParameter(Name = "Message")]
-        public string UpgradeSystemFirmware(AttachmentData Firmware)
+        public virtual string UpgradeSystemFirmware(AttachmentData Firmware)
         {
             throw new NotImplementedException();
         }

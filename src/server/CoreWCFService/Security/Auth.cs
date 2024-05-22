@@ -1,4 +1,5 @@
 ﻿using CoreWCF.Dispatcher;
+using CoreWCFService.Security;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
@@ -8,11 +9,14 @@ using System.Collections.ObjectModel;
 using System.IO.Pipelines;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Security.Principal;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 using static CoreWCFService.HttpRequestExtensions;
 
 namespace CoreWCFService
@@ -32,47 +36,40 @@ namespace CoreWCFService
 
         protected async override Task<AuthenticateResult> HandleAuthenticateAsync()
         {
-            string authTicketFromSoapEnvelope = await Request!.GetAuthenticationHeaderFromSoapEnvelope();
+            UsernameToken token = await Request!.GetSecurityHeaderFromSoapEnvelope();
 
-            if (authTicketFromSoapEnvelope != null)
+            if (token != null)
             {
-                //if (await _userRepository.Authenticate("admin", credentials[1]))
-                //{
-                //    var identity = new GenericIdentity(credentials[0]);
-                //    var claimsPrincipal = new ClaimsPrincipal(identity);
-                //    var ticket = new AuthenticationTicket(claimsPrincipal, Scheme.Name);
-                //    return await Task.FromResult(AuthenticateResult.Success(ticket));
-                //}
-
-                var identity = new GenericIdentity("admin");
-                var claimsPrincipal = new ClaimsPrincipal(identity);
-                var ticket = new AuthenticationTicket(claimsPrincipal, Scheme.Name);
-                return await Task.FromResult(AuthenticateResult.Success(ticket));
+                if (await _userRepository.Authenticate(token.Username, token.Password.Text, token.Nonce.Text, token.Created))
+                {
+                    var identity = new GenericIdentity(token.Username);
+                    var claimsPrincipal = new ClaimsPrincipal(identity);
+                    var ticket = new AuthenticationTicket(claimsPrincipal, Scheme.Name);
+                    return AuthenticateResult.Success(ticket);
+                }
             }
 
-            return await Task.FromResult(AuthenticateResult.Fail("Invalid Authorization Header"));
+            return AuthenticateResult.Fail("Invalid Authorization Header");
         }
 
-        protected override Task HandleChallengeAsync(AuthenticationProperties properties)
+        protected override async Task HandleChallengeAsync(AuthenticationProperties properties)
         {
             Response.StatusCode = 401;
-            string nonce = "4d6d466b596a637a4d7a67364f546335596a4a6c5932513d";
+            string nonce = DigestHelpers.CalculateNonce();
             Response.Headers.Append("WWW-Authenticate", $"Digest qop=\"auth\", realm=\"IP Camera\", nonce=\"{nonce}\", stale=\"FALSE\"");
-            Context.Response.WriteAsync("You are not logged in via Digest auth").Wait();
-            return Task.CompletedTask;
+            await Context.Response.WriteAsync("You are not logged in via Digest auth").ConfigureAwait(false);
         }
     }
 
     public static class HttpRequestExtensions
     {
-
-        public static async Task<string> GetAuthenticationHeaderFromSoapEnvelope(this HttpRequest request)
+        public static async Task<UsernameToken> GetSecurityHeaderFromSoapEnvelope(this HttpRequest request)
         {
             ReadResult requestBodyInBytes = await request.BodyReader.ReadAsync();
             string body = Encoding.UTF8.GetString(requestBodyInBytes.Buffer.FirstSpan);
             request.BodyReader.AdvanceTo(requestBodyInBytes.Buffer.Start, requestBodyInBytes.Buffer.End);
 
-            string security = null;
+            UsernameToken security = null;
 
             if (body?.Contains(@"http://www.w3.org/2003/05/soap-envelope") == true)
             {
@@ -83,36 +80,30 @@ namespace CoreWCFService
                 foreach (var header in headers)
                 {
                     var securityElement = header.Descendants().FirstOrDefault();
-                    if (!string.IsNullOrWhiteSpace(securityElement?.Value))
+                    if (securityElement != null)
                     {
-                        security = securityElement.Value;
-                        break;
+                        var userNameTokenElement = securityElement.Descendants().FirstOrDefault();
+                        if (userNameTokenElement != null)
+                        {
+                            var serializer = new XmlSerializer(typeof(UsernameToken));
+                            using (var str = new System.IO.MemoryStream(Encoding.UTF8.GetBytes(userNameTokenElement.ToString())))
+                            {
+                                UsernameToken xml = (UsernameToken)serializer.Deserialize(str);
+                                security = xml;
+                            }
+                            break;
+                        }
                     }
                 }
             }
 
             return security;
         }
-
-        public interface IUserRepository
-        {
-            public Task<bool> Authenticate(string username, string password);
-        }
-
-        public class UserRepository : IUserRepository
-        {
-            public Task<bool> Authenticate(string username, string password)
-            {
-                //TODO: some dummie auth mechanism used here, make something more realistic such as DB user repo lookup or similar
-                if (username == "admin" && password == "password")
-                {
-                    return Task.FromResult(true);
-                }
-                return Task.FromResult(false);
-            }
-        }
     }
 
+    /// <summary>
+    /// Workaround: Required because the Security header is not understood by WCF and it would fail the request because there are unparsed headers at the end of the pipeline.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Class)]
     public class DisableMustUnderstandValidationAttribute : Attribute, IServiceBehavior
     {
