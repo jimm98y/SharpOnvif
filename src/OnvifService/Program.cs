@@ -12,6 +12,7 @@ builder.Services.AddServiceModelServices();
 builder.Services.AddServiceModelMetadata();
 builder.Services.AddSingleton<IServiceBehavior, UseRequestHeadersForMetadataAddressBehavior>();
 builder.Services.AddSingleton<IUserRepository, UserRepository>();
+// all endpoints must have [DisableMustUnderstandValidation] for this to work
 builder.Services
     .AddAuthentication(SCHEME_DIGEST)
     .AddScheme<AuthenticationSchemeOptions, DigestAuthenticationHandler>(SCHEME_DIGEST, null);
