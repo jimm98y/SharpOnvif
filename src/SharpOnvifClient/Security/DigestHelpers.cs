@@ -31,7 +31,7 @@ namespace SharpOnvifClient.Security
             var nonceBytes = Convert.FromBase64String(nonce);
             var createdBytes = Encoding.UTF8.GetBytes(created);
             var passwordBytes = Encoding.UTF8.GetBytes(password);
-            var combined = new byte[createdBytes.Length + nonce.Length + passwordBytes.Length];
+            var combined = new byte[createdBytes.Length + nonceBytes.Length + passwordBytes.Length];
 
             Buffer.BlockCopy(nonceBytes, 0, combined, 0, nonceBytes.Length);
             Buffer.BlockCopy(createdBytes, 0, combined, nonceBytes.Length, createdBytes.Length);
