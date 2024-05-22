@@ -1,9 +1,7 @@
-﻿
-
-
+﻿using CoreWCFService.Security;
 using System;
 
-namespace CoreWCFService.onvif
+namespace CoreWCFService.Onvif
 {
     [DisableMustUnderstandValidation]
     public class OnvifDeviceMgmtImpl : Device

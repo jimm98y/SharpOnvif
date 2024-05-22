@@ -1,5 +1,5 @@
 ﻿using System.Net;
-using CoreWCFService.onvif;
+using CoreWCFService.Onvif;
 using CoreWCFService.Security;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;

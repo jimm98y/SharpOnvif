@@ -33,9 +33,9 @@ namespace CoreWCFService.Security
             var passwordBytes = Encoding.UTF8.GetBytes(password);
             var combined = new byte[createdBytes.Length + nonce.Length + passwordBytes.Length];
 
-            Buffer.BlockCopy(nonceBytes, 0, combined, 0, nonce.Length);
-            Buffer.BlockCopy(createdBytes, 0, combined, nonce.Length, createdBytes.Length);
-            Buffer.BlockCopy(passwordBytes, 0, combined, nonce.Length + createdBytes.Length, passwordBytes.Length);
+            Buffer.BlockCopy(nonceBytes, 0, combined, 0, nonceBytes.Length);
+            Buffer.BlockCopy(createdBytes, 0, combined, nonceBytes.Length, createdBytes.Length);
+            Buffer.BlockCopy(passwordBytes, 0, combined, nonceBytes.Length + createdBytes.Length, passwordBytes.Length);
 
             using (var sha = SHA1.Create())
             {

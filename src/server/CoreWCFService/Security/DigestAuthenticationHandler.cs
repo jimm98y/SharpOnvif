@@ -1,31 +1,26 @@
-﻿using CoreWCF.Dispatcher;
-using CoreWCFService.Security;
+﻿using CoreWCFService.Security;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using System;
-using System.Collections.ObjectModel;
 using System.IO.Pipelines;
 using System.Linq;
 using System.Security.Claims;
-using System.Security.Cryptography;
 using System.Security.Principal;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
-using static CoreWCFService.HttpRequestExtensions;
 
 namespace CoreWCFService
 {
     public class DigestAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
     {
-
         private readonly IUserRepository _userRepository;
-        public DigestAuthenticationHandler(IOptionsMonitor<AuthenticationSchemeOptions> options,
+
+        public DigestAuthenticationHandler(
+            IOptionsMonitor<AuthenticationSchemeOptions> options,
             ILoggerFactory logger,
             UrlEncoder encoder,
             IUserRepository userRepository) :
@@ -36,7 +31,7 @@ namespace CoreWCFService
 
         protected async override Task<AuthenticateResult> HandleAuthenticateAsync()
         {
-            UsernameToken token = await Request!.GetSecurityHeaderFromSoapEnvelope();
+            UsernameToken token = await GetSecurityHeaderFromSoapEnvelope(Request);
 
             if (token != null)
             {
@@ -59,18 +54,14 @@ namespace CoreWCFService
             Response.Headers.Append("WWW-Authenticate", $"Digest qop=\"auth\", realm=\"IP Camera\", nonce=\"{nonce}\", stale=\"FALSE\"");
             await Context.Response.WriteAsync("You are not logged in via Digest auth").ConfigureAwait(false);
         }
-    }
 
-    public static class HttpRequestExtensions
-    {
-        public static async Task<UsernameToken> GetSecurityHeaderFromSoapEnvelope(this HttpRequest request)
+        public static async Task<UsernameToken> GetSecurityHeaderFromSoapEnvelope(HttpRequest request)
         {
             ReadResult requestBodyInBytes = await request.BodyReader.ReadAsync();
             string body = Encoding.UTF8.GetString(requestBodyInBytes.Buffer.FirstSpan);
             request.BodyReader.AdvanceTo(requestBodyInBytes.Buffer.Start, requestBodyInBytes.Buffer.End);
 
             UsernameToken security = null;
-
             if (body?.Contains(@"http://www.w3.org/2003/05/soap-envelope") == true)
             {
                 XNamespace ns = "http://www.w3.org/2003/05/soap-envelope";
@@ -98,31 +89,6 @@ namespace CoreWCFService
             }
 
             return security;
-        }
-    }
-
-    /// <summary>
-    /// Workaround: Required because the Security header is not understood by WCF and it would fail the request because there are unparsed headers at the end of the pipeline.
-    /// </summary>
-    [AttributeUsage(AttributeTargets.Class)]
-    public class DisableMustUnderstandValidationAttribute : Attribute, IServiceBehavior
-    {
-        void IServiceBehavior.Validate(ServiceDescription description, ServiceHostBase serviceHostBase) { }
-        void IServiceBehavior.AddBindingParameters(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase, Collection<ServiceEndpoint> endpoints, BindingParameterCollection bindingParameters) { }
-        void IServiceBehavior.ApplyDispatchBehavior(ServiceDescription description, ServiceHostBase serviceHostBase)
-        {
-            for (int i = 0; i < serviceHostBase.ChannelDispatchers.Count; i++)
-            {
-                if (serviceHostBase.ChannelDispatchers[i] is ChannelDispatcher channelDispatcher)
-                {
-                    foreach (EndpointDispatcher endpointDispatcher in channelDispatcher.Endpoints)
-                    {
-                        if (endpointDispatcher.IsSystemEndpoint) continue;
-                        DispatchRuntime runtime = endpointDispatcher.DispatchRuntime;
-                        runtime.ValidateMustUnderstand = false;
-                    }
-                }
-            }
         }
     }
 }
