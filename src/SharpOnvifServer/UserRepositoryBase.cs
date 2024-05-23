@@ -1,9 +1,16 @@
 ﻿using System.Threading.Tasks;
+using SharpOnvifServer.Security;
 
-namespace SharpOnvifServer.Security
+namespace SharpOnvifServer
 {
+    /// <summary>
+    /// Basic implementation of the <see cref="IUserRepository"/> with Digest authentication.
+    /// </summary>
     public abstract class UserRepositoryBase : IUserRepository
     {
+        /// <summary>
+        /// Maximum allowed time difference in between the client and the server in seconds.
+        /// </summary>
         protected int MaxValidTimeDeltaInSeconds { get; set; } = 300;
 
         public Task<bool> Authenticate(string username, string password, string nonce, string created)
@@ -27,7 +34,18 @@ namespace SharpOnvifServer.Security
             return Task.FromResult(false);
         }
 
+        /// <summary>
+        /// Returns a password for the given user.
+        /// </summary>
+        /// <param name="username">User name.</param>
+        /// <returns>Password.</returns>
         protected abstract string GetPassword(string username);
+
+        /// <summary>
+        /// Returns true if the user exists, false otherwise.
+        /// </summary>
+        /// <param name="username">User name.</param>
+        /// <returns>true if the user exists, false otherwise.</returns>
         protected abstract bool UserExists(string username);
     }
 }

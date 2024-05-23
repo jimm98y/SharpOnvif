@@ -22,6 +22,8 @@ app.UseAuthentication();
     serviceBuilder.AddService<OnvifService.Onvif.OnvifDeviceMgmtImpl>();
     serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.OnvifDeviceMgmtImpl, OnvifScDeviceMgmt.Device>(OnvifHelpers.CreateOnvifBinding(), "/device_service");
 
+    // TODO: add more service endpoints
+
     var serviceMetadataBehavior = app.Services.GetRequiredService<ServiceMetadataBehavior>();
     serviceMetadataBehavior.HttpGetEnabled = true;
 });
