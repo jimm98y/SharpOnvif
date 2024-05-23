@@ -28,6 +28,7 @@ namespace OnvifService.Discovery
         {
             try
             {
+                // to kill a process owning a port: Get-Process -Id (Get-NetUDPEndpoint -LocalPort 3702).OwningProcess
                 _udpClient = new UdpClient();
                 _udpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
                 _udpClient.Client.Bind(new IPEndPoint(System.Net.IPAddress.Any, ONVIF_DISCOVERY_PORT));

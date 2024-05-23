@@ -1,10 +1,11 @@
 ﻿using System.Net;
-using CoreWCFService.Onvif;
 using CoreWCFService.Security;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using OnvifScDeviceMgmt;
 using OnvifService.Discovery;
+using OnvifService.OnvifImpl;
 
 const string SCHEME_DIGEST = "Digest";
 

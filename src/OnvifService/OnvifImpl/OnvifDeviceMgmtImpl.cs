@@ -1,7 +1,8 @@
 ﻿using CoreWCFService.Security;
+using OnvifScDeviceMgmt;
 using System;
 
-namespace CoreWCFService.Onvif
+namespace OnvifService.OnvifImpl
 {
     [DisableMustUnderstandValidation]
     public class OnvifDeviceMgmtImpl : Device
@@ -107,7 +108,7 @@ namespace CoreWCFService.Onvif
                         {
                             SystemLogging = true,
                             SupportedVersions = new OnvifVersion[]
-                            { 
+                            {
                                 new OnvifVersion()
                                 {
                                     Major = 16,
@@ -185,7 +186,7 @@ namespace CoreWCFService.Onvif
                     {
                         IPv4Address = "8.8.8.8"
                     }
-                } 
+                }
             };
         }
 
@@ -262,7 +263,7 @@ namespace CoreWCFService.Onvif
             {
                 NetworkInterfaces = new NetworkInterface[]
                 {
-                    new NetworkInterface() 
+                    new NetworkInterface()
                     {
                         Enabled = true,
                         Info = new NetworkInterfaceInfo()
@@ -403,7 +404,7 @@ namespace CoreWCFService.Onvif
             var now = System.DateTime.UtcNow;
             return new SystemDateTime()
             {
-                UTCDateTime = new DateTime()
+                UTCDateTime = new OnvifScDeviceMgmt.DateTime()
                 {
                     Date = new Date()
                     {
@@ -631,7 +632,7 @@ namespace CoreWCFService.Onvif
             throw new NotImplementedException();
         }
 
-        public virtual void SetSystemDateAndTime(SetDateTimeType DateTimeType, bool DaylightSavings, TimeZone TimeZone, DateTime UTCDateTime)
+        public void SetSystemDateAndTime(SetDateTimeType DateTimeType, bool DaylightSavings, OnvifScDeviceMgmt.TimeZone TimeZone, OnvifScDeviceMgmt.DateTime UTCDateTime)
         {
             throw new NotImplementedException();
         }

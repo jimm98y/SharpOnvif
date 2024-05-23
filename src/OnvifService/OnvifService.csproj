@@ -5,6 +5,12 @@
 	<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="_Generated\**" />
+    <Content Remove="_Generated\**" />
+    <EmbeddedResource Remove="_Generated\**" />
+    <None Remove="_Generated\**" />
+  </ItemGroup>
+  <ItemGroup>
     <Using Include="CoreWCF" />
     <Using Include="CoreWCF.Configuration" />
     <Using Include="CoreWCF.Channels" />
