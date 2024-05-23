@@ -4,6 +4,7 @@ using CoreWCFService.Security;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using OnvifService.Discovery;
 
 const string SCHEME_DIGEST = "Digest";
 
@@ -17,6 +18,7 @@ builder.Services
     .AddAuthentication(SCHEME_DIGEST)
     .AddScheme<AuthenticationSchemeOptions, DigestAuthenticationHandler>(SCHEME_DIGEST, null);
 builder.Services.AddAuthorization(); // this means we require Digest on all endpoints
+builder.Services.AddHostedService<DiscoveryService>(); // add Onvif discovery
 
 var app = builder.Build();
 app.UseAuthentication();

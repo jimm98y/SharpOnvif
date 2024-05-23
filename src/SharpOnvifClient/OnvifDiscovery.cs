@@ -44,12 +44,12 @@ namespace SharpOnvifClient
 
             await _discoverySlim.WaitAsync();
 
-            string uuid = Guid.NewGuid().ToString();
+            string uuid = Guid.NewGuid().ToString().ToLowerInvariant();
             string onvifDiscoveryProbe =
             "<s:Envelope xmlns:s=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:a=\"http://schemas.xmlsoap.org/ws/2004/08/addressing\">\r\n" +
             "   <s:Header>\r\n" +
             "      <a:Action s:mustUnderstand=\"1\">http://schemas.xmlsoap.org/ws/2005/04/discovery/Probe</a:Action>\r\n" +
-            "      <a:MessageID>urn:uuid:" + uuid.ToLowerInvariant() + "</a:MessageID>\r\n" + // uuid has to be unique for each request
+            "      <a:MessageID>urn:uuid:" + uuid + "</a:MessageID>\r\n" + // uuid has to be unique for each request
             "      <a:ReplyTo>\r\n" +
             "        <a:Address>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</a:Address>\r\n" +
             "      </a:ReplyTo>\r\n" +

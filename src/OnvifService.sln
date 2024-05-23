@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnvifService", "OnvifService\OnvifService.csproj", "{F2703F88-40F0-4EFC-8104-7B472B347FAC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnvifService", "OnvifService\OnvifService.csproj", "{B029D3AA-1FF8-4402-A899-E1F5FE0D5855}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F2703F88-40F0-4EFC-8104-7B472B347FAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F2703F88-40F0-4EFC-8104-7B472B347FAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F2703F88-40F0-4EFC-8104-7B472B347FAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F2703F88-40F0-4EFC-8104-7B472B347FAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B029D3AA-1FF8-4402-A899-E1F5FE0D5855}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B029D3AA-1FF8-4402-A899-E1F5FE0D5855}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B029D3AA-1FF8-4402-A899-E1F5FE0D5855}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B029D3AA-1FF8-4402-A899-E1F5FE0D5855}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {FD9C99BD-43F5-4D5C-8674-1A5EB5C9BFB0}
+		SolutionGuid = {B452BD85-1B80-4BB9-BF59-34EB16E21311}
 	EndGlobalSection
 EndGlobal
