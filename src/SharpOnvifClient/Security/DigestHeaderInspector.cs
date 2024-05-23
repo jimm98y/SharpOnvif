@@ -5,12 +5,12 @@ using System.ServiceModel.Dispatcher;
 
 namespace SharpOnvifClient.Security
 {
-    public class PasswordDigestHeaderInspector : IClientMessageInspector
+    public class DigestHeaderInspector : IClientMessageInspector
     {
         private readonly string _username;
         private readonly string _password;
 
-        public PasswordDigestHeaderInspector(string username, string password)
+        public DigestHeaderInspector(string username, string password)
         {
             _username = username;
             _password = password;
@@ -21,7 +21,7 @@ namespace SharpOnvifClient.Security
 
         public object BeforeSendRequest(ref Message request, IClientChannel channel)
         {
-            request.Headers.Add(new PasswordDigestHeader(_username, _password, DateTime.UtcNow));
+            request.Headers.Add(new DigestHeader(_username, _password, DateTime.UtcNow));
             return null;
         }
     }

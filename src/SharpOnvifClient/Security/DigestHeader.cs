@@ -48,14 +48,14 @@ namespace SharpOnvifClient.Security
     /// Security header for the Digest authentication.
     /// </summary>
     /// <remarks>https://stapp.space/using-soap-security-in-dotnet-core/</remarks>
-    public class PasswordDigestHeader : MessageHeader
+    public class DigestHeader : MessageHeader
     {
         private readonly string _username;
         private readonly string _nonce;
         private readonly DateTime _created;
         private readonly string _password;
 
-        public PasswordDigestHeader(string username, string password, DateTime created)
+        public DigestHeader(string username, string password, DateTime created)
         {
             _username = username;
             _nonce = DigestHelpers.CalculateNonce();

@@ -1,7 +1,7 @@
 ﻿using OnvifEvents;
 using System.Linq;
 
-namespace SharpOnvifClient.Client
+namespace SharpOnvifClient
 {
     public static class KnownOnvifEvents
     {

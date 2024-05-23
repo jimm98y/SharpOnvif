@@ -5,12 +5,12 @@ using System.ServiceModel.Dispatcher;
 
 namespace SharpOnvifClient.Security
 {
-    public class PasswordDigestBehavior : IEndpointBehavior
+    public class DigestBehavior : IEndpointBehavior
     {
         public string Username { get; set; }
         public string Password { get; set; }
 
-        public PasswordDigestBehavior(string username, string password)
+        public DigestBehavior(string username, string password)
         {
             this.Username = username;
             this.Password = password;
@@ -23,7 +23,7 @@ namespace SharpOnvifClient.Security
 
         public void ApplyClientBehavior(ServiceEndpoint endpoint, ClientRuntime clientRuntime)
         {
-            clientRuntime.ClientMessageInspectors.Add(new PasswordDigestHeaderInspector(this.Username, this.Password));
+            clientRuntime.ClientMessageInspectors.Add(new DigestHeaderInspector(this.Username, this.Password));
         }
 
         public void ApplyDispatchBehavior(ServiceEndpoint endpoint, EndpointDispatcher endpointDispatcher)

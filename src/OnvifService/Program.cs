@@ -20,7 +20,7 @@ app.UseAuthentication();
 ((IApplicationBuilder)app).UseServiceModel(serviceBuilder =>
 {
     serviceBuilder.AddService<OnvifService.Onvif.OnvifDeviceMgmtImpl>();
-    serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.OnvifDeviceMgmtImpl, OnvifScDeviceMgmt.Device>(OnvifHelpers.CreateOnvifBinding(), "/device_service");
+    serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.OnvifDeviceMgmtImpl, OnvifScDeviceMgmt.Device>(OnvifHelper.CreateBinding(), "/device_service");
 
     // TODO: add more service endpoints
 

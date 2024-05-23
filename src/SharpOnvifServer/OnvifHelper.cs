@@ -5,15 +5,15 @@ using System.Net;
 namespace SharpOnvifServer
 {
     /// <summary>
-    /// Onvif helpers.
+    /// Helper class for the CoreWCF bindings.
     /// </summary>
-    public static class OnvifHelpers
+    public static class OnvifHelper
     {
         /// <summary>
         /// Create an Onvif CoreWCF binding for the Digest authentication using Soap 1.2.
         /// </summary>
         /// <returns><see cref="CustomBinding"/> using Digest authentication and Soap 1.2.</returns>
-        public static CustomBinding CreateOnvifBinding()
+        public static CustomBinding CreateBinding()
         {
             var httpTransportBinding = new HttpTransportBindingElement
             {

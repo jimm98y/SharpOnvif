@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.ServiceModel.Description;
 using System.Threading.Tasks;
 
-namespace SharpOnvifClient.Client
+namespace SharpOnvifClient
 {
     public class SimpleOnvifClient
     {

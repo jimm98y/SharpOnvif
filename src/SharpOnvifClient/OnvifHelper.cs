@@ -13,7 +13,7 @@ namespace SharpOnvifClient
     {
         public static IEndpointBehavior CreateAuthenticationBehavior(string userName, string password)
         {
-            return new PasswordDigestBehavior(userName, password);
+            return new DigestBehavior(userName, password);
         }
 
         public static void SetAuthentication(ServiceEndpoint endpoint, IEndpointBehavior authenticationBehavior)

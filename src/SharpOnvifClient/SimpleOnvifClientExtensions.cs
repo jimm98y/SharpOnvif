@@ -1,9 +1,7 @@
 ﻿using OnvifEvents;
-using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SharpOnvifClient.Client
+namespace SharpOnvifClient
 {
     public static class SimpleOnvifClientExtensions
     {

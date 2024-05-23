@@ -10,9 +10,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.XPath;
 
-namespace SharpOnvifClient
+namespace SharpOnvifClient.Discovery
 {
-    public static class OnvifDiscovery
+    public static class DiscoveryClient
     {
         private class UdpState
         {
