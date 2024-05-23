@@ -1,4 +1,4 @@
-﻿using CoreWCFService.Security;
+﻿using SharpOnvifServer.Security;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
@@ -12,8 +12,10 @@ using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.Serialization;
+using System;
+using System.Diagnostics;
 
-namespace CoreWCFService
+namespace SharpOnvifServer
 {
     public class DigestAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
     {
@@ -35,12 +37,20 @@ namespace CoreWCFService
 
             if (token != null)
             {
-                if (await _userRepository.Authenticate(token.Username, token.Password.Text, token.Nonce.Text, token.Created))
+                try
                 {
-                    var identity = new GenericIdentity(token.Username);
-                    var claimsPrincipal = new ClaimsPrincipal(identity);
-                    var ticket = new AuthenticationTicket(claimsPrincipal, Scheme.Name);
-                    return AuthenticateResult.Success(ticket);
+                    if (await _userRepository.Authenticate(token.Username, token.Password.Text, token.Nonce.Text, token.Created))
+                    {
+                        var identity = new GenericIdentity(token.Username);
+                        var claimsPrincipal = new ClaimsPrincipal(identity);
+                        var ticket = new AuthenticationTicket(claimsPrincipal, Scheme.Name);
+                        return AuthenticateResult.Success(ticket);
+                    }
+                }
+                catch(Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                    return AuthenticateResult.Fail("Failed to authenticate the user.");
                 }
             }
 

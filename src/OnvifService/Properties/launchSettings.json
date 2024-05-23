@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "CoreWCFService": {
+    "OnvifService": {
       "commandName": "Project",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

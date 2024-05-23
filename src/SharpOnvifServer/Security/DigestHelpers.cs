@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace CoreWCFService.Security
+namespace SharpOnvifServer.Security
 {
     public static class DigestHelpers
     {

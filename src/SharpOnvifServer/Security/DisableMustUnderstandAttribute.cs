@@ -1,8 +1,11 @@
-﻿using CoreWCF.Dispatcher;
+﻿using CoreWCF;
+using CoreWCF.Channels;
+using CoreWCF.Description;
+using CoreWCF.Dispatcher;
 using System;
 using System.Collections.ObjectModel;
 
-namespace CoreWCFService.Security
+namespace SharpOnvifServer.Security
 {
     /// <summary>
     /// Workaround: Required because the Security header is not understood by WCF and it would fail the request because there are unparsed headers at the end of the pipeline.

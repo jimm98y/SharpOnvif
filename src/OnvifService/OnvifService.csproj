@@ -11,17 +11,12 @@
     <None Remove="_Generated\**" />
   </ItemGroup>
   <ItemGroup>
-    <Using Include="CoreWCF" />
-    <Using Include="CoreWCF.Configuration" />
-    <Using Include="CoreWCF.Channels" />
-    <Using Include="CoreWCF.Description" />
-    <Using Include="System.Runtime.Serialization " />
-    <Using Include="CoreWCFService" />
-    <Using Include="Microsoft.Extensions.DependencyInjection.Extensions" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="CoreWCF.Http" Version="1.5.2" />
     <PackageReference Include="CoreWCF.Primitives" Version="1.5.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Negotiate" Version="8.0.5" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SharpOnvifServer\SharpOnvifServer.csproj">
+      <Private>True</Private>
+    </ProjectReference>
   </ItemGroup>
 </Project>

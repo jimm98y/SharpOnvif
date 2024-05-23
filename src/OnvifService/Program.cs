@@ -1,42 +1,28 @@
-﻿using System.Net;
-using CoreWCFService.Security;
-using Microsoft.AspNetCore.Authentication;
+﻿using CoreWCF.Configuration;
+using CoreWCF.Description;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using OnvifScDeviceMgmt;
-using OnvifService.Discovery;
-using OnvifService.OnvifImpl;
-
-const string SCHEME_DIGEST = "Digest";
+using OnvifService.Repository;
+using SharpOnvifServer;
+using SharpOnvifServer.Security;
 
 var builder = WebApplication.CreateBuilder();
 builder.Services.AddServiceModelServices();
 builder.Services.AddServiceModelMetadata();
 builder.Services.AddSingleton<IServiceBehavior, UseRequestHeadersForMetadataAddressBehavior>();
 builder.Services.AddSingleton<IUserRepository, UserRepository>();
-// all endpoints must have [DisableMustUnderstandValidation] for this to work
-builder.Services
-    .AddAuthentication(SCHEME_DIGEST)
-    .AddScheme<AuthenticationSchemeOptions, DigestAuthenticationHandler>(SCHEME_DIGEST, null);
-builder.Services.AddAuthorization(); // this means we require Digest on all endpoints
-builder.Services.AddHostedService<DiscoveryService>(); // add Onvif discovery
+
+builder.Services.AddOnvifDigestAuthentication();
+builder.Services.AddOnvifDiscovery();
 
 var app = builder.Build();
 app.UseAuthentication();
 
 ((IApplicationBuilder)app).UseServiceModel(serviceBuilder =>
 {
-    serviceBuilder.AddService<OnvifDeviceMgmtImpl>();
-    var httpTransportBinding = new HttpTransportBindingElement
-    {
-        AuthenticationScheme = AuthenticationSchemes.Digest,
-    };
-    var textMessageEncodingBinding = new TextMessageEncodingBindingElement
-    {
-        MessageVersion = MessageVersion.CreateVersion(EnvelopeVersion.Soap12, AddressingVersion.None),
-    };  
-    var binding = new CustomBinding(textMessageEncodingBinding, httpTransportBinding);
-    serviceBuilder.AddServiceEndpoint<OnvifDeviceMgmtImpl, Device>(binding, "/device_service");
+    serviceBuilder.AddService<OnvifService.Onvif.OnvifDeviceMgmtImpl>();
+    serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.OnvifDeviceMgmtImpl, OnvifScDeviceMgmt.Device>(OnvifHelpers.CreateOnvifBinding(), "/device_service");
+
     var serviceMetadataBehavior = app.Services.GetRequiredService<ServiceMetadataBehavior>();
     serviceMetadataBehavior.HttpGetEnabled = true;
 });

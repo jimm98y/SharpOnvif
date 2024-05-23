@@ -1,8 +1,9 @@
-﻿using CoreWCFService.Security;
+﻿using CoreWCF;
 using OnvifScDeviceMgmt;
+using SharpOnvifServer.Security;
 using System;
 
-namespace OnvifService.OnvifImpl
+namespace OnvifService.Onvif
 {
     [DisableMustUnderstandValidation]
     public class OnvifDeviceMgmtImpl : Device
