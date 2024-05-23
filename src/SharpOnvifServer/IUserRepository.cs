@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace SharpOnvifServer.Security
+namespace SharpOnvifServer
 {
     public interface IUserRepository
     {

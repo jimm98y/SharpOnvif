@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using OnvifService.Repository;
 using SharpOnvifServer;
-using SharpOnvifServer.Security;
 
 var builder = WebApplication.CreateBuilder();
 builder.Services.AddServiceModelServices();
