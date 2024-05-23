@@ -48,7 +48,7 @@ namespace SharpOnvifServer.Discovery
                             if (parsedMessage != null) // TODO: valid types...
                             {
                                 // reply
-                                string reply = CreateDiscoveryResponse(parsedMessage.Types, parsedMessage.MessageUuid, "http://localhost:5000/device_service");
+                                string reply = CreateDiscoveryResponse(parsedMessage.Types, parsedMessage.MessageUuid, "http://localhost:5000/onvif/device_service");
                                 var replyBytes = Encoding.UTF8.GetBytes(reply);
                                 int sentBytes = _udpClient.Client.SendTo(replyBytes, remoteEndpoint);
                             }
