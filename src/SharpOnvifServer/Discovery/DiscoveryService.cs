@@ -31,8 +31,8 @@ namespace SharpOnvifServer.Discovery
                 // to kill a process owning a port: Get-Process -Id (Get-NetUDPEndpoint -LocalPort 3702).OwningProcess
                 _udpClient = new UdpClient();
                 _udpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
-                _udpClient.Client.Bind(new IPEndPoint(System.Net.IPAddress.Any, ONVIF_DISCOVERY_PORT));
-                _udpClient.JoinMulticastGroup(System.Net.IPAddress.Parse(OnvifDiscoveryAddress));
+                _udpClient.Client.Bind(new IPEndPoint(IPAddress.Any, ONVIF_DISCOVERY_PORT));
+                _udpClient.JoinMulticastGroup(IPAddress.Parse(OnvifDiscoveryAddress));
 
                 _listenerTask = Task.Run(() =>
                 {
@@ -40,7 +40,7 @@ namespace SharpOnvifServer.Discovery
                     {
                         try
                         {
-                            var remoteEndpoint = new IPEndPoint(System.Net.IPAddress.Any, 0);
+                            var remoteEndpoint = new IPEndPoint(IPAddress.Any, 0);
                             var recvResult = _udpClient.Receive(ref remoteEndpoint);
 
                             string message = Encoding.UTF8.GetString(recvResult);
