@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using SharpOnvifServer.Security;
+using SharpOnvifCommon.Security;
 
 namespace SharpOnvifServer
 {

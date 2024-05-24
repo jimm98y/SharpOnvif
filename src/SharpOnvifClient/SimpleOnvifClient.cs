@@ -84,7 +84,7 @@ namespace SharpOnvifClient
 
         public async Task<OnvifMedia.GetProfilesResponse> GetProfilesAsync()
         {
-            string mediaUrl = await GetServiceUriAsync(KnownOnvifServices.MEDIA).ConfigureAwait(false);
+            string mediaUrl = await GetServiceUriAsync(OnvifServices.MEDIA).ConfigureAwait(false);
             using (var mediaClient = new OnvifMedia.MediaClient(
                 OnvifHelper.CreateBinding(),
                 OnvifHelper.CreateEndpointAddress(mediaUrl)))
@@ -97,7 +97,7 @@ namespace SharpOnvifClient
 
         public async Task<OnvifMedia.MediaUri> GetStreamUriAsync(string profileToken)
         {
-            string mediaUrl = await GetServiceUriAsync(KnownOnvifServices.MEDIA).ConfigureAwait(false);
+            string mediaUrl = await GetServiceUriAsync(OnvifServices.MEDIA).ConfigureAwait(false);
             using (var mediaClient = new OnvifMedia.MediaClient(
                 OnvifHelper.CreateBinding(),
                 OnvifHelper.CreateEndpointAddress(mediaUrl)))
@@ -114,7 +114,7 @@ namespace SharpOnvifClient
 
         public async Task<CreatePullPointSubscriptionResponse> PullPointSubscribeAsync(int initialTerminationTimeInMinutes = 5)
         {
-            string eventUri = await GetServiceUriAsync(KnownOnvifServices.EVENTS);
+            string eventUri = await GetServiceUriAsync(OnvifServices.EVENTS);
             using (EventPortTypeClient eventPortTypeClient = new EventPortTypeClient(
                             OnvifHelper.CreateBinding(),
                             OnvifHelper.CreateEndpointAddress(eventUri)))
@@ -172,7 +172,7 @@ namespace SharpOnvifClient
         public async Task<SubscribeResponse1> BasicSubscribeAsync(string onvifEventListenerUri, int timeoutInMinutes = 5)
         {
             // Basic events need an exception in Windows Firewall + VS must run as Admin
-            string eventUri = await GetServiceUriAsync(KnownOnvifServices.EVENTS);
+            string eventUri = await GetServiceUriAsync(OnvifServices.EVENTS);
             using (NotificationProducerClient notificationProducerClient = new NotificationProducerClient(
                             OnvifHelper.CreateBinding(),
                             OnvifHelper.CreateEndpointAddress(eventUri)))

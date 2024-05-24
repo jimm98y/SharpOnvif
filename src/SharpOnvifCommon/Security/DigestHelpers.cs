@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace SharpOnvifClient.Security
+namespace SharpOnvifCommon.Security
 {
     public static class DigestHelpers
     {
@@ -16,12 +16,12 @@ namespace SharpOnvifClient.Security
             return Convert.ToBase64String(byteArray);
         }
 
-        public static string DateTimeToString(System.DateTime dateTime)
+        public static string DateTimeToString(DateTime dateTime)
         {
             return dateTime.ToString("yyyy-MM-ddTHH:mm:ss.fffZ");
         }
 
-        public static string CreateHashedPassword(string nonce, System.DateTime created, string password)
+        public static string CreateHashedPassword(string nonce, DateTime created, string password)
         {
             return CreateHashedPassword(nonce, DateTimeToString(created), password);
         }

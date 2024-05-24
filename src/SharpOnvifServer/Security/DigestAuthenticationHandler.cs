@@ -14,6 +14,7 @@ using System.Xml.Linq;
 using System.Xml.Serialization;
 using System;
 using System.Diagnostics;
+using SharpOnvifCommon.Security;
 
 namespace SharpOnvifServer
 {

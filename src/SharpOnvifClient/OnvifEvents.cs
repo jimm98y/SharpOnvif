@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace SharpOnvifClient
 {
-    public static class KnownOnvifEvents
+    public static class OnvifEvents
     {
         private static bool ContainsTrueValue(string eventXml)
         {

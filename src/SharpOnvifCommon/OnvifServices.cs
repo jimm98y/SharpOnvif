@@ -1,6 +1,6 @@
 ﻿namespace SharpOnvifClient
 {
-    public static class KnownOnvifServices
+    public static class OnvifServices
     {
         public const string ACCESS_CONTROL = "http://www.onvif.org/ver10/accesscontrol/wsdl";
         public const string ACCESS_RULES = "http://www.onvif.org/ver10/accessrules/wsdl";

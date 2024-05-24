@@ -1,27 +1,8 @@
-﻿using System.Xml.Serialization;
+﻿
+using System.Xml.Serialization;
 
-namespace SharpOnvifServer.Security
+namespace SharpOnvifCommon.Security
 {
-    [XmlRoot(ElementName = "Password", Namespace = "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd")]
-    public class Password
-    {
-        [XmlAttribute(AttributeName = "Type")]
-        public string Type { get; set; }
-
-        [XmlText]
-        public string Text { get; set; }
-    }
-
-    [XmlRoot(ElementName = "Nonce", Namespace = "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd")]
-    public class Nonce
-    {
-        [XmlAttribute(AttributeName = "EncodingType")]
-        public string EncodingType { get; set; }
-
-        [XmlText]
-        public string Text { get; set; }
-    }
-
     [XmlRoot(ElementName = "UsernameToken", Namespace = "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd")]
     public class UsernameToken
     {

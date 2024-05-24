@@ -374,7 +374,7 @@ namespace OnvifService.Onvif
                 {
                     new Service()
                     {
-                        Namespace = KnownOnvifServices.DEVICE_MGMT, 
+                        Namespace = OnvifServices.DEVICE_MGMT, 
                         XAddr = "http://localhost:5000/onvif/device_service",
                         Version = new OnvifVersion()
                         {
@@ -384,7 +384,7 @@ namespace OnvifService.Onvif
                     },
                     new Service()
                     {
-                        Namespace = KnownOnvifServices.MEDIA,
+                        Namespace = OnvifServices.MEDIA,
                         XAddr = "http://localhost:5000/onvif/media_service",
                         Version = new OnvifVersion()
                         {
