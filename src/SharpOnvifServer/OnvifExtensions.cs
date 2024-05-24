@@ -45,8 +45,12 @@ namespace SharpOnvifServer
         /// Adds a UDP listener for Onvif discovery.
         /// </summary>
         /// <param name="services"><see cref="IServiceCollection"/></param>
-        public static void AddOnvifDiscovery(this IServiceCollection services)
+        public static void AddOnvifDiscovery(this IServiceCollection services, OnvifDiscoveryOptions options = null)
         {
+            if (options == null)
+                options = new OnvifDiscoveryOptions("http://localhost:5000/onvif/device_service");
+
+            services.AddSingleton(options);
             services.AddHostedService<DiscoveryService>();
         }
     }

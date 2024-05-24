@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Hosting;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
@@ -11,6 +12,44 @@ using System.Xml.XPath;
 
 namespace SharpOnvifServer.Discovery
 {
+    public class OnvifDiscoveryMessage
+    {
+        public string Types { get; set; }
+        public string MessageUuid { get; set; }
+    }
+
+    public class OnvifDiscoveryOptions
+    {
+        public List<string> ServiceAddresses { get; set; } = new List<string>();
+        public List<string> Scopes { get; set; } = new List<string>()
+        {
+            "onvif://www.onvif.org/type/video_encoder",
+            "onvif://www.onvif.org/Profile/Streaming",
+            "onvif://www.onvif.org/Profile/G",
+            "onvif://www.onvif.org/Profile/T"
+        };
+
+        public List<string> Types { get; set; } = new List<string>()
+        {
+            "dn:NetworkVideoTransmitter",
+            "tds:Device"
+        };
+
+        public string MAC { get; set; }
+        public string Hardware { get; set; }
+        public string Name { get; set; }
+        public string City { get; set; }
+
+        /// <summary>
+        /// Ctor.
+        /// </summary>
+        /// <param name="serviceAddress">Public Onvif endpoint service address.</param>
+        public OnvifDiscoveryOptions(string serviceAddress)
+        {
+            ServiceAddresses.Add(serviceAddress);
+        }
+    }
+
     /// <summary>
     /// Onvif discovery implementation.
     /// Workaround until CoreWCF supports the discovery.
@@ -23,6 +62,13 @@ namespace SharpOnvifServer.Discovery
         private UdpClient _udpClient;
         private readonly CancellationTokenSource _cts = new CancellationTokenSource();
         private Task _listenerTask;
+
+        private readonly OnvifDiscoveryOptions _options = null;
+
+        public DiscoveryService(OnvifDiscoveryOptions options)
+        {
+            this._options = options;
+        }
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
@@ -48,7 +94,7 @@ namespace SharpOnvifServer.Discovery
                             if (parsedMessage != null) // TODO: valid types...
                             {
                                 // reply
-                                string reply = CreateDiscoveryResponse(parsedMessage.Types, parsedMessage.MessageUuid, "http://localhost:5000/onvif/device_service");
+                                string reply = CreateDiscoveryResponse(_options, parsedMessage.Types, parsedMessage.MessageUuid);
                                 var replyBytes = Encoding.UTF8.GetBytes(reply);
                                 int sentBytes = _udpClient.Client.SendTo(replyBytes, remoteEndpoint);
                             }
@@ -67,7 +113,7 @@ namespace SharpOnvifServer.Discovery
             return Task.CompletedTask;
         }
 
-        private static string CreateDiscoveryResponse(string searchedType, string discoveryMessageUuid, string serviceEndpoints)
+        private static string CreateDiscoveryResponse(OnvifDiscoveryOptions options, string searchedType, string discoveryMessageUuid)
         {
             // TODO: searchedType and namespaces
             string uuid = Guid.NewGuid().ToString().ToLowerInvariant();
@@ -88,18 +134,11 @@ namespace SharpOnvifServer.Discovery
                                 $"<wsadis:EndpointReference>" +
                                     $"<wsadis:Address>urn:uuid:{uuid}</wsadis:Address>\r\n" +
                                 $"</wsadis:EndpointReference>\r\n" +
-                                $"<d:Types>dn:NetworkVideoTransmitter tds:Device</d:Types>\r\n" + // TODO
+                                $"<d:Types>{string.Join(' ', options.Types)}</d:Types>\r\n" +
                                 $"<d:Scopes>" +
-                                    $"onvif://www.onvif.org/type/video_encoder " +
-                                    $"onvif://www.onvif.org/Profile/Streaming " +
-                                    $"onvif://www.onvif.org/Profile/G " +
-                                    $"onvif://www.onvif.org/Profile/T " +
-                                    $"onvif://www.onvif.org/MAC/00:1c:42:46:9a:0e " + // TODO
-                                    $"onvif://www.onvif.org/hardware/Test " +
-                                    $"onvif://www.onvif.org/name/LukasVolf " + // TODO
-                                    $"onvif://www.onvif.org/location/city/Holysov" + // TODO
+                                    BuildScopes(options) +                                  
                                 $"</d:Scopes>\r\n" +
-                                $"<d:XAddrs>{serviceEndpoints}</d:XAddrs>\r\n" +
+                                $"<d:XAddrs>{string.Join(' ', options.ServiceAddresses)}</d:XAddrs>\r\n" +
                                 $"<d:MetadataVersion>10</d:MetadataVersion>\r\n" +
                             $"</d:ProbeMatch>\r\n" +
                         $"</d:ProbeMatches>\r\n" +
@@ -108,10 +147,23 @@ namespace SharpOnvifServer.Discovery
             return message;
         }
 
-        public class OnvifDiscoveryMessage
+        private static string BuildScopes(OnvifDiscoveryOptions options)
         {
-            public string Types { get; set; }
-            public string MessageUuid { get; set; }
+            List<string> scopes = options.Scopes;
+            
+            if (!string.IsNullOrEmpty(options.MAC))
+                scopes.Add($"onvif://www.onvif.org/MAC/{options.MAC.Replace(' ', '_')}");
+
+            if (!string.IsNullOrEmpty(options.Hardware))
+                scopes.Add($"onvif://www.onvif.org/hardware/{options.Hardware.Replace(' ', '_')}");
+
+            if (!string.IsNullOrEmpty(options.Name))
+                scopes.Add($"onvif://www.onvif.org/name/{options.Name.Replace(' ', '_')}");
+
+            if (!string.IsNullOrEmpty(options.City))
+                scopes.Add($"onvif://www.onvif.org/location/city/{options.City.Replace(' ', '_')}");
+
+            return string.Join(' ', scopes);
         }
 
         private static OnvifDiscoveryMessage ReadOnvifEndpoint(string message)
@@ -154,55 +206,4 @@ namespace SharpOnvifServer.Discovery
             _udpClient.Dispose();
         }
     }
-
-    /*
-            <s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing">
-                <s:Header>
-                    <a:Action s:mustUnderstand="1">http://schemas.xmlsoap.org/ws/2005/04/discovery/Probe</a:Action>
-                    <a:MessageID>uuid:537d141e-1309-47bf-927e-1a42727e262d</a:MessageID>
-                    <a:ReplyTo>
-                        <a:Address>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</a:Address>
-                    </a:ReplyTo>
-                    <a:To s:mustUnderstand="1">urn:schemas-xmlsoap-org:ws:2005:04:discovery</a:To>
-                </s:Header>
-                <s:Body>
-                    <Probe xmlns="http://schemas.xmlsoap.org/ws/2005/04/discovery">
-                        <d:Types xmlns:d="http://schemas.xmlsoap.org/ws/2005/04/discovery" xmlns:dp0="http://www.onvif.org/ver10/device/wsdl">dp0:Device</d:Types>
-                    </Probe>
-                </s:Body>
-            </s:Envelope>
-
-            <?xml version="1.0" encoding="UTF-8"?>
-            <env:Envelope xmlns:env="http://www.w3.org/2003/05/soap-envelope" xmlns:d="http://schemas.xmlsoap.org/ws/2005/04/discovery" xmlns:wsadis="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:dn="http://www.onvif.org/ver10/network/wsdl" xmlns:tds="http://www.onvif.org/ver10/device/wsdl">
-                <env:Header>
-                    <wsadis:MessageID>urn:uuid:6eff0000-9fd2-11b4-8331-bcbac2a4dee3</wsadis:MessageID>
-                    <wsadis:RelatesTo>uuid:537d141e-1309-47bf-927e-1a42727e262d</wsadis:RelatesTo>
-                    <wsadis:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsadis:To>
-                    <wsadis:Action>http://schemas.xmlsoap.org/ws/2005/04/discovery/ProbeMatches</wsadis:Action>
-                    <d:AppSequence InstanceId="1716423123" MessageNumber="105702"/>
-                </env:Header>
-                <env:Body>
-                    <d:ProbeMatches>
-                        <d:ProbeMatch>
-                            <wsadis:EndpointReference>
-                                <wsadis:Address>urn:uuid:6eff0000-9fd2-11b4-8331-bcbac2a4dee3</wsadis:Address>
-                            </wsadis:EndpointReference>
-                            <d:Types>dn:NetworkVideoTransmitter tds:Device</d:Types>
-                            <d:Scopes> 
-                                onvif://www.onvif.org/type/video_encoder 
-                                onvif://www.onvif.org/Profile/Streaming 
-                                onvif://www.onvif.org/Profile/G 
-                                onvif://www.onvif.org/Profile/T 
-                                onvif://www.onvif.org/MAC/bc:ba:c2:a4:de:e3 
-                                onvif://www.onvif.org/hardware/DS-2CD2145FWD-I 
-                                onvif://www.onvif.org/name/HIKVISION%20DS-2CD2145FWD-I 
-                                onvif://www.onvif.org/location/city/hangzhou
-                            </d:Scopes>
-                            <d:XAddrs>http://192.168.1.17/onvif/device_service http://[fd8f:ff1b:35a3:e24d:beba:c2ff:fea4:dee3]/onvif/device_service</d:XAddrs>
-                            <d:MetadataVersion>10</d:MetadataVersion>
-                        </d:ProbeMatch>
-                    </d:ProbeMatches>
-                </env:Body>
-            </env:Envelope>
-        */
 }
