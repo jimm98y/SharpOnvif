@@ -1,5 +1,4 @@
 ﻿using SharpOnvifClient;
-using SharpOnvifClient.Discovery;
 using System;
 using System.Linq;
 

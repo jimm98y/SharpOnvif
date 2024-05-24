@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.XPath;
 
-namespace SharpOnvifClient.Discovery
+namespace SharpOnvifClient
 {
     public static class DiscoveryClient
     {
