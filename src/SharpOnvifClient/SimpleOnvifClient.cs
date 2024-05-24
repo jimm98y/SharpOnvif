@@ -9,9 +9,6 @@ namespace SharpOnvifClient
 {
     public class SimpleOnvifClient
     {
-        public const string ONVIF_MEDIA = "http://www.onvif.org/ver10/media/wsdl";
-        public const string ONVIF_EVENTS = "http://www.onvif.org/ver10/events/wsdl";
-
         private readonly string _onvifUri;
         private readonly IEndpointBehavior _auth;
         private Dictionary<string, string> _supportedServices;
@@ -87,7 +84,7 @@ namespace SharpOnvifClient
 
         public async Task<OnvifMedia.GetProfilesResponse> GetProfilesAsync()
         {
-            string mediaUrl = await GetServiceUriAsync(ONVIF_MEDIA).ConfigureAwait(false);
+            string mediaUrl = await GetServiceUriAsync(KnownOnvifServices.MEDIA).ConfigureAwait(false);
             using (var mediaClient = new OnvifMedia.MediaClient(
                 OnvifHelper.CreateBinding(),
                 OnvifHelper.CreateEndpointAddress(mediaUrl)))
@@ -100,7 +97,7 @@ namespace SharpOnvifClient
 
         public async Task<OnvifMedia.MediaUri> GetStreamUriAsync(string profileToken)
         {
-            string mediaUrl = await GetServiceUriAsync(ONVIF_MEDIA).ConfigureAwait(false);
+            string mediaUrl = await GetServiceUriAsync(KnownOnvifServices.MEDIA).ConfigureAwait(false);
             using (var mediaClient = new OnvifMedia.MediaClient(
                 OnvifHelper.CreateBinding(),
                 OnvifHelper.CreateEndpointAddress(mediaUrl)))
@@ -117,7 +114,7 @@ namespace SharpOnvifClient
 
         public async Task<CreatePullPointSubscriptionResponse> PullPointSubscribeAsync(int initialTerminationTimeInMinutes = 5)
         {
-            string eventUri = await GetServiceUriAsync(ONVIF_EVENTS);
+            string eventUri = await GetServiceUriAsync(KnownOnvifServices.EVENTS);
             using (EventPortTypeClient eventPortTypeClient = new EventPortTypeClient(
                             OnvifHelper.CreateBinding(),
                             OnvifHelper.CreateEndpointAddress(eventUri)))
@@ -175,7 +172,7 @@ namespace SharpOnvifClient
         public async Task<SubscribeResponse1> BasicSubscribeAsync(string onvifEventListenerUri, int timeoutInMinutes = 5)
         {
             // Basic events need an exception in Windows Firewall + VS must run as Admin
-            string eventUri = await GetServiceUriAsync(ONVIF_EVENTS);
+            string eventUri = await GetServiceUriAsync(KnownOnvifServices.EVENTS);
             using (NotificationProducerClient notificationProducerClient = new NotificationProducerClient(
                             OnvifHelper.CreateBinding(),
                             OnvifHelper.CreateEndpointAddress(eventUri)))
