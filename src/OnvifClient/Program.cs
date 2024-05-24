@@ -1,5 +1,7 @@
 ﻿using SharpOnvifClient;
 using SharpOnvifClient.Discovery;
+using System;
+using System.Linq;
 
 var devices = await DiscoveryClient.DiscoverAsync("0.0.0.0");
 var client = new SimpleOnvifClient(devices.First(x => x.Contains("localhost")), "admin", "password");
