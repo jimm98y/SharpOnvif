@@ -134,11 +134,11 @@ namespace SharpOnvifServer.Discovery
                                 $"<wsadis:EndpointReference>" +
                                     $"<wsadis:Address>urn:uuid:{uuid}</wsadis:Address>\r\n" +
                                 $"</wsadis:EndpointReference>\r\n" +
-                                $"<d:Types>{string.Join(' ', options.Types)}</d:Types>\r\n" +
+                                $"<d:Types>{BuildList(options.Types)}</d:Types>\r\n" +
                                 $"<d:Scopes>" +
                                     BuildScopes(options) +                                  
                                 $"</d:Scopes>\r\n" +
-                                $"<d:XAddrs>{string.Join(' ', options.ServiceAddresses)}</d:XAddrs>\r\n" +
+                                $"<d:XAddrs>{BuildList(options.ServiceAddresses)}</d:XAddrs>\r\n" +
                                 $"<d:MetadataVersion>10</d:MetadataVersion>\r\n" +
                             $"</d:ProbeMatch>\r\n" +
                         $"</d:ProbeMatches>\r\n" +
@@ -147,21 +147,26 @@ namespace SharpOnvifServer.Discovery
             return message;
         }
 
+        private static string BuildList(IEnumerable<string> values)
+        {
+            return string.Join(' ', values);
+        }
+
         private static string BuildScopes(OnvifDiscoveryOptions options)
         {
             List<string> scopes = options.Scopes;
             
             if (!string.IsNullOrEmpty(options.MAC))
-                scopes.Add($"onvif://www.onvif.org/MAC/{options.MAC.Replace(' ', '_')}");
+                scopes.Add($"onvif://www.onvif.org/MAC/{Uri.EscapeDataString(options.MAC)}");
 
             if (!string.IsNullOrEmpty(options.Hardware))
-                scopes.Add($"onvif://www.onvif.org/hardware/{options.Hardware.Replace(' ', '_')}");
+                scopes.Add($"onvif://www.onvif.org/hardware/{Uri.EscapeDataString(options.Hardware)}");
 
             if (!string.IsNullOrEmpty(options.Name))
-                scopes.Add($"onvif://www.onvif.org/name/{options.Name.Replace(' ', '_')}");
+                scopes.Add($"onvif://www.onvif.org/name/{Uri.EscapeDataString(options.Name)}");
 
             if (!string.IsNullOrEmpty(options.City))
-                scopes.Add($"onvif://www.onvif.org/location/city/{options.City.Replace(' ', '_')}");
+                scopes.Add($"onvif://www.onvif.org/location/city/{Uri.EscapeDataString(options.City)}");
 
             return string.Join(' ', scopes);
         }
