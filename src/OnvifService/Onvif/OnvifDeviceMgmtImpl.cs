@@ -1,5 +1,6 @@
 ﻿using CoreWCF;
 using OnvifScDeviceMgmt;
+using SharpOnvifClient;
 using SharpOnvifServer.Security;
 using System;
 
@@ -97,7 +98,7 @@ namespace OnvifService.Onvif
                 {
                     Device = new DeviceCapabilities()
                     {
-                        XAddr = "http://localhost:5000/device_service",
+                        XAddr = "http://localhost:5000/onvif/device_service",
                         Network = new NetworkCapabilities1()
                         {
                             IPFilter = true,
@@ -126,6 +127,10 @@ namespace OnvifService.Onvif
                         {
                             TLS12 = true,
                         }
+                    },
+                    Media = new MediaCapabilities()
+                    {
+                        XAddr = "http://localhost:5000/onvif/media_service"
                     }
                 }
             };
@@ -369,14 +374,24 @@ namespace OnvifService.Onvif
                 {
                     new Service()
                     {
-                        Namespace = "http://www.onvif.org/ver10/device/wsdl",
-                        XAddr = "http://192.168.1.15/onvif/device_service",
+                        Namespace = KnownOnvifServices.DEVICE_MGMT, 
+                        XAddr = "http://localhost:5000/onvif/device_service",
                         Version = new OnvifVersion()
                         {
                             Major = 17,
                             Minor = 12
                         },
-                    }
+                    },
+                    new Service()
+                    {
+                        Namespace = KnownOnvifServices.MEDIA,
+                        XAddr = "http://localhost:5000/onvif/media_service",
+                        Version = new OnvifVersion()
+                        {
+                            Major = 17,
+                            Minor = 12
+                        },
+                    },
                 }
             };
         }
