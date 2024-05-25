@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SharpOnvifCommon;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
@@ -61,6 +62,8 @@ namespace SharpOnvifClient
 
         public string GetOnvifEventListenerUri(string host = "0.0.0.0", int cameraID = 0)
         {
+            if (host == "0.0.0.0")
+                host = NetworkHelpers.GetIPv4NetworkInterface();
             return $"{GetHttpUri(host, _port)}{cameraID}/";
         }
 
