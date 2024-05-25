@@ -37,7 +37,7 @@ namespace SharpOnvifClient
         /// <param name="broadcastPort">Broadcast port - 0 to let the OS choose any free port.</param>
         /// <param name="deviceType">Device type we are searching for.</param>
         /// <returns>A list of discovered devices.</returns>
-        public static async Task<IList<string>> DiscoverAsync(string ipAddress, Action<string> onDeviceDiscovered = null, int broadcastTimeout = ONVIF_BROADCAST_TIMEOUT, int broadcastPort = 0, string deviceType = "NetworkVideoTransmitter")
+        public static async Task<IList<string>> DiscoverAsync(string ipAddress = "0.0.0.0", Action<string> onDeviceDiscovered = null, int broadcastTimeout = ONVIF_BROADCAST_TIMEOUT, int broadcastPort = 0, string deviceType = "NetworkVideoTransmitter")
         {
             if (ipAddress == null)
                 return new List<string>();
