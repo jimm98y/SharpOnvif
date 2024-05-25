@@ -5,7 +5,7 @@ using System;
 namespace SharpOnvifServer.Search
 {
     [DisableMustUnderstandValidation]
-    public class SearchBase : SearchPort
+    public class SearchPortBase : SearchPort
     {
         [return: MessageParameter(Name = "Endpoint")]
         public virtual DateTime EndSearch(string SearchToken)

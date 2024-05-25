@@ -5,7 +5,7 @@ using System;
 namespace SharpOnvifServer.Provisioning
 {
     [DisableMustUnderstandValidation]
-    public class ProvisioningBase : ProvisioningService
+    public class ProvisioningServiceBase : ProvisioningService
     {
         public virtual FocusMoveResponse FocusMove(FocusMoveRequest request)
         {

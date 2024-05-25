@@ -3,9 +3,8 @@ using System;
 
 namespace SharpOnvifServer.Events
 {
-    // TODO: Review
     [DisableMustUnderstandValidation]
-    public class EventsBase : NotificationConsumer
+    public class NotificationConsumerBase : NotificationConsumer
     {
         public virtual void Notify(Notify1 request)
         {

@@ -5,7 +5,7 @@ using System;
 namespace SharpOnvifServer.Analytics
 {
     [DisableMustUnderstandValidation]
-    public class AnalyticsBase : RuleEnginePort
+    public class RuleEnginePortBase : RuleEnginePort
     {
         public virtual CreateRulesResponse CreateRules(CreateRulesRequest request)
         {

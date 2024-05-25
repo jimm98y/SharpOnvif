@@ -5,7 +5,7 @@ using System;
 namespace SharpOnvifServer.Imaging
 {
     [DisableMustUnderstandValidation]
-    public class ImagingBase : ImagingPort
+    public class ImagingPortBase : ImagingPort
     {
         [return: MessageParameter(Name = "Preset")]
         public virtual ImagingPreset GetCurrentPreset(string VideoSourceToken)

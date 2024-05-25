@@ -4,7 +4,7 @@ using SharpOnvifServer.Security;
 namespace SharpOnvifServer.AccessControl
 {
     [DisableMustUnderstandValidation]
-    public class AccessControlBase : PACSPort
+    public class PACSPortBase : PACSPort
     {
         [return: MessageParameter(Name = "Token")]
         public virtual string CreateAccessPoint(AccessPoint AccessPoint)

@@ -5,7 +5,7 @@ using System;
 namespace SharpOnvifServer.Receiver
 {
     [DisableMustUnderstandValidation]
-    public class ReceiverBase : ReceiverPort
+    public class ReceiverPortBase : ReceiverPort
     {
         public virtual void ConfigureReceiver(string ReceiverToken, ReceiverConfiguration Configuration)
         {

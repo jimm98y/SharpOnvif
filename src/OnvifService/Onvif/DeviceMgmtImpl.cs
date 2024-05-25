@@ -3,7 +3,7 @@ using SharpOnvifServer.DeviceMgmt;
 
 namespace OnvifService.Onvif
 {
-    public class DeviceMgmtImpl : DeviceMgmtBase
+    public class DeviceMgmtImpl : DeviceBase
     {
         public override GetCapabilitiesResponse GetCapabilities(GetCapabilitiesRequest request)
         {
@@ -46,6 +46,11 @@ namespace OnvifService.Onvif
                     Media = new MediaCapabilities()
                     {
                         XAddr = "http://localhost:5000/onvif/media_service"
+                    },
+                    Events = new EventCapabilities()
+                    {
+                        WSPullPointSupport = true,
+                        XAddr = "http://localhost:5000/onvif/events_service"
                     }
                 }
             };
@@ -147,6 +152,16 @@ namespace OnvifService.Onvif
                             Minor = 12
                         },
                     },
+                    new Service()
+                    {
+                        Namespace = OnvifServices.EVENTS,
+                        XAddr = "http://localhost:5000/onvif/events_service",
+                        Version = new OnvifVersion()
+                        {
+                            Major = 17,
+                            Minor = 12
+                        },
+                    }
                 }
             };
         }

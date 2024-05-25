@@ -2,10 +2,10 @@
 using SharpOnvifServer.Security;
 using System;
 
-namespace SharpOnvifServer.DeviceMgmt
+namespace SharpOnvifServer.DeviceIO
 {
     [DisableMustUnderstandValidation]
-    public class DeviceMgmtBase : Device
+    public class DeviceBase : Device
     {
         public virtual void AddIPAddressFilter(IPAddressFilter IPAddressFilter)
         {
@@ -238,7 +238,7 @@ namespace SharpOnvifServer.DeviceMgmt
         }
 
         [return: MessageParameter(Name = "RelayOutputs")]
-        public virtual GetRelayOutputsResponse GetRelayOutputs(GetRelayOutputsRequest request)
+        public virtual GetRelayOutputsResponse1 GetRelayOutputs(GetRelayOutputsRequest1 request)
         {
             throw new NotImplementedException();
         }
@@ -506,7 +506,7 @@ namespace SharpOnvifServer.DeviceMgmt
             throw new NotImplementedException();
         }
 
-        public virtual void SetSystemDateAndTime(SetDateTimeType DateTimeType, bool DaylightSavings, SharpOnvifServer.DeviceMgmt.TimeZone TimeZone, SharpOnvifServer.DeviceMgmt.DateTime UTCDateTime)
+        public virtual void SetSystemDateAndTime(SetDateTimeType DateTimeType, bool DaylightSavings, TimeZone TimeZone, DateTime UTCDateTime)
         {
             throw new NotImplementedException();
         }

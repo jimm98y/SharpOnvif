@@ -5,7 +5,7 @@ using System;
 namespace SharpOnvifServer.AccessRules
 {
     [DisableMustUnderstandValidation]
-    public class AccessRulesBase : AccessRulesPort
+    public class AccessRulesPortBase : AccessRulesPort
     {
         [return: MessageParameter(Name = "Token")]
         public virtual string CreateAccessProfile(AccessProfile AccessProfile)

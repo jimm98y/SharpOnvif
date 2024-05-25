@@ -25,6 +25,10 @@ app.UseAuthentication();
     serviceBuilder.AddService<OnvifService.Onvif.MediaImpl>();
     serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.MediaImpl, SharpOnvifServer.Media.Media>(OnvifBindingFactory.CreateBinding(), "/onvif/media_service");
 
+    serviceBuilder.AddService<OnvifService.Onvif.EventsImpl>();
+    serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.EventsImpl, SharpOnvifServer.Events.NotificationConsumer>(OnvifBindingFactory.CreateBinding(), "/onvif/events_service");
+
+
     // TODO: add more service endpoints
 
     var serviceMetadataBehavior = app.Services.GetRequiredService<ServiceMetadataBehavior>();

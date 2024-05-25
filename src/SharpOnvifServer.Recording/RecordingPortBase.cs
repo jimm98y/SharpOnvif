@@ -5,7 +5,7 @@ using System;
 namespace SharpOnvifServer.Recording
 {
     [DisableMustUnderstandValidation]
-    public class RecordingBase : RecordingPort
+    public class RecordingPortBase : RecordingPort
     {
         [return: MessageParameter(Name = "RecordingToken")]
         public virtual string CreateRecording(RecordingConfiguration RecordingConfiguration)

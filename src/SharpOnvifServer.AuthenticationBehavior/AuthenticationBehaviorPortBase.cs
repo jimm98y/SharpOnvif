@@ -5,7 +5,7 @@ using System;
 namespace SharpOnvifServer.AuthenticationBehavior
 {
     [DisableMustUnderstandValidation]
-    public class AuthenticationBehaviorBase : AuthenticationBehaviorPort
+    public class AuthenticationBehaviorPortBase : AuthenticationBehaviorPort
     {
         [return: MessageParameter(Name = "Token")]
         public virtual string CreateAuthenticationProfile(AuthenticationProfile AuthenticationProfile)

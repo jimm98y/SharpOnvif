@@ -5,7 +5,7 @@ using System;
 namespace SharpOnvifServer.AdvancedSecurity
 {
     [DisableMustUnderstandValidation]
-    public class AdvancedSecurityBase : AdvancedSecurityService
+    public class AdvancedSecurityServiceBase : AdvancedSecurityService
     {
         [return: MessageParameter(Name = "Capabilities")]
         public virtual Capabilities GetServiceCapabilities()

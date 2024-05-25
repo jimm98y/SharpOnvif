@@ -5,7 +5,7 @@ using System;
 namespace SharpOnvifServer.Credential
 {
     [DisableMustUnderstandValidation]
-    public class CredentialBase : CredentialPort
+    public class CredentialPortBase : CredentialPort
     {
         public virtual AddToBlacklistResponse AddToBlacklist(AddToBlacklistRequest request)
         {

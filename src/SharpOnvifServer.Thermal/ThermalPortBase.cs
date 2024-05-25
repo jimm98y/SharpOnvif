@@ -5,7 +5,7 @@ using System;
 namespace SharpOnvifServer.Thermal
 {
     [DisableMustUnderstandValidation]
-    public class ThermalBase : ThermalPort
+    public class ThermalPortBase : ThermalPort
     {
         [return: MessageParameter(Name = "Configuration")]
         public virtual Configuration GetConfiguration(string VideoSourceToken)

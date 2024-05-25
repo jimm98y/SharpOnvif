@@ -5,7 +5,7 @@ using System;
 namespace SharpOnvifServer.DoorControl
 {
     [DisableMustUnderstandValidation]
-    public class DoorControlBase : DoorControlPort
+    public class DoorControlPortBase : DoorControlPort
     {
         public virtual AccessDoorResponse AccessDoor(AccessDoorRequest request)
         {

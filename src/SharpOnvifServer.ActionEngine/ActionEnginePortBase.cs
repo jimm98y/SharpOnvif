@@ -5,7 +5,7 @@ using System;
 namespace SharpOnvifServer.ActionEngine
 {
     [DisableMustUnderstandValidation]
-    public class ActionEngineBase : ActionEnginePort
+    public class ActionEnginePortBase : ActionEnginePort
     {
         public virtual CreateActionsResponse CreateActions(CreateActionsRequest request)
         {

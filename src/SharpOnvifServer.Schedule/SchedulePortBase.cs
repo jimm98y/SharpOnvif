@@ -5,7 +5,7 @@ using System;
 namespace SharpOnvifServer.Schedule
 {
     [DisableMustUnderstandValidation]
-    public class ScheduleBase : SchedulePort
+    public class SchedulePortBase : SchedulePort
     {
         [return: MessageParameter(Name = "Token")]
         public virtual string CreateSchedule(Schedule Schedule)
