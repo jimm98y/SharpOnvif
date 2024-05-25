@@ -7,12 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OnvifAccessControl
+namespace SharpOnvifClient.AccessControl
 {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl", ConfigurationName="OnvifAccessControl.PACSPort")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl", ConfigurationName="SharpOnvifClient.AccessControl.PACSPort")]
     public interface PACSPort
     {
         
@@ -20,45 +20,45 @@ namespace OnvifAccessControl
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Capabilities")]
-        System.Threading.Tasks.Task<OnvifAccessControl.ServiceCapabilities> GetServiceCapabilitiesAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.AccessControl.ServiceCapabilities> GetServiceCapabilitiesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/accesscontrol/wsdl/GetAccessPointInfo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifAccessControl.GetAccessPointInfoResponse> GetAccessPointInfoAsync(OnvifAccessControl.GetAccessPointInfoRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AccessControl.GetAccessPointInfoResponse> GetAccessPointInfoAsync(SharpOnvifClient.AccessControl.GetAccessPointInfoRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/accesscontrol/wsdl/GetAccessPointInfoList", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifAccessControl.GetAccessPointInfoListResponse> GetAccessPointInfoListAsync(OnvifAccessControl.GetAccessPointInfoListRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AccessControl.GetAccessPointInfoListResponse> GetAccessPointInfoListAsync(SharpOnvifClient.AccessControl.GetAccessPointInfoListRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/accesscontrol/wsdl/GetAccessPoints", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifAccessControl.GetAccessPointsResponse> GetAccessPointsAsync(OnvifAccessControl.GetAccessPointsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AccessControl.GetAccessPointsResponse> GetAccessPointsAsync(SharpOnvifClient.AccessControl.GetAccessPointsRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/accesscontrol/wsdl/GetAccessPointList", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifAccessControl.GetAccessPointListResponse> GetAccessPointListAsync(OnvifAccessControl.GetAccessPointListRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AccessControl.GetAccessPointListResponse> GetAccessPointListAsync(SharpOnvifClient.AccessControl.GetAccessPointListRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/accesscontrol/wsdl/CreateAccessPoint", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Token")]
-        System.Threading.Tasks.Task<string> CreateAccessPointAsync(OnvifAccessControl.AccessPoint AccessPoint);
+        System.Threading.Tasks.Task<string> CreateAccessPointAsync(SharpOnvifClient.AccessControl.AccessPoint AccessPoint);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/accesscontrol/wsdl/SetAccessPoint", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task SetAccessPointAsync(OnvifAccessControl.AccessPoint AccessPoint);
+        System.Threading.Tasks.Task SetAccessPointAsync(SharpOnvifClient.AccessControl.AccessPoint AccessPoint);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/accesscontrol/wsdl/ModifyAccessPoint", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task ModifyAccessPointAsync(OnvifAccessControl.AccessPoint AccessPoint);
+        System.Threading.Tasks.Task ModifyAccessPointAsync(SharpOnvifClient.AccessControl.AccessPoint AccessPoint);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/accesscontrol/wsdl/DeleteAccessPoint", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -80,40 +80,40 @@ namespace OnvifAccessControl
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/accesscontrol/wsdl/GetAreaInfo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifAccessControl.GetAreaInfoResponse> GetAreaInfoAsync(OnvifAccessControl.GetAreaInfoRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AccessControl.GetAreaInfoResponse> GetAreaInfoAsync(SharpOnvifClient.AccessControl.GetAreaInfoRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/accesscontrol/wsdl/GetAreaInfoList", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifAccessControl.GetAreaInfoListResponse> GetAreaInfoListAsync(OnvifAccessControl.GetAreaInfoListRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AccessControl.GetAreaInfoListResponse> GetAreaInfoListAsync(SharpOnvifClient.AccessControl.GetAreaInfoListRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/accesscontrol/wsdl/GetAreas", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifAccessControl.GetAreasResponse> GetAreasAsync(OnvifAccessControl.GetAreasRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AccessControl.GetAreasResponse> GetAreasAsync(SharpOnvifClient.AccessControl.GetAreasRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/accesscontrol/wsdl/GetAreaList", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifAccessControl.GetAreaListResponse> GetAreaListAsync(OnvifAccessControl.GetAreaListRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AccessControl.GetAreaListResponse> GetAreaListAsync(SharpOnvifClient.AccessControl.GetAreaListRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/accesscontrol/wsdl/CreateArea", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Token")]
-        System.Threading.Tasks.Task<string> CreateAreaAsync(OnvifAccessControl.Area Area);
+        System.Threading.Tasks.Task<string> CreateAreaAsync(SharpOnvifClient.AccessControl.Area Area);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/accesscontrol/wsdl/SetArea", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task SetAreaAsync(OnvifAccessControl.Area Area);
+        System.Threading.Tasks.Task SetAreaAsync(SharpOnvifClient.AccessControl.Area Area);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/accesscontrol/wsdl/ModifyArea", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task ModifyAreaAsync(OnvifAccessControl.Area Area);
+        System.Threading.Tasks.Task ModifyAreaAsync(SharpOnvifClient.AccessControl.Area Area);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/accesscontrol/wsdl/DeleteArea", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -124,7 +124,7 @@ namespace OnvifAccessControl
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="AccessPointState")]
-        System.Threading.Tasks.Task<OnvifAccessControl.AccessPointState> GetAccessPointStateAsync(string Token);
+        System.Threading.Tasks.Task<SharpOnvifClient.AccessControl.AccessPointState> GetAccessPointStateAsync(string Token);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/accesscontrol/wsdl/EnableAccessPoint", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -139,13 +139,13 @@ namespace OnvifAccessControl
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/accesscontrol/wsdl/ExternalAuthorization", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task ExternalAuthorizationAsync(string AccessPointToken, string CredentialToken, string Reason, OnvifAccessControl.Decision Decision);
+        System.Threading.Tasks.Task ExternalAuthorizationAsync(string AccessPointToken, string CredentialToken, string Reason, SharpOnvifClient.AccessControl.Decision Decision);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/accesscontrol/wsdl/Feedback", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifAccessControl.FeedbackResponse> FeedbackAsync(OnvifAccessControl.FeedbackRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AccessControl.FeedbackResponse> FeedbackAsync(SharpOnvifClient.AccessControl.FeedbackRequest request);
     }
     
     /// <remarks/>
@@ -980,13 +980,13 @@ namespace OnvifAccessControl
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("AccessPointInfo")]
-        public OnvifAccessControl.AccessPointInfo[] AccessPointInfo;
+        public SharpOnvifClient.AccessControl.AccessPointInfo[] AccessPointInfo;
         
         public GetAccessPointInfoResponse()
         {
         }
         
-        public GetAccessPointInfoResponse(OnvifAccessControl.AccessPointInfo[] AccessPointInfo)
+        public GetAccessPointInfoResponse(SharpOnvifClient.AccessControl.AccessPointInfo[] AccessPointInfo)
         {
             this.AccessPointInfo = AccessPointInfo;
         }
@@ -1026,13 +1026,13 @@ namespace OnvifAccessControl
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl", Order=1)]
         [System.Xml.Serialization.XmlElementAttribute("AccessPointInfo")]
-        public OnvifAccessControl.AccessPointInfo[] AccessPointInfo;
+        public SharpOnvifClient.AccessControl.AccessPointInfo[] AccessPointInfo;
         
         public GetAccessPointInfoListResponse()
         {
         }
         
-        public GetAccessPointInfoListResponse(string NextStartReference, OnvifAccessControl.AccessPointInfo[] AccessPointInfo)
+        public GetAccessPointInfoListResponse(string NextStartReference, SharpOnvifClient.AccessControl.AccessPointInfo[] AccessPointInfo)
         {
             this.NextStartReference = NextStartReference;
             this.AccessPointInfo = AccessPointInfo;
@@ -1069,13 +1069,13 @@ namespace OnvifAccessControl
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("AccessPoint")]
-        public OnvifAccessControl.AccessPoint[] AccessPoint;
+        public SharpOnvifClient.AccessControl.AccessPoint[] AccessPoint;
         
         public GetAccessPointsResponse()
         {
         }
         
-        public GetAccessPointsResponse(OnvifAccessControl.AccessPoint[] AccessPoint)
+        public GetAccessPointsResponse(SharpOnvifClient.AccessControl.AccessPoint[] AccessPoint)
         {
             this.AccessPoint = AccessPoint;
         }
@@ -1115,13 +1115,13 @@ namespace OnvifAccessControl
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl", Order=1)]
         [System.Xml.Serialization.XmlElementAttribute("AccessPoint")]
-        public OnvifAccessControl.AccessPoint[] AccessPoint;
+        public SharpOnvifClient.AccessControl.AccessPoint[] AccessPoint;
         
         public GetAccessPointListResponse()
         {
         }
         
-        public GetAccessPointListResponse(string NextStartReference, OnvifAccessControl.AccessPoint[] AccessPoint)
+        public GetAccessPointListResponse(string NextStartReference, SharpOnvifClient.AccessControl.AccessPoint[] AccessPoint)
         {
             this.NextStartReference = NextStartReference;
             this.AccessPoint = AccessPoint;
@@ -1158,13 +1158,13 @@ namespace OnvifAccessControl
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("AreaInfo")]
-        public OnvifAccessControl.AreaInfo[] AreaInfo;
+        public SharpOnvifClient.AccessControl.AreaInfo[] AreaInfo;
         
         public GetAreaInfoResponse()
         {
         }
         
-        public GetAreaInfoResponse(OnvifAccessControl.AreaInfo[] AreaInfo)
+        public GetAreaInfoResponse(SharpOnvifClient.AccessControl.AreaInfo[] AreaInfo)
         {
             this.AreaInfo = AreaInfo;
         }
@@ -1204,13 +1204,13 @@ namespace OnvifAccessControl
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl", Order=1)]
         [System.Xml.Serialization.XmlElementAttribute("AreaInfo")]
-        public OnvifAccessControl.AreaInfo[] AreaInfo;
+        public SharpOnvifClient.AccessControl.AreaInfo[] AreaInfo;
         
         public GetAreaInfoListResponse()
         {
         }
         
-        public GetAreaInfoListResponse(string NextStartReference, OnvifAccessControl.AreaInfo[] AreaInfo)
+        public GetAreaInfoListResponse(string NextStartReference, SharpOnvifClient.AccessControl.AreaInfo[] AreaInfo)
         {
             this.NextStartReference = NextStartReference;
             this.AreaInfo = AreaInfo;
@@ -1247,13 +1247,13 @@ namespace OnvifAccessControl
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Area")]
-        public OnvifAccessControl.Area[] Area;
+        public SharpOnvifClient.AccessControl.Area[] Area;
         
         public GetAreasResponse()
         {
         }
         
-        public GetAreasResponse(OnvifAccessControl.Area[] Area)
+        public GetAreasResponse(SharpOnvifClient.AccessControl.Area[] Area)
         {
             this.Area = Area;
         }
@@ -1293,13 +1293,13 @@ namespace OnvifAccessControl
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl", Order=1)]
         [System.Xml.Serialization.XmlElementAttribute("Area")]
-        public OnvifAccessControl.Area[] Area;
+        public SharpOnvifClient.AccessControl.Area[] Area;
         
         public GetAreaListResponse()
         {
         }
         
-        public GetAreaListResponse(string NextStartReference, OnvifAccessControl.Area[] Area)
+        public GetAreaListResponse(string NextStartReference, SharpOnvifClient.AccessControl.Area[] Area)
         {
             this.NextStartReference = NextStartReference;
             this.Area = Area;
@@ -1377,13 +1377,13 @@ namespace OnvifAccessControl
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface PACSPortChannel : OnvifAccessControl.PACSPort, System.ServiceModel.IClientChannel
+    public interface PACSPortChannel : SharpOnvifClient.AccessControl.PACSPort, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class PACSPortClient : System.ServiceModel.ClientBase<OnvifAccessControl.PACSPort>, OnvifAccessControl.PACSPort
+    public partial class PACSPortClient : System.ServiceModel.ClientBase<SharpOnvifClient.AccessControl.PACSPort>, SharpOnvifClient.AccessControl.PACSPort
     {
         
         public PACSPortClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
@@ -1391,58 +1391,58 @@ namespace OnvifAccessControl
         {
         }
         
-        public System.Threading.Tasks.Task<OnvifAccessControl.ServiceCapabilities> GetServiceCapabilitiesAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.AccessControl.ServiceCapabilities> GetServiceCapabilitiesAsync()
         {
             return base.Channel.GetServiceCapabilitiesAsync();
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAccessControl.GetAccessPointInfoResponse> OnvifAccessControl.PACSPort.GetAccessPointInfoAsync(OnvifAccessControl.GetAccessPointInfoRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AccessControl.GetAccessPointInfoResponse> SharpOnvifClient.AccessControl.PACSPort.GetAccessPointInfoAsync(SharpOnvifClient.AccessControl.GetAccessPointInfoRequest request)
         {
             return base.Channel.GetAccessPointInfoAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAccessControl.GetAccessPointInfoResponse> GetAccessPointInfoAsync(string[] Token)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AccessControl.GetAccessPointInfoResponse> GetAccessPointInfoAsync(string[] Token)
         {
-            OnvifAccessControl.GetAccessPointInfoRequest inValue = new OnvifAccessControl.GetAccessPointInfoRequest();
+            SharpOnvifClient.AccessControl.GetAccessPointInfoRequest inValue = new SharpOnvifClient.AccessControl.GetAccessPointInfoRequest();
             inValue.Token = Token;
-            return ((OnvifAccessControl.PACSPort)(this)).GetAccessPointInfoAsync(inValue);
+            return ((SharpOnvifClient.AccessControl.PACSPort)(this)).GetAccessPointInfoAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifAccessControl.GetAccessPointInfoListResponse> GetAccessPointInfoListAsync(OnvifAccessControl.GetAccessPointInfoListRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AccessControl.GetAccessPointInfoListResponse> GetAccessPointInfoListAsync(SharpOnvifClient.AccessControl.GetAccessPointInfoListRequest request)
         {
             return base.Channel.GetAccessPointInfoListAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAccessControl.GetAccessPointsResponse> OnvifAccessControl.PACSPort.GetAccessPointsAsync(OnvifAccessControl.GetAccessPointsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AccessControl.GetAccessPointsResponse> SharpOnvifClient.AccessControl.PACSPort.GetAccessPointsAsync(SharpOnvifClient.AccessControl.GetAccessPointsRequest request)
         {
             return base.Channel.GetAccessPointsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAccessControl.GetAccessPointsResponse> GetAccessPointsAsync(string[] Token)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AccessControl.GetAccessPointsResponse> GetAccessPointsAsync(string[] Token)
         {
-            OnvifAccessControl.GetAccessPointsRequest inValue = new OnvifAccessControl.GetAccessPointsRequest();
+            SharpOnvifClient.AccessControl.GetAccessPointsRequest inValue = new SharpOnvifClient.AccessControl.GetAccessPointsRequest();
             inValue.Token = Token;
-            return ((OnvifAccessControl.PACSPort)(this)).GetAccessPointsAsync(inValue);
+            return ((SharpOnvifClient.AccessControl.PACSPort)(this)).GetAccessPointsAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifAccessControl.GetAccessPointListResponse> GetAccessPointListAsync(OnvifAccessControl.GetAccessPointListRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AccessControl.GetAccessPointListResponse> GetAccessPointListAsync(SharpOnvifClient.AccessControl.GetAccessPointListRequest request)
         {
             return base.Channel.GetAccessPointListAsync(request);
         }
         
-        public System.Threading.Tasks.Task<string> CreateAccessPointAsync(OnvifAccessControl.AccessPoint AccessPoint)
+        public System.Threading.Tasks.Task<string> CreateAccessPointAsync(SharpOnvifClient.AccessControl.AccessPoint AccessPoint)
         {
             return base.Channel.CreateAccessPointAsync(AccessPoint);
         }
         
-        public System.Threading.Tasks.Task SetAccessPointAsync(OnvifAccessControl.AccessPoint AccessPoint)
+        public System.Threading.Tasks.Task SetAccessPointAsync(SharpOnvifClient.AccessControl.AccessPoint AccessPoint)
         {
             return base.Channel.SetAccessPointAsync(AccessPoint);
         }
         
-        public System.Threading.Tasks.Task ModifyAccessPointAsync(OnvifAccessControl.AccessPoint AccessPoint)
+        public System.Threading.Tasks.Task ModifyAccessPointAsync(SharpOnvifClient.AccessControl.AccessPoint AccessPoint)
         {
             return base.Channel.ModifyAccessPointAsync(AccessPoint);
         }
@@ -1463,52 +1463,52 @@ namespace OnvifAccessControl
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAccessControl.GetAreaInfoResponse> OnvifAccessControl.PACSPort.GetAreaInfoAsync(OnvifAccessControl.GetAreaInfoRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AccessControl.GetAreaInfoResponse> SharpOnvifClient.AccessControl.PACSPort.GetAreaInfoAsync(SharpOnvifClient.AccessControl.GetAreaInfoRequest request)
         {
             return base.Channel.GetAreaInfoAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAccessControl.GetAreaInfoResponse> GetAreaInfoAsync(string[] Token)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AccessControl.GetAreaInfoResponse> GetAreaInfoAsync(string[] Token)
         {
-            OnvifAccessControl.GetAreaInfoRequest inValue = new OnvifAccessControl.GetAreaInfoRequest();
+            SharpOnvifClient.AccessControl.GetAreaInfoRequest inValue = new SharpOnvifClient.AccessControl.GetAreaInfoRequest();
             inValue.Token = Token;
-            return ((OnvifAccessControl.PACSPort)(this)).GetAreaInfoAsync(inValue);
+            return ((SharpOnvifClient.AccessControl.PACSPort)(this)).GetAreaInfoAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifAccessControl.GetAreaInfoListResponse> GetAreaInfoListAsync(OnvifAccessControl.GetAreaInfoListRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AccessControl.GetAreaInfoListResponse> GetAreaInfoListAsync(SharpOnvifClient.AccessControl.GetAreaInfoListRequest request)
         {
             return base.Channel.GetAreaInfoListAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAccessControl.GetAreasResponse> OnvifAccessControl.PACSPort.GetAreasAsync(OnvifAccessControl.GetAreasRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AccessControl.GetAreasResponse> SharpOnvifClient.AccessControl.PACSPort.GetAreasAsync(SharpOnvifClient.AccessControl.GetAreasRequest request)
         {
             return base.Channel.GetAreasAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAccessControl.GetAreasResponse> GetAreasAsync(string[] Token)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AccessControl.GetAreasResponse> GetAreasAsync(string[] Token)
         {
-            OnvifAccessControl.GetAreasRequest inValue = new OnvifAccessControl.GetAreasRequest();
+            SharpOnvifClient.AccessControl.GetAreasRequest inValue = new SharpOnvifClient.AccessControl.GetAreasRequest();
             inValue.Token = Token;
-            return ((OnvifAccessControl.PACSPort)(this)).GetAreasAsync(inValue);
+            return ((SharpOnvifClient.AccessControl.PACSPort)(this)).GetAreasAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifAccessControl.GetAreaListResponse> GetAreaListAsync(OnvifAccessControl.GetAreaListRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AccessControl.GetAreaListResponse> GetAreaListAsync(SharpOnvifClient.AccessControl.GetAreaListRequest request)
         {
             return base.Channel.GetAreaListAsync(request);
         }
         
-        public System.Threading.Tasks.Task<string> CreateAreaAsync(OnvifAccessControl.Area Area)
+        public System.Threading.Tasks.Task<string> CreateAreaAsync(SharpOnvifClient.AccessControl.Area Area)
         {
             return base.Channel.CreateAreaAsync(Area);
         }
         
-        public System.Threading.Tasks.Task SetAreaAsync(OnvifAccessControl.Area Area)
+        public System.Threading.Tasks.Task SetAreaAsync(SharpOnvifClient.AccessControl.Area Area)
         {
             return base.Channel.SetAreaAsync(Area);
         }
         
-        public System.Threading.Tasks.Task ModifyAreaAsync(OnvifAccessControl.Area Area)
+        public System.Threading.Tasks.Task ModifyAreaAsync(SharpOnvifClient.AccessControl.Area Area)
         {
             return base.Channel.ModifyAreaAsync(Area);
         }
@@ -1518,7 +1518,7 @@ namespace OnvifAccessControl
             return base.Channel.DeleteAreaAsync(Token);
         }
         
-        public System.Threading.Tasks.Task<OnvifAccessControl.AccessPointState> GetAccessPointStateAsync(string Token)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AccessControl.AccessPointState> GetAccessPointStateAsync(string Token)
         {
             return base.Channel.GetAccessPointStateAsync(Token);
         }
@@ -1533,12 +1533,12 @@ namespace OnvifAccessControl
             return base.Channel.DisableAccessPointAsync(Token);
         }
         
-        public System.Threading.Tasks.Task ExternalAuthorizationAsync(string AccessPointToken, string CredentialToken, string Reason, OnvifAccessControl.Decision Decision)
+        public System.Threading.Tasks.Task ExternalAuthorizationAsync(string AccessPointToken, string CredentialToken, string Reason, SharpOnvifClient.AccessControl.Decision Decision)
         {
             return base.Channel.ExternalAuthorizationAsync(AccessPointToken, CredentialToken, Reason, Decision);
         }
         
-        public System.Threading.Tasks.Task<OnvifAccessControl.FeedbackResponse> FeedbackAsync(OnvifAccessControl.FeedbackRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AccessControl.FeedbackResponse> FeedbackAsync(SharpOnvifClient.AccessControl.FeedbackRequest request)
         {
             return base.Channel.FeedbackAsync(request);
         }

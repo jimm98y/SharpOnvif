@@ -7,12 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OnvifSearch
+namespace SharpOnvifClient.Search
 {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/search/wsdl", ConfigurationName="OnvifSearch.SearchPort")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/search/wsdl", ConfigurationName="SharpOnvifClient.Search.SearchPort")]
     public interface SearchPort
     {
         
@@ -20,60 +20,60 @@ namespace OnvifSearch
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(FilterType))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Capabilities")]
-        System.Threading.Tasks.Task<OnvifSearch.Capabilities> GetServiceCapabilitiesAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.Search.Capabilities> GetServiceCapabilitiesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/search/wsdl/GetRecordingSummary", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(FilterType))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Summary")]
-        System.Threading.Tasks.Task<OnvifSearch.RecordingSummary> GetRecordingSummaryAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.Search.RecordingSummary> GetRecordingSummaryAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/search/wsdl/GetRecordingInformation", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(FilterType))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="RecordingInformation")]
-        System.Threading.Tasks.Task<OnvifSearch.RecordingInformation> GetRecordingInformationAsync(string RecordingToken);
+        System.Threading.Tasks.Task<SharpOnvifClient.Search.RecordingInformation> GetRecordingInformationAsync(string RecordingToken);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/search/wsdl/GetMediaAttributes", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(FilterType))]
-        System.Threading.Tasks.Task<OnvifSearch.GetMediaAttributesResponse> GetMediaAttributesAsync(OnvifSearch.GetMediaAttributesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Search.GetMediaAttributesResponse> GetMediaAttributesAsync(SharpOnvifClient.Search.GetMediaAttributesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/search/wsdl/FindRecordings", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(FilterType))]
-        System.Threading.Tasks.Task<OnvifSearch.FindRecordingsResponse> FindRecordingsAsync(OnvifSearch.FindRecordingsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Search.FindRecordingsResponse> FindRecordingsAsync(SharpOnvifClient.Search.FindRecordingsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/search/wsdl/GetRecordingSearchResults", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(FilterType))]
-        System.Threading.Tasks.Task<OnvifSearch.GetRecordingSearchResultsResponse> GetRecordingSearchResultsAsync(OnvifSearch.GetRecordingSearchResultsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Search.GetRecordingSearchResultsResponse> GetRecordingSearchResultsAsync(SharpOnvifClient.Search.GetRecordingSearchResultsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/search/wsdl/FindEvents", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(FilterType))]
-        System.Threading.Tasks.Task<OnvifSearch.FindEventsResponse> FindEventsAsync(OnvifSearch.FindEventsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Search.FindEventsResponse> FindEventsAsync(SharpOnvifClient.Search.FindEventsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/search/wsdl/GetEventSearchResults", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(FilterType))]
-        System.Threading.Tasks.Task<OnvifSearch.GetEventSearchResultsResponse> GetEventSearchResultsAsync(OnvifSearch.GetEventSearchResultsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Search.GetEventSearchResultsResponse> GetEventSearchResultsAsync(SharpOnvifClient.Search.GetEventSearchResultsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/search/wsdl/FindPTZPosition", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(FilterType))]
-        System.Threading.Tasks.Task<OnvifSearch.FindPTZPositionResponse> FindPTZPositionAsync(OnvifSearch.FindPTZPositionRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Search.FindPTZPositionResponse> FindPTZPositionAsync(SharpOnvifClient.Search.FindPTZPositionRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/search/wsdl/GetPTZPositionSearchResults", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(FilterType))]
-        System.Threading.Tasks.Task<OnvifSearch.GetPTZPositionSearchResultsResponse> GetPTZPositionSearchResultsAsync(OnvifSearch.GetPTZPositionSearchResultsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Search.GetPTZPositionSearchResultsResponse> GetPTZPositionSearchResultsAsync(SharpOnvifClient.Search.GetPTZPositionSearchResultsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/search/wsdl/GetSearchState", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(FilterType))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="State")]
-        System.Threading.Tasks.Task<OnvifSearch.SearchState> GetSearchStateAsync(string SearchToken);
+        System.Threading.Tasks.Task<SharpOnvifClient.Search.SearchState> GetSearchStateAsync(string SearchToken);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/search/wsdl/EndSearch", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -84,12 +84,12 @@ namespace OnvifSearch
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/search/wsdl/FindMetadata", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(FilterType))]
-        System.Threading.Tasks.Task<OnvifSearch.FindMetadataResponse> FindMetadataAsync(OnvifSearch.FindMetadataRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Search.FindMetadataResponse> FindMetadataAsync(SharpOnvifClient.Search.FindMetadataRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/search/wsdl/GetMetadataSearchResults", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(FilterType))]
-        System.Threading.Tasks.Task<OnvifSearch.GetMetadataSearchResultsResponse> GetMetadataSearchResultsAsync(OnvifSearch.GetMetadataSearchResultsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Search.GetMetadataSearchResultsResponse> GetMetadataSearchResultsAsync(SharpOnvifClient.Search.GetMetadataSearchResultsRequest request);
     }
     
     /// <remarks/>
@@ -2341,13 +2341,13 @@ namespace OnvifSearch
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/search/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("MediaAttributes")]
-        public OnvifSearch.MediaAttributes[] MediaAttributes;
+        public SharpOnvifClient.Search.MediaAttributes[] MediaAttributes;
         
         public GetMediaAttributesResponse()
         {
         }
         
-        public GetMediaAttributesResponse(OnvifSearch.MediaAttributes[] MediaAttributes)
+        public GetMediaAttributesResponse(SharpOnvifClient.Search.MediaAttributes[] MediaAttributes)
         {
             this.MediaAttributes = MediaAttributes;
         }
@@ -2361,7 +2361,7 @@ namespace OnvifSearch
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/search/wsdl", Order=0)]
-        public OnvifSearch.SearchScope Scope;
+        public SharpOnvifClient.Search.SearchScope Scope;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/search/wsdl", Order=1)]
         public int MaxMatches;
@@ -2374,7 +2374,7 @@ namespace OnvifSearch
         {
         }
         
-        public FindRecordingsRequest(OnvifSearch.SearchScope Scope, int MaxMatches, string KeepAliveTime)
+        public FindRecordingsRequest(SharpOnvifClient.Search.SearchScope Scope, int MaxMatches, string KeepAliveTime)
         {
             this.Scope = Scope;
             this.MaxMatches = MaxMatches;
@@ -2443,13 +2443,13 @@ namespace OnvifSearch
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/search/wsdl", Order=0)]
-        public OnvifSearch.FindRecordingResultList ResultList;
+        public SharpOnvifClient.Search.FindRecordingResultList ResultList;
         
         public GetRecordingSearchResultsResponse()
         {
         }
         
-        public GetRecordingSearchResultsResponse(OnvifSearch.FindRecordingResultList ResultList)
+        public GetRecordingSearchResultsResponse(SharpOnvifClient.Search.FindRecordingResultList ResultList)
         {
             this.ResultList = ResultList;
         }
@@ -2469,10 +2469,10 @@ namespace OnvifSearch
         public System.DateTime EndPoint;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/search/wsdl", Order=2)]
-        public OnvifSearch.SearchScope Scope;
+        public SharpOnvifClient.Search.SearchScope Scope;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/search/wsdl", Order=3)]
-        public OnvifSearch.EventFilter SearchFilter;
+        public SharpOnvifClient.Search.EventFilter SearchFilter;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/search/wsdl", Order=4)]
         public bool IncludeStartState;
@@ -2488,7 +2488,7 @@ namespace OnvifSearch
         {
         }
         
-        public FindEventsRequest(System.DateTime StartPoint, System.DateTime EndPoint, OnvifSearch.SearchScope Scope, OnvifSearch.EventFilter SearchFilter, bool IncludeStartState, int MaxMatches, string KeepAliveTime)
+        public FindEventsRequest(System.DateTime StartPoint, System.DateTime EndPoint, SharpOnvifClient.Search.SearchScope Scope, SharpOnvifClient.Search.EventFilter SearchFilter, bool IncludeStartState, int MaxMatches, string KeepAliveTime)
         {
             this.StartPoint = StartPoint;
             this.EndPoint = EndPoint;
@@ -2561,13 +2561,13 @@ namespace OnvifSearch
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/search/wsdl", Order=0)]
-        public OnvifSearch.FindEventResultList ResultList;
+        public SharpOnvifClient.Search.FindEventResultList ResultList;
         
         public GetEventSearchResultsResponse()
         {
         }
         
-        public GetEventSearchResultsResponse(OnvifSearch.FindEventResultList ResultList)
+        public GetEventSearchResultsResponse(SharpOnvifClient.Search.FindEventResultList ResultList)
         {
             this.ResultList = ResultList;
         }
@@ -2587,10 +2587,10 @@ namespace OnvifSearch
         public System.DateTime EndPoint;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/search/wsdl", Order=2)]
-        public OnvifSearch.SearchScope Scope;
+        public SharpOnvifClient.Search.SearchScope Scope;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/search/wsdl", Order=3)]
-        public OnvifSearch.PTZPositionFilter SearchFilter;
+        public SharpOnvifClient.Search.PTZPositionFilter SearchFilter;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/search/wsdl", Order=4)]
         public int MaxMatches;
@@ -2603,7 +2603,7 @@ namespace OnvifSearch
         {
         }
         
-        public FindPTZPositionRequest(System.DateTime StartPoint, System.DateTime EndPoint, OnvifSearch.SearchScope Scope, OnvifSearch.PTZPositionFilter SearchFilter, int MaxMatches, string KeepAliveTime)
+        public FindPTZPositionRequest(System.DateTime StartPoint, System.DateTime EndPoint, SharpOnvifClient.Search.SearchScope Scope, SharpOnvifClient.Search.PTZPositionFilter SearchFilter, int MaxMatches, string KeepAliveTime)
         {
             this.StartPoint = StartPoint;
             this.EndPoint = EndPoint;
@@ -2675,13 +2675,13 @@ namespace OnvifSearch
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/search/wsdl", Order=0)]
-        public OnvifSearch.FindPTZPositionResultList ResultList;
+        public SharpOnvifClient.Search.FindPTZPositionResultList ResultList;
         
         public GetPTZPositionSearchResultsResponse()
         {
         }
         
-        public GetPTZPositionSearchResultsResponse(OnvifSearch.FindPTZPositionResultList ResultList)
+        public GetPTZPositionSearchResultsResponse(SharpOnvifClient.Search.FindPTZPositionResultList ResultList)
         {
             this.ResultList = ResultList;
         }
@@ -2701,10 +2701,10 @@ namespace OnvifSearch
         public System.DateTime EndPoint;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/search/wsdl", Order=2)]
-        public OnvifSearch.SearchScope Scope;
+        public SharpOnvifClient.Search.SearchScope Scope;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/search/wsdl", Order=3)]
-        public OnvifSearch.MetadataFilter MetadataFilter;
+        public SharpOnvifClient.Search.MetadataFilter MetadataFilter;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/search/wsdl", Order=4)]
         public int MaxMatches;
@@ -2717,7 +2717,7 @@ namespace OnvifSearch
         {
         }
         
-        public FindMetadataRequest(System.DateTime StartPoint, System.DateTime EndPoint, OnvifSearch.SearchScope Scope, OnvifSearch.MetadataFilter MetadataFilter, int MaxMatches, string KeepAliveTime)
+        public FindMetadataRequest(System.DateTime StartPoint, System.DateTime EndPoint, SharpOnvifClient.Search.SearchScope Scope, SharpOnvifClient.Search.MetadataFilter MetadataFilter, int MaxMatches, string KeepAliveTime)
         {
             this.StartPoint = StartPoint;
             this.EndPoint = EndPoint;
@@ -2789,26 +2789,26 @@ namespace OnvifSearch
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/search/wsdl", Order=0)]
-        public OnvifSearch.FindMetadataResultList ResultList;
+        public SharpOnvifClient.Search.FindMetadataResultList ResultList;
         
         public GetMetadataSearchResultsResponse()
         {
         }
         
-        public GetMetadataSearchResultsResponse(OnvifSearch.FindMetadataResultList ResultList)
+        public GetMetadataSearchResultsResponse(SharpOnvifClient.Search.FindMetadataResultList ResultList)
         {
             this.ResultList = ResultList;
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface SearchPortChannel : OnvifSearch.SearchPort, System.ServiceModel.IClientChannel
+    public interface SearchPortChannel : SharpOnvifClient.Search.SearchPort, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class SearchPortClient : System.ServiceModel.ClientBase<OnvifSearch.SearchPort>, OnvifSearch.SearchPort
+    public partial class SearchPortClient : System.ServiceModel.ClientBase<SharpOnvifClient.Search.SearchPort>, SharpOnvifClient.Search.SearchPort
     {
         
         public SearchPortClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
@@ -2816,75 +2816,75 @@ namespace OnvifSearch
         {
         }
         
-        public System.Threading.Tasks.Task<OnvifSearch.Capabilities> GetServiceCapabilitiesAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.Search.Capabilities> GetServiceCapabilitiesAsync()
         {
             return base.Channel.GetServiceCapabilitiesAsync();
         }
         
-        public System.Threading.Tasks.Task<OnvifSearch.RecordingSummary> GetRecordingSummaryAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.Search.RecordingSummary> GetRecordingSummaryAsync()
         {
             return base.Channel.GetRecordingSummaryAsync();
         }
         
-        public System.Threading.Tasks.Task<OnvifSearch.RecordingInformation> GetRecordingInformationAsync(string RecordingToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Search.RecordingInformation> GetRecordingInformationAsync(string RecordingToken)
         {
             return base.Channel.GetRecordingInformationAsync(RecordingToken);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifSearch.GetMediaAttributesResponse> OnvifSearch.SearchPort.GetMediaAttributesAsync(OnvifSearch.GetMediaAttributesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Search.GetMediaAttributesResponse> SharpOnvifClient.Search.SearchPort.GetMediaAttributesAsync(SharpOnvifClient.Search.GetMediaAttributesRequest request)
         {
             return base.Channel.GetMediaAttributesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifSearch.GetMediaAttributesResponse> GetMediaAttributesAsync(string[] RecordingTokens, System.DateTime Time)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Search.GetMediaAttributesResponse> GetMediaAttributesAsync(string[] RecordingTokens, System.DateTime Time)
         {
-            OnvifSearch.GetMediaAttributesRequest inValue = new OnvifSearch.GetMediaAttributesRequest();
+            SharpOnvifClient.Search.GetMediaAttributesRequest inValue = new SharpOnvifClient.Search.GetMediaAttributesRequest();
             inValue.RecordingTokens = RecordingTokens;
             inValue.Time = Time;
-            return ((OnvifSearch.SearchPort)(this)).GetMediaAttributesAsync(inValue);
+            return ((SharpOnvifClient.Search.SearchPort)(this)).GetMediaAttributesAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifSearch.FindRecordingsResponse> OnvifSearch.SearchPort.FindRecordingsAsync(OnvifSearch.FindRecordingsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Search.FindRecordingsResponse> SharpOnvifClient.Search.SearchPort.FindRecordingsAsync(SharpOnvifClient.Search.FindRecordingsRequest request)
         {
             return base.Channel.FindRecordingsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifSearch.FindRecordingsResponse> FindRecordingsAsync(OnvifSearch.SearchScope Scope, int MaxMatches, string KeepAliveTime)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Search.FindRecordingsResponse> FindRecordingsAsync(SharpOnvifClient.Search.SearchScope Scope, int MaxMatches, string KeepAliveTime)
         {
-            OnvifSearch.FindRecordingsRequest inValue = new OnvifSearch.FindRecordingsRequest();
+            SharpOnvifClient.Search.FindRecordingsRequest inValue = new SharpOnvifClient.Search.FindRecordingsRequest();
             inValue.Scope = Scope;
             inValue.MaxMatches = MaxMatches;
             inValue.KeepAliveTime = KeepAliveTime;
-            return ((OnvifSearch.SearchPort)(this)).FindRecordingsAsync(inValue);
+            return ((SharpOnvifClient.Search.SearchPort)(this)).FindRecordingsAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifSearch.GetRecordingSearchResultsResponse> OnvifSearch.SearchPort.GetRecordingSearchResultsAsync(OnvifSearch.GetRecordingSearchResultsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Search.GetRecordingSearchResultsResponse> SharpOnvifClient.Search.SearchPort.GetRecordingSearchResultsAsync(SharpOnvifClient.Search.GetRecordingSearchResultsRequest request)
         {
             return base.Channel.GetRecordingSearchResultsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifSearch.GetRecordingSearchResultsResponse> GetRecordingSearchResultsAsync(string SearchToken, int MinResults, int MaxResults, string WaitTime)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Search.GetRecordingSearchResultsResponse> GetRecordingSearchResultsAsync(string SearchToken, int MinResults, int MaxResults, string WaitTime)
         {
-            OnvifSearch.GetRecordingSearchResultsRequest inValue = new OnvifSearch.GetRecordingSearchResultsRequest();
+            SharpOnvifClient.Search.GetRecordingSearchResultsRequest inValue = new SharpOnvifClient.Search.GetRecordingSearchResultsRequest();
             inValue.SearchToken = SearchToken;
             inValue.MinResults = MinResults;
             inValue.MaxResults = MaxResults;
             inValue.WaitTime = WaitTime;
-            return ((OnvifSearch.SearchPort)(this)).GetRecordingSearchResultsAsync(inValue);
+            return ((SharpOnvifClient.Search.SearchPort)(this)).GetRecordingSearchResultsAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifSearch.FindEventsResponse> OnvifSearch.SearchPort.FindEventsAsync(OnvifSearch.FindEventsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Search.FindEventsResponse> SharpOnvifClient.Search.SearchPort.FindEventsAsync(SharpOnvifClient.Search.FindEventsRequest request)
         {
             return base.Channel.FindEventsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifSearch.FindEventsResponse> FindEventsAsync(System.DateTime StartPoint, System.DateTime EndPoint, OnvifSearch.SearchScope Scope, OnvifSearch.EventFilter SearchFilter, bool IncludeStartState, int MaxMatches, string KeepAliveTime)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Search.FindEventsResponse> FindEventsAsync(System.DateTime StartPoint, System.DateTime EndPoint, SharpOnvifClient.Search.SearchScope Scope, SharpOnvifClient.Search.EventFilter SearchFilter, bool IncludeStartState, int MaxMatches, string KeepAliveTime)
         {
-            OnvifSearch.FindEventsRequest inValue = new OnvifSearch.FindEventsRequest();
+            SharpOnvifClient.Search.FindEventsRequest inValue = new SharpOnvifClient.Search.FindEventsRequest();
             inValue.StartPoint = StartPoint;
             inValue.EndPoint = EndPoint;
             inValue.Scope = Scope;
@@ -2892,60 +2892,60 @@ namespace OnvifSearch
             inValue.IncludeStartState = IncludeStartState;
             inValue.MaxMatches = MaxMatches;
             inValue.KeepAliveTime = KeepAliveTime;
-            return ((OnvifSearch.SearchPort)(this)).FindEventsAsync(inValue);
+            return ((SharpOnvifClient.Search.SearchPort)(this)).FindEventsAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifSearch.GetEventSearchResultsResponse> OnvifSearch.SearchPort.GetEventSearchResultsAsync(OnvifSearch.GetEventSearchResultsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Search.GetEventSearchResultsResponse> SharpOnvifClient.Search.SearchPort.GetEventSearchResultsAsync(SharpOnvifClient.Search.GetEventSearchResultsRequest request)
         {
             return base.Channel.GetEventSearchResultsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifSearch.GetEventSearchResultsResponse> GetEventSearchResultsAsync(string SearchToken, int MinResults, int MaxResults, string WaitTime)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Search.GetEventSearchResultsResponse> GetEventSearchResultsAsync(string SearchToken, int MinResults, int MaxResults, string WaitTime)
         {
-            OnvifSearch.GetEventSearchResultsRequest inValue = new OnvifSearch.GetEventSearchResultsRequest();
+            SharpOnvifClient.Search.GetEventSearchResultsRequest inValue = new SharpOnvifClient.Search.GetEventSearchResultsRequest();
             inValue.SearchToken = SearchToken;
             inValue.MinResults = MinResults;
             inValue.MaxResults = MaxResults;
             inValue.WaitTime = WaitTime;
-            return ((OnvifSearch.SearchPort)(this)).GetEventSearchResultsAsync(inValue);
+            return ((SharpOnvifClient.Search.SearchPort)(this)).GetEventSearchResultsAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifSearch.FindPTZPositionResponse> OnvifSearch.SearchPort.FindPTZPositionAsync(OnvifSearch.FindPTZPositionRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Search.FindPTZPositionResponse> SharpOnvifClient.Search.SearchPort.FindPTZPositionAsync(SharpOnvifClient.Search.FindPTZPositionRequest request)
         {
             return base.Channel.FindPTZPositionAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifSearch.FindPTZPositionResponse> FindPTZPositionAsync(System.DateTime StartPoint, System.DateTime EndPoint, OnvifSearch.SearchScope Scope, OnvifSearch.PTZPositionFilter SearchFilter, int MaxMatches, string KeepAliveTime)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Search.FindPTZPositionResponse> FindPTZPositionAsync(System.DateTime StartPoint, System.DateTime EndPoint, SharpOnvifClient.Search.SearchScope Scope, SharpOnvifClient.Search.PTZPositionFilter SearchFilter, int MaxMatches, string KeepAliveTime)
         {
-            OnvifSearch.FindPTZPositionRequest inValue = new OnvifSearch.FindPTZPositionRequest();
+            SharpOnvifClient.Search.FindPTZPositionRequest inValue = new SharpOnvifClient.Search.FindPTZPositionRequest();
             inValue.StartPoint = StartPoint;
             inValue.EndPoint = EndPoint;
             inValue.Scope = Scope;
             inValue.SearchFilter = SearchFilter;
             inValue.MaxMatches = MaxMatches;
             inValue.KeepAliveTime = KeepAliveTime;
-            return ((OnvifSearch.SearchPort)(this)).FindPTZPositionAsync(inValue);
+            return ((SharpOnvifClient.Search.SearchPort)(this)).FindPTZPositionAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifSearch.GetPTZPositionSearchResultsResponse> OnvifSearch.SearchPort.GetPTZPositionSearchResultsAsync(OnvifSearch.GetPTZPositionSearchResultsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Search.GetPTZPositionSearchResultsResponse> SharpOnvifClient.Search.SearchPort.GetPTZPositionSearchResultsAsync(SharpOnvifClient.Search.GetPTZPositionSearchResultsRequest request)
         {
             return base.Channel.GetPTZPositionSearchResultsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifSearch.GetPTZPositionSearchResultsResponse> GetPTZPositionSearchResultsAsync(string SearchToken, int MinResults, int MaxResults, string WaitTime)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Search.GetPTZPositionSearchResultsResponse> GetPTZPositionSearchResultsAsync(string SearchToken, int MinResults, int MaxResults, string WaitTime)
         {
-            OnvifSearch.GetPTZPositionSearchResultsRequest inValue = new OnvifSearch.GetPTZPositionSearchResultsRequest();
+            SharpOnvifClient.Search.GetPTZPositionSearchResultsRequest inValue = new SharpOnvifClient.Search.GetPTZPositionSearchResultsRequest();
             inValue.SearchToken = SearchToken;
             inValue.MinResults = MinResults;
             inValue.MaxResults = MaxResults;
             inValue.WaitTime = WaitTime;
-            return ((OnvifSearch.SearchPort)(this)).GetPTZPositionSearchResultsAsync(inValue);
+            return ((SharpOnvifClient.Search.SearchPort)(this)).GetPTZPositionSearchResultsAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifSearch.SearchState> GetSearchStateAsync(string SearchToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Search.SearchState> GetSearchStateAsync(string SearchToken)
         {
             return base.Channel.GetSearchStateAsync(SearchToken);
         }
@@ -2956,37 +2956,37 @@ namespace OnvifSearch
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifSearch.FindMetadataResponse> OnvifSearch.SearchPort.FindMetadataAsync(OnvifSearch.FindMetadataRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Search.FindMetadataResponse> SharpOnvifClient.Search.SearchPort.FindMetadataAsync(SharpOnvifClient.Search.FindMetadataRequest request)
         {
             return base.Channel.FindMetadataAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifSearch.FindMetadataResponse> FindMetadataAsync(System.DateTime StartPoint, System.DateTime EndPoint, OnvifSearch.SearchScope Scope, OnvifSearch.MetadataFilter MetadataFilter, int MaxMatches, string KeepAliveTime)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Search.FindMetadataResponse> FindMetadataAsync(System.DateTime StartPoint, System.DateTime EndPoint, SharpOnvifClient.Search.SearchScope Scope, SharpOnvifClient.Search.MetadataFilter MetadataFilter, int MaxMatches, string KeepAliveTime)
         {
-            OnvifSearch.FindMetadataRequest inValue = new OnvifSearch.FindMetadataRequest();
+            SharpOnvifClient.Search.FindMetadataRequest inValue = new SharpOnvifClient.Search.FindMetadataRequest();
             inValue.StartPoint = StartPoint;
             inValue.EndPoint = EndPoint;
             inValue.Scope = Scope;
             inValue.MetadataFilter = MetadataFilter;
             inValue.MaxMatches = MaxMatches;
             inValue.KeepAliveTime = KeepAliveTime;
-            return ((OnvifSearch.SearchPort)(this)).FindMetadataAsync(inValue);
+            return ((SharpOnvifClient.Search.SearchPort)(this)).FindMetadataAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifSearch.GetMetadataSearchResultsResponse> OnvifSearch.SearchPort.GetMetadataSearchResultsAsync(OnvifSearch.GetMetadataSearchResultsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Search.GetMetadataSearchResultsResponse> SharpOnvifClient.Search.SearchPort.GetMetadataSearchResultsAsync(SharpOnvifClient.Search.GetMetadataSearchResultsRequest request)
         {
             return base.Channel.GetMetadataSearchResultsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifSearch.GetMetadataSearchResultsResponse> GetMetadataSearchResultsAsync(string SearchToken, int MinResults, int MaxResults, string WaitTime)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Search.GetMetadataSearchResultsResponse> GetMetadataSearchResultsAsync(string SearchToken, int MinResults, int MaxResults, string WaitTime)
         {
-            OnvifSearch.GetMetadataSearchResultsRequest inValue = new OnvifSearch.GetMetadataSearchResultsRequest();
+            SharpOnvifClient.Search.GetMetadataSearchResultsRequest inValue = new SharpOnvifClient.Search.GetMetadataSearchResultsRequest();
             inValue.SearchToken = SearchToken;
             inValue.MinResults = MinResults;
             inValue.MaxResults = MaxResults;
             inValue.WaitTime = WaitTime;
-            return ((OnvifSearch.SearchPort)(this)).GetMetadataSearchResultsAsync(inValue);
+            return ((SharpOnvifClient.Search.SearchPort)(this)).GetMetadataSearchResultsAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()

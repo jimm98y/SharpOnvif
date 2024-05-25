@@ -1,11 +1,12 @@
-﻿using OnvifEvents;
+﻿using SharpOnvifClient.Events;
+using SharpOnvifClient.Media;
 using System.Threading.Tasks;
 
 namespace SharpOnvifClient
 {
     public static class SimpleOnvifClientExtensions
     {
-        public static Task<OnvifMedia.MediaUri> GetStreamUriAsync(this SimpleOnvifClient client, OnvifMedia.Profile profile)
+        public static Task<MediaUri> GetStreamUriAsync(this SimpleOnvifClient client, Profile profile)
         {
             return client.GetStreamUriAsync(profile.token);
         }

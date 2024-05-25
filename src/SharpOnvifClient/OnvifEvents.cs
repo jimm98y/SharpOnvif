@@ -1,4 +1,4 @@
-﻿using OnvifEvents;
+﻿using SharpOnvifClient.Events;
 using System.Linq;
 
 namespace SharpOnvifClient

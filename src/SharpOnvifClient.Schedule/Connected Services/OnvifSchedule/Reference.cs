@@ -7,12 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OnvifSchedule
+namespace SharpOnvifClient.Schedule
 {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/schedule/wsdl", ConfigurationName="OnvifSchedule.SchedulePort")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/schedule/wsdl", ConfigurationName="SharpOnvifClient.Schedule.SchedulePort")]
     public interface SchedulePort
     {
         
@@ -20,51 +20,51 @@ namespace OnvifSchedule
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Capabilities")]
-        System.Threading.Tasks.Task<OnvifSchedule.ServiceCapabilities> GetServiceCapabilitiesAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.Schedule.ServiceCapabilities> GetServiceCapabilitiesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/schedule/wsdl/GetScheduleState", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="ScheduleState")]
-        System.Threading.Tasks.Task<OnvifSchedule.ScheduleState> GetScheduleStateAsync(string Token);
+        System.Threading.Tasks.Task<SharpOnvifClient.Schedule.ScheduleState> GetScheduleStateAsync(string Token);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/schedule/wsdl/GetScheduleInfo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifSchedule.GetScheduleInfoResponse> GetScheduleInfoAsync(OnvifSchedule.GetScheduleInfoRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Schedule.GetScheduleInfoResponse> GetScheduleInfoAsync(SharpOnvifClient.Schedule.GetScheduleInfoRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/schedule/wsdl/GetScheduleInfoList", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifSchedule.GetScheduleInfoListResponse> GetScheduleInfoListAsync(OnvifSchedule.GetScheduleInfoListRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Schedule.GetScheduleInfoListResponse> GetScheduleInfoListAsync(SharpOnvifClient.Schedule.GetScheduleInfoListRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/schedule/wsdl/GetSchedules", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifSchedule.GetSchedulesResponse> GetSchedulesAsync(OnvifSchedule.GetSchedulesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Schedule.GetSchedulesResponse> GetSchedulesAsync(SharpOnvifClient.Schedule.GetSchedulesRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/schedule/wsdl/GetScheduleList", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifSchedule.GetScheduleListResponse> GetScheduleListAsync(OnvifSchedule.GetScheduleListRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Schedule.GetScheduleListResponse> GetScheduleListAsync(SharpOnvifClient.Schedule.GetScheduleListRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/schedule/wsdl/CreateSchedule", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Token")]
-        System.Threading.Tasks.Task<string> CreateScheduleAsync(OnvifSchedule.Schedule Schedule);
+        System.Threading.Tasks.Task<string> CreateScheduleAsync(SharpOnvifClient.Schedule.Schedule Schedule);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/schedule/wsdl/SetSchedule", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task SetScheduleAsync(OnvifSchedule.Schedule Schedule);
+        System.Threading.Tasks.Task SetScheduleAsync(SharpOnvifClient.Schedule.Schedule Schedule);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/schedule/wsdl/ModifySchedule", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task ModifyScheduleAsync(OnvifSchedule.Schedule Schedule);
+        System.Threading.Tasks.Task ModifyScheduleAsync(SharpOnvifClient.Schedule.Schedule Schedule);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/schedule/wsdl/DeleteSchedule", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -74,40 +74,40 @@ namespace OnvifSchedule
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/schedule/wsdl/GetSpecialDayGroupInfo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifSchedule.GetSpecialDayGroupInfoResponse> GetSpecialDayGroupInfoAsync(OnvifSchedule.GetSpecialDayGroupInfoRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Schedule.GetSpecialDayGroupInfoResponse> GetSpecialDayGroupInfoAsync(SharpOnvifClient.Schedule.GetSpecialDayGroupInfoRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/schedule/wsdl/GetSpecialDayGroupInfoList", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifSchedule.GetSpecialDayGroupInfoListResponse> GetSpecialDayGroupInfoListAsync(OnvifSchedule.GetSpecialDayGroupInfoListRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Schedule.GetSpecialDayGroupInfoListResponse> GetSpecialDayGroupInfoListAsync(SharpOnvifClient.Schedule.GetSpecialDayGroupInfoListRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/schedule/wsdl/GetSpecialDayGroups", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifSchedule.GetSpecialDayGroupsResponse> GetSpecialDayGroupsAsync(OnvifSchedule.GetSpecialDayGroupsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Schedule.GetSpecialDayGroupsResponse> GetSpecialDayGroupsAsync(SharpOnvifClient.Schedule.GetSpecialDayGroupsRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/schedule/wsdl/GetSpecialDayGroupList", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifSchedule.GetSpecialDayGroupListResponse> GetSpecialDayGroupListAsync(OnvifSchedule.GetSpecialDayGroupListRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Schedule.GetSpecialDayGroupListResponse> GetSpecialDayGroupListAsync(SharpOnvifClient.Schedule.GetSpecialDayGroupListRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/schedule/wsdl/CreateSpecialDayGroup", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Token")]
-        System.Threading.Tasks.Task<string> CreateSpecialDayGroupAsync(OnvifSchedule.SpecialDayGroup SpecialDayGroup);
+        System.Threading.Tasks.Task<string> CreateSpecialDayGroupAsync(SharpOnvifClient.Schedule.SpecialDayGroup SpecialDayGroup);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/schedule/wsdl/SetSpecialDayGroup", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task SetSpecialDayGroupAsync(OnvifSchedule.SpecialDayGroup SpecialDayGroup);
+        System.Threading.Tasks.Task SetSpecialDayGroupAsync(SharpOnvifClient.Schedule.SpecialDayGroup SpecialDayGroup);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/schedule/wsdl/ModifySpecialDayGroup", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task ModifySpecialDayGroupAsync(OnvifSchedule.SpecialDayGroup SpecialDayGroup);
+        System.Threading.Tasks.Task ModifySpecialDayGroupAsync(SharpOnvifClient.Schedule.SpecialDayGroup SpecialDayGroup);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/schedule/wsdl/DeleteSpecialDayGroup", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -861,13 +861,13 @@ namespace OnvifSchedule
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/schedule/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("ScheduleInfo")]
-        public OnvifSchedule.ScheduleInfo[] ScheduleInfo;
+        public SharpOnvifClient.Schedule.ScheduleInfo[] ScheduleInfo;
         
         public GetScheduleInfoResponse()
         {
         }
         
-        public GetScheduleInfoResponse(OnvifSchedule.ScheduleInfo[] ScheduleInfo)
+        public GetScheduleInfoResponse(SharpOnvifClient.Schedule.ScheduleInfo[] ScheduleInfo)
         {
             this.ScheduleInfo = ScheduleInfo;
         }
@@ -907,13 +907,13 @@ namespace OnvifSchedule
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/schedule/wsdl", Order=1)]
         [System.Xml.Serialization.XmlElementAttribute("ScheduleInfo")]
-        public OnvifSchedule.ScheduleInfo[] ScheduleInfo;
+        public SharpOnvifClient.Schedule.ScheduleInfo[] ScheduleInfo;
         
         public GetScheduleInfoListResponse()
         {
         }
         
-        public GetScheduleInfoListResponse(string NextStartReference, OnvifSchedule.ScheduleInfo[] ScheduleInfo)
+        public GetScheduleInfoListResponse(string NextStartReference, SharpOnvifClient.Schedule.ScheduleInfo[] ScheduleInfo)
         {
             this.NextStartReference = NextStartReference;
             this.ScheduleInfo = ScheduleInfo;
@@ -950,13 +950,13 @@ namespace OnvifSchedule
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/schedule/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Schedule")]
-        public OnvifSchedule.Schedule[] Schedule;
+        public SharpOnvifClient.Schedule.Schedule[] Schedule;
         
         public GetSchedulesResponse()
         {
         }
         
-        public GetSchedulesResponse(OnvifSchedule.Schedule[] Schedule)
+        public GetSchedulesResponse(SharpOnvifClient.Schedule.Schedule[] Schedule)
         {
             this.Schedule = Schedule;
         }
@@ -996,13 +996,13 @@ namespace OnvifSchedule
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/schedule/wsdl", Order=1)]
         [System.Xml.Serialization.XmlElementAttribute("Schedule")]
-        public OnvifSchedule.Schedule[] Schedule;
+        public SharpOnvifClient.Schedule.Schedule[] Schedule;
         
         public GetScheduleListResponse()
         {
         }
         
-        public GetScheduleListResponse(string NextStartReference, OnvifSchedule.Schedule[] Schedule)
+        public GetScheduleListResponse(string NextStartReference, SharpOnvifClient.Schedule.Schedule[] Schedule)
         {
             this.NextStartReference = NextStartReference;
             this.Schedule = Schedule;
@@ -1039,13 +1039,13 @@ namespace OnvifSchedule
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/schedule/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("SpecialDayGroupInfo")]
-        public OnvifSchedule.SpecialDayGroupInfo[] SpecialDayGroupInfo;
+        public SharpOnvifClient.Schedule.SpecialDayGroupInfo[] SpecialDayGroupInfo;
         
         public GetSpecialDayGroupInfoResponse()
         {
         }
         
-        public GetSpecialDayGroupInfoResponse(OnvifSchedule.SpecialDayGroupInfo[] SpecialDayGroupInfo)
+        public GetSpecialDayGroupInfoResponse(SharpOnvifClient.Schedule.SpecialDayGroupInfo[] SpecialDayGroupInfo)
         {
             this.SpecialDayGroupInfo = SpecialDayGroupInfo;
         }
@@ -1085,13 +1085,13 @@ namespace OnvifSchedule
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/schedule/wsdl", Order=1)]
         [System.Xml.Serialization.XmlElementAttribute("SpecialDayGroupInfo")]
-        public OnvifSchedule.SpecialDayGroupInfo[] SpecialDayGroupInfo;
+        public SharpOnvifClient.Schedule.SpecialDayGroupInfo[] SpecialDayGroupInfo;
         
         public GetSpecialDayGroupInfoListResponse()
         {
         }
         
-        public GetSpecialDayGroupInfoListResponse(string NextStartReference, OnvifSchedule.SpecialDayGroupInfo[] SpecialDayGroupInfo)
+        public GetSpecialDayGroupInfoListResponse(string NextStartReference, SharpOnvifClient.Schedule.SpecialDayGroupInfo[] SpecialDayGroupInfo)
         {
             this.NextStartReference = NextStartReference;
             this.SpecialDayGroupInfo = SpecialDayGroupInfo;
@@ -1128,13 +1128,13 @@ namespace OnvifSchedule
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/schedule/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("SpecialDayGroup")]
-        public OnvifSchedule.SpecialDayGroup[] SpecialDayGroup;
+        public SharpOnvifClient.Schedule.SpecialDayGroup[] SpecialDayGroup;
         
         public GetSpecialDayGroupsResponse()
         {
         }
         
-        public GetSpecialDayGroupsResponse(OnvifSchedule.SpecialDayGroup[] SpecialDayGroup)
+        public GetSpecialDayGroupsResponse(SharpOnvifClient.Schedule.SpecialDayGroup[] SpecialDayGroup)
         {
             this.SpecialDayGroup = SpecialDayGroup;
         }
@@ -1174,13 +1174,13 @@ namespace OnvifSchedule
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/schedule/wsdl", Order=1)]
         [System.Xml.Serialization.XmlElementAttribute("SpecialDayGroup")]
-        public OnvifSchedule.SpecialDayGroup[] SpecialDayGroup;
+        public SharpOnvifClient.Schedule.SpecialDayGroup[] SpecialDayGroup;
         
         public GetSpecialDayGroupListResponse()
         {
         }
         
-        public GetSpecialDayGroupListResponse(string NextStartReference, OnvifSchedule.SpecialDayGroup[] SpecialDayGroup)
+        public GetSpecialDayGroupListResponse(string NextStartReference, SharpOnvifClient.Schedule.SpecialDayGroup[] SpecialDayGroup)
         {
             this.NextStartReference = NextStartReference;
             this.SpecialDayGroup = SpecialDayGroup;
@@ -1188,13 +1188,13 @@ namespace OnvifSchedule
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface SchedulePortChannel : OnvifSchedule.SchedulePort, System.ServiceModel.IClientChannel
+    public interface SchedulePortChannel : SharpOnvifClient.Schedule.SchedulePort, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class SchedulePortClient : System.ServiceModel.ClientBase<OnvifSchedule.SchedulePort>, OnvifSchedule.SchedulePort
+    public partial class SchedulePortClient : System.ServiceModel.ClientBase<SharpOnvifClient.Schedule.SchedulePort>, SharpOnvifClient.Schedule.SchedulePort
     {
         
         public SchedulePortClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
@@ -1202,63 +1202,63 @@ namespace OnvifSchedule
         {
         }
         
-        public System.Threading.Tasks.Task<OnvifSchedule.ServiceCapabilities> GetServiceCapabilitiesAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.Schedule.ServiceCapabilities> GetServiceCapabilitiesAsync()
         {
             return base.Channel.GetServiceCapabilitiesAsync();
         }
         
-        public System.Threading.Tasks.Task<OnvifSchedule.ScheduleState> GetScheduleStateAsync(string Token)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Schedule.ScheduleState> GetScheduleStateAsync(string Token)
         {
             return base.Channel.GetScheduleStateAsync(Token);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifSchedule.GetScheduleInfoResponse> OnvifSchedule.SchedulePort.GetScheduleInfoAsync(OnvifSchedule.GetScheduleInfoRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Schedule.GetScheduleInfoResponse> SharpOnvifClient.Schedule.SchedulePort.GetScheduleInfoAsync(SharpOnvifClient.Schedule.GetScheduleInfoRequest request)
         {
             return base.Channel.GetScheduleInfoAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifSchedule.GetScheduleInfoResponse> GetScheduleInfoAsync(string[] Token)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Schedule.GetScheduleInfoResponse> GetScheduleInfoAsync(string[] Token)
         {
-            OnvifSchedule.GetScheduleInfoRequest inValue = new OnvifSchedule.GetScheduleInfoRequest();
+            SharpOnvifClient.Schedule.GetScheduleInfoRequest inValue = new SharpOnvifClient.Schedule.GetScheduleInfoRequest();
             inValue.Token = Token;
-            return ((OnvifSchedule.SchedulePort)(this)).GetScheduleInfoAsync(inValue);
+            return ((SharpOnvifClient.Schedule.SchedulePort)(this)).GetScheduleInfoAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifSchedule.GetScheduleInfoListResponse> GetScheduleInfoListAsync(OnvifSchedule.GetScheduleInfoListRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Schedule.GetScheduleInfoListResponse> GetScheduleInfoListAsync(SharpOnvifClient.Schedule.GetScheduleInfoListRequest request)
         {
             return base.Channel.GetScheduleInfoListAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifSchedule.GetSchedulesResponse> OnvifSchedule.SchedulePort.GetSchedulesAsync(OnvifSchedule.GetSchedulesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Schedule.GetSchedulesResponse> SharpOnvifClient.Schedule.SchedulePort.GetSchedulesAsync(SharpOnvifClient.Schedule.GetSchedulesRequest request)
         {
             return base.Channel.GetSchedulesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifSchedule.GetSchedulesResponse> GetSchedulesAsync(string[] Token)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Schedule.GetSchedulesResponse> GetSchedulesAsync(string[] Token)
         {
-            OnvifSchedule.GetSchedulesRequest inValue = new OnvifSchedule.GetSchedulesRequest();
+            SharpOnvifClient.Schedule.GetSchedulesRequest inValue = new SharpOnvifClient.Schedule.GetSchedulesRequest();
             inValue.Token = Token;
-            return ((OnvifSchedule.SchedulePort)(this)).GetSchedulesAsync(inValue);
+            return ((SharpOnvifClient.Schedule.SchedulePort)(this)).GetSchedulesAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifSchedule.GetScheduleListResponse> GetScheduleListAsync(OnvifSchedule.GetScheduleListRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Schedule.GetScheduleListResponse> GetScheduleListAsync(SharpOnvifClient.Schedule.GetScheduleListRequest request)
         {
             return base.Channel.GetScheduleListAsync(request);
         }
         
-        public System.Threading.Tasks.Task<string> CreateScheduleAsync(OnvifSchedule.Schedule Schedule)
+        public System.Threading.Tasks.Task<string> CreateScheduleAsync(SharpOnvifClient.Schedule.Schedule Schedule)
         {
             return base.Channel.CreateScheduleAsync(Schedule);
         }
         
-        public System.Threading.Tasks.Task SetScheduleAsync(OnvifSchedule.Schedule Schedule)
+        public System.Threading.Tasks.Task SetScheduleAsync(SharpOnvifClient.Schedule.Schedule Schedule)
         {
             return base.Channel.SetScheduleAsync(Schedule);
         }
         
-        public System.Threading.Tasks.Task ModifyScheduleAsync(OnvifSchedule.Schedule Schedule)
+        public System.Threading.Tasks.Task ModifyScheduleAsync(SharpOnvifClient.Schedule.Schedule Schedule)
         {
             return base.Channel.ModifyScheduleAsync(Schedule);
         }
@@ -1269,52 +1269,52 @@ namespace OnvifSchedule
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifSchedule.GetSpecialDayGroupInfoResponse> OnvifSchedule.SchedulePort.GetSpecialDayGroupInfoAsync(OnvifSchedule.GetSpecialDayGroupInfoRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Schedule.GetSpecialDayGroupInfoResponse> SharpOnvifClient.Schedule.SchedulePort.GetSpecialDayGroupInfoAsync(SharpOnvifClient.Schedule.GetSpecialDayGroupInfoRequest request)
         {
             return base.Channel.GetSpecialDayGroupInfoAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifSchedule.GetSpecialDayGroupInfoResponse> GetSpecialDayGroupInfoAsync(string[] Token)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Schedule.GetSpecialDayGroupInfoResponse> GetSpecialDayGroupInfoAsync(string[] Token)
         {
-            OnvifSchedule.GetSpecialDayGroupInfoRequest inValue = new OnvifSchedule.GetSpecialDayGroupInfoRequest();
+            SharpOnvifClient.Schedule.GetSpecialDayGroupInfoRequest inValue = new SharpOnvifClient.Schedule.GetSpecialDayGroupInfoRequest();
             inValue.Token = Token;
-            return ((OnvifSchedule.SchedulePort)(this)).GetSpecialDayGroupInfoAsync(inValue);
+            return ((SharpOnvifClient.Schedule.SchedulePort)(this)).GetSpecialDayGroupInfoAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifSchedule.GetSpecialDayGroupInfoListResponse> GetSpecialDayGroupInfoListAsync(OnvifSchedule.GetSpecialDayGroupInfoListRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Schedule.GetSpecialDayGroupInfoListResponse> GetSpecialDayGroupInfoListAsync(SharpOnvifClient.Schedule.GetSpecialDayGroupInfoListRequest request)
         {
             return base.Channel.GetSpecialDayGroupInfoListAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifSchedule.GetSpecialDayGroupsResponse> OnvifSchedule.SchedulePort.GetSpecialDayGroupsAsync(OnvifSchedule.GetSpecialDayGroupsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Schedule.GetSpecialDayGroupsResponse> SharpOnvifClient.Schedule.SchedulePort.GetSpecialDayGroupsAsync(SharpOnvifClient.Schedule.GetSpecialDayGroupsRequest request)
         {
             return base.Channel.GetSpecialDayGroupsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifSchedule.GetSpecialDayGroupsResponse> GetSpecialDayGroupsAsync(string[] Token)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Schedule.GetSpecialDayGroupsResponse> GetSpecialDayGroupsAsync(string[] Token)
         {
-            OnvifSchedule.GetSpecialDayGroupsRequest inValue = new OnvifSchedule.GetSpecialDayGroupsRequest();
+            SharpOnvifClient.Schedule.GetSpecialDayGroupsRequest inValue = new SharpOnvifClient.Schedule.GetSpecialDayGroupsRequest();
             inValue.Token = Token;
-            return ((OnvifSchedule.SchedulePort)(this)).GetSpecialDayGroupsAsync(inValue);
+            return ((SharpOnvifClient.Schedule.SchedulePort)(this)).GetSpecialDayGroupsAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifSchedule.GetSpecialDayGroupListResponse> GetSpecialDayGroupListAsync(OnvifSchedule.GetSpecialDayGroupListRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Schedule.GetSpecialDayGroupListResponse> GetSpecialDayGroupListAsync(SharpOnvifClient.Schedule.GetSpecialDayGroupListRequest request)
         {
             return base.Channel.GetSpecialDayGroupListAsync(request);
         }
         
-        public System.Threading.Tasks.Task<string> CreateSpecialDayGroupAsync(OnvifSchedule.SpecialDayGroup SpecialDayGroup)
+        public System.Threading.Tasks.Task<string> CreateSpecialDayGroupAsync(SharpOnvifClient.Schedule.SpecialDayGroup SpecialDayGroup)
         {
             return base.Channel.CreateSpecialDayGroupAsync(SpecialDayGroup);
         }
         
-        public System.Threading.Tasks.Task SetSpecialDayGroupAsync(OnvifSchedule.SpecialDayGroup SpecialDayGroup)
+        public System.Threading.Tasks.Task SetSpecialDayGroupAsync(SharpOnvifClient.Schedule.SpecialDayGroup SpecialDayGroup)
         {
             return base.Channel.SetSpecialDayGroupAsync(SpecialDayGroup);
         }
         
-        public System.Threading.Tasks.Task ModifySpecialDayGroupAsync(OnvifSchedule.SpecialDayGroup SpecialDayGroup)
+        public System.Threading.Tasks.Task ModifySpecialDayGroupAsync(SharpOnvifClient.Schedule.SpecialDayGroup SpecialDayGroup)
         {
             return base.Channel.ModifySpecialDayGroupAsync(SpecialDayGroup);
         }

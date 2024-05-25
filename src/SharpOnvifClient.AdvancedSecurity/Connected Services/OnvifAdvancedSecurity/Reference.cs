@@ -7,12 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OnvifAdvancedSecurity
+namespace SharpOnvifClient.AdvancedSecurity
 {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl", ConfigurationName="OnvifAdvancedSecurity.AdvancedSecurityService")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl", ConfigurationName="SharpOnvifClient.AdvancedSecurity.AdvancedSecurityService")]
     public interface AdvancedSecurityService
     {
         
@@ -20,7 +20,7 @@ namespace OnvifAdvancedSecurity
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Capabilities")]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.Capabilities> GetServiceCapabilitiesAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.Capabilities> GetServiceCapabilitiesAsync();
     }
     
     /// <remarks/>
@@ -8959,13 +8959,13 @@ namespace OnvifAdvancedSecurity
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface AdvancedSecurityServiceChannel : OnvifAdvancedSecurity.AdvancedSecurityService, System.ServiceModel.IClientChannel
+    public interface AdvancedSecurityServiceChannel : SharpOnvifClient.AdvancedSecurity.AdvancedSecurityService, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class AdvancedSecurityServiceClient : System.ServiceModel.ClientBase<OnvifAdvancedSecurity.AdvancedSecurityService>, OnvifAdvancedSecurity.AdvancedSecurityService
+    public partial class AdvancedSecurityServiceClient : System.ServiceModel.ClientBase<SharpOnvifClient.AdvancedSecurity.AdvancedSecurityService>, SharpOnvifClient.AdvancedSecurity.AdvancedSecurityService
     {
         
         public AdvancedSecurityServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
@@ -8973,7 +8973,7 @@ namespace OnvifAdvancedSecurity
         {
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.Capabilities> GetServiceCapabilitiesAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.Capabilities> GetServiceCapabilitiesAsync()
         {
             return base.Channel.GetServiceCapabilitiesAsync();
         }
@@ -8990,7 +8990,7 @@ namespace OnvifAdvancedSecurity
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl", ConfigurationName="OnvifAdvancedSecurity.JWT")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl", ConfigurationName="SharpOnvifClient.AdvancedSecurity.JWT")]
     public interface JWT
     {
         
@@ -8998,22 +8998,22 @@ namespace OnvifAdvancedSecurity
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Configuration")]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.JWTConfiguration> GetJWTConfigurationAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.JWTConfiguration> GetJWTConfigurationAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/SetJWTConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task SetJWTConfigurationAsync(OnvifAdvancedSecurity.JWTConfiguration Configuration);
+        System.Threading.Tasks.Task SetJWTConfigurationAsync(SharpOnvifClient.AdvancedSecurity.JWTConfiguration Configuration);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface JWTChannel : OnvifAdvancedSecurity.JWT, System.ServiceModel.IClientChannel
+    public interface JWTChannel : SharpOnvifClient.AdvancedSecurity.JWT, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class JWTClient : System.ServiceModel.ClientBase<OnvifAdvancedSecurity.JWT>, OnvifAdvancedSecurity.JWT
+    public partial class JWTClient : System.ServiceModel.ClientBase<SharpOnvifClient.AdvancedSecurity.JWT>, SharpOnvifClient.AdvancedSecurity.JWT
     {
         
         public JWTClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
@@ -9021,12 +9021,12 @@ namespace OnvifAdvancedSecurity
         {
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.JWTConfiguration> GetJWTConfigurationAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.JWTConfiguration> GetJWTConfigurationAsync()
         {
             return base.Channel.GetJWTConfigurationAsync();
         }
         
-        public System.Threading.Tasks.Task SetJWTConfigurationAsync(OnvifAdvancedSecurity.JWTConfiguration Configuration)
+        public System.Threading.Tasks.Task SetJWTConfigurationAsync(SharpOnvifClient.AdvancedSecurity.JWTConfiguration Configuration)
         {
             return base.Channel.SetJWTConfigurationAsync(Configuration);
         }
@@ -9043,7 +9043,7 @@ namespace OnvifAdvancedSecurity
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl", ConfigurationName="OnvifAdvancedSecurity.Keystore")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl", ConfigurationName="SharpOnvifClient.AdvancedSecurity.Keystore")]
     public interface Keystore
     {
         
@@ -9051,152 +9051,152 @@ namespace OnvifAdvancedSecurity
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/CreateRSAKeyPair", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.CreateRSAKeyPairResponse> CreateRSAKeyPairAsync(OnvifAdvancedSecurity.CreateRSAKeyPairRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.CreateRSAKeyPairResponse> CreateRSAKeyPairAsync(SharpOnvifClient.AdvancedSecurity.CreateRSAKeyPairRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/CreateECCKeyPair", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.CreateECCKeyPairResponse> CreateECCKeyPairAsync(OnvifAdvancedSecurity.CreateECCKeyPairRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.CreateECCKeyPairResponse> CreateECCKeyPairAsync(SharpOnvifClient.AdvancedSecurity.CreateECCKeyPairRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/UploadKeyPairInPKCS8", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.UploadKeyPairInPKCS8Response> UploadKeyPairInPKCS8Async(OnvifAdvancedSecurity.UploadKeyPairInPKCS8Request request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.UploadKeyPairInPKCS8Response> UploadKeyPairInPKCS8Async(SharpOnvifClient.AdvancedSecurity.UploadKeyPairInPKCS8Request request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/UploadCertificateWithPrivateKeyI" +
             "nPKCS12", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.UploadCertificateWithPrivateKeyInPKCS12Response> UploadCertificateWithPrivateKeyInPKCS12Async(OnvifAdvancedSecurity.UploadCertificateWithPrivateKeyInPKCS12Request request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.UploadCertificateWithPrivateKeyInPKCS12Response> UploadCertificateWithPrivateKeyInPKCS12Async(SharpOnvifClient.AdvancedSecurity.UploadCertificateWithPrivateKeyInPKCS12Request request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/GetKeyStatus", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetKeyStatusResponse> GetKeyStatusAsync(OnvifAdvancedSecurity.GetKeyStatusRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetKeyStatusResponse> GetKeyStatusAsync(SharpOnvifClient.AdvancedSecurity.GetKeyStatusRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/GetPrivateKeyStatus", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetPrivateKeyStatusResponse> GetPrivateKeyStatusAsync(OnvifAdvancedSecurity.GetPrivateKeyStatusRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetPrivateKeyStatusResponse> GetPrivateKeyStatusAsync(SharpOnvifClient.AdvancedSecurity.GetPrivateKeyStatusRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/GetAllKeys", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetAllKeysResponse> GetAllKeysAsync(OnvifAdvancedSecurity.GetAllKeysRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetAllKeysResponse> GetAllKeysAsync(SharpOnvifClient.AdvancedSecurity.GetAllKeysRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/DeleteKey", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.DeleteKeyResponse> DeleteKeyAsync(OnvifAdvancedSecurity.DeleteKeyRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.DeleteKeyResponse> DeleteKeyAsync(SharpOnvifClient.AdvancedSecurity.DeleteKeyRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/CreatePKCS10CSR", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.CreatePKCS10CSRResponse> CreatePKCS10CSRAsync(OnvifAdvancedSecurity.CreatePKCS10CSRRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.CreatePKCS10CSRResponse> CreatePKCS10CSRAsync(SharpOnvifClient.AdvancedSecurity.CreatePKCS10CSRRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/CreateSelfSignedCertificate", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.CreateSelfSignedCertificateResponse> CreateSelfSignedCertificateAsync(OnvifAdvancedSecurity.CreateSelfSignedCertificateRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.CreateSelfSignedCertificateResponse> CreateSelfSignedCertificateAsync(SharpOnvifClient.AdvancedSecurity.CreateSelfSignedCertificateRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/UploadCertificate", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.UploadCertificateResponse> UploadCertificateAsync(OnvifAdvancedSecurity.UploadCertificateRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.UploadCertificateResponse> UploadCertificateAsync(SharpOnvifClient.AdvancedSecurity.UploadCertificateRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/GetCertificate", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetCertificateResponse> GetCertificateAsync(OnvifAdvancedSecurity.GetCertificateRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetCertificateResponse> GetCertificateAsync(SharpOnvifClient.AdvancedSecurity.GetCertificateRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/GetAllCertificates", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetAllCertificatesResponse> GetAllCertificatesAsync(OnvifAdvancedSecurity.GetAllCertificatesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetAllCertificatesResponse> GetAllCertificatesAsync(SharpOnvifClient.AdvancedSecurity.GetAllCertificatesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/DeleteCertificate", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.DeleteCertificateResponse> DeleteCertificateAsync(OnvifAdvancedSecurity.DeleteCertificateRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.DeleteCertificateResponse> DeleteCertificateAsync(SharpOnvifClient.AdvancedSecurity.DeleteCertificateRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/CreateCertificationPath", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.CreateCertificationPathResponse> CreateCertificationPathAsync(OnvifAdvancedSecurity.CreateCertificationPathRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.CreateCertificationPathResponse> CreateCertificationPathAsync(SharpOnvifClient.AdvancedSecurity.CreateCertificationPathRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/GetCertificationPath", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetCertificationPathResponse> GetCertificationPathAsync(OnvifAdvancedSecurity.GetCertificationPathRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetCertificationPathResponse> GetCertificationPathAsync(SharpOnvifClient.AdvancedSecurity.GetCertificationPathRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/GetAllCertificationPaths", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetAllCertificationPathsResponse> GetAllCertificationPathsAsync(OnvifAdvancedSecurity.GetAllCertificationPathsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetAllCertificationPathsResponse> GetAllCertificationPathsAsync(SharpOnvifClient.AdvancedSecurity.GetAllCertificationPathsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/DeleteCertificationPath", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.DeleteCertificationPathResponse> DeleteCertificationPathAsync(OnvifAdvancedSecurity.DeleteCertificationPathRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.DeleteCertificationPathResponse> DeleteCertificationPathAsync(SharpOnvifClient.AdvancedSecurity.DeleteCertificationPathRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/UploadPassphrase", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.UploadPassphraseResponse> UploadPassphraseAsync(OnvifAdvancedSecurity.UploadPassphraseRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.UploadPassphraseResponse> UploadPassphraseAsync(SharpOnvifClient.AdvancedSecurity.UploadPassphraseRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/GetAllPassphrases", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetAllPassphrasesResponse> GetAllPassphrasesAsync(OnvifAdvancedSecurity.GetAllPassphrasesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetAllPassphrasesResponse> GetAllPassphrasesAsync(SharpOnvifClient.AdvancedSecurity.GetAllPassphrasesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/DeletePassphrase", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.DeletePassphraseResponse> DeletePassphraseAsync(OnvifAdvancedSecurity.DeletePassphraseRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.DeletePassphraseResponse> DeletePassphraseAsync(SharpOnvifClient.AdvancedSecurity.DeletePassphraseRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/UploadCRL", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.UploadCRLResponse> UploadCRLAsync(OnvifAdvancedSecurity.UploadCRLRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.UploadCRLResponse> UploadCRLAsync(SharpOnvifClient.AdvancedSecurity.UploadCRLRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/GetCRL", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetCRLResponse> GetCRLAsync(OnvifAdvancedSecurity.GetCRLRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetCRLResponse> GetCRLAsync(SharpOnvifClient.AdvancedSecurity.GetCRLRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/GetAllCRLs", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetAllCRLsResponse> GetAllCRLsAsync(OnvifAdvancedSecurity.GetAllCRLsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetAllCRLsResponse> GetAllCRLsAsync(SharpOnvifClient.AdvancedSecurity.GetAllCRLsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/DeleteCRL", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.DeleteCRLResponse> DeleteCRLAsync(OnvifAdvancedSecurity.DeleteCRLRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.DeleteCRLResponse> DeleteCRLAsync(SharpOnvifClient.AdvancedSecurity.DeleteCRLRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/CreateCertPathValidationPolicy", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.CreateCertPathValidationPolicyResponse> CreateCertPathValidationPolicyAsync(OnvifAdvancedSecurity.CreateCertPathValidationPolicyRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.CreateCertPathValidationPolicyResponse> CreateCertPathValidationPolicyAsync(SharpOnvifClient.AdvancedSecurity.CreateCertPathValidationPolicyRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/GetCertPathValidationPolicy", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetCertPathValidationPolicyResponse> GetCertPathValidationPolicyAsync(OnvifAdvancedSecurity.GetCertPathValidationPolicyRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetCertPathValidationPolicyResponse> GetCertPathValidationPolicyAsync(SharpOnvifClient.AdvancedSecurity.GetCertPathValidationPolicyRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/GetAllCertPathValidationPolicies" +
             "", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetAllCertPathValidationPoliciesResponse> GetAllCertPathValidationPoliciesAsync(OnvifAdvancedSecurity.GetAllCertPathValidationPoliciesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetAllCertPathValidationPoliciesResponse> GetAllCertPathValidationPoliciesAsync(SharpOnvifClient.AdvancedSecurity.GetAllCertPathValidationPoliciesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/DeleteCertPathValidationPolicy", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.DeleteCertPathValidationPolicyResponse> DeleteCertPathValidationPolicyAsync(OnvifAdvancedSecurity.DeleteCertPathValidationPolicyRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.DeleteCertPathValidationPolicyResponse> DeleteCertPathValidationPolicyAsync(SharpOnvifClient.AdvancedSecurity.DeleteCertPathValidationPolicyRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -9526,13 +9526,13 @@ namespace OnvifAdvancedSecurity
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("KeyAttribute")]
-        public OnvifAdvancedSecurity.KeyAttribute[] KeyAttribute;
+        public SharpOnvifClient.AdvancedSecurity.KeyAttribute[] KeyAttribute;
         
         public GetAllKeysResponse()
         {
         }
         
-        public GetAllKeysResponse(OnvifAdvancedSecurity.KeyAttribute[] KeyAttribute)
+        public GetAllKeysResponse(SharpOnvifClient.AdvancedSecurity.KeyAttribute[] KeyAttribute)
         {
             this.KeyAttribute = KeyAttribute;
         }
@@ -9579,7 +9579,7 @@ namespace OnvifAdvancedSecurity
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl", Order=0)]
-        public OnvifAdvancedSecurity.DistinguishedName Subject;
+        public SharpOnvifClient.AdvancedSecurity.DistinguishedName Subject;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl", Order=1)]
         [System.Xml.Serialization.XmlElementAttribute(DataType="NCName")]
@@ -9587,16 +9587,16 @@ namespace OnvifAdvancedSecurity
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl", Order=2)]
         [System.Xml.Serialization.XmlElementAttribute("CSRAttribute")]
-        public OnvifAdvancedSecurity.CSRAttribute[] CSRAttribute;
+        public SharpOnvifClient.AdvancedSecurity.CSRAttribute[] CSRAttribute;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl", Order=3)]
-        public OnvifAdvancedSecurity.AlgorithmIdentifier SignatureAlgorithm;
+        public SharpOnvifClient.AdvancedSecurity.AlgorithmIdentifier SignatureAlgorithm;
         
         public CreatePKCS10CSRRequest()
         {
         }
         
-        public CreatePKCS10CSRRequest(OnvifAdvancedSecurity.DistinguishedName Subject, string KeyID, OnvifAdvancedSecurity.CSRAttribute[] CSRAttribute, OnvifAdvancedSecurity.AlgorithmIdentifier SignatureAlgorithm)
+        public CreatePKCS10CSRRequest(SharpOnvifClient.AdvancedSecurity.DistinguishedName Subject, string KeyID, SharpOnvifClient.AdvancedSecurity.CSRAttribute[] CSRAttribute, SharpOnvifClient.AdvancedSecurity.AlgorithmIdentifier SignatureAlgorithm)
         {
             this.Subject = Subject;
             this.KeyID = KeyID;
@@ -9638,7 +9638,7 @@ namespace OnvifAdvancedSecurity
         public string X509Version;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl", Order=1)]
-        public OnvifAdvancedSecurity.DistinguishedName Subject;
+        public SharpOnvifClient.AdvancedSecurity.DistinguishedName Subject;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl", Order=2)]
         [System.Xml.Serialization.XmlElementAttribute(DataType="NCName")]
@@ -9654,17 +9654,17 @@ namespace OnvifAdvancedSecurity
         public System.DateTime notValidAfter;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl", Order=6)]
-        public OnvifAdvancedSecurity.AlgorithmIdentifier SignatureAlgorithm;
+        public SharpOnvifClient.AdvancedSecurity.AlgorithmIdentifier SignatureAlgorithm;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl", Order=7)]
         [System.Xml.Serialization.XmlElementAttribute("Extension")]
-        public OnvifAdvancedSecurity.X509v3Extension[] Extension;
+        public SharpOnvifClient.AdvancedSecurity.X509v3Extension[] Extension;
         
         public CreateSelfSignedCertificateRequest()
         {
         }
         
-        public CreateSelfSignedCertificateRequest(string X509Version, OnvifAdvancedSecurity.DistinguishedName Subject, string KeyID, string Alias, System.DateTime notValidBefore, System.DateTime notValidAfter, OnvifAdvancedSecurity.AlgorithmIdentifier SignatureAlgorithm, OnvifAdvancedSecurity.X509v3Extension[] Extension)
+        public CreateSelfSignedCertificateRequest(string X509Version, SharpOnvifClient.AdvancedSecurity.DistinguishedName Subject, string KeyID, string Alias, System.DateTime notValidBefore, System.DateTime notValidAfter, SharpOnvifClient.AdvancedSecurity.AlgorithmIdentifier SignatureAlgorithm, SharpOnvifClient.AdvancedSecurity.X509v3Extension[] Extension)
         {
             this.X509Version = X509Version;
             this.Subject = Subject;
@@ -9785,13 +9785,13 @@ namespace OnvifAdvancedSecurity
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl", Order=0)]
-        public OnvifAdvancedSecurity.X509Certificate Certificate;
+        public SharpOnvifClient.AdvancedSecurity.X509Certificate Certificate;
         
         public GetCertificateResponse()
         {
         }
         
-        public GetCertificateResponse(OnvifAdvancedSecurity.X509Certificate Certificate)
+        public GetCertificateResponse(SharpOnvifClient.AdvancedSecurity.X509Certificate Certificate)
         {
             this.Certificate = Certificate;
         }
@@ -9818,13 +9818,13 @@ namespace OnvifAdvancedSecurity
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Certificate")]
-        public OnvifAdvancedSecurity.X509Certificate[] Certificate;
+        public SharpOnvifClient.AdvancedSecurity.X509Certificate[] Certificate;
         
         public GetAllCertificatesResponse()
         {
         }
         
-        public GetAllCertificatesResponse(OnvifAdvancedSecurity.X509Certificate[] Certificate)
+        public GetAllCertificatesResponse(SharpOnvifClient.AdvancedSecurity.X509Certificate[] Certificate)
         {
             this.Certificate = Certificate;
         }
@@ -9871,7 +9871,7 @@ namespace OnvifAdvancedSecurity
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl", Order=0)]
-        public OnvifAdvancedSecurity.CertificateIDs CertificateIDs;
+        public SharpOnvifClient.AdvancedSecurity.CertificateIDs CertificateIDs;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl", Order=1)]
         public string Alias;
@@ -9880,7 +9880,7 @@ namespace OnvifAdvancedSecurity
         {
         }
         
-        public CreateCertificationPathRequest(OnvifAdvancedSecurity.CertificateIDs CertificateIDs, string Alias)
+        public CreateCertificationPathRequest(SharpOnvifClient.AdvancedSecurity.CertificateIDs CertificateIDs, string Alias)
         {
             this.CertificateIDs = CertificateIDs;
             this.Alias = Alias;
@@ -9937,13 +9937,13 @@ namespace OnvifAdvancedSecurity
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl", Order=0)]
-        public OnvifAdvancedSecurity.CertificationPath CertificationPath;
+        public SharpOnvifClient.AdvancedSecurity.CertificationPath CertificationPath;
         
         public GetCertificationPathResponse()
         {
         }
         
-        public GetCertificationPathResponse(OnvifAdvancedSecurity.CertificationPath CertificationPath)
+        public GetCertificationPathResponse(SharpOnvifClient.AdvancedSecurity.CertificationPath CertificationPath)
         {
             this.CertificationPath = CertificationPath;
         }
@@ -10081,13 +10081,13 @@ namespace OnvifAdvancedSecurity
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("PassphraseAttribute")]
-        public OnvifAdvancedSecurity.PassphraseAttribute[] PassphraseAttribute;
+        public SharpOnvifClient.AdvancedSecurity.PassphraseAttribute[] PassphraseAttribute;
         
         public GetAllPassphrasesResponse()
         {
         }
         
-        public GetAllPassphrasesResponse(OnvifAdvancedSecurity.PassphraseAttribute[] PassphraseAttribute)
+        public GetAllPassphrasesResponse(SharpOnvifClient.AdvancedSecurity.PassphraseAttribute[] PassphraseAttribute)
         {
             this.PassphraseAttribute = PassphraseAttribute;
         }
@@ -10165,13 +10165,13 @@ namespace OnvifAdvancedSecurity
         public string Alias;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl", Order=2)]
-        public OnvifAdvancedSecurity.UploadCRLAnyParameters anyParameters;
+        public SharpOnvifClient.AdvancedSecurity.UploadCRLAnyParameters anyParameters;
         
         public UploadCRLRequest()
         {
         }
         
-        public UploadCRLRequest(byte[] Crl, string Alias, OnvifAdvancedSecurity.UploadCRLAnyParameters anyParameters)
+        public UploadCRLRequest(byte[] Crl, string Alias, SharpOnvifClient.AdvancedSecurity.UploadCRLAnyParameters anyParameters)
         {
             this.Crl = Crl;
             this.Alias = Alias;
@@ -10229,13 +10229,13 @@ namespace OnvifAdvancedSecurity
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl", Order=0)]
-        public OnvifAdvancedSecurity.CRL Crl;
+        public SharpOnvifClient.AdvancedSecurity.CRL Crl;
         
         public GetCRLResponse()
         {
         }
         
-        public GetCRLResponse(OnvifAdvancedSecurity.CRL Crl)
+        public GetCRLResponse(SharpOnvifClient.AdvancedSecurity.CRL Crl)
         {
             this.Crl = Crl;
         }
@@ -10262,13 +10262,13 @@ namespace OnvifAdvancedSecurity
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Crl")]
-        public OnvifAdvancedSecurity.CRL[] Crl;
+        public SharpOnvifClient.AdvancedSecurity.CRL[] Crl;
         
         public GetAllCRLsResponse()
         {
         }
         
-        public GetAllCRLsResponse(OnvifAdvancedSecurity.CRL[] Crl)
+        public GetAllCRLsResponse(SharpOnvifClient.AdvancedSecurity.CRL[] Crl)
         {
             this.Crl = Crl;
         }
@@ -10342,20 +10342,20 @@ namespace OnvifAdvancedSecurity
         public string Alias;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl", Order=1)]
-        public OnvifAdvancedSecurity.CertPathValidationParameters Parameters;
+        public SharpOnvifClient.AdvancedSecurity.CertPathValidationParameters Parameters;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl", Order=2)]
         [System.Xml.Serialization.XmlElementAttribute("TrustAnchor")]
-        public OnvifAdvancedSecurity.TrustAnchor[] TrustAnchor;
+        public SharpOnvifClient.AdvancedSecurity.TrustAnchor[] TrustAnchor;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl", Order=3)]
-        public OnvifAdvancedSecurity.CreateCertPathValidationPolicyAnyParameters anyParameters;
+        public SharpOnvifClient.AdvancedSecurity.CreateCertPathValidationPolicyAnyParameters anyParameters;
         
         public CreateCertPathValidationPolicyRequest()
         {
         }
         
-        public CreateCertPathValidationPolicyRequest(string Alias, OnvifAdvancedSecurity.CertPathValidationParameters Parameters, OnvifAdvancedSecurity.TrustAnchor[] TrustAnchor, OnvifAdvancedSecurity.CreateCertPathValidationPolicyAnyParameters anyParameters)
+        public CreateCertPathValidationPolicyRequest(string Alias, SharpOnvifClient.AdvancedSecurity.CertPathValidationParameters Parameters, SharpOnvifClient.AdvancedSecurity.TrustAnchor[] TrustAnchor, SharpOnvifClient.AdvancedSecurity.CreateCertPathValidationPolicyAnyParameters anyParameters)
         {
             this.Alias = Alias;
             this.Parameters = Parameters;
@@ -10414,13 +10414,13 @@ namespace OnvifAdvancedSecurity
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl", Order=0)]
-        public OnvifAdvancedSecurity.CertPathValidationPolicy CertPathValidationPolicy;
+        public SharpOnvifClient.AdvancedSecurity.CertPathValidationPolicy CertPathValidationPolicy;
         
         public GetCertPathValidationPolicyResponse()
         {
         }
         
-        public GetCertPathValidationPolicyResponse(OnvifAdvancedSecurity.CertPathValidationPolicy CertPathValidationPolicy)
+        public GetCertPathValidationPolicyResponse(SharpOnvifClient.AdvancedSecurity.CertPathValidationPolicy CertPathValidationPolicy)
         {
             this.CertPathValidationPolicy = CertPathValidationPolicy;
         }
@@ -10447,13 +10447,13 @@ namespace OnvifAdvancedSecurity
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("CertPathValidationPolicy")]
-        public OnvifAdvancedSecurity.CertPathValidationPolicy[] CertPathValidationPolicy;
+        public SharpOnvifClient.AdvancedSecurity.CertPathValidationPolicy[] CertPathValidationPolicy;
         
         public GetAllCertPathValidationPoliciesResponse()
         {
         }
         
-        public GetAllCertPathValidationPoliciesResponse(OnvifAdvancedSecurity.CertPathValidationPolicy[] CertPathValidationPolicy)
+        public GetAllCertPathValidationPoliciesResponse(SharpOnvifClient.AdvancedSecurity.CertPathValidationPolicy[] CertPathValidationPolicy)
         {
             this.CertPathValidationPolicy = CertPathValidationPolicy;
         }
@@ -10493,13 +10493,13 @@ namespace OnvifAdvancedSecurity
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface KeystoreChannel : OnvifAdvancedSecurity.Keystore, System.ServiceModel.IClientChannel
+    public interface KeystoreChannel : SharpOnvifClient.AdvancedSecurity.Keystore, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class KeystoreClient : System.ServiceModel.ClientBase<OnvifAdvancedSecurity.Keystore>, OnvifAdvancedSecurity.Keystore
+    public partial class KeystoreClient : System.ServiceModel.ClientBase<SharpOnvifClient.AdvancedSecurity.Keystore>, SharpOnvifClient.AdvancedSecurity.Keystore
     {
         
         public KeystoreClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
@@ -10507,113 +10507,113 @@ namespace OnvifAdvancedSecurity
         {
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.CreateRSAKeyPairResponse> CreateRSAKeyPairAsync(OnvifAdvancedSecurity.CreateRSAKeyPairRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.CreateRSAKeyPairResponse> CreateRSAKeyPairAsync(SharpOnvifClient.AdvancedSecurity.CreateRSAKeyPairRequest request)
         {
             return base.Channel.CreateRSAKeyPairAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.CreateECCKeyPairResponse> CreateECCKeyPairAsync(OnvifAdvancedSecurity.CreateECCKeyPairRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.CreateECCKeyPairResponse> CreateECCKeyPairAsync(SharpOnvifClient.AdvancedSecurity.CreateECCKeyPairRequest request)
         {
             return base.Channel.CreateECCKeyPairAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.UploadKeyPairInPKCS8Response> OnvifAdvancedSecurity.Keystore.UploadKeyPairInPKCS8Async(OnvifAdvancedSecurity.UploadKeyPairInPKCS8Request request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.UploadKeyPairInPKCS8Response> SharpOnvifClient.AdvancedSecurity.Keystore.UploadKeyPairInPKCS8Async(SharpOnvifClient.AdvancedSecurity.UploadKeyPairInPKCS8Request request)
         {
             return base.Channel.UploadKeyPairInPKCS8Async(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.UploadKeyPairInPKCS8Response> UploadKeyPairInPKCS8Async(byte[] KeyPair, string Alias, string EncryptionPassphraseID, string EncryptionPassphrase)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.UploadKeyPairInPKCS8Response> UploadKeyPairInPKCS8Async(byte[] KeyPair, string Alias, string EncryptionPassphraseID, string EncryptionPassphrase)
         {
-            OnvifAdvancedSecurity.UploadKeyPairInPKCS8Request inValue = new OnvifAdvancedSecurity.UploadKeyPairInPKCS8Request();
+            SharpOnvifClient.AdvancedSecurity.UploadKeyPairInPKCS8Request inValue = new SharpOnvifClient.AdvancedSecurity.UploadKeyPairInPKCS8Request();
             inValue.KeyPair = KeyPair;
             inValue.Alias = Alias;
             inValue.EncryptionPassphraseID = EncryptionPassphraseID;
             inValue.EncryptionPassphrase = EncryptionPassphrase;
-            return ((OnvifAdvancedSecurity.Keystore)(this)).UploadKeyPairInPKCS8Async(inValue);
+            return ((SharpOnvifClient.AdvancedSecurity.Keystore)(this)).UploadKeyPairInPKCS8Async(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.UploadCertificateWithPrivateKeyInPKCS12Response> UploadCertificateWithPrivateKeyInPKCS12Async(OnvifAdvancedSecurity.UploadCertificateWithPrivateKeyInPKCS12Request request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.UploadCertificateWithPrivateKeyInPKCS12Response> UploadCertificateWithPrivateKeyInPKCS12Async(SharpOnvifClient.AdvancedSecurity.UploadCertificateWithPrivateKeyInPKCS12Request request)
         {
             return base.Channel.UploadCertificateWithPrivateKeyInPKCS12Async(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetKeyStatusResponse> OnvifAdvancedSecurity.Keystore.GetKeyStatusAsync(OnvifAdvancedSecurity.GetKeyStatusRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetKeyStatusResponse> SharpOnvifClient.AdvancedSecurity.Keystore.GetKeyStatusAsync(SharpOnvifClient.AdvancedSecurity.GetKeyStatusRequest request)
         {
             return base.Channel.GetKeyStatusAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetKeyStatusResponse> GetKeyStatusAsync(string KeyID)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetKeyStatusResponse> GetKeyStatusAsync(string KeyID)
         {
-            OnvifAdvancedSecurity.GetKeyStatusRequest inValue = new OnvifAdvancedSecurity.GetKeyStatusRequest();
+            SharpOnvifClient.AdvancedSecurity.GetKeyStatusRequest inValue = new SharpOnvifClient.AdvancedSecurity.GetKeyStatusRequest();
             inValue.KeyID = KeyID;
-            return ((OnvifAdvancedSecurity.Keystore)(this)).GetKeyStatusAsync(inValue);
+            return ((SharpOnvifClient.AdvancedSecurity.Keystore)(this)).GetKeyStatusAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetPrivateKeyStatusResponse> OnvifAdvancedSecurity.Keystore.GetPrivateKeyStatusAsync(OnvifAdvancedSecurity.GetPrivateKeyStatusRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetPrivateKeyStatusResponse> SharpOnvifClient.AdvancedSecurity.Keystore.GetPrivateKeyStatusAsync(SharpOnvifClient.AdvancedSecurity.GetPrivateKeyStatusRequest request)
         {
             return base.Channel.GetPrivateKeyStatusAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetPrivateKeyStatusResponse> GetPrivateKeyStatusAsync(string KeyID)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetPrivateKeyStatusResponse> GetPrivateKeyStatusAsync(string KeyID)
         {
-            OnvifAdvancedSecurity.GetPrivateKeyStatusRequest inValue = new OnvifAdvancedSecurity.GetPrivateKeyStatusRequest();
+            SharpOnvifClient.AdvancedSecurity.GetPrivateKeyStatusRequest inValue = new SharpOnvifClient.AdvancedSecurity.GetPrivateKeyStatusRequest();
             inValue.KeyID = KeyID;
-            return ((OnvifAdvancedSecurity.Keystore)(this)).GetPrivateKeyStatusAsync(inValue);
+            return ((SharpOnvifClient.AdvancedSecurity.Keystore)(this)).GetPrivateKeyStatusAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetAllKeysResponse> OnvifAdvancedSecurity.Keystore.GetAllKeysAsync(OnvifAdvancedSecurity.GetAllKeysRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetAllKeysResponse> SharpOnvifClient.AdvancedSecurity.Keystore.GetAllKeysAsync(SharpOnvifClient.AdvancedSecurity.GetAllKeysRequest request)
         {
             return base.Channel.GetAllKeysAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetAllKeysResponse> GetAllKeysAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetAllKeysResponse> GetAllKeysAsync()
         {
-            OnvifAdvancedSecurity.GetAllKeysRequest inValue = new OnvifAdvancedSecurity.GetAllKeysRequest();
-            return ((OnvifAdvancedSecurity.Keystore)(this)).GetAllKeysAsync(inValue);
+            SharpOnvifClient.AdvancedSecurity.GetAllKeysRequest inValue = new SharpOnvifClient.AdvancedSecurity.GetAllKeysRequest();
+            return ((SharpOnvifClient.AdvancedSecurity.Keystore)(this)).GetAllKeysAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.DeleteKeyResponse> OnvifAdvancedSecurity.Keystore.DeleteKeyAsync(OnvifAdvancedSecurity.DeleteKeyRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.DeleteKeyResponse> SharpOnvifClient.AdvancedSecurity.Keystore.DeleteKeyAsync(SharpOnvifClient.AdvancedSecurity.DeleteKeyRequest request)
         {
             return base.Channel.DeleteKeyAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.DeleteKeyResponse> DeleteKeyAsync(string KeyID)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.DeleteKeyResponse> DeleteKeyAsync(string KeyID)
         {
-            OnvifAdvancedSecurity.DeleteKeyRequest inValue = new OnvifAdvancedSecurity.DeleteKeyRequest();
+            SharpOnvifClient.AdvancedSecurity.DeleteKeyRequest inValue = new SharpOnvifClient.AdvancedSecurity.DeleteKeyRequest();
             inValue.KeyID = KeyID;
-            return ((OnvifAdvancedSecurity.Keystore)(this)).DeleteKeyAsync(inValue);
+            return ((SharpOnvifClient.AdvancedSecurity.Keystore)(this)).DeleteKeyAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.CreatePKCS10CSRResponse> OnvifAdvancedSecurity.Keystore.CreatePKCS10CSRAsync(OnvifAdvancedSecurity.CreatePKCS10CSRRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.CreatePKCS10CSRResponse> SharpOnvifClient.AdvancedSecurity.Keystore.CreatePKCS10CSRAsync(SharpOnvifClient.AdvancedSecurity.CreatePKCS10CSRRequest request)
         {
             return base.Channel.CreatePKCS10CSRAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.CreatePKCS10CSRResponse> CreatePKCS10CSRAsync(OnvifAdvancedSecurity.DistinguishedName Subject, string KeyID, OnvifAdvancedSecurity.CSRAttribute[] CSRAttribute, OnvifAdvancedSecurity.AlgorithmIdentifier SignatureAlgorithm)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.CreatePKCS10CSRResponse> CreatePKCS10CSRAsync(SharpOnvifClient.AdvancedSecurity.DistinguishedName Subject, string KeyID, SharpOnvifClient.AdvancedSecurity.CSRAttribute[] CSRAttribute, SharpOnvifClient.AdvancedSecurity.AlgorithmIdentifier SignatureAlgorithm)
         {
-            OnvifAdvancedSecurity.CreatePKCS10CSRRequest inValue = new OnvifAdvancedSecurity.CreatePKCS10CSRRequest();
+            SharpOnvifClient.AdvancedSecurity.CreatePKCS10CSRRequest inValue = new SharpOnvifClient.AdvancedSecurity.CreatePKCS10CSRRequest();
             inValue.Subject = Subject;
             inValue.KeyID = KeyID;
             inValue.CSRAttribute = CSRAttribute;
             inValue.SignatureAlgorithm = SignatureAlgorithm;
-            return ((OnvifAdvancedSecurity.Keystore)(this)).CreatePKCS10CSRAsync(inValue);
+            return ((SharpOnvifClient.AdvancedSecurity.Keystore)(this)).CreatePKCS10CSRAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.CreateSelfSignedCertificateResponse> OnvifAdvancedSecurity.Keystore.CreateSelfSignedCertificateAsync(OnvifAdvancedSecurity.CreateSelfSignedCertificateRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.CreateSelfSignedCertificateResponse> SharpOnvifClient.AdvancedSecurity.Keystore.CreateSelfSignedCertificateAsync(SharpOnvifClient.AdvancedSecurity.CreateSelfSignedCertificateRequest request)
         {
             return base.Channel.CreateSelfSignedCertificateAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.CreateSelfSignedCertificateResponse> CreateSelfSignedCertificateAsync(string X509Version, OnvifAdvancedSecurity.DistinguishedName Subject, string KeyID, string Alias, System.DateTime notValidBefore, System.DateTime notValidAfter, OnvifAdvancedSecurity.AlgorithmIdentifier SignatureAlgorithm, OnvifAdvancedSecurity.X509v3Extension[] Extension)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.CreateSelfSignedCertificateResponse> CreateSelfSignedCertificateAsync(string X509Version, SharpOnvifClient.AdvancedSecurity.DistinguishedName Subject, string KeyID, string Alias, System.DateTime notValidBefore, System.DateTime notValidAfter, SharpOnvifClient.AdvancedSecurity.AlgorithmIdentifier SignatureAlgorithm, SharpOnvifClient.AdvancedSecurity.X509v3Extension[] Extension)
         {
-            OnvifAdvancedSecurity.CreateSelfSignedCertificateRequest inValue = new OnvifAdvancedSecurity.CreateSelfSignedCertificateRequest();
+            SharpOnvifClient.AdvancedSecurity.CreateSelfSignedCertificateRequest inValue = new SharpOnvifClient.AdvancedSecurity.CreateSelfSignedCertificateRequest();
             inValue.X509Version = X509Version;
             inValue.Subject = Subject;
             inValue.KeyID = KeyID;
@@ -10622,248 +10622,248 @@ namespace OnvifAdvancedSecurity
             inValue.notValidAfter = notValidAfter;
             inValue.SignatureAlgorithm = SignatureAlgorithm;
             inValue.Extension = Extension;
-            return ((OnvifAdvancedSecurity.Keystore)(this)).CreateSelfSignedCertificateAsync(inValue);
+            return ((SharpOnvifClient.AdvancedSecurity.Keystore)(this)).CreateSelfSignedCertificateAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.UploadCertificateResponse> UploadCertificateAsync(OnvifAdvancedSecurity.UploadCertificateRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.UploadCertificateResponse> UploadCertificateAsync(SharpOnvifClient.AdvancedSecurity.UploadCertificateRequest request)
         {
             return base.Channel.UploadCertificateAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetCertificateResponse> OnvifAdvancedSecurity.Keystore.GetCertificateAsync(OnvifAdvancedSecurity.GetCertificateRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetCertificateResponse> SharpOnvifClient.AdvancedSecurity.Keystore.GetCertificateAsync(SharpOnvifClient.AdvancedSecurity.GetCertificateRequest request)
         {
             return base.Channel.GetCertificateAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetCertificateResponse> GetCertificateAsync(string CertificateID)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetCertificateResponse> GetCertificateAsync(string CertificateID)
         {
-            OnvifAdvancedSecurity.GetCertificateRequest inValue = new OnvifAdvancedSecurity.GetCertificateRequest();
+            SharpOnvifClient.AdvancedSecurity.GetCertificateRequest inValue = new SharpOnvifClient.AdvancedSecurity.GetCertificateRequest();
             inValue.CertificateID = CertificateID;
-            return ((OnvifAdvancedSecurity.Keystore)(this)).GetCertificateAsync(inValue);
+            return ((SharpOnvifClient.AdvancedSecurity.Keystore)(this)).GetCertificateAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetAllCertificatesResponse> OnvifAdvancedSecurity.Keystore.GetAllCertificatesAsync(OnvifAdvancedSecurity.GetAllCertificatesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetAllCertificatesResponse> SharpOnvifClient.AdvancedSecurity.Keystore.GetAllCertificatesAsync(SharpOnvifClient.AdvancedSecurity.GetAllCertificatesRequest request)
         {
             return base.Channel.GetAllCertificatesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetAllCertificatesResponse> GetAllCertificatesAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetAllCertificatesResponse> GetAllCertificatesAsync()
         {
-            OnvifAdvancedSecurity.GetAllCertificatesRequest inValue = new OnvifAdvancedSecurity.GetAllCertificatesRequest();
-            return ((OnvifAdvancedSecurity.Keystore)(this)).GetAllCertificatesAsync(inValue);
+            SharpOnvifClient.AdvancedSecurity.GetAllCertificatesRequest inValue = new SharpOnvifClient.AdvancedSecurity.GetAllCertificatesRequest();
+            return ((SharpOnvifClient.AdvancedSecurity.Keystore)(this)).GetAllCertificatesAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.DeleteCertificateResponse> OnvifAdvancedSecurity.Keystore.DeleteCertificateAsync(OnvifAdvancedSecurity.DeleteCertificateRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.DeleteCertificateResponse> SharpOnvifClient.AdvancedSecurity.Keystore.DeleteCertificateAsync(SharpOnvifClient.AdvancedSecurity.DeleteCertificateRequest request)
         {
             return base.Channel.DeleteCertificateAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.DeleteCertificateResponse> DeleteCertificateAsync(string CertificateID)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.DeleteCertificateResponse> DeleteCertificateAsync(string CertificateID)
         {
-            OnvifAdvancedSecurity.DeleteCertificateRequest inValue = new OnvifAdvancedSecurity.DeleteCertificateRequest();
+            SharpOnvifClient.AdvancedSecurity.DeleteCertificateRequest inValue = new SharpOnvifClient.AdvancedSecurity.DeleteCertificateRequest();
             inValue.CertificateID = CertificateID;
-            return ((OnvifAdvancedSecurity.Keystore)(this)).DeleteCertificateAsync(inValue);
+            return ((SharpOnvifClient.AdvancedSecurity.Keystore)(this)).DeleteCertificateAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.CreateCertificationPathResponse> OnvifAdvancedSecurity.Keystore.CreateCertificationPathAsync(OnvifAdvancedSecurity.CreateCertificationPathRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.CreateCertificationPathResponse> SharpOnvifClient.AdvancedSecurity.Keystore.CreateCertificationPathAsync(SharpOnvifClient.AdvancedSecurity.CreateCertificationPathRequest request)
         {
             return base.Channel.CreateCertificationPathAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.CreateCertificationPathResponse> CreateCertificationPathAsync(OnvifAdvancedSecurity.CertificateIDs CertificateIDs, string Alias)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.CreateCertificationPathResponse> CreateCertificationPathAsync(SharpOnvifClient.AdvancedSecurity.CertificateIDs CertificateIDs, string Alias)
         {
-            OnvifAdvancedSecurity.CreateCertificationPathRequest inValue = new OnvifAdvancedSecurity.CreateCertificationPathRequest();
+            SharpOnvifClient.AdvancedSecurity.CreateCertificationPathRequest inValue = new SharpOnvifClient.AdvancedSecurity.CreateCertificationPathRequest();
             inValue.CertificateIDs = CertificateIDs;
             inValue.Alias = Alias;
-            return ((OnvifAdvancedSecurity.Keystore)(this)).CreateCertificationPathAsync(inValue);
+            return ((SharpOnvifClient.AdvancedSecurity.Keystore)(this)).CreateCertificationPathAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetCertificationPathResponse> OnvifAdvancedSecurity.Keystore.GetCertificationPathAsync(OnvifAdvancedSecurity.GetCertificationPathRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetCertificationPathResponse> SharpOnvifClient.AdvancedSecurity.Keystore.GetCertificationPathAsync(SharpOnvifClient.AdvancedSecurity.GetCertificationPathRequest request)
         {
             return base.Channel.GetCertificationPathAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetCertificationPathResponse> GetCertificationPathAsync(string CertificationPathID)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetCertificationPathResponse> GetCertificationPathAsync(string CertificationPathID)
         {
-            OnvifAdvancedSecurity.GetCertificationPathRequest inValue = new OnvifAdvancedSecurity.GetCertificationPathRequest();
+            SharpOnvifClient.AdvancedSecurity.GetCertificationPathRequest inValue = new SharpOnvifClient.AdvancedSecurity.GetCertificationPathRequest();
             inValue.CertificationPathID = CertificationPathID;
-            return ((OnvifAdvancedSecurity.Keystore)(this)).GetCertificationPathAsync(inValue);
+            return ((SharpOnvifClient.AdvancedSecurity.Keystore)(this)).GetCertificationPathAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetAllCertificationPathsResponse> OnvifAdvancedSecurity.Keystore.GetAllCertificationPathsAsync(OnvifAdvancedSecurity.GetAllCertificationPathsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetAllCertificationPathsResponse> SharpOnvifClient.AdvancedSecurity.Keystore.GetAllCertificationPathsAsync(SharpOnvifClient.AdvancedSecurity.GetAllCertificationPathsRequest request)
         {
             return base.Channel.GetAllCertificationPathsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetAllCertificationPathsResponse> GetAllCertificationPathsAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetAllCertificationPathsResponse> GetAllCertificationPathsAsync()
         {
-            OnvifAdvancedSecurity.GetAllCertificationPathsRequest inValue = new OnvifAdvancedSecurity.GetAllCertificationPathsRequest();
-            return ((OnvifAdvancedSecurity.Keystore)(this)).GetAllCertificationPathsAsync(inValue);
+            SharpOnvifClient.AdvancedSecurity.GetAllCertificationPathsRequest inValue = new SharpOnvifClient.AdvancedSecurity.GetAllCertificationPathsRequest();
+            return ((SharpOnvifClient.AdvancedSecurity.Keystore)(this)).GetAllCertificationPathsAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.DeleteCertificationPathResponse> OnvifAdvancedSecurity.Keystore.DeleteCertificationPathAsync(OnvifAdvancedSecurity.DeleteCertificationPathRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.DeleteCertificationPathResponse> SharpOnvifClient.AdvancedSecurity.Keystore.DeleteCertificationPathAsync(SharpOnvifClient.AdvancedSecurity.DeleteCertificationPathRequest request)
         {
             return base.Channel.DeleteCertificationPathAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.DeleteCertificationPathResponse> DeleteCertificationPathAsync(string CertificationPathID)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.DeleteCertificationPathResponse> DeleteCertificationPathAsync(string CertificationPathID)
         {
-            OnvifAdvancedSecurity.DeleteCertificationPathRequest inValue = new OnvifAdvancedSecurity.DeleteCertificationPathRequest();
+            SharpOnvifClient.AdvancedSecurity.DeleteCertificationPathRequest inValue = new SharpOnvifClient.AdvancedSecurity.DeleteCertificationPathRequest();
             inValue.CertificationPathID = CertificationPathID;
-            return ((OnvifAdvancedSecurity.Keystore)(this)).DeleteCertificationPathAsync(inValue);
+            return ((SharpOnvifClient.AdvancedSecurity.Keystore)(this)).DeleteCertificationPathAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.UploadPassphraseResponse> OnvifAdvancedSecurity.Keystore.UploadPassphraseAsync(OnvifAdvancedSecurity.UploadPassphraseRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.UploadPassphraseResponse> SharpOnvifClient.AdvancedSecurity.Keystore.UploadPassphraseAsync(SharpOnvifClient.AdvancedSecurity.UploadPassphraseRequest request)
         {
             return base.Channel.UploadPassphraseAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.UploadPassphraseResponse> UploadPassphraseAsync(string Passphrase, string PassphraseAlias)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.UploadPassphraseResponse> UploadPassphraseAsync(string Passphrase, string PassphraseAlias)
         {
-            OnvifAdvancedSecurity.UploadPassphraseRequest inValue = new OnvifAdvancedSecurity.UploadPassphraseRequest();
+            SharpOnvifClient.AdvancedSecurity.UploadPassphraseRequest inValue = new SharpOnvifClient.AdvancedSecurity.UploadPassphraseRequest();
             inValue.Passphrase = Passphrase;
             inValue.PassphraseAlias = PassphraseAlias;
-            return ((OnvifAdvancedSecurity.Keystore)(this)).UploadPassphraseAsync(inValue);
+            return ((SharpOnvifClient.AdvancedSecurity.Keystore)(this)).UploadPassphraseAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetAllPassphrasesResponse> OnvifAdvancedSecurity.Keystore.GetAllPassphrasesAsync(OnvifAdvancedSecurity.GetAllPassphrasesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetAllPassphrasesResponse> SharpOnvifClient.AdvancedSecurity.Keystore.GetAllPassphrasesAsync(SharpOnvifClient.AdvancedSecurity.GetAllPassphrasesRequest request)
         {
             return base.Channel.GetAllPassphrasesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetAllPassphrasesResponse> GetAllPassphrasesAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetAllPassphrasesResponse> GetAllPassphrasesAsync()
         {
-            OnvifAdvancedSecurity.GetAllPassphrasesRequest inValue = new OnvifAdvancedSecurity.GetAllPassphrasesRequest();
-            return ((OnvifAdvancedSecurity.Keystore)(this)).GetAllPassphrasesAsync(inValue);
+            SharpOnvifClient.AdvancedSecurity.GetAllPassphrasesRequest inValue = new SharpOnvifClient.AdvancedSecurity.GetAllPassphrasesRequest();
+            return ((SharpOnvifClient.AdvancedSecurity.Keystore)(this)).GetAllPassphrasesAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.DeletePassphraseResponse> OnvifAdvancedSecurity.Keystore.DeletePassphraseAsync(OnvifAdvancedSecurity.DeletePassphraseRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.DeletePassphraseResponse> SharpOnvifClient.AdvancedSecurity.Keystore.DeletePassphraseAsync(SharpOnvifClient.AdvancedSecurity.DeletePassphraseRequest request)
         {
             return base.Channel.DeletePassphraseAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.DeletePassphraseResponse> DeletePassphraseAsync(string PassphraseID)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.DeletePassphraseResponse> DeletePassphraseAsync(string PassphraseID)
         {
-            OnvifAdvancedSecurity.DeletePassphraseRequest inValue = new OnvifAdvancedSecurity.DeletePassphraseRequest();
+            SharpOnvifClient.AdvancedSecurity.DeletePassphraseRequest inValue = new SharpOnvifClient.AdvancedSecurity.DeletePassphraseRequest();
             inValue.PassphraseID = PassphraseID;
-            return ((OnvifAdvancedSecurity.Keystore)(this)).DeletePassphraseAsync(inValue);
+            return ((SharpOnvifClient.AdvancedSecurity.Keystore)(this)).DeletePassphraseAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.UploadCRLResponse> OnvifAdvancedSecurity.Keystore.UploadCRLAsync(OnvifAdvancedSecurity.UploadCRLRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.UploadCRLResponse> SharpOnvifClient.AdvancedSecurity.Keystore.UploadCRLAsync(SharpOnvifClient.AdvancedSecurity.UploadCRLRequest request)
         {
             return base.Channel.UploadCRLAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.UploadCRLResponse> UploadCRLAsync(byte[] Crl, string Alias, OnvifAdvancedSecurity.UploadCRLAnyParameters anyParameters)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.UploadCRLResponse> UploadCRLAsync(byte[] Crl, string Alias, SharpOnvifClient.AdvancedSecurity.UploadCRLAnyParameters anyParameters)
         {
-            OnvifAdvancedSecurity.UploadCRLRequest inValue = new OnvifAdvancedSecurity.UploadCRLRequest();
+            SharpOnvifClient.AdvancedSecurity.UploadCRLRequest inValue = new SharpOnvifClient.AdvancedSecurity.UploadCRLRequest();
             inValue.Crl = Crl;
             inValue.Alias = Alias;
             inValue.anyParameters = anyParameters;
-            return ((OnvifAdvancedSecurity.Keystore)(this)).UploadCRLAsync(inValue);
+            return ((SharpOnvifClient.AdvancedSecurity.Keystore)(this)).UploadCRLAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetCRLResponse> OnvifAdvancedSecurity.Keystore.GetCRLAsync(OnvifAdvancedSecurity.GetCRLRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetCRLResponse> SharpOnvifClient.AdvancedSecurity.Keystore.GetCRLAsync(SharpOnvifClient.AdvancedSecurity.GetCRLRequest request)
         {
             return base.Channel.GetCRLAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetCRLResponse> GetCRLAsync(string CrlID)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetCRLResponse> GetCRLAsync(string CrlID)
         {
-            OnvifAdvancedSecurity.GetCRLRequest inValue = new OnvifAdvancedSecurity.GetCRLRequest();
+            SharpOnvifClient.AdvancedSecurity.GetCRLRequest inValue = new SharpOnvifClient.AdvancedSecurity.GetCRLRequest();
             inValue.CrlID = CrlID;
-            return ((OnvifAdvancedSecurity.Keystore)(this)).GetCRLAsync(inValue);
+            return ((SharpOnvifClient.AdvancedSecurity.Keystore)(this)).GetCRLAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetAllCRLsResponse> OnvifAdvancedSecurity.Keystore.GetAllCRLsAsync(OnvifAdvancedSecurity.GetAllCRLsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetAllCRLsResponse> SharpOnvifClient.AdvancedSecurity.Keystore.GetAllCRLsAsync(SharpOnvifClient.AdvancedSecurity.GetAllCRLsRequest request)
         {
             return base.Channel.GetAllCRLsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetAllCRLsResponse> GetAllCRLsAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetAllCRLsResponse> GetAllCRLsAsync()
         {
-            OnvifAdvancedSecurity.GetAllCRLsRequest inValue = new OnvifAdvancedSecurity.GetAllCRLsRequest();
-            return ((OnvifAdvancedSecurity.Keystore)(this)).GetAllCRLsAsync(inValue);
+            SharpOnvifClient.AdvancedSecurity.GetAllCRLsRequest inValue = new SharpOnvifClient.AdvancedSecurity.GetAllCRLsRequest();
+            return ((SharpOnvifClient.AdvancedSecurity.Keystore)(this)).GetAllCRLsAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.DeleteCRLResponse> OnvifAdvancedSecurity.Keystore.DeleteCRLAsync(OnvifAdvancedSecurity.DeleteCRLRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.DeleteCRLResponse> SharpOnvifClient.AdvancedSecurity.Keystore.DeleteCRLAsync(SharpOnvifClient.AdvancedSecurity.DeleteCRLRequest request)
         {
             return base.Channel.DeleteCRLAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.DeleteCRLResponse> DeleteCRLAsync(string CrlID)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.DeleteCRLResponse> DeleteCRLAsync(string CrlID)
         {
-            OnvifAdvancedSecurity.DeleteCRLRequest inValue = new OnvifAdvancedSecurity.DeleteCRLRequest();
+            SharpOnvifClient.AdvancedSecurity.DeleteCRLRequest inValue = new SharpOnvifClient.AdvancedSecurity.DeleteCRLRequest();
             inValue.CrlID = CrlID;
-            return ((OnvifAdvancedSecurity.Keystore)(this)).DeleteCRLAsync(inValue);
+            return ((SharpOnvifClient.AdvancedSecurity.Keystore)(this)).DeleteCRLAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.CreateCertPathValidationPolicyResponse> OnvifAdvancedSecurity.Keystore.CreateCertPathValidationPolicyAsync(OnvifAdvancedSecurity.CreateCertPathValidationPolicyRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.CreateCertPathValidationPolicyResponse> SharpOnvifClient.AdvancedSecurity.Keystore.CreateCertPathValidationPolicyAsync(SharpOnvifClient.AdvancedSecurity.CreateCertPathValidationPolicyRequest request)
         {
             return base.Channel.CreateCertPathValidationPolicyAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.CreateCertPathValidationPolicyResponse> CreateCertPathValidationPolicyAsync(string Alias, OnvifAdvancedSecurity.CertPathValidationParameters Parameters, OnvifAdvancedSecurity.TrustAnchor[] TrustAnchor, OnvifAdvancedSecurity.CreateCertPathValidationPolicyAnyParameters anyParameters)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.CreateCertPathValidationPolicyResponse> CreateCertPathValidationPolicyAsync(string Alias, SharpOnvifClient.AdvancedSecurity.CertPathValidationParameters Parameters, SharpOnvifClient.AdvancedSecurity.TrustAnchor[] TrustAnchor, SharpOnvifClient.AdvancedSecurity.CreateCertPathValidationPolicyAnyParameters anyParameters)
         {
-            OnvifAdvancedSecurity.CreateCertPathValidationPolicyRequest inValue = new OnvifAdvancedSecurity.CreateCertPathValidationPolicyRequest();
+            SharpOnvifClient.AdvancedSecurity.CreateCertPathValidationPolicyRequest inValue = new SharpOnvifClient.AdvancedSecurity.CreateCertPathValidationPolicyRequest();
             inValue.Alias = Alias;
             inValue.Parameters = Parameters;
             inValue.TrustAnchor = TrustAnchor;
             inValue.anyParameters = anyParameters;
-            return ((OnvifAdvancedSecurity.Keystore)(this)).CreateCertPathValidationPolicyAsync(inValue);
+            return ((SharpOnvifClient.AdvancedSecurity.Keystore)(this)).CreateCertPathValidationPolicyAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetCertPathValidationPolicyResponse> OnvifAdvancedSecurity.Keystore.GetCertPathValidationPolicyAsync(OnvifAdvancedSecurity.GetCertPathValidationPolicyRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetCertPathValidationPolicyResponse> SharpOnvifClient.AdvancedSecurity.Keystore.GetCertPathValidationPolicyAsync(SharpOnvifClient.AdvancedSecurity.GetCertPathValidationPolicyRequest request)
         {
             return base.Channel.GetCertPathValidationPolicyAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetCertPathValidationPolicyResponse> GetCertPathValidationPolicyAsync(string CertPathValidationPolicyID)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetCertPathValidationPolicyResponse> GetCertPathValidationPolicyAsync(string CertPathValidationPolicyID)
         {
-            OnvifAdvancedSecurity.GetCertPathValidationPolicyRequest inValue = new OnvifAdvancedSecurity.GetCertPathValidationPolicyRequest();
+            SharpOnvifClient.AdvancedSecurity.GetCertPathValidationPolicyRequest inValue = new SharpOnvifClient.AdvancedSecurity.GetCertPathValidationPolicyRequest();
             inValue.CertPathValidationPolicyID = CertPathValidationPolicyID;
-            return ((OnvifAdvancedSecurity.Keystore)(this)).GetCertPathValidationPolicyAsync(inValue);
+            return ((SharpOnvifClient.AdvancedSecurity.Keystore)(this)).GetCertPathValidationPolicyAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetAllCertPathValidationPoliciesResponse> OnvifAdvancedSecurity.Keystore.GetAllCertPathValidationPoliciesAsync(OnvifAdvancedSecurity.GetAllCertPathValidationPoliciesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetAllCertPathValidationPoliciesResponse> SharpOnvifClient.AdvancedSecurity.Keystore.GetAllCertPathValidationPoliciesAsync(SharpOnvifClient.AdvancedSecurity.GetAllCertPathValidationPoliciesRequest request)
         {
             return base.Channel.GetAllCertPathValidationPoliciesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetAllCertPathValidationPoliciesResponse> GetAllCertPathValidationPoliciesAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetAllCertPathValidationPoliciesResponse> GetAllCertPathValidationPoliciesAsync()
         {
-            OnvifAdvancedSecurity.GetAllCertPathValidationPoliciesRequest inValue = new OnvifAdvancedSecurity.GetAllCertPathValidationPoliciesRequest();
-            return ((OnvifAdvancedSecurity.Keystore)(this)).GetAllCertPathValidationPoliciesAsync(inValue);
+            SharpOnvifClient.AdvancedSecurity.GetAllCertPathValidationPoliciesRequest inValue = new SharpOnvifClient.AdvancedSecurity.GetAllCertPathValidationPoliciesRequest();
+            return ((SharpOnvifClient.AdvancedSecurity.Keystore)(this)).GetAllCertPathValidationPoliciesAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.DeleteCertPathValidationPolicyResponse> OnvifAdvancedSecurity.Keystore.DeleteCertPathValidationPolicyAsync(OnvifAdvancedSecurity.DeleteCertPathValidationPolicyRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.DeleteCertPathValidationPolicyResponse> SharpOnvifClient.AdvancedSecurity.Keystore.DeleteCertPathValidationPolicyAsync(SharpOnvifClient.AdvancedSecurity.DeleteCertPathValidationPolicyRequest request)
         {
             return base.Channel.DeleteCertPathValidationPolicyAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.DeleteCertPathValidationPolicyResponse> DeleteCertPathValidationPolicyAsync(string CertPathValidationPolicyID)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.DeleteCertPathValidationPolicyResponse> DeleteCertPathValidationPolicyAsync(string CertPathValidationPolicyID)
         {
-            OnvifAdvancedSecurity.DeleteCertPathValidationPolicyRequest inValue = new OnvifAdvancedSecurity.DeleteCertPathValidationPolicyRequest();
+            SharpOnvifClient.AdvancedSecurity.DeleteCertPathValidationPolicyRequest inValue = new SharpOnvifClient.AdvancedSecurity.DeleteCertPathValidationPolicyRequest();
             inValue.CertPathValidationPolicyID = CertPathValidationPolicyID;
-            return ((OnvifAdvancedSecurity.Keystore)(this)).DeleteCertPathValidationPolicyAsync(inValue);
+            return ((SharpOnvifClient.AdvancedSecurity.Keystore)(this)).DeleteCertPathValidationPolicyAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()
@@ -10878,26 +10878,26 @@ namespace OnvifAdvancedSecurity
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl", ConfigurationName="OnvifAdvancedSecurity.TLSServer")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl", ConfigurationName="SharpOnvifClient.AdvancedSecurity.TLSServer")]
     public interface TLSServer
     {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/AddServerCertificateAssignment", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.AddServerCertificateAssignmentResponse> AddServerCertificateAssignmentAsync(OnvifAdvancedSecurity.AddServerCertificateAssignmentRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.AddServerCertificateAssignmentResponse> AddServerCertificateAssignmentAsync(SharpOnvifClient.AdvancedSecurity.AddServerCertificateAssignmentRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/RemoveServerCertificateAssignmen" +
             "t", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.RemoveServerCertificateAssignmentResponse> RemoveServerCertificateAssignmentAsync(OnvifAdvancedSecurity.RemoveServerCertificateAssignmentRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.RemoveServerCertificateAssignmentResponse> RemoveServerCertificateAssignmentAsync(SharpOnvifClient.AdvancedSecurity.RemoveServerCertificateAssignmentRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/ReplaceServerCertificateAssignme" +
             "nt", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.ReplaceServerCertificateAssignmentResponse> ReplaceServerCertificateAssignmentAsync(OnvifAdvancedSecurity.ReplaceServerCertificateAssignmentRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.ReplaceServerCertificateAssignmentResponse> ReplaceServerCertificateAssignmentAsync(SharpOnvifClient.AdvancedSecurity.ReplaceServerCertificateAssignmentRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/SetEnabledTLSVersions", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -10913,7 +10913,7 @@ namespace OnvifAdvancedSecurity
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/GetAssignedServerCertificates", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetAssignedServerCertificatesResponse> GetAssignedServerCertificatesAsync(OnvifAdvancedSecurity.GetAssignedServerCertificatesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetAssignedServerCertificatesResponse> GetAssignedServerCertificatesAsync(SharpOnvifClient.AdvancedSecurity.GetAssignedServerCertificatesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/SetClientAuthenticationRequired", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -10941,25 +10941,25 @@ namespace OnvifAdvancedSecurity
             "nment", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.AddCertPathValidationPolicyAssignmentResponse> AddCertPathValidationPolicyAssignmentAsync(OnvifAdvancedSecurity.AddCertPathValidationPolicyAssignmentRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.AddCertPathValidationPolicyAssignmentResponse> AddCertPathValidationPolicyAssignmentAsync(SharpOnvifClient.AdvancedSecurity.AddCertPathValidationPolicyAssignmentRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/RemoveCertPathValidationPolicyAs" +
             "signment", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.RemoveCertPathValidationPolicyAssignmentResponse> RemoveCertPathValidationPolicyAssignmentAsync(OnvifAdvancedSecurity.RemoveCertPathValidationPolicyAssignmentRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.RemoveCertPathValidationPolicyAssignmentResponse> RemoveCertPathValidationPolicyAssignmentAsync(SharpOnvifClient.AdvancedSecurity.RemoveCertPathValidationPolicyAssignmentRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/ReplaceCertPathValidationPolicyA" +
             "ssignment", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.ReplaceCertPathValidationPolicyAssignmentResponse> ReplaceCertPathValidationPolicyAssignmentAsync(OnvifAdvancedSecurity.ReplaceCertPathValidationPolicyAssignmentRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.ReplaceCertPathValidationPolicyAssignmentResponse> ReplaceCertPathValidationPolicyAssignmentAsync(SharpOnvifClient.AdvancedSecurity.ReplaceCertPathValidationPolicyAssignmentRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/GetAssignedCertPathValidationPol" +
             "icies", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetAssignedCertPathValidationPoliciesResponse> GetAssignedCertPathValidationPoliciesAsync(OnvifAdvancedSecurity.GetAssignedCertPathValidationPoliciesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetAssignedCertPathValidationPoliciesResponse> GetAssignedCertPathValidationPoliciesAsync(SharpOnvifClient.AdvancedSecurity.GetAssignedCertPathValidationPoliciesRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -11237,13 +11237,13 @@ namespace OnvifAdvancedSecurity
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface TLSServerChannel : OnvifAdvancedSecurity.TLSServer, System.ServiceModel.IClientChannel
+    public interface TLSServerChannel : SharpOnvifClient.AdvancedSecurity.TLSServer, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class TLSServerClient : System.ServiceModel.ClientBase<OnvifAdvancedSecurity.TLSServer>, OnvifAdvancedSecurity.TLSServer
+    public partial class TLSServerClient : System.ServiceModel.ClientBase<SharpOnvifClient.AdvancedSecurity.TLSServer>, SharpOnvifClient.AdvancedSecurity.TLSServer
     {
         
         public TLSServerClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
@@ -11252,43 +11252,43 @@ namespace OnvifAdvancedSecurity
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.AddServerCertificateAssignmentResponse> OnvifAdvancedSecurity.TLSServer.AddServerCertificateAssignmentAsync(OnvifAdvancedSecurity.AddServerCertificateAssignmentRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.AddServerCertificateAssignmentResponse> SharpOnvifClient.AdvancedSecurity.TLSServer.AddServerCertificateAssignmentAsync(SharpOnvifClient.AdvancedSecurity.AddServerCertificateAssignmentRequest request)
         {
             return base.Channel.AddServerCertificateAssignmentAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.AddServerCertificateAssignmentResponse> AddServerCertificateAssignmentAsync(string CertificationPathID)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.AddServerCertificateAssignmentResponse> AddServerCertificateAssignmentAsync(string CertificationPathID)
         {
-            OnvifAdvancedSecurity.AddServerCertificateAssignmentRequest inValue = new OnvifAdvancedSecurity.AddServerCertificateAssignmentRequest();
+            SharpOnvifClient.AdvancedSecurity.AddServerCertificateAssignmentRequest inValue = new SharpOnvifClient.AdvancedSecurity.AddServerCertificateAssignmentRequest();
             inValue.CertificationPathID = CertificationPathID;
-            return ((OnvifAdvancedSecurity.TLSServer)(this)).AddServerCertificateAssignmentAsync(inValue);
+            return ((SharpOnvifClient.AdvancedSecurity.TLSServer)(this)).AddServerCertificateAssignmentAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.RemoveServerCertificateAssignmentResponse> OnvifAdvancedSecurity.TLSServer.RemoveServerCertificateAssignmentAsync(OnvifAdvancedSecurity.RemoveServerCertificateAssignmentRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.RemoveServerCertificateAssignmentResponse> SharpOnvifClient.AdvancedSecurity.TLSServer.RemoveServerCertificateAssignmentAsync(SharpOnvifClient.AdvancedSecurity.RemoveServerCertificateAssignmentRequest request)
         {
             return base.Channel.RemoveServerCertificateAssignmentAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.RemoveServerCertificateAssignmentResponse> RemoveServerCertificateAssignmentAsync(string CertificationPathID)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.RemoveServerCertificateAssignmentResponse> RemoveServerCertificateAssignmentAsync(string CertificationPathID)
         {
-            OnvifAdvancedSecurity.RemoveServerCertificateAssignmentRequest inValue = new OnvifAdvancedSecurity.RemoveServerCertificateAssignmentRequest();
+            SharpOnvifClient.AdvancedSecurity.RemoveServerCertificateAssignmentRequest inValue = new SharpOnvifClient.AdvancedSecurity.RemoveServerCertificateAssignmentRequest();
             inValue.CertificationPathID = CertificationPathID;
-            return ((OnvifAdvancedSecurity.TLSServer)(this)).RemoveServerCertificateAssignmentAsync(inValue);
+            return ((SharpOnvifClient.AdvancedSecurity.TLSServer)(this)).RemoveServerCertificateAssignmentAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.ReplaceServerCertificateAssignmentResponse> OnvifAdvancedSecurity.TLSServer.ReplaceServerCertificateAssignmentAsync(OnvifAdvancedSecurity.ReplaceServerCertificateAssignmentRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.ReplaceServerCertificateAssignmentResponse> SharpOnvifClient.AdvancedSecurity.TLSServer.ReplaceServerCertificateAssignmentAsync(SharpOnvifClient.AdvancedSecurity.ReplaceServerCertificateAssignmentRequest request)
         {
             return base.Channel.ReplaceServerCertificateAssignmentAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.ReplaceServerCertificateAssignmentResponse> ReplaceServerCertificateAssignmentAsync(string OldCertificationPathID, string NewCertificationPathID)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.ReplaceServerCertificateAssignmentResponse> ReplaceServerCertificateAssignmentAsync(string OldCertificationPathID, string NewCertificationPathID)
         {
-            OnvifAdvancedSecurity.ReplaceServerCertificateAssignmentRequest inValue = new OnvifAdvancedSecurity.ReplaceServerCertificateAssignmentRequest();
+            SharpOnvifClient.AdvancedSecurity.ReplaceServerCertificateAssignmentRequest inValue = new SharpOnvifClient.AdvancedSecurity.ReplaceServerCertificateAssignmentRequest();
             inValue.OldCertificationPathID = OldCertificationPathID;
             inValue.NewCertificationPathID = NewCertificationPathID;
-            return ((OnvifAdvancedSecurity.TLSServer)(this)).ReplaceServerCertificateAssignmentAsync(inValue);
+            return ((SharpOnvifClient.AdvancedSecurity.TLSServer)(this)).ReplaceServerCertificateAssignmentAsync(inValue);
         }
         
         public System.Threading.Tasks.Task SetEnabledTLSVersionsAsync(string Versions)
@@ -11302,15 +11302,15 @@ namespace OnvifAdvancedSecurity
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetAssignedServerCertificatesResponse> OnvifAdvancedSecurity.TLSServer.GetAssignedServerCertificatesAsync(OnvifAdvancedSecurity.GetAssignedServerCertificatesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetAssignedServerCertificatesResponse> SharpOnvifClient.AdvancedSecurity.TLSServer.GetAssignedServerCertificatesAsync(SharpOnvifClient.AdvancedSecurity.GetAssignedServerCertificatesRequest request)
         {
             return base.Channel.GetAssignedServerCertificatesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetAssignedServerCertificatesResponse> GetAssignedServerCertificatesAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetAssignedServerCertificatesResponse> GetAssignedServerCertificatesAsync()
         {
-            OnvifAdvancedSecurity.GetAssignedServerCertificatesRequest inValue = new OnvifAdvancedSecurity.GetAssignedServerCertificatesRequest();
-            return ((OnvifAdvancedSecurity.TLSServer)(this)).GetAssignedServerCertificatesAsync(inValue);
+            SharpOnvifClient.AdvancedSecurity.GetAssignedServerCertificatesRequest inValue = new SharpOnvifClient.AdvancedSecurity.GetAssignedServerCertificatesRequest();
+            return ((SharpOnvifClient.AdvancedSecurity.TLSServer)(this)).GetAssignedServerCertificatesAsync(inValue);
         }
         
         public System.Threading.Tasks.Task SetClientAuthenticationRequiredAsync(bool clientAuthenticationRequired)
@@ -11334,55 +11334,55 @@ namespace OnvifAdvancedSecurity
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.AddCertPathValidationPolicyAssignmentResponse> OnvifAdvancedSecurity.TLSServer.AddCertPathValidationPolicyAssignmentAsync(OnvifAdvancedSecurity.AddCertPathValidationPolicyAssignmentRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.AddCertPathValidationPolicyAssignmentResponse> SharpOnvifClient.AdvancedSecurity.TLSServer.AddCertPathValidationPolicyAssignmentAsync(SharpOnvifClient.AdvancedSecurity.AddCertPathValidationPolicyAssignmentRequest request)
         {
             return base.Channel.AddCertPathValidationPolicyAssignmentAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.AddCertPathValidationPolicyAssignmentResponse> AddCertPathValidationPolicyAssignmentAsync(string CertPathValidationPolicyID)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.AddCertPathValidationPolicyAssignmentResponse> AddCertPathValidationPolicyAssignmentAsync(string CertPathValidationPolicyID)
         {
-            OnvifAdvancedSecurity.AddCertPathValidationPolicyAssignmentRequest inValue = new OnvifAdvancedSecurity.AddCertPathValidationPolicyAssignmentRequest();
+            SharpOnvifClient.AdvancedSecurity.AddCertPathValidationPolicyAssignmentRequest inValue = new SharpOnvifClient.AdvancedSecurity.AddCertPathValidationPolicyAssignmentRequest();
             inValue.CertPathValidationPolicyID = CertPathValidationPolicyID;
-            return ((OnvifAdvancedSecurity.TLSServer)(this)).AddCertPathValidationPolicyAssignmentAsync(inValue);
+            return ((SharpOnvifClient.AdvancedSecurity.TLSServer)(this)).AddCertPathValidationPolicyAssignmentAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.RemoveCertPathValidationPolicyAssignmentResponse> OnvifAdvancedSecurity.TLSServer.RemoveCertPathValidationPolicyAssignmentAsync(OnvifAdvancedSecurity.RemoveCertPathValidationPolicyAssignmentRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.RemoveCertPathValidationPolicyAssignmentResponse> SharpOnvifClient.AdvancedSecurity.TLSServer.RemoveCertPathValidationPolicyAssignmentAsync(SharpOnvifClient.AdvancedSecurity.RemoveCertPathValidationPolicyAssignmentRequest request)
         {
             return base.Channel.RemoveCertPathValidationPolicyAssignmentAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.RemoveCertPathValidationPolicyAssignmentResponse> RemoveCertPathValidationPolicyAssignmentAsync(string CertPathValidationPolicyID)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.RemoveCertPathValidationPolicyAssignmentResponse> RemoveCertPathValidationPolicyAssignmentAsync(string CertPathValidationPolicyID)
         {
-            OnvifAdvancedSecurity.RemoveCertPathValidationPolicyAssignmentRequest inValue = new OnvifAdvancedSecurity.RemoveCertPathValidationPolicyAssignmentRequest();
+            SharpOnvifClient.AdvancedSecurity.RemoveCertPathValidationPolicyAssignmentRequest inValue = new SharpOnvifClient.AdvancedSecurity.RemoveCertPathValidationPolicyAssignmentRequest();
             inValue.CertPathValidationPolicyID = CertPathValidationPolicyID;
-            return ((OnvifAdvancedSecurity.TLSServer)(this)).RemoveCertPathValidationPolicyAssignmentAsync(inValue);
+            return ((SharpOnvifClient.AdvancedSecurity.TLSServer)(this)).RemoveCertPathValidationPolicyAssignmentAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.ReplaceCertPathValidationPolicyAssignmentResponse> OnvifAdvancedSecurity.TLSServer.ReplaceCertPathValidationPolicyAssignmentAsync(OnvifAdvancedSecurity.ReplaceCertPathValidationPolicyAssignmentRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.ReplaceCertPathValidationPolicyAssignmentResponse> SharpOnvifClient.AdvancedSecurity.TLSServer.ReplaceCertPathValidationPolicyAssignmentAsync(SharpOnvifClient.AdvancedSecurity.ReplaceCertPathValidationPolicyAssignmentRequest request)
         {
             return base.Channel.ReplaceCertPathValidationPolicyAssignmentAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.ReplaceCertPathValidationPolicyAssignmentResponse> ReplaceCertPathValidationPolicyAssignmentAsync(string OldCertPathValidationPolicyID, string NewCertPathValidationPolicyID)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.ReplaceCertPathValidationPolicyAssignmentResponse> ReplaceCertPathValidationPolicyAssignmentAsync(string OldCertPathValidationPolicyID, string NewCertPathValidationPolicyID)
         {
-            OnvifAdvancedSecurity.ReplaceCertPathValidationPolicyAssignmentRequest inValue = new OnvifAdvancedSecurity.ReplaceCertPathValidationPolicyAssignmentRequest();
+            SharpOnvifClient.AdvancedSecurity.ReplaceCertPathValidationPolicyAssignmentRequest inValue = new SharpOnvifClient.AdvancedSecurity.ReplaceCertPathValidationPolicyAssignmentRequest();
             inValue.OldCertPathValidationPolicyID = OldCertPathValidationPolicyID;
             inValue.NewCertPathValidationPolicyID = NewCertPathValidationPolicyID;
-            return ((OnvifAdvancedSecurity.TLSServer)(this)).ReplaceCertPathValidationPolicyAssignmentAsync(inValue);
+            return ((SharpOnvifClient.AdvancedSecurity.TLSServer)(this)).ReplaceCertPathValidationPolicyAssignmentAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetAssignedCertPathValidationPoliciesResponse> OnvifAdvancedSecurity.TLSServer.GetAssignedCertPathValidationPoliciesAsync(OnvifAdvancedSecurity.GetAssignedCertPathValidationPoliciesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetAssignedCertPathValidationPoliciesResponse> SharpOnvifClient.AdvancedSecurity.TLSServer.GetAssignedCertPathValidationPoliciesAsync(SharpOnvifClient.AdvancedSecurity.GetAssignedCertPathValidationPoliciesRequest request)
         {
             return base.Channel.GetAssignedCertPathValidationPoliciesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetAssignedCertPathValidationPoliciesResponse> GetAssignedCertPathValidationPoliciesAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetAssignedCertPathValidationPoliciesResponse> GetAssignedCertPathValidationPoliciesAsync()
         {
-            OnvifAdvancedSecurity.GetAssignedCertPathValidationPoliciesRequest inValue = new OnvifAdvancedSecurity.GetAssignedCertPathValidationPoliciesRequest();
-            return ((OnvifAdvancedSecurity.TLSServer)(this)).GetAssignedCertPathValidationPoliciesAsync(inValue);
+            SharpOnvifClient.AdvancedSecurity.GetAssignedCertPathValidationPoliciesRequest inValue = new SharpOnvifClient.AdvancedSecurity.GetAssignedCertPathValidationPoliciesRequest();
+            return ((SharpOnvifClient.AdvancedSecurity.TLSServer)(this)).GetAssignedCertPathValidationPoliciesAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()
@@ -11397,41 +11397,41 @@ namespace OnvifAdvancedSecurity
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl", ConfigurationName="OnvifAdvancedSecurity.Dot1X")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl", ConfigurationName="SharpOnvifClient.AdvancedSecurity.Dot1X")]
     public interface Dot1X
     {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/AddDot1XConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.AddDot1XConfigurationResponse> AddDot1XConfigurationAsync(OnvifAdvancedSecurity.AddDot1XConfigurationRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.AddDot1XConfigurationResponse> AddDot1XConfigurationAsync(SharpOnvifClient.AdvancedSecurity.AddDot1XConfigurationRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/GetAllDot1XConfigurations", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetAllDot1XConfigurationsResponse> GetAllDot1XConfigurationsAsync(OnvifAdvancedSecurity.GetAllDot1XConfigurationsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetAllDot1XConfigurationsResponse> GetAllDot1XConfigurationsAsync(SharpOnvifClient.AdvancedSecurity.GetAllDot1XConfigurationsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/GetDot1XConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetDot1XConfigurationResponse> GetDot1XConfigurationAsync(OnvifAdvancedSecurity.GetDot1XConfigurationRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetDot1XConfigurationResponse> GetDot1XConfigurationAsync(SharpOnvifClient.AdvancedSecurity.GetDot1XConfigurationRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/DeleteDot1XConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.DeleteDot1XConfigurationResponse> DeleteDot1XConfigurationAsync(OnvifAdvancedSecurity.DeleteDot1XConfigurationRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.DeleteDot1XConfigurationResponse> DeleteDot1XConfigurationAsync(SharpOnvifClient.AdvancedSecurity.DeleteDot1XConfigurationRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/SetNetworkInterfaceDot1XConfigur" +
             "ation", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.SetNetworkInterfaceDot1XConfigurationResponse> SetNetworkInterfaceDot1XConfigurationAsync(OnvifAdvancedSecurity.SetNetworkInterfaceDot1XConfigurationRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.SetNetworkInterfaceDot1XConfigurationResponse> SetNetworkInterfaceDot1XConfigurationAsync(SharpOnvifClient.AdvancedSecurity.SetNetworkInterfaceDot1XConfigurationRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/GetNetworkInterfaceDot1XConfigur" +
             "ation", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetNetworkInterfaceDot1XConfigurationResponse> GetNetworkInterfaceDot1XConfigurationAsync(OnvifAdvancedSecurity.GetNetworkInterfaceDot1XConfigurationRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetNetworkInterfaceDot1XConfigurationResponse> GetNetworkInterfaceDot1XConfigurationAsync(SharpOnvifClient.AdvancedSecurity.GetNetworkInterfaceDot1XConfigurationRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/DeleteNetworkInterfaceDot1XConfi" +
             "guration", ReplyAction="*")]
@@ -11449,13 +11449,13 @@ namespace OnvifAdvancedSecurity
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl", Order=0)]
-        public OnvifAdvancedSecurity.Dot1XConfiguration Dot1XConfiguration;
+        public SharpOnvifClient.AdvancedSecurity.Dot1XConfiguration Dot1XConfiguration;
         
         public AddDot1XConfigurationRequest()
         {
         }
         
-        public AddDot1XConfigurationRequest(OnvifAdvancedSecurity.Dot1XConfiguration Dot1XConfiguration)
+        public AddDot1XConfigurationRequest(SharpOnvifClient.AdvancedSecurity.Dot1XConfiguration Dot1XConfiguration)
         {
             this.Dot1XConfiguration = Dot1XConfiguration;
         }
@@ -11503,13 +11503,13 @@ namespace OnvifAdvancedSecurity
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Configuration")]
-        public OnvifAdvancedSecurity.Dot1XConfiguration[] Configuration;
+        public SharpOnvifClient.AdvancedSecurity.Dot1XConfiguration[] Configuration;
         
         public GetAllDot1XConfigurationsResponse()
         {
         }
         
-        public GetAllDot1XConfigurationsResponse(OnvifAdvancedSecurity.Dot1XConfiguration[] Configuration)
+        public GetAllDot1XConfigurationsResponse(SharpOnvifClient.AdvancedSecurity.Dot1XConfiguration[] Configuration)
         {
             this.Configuration = Configuration;
         }
@@ -11544,13 +11544,13 @@ namespace OnvifAdvancedSecurity
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl", Order=0)]
-        public OnvifAdvancedSecurity.Dot1XConfiguration Dot1XConfiguration;
+        public SharpOnvifClient.AdvancedSecurity.Dot1XConfiguration Dot1XConfiguration;
         
         public GetDot1XConfigurationResponse()
         {
         }
         
-        public GetDot1XConfigurationResponse(OnvifAdvancedSecurity.Dot1XConfiguration Dot1XConfiguration)
+        public GetDot1XConfigurationResponse(SharpOnvifClient.AdvancedSecurity.Dot1XConfiguration Dot1XConfiguration)
         {
             this.Dot1XConfiguration = Dot1XConfiguration;
         }
@@ -11676,13 +11676,13 @@ namespace OnvifAdvancedSecurity
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface Dot1XChannel : OnvifAdvancedSecurity.Dot1X, System.ServiceModel.IClientChannel
+    public interface Dot1XChannel : SharpOnvifClient.AdvancedSecurity.Dot1X, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class Dot1XClient : System.ServiceModel.ClientBase<OnvifAdvancedSecurity.Dot1X>, OnvifAdvancedSecurity.Dot1X
+    public partial class Dot1XClient : System.ServiceModel.ClientBase<SharpOnvifClient.AdvancedSecurity.Dot1X>, SharpOnvifClient.AdvancedSecurity.Dot1X
     {
         
         public Dot1XClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
@@ -11691,81 +11691,81 @@ namespace OnvifAdvancedSecurity
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.AddDot1XConfigurationResponse> OnvifAdvancedSecurity.Dot1X.AddDot1XConfigurationAsync(OnvifAdvancedSecurity.AddDot1XConfigurationRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.AddDot1XConfigurationResponse> SharpOnvifClient.AdvancedSecurity.Dot1X.AddDot1XConfigurationAsync(SharpOnvifClient.AdvancedSecurity.AddDot1XConfigurationRequest request)
         {
             return base.Channel.AddDot1XConfigurationAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.AddDot1XConfigurationResponse> AddDot1XConfigurationAsync(OnvifAdvancedSecurity.Dot1XConfiguration Dot1XConfiguration)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.AddDot1XConfigurationResponse> AddDot1XConfigurationAsync(SharpOnvifClient.AdvancedSecurity.Dot1XConfiguration Dot1XConfiguration)
         {
-            OnvifAdvancedSecurity.AddDot1XConfigurationRequest inValue = new OnvifAdvancedSecurity.AddDot1XConfigurationRequest();
+            SharpOnvifClient.AdvancedSecurity.AddDot1XConfigurationRequest inValue = new SharpOnvifClient.AdvancedSecurity.AddDot1XConfigurationRequest();
             inValue.Dot1XConfiguration = Dot1XConfiguration;
-            return ((OnvifAdvancedSecurity.Dot1X)(this)).AddDot1XConfigurationAsync(inValue);
+            return ((SharpOnvifClient.AdvancedSecurity.Dot1X)(this)).AddDot1XConfigurationAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetAllDot1XConfigurationsResponse> OnvifAdvancedSecurity.Dot1X.GetAllDot1XConfigurationsAsync(OnvifAdvancedSecurity.GetAllDot1XConfigurationsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetAllDot1XConfigurationsResponse> SharpOnvifClient.AdvancedSecurity.Dot1X.GetAllDot1XConfigurationsAsync(SharpOnvifClient.AdvancedSecurity.GetAllDot1XConfigurationsRequest request)
         {
             return base.Channel.GetAllDot1XConfigurationsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetAllDot1XConfigurationsResponse> GetAllDot1XConfigurationsAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetAllDot1XConfigurationsResponse> GetAllDot1XConfigurationsAsync()
         {
-            OnvifAdvancedSecurity.GetAllDot1XConfigurationsRequest inValue = new OnvifAdvancedSecurity.GetAllDot1XConfigurationsRequest();
-            return ((OnvifAdvancedSecurity.Dot1X)(this)).GetAllDot1XConfigurationsAsync(inValue);
+            SharpOnvifClient.AdvancedSecurity.GetAllDot1XConfigurationsRequest inValue = new SharpOnvifClient.AdvancedSecurity.GetAllDot1XConfigurationsRequest();
+            return ((SharpOnvifClient.AdvancedSecurity.Dot1X)(this)).GetAllDot1XConfigurationsAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetDot1XConfigurationResponse> OnvifAdvancedSecurity.Dot1X.GetDot1XConfigurationAsync(OnvifAdvancedSecurity.GetDot1XConfigurationRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetDot1XConfigurationResponse> SharpOnvifClient.AdvancedSecurity.Dot1X.GetDot1XConfigurationAsync(SharpOnvifClient.AdvancedSecurity.GetDot1XConfigurationRequest request)
         {
             return base.Channel.GetDot1XConfigurationAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetDot1XConfigurationResponse> GetDot1XConfigurationAsync(string Dot1XID)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetDot1XConfigurationResponse> GetDot1XConfigurationAsync(string Dot1XID)
         {
-            OnvifAdvancedSecurity.GetDot1XConfigurationRequest inValue = new OnvifAdvancedSecurity.GetDot1XConfigurationRequest();
+            SharpOnvifClient.AdvancedSecurity.GetDot1XConfigurationRequest inValue = new SharpOnvifClient.AdvancedSecurity.GetDot1XConfigurationRequest();
             inValue.Dot1XID = Dot1XID;
-            return ((OnvifAdvancedSecurity.Dot1X)(this)).GetDot1XConfigurationAsync(inValue);
+            return ((SharpOnvifClient.AdvancedSecurity.Dot1X)(this)).GetDot1XConfigurationAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.DeleteDot1XConfigurationResponse> OnvifAdvancedSecurity.Dot1X.DeleteDot1XConfigurationAsync(OnvifAdvancedSecurity.DeleteDot1XConfigurationRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.DeleteDot1XConfigurationResponse> SharpOnvifClient.AdvancedSecurity.Dot1X.DeleteDot1XConfigurationAsync(SharpOnvifClient.AdvancedSecurity.DeleteDot1XConfigurationRequest request)
         {
             return base.Channel.DeleteDot1XConfigurationAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.DeleteDot1XConfigurationResponse> DeleteDot1XConfigurationAsync(string Dot1XID)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.DeleteDot1XConfigurationResponse> DeleteDot1XConfigurationAsync(string Dot1XID)
         {
-            OnvifAdvancedSecurity.DeleteDot1XConfigurationRequest inValue = new OnvifAdvancedSecurity.DeleteDot1XConfigurationRequest();
+            SharpOnvifClient.AdvancedSecurity.DeleteDot1XConfigurationRequest inValue = new SharpOnvifClient.AdvancedSecurity.DeleteDot1XConfigurationRequest();
             inValue.Dot1XID = Dot1XID;
-            return ((OnvifAdvancedSecurity.Dot1X)(this)).DeleteDot1XConfigurationAsync(inValue);
+            return ((SharpOnvifClient.AdvancedSecurity.Dot1X)(this)).DeleteDot1XConfigurationAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.SetNetworkInterfaceDot1XConfigurationResponse> OnvifAdvancedSecurity.Dot1X.SetNetworkInterfaceDot1XConfigurationAsync(OnvifAdvancedSecurity.SetNetworkInterfaceDot1XConfigurationRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.SetNetworkInterfaceDot1XConfigurationResponse> SharpOnvifClient.AdvancedSecurity.Dot1X.SetNetworkInterfaceDot1XConfigurationAsync(SharpOnvifClient.AdvancedSecurity.SetNetworkInterfaceDot1XConfigurationRequest request)
         {
             return base.Channel.SetNetworkInterfaceDot1XConfigurationAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.SetNetworkInterfaceDot1XConfigurationResponse> SetNetworkInterfaceDot1XConfigurationAsync(string token, string Dot1XID)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.SetNetworkInterfaceDot1XConfigurationResponse> SetNetworkInterfaceDot1XConfigurationAsync(string token, string Dot1XID)
         {
-            OnvifAdvancedSecurity.SetNetworkInterfaceDot1XConfigurationRequest inValue = new OnvifAdvancedSecurity.SetNetworkInterfaceDot1XConfigurationRequest();
+            SharpOnvifClient.AdvancedSecurity.SetNetworkInterfaceDot1XConfigurationRequest inValue = new SharpOnvifClient.AdvancedSecurity.SetNetworkInterfaceDot1XConfigurationRequest();
             inValue.token = token;
             inValue.Dot1XID = Dot1XID;
-            return ((OnvifAdvancedSecurity.Dot1X)(this)).SetNetworkInterfaceDot1XConfigurationAsync(inValue);
+            return ((SharpOnvifClient.AdvancedSecurity.Dot1X)(this)).SetNetworkInterfaceDot1XConfigurationAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetNetworkInterfaceDot1XConfigurationResponse> OnvifAdvancedSecurity.Dot1X.GetNetworkInterfaceDot1XConfigurationAsync(OnvifAdvancedSecurity.GetNetworkInterfaceDot1XConfigurationRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetNetworkInterfaceDot1XConfigurationResponse> SharpOnvifClient.AdvancedSecurity.Dot1X.GetNetworkInterfaceDot1XConfigurationAsync(SharpOnvifClient.AdvancedSecurity.GetNetworkInterfaceDot1XConfigurationRequest request)
         {
             return base.Channel.GetNetworkInterfaceDot1XConfigurationAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetNetworkInterfaceDot1XConfigurationResponse> GetNetworkInterfaceDot1XConfigurationAsync(string token)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetNetworkInterfaceDot1XConfigurationResponse> GetNetworkInterfaceDot1XConfigurationAsync(string token)
         {
-            OnvifAdvancedSecurity.GetNetworkInterfaceDot1XConfigurationRequest inValue = new OnvifAdvancedSecurity.GetNetworkInterfaceDot1XConfigurationRequest();
+            SharpOnvifClient.AdvancedSecurity.GetNetworkInterfaceDot1XConfigurationRequest inValue = new SharpOnvifClient.AdvancedSecurity.GetNetworkInterfaceDot1XConfigurationRequest();
             inValue.token = token;
-            return ((OnvifAdvancedSecurity.Dot1X)(this)).GetNetworkInterfaceDot1XConfigurationAsync(inValue);
+            return ((SharpOnvifClient.AdvancedSecurity.Dot1X)(this)).GetNetworkInterfaceDot1XConfigurationAsync(inValue);
         }
         
         public System.Threading.Tasks.Task<bool> DeleteNetworkInterfaceDot1XConfigurationAsync(string token)
@@ -11785,7 +11785,7 @@ namespace OnvifAdvancedSecurity
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl", ConfigurationName="OnvifAdvancedSecurity.AuthorizationServer")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl", ConfigurationName="SharpOnvifClient.AdvancedSecurity.AuthorizationServer")]
     public interface AuthorizationServer
     {
         
@@ -11793,20 +11793,20 @@ namespace OnvifAdvancedSecurity
             "ions", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetAuthorizationServerConfigurationsResponse> GetAuthorizationServerConfigurationsAsync(OnvifAdvancedSecurity.GetAuthorizationServerConfigurationsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetAuthorizationServerConfigurationsResponse> GetAuthorizationServerConfigurationsAsync(SharpOnvifClient.AdvancedSecurity.GetAuthorizationServerConfigurationsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/CreateAuthorizationServerConfigu" +
             "ration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Token")]
-        System.Threading.Tasks.Task<string> CreateAuthorizationServerConfigurationAsync(OnvifAdvancedSecurity.AuthorizationServerConfigurationData Configuration);
+        System.Threading.Tasks.Task<string> CreateAuthorizationServerConfigurationAsync(SharpOnvifClient.AdvancedSecurity.AuthorizationServerConfigurationData Configuration);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/SetAuthorizationServerConfigurat" +
             "ion", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task SetAuthorizationServerConfigurationAsync(OnvifAdvancedSecurity.AuthorizationServerConfiguration Configuration);
+        System.Threading.Tasks.Task SetAuthorizationServerConfigurationAsync(SharpOnvifClient.AdvancedSecurity.AuthorizationServerConfiguration Configuration);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/advancedsecurity/wsdl/DeleteAuthorizationServerConfigu" +
             "ration", ReplyAction="*")]
@@ -11844,26 +11844,26 @@ namespace OnvifAdvancedSecurity
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Configuration")]
-        public OnvifAdvancedSecurity.AuthorizationServerConfiguration[] Configuration;
+        public SharpOnvifClient.AdvancedSecurity.AuthorizationServerConfiguration[] Configuration;
         
         public GetAuthorizationServerConfigurationsResponse()
         {
         }
         
-        public GetAuthorizationServerConfigurationsResponse(OnvifAdvancedSecurity.AuthorizationServerConfiguration[] Configuration)
+        public GetAuthorizationServerConfigurationsResponse(SharpOnvifClient.AdvancedSecurity.AuthorizationServerConfiguration[] Configuration)
         {
             this.Configuration = Configuration;
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface AuthorizationServerChannel : OnvifAdvancedSecurity.AuthorizationServer, System.ServiceModel.IClientChannel
+    public interface AuthorizationServerChannel : SharpOnvifClient.AdvancedSecurity.AuthorizationServer, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class AuthorizationServerClient : System.ServiceModel.ClientBase<OnvifAdvancedSecurity.AuthorizationServer>, OnvifAdvancedSecurity.AuthorizationServer
+    public partial class AuthorizationServerClient : System.ServiceModel.ClientBase<SharpOnvifClient.AdvancedSecurity.AuthorizationServer>, SharpOnvifClient.AdvancedSecurity.AuthorizationServer
     {
         
         public AuthorizationServerClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
@@ -11872,24 +11872,24 @@ namespace OnvifAdvancedSecurity
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetAuthorizationServerConfigurationsResponse> OnvifAdvancedSecurity.AuthorizationServer.GetAuthorizationServerConfigurationsAsync(OnvifAdvancedSecurity.GetAuthorizationServerConfigurationsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetAuthorizationServerConfigurationsResponse> SharpOnvifClient.AdvancedSecurity.AuthorizationServer.GetAuthorizationServerConfigurationsAsync(SharpOnvifClient.AdvancedSecurity.GetAuthorizationServerConfigurationsRequest request)
         {
             return base.Channel.GetAuthorizationServerConfigurationsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAdvancedSecurity.GetAuthorizationServerConfigurationsResponse> GetAuthorizationServerConfigurationsAsync(string Token)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AdvancedSecurity.GetAuthorizationServerConfigurationsResponse> GetAuthorizationServerConfigurationsAsync(string Token)
         {
-            OnvifAdvancedSecurity.GetAuthorizationServerConfigurationsRequest inValue = new OnvifAdvancedSecurity.GetAuthorizationServerConfigurationsRequest();
+            SharpOnvifClient.AdvancedSecurity.GetAuthorizationServerConfigurationsRequest inValue = new SharpOnvifClient.AdvancedSecurity.GetAuthorizationServerConfigurationsRequest();
             inValue.Token = Token;
-            return ((OnvifAdvancedSecurity.AuthorizationServer)(this)).GetAuthorizationServerConfigurationsAsync(inValue);
+            return ((SharpOnvifClient.AdvancedSecurity.AuthorizationServer)(this)).GetAuthorizationServerConfigurationsAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<string> CreateAuthorizationServerConfigurationAsync(OnvifAdvancedSecurity.AuthorizationServerConfigurationData Configuration)
+        public System.Threading.Tasks.Task<string> CreateAuthorizationServerConfigurationAsync(SharpOnvifClient.AdvancedSecurity.AuthorizationServerConfigurationData Configuration)
         {
             return base.Channel.CreateAuthorizationServerConfigurationAsync(Configuration);
         }
         
-        public System.Threading.Tasks.Task SetAuthorizationServerConfigurationAsync(OnvifAdvancedSecurity.AuthorizationServerConfiguration Configuration)
+        public System.Threading.Tasks.Task SetAuthorizationServerConfigurationAsync(SharpOnvifClient.AdvancedSecurity.AuthorizationServerConfiguration Configuration)
         {
             return base.Channel.SetAuthorizationServerConfigurationAsync(Configuration);
         }

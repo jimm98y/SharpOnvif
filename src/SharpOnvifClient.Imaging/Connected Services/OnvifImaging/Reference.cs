@@ -7,42 +7,42 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OnvifImaging
+namespace SharpOnvifClient.Imaging
 {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver20/imaging/wsdl", ConfigurationName="OnvifImaging.ImagingPort")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver20/imaging/wsdl", ConfigurationName="SharpOnvifClient.Imaging.ImagingPort")]
     public interface ImagingPort
     {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/imaging/wsdl/GetServiceCapabilities", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Capabilities")]
-        System.Threading.Tasks.Task<OnvifImaging.Capabilities> GetServiceCapabilitiesAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.Imaging.Capabilities> GetServiceCapabilitiesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/imaging/wsdl/GetImagingSettings", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="ImagingSettings")]
-        System.Threading.Tasks.Task<OnvifImaging.ImagingSettings20> GetImagingSettingsAsync(string VideoSourceToken);
+        System.Threading.Tasks.Task<SharpOnvifClient.Imaging.ImagingSettings20> GetImagingSettingsAsync(string VideoSourceToken);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/imaging/wsdl/SetImagingSettings", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task SetImagingSettingsAsync(string VideoSourceToken, OnvifImaging.ImagingSettings20 ImagingSettings, bool ForcePersistence);
+        System.Threading.Tasks.Task SetImagingSettingsAsync(string VideoSourceToken, SharpOnvifClient.Imaging.ImagingSettings20 ImagingSettings, bool ForcePersistence);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/imaging/wsdl/GetOptions", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="ImagingOptions")]
-        System.Threading.Tasks.Task<OnvifImaging.ImagingOptions20> GetOptionsAsync(string VideoSourceToken);
+        System.Threading.Tasks.Task<SharpOnvifClient.Imaging.ImagingOptions20> GetOptionsAsync(string VideoSourceToken);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/imaging/wsdl/Move", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task MoveAsync(string VideoSourceToken, OnvifImaging.FocusMove Focus);
+        System.Threading.Tasks.Task MoveAsync(string VideoSourceToken, SharpOnvifClient.Imaging.FocusMove Focus);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/imaging/wsdl/GetMoveOptions", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="MoveOptions")]
-        System.Threading.Tasks.Task<OnvifImaging.MoveOptions20> GetMoveOptionsAsync(string VideoSourceToken);
+        System.Threading.Tasks.Task<SharpOnvifClient.Imaging.MoveOptions20> GetMoveOptionsAsync(string VideoSourceToken);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/imaging/wsdl/FocusStop", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -51,16 +51,16 @@ namespace OnvifImaging
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/imaging/wsdl/GetStatus", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Status")]
-        System.Threading.Tasks.Task<OnvifImaging.ImagingStatus20> GetStatusAsync(string VideoSourceToken);
+        System.Threading.Tasks.Task<SharpOnvifClient.Imaging.ImagingStatus20> GetStatusAsync(string VideoSourceToken);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/imaging/wsdl/GetPresets", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifImaging.GetPresetsResponse> GetPresetsAsync(OnvifImaging.GetPresetsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Imaging.GetPresetsResponse> GetPresetsAsync(SharpOnvifClient.Imaging.GetPresetsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/imaging/wsdl/GetCurrentPreset", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Preset")]
-        System.Threading.Tasks.Task<OnvifImaging.ImagingPreset> GetCurrentPresetAsync(string VideoSourceToken);
+        System.Threading.Tasks.Task<SharpOnvifClient.Imaging.ImagingPreset> GetCurrentPresetAsync(string VideoSourceToken);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/imaging/wsdl/SetCurrentPreset", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -4009,26 +4009,26 @@ namespace OnvifImaging
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver20/imaging/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Preset")]
-        public OnvifImaging.ImagingPreset[] Preset;
+        public SharpOnvifClient.Imaging.ImagingPreset[] Preset;
         
         public GetPresetsResponse()
         {
         }
         
-        public GetPresetsResponse(OnvifImaging.ImagingPreset[] Preset)
+        public GetPresetsResponse(SharpOnvifClient.Imaging.ImagingPreset[] Preset)
         {
             this.Preset = Preset;
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface ImagingPortChannel : OnvifImaging.ImagingPort, System.ServiceModel.IClientChannel
+    public interface ImagingPortChannel : SharpOnvifClient.Imaging.ImagingPort, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class ImagingPortClient : System.ServiceModel.ClientBase<OnvifImaging.ImagingPort>, OnvifImaging.ImagingPort
+    public partial class ImagingPortClient : System.ServiceModel.ClientBase<SharpOnvifClient.Imaging.ImagingPort>, SharpOnvifClient.Imaging.ImagingPort
     {
         
         public ImagingPortClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
@@ -4036,32 +4036,32 @@ namespace OnvifImaging
         {
         }
         
-        public System.Threading.Tasks.Task<OnvifImaging.Capabilities> GetServiceCapabilitiesAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.Imaging.Capabilities> GetServiceCapabilitiesAsync()
         {
             return base.Channel.GetServiceCapabilitiesAsync();
         }
         
-        public System.Threading.Tasks.Task<OnvifImaging.ImagingSettings20> GetImagingSettingsAsync(string VideoSourceToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Imaging.ImagingSettings20> GetImagingSettingsAsync(string VideoSourceToken)
         {
             return base.Channel.GetImagingSettingsAsync(VideoSourceToken);
         }
         
-        public System.Threading.Tasks.Task SetImagingSettingsAsync(string VideoSourceToken, OnvifImaging.ImagingSettings20 ImagingSettings, bool ForcePersistence)
+        public System.Threading.Tasks.Task SetImagingSettingsAsync(string VideoSourceToken, SharpOnvifClient.Imaging.ImagingSettings20 ImagingSettings, bool ForcePersistence)
         {
             return base.Channel.SetImagingSettingsAsync(VideoSourceToken, ImagingSettings, ForcePersistence);
         }
         
-        public System.Threading.Tasks.Task<OnvifImaging.ImagingOptions20> GetOptionsAsync(string VideoSourceToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Imaging.ImagingOptions20> GetOptionsAsync(string VideoSourceToken)
         {
             return base.Channel.GetOptionsAsync(VideoSourceToken);
         }
         
-        public System.Threading.Tasks.Task MoveAsync(string VideoSourceToken, OnvifImaging.FocusMove Focus)
+        public System.Threading.Tasks.Task MoveAsync(string VideoSourceToken, SharpOnvifClient.Imaging.FocusMove Focus)
         {
             return base.Channel.MoveAsync(VideoSourceToken, Focus);
         }
         
-        public System.Threading.Tasks.Task<OnvifImaging.MoveOptions20> GetMoveOptionsAsync(string VideoSourceToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Imaging.MoveOptions20> GetMoveOptionsAsync(string VideoSourceToken)
         {
             return base.Channel.GetMoveOptionsAsync(VideoSourceToken);
         }
@@ -4071,25 +4071,25 @@ namespace OnvifImaging
             return base.Channel.StopAsync(VideoSourceToken);
         }
         
-        public System.Threading.Tasks.Task<OnvifImaging.ImagingStatus20> GetStatusAsync(string VideoSourceToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Imaging.ImagingStatus20> GetStatusAsync(string VideoSourceToken)
         {
             return base.Channel.GetStatusAsync(VideoSourceToken);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifImaging.GetPresetsResponse> OnvifImaging.ImagingPort.GetPresetsAsync(OnvifImaging.GetPresetsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Imaging.GetPresetsResponse> SharpOnvifClient.Imaging.ImagingPort.GetPresetsAsync(SharpOnvifClient.Imaging.GetPresetsRequest request)
         {
             return base.Channel.GetPresetsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifImaging.GetPresetsResponse> GetPresetsAsync(string VideoSourceToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Imaging.GetPresetsResponse> GetPresetsAsync(string VideoSourceToken)
         {
-            OnvifImaging.GetPresetsRequest inValue = new OnvifImaging.GetPresetsRequest();
+            SharpOnvifClient.Imaging.GetPresetsRequest inValue = new SharpOnvifClient.Imaging.GetPresetsRequest();
             inValue.VideoSourceToken = VideoSourceToken;
-            return ((OnvifImaging.ImagingPort)(this)).GetPresetsAsync(inValue);
+            return ((SharpOnvifClient.Imaging.ImagingPort)(this)).GetPresetsAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifImaging.ImagingPreset> GetCurrentPresetAsync(string VideoSourceToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Imaging.ImagingPreset> GetCurrentPresetAsync(string VideoSourceToken)
         {
             return base.Channel.GetCurrentPresetAsync(VideoSourceToken);
         }

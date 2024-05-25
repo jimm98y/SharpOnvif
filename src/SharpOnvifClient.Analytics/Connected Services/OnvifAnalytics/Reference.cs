@@ -7,12 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OnvifAnalytics
+namespace SharpOnvifClient.Analytics
 {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver20/analytics/wsdl", ConfigurationName="OnvifAnalytics.RuleEnginePort")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver20/analytics/wsdl", ConfigurationName="SharpOnvifClient.Analytics.RuleEnginePort")]
     public interface RuleEnginePort
     {
         
@@ -109,7 +109,7 @@ namespace OnvifAnalytics
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseFaultType))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MessageDescription))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="SupportedRules")]
-        System.Threading.Tasks.Task<OnvifAnalytics.SupportedRules> GetSupportedRulesAsync(string ConfigurationToken);
+        System.Threading.Tasks.Task<SharpOnvifClient.Analytics.SupportedRules> GetSupportedRulesAsync(string ConfigurationToken);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/analytics/wsdl/CreateRules", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -203,7 +203,7 @@ namespace OnvifAnalytics
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseFaultType))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MessageDescription))]
-        System.Threading.Tasks.Task<OnvifAnalytics.CreateRulesResponse> CreateRulesAsync(OnvifAnalytics.CreateRulesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Analytics.CreateRulesResponse> CreateRulesAsync(SharpOnvifClient.Analytics.CreateRulesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/analytics/wsdl/DeleteRules", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -297,7 +297,7 @@ namespace OnvifAnalytics
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseFaultType))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MessageDescription))]
-        System.Threading.Tasks.Task<OnvifAnalytics.DeleteRulesResponse> DeleteRulesAsync(OnvifAnalytics.DeleteRulesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Analytics.DeleteRulesResponse> DeleteRulesAsync(SharpOnvifClient.Analytics.DeleteRulesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/analytics/wsdl/GetRules", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -391,7 +391,7 @@ namespace OnvifAnalytics
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseFaultType))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MessageDescription))]
-        System.Threading.Tasks.Task<OnvifAnalytics.GetRulesResponse> GetRulesAsync(OnvifAnalytics.GetRulesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Analytics.GetRulesResponse> GetRulesAsync(SharpOnvifClient.Analytics.GetRulesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/analytics/wsdl/GetRuleOptions", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -485,7 +485,7 @@ namespace OnvifAnalytics
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseFaultType))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MessageDescription))]
-        System.Threading.Tasks.Task<OnvifAnalytics.GetRuleOptionsResponse> GetRuleOptionsAsync(OnvifAnalytics.GetRuleOptionsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Analytics.GetRuleOptionsResponse> GetRuleOptionsAsync(SharpOnvifClient.Analytics.GetRuleOptionsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/analytics/wsdl/ModifyRules", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -579,7 +579,7 @@ namespace OnvifAnalytics
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseFaultType))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MessageDescription))]
-        System.Threading.Tasks.Task<OnvifAnalytics.ModifyRulesResponse> ModifyRulesAsync(OnvifAnalytics.ModifyRulesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Analytics.ModifyRulesResponse> ModifyRulesAsync(SharpOnvifClient.Analytics.ModifyRulesRequest request);
     }
     
     /// <remarks/>
@@ -38196,13 +38196,13 @@ namespace OnvifAnalytics
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver20/analytics/wsdl", Order=1)]
         [System.Xml.Serialization.XmlElementAttribute("Rule")]
-        public OnvifAnalytics.Config[] Rule;
+        public SharpOnvifClient.Analytics.Config[] Rule;
         
         public CreateRulesRequest()
         {
         }
         
-        public CreateRulesRequest(string ConfigurationToken, OnvifAnalytics.Config[] Rule)
+        public CreateRulesRequest(string ConfigurationToken, SharpOnvifClient.Analytics.Config[] Rule)
         {
             this.ConfigurationToken = ConfigurationToken;
             this.Rule = Rule;
@@ -38287,13 +38287,13 @@ namespace OnvifAnalytics
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver20/analytics/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Rule")]
-        public OnvifAnalytics.Config[] Rule;
+        public SharpOnvifClient.Analytics.Config[] Rule;
         
         public GetRulesResponse()
         {
         }
         
-        public GetRulesResponse(OnvifAnalytics.Config[] Rule)
+        public GetRulesResponse(SharpOnvifClient.Analytics.Config[] Rule)
         {
             this.Rule = Rule;
         }
@@ -38332,13 +38332,13 @@ namespace OnvifAnalytics
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver20/analytics/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("RuleOptions")]
-        public OnvifAnalytics.ConfigOptions[] RuleOptions;
+        public SharpOnvifClient.Analytics.ConfigOptions[] RuleOptions;
         
         public GetRuleOptionsResponse()
         {
         }
         
-        public GetRuleOptionsResponse(OnvifAnalytics.ConfigOptions[] RuleOptions)
+        public GetRuleOptionsResponse(SharpOnvifClient.Analytics.ConfigOptions[] RuleOptions)
         {
             this.RuleOptions = RuleOptions;
         }
@@ -38356,13 +38356,13 @@ namespace OnvifAnalytics
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver20/analytics/wsdl", Order=1)]
         [System.Xml.Serialization.XmlElementAttribute("Rule")]
-        public OnvifAnalytics.Config[] Rule;
+        public SharpOnvifClient.Analytics.Config[] Rule;
         
         public ModifyRulesRequest()
         {
         }
         
-        public ModifyRulesRequest(string ConfigurationToken, OnvifAnalytics.Config[] Rule)
+        public ModifyRulesRequest(string ConfigurationToken, SharpOnvifClient.Analytics.Config[] Rule)
         {
             this.ConfigurationToken = ConfigurationToken;
             this.Rule = Rule;
@@ -38382,13 +38382,13 @@ namespace OnvifAnalytics
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface RuleEnginePortChannel : OnvifAnalytics.RuleEnginePort, System.ServiceModel.IClientChannel
+    public interface RuleEnginePortChannel : SharpOnvifClient.Analytics.RuleEnginePort, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class RuleEnginePortClient : System.ServiceModel.ClientBase<OnvifAnalytics.RuleEnginePort>, OnvifAnalytics.RuleEnginePort
+    public partial class RuleEnginePortClient : System.ServiceModel.ClientBase<SharpOnvifClient.Analytics.RuleEnginePort>, SharpOnvifClient.Analytics.RuleEnginePort
     {
         
         public RuleEnginePortClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
@@ -38396,78 +38396,78 @@ namespace OnvifAnalytics
         {
         }
         
-        public System.Threading.Tasks.Task<OnvifAnalytics.SupportedRules> GetSupportedRulesAsync(string ConfigurationToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Analytics.SupportedRules> GetSupportedRulesAsync(string ConfigurationToken)
         {
             return base.Channel.GetSupportedRulesAsync(ConfigurationToken);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAnalytics.CreateRulesResponse> OnvifAnalytics.RuleEnginePort.CreateRulesAsync(OnvifAnalytics.CreateRulesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Analytics.CreateRulesResponse> SharpOnvifClient.Analytics.RuleEnginePort.CreateRulesAsync(SharpOnvifClient.Analytics.CreateRulesRequest request)
         {
             return base.Channel.CreateRulesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAnalytics.CreateRulesResponse> CreateRulesAsync(string ConfigurationToken, OnvifAnalytics.Config[] Rule)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Analytics.CreateRulesResponse> CreateRulesAsync(string ConfigurationToken, SharpOnvifClient.Analytics.Config[] Rule)
         {
-            OnvifAnalytics.CreateRulesRequest inValue = new OnvifAnalytics.CreateRulesRequest();
+            SharpOnvifClient.Analytics.CreateRulesRequest inValue = new SharpOnvifClient.Analytics.CreateRulesRequest();
             inValue.ConfigurationToken = ConfigurationToken;
             inValue.Rule = Rule;
-            return ((OnvifAnalytics.RuleEnginePort)(this)).CreateRulesAsync(inValue);
+            return ((SharpOnvifClient.Analytics.RuleEnginePort)(this)).CreateRulesAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAnalytics.DeleteRulesResponse> OnvifAnalytics.RuleEnginePort.DeleteRulesAsync(OnvifAnalytics.DeleteRulesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Analytics.DeleteRulesResponse> SharpOnvifClient.Analytics.RuleEnginePort.DeleteRulesAsync(SharpOnvifClient.Analytics.DeleteRulesRequest request)
         {
             return base.Channel.DeleteRulesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAnalytics.DeleteRulesResponse> DeleteRulesAsync(string ConfigurationToken, string[] RuleName)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Analytics.DeleteRulesResponse> DeleteRulesAsync(string ConfigurationToken, string[] RuleName)
         {
-            OnvifAnalytics.DeleteRulesRequest inValue = new OnvifAnalytics.DeleteRulesRequest();
+            SharpOnvifClient.Analytics.DeleteRulesRequest inValue = new SharpOnvifClient.Analytics.DeleteRulesRequest();
             inValue.ConfigurationToken = ConfigurationToken;
             inValue.RuleName = RuleName;
-            return ((OnvifAnalytics.RuleEnginePort)(this)).DeleteRulesAsync(inValue);
+            return ((SharpOnvifClient.Analytics.RuleEnginePort)(this)).DeleteRulesAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAnalytics.GetRulesResponse> OnvifAnalytics.RuleEnginePort.GetRulesAsync(OnvifAnalytics.GetRulesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Analytics.GetRulesResponse> SharpOnvifClient.Analytics.RuleEnginePort.GetRulesAsync(SharpOnvifClient.Analytics.GetRulesRequest request)
         {
             return base.Channel.GetRulesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAnalytics.GetRulesResponse> GetRulesAsync(string ConfigurationToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Analytics.GetRulesResponse> GetRulesAsync(string ConfigurationToken)
         {
-            OnvifAnalytics.GetRulesRequest inValue = new OnvifAnalytics.GetRulesRequest();
+            SharpOnvifClient.Analytics.GetRulesRequest inValue = new SharpOnvifClient.Analytics.GetRulesRequest();
             inValue.ConfigurationToken = ConfigurationToken;
-            return ((OnvifAnalytics.RuleEnginePort)(this)).GetRulesAsync(inValue);
+            return ((SharpOnvifClient.Analytics.RuleEnginePort)(this)).GetRulesAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAnalytics.GetRuleOptionsResponse> OnvifAnalytics.RuleEnginePort.GetRuleOptionsAsync(OnvifAnalytics.GetRuleOptionsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Analytics.GetRuleOptionsResponse> SharpOnvifClient.Analytics.RuleEnginePort.GetRuleOptionsAsync(SharpOnvifClient.Analytics.GetRuleOptionsRequest request)
         {
             return base.Channel.GetRuleOptionsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAnalytics.GetRuleOptionsResponse> GetRuleOptionsAsync(System.Xml.XmlQualifiedName RuleType, string ConfigurationToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Analytics.GetRuleOptionsResponse> GetRuleOptionsAsync(System.Xml.XmlQualifiedName RuleType, string ConfigurationToken)
         {
-            OnvifAnalytics.GetRuleOptionsRequest inValue = new OnvifAnalytics.GetRuleOptionsRequest();
+            SharpOnvifClient.Analytics.GetRuleOptionsRequest inValue = new SharpOnvifClient.Analytics.GetRuleOptionsRequest();
             inValue.RuleType = RuleType;
             inValue.ConfigurationToken = ConfigurationToken;
-            return ((OnvifAnalytics.RuleEnginePort)(this)).GetRuleOptionsAsync(inValue);
+            return ((SharpOnvifClient.Analytics.RuleEnginePort)(this)).GetRuleOptionsAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAnalytics.ModifyRulesResponse> OnvifAnalytics.RuleEnginePort.ModifyRulesAsync(OnvifAnalytics.ModifyRulesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Analytics.ModifyRulesResponse> SharpOnvifClient.Analytics.RuleEnginePort.ModifyRulesAsync(SharpOnvifClient.Analytics.ModifyRulesRequest request)
         {
             return base.Channel.ModifyRulesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAnalytics.ModifyRulesResponse> ModifyRulesAsync(string ConfigurationToken, OnvifAnalytics.Config[] Rule)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Analytics.ModifyRulesResponse> ModifyRulesAsync(string ConfigurationToken, SharpOnvifClient.Analytics.Config[] Rule)
         {
-            OnvifAnalytics.ModifyRulesRequest inValue = new OnvifAnalytics.ModifyRulesRequest();
+            SharpOnvifClient.Analytics.ModifyRulesRequest inValue = new SharpOnvifClient.Analytics.ModifyRulesRequest();
             inValue.ConfigurationToken = ConfigurationToken;
             inValue.Rule = Rule;
-            return ((OnvifAnalytics.RuleEnginePort)(this)).ModifyRulesAsync(inValue);
+            return ((SharpOnvifClient.Analytics.RuleEnginePort)(this)).ModifyRulesAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()
@@ -38482,7 +38482,7 @@ namespace OnvifAnalytics
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver20/analytics/wsdl", ConfigurationName="OnvifAnalytics.AnalyticsEnginePort")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver20/analytics/wsdl", ConfigurationName="SharpOnvifClient.Analytics.AnalyticsEnginePort")]
     public interface AnalyticsEnginePort
     {
         
@@ -38579,7 +38579,7 @@ namespace OnvifAnalytics
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseFaultType))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MessageDescription))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Capabilities")]
-        System.Threading.Tasks.Task<OnvifAnalytics.Capabilities> GetServiceCapabilitiesAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.Analytics.Capabilities> GetServiceCapabilitiesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/analytics/wsdl/GetSupportedAnalyticsModules", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -38674,7 +38674,7 @@ namespace OnvifAnalytics
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseFaultType))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MessageDescription))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="SupportedAnalyticsModules")]
-        System.Threading.Tasks.Task<OnvifAnalytics.SupportedAnalyticsModules> GetSupportedAnalyticsModulesAsync(string ConfigurationToken);
+        System.Threading.Tasks.Task<SharpOnvifClient.Analytics.SupportedAnalyticsModules> GetSupportedAnalyticsModulesAsync(string ConfigurationToken);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/analytics/wsdl/GetAnalyticsModuleOptions", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -38768,7 +38768,7 @@ namespace OnvifAnalytics
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseFaultType))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MessageDescription))]
-        System.Threading.Tasks.Task<OnvifAnalytics.GetAnalyticsModuleOptionsResponse> GetAnalyticsModuleOptionsAsync(OnvifAnalytics.GetAnalyticsModuleOptionsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Analytics.GetAnalyticsModuleOptionsResponse> GetAnalyticsModuleOptionsAsync(SharpOnvifClient.Analytics.GetAnalyticsModuleOptionsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/analytics/wsdl/CreateAnalyticsModules", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -38862,7 +38862,7 @@ namespace OnvifAnalytics
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseFaultType))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MessageDescription))]
-        System.Threading.Tasks.Task<OnvifAnalytics.CreateAnalyticsModulesResponse> CreateAnalyticsModulesAsync(OnvifAnalytics.CreateAnalyticsModulesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Analytics.CreateAnalyticsModulesResponse> CreateAnalyticsModulesAsync(SharpOnvifClient.Analytics.CreateAnalyticsModulesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/analytics/wsdl/DeleteAnalyticsModules", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -38956,7 +38956,7 @@ namespace OnvifAnalytics
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseFaultType))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MessageDescription))]
-        System.Threading.Tasks.Task<OnvifAnalytics.DeleteAnalyticsModulesResponse> DeleteAnalyticsModulesAsync(OnvifAnalytics.DeleteAnalyticsModulesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Analytics.DeleteAnalyticsModulesResponse> DeleteAnalyticsModulesAsync(SharpOnvifClient.Analytics.DeleteAnalyticsModulesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/analytics/wsdl/GetAnalyticsModules", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -39050,7 +39050,7 @@ namespace OnvifAnalytics
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseFaultType))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MessageDescription))]
-        System.Threading.Tasks.Task<OnvifAnalytics.GetAnalyticsModulesResponse> GetAnalyticsModulesAsync(OnvifAnalytics.GetAnalyticsModulesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Analytics.GetAnalyticsModulesResponse> GetAnalyticsModulesAsync(SharpOnvifClient.Analytics.GetAnalyticsModulesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/analytics/wsdl/ModifyAnalyticsModules", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -39144,7 +39144,7 @@ namespace OnvifAnalytics
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseFaultType))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MessageDescription))]
-        System.Threading.Tasks.Task<OnvifAnalytics.ModifyAnalyticsModulesResponse> ModifyAnalyticsModulesAsync(OnvifAnalytics.ModifyAnalyticsModulesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Analytics.ModifyAnalyticsModulesResponse> ModifyAnalyticsModulesAsync(SharpOnvifClient.Analytics.ModifyAnalyticsModulesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/analytics/wsdl/GetSupportedMetadata", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -39238,7 +39238,7 @@ namespace OnvifAnalytics
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseFaultType))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MessageDescription))]
-        System.Threading.Tasks.Task<OnvifAnalytics.GetSupportedMetadataResponse> GetSupportedMetadataAsync(OnvifAnalytics.GetSupportedMetadataRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Analytics.GetSupportedMetadataResponse> GetSupportedMetadataAsync(SharpOnvifClient.Analytics.GetSupportedMetadataRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -39274,13 +39274,13 @@ namespace OnvifAnalytics
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver20/analytics/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Options")]
-        public OnvifAnalytics.ConfigOptions[] Options;
+        public SharpOnvifClient.Analytics.ConfigOptions[] Options;
         
         public GetAnalyticsModuleOptionsResponse()
         {
         }
         
-        public GetAnalyticsModuleOptionsResponse(OnvifAnalytics.ConfigOptions[] Options)
+        public GetAnalyticsModuleOptionsResponse(SharpOnvifClient.Analytics.ConfigOptions[] Options)
         {
             this.Options = Options;
         }
@@ -39298,13 +39298,13 @@ namespace OnvifAnalytics
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver20/analytics/wsdl", Order=1)]
         [System.Xml.Serialization.XmlElementAttribute("AnalyticsModule")]
-        public OnvifAnalytics.Config[] AnalyticsModule;
+        public SharpOnvifClient.Analytics.Config[] AnalyticsModule;
         
         public CreateAnalyticsModulesRequest()
         {
         }
         
-        public CreateAnalyticsModulesRequest(string ConfigurationToken, OnvifAnalytics.Config[] AnalyticsModule)
+        public CreateAnalyticsModulesRequest(string ConfigurationToken, SharpOnvifClient.Analytics.Config[] AnalyticsModule)
         {
             this.ConfigurationToken = ConfigurationToken;
             this.AnalyticsModule = AnalyticsModule;
@@ -39389,13 +39389,13 @@ namespace OnvifAnalytics
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver20/analytics/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("AnalyticsModule")]
-        public OnvifAnalytics.Config[] AnalyticsModule;
+        public SharpOnvifClient.Analytics.Config[] AnalyticsModule;
         
         public GetAnalyticsModulesResponse()
         {
         }
         
-        public GetAnalyticsModulesResponse(OnvifAnalytics.Config[] AnalyticsModule)
+        public GetAnalyticsModulesResponse(SharpOnvifClient.Analytics.Config[] AnalyticsModule)
         {
             this.AnalyticsModule = AnalyticsModule;
         }
@@ -39413,13 +39413,13 @@ namespace OnvifAnalytics
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver20/analytics/wsdl", Order=1)]
         [System.Xml.Serialization.XmlElementAttribute("AnalyticsModule")]
-        public OnvifAnalytics.Config[] AnalyticsModule;
+        public SharpOnvifClient.Analytics.Config[] AnalyticsModule;
         
         public ModifyAnalyticsModulesRequest()
         {
         }
         
-        public ModifyAnalyticsModulesRequest(string ConfigurationToken, OnvifAnalytics.Config[] AnalyticsModule)
+        public ModifyAnalyticsModulesRequest(string ConfigurationToken, SharpOnvifClient.Analytics.Config[] AnalyticsModule)
         {
             this.ConfigurationToken = ConfigurationToken;
             this.AnalyticsModule = AnalyticsModule;
@@ -39467,26 +39467,26 @@ namespace OnvifAnalytics
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver20/analytics/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("AnalyticsModule")]
-        public OnvifAnalytics.MetadataInfo[] AnalyticsModule;
+        public SharpOnvifClient.Analytics.MetadataInfo[] AnalyticsModule;
         
         public GetSupportedMetadataResponse()
         {
         }
         
-        public GetSupportedMetadataResponse(OnvifAnalytics.MetadataInfo[] AnalyticsModule)
+        public GetSupportedMetadataResponse(SharpOnvifClient.Analytics.MetadataInfo[] AnalyticsModule)
         {
             this.AnalyticsModule = AnalyticsModule;
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface AnalyticsEnginePortChannel : OnvifAnalytics.AnalyticsEnginePort, System.ServiceModel.IClientChannel
+    public interface AnalyticsEnginePortChannel : SharpOnvifClient.Analytics.AnalyticsEnginePort, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class AnalyticsEnginePortClient : System.ServiceModel.ClientBase<OnvifAnalytics.AnalyticsEnginePort>, OnvifAnalytics.AnalyticsEnginePort
+    public partial class AnalyticsEnginePortClient : System.ServiceModel.ClientBase<SharpOnvifClient.Analytics.AnalyticsEnginePort>, SharpOnvifClient.Analytics.AnalyticsEnginePort
     {
         
         public AnalyticsEnginePortClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
@@ -39494,96 +39494,96 @@ namespace OnvifAnalytics
         {
         }
         
-        public System.Threading.Tasks.Task<OnvifAnalytics.Capabilities> GetServiceCapabilitiesAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.Analytics.Capabilities> GetServiceCapabilitiesAsync()
         {
             return base.Channel.GetServiceCapabilitiesAsync();
         }
         
-        public System.Threading.Tasks.Task<OnvifAnalytics.SupportedAnalyticsModules> GetSupportedAnalyticsModulesAsync(string ConfigurationToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Analytics.SupportedAnalyticsModules> GetSupportedAnalyticsModulesAsync(string ConfigurationToken)
         {
             return base.Channel.GetSupportedAnalyticsModulesAsync(ConfigurationToken);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAnalytics.GetAnalyticsModuleOptionsResponse> OnvifAnalytics.AnalyticsEnginePort.GetAnalyticsModuleOptionsAsync(OnvifAnalytics.GetAnalyticsModuleOptionsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Analytics.GetAnalyticsModuleOptionsResponse> SharpOnvifClient.Analytics.AnalyticsEnginePort.GetAnalyticsModuleOptionsAsync(SharpOnvifClient.Analytics.GetAnalyticsModuleOptionsRequest request)
         {
             return base.Channel.GetAnalyticsModuleOptionsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAnalytics.GetAnalyticsModuleOptionsResponse> GetAnalyticsModuleOptionsAsync(System.Xml.XmlQualifiedName Type, string ConfigurationToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Analytics.GetAnalyticsModuleOptionsResponse> GetAnalyticsModuleOptionsAsync(System.Xml.XmlQualifiedName Type, string ConfigurationToken)
         {
-            OnvifAnalytics.GetAnalyticsModuleOptionsRequest inValue = new OnvifAnalytics.GetAnalyticsModuleOptionsRequest();
+            SharpOnvifClient.Analytics.GetAnalyticsModuleOptionsRequest inValue = new SharpOnvifClient.Analytics.GetAnalyticsModuleOptionsRequest();
             inValue.Type = Type;
             inValue.ConfigurationToken = ConfigurationToken;
-            return ((OnvifAnalytics.AnalyticsEnginePort)(this)).GetAnalyticsModuleOptionsAsync(inValue);
+            return ((SharpOnvifClient.Analytics.AnalyticsEnginePort)(this)).GetAnalyticsModuleOptionsAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAnalytics.CreateAnalyticsModulesResponse> OnvifAnalytics.AnalyticsEnginePort.CreateAnalyticsModulesAsync(OnvifAnalytics.CreateAnalyticsModulesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Analytics.CreateAnalyticsModulesResponse> SharpOnvifClient.Analytics.AnalyticsEnginePort.CreateAnalyticsModulesAsync(SharpOnvifClient.Analytics.CreateAnalyticsModulesRequest request)
         {
             return base.Channel.CreateAnalyticsModulesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAnalytics.CreateAnalyticsModulesResponse> CreateAnalyticsModulesAsync(string ConfigurationToken, OnvifAnalytics.Config[] AnalyticsModule)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Analytics.CreateAnalyticsModulesResponse> CreateAnalyticsModulesAsync(string ConfigurationToken, SharpOnvifClient.Analytics.Config[] AnalyticsModule)
         {
-            OnvifAnalytics.CreateAnalyticsModulesRequest inValue = new OnvifAnalytics.CreateAnalyticsModulesRequest();
+            SharpOnvifClient.Analytics.CreateAnalyticsModulesRequest inValue = new SharpOnvifClient.Analytics.CreateAnalyticsModulesRequest();
             inValue.ConfigurationToken = ConfigurationToken;
             inValue.AnalyticsModule = AnalyticsModule;
-            return ((OnvifAnalytics.AnalyticsEnginePort)(this)).CreateAnalyticsModulesAsync(inValue);
+            return ((SharpOnvifClient.Analytics.AnalyticsEnginePort)(this)).CreateAnalyticsModulesAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAnalytics.DeleteAnalyticsModulesResponse> OnvifAnalytics.AnalyticsEnginePort.DeleteAnalyticsModulesAsync(OnvifAnalytics.DeleteAnalyticsModulesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Analytics.DeleteAnalyticsModulesResponse> SharpOnvifClient.Analytics.AnalyticsEnginePort.DeleteAnalyticsModulesAsync(SharpOnvifClient.Analytics.DeleteAnalyticsModulesRequest request)
         {
             return base.Channel.DeleteAnalyticsModulesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAnalytics.DeleteAnalyticsModulesResponse> DeleteAnalyticsModulesAsync(string ConfigurationToken, string[] AnalyticsModuleName)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Analytics.DeleteAnalyticsModulesResponse> DeleteAnalyticsModulesAsync(string ConfigurationToken, string[] AnalyticsModuleName)
         {
-            OnvifAnalytics.DeleteAnalyticsModulesRequest inValue = new OnvifAnalytics.DeleteAnalyticsModulesRequest();
+            SharpOnvifClient.Analytics.DeleteAnalyticsModulesRequest inValue = new SharpOnvifClient.Analytics.DeleteAnalyticsModulesRequest();
             inValue.ConfigurationToken = ConfigurationToken;
             inValue.AnalyticsModuleName = AnalyticsModuleName;
-            return ((OnvifAnalytics.AnalyticsEnginePort)(this)).DeleteAnalyticsModulesAsync(inValue);
+            return ((SharpOnvifClient.Analytics.AnalyticsEnginePort)(this)).DeleteAnalyticsModulesAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAnalytics.GetAnalyticsModulesResponse> OnvifAnalytics.AnalyticsEnginePort.GetAnalyticsModulesAsync(OnvifAnalytics.GetAnalyticsModulesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Analytics.GetAnalyticsModulesResponse> SharpOnvifClient.Analytics.AnalyticsEnginePort.GetAnalyticsModulesAsync(SharpOnvifClient.Analytics.GetAnalyticsModulesRequest request)
         {
             return base.Channel.GetAnalyticsModulesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAnalytics.GetAnalyticsModulesResponse> GetAnalyticsModulesAsync(string ConfigurationToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Analytics.GetAnalyticsModulesResponse> GetAnalyticsModulesAsync(string ConfigurationToken)
         {
-            OnvifAnalytics.GetAnalyticsModulesRequest inValue = new OnvifAnalytics.GetAnalyticsModulesRequest();
+            SharpOnvifClient.Analytics.GetAnalyticsModulesRequest inValue = new SharpOnvifClient.Analytics.GetAnalyticsModulesRequest();
             inValue.ConfigurationToken = ConfigurationToken;
-            return ((OnvifAnalytics.AnalyticsEnginePort)(this)).GetAnalyticsModulesAsync(inValue);
+            return ((SharpOnvifClient.Analytics.AnalyticsEnginePort)(this)).GetAnalyticsModulesAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAnalytics.ModifyAnalyticsModulesResponse> OnvifAnalytics.AnalyticsEnginePort.ModifyAnalyticsModulesAsync(OnvifAnalytics.ModifyAnalyticsModulesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Analytics.ModifyAnalyticsModulesResponse> SharpOnvifClient.Analytics.AnalyticsEnginePort.ModifyAnalyticsModulesAsync(SharpOnvifClient.Analytics.ModifyAnalyticsModulesRequest request)
         {
             return base.Channel.ModifyAnalyticsModulesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAnalytics.ModifyAnalyticsModulesResponse> ModifyAnalyticsModulesAsync(string ConfigurationToken, OnvifAnalytics.Config[] AnalyticsModule)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Analytics.ModifyAnalyticsModulesResponse> ModifyAnalyticsModulesAsync(string ConfigurationToken, SharpOnvifClient.Analytics.Config[] AnalyticsModule)
         {
-            OnvifAnalytics.ModifyAnalyticsModulesRequest inValue = new OnvifAnalytics.ModifyAnalyticsModulesRequest();
+            SharpOnvifClient.Analytics.ModifyAnalyticsModulesRequest inValue = new SharpOnvifClient.Analytics.ModifyAnalyticsModulesRequest();
             inValue.ConfigurationToken = ConfigurationToken;
             inValue.AnalyticsModule = AnalyticsModule;
-            return ((OnvifAnalytics.AnalyticsEnginePort)(this)).ModifyAnalyticsModulesAsync(inValue);
+            return ((SharpOnvifClient.Analytics.AnalyticsEnginePort)(this)).ModifyAnalyticsModulesAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAnalytics.GetSupportedMetadataResponse> OnvifAnalytics.AnalyticsEnginePort.GetSupportedMetadataAsync(OnvifAnalytics.GetSupportedMetadataRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Analytics.GetSupportedMetadataResponse> SharpOnvifClient.Analytics.AnalyticsEnginePort.GetSupportedMetadataAsync(SharpOnvifClient.Analytics.GetSupportedMetadataRequest request)
         {
             return base.Channel.GetSupportedMetadataAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAnalytics.GetSupportedMetadataResponse> GetSupportedMetadataAsync(System.Xml.XmlQualifiedName Type)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Analytics.GetSupportedMetadataResponse> GetSupportedMetadataAsync(System.Xml.XmlQualifiedName Type)
         {
-            OnvifAnalytics.GetSupportedMetadataRequest inValue = new OnvifAnalytics.GetSupportedMetadataRequest();
+            SharpOnvifClient.Analytics.GetSupportedMetadataRequest inValue = new SharpOnvifClient.Analytics.GetSupportedMetadataRequest();
             inValue.Type = Type;
-            return ((OnvifAnalytics.AnalyticsEnginePort)(this)).GetSupportedMetadataAsync(inValue);
+            return ((SharpOnvifClient.Analytics.AnalyticsEnginePort)(this)).GetSupportedMetadataAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()

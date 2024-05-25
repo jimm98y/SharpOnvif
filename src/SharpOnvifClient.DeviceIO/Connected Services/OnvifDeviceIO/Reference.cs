@@ -7,12 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OnvifDeviceIO
+namespace SharpOnvifClient.DeviceIO
 {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", ConfigurationName="OnvifDeviceIO.Device")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", ConfigurationName="SharpOnvifClient.DeviceIO.Device")]
     public interface Device
     {
         
@@ -20,47 +20,47 @@ namespace OnvifDeviceIO
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetServicesResponse> GetServicesAsync(OnvifDeviceIO.GetServicesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetServicesResponse> GetServicesAsync(SharpOnvifClient.DeviceIO.GetServicesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/GetServiceCapabilities", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Capabilities")]
-        System.Threading.Tasks.Task<OnvifDeviceIO.DeviceServiceCapabilities> GetServiceCapabilitiesAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.DeviceServiceCapabilities> GetServiceCapabilitiesAsync();
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/GetDeviceInformation", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetDeviceInformationResponse> GetDeviceInformationAsync(OnvifDeviceIO.GetDeviceInformationRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetDeviceInformationResponse> GetDeviceInformationAsync(SharpOnvifClient.DeviceIO.GetDeviceInformationRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/SetSystemDateAndTime", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task SetSystemDateAndTimeAsync(OnvifDeviceIO.SetDateTimeType DateTimeType, bool DaylightSavings, OnvifDeviceIO.TimeZone TimeZone, OnvifDeviceIO.DateTime UTCDateTime);
+        System.Threading.Tasks.Task SetSystemDateAndTimeAsync(SharpOnvifClient.DeviceIO.SetDateTimeType DateTimeType, bool DaylightSavings, SharpOnvifClient.DeviceIO.TimeZone TimeZone, SharpOnvifClient.DeviceIO.DateTime UTCDateTime);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/GetSystemDateAndTime", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="SystemDateAndTime")]
-        System.Threading.Tasks.Task<OnvifDeviceIO.SystemDateTime> GetSystemDateAndTimeAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SystemDateTime> GetSystemDateAndTimeAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/SetSystemFactoryDefault", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task SetSystemFactoryDefaultAsync(OnvifDeviceIO.FactoryDefaultType FactoryDefault);
+        System.Threading.Tasks.Task SetSystemFactoryDefaultAsync(SharpOnvifClient.DeviceIO.FactoryDefaultType FactoryDefault);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/UpgradeSystemFirmware", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Message")]
-        System.Threading.Tasks.Task<string> UpgradeSystemFirmwareAsync(OnvifDeviceIO.AttachmentData Firmware);
+        System.Threading.Tasks.Task<string> UpgradeSystemFirmwareAsync(SharpOnvifClient.DeviceIO.AttachmentData Firmware);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/SystemReboot", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -73,154 +73,154 @@ namespace OnvifDeviceIO
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.RestoreSystemResponse> RestoreSystemAsync(OnvifDeviceIO.RestoreSystemRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.RestoreSystemResponse> RestoreSystemAsync(SharpOnvifClient.DeviceIO.RestoreSystemRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/GetSystemBackup", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetSystemBackupResponse> GetSystemBackupAsync(OnvifDeviceIO.GetSystemBackupRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetSystemBackupResponse> GetSystemBackupAsync(SharpOnvifClient.DeviceIO.GetSystemBackupRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/GetSystemLog", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="SystemLog")]
-        System.Threading.Tasks.Task<OnvifDeviceIO.SystemLog> GetSystemLogAsync(OnvifDeviceIO.SystemLogType LogType);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SystemLog> GetSystemLogAsync(SharpOnvifClient.DeviceIO.SystemLogType LogType);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/GetSystemSupportInformation", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="SupportInformation")]
-        System.Threading.Tasks.Task<OnvifDeviceIO.SupportInformation> GetSystemSupportInformationAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SupportInformation> GetSystemSupportInformationAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/GetScopes", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetScopesResponse> GetScopesAsync(OnvifDeviceIO.GetScopesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetScopesResponse> GetScopesAsync(SharpOnvifClient.DeviceIO.GetScopesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/SetScopes", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.SetScopesResponse> SetScopesAsync(OnvifDeviceIO.SetScopesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetScopesResponse> SetScopesAsync(SharpOnvifClient.DeviceIO.SetScopesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/AddScopes", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.AddScopesResponse> AddScopesAsync(OnvifDeviceIO.AddScopesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.AddScopesResponse> AddScopesAsync(SharpOnvifClient.DeviceIO.AddScopesRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/RemoveScopes", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.RemoveScopesResponse> RemoveScopesAsync(OnvifDeviceIO.RemoveScopesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.RemoveScopesResponse> RemoveScopesAsync(SharpOnvifClient.DeviceIO.RemoveScopesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/GetDiscoveryMode", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="DiscoveryMode")]
-        System.Threading.Tasks.Task<OnvifDeviceIO.DiscoveryMode> GetDiscoveryModeAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.DiscoveryMode> GetDiscoveryModeAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/SetDiscoveryMode", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task SetDiscoveryModeAsync(OnvifDeviceIO.DiscoveryMode DiscoveryMode);
+        System.Threading.Tasks.Task SetDiscoveryModeAsync(SharpOnvifClient.DeviceIO.DiscoveryMode DiscoveryMode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/GetRemoteDiscoveryMode", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="RemoteDiscoveryMode")]
-        System.Threading.Tasks.Task<OnvifDeviceIO.DiscoveryMode> GetRemoteDiscoveryModeAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.DiscoveryMode> GetRemoteDiscoveryModeAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/SetRemoteDiscoveryMode", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task SetRemoteDiscoveryModeAsync(OnvifDeviceIO.DiscoveryMode RemoteDiscoveryMode);
+        System.Threading.Tasks.Task SetRemoteDiscoveryModeAsync(SharpOnvifClient.DeviceIO.DiscoveryMode RemoteDiscoveryMode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/GetDPAddresses", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetDPAddressesResponse> GetDPAddressesAsync(OnvifDeviceIO.GetDPAddressesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetDPAddressesResponse> GetDPAddressesAsync(SharpOnvifClient.DeviceIO.GetDPAddressesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/SetDPAddresses", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.SetDPAddressesResponse> SetDPAddressesAsync(OnvifDeviceIO.SetDPAddressesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetDPAddressesResponse> SetDPAddressesAsync(SharpOnvifClient.DeviceIO.SetDPAddressesRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/GetEndpointReference", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetEndpointReferenceResponse> GetEndpointReferenceAsync(OnvifDeviceIO.GetEndpointReferenceRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetEndpointReferenceResponse> GetEndpointReferenceAsync(SharpOnvifClient.DeviceIO.GetEndpointReferenceRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/GetRemoteUser", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="RemoteUser")]
-        System.Threading.Tasks.Task<OnvifDeviceIO.RemoteUser> GetRemoteUserAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.RemoteUser> GetRemoteUserAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/SetRemoteUser", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task SetRemoteUserAsync(OnvifDeviceIO.RemoteUser RemoteUser);
+        System.Threading.Tasks.Task SetRemoteUserAsync(SharpOnvifClient.DeviceIO.RemoteUser RemoteUser);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/GetUsers", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetUsersResponse> GetUsersAsync(OnvifDeviceIO.GetUsersRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetUsersResponse> GetUsersAsync(SharpOnvifClient.DeviceIO.GetUsersRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/CreateUsers", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.CreateUsersResponse> CreateUsersAsync(OnvifDeviceIO.CreateUsersRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.CreateUsersResponse> CreateUsersAsync(SharpOnvifClient.DeviceIO.CreateUsersRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/DeleteUsers", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.DeleteUsersResponse> DeleteUsersAsync(OnvifDeviceIO.DeleteUsersRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.DeleteUsersResponse> DeleteUsersAsync(SharpOnvifClient.DeviceIO.DeleteUsersRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/SetUser", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.SetUserResponse> SetUserAsync(OnvifDeviceIO.SetUserRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetUserResponse> SetUserAsync(SharpOnvifClient.DeviceIO.SetUserRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/GetWsdlUrl", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetWsdlUrlResponse> GetWsdlUrlAsync(OnvifDeviceIO.GetWsdlUrlRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetWsdlUrlResponse> GetWsdlUrlAsync(SharpOnvifClient.DeviceIO.GetWsdlUrlRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/GetPasswordComplexityOptions", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetPasswordComplexityOptionsResponse> GetPasswordComplexityOptionsAsync(OnvifDeviceIO.GetPasswordComplexityOptionsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetPasswordComplexityOptionsResponse> GetPasswordComplexityOptionsAsync(SharpOnvifClient.DeviceIO.GetPasswordComplexityOptionsRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/GetPasswordComplexityConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetPasswordComplexityConfigurationResponse> GetPasswordComplexityConfigurationAsync(OnvifDeviceIO.GetPasswordComplexityConfigurationRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetPasswordComplexityConfigurationResponse> GetPasswordComplexityConfigurationAsync(SharpOnvifClient.DeviceIO.GetPasswordComplexityConfigurationRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/SetPasswordComplexityConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -233,7 +233,7 @@ namespace OnvifDeviceIO
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetPasswordHistoryConfigurationResponse> GetPasswordHistoryConfigurationAsync(OnvifDeviceIO.GetPasswordHistoryConfigurationRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetPasswordHistoryConfigurationResponse> GetPasswordHistoryConfigurationAsync(SharpOnvifClient.DeviceIO.GetPasswordHistoryConfigurationRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/SetPasswordHistoryConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -246,14 +246,14 @@ namespace OnvifDeviceIO
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetAuthFailureWarningOptionsResponse> GetAuthFailureWarningOptionsAsync(OnvifDeviceIO.GetAuthFailureWarningOptionsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetAuthFailureWarningOptionsResponse> GetAuthFailureWarningOptionsAsync(SharpOnvifClient.DeviceIO.GetAuthFailureWarningOptionsRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/GetAuthFailureWarningConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetAuthFailureWarningConfigurationResponse> GetAuthFailureWarningConfigurationAsync(OnvifDeviceIO.GetAuthFailureWarningConfigurationRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetAuthFailureWarningConfigurationResponse> GetAuthFailureWarningConfigurationAsync(SharpOnvifClient.DeviceIO.GetAuthFailureWarningConfigurationRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/SetAuthFailureWarningConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -265,20 +265,20 @@ namespace OnvifDeviceIO
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetCapabilitiesResponse> GetCapabilitiesAsync(OnvifDeviceIO.GetCapabilitiesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetCapabilitiesResponse> GetCapabilitiesAsync(SharpOnvifClient.DeviceIO.GetCapabilitiesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/GetHostname", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="HostnameInformation")]
-        System.Threading.Tasks.Task<OnvifDeviceIO.HostnameInformation> GetHostnameAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.HostnameInformation> GetHostnameAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/SetHostname", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.SetHostnameResponse> SetHostnameAsync(OnvifDeviceIO.SetHostnameRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetHostnameResponse> SetHostnameAsync(SharpOnvifClient.DeviceIO.SetHostnameRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/SetHostnameFromDHCP", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -292,84 +292,84 @@ namespace OnvifDeviceIO
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="DNSInformation")]
-        System.Threading.Tasks.Task<OnvifDeviceIO.DNSInformation> GetDNSAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.DNSInformation> GetDNSAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/SetDNS", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.SetDNSResponse> SetDNSAsync(OnvifDeviceIO.SetDNSRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetDNSResponse> SetDNSAsync(SharpOnvifClient.DeviceIO.SetDNSRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/GetNTP", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="NTPInformation")]
-        System.Threading.Tasks.Task<OnvifDeviceIO.NTPInformation> GetNTPAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.NTPInformation> GetNTPAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/SetNTP", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.SetNTPResponse> SetNTPAsync(OnvifDeviceIO.SetNTPRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetNTPResponse> SetNTPAsync(SharpOnvifClient.DeviceIO.SetNTPRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/GetDynamicDNS", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="DynamicDNSInformation")]
-        System.Threading.Tasks.Task<OnvifDeviceIO.DynamicDNSInformation> GetDynamicDNSAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.DynamicDNSInformation> GetDynamicDNSAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/SetDynamicDNS", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.SetDynamicDNSResponse> SetDynamicDNSAsync(OnvifDeviceIO.SetDynamicDNSRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetDynamicDNSResponse> SetDynamicDNSAsync(SharpOnvifClient.DeviceIO.SetDynamicDNSRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/GetNetworkInterfaces", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetNetworkInterfacesResponse> GetNetworkInterfacesAsync(OnvifDeviceIO.GetNetworkInterfacesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetNetworkInterfacesResponse> GetNetworkInterfacesAsync(SharpOnvifClient.DeviceIO.GetNetworkInterfacesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/SetNetworkInterfaces", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="RebootNeeded")]
-        System.Threading.Tasks.Task<bool> SetNetworkInterfacesAsync(string InterfaceToken, OnvifDeviceIO.NetworkInterfaceSetConfiguration NetworkInterface);
+        System.Threading.Tasks.Task<bool> SetNetworkInterfacesAsync(string InterfaceToken, SharpOnvifClient.DeviceIO.NetworkInterfaceSetConfiguration NetworkInterface);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/GetNetworkProtocols", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetNetworkProtocolsResponse> GetNetworkProtocolsAsync(OnvifDeviceIO.GetNetworkProtocolsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetNetworkProtocolsResponse> GetNetworkProtocolsAsync(SharpOnvifClient.DeviceIO.GetNetworkProtocolsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/SetNetworkProtocols", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.SetNetworkProtocolsResponse> SetNetworkProtocolsAsync(OnvifDeviceIO.SetNetworkProtocolsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetNetworkProtocolsResponse> SetNetworkProtocolsAsync(SharpOnvifClient.DeviceIO.SetNetworkProtocolsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/GetNetworkDefaultGateway", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="NetworkGateway")]
-        System.Threading.Tasks.Task<OnvifDeviceIO.NetworkGateway> GetNetworkDefaultGatewayAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.NetworkGateway> GetNetworkDefaultGatewayAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/SetNetworkDefaultGateway", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.SetNetworkDefaultGatewayResponse> SetNetworkDefaultGatewayAsync(OnvifDeviceIO.SetNetworkDefaultGatewayRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetNetworkDefaultGatewayResponse> SetNetworkDefaultGatewayAsync(SharpOnvifClient.DeviceIO.SetNetworkDefaultGatewayRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/GetZeroConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="ZeroConfiguration")]
-        System.Threading.Tasks.Task<OnvifDeviceIO.NetworkZeroConfiguration> GetZeroConfigurationAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.NetworkZeroConfiguration> GetZeroConfigurationAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/SetZeroConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -382,56 +382,56 @@ namespace OnvifDeviceIO
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="IPAddressFilter")]
-        System.Threading.Tasks.Task<OnvifDeviceIO.IPAddressFilter> GetIPAddressFilterAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.IPAddressFilter> GetIPAddressFilterAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/SetIPAddressFilter", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task SetIPAddressFilterAsync(OnvifDeviceIO.IPAddressFilter IPAddressFilter);
+        System.Threading.Tasks.Task SetIPAddressFilterAsync(SharpOnvifClient.DeviceIO.IPAddressFilter IPAddressFilter);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/AddIPAddressFilter", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task AddIPAddressFilterAsync(OnvifDeviceIO.IPAddressFilter IPAddressFilter);
+        System.Threading.Tasks.Task AddIPAddressFilterAsync(SharpOnvifClient.DeviceIO.IPAddressFilter IPAddressFilter);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/RemoveIPAddressFilter", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task RemoveIPAddressFilterAsync(OnvifDeviceIO.IPAddressFilter IPAddressFilter);
+        System.Threading.Tasks.Task RemoveIPAddressFilterAsync(SharpOnvifClient.DeviceIO.IPAddressFilter IPAddressFilter);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/GetAccessPolicy", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="PolicyFile")]
-        System.Threading.Tasks.Task<OnvifDeviceIO.BinaryData> GetAccessPolicyAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.BinaryData> GetAccessPolicyAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/SetAccessPolicy", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task SetAccessPolicyAsync(OnvifDeviceIO.BinaryData PolicyFile);
+        System.Threading.Tasks.Task SetAccessPolicyAsync(SharpOnvifClient.DeviceIO.BinaryData PolicyFile);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/GetRelayOutputs", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetRelayOutputsResponse> GetRelayOutputsAsync(OnvifDeviceIO.GetRelayOutputsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetRelayOutputsResponse> GetRelayOutputsAsync(SharpOnvifClient.DeviceIO.GetRelayOutputsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/SetRelayOutputSettings", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task SetRelayOutputSettingsAsync(string RelayOutputToken, OnvifDeviceIO.RelayOutputSettings Properties);
+        System.Threading.Tasks.Task SetRelayOutputSettingsAsync(string RelayOutputToken, SharpOnvifClient.DeviceIO.RelayOutputSettings Properties);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/SetRelayOutputState", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task SetRelayOutputStateAsync(string RelayOutputToken, OnvifDeviceIO.RelayLogicalState LogicalState);
+        System.Threading.Tasks.Task SetRelayOutputStateAsync(string RelayOutputToken, SharpOnvifClient.DeviceIO.RelayLogicalState LogicalState);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/SendAuxiliaryCommand", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -444,67 +444,67 @@ namespace OnvifDeviceIO
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetDot11CapabilitiesResponse> GetDot11CapabilitiesAsync(OnvifDeviceIO.GetDot11CapabilitiesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetDot11CapabilitiesResponse> GetDot11CapabilitiesAsync(SharpOnvifClient.DeviceIO.GetDot11CapabilitiesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/GetDot11Status", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Status")]
-        System.Threading.Tasks.Task<OnvifDeviceIO.Dot11Status> GetDot11StatusAsync(string InterfaceToken);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.Dot11Status> GetDot11StatusAsync(string InterfaceToken);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/ScanAvailableDot11Networks", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.ScanAvailableDot11NetworksResponse> ScanAvailableDot11NetworksAsync(OnvifDeviceIO.ScanAvailableDot11NetworksRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.ScanAvailableDot11NetworksResponse> ScanAvailableDot11NetworksAsync(SharpOnvifClient.DeviceIO.ScanAvailableDot11NetworksRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/GetSystemUris", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetSystemUrisResponse> GetSystemUrisAsync(OnvifDeviceIO.GetSystemUrisRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetSystemUrisResponse> GetSystemUrisAsync(SharpOnvifClient.DeviceIO.GetSystemUrisRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/StartFirmwareUpgrade", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.StartFirmwareUpgradeResponse> StartFirmwareUpgradeAsync(OnvifDeviceIO.StartFirmwareUpgradeRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.StartFirmwareUpgradeResponse> StartFirmwareUpgradeAsync(SharpOnvifClient.DeviceIO.StartFirmwareUpgradeRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/StartSystemRestore", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.StartSystemRestoreResponse> StartSystemRestoreAsync(OnvifDeviceIO.StartSystemRestoreRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.StartSystemRestoreResponse> StartSystemRestoreAsync(SharpOnvifClient.DeviceIO.StartSystemRestoreRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/GetStorageConfigurations", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetStorageConfigurationsResponse> GetStorageConfigurationsAsync(OnvifDeviceIO.GetStorageConfigurationsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetStorageConfigurationsResponse> GetStorageConfigurationsAsync(SharpOnvifClient.DeviceIO.GetStorageConfigurationsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/CreateStorageConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Token")]
-        System.Threading.Tasks.Task<string> CreateStorageConfigurationAsync(OnvifDeviceIO.StorageConfigurationData StorageConfiguration);
+        System.Threading.Tasks.Task<string> CreateStorageConfigurationAsync(SharpOnvifClient.DeviceIO.StorageConfigurationData StorageConfiguration);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/GetStorageConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="StorageConfiguration")]
-        System.Threading.Tasks.Task<OnvifDeviceIO.StorageConfiguration> GetStorageConfigurationAsync(string Token);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.StorageConfiguration> GetStorageConfigurationAsync(string Token);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/SetStorageConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task SetStorageConfigurationAsync(OnvifDeviceIO.StorageConfiguration StorageConfiguration);
+        System.Threading.Tasks.Task SetStorageConfigurationAsync(SharpOnvifClient.DeviceIO.StorageConfiguration StorageConfiguration);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/DeleteStorageConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -516,19 +516,19 @@ namespace OnvifDeviceIO
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetGeoLocationResponse> GetGeoLocationAsync(OnvifDeviceIO.GetGeoLocationRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetGeoLocationResponse> GetGeoLocationAsync(SharpOnvifClient.DeviceIO.GetGeoLocationRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/SetGeoLocation", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.SetGeoLocationResponse> SetGeoLocationAsync(OnvifDeviceIO.SetGeoLocationRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetGeoLocationResponse> SetGeoLocationAsync(SharpOnvifClient.DeviceIO.SetGeoLocationRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/DeleteGeoLocation", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.DeleteGeoLocationResponse> DeleteGeoLocationAsync(OnvifDeviceIO.DeleteGeoLocationRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.DeleteGeoLocationResponse> DeleteGeoLocationAsync(SharpOnvifClient.DeviceIO.DeleteGeoLocationRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/SetHashingAlgorithm", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -540,43 +540,43 @@ namespace OnvifDeviceIO
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.CreateCertificateResponse> CreateCertificateAsync(OnvifDeviceIO.CreateCertificateRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.CreateCertificateResponse> CreateCertificateAsync(SharpOnvifClient.DeviceIO.CreateCertificateRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/GetCertificates", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetCertificatesResponse> GetCertificatesAsync(OnvifDeviceIO.GetCertificatesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetCertificatesResponse> GetCertificatesAsync(SharpOnvifClient.DeviceIO.GetCertificatesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/GetCertificatesStatus", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetCertificatesStatusResponse> GetCertificatesStatusAsync(OnvifDeviceIO.GetCertificatesStatusRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetCertificatesStatusResponse> GetCertificatesStatusAsync(SharpOnvifClient.DeviceIO.GetCertificatesStatusRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/SetCertificatesStatus", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.SetCertificatesStatusResponse> SetCertificatesStatusAsync(OnvifDeviceIO.SetCertificatesStatusRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetCertificatesStatusResponse> SetCertificatesStatusAsync(SharpOnvifClient.DeviceIO.SetCertificatesStatusRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/DeleteCertificates", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.DeleteCertificatesResponse> DeleteCertificatesAsync(OnvifDeviceIO.DeleteCertificatesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.DeleteCertificatesResponse> DeleteCertificatesAsync(SharpOnvifClient.DeviceIO.DeleteCertificatesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/GetPkcs10Request", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetPkcs10RequestResponse> GetPkcs10RequestAsync(OnvifDeviceIO.GetPkcs10RequestRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetPkcs10RequestResponse> GetPkcs10RequestAsync(SharpOnvifClient.DeviceIO.GetPkcs10RequestRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/LoadCertificates", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.LoadCertificatesResponse> LoadCertificatesAsync(OnvifDeviceIO.LoadCertificatesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.LoadCertificatesResponse> LoadCertificatesAsync(SharpOnvifClient.DeviceIO.LoadCertificatesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/GetClientCertificateMode", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -595,56 +595,56 @@ namespace OnvifDeviceIO
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetCACertificatesResponse> GetCACertificatesAsync(OnvifDeviceIO.GetCACertificatesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetCACertificatesResponse> GetCACertificatesAsync(SharpOnvifClient.DeviceIO.GetCACertificatesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/LoadCertificateWithPrivateKey", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.LoadCertificateWithPrivateKeyResponse> LoadCertificateWithPrivateKeyAsync(OnvifDeviceIO.LoadCertificateWithPrivateKeyRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.LoadCertificateWithPrivateKeyResponse> LoadCertificateWithPrivateKeyAsync(SharpOnvifClient.DeviceIO.LoadCertificateWithPrivateKeyRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/GetCertificateInformation", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetCertificateInformationResponse> GetCertificateInformationAsync(OnvifDeviceIO.GetCertificateInformationRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetCertificateInformationResponse> GetCertificateInformationAsync(SharpOnvifClient.DeviceIO.GetCertificateInformationRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/LoadCACertificates", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.LoadCACertificatesResponse> LoadCACertificatesAsync(OnvifDeviceIO.LoadCACertificatesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.LoadCACertificatesResponse> LoadCACertificatesAsync(SharpOnvifClient.DeviceIO.LoadCACertificatesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/CreateDot1XConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task CreateDot1XConfigurationAsync(OnvifDeviceIO.Dot1XConfiguration Dot1XConfiguration);
+        System.Threading.Tasks.Task CreateDot1XConfigurationAsync(SharpOnvifClient.DeviceIO.Dot1XConfiguration Dot1XConfiguration);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/SetDot1XConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task SetDot1XConfigurationAsync(OnvifDeviceIO.Dot1XConfiguration Dot1XConfiguration);
+        System.Threading.Tasks.Task SetDot1XConfigurationAsync(SharpOnvifClient.DeviceIO.Dot1XConfiguration Dot1XConfiguration);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/GetDot1XConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Dot1XConfiguration")]
-        System.Threading.Tasks.Task<OnvifDeviceIO.Dot1XConfiguration> GetDot1XConfigurationAsync(string Dot1XConfigurationToken);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.Dot1XConfiguration> GetDot1XConfigurationAsync(string Dot1XConfigurationToken);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/GetDot1XConfigurations", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetDot1XConfigurationsResponse> GetDot1XConfigurationsAsync(OnvifDeviceIO.GetDot1XConfigurationsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetDot1XConfigurationsResponse> GetDot1XConfigurationsAsync(SharpOnvifClient.DeviceIO.GetDot1XConfigurationsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/device/wsdl/DeleteDot1XConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.DeleteDot1XConfigurationResponse> DeleteDot1XConfigurationAsync(OnvifDeviceIO.DeleteDot1XConfigurationRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.DeleteDot1XConfigurationResponse> DeleteDot1XConfigurationAsync(SharpOnvifClient.DeviceIO.DeleteDot1XConfigurationRequest request);
     }
     
     /// <remarks/>
@@ -20869,13 +20869,13 @@ namespace OnvifDeviceIO
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Service")]
-        public OnvifDeviceIO.Service[] Service;
+        public SharpOnvifClient.DeviceIO.Service[] Service;
         
         public GetServicesResponse()
         {
         }
         
-        public GetServicesResponse(OnvifDeviceIO.Service[] Service)
+        public GetServicesResponse(SharpOnvifClient.DeviceIO.Service[] Service)
         {
             this.Service = Service;
         }
@@ -20949,13 +20949,13 @@ namespace OnvifDeviceIO
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("BackupFiles")]
-        public OnvifDeviceIO.BackupFile[] BackupFiles;
+        public SharpOnvifClient.DeviceIO.BackupFile[] BackupFiles;
         
         public RestoreSystemRequest()
         {
         }
         
-        public RestoreSystemRequest(OnvifDeviceIO.BackupFile[] BackupFiles)
+        public RestoreSystemRequest(SharpOnvifClient.DeviceIO.BackupFile[] BackupFiles)
         {
             this.BackupFiles = BackupFiles;
         }
@@ -20994,13 +20994,13 @@ namespace OnvifDeviceIO
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("BackupFiles")]
-        public OnvifDeviceIO.BackupFile[] BackupFiles;
+        public SharpOnvifClient.DeviceIO.BackupFile[] BackupFiles;
         
         public GetSystemBackupResponse()
         {
         }
         
-        public GetSystemBackupResponse(OnvifDeviceIO.BackupFile[] BackupFiles)
+        public GetSystemBackupResponse(SharpOnvifClient.DeviceIO.BackupFile[] BackupFiles)
         {
             this.BackupFiles = BackupFiles;
         }
@@ -21027,13 +21027,13 @@ namespace OnvifDeviceIO
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Scopes")]
-        public OnvifDeviceIO.Scope[] Scopes;
+        public SharpOnvifClient.DeviceIO.Scope[] Scopes;
         
         public GetScopesResponse()
         {
         }
         
-        public GetScopesResponse(OnvifDeviceIO.Scope[] Scopes)
+        public GetScopesResponse(SharpOnvifClient.DeviceIO.Scope[] Scopes)
         {
             this.Scopes = Scopes;
         }
@@ -21179,13 +21179,13 @@ namespace OnvifDeviceIO
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("DPAddress")]
-        public OnvifDeviceIO.NetworkHost[] DPAddress;
+        public SharpOnvifClient.DeviceIO.NetworkHost[] DPAddress;
         
         public GetDPAddressesResponse()
         {
         }
         
-        public GetDPAddressesResponse(OnvifDeviceIO.NetworkHost[] DPAddress)
+        public GetDPAddressesResponse(SharpOnvifClient.DeviceIO.NetworkHost[] DPAddress)
         {
             this.DPAddress = DPAddress;
         }
@@ -21200,13 +21200,13 @@ namespace OnvifDeviceIO
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("DPAddress")]
-        public OnvifDeviceIO.NetworkHost[] DPAddress;
+        public SharpOnvifClient.DeviceIO.NetworkHost[] DPAddress;
         
         public SetDPAddressesRequest()
         {
         }
         
-        public SetDPAddressesRequest(OnvifDeviceIO.NetworkHost[] DPAddress)
+        public SetDPAddressesRequest(SharpOnvifClient.DeviceIO.NetworkHost[] DPAddress)
         {
             this.DPAddress = DPAddress;
         }
@@ -21280,13 +21280,13 @@ namespace OnvifDeviceIO
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("User")]
-        public OnvifDeviceIO.User[] User;
+        public SharpOnvifClient.DeviceIO.User[] User;
         
         public GetUsersResponse()
         {
         }
         
-        public GetUsersResponse(OnvifDeviceIO.User[] User)
+        public GetUsersResponse(SharpOnvifClient.DeviceIO.User[] User)
         {
             this.User = User;
         }
@@ -21301,13 +21301,13 @@ namespace OnvifDeviceIO
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("User")]
-        public OnvifDeviceIO.User[] User;
+        public SharpOnvifClient.DeviceIO.User[] User;
         
         public CreateUsersRequest()
         {
         }
         
-        public CreateUsersRequest(OnvifDeviceIO.User[] User)
+        public CreateUsersRequest(SharpOnvifClient.DeviceIO.User[] User)
         {
             this.User = User;
         }
@@ -21367,13 +21367,13 @@ namespace OnvifDeviceIO
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("User")]
-        public OnvifDeviceIO.User[] User;
+        public SharpOnvifClient.DeviceIO.User[] User;
         
         public SetUserRequest()
         {
         }
         
-        public SetUserRequest(OnvifDeviceIO.User[] User)
+        public SetUserRequest(SharpOnvifClient.DeviceIO.User[] User)
         {
             this.User = User;
         }
@@ -21442,16 +21442,16 @@ namespace OnvifDeviceIO
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=0)]
-        public OnvifDeviceIO.IntRange MinLenRange;
+        public SharpOnvifClient.DeviceIO.IntRange MinLenRange;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=1)]
-        public OnvifDeviceIO.IntRange UppercaseRange;
+        public SharpOnvifClient.DeviceIO.IntRange UppercaseRange;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=2)]
-        public OnvifDeviceIO.IntRange NumberRange;
+        public SharpOnvifClient.DeviceIO.IntRange NumberRange;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=3)]
-        public OnvifDeviceIO.IntRange SpecialCharsRange;
+        public SharpOnvifClient.DeviceIO.IntRange SpecialCharsRange;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=4)]
         public bool BlockUsernameOccurrenceSupported;
@@ -21463,7 +21463,7 @@ namespace OnvifDeviceIO
         {
         }
         
-        public GetPasswordComplexityOptionsResponse(OnvifDeviceIO.IntRange MinLenRange, OnvifDeviceIO.IntRange UppercaseRange, OnvifDeviceIO.IntRange NumberRange, OnvifDeviceIO.IntRange SpecialCharsRange, bool BlockUsernameOccurrenceSupported, bool PolicyConfigurationLockSupported)
+        public GetPasswordComplexityOptionsResponse(SharpOnvifClient.DeviceIO.IntRange MinLenRange, SharpOnvifClient.DeviceIO.IntRange UppercaseRange, SharpOnvifClient.DeviceIO.IntRange NumberRange, SharpOnvifClient.DeviceIO.IntRange SpecialCharsRange, bool BlockUsernameOccurrenceSupported, bool PolicyConfigurationLockSupported)
         {
             this.MinLenRange = MinLenRange;
             this.UppercaseRange = UppercaseRange;
@@ -21576,16 +21576,16 @@ namespace OnvifDeviceIO
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=0)]
-        public OnvifDeviceIO.IntRange MonitorPeriodRange;
+        public SharpOnvifClient.DeviceIO.IntRange MonitorPeriodRange;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=1)]
-        public OnvifDeviceIO.IntRange AuthFailureRange;
+        public SharpOnvifClient.DeviceIO.IntRange AuthFailureRange;
         
         public GetAuthFailureWarningOptionsResponse()
         {
         }
         
-        public GetAuthFailureWarningOptionsResponse(OnvifDeviceIO.IntRange MonitorPeriodRange, OnvifDeviceIO.IntRange AuthFailureRange)
+        public GetAuthFailureWarningOptionsResponse(SharpOnvifClient.DeviceIO.IntRange MonitorPeriodRange, SharpOnvifClient.DeviceIO.IntRange AuthFailureRange)
         {
             this.MonitorPeriodRange = MonitorPeriodRange;
             this.AuthFailureRange = AuthFailureRange;
@@ -21667,13 +21667,13 @@ namespace OnvifDeviceIO
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Category")]
-        public OnvifDeviceIO.CapabilityCategory[] Category;
+        public SharpOnvifClient.DeviceIO.CapabilityCategory[] Category;
         
         public GetCapabilitiesRequest()
         {
         }
         
-        public GetCapabilitiesRequest(OnvifDeviceIO.CapabilityCategory[] Category)
+        public GetCapabilitiesRequest(SharpOnvifClient.DeviceIO.CapabilityCategory[] Category)
         {
             this.Category = Category;
         }
@@ -21687,13 +21687,13 @@ namespace OnvifDeviceIO
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=0)]
-        public OnvifDeviceIO.Capabilities Capabilities;
+        public SharpOnvifClient.DeviceIO.Capabilities Capabilities;
         
         public GetCapabilitiesResponse()
         {
         }
         
-        public GetCapabilitiesResponse(OnvifDeviceIO.Capabilities Capabilities)
+        public GetCapabilitiesResponse(SharpOnvifClient.DeviceIO.Capabilities Capabilities)
         {
             this.Capabilities = Capabilities;
         }
@@ -21748,13 +21748,13 @@ namespace OnvifDeviceIO
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=2)]
         [System.Xml.Serialization.XmlElementAttribute("DNSManual")]
-        public OnvifDeviceIO.IPAddress[] DNSManual;
+        public SharpOnvifClient.DeviceIO.IPAddress[] DNSManual;
         
         public SetDNSRequest()
         {
         }
         
-        public SetDNSRequest(bool FromDHCP, string[] SearchDomain, OnvifDeviceIO.IPAddress[] DNSManual)
+        public SetDNSRequest(bool FromDHCP, string[] SearchDomain, SharpOnvifClient.DeviceIO.IPAddress[] DNSManual)
         {
             this.FromDHCP = FromDHCP;
             this.SearchDomain = SearchDomain;
@@ -21786,13 +21786,13 @@ namespace OnvifDeviceIO
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=1)]
         [System.Xml.Serialization.XmlElementAttribute("NTPManual")]
-        public OnvifDeviceIO.NetworkHost[] NTPManual;
+        public SharpOnvifClient.DeviceIO.NetworkHost[] NTPManual;
         
         public SetNTPRequest()
         {
         }
         
-        public SetNTPRequest(bool FromDHCP, OnvifDeviceIO.NetworkHost[] NTPManual)
+        public SetNTPRequest(bool FromDHCP, SharpOnvifClient.DeviceIO.NetworkHost[] NTPManual)
         {
             this.FromDHCP = FromDHCP;
             this.NTPManual = NTPManual;
@@ -21819,7 +21819,7 @@ namespace OnvifDeviceIO
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=0)]
-        public OnvifDeviceIO.DynamicDNSType Type;
+        public SharpOnvifClient.DeviceIO.DynamicDNSType Type;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=1)]
         [System.Xml.Serialization.XmlElementAttribute(DataType="token")]
@@ -21833,7 +21833,7 @@ namespace OnvifDeviceIO
         {
         }
         
-        public SetDynamicDNSRequest(OnvifDeviceIO.DynamicDNSType Type, string Name, string TTL)
+        public SetDynamicDNSRequest(SharpOnvifClient.DeviceIO.DynamicDNSType Type, string Name, string TTL)
         {
             this.Type = Type;
             this.Name = Name;
@@ -21874,13 +21874,13 @@ namespace OnvifDeviceIO
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("NetworkInterfaces")]
-        public OnvifDeviceIO.NetworkInterface[] NetworkInterfaces;
+        public SharpOnvifClient.DeviceIO.NetworkInterface[] NetworkInterfaces;
         
         public GetNetworkInterfacesResponse()
         {
         }
         
-        public GetNetworkInterfacesResponse(OnvifDeviceIO.NetworkInterface[] NetworkInterfaces)
+        public GetNetworkInterfacesResponse(SharpOnvifClient.DeviceIO.NetworkInterface[] NetworkInterfaces)
         {
             this.NetworkInterfaces = NetworkInterfaces;
         }
@@ -21907,13 +21907,13 @@ namespace OnvifDeviceIO
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("NetworkProtocols")]
-        public OnvifDeviceIO.NetworkProtocol[] NetworkProtocols;
+        public SharpOnvifClient.DeviceIO.NetworkProtocol[] NetworkProtocols;
         
         public GetNetworkProtocolsResponse()
         {
         }
         
-        public GetNetworkProtocolsResponse(OnvifDeviceIO.NetworkProtocol[] NetworkProtocols)
+        public GetNetworkProtocolsResponse(SharpOnvifClient.DeviceIO.NetworkProtocol[] NetworkProtocols)
         {
             this.NetworkProtocols = NetworkProtocols;
         }
@@ -21928,13 +21928,13 @@ namespace OnvifDeviceIO
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("NetworkProtocols")]
-        public OnvifDeviceIO.NetworkProtocol[] NetworkProtocols;
+        public SharpOnvifClient.DeviceIO.NetworkProtocol[] NetworkProtocols;
         
         public SetNetworkProtocolsRequest()
         {
         }
         
-        public SetNetworkProtocolsRequest(OnvifDeviceIO.NetworkProtocol[] NetworkProtocols)
+        public SetNetworkProtocolsRequest(SharpOnvifClient.DeviceIO.NetworkProtocol[] NetworkProtocols)
         {
             this.NetworkProtocols = NetworkProtocols;
         }
@@ -22011,13 +22011,13 @@ namespace OnvifDeviceIO
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("RelayOutputs")]
-        public OnvifDeviceIO.RelayOutput[] RelayOutputs;
+        public SharpOnvifClient.DeviceIO.RelayOutput[] RelayOutputs;
         
         public GetRelayOutputsResponse()
         {
         }
         
-        public GetRelayOutputsResponse(OnvifDeviceIO.RelayOutput[] RelayOutputs)
+        public GetRelayOutputsResponse(SharpOnvifClient.DeviceIO.RelayOutput[] RelayOutputs)
         {
             this.RelayOutputs = RelayOutputs;
         }
@@ -22065,13 +22065,13 @@ namespace OnvifDeviceIO
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=0)]
-        public OnvifDeviceIO.Dot11Capabilities Capabilities;
+        public SharpOnvifClient.DeviceIO.Dot11Capabilities Capabilities;
         
         public GetDot11CapabilitiesResponse()
         {
         }
         
-        public GetDot11CapabilitiesResponse(OnvifDeviceIO.Dot11Capabilities Capabilities)
+        public GetDot11CapabilitiesResponse(SharpOnvifClient.DeviceIO.Dot11Capabilities Capabilities)
         {
             this.Capabilities = Capabilities;
         }
@@ -22106,13 +22106,13 @@ namespace OnvifDeviceIO
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Networks")]
-        public OnvifDeviceIO.Dot11AvailableNetworks[] Networks;
+        public SharpOnvifClient.DeviceIO.Dot11AvailableNetworks[] Networks;
         
         public ScanAvailableDot11NetworksResponse()
         {
         }
         
-        public ScanAvailableDot11NetworksResponse(OnvifDeviceIO.Dot11AvailableNetworks[] Networks)
+        public ScanAvailableDot11NetworksResponse(SharpOnvifClient.DeviceIO.Dot11AvailableNetworks[] Networks)
         {
             this.Networks = Networks;
         }
@@ -22161,7 +22161,7 @@ namespace OnvifDeviceIO
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=0)]
         [System.Xml.Serialization.XmlArrayItemAttribute("SystemLog", Namespace="http://www.onvif.org/ver10/schema", IsNullable=false)]
-        public OnvifDeviceIO.SystemLogUri[] SystemLogUris;
+        public SharpOnvifClient.DeviceIO.SystemLogUri[] SystemLogUris;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=1)]
         [System.Xml.Serialization.XmlElementAttribute(DataType="anyURI")]
@@ -22172,13 +22172,13 @@ namespace OnvifDeviceIO
         public string SystemBackupUri;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=3)]
-        public OnvifDeviceIO.GetSystemUrisResponseExtension Extension;
+        public SharpOnvifClient.DeviceIO.GetSystemUrisResponseExtension Extension;
         
         public GetSystemUrisResponse()
         {
         }
         
-        public GetSystemUrisResponse(OnvifDeviceIO.SystemLogUri[] SystemLogUris, string SupportInfoUri, string SystemBackupUri, OnvifDeviceIO.GetSystemUrisResponseExtension Extension)
+        public GetSystemUrisResponse(SharpOnvifClient.DeviceIO.SystemLogUri[] SystemLogUris, string SupportInfoUri, string SystemBackupUri, SharpOnvifClient.DeviceIO.GetSystemUrisResponseExtension Extension)
         {
             this.SystemLogUris = SystemLogUris;
             this.SupportInfoUri = SupportInfoUri;
@@ -22285,13 +22285,13 @@ namespace OnvifDeviceIO
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("StorageConfigurations")]
-        public OnvifDeviceIO.StorageConfiguration[] StorageConfigurations;
+        public SharpOnvifClient.DeviceIO.StorageConfiguration[] StorageConfigurations;
         
         public GetStorageConfigurationsResponse()
         {
         }
         
-        public GetStorageConfigurationsResponse(OnvifDeviceIO.StorageConfiguration[] StorageConfigurations)
+        public GetStorageConfigurationsResponse(SharpOnvifClient.DeviceIO.StorageConfiguration[] StorageConfigurations)
         {
             this.StorageConfigurations = StorageConfigurations;
         }
@@ -22318,13 +22318,13 @@ namespace OnvifDeviceIO
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Location")]
-        public OnvifDeviceIO.LocationEntity[] Location;
+        public SharpOnvifClient.DeviceIO.LocationEntity[] Location;
         
         public GetGeoLocationResponse()
         {
         }
         
-        public GetGeoLocationResponse(OnvifDeviceIO.LocationEntity[] Location)
+        public GetGeoLocationResponse(SharpOnvifClient.DeviceIO.LocationEntity[] Location)
         {
             this.Location = Location;
         }
@@ -22339,13 +22339,13 @@ namespace OnvifDeviceIO
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Location")]
-        public OnvifDeviceIO.LocationEntity[] Location;
+        public SharpOnvifClient.DeviceIO.LocationEntity[] Location;
         
         public SetGeoLocationRequest()
         {
         }
         
-        public SetGeoLocationRequest(OnvifDeviceIO.LocationEntity[] Location)
+        public SetGeoLocationRequest(SharpOnvifClient.DeviceIO.LocationEntity[] Location)
         {
             this.Location = Location;
         }
@@ -22372,13 +22372,13 @@ namespace OnvifDeviceIO
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Location")]
-        public OnvifDeviceIO.LocationEntity[] Location;
+        public SharpOnvifClient.DeviceIO.LocationEntity[] Location;
         
         public DeleteGeoLocationRequest()
         {
         }
         
-        public DeleteGeoLocationRequest(OnvifDeviceIO.LocationEntity[] Location)
+        public DeleteGeoLocationRequest(SharpOnvifClient.DeviceIO.LocationEntity[] Location)
         {
             this.Location = Location;
         }
@@ -22437,13 +22437,13 @@ namespace OnvifDeviceIO
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=0)]
-        public OnvifDeviceIO.Certificate NvtCertificate;
+        public SharpOnvifClient.DeviceIO.Certificate NvtCertificate;
         
         public CreateCertificateResponse()
         {
         }
         
-        public CreateCertificateResponse(OnvifDeviceIO.Certificate NvtCertificate)
+        public CreateCertificateResponse(SharpOnvifClient.DeviceIO.Certificate NvtCertificate)
         {
             this.NvtCertificate = NvtCertificate;
         }
@@ -22470,13 +22470,13 @@ namespace OnvifDeviceIO
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("NvtCertificate")]
-        public OnvifDeviceIO.Certificate[] NvtCertificate;
+        public SharpOnvifClient.DeviceIO.Certificate[] NvtCertificate;
         
         public GetCertificatesResponse()
         {
         }
         
-        public GetCertificatesResponse(OnvifDeviceIO.Certificate[] NvtCertificate)
+        public GetCertificatesResponse(SharpOnvifClient.DeviceIO.Certificate[] NvtCertificate)
         {
             this.NvtCertificate = NvtCertificate;
         }
@@ -22503,13 +22503,13 @@ namespace OnvifDeviceIO
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("CertificateStatus")]
-        public OnvifDeviceIO.CertificateStatus[] CertificateStatus;
+        public SharpOnvifClient.DeviceIO.CertificateStatus[] CertificateStatus;
         
         public GetCertificatesStatusResponse()
         {
         }
         
-        public GetCertificatesStatusResponse(OnvifDeviceIO.CertificateStatus[] CertificateStatus)
+        public GetCertificatesStatusResponse(SharpOnvifClient.DeviceIO.CertificateStatus[] CertificateStatus)
         {
             this.CertificateStatus = CertificateStatus;
         }
@@ -22524,13 +22524,13 @@ namespace OnvifDeviceIO
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("CertificateStatus")]
-        public OnvifDeviceIO.CertificateStatus[] CertificateStatus;
+        public SharpOnvifClient.DeviceIO.CertificateStatus[] CertificateStatus;
         
         public SetCertificatesStatusRequest()
         {
         }
         
-        public SetCertificatesStatusRequest(OnvifDeviceIO.CertificateStatus[] CertificateStatus)
+        public SetCertificatesStatusRequest(SharpOnvifClient.DeviceIO.CertificateStatus[] CertificateStatus)
         {
             this.CertificateStatus = CertificateStatus;
         }
@@ -22596,13 +22596,13 @@ namespace OnvifDeviceIO
         public string Subject;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=2)]
-        public OnvifDeviceIO.BinaryData Attributes;
+        public SharpOnvifClient.DeviceIO.BinaryData Attributes;
         
         public GetPkcs10RequestRequest()
         {
         }
         
-        public GetPkcs10RequestRequest(string CertificateID, string Subject, OnvifDeviceIO.BinaryData Attributes)
+        public GetPkcs10RequestRequest(string CertificateID, string Subject, SharpOnvifClient.DeviceIO.BinaryData Attributes)
         {
             this.CertificateID = CertificateID;
             this.Subject = Subject;
@@ -22618,13 +22618,13 @@ namespace OnvifDeviceIO
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=0)]
-        public OnvifDeviceIO.BinaryData Pkcs10Request;
+        public SharpOnvifClient.DeviceIO.BinaryData Pkcs10Request;
         
         public GetPkcs10RequestResponse()
         {
         }
         
-        public GetPkcs10RequestResponse(OnvifDeviceIO.BinaryData Pkcs10Request)
+        public GetPkcs10RequestResponse(SharpOnvifClient.DeviceIO.BinaryData Pkcs10Request)
         {
             this.Pkcs10Request = Pkcs10Request;
         }
@@ -22639,13 +22639,13 @@ namespace OnvifDeviceIO
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("NVTCertificate")]
-        public OnvifDeviceIO.Certificate[] NVTCertificate;
+        public SharpOnvifClient.DeviceIO.Certificate[] NVTCertificate;
         
         public LoadCertificatesRequest()
         {
         }
         
-        public LoadCertificatesRequest(OnvifDeviceIO.Certificate[] NVTCertificate)
+        public LoadCertificatesRequest(SharpOnvifClient.DeviceIO.Certificate[] NVTCertificate)
         {
             this.NVTCertificate = NVTCertificate;
         }
@@ -22684,13 +22684,13 @@ namespace OnvifDeviceIO
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("CACertificate")]
-        public OnvifDeviceIO.Certificate[] CACertificate;
+        public SharpOnvifClient.DeviceIO.Certificate[] CACertificate;
         
         public GetCACertificatesResponse()
         {
         }
         
-        public GetCACertificatesResponse(OnvifDeviceIO.Certificate[] CACertificate)
+        public GetCACertificatesResponse(SharpOnvifClient.DeviceIO.Certificate[] CACertificate)
         {
             this.CACertificate = CACertificate;
         }
@@ -22705,13 +22705,13 @@ namespace OnvifDeviceIO
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("CertificateWithPrivateKey")]
-        public OnvifDeviceIO.CertificateWithPrivateKey[] CertificateWithPrivateKey;
+        public SharpOnvifClient.DeviceIO.CertificateWithPrivateKey[] CertificateWithPrivateKey;
         
         public LoadCertificateWithPrivateKeyRequest()
         {
         }
         
-        public LoadCertificateWithPrivateKeyRequest(OnvifDeviceIO.CertificateWithPrivateKey[] CertificateWithPrivateKey)
+        public LoadCertificateWithPrivateKeyRequest(SharpOnvifClient.DeviceIO.CertificateWithPrivateKey[] CertificateWithPrivateKey)
         {
             this.CertificateWithPrivateKey = CertificateWithPrivateKey;
         }
@@ -22758,13 +22758,13 @@ namespace OnvifDeviceIO
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=0)]
-        public OnvifDeviceIO.CertificateInformation CertificateInformation;
+        public SharpOnvifClient.DeviceIO.CertificateInformation CertificateInformation;
         
         public GetCertificateInformationResponse()
         {
         }
         
-        public GetCertificateInformationResponse(OnvifDeviceIO.CertificateInformation CertificateInformation)
+        public GetCertificateInformationResponse(SharpOnvifClient.DeviceIO.CertificateInformation CertificateInformation)
         {
             this.CertificateInformation = CertificateInformation;
         }
@@ -22779,13 +22779,13 @@ namespace OnvifDeviceIO
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("CACertificate")]
-        public OnvifDeviceIO.Certificate[] CACertificate;
+        public SharpOnvifClient.DeviceIO.Certificate[] CACertificate;
         
         public LoadCACertificatesRequest()
         {
         }
         
-        public LoadCACertificatesRequest(OnvifDeviceIO.Certificate[] CACertificate)
+        public LoadCACertificatesRequest(SharpOnvifClient.DeviceIO.Certificate[] CACertificate)
         {
             this.CACertificate = CACertificate;
         }
@@ -22824,13 +22824,13 @@ namespace OnvifDeviceIO
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Dot1XConfiguration")]
-        public OnvifDeviceIO.Dot1XConfiguration[] Dot1XConfiguration;
+        public SharpOnvifClient.DeviceIO.Dot1XConfiguration[] Dot1XConfiguration;
         
         public GetDot1XConfigurationsResponse()
         {
         }
         
-        public GetDot1XConfigurationsResponse(OnvifDeviceIO.Dot1XConfiguration[] Dot1XConfiguration)
+        public GetDot1XConfigurationsResponse(SharpOnvifClient.DeviceIO.Dot1XConfiguration[] Dot1XConfiguration)
         {
             this.Dot1XConfiguration = Dot1XConfiguration;
         }
@@ -22870,13 +22870,13 @@ namespace OnvifDeviceIO
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface DeviceChannel : OnvifDeviceIO.Device, System.ServiceModel.IClientChannel
+    public interface DeviceChannel : SharpOnvifClient.DeviceIO.Device, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class DeviceClient : System.ServiceModel.ClientBase<OnvifDeviceIO.Device>, OnvifDeviceIO.Device
+    public partial class DeviceClient : System.ServiceModel.ClientBase<SharpOnvifClient.DeviceIO.Device>, SharpOnvifClient.DeviceIO.Device
     {
         
         public DeviceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
@@ -22885,44 +22885,44 @@ namespace OnvifDeviceIO
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetServicesResponse> OnvifDeviceIO.Device.GetServicesAsync(OnvifDeviceIO.GetServicesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetServicesResponse> SharpOnvifClient.DeviceIO.Device.GetServicesAsync(SharpOnvifClient.DeviceIO.GetServicesRequest request)
         {
             return base.Channel.GetServicesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetServicesResponse> GetServicesAsync(bool IncludeCapability)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetServicesResponse> GetServicesAsync(bool IncludeCapability)
         {
-            OnvifDeviceIO.GetServicesRequest inValue = new OnvifDeviceIO.GetServicesRequest();
+            SharpOnvifClient.DeviceIO.GetServicesRequest inValue = new SharpOnvifClient.DeviceIO.GetServicesRequest();
             inValue.IncludeCapability = IncludeCapability;
-            return ((OnvifDeviceIO.Device)(this)).GetServicesAsync(inValue);
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).GetServicesAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.DeviceServiceCapabilities> GetServiceCapabilitiesAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.DeviceServiceCapabilities> GetServiceCapabilitiesAsync()
         {
             return base.Channel.GetServiceCapabilitiesAsync();
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetDeviceInformationResponse> GetDeviceInformationAsync(OnvifDeviceIO.GetDeviceInformationRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetDeviceInformationResponse> GetDeviceInformationAsync(SharpOnvifClient.DeviceIO.GetDeviceInformationRequest request)
         {
             return base.Channel.GetDeviceInformationAsync(request);
         }
         
-        public System.Threading.Tasks.Task SetSystemDateAndTimeAsync(OnvifDeviceIO.SetDateTimeType DateTimeType, bool DaylightSavings, OnvifDeviceIO.TimeZone TimeZone, OnvifDeviceIO.DateTime UTCDateTime)
+        public System.Threading.Tasks.Task SetSystemDateAndTimeAsync(SharpOnvifClient.DeviceIO.SetDateTimeType DateTimeType, bool DaylightSavings, SharpOnvifClient.DeviceIO.TimeZone TimeZone, SharpOnvifClient.DeviceIO.DateTime UTCDateTime)
         {
             return base.Channel.SetSystemDateAndTimeAsync(DateTimeType, DaylightSavings, TimeZone, UTCDateTime);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.SystemDateTime> GetSystemDateAndTimeAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SystemDateTime> GetSystemDateAndTimeAsync()
         {
             return base.Channel.GetSystemDateAndTimeAsync();
         }
         
-        public System.Threading.Tasks.Task SetSystemFactoryDefaultAsync(OnvifDeviceIO.FactoryDefaultType FactoryDefault)
+        public System.Threading.Tasks.Task SetSystemFactoryDefaultAsync(SharpOnvifClient.DeviceIO.FactoryDefaultType FactoryDefault)
         {
             return base.Channel.SetSystemFactoryDefaultAsync(FactoryDefault);
         }
         
-        public System.Threading.Tasks.Task<string> UpgradeSystemFirmwareAsync(OnvifDeviceIO.AttachmentData Firmware)
+        public System.Threading.Tasks.Task<string> UpgradeSystemFirmwareAsync(SharpOnvifClient.DeviceIO.AttachmentData Firmware)
         {
             return base.Channel.UpgradeSystemFirmwareAsync(Firmware);
         }
@@ -22933,212 +22933,212 @@ namespace OnvifDeviceIO
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.RestoreSystemResponse> OnvifDeviceIO.Device.RestoreSystemAsync(OnvifDeviceIO.RestoreSystemRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.RestoreSystemResponse> SharpOnvifClient.DeviceIO.Device.RestoreSystemAsync(SharpOnvifClient.DeviceIO.RestoreSystemRequest request)
         {
             return base.Channel.RestoreSystemAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.RestoreSystemResponse> RestoreSystemAsync(OnvifDeviceIO.BackupFile[] BackupFiles)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.RestoreSystemResponse> RestoreSystemAsync(SharpOnvifClient.DeviceIO.BackupFile[] BackupFiles)
         {
-            OnvifDeviceIO.RestoreSystemRequest inValue = new OnvifDeviceIO.RestoreSystemRequest();
+            SharpOnvifClient.DeviceIO.RestoreSystemRequest inValue = new SharpOnvifClient.DeviceIO.RestoreSystemRequest();
             inValue.BackupFiles = BackupFiles;
-            return ((OnvifDeviceIO.Device)(this)).RestoreSystemAsync(inValue);
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).RestoreSystemAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetSystemBackupResponse> OnvifDeviceIO.Device.GetSystemBackupAsync(OnvifDeviceIO.GetSystemBackupRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetSystemBackupResponse> SharpOnvifClient.DeviceIO.Device.GetSystemBackupAsync(SharpOnvifClient.DeviceIO.GetSystemBackupRequest request)
         {
             return base.Channel.GetSystemBackupAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetSystemBackupResponse> GetSystemBackupAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetSystemBackupResponse> GetSystemBackupAsync()
         {
-            OnvifDeviceIO.GetSystemBackupRequest inValue = new OnvifDeviceIO.GetSystemBackupRequest();
-            return ((OnvifDeviceIO.Device)(this)).GetSystemBackupAsync(inValue);
+            SharpOnvifClient.DeviceIO.GetSystemBackupRequest inValue = new SharpOnvifClient.DeviceIO.GetSystemBackupRequest();
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).GetSystemBackupAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.SystemLog> GetSystemLogAsync(OnvifDeviceIO.SystemLogType LogType)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SystemLog> GetSystemLogAsync(SharpOnvifClient.DeviceIO.SystemLogType LogType)
         {
             return base.Channel.GetSystemLogAsync(LogType);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.SupportInformation> GetSystemSupportInformationAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SupportInformation> GetSystemSupportInformationAsync()
         {
             return base.Channel.GetSystemSupportInformationAsync();
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetScopesResponse> OnvifDeviceIO.Device.GetScopesAsync(OnvifDeviceIO.GetScopesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetScopesResponse> SharpOnvifClient.DeviceIO.Device.GetScopesAsync(SharpOnvifClient.DeviceIO.GetScopesRequest request)
         {
             return base.Channel.GetScopesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetScopesResponse> GetScopesAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetScopesResponse> GetScopesAsync()
         {
-            OnvifDeviceIO.GetScopesRequest inValue = new OnvifDeviceIO.GetScopesRequest();
-            return ((OnvifDeviceIO.Device)(this)).GetScopesAsync(inValue);
+            SharpOnvifClient.DeviceIO.GetScopesRequest inValue = new SharpOnvifClient.DeviceIO.GetScopesRequest();
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).GetScopesAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.SetScopesResponse> OnvifDeviceIO.Device.SetScopesAsync(OnvifDeviceIO.SetScopesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetScopesResponse> SharpOnvifClient.DeviceIO.Device.SetScopesAsync(SharpOnvifClient.DeviceIO.SetScopesRequest request)
         {
             return base.Channel.SetScopesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.SetScopesResponse> SetScopesAsync(string[] Scopes)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetScopesResponse> SetScopesAsync(string[] Scopes)
         {
-            OnvifDeviceIO.SetScopesRequest inValue = new OnvifDeviceIO.SetScopesRequest();
+            SharpOnvifClient.DeviceIO.SetScopesRequest inValue = new SharpOnvifClient.DeviceIO.SetScopesRequest();
             inValue.Scopes = Scopes;
-            return ((OnvifDeviceIO.Device)(this)).SetScopesAsync(inValue);
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).SetScopesAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.AddScopesResponse> OnvifDeviceIO.Device.AddScopesAsync(OnvifDeviceIO.AddScopesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.AddScopesResponse> SharpOnvifClient.DeviceIO.Device.AddScopesAsync(SharpOnvifClient.DeviceIO.AddScopesRequest request)
         {
             return base.Channel.AddScopesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.AddScopesResponse> AddScopesAsync(string[] ScopeItem)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.AddScopesResponse> AddScopesAsync(string[] ScopeItem)
         {
-            OnvifDeviceIO.AddScopesRequest inValue = new OnvifDeviceIO.AddScopesRequest();
+            SharpOnvifClient.DeviceIO.AddScopesRequest inValue = new SharpOnvifClient.DeviceIO.AddScopesRequest();
             inValue.ScopeItem = ScopeItem;
-            return ((OnvifDeviceIO.Device)(this)).AddScopesAsync(inValue);
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).AddScopesAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.RemoveScopesResponse> RemoveScopesAsync(OnvifDeviceIO.RemoveScopesRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.RemoveScopesResponse> RemoveScopesAsync(SharpOnvifClient.DeviceIO.RemoveScopesRequest request)
         {
             return base.Channel.RemoveScopesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.DiscoveryMode> GetDiscoveryModeAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.DiscoveryMode> GetDiscoveryModeAsync()
         {
             return base.Channel.GetDiscoveryModeAsync();
         }
         
-        public System.Threading.Tasks.Task SetDiscoveryModeAsync(OnvifDeviceIO.DiscoveryMode DiscoveryMode)
+        public System.Threading.Tasks.Task SetDiscoveryModeAsync(SharpOnvifClient.DeviceIO.DiscoveryMode DiscoveryMode)
         {
             return base.Channel.SetDiscoveryModeAsync(DiscoveryMode);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.DiscoveryMode> GetRemoteDiscoveryModeAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.DiscoveryMode> GetRemoteDiscoveryModeAsync()
         {
             return base.Channel.GetRemoteDiscoveryModeAsync();
         }
         
-        public System.Threading.Tasks.Task SetRemoteDiscoveryModeAsync(OnvifDeviceIO.DiscoveryMode RemoteDiscoveryMode)
+        public System.Threading.Tasks.Task SetRemoteDiscoveryModeAsync(SharpOnvifClient.DeviceIO.DiscoveryMode RemoteDiscoveryMode)
         {
             return base.Channel.SetRemoteDiscoveryModeAsync(RemoteDiscoveryMode);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetDPAddressesResponse> OnvifDeviceIO.Device.GetDPAddressesAsync(OnvifDeviceIO.GetDPAddressesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetDPAddressesResponse> SharpOnvifClient.DeviceIO.Device.GetDPAddressesAsync(SharpOnvifClient.DeviceIO.GetDPAddressesRequest request)
         {
             return base.Channel.GetDPAddressesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetDPAddressesResponse> GetDPAddressesAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetDPAddressesResponse> GetDPAddressesAsync()
         {
-            OnvifDeviceIO.GetDPAddressesRequest inValue = new OnvifDeviceIO.GetDPAddressesRequest();
-            return ((OnvifDeviceIO.Device)(this)).GetDPAddressesAsync(inValue);
+            SharpOnvifClient.DeviceIO.GetDPAddressesRequest inValue = new SharpOnvifClient.DeviceIO.GetDPAddressesRequest();
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).GetDPAddressesAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.SetDPAddressesResponse> OnvifDeviceIO.Device.SetDPAddressesAsync(OnvifDeviceIO.SetDPAddressesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetDPAddressesResponse> SharpOnvifClient.DeviceIO.Device.SetDPAddressesAsync(SharpOnvifClient.DeviceIO.SetDPAddressesRequest request)
         {
             return base.Channel.SetDPAddressesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.SetDPAddressesResponse> SetDPAddressesAsync(OnvifDeviceIO.NetworkHost[] DPAddress)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetDPAddressesResponse> SetDPAddressesAsync(SharpOnvifClient.DeviceIO.NetworkHost[] DPAddress)
         {
-            OnvifDeviceIO.SetDPAddressesRequest inValue = new OnvifDeviceIO.SetDPAddressesRequest();
+            SharpOnvifClient.DeviceIO.SetDPAddressesRequest inValue = new SharpOnvifClient.DeviceIO.SetDPAddressesRequest();
             inValue.DPAddress = DPAddress;
-            return ((OnvifDeviceIO.Device)(this)).SetDPAddressesAsync(inValue);
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).SetDPAddressesAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetEndpointReferenceResponse> GetEndpointReferenceAsync(OnvifDeviceIO.GetEndpointReferenceRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetEndpointReferenceResponse> GetEndpointReferenceAsync(SharpOnvifClient.DeviceIO.GetEndpointReferenceRequest request)
         {
             return base.Channel.GetEndpointReferenceAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.RemoteUser> GetRemoteUserAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.RemoteUser> GetRemoteUserAsync()
         {
             return base.Channel.GetRemoteUserAsync();
         }
         
-        public System.Threading.Tasks.Task SetRemoteUserAsync(OnvifDeviceIO.RemoteUser RemoteUser)
+        public System.Threading.Tasks.Task SetRemoteUserAsync(SharpOnvifClient.DeviceIO.RemoteUser RemoteUser)
         {
             return base.Channel.SetRemoteUserAsync(RemoteUser);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetUsersResponse> OnvifDeviceIO.Device.GetUsersAsync(OnvifDeviceIO.GetUsersRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetUsersResponse> SharpOnvifClient.DeviceIO.Device.GetUsersAsync(SharpOnvifClient.DeviceIO.GetUsersRequest request)
         {
             return base.Channel.GetUsersAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetUsersResponse> GetUsersAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetUsersResponse> GetUsersAsync()
         {
-            OnvifDeviceIO.GetUsersRequest inValue = new OnvifDeviceIO.GetUsersRequest();
-            return ((OnvifDeviceIO.Device)(this)).GetUsersAsync(inValue);
+            SharpOnvifClient.DeviceIO.GetUsersRequest inValue = new SharpOnvifClient.DeviceIO.GetUsersRequest();
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).GetUsersAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.CreateUsersResponse> OnvifDeviceIO.Device.CreateUsersAsync(OnvifDeviceIO.CreateUsersRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.CreateUsersResponse> SharpOnvifClient.DeviceIO.Device.CreateUsersAsync(SharpOnvifClient.DeviceIO.CreateUsersRequest request)
         {
             return base.Channel.CreateUsersAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.CreateUsersResponse> CreateUsersAsync(OnvifDeviceIO.User[] User)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.CreateUsersResponse> CreateUsersAsync(SharpOnvifClient.DeviceIO.User[] User)
         {
-            OnvifDeviceIO.CreateUsersRequest inValue = new OnvifDeviceIO.CreateUsersRequest();
+            SharpOnvifClient.DeviceIO.CreateUsersRequest inValue = new SharpOnvifClient.DeviceIO.CreateUsersRequest();
             inValue.User = User;
-            return ((OnvifDeviceIO.Device)(this)).CreateUsersAsync(inValue);
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).CreateUsersAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.DeleteUsersResponse> OnvifDeviceIO.Device.DeleteUsersAsync(OnvifDeviceIO.DeleteUsersRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.DeleteUsersResponse> SharpOnvifClient.DeviceIO.Device.DeleteUsersAsync(SharpOnvifClient.DeviceIO.DeleteUsersRequest request)
         {
             return base.Channel.DeleteUsersAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.DeleteUsersResponse> DeleteUsersAsync(string[] Username)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.DeleteUsersResponse> DeleteUsersAsync(string[] Username)
         {
-            OnvifDeviceIO.DeleteUsersRequest inValue = new OnvifDeviceIO.DeleteUsersRequest();
+            SharpOnvifClient.DeviceIO.DeleteUsersRequest inValue = new SharpOnvifClient.DeviceIO.DeleteUsersRequest();
             inValue.Username = Username;
-            return ((OnvifDeviceIO.Device)(this)).DeleteUsersAsync(inValue);
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).DeleteUsersAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.SetUserResponse> OnvifDeviceIO.Device.SetUserAsync(OnvifDeviceIO.SetUserRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetUserResponse> SharpOnvifClient.DeviceIO.Device.SetUserAsync(SharpOnvifClient.DeviceIO.SetUserRequest request)
         {
             return base.Channel.SetUserAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.SetUserResponse> SetUserAsync(OnvifDeviceIO.User[] User)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetUserResponse> SetUserAsync(SharpOnvifClient.DeviceIO.User[] User)
         {
-            OnvifDeviceIO.SetUserRequest inValue = new OnvifDeviceIO.SetUserRequest();
+            SharpOnvifClient.DeviceIO.SetUserRequest inValue = new SharpOnvifClient.DeviceIO.SetUserRequest();
             inValue.User = User;
-            return ((OnvifDeviceIO.Device)(this)).SetUserAsync(inValue);
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).SetUserAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetWsdlUrlResponse> OnvifDeviceIO.Device.GetWsdlUrlAsync(OnvifDeviceIO.GetWsdlUrlRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetWsdlUrlResponse> SharpOnvifClient.DeviceIO.Device.GetWsdlUrlAsync(SharpOnvifClient.DeviceIO.GetWsdlUrlRequest request)
         {
             return base.Channel.GetWsdlUrlAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetWsdlUrlResponse> GetWsdlUrlAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetWsdlUrlResponse> GetWsdlUrlAsync()
         {
-            OnvifDeviceIO.GetWsdlUrlRequest inValue = new OnvifDeviceIO.GetWsdlUrlRequest();
-            return ((OnvifDeviceIO.Device)(this)).GetWsdlUrlAsync(inValue);
+            SharpOnvifClient.DeviceIO.GetWsdlUrlRequest inValue = new SharpOnvifClient.DeviceIO.GetWsdlUrlRequest();
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).GetWsdlUrlAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetPasswordComplexityOptionsResponse> GetPasswordComplexityOptionsAsync(OnvifDeviceIO.GetPasswordComplexityOptionsRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetPasswordComplexityOptionsResponse> GetPasswordComplexityOptionsAsync(SharpOnvifClient.DeviceIO.GetPasswordComplexityOptionsRequest request)
         {
             return base.Channel.GetPasswordComplexityOptionsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetPasswordComplexityConfigurationResponse> GetPasswordComplexityConfigurationAsync(OnvifDeviceIO.GetPasswordComplexityConfigurationRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetPasswordComplexityConfigurationResponse> GetPasswordComplexityConfigurationAsync(SharpOnvifClient.DeviceIO.GetPasswordComplexityConfigurationRequest request)
         {
             return base.Channel.GetPasswordComplexityConfigurationAsync(request);
         }
@@ -23148,7 +23148,7 @@ namespace OnvifDeviceIO
             return base.Channel.SetPasswordComplexityConfigurationAsync(MinLen, Uppercase, Number, SpecialChars, BlockUsernameOccurrence, PolicyConfigurationLocked);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetPasswordHistoryConfigurationResponse> GetPasswordHistoryConfigurationAsync(OnvifDeviceIO.GetPasswordHistoryConfigurationRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetPasswordHistoryConfigurationResponse> GetPasswordHistoryConfigurationAsync(SharpOnvifClient.DeviceIO.GetPasswordHistoryConfigurationRequest request)
         {
             return base.Channel.GetPasswordHistoryConfigurationAsync(request);
         }
@@ -23158,12 +23158,12 @@ namespace OnvifDeviceIO
             return base.Channel.SetPasswordHistoryConfigurationAsync(Enabled, Length);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetAuthFailureWarningOptionsResponse> GetAuthFailureWarningOptionsAsync(OnvifDeviceIO.GetAuthFailureWarningOptionsRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetAuthFailureWarningOptionsResponse> GetAuthFailureWarningOptionsAsync(SharpOnvifClient.DeviceIO.GetAuthFailureWarningOptionsRequest request)
         {
             return base.Channel.GetAuthFailureWarningOptionsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetAuthFailureWarningConfigurationResponse> GetAuthFailureWarningConfigurationAsync(OnvifDeviceIO.GetAuthFailureWarningConfigurationRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetAuthFailureWarningConfigurationResponse> GetAuthFailureWarningConfigurationAsync(SharpOnvifClient.DeviceIO.GetAuthFailureWarningConfigurationRequest request)
         {
             return base.Channel.GetAuthFailureWarningConfigurationAsync(request);
         }
@@ -23174,34 +23174,34 @@ namespace OnvifDeviceIO
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetCapabilitiesResponse> OnvifDeviceIO.Device.GetCapabilitiesAsync(OnvifDeviceIO.GetCapabilitiesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetCapabilitiesResponse> SharpOnvifClient.DeviceIO.Device.GetCapabilitiesAsync(SharpOnvifClient.DeviceIO.GetCapabilitiesRequest request)
         {
             return base.Channel.GetCapabilitiesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetCapabilitiesResponse> GetCapabilitiesAsync(OnvifDeviceIO.CapabilityCategory[] Category)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetCapabilitiesResponse> GetCapabilitiesAsync(SharpOnvifClient.DeviceIO.CapabilityCategory[] Category)
         {
-            OnvifDeviceIO.GetCapabilitiesRequest inValue = new OnvifDeviceIO.GetCapabilitiesRequest();
+            SharpOnvifClient.DeviceIO.GetCapabilitiesRequest inValue = new SharpOnvifClient.DeviceIO.GetCapabilitiesRequest();
             inValue.Category = Category;
-            return ((OnvifDeviceIO.Device)(this)).GetCapabilitiesAsync(inValue);
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).GetCapabilitiesAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.HostnameInformation> GetHostnameAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.HostnameInformation> GetHostnameAsync()
         {
             return base.Channel.GetHostnameAsync();
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.SetHostnameResponse> OnvifDeviceIO.Device.SetHostnameAsync(OnvifDeviceIO.SetHostnameRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetHostnameResponse> SharpOnvifClient.DeviceIO.Device.SetHostnameAsync(SharpOnvifClient.DeviceIO.SetHostnameRequest request)
         {
             return base.Channel.SetHostnameAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.SetHostnameResponse> SetHostnameAsync(string Name)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetHostnameResponse> SetHostnameAsync(string Name)
         {
-            OnvifDeviceIO.SetHostnameRequest inValue = new OnvifDeviceIO.SetHostnameRequest();
+            SharpOnvifClient.DeviceIO.SetHostnameRequest inValue = new SharpOnvifClient.DeviceIO.SetHostnameRequest();
             inValue.Name = Name;
-            return ((OnvifDeviceIO.Device)(this)).SetHostnameAsync(inValue);
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).SetHostnameAsync(inValue);
         }
         
         public System.Threading.Tasks.Task<bool> SetHostnameFromDHCPAsync(bool FromDHCP)
@@ -23209,127 +23209,127 @@ namespace OnvifDeviceIO
             return base.Channel.SetHostnameFromDHCPAsync(FromDHCP);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.DNSInformation> GetDNSAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.DNSInformation> GetDNSAsync()
         {
             return base.Channel.GetDNSAsync();
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.SetDNSResponse> OnvifDeviceIO.Device.SetDNSAsync(OnvifDeviceIO.SetDNSRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetDNSResponse> SharpOnvifClient.DeviceIO.Device.SetDNSAsync(SharpOnvifClient.DeviceIO.SetDNSRequest request)
         {
             return base.Channel.SetDNSAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.SetDNSResponse> SetDNSAsync(bool FromDHCP, string[] SearchDomain, OnvifDeviceIO.IPAddress[] DNSManual)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetDNSResponse> SetDNSAsync(bool FromDHCP, string[] SearchDomain, SharpOnvifClient.DeviceIO.IPAddress[] DNSManual)
         {
-            OnvifDeviceIO.SetDNSRequest inValue = new OnvifDeviceIO.SetDNSRequest();
+            SharpOnvifClient.DeviceIO.SetDNSRequest inValue = new SharpOnvifClient.DeviceIO.SetDNSRequest();
             inValue.FromDHCP = FromDHCP;
             inValue.SearchDomain = SearchDomain;
             inValue.DNSManual = DNSManual;
-            return ((OnvifDeviceIO.Device)(this)).SetDNSAsync(inValue);
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).SetDNSAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.NTPInformation> GetNTPAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.NTPInformation> GetNTPAsync()
         {
             return base.Channel.GetNTPAsync();
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.SetNTPResponse> OnvifDeviceIO.Device.SetNTPAsync(OnvifDeviceIO.SetNTPRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetNTPResponse> SharpOnvifClient.DeviceIO.Device.SetNTPAsync(SharpOnvifClient.DeviceIO.SetNTPRequest request)
         {
             return base.Channel.SetNTPAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.SetNTPResponse> SetNTPAsync(bool FromDHCP, OnvifDeviceIO.NetworkHost[] NTPManual)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetNTPResponse> SetNTPAsync(bool FromDHCP, SharpOnvifClient.DeviceIO.NetworkHost[] NTPManual)
         {
-            OnvifDeviceIO.SetNTPRequest inValue = new OnvifDeviceIO.SetNTPRequest();
+            SharpOnvifClient.DeviceIO.SetNTPRequest inValue = new SharpOnvifClient.DeviceIO.SetNTPRequest();
             inValue.FromDHCP = FromDHCP;
             inValue.NTPManual = NTPManual;
-            return ((OnvifDeviceIO.Device)(this)).SetNTPAsync(inValue);
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).SetNTPAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.DynamicDNSInformation> GetDynamicDNSAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.DynamicDNSInformation> GetDynamicDNSAsync()
         {
             return base.Channel.GetDynamicDNSAsync();
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.SetDynamicDNSResponse> OnvifDeviceIO.Device.SetDynamicDNSAsync(OnvifDeviceIO.SetDynamicDNSRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetDynamicDNSResponse> SharpOnvifClient.DeviceIO.Device.SetDynamicDNSAsync(SharpOnvifClient.DeviceIO.SetDynamicDNSRequest request)
         {
             return base.Channel.SetDynamicDNSAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.SetDynamicDNSResponse> SetDynamicDNSAsync(OnvifDeviceIO.DynamicDNSType Type, string Name, string TTL)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetDynamicDNSResponse> SetDynamicDNSAsync(SharpOnvifClient.DeviceIO.DynamicDNSType Type, string Name, string TTL)
         {
-            OnvifDeviceIO.SetDynamicDNSRequest inValue = new OnvifDeviceIO.SetDynamicDNSRequest();
+            SharpOnvifClient.DeviceIO.SetDynamicDNSRequest inValue = new SharpOnvifClient.DeviceIO.SetDynamicDNSRequest();
             inValue.Type = Type;
             inValue.Name = Name;
             inValue.TTL = TTL;
-            return ((OnvifDeviceIO.Device)(this)).SetDynamicDNSAsync(inValue);
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).SetDynamicDNSAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetNetworkInterfacesResponse> OnvifDeviceIO.Device.GetNetworkInterfacesAsync(OnvifDeviceIO.GetNetworkInterfacesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetNetworkInterfacesResponse> SharpOnvifClient.DeviceIO.Device.GetNetworkInterfacesAsync(SharpOnvifClient.DeviceIO.GetNetworkInterfacesRequest request)
         {
             return base.Channel.GetNetworkInterfacesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetNetworkInterfacesResponse> GetNetworkInterfacesAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetNetworkInterfacesResponse> GetNetworkInterfacesAsync()
         {
-            OnvifDeviceIO.GetNetworkInterfacesRequest inValue = new OnvifDeviceIO.GetNetworkInterfacesRequest();
-            return ((OnvifDeviceIO.Device)(this)).GetNetworkInterfacesAsync(inValue);
+            SharpOnvifClient.DeviceIO.GetNetworkInterfacesRequest inValue = new SharpOnvifClient.DeviceIO.GetNetworkInterfacesRequest();
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).GetNetworkInterfacesAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<bool> SetNetworkInterfacesAsync(string InterfaceToken, OnvifDeviceIO.NetworkInterfaceSetConfiguration NetworkInterface)
+        public System.Threading.Tasks.Task<bool> SetNetworkInterfacesAsync(string InterfaceToken, SharpOnvifClient.DeviceIO.NetworkInterfaceSetConfiguration NetworkInterface)
         {
             return base.Channel.SetNetworkInterfacesAsync(InterfaceToken, NetworkInterface);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetNetworkProtocolsResponse> OnvifDeviceIO.Device.GetNetworkProtocolsAsync(OnvifDeviceIO.GetNetworkProtocolsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetNetworkProtocolsResponse> SharpOnvifClient.DeviceIO.Device.GetNetworkProtocolsAsync(SharpOnvifClient.DeviceIO.GetNetworkProtocolsRequest request)
         {
             return base.Channel.GetNetworkProtocolsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetNetworkProtocolsResponse> GetNetworkProtocolsAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetNetworkProtocolsResponse> GetNetworkProtocolsAsync()
         {
-            OnvifDeviceIO.GetNetworkProtocolsRequest inValue = new OnvifDeviceIO.GetNetworkProtocolsRequest();
-            return ((OnvifDeviceIO.Device)(this)).GetNetworkProtocolsAsync(inValue);
+            SharpOnvifClient.DeviceIO.GetNetworkProtocolsRequest inValue = new SharpOnvifClient.DeviceIO.GetNetworkProtocolsRequest();
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).GetNetworkProtocolsAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.SetNetworkProtocolsResponse> OnvifDeviceIO.Device.SetNetworkProtocolsAsync(OnvifDeviceIO.SetNetworkProtocolsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetNetworkProtocolsResponse> SharpOnvifClient.DeviceIO.Device.SetNetworkProtocolsAsync(SharpOnvifClient.DeviceIO.SetNetworkProtocolsRequest request)
         {
             return base.Channel.SetNetworkProtocolsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.SetNetworkProtocolsResponse> SetNetworkProtocolsAsync(OnvifDeviceIO.NetworkProtocol[] NetworkProtocols)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetNetworkProtocolsResponse> SetNetworkProtocolsAsync(SharpOnvifClient.DeviceIO.NetworkProtocol[] NetworkProtocols)
         {
-            OnvifDeviceIO.SetNetworkProtocolsRequest inValue = new OnvifDeviceIO.SetNetworkProtocolsRequest();
+            SharpOnvifClient.DeviceIO.SetNetworkProtocolsRequest inValue = new SharpOnvifClient.DeviceIO.SetNetworkProtocolsRequest();
             inValue.NetworkProtocols = NetworkProtocols;
-            return ((OnvifDeviceIO.Device)(this)).SetNetworkProtocolsAsync(inValue);
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).SetNetworkProtocolsAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.NetworkGateway> GetNetworkDefaultGatewayAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.NetworkGateway> GetNetworkDefaultGatewayAsync()
         {
             return base.Channel.GetNetworkDefaultGatewayAsync();
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.SetNetworkDefaultGatewayResponse> OnvifDeviceIO.Device.SetNetworkDefaultGatewayAsync(OnvifDeviceIO.SetNetworkDefaultGatewayRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetNetworkDefaultGatewayResponse> SharpOnvifClient.DeviceIO.Device.SetNetworkDefaultGatewayAsync(SharpOnvifClient.DeviceIO.SetNetworkDefaultGatewayRequest request)
         {
             return base.Channel.SetNetworkDefaultGatewayAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.SetNetworkDefaultGatewayResponse> SetNetworkDefaultGatewayAsync(string[] IPv4Address, string[] IPv6Address)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetNetworkDefaultGatewayResponse> SetNetworkDefaultGatewayAsync(string[] IPv4Address, string[] IPv6Address)
         {
-            OnvifDeviceIO.SetNetworkDefaultGatewayRequest inValue = new OnvifDeviceIO.SetNetworkDefaultGatewayRequest();
+            SharpOnvifClient.DeviceIO.SetNetworkDefaultGatewayRequest inValue = new SharpOnvifClient.DeviceIO.SetNetworkDefaultGatewayRequest();
             inValue.IPv4Address = IPv4Address;
             inValue.IPv6Address = IPv6Address;
-            return ((OnvifDeviceIO.Device)(this)).SetNetworkDefaultGatewayAsync(inValue);
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).SetNetworkDefaultGatewayAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.NetworkZeroConfiguration> GetZeroConfigurationAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.NetworkZeroConfiguration> GetZeroConfigurationAsync()
         {
             return base.Channel.GetZeroConfigurationAsync();
         }
@@ -23339,54 +23339,54 @@ namespace OnvifDeviceIO
             return base.Channel.SetZeroConfigurationAsync(InterfaceToken, Enabled);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.IPAddressFilter> GetIPAddressFilterAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.IPAddressFilter> GetIPAddressFilterAsync()
         {
             return base.Channel.GetIPAddressFilterAsync();
         }
         
-        public System.Threading.Tasks.Task SetIPAddressFilterAsync(OnvifDeviceIO.IPAddressFilter IPAddressFilter)
+        public System.Threading.Tasks.Task SetIPAddressFilterAsync(SharpOnvifClient.DeviceIO.IPAddressFilter IPAddressFilter)
         {
             return base.Channel.SetIPAddressFilterAsync(IPAddressFilter);
         }
         
-        public System.Threading.Tasks.Task AddIPAddressFilterAsync(OnvifDeviceIO.IPAddressFilter IPAddressFilter)
+        public System.Threading.Tasks.Task AddIPAddressFilterAsync(SharpOnvifClient.DeviceIO.IPAddressFilter IPAddressFilter)
         {
             return base.Channel.AddIPAddressFilterAsync(IPAddressFilter);
         }
         
-        public System.Threading.Tasks.Task RemoveIPAddressFilterAsync(OnvifDeviceIO.IPAddressFilter IPAddressFilter)
+        public System.Threading.Tasks.Task RemoveIPAddressFilterAsync(SharpOnvifClient.DeviceIO.IPAddressFilter IPAddressFilter)
         {
             return base.Channel.RemoveIPAddressFilterAsync(IPAddressFilter);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.BinaryData> GetAccessPolicyAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.BinaryData> GetAccessPolicyAsync()
         {
             return base.Channel.GetAccessPolicyAsync();
         }
         
-        public System.Threading.Tasks.Task SetAccessPolicyAsync(OnvifDeviceIO.BinaryData PolicyFile)
+        public System.Threading.Tasks.Task SetAccessPolicyAsync(SharpOnvifClient.DeviceIO.BinaryData PolicyFile)
         {
             return base.Channel.SetAccessPolicyAsync(PolicyFile);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetRelayOutputsResponse> OnvifDeviceIO.Device.GetRelayOutputsAsync(OnvifDeviceIO.GetRelayOutputsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetRelayOutputsResponse> SharpOnvifClient.DeviceIO.Device.GetRelayOutputsAsync(SharpOnvifClient.DeviceIO.GetRelayOutputsRequest request)
         {
             return base.Channel.GetRelayOutputsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetRelayOutputsResponse> GetRelayOutputsAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetRelayOutputsResponse> GetRelayOutputsAsync()
         {
-            OnvifDeviceIO.GetRelayOutputsRequest inValue = new OnvifDeviceIO.GetRelayOutputsRequest();
-            return ((OnvifDeviceIO.Device)(this)).GetRelayOutputsAsync(inValue);
+            SharpOnvifClient.DeviceIO.GetRelayOutputsRequest inValue = new SharpOnvifClient.DeviceIO.GetRelayOutputsRequest();
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).GetRelayOutputsAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task SetRelayOutputSettingsAsync(string RelayOutputToken, OnvifDeviceIO.RelayOutputSettings Properties)
+        public System.Threading.Tasks.Task SetRelayOutputSettingsAsync(string RelayOutputToken, SharpOnvifClient.DeviceIO.RelayOutputSettings Properties)
         {
             return base.Channel.SetRelayOutputSettingsAsync(RelayOutputToken, Properties);
         }
         
-        public System.Threading.Tasks.Task SetRelayOutputStateAsync(string RelayOutputToken, OnvifDeviceIO.RelayLogicalState LogicalState)
+        public System.Threading.Tasks.Task SetRelayOutputStateAsync(string RelayOutputToken, SharpOnvifClient.DeviceIO.RelayLogicalState LogicalState)
         {
             return base.Channel.SetRelayOutputStateAsync(RelayOutputToken, LogicalState);
         }
@@ -23397,74 +23397,74 @@ namespace OnvifDeviceIO
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetDot11CapabilitiesResponse> OnvifDeviceIO.Device.GetDot11CapabilitiesAsync(OnvifDeviceIO.GetDot11CapabilitiesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetDot11CapabilitiesResponse> SharpOnvifClient.DeviceIO.Device.GetDot11CapabilitiesAsync(SharpOnvifClient.DeviceIO.GetDot11CapabilitiesRequest request)
         {
             return base.Channel.GetDot11CapabilitiesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetDot11CapabilitiesResponse> GetDot11CapabilitiesAsync(System.Xml.XmlElement[] Any)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetDot11CapabilitiesResponse> GetDot11CapabilitiesAsync(System.Xml.XmlElement[] Any)
         {
-            OnvifDeviceIO.GetDot11CapabilitiesRequest inValue = new OnvifDeviceIO.GetDot11CapabilitiesRequest();
+            SharpOnvifClient.DeviceIO.GetDot11CapabilitiesRequest inValue = new SharpOnvifClient.DeviceIO.GetDot11CapabilitiesRequest();
             inValue.Any = Any;
-            return ((OnvifDeviceIO.Device)(this)).GetDot11CapabilitiesAsync(inValue);
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).GetDot11CapabilitiesAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.Dot11Status> GetDot11StatusAsync(string InterfaceToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.Dot11Status> GetDot11StatusAsync(string InterfaceToken)
         {
             return base.Channel.GetDot11StatusAsync(InterfaceToken);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.ScanAvailableDot11NetworksResponse> OnvifDeviceIO.Device.ScanAvailableDot11NetworksAsync(OnvifDeviceIO.ScanAvailableDot11NetworksRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.ScanAvailableDot11NetworksResponse> SharpOnvifClient.DeviceIO.Device.ScanAvailableDot11NetworksAsync(SharpOnvifClient.DeviceIO.ScanAvailableDot11NetworksRequest request)
         {
             return base.Channel.ScanAvailableDot11NetworksAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.ScanAvailableDot11NetworksResponse> ScanAvailableDot11NetworksAsync(string InterfaceToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.ScanAvailableDot11NetworksResponse> ScanAvailableDot11NetworksAsync(string InterfaceToken)
         {
-            OnvifDeviceIO.ScanAvailableDot11NetworksRequest inValue = new OnvifDeviceIO.ScanAvailableDot11NetworksRequest();
+            SharpOnvifClient.DeviceIO.ScanAvailableDot11NetworksRequest inValue = new SharpOnvifClient.DeviceIO.ScanAvailableDot11NetworksRequest();
             inValue.InterfaceToken = InterfaceToken;
-            return ((OnvifDeviceIO.Device)(this)).ScanAvailableDot11NetworksAsync(inValue);
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).ScanAvailableDot11NetworksAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetSystemUrisResponse> GetSystemUrisAsync(OnvifDeviceIO.GetSystemUrisRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetSystemUrisResponse> GetSystemUrisAsync(SharpOnvifClient.DeviceIO.GetSystemUrisRequest request)
         {
             return base.Channel.GetSystemUrisAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.StartFirmwareUpgradeResponse> StartFirmwareUpgradeAsync(OnvifDeviceIO.StartFirmwareUpgradeRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.StartFirmwareUpgradeResponse> StartFirmwareUpgradeAsync(SharpOnvifClient.DeviceIO.StartFirmwareUpgradeRequest request)
         {
             return base.Channel.StartFirmwareUpgradeAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.StartSystemRestoreResponse> StartSystemRestoreAsync(OnvifDeviceIO.StartSystemRestoreRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.StartSystemRestoreResponse> StartSystemRestoreAsync(SharpOnvifClient.DeviceIO.StartSystemRestoreRequest request)
         {
             return base.Channel.StartSystemRestoreAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetStorageConfigurationsResponse> OnvifDeviceIO.Device.GetStorageConfigurationsAsync(OnvifDeviceIO.GetStorageConfigurationsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetStorageConfigurationsResponse> SharpOnvifClient.DeviceIO.Device.GetStorageConfigurationsAsync(SharpOnvifClient.DeviceIO.GetStorageConfigurationsRequest request)
         {
             return base.Channel.GetStorageConfigurationsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetStorageConfigurationsResponse> GetStorageConfigurationsAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetStorageConfigurationsResponse> GetStorageConfigurationsAsync()
         {
-            OnvifDeviceIO.GetStorageConfigurationsRequest inValue = new OnvifDeviceIO.GetStorageConfigurationsRequest();
-            return ((OnvifDeviceIO.Device)(this)).GetStorageConfigurationsAsync(inValue);
+            SharpOnvifClient.DeviceIO.GetStorageConfigurationsRequest inValue = new SharpOnvifClient.DeviceIO.GetStorageConfigurationsRequest();
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).GetStorageConfigurationsAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<string> CreateStorageConfigurationAsync(OnvifDeviceIO.StorageConfigurationData StorageConfiguration)
+        public System.Threading.Tasks.Task<string> CreateStorageConfigurationAsync(SharpOnvifClient.DeviceIO.StorageConfigurationData StorageConfiguration)
         {
             return base.Channel.CreateStorageConfigurationAsync(StorageConfiguration);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.StorageConfiguration> GetStorageConfigurationAsync(string Token)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.StorageConfiguration> GetStorageConfigurationAsync(string Token)
         {
             return base.Channel.GetStorageConfigurationAsync(Token);
         }
         
-        public System.Threading.Tasks.Task SetStorageConfigurationAsync(OnvifDeviceIO.StorageConfiguration StorageConfiguration)
+        public System.Threading.Tasks.Task SetStorageConfigurationAsync(SharpOnvifClient.DeviceIO.StorageConfiguration StorageConfiguration)
         {
             return base.Channel.SetStorageConfigurationAsync(StorageConfiguration);
         }
@@ -23475,41 +23475,41 @@ namespace OnvifDeviceIO
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetGeoLocationResponse> OnvifDeviceIO.Device.GetGeoLocationAsync(OnvifDeviceIO.GetGeoLocationRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetGeoLocationResponse> SharpOnvifClient.DeviceIO.Device.GetGeoLocationAsync(SharpOnvifClient.DeviceIO.GetGeoLocationRequest request)
         {
             return base.Channel.GetGeoLocationAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetGeoLocationResponse> GetGeoLocationAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetGeoLocationResponse> GetGeoLocationAsync()
         {
-            OnvifDeviceIO.GetGeoLocationRequest inValue = new OnvifDeviceIO.GetGeoLocationRequest();
-            return ((OnvifDeviceIO.Device)(this)).GetGeoLocationAsync(inValue);
+            SharpOnvifClient.DeviceIO.GetGeoLocationRequest inValue = new SharpOnvifClient.DeviceIO.GetGeoLocationRequest();
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).GetGeoLocationAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.SetGeoLocationResponse> OnvifDeviceIO.Device.SetGeoLocationAsync(OnvifDeviceIO.SetGeoLocationRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetGeoLocationResponse> SharpOnvifClient.DeviceIO.Device.SetGeoLocationAsync(SharpOnvifClient.DeviceIO.SetGeoLocationRequest request)
         {
             return base.Channel.SetGeoLocationAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.SetGeoLocationResponse> SetGeoLocationAsync(OnvifDeviceIO.LocationEntity[] Location)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetGeoLocationResponse> SetGeoLocationAsync(SharpOnvifClient.DeviceIO.LocationEntity[] Location)
         {
-            OnvifDeviceIO.SetGeoLocationRequest inValue = new OnvifDeviceIO.SetGeoLocationRequest();
+            SharpOnvifClient.DeviceIO.SetGeoLocationRequest inValue = new SharpOnvifClient.DeviceIO.SetGeoLocationRequest();
             inValue.Location = Location;
-            return ((OnvifDeviceIO.Device)(this)).SetGeoLocationAsync(inValue);
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).SetGeoLocationAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.DeleteGeoLocationResponse> OnvifDeviceIO.Device.DeleteGeoLocationAsync(OnvifDeviceIO.DeleteGeoLocationRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.DeleteGeoLocationResponse> SharpOnvifClient.DeviceIO.Device.DeleteGeoLocationAsync(SharpOnvifClient.DeviceIO.DeleteGeoLocationRequest request)
         {
             return base.Channel.DeleteGeoLocationAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.DeleteGeoLocationResponse> DeleteGeoLocationAsync(OnvifDeviceIO.LocationEntity[] Location)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.DeleteGeoLocationResponse> DeleteGeoLocationAsync(SharpOnvifClient.DeviceIO.LocationEntity[] Location)
         {
-            OnvifDeviceIO.DeleteGeoLocationRequest inValue = new OnvifDeviceIO.DeleteGeoLocationRequest();
+            SharpOnvifClient.DeviceIO.DeleteGeoLocationRequest inValue = new SharpOnvifClient.DeviceIO.DeleteGeoLocationRequest();
             inValue.Location = Location;
-            return ((OnvifDeviceIO.Device)(this)).DeleteGeoLocationAsync(inValue);
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).DeleteGeoLocationAsync(inValue);
         }
         
         public System.Threading.Tasks.Task SetHashingAlgorithmAsync(string Algorithm)
@@ -23518,97 +23518,97 @@ namespace OnvifDeviceIO
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.CreateCertificateResponse> OnvifDeviceIO.Device.CreateCertificateAsync(OnvifDeviceIO.CreateCertificateRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.CreateCertificateResponse> SharpOnvifClient.DeviceIO.Device.CreateCertificateAsync(SharpOnvifClient.DeviceIO.CreateCertificateRequest request)
         {
             return base.Channel.CreateCertificateAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.CreateCertificateResponse> CreateCertificateAsync(string CertificateID, string Subject, System.DateTime ValidNotBefore, System.DateTime ValidNotAfter)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.CreateCertificateResponse> CreateCertificateAsync(string CertificateID, string Subject, System.DateTime ValidNotBefore, System.DateTime ValidNotAfter)
         {
-            OnvifDeviceIO.CreateCertificateRequest inValue = new OnvifDeviceIO.CreateCertificateRequest();
+            SharpOnvifClient.DeviceIO.CreateCertificateRequest inValue = new SharpOnvifClient.DeviceIO.CreateCertificateRequest();
             inValue.CertificateID = CertificateID;
             inValue.Subject = Subject;
             inValue.ValidNotBefore = ValidNotBefore;
             inValue.ValidNotAfter = ValidNotAfter;
-            return ((OnvifDeviceIO.Device)(this)).CreateCertificateAsync(inValue);
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).CreateCertificateAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetCertificatesResponse> OnvifDeviceIO.Device.GetCertificatesAsync(OnvifDeviceIO.GetCertificatesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetCertificatesResponse> SharpOnvifClient.DeviceIO.Device.GetCertificatesAsync(SharpOnvifClient.DeviceIO.GetCertificatesRequest request)
         {
             return base.Channel.GetCertificatesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetCertificatesResponse> GetCertificatesAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetCertificatesResponse> GetCertificatesAsync()
         {
-            OnvifDeviceIO.GetCertificatesRequest inValue = new OnvifDeviceIO.GetCertificatesRequest();
-            return ((OnvifDeviceIO.Device)(this)).GetCertificatesAsync(inValue);
+            SharpOnvifClient.DeviceIO.GetCertificatesRequest inValue = new SharpOnvifClient.DeviceIO.GetCertificatesRequest();
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).GetCertificatesAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetCertificatesStatusResponse> OnvifDeviceIO.Device.GetCertificatesStatusAsync(OnvifDeviceIO.GetCertificatesStatusRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetCertificatesStatusResponse> SharpOnvifClient.DeviceIO.Device.GetCertificatesStatusAsync(SharpOnvifClient.DeviceIO.GetCertificatesStatusRequest request)
         {
             return base.Channel.GetCertificatesStatusAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetCertificatesStatusResponse> GetCertificatesStatusAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetCertificatesStatusResponse> GetCertificatesStatusAsync()
         {
-            OnvifDeviceIO.GetCertificatesStatusRequest inValue = new OnvifDeviceIO.GetCertificatesStatusRequest();
-            return ((OnvifDeviceIO.Device)(this)).GetCertificatesStatusAsync(inValue);
+            SharpOnvifClient.DeviceIO.GetCertificatesStatusRequest inValue = new SharpOnvifClient.DeviceIO.GetCertificatesStatusRequest();
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).GetCertificatesStatusAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.SetCertificatesStatusResponse> OnvifDeviceIO.Device.SetCertificatesStatusAsync(OnvifDeviceIO.SetCertificatesStatusRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetCertificatesStatusResponse> SharpOnvifClient.DeviceIO.Device.SetCertificatesStatusAsync(SharpOnvifClient.DeviceIO.SetCertificatesStatusRequest request)
         {
             return base.Channel.SetCertificatesStatusAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.SetCertificatesStatusResponse> SetCertificatesStatusAsync(OnvifDeviceIO.CertificateStatus[] CertificateStatus)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetCertificatesStatusResponse> SetCertificatesStatusAsync(SharpOnvifClient.DeviceIO.CertificateStatus[] CertificateStatus)
         {
-            OnvifDeviceIO.SetCertificatesStatusRequest inValue = new OnvifDeviceIO.SetCertificatesStatusRequest();
+            SharpOnvifClient.DeviceIO.SetCertificatesStatusRequest inValue = new SharpOnvifClient.DeviceIO.SetCertificatesStatusRequest();
             inValue.CertificateStatus = CertificateStatus;
-            return ((OnvifDeviceIO.Device)(this)).SetCertificatesStatusAsync(inValue);
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).SetCertificatesStatusAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.DeleteCertificatesResponse> OnvifDeviceIO.Device.DeleteCertificatesAsync(OnvifDeviceIO.DeleteCertificatesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.DeleteCertificatesResponse> SharpOnvifClient.DeviceIO.Device.DeleteCertificatesAsync(SharpOnvifClient.DeviceIO.DeleteCertificatesRequest request)
         {
             return base.Channel.DeleteCertificatesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.DeleteCertificatesResponse> DeleteCertificatesAsync(string[] CertificateID)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.DeleteCertificatesResponse> DeleteCertificatesAsync(string[] CertificateID)
         {
-            OnvifDeviceIO.DeleteCertificatesRequest inValue = new OnvifDeviceIO.DeleteCertificatesRequest();
+            SharpOnvifClient.DeviceIO.DeleteCertificatesRequest inValue = new SharpOnvifClient.DeviceIO.DeleteCertificatesRequest();
             inValue.CertificateID = CertificateID;
-            return ((OnvifDeviceIO.Device)(this)).DeleteCertificatesAsync(inValue);
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).DeleteCertificatesAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetPkcs10RequestResponse> OnvifDeviceIO.Device.GetPkcs10RequestAsync(OnvifDeviceIO.GetPkcs10RequestRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetPkcs10RequestResponse> SharpOnvifClient.DeviceIO.Device.GetPkcs10RequestAsync(SharpOnvifClient.DeviceIO.GetPkcs10RequestRequest request)
         {
             return base.Channel.GetPkcs10RequestAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetPkcs10RequestResponse> GetPkcs10RequestAsync(string CertificateID, string Subject, OnvifDeviceIO.BinaryData Attributes)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetPkcs10RequestResponse> GetPkcs10RequestAsync(string CertificateID, string Subject, SharpOnvifClient.DeviceIO.BinaryData Attributes)
         {
-            OnvifDeviceIO.GetPkcs10RequestRequest inValue = new OnvifDeviceIO.GetPkcs10RequestRequest();
+            SharpOnvifClient.DeviceIO.GetPkcs10RequestRequest inValue = new SharpOnvifClient.DeviceIO.GetPkcs10RequestRequest();
             inValue.CertificateID = CertificateID;
             inValue.Subject = Subject;
             inValue.Attributes = Attributes;
-            return ((OnvifDeviceIO.Device)(this)).GetPkcs10RequestAsync(inValue);
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).GetPkcs10RequestAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.LoadCertificatesResponse> OnvifDeviceIO.Device.LoadCertificatesAsync(OnvifDeviceIO.LoadCertificatesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.LoadCertificatesResponse> SharpOnvifClient.DeviceIO.Device.LoadCertificatesAsync(SharpOnvifClient.DeviceIO.LoadCertificatesRequest request)
         {
             return base.Channel.LoadCertificatesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.LoadCertificatesResponse> LoadCertificatesAsync(OnvifDeviceIO.Certificate[] NVTCertificate)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.LoadCertificatesResponse> LoadCertificatesAsync(SharpOnvifClient.DeviceIO.Certificate[] NVTCertificate)
         {
-            OnvifDeviceIO.LoadCertificatesRequest inValue = new OnvifDeviceIO.LoadCertificatesRequest();
+            SharpOnvifClient.DeviceIO.LoadCertificatesRequest inValue = new SharpOnvifClient.DeviceIO.LoadCertificatesRequest();
             inValue.NVTCertificate = NVTCertificate;
-            return ((OnvifDeviceIO.Device)(this)).LoadCertificatesAsync(inValue);
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).LoadCertificatesAsync(inValue);
         }
         
         public System.Threading.Tasks.Task<bool> GetClientCertificateModeAsync()
@@ -23622,94 +23622,94 @@ namespace OnvifDeviceIO
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetCACertificatesResponse> OnvifDeviceIO.Device.GetCACertificatesAsync(OnvifDeviceIO.GetCACertificatesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetCACertificatesResponse> SharpOnvifClient.DeviceIO.Device.GetCACertificatesAsync(SharpOnvifClient.DeviceIO.GetCACertificatesRequest request)
         {
             return base.Channel.GetCACertificatesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetCACertificatesResponse> GetCACertificatesAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetCACertificatesResponse> GetCACertificatesAsync()
         {
-            OnvifDeviceIO.GetCACertificatesRequest inValue = new OnvifDeviceIO.GetCACertificatesRequest();
-            return ((OnvifDeviceIO.Device)(this)).GetCACertificatesAsync(inValue);
+            SharpOnvifClient.DeviceIO.GetCACertificatesRequest inValue = new SharpOnvifClient.DeviceIO.GetCACertificatesRequest();
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).GetCACertificatesAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.LoadCertificateWithPrivateKeyResponse> OnvifDeviceIO.Device.LoadCertificateWithPrivateKeyAsync(OnvifDeviceIO.LoadCertificateWithPrivateKeyRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.LoadCertificateWithPrivateKeyResponse> SharpOnvifClient.DeviceIO.Device.LoadCertificateWithPrivateKeyAsync(SharpOnvifClient.DeviceIO.LoadCertificateWithPrivateKeyRequest request)
         {
             return base.Channel.LoadCertificateWithPrivateKeyAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.LoadCertificateWithPrivateKeyResponse> LoadCertificateWithPrivateKeyAsync(OnvifDeviceIO.CertificateWithPrivateKey[] CertificateWithPrivateKey)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.LoadCertificateWithPrivateKeyResponse> LoadCertificateWithPrivateKeyAsync(SharpOnvifClient.DeviceIO.CertificateWithPrivateKey[] CertificateWithPrivateKey)
         {
-            OnvifDeviceIO.LoadCertificateWithPrivateKeyRequest inValue = new OnvifDeviceIO.LoadCertificateWithPrivateKeyRequest();
+            SharpOnvifClient.DeviceIO.LoadCertificateWithPrivateKeyRequest inValue = new SharpOnvifClient.DeviceIO.LoadCertificateWithPrivateKeyRequest();
             inValue.CertificateWithPrivateKey = CertificateWithPrivateKey;
-            return ((OnvifDeviceIO.Device)(this)).LoadCertificateWithPrivateKeyAsync(inValue);
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).LoadCertificateWithPrivateKeyAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetCertificateInformationResponse> OnvifDeviceIO.Device.GetCertificateInformationAsync(OnvifDeviceIO.GetCertificateInformationRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetCertificateInformationResponse> SharpOnvifClient.DeviceIO.Device.GetCertificateInformationAsync(SharpOnvifClient.DeviceIO.GetCertificateInformationRequest request)
         {
             return base.Channel.GetCertificateInformationAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetCertificateInformationResponse> GetCertificateInformationAsync(string CertificateID)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetCertificateInformationResponse> GetCertificateInformationAsync(string CertificateID)
         {
-            OnvifDeviceIO.GetCertificateInformationRequest inValue = new OnvifDeviceIO.GetCertificateInformationRequest();
+            SharpOnvifClient.DeviceIO.GetCertificateInformationRequest inValue = new SharpOnvifClient.DeviceIO.GetCertificateInformationRequest();
             inValue.CertificateID = CertificateID;
-            return ((OnvifDeviceIO.Device)(this)).GetCertificateInformationAsync(inValue);
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).GetCertificateInformationAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.LoadCACertificatesResponse> OnvifDeviceIO.Device.LoadCACertificatesAsync(OnvifDeviceIO.LoadCACertificatesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.LoadCACertificatesResponse> SharpOnvifClient.DeviceIO.Device.LoadCACertificatesAsync(SharpOnvifClient.DeviceIO.LoadCACertificatesRequest request)
         {
             return base.Channel.LoadCACertificatesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.LoadCACertificatesResponse> LoadCACertificatesAsync(OnvifDeviceIO.Certificate[] CACertificate)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.LoadCACertificatesResponse> LoadCACertificatesAsync(SharpOnvifClient.DeviceIO.Certificate[] CACertificate)
         {
-            OnvifDeviceIO.LoadCACertificatesRequest inValue = new OnvifDeviceIO.LoadCACertificatesRequest();
+            SharpOnvifClient.DeviceIO.LoadCACertificatesRequest inValue = new SharpOnvifClient.DeviceIO.LoadCACertificatesRequest();
             inValue.CACertificate = CACertificate;
-            return ((OnvifDeviceIO.Device)(this)).LoadCACertificatesAsync(inValue);
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).LoadCACertificatesAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task CreateDot1XConfigurationAsync(OnvifDeviceIO.Dot1XConfiguration Dot1XConfiguration)
+        public System.Threading.Tasks.Task CreateDot1XConfigurationAsync(SharpOnvifClient.DeviceIO.Dot1XConfiguration Dot1XConfiguration)
         {
             return base.Channel.CreateDot1XConfigurationAsync(Dot1XConfiguration);
         }
         
-        public System.Threading.Tasks.Task SetDot1XConfigurationAsync(OnvifDeviceIO.Dot1XConfiguration Dot1XConfiguration)
+        public System.Threading.Tasks.Task SetDot1XConfigurationAsync(SharpOnvifClient.DeviceIO.Dot1XConfiguration Dot1XConfiguration)
         {
             return base.Channel.SetDot1XConfigurationAsync(Dot1XConfiguration);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.Dot1XConfiguration> GetDot1XConfigurationAsync(string Dot1XConfigurationToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.Dot1XConfiguration> GetDot1XConfigurationAsync(string Dot1XConfigurationToken)
         {
             return base.Channel.GetDot1XConfigurationAsync(Dot1XConfigurationToken);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetDot1XConfigurationsResponse> OnvifDeviceIO.Device.GetDot1XConfigurationsAsync(OnvifDeviceIO.GetDot1XConfigurationsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetDot1XConfigurationsResponse> SharpOnvifClient.DeviceIO.Device.GetDot1XConfigurationsAsync(SharpOnvifClient.DeviceIO.GetDot1XConfigurationsRequest request)
         {
             return base.Channel.GetDot1XConfigurationsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetDot1XConfigurationsResponse> GetDot1XConfigurationsAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetDot1XConfigurationsResponse> GetDot1XConfigurationsAsync()
         {
-            OnvifDeviceIO.GetDot1XConfigurationsRequest inValue = new OnvifDeviceIO.GetDot1XConfigurationsRequest();
-            return ((OnvifDeviceIO.Device)(this)).GetDot1XConfigurationsAsync(inValue);
+            SharpOnvifClient.DeviceIO.GetDot1XConfigurationsRequest inValue = new SharpOnvifClient.DeviceIO.GetDot1XConfigurationsRequest();
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).GetDot1XConfigurationsAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.DeleteDot1XConfigurationResponse> OnvifDeviceIO.Device.DeleteDot1XConfigurationAsync(OnvifDeviceIO.DeleteDot1XConfigurationRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.DeleteDot1XConfigurationResponse> SharpOnvifClient.DeviceIO.Device.DeleteDot1XConfigurationAsync(SharpOnvifClient.DeviceIO.DeleteDot1XConfigurationRequest request)
         {
             return base.Channel.DeleteDot1XConfigurationAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.DeleteDot1XConfigurationResponse> DeleteDot1XConfigurationAsync(string[] Dot1XConfigurationToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.DeleteDot1XConfigurationResponse> DeleteDot1XConfigurationAsync(string[] Dot1XConfigurationToken)
         {
-            OnvifDeviceIO.DeleteDot1XConfigurationRequest inValue = new OnvifDeviceIO.DeleteDot1XConfigurationRequest();
+            SharpOnvifClient.DeviceIO.DeleteDot1XConfigurationRequest inValue = new SharpOnvifClient.DeviceIO.DeleteDot1XConfigurationRequest();
             inValue.Dot1XConfigurationToken = Dot1XConfigurationToken;
-            return ((OnvifDeviceIO.Device)(this)).DeleteDot1XConfigurationAsync(inValue);
+            return ((SharpOnvifClient.DeviceIO.Device)(this)).DeleteDot1XConfigurationAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()
@@ -23724,7 +23724,7 @@ namespace OnvifDeviceIO
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl", ConfigurationName="OnvifDeviceIO.DeviceIOPort")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl", ConfigurationName="SharpOnvifClient.DeviceIO.DeviceIOPort")]
     public interface DeviceIOPort
     {
         
@@ -23733,191 +23733,191 @@ namespace OnvifDeviceIO
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Capabilities")]
-        System.Threading.Tasks.Task<OnvifDeviceIO.Capabilities1> GetServiceCapabilitiesAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.Capabilities1> GetServiceCapabilitiesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/deviceio/wsdl/GetRelayOutputOptions", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetRelayOutputOptionsResponse> GetRelayOutputOptionsAsync(OnvifDeviceIO.GetRelayOutputOptionsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetRelayOutputOptionsResponse> GetRelayOutputOptionsAsync(SharpOnvifClient.DeviceIO.GetRelayOutputOptionsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/deviceio/wsdl/GetAudioSources", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetAudioSourcesResponse> GetAudioSourcesAsync(OnvifDeviceIO.GetAudioSourcesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetAudioSourcesResponse> GetAudioSourcesAsync(SharpOnvifClient.DeviceIO.GetAudioSourcesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/deviceio/wsdl/GetAudioOutputs", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetAudioOutputsResponse> GetAudioOutputsAsync(OnvifDeviceIO.GetAudioOutputsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetAudioOutputsResponse> GetAudioOutputsAsync(SharpOnvifClient.DeviceIO.GetAudioOutputsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/deviceio/wsdl/GetVideoSources", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetVideoSourcesResponse> GetVideoSourcesAsync(OnvifDeviceIO.GetVideoSourcesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetVideoSourcesResponse> GetVideoSourcesAsync(SharpOnvifClient.DeviceIO.GetVideoSourcesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/deviceio/wsdl/GetVideoOutputs", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetVideoOutputsResponse> GetVideoOutputsAsync(OnvifDeviceIO.GetVideoOutputsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetVideoOutputsResponse> GetVideoOutputsAsync(SharpOnvifClient.DeviceIO.GetVideoOutputsRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/deviceio/wsdl/GetVideoSourceConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetVideoSourceConfigurationResponse> GetVideoSourceConfigurationAsync(OnvifDeviceIO.GetVideoSourceConfigurationRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetVideoSourceConfigurationResponse> GetVideoSourceConfigurationAsync(SharpOnvifClient.DeviceIO.GetVideoSourceConfigurationRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/deviceio/wsdl/GetVideoOutputConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetVideoOutputConfigurationResponse> GetVideoOutputConfigurationAsync(OnvifDeviceIO.GetVideoOutputConfigurationRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetVideoOutputConfigurationResponse> GetVideoOutputConfigurationAsync(SharpOnvifClient.DeviceIO.GetVideoOutputConfigurationRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/deviceio/wsdl/GetAudioSourceConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetAudioSourceConfigurationResponse> GetAudioSourceConfigurationAsync(OnvifDeviceIO.GetAudioSourceConfigurationRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetAudioSourceConfigurationResponse> GetAudioSourceConfigurationAsync(SharpOnvifClient.DeviceIO.GetAudioSourceConfigurationRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/deviceio/wsdl/GetAudioOutputConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetAudioOutputConfigurationResponse> GetAudioOutputConfigurationAsync(OnvifDeviceIO.GetAudioOutputConfigurationRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetAudioOutputConfigurationResponse> GetAudioOutputConfigurationAsync(SharpOnvifClient.DeviceIO.GetAudioOutputConfigurationRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/deviceio/wsdl/SetVideoSourceConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.SetVideoSourceConfigurationResponse> SetVideoSourceConfigurationAsync(OnvifDeviceIO.SetVideoSourceConfigurationRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetVideoSourceConfigurationResponse> SetVideoSourceConfigurationAsync(SharpOnvifClient.DeviceIO.SetVideoSourceConfigurationRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/deviceio/wsdl/SetVideoOutputConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.SetVideoOutputConfigurationResponse> SetVideoOutputConfigurationAsync(OnvifDeviceIO.SetVideoOutputConfigurationRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetVideoOutputConfigurationResponse> SetVideoOutputConfigurationAsync(SharpOnvifClient.DeviceIO.SetVideoOutputConfigurationRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/deviceio/wsdl/SetAudioSourceConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.SetAudioSourceConfigurationResponse> SetAudioSourceConfigurationAsync(OnvifDeviceIO.SetAudioSourceConfigurationRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetAudioSourceConfigurationResponse> SetAudioSourceConfigurationAsync(SharpOnvifClient.DeviceIO.SetAudioSourceConfigurationRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/deviceio/wsdl/SetAudioOutputConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.SetAudioOutputConfigurationResponse> SetAudioOutputConfigurationAsync(OnvifDeviceIO.SetAudioOutputConfigurationRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetAudioOutputConfigurationResponse> SetAudioOutputConfigurationAsync(SharpOnvifClient.DeviceIO.SetAudioOutputConfigurationRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/deviceio/wsdl/GetVideoSourceConfigurationOptions", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetVideoSourceConfigurationOptionsResponse> GetVideoSourceConfigurationOptionsAsync(OnvifDeviceIO.GetVideoSourceConfigurationOptionsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetVideoSourceConfigurationOptionsResponse> GetVideoSourceConfigurationOptionsAsync(SharpOnvifClient.DeviceIO.GetVideoSourceConfigurationOptionsRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/deviceio/wsdl/GetVideoOutputConfigurationOptions", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetVideoOutputConfigurationOptionsResponse> GetVideoOutputConfigurationOptionsAsync(OnvifDeviceIO.GetVideoOutputConfigurationOptionsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetVideoOutputConfigurationOptionsResponse> GetVideoOutputConfigurationOptionsAsync(SharpOnvifClient.DeviceIO.GetVideoOutputConfigurationOptionsRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/deviceio/wsdl/GetAudioSourceConfigurationOptions", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetAudioSourceConfigurationOptionsResponse> GetAudioSourceConfigurationOptionsAsync(OnvifDeviceIO.GetAudioSourceConfigurationOptionsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetAudioSourceConfigurationOptionsResponse> GetAudioSourceConfigurationOptionsAsync(SharpOnvifClient.DeviceIO.GetAudioSourceConfigurationOptionsRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/deviceio/wsdl/GetAudioOutputConfigurationOptions", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetAudioOutputConfigurationOptionsResponse> GetAudioOutputConfigurationOptionsAsync(OnvifDeviceIO.GetAudioOutputConfigurationOptionsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetAudioOutputConfigurationOptionsResponse> GetAudioOutputConfigurationOptionsAsync(SharpOnvifClient.DeviceIO.GetAudioOutputConfigurationOptionsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/deviceio/wsdl/GetRelayOutputs", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetRelayOutputsResponse1> GetRelayOutputsAsync(OnvifDeviceIO.GetRelayOutputsRequest1 request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetRelayOutputsResponse1> GetRelayOutputsAsync(SharpOnvifClient.DeviceIO.GetRelayOutputsRequest1 request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/deviceio/wsdl/SetRelayOutputSettings", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task SetRelayOutputSettingsAsync(OnvifDeviceIO.RelayOutput RelayOutput);
+        System.Threading.Tasks.Task SetRelayOutputSettingsAsync(SharpOnvifClient.DeviceIO.RelayOutput RelayOutput);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/deviceio/wsdl/SetRelayOutputState", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.SetRelayOutputStateResponse> SetRelayOutputStateAsync(OnvifDeviceIO.SetRelayOutputStateRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetRelayOutputStateResponse> SetRelayOutputStateAsync(SharpOnvifClient.DeviceIO.SetRelayOutputStateRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/deviceio/wsdl/GetDigitalInputs", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetDigitalInputsResponse> GetDigitalInputsAsync(OnvifDeviceIO.GetDigitalInputsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetDigitalInputsResponse> GetDigitalInputsAsync(SharpOnvifClient.DeviceIO.GetDigitalInputsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/deviceio/wsdl/GetDigitalInputConfigurationOptions", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="DigitalInputOptions")]
-        System.Threading.Tasks.Task<OnvifDeviceIO.DigitalInputConfigurationOptions> GetDigitalInputConfigurationOptionsAsync(string Token);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.DigitalInputConfigurationOptions> GetDigitalInputConfigurationOptionsAsync(string Token);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/deviceio/wsdl/SetDigitalInputConfigurations", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.SetDigitalInputConfigurationsResponse> SetDigitalInputConfigurationsAsync(OnvifDeviceIO.SetDigitalInputConfigurationsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetDigitalInputConfigurationsResponse> SetDigitalInputConfigurationsAsync(SharpOnvifClient.DeviceIO.SetDigitalInputConfigurationsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/deviceio/wsdl/GetSerialPorts", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetSerialPortsResponse> GetSerialPortsAsync(OnvifDeviceIO.GetSerialPortsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetSerialPortsResponse> GetSerialPortsAsync(SharpOnvifClient.DeviceIO.GetSerialPortsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/deviceio/wsdl/GetSerialPortConfigurations", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="SerialPortConfiguration")]
-        System.Threading.Tasks.Task<OnvifDeviceIO.SerialPortConfiguration> GetSerialPortConfigurationAsync(string SerialPortToken);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SerialPortConfiguration> GetSerialPortConfigurationAsync(string SerialPortToken);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/deviceio/wsdl/SetSerialPortConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task SetSerialPortConfigurationAsync(OnvifDeviceIO.SerialPortConfiguration SerialPortConfiguration, bool ForcePersistance);
+        System.Threading.Tasks.Task SetSerialPortConfigurationAsync(SharpOnvifClient.DeviceIO.SerialPortConfiguration SerialPortConfiguration, bool ForcePersistance);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/deviceio/wsdl/GetSerialPortConfigurationOptions", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="SerialPortOptions")]
-        System.Threading.Tasks.Task<OnvifDeviceIO.SerialPortConfigurationOptions> GetSerialPortConfigurationOptionsAsync(string SerialPortToken);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SerialPortConfigurationOptions> GetSerialPortConfigurationOptionsAsync(string SerialPortToken);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/deviceio/wsdl/SendReceiveSerialCommand", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifDeviceIO.SendReceiveSerialCommandResponse> SendReceiveSerialCommandAsync(OnvifDeviceIO.SendReceiveSerialCommandRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SendReceiveSerialCommandResponse> SendReceiveSerialCommandAsync(SharpOnvifClient.DeviceIO.SendReceiveSerialCommandRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -23949,13 +23949,13 @@ namespace OnvifDeviceIO
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("RelayOutputOptions")]
-        public OnvifDeviceIO.RelayOutputOptions[] RelayOutputOptions;
+        public SharpOnvifClient.DeviceIO.RelayOutputOptions[] RelayOutputOptions;
         
         public GetRelayOutputOptionsResponse()
         {
         }
         
-        public GetRelayOutputOptionsResponse(OnvifDeviceIO.RelayOutputOptions[] RelayOutputOptions)
+        public GetRelayOutputOptionsResponse(SharpOnvifClient.DeviceIO.RelayOutputOptions[] RelayOutputOptions)
         {
             this.RelayOutputOptions = RelayOutputOptions;
         }
@@ -24081,13 +24081,13 @@ namespace OnvifDeviceIO
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("VideoOutputs")]
-        public OnvifDeviceIO.VideoOutput[] VideoOutputs;
+        public SharpOnvifClient.DeviceIO.VideoOutput[] VideoOutputs;
         
         public GetVideoOutputsResponse()
         {
         }
         
-        public GetVideoOutputsResponse(OnvifDeviceIO.VideoOutput[] VideoOutputs)
+        public GetVideoOutputsResponse(SharpOnvifClient.DeviceIO.VideoOutput[] VideoOutputs)
         {
             this.VideoOutputs = VideoOutputs;
         }
@@ -24124,7 +24124,7 @@ namespace OnvifDeviceIO
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl", Order=0)]
-        public OnvifDeviceIO.VideoSourceConfiguration VideoSourceConfiguration;
+        public SharpOnvifClient.DeviceIO.VideoSourceConfiguration VideoSourceConfiguration;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=1)]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
@@ -24134,7 +24134,7 @@ namespace OnvifDeviceIO
         {
         }
         
-        public GetVideoSourceConfigurationResponse(OnvifDeviceIO.VideoSourceConfiguration VideoSourceConfiguration, System.Xml.XmlElement[] Any)
+        public GetVideoSourceConfigurationResponse(SharpOnvifClient.DeviceIO.VideoSourceConfiguration VideoSourceConfiguration, System.Xml.XmlElement[] Any)
         {
             this.VideoSourceConfiguration = VideoSourceConfiguration;
             this.Any = Any;
@@ -24172,7 +24172,7 @@ namespace OnvifDeviceIO
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl", Order=0)]
-        public OnvifDeviceIO.VideoOutputConfiguration VideoOutputConfiguration;
+        public SharpOnvifClient.DeviceIO.VideoOutputConfiguration VideoOutputConfiguration;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=1)]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
@@ -24182,7 +24182,7 @@ namespace OnvifDeviceIO
         {
         }
         
-        public GetVideoOutputConfigurationResponse(OnvifDeviceIO.VideoOutputConfiguration VideoOutputConfiguration, System.Xml.XmlElement[] Any)
+        public GetVideoOutputConfigurationResponse(SharpOnvifClient.DeviceIO.VideoOutputConfiguration VideoOutputConfiguration, System.Xml.XmlElement[] Any)
         {
             this.VideoOutputConfiguration = VideoOutputConfiguration;
             this.Any = Any;
@@ -24220,7 +24220,7 @@ namespace OnvifDeviceIO
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl", Order=0)]
-        public OnvifDeviceIO.AudioSourceConfiguration AudioSourceConfiguration;
+        public SharpOnvifClient.DeviceIO.AudioSourceConfiguration AudioSourceConfiguration;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=1)]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
@@ -24230,7 +24230,7 @@ namespace OnvifDeviceIO
         {
         }
         
-        public GetAudioSourceConfigurationResponse(OnvifDeviceIO.AudioSourceConfiguration AudioSourceConfiguration, System.Xml.XmlElement[] Any)
+        public GetAudioSourceConfigurationResponse(SharpOnvifClient.DeviceIO.AudioSourceConfiguration AudioSourceConfiguration, System.Xml.XmlElement[] Any)
         {
             this.AudioSourceConfiguration = AudioSourceConfiguration;
             this.Any = Any;
@@ -24268,7 +24268,7 @@ namespace OnvifDeviceIO
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl", Order=0)]
-        public OnvifDeviceIO.AudioOutputConfiguration AudioOutputConfiguration;
+        public SharpOnvifClient.DeviceIO.AudioOutputConfiguration AudioOutputConfiguration;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=1)]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
@@ -24278,7 +24278,7 @@ namespace OnvifDeviceIO
         {
         }
         
-        public GetAudioOutputConfigurationResponse(OnvifDeviceIO.AudioOutputConfiguration AudioOutputConfiguration, System.Xml.XmlElement[] Any)
+        public GetAudioOutputConfigurationResponse(SharpOnvifClient.DeviceIO.AudioOutputConfiguration AudioOutputConfiguration, System.Xml.XmlElement[] Any)
         {
             this.AudioOutputConfiguration = AudioOutputConfiguration;
             this.Any = Any;
@@ -24292,7 +24292,7 @@ namespace OnvifDeviceIO
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl", Order=0)]
-        public OnvifDeviceIO.VideoSourceConfiguration Configuration;
+        public SharpOnvifClient.DeviceIO.VideoSourceConfiguration Configuration;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl", Order=1)]
         public bool ForcePersistence;
@@ -24305,7 +24305,7 @@ namespace OnvifDeviceIO
         {
         }
         
-        public SetVideoSourceConfigurationRequest(OnvifDeviceIO.VideoSourceConfiguration Configuration, bool ForcePersistence, System.Xml.XmlElement[] Any)
+        public SetVideoSourceConfigurationRequest(SharpOnvifClient.DeviceIO.VideoSourceConfiguration Configuration, bool ForcePersistence, System.Xml.XmlElement[] Any)
         {
             this.Configuration = Configuration;
             this.ForcePersistence = ForcePersistence;
@@ -24340,7 +24340,7 @@ namespace OnvifDeviceIO
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl", Order=0)]
-        public OnvifDeviceIO.VideoOutputConfiguration Configuration;
+        public SharpOnvifClient.DeviceIO.VideoOutputConfiguration Configuration;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl", Order=1)]
         public bool ForcePersistence;
@@ -24353,7 +24353,7 @@ namespace OnvifDeviceIO
         {
         }
         
-        public SetVideoOutputConfigurationRequest(OnvifDeviceIO.VideoOutputConfiguration Configuration, bool ForcePersistence, System.Xml.XmlElement[] Any)
+        public SetVideoOutputConfigurationRequest(SharpOnvifClient.DeviceIO.VideoOutputConfiguration Configuration, bool ForcePersistence, System.Xml.XmlElement[] Any)
         {
             this.Configuration = Configuration;
             this.ForcePersistence = ForcePersistence;
@@ -24388,7 +24388,7 @@ namespace OnvifDeviceIO
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl", Order=0)]
-        public OnvifDeviceIO.AudioSourceConfiguration Configuration;
+        public SharpOnvifClient.DeviceIO.AudioSourceConfiguration Configuration;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl", Order=1)]
         public bool ForcePersistence;
@@ -24401,7 +24401,7 @@ namespace OnvifDeviceIO
         {
         }
         
-        public SetAudioSourceConfigurationRequest(OnvifDeviceIO.AudioSourceConfiguration Configuration, bool ForcePersistence, System.Xml.XmlElement[] Any)
+        public SetAudioSourceConfigurationRequest(SharpOnvifClient.DeviceIO.AudioSourceConfiguration Configuration, bool ForcePersistence, System.Xml.XmlElement[] Any)
         {
             this.Configuration = Configuration;
             this.ForcePersistence = ForcePersistence;
@@ -24436,7 +24436,7 @@ namespace OnvifDeviceIO
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl", Order=0)]
-        public OnvifDeviceIO.AudioOutputConfiguration Configuration;
+        public SharpOnvifClient.DeviceIO.AudioOutputConfiguration Configuration;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl", Order=1)]
         public bool ForcePersistence;
@@ -24449,7 +24449,7 @@ namespace OnvifDeviceIO
         {
         }
         
-        public SetAudioOutputConfigurationRequest(OnvifDeviceIO.AudioOutputConfiguration Configuration, bool ForcePersistence, System.Xml.XmlElement[] Any)
+        public SetAudioOutputConfigurationRequest(SharpOnvifClient.DeviceIO.AudioOutputConfiguration Configuration, bool ForcePersistence, System.Xml.XmlElement[] Any)
         {
             this.Configuration = Configuration;
             this.ForcePersistence = ForcePersistence;
@@ -24508,7 +24508,7 @@ namespace OnvifDeviceIO
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl", Order=0)]
-        public OnvifDeviceIO.VideoSourceConfigurationOptions VideoSourceConfigurationOptions;
+        public SharpOnvifClient.DeviceIO.VideoSourceConfigurationOptions VideoSourceConfigurationOptions;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=1)]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
@@ -24518,7 +24518,7 @@ namespace OnvifDeviceIO
         {
         }
         
-        public GetVideoSourceConfigurationOptionsResponse(OnvifDeviceIO.VideoSourceConfigurationOptions VideoSourceConfigurationOptions, System.Xml.XmlElement[] Any)
+        public GetVideoSourceConfigurationOptionsResponse(SharpOnvifClient.DeviceIO.VideoSourceConfigurationOptions VideoSourceConfigurationOptions, System.Xml.XmlElement[] Any)
         {
             this.VideoSourceConfigurationOptions = VideoSourceConfigurationOptions;
             this.Any = Any;
@@ -24556,7 +24556,7 @@ namespace OnvifDeviceIO
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl", Order=0)]
-        public OnvifDeviceIO.VideoOutputConfigurationOptions VideoOutputConfigurationOptions;
+        public SharpOnvifClient.DeviceIO.VideoOutputConfigurationOptions VideoOutputConfigurationOptions;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=1)]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
@@ -24566,7 +24566,7 @@ namespace OnvifDeviceIO
         {
         }
         
-        public GetVideoOutputConfigurationOptionsResponse(OnvifDeviceIO.VideoOutputConfigurationOptions VideoOutputConfigurationOptions, System.Xml.XmlElement[] Any)
+        public GetVideoOutputConfigurationOptionsResponse(SharpOnvifClient.DeviceIO.VideoOutputConfigurationOptions VideoOutputConfigurationOptions, System.Xml.XmlElement[] Any)
         {
             this.VideoOutputConfigurationOptions = VideoOutputConfigurationOptions;
             this.Any = Any;
@@ -24604,7 +24604,7 @@ namespace OnvifDeviceIO
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl", Order=0)]
-        public OnvifDeviceIO.AudioSourceConfigurationOptions AudioSourceOptions;
+        public SharpOnvifClient.DeviceIO.AudioSourceConfigurationOptions AudioSourceOptions;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=1)]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
@@ -24614,7 +24614,7 @@ namespace OnvifDeviceIO
         {
         }
         
-        public GetAudioSourceConfigurationOptionsResponse(OnvifDeviceIO.AudioSourceConfigurationOptions AudioSourceOptions, System.Xml.XmlElement[] Any)
+        public GetAudioSourceConfigurationOptionsResponse(SharpOnvifClient.DeviceIO.AudioSourceConfigurationOptions AudioSourceOptions, System.Xml.XmlElement[] Any)
         {
             this.AudioSourceOptions = AudioSourceOptions;
             this.Any = Any;
@@ -24652,7 +24652,7 @@ namespace OnvifDeviceIO
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl", Order=0)]
-        public OnvifDeviceIO.AudioOutputConfigurationOptions AudioOutputOptions;
+        public SharpOnvifClient.DeviceIO.AudioOutputConfigurationOptions AudioOutputOptions;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=1)]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
@@ -24662,7 +24662,7 @@ namespace OnvifDeviceIO
         {
         }
         
-        public GetAudioOutputConfigurationOptionsResponse(OnvifDeviceIO.AudioOutputConfigurationOptions AudioOutputOptions, System.Xml.XmlElement[] Any)
+        public GetAudioOutputConfigurationOptionsResponse(SharpOnvifClient.DeviceIO.AudioOutputConfigurationOptions AudioOutputOptions, System.Xml.XmlElement[] Any)
         {
             this.AudioOutputOptions = AudioOutputOptions;
             this.Any = Any;
@@ -24690,13 +24690,13 @@ namespace OnvifDeviceIO
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("RelayOutputs")]
-        public OnvifDeviceIO.RelayOutput[] RelayOutputs;
+        public SharpOnvifClient.DeviceIO.RelayOutput[] RelayOutputs;
         
         public GetRelayOutputsResponse1()
         {
         }
         
-        public GetRelayOutputsResponse1(OnvifDeviceIO.RelayOutput[] RelayOutputs)
+        public GetRelayOutputsResponse1(SharpOnvifClient.DeviceIO.RelayOutput[] RelayOutputs)
         {
             this.RelayOutputs = RelayOutputs;
         }
@@ -24713,13 +24713,13 @@ namespace OnvifDeviceIO
         public string RelayOutputToken;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl", Order=1)]
-        public OnvifDeviceIO.RelayLogicalState LogicalState;
+        public SharpOnvifClient.DeviceIO.RelayLogicalState LogicalState;
         
         public SetRelayOutputStateRequest()
         {
         }
         
-        public SetRelayOutputStateRequest(string RelayOutputToken, OnvifDeviceIO.RelayLogicalState LogicalState)
+        public SetRelayOutputStateRequest(string RelayOutputToken, SharpOnvifClient.DeviceIO.RelayLogicalState LogicalState)
         {
             this.RelayOutputToken = RelayOutputToken;
             this.LogicalState = LogicalState;
@@ -24759,13 +24759,13 @@ namespace OnvifDeviceIO
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("DigitalInputs")]
-        public OnvifDeviceIO.DigitalInput[] DigitalInputs;
+        public SharpOnvifClient.DeviceIO.DigitalInput[] DigitalInputs;
         
         public GetDigitalInputsResponse()
         {
         }
         
-        public GetDigitalInputsResponse(OnvifDeviceIO.DigitalInput[] DigitalInputs)
+        public GetDigitalInputsResponse(SharpOnvifClient.DeviceIO.DigitalInput[] DigitalInputs)
         {
             this.DigitalInputs = DigitalInputs;
         }
@@ -24780,13 +24780,13 @@ namespace OnvifDeviceIO
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("DigitalInputs")]
-        public OnvifDeviceIO.DigitalInput[] DigitalInputs;
+        public SharpOnvifClient.DeviceIO.DigitalInput[] DigitalInputs;
         
         public SetDigitalInputConfigurationsRequest()
         {
         }
         
-        public SetDigitalInputConfigurationsRequest(OnvifDeviceIO.DigitalInput[] DigitalInputs)
+        public SetDigitalInputConfigurationsRequest(SharpOnvifClient.DeviceIO.DigitalInput[] DigitalInputs)
         {
             this.DigitalInputs = DigitalInputs;
         }
@@ -24825,13 +24825,13 @@ namespace OnvifDeviceIO
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("SerialPort")]
-        public OnvifDeviceIO.SerialPort[] SerialPort;
+        public SharpOnvifClient.DeviceIO.SerialPort[] SerialPort;
         
         public GetSerialPortsResponse()
         {
         }
         
-        public GetSerialPortsResponse(OnvifDeviceIO.SerialPort[] SerialPort)
+        public GetSerialPortsResponse(SharpOnvifClient.DeviceIO.SerialPort[] SerialPort)
         {
             this.SerialPort = SerialPort;
         }
@@ -24847,7 +24847,7 @@ namespace OnvifDeviceIO
         public string Token;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl", Order=1)]
-        public OnvifDeviceIO.SerialData SerialData;
+        public SharpOnvifClient.DeviceIO.SerialData SerialData;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl", Order=2)]
         [System.Xml.Serialization.XmlElementAttribute(DataType="duration")]
@@ -24864,7 +24864,7 @@ namespace OnvifDeviceIO
         {
         }
         
-        public SendReceiveSerialCommandRequest(string Token, OnvifDeviceIO.SerialData SerialData, string TimeOut, string DataLength, string Delimiter)
+        public SendReceiveSerialCommandRequest(string Token, SharpOnvifClient.DeviceIO.SerialData SerialData, string TimeOut, string DataLength, string Delimiter)
         {
             this.Token = Token;
             this.SerialData = SerialData;
@@ -24881,26 +24881,26 @@ namespace OnvifDeviceIO
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl", Order=0)]
-        public OnvifDeviceIO.SerialData SerialData;
+        public SharpOnvifClient.DeviceIO.SerialData SerialData;
         
         public SendReceiveSerialCommandResponse()
         {
         }
         
-        public SendReceiveSerialCommandResponse(OnvifDeviceIO.SerialData SerialData)
+        public SendReceiveSerialCommandResponse(SharpOnvifClient.DeviceIO.SerialData SerialData)
         {
             this.SerialData = SerialData;
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface DeviceIOPortChannel : OnvifDeviceIO.DeviceIOPort, System.ServiceModel.IClientChannel
+    public interface DeviceIOPortChannel : SharpOnvifClient.DeviceIO.DeviceIOPort, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class DeviceIOPortClient : System.ServiceModel.ClientBase<OnvifDeviceIO.DeviceIOPort>, OnvifDeviceIO.DeviceIOPort
+    public partial class DeviceIOPortClient : System.ServiceModel.ClientBase<SharpOnvifClient.DeviceIO.DeviceIOPort>, SharpOnvifClient.DeviceIO.DeviceIOPort
     {
         
         public DeviceIOPortClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
@@ -24908,221 +24908,221 @@ namespace OnvifDeviceIO
         {
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.Capabilities1> GetServiceCapabilitiesAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.Capabilities1> GetServiceCapabilitiesAsync()
         {
             return base.Channel.GetServiceCapabilitiesAsync();
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetRelayOutputOptionsResponse> OnvifDeviceIO.DeviceIOPort.GetRelayOutputOptionsAsync(OnvifDeviceIO.GetRelayOutputOptionsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetRelayOutputOptionsResponse> SharpOnvifClient.DeviceIO.DeviceIOPort.GetRelayOutputOptionsAsync(SharpOnvifClient.DeviceIO.GetRelayOutputOptionsRequest request)
         {
             return base.Channel.GetRelayOutputOptionsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetRelayOutputOptionsResponse> GetRelayOutputOptionsAsync(string RelayOutputToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetRelayOutputOptionsResponse> GetRelayOutputOptionsAsync(string RelayOutputToken)
         {
-            OnvifDeviceIO.GetRelayOutputOptionsRequest inValue = new OnvifDeviceIO.GetRelayOutputOptionsRequest();
+            SharpOnvifClient.DeviceIO.GetRelayOutputOptionsRequest inValue = new SharpOnvifClient.DeviceIO.GetRelayOutputOptionsRequest();
             inValue.RelayOutputToken = RelayOutputToken;
-            return ((OnvifDeviceIO.DeviceIOPort)(this)).GetRelayOutputOptionsAsync(inValue);
+            return ((SharpOnvifClient.DeviceIO.DeviceIOPort)(this)).GetRelayOutputOptionsAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetAudioSourcesResponse> OnvifDeviceIO.DeviceIOPort.GetAudioSourcesAsync(OnvifDeviceIO.GetAudioSourcesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetAudioSourcesResponse> SharpOnvifClient.DeviceIO.DeviceIOPort.GetAudioSourcesAsync(SharpOnvifClient.DeviceIO.GetAudioSourcesRequest request)
         {
             return base.Channel.GetAudioSourcesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetAudioSourcesResponse> GetAudioSourcesAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetAudioSourcesResponse> GetAudioSourcesAsync()
         {
-            OnvifDeviceIO.GetAudioSourcesRequest inValue = new OnvifDeviceIO.GetAudioSourcesRequest();
-            return ((OnvifDeviceIO.DeviceIOPort)(this)).GetAudioSourcesAsync(inValue);
+            SharpOnvifClient.DeviceIO.GetAudioSourcesRequest inValue = new SharpOnvifClient.DeviceIO.GetAudioSourcesRequest();
+            return ((SharpOnvifClient.DeviceIO.DeviceIOPort)(this)).GetAudioSourcesAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetAudioOutputsResponse> OnvifDeviceIO.DeviceIOPort.GetAudioOutputsAsync(OnvifDeviceIO.GetAudioOutputsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetAudioOutputsResponse> SharpOnvifClient.DeviceIO.DeviceIOPort.GetAudioOutputsAsync(SharpOnvifClient.DeviceIO.GetAudioOutputsRequest request)
         {
             return base.Channel.GetAudioOutputsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetAudioOutputsResponse> GetAudioOutputsAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetAudioOutputsResponse> GetAudioOutputsAsync()
         {
-            OnvifDeviceIO.GetAudioOutputsRequest inValue = new OnvifDeviceIO.GetAudioOutputsRequest();
-            return ((OnvifDeviceIO.DeviceIOPort)(this)).GetAudioOutputsAsync(inValue);
+            SharpOnvifClient.DeviceIO.GetAudioOutputsRequest inValue = new SharpOnvifClient.DeviceIO.GetAudioOutputsRequest();
+            return ((SharpOnvifClient.DeviceIO.DeviceIOPort)(this)).GetAudioOutputsAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetVideoSourcesResponse> OnvifDeviceIO.DeviceIOPort.GetVideoSourcesAsync(OnvifDeviceIO.GetVideoSourcesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetVideoSourcesResponse> SharpOnvifClient.DeviceIO.DeviceIOPort.GetVideoSourcesAsync(SharpOnvifClient.DeviceIO.GetVideoSourcesRequest request)
         {
             return base.Channel.GetVideoSourcesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetVideoSourcesResponse> GetVideoSourcesAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetVideoSourcesResponse> GetVideoSourcesAsync()
         {
-            OnvifDeviceIO.GetVideoSourcesRequest inValue = new OnvifDeviceIO.GetVideoSourcesRequest();
-            return ((OnvifDeviceIO.DeviceIOPort)(this)).GetVideoSourcesAsync(inValue);
+            SharpOnvifClient.DeviceIO.GetVideoSourcesRequest inValue = new SharpOnvifClient.DeviceIO.GetVideoSourcesRequest();
+            return ((SharpOnvifClient.DeviceIO.DeviceIOPort)(this)).GetVideoSourcesAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetVideoOutputsResponse> OnvifDeviceIO.DeviceIOPort.GetVideoOutputsAsync(OnvifDeviceIO.GetVideoOutputsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetVideoOutputsResponse> SharpOnvifClient.DeviceIO.DeviceIOPort.GetVideoOutputsAsync(SharpOnvifClient.DeviceIO.GetVideoOutputsRequest request)
         {
             return base.Channel.GetVideoOutputsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetVideoOutputsResponse> GetVideoOutputsAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetVideoOutputsResponse> GetVideoOutputsAsync()
         {
-            OnvifDeviceIO.GetVideoOutputsRequest inValue = new OnvifDeviceIO.GetVideoOutputsRequest();
-            return ((OnvifDeviceIO.DeviceIOPort)(this)).GetVideoOutputsAsync(inValue);
+            SharpOnvifClient.DeviceIO.GetVideoOutputsRequest inValue = new SharpOnvifClient.DeviceIO.GetVideoOutputsRequest();
+            return ((SharpOnvifClient.DeviceIO.DeviceIOPort)(this)).GetVideoOutputsAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetVideoSourceConfigurationResponse> GetVideoSourceConfigurationAsync(OnvifDeviceIO.GetVideoSourceConfigurationRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetVideoSourceConfigurationResponse> GetVideoSourceConfigurationAsync(SharpOnvifClient.DeviceIO.GetVideoSourceConfigurationRequest request)
         {
             return base.Channel.GetVideoSourceConfigurationAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetVideoOutputConfigurationResponse> GetVideoOutputConfigurationAsync(OnvifDeviceIO.GetVideoOutputConfigurationRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetVideoOutputConfigurationResponse> GetVideoOutputConfigurationAsync(SharpOnvifClient.DeviceIO.GetVideoOutputConfigurationRequest request)
         {
             return base.Channel.GetVideoOutputConfigurationAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetAudioSourceConfigurationResponse> GetAudioSourceConfigurationAsync(OnvifDeviceIO.GetAudioSourceConfigurationRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetAudioSourceConfigurationResponse> GetAudioSourceConfigurationAsync(SharpOnvifClient.DeviceIO.GetAudioSourceConfigurationRequest request)
         {
             return base.Channel.GetAudioSourceConfigurationAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetAudioOutputConfigurationResponse> GetAudioOutputConfigurationAsync(OnvifDeviceIO.GetAudioOutputConfigurationRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetAudioOutputConfigurationResponse> GetAudioOutputConfigurationAsync(SharpOnvifClient.DeviceIO.GetAudioOutputConfigurationRequest request)
         {
             return base.Channel.GetAudioOutputConfigurationAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.SetVideoSourceConfigurationResponse> SetVideoSourceConfigurationAsync(OnvifDeviceIO.SetVideoSourceConfigurationRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetVideoSourceConfigurationResponse> SetVideoSourceConfigurationAsync(SharpOnvifClient.DeviceIO.SetVideoSourceConfigurationRequest request)
         {
             return base.Channel.SetVideoSourceConfigurationAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.SetVideoOutputConfigurationResponse> SetVideoOutputConfigurationAsync(OnvifDeviceIO.SetVideoOutputConfigurationRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetVideoOutputConfigurationResponse> SetVideoOutputConfigurationAsync(SharpOnvifClient.DeviceIO.SetVideoOutputConfigurationRequest request)
         {
             return base.Channel.SetVideoOutputConfigurationAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.SetAudioSourceConfigurationResponse> SetAudioSourceConfigurationAsync(OnvifDeviceIO.SetAudioSourceConfigurationRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetAudioSourceConfigurationResponse> SetAudioSourceConfigurationAsync(SharpOnvifClient.DeviceIO.SetAudioSourceConfigurationRequest request)
         {
             return base.Channel.SetAudioSourceConfigurationAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.SetAudioOutputConfigurationResponse> SetAudioOutputConfigurationAsync(OnvifDeviceIO.SetAudioOutputConfigurationRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetAudioOutputConfigurationResponse> SetAudioOutputConfigurationAsync(SharpOnvifClient.DeviceIO.SetAudioOutputConfigurationRequest request)
         {
             return base.Channel.SetAudioOutputConfigurationAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetVideoSourceConfigurationOptionsResponse> GetVideoSourceConfigurationOptionsAsync(OnvifDeviceIO.GetVideoSourceConfigurationOptionsRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetVideoSourceConfigurationOptionsResponse> GetVideoSourceConfigurationOptionsAsync(SharpOnvifClient.DeviceIO.GetVideoSourceConfigurationOptionsRequest request)
         {
             return base.Channel.GetVideoSourceConfigurationOptionsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetVideoOutputConfigurationOptionsResponse> GetVideoOutputConfigurationOptionsAsync(OnvifDeviceIO.GetVideoOutputConfigurationOptionsRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetVideoOutputConfigurationOptionsResponse> GetVideoOutputConfigurationOptionsAsync(SharpOnvifClient.DeviceIO.GetVideoOutputConfigurationOptionsRequest request)
         {
             return base.Channel.GetVideoOutputConfigurationOptionsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetAudioSourceConfigurationOptionsResponse> GetAudioSourceConfigurationOptionsAsync(OnvifDeviceIO.GetAudioSourceConfigurationOptionsRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetAudioSourceConfigurationOptionsResponse> GetAudioSourceConfigurationOptionsAsync(SharpOnvifClient.DeviceIO.GetAudioSourceConfigurationOptionsRequest request)
         {
             return base.Channel.GetAudioSourceConfigurationOptionsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetAudioOutputConfigurationOptionsResponse> GetAudioOutputConfigurationOptionsAsync(OnvifDeviceIO.GetAudioOutputConfigurationOptionsRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetAudioOutputConfigurationOptionsResponse> GetAudioOutputConfigurationOptionsAsync(SharpOnvifClient.DeviceIO.GetAudioOutputConfigurationOptionsRequest request)
         {
             return base.Channel.GetAudioOutputConfigurationOptionsAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetRelayOutputsResponse1> OnvifDeviceIO.DeviceIOPort.GetRelayOutputsAsync(OnvifDeviceIO.GetRelayOutputsRequest1 request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetRelayOutputsResponse1> SharpOnvifClient.DeviceIO.DeviceIOPort.GetRelayOutputsAsync(SharpOnvifClient.DeviceIO.GetRelayOutputsRequest1 request)
         {
             return base.Channel.GetRelayOutputsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetRelayOutputsResponse1> GetRelayOutputsAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetRelayOutputsResponse1> GetRelayOutputsAsync()
         {
-            OnvifDeviceIO.GetRelayOutputsRequest1 inValue = new OnvifDeviceIO.GetRelayOutputsRequest1();
-            return ((OnvifDeviceIO.DeviceIOPort)(this)).GetRelayOutputsAsync(inValue);
+            SharpOnvifClient.DeviceIO.GetRelayOutputsRequest1 inValue = new SharpOnvifClient.DeviceIO.GetRelayOutputsRequest1();
+            return ((SharpOnvifClient.DeviceIO.DeviceIOPort)(this)).GetRelayOutputsAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task SetRelayOutputSettingsAsync(OnvifDeviceIO.RelayOutput RelayOutput)
+        public System.Threading.Tasks.Task SetRelayOutputSettingsAsync(SharpOnvifClient.DeviceIO.RelayOutput RelayOutput)
         {
             return base.Channel.SetRelayOutputSettingsAsync(RelayOutput);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.SetRelayOutputStateResponse> OnvifDeviceIO.DeviceIOPort.SetRelayOutputStateAsync(OnvifDeviceIO.SetRelayOutputStateRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetRelayOutputStateResponse> SharpOnvifClient.DeviceIO.DeviceIOPort.SetRelayOutputStateAsync(SharpOnvifClient.DeviceIO.SetRelayOutputStateRequest request)
         {
             return base.Channel.SetRelayOutputStateAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.SetRelayOutputStateResponse> SetRelayOutputStateAsync(string RelayOutputToken, OnvifDeviceIO.RelayLogicalState LogicalState)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetRelayOutputStateResponse> SetRelayOutputStateAsync(string RelayOutputToken, SharpOnvifClient.DeviceIO.RelayLogicalState LogicalState)
         {
-            OnvifDeviceIO.SetRelayOutputStateRequest inValue = new OnvifDeviceIO.SetRelayOutputStateRequest();
+            SharpOnvifClient.DeviceIO.SetRelayOutputStateRequest inValue = new SharpOnvifClient.DeviceIO.SetRelayOutputStateRequest();
             inValue.RelayOutputToken = RelayOutputToken;
             inValue.LogicalState = LogicalState;
-            return ((OnvifDeviceIO.DeviceIOPort)(this)).SetRelayOutputStateAsync(inValue);
+            return ((SharpOnvifClient.DeviceIO.DeviceIOPort)(this)).SetRelayOutputStateAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetDigitalInputsResponse> OnvifDeviceIO.DeviceIOPort.GetDigitalInputsAsync(OnvifDeviceIO.GetDigitalInputsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetDigitalInputsResponse> SharpOnvifClient.DeviceIO.DeviceIOPort.GetDigitalInputsAsync(SharpOnvifClient.DeviceIO.GetDigitalInputsRequest request)
         {
             return base.Channel.GetDigitalInputsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetDigitalInputsResponse> GetDigitalInputsAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetDigitalInputsResponse> GetDigitalInputsAsync()
         {
-            OnvifDeviceIO.GetDigitalInputsRequest inValue = new OnvifDeviceIO.GetDigitalInputsRequest();
-            return ((OnvifDeviceIO.DeviceIOPort)(this)).GetDigitalInputsAsync(inValue);
+            SharpOnvifClient.DeviceIO.GetDigitalInputsRequest inValue = new SharpOnvifClient.DeviceIO.GetDigitalInputsRequest();
+            return ((SharpOnvifClient.DeviceIO.DeviceIOPort)(this)).GetDigitalInputsAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.DigitalInputConfigurationOptions> GetDigitalInputConfigurationOptionsAsync(string Token)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.DigitalInputConfigurationOptions> GetDigitalInputConfigurationOptionsAsync(string Token)
         {
             return base.Channel.GetDigitalInputConfigurationOptionsAsync(Token);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.SetDigitalInputConfigurationsResponse> OnvifDeviceIO.DeviceIOPort.SetDigitalInputConfigurationsAsync(OnvifDeviceIO.SetDigitalInputConfigurationsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetDigitalInputConfigurationsResponse> SharpOnvifClient.DeviceIO.DeviceIOPort.SetDigitalInputConfigurationsAsync(SharpOnvifClient.DeviceIO.SetDigitalInputConfigurationsRequest request)
         {
             return base.Channel.SetDigitalInputConfigurationsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.SetDigitalInputConfigurationsResponse> SetDigitalInputConfigurationsAsync(OnvifDeviceIO.DigitalInput[] DigitalInputs)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SetDigitalInputConfigurationsResponse> SetDigitalInputConfigurationsAsync(SharpOnvifClient.DeviceIO.DigitalInput[] DigitalInputs)
         {
-            OnvifDeviceIO.SetDigitalInputConfigurationsRequest inValue = new OnvifDeviceIO.SetDigitalInputConfigurationsRequest();
+            SharpOnvifClient.DeviceIO.SetDigitalInputConfigurationsRequest inValue = new SharpOnvifClient.DeviceIO.SetDigitalInputConfigurationsRequest();
             inValue.DigitalInputs = DigitalInputs;
-            return ((OnvifDeviceIO.DeviceIOPort)(this)).SetDigitalInputConfigurationsAsync(inValue);
+            return ((SharpOnvifClient.DeviceIO.DeviceIOPort)(this)).SetDigitalInputConfigurationsAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDeviceIO.GetSerialPortsResponse> OnvifDeviceIO.DeviceIOPort.GetSerialPortsAsync(OnvifDeviceIO.GetSerialPortsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetSerialPortsResponse> SharpOnvifClient.DeviceIO.DeviceIOPort.GetSerialPortsAsync(SharpOnvifClient.DeviceIO.GetSerialPortsRequest request)
         {
             return base.Channel.GetSerialPortsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.GetSerialPortsResponse> GetSerialPortsAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.GetSerialPortsResponse> GetSerialPortsAsync()
         {
-            OnvifDeviceIO.GetSerialPortsRequest inValue = new OnvifDeviceIO.GetSerialPortsRequest();
-            return ((OnvifDeviceIO.DeviceIOPort)(this)).GetSerialPortsAsync(inValue);
+            SharpOnvifClient.DeviceIO.GetSerialPortsRequest inValue = new SharpOnvifClient.DeviceIO.GetSerialPortsRequest();
+            return ((SharpOnvifClient.DeviceIO.DeviceIOPort)(this)).GetSerialPortsAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.SerialPortConfiguration> GetSerialPortConfigurationAsync(string SerialPortToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SerialPortConfiguration> GetSerialPortConfigurationAsync(string SerialPortToken)
         {
             return base.Channel.GetSerialPortConfigurationAsync(SerialPortToken);
         }
         
-        public System.Threading.Tasks.Task SetSerialPortConfigurationAsync(OnvifDeviceIO.SerialPortConfiguration SerialPortConfiguration, bool ForcePersistance)
+        public System.Threading.Tasks.Task SetSerialPortConfigurationAsync(SharpOnvifClient.DeviceIO.SerialPortConfiguration SerialPortConfiguration, bool ForcePersistance)
         {
             return base.Channel.SetSerialPortConfigurationAsync(SerialPortConfiguration, ForcePersistance);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.SerialPortConfigurationOptions> GetSerialPortConfigurationOptionsAsync(string SerialPortToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SerialPortConfigurationOptions> GetSerialPortConfigurationOptionsAsync(string SerialPortToken)
         {
             return base.Channel.GetSerialPortConfigurationOptionsAsync(SerialPortToken);
         }
         
-        public System.Threading.Tasks.Task<OnvifDeviceIO.SendReceiveSerialCommandResponse> SendReceiveSerialCommandAsync(OnvifDeviceIO.SendReceiveSerialCommandRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DeviceIO.SendReceiveSerialCommandResponse> SendReceiveSerialCommandAsync(SharpOnvifClient.DeviceIO.SendReceiveSerialCommandRequest request)
         {
             return base.Channel.SendReceiveSerialCommandAsync(request);
         }

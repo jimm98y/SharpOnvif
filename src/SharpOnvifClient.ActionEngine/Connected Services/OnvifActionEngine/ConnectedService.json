@@ -8,7 +8,7 @@
       "System.Collections.Generic.Dictionary`2"
     ],
     "namespaceMappings": [
-      "*, OnvifActionEngine"
+      "*, SharpOnvifClient.ActionEngine"
     ],
     "references": [
       "System.ServiceModel, {System.ServiceModel.Primitives, 4.10.3}",

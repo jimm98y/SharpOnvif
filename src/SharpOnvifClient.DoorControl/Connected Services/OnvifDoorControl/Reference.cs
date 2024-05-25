@@ -7,12 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OnvifDoorControl
+namespace SharpOnvifClient.DoorControl
 {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl", ConfigurationName="OnvifDoorControl.DoorControlPort")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl", ConfigurationName="SharpOnvifClient.DoorControl.DoorControlPort")]
     public interface DoorControlPort
     {
         
@@ -20,45 +20,45 @@ namespace OnvifDoorControl
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Capabilities")]
-        System.Threading.Tasks.Task<OnvifDoorControl.ServiceCapabilities> GetServiceCapabilitiesAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.DoorControl.ServiceCapabilities> GetServiceCapabilitiesAsync();
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/doorcontrol/wsdl/GetDoorInfoList", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifDoorControl.GetDoorInfoListResponse> GetDoorInfoListAsync(OnvifDoorControl.GetDoorInfoListRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DoorControl.GetDoorInfoListResponse> GetDoorInfoListAsync(SharpOnvifClient.DoorControl.GetDoorInfoListRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/doorcontrol/wsdl/GetDoorInfo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifDoorControl.GetDoorInfoResponse> GetDoorInfoAsync(OnvifDoorControl.GetDoorInfoRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DoorControl.GetDoorInfoResponse> GetDoorInfoAsync(SharpOnvifClient.DoorControl.GetDoorInfoRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/doorcontrol/wsdl/GetDoorList", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifDoorControl.GetDoorListResponse> GetDoorListAsync(OnvifDoorControl.GetDoorListRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DoorControl.GetDoorListResponse> GetDoorListAsync(SharpOnvifClient.DoorControl.GetDoorListRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/doorcontrol/wsdl/GetDoors", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifDoorControl.GetDoorsResponse> GetDoorsAsync(OnvifDoorControl.GetDoorsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DoorControl.GetDoorsResponse> GetDoorsAsync(SharpOnvifClient.DoorControl.GetDoorsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/doorcontrol/wsdl/CreateDoor", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Token")]
-        System.Threading.Tasks.Task<string> CreateDoorAsync(OnvifDoorControl.Door Door);
+        System.Threading.Tasks.Task<string> CreateDoorAsync(SharpOnvifClient.DoorControl.Door Door);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/doorcontrol/wsdl/SetDoor", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task SetDoorAsync(OnvifDoorControl.Door Door);
+        System.Threading.Tasks.Task SetDoorAsync(SharpOnvifClient.DoorControl.Door Door);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/doorcontrol/wsdl/ModifyDoor", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task ModifyDoorAsync(OnvifDoorControl.Door Door);
+        System.Threading.Tasks.Task ModifyDoorAsync(SharpOnvifClient.DoorControl.Door Door);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/doorcontrol/wsdl/DeleteDoor", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -69,12 +69,12 @@ namespace OnvifDoorControl
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="DoorState")]
-        System.Threading.Tasks.Task<OnvifDoorControl.DoorState> GetDoorStateAsync(string Token);
+        System.Threading.Tasks.Task<SharpOnvifClient.DoorControl.DoorState> GetDoorStateAsync(string Token);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/doorcontrol/wsdl/AccessDoor", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifDoorControl.AccessDoorResponse> AccessDoorAsync(OnvifDoorControl.AccessDoorRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.DoorControl.AccessDoorResponse> AccessDoorAsync(SharpOnvifClient.DoorControl.AccessDoorRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/doorcontrol/wsdl/LockDoor", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -1523,13 +1523,13 @@ namespace OnvifDoorControl
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl", Order=1)]
         [System.Xml.Serialization.XmlElementAttribute("DoorInfo")]
-        public OnvifDoorControl.DoorInfo[] DoorInfo;
+        public SharpOnvifClient.DoorControl.DoorInfo[] DoorInfo;
         
         public GetDoorInfoListResponse()
         {
         }
         
-        public GetDoorInfoListResponse(string NextStartReference, OnvifDoorControl.DoorInfo[] DoorInfo)
+        public GetDoorInfoListResponse(string NextStartReference, SharpOnvifClient.DoorControl.DoorInfo[] DoorInfo)
         {
             this.NextStartReference = NextStartReference;
             this.DoorInfo = DoorInfo;
@@ -1566,13 +1566,13 @@ namespace OnvifDoorControl
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("DoorInfo")]
-        public OnvifDoorControl.DoorInfo[] DoorInfo;
+        public SharpOnvifClient.DoorControl.DoorInfo[] DoorInfo;
         
         public GetDoorInfoResponse()
         {
         }
         
-        public GetDoorInfoResponse(OnvifDoorControl.DoorInfo[] DoorInfo)
+        public GetDoorInfoResponse(SharpOnvifClient.DoorControl.DoorInfo[] DoorInfo)
         {
             this.DoorInfo = DoorInfo;
         }
@@ -1612,13 +1612,13 @@ namespace OnvifDoorControl
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl", Order=1)]
         [System.Xml.Serialization.XmlElementAttribute("Door")]
-        public OnvifDoorControl.Door[] Door;
+        public SharpOnvifClient.DoorControl.Door[] Door;
         
         public GetDoorListResponse()
         {
         }
         
-        public GetDoorListResponse(string NextStartReference, OnvifDoorControl.Door[] Door)
+        public GetDoorListResponse(string NextStartReference, SharpOnvifClient.DoorControl.Door[] Door)
         {
             this.NextStartReference = NextStartReference;
             this.Door = Door;
@@ -1655,13 +1655,13 @@ namespace OnvifDoorControl
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Door")]
-        public OnvifDoorControl.Door[] Door;
+        public SharpOnvifClient.DoorControl.Door[] Door;
         
         public GetDoorsResponse()
         {
         }
         
-        public GetDoorsResponse(OnvifDoorControl.Door[] Door)
+        public GetDoorsResponse(SharpOnvifClient.DoorControl.Door[] Door)
         {
             this.Door = Door;
         }
@@ -1693,13 +1693,13 @@ namespace OnvifDoorControl
         public string PreAlarmTime;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl", Order=5)]
-        public OnvifDoorControl.AccessDoorExtension Extension;
+        public SharpOnvifClient.DoorControl.AccessDoorExtension Extension;
         
         public AccessDoorRequest()
         {
         }
         
-        public AccessDoorRequest(string Token, bool UseExtendedTime, string AccessTime, string OpenTooLongTime, string PreAlarmTime, OnvifDoorControl.AccessDoorExtension Extension)
+        public AccessDoorRequest(string Token, bool UseExtendedTime, string AccessTime, string OpenTooLongTime, string PreAlarmTime, SharpOnvifClient.DoorControl.AccessDoorExtension Extension)
         {
             this.Token = Token;
             this.UseExtendedTime = UseExtendedTime;
@@ -1723,13 +1723,13 @@ namespace OnvifDoorControl
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface DoorControlPortChannel : OnvifDoorControl.DoorControlPort, System.ServiceModel.IClientChannel
+    public interface DoorControlPortChannel : SharpOnvifClient.DoorControl.DoorControlPort, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class DoorControlPortClient : System.ServiceModel.ClientBase<OnvifDoorControl.DoorControlPort>, OnvifDoorControl.DoorControlPort
+    public partial class DoorControlPortClient : System.ServiceModel.ClientBase<SharpOnvifClient.DoorControl.DoorControlPort>, SharpOnvifClient.DoorControl.DoorControlPort
     {
         
         public DoorControlPortClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
@@ -1737,58 +1737,58 @@ namespace OnvifDoorControl
         {
         }
         
-        public System.Threading.Tasks.Task<OnvifDoorControl.ServiceCapabilities> GetServiceCapabilitiesAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.DoorControl.ServiceCapabilities> GetServiceCapabilitiesAsync()
         {
             return base.Channel.GetServiceCapabilitiesAsync();
         }
         
-        public System.Threading.Tasks.Task<OnvifDoorControl.GetDoorInfoListResponse> GetDoorInfoListAsync(OnvifDoorControl.GetDoorInfoListRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DoorControl.GetDoorInfoListResponse> GetDoorInfoListAsync(SharpOnvifClient.DoorControl.GetDoorInfoListRequest request)
         {
             return base.Channel.GetDoorInfoListAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDoorControl.GetDoorInfoResponse> OnvifDoorControl.DoorControlPort.GetDoorInfoAsync(OnvifDoorControl.GetDoorInfoRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DoorControl.GetDoorInfoResponse> SharpOnvifClient.DoorControl.DoorControlPort.GetDoorInfoAsync(SharpOnvifClient.DoorControl.GetDoorInfoRequest request)
         {
             return base.Channel.GetDoorInfoAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDoorControl.GetDoorInfoResponse> GetDoorInfoAsync(string[] Token)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DoorControl.GetDoorInfoResponse> GetDoorInfoAsync(string[] Token)
         {
-            OnvifDoorControl.GetDoorInfoRequest inValue = new OnvifDoorControl.GetDoorInfoRequest();
+            SharpOnvifClient.DoorControl.GetDoorInfoRequest inValue = new SharpOnvifClient.DoorControl.GetDoorInfoRequest();
             inValue.Token = Token;
-            return ((OnvifDoorControl.DoorControlPort)(this)).GetDoorInfoAsync(inValue);
+            return ((SharpOnvifClient.DoorControl.DoorControlPort)(this)).GetDoorInfoAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifDoorControl.GetDoorListResponse> GetDoorListAsync(OnvifDoorControl.GetDoorListRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DoorControl.GetDoorListResponse> GetDoorListAsync(SharpOnvifClient.DoorControl.GetDoorListRequest request)
         {
             return base.Channel.GetDoorListAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDoorControl.GetDoorsResponse> OnvifDoorControl.DoorControlPort.GetDoorsAsync(OnvifDoorControl.GetDoorsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DoorControl.GetDoorsResponse> SharpOnvifClient.DoorControl.DoorControlPort.GetDoorsAsync(SharpOnvifClient.DoorControl.GetDoorsRequest request)
         {
             return base.Channel.GetDoorsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDoorControl.GetDoorsResponse> GetDoorsAsync(string[] Token)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DoorControl.GetDoorsResponse> GetDoorsAsync(string[] Token)
         {
-            OnvifDoorControl.GetDoorsRequest inValue = new OnvifDoorControl.GetDoorsRequest();
+            SharpOnvifClient.DoorControl.GetDoorsRequest inValue = new SharpOnvifClient.DoorControl.GetDoorsRequest();
             inValue.Token = Token;
-            return ((OnvifDoorControl.DoorControlPort)(this)).GetDoorsAsync(inValue);
+            return ((SharpOnvifClient.DoorControl.DoorControlPort)(this)).GetDoorsAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<string> CreateDoorAsync(OnvifDoorControl.Door Door)
+        public System.Threading.Tasks.Task<string> CreateDoorAsync(SharpOnvifClient.DoorControl.Door Door)
         {
             return base.Channel.CreateDoorAsync(Door);
         }
         
-        public System.Threading.Tasks.Task SetDoorAsync(OnvifDoorControl.Door Door)
+        public System.Threading.Tasks.Task SetDoorAsync(SharpOnvifClient.DoorControl.Door Door)
         {
             return base.Channel.SetDoorAsync(Door);
         }
         
-        public System.Threading.Tasks.Task ModifyDoorAsync(OnvifDoorControl.Door Door)
+        public System.Threading.Tasks.Task ModifyDoorAsync(SharpOnvifClient.DoorControl.Door Door)
         {
             return base.Channel.ModifyDoorAsync(Door);
         }
@@ -1798,27 +1798,27 @@ namespace OnvifDoorControl
             return base.Channel.DeleteDoorAsync(Token);
         }
         
-        public System.Threading.Tasks.Task<OnvifDoorControl.DoorState> GetDoorStateAsync(string Token)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DoorControl.DoorState> GetDoorStateAsync(string Token)
         {
             return base.Channel.GetDoorStateAsync(Token);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDoorControl.AccessDoorResponse> OnvifDoorControl.DoorControlPort.AccessDoorAsync(OnvifDoorControl.AccessDoorRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.DoorControl.AccessDoorResponse> SharpOnvifClient.DoorControl.DoorControlPort.AccessDoorAsync(SharpOnvifClient.DoorControl.AccessDoorRequest request)
         {
             return base.Channel.AccessDoorAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDoorControl.AccessDoorResponse> AccessDoorAsync(string Token, bool UseExtendedTime, string AccessTime, string OpenTooLongTime, string PreAlarmTime, OnvifDoorControl.AccessDoorExtension Extension)
+        public System.Threading.Tasks.Task<SharpOnvifClient.DoorControl.AccessDoorResponse> AccessDoorAsync(string Token, bool UseExtendedTime, string AccessTime, string OpenTooLongTime, string PreAlarmTime, SharpOnvifClient.DoorControl.AccessDoorExtension Extension)
         {
-            OnvifDoorControl.AccessDoorRequest inValue = new OnvifDoorControl.AccessDoorRequest();
+            SharpOnvifClient.DoorControl.AccessDoorRequest inValue = new SharpOnvifClient.DoorControl.AccessDoorRequest();
             inValue.Token = Token;
             inValue.UseExtendedTime = UseExtendedTime;
             inValue.AccessTime = AccessTime;
             inValue.OpenTooLongTime = OpenTooLongTime;
             inValue.PreAlarmTime = PreAlarmTime;
             inValue.Extension = Extension;
-            return ((OnvifDoorControl.DoorControlPort)(this)).AccessDoorAsync(inValue);
+            return ((SharpOnvifClient.DoorControl.DoorControlPort)(this)).AccessDoorAsync(inValue);
         }
         
         public System.Threading.Tasks.Task LockDoorAsync(string Token)

@@ -7,24 +7,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OnvifRecording
+namespace SharpOnvifClient.Recording
 {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/recording/wsdl", ConfigurationName="OnvifRecording.RecordingPort")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/recording/wsdl", ConfigurationName="SharpOnvifClient.Recording.RecordingPort")]
     public interface RecordingPort
     {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/recording/wsdl/GetServiceCapabilities", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Capabilities")]
-        System.Threading.Tasks.Task<OnvifRecording.Capabilities> GetServiceCapabilitiesAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.Recording.Capabilities> GetServiceCapabilitiesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/recording/wsdl/CreateRecording", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="RecordingToken")]
-        System.Threading.Tasks.Task<string> CreateRecordingAsync(OnvifRecording.RecordingConfiguration RecordingConfiguration);
+        System.Threading.Tasks.Task<string> CreateRecordingAsync(SharpOnvifClient.Recording.RecordingConfiguration RecordingConfiguration);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/recording/wsdl/DeleteRecording", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -32,26 +32,26 @@ namespace OnvifRecording
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/recording/wsdl/GetRecordings", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifRecording.GetRecordingsResponse> GetRecordingsAsync(OnvifRecording.GetRecordingsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Recording.GetRecordingsResponse> GetRecordingsAsync(SharpOnvifClient.Recording.GetRecordingsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/recording/wsdl/SetRecordingConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task SetRecordingConfigurationAsync(string RecordingToken, OnvifRecording.RecordingConfiguration RecordingConfiguration);
+        System.Threading.Tasks.Task SetRecordingConfigurationAsync(string RecordingToken, SharpOnvifClient.Recording.RecordingConfiguration RecordingConfiguration);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/recording/wsdl/GetRecordingConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="RecordingConfiguration")]
-        System.Threading.Tasks.Task<OnvifRecording.RecordingConfiguration> GetRecordingConfigurationAsync(string RecordingToken);
+        System.Threading.Tasks.Task<SharpOnvifClient.Recording.RecordingConfiguration> GetRecordingConfigurationAsync(string RecordingToken);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/recording/wsdl/GetRecordingOptions", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Options")]
-        System.Threading.Tasks.Task<OnvifRecording.RecordingOptions> GetRecordingOptionsAsync(string RecordingToken);
+        System.Threading.Tasks.Task<SharpOnvifClient.Recording.RecordingOptions> GetRecordingOptionsAsync(string RecordingToken);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/recording/wsdl/CreateTrack", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="TrackToken")]
-        System.Threading.Tasks.Task<string> CreateTrackAsync(string RecordingToken, OnvifRecording.TrackConfiguration TrackConfiguration);
+        System.Threading.Tasks.Task<string> CreateTrackAsync(string RecordingToken, SharpOnvifClient.Recording.TrackConfiguration TrackConfiguration);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/recording/wsdl/DeleteTrack", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -60,16 +60,16 @@ namespace OnvifRecording
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/recording/wsdl/GetTrackConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="TrackConfiguration")]
-        System.Threading.Tasks.Task<OnvifRecording.TrackConfiguration> GetTrackConfigurationAsync(string RecordingToken, string TrackToken);
+        System.Threading.Tasks.Task<SharpOnvifClient.Recording.TrackConfiguration> GetTrackConfigurationAsync(string RecordingToken, string TrackToken);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/recording/wsdl/SetTrackConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task SetTrackConfigurationAsync(string RecordingToken, string TrackToken, OnvifRecording.TrackConfiguration TrackConfiguration);
+        System.Threading.Tasks.Task SetTrackConfigurationAsync(string RecordingToken, string TrackToken, SharpOnvifClient.Recording.TrackConfiguration TrackConfiguration);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/recording/wsdl/CreateRecordingJob", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifRecording.CreateRecordingJobResponse> CreateRecordingJobAsync(OnvifRecording.CreateRecordingJobRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Recording.CreateRecordingJobResponse> CreateRecordingJobAsync(SharpOnvifClient.Recording.CreateRecordingJobRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/recording/wsdl/DeleteRecordingJob", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -77,17 +77,17 @@ namespace OnvifRecording
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/recording/wsdl/GetRecordingJobs", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifRecording.GetRecordingJobsResponse> GetRecordingJobsAsync(OnvifRecording.GetRecordingJobsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Recording.GetRecordingJobsResponse> GetRecordingJobsAsync(SharpOnvifClient.Recording.GetRecordingJobsRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/recording/wsdl/SetRecordingJobConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifRecording.SetRecordingJobConfigurationResponse> SetRecordingJobConfigurationAsync(OnvifRecording.SetRecordingJobConfigurationRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Recording.SetRecordingJobConfigurationResponse> SetRecordingJobConfigurationAsync(SharpOnvifClient.Recording.SetRecordingJobConfigurationRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/recording/wsdl/GetRecordingJobConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="JobConfiguration")]
-        System.Threading.Tasks.Task<OnvifRecording.RecordingJobConfiguration> GetRecordingJobConfigurationAsync(string JobToken);
+        System.Threading.Tasks.Task<SharpOnvifClient.Recording.RecordingJobConfiguration> GetRecordingJobConfigurationAsync(string JobToken);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/recording/wsdl/SetRecordingJobMode", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -96,22 +96,22 @@ namespace OnvifRecording
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/recording/wsdl/GetRecordingJobState", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="State")]
-        System.Threading.Tasks.Task<OnvifRecording.RecordingJobStateInformation> GetRecordingJobStateAsync(string JobToken);
+        System.Threading.Tasks.Task<SharpOnvifClient.Recording.RecordingJobStateInformation> GetRecordingJobStateAsync(string JobToken);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/recording/wsdl/ExportRecordedData", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifRecording.ExportRecordedDataResponse> ExportRecordedDataAsync(OnvifRecording.ExportRecordedDataRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Recording.ExportRecordedDataResponse> ExportRecordedDataAsync(SharpOnvifClient.Recording.ExportRecordedDataRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/recording/wsdl/StopExportRecordedData", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifRecording.StopExportRecordedDataResponse> StopExportRecordedDataAsync(OnvifRecording.StopExportRecordedDataRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Recording.StopExportRecordedDataResponse> StopExportRecordedDataAsync(SharpOnvifClient.Recording.StopExportRecordedDataRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/recording/wsdl/GetExportRecordedDataState", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifRecording.GetExportRecordedDataStateResponse> GetExportRecordedDataStateAsync(OnvifRecording.GetExportRecordedDataStateRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Recording.GetExportRecordedDataStateResponse> GetExportRecordedDataStateAsync(SharpOnvifClient.Recording.GetExportRecordedDataStateRequest request);
     }
     
     /// <remarks/>
@@ -2616,13 +2616,13 @@ namespace OnvifRecording
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/recording/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("RecordingItem")]
-        public OnvifRecording.GetRecordingsResponseItem[] RecordingItem;
+        public SharpOnvifClient.Recording.GetRecordingsResponseItem[] RecordingItem;
         
         public GetRecordingsResponse()
         {
         }
         
-        public GetRecordingsResponse(OnvifRecording.GetRecordingsResponseItem[] RecordingItem)
+        public GetRecordingsResponse(SharpOnvifClient.Recording.GetRecordingsResponseItem[] RecordingItem)
         {
             this.RecordingItem = RecordingItem;
         }
@@ -2635,13 +2635,13 @@ namespace OnvifRecording
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/recording/wsdl", Order=0)]
-        public OnvifRecording.RecordingJobConfiguration JobConfiguration;
+        public SharpOnvifClient.Recording.RecordingJobConfiguration JobConfiguration;
         
         public CreateRecordingJobRequest()
         {
         }
         
-        public CreateRecordingJobRequest(OnvifRecording.RecordingJobConfiguration JobConfiguration)
+        public CreateRecordingJobRequest(SharpOnvifClient.Recording.RecordingJobConfiguration JobConfiguration)
         {
             this.JobConfiguration = JobConfiguration;
         }
@@ -2657,13 +2657,13 @@ namespace OnvifRecording
         public string JobToken;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/recording/wsdl", Order=1)]
-        public OnvifRecording.RecordingJobConfiguration JobConfiguration;
+        public SharpOnvifClient.Recording.RecordingJobConfiguration JobConfiguration;
         
         public CreateRecordingJobResponse()
         {
         }
         
-        public CreateRecordingJobResponse(string JobToken, OnvifRecording.RecordingJobConfiguration JobConfiguration)
+        public CreateRecordingJobResponse(string JobToken, SharpOnvifClient.Recording.RecordingJobConfiguration JobConfiguration)
         {
             this.JobToken = JobToken;
             this.JobConfiguration = JobConfiguration;
@@ -2691,13 +2691,13 @@ namespace OnvifRecording
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/recording/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("JobItem")]
-        public OnvifRecording.GetRecordingJobsResponseItem[] JobItem;
+        public SharpOnvifClient.Recording.GetRecordingJobsResponseItem[] JobItem;
         
         public GetRecordingJobsResponse()
         {
         }
         
-        public GetRecordingJobsResponse(OnvifRecording.GetRecordingJobsResponseItem[] JobItem)
+        public GetRecordingJobsResponse(SharpOnvifClient.Recording.GetRecordingJobsResponseItem[] JobItem)
         {
             this.JobItem = JobItem;
         }
@@ -2713,13 +2713,13 @@ namespace OnvifRecording
         public string JobToken;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/recording/wsdl", Order=1)]
-        public OnvifRecording.RecordingJobConfiguration JobConfiguration;
+        public SharpOnvifClient.Recording.RecordingJobConfiguration JobConfiguration;
         
         public SetRecordingJobConfigurationRequest()
         {
         }
         
-        public SetRecordingJobConfigurationRequest(string JobToken, OnvifRecording.RecordingJobConfiguration JobConfiguration)
+        public SetRecordingJobConfigurationRequest(string JobToken, SharpOnvifClient.Recording.RecordingJobConfiguration JobConfiguration)
         {
             this.JobToken = JobToken;
             this.JobConfiguration = JobConfiguration;
@@ -2733,13 +2733,13 @@ namespace OnvifRecording
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/recording/wsdl", Order=0)]
-        public OnvifRecording.RecordingJobConfiguration JobConfiguration;
+        public SharpOnvifClient.Recording.RecordingJobConfiguration JobConfiguration;
         
         public SetRecordingJobConfigurationResponse()
         {
         }
         
-        public SetRecordingJobConfigurationResponse(OnvifRecording.RecordingJobConfiguration JobConfiguration)
+        public SetRecordingJobConfigurationResponse(SharpOnvifClient.Recording.RecordingJobConfiguration JobConfiguration)
         {
             this.JobConfiguration = JobConfiguration;
         }
@@ -2782,19 +2782,19 @@ namespace OnvifRecording
         public System.DateTime EndPoint;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/recording/wsdl", Order=2)]
-        public OnvifRecording.SearchScope SearchScope;
+        public SharpOnvifClient.Recording.SearchScope SearchScope;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/recording/wsdl", Order=3)]
         public string FileFormat;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/recording/wsdl", Order=4)]
-        public OnvifRecording.StorageReferencePath StorageDestination;
+        public SharpOnvifClient.Recording.StorageReferencePath StorageDestination;
         
         public ExportRecordedDataRequest()
         {
         }
         
-        public ExportRecordedDataRequest(System.DateTime StartPoint, System.DateTime EndPoint, OnvifRecording.SearchScope SearchScope, string FileFormat, OnvifRecording.StorageReferencePath StorageDestination)
+        public ExportRecordedDataRequest(System.DateTime StartPoint, System.DateTime EndPoint, SharpOnvifClient.Recording.SearchScope SearchScope, string FileFormat, SharpOnvifClient.Recording.StorageReferencePath StorageDestination)
         {
             this.StartPoint = StartPoint;
             this.EndPoint = EndPoint;
@@ -2818,13 +2818,13 @@ namespace OnvifRecording
         public string[] FileNames;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/recording/wsdl", Order=2)]
-        public OnvifRecording.ExportRecordedDataResponseExtension Extension;
+        public SharpOnvifClient.Recording.ExportRecordedDataResponseExtension Extension;
         
         public ExportRecordedDataResponse()
         {
         }
         
-        public ExportRecordedDataResponse(string OperationToken, string[] FileNames, OnvifRecording.ExportRecordedDataResponseExtension Extension)
+        public ExportRecordedDataResponse(string OperationToken, string[] FileNames, SharpOnvifClient.Recording.ExportRecordedDataResponseExtension Extension)
         {
             this.OperationToken = OperationToken;
             this.FileNames = FileNames;
@@ -2861,7 +2861,7 @@ namespace OnvifRecording
         public float Progress;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/recording/wsdl", Order=1)]
-        public OnvifRecording.ArrayOfFileProgress FileProgressStatus;
+        public SharpOnvifClient.Recording.ArrayOfFileProgress FileProgressStatus;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=2)]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
@@ -2871,7 +2871,7 @@ namespace OnvifRecording
         {
         }
         
-        public StopExportRecordedDataResponse(float Progress, OnvifRecording.ArrayOfFileProgress FileProgressStatus, System.Xml.XmlElement[] Any)
+        public StopExportRecordedDataResponse(float Progress, SharpOnvifClient.Recording.ArrayOfFileProgress FileProgressStatus, System.Xml.XmlElement[] Any)
         {
             this.Progress = Progress;
             this.FileProgressStatus = FileProgressStatus;
@@ -2908,7 +2908,7 @@ namespace OnvifRecording
         public float Progress;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/recording/wsdl", Order=1)]
-        public OnvifRecording.ArrayOfFileProgress FileProgressStatus;
+        public SharpOnvifClient.Recording.ArrayOfFileProgress FileProgressStatus;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=2)]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
@@ -2918,7 +2918,7 @@ namespace OnvifRecording
         {
         }
         
-        public GetExportRecordedDataStateResponse(float Progress, OnvifRecording.ArrayOfFileProgress FileProgressStatus, System.Xml.XmlElement[] Any)
+        public GetExportRecordedDataStateResponse(float Progress, SharpOnvifClient.Recording.ArrayOfFileProgress FileProgressStatus, System.Xml.XmlElement[] Any)
         {
             this.Progress = Progress;
             this.FileProgressStatus = FileProgressStatus;
@@ -2927,13 +2927,13 @@ namespace OnvifRecording
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface RecordingPortChannel : OnvifRecording.RecordingPort, System.ServiceModel.IClientChannel
+    public interface RecordingPortChannel : SharpOnvifClient.Recording.RecordingPort, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class RecordingPortClient : System.ServiceModel.ClientBase<OnvifRecording.RecordingPort>, OnvifRecording.RecordingPort
+    public partial class RecordingPortClient : System.ServiceModel.ClientBase<SharpOnvifClient.Recording.RecordingPort>, SharpOnvifClient.Recording.RecordingPort
     {
         
         public RecordingPortClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
@@ -2941,12 +2941,12 @@ namespace OnvifRecording
         {
         }
         
-        public System.Threading.Tasks.Task<OnvifRecording.Capabilities> GetServiceCapabilitiesAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.Recording.Capabilities> GetServiceCapabilitiesAsync()
         {
             return base.Channel.GetServiceCapabilitiesAsync();
         }
         
-        public System.Threading.Tasks.Task<string> CreateRecordingAsync(OnvifRecording.RecordingConfiguration RecordingConfiguration)
+        public System.Threading.Tasks.Task<string> CreateRecordingAsync(SharpOnvifClient.Recording.RecordingConfiguration RecordingConfiguration)
         {
             return base.Channel.CreateRecordingAsync(RecordingConfiguration);
         }
@@ -2957,33 +2957,33 @@ namespace OnvifRecording
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifRecording.GetRecordingsResponse> OnvifRecording.RecordingPort.GetRecordingsAsync(OnvifRecording.GetRecordingsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Recording.GetRecordingsResponse> SharpOnvifClient.Recording.RecordingPort.GetRecordingsAsync(SharpOnvifClient.Recording.GetRecordingsRequest request)
         {
             return base.Channel.GetRecordingsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifRecording.GetRecordingsResponse> GetRecordingsAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.Recording.GetRecordingsResponse> GetRecordingsAsync()
         {
-            OnvifRecording.GetRecordingsRequest inValue = new OnvifRecording.GetRecordingsRequest();
-            return ((OnvifRecording.RecordingPort)(this)).GetRecordingsAsync(inValue);
+            SharpOnvifClient.Recording.GetRecordingsRequest inValue = new SharpOnvifClient.Recording.GetRecordingsRequest();
+            return ((SharpOnvifClient.Recording.RecordingPort)(this)).GetRecordingsAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task SetRecordingConfigurationAsync(string RecordingToken, OnvifRecording.RecordingConfiguration RecordingConfiguration)
+        public System.Threading.Tasks.Task SetRecordingConfigurationAsync(string RecordingToken, SharpOnvifClient.Recording.RecordingConfiguration RecordingConfiguration)
         {
             return base.Channel.SetRecordingConfigurationAsync(RecordingToken, RecordingConfiguration);
         }
         
-        public System.Threading.Tasks.Task<OnvifRecording.RecordingConfiguration> GetRecordingConfigurationAsync(string RecordingToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Recording.RecordingConfiguration> GetRecordingConfigurationAsync(string RecordingToken)
         {
             return base.Channel.GetRecordingConfigurationAsync(RecordingToken);
         }
         
-        public System.Threading.Tasks.Task<OnvifRecording.RecordingOptions> GetRecordingOptionsAsync(string RecordingToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Recording.RecordingOptions> GetRecordingOptionsAsync(string RecordingToken)
         {
             return base.Channel.GetRecordingOptionsAsync(RecordingToken);
         }
         
-        public System.Threading.Tasks.Task<string> CreateTrackAsync(string RecordingToken, OnvifRecording.TrackConfiguration TrackConfiguration)
+        public System.Threading.Tasks.Task<string> CreateTrackAsync(string RecordingToken, SharpOnvifClient.Recording.TrackConfiguration TrackConfiguration)
         {
             return base.Channel.CreateTrackAsync(RecordingToken, TrackConfiguration);
         }
@@ -2993,17 +2993,17 @@ namespace OnvifRecording
             return base.Channel.DeleteTrackAsync(RecordingToken, TrackToken);
         }
         
-        public System.Threading.Tasks.Task<OnvifRecording.TrackConfiguration> GetTrackConfigurationAsync(string RecordingToken, string TrackToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Recording.TrackConfiguration> GetTrackConfigurationAsync(string RecordingToken, string TrackToken)
         {
             return base.Channel.GetTrackConfigurationAsync(RecordingToken, TrackToken);
         }
         
-        public System.Threading.Tasks.Task SetTrackConfigurationAsync(string RecordingToken, string TrackToken, OnvifRecording.TrackConfiguration TrackConfiguration)
+        public System.Threading.Tasks.Task SetTrackConfigurationAsync(string RecordingToken, string TrackToken, SharpOnvifClient.Recording.TrackConfiguration TrackConfiguration)
         {
             return base.Channel.SetTrackConfigurationAsync(RecordingToken, TrackToken, TrackConfiguration);
         }
         
-        public System.Threading.Tasks.Task<OnvifRecording.CreateRecordingJobResponse> CreateRecordingJobAsync(OnvifRecording.CreateRecordingJobRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Recording.CreateRecordingJobResponse> CreateRecordingJobAsync(SharpOnvifClient.Recording.CreateRecordingJobRequest request)
         {
             return base.Channel.CreateRecordingJobAsync(request);
         }
@@ -3014,23 +3014,23 @@ namespace OnvifRecording
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifRecording.GetRecordingJobsResponse> OnvifRecording.RecordingPort.GetRecordingJobsAsync(OnvifRecording.GetRecordingJobsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Recording.GetRecordingJobsResponse> SharpOnvifClient.Recording.RecordingPort.GetRecordingJobsAsync(SharpOnvifClient.Recording.GetRecordingJobsRequest request)
         {
             return base.Channel.GetRecordingJobsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifRecording.GetRecordingJobsResponse> GetRecordingJobsAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.Recording.GetRecordingJobsResponse> GetRecordingJobsAsync()
         {
-            OnvifRecording.GetRecordingJobsRequest inValue = new OnvifRecording.GetRecordingJobsRequest();
-            return ((OnvifRecording.RecordingPort)(this)).GetRecordingJobsAsync(inValue);
+            SharpOnvifClient.Recording.GetRecordingJobsRequest inValue = new SharpOnvifClient.Recording.GetRecordingJobsRequest();
+            return ((SharpOnvifClient.Recording.RecordingPort)(this)).GetRecordingJobsAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifRecording.SetRecordingJobConfigurationResponse> SetRecordingJobConfigurationAsync(OnvifRecording.SetRecordingJobConfigurationRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Recording.SetRecordingJobConfigurationResponse> SetRecordingJobConfigurationAsync(SharpOnvifClient.Recording.SetRecordingJobConfigurationRequest request)
         {
             return base.Channel.SetRecordingJobConfigurationAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifRecording.RecordingJobConfiguration> GetRecordingJobConfigurationAsync(string JobToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Recording.RecordingJobConfiguration> GetRecordingJobConfigurationAsync(string JobToken)
         {
             return base.Channel.GetRecordingJobConfigurationAsync(JobToken);
         }
@@ -3040,22 +3040,22 @@ namespace OnvifRecording
             return base.Channel.SetRecordingJobModeAsync(JobToken, Mode);
         }
         
-        public System.Threading.Tasks.Task<OnvifRecording.RecordingJobStateInformation> GetRecordingJobStateAsync(string JobToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Recording.RecordingJobStateInformation> GetRecordingJobStateAsync(string JobToken)
         {
             return base.Channel.GetRecordingJobStateAsync(JobToken);
         }
         
-        public System.Threading.Tasks.Task<OnvifRecording.ExportRecordedDataResponse> ExportRecordedDataAsync(OnvifRecording.ExportRecordedDataRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Recording.ExportRecordedDataResponse> ExportRecordedDataAsync(SharpOnvifClient.Recording.ExportRecordedDataRequest request)
         {
             return base.Channel.ExportRecordedDataAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifRecording.StopExportRecordedDataResponse> StopExportRecordedDataAsync(OnvifRecording.StopExportRecordedDataRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Recording.StopExportRecordedDataResponse> StopExportRecordedDataAsync(SharpOnvifClient.Recording.StopExportRecordedDataRequest request)
         {
             return base.Channel.StopExportRecordedDataAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifRecording.GetExportRecordedDataStateResponse> GetExportRecordedDataStateAsync(OnvifRecording.GetExportRecordedDataStateRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Recording.GetExportRecordedDataStateResponse> GetExportRecordedDataStateAsync(SharpOnvifClient.Recording.GetExportRecordedDataStateRequest request)
         {
             return base.Channel.GetExportRecordedDataStateAsync(request);
         }

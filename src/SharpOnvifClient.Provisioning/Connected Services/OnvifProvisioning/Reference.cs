@@ -7,39 +7,39 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OnvifProvisioning
+namespace SharpOnvifClient.Provisioning
 {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/provisioning/wsdl", ConfigurationName="OnvifProvisioning.ProvisioningService")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/provisioning/wsdl", ConfigurationName="SharpOnvifClient.Provisioning.ProvisioningService")]
     public interface ProvisioningService
     {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/provisioning/wsdl/GetServiceCapabilities", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Capabilities")]
-        System.Threading.Tasks.Task<OnvifProvisioning.Capabilities> GetServiceCapabilitiesAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.Provisioning.Capabilities> GetServiceCapabilitiesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/provisioning/wsdl/PanMove", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifProvisioning.PanMoveResponse> PanMoveAsync(OnvifProvisioning.PanMoveRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Provisioning.PanMoveResponse> PanMoveAsync(SharpOnvifClient.Provisioning.PanMoveRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/provisioning/wsdl/TiltMove", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifProvisioning.TiltMoveResponse> TiltMoveAsync(OnvifProvisioning.TiltMoveRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Provisioning.TiltMoveResponse> TiltMoveAsync(SharpOnvifClient.Provisioning.TiltMoveRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/provisioning/wsdl/ZoomMove", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifProvisioning.ZoomMoveResponse> ZoomMoveAsync(OnvifProvisioning.ZoomMoveRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Provisioning.ZoomMoveResponse> ZoomMoveAsync(SharpOnvifClient.Provisioning.ZoomMoveRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/provisioning/wsdl/RollMove", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifProvisioning.RollMoveResponse> RollMoveAsync(OnvifProvisioning.RollMoveRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Provisioning.RollMoveResponse> RollMoveAsync(SharpOnvifClient.Provisioning.RollMoveRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/provisioning/wsdl/FocusMove", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifProvisioning.FocusMoveResponse> FocusMoveAsync(OnvifProvisioning.FocusMoveRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Provisioning.FocusMoveResponse> FocusMoveAsync(SharpOnvifClient.Provisioning.FocusMoveRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/provisioning/wsdl/Stop", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -48,7 +48,7 @@ namespace OnvifProvisioning
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/provisioning/wsdl/Usage", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Usage")]
-        System.Threading.Tasks.Task<OnvifProvisioning.Usage> GetUsageAsync(string VideoSource);
+        System.Threading.Tasks.Task<SharpOnvifClient.Provisioning.Usage> GetUsageAsync(string VideoSource);
     }
     
     /// <remarks/>
@@ -419,7 +419,7 @@ namespace OnvifProvisioning
         public string VideoSource;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/provisioning/wsdl", Order=1)]
-        public OnvifProvisioning.PanDirection Direction;
+        public SharpOnvifClient.Provisioning.PanDirection Direction;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/provisioning/wsdl", Order=2)]
         [System.Xml.Serialization.XmlElementAttribute(DataType="duration")]
@@ -429,7 +429,7 @@ namespace OnvifProvisioning
         {
         }
         
-        public PanMoveRequest(string VideoSource, OnvifProvisioning.PanDirection Direction, string Timeout)
+        public PanMoveRequest(string VideoSource, SharpOnvifClient.Provisioning.PanDirection Direction, string Timeout)
         {
             this.VideoSource = VideoSource;
             this.Direction = Direction;
@@ -473,7 +473,7 @@ namespace OnvifProvisioning
         public string VideoSource;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/provisioning/wsdl", Order=1)]
-        public OnvifProvisioning.TiltDirection Direction;
+        public SharpOnvifClient.Provisioning.TiltDirection Direction;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/provisioning/wsdl", Order=2)]
         [System.Xml.Serialization.XmlElementAttribute(DataType="duration")]
@@ -483,7 +483,7 @@ namespace OnvifProvisioning
         {
         }
         
-        public TiltMoveRequest(string VideoSource, OnvifProvisioning.TiltDirection Direction, string Timeout)
+        public TiltMoveRequest(string VideoSource, SharpOnvifClient.Provisioning.TiltDirection Direction, string Timeout)
         {
             this.VideoSource = VideoSource;
             this.Direction = Direction;
@@ -527,7 +527,7 @@ namespace OnvifProvisioning
         public string VideoSource;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/provisioning/wsdl", Order=1)]
-        public OnvifProvisioning.ZoomDirection Direction;
+        public SharpOnvifClient.Provisioning.ZoomDirection Direction;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/provisioning/wsdl", Order=2)]
         [System.Xml.Serialization.XmlElementAttribute(DataType="duration")]
@@ -537,7 +537,7 @@ namespace OnvifProvisioning
         {
         }
         
-        public ZoomMoveRequest(string VideoSource, OnvifProvisioning.ZoomDirection Direction, string Timeout)
+        public ZoomMoveRequest(string VideoSource, SharpOnvifClient.Provisioning.ZoomDirection Direction, string Timeout)
         {
             this.VideoSource = VideoSource;
             this.Direction = Direction;
@@ -584,7 +584,7 @@ namespace OnvifProvisioning
         public string VideoSource;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/provisioning/wsdl", Order=1)]
-        public OnvifProvisioning.RollDirection Direction;
+        public SharpOnvifClient.Provisioning.RollDirection Direction;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/provisioning/wsdl", Order=2)]
         [System.Xml.Serialization.XmlElementAttribute(DataType="duration")]
@@ -594,7 +594,7 @@ namespace OnvifProvisioning
         {
         }
         
-        public RollMoveRequest(string VideoSource, OnvifProvisioning.RollDirection Direction, string Timeout)
+        public RollMoveRequest(string VideoSource, SharpOnvifClient.Provisioning.RollDirection Direction, string Timeout)
         {
             this.VideoSource = VideoSource;
             this.Direction = Direction;
@@ -641,7 +641,7 @@ namespace OnvifProvisioning
         public string VideoSource;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/provisioning/wsdl", Order=1)]
-        public OnvifProvisioning.FocusDirection Direction;
+        public SharpOnvifClient.Provisioning.FocusDirection Direction;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/provisioning/wsdl", Order=2)]
         [System.Xml.Serialization.XmlElementAttribute(DataType="duration")]
@@ -651,7 +651,7 @@ namespace OnvifProvisioning
         {
         }
         
-        public FocusMoveRequest(string VideoSource, OnvifProvisioning.FocusDirection Direction, string Timeout)
+        public FocusMoveRequest(string VideoSource, SharpOnvifClient.Provisioning.FocusDirection Direction, string Timeout)
         {
             this.VideoSource = VideoSource;
             this.Direction = Direction;
@@ -672,13 +672,13 @@ namespace OnvifProvisioning
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface ProvisioningServiceChannel : OnvifProvisioning.ProvisioningService, System.ServiceModel.IClientChannel
+    public interface ProvisioningServiceChannel : SharpOnvifClient.Provisioning.ProvisioningService, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class ProvisioningServiceClient : System.ServiceModel.ClientBase<OnvifProvisioning.ProvisioningService>, OnvifProvisioning.ProvisioningService
+    public partial class ProvisioningServiceClient : System.ServiceModel.ClientBase<SharpOnvifClient.Provisioning.ProvisioningService>, SharpOnvifClient.Provisioning.ProvisioningService
     {
         
         public ProvisioningServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
@@ -686,84 +686,84 @@ namespace OnvifProvisioning
         {
         }
         
-        public System.Threading.Tasks.Task<OnvifProvisioning.Capabilities> GetServiceCapabilitiesAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.Provisioning.Capabilities> GetServiceCapabilitiesAsync()
         {
             return base.Channel.GetServiceCapabilitiesAsync();
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifProvisioning.PanMoveResponse> OnvifProvisioning.ProvisioningService.PanMoveAsync(OnvifProvisioning.PanMoveRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Provisioning.PanMoveResponse> SharpOnvifClient.Provisioning.ProvisioningService.PanMoveAsync(SharpOnvifClient.Provisioning.PanMoveRequest request)
         {
             return base.Channel.PanMoveAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifProvisioning.PanMoveResponse> PanMoveAsync(string VideoSource, OnvifProvisioning.PanDirection Direction, string Timeout)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Provisioning.PanMoveResponse> PanMoveAsync(string VideoSource, SharpOnvifClient.Provisioning.PanDirection Direction, string Timeout)
         {
-            OnvifProvisioning.PanMoveRequest inValue = new OnvifProvisioning.PanMoveRequest();
+            SharpOnvifClient.Provisioning.PanMoveRequest inValue = new SharpOnvifClient.Provisioning.PanMoveRequest();
             inValue.VideoSource = VideoSource;
             inValue.Direction = Direction;
             inValue.Timeout = Timeout;
-            return ((OnvifProvisioning.ProvisioningService)(this)).PanMoveAsync(inValue);
+            return ((SharpOnvifClient.Provisioning.ProvisioningService)(this)).PanMoveAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifProvisioning.TiltMoveResponse> OnvifProvisioning.ProvisioningService.TiltMoveAsync(OnvifProvisioning.TiltMoveRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Provisioning.TiltMoveResponse> SharpOnvifClient.Provisioning.ProvisioningService.TiltMoveAsync(SharpOnvifClient.Provisioning.TiltMoveRequest request)
         {
             return base.Channel.TiltMoveAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifProvisioning.TiltMoveResponse> TiltMoveAsync(string VideoSource, OnvifProvisioning.TiltDirection Direction, string Timeout)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Provisioning.TiltMoveResponse> TiltMoveAsync(string VideoSource, SharpOnvifClient.Provisioning.TiltDirection Direction, string Timeout)
         {
-            OnvifProvisioning.TiltMoveRequest inValue = new OnvifProvisioning.TiltMoveRequest();
+            SharpOnvifClient.Provisioning.TiltMoveRequest inValue = new SharpOnvifClient.Provisioning.TiltMoveRequest();
             inValue.VideoSource = VideoSource;
             inValue.Direction = Direction;
             inValue.Timeout = Timeout;
-            return ((OnvifProvisioning.ProvisioningService)(this)).TiltMoveAsync(inValue);
+            return ((SharpOnvifClient.Provisioning.ProvisioningService)(this)).TiltMoveAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifProvisioning.ZoomMoveResponse> OnvifProvisioning.ProvisioningService.ZoomMoveAsync(OnvifProvisioning.ZoomMoveRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Provisioning.ZoomMoveResponse> SharpOnvifClient.Provisioning.ProvisioningService.ZoomMoveAsync(SharpOnvifClient.Provisioning.ZoomMoveRequest request)
         {
             return base.Channel.ZoomMoveAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifProvisioning.ZoomMoveResponse> ZoomMoveAsync(string VideoSource, OnvifProvisioning.ZoomDirection Direction, string Timeout)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Provisioning.ZoomMoveResponse> ZoomMoveAsync(string VideoSource, SharpOnvifClient.Provisioning.ZoomDirection Direction, string Timeout)
         {
-            OnvifProvisioning.ZoomMoveRequest inValue = new OnvifProvisioning.ZoomMoveRequest();
+            SharpOnvifClient.Provisioning.ZoomMoveRequest inValue = new SharpOnvifClient.Provisioning.ZoomMoveRequest();
             inValue.VideoSource = VideoSource;
             inValue.Direction = Direction;
             inValue.Timeout = Timeout;
-            return ((OnvifProvisioning.ProvisioningService)(this)).ZoomMoveAsync(inValue);
+            return ((SharpOnvifClient.Provisioning.ProvisioningService)(this)).ZoomMoveAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifProvisioning.RollMoveResponse> OnvifProvisioning.ProvisioningService.RollMoveAsync(OnvifProvisioning.RollMoveRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Provisioning.RollMoveResponse> SharpOnvifClient.Provisioning.ProvisioningService.RollMoveAsync(SharpOnvifClient.Provisioning.RollMoveRequest request)
         {
             return base.Channel.RollMoveAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifProvisioning.RollMoveResponse> RollMoveAsync(string VideoSource, OnvifProvisioning.RollDirection Direction, string Timeout)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Provisioning.RollMoveResponse> RollMoveAsync(string VideoSource, SharpOnvifClient.Provisioning.RollDirection Direction, string Timeout)
         {
-            OnvifProvisioning.RollMoveRequest inValue = new OnvifProvisioning.RollMoveRequest();
+            SharpOnvifClient.Provisioning.RollMoveRequest inValue = new SharpOnvifClient.Provisioning.RollMoveRequest();
             inValue.VideoSource = VideoSource;
             inValue.Direction = Direction;
             inValue.Timeout = Timeout;
-            return ((OnvifProvisioning.ProvisioningService)(this)).RollMoveAsync(inValue);
+            return ((SharpOnvifClient.Provisioning.ProvisioningService)(this)).RollMoveAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifProvisioning.FocusMoveResponse> OnvifProvisioning.ProvisioningService.FocusMoveAsync(OnvifProvisioning.FocusMoveRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Provisioning.FocusMoveResponse> SharpOnvifClient.Provisioning.ProvisioningService.FocusMoveAsync(SharpOnvifClient.Provisioning.FocusMoveRequest request)
         {
             return base.Channel.FocusMoveAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifProvisioning.FocusMoveResponse> FocusMoveAsync(string VideoSource, OnvifProvisioning.FocusDirection Direction, string Timeout)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Provisioning.FocusMoveResponse> FocusMoveAsync(string VideoSource, SharpOnvifClient.Provisioning.FocusDirection Direction, string Timeout)
         {
-            OnvifProvisioning.FocusMoveRequest inValue = new OnvifProvisioning.FocusMoveRequest();
+            SharpOnvifClient.Provisioning.FocusMoveRequest inValue = new SharpOnvifClient.Provisioning.FocusMoveRequest();
             inValue.VideoSource = VideoSource;
             inValue.Direction = Direction;
             inValue.Timeout = Timeout;
-            return ((OnvifProvisioning.ProvisioningService)(this)).FocusMoveAsync(inValue);
+            return ((SharpOnvifClient.Provisioning.ProvisioningService)(this)).FocusMoveAsync(inValue);
         }
         
         public System.Threading.Tasks.Task StopAsync(string VideoSource)
@@ -771,7 +771,7 @@ namespace OnvifProvisioning
             return base.Channel.StopAsync(VideoSource);
         }
         
-        public System.Threading.Tasks.Task<OnvifProvisioning.Usage> GetUsageAsync(string VideoSource)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Provisioning.Usage> GetUsageAsync(string VideoSource)
         {
             return base.Channel.GetUsageAsync(VideoSource);
         }

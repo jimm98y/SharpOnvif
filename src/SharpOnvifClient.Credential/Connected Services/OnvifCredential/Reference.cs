@@ -7,12 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OnvifCredential
+namespace SharpOnvifClient.Credential
 {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/credential/wsdl", ConfigurationName="OnvifCredential.CredentialPort")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/credential/wsdl", ConfigurationName="SharpOnvifClient.Credential.CredentialPort")]
     public interface CredentialPort
     {
         
@@ -20,50 +20,50 @@ namespace OnvifCredential
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Capabilities")]
-        System.Threading.Tasks.Task<OnvifCredential.ServiceCapabilities> GetServiceCapabilitiesAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.Credential.ServiceCapabilities> GetServiceCapabilitiesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/credential/wsdl/GetSupportedFormatTypes", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifCredential.GetSupportedFormatTypesResponse> GetSupportedFormatTypesAsync(OnvifCredential.GetSupportedFormatTypesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Credential.GetSupportedFormatTypesResponse> GetSupportedFormatTypesAsync(SharpOnvifClient.Credential.GetSupportedFormatTypesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/credential/wsdl/GetCredentialInfo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifCredential.GetCredentialInfoResponse> GetCredentialInfoAsync(OnvifCredential.GetCredentialInfoRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Credential.GetCredentialInfoResponse> GetCredentialInfoAsync(SharpOnvifClient.Credential.GetCredentialInfoRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/credential/wsdl/GetCredentialInfoList", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifCredential.GetCredentialInfoListResponse> GetCredentialInfoListAsync(OnvifCredential.GetCredentialInfoListRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Credential.GetCredentialInfoListResponse> GetCredentialInfoListAsync(SharpOnvifClient.Credential.GetCredentialInfoListRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/credential/wsdl/GetCredentials", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifCredential.GetCredentialsResponse> GetCredentialsAsync(OnvifCredential.GetCredentialsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Credential.GetCredentialsResponse> GetCredentialsAsync(SharpOnvifClient.Credential.GetCredentialsRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/credential/wsdl/GetCredentialList", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifCredential.GetCredentialListResponse> GetCredentialListAsync(OnvifCredential.GetCredentialListRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Credential.GetCredentialListResponse> GetCredentialListAsync(SharpOnvifClient.Credential.GetCredentialListRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/credential/wsdl/CreateCredential", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Token")]
-        System.Threading.Tasks.Task<string> CreateCredentialAsync(OnvifCredential.Credential Credential, OnvifCredential.CredentialState State);
+        System.Threading.Tasks.Task<string> CreateCredentialAsync(SharpOnvifClient.Credential.Credential Credential, SharpOnvifClient.Credential.CredentialState State);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/credential/wsdl/SetCredential", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task SetCredentialAsync(OnvifCredential.CredentialData CredentialData);
+        System.Threading.Tasks.Task SetCredentialAsync(SharpOnvifClient.Credential.CredentialData CredentialData);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/credential/wsdl/ModifyCredential", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task ModifyCredentialAsync(OnvifCredential.Credential Credential);
+        System.Threading.Tasks.Task ModifyCredentialAsync(SharpOnvifClient.Credential.Credential Credential);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/credential/wsdl/DeleteCredential", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -74,7 +74,7 @@ namespace OnvifCredential
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="State")]
-        System.Threading.Tasks.Task<OnvifCredential.CredentialState> GetCredentialStateAsync(string Token);
+        System.Threading.Tasks.Task<SharpOnvifClient.Credential.CredentialState> GetCredentialStateAsync(string Token);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/credential/wsdl/EnableCredential", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -94,12 +94,12 @@ namespace OnvifCredential
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/credential/wsdl/GetCredentialIdentifiers", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifCredential.GetCredentialIdentifiersResponse> GetCredentialIdentifiersAsync(OnvifCredential.GetCredentialIdentifiersRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Credential.GetCredentialIdentifiersResponse> GetCredentialIdentifiersAsync(SharpOnvifClient.Credential.GetCredentialIdentifiersRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/credential/wsdl/SetCredentialIdentifier", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task SetCredentialIdentifierAsync(string CredentialToken, OnvifCredential.CredentialIdentifier CredentialIdentifier);
+        System.Threading.Tasks.Task SetCredentialIdentifierAsync(string CredentialToken, SharpOnvifClient.Credential.CredentialIdentifier CredentialIdentifier);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/credential/wsdl/DeleteCredentialIdentifier", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -109,33 +109,33 @@ namespace OnvifCredential
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/credential/wsdl/GetCredentialAccessProfiles", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifCredential.GetCredentialAccessProfilesResponse> GetCredentialAccessProfilesAsync(OnvifCredential.GetCredentialAccessProfilesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Credential.GetCredentialAccessProfilesResponse> GetCredentialAccessProfilesAsync(SharpOnvifClient.Credential.GetCredentialAccessProfilesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/credential/wsdl/SetCredentialAccessProfiles", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifCredential.SetCredentialAccessProfilesResponse> SetCredentialAccessProfilesAsync(OnvifCredential.SetCredentialAccessProfilesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Credential.SetCredentialAccessProfilesResponse> SetCredentialAccessProfilesAsync(SharpOnvifClient.Credential.SetCredentialAccessProfilesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/credential/wsdl/DeleteCredentialAccessProfiles", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifCredential.DeleteCredentialAccessProfilesResponse> DeleteCredentialAccessProfilesAsync(OnvifCredential.DeleteCredentialAccessProfilesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Credential.DeleteCredentialAccessProfilesResponse> DeleteCredentialAccessProfilesAsync(SharpOnvifClient.Credential.DeleteCredentialAccessProfilesRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/credential/wsdl/GetWhitelist", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifCredential.GetWhitelistResponse> GetWhitelistAsync(OnvifCredential.GetWhitelistRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Credential.GetWhitelistResponse> GetWhitelistAsync(SharpOnvifClient.Credential.GetWhitelistRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/credential/wsdl/AddToWhitelist", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifCredential.AddToWhitelistResponse> AddToWhitelistAsync(OnvifCredential.AddToWhitelistRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Credential.AddToWhitelistResponse> AddToWhitelistAsync(SharpOnvifClient.Credential.AddToWhitelistRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/credential/wsdl/RemoveFromWhitelist", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifCredential.RemoveFromWhitelistResponse> RemoveFromWhitelistAsync(OnvifCredential.RemoveFromWhitelistRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Credential.RemoveFromWhitelistResponse> RemoveFromWhitelistAsync(SharpOnvifClient.Credential.RemoveFromWhitelistRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/credential/wsdl/DeleteWhitelist", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -146,17 +146,17 @@ namespace OnvifCredential
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/credential/wsdl/GetBlacklist", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifCredential.GetBlacklistResponse> GetBlacklistAsync(OnvifCredential.GetBlacklistRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Credential.GetBlacklistResponse> GetBlacklistAsync(SharpOnvifClient.Credential.GetBlacklistRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/credential/wsdl/AddToBlacklist", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifCredential.AddToBlacklistResponse> AddToBlacklistAsync(OnvifCredential.AddToBlacklistRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Credential.AddToBlacklistResponse> AddToBlacklistAsync(SharpOnvifClient.Credential.AddToBlacklistRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/credential/wsdl/RemoveFromBlacklist", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifCredential.RemoveFromBlacklistResponse> RemoveFromBlacklistAsync(OnvifCredential.RemoveFromBlacklistRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Credential.RemoveFromBlacklistResponse> RemoveFromBlacklistAsync(SharpOnvifClient.Credential.RemoveFromBlacklistRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/credential/wsdl/DeleteBlacklist", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -1334,13 +1334,13 @@ namespace OnvifCredential
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/credential/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("FormatTypeInfo")]
-        public OnvifCredential.CredentialIdentifierFormatTypeInfo[] FormatTypeInfo;
+        public SharpOnvifClient.Credential.CredentialIdentifierFormatTypeInfo[] FormatTypeInfo;
         
         public GetSupportedFormatTypesResponse()
         {
         }
         
-        public GetSupportedFormatTypesResponse(OnvifCredential.CredentialIdentifierFormatTypeInfo[] FormatTypeInfo)
+        public GetSupportedFormatTypesResponse(SharpOnvifClient.Credential.CredentialIdentifierFormatTypeInfo[] FormatTypeInfo)
         {
             this.FormatTypeInfo = FormatTypeInfo;
         }
@@ -1376,13 +1376,13 @@ namespace OnvifCredential
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/credential/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("CredentialInfo")]
-        public OnvifCredential.CredentialInfo[] CredentialInfo;
+        public SharpOnvifClient.Credential.CredentialInfo[] CredentialInfo;
         
         public GetCredentialInfoResponse()
         {
         }
         
-        public GetCredentialInfoResponse(OnvifCredential.CredentialInfo[] CredentialInfo)
+        public GetCredentialInfoResponse(SharpOnvifClient.Credential.CredentialInfo[] CredentialInfo)
         {
             this.CredentialInfo = CredentialInfo;
         }
@@ -1422,13 +1422,13 @@ namespace OnvifCredential
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/credential/wsdl", Order=1)]
         [System.Xml.Serialization.XmlElementAttribute("CredentialInfo")]
-        public OnvifCredential.CredentialInfo[] CredentialInfo;
+        public SharpOnvifClient.Credential.CredentialInfo[] CredentialInfo;
         
         public GetCredentialInfoListResponse()
         {
         }
         
-        public GetCredentialInfoListResponse(string NextStartReference, OnvifCredential.CredentialInfo[] CredentialInfo)
+        public GetCredentialInfoListResponse(string NextStartReference, SharpOnvifClient.Credential.CredentialInfo[] CredentialInfo)
         {
             this.NextStartReference = NextStartReference;
             this.CredentialInfo = CredentialInfo;
@@ -1465,13 +1465,13 @@ namespace OnvifCredential
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/credential/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Credential")]
-        public OnvifCredential.Credential[] Credential;
+        public SharpOnvifClient.Credential.Credential[] Credential;
         
         public GetCredentialsResponse()
         {
         }
         
-        public GetCredentialsResponse(OnvifCredential.Credential[] Credential)
+        public GetCredentialsResponse(SharpOnvifClient.Credential.Credential[] Credential)
         {
             this.Credential = Credential;
         }
@@ -1511,13 +1511,13 @@ namespace OnvifCredential
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/credential/wsdl", Order=1)]
         [System.Xml.Serialization.XmlElementAttribute("Credential")]
-        public OnvifCredential.Credential[] Credential;
+        public SharpOnvifClient.Credential.Credential[] Credential;
         
         public GetCredentialListResponse()
         {
         }
         
-        public GetCredentialListResponse(string NextStartReference, OnvifCredential.Credential[] Credential)
+        public GetCredentialListResponse(string NextStartReference, SharpOnvifClient.Credential.Credential[] Credential)
         {
             this.NextStartReference = NextStartReference;
             this.Credential = Credential;
@@ -1553,13 +1553,13 @@ namespace OnvifCredential
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/credential/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("CredentialIdentifier")]
-        public OnvifCredential.CredentialIdentifier[] CredentialIdentifier;
+        public SharpOnvifClient.Credential.CredentialIdentifier[] CredentialIdentifier;
         
         public GetCredentialIdentifiersResponse()
         {
         }
         
-        public GetCredentialIdentifiersResponse(OnvifCredential.CredentialIdentifier[] CredentialIdentifier)
+        public GetCredentialIdentifiersResponse(SharpOnvifClient.Credential.CredentialIdentifier[] CredentialIdentifier)
         {
             this.CredentialIdentifier = CredentialIdentifier;
         }
@@ -1594,13 +1594,13 @@ namespace OnvifCredential
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/credential/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("CredentialAccessProfile")]
-        public OnvifCredential.CredentialAccessProfile[] CredentialAccessProfile;
+        public SharpOnvifClient.Credential.CredentialAccessProfile[] CredentialAccessProfile;
         
         public GetCredentialAccessProfilesResponse()
         {
         }
         
-        public GetCredentialAccessProfilesResponse(OnvifCredential.CredentialAccessProfile[] CredentialAccessProfile)
+        public GetCredentialAccessProfilesResponse(SharpOnvifClient.Credential.CredentialAccessProfile[] CredentialAccessProfile)
         {
             this.CredentialAccessProfile = CredentialAccessProfile;
         }
@@ -1618,13 +1618,13 @@ namespace OnvifCredential
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/credential/wsdl", Order=1)]
         [System.Xml.Serialization.XmlElementAttribute("CredentialAccessProfile")]
-        public OnvifCredential.CredentialAccessProfile[] CredentialAccessProfile;
+        public SharpOnvifClient.Credential.CredentialAccessProfile[] CredentialAccessProfile;
         
         public SetCredentialAccessProfilesRequest()
         {
         }
         
-        public SetCredentialAccessProfilesRequest(string CredentialToken, OnvifCredential.CredentialAccessProfile[] CredentialAccessProfile)
+        public SetCredentialAccessProfilesRequest(string CredentialToken, SharpOnvifClient.Credential.CredentialAccessProfile[] CredentialAccessProfile)
         {
             this.CredentialToken = CredentialToken;
             this.CredentialAccessProfile = CredentialAccessProfile;
@@ -1732,13 +1732,13 @@ namespace OnvifCredential
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/credential/wsdl", Order=1)]
         [System.Xml.Serialization.XmlElementAttribute("Identifier")]
-        public OnvifCredential.CredentialIdentifierItem[] Identifier;
+        public SharpOnvifClient.Credential.CredentialIdentifierItem[] Identifier;
         
         public GetWhitelistResponse()
         {
         }
         
-        public GetWhitelistResponse(string NextStartReference, OnvifCredential.CredentialIdentifierItem[] Identifier)
+        public GetWhitelistResponse(string NextStartReference, SharpOnvifClient.Credential.CredentialIdentifierItem[] Identifier)
         {
             this.NextStartReference = NextStartReference;
             this.Identifier = Identifier;
@@ -1754,7 +1754,7 @@ namespace OnvifCredential
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/credential/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Identifier")]
-        public OnvifCredential.CredentialIdentifierItem[] Identifier;
+        public SharpOnvifClient.Credential.CredentialIdentifierItem[] Identifier;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=1)]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
@@ -1764,7 +1764,7 @@ namespace OnvifCredential
         {
         }
         
-        public AddToWhitelistRequest(OnvifCredential.CredentialIdentifierItem[] Identifier, System.Xml.XmlElement[] Any)
+        public AddToWhitelistRequest(SharpOnvifClient.Credential.CredentialIdentifierItem[] Identifier, System.Xml.XmlElement[] Any)
         {
             this.Identifier = Identifier;
             this.Any = Any;
@@ -1792,7 +1792,7 @@ namespace OnvifCredential
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/credential/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Identifier")]
-        public OnvifCredential.CredentialIdentifierItem[] Identifier;
+        public SharpOnvifClient.Credential.CredentialIdentifierItem[] Identifier;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=1)]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
@@ -1802,7 +1802,7 @@ namespace OnvifCredential
         {
         }
         
-        public RemoveFromWhitelistRequest(OnvifCredential.CredentialIdentifierItem[] Identifier, System.Xml.XmlElement[] Any)
+        public RemoveFromWhitelistRequest(SharpOnvifClient.Credential.CredentialIdentifierItem[] Identifier, System.Xml.XmlElement[] Any)
         {
             this.Identifier = Identifier;
             this.Any = Any;
@@ -1873,13 +1873,13 @@ namespace OnvifCredential
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/credential/wsdl", Order=1)]
         [System.Xml.Serialization.XmlElementAttribute("Identifier")]
-        public OnvifCredential.CredentialIdentifierItem[] Identifier;
+        public SharpOnvifClient.Credential.CredentialIdentifierItem[] Identifier;
         
         public GetBlacklistResponse()
         {
         }
         
-        public GetBlacklistResponse(string NextStartReference, OnvifCredential.CredentialIdentifierItem[] Identifier)
+        public GetBlacklistResponse(string NextStartReference, SharpOnvifClient.Credential.CredentialIdentifierItem[] Identifier)
         {
             this.NextStartReference = NextStartReference;
             this.Identifier = Identifier;
@@ -1895,7 +1895,7 @@ namespace OnvifCredential
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/credential/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Identifier")]
-        public OnvifCredential.CredentialIdentifierItem[] Identifier;
+        public SharpOnvifClient.Credential.CredentialIdentifierItem[] Identifier;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=1)]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
@@ -1905,7 +1905,7 @@ namespace OnvifCredential
         {
         }
         
-        public AddToBlacklistRequest(OnvifCredential.CredentialIdentifierItem[] Identifier, System.Xml.XmlElement[] Any)
+        public AddToBlacklistRequest(SharpOnvifClient.Credential.CredentialIdentifierItem[] Identifier, System.Xml.XmlElement[] Any)
         {
             this.Identifier = Identifier;
             this.Any = Any;
@@ -1933,7 +1933,7 @@ namespace OnvifCredential
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/credential/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Identifier")]
-        public OnvifCredential.CredentialIdentifierItem[] Identifier;
+        public SharpOnvifClient.Credential.CredentialIdentifierItem[] Identifier;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=1)]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
@@ -1943,7 +1943,7 @@ namespace OnvifCredential
         {
         }
         
-        public RemoveFromBlacklistRequest(OnvifCredential.CredentialIdentifierItem[] Identifier, System.Xml.XmlElement[] Any)
+        public RemoveFromBlacklistRequest(SharpOnvifClient.Credential.CredentialIdentifierItem[] Identifier, System.Xml.XmlElement[] Any)
         {
             this.Identifier = Identifier;
             this.Any = Any;
@@ -1963,13 +1963,13 @@ namespace OnvifCredential
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface CredentialPortChannel : OnvifCredential.CredentialPort, System.ServiceModel.IClientChannel
+    public interface CredentialPortChannel : SharpOnvifClient.Credential.CredentialPort, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class CredentialPortClient : System.ServiceModel.ClientBase<OnvifCredential.CredentialPort>, OnvifCredential.CredentialPort
+    public partial class CredentialPortClient : System.ServiceModel.ClientBase<SharpOnvifClient.Credential.CredentialPort>, SharpOnvifClient.Credential.CredentialPort
     {
         
         public CredentialPortClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
@@ -1977,71 +1977,71 @@ namespace OnvifCredential
         {
         }
         
-        public System.Threading.Tasks.Task<OnvifCredential.ServiceCapabilities> GetServiceCapabilitiesAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.Credential.ServiceCapabilities> GetServiceCapabilitiesAsync()
         {
             return base.Channel.GetServiceCapabilitiesAsync();
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifCredential.GetSupportedFormatTypesResponse> OnvifCredential.CredentialPort.GetSupportedFormatTypesAsync(OnvifCredential.GetSupportedFormatTypesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Credential.GetSupportedFormatTypesResponse> SharpOnvifClient.Credential.CredentialPort.GetSupportedFormatTypesAsync(SharpOnvifClient.Credential.GetSupportedFormatTypesRequest request)
         {
             return base.Channel.GetSupportedFormatTypesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifCredential.GetSupportedFormatTypesResponse> GetSupportedFormatTypesAsync(string CredentialIdentifierTypeName)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Credential.GetSupportedFormatTypesResponse> GetSupportedFormatTypesAsync(string CredentialIdentifierTypeName)
         {
-            OnvifCredential.GetSupportedFormatTypesRequest inValue = new OnvifCredential.GetSupportedFormatTypesRequest();
+            SharpOnvifClient.Credential.GetSupportedFormatTypesRequest inValue = new SharpOnvifClient.Credential.GetSupportedFormatTypesRequest();
             inValue.CredentialIdentifierTypeName = CredentialIdentifierTypeName;
-            return ((OnvifCredential.CredentialPort)(this)).GetSupportedFormatTypesAsync(inValue);
+            return ((SharpOnvifClient.Credential.CredentialPort)(this)).GetSupportedFormatTypesAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifCredential.GetCredentialInfoResponse> OnvifCredential.CredentialPort.GetCredentialInfoAsync(OnvifCredential.GetCredentialInfoRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Credential.GetCredentialInfoResponse> SharpOnvifClient.Credential.CredentialPort.GetCredentialInfoAsync(SharpOnvifClient.Credential.GetCredentialInfoRequest request)
         {
             return base.Channel.GetCredentialInfoAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifCredential.GetCredentialInfoResponse> GetCredentialInfoAsync(string[] Token)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Credential.GetCredentialInfoResponse> GetCredentialInfoAsync(string[] Token)
         {
-            OnvifCredential.GetCredentialInfoRequest inValue = new OnvifCredential.GetCredentialInfoRequest();
+            SharpOnvifClient.Credential.GetCredentialInfoRequest inValue = new SharpOnvifClient.Credential.GetCredentialInfoRequest();
             inValue.Token = Token;
-            return ((OnvifCredential.CredentialPort)(this)).GetCredentialInfoAsync(inValue);
+            return ((SharpOnvifClient.Credential.CredentialPort)(this)).GetCredentialInfoAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifCredential.GetCredentialInfoListResponse> GetCredentialInfoListAsync(OnvifCredential.GetCredentialInfoListRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Credential.GetCredentialInfoListResponse> GetCredentialInfoListAsync(SharpOnvifClient.Credential.GetCredentialInfoListRequest request)
         {
             return base.Channel.GetCredentialInfoListAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifCredential.GetCredentialsResponse> OnvifCredential.CredentialPort.GetCredentialsAsync(OnvifCredential.GetCredentialsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Credential.GetCredentialsResponse> SharpOnvifClient.Credential.CredentialPort.GetCredentialsAsync(SharpOnvifClient.Credential.GetCredentialsRequest request)
         {
             return base.Channel.GetCredentialsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifCredential.GetCredentialsResponse> GetCredentialsAsync(string[] Token)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Credential.GetCredentialsResponse> GetCredentialsAsync(string[] Token)
         {
-            OnvifCredential.GetCredentialsRequest inValue = new OnvifCredential.GetCredentialsRequest();
+            SharpOnvifClient.Credential.GetCredentialsRequest inValue = new SharpOnvifClient.Credential.GetCredentialsRequest();
             inValue.Token = Token;
-            return ((OnvifCredential.CredentialPort)(this)).GetCredentialsAsync(inValue);
+            return ((SharpOnvifClient.Credential.CredentialPort)(this)).GetCredentialsAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifCredential.GetCredentialListResponse> GetCredentialListAsync(OnvifCredential.GetCredentialListRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Credential.GetCredentialListResponse> GetCredentialListAsync(SharpOnvifClient.Credential.GetCredentialListRequest request)
         {
             return base.Channel.GetCredentialListAsync(request);
         }
         
-        public System.Threading.Tasks.Task<string> CreateCredentialAsync(OnvifCredential.Credential Credential, OnvifCredential.CredentialState State)
+        public System.Threading.Tasks.Task<string> CreateCredentialAsync(SharpOnvifClient.Credential.Credential Credential, SharpOnvifClient.Credential.CredentialState State)
         {
             return base.Channel.CreateCredentialAsync(Credential, State);
         }
         
-        public System.Threading.Tasks.Task SetCredentialAsync(OnvifCredential.CredentialData CredentialData)
+        public System.Threading.Tasks.Task SetCredentialAsync(SharpOnvifClient.Credential.CredentialData CredentialData)
         {
             return base.Channel.SetCredentialAsync(CredentialData);
         }
         
-        public System.Threading.Tasks.Task ModifyCredentialAsync(OnvifCredential.Credential Credential)
+        public System.Threading.Tasks.Task ModifyCredentialAsync(SharpOnvifClient.Credential.Credential Credential)
         {
             return base.Channel.ModifyCredentialAsync(Credential);
         }
@@ -2051,7 +2051,7 @@ namespace OnvifCredential
             return base.Channel.DeleteCredentialAsync(Token);
         }
         
-        public System.Threading.Tasks.Task<OnvifCredential.CredentialState> GetCredentialStateAsync(string Token)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Credential.CredentialState> GetCredentialStateAsync(string Token)
         {
             return base.Channel.GetCredentialStateAsync(Token);
         }
@@ -2072,19 +2072,19 @@ namespace OnvifCredential
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifCredential.GetCredentialIdentifiersResponse> OnvifCredential.CredentialPort.GetCredentialIdentifiersAsync(OnvifCredential.GetCredentialIdentifiersRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Credential.GetCredentialIdentifiersResponse> SharpOnvifClient.Credential.CredentialPort.GetCredentialIdentifiersAsync(SharpOnvifClient.Credential.GetCredentialIdentifiersRequest request)
         {
             return base.Channel.GetCredentialIdentifiersAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifCredential.GetCredentialIdentifiersResponse> GetCredentialIdentifiersAsync(string CredentialToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Credential.GetCredentialIdentifiersResponse> GetCredentialIdentifiersAsync(string CredentialToken)
         {
-            OnvifCredential.GetCredentialIdentifiersRequest inValue = new OnvifCredential.GetCredentialIdentifiersRequest();
+            SharpOnvifClient.Credential.GetCredentialIdentifiersRequest inValue = new SharpOnvifClient.Credential.GetCredentialIdentifiersRequest();
             inValue.CredentialToken = CredentialToken;
-            return ((OnvifCredential.CredentialPort)(this)).GetCredentialIdentifiersAsync(inValue);
+            return ((SharpOnvifClient.Credential.CredentialPort)(this)).GetCredentialIdentifiersAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task SetCredentialIdentifierAsync(string CredentialToken, OnvifCredential.CredentialIdentifier CredentialIdentifier)
+        public System.Threading.Tasks.Task SetCredentialIdentifierAsync(string CredentialToken, SharpOnvifClient.Credential.CredentialIdentifier CredentialIdentifier)
         {
             return base.Channel.SetCredentialIdentifierAsync(CredentialToken, CredentialIdentifier);
         }
@@ -2095,77 +2095,77 @@ namespace OnvifCredential
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifCredential.GetCredentialAccessProfilesResponse> OnvifCredential.CredentialPort.GetCredentialAccessProfilesAsync(OnvifCredential.GetCredentialAccessProfilesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Credential.GetCredentialAccessProfilesResponse> SharpOnvifClient.Credential.CredentialPort.GetCredentialAccessProfilesAsync(SharpOnvifClient.Credential.GetCredentialAccessProfilesRequest request)
         {
             return base.Channel.GetCredentialAccessProfilesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifCredential.GetCredentialAccessProfilesResponse> GetCredentialAccessProfilesAsync(string CredentialToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Credential.GetCredentialAccessProfilesResponse> GetCredentialAccessProfilesAsync(string CredentialToken)
         {
-            OnvifCredential.GetCredentialAccessProfilesRequest inValue = new OnvifCredential.GetCredentialAccessProfilesRequest();
+            SharpOnvifClient.Credential.GetCredentialAccessProfilesRequest inValue = new SharpOnvifClient.Credential.GetCredentialAccessProfilesRequest();
             inValue.CredentialToken = CredentialToken;
-            return ((OnvifCredential.CredentialPort)(this)).GetCredentialAccessProfilesAsync(inValue);
+            return ((SharpOnvifClient.Credential.CredentialPort)(this)).GetCredentialAccessProfilesAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifCredential.SetCredentialAccessProfilesResponse> OnvifCredential.CredentialPort.SetCredentialAccessProfilesAsync(OnvifCredential.SetCredentialAccessProfilesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Credential.SetCredentialAccessProfilesResponse> SharpOnvifClient.Credential.CredentialPort.SetCredentialAccessProfilesAsync(SharpOnvifClient.Credential.SetCredentialAccessProfilesRequest request)
         {
             return base.Channel.SetCredentialAccessProfilesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifCredential.SetCredentialAccessProfilesResponse> SetCredentialAccessProfilesAsync(string CredentialToken, OnvifCredential.CredentialAccessProfile[] CredentialAccessProfile)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Credential.SetCredentialAccessProfilesResponse> SetCredentialAccessProfilesAsync(string CredentialToken, SharpOnvifClient.Credential.CredentialAccessProfile[] CredentialAccessProfile)
         {
-            OnvifCredential.SetCredentialAccessProfilesRequest inValue = new OnvifCredential.SetCredentialAccessProfilesRequest();
+            SharpOnvifClient.Credential.SetCredentialAccessProfilesRequest inValue = new SharpOnvifClient.Credential.SetCredentialAccessProfilesRequest();
             inValue.CredentialToken = CredentialToken;
             inValue.CredentialAccessProfile = CredentialAccessProfile;
-            return ((OnvifCredential.CredentialPort)(this)).SetCredentialAccessProfilesAsync(inValue);
+            return ((SharpOnvifClient.Credential.CredentialPort)(this)).SetCredentialAccessProfilesAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifCredential.DeleteCredentialAccessProfilesResponse> OnvifCredential.CredentialPort.DeleteCredentialAccessProfilesAsync(OnvifCredential.DeleteCredentialAccessProfilesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Credential.DeleteCredentialAccessProfilesResponse> SharpOnvifClient.Credential.CredentialPort.DeleteCredentialAccessProfilesAsync(SharpOnvifClient.Credential.DeleteCredentialAccessProfilesRequest request)
         {
             return base.Channel.DeleteCredentialAccessProfilesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifCredential.DeleteCredentialAccessProfilesResponse> DeleteCredentialAccessProfilesAsync(string CredentialToken, string[] AccessProfileToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Credential.DeleteCredentialAccessProfilesResponse> DeleteCredentialAccessProfilesAsync(string CredentialToken, string[] AccessProfileToken)
         {
-            OnvifCredential.DeleteCredentialAccessProfilesRequest inValue = new OnvifCredential.DeleteCredentialAccessProfilesRequest();
+            SharpOnvifClient.Credential.DeleteCredentialAccessProfilesRequest inValue = new SharpOnvifClient.Credential.DeleteCredentialAccessProfilesRequest();
             inValue.CredentialToken = CredentialToken;
             inValue.AccessProfileToken = AccessProfileToken;
-            return ((OnvifCredential.CredentialPort)(this)).DeleteCredentialAccessProfilesAsync(inValue);
+            return ((SharpOnvifClient.Credential.CredentialPort)(this)).DeleteCredentialAccessProfilesAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifCredential.GetWhitelistResponse> GetWhitelistAsync(OnvifCredential.GetWhitelistRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Credential.GetWhitelistResponse> GetWhitelistAsync(SharpOnvifClient.Credential.GetWhitelistRequest request)
         {
             return base.Channel.GetWhitelistAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifCredential.AddToWhitelistResponse> OnvifCredential.CredentialPort.AddToWhitelistAsync(OnvifCredential.AddToWhitelistRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Credential.AddToWhitelistResponse> SharpOnvifClient.Credential.CredentialPort.AddToWhitelistAsync(SharpOnvifClient.Credential.AddToWhitelistRequest request)
         {
             return base.Channel.AddToWhitelistAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifCredential.AddToWhitelistResponse> AddToWhitelistAsync(OnvifCredential.CredentialIdentifierItem[] Identifier, System.Xml.XmlElement[] Any)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Credential.AddToWhitelistResponse> AddToWhitelistAsync(SharpOnvifClient.Credential.CredentialIdentifierItem[] Identifier, System.Xml.XmlElement[] Any)
         {
-            OnvifCredential.AddToWhitelistRequest inValue = new OnvifCredential.AddToWhitelistRequest();
+            SharpOnvifClient.Credential.AddToWhitelistRequest inValue = new SharpOnvifClient.Credential.AddToWhitelistRequest();
             inValue.Identifier = Identifier;
             inValue.Any = Any;
-            return ((OnvifCredential.CredentialPort)(this)).AddToWhitelistAsync(inValue);
+            return ((SharpOnvifClient.Credential.CredentialPort)(this)).AddToWhitelistAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifCredential.RemoveFromWhitelistResponse> OnvifCredential.CredentialPort.RemoveFromWhitelistAsync(OnvifCredential.RemoveFromWhitelistRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Credential.RemoveFromWhitelistResponse> SharpOnvifClient.Credential.CredentialPort.RemoveFromWhitelistAsync(SharpOnvifClient.Credential.RemoveFromWhitelistRequest request)
         {
             return base.Channel.RemoveFromWhitelistAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifCredential.RemoveFromWhitelistResponse> RemoveFromWhitelistAsync(OnvifCredential.CredentialIdentifierItem[] Identifier, System.Xml.XmlElement[] Any)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Credential.RemoveFromWhitelistResponse> RemoveFromWhitelistAsync(SharpOnvifClient.Credential.CredentialIdentifierItem[] Identifier, System.Xml.XmlElement[] Any)
         {
-            OnvifCredential.RemoveFromWhitelistRequest inValue = new OnvifCredential.RemoveFromWhitelistRequest();
+            SharpOnvifClient.Credential.RemoveFromWhitelistRequest inValue = new SharpOnvifClient.Credential.RemoveFromWhitelistRequest();
             inValue.Identifier = Identifier;
             inValue.Any = Any;
-            return ((OnvifCredential.CredentialPort)(this)).RemoveFromWhitelistAsync(inValue);
+            return ((SharpOnvifClient.Credential.CredentialPort)(this)).RemoveFromWhitelistAsync(inValue);
         }
         
         public System.Threading.Tasks.Task DeleteWhitelistAsync()
@@ -2173,37 +2173,37 @@ namespace OnvifCredential
             return base.Channel.DeleteWhitelistAsync();
         }
         
-        public System.Threading.Tasks.Task<OnvifCredential.GetBlacklistResponse> GetBlacklistAsync(OnvifCredential.GetBlacklistRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Credential.GetBlacklistResponse> GetBlacklistAsync(SharpOnvifClient.Credential.GetBlacklistRequest request)
         {
             return base.Channel.GetBlacklistAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifCredential.AddToBlacklistResponse> OnvifCredential.CredentialPort.AddToBlacklistAsync(OnvifCredential.AddToBlacklistRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Credential.AddToBlacklistResponse> SharpOnvifClient.Credential.CredentialPort.AddToBlacklistAsync(SharpOnvifClient.Credential.AddToBlacklistRequest request)
         {
             return base.Channel.AddToBlacklistAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifCredential.AddToBlacklistResponse> AddToBlacklistAsync(OnvifCredential.CredentialIdentifierItem[] Identifier, System.Xml.XmlElement[] Any)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Credential.AddToBlacklistResponse> AddToBlacklistAsync(SharpOnvifClient.Credential.CredentialIdentifierItem[] Identifier, System.Xml.XmlElement[] Any)
         {
-            OnvifCredential.AddToBlacklistRequest inValue = new OnvifCredential.AddToBlacklistRequest();
+            SharpOnvifClient.Credential.AddToBlacklistRequest inValue = new SharpOnvifClient.Credential.AddToBlacklistRequest();
             inValue.Identifier = Identifier;
             inValue.Any = Any;
-            return ((OnvifCredential.CredentialPort)(this)).AddToBlacklistAsync(inValue);
+            return ((SharpOnvifClient.Credential.CredentialPort)(this)).AddToBlacklistAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifCredential.RemoveFromBlacklistResponse> OnvifCredential.CredentialPort.RemoveFromBlacklistAsync(OnvifCredential.RemoveFromBlacklistRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Credential.RemoveFromBlacklistResponse> SharpOnvifClient.Credential.CredentialPort.RemoveFromBlacklistAsync(SharpOnvifClient.Credential.RemoveFromBlacklistRequest request)
         {
             return base.Channel.RemoveFromBlacklistAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifCredential.RemoveFromBlacklistResponse> RemoveFromBlacklistAsync(OnvifCredential.CredentialIdentifierItem[] Identifier, System.Xml.XmlElement[] Any)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Credential.RemoveFromBlacklistResponse> RemoveFromBlacklistAsync(SharpOnvifClient.Credential.CredentialIdentifierItem[] Identifier, System.Xml.XmlElement[] Any)
         {
-            OnvifCredential.RemoveFromBlacklistRequest inValue = new OnvifCredential.RemoveFromBlacklistRequest();
+            SharpOnvifClient.Credential.RemoveFromBlacklistRequest inValue = new SharpOnvifClient.Credential.RemoveFromBlacklistRequest();
             inValue.Identifier = Identifier;
             inValue.Any = Any;
-            return ((OnvifCredential.CredentialPort)(this)).RemoveFromBlacklistAsync(inValue);
+            return ((SharpOnvifClient.Credential.CredentialPort)(this)).RemoveFromBlacklistAsync(inValue);
         }
         
         public System.Threading.Tasks.Task DeleteBlacklistAsync()

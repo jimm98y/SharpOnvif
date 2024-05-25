@@ -7,12 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OnvifPTZ
+namespace SharpOnvifClient.PTZ
 {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver20/ptz/wsdl", ConfigurationName="OnvifPTZ.PTZ")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver20/ptz/wsdl", ConfigurationName="SharpOnvifClient.PTZ.PTZ")]
     public interface PTZ
     {
         
@@ -21,46 +21,46 @@ namespace OnvifPTZ
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Capabilities")]
-        System.Threading.Tasks.Task<OnvifPTZ.Capabilities> GetServiceCapabilitiesAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.PTZ.Capabilities> GetServiceCapabilitiesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/ptz/wsdl/GetNodes", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifPTZ.GetNodesResponse> GetNodesAsync(OnvifPTZ.GetNodesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.PTZ.GetNodesResponse> GetNodesAsync(SharpOnvifClient.PTZ.GetNodesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/ptz/wsdl/GetNode", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="PTZNode")]
-        System.Threading.Tasks.Task<OnvifPTZ.PTZNode> GetNodeAsync(string NodeToken);
+        System.Threading.Tasks.Task<SharpOnvifClient.PTZ.PTZNode> GetNodeAsync(string NodeToken);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/ptz/wsdl/GetConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="PTZConfiguration")]
-        System.Threading.Tasks.Task<OnvifPTZ.PTZConfiguration> GetConfigurationAsync(string PTZConfigurationToken);
+        System.Threading.Tasks.Task<SharpOnvifClient.PTZ.PTZConfiguration> GetConfigurationAsync(string PTZConfigurationToken);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/ptz/wsdl/GetConfigurations", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifPTZ.GetConfigurationsResponse> GetConfigurationsAsync(OnvifPTZ.GetConfigurationsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.PTZ.GetConfigurationsResponse> GetConfigurationsAsync(SharpOnvifClient.PTZ.GetConfigurationsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/ptz/wsdl/SetConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task SetConfigurationAsync(OnvifPTZ.PTZConfiguration PTZConfiguration, bool ForcePersistence);
+        System.Threading.Tasks.Task SetConfigurationAsync(SharpOnvifClient.PTZ.PTZConfiguration PTZConfiguration, bool ForcePersistence);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/ptz/wsdl/GetConfigurationOptions", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="PTZConfigurationOptions")]
-        System.Threading.Tasks.Task<OnvifPTZ.PTZConfigurationOptions> GetConfigurationOptionsAsync(string ConfigurationToken);
+        System.Threading.Tasks.Task<SharpOnvifClient.PTZ.PTZConfigurationOptions> GetConfigurationOptionsAsync(string ConfigurationToken);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/ptz/wsdl/SendAuxiliaryCommand", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -73,14 +73,14 @@ namespace OnvifPTZ
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifPTZ.GetPresetsResponse> GetPresetsAsync(OnvifPTZ.GetPresetsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.PTZ.GetPresetsResponse> GetPresetsAsync(SharpOnvifClient.PTZ.GetPresetsRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/ptz/wsdl/SetPreset", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifPTZ.SetPresetResponse> SetPresetAsync(OnvifPTZ.SetPresetRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.PTZ.SetPresetResponse> SetPresetAsync(SharpOnvifClient.PTZ.SetPresetRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/ptz/wsdl/RemovePreset", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -92,13 +92,13 @@ namespace OnvifPTZ
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task GotoPresetAsync(string ProfileToken, string PresetToken, OnvifPTZ.PTZSpeed Speed);
+        System.Threading.Tasks.Task GotoPresetAsync(string ProfileToken, string PresetToken, SharpOnvifClient.PTZ.PTZSpeed Speed);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/ptz/wsdl/GotoHomePosition", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task GotoHomePositionAsync(string ProfileToken, OnvifPTZ.PTZSpeed Speed);
+        System.Threading.Tasks.Task GotoHomePositionAsync(string ProfileToken, SharpOnvifClient.PTZ.PTZSpeed Speed);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/ptz/wsdl/SetHomePosition", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -110,32 +110,32 @@ namespace OnvifPTZ
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifPTZ.ContinuousMoveResponse> ContinuousMoveAsync(OnvifPTZ.ContinuousMoveRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.PTZ.ContinuousMoveResponse> ContinuousMoveAsync(SharpOnvifClient.PTZ.ContinuousMoveRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/ptz/wsdl/RelativeMove", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task RelativeMoveAsync(string ProfileToken, OnvifPTZ.PTZVector Translation, OnvifPTZ.PTZSpeed Speed);
+        System.Threading.Tasks.Task RelativeMoveAsync(string ProfileToken, SharpOnvifClient.PTZ.PTZVector Translation, SharpOnvifClient.PTZ.PTZSpeed Speed);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/ptz/wsdl/GetStatus", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="PTZStatus")]
-        System.Threading.Tasks.Task<OnvifPTZ.PTZStatus> GetStatusAsync(string ProfileToken);
+        System.Threading.Tasks.Task<SharpOnvifClient.PTZ.PTZStatus> GetStatusAsync(string ProfileToken);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/ptz/wsdl/AbsoluteMove", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task AbsoluteMoveAsync(string ProfileToken, OnvifPTZ.PTZVector Position, OnvifPTZ.PTZSpeed Speed);
+        System.Threading.Tasks.Task AbsoluteMoveAsync(string ProfileToken, SharpOnvifClient.PTZ.PTZVector Position, SharpOnvifClient.PTZ.PTZSpeed Speed);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/ptz/wsdl/GeoMove", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task GeoMoveAsync(string ProfileToken, OnvifPTZ.GeoLocation Target, OnvifPTZ.PTZSpeed Speed, float AreaHeight, float AreaWidth);
+        System.Threading.Tasks.Task GeoMoveAsync(string ProfileToken, SharpOnvifClient.PTZ.GeoLocation Target, SharpOnvifClient.PTZ.PTZSpeed Speed, float AreaHeight, float AreaWidth);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/ptz/wsdl/Stop", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -147,21 +147,21 @@ namespace OnvifPTZ
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifPTZ.GetPresetToursResponse> GetPresetToursAsync(OnvifPTZ.GetPresetToursRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.PTZ.GetPresetToursResponse> GetPresetToursAsync(SharpOnvifClient.PTZ.GetPresetToursRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/ptz/wsdl/GetPresetTour", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="PresetTour")]
-        System.Threading.Tasks.Task<OnvifPTZ.PresetTour> GetPresetTourAsync(string ProfileToken, string PresetTourToken);
+        System.Threading.Tasks.Task<SharpOnvifClient.PTZ.PresetTour> GetPresetTourAsync(string ProfileToken, string PresetTourToken);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/ptz/wsdl/GetPresetTourOptions", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Options")]
-        System.Threading.Tasks.Task<OnvifPTZ.PTZPresetTourOptions> GetPresetTourOptionsAsync(string ProfileToken, string PresetTourToken);
+        System.Threading.Tasks.Task<SharpOnvifClient.PTZ.PTZPresetTourOptions> GetPresetTourOptionsAsync(string ProfileToken, string PresetTourToken);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/ptz/wsdl/CreatePresetTour", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -174,13 +174,13 @@ namespace OnvifPTZ
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task ModifyPresetTourAsync(string ProfileToken, OnvifPTZ.PresetTour PresetTour);
+        System.Threading.Tasks.Task ModifyPresetTourAsync(string ProfileToken, SharpOnvifClient.PTZ.PresetTour PresetTour);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/ptz/wsdl/OperatePresetTour", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task OperatePresetTourAsync(string ProfileToken, string PresetTourToken, OnvifPTZ.PTZPresetTourOperation Operation);
+        System.Threading.Tasks.Task OperatePresetTourAsync(string ProfileToken, string PresetTourToken, SharpOnvifClient.PTZ.PTZPresetTourOperation Operation);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/ptz/wsdl/RemovePresetTour", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -192,13 +192,13 @@ namespace OnvifPTZ
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifPTZ.GetCompatibleConfigurationsResponse> GetCompatibleConfigurationsAsync(OnvifPTZ.GetCompatibleConfigurationsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.PTZ.GetCompatibleConfigurationsResponse> GetCompatibleConfigurationsAsync(SharpOnvifClient.PTZ.GetCompatibleConfigurationsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/ptz/wsdl/MoveAndStartTracking", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
-        System.Threading.Tasks.Task<OnvifPTZ.MoveAndStartTrackingResponse> MoveAndStartTrackingAsync(OnvifPTZ.MoveAndStartTrackingRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.PTZ.MoveAndStartTrackingResponse> MoveAndStartTrackingAsync(SharpOnvifClient.PTZ.MoveAndStartTrackingRequest request);
     }
     
     /// <remarks/>
@@ -12383,13 +12383,13 @@ namespace OnvifPTZ
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver20/ptz/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("PTZNode")]
-        public OnvifPTZ.PTZNode[] PTZNode;
+        public SharpOnvifClient.PTZ.PTZNode[] PTZNode;
         
         public GetNodesResponse()
         {
         }
         
-        public GetNodesResponse(OnvifPTZ.PTZNode[] PTZNode)
+        public GetNodesResponse(SharpOnvifClient.PTZ.PTZNode[] PTZNode)
         {
             this.PTZNode = PTZNode;
         }
@@ -12416,13 +12416,13 @@ namespace OnvifPTZ
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver20/ptz/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("PTZConfiguration")]
-        public OnvifPTZ.PTZConfiguration[] PTZConfiguration;
+        public SharpOnvifClient.PTZ.PTZConfiguration[] PTZConfiguration;
         
         public GetConfigurationsResponse()
         {
         }
         
-        public GetConfigurationsResponse(OnvifPTZ.PTZConfiguration[] PTZConfiguration)
+        public GetConfigurationsResponse(SharpOnvifClient.PTZ.PTZConfiguration[] PTZConfiguration)
         {
             this.PTZConfiguration = PTZConfiguration;
         }
@@ -12457,13 +12457,13 @@ namespace OnvifPTZ
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver20/ptz/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Preset")]
-        public OnvifPTZ.PTZPreset[] Preset;
+        public SharpOnvifClient.PTZ.PTZPreset[] Preset;
         
         public GetPresetsResponse()
         {
         }
         
-        public GetPresetsResponse(OnvifPTZ.PTZPreset[] Preset)
+        public GetPresetsResponse(SharpOnvifClient.PTZ.PTZPreset[] Preset)
         {
             this.Preset = Preset;
         }
@@ -12526,7 +12526,7 @@ namespace OnvifPTZ
         public string ProfileToken;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver20/ptz/wsdl", Order=1)]
-        public OnvifPTZ.PTZSpeed Velocity;
+        public SharpOnvifClient.PTZ.PTZSpeed Velocity;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver20/ptz/wsdl", Order=2)]
         [System.Xml.Serialization.XmlElementAttribute(DataType="duration")]
@@ -12536,7 +12536,7 @@ namespace OnvifPTZ
         {
         }
         
-        public ContinuousMoveRequest(string ProfileToken, OnvifPTZ.PTZSpeed Velocity, string Timeout)
+        public ContinuousMoveRequest(string ProfileToken, SharpOnvifClient.PTZ.PTZSpeed Velocity, string Timeout)
         {
             this.ProfileToken = ProfileToken;
             this.Velocity = Velocity;
@@ -12585,13 +12585,13 @@ namespace OnvifPTZ
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver20/ptz/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("PresetTour")]
-        public OnvifPTZ.PresetTour[] PresetTour;
+        public SharpOnvifClient.PTZ.PresetTour[] PresetTour;
         
         public GetPresetToursResponse()
         {
         }
         
-        public GetPresetToursResponse(OnvifPTZ.PresetTour[] PresetTour)
+        public GetPresetToursResponse(SharpOnvifClient.PTZ.PresetTour[] PresetTour)
         {
             this.PresetTour = PresetTour;
         }
@@ -12626,13 +12626,13 @@ namespace OnvifPTZ
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver20/ptz/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("PTZConfiguration")]
-        public OnvifPTZ.PTZConfiguration[] PTZConfiguration;
+        public SharpOnvifClient.PTZ.PTZConfiguration[] PTZConfiguration;
         
         public GetCompatibleConfigurationsResponse()
         {
         }
         
-        public GetCompatibleConfigurationsResponse(OnvifPTZ.PTZConfiguration[] PTZConfiguration)
+        public GetCompatibleConfigurationsResponse(SharpOnvifClient.PTZ.PTZConfiguration[] PTZConfiguration)
         {
             this.PTZConfiguration = PTZConfiguration;
         }
@@ -12652,13 +12652,13 @@ namespace OnvifPTZ
         public string PresetToken;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver20/ptz/wsdl", Order=2)]
-        public OnvifPTZ.GeoLocation GeoLocation;
+        public SharpOnvifClient.PTZ.GeoLocation GeoLocation;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver20/ptz/wsdl", Order=3)]
-        public OnvifPTZ.PTZVector TargetPosition;
+        public SharpOnvifClient.PTZ.PTZVector TargetPosition;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver20/ptz/wsdl", Order=4)]
-        public OnvifPTZ.PTZSpeed Speed;
+        public SharpOnvifClient.PTZ.PTZSpeed Speed;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver20/ptz/wsdl", Order=5)]
         [System.Xml.Serialization.XmlElementAttribute(DataType="integer")]
@@ -12672,7 +12672,7 @@ namespace OnvifPTZ
         {
         }
         
-        public MoveAndStartTrackingRequest(string ProfileToken, string PresetToken, OnvifPTZ.GeoLocation GeoLocation, OnvifPTZ.PTZVector TargetPosition, OnvifPTZ.PTZSpeed Speed, string ObjectID, System.Xml.XmlElement[] Any)
+        public MoveAndStartTrackingRequest(string ProfileToken, string PresetToken, SharpOnvifClient.PTZ.GeoLocation GeoLocation, SharpOnvifClient.PTZ.PTZVector TargetPosition, SharpOnvifClient.PTZ.PTZSpeed Speed, string ObjectID, System.Xml.XmlElement[] Any)
         {
             this.ProfileToken = ProfileToken;
             this.PresetToken = PresetToken;
@@ -12697,13 +12697,13 @@ namespace OnvifPTZ
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface PTZChannel : OnvifPTZ.PTZ, System.ServiceModel.IClientChannel
+    public interface PTZChannel : SharpOnvifClient.PTZ.PTZ, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class PTZClient : System.ServiceModel.ClientBase<OnvifPTZ.PTZ>, OnvifPTZ.PTZ
+    public partial class PTZClient : System.ServiceModel.ClientBase<SharpOnvifClient.PTZ.PTZ>, SharpOnvifClient.PTZ.PTZ
     {
         
         public PTZClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
@@ -12711,51 +12711,51 @@ namespace OnvifPTZ
         {
         }
         
-        public System.Threading.Tasks.Task<OnvifPTZ.Capabilities> GetServiceCapabilitiesAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.PTZ.Capabilities> GetServiceCapabilitiesAsync()
         {
             return base.Channel.GetServiceCapabilitiesAsync();
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifPTZ.GetNodesResponse> OnvifPTZ.PTZ.GetNodesAsync(OnvifPTZ.GetNodesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.PTZ.GetNodesResponse> SharpOnvifClient.PTZ.PTZ.GetNodesAsync(SharpOnvifClient.PTZ.GetNodesRequest request)
         {
             return base.Channel.GetNodesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifPTZ.GetNodesResponse> GetNodesAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.PTZ.GetNodesResponse> GetNodesAsync()
         {
-            OnvifPTZ.GetNodesRequest inValue = new OnvifPTZ.GetNodesRequest();
-            return ((OnvifPTZ.PTZ)(this)).GetNodesAsync(inValue);
+            SharpOnvifClient.PTZ.GetNodesRequest inValue = new SharpOnvifClient.PTZ.GetNodesRequest();
+            return ((SharpOnvifClient.PTZ.PTZ)(this)).GetNodesAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifPTZ.PTZNode> GetNodeAsync(string NodeToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.PTZ.PTZNode> GetNodeAsync(string NodeToken)
         {
             return base.Channel.GetNodeAsync(NodeToken);
         }
         
-        public System.Threading.Tasks.Task<OnvifPTZ.PTZConfiguration> GetConfigurationAsync(string PTZConfigurationToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.PTZ.PTZConfiguration> GetConfigurationAsync(string PTZConfigurationToken)
         {
             return base.Channel.GetConfigurationAsync(PTZConfigurationToken);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifPTZ.GetConfigurationsResponse> OnvifPTZ.PTZ.GetConfigurationsAsync(OnvifPTZ.GetConfigurationsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.PTZ.GetConfigurationsResponse> SharpOnvifClient.PTZ.PTZ.GetConfigurationsAsync(SharpOnvifClient.PTZ.GetConfigurationsRequest request)
         {
             return base.Channel.GetConfigurationsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifPTZ.GetConfigurationsResponse> GetConfigurationsAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.PTZ.GetConfigurationsResponse> GetConfigurationsAsync()
         {
-            OnvifPTZ.GetConfigurationsRequest inValue = new OnvifPTZ.GetConfigurationsRequest();
-            return ((OnvifPTZ.PTZ)(this)).GetConfigurationsAsync(inValue);
+            SharpOnvifClient.PTZ.GetConfigurationsRequest inValue = new SharpOnvifClient.PTZ.GetConfigurationsRequest();
+            return ((SharpOnvifClient.PTZ.PTZ)(this)).GetConfigurationsAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task SetConfigurationAsync(OnvifPTZ.PTZConfiguration PTZConfiguration, bool ForcePersistence)
+        public System.Threading.Tasks.Task SetConfigurationAsync(SharpOnvifClient.PTZ.PTZConfiguration PTZConfiguration, bool ForcePersistence)
         {
             return base.Channel.SetConfigurationAsync(PTZConfiguration, ForcePersistence);
         }
         
-        public System.Threading.Tasks.Task<OnvifPTZ.PTZConfigurationOptions> GetConfigurationOptionsAsync(string ConfigurationToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.PTZ.PTZConfigurationOptions> GetConfigurationOptionsAsync(string ConfigurationToken)
         {
             return base.Channel.GetConfigurationOptionsAsync(ConfigurationToken);
         }
@@ -12766,19 +12766,19 @@ namespace OnvifPTZ
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifPTZ.GetPresetsResponse> OnvifPTZ.PTZ.GetPresetsAsync(OnvifPTZ.GetPresetsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.PTZ.GetPresetsResponse> SharpOnvifClient.PTZ.PTZ.GetPresetsAsync(SharpOnvifClient.PTZ.GetPresetsRequest request)
         {
             return base.Channel.GetPresetsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifPTZ.GetPresetsResponse> GetPresetsAsync(string ProfileToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.PTZ.GetPresetsResponse> GetPresetsAsync(string ProfileToken)
         {
-            OnvifPTZ.GetPresetsRequest inValue = new OnvifPTZ.GetPresetsRequest();
+            SharpOnvifClient.PTZ.GetPresetsRequest inValue = new SharpOnvifClient.PTZ.GetPresetsRequest();
             inValue.ProfileToken = ProfileToken;
-            return ((OnvifPTZ.PTZ)(this)).GetPresetsAsync(inValue);
+            return ((SharpOnvifClient.PTZ.PTZ)(this)).GetPresetsAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifPTZ.SetPresetResponse> SetPresetAsync(OnvifPTZ.SetPresetRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.PTZ.SetPresetResponse> SetPresetAsync(SharpOnvifClient.PTZ.SetPresetRequest request)
         {
             return base.Channel.SetPresetAsync(request);
         }
@@ -12788,12 +12788,12 @@ namespace OnvifPTZ
             return base.Channel.RemovePresetAsync(ProfileToken, PresetToken);
         }
         
-        public System.Threading.Tasks.Task GotoPresetAsync(string ProfileToken, string PresetToken, OnvifPTZ.PTZSpeed Speed)
+        public System.Threading.Tasks.Task GotoPresetAsync(string ProfileToken, string PresetToken, SharpOnvifClient.PTZ.PTZSpeed Speed)
         {
             return base.Channel.GotoPresetAsync(ProfileToken, PresetToken, Speed);
         }
         
-        public System.Threading.Tasks.Task GotoHomePositionAsync(string ProfileToken, OnvifPTZ.PTZSpeed Speed)
+        public System.Threading.Tasks.Task GotoHomePositionAsync(string ProfileToken, SharpOnvifClient.PTZ.PTZSpeed Speed)
         {
             return base.Channel.GotoHomePositionAsync(ProfileToken, Speed);
         }
@@ -12804,36 +12804,36 @@ namespace OnvifPTZ
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifPTZ.ContinuousMoveResponse> OnvifPTZ.PTZ.ContinuousMoveAsync(OnvifPTZ.ContinuousMoveRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.PTZ.ContinuousMoveResponse> SharpOnvifClient.PTZ.PTZ.ContinuousMoveAsync(SharpOnvifClient.PTZ.ContinuousMoveRequest request)
         {
             return base.Channel.ContinuousMoveAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifPTZ.ContinuousMoveResponse> ContinuousMoveAsync(string ProfileToken, OnvifPTZ.PTZSpeed Velocity, string Timeout)
+        public System.Threading.Tasks.Task<SharpOnvifClient.PTZ.ContinuousMoveResponse> ContinuousMoveAsync(string ProfileToken, SharpOnvifClient.PTZ.PTZSpeed Velocity, string Timeout)
         {
-            OnvifPTZ.ContinuousMoveRequest inValue = new OnvifPTZ.ContinuousMoveRequest();
+            SharpOnvifClient.PTZ.ContinuousMoveRequest inValue = new SharpOnvifClient.PTZ.ContinuousMoveRequest();
             inValue.ProfileToken = ProfileToken;
             inValue.Velocity = Velocity;
             inValue.Timeout = Timeout;
-            return ((OnvifPTZ.PTZ)(this)).ContinuousMoveAsync(inValue);
+            return ((SharpOnvifClient.PTZ.PTZ)(this)).ContinuousMoveAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task RelativeMoveAsync(string ProfileToken, OnvifPTZ.PTZVector Translation, OnvifPTZ.PTZSpeed Speed)
+        public System.Threading.Tasks.Task RelativeMoveAsync(string ProfileToken, SharpOnvifClient.PTZ.PTZVector Translation, SharpOnvifClient.PTZ.PTZSpeed Speed)
         {
             return base.Channel.RelativeMoveAsync(ProfileToken, Translation, Speed);
         }
         
-        public System.Threading.Tasks.Task<OnvifPTZ.PTZStatus> GetStatusAsync(string ProfileToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.PTZ.PTZStatus> GetStatusAsync(string ProfileToken)
         {
             return base.Channel.GetStatusAsync(ProfileToken);
         }
         
-        public System.Threading.Tasks.Task AbsoluteMoveAsync(string ProfileToken, OnvifPTZ.PTZVector Position, OnvifPTZ.PTZSpeed Speed)
+        public System.Threading.Tasks.Task AbsoluteMoveAsync(string ProfileToken, SharpOnvifClient.PTZ.PTZVector Position, SharpOnvifClient.PTZ.PTZSpeed Speed)
         {
             return base.Channel.AbsoluteMoveAsync(ProfileToken, Position, Speed);
         }
         
-        public System.Threading.Tasks.Task GeoMoveAsync(string ProfileToken, OnvifPTZ.GeoLocation Target, OnvifPTZ.PTZSpeed Speed, float AreaHeight, float AreaWidth)
+        public System.Threading.Tasks.Task GeoMoveAsync(string ProfileToken, SharpOnvifClient.PTZ.GeoLocation Target, SharpOnvifClient.PTZ.PTZSpeed Speed, float AreaHeight, float AreaWidth)
         {
             return base.Channel.GeoMoveAsync(ProfileToken, Target, Speed, AreaHeight, AreaWidth);
         }
@@ -12844,24 +12844,24 @@ namespace OnvifPTZ
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifPTZ.GetPresetToursResponse> OnvifPTZ.PTZ.GetPresetToursAsync(OnvifPTZ.GetPresetToursRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.PTZ.GetPresetToursResponse> SharpOnvifClient.PTZ.PTZ.GetPresetToursAsync(SharpOnvifClient.PTZ.GetPresetToursRequest request)
         {
             return base.Channel.GetPresetToursAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifPTZ.GetPresetToursResponse> GetPresetToursAsync(string ProfileToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.PTZ.GetPresetToursResponse> GetPresetToursAsync(string ProfileToken)
         {
-            OnvifPTZ.GetPresetToursRequest inValue = new OnvifPTZ.GetPresetToursRequest();
+            SharpOnvifClient.PTZ.GetPresetToursRequest inValue = new SharpOnvifClient.PTZ.GetPresetToursRequest();
             inValue.ProfileToken = ProfileToken;
-            return ((OnvifPTZ.PTZ)(this)).GetPresetToursAsync(inValue);
+            return ((SharpOnvifClient.PTZ.PTZ)(this)).GetPresetToursAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifPTZ.PresetTour> GetPresetTourAsync(string ProfileToken, string PresetTourToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.PTZ.PresetTour> GetPresetTourAsync(string ProfileToken, string PresetTourToken)
         {
             return base.Channel.GetPresetTourAsync(ProfileToken, PresetTourToken);
         }
         
-        public System.Threading.Tasks.Task<OnvifPTZ.PTZPresetTourOptions> GetPresetTourOptionsAsync(string ProfileToken, string PresetTourToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.PTZ.PTZPresetTourOptions> GetPresetTourOptionsAsync(string ProfileToken, string PresetTourToken)
         {
             return base.Channel.GetPresetTourOptionsAsync(ProfileToken, PresetTourToken);
         }
@@ -12871,12 +12871,12 @@ namespace OnvifPTZ
             return base.Channel.CreatePresetTourAsync(ProfileToken);
         }
         
-        public System.Threading.Tasks.Task ModifyPresetTourAsync(string ProfileToken, OnvifPTZ.PresetTour PresetTour)
+        public System.Threading.Tasks.Task ModifyPresetTourAsync(string ProfileToken, SharpOnvifClient.PTZ.PresetTour PresetTour)
         {
             return base.Channel.ModifyPresetTourAsync(ProfileToken, PresetTour);
         }
         
-        public System.Threading.Tasks.Task OperatePresetTourAsync(string ProfileToken, string PresetTourToken, OnvifPTZ.PTZPresetTourOperation Operation)
+        public System.Threading.Tasks.Task OperatePresetTourAsync(string ProfileToken, string PresetTourToken, SharpOnvifClient.PTZ.PTZPresetTourOperation Operation)
         {
             return base.Channel.OperatePresetTourAsync(ProfileToken, PresetTourToken, Operation);
         }
@@ -12887,27 +12887,27 @@ namespace OnvifPTZ
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifPTZ.GetCompatibleConfigurationsResponse> OnvifPTZ.PTZ.GetCompatibleConfigurationsAsync(OnvifPTZ.GetCompatibleConfigurationsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.PTZ.GetCompatibleConfigurationsResponse> SharpOnvifClient.PTZ.PTZ.GetCompatibleConfigurationsAsync(SharpOnvifClient.PTZ.GetCompatibleConfigurationsRequest request)
         {
             return base.Channel.GetCompatibleConfigurationsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifPTZ.GetCompatibleConfigurationsResponse> GetCompatibleConfigurationsAsync(string ProfileToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.PTZ.GetCompatibleConfigurationsResponse> GetCompatibleConfigurationsAsync(string ProfileToken)
         {
-            OnvifPTZ.GetCompatibleConfigurationsRequest inValue = new OnvifPTZ.GetCompatibleConfigurationsRequest();
+            SharpOnvifClient.PTZ.GetCompatibleConfigurationsRequest inValue = new SharpOnvifClient.PTZ.GetCompatibleConfigurationsRequest();
             inValue.ProfileToken = ProfileToken;
-            return ((OnvifPTZ.PTZ)(this)).GetCompatibleConfigurationsAsync(inValue);
+            return ((SharpOnvifClient.PTZ.PTZ)(this)).GetCompatibleConfigurationsAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifPTZ.MoveAndStartTrackingResponse> OnvifPTZ.PTZ.MoveAndStartTrackingAsync(OnvifPTZ.MoveAndStartTrackingRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.PTZ.MoveAndStartTrackingResponse> SharpOnvifClient.PTZ.PTZ.MoveAndStartTrackingAsync(SharpOnvifClient.PTZ.MoveAndStartTrackingRequest request)
         {
             return base.Channel.MoveAndStartTrackingAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifPTZ.MoveAndStartTrackingResponse> MoveAndStartTrackingAsync(string ProfileToken, string PresetToken, OnvifPTZ.GeoLocation GeoLocation, OnvifPTZ.PTZVector TargetPosition, OnvifPTZ.PTZSpeed Speed, string ObjectID, System.Xml.XmlElement[] Any)
+        public System.Threading.Tasks.Task<SharpOnvifClient.PTZ.MoveAndStartTrackingResponse> MoveAndStartTrackingAsync(string ProfileToken, string PresetToken, SharpOnvifClient.PTZ.GeoLocation GeoLocation, SharpOnvifClient.PTZ.PTZVector TargetPosition, SharpOnvifClient.PTZ.PTZSpeed Speed, string ObjectID, System.Xml.XmlElement[] Any)
         {
-            OnvifPTZ.MoveAndStartTrackingRequest inValue = new OnvifPTZ.MoveAndStartTrackingRequest();
+            SharpOnvifClient.PTZ.MoveAndStartTrackingRequest inValue = new SharpOnvifClient.PTZ.MoveAndStartTrackingRequest();
             inValue.ProfileToken = ProfileToken;
             inValue.PresetToken = PresetToken;
             inValue.GeoLocation = GeoLocation;
@@ -12915,7 +12915,7 @@ namespace OnvifPTZ
             inValue.Speed = Speed;
             inValue.ObjectID = ObjectID;
             inValue.Any = Any;
-            return ((OnvifPTZ.PTZ)(this)).MoveAndStartTrackingAsync(inValue);
+            return ((SharpOnvifClient.PTZ.PTZ)(this)).MoveAndStartTrackingAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()

@@ -7,12 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OnvifAuthenticationBehavior
+namespace SharpOnvifClient.AuthenticationBehavior
 {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl", ConfigurationName="OnvifAuthenticationBehavior.AuthenticationBehaviorPort")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl", ConfigurationName="SharpOnvifClient.AuthenticationBehavior.AuthenticationBehaviorPort")]
     public interface AuthenticationBehaviorPort
     {
         
@@ -20,50 +20,50 @@ namespace OnvifAuthenticationBehavior
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Capabilities")]
-        System.Threading.Tasks.Task<OnvifAuthenticationBehavior.ServiceCapabilities> GetServiceCapabilitiesAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.AuthenticationBehavior.ServiceCapabilities> GetServiceCapabilitiesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/authenticationbehavior/wsdl/GetAuthenticationProfileIn" +
             "fo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifAuthenticationBehavior.GetAuthenticationProfileInfoResponse> GetAuthenticationProfileInfoAsync(OnvifAuthenticationBehavior.GetAuthenticationProfileInfoRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AuthenticationBehavior.GetAuthenticationProfileInfoResponse> GetAuthenticationProfileInfoAsync(SharpOnvifClient.AuthenticationBehavior.GetAuthenticationProfileInfoRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/authenticationbehavior/wsdl/GetAuthenticationProfileIn" +
             "foList", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifAuthenticationBehavior.GetAuthenticationProfileInfoListResponse> GetAuthenticationProfileInfoListAsync(OnvifAuthenticationBehavior.GetAuthenticationProfileInfoListRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AuthenticationBehavior.GetAuthenticationProfileInfoListResponse> GetAuthenticationProfileInfoListAsync(SharpOnvifClient.AuthenticationBehavior.GetAuthenticationProfileInfoListRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/authenticationbehavior/wsdl/GetAuthenticationProfiles", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifAuthenticationBehavior.GetAuthenticationProfilesResponse> GetAuthenticationProfilesAsync(OnvifAuthenticationBehavior.GetAuthenticationProfilesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AuthenticationBehavior.GetAuthenticationProfilesResponse> GetAuthenticationProfilesAsync(SharpOnvifClient.AuthenticationBehavior.GetAuthenticationProfilesRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/authenticationbehavior/wsdl/GetAuthenticationProfileLi" +
             "st", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifAuthenticationBehavior.GetAuthenticationProfileListResponse> GetAuthenticationProfileListAsync(OnvifAuthenticationBehavior.GetAuthenticationProfileListRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AuthenticationBehavior.GetAuthenticationProfileListResponse> GetAuthenticationProfileListAsync(SharpOnvifClient.AuthenticationBehavior.GetAuthenticationProfileListRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/authenticationbehavior/wsdl/CreateAuthenticationProfil" +
             "e", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Token")]
-        System.Threading.Tasks.Task<string> CreateAuthenticationProfileAsync(OnvifAuthenticationBehavior.AuthenticationProfile AuthenticationProfile);
+        System.Threading.Tasks.Task<string> CreateAuthenticationProfileAsync(SharpOnvifClient.AuthenticationBehavior.AuthenticationProfile AuthenticationProfile);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/authenticationbehavior/wsdl/SetAuthenticationProfile", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task SetAuthenticationProfileAsync(OnvifAuthenticationBehavior.AuthenticationProfile AuthenticationProfile);
+        System.Threading.Tasks.Task SetAuthenticationProfileAsync(SharpOnvifClient.AuthenticationBehavior.AuthenticationProfile AuthenticationProfile);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/authenticationbehavior/wsdl/ModifyAuthenticationProfil" +
             "e", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task ModifyAuthenticationProfileAsync(OnvifAuthenticationBehavior.AuthenticationProfile AuthenticationProfile);
+        System.Threading.Tasks.Task ModifyAuthenticationProfileAsync(SharpOnvifClient.AuthenticationBehavior.AuthenticationProfile AuthenticationProfile);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/authenticationbehavior/wsdl/DeleteAuthenticationProfil" +
             "e", ReplyAction="*")]
@@ -74,40 +74,40 @@ namespace OnvifAuthenticationBehavior
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/authenticationbehavior/wsdl/GetSecurityLevelInfo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifAuthenticationBehavior.GetSecurityLevelInfoResponse> GetSecurityLevelInfoAsync(OnvifAuthenticationBehavior.GetSecurityLevelInfoRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AuthenticationBehavior.GetSecurityLevelInfoResponse> GetSecurityLevelInfoAsync(SharpOnvifClient.AuthenticationBehavior.GetSecurityLevelInfoRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/authenticationbehavior/wsdl/GetSecurityLevelInfoList", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifAuthenticationBehavior.GetSecurityLevelInfoListResponse> GetSecurityLevelInfoListAsync(OnvifAuthenticationBehavior.GetSecurityLevelInfoListRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AuthenticationBehavior.GetSecurityLevelInfoListResponse> GetSecurityLevelInfoListAsync(SharpOnvifClient.AuthenticationBehavior.GetSecurityLevelInfoListRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/authenticationbehavior/wsdl/GetSecurityLevels", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifAuthenticationBehavior.GetSecurityLevelsResponse> GetSecurityLevelsAsync(OnvifAuthenticationBehavior.GetSecurityLevelsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AuthenticationBehavior.GetSecurityLevelsResponse> GetSecurityLevelsAsync(SharpOnvifClient.AuthenticationBehavior.GetSecurityLevelsRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/authenticationbehavior/wsdl/GetSecurityLevelList", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifAuthenticationBehavior.GetSecurityLevelListResponse> GetSecurityLevelListAsync(OnvifAuthenticationBehavior.GetSecurityLevelListRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AuthenticationBehavior.GetSecurityLevelListResponse> GetSecurityLevelListAsync(SharpOnvifClient.AuthenticationBehavior.GetSecurityLevelListRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/authenticationbehavior/wsdl/CreateSecurityLevel", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Token")]
-        System.Threading.Tasks.Task<string> CreateSecurityLevelAsync(OnvifAuthenticationBehavior.SecurityLevel SecurityLevel);
+        System.Threading.Tasks.Task<string> CreateSecurityLevelAsync(SharpOnvifClient.AuthenticationBehavior.SecurityLevel SecurityLevel);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/authenticationbehavior/wsdl/SetSecurityLevel", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task SetSecurityLevelAsync(OnvifAuthenticationBehavior.SecurityLevel SecurityLevel);
+        System.Threading.Tasks.Task SetSecurityLevelAsync(SharpOnvifClient.AuthenticationBehavior.SecurityLevel SecurityLevel);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/authenticationbehavior/wsdl/ModifySecurityLevel", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task ModifySecurityLevelAsync(OnvifAuthenticationBehavior.SecurityLevel SecurityLevel);
+        System.Threading.Tasks.Task ModifySecurityLevelAsync(SharpOnvifClient.AuthenticationBehavior.SecurityLevel SecurityLevel);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/authenticationbehavior/wsdl/DeleteSecurityLevel", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -915,13 +915,13 @@ namespace OnvifAuthenticationBehavior
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("AuthenticationProfileInfo")]
-        public OnvifAuthenticationBehavior.AuthenticationProfileInfo[] AuthenticationProfileInfo;
+        public SharpOnvifClient.AuthenticationBehavior.AuthenticationProfileInfo[] AuthenticationProfileInfo;
         
         public GetAuthenticationProfileInfoResponse()
         {
         }
         
-        public GetAuthenticationProfileInfoResponse(OnvifAuthenticationBehavior.AuthenticationProfileInfo[] AuthenticationProfileInfo)
+        public GetAuthenticationProfileInfoResponse(SharpOnvifClient.AuthenticationBehavior.AuthenticationProfileInfo[] AuthenticationProfileInfo)
         {
             this.AuthenticationProfileInfo = AuthenticationProfileInfo;
         }
@@ -961,13 +961,13 @@ namespace OnvifAuthenticationBehavior
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl", Order=1)]
         [System.Xml.Serialization.XmlElementAttribute("AuthenticationProfileInfo")]
-        public OnvifAuthenticationBehavior.AuthenticationProfileInfo[] AuthenticationProfileInfo;
+        public SharpOnvifClient.AuthenticationBehavior.AuthenticationProfileInfo[] AuthenticationProfileInfo;
         
         public GetAuthenticationProfileInfoListResponse()
         {
         }
         
-        public GetAuthenticationProfileInfoListResponse(string NextStartReference, OnvifAuthenticationBehavior.AuthenticationProfileInfo[] AuthenticationProfileInfo)
+        public GetAuthenticationProfileInfoListResponse(string NextStartReference, SharpOnvifClient.AuthenticationBehavior.AuthenticationProfileInfo[] AuthenticationProfileInfo)
         {
             this.NextStartReference = NextStartReference;
             this.AuthenticationProfileInfo = AuthenticationProfileInfo;
@@ -1004,13 +1004,13 @@ namespace OnvifAuthenticationBehavior
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("AuthenticationProfile")]
-        public OnvifAuthenticationBehavior.AuthenticationProfile[] AuthenticationProfile;
+        public SharpOnvifClient.AuthenticationBehavior.AuthenticationProfile[] AuthenticationProfile;
         
         public GetAuthenticationProfilesResponse()
         {
         }
         
-        public GetAuthenticationProfilesResponse(OnvifAuthenticationBehavior.AuthenticationProfile[] AuthenticationProfile)
+        public GetAuthenticationProfilesResponse(SharpOnvifClient.AuthenticationBehavior.AuthenticationProfile[] AuthenticationProfile)
         {
             this.AuthenticationProfile = AuthenticationProfile;
         }
@@ -1050,13 +1050,13 @@ namespace OnvifAuthenticationBehavior
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl", Order=1)]
         [System.Xml.Serialization.XmlElementAttribute("AuthenticationProfile")]
-        public OnvifAuthenticationBehavior.AuthenticationProfile[] AuthenticationProfile;
+        public SharpOnvifClient.AuthenticationBehavior.AuthenticationProfile[] AuthenticationProfile;
         
         public GetAuthenticationProfileListResponse()
         {
         }
         
-        public GetAuthenticationProfileListResponse(string NextStartReference, OnvifAuthenticationBehavior.AuthenticationProfile[] AuthenticationProfile)
+        public GetAuthenticationProfileListResponse(string NextStartReference, SharpOnvifClient.AuthenticationBehavior.AuthenticationProfile[] AuthenticationProfile)
         {
             this.NextStartReference = NextStartReference;
             this.AuthenticationProfile = AuthenticationProfile;
@@ -1093,13 +1093,13 @@ namespace OnvifAuthenticationBehavior
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("SecurityLevelInfo")]
-        public OnvifAuthenticationBehavior.SecurityLevelInfo[] SecurityLevelInfo;
+        public SharpOnvifClient.AuthenticationBehavior.SecurityLevelInfo[] SecurityLevelInfo;
         
         public GetSecurityLevelInfoResponse()
         {
         }
         
-        public GetSecurityLevelInfoResponse(OnvifAuthenticationBehavior.SecurityLevelInfo[] SecurityLevelInfo)
+        public GetSecurityLevelInfoResponse(SharpOnvifClient.AuthenticationBehavior.SecurityLevelInfo[] SecurityLevelInfo)
         {
             this.SecurityLevelInfo = SecurityLevelInfo;
         }
@@ -1139,13 +1139,13 @@ namespace OnvifAuthenticationBehavior
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl", Order=1)]
         [System.Xml.Serialization.XmlElementAttribute("SecurityLevelInfo")]
-        public OnvifAuthenticationBehavior.SecurityLevelInfo[] SecurityLevelInfo;
+        public SharpOnvifClient.AuthenticationBehavior.SecurityLevelInfo[] SecurityLevelInfo;
         
         public GetSecurityLevelInfoListResponse()
         {
         }
         
-        public GetSecurityLevelInfoListResponse(string NextStartReference, OnvifAuthenticationBehavior.SecurityLevelInfo[] SecurityLevelInfo)
+        public GetSecurityLevelInfoListResponse(string NextStartReference, SharpOnvifClient.AuthenticationBehavior.SecurityLevelInfo[] SecurityLevelInfo)
         {
             this.NextStartReference = NextStartReference;
             this.SecurityLevelInfo = SecurityLevelInfo;
@@ -1182,13 +1182,13 @@ namespace OnvifAuthenticationBehavior
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("SecurityLevel")]
-        public OnvifAuthenticationBehavior.SecurityLevel[] SecurityLevel;
+        public SharpOnvifClient.AuthenticationBehavior.SecurityLevel[] SecurityLevel;
         
         public GetSecurityLevelsResponse()
         {
         }
         
-        public GetSecurityLevelsResponse(OnvifAuthenticationBehavior.SecurityLevel[] SecurityLevel)
+        public GetSecurityLevelsResponse(SharpOnvifClient.AuthenticationBehavior.SecurityLevel[] SecurityLevel)
         {
             this.SecurityLevel = SecurityLevel;
         }
@@ -1228,13 +1228,13 @@ namespace OnvifAuthenticationBehavior
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl", Order=1)]
         [System.Xml.Serialization.XmlElementAttribute("SecurityLevel")]
-        public OnvifAuthenticationBehavior.SecurityLevel[] SecurityLevel;
+        public SharpOnvifClient.AuthenticationBehavior.SecurityLevel[] SecurityLevel;
         
         public GetSecurityLevelListResponse()
         {
         }
         
-        public GetSecurityLevelListResponse(string NextStartReference, OnvifAuthenticationBehavior.SecurityLevel[] SecurityLevel)
+        public GetSecurityLevelListResponse(string NextStartReference, SharpOnvifClient.AuthenticationBehavior.SecurityLevel[] SecurityLevel)
         {
             this.NextStartReference = NextStartReference;
             this.SecurityLevel = SecurityLevel;
@@ -1242,13 +1242,13 @@ namespace OnvifAuthenticationBehavior
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface AuthenticationBehaviorPortChannel : OnvifAuthenticationBehavior.AuthenticationBehaviorPort, System.ServiceModel.IClientChannel
+    public interface AuthenticationBehaviorPortChannel : SharpOnvifClient.AuthenticationBehavior.AuthenticationBehaviorPort, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class AuthenticationBehaviorPortClient : System.ServiceModel.ClientBase<OnvifAuthenticationBehavior.AuthenticationBehaviorPort>, OnvifAuthenticationBehavior.AuthenticationBehaviorPort
+    public partial class AuthenticationBehaviorPortClient : System.ServiceModel.ClientBase<SharpOnvifClient.AuthenticationBehavior.AuthenticationBehaviorPort>, SharpOnvifClient.AuthenticationBehavior.AuthenticationBehaviorPort
     {
         
         public AuthenticationBehaviorPortClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
@@ -1256,58 +1256,58 @@ namespace OnvifAuthenticationBehavior
         {
         }
         
-        public System.Threading.Tasks.Task<OnvifAuthenticationBehavior.ServiceCapabilities> GetServiceCapabilitiesAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.AuthenticationBehavior.ServiceCapabilities> GetServiceCapabilitiesAsync()
         {
             return base.Channel.GetServiceCapabilitiesAsync();
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAuthenticationBehavior.GetAuthenticationProfileInfoResponse> OnvifAuthenticationBehavior.AuthenticationBehaviorPort.GetAuthenticationProfileInfoAsync(OnvifAuthenticationBehavior.GetAuthenticationProfileInfoRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AuthenticationBehavior.GetAuthenticationProfileInfoResponse> SharpOnvifClient.AuthenticationBehavior.AuthenticationBehaviorPort.GetAuthenticationProfileInfoAsync(SharpOnvifClient.AuthenticationBehavior.GetAuthenticationProfileInfoRequest request)
         {
             return base.Channel.GetAuthenticationProfileInfoAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAuthenticationBehavior.GetAuthenticationProfileInfoResponse> GetAuthenticationProfileInfoAsync(string[] Token)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AuthenticationBehavior.GetAuthenticationProfileInfoResponse> GetAuthenticationProfileInfoAsync(string[] Token)
         {
-            OnvifAuthenticationBehavior.GetAuthenticationProfileInfoRequest inValue = new OnvifAuthenticationBehavior.GetAuthenticationProfileInfoRequest();
+            SharpOnvifClient.AuthenticationBehavior.GetAuthenticationProfileInfoRequest inValue = new SharpOnvifClient.AuthenticationBehavior.GetAuthenticationProfileInfoRequest();
             inValue.Token = Token;
-            return ((OnvifAuthenticationBehavior.AuthenticationBehaviorPort)(this)).GetAuthenticationProfileInfoAsync(inValue);
+            return ((SharpOnvifClient.AuthenticationBehavior.AuthenticationBehaviorPort)(this)).GetAuthenticationProfileInfoAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifAuthenticationBehavior.GetAuthenticationProfileInfoListResponse> GetAuthenticationProfileInfoListAsync(OnvifAuthenticationBehavior.GetAuthenticationProfileInfoListRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AuthenticationBehavior.GetAuthenticationProfileInfoListResponse> GetAuthenticationProfileInfoListAsync(SharpOnvifClient.AuthenticationBehavior.GetAuthenticationProfileInfoListRequest request)
         {
             return base.Channel.GetAuthenticationProfileInfoListAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAuthenticationBehavior.GetAuthenticationProfilesResponse> OnvifAuthenticationBehavior.AuthenticationBehaviorPort.GetAuthenticationProfilesAsync(OnvifAuthenticationBehavior.GetAuthenticationProfilesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AuthenticationBehavior.GetAuthenticationProfilesResponse> SharpOnvifClient.AuthenticationBehavior.AuthenticationBehaviorPort.GetAuthenticationProfilesAsync(SharpOnvifClient.AuthenticationBehavior.GetAuthenticationProfilesRequest request)
         {
             return base.Channel.GetAuthenticationProfilesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAuthenticationBehavior.GetAuthenticationProfilesResponse> GetAuthenticationProfilesAsync(string[] Token)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AuthenticationBehavior.GetAuthenticationProfilesResponse> GetAuthenticationProfilesAsync(string[] Token)
         {
-            OnvifAuthenticationBehavior.GetAuthenticationProfilesRequest inValue = new OnvifAuthenticationBehavior.GetAuthenticationProfilesRequest();
+            SharpOnvifClient.AuthenticationBehavior.GetAuthenticationProfilesRequest inValue = new SharpOnvifClient.AuthenticationBehavior.GetAuthenticationProfilesRequest();
             inValue.Token = Token;
-            return ((OnvifAuthenticationBehavior.AuthenticationBehaviorPort)(this)).GetAuthenticationProfilesAsync(inValue);
+            return ((SharpOnvifClient.AuthenticationBehavior.AuthenticationBehaviorPort)(this)).GetAuthenticationProfilesAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifAuthenticationBehavior.GetAuthenticationProfileListResponse> GetAuthenticationProfileListAsync(OnvifAuthenticationBehavior.GetAuthenticationProfileListRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AuthenticationBehavior.GetAuthenticationProfileListResponse> GetAuthenticationProfileListAsync(SharpOnvifClient.AuthenticationBehavior.GetAuthenticationProfileListRequest request)
         {
             return base.Channel.GetAuthenticationProfileListAsync(request);
         }
         
-        public System.Threading.Tasks.Task<string> CreateAuthenticationProfileAsync(OnvifAuthenticationBehavior.AuthenticationProfile AuthenticationProfile)
+        public System.Threading.Tasks.Task<string> CreateAuthenticationProfileAsync(SharpOnvifClient.AuthenticationBehavior.AuthenticationProfile AuthenticationProfile)
         {
             return base.Channel.CreateAuthenticationProfileAsync(AuthenticationProfile);
         }
         
-        public System.Threading.Tasks.Task SetAuthenticationProfileAsync(OnvifAuthenticationBehavior.AuthenticationProfile AuthenticationProfile)
+        public System.Threading.Tasks.Task SetAuthenticationProfileAsync(SharpOnvifClient.AuthenticationBehavior.AuthenticationProfile AuthenticationProfile)
         {
             return base.Channel.SetAuthenticationProfileAsync(AuthenticationProfile);
         }
         
-        public System.Threading.Tasks.Task ModifyAuthenticationProfileAsync(OnvifAuthenticationBehavior.AuthenticationProfile AuthenticationProfile)
+        public System.Threading.Tasks.Task ModifyAuthenticationProfileAsync(SharpOnvifClient.AuthenticationBehavior.AuthenticationProfile AuthenticationProfile)
         {
             return base.Channel.ModifyAuthenticationProfileAsync(AuthenticationProfile);
         }
@@ -1318,52 +1318,52 @@ namespace OnvifAuthenticationBehavior
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAuthenticationBehavior.GetSecurityLevelInfoResponse> OnvifAuthenticationBehavior.AuthenticationBehaviorPort.GetSecurityLevelInfoAsync(OnvifAuthenticationBehavior.GetSecurityLevelInfoRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AuthenticationBehavior.GetSecurityLevelInfoResponse> SharpOnvifClient.AuthenticationBehavior.AuthenticationBehaviorPort.GetSecurityLevelInfoAsync(SharpOnvifClient.AuthenticationBehavior.GetSecurityLevelInfoRequest request)
         {
             return base.Channel.GetSecurityLevelInfoAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAuthenticationBehavior.GetSecurityLevelInfoResponse> GetSecurityLevelInfoAsync(string[] Token)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AuthenticationBehavior.GetSecurityLevelInfoResponse> GetSecurityLevelInfoAsync(string[] Token)
         {
-            OnvifAuthenticationBehavior.GetSecurityLevelInfoRequest inValue = new OnvifAuthenticationBehavior.GetSecurityLevelInfoRequest();
+            SharpOnvifClient.AuthenticationBehavior.GetSecurityLevelInfoRequest inValue = new SharpOnvifClient.AuthenticationBehavior.GetSecurityLevelInfoRequest();
             inValue.Token = Token;
-            return ((OnvifAuthenticationBehavior.AuthenticationBehaviorPort)(this)).GetSecurityLevelInfoAsync(inValue);
+            return ((SharpOnvifClient.AuthenticationBehavior.AuthenticationBehaviorPort)(this)).GetSecurityLevelInfoAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifAuthenticationBehavior.GetSecurityLevelInfoListResponse> GetSecurityLevelInfoListAsync(OnvifAuthenticationBehavior.GetSecurityLevelInfoListRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AuthenticationBehavior.GetSecurityLevelInfoListResponse> GetSecurityLevelInfoListAsync(SharpOnvifClient.AuthenticationBehavior.GetSecurityLevelInfoListRequest request)
         {
             return base.Channel.GetSecurityLevelInfoListAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAuthenticationBehavior.GetSecurityLevelsResponse> OnvifAuthenticationBehavior.AuthenticationBehaviorPort.GetSecurityLevelsAsync(OnvifAuthenticationBehavior.GetSecurityLevelsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AuthenticationBehavior.GetSecurityLevelsResponse> SharpOnvifClient.AuthenticationBehavior.AuthenticationBehaviorPort.GetSecurityLevelsAsync(SharpOnvifClient.AuthenticationBehavior.GetSecurityLevelsRequest request)
         {
             return base.Channel.GetSecurityLevelsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAuthenticationBehavior.GetSecurityLevelsResponse> GetSecurityLevelsAsync(string[] Token)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AuthenticationBehavior.GetSecurityLevelsResponse> GetSecurityLevelsAsync(string[] Token)
         {
-            OnvifAuthenticationBehavior.GetSecurityLevelsRequest inValue = new OnvifAuthenticationBehavior.GetSecurityLevelsRequest();
+            SharpOnvifClient.AuthenticationBehavior.GetSecurityLevelsRequest inValue = new SharpOnvifClient.AuthenticationBehavior.GetSecurityLevelsRequest();
             inValue.Token = Token;
-            return ((OnvifAuthenticationBehavior.AuthenticationBehaviorPort)(this)).GetSecurityLevelsAsync(inValue);
+            return ((SharpOnvifClient.AuthenticationBehavior.AuthenticationBehaviorPort)(this)).GetSecurityLevelsAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifAuthenticationBehavior.GetSecurityLevelListResponse> GetSecurityLevelListAsync(OnvifAuthenticationBehavior.GetSecurityLevelListRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AuthenticationBehavior.GetSecurityLevelListResponse> GetSecurityLevelListAsync(SharpOnvifClient.AuthenticationBehavior.GetSecurityLevelListRequest request)
         {
             return base.Channel.GetSecurityLevelListAsync(request);
         }
         
-        public System.Threading.Tasks.Task<string> CreateSecurityLevelAsync(OnvifAuthenticationBehavior.SecurityLevel SecurityLevel)
+        public System.Threading.Tasks.Task<string> CreateSecurityLevelAsync(SharpOnvifClient.AuthenticationBehavior.SecurityLevel SecurityLevel)
         {
             return base.Channel.CreateSecurityLevelAsync(SecurityLevel);
         }
         
-        public System.Threading.Tasks.Task SetSecurityLevelAsync(OnvifAuthenticationBehavior.SecurityLevel SecurityLevel)
+        public System.Threading.Tasks.Task SetSecurityLevelAsync(SharpOnvifClient.AuthenticationBehavior.SecurityLevel SecurityLevel)
         {
             return base.Channel.SetSecurityLevelAsync(SecurityLevel);
         }
         
-        public System.Threading.Tasks.Task ModifySecurityLevelAsync(OnvifAuthenticationBehavior.SecurityLevel SecurityLevel)
+        public System.Threading.Tasks.Task ModifySecurityLevelAsync(SharpOnvifClient.AuthenticationBehavior.SecurityLevel SecurityLevel)
         {
             return base.Channel.ModifySecurityLevelAsync(SecurityLevel);
         }

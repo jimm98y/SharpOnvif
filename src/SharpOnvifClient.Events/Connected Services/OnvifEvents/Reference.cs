@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OnvifEvents
+namespace SharpOnvifClient.Events
 {
     
     
@@ -851,13 +851,13 @@ namespace OnvifEvents
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://docs.oasis-open.org/wsn/bw-2", ConfigurationName="OnvifEvents.NotificationConsumer")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://docs.oasis-open.org/wsn/bw-2", ConfigurationName="SharpOnvifClient.Events.NotificationConsumer")]
     public interface NotificationConsumer
     {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://docs.oasis-open.org/wsn/bw-2/NotificationConsumer/Notify")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task NotifyAsync(OnvifEvents.Notify1 request);
+        System.Threading.Tasks.Task NotifyAsync(SharpOnvifClient.Events.Notify1 request);
     }
     
     /// <remarks/>
@@ -908,26 +908,26 @@ namespace OnvifEvents
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2", Order=0)]
-        public OnvifEvents.Notify Notify;
+        public SharpOnvifClient.Events.Notify Notify;
         
         public Notify1()
         {
         }
         
-        public Notify1(OnvifEvents.Notify Notify)
+        public Notify1(SharpOnvifClient.Events.Notify Notify)
         {
             this.Notify = Notify;
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface NotificationConsumerChannel : OnvifEvents.NotificationConsumer, System.ServiceModel.IClientChannel
+    public interface NotificationConsumerChannel : SharpOnvifClient.Events.NotificationConsumer, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class NotificationConsumerClient : System.ServiceModel.ClientBase<OnvifEvents.NotificationConsumer>, OnvifEvents.NotificationConsumer
+    public partial class NotificationConsumerClient : System.ServiceModel.ClientBase<SharpOnvifClient.Events.NotificationConsumer>, SharpOnvifClient.Events.NotificationConsumer
     {
         
         public NotificationConsumerClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
@@ -936,16 +936,16 @@ namespace OnvifEvents
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task OnvifEvents.NotificationConsumer.NotifyAsync(OnvifEvents.Notify1 request)
+        System.Threading.Tasks.Task SharpOnvifClient.Events.NotificationConsumer.NotifyAsync(SharpOnvifClient.Events.Notify1 request)
         {
             return base.Channel.NotifyAsync(request);
         }
         
-        public System.Threading.Tasks.Task NotifyAsync(OnvifEvents.Notify Notify)
+        public System.Threading.Tasks.Task NotifyAsync(SharpOnvifClient.Events.Notify Notify)
         {
-            OnvifEvents.Notify1 inValue = new OnvifEvents.Notify1();
+            SharpOnvifClient.Events.Notify1 inValue = new SharpOnvifClient.Events.Notify1();
             inValue.Notify = Notify;
-            return ((OnvifEvents.NotificationConsumer)(this)).NotifyAsync(inValue);
+            return ((SharpOnvifClient.Events.NotificationConsumer)(this)).NotifyAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()
@@ -960,42 +960,42 @@ namespace OnvifEvents
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://docs.oasis-open.org/wsn/bw-2", ConfigurationName="OnvifEvents.NotificationProducer")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://docs.oasis-open.org/wsn/bw-2", ConfigurationName="SharpOnvifClient.Events.NotificationProducer")]
     public interface NotificationProducer
     {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://docs.oasis-open.org/wsn/bw-2/NotificationProducer/SubscribeRequest", ReplyAction="*")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.ResourceUnknownFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/NotificationProducer/SubscribeRequest", Name="ResourceUnknownFault", Namespace="http://docs.oasis-open.org/wsrf/r-2")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.InvalidFilterFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/NotificationProducer/SubscribeRequest", Name="InvalidFilterFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.TopicExpressionDialectUnknownFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/NotificationProducer/SubscribeRequest", Name="TopicExpressionDialectUnknownFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.InvalidTopicExpressionFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/NotificationProducer/SubscribeRequest", Name="InvalidTopicExpressionFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.TopicNotSupportedFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/NotificationProducer/SubscribeRequest", Name="TopicNotSupportedFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.InvalidProducerPropertiesExpressionFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/NotificationProducer/SubscribeRequest", Name="InvalidProducerPropertiesExpressionFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.InvalidMessageContentExpressionFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/NotificationProducer/SubscribeRequest", Name="InvalidMessageContentExpressionFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.UnacceptableInitialTerminationTimeFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/NotificationProducer/SubscribeRequest", Name="UnacceptableInitialTerminationTimeFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.UnrecognizedPolicyRequestFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/NotificationProducer/SubscribeRequest", Name="UnrecognizedPolicyRequestFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.UnsupportedPolicyRequestFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/NotificationProducer/SubscribeRequest", Name="UnsupportedPolicyRequestFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.NotifyMessageNotSupportedFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/NotificationProducer/SubscribeRequest", Name="NotifyMessageNotSupportedFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.SubscribeCreationFailedFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/NotificationProducer/SubscribeRequest", Name="SubscribeCreationFailedFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.ResourceUnknownFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/NotificationProducer/SubscribeRequest", Name="ResourceUnknownFault", Namespace="http://docs.oasis-open.org/wsrf/r-2")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.InvalidFilterFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/NotificationProducer/SubscribeRequest", Name="InvalidFilterFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.TopicExpressionDialectUnknownFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/NotificationProducer/SubscribeRequest", Name="TopicExpressionDialectUnknownFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.InvalidTopicExpressionFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/NotificationProducer/SubscribeRequest", Name="InvalidTopicExpressionFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.TopicNotSupportedFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/NotificationProducer/SubscribeRequest", Name="TopicNotSupportedFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.InvalidProducerPropertiesExpressionFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/NotificationProducer/SubscribeRequest", Name="InvalidProducerPropertiesExpressionFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.InvalidMessageContentExpressionFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/NotificationProducer/SubscribeRequest", Name="InvalidMessageContentExpressionFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.UnacceptableInitialTerminationTimeFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/NotificationProducer/SubscribeRequest", Name="UnacceptableInitialTerminationTimeFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.UnrecognizedPolicyRequestFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/NotificationProducer/SubscribeRequest", Name="UnrecognizedPolicyRequestFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.UnsupportedPolicyRequestFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/NotificationProducer/SubscribeRequest", Name="UnsupportedPolicyRequestFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.NotifyMessageNotSupportedFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/NotificationProducer/SubscribeRequest", Name="NotifyMessageNotSupportedFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.SubscribeCreationFailedFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/NotificationProducer/SubscribeRequest", Name="SubscribeCreationFailedFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifEvents.SubscribeResponse1> SubscribeAsync(OnvifEvents.SubscribeRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Events.SubscribeResponse1> SubscribeAsync(SharpOnvifClient.Events.SubscribeRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://docs.oasis-open.org/wsn/bw-2/NotificationProducer/GetCurrentMessageRequest" +
             "", ReplyAction="*")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.ResourceUnknownFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/NotificationProducer/GetCurrentMessageRequest" +
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.ResourceUnknownFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/NotificationProducer/GetCurrentMessageRequest" +
             "", Name="ResourceUnknownFault", Namespace="http://docs.oasis-open.org/wsrf/r-2")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.TopicExpressionDialectUnknownFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/NotificationProducer/GetCurrentMessageRequest" +
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.TopicExpressionDialectUnknownFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/NotificationProducer/GetCurrentMessageRequest" +
             "", Name="TopicExpressionDialectUnknownFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.InvalidTopicExpressionFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/NotificationProducer/GetCurrentMessageRequest" +
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.InvalidTopicExpressionFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/NotificationProducer/GetCurrentMessageRequest" +
             "", Name="InvalidTopicExpressionFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.TopicNotSupportedFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/NotificationProducer/GetCurrentMessageRequest" +
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.TopicNotSupportedFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/NotificationProducer/GetCurrentMessageRequest" +
             "", Name="TopicNotSupportedFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.NoCurrentMessageOnTopicFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/NotificationProducer/GetCurrentMessageRequest" +
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.NoCurrentMessageOnTopicFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/NotificationProducer/GetCurrentMessageRequest" +
             "", Name="NoCurrentMessageOnTopicFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.MultipleTopicsSpecifiedFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/NotificationProducer/GetCurrentMessageRequest" +
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.MultipleTopicsSpecifiedFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/NotificationProducer/GetCurrentMessageRequest" +
             "", Name="MultipleTopicsSpecifiedFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifEvents.GetCurrentMessageResponse1> GetCurrentMessageAsync(OnvifEvents.GetCurrentMessageRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Events.GetCurrentMessageResponse1> GetCurrentMessageAsync(SharpOnvifClient.Events.GetCurrentMessageRequest request);
     }
     
     /// <remarks/>
@@ -1246,13 +1246,13 @@ namespace OnvifEvents
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2", Order=0)]
-        public OnvifEvents.Subscribe Subscribe;
+        public SharpOnvifClient.Events.Subscribe Subscribe;
         
         public SubscribeRequest()
         {
         }
         
-        public SubscribeRequest(OnvifEvents.Subscribe Subscribe)
+        public SubscribeRequest(SharpOnvifClient.Events.Subscribe Subscribe)
         {
             this.Subscribe = Subscribe;
         }
@@ -1266,13 +1266,13 @@ namespace OnvifEvents
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2", Order=0)]
-        public OnvifEvents.SubscribeResponse SubscribeResponse;
+        public SharpOnvifClient.Events.SubscribeResponse SubscribeResponse;
         
         public SubscribeResponse1()
         {
         }
         
-        public SubscribeResponse1(OnvifEvents.SubscribeResponse SubscribeResponse)
+        public SubscribeResponse1(SharpOnvifClient.Events.SubscribeResponse SubscribeResponse)
         {
             this.SubscribeResponse = SubscribeResponse;
         }
@@ -1350,13 +1350,13 @@ namespace OnvifEvents
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2", Order=0)]
-        public OnvifEvents.GetCurrentMessage GetCurrentMessage;
+        public SharpOnvifClient.Events.GetCurrentMessage GetCurrentMessage;
         
         public GetCurrentMessageRequest()
         {
         }
         
-        public GetCurrentMessageRequest(OnvifEvents.GetCurrentMessage GetCurrentMessage)
+        public GetCurrentMessageRequest(SharpOnvifClient.Events.GetCurrentMessage GetCurrentMessage)
         {
             this.GetCurrentMessage = GetCurrentMessage;
         }
@@ -1370,26 +1370,26 @@ namespace OnvifEvents
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2", Order=0)]
-        public OnvifEvents.GetCurrentMessageResponse GetCurrentMessageResponse;
+        public SharpOnvifClient.Events.GetCurrentMessageResponse GetCurrentMessageResponse;
         
         public GetCurrentMessageResponse1()
         {
         }
         
-        public GetCurrentMessageResponse1(OnvifEvents.GetCurrentMessageResponse GetCurrentMessageResponse)
+        public GetCurrentMessageResponse1(SharpOnvifClient.Events.GetCurrentMessageResponse GetCurrentMessageResponse)
         {
             this.GetCurrentMessageResponse = GetCurrentMessageResponse;
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface NotificationProducerChannel : OnvifEvents.NotificationProducer, System.ServiceModel.IClientChannel
+    public interface NotificationProducerChannel : SharpOnvifClient.Events.NotificationProducer, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class NotificationProducerClient : System.ServiceModel.ClientBase<OnvifEvents.NotificationProducer>, OnvifEvents.NotificationProducer
+    public partial class NotificationProducerClient : System.ServiceModel.ClientBase<SharpOnvifClient.Events.NotificationProducer>, SharpOnvifClient.Events.NotificationProducer
     {
         
         public NotificationProducerClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
@@ -1398,29 +1398,29 @@ namespace OnvifEvents
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifEvents.SubscribeResponse1> OnvifEvents.NotificationProducer.SubscribeAsync(OnvifEvents.SubscribeRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Events.SubscribeResponse1> SharpOnvifClient.Events.NotificationProducer.SubscribeAsync(SharpOnvifClient.Events.SubscribeRequest request)
         {
             return base.Channel.SubscribeAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifEvents.SubscribeResponse1> SubscribeAsync(OnvifEvents.Subscribe Subscribe)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Events.SubscribeResponse1> SubscribeAsync(SharpOnvifClient.Events.Subscribe Subscribe)
         {
-            OnvifEvents.SubscribeRequest inValue = new OnvifEvents.SubscribeRequest();
+            SharpOnvifClient.Events.SubscribeRequest inValue = new SharpOnvifClient.Events.SubscribeRequest();
             inValue.Subscribe = Subscribe;
-            return ((OnvifEvents.NotificationProducer)(this)).SubscribeAsync(inValue);
+            return ((SharpOnvifClient.Events.NotificationProducer)(this)).SubscribeAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifEvents.GetCurrentMessageResponse1> OnvifEvents.NotificationProducer.GetCurrentMessageAsync(OnvifEvents.GetCurrentMessageRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Events.GetCurrentMessageResponse1> SharpOnvifClient.Events.NotificationProducer.GetCurrentMessageAsync(SharpOnvifClient.Events.GetCurrentMessageRequest request)
         {
             return base.Channel.GetCurrentMessageAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifEvents.GetCurrentMessageResponse1> GetCurrentMessageAsync(OnvifEvents.GetCurrentMessage GetCurrentMessage)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Events.GetCurrentMessageResponse1> GetCurrentMessageAsync(SharpOnvifClient.Events.GetCurrentMessage GetCurrentMessage)
         {
-            OnvifEvents.GetCurrentMessageRequest inValue = new OnvifEvents.GetCurrentMessageRequest();
+            SharpOnvifClient.Events.GetCurrentMessageRequest inValue = new SharpOnvifClient.Events.GetCurrentMessageRequest();
             inValue.GetCurrentMessage = GetCurrentMessage;
-            return ((OnvifEvents.NotificationProducer)(this)).GetCurrentMessageAsync(inValue);
+            return ((SharpOnvifClient.Events.NotificationProducer)(this)).GetCurrentMessageAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()
@@ -1435,25 +1435,25 @@ namespace OnvifEvents
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://docs.oasis-open.org/wsn/bw-2", ConfigurationName="OnvifEvents.PullPoint")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://docs.oasis-open.org/wsn/bw-2", ConfigurationName="SharpOnvifClient.Events.PullPoint")]
     public interface PullPoint
     {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://docs.oasis-open.org/wsn/bw-2/PullPoint/GetMessagesRequest", ReplyAction="*")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.ResourceUnknownFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/PullPoint/GetMessagesRequest", Name="ResourceUnknownFault", Namespace="http://docs.oasis-open.org/wsrf/r-2")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.UnableToGetMessagesFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/PullPoint/GetMessagesRequest", Name="UnableToGetMessagesFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.ResourceUnknownFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/PullPoint/GetMessagesRequest", Name="ResourceUnknownFault", Namespace="http://docs.oasis-open.org/wsrf/r-2")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.UnableToGetMessagesFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/PullPoint/GetMessagesRequest", Name="UnableToGetMessagesFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifEvents.GetMessagesResponse1> GetMessagesAsync(OnvifEvents.GetMessagesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Events.GetMessagesResponse1> GetMessagesAsync(SharpOnvifClient.Events.GetMessagesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://docs.oasis-open.org/wsn/bw-2/PullPoint/DestroyPullPointRequest", ReplyAction="*")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.ResourceUnknownFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/PullPoint/DestroyPullPointRequest", Name="ResourceUnknownFault", Namespace="http://docs.oasis-open.org/wsrf/r-2")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.UnableToDestroyPullPointFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/PullPoint/DestroyPullPointRequest", Name="UnableToDestroyPullPointFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.ResourceUnknownFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/PullPoint/DestroyPullPointRequest", Name="ResourceUnknownFault", Namespace="http://docs.oasis-open.org/wsrf/r-2")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.UnableToDestroyPullPointFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/PullPoint/DestroyPullPointRequest", Name="UnableToDestroyPullPointFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifEvents.DestroyPullPointResponse1> DestroyPullPointAsync(OnvifEvents.DestroyPullPointRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Events.DestroyPullPointResponse1> DestroyPullPointAsync(SharpOnvifClient.Events.DestroyPullPointRequest request);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://docs.oasis-open.org/wsn/bw-2/PullPoint/Notify")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task NotifyAsync(OnvifEvents.Notify1 request);
+        System.Threading.Tasks.Task NotifyAsync(SharpOnvifClient.Events.Notify1 request);
     }
     
     /// <remarks/>
@@ -1544,13 +1544,13 @@ namespace OnvifEvents
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2", Order=0)]
-        public OnvifEvents.GetMessages GetMessages;
+        public SharpOnvifClient.Events.GetMessages GetMessages;
         
         public GetMessagesRequest()
         {
         }
         
-        public GetMessagesRequest(OnvifEvents.GetMessages GetMessages)
+        public GetMessagesRequest(SharpOnvifClient.Events.GetMessages GetMessages)
         {
             this.GetMessages = GetMessages;
         }
@@ -1564,13 +1564,13 @@ namespace OnvifEvents
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2", Order=0)]
-        public OnvifEvents.GetMessagesResponse GetMessagesResponse;
+        public SharpOnvifClient.Events.GetMessagesResponse GetMessagesResponse;
         
         public GetMessagesResponse1()
         {
         }
         
-        public GetMessagesResponse1(OnvifEvents.GetMessagesResponse GetMessagesResponse)
+        public GetMessagesResponse1(SharpOnvifClient.Events.GetMessagesResponse GetMessagesResponse)
         {
             this.GetMessagesResponse = GetMessagesResponse;
         }
@@ -1632,13 +1632,13 @@ namespace OnvifEvents
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2", Order=0)]
-        public OnvifEvents.DestroyPullPoint DestroyPullPoint;
+        public SharpOnvifClient.Events.DestroyPullPoint DestroyPullPoint;
         
         public DestroyPullPointRequest()
         {
         }
         
-        public DestroyPullPointRequest(OnvifEvents.DestroyPullPoint DestroyPullPoint)
+        public DestroyPullPointRequest(SharpOnvifClient.Events.DestroyPullPoint DestroyPullPoint)
         {
             this.DestroyPullPoint = DestroyPullPoint;
         }
@@ -1652,26 +1652,26 @@ namespace OnvifEvents
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2", Order=0)]
-        public OnvifEvents.DestroyPullPointResponse DestroyPullPointResponse;
+        public SharpOnvifClient.Events.DestroyPullPointResponse DestroyPullPointResponse;
         
         public DestroyPullPointResponse1()
         {
         }
         
-        public DestroyPullPointResponse1(OnvifEvents.DestroyPullPointResponse DestroyPullPointResponse)
+        public DestroyPullPointResponse1(SharpOnvifClient.Events.DestroyPullPointResponse DestroyPullPointResponse)
         {
             this.DestroyPullPointResponse = DestroyPullPointResponse;
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface PullPointChannel : OnvifEvents.PullPoint, System.ServiceModel.IClientChannel
+    public interface PullPointChannel : SharpOnvifClient.Events.PullPoint, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class PullPointClient : System.ServiceModel.ClientBase<OnvifEvents.PullPoint>, OnvifEvents.PullPoint
+    public partial class PullPointClient : System.ServiceModel.ClientBase<SharpOnvifClient.Events.PullPoint>, SharpOnvifClient.Events.PullPoint
     {
         
         public PullPointClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
@@ -1680,42 +1680,42 @@ namespace OnvifEvents
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifEvents.GetMessagesResponse1> OnvifEvents.PullPoint.GetMessagesAsync(OnvifEvents.GetMessagesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Events.GetMessagesResponse1> SharpOnvifClient.Events.PullPoint.GetMessagesAsync(SharpOnvifClient.Events.GetMessagesRequest request)
         {
             return base.Channel.GetMessagesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifEvents.GetMessagesResponse1> GetMessagesAsync(OnvifEvents.GetMessages GetMessages)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Events.GetMessagesResponse1> GetMessagesAsync(SharpOnvifClient.Events.GetMessages GetMessages)
         {
-            OnvifEvents.GetMessagesRequest inValue = new OnvifEvents.GetMessagesRequest();
+            SharpOnvifClient.Events.GetMessagesRequest inValue = new SharpOnvifClient.Events.GetMessagesRequest();
             inValue.GetMessages = GetMessages;
-            return ((OnvifEvents.PullPoint)(this)).GetMessagesAsync(inValue);
+            return ((SharpOnvifClient.Events.PullPoint)(this)).GetMessagesAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifEvents.DestroyPullPointResponse1> OnvifEvents.PullPoint.DestroyPullPointAsync(OnvifEvents.DestroyPullPointRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Events.DestroyPullPointResponse1> SharpOnvifClient.Events.PullPoint.DestroyPullPointAsync(SharpOnvifClient.Events.DestroyPullPointRequest request)
         {
             return base.Channel.DestroyPullPointAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifEvents.DestroyPullPointResponse1> DestroyPullPointAsync(OnvifEvents.DestroyPullPoint DestroyPullPoint)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Events.DestroyPullPointResponse1> DestroyPullPointAsync(SharpOnvifClient.Events.DestroyPullPoint DestroyPullPoint)
         {
-            OnvifEvents.DestroyPullPointRequest inValue = new OnvifEvents.DestroyPullPointRequest();
+            SharpOnvifClient.Events.DestroyPullPointRequest inValue = new SharpOnvifClient.Events.DestroyPullPointRequest();
             inValue.DestroyPullPoint = DestroyPullPoint;
-            return ((OnvifEvents.PullPoint)(this)).DestroyPullPointAsync(inValue);
+            return ((SharpOnvifClient.Events.PullPoint)(this)).DestroyPullPointAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task OnvifEvents.PullPoint.NotifyAsync(OnvifEvents.Notify1 request)
+        System.Threading.Tasks.Task SharpOnvifClient.Events.PullPoint.NotifyAsync(SharpOnvifClient.Events.Notify1 request)
         {
             return base.Channel.NotifyAsync(request);
         }
         
-        public System.Threading.Tasks.Task NotifyAsync(OnvifEvents.Notify Notify)
+        public System.Threading.Tasks.Task NotifyAsync(SharpOnvifClient.Events.Notify Notify)
         {
-            OnvifEvents.Notify1 inValue = new OnvifEvents.Notify1();
+            SharpOnvifClient.Events.Notify1 inValue = new SharpOnvifClient.Events.Notify1();
             inValue.Notify = Notify;
-            return ((OnvifEvents.PullPoint)(this)).NotifyAsync(inValue);
+            return ((SharpOnvifClient.Events.PullPoint)(this)).NotifyAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()
@@ -1730,14 +1730,14 @@ namespace OnvifEvents
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://docs.oasis-open.org/wsn/bw-2", ConfigurationName="OnvifEvents.CreatePullPoint")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://docs.oasis-open.org/wsn/bw-2", ConfigurationName="SharpOnvifClient.Events.CreatePullPoint")]
     public interface CreatePullPoint
     {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://docs.oasis-open.org/wsn/bw-2/CreatePullPoint/CreatePullPointRequest", ReplyAction="*")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.UnableToCreatePullPointFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/CreatePullPoint/CreatePullPointRequest", Name="UnableToCreatePullPointFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.UnableToCreatePullPointFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/CreatePullPoint/CreatePullPointRequest", Name="UnableToCreatePullPointFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifEvents.CreatePullPointResponse1> CreatePullPointAsync(OnvifEvents.CreatePullPointRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Events.CreatePullPointResponse1> CreatePullPointAsync(SharpOnvifClient.Events.CreatePullPointRequest request);
     }
     
     /// <remarks/>
@@ -1812,13 +1812,13 @@ namespace OnvifEvents
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2", Order=0)]
-        public OnvifEvents.CreatePullPoint CreatePullPoint;
+        public SharpOnvifClient.Events.CreatePullPoint CreatePullPoint;
         
         public CreatePullPointRequest()
         {
         }
         
-        public CreatePullPointRequest(OnvifEvents.CreatePullPoint CreatePullPoint)
+        public CreatePullPointRequest(SharpOnvifClient.Events.CreatePullPoint CreatePullPoint)
         {
             this.CreatePullPoint = CreatePullPoint;
         }
@@ -1832,26 +1832,26 @@ namespace OnvifEvents
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2", Order=0)]
-        public OnvifEvents.CreatePullPointResponse CreatePullPointResponse;
+        public SharpOnvifClient.Events.CreatePullPointResponse CreatePullPointResponse;
         
         public CreatePullPointResponse1()
         {
         }
         
-        public CreatePullPointResponse1(OnvifEvents.CreatePullPointResponse CreatePullPointResponse)
+        public CreatePullPointResponse1(SharpOnvifClient.Events.CreatePullPointResponse CreatePullPointResponse)
         {
             this.CreatePullPointResponse = CreatePullPointResponse;
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface CreatePullPointChannel : OnvifEvents.CreatePullPoint, System.ServiceModel.IClientChannel
+    public interface CreatePullPointChannel : SharpOnvifClient.Events.CreatePullPoint, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class CreatePullPointClient : System.ServiceModel.ClientBase<OnvifEvents.CreatePullPoint>, OnvifEvents.CreatePullPoint
+    public partial class CreatePullPointClient : System.ServiceModel.ClientBase<SharpOnvifClient.Events.CreatePullPoint>, SharpOnvifClient.Events.CreatePullPoint
     {
         
         public CreatePullPointClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
@@ -1860,16 +1860,16 @@ namespace OnvifEvents
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifEvents.CreatePullPointResponse1> OnvifEvents.CreatePullPoint.CreatePullPointAsync(OnvifEvents.CreatePullPointRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Events.CreatePullPointResponse1> SharpOnvifClient.Events.CreatePullPoint.CreatePullPointAsync(SharpOnvifClient.Events.CreatePullPointRequest request)
         {
             return base.Channel.CreatePullPointAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifEvents.CreatePullPointResponse1> CreatePullPointAsync(OnvifEvents.CreatePullPoint CreatePullPoint)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Events.CreatePullPointResponse1> CreatePullPointAsync(SharpOnvifClient.Events.CreatePullPoint CreatePullPoint)
         {
-            OnvifEvents.CreatePullPointRequest inValue = new OnvifEvents.CreatePullPointRequest();
+            SharpOnvifClient.Events.CreatePullPointRequest inValue = new SharpOnvifClient.Events.CreatePullPointRequest();
             inValue.CreatePullPoint = CreatePullPoint;
-            return ((OnvifEvents.CreatePullPoint)(this)).CreatePullPointAsync(inValue);
+            return ((SharpOnvifClient.Events.CreatePullPoint)(this)).CreatePullPointAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()
@@ -1884,21 +1884,21 @@ namespace OnvifEvents
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://docs.oasis-open.org/wsn/bw-2", ConfigurationName="OnvifEvents.SubscriptionManager")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://docs.oasis-open.org/wsn/bw-2", ConfigurationName="SharpOnvifClient.Events.SubscriptionManager")]
     public interface SubscriptionManager
     {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://docs.oasis-open.org/wsn/bw-2/SubscriptionManager/RenewRequest", ReplyAction="*")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.ResourceUnknownFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/SubscriptionManager/RenewRequest", Name="ResourceUnknownFault", Namespace="http://docs.oasis-open.org/wsrf/r-2")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.UnacceptableTerminationTimeFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/SubscriptionManager/RenewRequest", Name="UnacceptableTerminationTimeFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.ResourceUnknownFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/SubscriptionManager/RenewRequest", Name="ResourceUnknownFault", Namespace="http://docs.oasis-open.org/wsrf/r-2")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.UnacceptableTerminationTimeFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/SubscriptionManager/RenewRequest", Name="UnacceptableTerminationTimeFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifEvents.RenewResponse1> RenewAsync(OnvifEvents.RenewRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Events.RenewResponse1> RenewAsync(SharpOnvifClient.Events.RenewRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://docs.oasis-open.org/wsn/bw-2/SubscriptionManager/UnsubscribeRequest", ReplyAction="*")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.ResourceUnknownFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/SubscriptionManager/UnsubscribeRequest", Name="ResourceUnknownFault", Namespace="http://docs.oasis-open.org/wsrf/r-2")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.UnableToDestroySubscriptionFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/SubscriptionManager/UnsubscribeRequest", Name="UnableToDestroySubscriptionFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.ResourceUnknownFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/SubscriptionManager/UnsubscribeRequest", Name="ResourceUnknownFault", Namespace="http://docs.oasis-open.org/wsrf/r-2")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.UnableToDestroySubscriptionFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/SubscriptionManager/UnsubscribeRequest", Name="UnableToDestroySubscriptionFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifEvents.UnsubscribeResponse1> UnsubscribeAsync(OnvifEvents.UnsubscribeRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Events.UnsubscribeResponse1> UnsubscribeAsync(SharpOnvifClient.Events.UnsubscribeRequest request);
     }
     
     /// <remarks/>
@@ -2021,13 +2021,13 @@ namespace OnvifEvents
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2", Order=0)]
-        public OnvifEvents.Renew Renew;
+        public SharpOnvifClient.Events.Renew Renew;
         
         public RenewRequest()
         {
         }
         
-        public RenewRequest(OnvifEvents.Renew Renew)
+        public RenewRequest(SharpOnvifClient.Events.Renew Renew)
         {
             this.Renew = Renew;
         }
@@ -2041,13 +2041,13 @@ namespace OnvifEvents
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2", Order=0)]
-        public OnvifEvents.RenewResponse RenewResponse;
+        public SharpOnvifClient.Events.RenewResponse RenewResponse;
         
         public RenewResponse1()
         {
         }
         
-        public RenewResponse1(OnvifEvents.RenewResponse RenewResponse)
+        public RenewResponse1(SharpOnvifClient.Events.RenewResponse RenewResponse)
         {
             this.RenewResponse = RenewResponse;
         }
@@ -2109,13 +2109,13 @@ namespace OnvifEvents
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2", Order=0)]
-        public OnvifEvents.Unsubscribe Unsubscribe;
+        public SharpOnvifClient.Events.Unsubscribe Unsubscribe;
         
         public UnsubscribeRequest()
         {
         }
         
-        public UnsubscribeRequest(OnvifEvents.Unsubscribe Unsubscribe)
+        public UnsubscribeRequest(SharpOnvifClient.Events.Unsubscribe Unsubscribe)
         {
             this.Unsubscribe = Unsubscribe;
         }
@@ -2129,26 +2129,26 @@ namespace OnvifEvents
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2", Order=0)]
-        public OnvifEvents.UnsubscribeResponse UnsubscribeResponse;
+        public SharpOnvifClient.Events.UnsubscribeResponse UnsubscribeResponse;
         
         public UnsubscribeResponse1()
         {
         }
         
-        public UnsubscribeResponse1(OnvifEvents.UnsubscribeResponse UnsubscribeResponse)
+        public UnsubscribeResponse1(SharpOnvifClient.Events.UnsubscribeResponse UnsubscribeResponse)
         {
             this.UnsubscribeResponse = UnsubscribeResponse;
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface SubscriptionManagerChannel : OnvifEvents.SubscriptionManager, System.ServiceModel.IClientChannel
+    public interface SubscriptionManagerChannel : SharpOnvifClient.Events.SubscriptionManager, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class SubscriptionManagerClient : System.ServiceModel.ClientBase<OnvifEvents.SubscriptionManager>, OnvifEvents.SubscriptionManager
+    public partial class SubscriptionManagerClient : System.ServiceModel.ClientBase<SharpOnvifClient.Events.SubscriptionManager>, SharpOnvifClient.Events.SubscriptionManager
     {
         
         public SubscriptionManagerClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
@@ -2157,29 +2157,29 @@ namespace OnvifEvents
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifEvents.RenewResponse1> OnvifEvents.SubscriptionManager.RenewAsync(OnvifEvents.RenewRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Events.RenewResponse1> SharpOnvifClient.Events.SubscriptionManager.RenewAsync(SharpOnvifClient.Events.RenewRequest request)
         {
             return base.Channel.RenewAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifEvents.RenewResponse1> RenewAsync(OnvifEvents.Renew Renew)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Events.RenewResponse1> RenewAsync(SharpOnvifClient.Events.Renew Renew)
         {
-            OnvifEvents.RenewRequest inValue = new OnvifEvents.RenewRequest();
+            SharpOnvifClient.Events.RenewRequest inValue = new SharpOnvifClient.Events.RenewRequest();
             inValue.Renew = Renew;
-            return ((OnvifEvents.SubscriptionManager)(this)).RenewAsync(inValue);
+            return ((SharpOnvifClient.Events.SubscriptionManager)(this)).RenewAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifEvents.UnsubscribeResponse1> OnvifEvents.SubscriptionManager.UnsubscribeAsync(OnvifEvents.UnsubscribeRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Events.UnsubscribeResponse1> SharpOnvifClient.Events.SubscriptionManager.UnsubscribeAsync(SharpOnvifClient.Events.UnsubscribeRequest request)
         {
             return base.Channel.UnsubscribeAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifEvents.UnsubscribeResponse1> UnsubscribeAsync(OnvifEvents.Unsubscribe Unsubscribe)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Events.UnsubscribeResponse1> UnsubscribeAsync(SharpOnvifClient.Events.Unsubscribe Unsubscribe)
         {
-            OnvifEvents.UnsubscribeRequest inValue = new OnvifEvents.UnsubscribeRequest();
+            SharpOnvifClient.Events.UnsubscribeRequest inValue = new SharpOnvifClient.Events.UnsubscribeRequest();
             inValue.Unsubscribe = Unsubscribe;
-            return ((OnvifEvents.SubscriptionManager)(this)).UnsubscribeAsync(inValue);
+            return ((SharpOnvifClient.Events.SubscriptionManager)(this)).UnsubscribeAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()
@@ -2194,42 +2194,42 @@ namespace OnvifEvents
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://docs.oasis-open.org/wsn/bw-2", ConfigurationName="OnvifEvents.PausableSubscriptionManager")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://docs.oasis-open.org/wsn/bw-2", ConfigurationName="SharpOnvifClient.Events.PausableSubscriptionManager")]
     public interface PausableSubscriptionManager
     {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://docs.oasis-open.org/wsn/bw-2/PausableSubscriptionManager/RenewRequest", ReplyAction="*")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.ResourceUnknownFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/PausableSubscriptionManager/RenewRequest", Name="ResourceUnknownFault", Namespace="http://docs.oasis-open.org/wsrf/r-2")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.UnacceptableTerminationTimeFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/PausableSubscriptionManager/RenewRequest", Name="UnacceptableTerminationTimeFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.ResourceUnknownFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/PausableSubscriptionManager/RenewRequest", Name="ResourceUnknownFault", Namespace="http://docs.oasis-open.org/wsrf/r-2")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.UnacceptableTerminationTimeFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/PausableSubscriptionManager/RenewRequest", Name="UnacceptableTerminationTimeFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifEvents.RenewResponse1> RenewAsync(OnvifEvents.RenewRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Events.RenewResponse1> RenewAsync(SharpOnvifClient.Events.RenewRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://docs.oasis-open.org/wsn/bw-2/PausableSubscriptionManager/UnsubscribeReques" +
             "t", ReplyAction="*")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.ResourceUnknownFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/PausableSubscriptionManager/UnsubscribeReques" +
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.ResourceUnknownFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/PausableSubscriptionManager/UnsubscribeReques" +
             "t", Name="ResourceUnknownFault", Namespace="http://docs.oasis-open.org/wsrf/r-2")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.UnableToDestroySubscriptionFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/PausableSubscriptionManager/UnsubscribeReques" +
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.UnableToDestroySubscriptionFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/PausableSubscriptionManager/UnsubscribeReques" +
             "t", Name="UnableToDestroySubscriptionFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifEvents.UnsubscribeResponse1> UnsubscribeAsync(OnvifEvents.UnsubscribeRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Events.UnsubscribeResponse1> UnsubscribeAsync(SharpOnvifClient.Events.UnsubscribeRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://docs.oasis-open.org/wsn/bw-2/PausableSubscriptionManager/PauseSubscription" +
             "Request", ReplyAction="*")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.ResourceUnknownFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/PausableSubscriptionManager/PauseSubscription" +
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.ResourceUnknownFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/PausableSubscriptionManager/PauseSubscription" +
             "Request", Name="ResourceUnknownFault", Namespace="http://docs.oasis-open.org/wsrf/r-2")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.PauseFailedFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/PausableSubscriptionManager/PauseSubscription" +
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.PauseFailedFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/PausableSubscriptionManager/PauseSubscription" +
             "Request", Name="PauseFailedFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifEvents.PauseSubscriptionResponse1> PauseSubscriptionAsync(OnvifEvents.PauseSubscriptionRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Events.PauseSubscriptionResponse1> PauseSubscriptionAsync(SharpOnvifClient.Events.PauseSubscriptionRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://docs.oasis-open.org/wsn/bw-2/PausableSubscriptionManager/ResumeSubscriptio" +
             "nRequest", ReplyAction="*")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.ResourceUnknownFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/PausableSubscriptionManager/ResumeSubscriptio" +
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.ResourceUnknownFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/PausableSubscriptionManager/ResumeSubscriptio" +
             "nRequest", Name="ResourceUnknownFault", Namespace="http://docs.oasis-open.org/wsrf/r-2")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.ResumeFailedFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/PausableSubscriptionManager/ResumeSubscriptio" +
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.ResumeFailedFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/PausableSubscriptionManager/ResumeSubscriptio" +
             "nRequest", Name="ResumeFailedFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifEvents.ResumeSubscriptionResponse1> ResumeSubscriptionAsync(OnvifEvents.ResumeSubscriptionRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Events.ResumeSubscriptionResponse1> ResumeSubscriptionAsync(SharpOnvifClient.Events.ResumeSubscriptionRequest request);
     }
     
     /// <remarks/>
@@ -2288,13 +2288,13 @@ namespace OnvifEvents
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2", Order=0)]
-        public OnvifEvents.PauseSubscription PauseSubscription;
+        public SharpOnvifClient.Events.PauseSubscription PauseSubscription;
         
         public PauseSubscriptionRequest()
         {
         }
         
-        public PauseSubscriptionRequest(OnvifEvents.PauseSubscription PauseSubscription)
+        public PauseSubscriptionRequest(SharpOnvifClient.Events.PauseSubscription PauseSubscription)
         {
             this.PauseSubscription = PauseSubscription;
         }
@@ -2308,13 +2308,13 @@ namespace OnvifEvents
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2", Order=0)]
-        public OnvifEvents.PauseSubscriptionResponse PauseSubscriptionResponse;
+        public SharpOnvifClient.Events.PauseSubscriptionResponse PauseSubscriptionResponse;
         
         public PauseSubscriptionResponse1()
         {
         }
         
-        public PauseSubscriptionResponse1(OnvifEvents.PauseSubscriptionResponse PauseSubscriptionResponse)
+        public PauseSubscriptionResponse1(SharpOnvifClient.Events.PauseSubscriptionResponse PauseSubscriptionResponse)
         {
             this.PauseSubscriptionResponse = PauseSubscriptionResponse;
         }
@@ -2376,13 +2376,13 @@ namespace OnvifEvents
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2", Order=0)]
-        public OnvifEvents.ResumeSubscription ResumeSubscription;
+        public SharpOnvifClient.Events.ResumeSubscription ResumeSubscription;
         
         public ResumeSubscriptionRequest()
         {
         }
         
-        public ResumeSubscriptionRequest(OnvifEvents.ResumeSubscription ResumeSubscription)
+        public ResumeSubscriptionRequest(SharpOnvifClient.Events.ResumeSubscription ResumeSubscription)
         {
             this.ResumeSubscription = ResumeSubscription;
         }
@@ -2396,26 +2396,26 @@ namespace OnvifEvents
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2", Order=0)]
-        public OnvifEvents.ResumeSubscriptionResponse ResumeSubscriptionResponse;
+        public SharpOnvifClient.Events.ResumeSubscriptionResponse ResumeSubscriptionResponse;
         
         public ResumeSubscriptionResponse1()
         {
         }
         
-        public ResumeSubscriptionResponse1(OnvifEvents.ResumeSubscriptionResponse ResumeSubscriptionResponse)
+        public ResumeSubscriptionResponse1(SharpOnvifClient.Events.ResumeSubscriptionResponse ResumeSubscriptionResponse)
         {
             this.ResumeSubscriptionResponse = ResumeSubscriptionResponse;
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface PausableSubscriptionManagerChannel : OnvifEvents.PausableSubscriptionManager, System.ServiceModel.IClientChannel
+    public interface PausableSubscriptionManagerChannel : SharpOnvifClient.Events.PausableSubscriptionManager, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class PausableSubscriptionManagerClient : System.ServiceModel.ClientBase<OnvifEvents.PausableSubscriptionManager>, OnvifEvents.PausableSubscriptionManager
+    public partial class PausableSubscriptionManagerClient : System.ServiceModel.ClientBase<SharpOnvifClient.Events.PausableSubscriptionManager>, SharpOnvifClient.Events.PausableSubscriptionManager
     {
         
         public PausableSubscriptionManagerClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
@@ -2424,55 +2424,55 @@ namespace OnvifEvents
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifEvents.RenewResponse1> OnvifEvents.PausableSubscriptionManager.RenewAsync(OnvifEvents.RenewRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Events.RenewResponse1> SharpOnvifClient.Events.PausableSubscriptionManager.RenewAsync(SharpOnvifClient.Events.RenewRequest request)
         {
             return base.Channel.RenewAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifEvents.RenewResponse1> RenewAsync(OnvifEvents.Renew Renew)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Events.RenewResponse1> RenewAsync(SharpOnvifClient.Events.Renew Renew)
         {
-            OnvifEvents.RenewRequest inValue = new OnvifEvents.RenewRequest();
+            SharpOnvifClient.Events.RenewRequest inValue = new SharpOnvifClient.Events.RenewRequest();
             inValue.Renew = Renew;
-            return ((OnvifEvents.PausableSubscriptionManager)(this)).RenewAsync(inValue);
+            return ((SharpOnvifClient.Events.PausableSubscriptionManager)(this)).RenewAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifEvents.UnsubscribeResponse1> OnvifEvents.PausableSubscriptionManager.UnsubscribeAsync(OnvifEvents.UnsubscribeRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Events.UnsubscribeResponse1> SharpOnvifClient.Events.PausableSubscriptionManager.UnsubscribeAsync(SharpOnvifClient.Events.UnsubscribeRequest request)
         {
             return base.Channel.UnsubscribeAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifEvents.UnsubscribeResponse1> UnsubscribeAsync(OnvifEvents.Unsubscribe Unsubscribe)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Events.UnsubscribeResponse1> UnsubscribeAsync(SharpOnvifClient.Events.Unsubscribe Unsubscribe)
         {
-            OnvifEvents.UnsubscribeRequest inValue = new OnvifEvents.UnsubscribeRequest();
+            SharpOnvifClient.Events.UnsubscribeRequest inValue = new SharpOnvifClient.Events.UnsubscribeRequest();
             inValue.Unsubscribe = Unsubscribe;
-            return ((OnvifEvents.PausableSubscriptionManager)(this)).UnsubscribeAsync(inValue);
+            return ((SharpOnvifClient.Events.PausableSubscriptionManager)(this)).UnsubscribeAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifEvents.PauseSubscriptionResponse1> OnvifEvents.PausableSubscriptionManager.PauseSubscriptionAsync(OnvifEvents.PauseSubscriptionRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Events.PauseSubscriptionResponse1> SharpOnvifClient.Events.PausableSubscriptionManager.PauseSubscriptionAsync(SharpOnvifClient.Events.PauseSubscriptionRequest request)
         {
             return base.Channel.PauseSubscriptionAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifEvents.PauseSubscriptionResponse1> PauseSubscriptionAsync(OnvifEvents.PauseSubscription PauseSubscription)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Events.PauseSubscriptionResponse1> PauseSubscriptionAsync(SharpOnvifClient.Events.PauseSubscription PauseSubscription)
         {
-            OnvifEvents.PauseSubscriptionRequest inValue = new OnvifEvents.PauseSubscriptionRequest();
+            SharpOnvifClient.Events.PauseSubscriptionRequest inValue = new SharpOnvifClient.Events.PauseSubscriptionRequest();
             inValue.PauseSubscription = PauseSubscription;
-            return ((OnvifEvents.PausableSubscriptionManager)(this)).PauseSubscriptionAsync(inValue);
+            return ((SharpOnvifClient.Events.PausableSubscriptionManager)(this)).PauseSubscriptionAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifEvents.ResumeSubscriptionResponse1> OnvifEvents.PausableSubscriptionManager.ResumeSubscriptionAsync(OnvifEvents.ResumeSubscriptionRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Events.ResumeSubscriptionResponse1> SharpOnvifClient.Events.PausableSubscriptionManager.ResumeSubscriptionAsync(SharpOnvifClient.Events.ResumeSubscriptionRequest request)
         {
             return base.Channel.ResumeSubscriptionAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifEvents.ResumeSubscriptionResponse1> ResumeSubscriptionAsync(OnvifEvents.ResumeSubscription ResumeSubscription)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Events.ResumeSubscriptionResponse1> ResumeSubscriptionAsync(SharpOnvifClient.Events.ResumeSubscription ResumeSubscription)
         {
-            OnvifEvents.ResumeSubscriptionRequest inValue = new OnvifEvents.ResumeSubscriptionRequest();
+            SharpOnvifClient.Events.ResumeSubscriptionRequest inValue = new SharpOnvifClient.Events.ResumeSubscriptionRequest();
             inValue.ResumeSubscription = ResumeSubscription;
-            return ((OnvifEvents.PausableSubscriptionManager)(this)).ResumeSubscriptionAsync(inValue);
+            return ((SharpOnvifClient.Events.PausableSubscriptionManager)(this)).ResumeSubscriptionAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()
@@ -2487,7 +2487,7 @@ namespace OnvifEvents
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/events/wsdl", ConfigurationName="OnvifEvents.EventPortType")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/events/wsdl", ConfigurationName="SharpOnvifClient.Events.EventPortType")]
     public interface EventPortType
     {
         
@@ -2496,55 +2496,55 @@ namespace OnvifEvents
             "se")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Capabilities")]
-        System.Threading.Tasks.Task<OnvifEvents.Capabilities> GetServiceCapabilitiesAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.Events.Capabilities> GetServiceCapabilitiesAsync();
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/events/wsdl/EventPortType/CreatePullPointSubscriptionR" +
             "equest", ReplyAction="http://www.onvif.org/ver10/events/wsdl/EventPortType/CreatePullPointSubscriptionR" +
             "esponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.ResourceUnknownFaultType), Action="http://www.onvif.org/ver10/events/wsdl/EventPortType/CreatePullPointSubscriptionR" +
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.ResourceUnknownFaultType), Action="http://www.onvif.org/ver10/events/wsdl/EventPortType/CreatePullPointSubscriptionR" +
             "equest", Name="ResourceUnknownFault", Namespace="http://docs.oasis-open.org/wsrf/r-2")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.InvalidFilterFaultType), Action="http://www.onvif.org/ver10/events/wsdl/EventPortType/CreatePullPointSubscriptionR" +
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.InvalidFilterFaultType), Action="http://www.onvif.org/ver10/events/wsdl/EventPortType/CreatePullPointSubscriptionR" +
             "equest", Name="InvalidFilterFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.TopicExpressionDialectUnknownFaultType), Action="http://www.onvif.org/ver10/events/wsdl/EventPortType/CreatePullPointSubscriptionR" +
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.TopicExpressionDialectUnknownFaultType), Action="http://www.onvif.org/ver10/events/wsdl/EventPortType/CreatePullPointSubscriptionR" +
             "equest", Name="TopicExpressionDialectUnknownFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.InvalidTopicExpressionFaultType), Action="http://www.onvif.org/ver10/events/wsdl/EventPortType/CreatePullPointSubscriptionR" +
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.InvalidTopicExpressionFaultType), Action="http://www.onvif.org/ver10/events/wsdl/EventPortType/CreatePullPointSubscriptionR" +
             "equest", Name="InvalidTopicExpressionFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.TopicNotSupportedFaultType), Action="http://www.onvif.org/ver10/events/wsdl/EventPortType/CreatePullPointSubscriptionR" +
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.TopicNotSupportedFaultType), Action="http://www.onvif.org/ver10/events/wsdl/EventPortType/CreatePullPointSubscriptionR" +
             "equest", Name="TopicNotSupportedFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.InvalidProducerPropertiesExpressionFaultType), Action="http://www.onvif.org/ver10/events/wsdl/EventPortType/CreatePullPointSubscriptionR" +
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.InvalidProducerPropertiesExpressionFaultType), Action="http://www.onvif.org/ver10/events/wsdl/EventPortType/CreatePullPointSubscriptionR" +
             "equest", Name="InvalidProducerPropertiesExpressionFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.InvalidMessageContentExpressionFaultType), Action="http://www.onvif.org/ver10/events/wsdl/EventPortType/CreatePullPointSubscriptionR" +
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.InvalidMessageContentExpressionFaultType), Action="http://www.onvif.org/ver10/events/wsdl/EventPortType/CreatePullPointSubscriptionR" +
             "equest", Name="InvalidMessageContentExpressionFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.UnacceptableInitialTerminationTimeFaultType), Action="http://www.onvif.org/ver10/events/wsdl/EventPortType/CreatePullPointSubscriptionR" +
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.UnacceptableInitialTerminationTimeFaultType), Action="http://www.onvif.org/ver10/events/wsdl/EventPortType/CreatePullPointSubscriptionR" +
             "equest", Name="UnacceptableInitialTerminationTimeFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.UnrecognizedPolicyRequestFaultType), Action="http://www.onvif.org/ver10/events/wsdl/EventPortType/CreatePullPointSubscriptionR" +
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.UnrecognizedPolicyRequestFaultType), Action="http://www.onvif.org/ver10/events/wsdl/EventPortType/CreatePullPointSubscriptionR" +
             "equest", Name="UnrecognizedPolicyRequestFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.UnsupportedPolicyRequestFaultType), Action="http://www.onvif.org/ver10/events/wsdl/EventPortType/CreatePullPointSubscriptionR" +
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.UnsupportedPolicyRequestFaultType), Action="http://www.onvif.org/ver10/events/wsdl/EventPortType/CreatePullPointSubscriptionR" +
             "equest", Name="UnsupportedPolicyRequestFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.NotifyMessageNotSupportedFaultType), Action="http://www.onvif.org/ver10/events/wsdl/EventPortType/CreatePullPointSubscriptionR" +
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.NotifyMessageNotSupportedFaultType), Action="http://www.onvif.org/ver10/events/wsdl/EventPortType/CreatePullPointSubscriptionR" +
             "equest", Name="NotifyMessageNotSupportedFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.SubscribeCreationFailedFaultType), Action="http://www.onvif.org/ver10/events/wsdl/EventPortType/CreatePullPointSubscriptionR" +
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.SubscribeCreationFailedFaultType), Action="http://www.onvif.org/ver10/events/wsdl/EventPortType/CreatePullPointSubscriptionR" +
             "equest", Name="SubscribeCreationFailedFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifEvents.CreatePullPointSubscriptionResponse> CreatePullPointSubscriptionAsync(OnvifEvents.CreatePullPointSubscriptionRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Events.CreatePullPointSubscriptionResponse> CreatePullPointSubscriptionAsync(SharpOnvifClient.Events.CreatePullPointSubscriptionRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/events/wsdl/EventPortType/GetEventPropertiesRequest", ReplyAction="http://www.onvif.org/ver10/events/wsdl/EventPortType/GetEventPropertiesResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifEvents.GetEventPropertiesResponse> GetEventPropertiesAsync(OnvifEvents.GetEventPropertiesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Events.GetEventPropertiesResponse> GetEventPropertiesAsync(SharpOnvifClient.Events.GetEventPropertiesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/events/wsdl/EventPortType/AddEventBrokerRequest", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task AddEventBrokerAsync(OnvifEvents.EventBrokerConfig EventBroker);
+        System.Threading.Tasks.Task AddEventBrokerAsync(SharpOnvifClient.Events.EventBrokerConfig EventBroker);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/events/wsdl/EventPortType/DeleteEventBrokerRequest", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifEvents.DeleteEventBrokerResponse> DeleteEventBrokerAsync(OnvifEvents.DeleteEventBrokerRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Events.DeleteEventBrokerResponse> DeleteEventBrokerAsync(SharpOnvifClient.Events.DeleteEventBrokerRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/events/wsdl/EventPortType/GetEventBrokersRequest", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifEvents.GetEventBrokersResponse> GetEventBrokersAsync(OnvifEvents.GetEventBrokersRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Events.GetEventBrokersResponse> GetEventBrokersAsync(SharpOnvifClient.Events.GetEventBrokersRequest request);
     }
     
     /// <remarks/>
@@ -2874,14 +2874,14 @@ namespace OnvifEvents
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/events/wsdl", Order=0)]
-        public OnvifEvents.FilterType Filter;
+        public SharpOnvifClient.Events.FilterType Filter;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/events/wsdl", Order=1)]
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
         public string InitialTerminationTime;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/events/wsdl", Order=2)]
-        public OnvifEvents.CreatePullPointSubscriptionSubscriptionPolicy SubscriptionPolicy;
+        public SharpOnvifClient.Events.CreatePullPointSubscriptionSubscriptionPolicy SubscriptionPolicy;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=3)]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
@@ -2891,7 +2891,7 @@ namespace OnvifEvents
         {
         }
         
-        public CreatePullPointSubscriptionRequest(OnvifEvents.FilterType Filter, string InitialTerminationTime, OnvifEvents.CreatePullPointSubscriptionSubscriptionPolicy SubscriptionPolicy, System.Xml.XmlElement[] Any)
+        public CreatePullPointSubscriptionRequest(SharpOnvifClient.Events.FilterType Filter, string InitialTerminationTime, SharpOnvifClient.Events.CreatePullPointSubscriptionSubscriptionPolicy SubscriptionPolicy, System.Xml.XmlElement[] Any)
         {
             this.Filter = Filter;
             this.InitialTerminationTime = InitialTerminationTime;
@@ -2907,7 +2907,7 @@ namespace OnvifEvents
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/events/wsdl", Order=0)]
-        public OnvifEvents.EndpointReferenceType SubscriptionReference;
+        public SharpOnvifClient.Events.EndpointReferenceType SubscriptionReference;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2", Order=1)]
         [System.Xml.Serialization.XmlElementAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
@@ -2925,7 +2925,7 @@ namespace OnvifEvents
         {
         }
         
-        public CreatePullPointSubscriptionResponse(OnvifEvents.EndpointReferenceType SubscriptionReference, System.DateTime CurrentTime, System.Nullable<System.DateTime> TerminationTime, System.Xml.XmlElement[] Any)
+        public CreatePullPointSubscriptionResponse(SharpOnvifClient.Events.EndpointReferenceType SubscriptionReference, System.DateTime CurrentTime, System.Nullable<System.DateTime> TerminationTime, System.Xml.XmlElement[] Any)
         {
             this.SubscriptionReference = SubscriptionReference;
             this.CurrentTime = CurrentTime;
@@ -3306,7 +3306,7 @@ namespace OnvifEvents
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://docs.oasis-open.org/wsn/t-1", Order=2)]
         [System.Xml.Serialization.XmlElementAttribute(Namespace="http://docs.oasis-open.org/wsn/t-1")]
-        public OnvifEvents.TopicSetType TopicSet;
+        public SharpOnvifClient.Events.TopicSetType TopicSet;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2", Order=3)]
         [System.Xml.Serialization.XmlElementAttribute("TopicExpressionDialect", Namespace="http://docs.oasis-open.org/wsn/b-2", DataType="anyURI")]
@@ -3332,7 +3332,7 @@ namespace OnvifEvents
         {
         }
         
-        public GetEventPropertiesResponse(string[] TopicNamespaceLocation, bool FixedTopicSet, OnvifEvents.TopicSetType TopicSet, string[] TopicExpressionDialect, string[] MessageContentFilterDialect, string[] ProducerPropertiesFilterDialect, string[] MessageContentSchemaLocation, System.Xml.XmlElement[] Any)
+        public GetEventPropertiesResponse(string[] TopicNamespaceLocation, bool FixedTopicSet, SharpOnvifClient.Events.TopicSetType TopicSet, string[] TopicExpressionDialect, string[] MessageContentFilterDialect, string[] ProducerPropertiesFilterDialect, string[] MessageContentSchemaLocation, System.Xml.XmlElement[] Any)
         {
             this.TopicNamespaceLocation = TopicNamespaceLocation;
             this.FixedTopicSet = FixedTopicSet;
@@ -3608,26 +3608,26 @@ namespace OnvifEvents
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/events/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("EventBroker")]
-        public OnvifEvents.EventBrokerConfig[] EventBroker;
+        public SharpOnvifClient.Events.EventBrokerConfig[] EventBroker;
         
         public GetEventBrokersResponse()
         {
         }
         
-        public GetEventBrokersResponse(OnvifEvents.EventBrokerConfig[] EventBroker)
+        public GetEventBrokersResponse(SharpOnvifClient.Events.EventBrokerConfig[] EventBroker)
         {
             this.EventBroker = EventBroker;
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface EventPortTypeChannel : OnvifEvents.EventPortType, System.ServiceModel.IClientChannel
+    public interface EventPortTypeChannel : SharpOnvifClient.Events.EventPortType, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class EventPortTypeClient : System.ServiceModel.ClientBase<OnvifEvents.EventPortType>, OnvifEvents.EventPortType
+    public partial class EventPortTypeClient : System.ServiceModel.ClientBase<SharpOnvifClient.Events.EventPortType>, SharpOnvifClient.Events.EventPortType
     {
         
         public EventPortTypeClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
@@ -3635,50 +3635,50 @@ namespace OnvifEvents
         {
         }
         
-        public System.Threading.Tasks.Task<OnvifEvents.Capabilities> GetServiceCapabilitiesAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.Events.Capabilities> GetServiceCapabilitiesAsync()
         {
             return base.Channel.GetServiceCapabilitiesAsync();
         }
         
-        public System.Threading.Tasks.Task<OnvifEvents.CreatePullPointSubscriptionResponse> CreatePullPointSubscriptionAsync(OnvifEvents.CreatePullPointSubscriptionRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Events.CreatePullPointSubscriptionResponse> CreatePullPointSubscriptionAsync(SharpOnvifClient.Events.CreatePullPointSubscriptionRequest request)
         {
             return base.Channel.CreatePullPointSubscriptionAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifEvents.GetEventPropertiesResponse> GetEventPropertiesAsync(OnvifEvents.GetEventPropertiesRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Events.GetEventPropertiesResponse> GetEventPropertiesAsync(SharpOnvifClient.Events.GetEventPropertiesRequest request)
         {
             return base.Channel.GetEventPropertiesAsync(request);
         }
         
-        public System.Threading.Tasks.Task AddEventBrokerAsync(OnvifEvents.EventBrokerConfig EventBroker)
+        public System.Threading.Tasks.Task AddEventBrokerAsync(SharpOnvifClient.Events.EventBrokerConfig EventBroker)
         {
             return base.Channel.AddEventBrokerAsync(EventBroker);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifEvents.DeleteEventBrokerResponse> OnvifEvents.EventPortType.DeleteEventBrokerAsync(OnvifEvents.DeleteEventBrokerRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Events.DeleteEventBrokerResponse> SharpOnvifClient.Events.EventPortType.DeleteEventBrokerAsync(SharpOnvifClient.Events.DeleteEventBrokerRequest request)
         {
             return base.Channel.DeleteEventBrokerAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifEvents.DeleteEventBrokerResponse> DeleteEventBrokerAsync(string Address)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Events.DeleteEventBrokerResponse> DeleteEventBrokerAsync(string Address)
         {
-            OnvifEvents.DeleteEventBrokerRequest inValue = new OnvifEvents.DeleteEventBrokerRequest();
+            SharpOnvifClient.Events.DeleteEventBrokerRequest inValue = new SharpOnvifClient.Events.DeleteEventBrokerRequest();
             inValue.Address = Address;
-            return ((OnvifEvents.EventPortType)(this)).DeleteEventBrokerAsync(inValue);
+            return ((SharpOnvifClient.Events.EventPortType)(this)).DeleteEventBrokerAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifEvents.GetEventBrokersResponse> OnvifEvents.EventPortType.GetEventBrokersAsync(OnvifEvents.GetEventBrokersRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Events.GetEventBrokersResponse> SharpOnvifClient.Events.EventPortType.GetEventBrokersAsync(SharpOnvifClient.Events.GetEventBrokersRequest request)
         {
             return base.Channel.GetEventBrokersAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifEvents.GetEventBrokersResponse> GetEventBrokersAsync(string Address)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Events.GetEventBrokersResponse> GetEventBrokersAsync(string Address)
         {
-            OnvifEvents.GetEventBrokersRequest inValue = new OnvifEvents.GetEventBrokersRequest();
+            SharpOnvifClient.Events.GetEventBrokersRequest inValue = new SharpOnvifClient.Events.GetEventBrokersRequest();
             inValue.Address = Address;
-            return ((OnvifEvents.EventPortType)(this)).GetEventBrokersAsync(inValue);
+            return ((SharpOnvifClient.Events.EventPortType)(this)).GetEventBrokersAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()
@@ -3693,21 +3693,21 @@ namespace OnvifEvents
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/events/wsdl", ConfigurationName="OnvifEvents.PullPointSubscription")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/events/wsdl", ConfigurationName="SharpOnvifClient.Events.PullPointSubscription")]
     public interface PullPointSubscription
     {
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/events/wsdl/PullPointSubscription/PullMessagesRequest", ReplyAction="http://www.onvif.org/ver10/events/wsdl/PullPointSubscription/PullMessagesResponse" +
             "")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.PullMessagesFaultResponse), Action="http://www.onvif.org/ver10/events/wsdl/PullPointSubscription/PullMessages/Fault/P" +
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.PullMessagesFaultResponse), Action="http://www.onvif.org/ver10/events/wsdl/PullPointSubscription/PullMessages/Fault/P" +
             "ullMessagesFaultResponse", Name="PullMessagesFaultResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifEvents.PullMessagesResponse> PullMessagesAsync(OnvifEvents.PullMessagesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Events.PullMessagesResponse> PullMessagesAsync(SharpOnvifClient.Events.PullMessagesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/events/wsdl/PullPointSubscription/SeekRequest", ReplyAction="http://www.onvif.org/ver10/events/wsdl/PullPointSubscription/SeekResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifEvents.SeekResponse> SeekAsync(OnvifEvents.SeekRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Events.SeekResponse> SeekAsync(SharpOnvifClient.Events.SeekRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/events/wsdl/PullPointSubscription/SetSynchronizationPo" +
             "intRequest", ReplyAction="http://www.onvif.org/ver10/events/wsdl/PullPointSubscription/SetSynchronizationPo" +
@@ -3716,10 +3716,10 @@ namespace OnvifEvents
         System.Threading.Tasks.Task SetSynchronizationPointAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://docs.oasis-open.org/wsn/bw-2/SubscriptionManager/UnsubscribeRequest", ReplyAction="*")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.ResourceUnknownFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/SubscriptionManager/UnsubscribeRequest", Name="ResourceUnknownFault", Namespace="http://docs.oasis-open.org/wsrf/r-2")]
-        [System.ServiceModel.FaultContractAttribute(typeof(OnvifEvents.UnableToDestroySubscriptionFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/SubscriptionManager/UnsubscribeRequest", Name="UnableToDestroySubscriptionFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.ResourceUnknownFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/SubscriptionManager/UnsubscribeRequest", Name="ResourceUnknownFault", Namespace="http://docs.oasis-open.org/wsrf/r-2")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.UnableToDestroySubscriptionFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/SubscriptionManager/UnsubscribeRequest", Name="UnableToDestroySubscriptionFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifEvents.UnsubscribeResponse1> UnsubscribeAsync(OnvifEvents.UnsubscribeRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Events.UnsubscribeResponse1> UnsubscribeAsync(SharpOnvifClient.Events.UnsubscribeRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -3765,13 +3765,13 @@ namespace OnvifEvents
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2", Order=2)]
         [System.Xml.Serialization.XmlElementAttribute("NotificationMessage", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-        public OnvifEvents.NotificationMessageHolderType[] NotificationMessage;
+        public SharpOnvifClient.Events.NotificationMessageHolderType[] NotificationMessage;
         
         public PullMessagesResponse()
         {
         }
         
-        public PullMessagesResponse(System.DateTime CurrentTime, System.DateTime TerminationTime, OnvifEvents.NotificationMessageHolderType[] NotificationMessage)
+        public PullMessagesResponse(System.DateTime CurrentTime, System.DateTime TerminationTime, SharpOnvifClient.Events.NotificationMessageHolderType[] NotificationMessage)
         {
             this.CurrentTime = CurrentTime;
             this.TerminationTime = TerminationTime;
@@ -3821,13 +3821,13 @@ namespace OnvifEvents
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface PullPointSubscriptionChannel : OnvifEvents.PullPointSubscription, System.ServiceModel.IClientChannel
+    public interface PullPointSubscriptionChannel : SharpOnvifClient.Events.PullPointSubscription, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class PullPointSubscriptionClient : System.ServiceModel.ClientBase<OnvifEvents.PullPointSubscription>, OnvifEvents.PullPointSubscription
+    public partial class PullPointSubscriptionClient : System.ServiceModel.ClientBase<SharpOnvifClient.Events.PullPointSubscription>, SharpOnvifClient.Events.PullPointSubscription
     {
         
         public PullPointSubscriptionClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
@@ -3835,24 +3835,24 @@ namespace OnvifEvents
         {
         }
         
-        public System.Threading.Tasks.Task<OnvifEvents.PullMessagesResponse> PullMessagesAsync(OnvifEvents.PullMessagesRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Events.PullMessagesResponse> PullMessagesAsync(SharpOnvifClient.Events.PullMessagesRequest request)
         {
             return base.Channel.PullMessagesAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifEvents.SeekResponse> OnvifEvents.PullPointSubscription.SeekAsync(OnvifEvents.SeekRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Events.SeekResponse> SharpOnvifClient.Events.PullPointSubscription.SeekAsync(SharpOnvifClient.Events.SeekRequest request)
         {
             return base.Channel.SeekAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifEvents.SeekResponse> SeekAsync(System.DateTime UtcTime, bool Reverse, System.Xml.XmlElement[] Any)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Events.SeekResponse> SeekAsync(System.DateTime UtcTime, bool Reverse, System.Xml.XmlElement[] Any)
         {
-            OnvifEvents.SeekRequest inValue = new OnvifEvents.SeekRequest();
+            SharpOnvifClient.Events.SeekRequest inValue = new SharpOnvifClient.Events.SeekRequest();
             inValue.UtcTime = UtcTime;
             inValue.Reverse = Reverse;
             inValue.Any = Any;
-            return ((OnvifEvents.PullPointSubscription)(this)).SeekAsync(inValue);
+            return ((SharpOnvifClient.Events.PullPointSubscription)(this)).SeekAsync(inValue);
         }
         
         public System.Threading.Tasks.Task SetSynchronizationPointAsync()
@@ -3861,16 +3861,16 @@ namespace OnvifEvents
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifEvents.UnsubscribeResponse1> OnvifEvents.PullPointSubscription.UnsubscribeAsync(OnvifEvents.UnsubscribeRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Events.UnsubscribeResponse1> SharpOnvifClient.Events.PullPointSubscription.UnsubscribeAsync(SharpOnvifClient.Events.UnsubscribeRequest request)
         {
             return base.Channel.UnsubscribeAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifEvents.UnsubscribeResponse1> UnsubscribeAsync(OnvifEvents.Unsubscribe Unsubscribe)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Events.UnsubscribeResponse1> UnsubscribeAsync(SharpOnvifClient.Events.Unsubscribe Unsubscribe)
         {
-            OnvifEvents.UnsubscribeRequest inValue = new OnvifEvents.UnsubscribeRequest();
+            SharpOnvifClient.Events.UnsubscribeRequest inValue = new SharpOnvifClient.Events.UnsubscribeRequest();
             inValue.Unsubscribe = Unsubscribe;
-            return ((OnvifEvents.PullPointSubscription)(this)).UnsubscribeAsync(inValue);
+            return ((SharpOnvifClient.Events.PullPointSubscription)(this)).UnsubscribeAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()

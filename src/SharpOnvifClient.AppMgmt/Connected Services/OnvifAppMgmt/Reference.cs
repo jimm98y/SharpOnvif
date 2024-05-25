@@ -7,46 +7,46 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OnvifAppMgmt
+namespace SharpOnvifClient.AppMgmt
 {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/appmgmt/wsdl", ConfigurationName="OnvifAppMgmt.AppManagement")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/appmgmt/wsdl", ConfigurationName="SharpOnvifClient.AppMgmt.AppManagement")]
     public interface AppManagement
     {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/appmgmt/wsdl/Uninstall", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifAppMgmt.UninstallResponse> UninstallAsync(OnvifAppMgmt.UninstallRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AppMgmt.UninstallResponse> UninstallAsync(SharpOnvifClient.AppMgmt.UninstallRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/appmgmt/wsdl/GetInstalledApps", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifAppMgmt.GetInstalledAppsResponse> GetInstalledAppsAsync(OnvifAppMgmt.GetInstalledAppsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AppMgmt.GetInstalledAppsResponse> GetInstalledAppsAsync(SharpOnvifClient.AppMgmt.GetInstalledAppsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/appmgmt/wsdl/GetAppsInfo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifAppMgmt.GetAppsInfoResponse> GetAppsInfoAsync(OnvifAppMgmt.GetAppsInfoRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AppMgmt.GetAppsInfoResponse> GetAppsInfoAsync(SharpOnvifClient.AppMgmt.GetAppsInfoRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/appmgmt/wsdl/Activate", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifAppMgmt.ActivateResponse> ActivateAsync(OnvifAppMgmt.ActivateRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AppMgmt.ActivateResponse> ActivateAsync(SharpOnvifClient.AppMgmt.ActivateRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/appmgmt/wsdl/Deactivate", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifAppMgmt.DeactivateResponse> DeactivateAsync(OnvifAppMgmt.DeactivateRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AppMgmt.DeactivateResponse> DeactivateAsync(SharpOnvifClient.AppMgmt.DeactivateRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/appmgmt/wsdl/GetServiceCapabilities", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifAppMgmt.GetServiceCapabilitiesResponse> GetServiceCapabilitiesAsync(OnvifAppMgmt.GetServiceCapabilitiesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AppMgmt.GetServiceCapabilitiesResponse> GetServiceCapabilitiesAsync(SharpOnvifClient.AppMgmt.GetServiceCapabilitiesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/appmgmt/wsdl/InstallLicense", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifAppMgmt.InstallLicenseResponse> InstallLicenseAsync(OnvifAppMgmt.InstallLicenseRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AppMgmt.InstallLicenseResponse> InstallLicenseAsync(SharpOnvifClient.AppMgmt.InstallLicenseRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/appmgmt/wsdl/GetDeviceId", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifAppMgmt.GetDeviceIdResponse> GetDeviceIdAsync(OnvifAppMgmt.GetDeviceIdRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AppMgmt.GetDeviceIdResponse> GetDeviceIdAsync(SharpOnvifClient.AppMgmt.GetDeviceIdRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -640,13 +640,13 @@ namespace OnvifAppMgmt
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/appmgmt/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("App", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public OnvifAppMgmt.GetInstalledAppsResponseApp[] App;
+        public SharpOnvifClient.AppMgmt.GetInstalledAppsResponseApp[] App;
         
         public GetInstalledAppsResponse()
         {
         }
         
-        public GetInstalledAppsResponse(OnvifAppMgmt.GetInstalledAppsResponseApp[] App)
+        public GetInstalledAppsResponse(SharpOnvifClient.AppMgmt.GetInstalledAppsResponseApp[] App)
         {
             this.App = App;
         }
@@ -682,13 +682,13 @@ namespace OnvifAppMgmt
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/appmgmt/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Info", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public OnvifAppMgmt.AppInfo[] Info;
+        public SharpOnvifClient.AppMgmt.AppInfo[] Info;
         
         public GetAppsInfoResponse()
         {
         }
         
-        public GetAppsInfoResponse(OnvifAppMgmt.AppInfo[] Info)
+        public GetAppsInfoResponse(SharpOnvifClient.AppMgmt.AppInfo[] Info)
         {
             this.Info = Info;
         }
@@ -781,13 +781,13 @@ namespace OnvifAppMgmt
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/appmgmt/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public OnvifAppMgmt.Capabilities Capabilities;
+        public SharpOnvifClient.AppMgmt.Capabilities Capabilities;
         
         public GetServiceCapabilitiesResponse()
         {
         }
         
-        public GetServiceCapabilitiesResponse(OnvifAppMgmt.Capabilities Capabilities)
+        public GetServiceCapabilitiesResponse(SharpOnvifClient.AppMgmt.Capabilities Capabilities)
         {
             this.Capabilities = Capabilities;
         }
@@ -865,13 +865,13 @@ namespace OnvifAppMgmt
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface AppManagementChannel : OnvifAppMgmt.AppManagement, System.ServiceModel.IClientChannel
+    public interface AppManagementChannel : SharpOnvifClient.AppMgmt.AppManagement, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class AppManagementClient : System.ServiceModel.ClientBase<OnvifAppMgmt.AppManagement>, OnvifAppMgmt.AppManagement
+    public partial class AppManagementClient : System.ServiceModel.ClientBase<SharpOnvifClient.AppMgmt.AppManagement>, SharpOnvifClient.AppMgmt.AppManagement
     {
         
         public AppManagementClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
@@ -880,105 +880,105 @@ namespace OnvifAppMgmt
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAppMgmt.UninstallResponse> OnvifAppMgmt.AppManagement.UninstallAsync(OnvifAppMgmt.UninstallRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AppMgmt.UninstallResponse> SharpOnvifClient.AppMgmt.AppManagement.UninstallAsync(SharpOnvifClient.AppMgmt.UninstallRequest request)
         {
             return base.Channel.UninstallAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAppMgmt.UninstallResponse> UninstallAsync(string AppID)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AppMgmt.UninstallResponse> UninstallAsync(string AppID)
         {
-            OnvifAppMgmt.UninstallRequest inValue = new OnvifAppMgmt.UninstallRequest();
+            SharpOnvifClient.AppMgmt.UninstallRequest inValue = new SharpOnvifClient.AppMgmt.UninstallRequest();
             inValue.AppID = AppID;
-            return ((OnvifAppMgmt.AppManagement)(this)).UninstallAsync(inValue);
+            return ((SharpOnvifClient.AppMgmt.AppManagement)(this)).UninstallAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAppMgmt.GetInstalledAppsResponse> OnvifAppMgmt.AppManagement.GetInstalledAppsAsync(OnvifAppMgmt.GetInstalledAppsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AppMgmt.GetInstalledAppsResponse> SharpOnvifClient.AppMgmt.AppManagement.GetInstalledAppsAsync(SharpOnvifClient.AppMgmt.GetInstalledAppsRequest request)
         {
             return base.Channel.GetInstalledAppsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAppMgmt.GetInstalledAppsResponse> GetInstalledAppsAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.AppMgmt.GetInstalledAppsResponse> GetInstalledAppsAsync()
         {
-            OnvifAppMgmt.GetInstalledAppsRequest inValue = new OnvifAppMgmt.GetInstalledAppsRequest();
-            return ((OnvifAppMgmt.AppManagement)(this)).GetInstalledAppsAsync(inValue);
+            SharpOnvifClient.AppMgmt.GetInstalledAppsRequest inValue = new SharpOnvifClient.AppMgmt.GetInstalledAppsRequest();
+            return ((SharpOnvifClient.AppMgmt.AppManagement)(this)).GetInstalledAppsAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAppMgmt.GetAppsInfoResponse> OnvifAppMgmt.AppManagement.GetAppsInfoAsync(OnvifAppMgmt.GetAppsInfoRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AppMgmt.GetAppsInfoResponse> SharpOnvifClient.AppMgmt.AppManagement.GetAppsInfoAsync(SharpOnvifClient.AppMgmt.GetAppsInfoRequest request)
         {
             return base.Channel.GetAppsInfoAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAppMgmt.GetAppsInfoResponse> GetAppsInfoAsync(string AppID)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AppMgmt.GetAppsInfoResponse> GetAppsInfoAsync(string AppID)
         {
-            OnvifAppMgmt.GetAppsInfoRequest inValue = new OnvifAppMgmt.GetAppsInfoRequest();
+            SharpOnvifClient.AppMgmt.GetAppsInfoRequest inValue = new SharpOnvifClient.AppMgmt.GetAppsInfoRequest();
             inValue.AppID = AppID;
-            return ((OnvifAppMgmt.AppManagement)(this)).GetAppsInfoAsync(inValue);
+            return ((SharpOnvifClient.AppMgmt.AppManagement)(this)).GetAppsInfoAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAppMgmt.ActivateResponse> OnvifAppMgmt.AppManagement.ActivateAsync(OnvifAppMgmt.ActivateRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AppMgmt.ActivateResponse> SharpOnvifClient.AppMgmt.AppManagement.ActivateAsync(SharpOnvifClient.AppMgmt.ActivateRequest request)
         {
             return base.Channel.ActivateAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAppMgmt.ActivateResponse> ActivateAsync(string AppID)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AppMgmt.ActivateResponse> ActivateAsync(string AppID)
         {
-            OnvifAppMgmt.ActivateRequest inValue = new OnvifAppMgmt.ActivateRequest();
+            SharpOnvifClient.AppMgmt.ActivateRequest inValue = new SharpOnvifClient.AppMgmt.ActivateRequest();
             inValue.AppID = AppID;
-            return ((OnvifAppMgmt.AppManagement)(this)).ActivateAsync(inValue);
+            return ((SharpOnvifClient.AppMgmt.AppManagement)(this)).ActivateAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAppMgmt.DeactivateResponse> OnvifAppMgmt.AppManagement.DeactivateAsync(OnvifAppMgmt.DeactivateRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AppMgmt.DeactivateResponse> SharpOnvifClient.AppMgmt.AppManagement.DeactivateAsync(SharpOnvifClient.AppMgmt.DeactivateRequest request)
         {
             return base.Channel.DeactivateAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAppMgmt.DeactivateResponse> DeactivateAsync(string AppID)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AppMgmt.DeactivateResponse> DeactivateAsync(string AppID)
         {
-            OnvifAppMgmt.DeactivateRequest inValue = new OnvifAppMgmt.DeactivateRequest();
+            SharpOnvifClient.AppMgmt.DeactivateRequest inValue = new SharpOnvifClient.AppMgmt.DeactivateRequest();
             inValue.AppID = AppID;
-            return ((OnvifAppMgmt.AppManagement)(this)).DeactivateAsync(inValue);
+            return ((SharpOnvifClient.AppMgmt.AppManagement)(this)).DeactivateAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAppMgmt.GetServiceCapabilitiesResponse> OnvifAppMgmt.AppManagement.GetServiceCapabilitiesAsync(OnvifAppMgmt.GetServiceCapabilitiesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AppMgmt.GetServiceCapabilitiesResponse> SharpOnvifClient.AppMgmt.AppManagement.GetServiceCapabilitiesAsync(SharpOnvifClient.AppMgmt.GetServiceCapabilitiesRequest request)
         {
             return base.Channel.GetServiceCapabilitiesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAppMgmt.GetServiceCapabilitiesResponse> GetServiceCapabilitiesAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.AppMgmt.GetServiceCapabilitiesResponse> GetServiceCapabilitiesAsync()
         {
-            OnvifAppMgmt.GetServiceCapabilitiesRequest inValue = new OnvifAppMgmt.GetServiceCapabilitiesRequest();
-            return ((OnvifAppMgmt.AppManagement)(this)).GetServiceCapabilitiesAsync(inValue);
+            SharpOnvifClient.AppMgmt.GetServiceCapabilitiesRequest inValue = new SharpOnvifClient.AppMgmt.GetServiceCapabilitiesRequest();
+            return ((SharpOnvifClient.AppMgmt.AppManagement)(this)).GetServiceCapabilitiesAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAppMgmt.InstallLicenseResponse> OnvifAppMgmt.AppManagement.InstallLicenseAsync(OnvifAppMgmt.InstallLicenseRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AppMgmt.InstallLicenseResponse> SharpOnvifClient.AppMgmt.AppManagement.InstallLicenseAsync(SharpOnvifClient.AppMgmt.InstallLicenseRequest request)
         {
             return base.Channel.InstallLicenseAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAppMgmt.InstallLicenseResponse> InstallLicenseAsync(string AppID, string License)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AppMgmt.InstallLicenseResponse> InstallLicenseAsync(string AppID, string License)
         {
-            OnvifAppMgmt.InstallLicenseRequest inValue = new OnvifAppMgmt.InstallLicenseRequest();
+            SharpOnvifClient.AppMgmt.InstallLicenseRequest inValue = new SharpOnvifClient.AppMgmt.InstallLicenseRequest();
             inValue.AppID = AppID;
             inValue.License = License;
-            return ((OnvifAppMgmt.AppManagement)(this)).InstallLicenseAsync(inValue);
+            return ((SharpOnvifClient.AppMgmt.AppManagement)(this)).InstallLicenseAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAppMgmt.GetDeviceIdResponse> OnvifAppMgmt.AppManagement.GetDeviceIdAsync(OnvifAppMgmt.GetDeviceIdRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AppMgmt.GetDeviceIdResponse> SharpOnvifClient.AppMgmt.AppManagement.GetDeviceIdAsync(SharpOnvifClient.AppMgmt.GetDeviceIdRequest request)
         {
             return base.Channel.GetDeviceIdAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAppMgmt.GetDeviceIdResponse> GetDeviceIdAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.AppMgmt.GetDeviceIdResponse> GetDeviceIdAsync()
         {
-            OnvifAppMgmt.GetDeviceIdRequest inValue = new OnvifAppMgmt.GetDeviceIdRequest();
-            return ((OnvifAppMgmt.AppManagement)(this)).GetDeviceIdAsync(inValue);
+            SharpOnvifClient.AppMgmt.GetDeviceIdRequest inValue = new SharpOnvifClient.AppMgmt.GetDeviceIdRequest();
+            return ((SharpOnvifClient.AppMgmt.AppManagement)(this)).GetDeviceIdAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()

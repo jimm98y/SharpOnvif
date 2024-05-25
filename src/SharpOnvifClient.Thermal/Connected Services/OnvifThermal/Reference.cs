@@ -7,51 +7,51 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OnvifThermal
+namespace SharpOnvifClient.Thermal
 {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/thermal/wsdl", ConfigurationName="OnvifThermal.ThermalPort")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/thermal/wsdl", ConfigurationName="SharpOnvifClient.Thermal.ThermalPort")]
     public interface ThermalPort
     {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/thermal/wsdl/GetServiceCapabilities", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Capabilities")]
-        System.Threading.Tasks.Task<OnvifThermal.Capabilities> GetServiceCapabilitiesAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.Thermal.Capabilities> GetServiceCapabilitiesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/thermal/wsdl/GetConfigurationOptions", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="ConfigurationOptions")]
-        System.Threading.Tasks.Task<OnvifThermal.ConfigurationOptions> GetConfigurationOptionsAsync(string VideoSourceToken);
+        System.Threading.Tasks.Task<SharpOnvifClient.Thermal.ConfigurationOptions> GetConfigurationOptionsAsync(string VideoSourceToken);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/thermal/wsdl/GetConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Configuration")]
-        System.Threading.Tasks.Task<OnvifThermal.Configuration> GetConfigurationAsync(string VideoSourceToken);
+        System.Threading.Tasks.Task<SharpOnvifClient.Thermal.Configuration> GetConfigurationAsync(string VideoSourceToken);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/thermal/wsdl/GetConfigurations", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifThermal.GetConfigurationsResponse> GetConfigurationsAsync(OnvifThermal.GetConfigurationsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Thermal.GetConfigurationsResponse> GetConfigurationsAsync(SharpOnvifClient.Thermal.GetConfigurationsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/thermal/wsdl/SetConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task SetConfigurationAsync(string VideoSourceToken, OnvifThermal.Configuration Configuration);
+        System.Threading.Tasks.Task SetConfigurationAsync(string VideoSourceToken, SharpOnvifClient.Thermal.Configuration Configuration);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/thermal/wsdl/GetRadiometryConfigurationOptions", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="ConfigurationOptions")]
-        System.Threading.Tasks.Task<OnvifThermal.RadiometryConfigurationOptions> GetRadiometryConfigurationOptionsAsync(string VideoSourceToken);
+        System.Threading.Tasks.Task<SharpOnvifClient.Thermal.RadiometryConfigurationOptions> GetRadiometryConfigurationOptionsAsync(string VideoSourceToken);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/thermal/wsdl/GetRadiometryConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Configuration")]
-        System.Threading.Tasks.Task<OnvifThermal.RadiometryConfiguration> GetRadiometryConfigurationAsync(string VideoSourceToken);
+        System.Threading.Tasks.Task<SharpOnvifClient.Thermal.RadiometryConfiguration> GetRadiometryConfigurationAsync(string VideoSourceToken);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/thermal/wsdl/SetRadiometryConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task SetRadiometryConfigurationAsync(string VideoSourceToken, OnvifThermal.RadiometryConfiguration Configuration);
+        System.Threading.Tasks.Task SetRadiometryConfigurationAsync(string VideoSourceToken, SharpOnvifClient.Thermal.RadiometryConfiguration Configuration);
     }
     
     /// <remarks/>
@@ -1184,26 +1184,26 @@ namespace OnvifThermal
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/thermal/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Configurations")]
-        public OnvifThermal.Configurations[] Configurations;
+        public SharpOnvifClient.Thermal.Configurations[] Configurations;
         
         public GetConfigurationsResponse()
         {
         }
         
-        public GetConfigurationsResponse(OnvifThermal.Configurations[] Configurations)
+        public GetConfigurationsResponse(SharpOnvifClient.Thermal.Configurations[] Configurations)
         {
             this.Configurations = Configurations;
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface ThermalPortChannel : OnvifThermal.ThermalPort, System.ServiceModel.IClientChannel
+    public interface ThermalPortChannel : SharpOnvifClient.Thermal.ThermalPort, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class ThermalPortClient : System.ServiceModel.ClientBase<OnvifThermal.ThermalPort>, OnvifThermal.ThermalPort
+    public partial class ThermalPortClient : System.ServiceModel.ClientBase<SharpOnvifClient.Thermal.ThermalPort>, SharpOnvifClient.Thermal.ThermalPort
     {
         
         public ThermalPortClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
@@ -1211,49 +1211,49 @@ namespace OnvifThermal
         {
         }
         
-        public System.Threading.Tasks.Task<OnvifThermal.Capabilities> GetServiceCapabilitiesAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.Thermal.Capabilities> GetServiceCapabilitiesAsync()
         {
             return base.Channel.GetServiceCapabilitiesAsync();
         }
         
-        public System.Threading.Tasks.Task<OnvifThermal.ConfigurationOptions> GetConfigurationOptionsAsync(string VideoSourceToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Thermal.ConfigurationOptions> GetConfigurationOptionsAsync(string VideoSourceToken)
         {
             return base.Channel.GetConfigurationOptionsAsync(VideoSourceToken);
         }
         
-        public System.Threading.Tasks.Task<OnvifThermal.Configuration> GetConfigurationAsync(string VideoSourceToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Thermal.Configuration> GetConfigurationAsync(string VideoSourceToken)
         {
             return base.Channel.GetConfigurationAsync(VideoSourceToken);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifThermal.GetConfigurationsResponse> OnvifThermal.ThermalPort.GetConfigurationsAsync(OnvifThermal.GetConfigurationsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Thermal.GetConfigurationsResponse> SharpOnvifClient.Thermal.ThermalPort.GetConfigurationsAsync(SharpOnvifClient.Thermal.GetConfigurationsRequest request)
         {
             return base.Channel.GetConfigurationsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifThermal.GetConfigurationsResponse> GetConfigurationsAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.Thermal.GetConfigurationsResponse> GetConfigurationsAsync()
         {
-            OnvifThermal.GetConfigurationsRequest inValue = new OnvifThermal.GetConfigurationsRequest();
-            return ((OnvifThermal.ThermalPort)(this)).GetConfigurationsAsync(inValue);
+            SharpOnvifClient.Thermal.GetConfigurationsRequest inValue = new SharpOnvifClient.Thermal.GetConfigurationsRequest();
+            return ((SharpOnvifClient.Thermal.ThermalPort)(this)).GetConfigurationsAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task SetConfigurationAsync(string VideoSourceToken, OnvifThermal.Configuration Configuration)
+        public System.Threading.Tasks.Task SetConfigurationAsync(string VideoSourceToken, SharpOnvifClient.Thermal.Configuration Configuration)
         {
             return base.Channel.SetConfigurationAsync(VideoSourceToken, Configuration);
         }
         
-        public System.Threading.Tasks.Task<OnvifThermal.RadiometryConfigurationOptions> GetRadiometryConfigurationOptionsAsync(string VideoSourceToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Thermal.RadiometryConfigurationOptions> GetRadiometryConfigurationOptionsAsync(string VideoSourceToken)
         {
             return base.Channel.GetRadiometryConfigurationOptionsAsync(VideoSourceToken);
         }
         
-        public System.Threading.Tasks.Task<OnvifThermal.RadiometryConfiguration> GetRadiometryConfigurationAsync(string VideoSourceToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Thermal.RadiometryConfiguration> GetRadiometryConfigurationAsync(string VideoSourceToken)
         {
             return base.Channel.GetRadiometryConfigurationAsync(VideoSourceToken);
         }
         
-        public System.Threading.Tasks.Task SetRadiometryConfigurationAsync(string VideoSourceToken, OnvifThermal.RadiometryConfiguration Configuration)
+        public System.Threading.Tasks.Task SetRadiometryConfigurationAsync(string VideoSourceToken, SharpOnvifClient.Thermal.RadiometryConfiguration Configuration)
         {
             return base.Channel.SetRadiometryConfigurationAsync(VideoSourceToken, Configuration);
         }

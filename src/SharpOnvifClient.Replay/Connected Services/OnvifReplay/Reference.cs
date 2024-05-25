@@ -7,32 +7,32 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OnvifReplay
+namespace SharpOnvifClient.Replay
 {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/replay/wsdl", ConfigurationName="OnvifReplay.ReplayPort")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/replay/wsdl", ConfigurationName="SharpOnvifClient.Replay.ReplayPort")]
     public interface ReplayPort
     {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/replay/wsdl/GetServiceCapabilities", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Capabilities")]
-        System.Threading.Tasks.Task<OnvifReplay.Capabilities> GetServiceCapabilitiesAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.Replay.Capabilities> GetServiceCapabilitiesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/replay/wsdl/GetReplayUri", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifReplay.GetReplayUriResponse> GetReplayUriAsync(OnvifReplay.GetReplayUriRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Replay.GetReplayUriResponse> GetReplayUriAsync(SharpOnvifClient.Replay.GetReplayUriRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/replay/wsdl/GetReplayConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Configuration")]
-        System.Threading.Tasks.Task<OnvifReplay.ReplayConfiguration> GetReplayConfigurationAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.Replay.ReplayConfiguration> GetReplayConfigurationAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/replay/wsdl/SetReplayConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task SetReplayConfigurationAsync(OnvifReplay.ReplayConfiguration Configuration);
+        System.Threading.Tasks.Task SetReplayConfigurationAsync(SharpOnvifClient.Replay.ReplayConfiguration Configuration);
     }
     
     /// <remarks/>
@@ -333,7 +333,7 @@ namespace OnvifReplay
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/replay/wsdl", Order=0)]
-        public OnvifReplay.StreamSetup StreamSetup;
+        public SharpOnvifClient.Replay.StreamSetup StreamSetup;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/replay/wsdl", Order=1)]
         public string RecordingToken;
@@ -342,7 +342,7 @@ namespace OnvifReplay
         {
         }
         
-        public GetReplayUriRequest(OnvifReplay.StreamSetup StreamSetup, string RecordingToken)
+        public GetReplayUriRequest(SharpOnvifClient.Replay.StreamSetup StreamSetup, string RecordingToken)
         {
             this.StreamSetup = StreamSetup;
             this.RecordingToken = RecordingToken;
@@ -371,13 +371,13 @@ namespace OnvifReplay
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface ReplayPortChannel : OnvifReplay.ReplayPort, System.ServiceModel.IClientChannel
+    public interface ReplayPortChannel : SharpOnvifClient.Replay.ReplayPort, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class ReplayPortClient : System.ServiceModel.ClientBase<OnvifReplay.ReplayPort>, OnvifReplay.ReplayPort
+    public partial class ReplayPortClient : System.ServiceModel.ClientBase<SharpOnvifClient.Replay.ReplayPort>, SharpOnvifClient.Replay.ReplayPort
     {
         
         public ReplayPortClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
@@ -385,31 +385,31 @@ namespace OnvifReplay
         {
         }
         
-        public System.Threading.Tasks.Task<OnvifReplay.Capabilities> GetServiceCapabilitiesAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.Replay.Capabilities> GetServiceCapabilitiesAsync()
         {
             return base.Channel.GetServiceCapabilitiesAsync();
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifReplay.GetReplayUriResponse> OnvifReplay.ReplayPort.GetReplayUriAsync(OnvifReplay.GetReplayUriRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Replay.GetReplayUriResponse> SharpOnvifClient.Replay.ReplayPort.GetReplayUriAsync(SharpOnvifClient.Replay.GetReplayUriRequest request)
         {
             return base.Channel.GetReplayUriAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifReplay.GetReplayUriResponse> GetReplayUriAsync(OnvifReplay.StreamSetup StreamSetup, string RecordingToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Replay.GetReplayUriResponse> GetReplayUriAsync(SharpOnvifClient.Replay.StreamSetup StreamSetup, string RecordingToken)
         {
-            OnvifReplay.GetReplayUriRequest inValue = new OnvifReplay.GetReplayUriRequest();
+            SharpOnvifClient.Replay.GetReplayUriRequest inValue = new SharpOnvifClient.Replay.GetReplayUriRequest();
             inValue.StreamSetup = StreamSetup;
             inValue.RecordingToken = RecordingToken;
-            return ((OnvifReplay.ReplayPort)(this)).GetReplayUriAsync(inValue);
+            return ((SharpOnvifClient.Replay.ReplayPort)(this)).GetReplayUriAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifReplay.ReplayConfiguration> GetReplayConfigurationAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.Replay.ReplayConfiguration> GetReplayConfigurationAsync()
         {
             return base.Channel.GetReplayConfigurationAsync();
         }
         
-        public System.Threading.Tasks.Task SetReplayConfigurationAsync(OnvifReplay.ReplayConfiguration Configuration)
+        public System.Threading.Tasks.Task SetReplayConfigurationAsync(SharpOnvifClient.Replay.ReplayConfiguration Configuration)
         {
             return base.Channel.SetReplayConfigurationAsync(Configuration);
         }

@@ -1,4 +1,4 @@
-﻿namespace OnvifAnalytics
+﻿namespace SharpOnvifClient.Analytics
 {
     // Vector[][] has to be changed to Vector[,]
 

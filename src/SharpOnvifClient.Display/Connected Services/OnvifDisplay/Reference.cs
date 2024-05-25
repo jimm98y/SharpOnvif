@@ -7,12 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OnvifDisplay
+namespace SharpOnvifClient.Display
 {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/display/wsdl", ConfigurationName="OnvifDisplay.DisplayPort")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/display/wsdl", ConfigurationName="SharpOnvifClient.Display.DisplayPort")]
     public interface DisplayPort
     {
         
@@ -20,59 +20,59 @@ namespace OnvifDisplay
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Capabilities")]
-        System.Threading.Tasks.Task<OnvifDisplay.Capabilities> GetServiceCapabilitiesAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.Display.Capabilities> GetServiceCapabilitiesAsync();
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/display/wsdl/GetLayout", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
-        System.Threading.Tasks.Task<OnvifDisplay.GetLayoutResponse> GetLayoutAsync(OnvifDisplay.GetLayoutRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Display.GetLayoutResponse> GetLayoutAsync(SharpOnvifClient.Display.GetLayoutRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/display/wsdl/SetLayout", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
-        System.Threading.Tasks.Task<OnvifDisplay.SetLayoutResponse> SetLayoutAsync(OnvifDisplay.SetLayoutRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Display.SetLayoutResponse> SetLayoutAsync(SharpOnvifClient.Display.SetLayoutRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/display/wsdl/GetDisplayOptions", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
-        System.Threading.Tasks.Task<OnvifDisplay.GetDisplayOptionsResponse> GetDisplayOptionsAsync(OnvifDisplay.GetDisplayOptionsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Display.GetDisplayOptionsResponse> GetDisplayOptionsAsync(SharpOnvifClient.Display.GetDisplayOptionsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/display/wsdl/GetPaneConfigurations", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
-        System.Threading.Tasks.Task<OnvifDisplay.GetPaneConfigurationsResponse> GetPaneConfigurationsAsync(OnvifDisplay.GetPaneConfigurationsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Display.GetPaneConfigurationsResponse> GetPaneConfigurationsAsync(SharpOnvifClient.Display.GetPaneConfigurationsRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/display/wsdl/GetPaneConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
-        System.Threading.Tasks.Task<OnvifDisplay.GetPaneConfigurationResponse> GetPaneConfigurationAsync(OnvifDisplay.GetPaneConfigurationRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Display.GetPaneConfigurationResponse> GetPaneConfigurationAsync(SharpOnvifClient.Display.GetPaneConfigurationRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/display/wsdl/SetPaneConfigurations", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
-        System.Threading.Tasks.Task<OnvifDisplay.SetPaneConfigurationsResponse> SetPaneConfigurationsAsync(OnvifDisplay.SetPaneConfigurationsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Display.SetPaneConfigurationsResponse> SetPaneConfigurationsAsync(SharpOnvifClient.Display.SetPaneConfigurationsRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/display/wsdl/SetPaneConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
-        System.Threading.Tasks.Task<OnvifDisplay.SetPaneConfigurationResponse> SetPaneConfigurationAsync(OnvifDisplay.SetPaneConfigurationRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Display.SetPaneConfigurationResponse> SetPaneConfigurationAsync(SharpOnvifClient.Display.SetPaneConfigurationRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/display/wsdl/CreatePaneConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
-        System.Threading.Tasks.Task<OnvifDisplay.CreatePaneConfigurationResponse> CreatePaneConfigurationAsync(OnvifDisplay.CreatePaneConfigurationRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Display.CreatePaneConfigurationResponse> CreatePaneConfigurationAsync(SharpOnvifClient.Display.CreatePaneConfigurationRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/display/wsdl/DeletePaneConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
-        System.Threading.Tasks.Task<OnvifDisplay.DeletePaneConfigurationResponse> DeletePaneConfigurationAsync(OnvifDisplay.DeletePaneConfigurationRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Display.DeletePaneConfigurationResponse> DeletePaneConfigurationAsync(SharpOnvifClient.Display.DeletePaneConfigurationRequest request);
     }
     
     /// <remarks/>
@@ -5847,7 +5847,7 @@ namespace OnvifDisplay
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/display/wsdl", Order=0)]
-        public OnvifDisplay.Layout Layout;
+        public SharpOnvifClient.Display.Layout Layout;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=1)]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
@@ -5857,7 +5857,7 @@ namespace OnvifDisplay
         {
         }
         
-        public GetLayoutResponse(OnvifDisplay.Layout Layout, System.Xml.XmlElement[] Any)
+        public GetLayoutResponse(SharpOnvifClient.Display.Layout Layout, System.Xml.XmlElement[] Any)
         {
             this.Layout = Layout;
             this.Any = Any;
@@ -5874,7 +5874,7 @@ namespace OnvifDisplay
         public string VideoOutput;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/display/wsdl", Order=1)]
-        public OnvifDisplay.Layout Layout;
+        public SharpOnvifClient.Display.Layout Layout;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=2)]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
@@ -5884,7 +5884,7 @@ namespace OnvifDisplay
         {
         }
         
-        public SetLayoutRequest(string VideoOutput, OnvifDisplay.Layout Layout, System.Xml.XmlElement[] Any)
+        public SetLayoutRequest(string VideoOutput, SharpOnvifClient.Display.Layout Layout, System.Xml.XmlElement[] Any)
         {
             this.VideoOutput = VideoOutput;
             this.Layout = Layout;
@@ -5943,10 +5943,10 @@ namespace OnvifDisplay
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/display/wsdl", Order=0)]
-        public OnvifDisplay.LayoutOptions LayoutOptions;
+        public SharpOnvifClient.Display.LayoutOptions LayoutOptions;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/display/wsdl", Order=1)]
-        public OnvifDisplay.CodingCapabilities CodingCapabilities;
+        public SharpOnvifClient.Display.CodingCapabilities CodingCapabilities;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=2)]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
@@ -5956,7 +5956,7 @@ namespace OnvifDisplay
         {
         }
         
-        public GetDisplayOptionsResponse(OnvifDisplay.LayoutOptions LayoutOptions, OnvifDisplay.CodingCapabilities CodingCapabilities, System.Xml.XmlElement[] Any)
+        public GetDisplayOptionsResponse(SharpOnvifClient.Display.LayoutOptions LayoutOptions, SharpOnvifClient.Display.CodingCapabilities CodingCapabilities, System.Xml.XmlElement[] Any)
         {
             this.LayoutOptions = LayoutOptions;
             this.CodingCapabilities = CodingCapabilities;
@@ -5998,13 +5998,13 @@ namespace OnvifDisplay
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/display/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("PaneConfiguration")]
-        public OnvifDisplay.PaneConfiguration[] PaneConfiguration;
+        public SharpOnvifClient.Display.PaneConfiguration[] PaneConfiguration;
         
         public GetPaneConfigurationsResponse()
         {
         }
         
-        public GetPaneConfigurationsResponse(OnvifDisplay.PaneConfiguration[] PaneConfiguration)
+        public GetPaneConfigurationsResponse(SharpOnvifClient.Display.PaneConfiguration[] PaneConfiguration)
         {
             this.PaneConfiguration = PaneConfiguration;
         }
@@ -6045,7 +6045,7 @@ namespace OnvifDisplay
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/display/wsdl", Order=0)]
-        public OnvifDisplay.PaneConfiguration PaneConfiguration;
+        public SharpOnvifClient.Display.PaneConfiguration PaneConfiguration;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=1)]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
@@ -6055,7 +6055,7 @@ namespace OnvifDisplay
         {
         }
         
-        public GetPaneConfigurationResponse(OnvifDisplay.PaneConfiguration PaneConfiguration, System.Xml.XmlElement[] Any)
+        public GetPaneConfigurationResponse(SharpOnvifClient.Display.PaneConfiguration PaneConfiguration, System.Xml.XmlElement[] Any)
         {
             this.PaneConfiguration = PaneConfiguration;
             this.Any = Any;
@@ -6074,13 +6074,13 @@ namespace OnvifDisplay
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/display/wsdl", Order=1)]
         [System.Xml.Serialization.XmlElementAttribute("PaneConfiguration")]
-        public OnvifDisplay.PaneConfiguration[] PaneConfiguration;
+        public SharpOnvifClient.Display.PaneConfiguration[] PaneConfiguration;
         
         public SetPaneConfigurationsRequest()
         {
         }
         
-        public SetPaneConfigurationsRequest(string VideoOutput, OnvifDisplay.PaneConfiguration[] PaneConfiguration)
+        public SetPaneConfigurationsRequest(string VideoOutput, SharpOnvifClient.Display.PaneConfiguration[] PaneConfiguration)
         {
             this.VideoOutput = VideoOutput;
             this.PaneConfiguration = PaneConfiguration;
@@ -6118,7 +6118,7 @@ namespace OnvifDisplay
         public string VideoOutput;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/display/wsdl", Order=1)]
-        public OnvifDisplay.PaneConfiguration PaneConfiguration;
+        public SharpOnvifClient.Display.PaneConfiguration PaneConfiguration;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=2)]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
@@ -6128,7 +6128,7 @@ namespace OnvifDisplay
         {
         }
         
-        public SetPaneConfigurationRequest(string VideoOutput, OnvifDisplay.PaneConfiguration PaneConfiguration, System.Xml.XmlElement[] Any)
+        public SetPaneConfigurationRequest(string VideoOutput, SharpOnvifClient.Display.PaneConfiguration PaneConfiguration, System.Xml.XmlElement[] Any)
         {
             this.VideoOutput = VideoOutput;
             this.PaneConfiguration = PaneConfiguration;
@@ -6166,7 +6166,7 @@ namespace OnvifDisplay
         public string VideoOutput;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/display/wsdl", Order=1)]
-        public OnvifDisplay.PaneConfiguration PaneConfiguration;
+        public SharpOnvifClient.Display.PaneConfiguration PaneConfiguration;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=2)]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
@@ -6176,7 +6176,7 @@ namespace OnvifDisplay
         {
         }
         
-        public CreatePaneConfigurationRequest(string VideoOutput, OnvifDisplay.PaneConfiguration PaneConfiguration, System.Xml.XmlElement[] Any)
+        public CreatePaneConfigurationRequest(string VideoOutput, SharpOnvifClient.Display.PaneConfiguration PaneConfiguration, System.Xml.XmlElement[] Any)
         {
             this.VideoOutput = VideoOutput;
             this.PaneConfiguration = PaneConfiguration;
@@ -6257,13 +6257,13 @@ namespace OnvifDisplay
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface DisplayPortChannel : OnvifDisplay.DisplayPort, System.ServiceModel.IClientChannel
+    public interface DisplayPortChannel : SharpOnvifClient.Display.DisplayPort, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class DisplayPortClient : System.ServiceModel.ClientBase<OnvifDisplay.DisplayPort>, OnvifDisplay.DisplayPort
+    public partial class DisplayPortClient : System.ServiceModel.ClientBase<SharpOnvifClient.Display.DisplayPort>, SharpOnvifClient.Display.DisplayPort
     {
         
         public DisplayPortClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
@@ -6271,70 +6271,70 @@ namespace OnvifDisplay
         {
         }
         
-        public System.Threading.Tasks.Task<OnvifDisplay.Capabilities> GetServiceCapabilitiesAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.Display.Capabilities> GetServiceCapabilitiesAsync()
         {
             return base.Channel.GetServiceCapabilitiesAsync();
         }
         
-        public System.Threading.Tasks.Task<OnvifDisplay.GetLayoutResponse> GetLayoutAsync(OnvifDisplay.GetLayoutRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Display.GetLayoutResponse> GetLayoutAsync(SharpOnvifClient.Display.GetLayoutRequest request)
         {
             return base.Channel.GetLayoutAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDisplay.SetLayoutResponse> SetLayoutAsync(OnvifDisplay.SetLayoutRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Display.SetLayoutResponse> SetLayoutAsync(SharpOnvifClient.Display.SetLayoutRequest request)
         {
             return base.Channel.SetLayoutAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDisplay.GetDisplayOptionsResponse> GetDisplayOptionsAsync(OnvifDisplay.GetDisplayOptionsRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Display.GetDisplayOptionsResponse> GetDisplayOptionsAsync(SharpOnvifClient.Display.GetDisplayOptionsRequest request)
         {
             return base.Channel.GetDisplayOptionsAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDisplay.GetPaneConfigurationsResponse> OnvifDisplay.DisplayPort.GetPaneConfigurationsAsync(OnvifDisplay.GetPaneConfigurationsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Display.GetPaneConfigurationsResponse> SharpOnvifClient.Display.DisplayPort.GetPaneConfigurationsAsync(SharpOnvifClient.Display.GetPaneConfigurationsRequest request)
         {
             return base.Channel.GetPaneConfigurationsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDisplay.GetPaneConfigurationsResponse> GetPaneConfigurationsAsync(string VideoOutput, System.Xml.XmlElement[] Any)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Display.GetPaneConfigurationsResponse> GetPaneConfigurationsAsync(string VideoOutput, System.Xml.XmlElement[] Any)
         {
-            OnvifDisplay.GetPaneConfigurationsRequest inValue = new OnvifDisplay.GetPaneConfigurationsRequest();
+            SharpOnvifClient.Display.GetPaneConfigurationsRequest inValue = new SharpOnvifClient.Display.GetPaneConfigurationsRequest();
             inValue.VideoOutput = VideoOutput;
             inValue.Any = Any;
-            return ((OnvifDisplay.DisplayPort)(this)).GetPaneConfigurationsAsync(inValue);
+            return ((SharpOnvifClient.Display.DisplayPort)(this)).GetPaneConfigurationsAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifDisplay.GetPaneConfigurationResponse> GetPaneConfigurationAsync(OnvifDisplay.GetPaneConfigurationRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Display.GetPaneConfigurationResponse> GetPaneConfigurationAsync(SharpOnvifClient.Display.GetPaneConfigurationRequest request)
         {
             return base.Channel.GetPaneConfigurationAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifDisplay.SetPaneConfigurationsResponse> OnvifDisplay.DisplayPort.SetPaneConfigurationsAsync(OnvifDisplay.SetPaneConfigurationsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Display.SetPaneConfigurationsResponse> SharpOnvifClient.Display.DisplayPort.SetPaneConfigurationsAsync(SharpOnvifClient.Display.SetPaneConfigurationsRequest request)
         {
             return base.Channel.SetPaneConfigurationsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDisplay.SetPaneConfigurationsResponse> SetPaneConfigurationsAsync(string VideoOutput, OnvifDisplay.PaneConfiguration[] PaneConfiguration)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Display.SetPaneConfigurationsResponse> SetPaneConfigurationsAsync(string VideoOutput, SharpOnvifClient.Display.PaneConfiguration[] PaneConfiguration)
         {
-            OnvifDisplay.SetPaneConfigurationsRequest inValue = new OnvifDisplay.SetPaneConfigurationsRequest();
+            SharpOnvifClient.Display.SetPaneConfigurationsRequest inValue = new SharpOnvifClient.Display.SetPaneConfigurationsRequest();
             inValue.VideoOutput = VideoOutput;
             inValue.PaneConfiguration = PaneConfiguration;
-            return ((OnvifDisplay.DisplayPort)(this)).SetPaneConfigurationsAsync(inValue);
+            return ((SharpOnvifClient.Display.DisplayPort)(this)).SetPaneConfigurationsAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifDisplay.SetPaneConfigurationResponse> SetPaneConfigurationAsync(OnvifDisplay.SetPaneConfigurationRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Display.SetPaneConfigurationResponse> SetPaneConfigurationAsync(SharpOnvifClient.Display.SetPaneConfigurationRequest request)
         {
             return base.Channel.SetPaneConfigurationAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDisplay.CreatePaneConfigurationResponse> CreatePaneConfigurationAsync(OnvifDisplay.CreatePaneConfigurationRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Display.CreatePaneConfigurationResponse> CreatePaneConfigurationAsync(SharpOnvifClient.Display.CreatePaneConfigurationRequest request)
         {
             return base.Channel.CreatePaneConfigurationAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifDisplay.DeletePaneConfigurationResponse> DeletePaneConfigurationAsync(OnvifDisplay.DeletePaneConfigurationRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Display.DeletePaneConfigurationResponse> DeletePaneConfigurationAsync(SharpOnvifClient.Display.DeletePaneConfigurationRequest request)
         {
             return base.Channel.DeletePaneConfigurationAsync(request);
         }

@@ -7,12 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OnvifMedia2
+namespace SharpOnvifClient.Media2
 {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl", ConfigurationName="OnvifMedia2.Media2")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl", ConfigurationName="SharpOnvifClient.Media2.Media2")]
     public interface Media2
     {
         
@@ -22,35 +22,35 @@ namespace OnvifMedia2
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReceiverConfiguration))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Capabilities")]
-        System.Threading.Tasks.Task<OnvifMedia2.Capabilities2> GetServiceCapabilitiesAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.Capabilities2> GetServiceCapabilitiesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/media/wsdl/CreateProfile", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReceiverConfiguration))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
-        System.Threading.Tasks.Task<OnvifMedia2.CreateProfileResponse> CreateProfileAsync(OnvifMedia2.CreateProfileRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.CreateProfileResponse> CreateProfileAsync(SharpOnvifClient.Media2.CreateProfileRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/media/wsdl/GetProfiles", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReceiverConfiguration))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
-        System.Threading.Tasks.Task<OnvifMedia2.GetProfilesResponse> GetProfilesAsync(OnvifMedia2.GetProfilesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetProfilesResponse> GetProfilesAsync(SharpOnvifClient.Media2.GetProfilesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/media/wsdl/AddConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReceiverConfiguration))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
-        System.Threading.Tasks.Task<OnvifMedia2.AddConfigurationResponse> AddConfigurationAsync(OnvifMedia2.AddConfigurationRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.AddConfigurationResponse> AddConfigurationAsync(SharpOnvifClient.Media2.AddConfigurationRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/media/wsdl/RemoveConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReceiverConfiguration))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
-        System.Threading.Tasks.Task<OnvifMedia2.RemoveConfigurationResponse> RemoveConfigurationAsync(OnvifMedia2.RemoveConfigurationRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.RemoveConfigurationResponse> RemoveConfigurationAsync(SharpOnvifClient.Media2.RemoveConfigurationRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/media/wsdl/DeleteProfile", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -64,105 +64,105 @@ namespace OnvifMedia2
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReceiverConfiguration))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
-        System.Threading.Tasks.Task<OnvifMedia2.GetVideoSourceConfigurationsResponse> GetVideoSourceConfigurationsAsync(OnvifMedia2.GetVideoSourceConfigurationsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetVideoSourceConfigurationsResponse> GetVideoSourceConfigurationsAsync(SharpOnvifClient.Media2.GetVideoSourceConfigurationsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/media/wsdl/GetVideoEncoderConfigurations", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReceiverConfiguration))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
-        System.Threading.Tasks.Task<OnvifMedia2.GetVideoEncoderConfigurationsResponse> GetVideoEncoderConfigurationsAsync(OnvifMedia2.GetVideoEncoderConfigurationsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetVideoEncoderConfigurationsResponse> GetVideoEncoderConfigurationsAsync(SharpOnvifClient.Media2.GetVideoEncoderConfigurationsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/media/wsdl/GetAudioSourceConfigurations/", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReceiverConfiguration))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
-        System.Threading.Tasks.Task<OnvifMedia2.GetAudioSourceConfigurationsResponse> GetAudioSourceConfigurationsAsync(OnvifMedia2.GetAudioSourceConfigurationsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetAudioSourceConfigurationsResponse> GetAudioSourceConfigurationsAsync(SharpOnvifClient.Media2.GetAudioSourceConfigurationsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/media/wsdl/GetAudioEncoderConfigurations", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReceiverConfiguration))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
-        System.Threading.Tasks.Task<OnvifMedia2.GetAudioEncoderConfigurationsResponse> GetAudioEncoderConfigurationsAsync(OnvifMedia2.GetAudioEncoderConfigurationsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetAudioEncoderConfigurationsResponse> GetAudioEncoderConfigurationsAsync(SharpOnvifClient.Media2.GetAudioEncoderConfigurationsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/media/wsdl/GetAnalyticsConfigurations", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReceiverConfiguration))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
-        System.Threading.Tasks.Task<OnvifMedia2.GetAnalyticsConfigurationsResponse> GetAnalyticsConfigurationsAsync(OnvifMedia2.GetAnalyticsConfigurationsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetAnalyticsConfigurationsResponse> GetAnalyticsConfigurationsAsync(SharpOnvifClient.Media2.GetAnalyticsConfigurationsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/media/wsdl/GetMetadataConfigurations", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReceiverConfiguration))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
-        System.Threading.Tasks.Task<OnvifMedia2.GetMetadataConfigurationsResponse> GetMetadataConfigurationsAsync(OnvifMedia2.GetMetadataConfigurationsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetMetadataConfigurationsResponse> GetMetadataConfigurationsAsync(SharpOnvifClient.Media2.GetMetadataConfigurationsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/media/wsdl/GetAudioOutputConfigurations", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReceiverConfiguration))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
-        System.Threading.Tasks.Task<OnvifMedia2.GetAudioOutputConfigurationsResponse> GetAudioOutputConfigurationsAsync(OnvifMedia2.GetAudioOutputConfigurationsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetAudioOutputConfigurationsResponse> GetAudioOutputConfigurationsAsync(SharpOnvifClient.Media2.GetAudioOutputConfigurationsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/media/wsdl/GetAudioDecoderConfigurations", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReceiverConfiguration))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
-        System.Threading.Tasks.Task<OnvifMedia2.GetAudioDecoderConfigurationsResponse> GetAudioDecoderConfigurationsAsync(OnvifMedia2.GetAudioDecoderConfigurationsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetAudioDecoderConfigurationsResponse> GetAudioDecoderConfigurationsAsync(SharpOnvifClient.Media2.GetAudioDecoderConfigurationsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/media/wsdl/SetVideoSourceConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReceiverConfiguration))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
-        System.Threading.Tasks.Task SetVideoSourceConfigurationAsync(OnvifMedia2.VideoSourceConfiguration Configuration);
+        System.Threading.Tasks.Task SetVideoSourceConfigurationAsync(SharpOnvifClient.Media2.VideoSourceConfiguration Configuration);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/media/wsdl/SetVideoEncoderConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReceiverConfiguration))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
-        System.Threading.Tasks.Task SetVideoEncoderConfigurationAsync(OnvifMedia2.VideoEncoder2Configuration Configuration);
+        System.Threading.Tasks.Task SetVideoEncoderConfigurationAsync(SharpOnvifClient.Media2.VideoEncoder2Configuration Configuration);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/media/wsdl/SetAudioSourceConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReceiverConfiguration))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
-        System.Threading.Tasks.Task SetAudioSourceConfigurationAsync(OnvifMedia2.AudioSourceConfiguration Configuration);
+        System.Threading.Tasks.Task SetAudioSourceConfigurationAsync(SharpOnvifClient.Media2.AudioSourceConfiguration Configuration);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/media/wsdl/SetAudioEncoderConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReceiverConfiguration))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
-        System.Threading.Tasks.Task SetAudioEncoderConfigurationAsync(OnvifMedia2.AudioEncoder2Configuration Configuration);
+        System.Threading.Tasks.Task SetAudioEncoderConfigurationAsync(SharpOnvifClient.Media2.AudioEncoder2Configuration Configuration);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/media/wsdl/SetMetadataConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReceiverConfiguration))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
-        System.Threading.Tasks.Task SetMetadataConfigurationAsync(OnvifMedia2.MetadataConfiguration Configuration);
+        System.Threading.Tasks.Task SetMetadataConfigurationAsync(SharpOnvifClient.Media2.MetadataConfiguration Configuration);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/media/wsdl/SetAudioOutputConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReceiverConfiguration))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
-        System.Threading.Tasks.Task SetAudioOutputConfigurationAsync(OnvifMedia2.AudioOutputConfiguration Configuration);
+        System.Threading.Tasks.Task SetAudioOutputConfigurationAsync(SharpOnvifClient.Media2.AudioOutputConfiguration Configuration);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/media/wsdl/SetAudioDecoderConfiguration", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReceiverConfiguration))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
-        System.Threading.Tasks.Task SetAudioDecoderConfigurationAsync(OnvifMedia2.AudioDecoderConfiguration Configuration);
+        System.Threading.Tasks.Task SetAudioDecoderConfigurationAsync(SharpOnvifClient.Media2.AudioDecoderConfiguration Configuration);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/media/wsdl/GetVideoSourceConfigurationOptions/", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -170,14 +170,14 @@ namespace OnvifMedia2
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReceiverConfiguration))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Options")]
-        System.Threading.Tasks.Task<OnvifMedia2.VideoSourceConfigurationOptions> GetVideoSourceConfigurationOptionsAsync(string ConfigurationToken, string ProfileToken);
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.VideoSourceConfigurationOptions> GetVideoSourceConfigurationOptionsAsync(string ConfigurationToken, string ProfileToken);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/media/wsdl/GetVideoEncoderConfigurationOptions", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReceiverConfiguration))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
-        System.Threading.Tasks.Task<OnvifMedia2.GetVideoEncoderConfigurationOptionsResponse> GetVideoEncoderConfigurationOptionsAsync(OnvifMedia2.GetVideoEncoderConfigurationOptionsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetVideoEncoderConfigurationOptionsResponse> GetVideoEncoderConfigurationOptionsAsync(SharpOnvifClient.Media2.GetVideoEncoderConfigurationOptionsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/media/wsdl/GetAudioSourceConfigurationOptions", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -185,14 +185,14 @@ namespace OnvifMedia2
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReceiverConfiguration))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Options")]
-        System.Threading.Tasks.Task<OnvifMedia2.AudioSourceConfigurationOptions> GetAudioSourceConfigurationOptionsAsync(string ConfigurationToken, string ProfileToken);
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.AudioSourceConfigurationOptions> GetAudioSourceConfigurationOptionsAsync(string ConfigurationToken, string ProfileToken);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/media/wsdl/GetAudioEncoderConfigurationOptions", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReceiverConfiguration))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
-        System.Threading.Tasks.Task<OnvifMedia2.GetAudioEncoderConfigurationOptionsResponse> GetAudioEncoderConfigurationOptionsAsync(OnvifMedia2.GetAudioEncoderConfigurationOptionsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetAudioEncoderConfigurationOptionsResponse> GetAudioEncoderConfigurationOptionsAsync(SharpOnvifClient.Media2.GetAudioEncoderConfigurationOptionsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/media/wsdl/GetMetadataConfigurationOptions", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -200,7 +200,7 @@ namespace OnvifMedia2
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReceiverConfiguration))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Options")]
-        System.Threading.Tasks.Task<OnvifMedia2.MetadataConfigurationOptions> GetMetadataConfigurationOptionsAsync(string ConfigurationToken, string ProfileToken);
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.MetadataConfigurationOptions> GetMetadataConfigurationOptionsAsync(string ConfigurationToken, string ProfileToken);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/media/wsdl/GetAudioOutputConfigurationOptions", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -208,14 +208,14 @@ namespace OnvifMedia2
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReceiverConfiguration))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Options")]
-        System.Threading.Tasks.Task<OnvifMedia2.AudioOutputConfigurationOptions> GetAudioOutputConfigurationOptionsAsync(string ConfigurationToken, string ProfileToken);
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.AudioOutputConfigurationOptions> GetAudioOutputConfigurationOptionsAsync(string ConfigurationToken, string ProfileToken);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/media/wsdl/GetAudioDecoderConfigurationOptions", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReceiverConfiguration))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
-        System.Threading.Tasks.Task<OnvifMedia2.GetAudioDecoderConfigurationOptionsResponse> GetAudioDecoderConfigurationOptionsAsync(OnvifMedia2.GetAudioDecoderConfigurationOptionsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetAudioDecoderConfigurationOptionsResponse> GetAudioDecoderConfigurationOptionsAsync(SharpOnvifClient.Media2.GetAudioDecoderConfigurationOptionsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/media/wsdl/GetVideoEncoderInstances", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -223,14 +223,14 @@ namespace OnvifMedia2
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReceiverConfiguration))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Info")]
-        System.Threading.Tasks.Task<OnvifMedia2.EncoderInstanceInfo> GetVideoEncoderInstancesAsync(string ConfigurationToken);
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.EncoderInstanceInfo> GetVideoEncoderInstancesAsync(string ConfigurationToken);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/media/wsdl/GetStreamUri", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReceiverConfiguration))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
-        System.Threading.Tasks.Task<OnvifMedia2.GetStreamUriResponse> GetStreamUriAsync(OnvifMedia2.GetStreamUriRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetStreamUriResponse> GetStreamUriAsync(SharpOnvifClient.Media2.GetStreamUriRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/media/wsdl/StartMulticastStreaming", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -258,14 +258,14 @@ namespace OnvifMedia2
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReceiverConfiguration))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
-        System.Threading.Tasks.Task<OnvifMedia2.GetSnapshotUriResponse> GetSnapshotUriAsync(OnvifMedia2.GetSnapshotUriRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetSnapshotUriResponse> GetSnapshotUriAsync(SharpOnvifClient.Media2.GetSnapshotUriRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/media/wsdl/GetVideoSourceModes", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReceiverConfiguration))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
-        System.Threading.Tasks.Task<OnvifMedia2.GetVideoSourceModesResponse> GetVideoSourceModesAsync(OnvifMedia2.GetVideoSourceModesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetVideoSourceModesResponse> GetVideoSourceModesAsync(SharpOnvifClient.Media2.GetVideoSourceModesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/media/wsdl/SetVideoSourceMode", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -280,7 +280,7 @@ namespace OnvifMedia2
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReceiverConfiguration))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
-        System.Threading.Tasks.Task<OnvifMedia2.GetOSDsResponse> GetOSDsAsync(OnvifMedia2.GetOSDsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetOSDsResponse> GetOSDsAsync(SharpOnvifClient.Media2.GetOSDsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/media/wsdl/GetOSDOptions", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -288,14 +288,14 @@ namespace OnvifMedia2
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReceiverConfiguration))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="OSDOptions")]
-        System.Threading.Tasks.Task<OnvifMedia2.OSDConfigurationOptions> GetOSDOptionsAsync(string ConfigurationToken);
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.OSDConfigurationOptions> GetOSDOptionsAsync(string ConfigurationToken);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/media/wsdl/SetOSD", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReceiverConfiguration))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
-        System.Threading.Tasks.Task SetOSDAsync(OnvifMedia2.OSDConfiguration OSD);
+        System.Threading.Tasks.Task SetOSDAsync(SharpOnvifClient.Media2.OSDConfiguration OSD);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/media/wsdl/CreateOSD", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -303,7 +303,7 @@ namespace OnvifMedia2
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReceiverConfiguration))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="OSDToken")]
-        System.Threading.Tasks.Task<string> CreateOSDAsync(OnvifMedia2.OSDConfiguration OSD);
+        System.Threading.Tasks.Task<string> CreateOSDAsync(SharpOnvifClient.Media2.OSDConfiguration OSD);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/media/wsdl/DeleteOSD", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -317,7 +317,7 @@ namespace OnvifMedia2
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReceiverConfiguration))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
-        System.Threading.Tasks.Task<OnvifMedia2.GetMasksResponse> GetMasksAsync(OnvifMedia2.GetMasksRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetMasksResponse> GetMasksAsync(SharpOnvifClient.Media2.GetMasksRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/media/wsdl/GetMaskOptions", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -325,14 +325,14 @@ namespace OnvifMedia2
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReceiverConfiguration))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Options")]
-        System.Threading.Tasks.Task<OnvifMedia2.MaskOptions> GetMaskOptionsAsync(string ConfigurationToken);
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.MaskOptions> GetMaskOptionsAsync(string ConfigurationToken);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/media/wsdl/SetMask", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeviceEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReceiverConfiguration))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
-        System.Threading.Tasks.Task SetMaskAsync(OnvifMedia2.Mask Mask);
+        System.Threading.Tasks.Task SetMaskAsync(SharpOnvifClient.Media2.Mask Mask);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/media/wsdl/CreateMask", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -340,7 +340,7 @@ namespace OnvifMedia2
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReceiverConfiguration))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ConfigurationEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Token")]
-        System.Threading.Tasks.Task<string> CreateMaskAsync(OnvifMedia2.Mask Mask);
+        System.Threading.Tasks.Task<string> CreateMaskAsync(SharpOnvifClient.Media2.Mask Mask);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver20/media/wsdl/DeleteMask", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -14248,13 +14248,13 @@ namespace OnvifMedia2
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl", Order=1)]
         [System.Xml.Serialization.XmlElementAttribute("Configuration")]
-        public OnvifMedia2.ConfigurationRef[] Configuration;
+        public SharpOnvifClient.Media2.ConfigurationRef[] Configuration;
         
         public CreateProfileRequest()
         {
         }
         
-        public CreateProfileRequest(string Name, OnvifMedia2.ConfigurationRef[] Configuration)
+        public CreateProfileRequest(string Name, SharpOnvifClient.Media2.ConfigurationRef[] Configuration)
         {
             this.Name = Name;
             this.Configuration = Configuration;
@@ -14315,13 +14315,13 @@ namespace OnvifMedia2
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Profiles")]
-        public OnvifMedia2.MediaProfile[] Profiles;
+        public SharpOnvifClient.Media2.MediaProfile[] Profiles;
         
         public GetProfilesResponse()
         {
         }
         
-        public GetProfilesResponse(OnvifMedia2.MediaProfile[] Profiles)
+        public GetProfilesResponse(SharpOnvifClient.Media2.MediaProfile[] Profiles)
         {
             this.Profiles = Profiles;
         }
@@ -14342,13 +14342,13 @@ namespace OnvifMedia2
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl", Order=2)]
         [System.Xml.Serialization.XmlElementAttribute("Configuration")]
-        public OnvifMedia2.ConfigurationRef[] Configuration;
+        public SharpOnvifClient.Media2.ConfigurationRef[] Configuration;
         
         public AddConfigurationRequest()
         {
         }
         
-        public AddConfigurationRequest(string ProfileToken, string Name, OnvifMedia2.ConfigurationRef[] Configuration)
+        public AddConfigurationRequest(string ProfileToken, string Name, SharpOnvifClient.Media2.ConfigurationRef[] Configuration)
         {
             this.ProfileToken = ProfileToken;
             this.Name = Name;
@@ -14380,13 +14380,13 @@ namespace OnvifMedia2
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl", Order=1)]
         [System.Xml.Serialization.XmlElementAttribute("Configuration")]
-        public OnvifMedia2.ConfigurationRef[] Configuration;
+        public SharpOnvifClient.Media2.ConfigurationRef[] Configuration;
         
         public RemoveConfigurationRequest()
         {
         }
         
-        public RemoveConfigurationRequest(string ProfileToken, OnvifMedia2.ConfigurationRef[] Configuration)
+        public RemoveConfigurationRequest(string ProfileToken, SharpOnvifClient.Media2.ConfigurationRef[] Configuration)
         {
             this.ProfileToken = ProfileToken;
             this.Configuration = Configuration;
@@ -14438,13 +14438,13 @@ namespace OnvifMedia2
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Configurations")]
-        public OnvifMedia2.VideoSourceConfiguration[] Configurations;
+        public SharpOnvifClient.Media2.VideoSourceConfiguration[] Configurations;
         
         public GetVideoSourceConfigurationsResponse()
         {
         }
         
-        public GetVideoSourceConfigurationsResponse(OnvifMedia2.VideoSourceConfiguration[] Configurations)
+        public GetVideoSourceConfigurationsResponse(SharpOnvifClient.Media2.VideoSourceConfiguration[] Configurations)
         {
             this.Configurations = Configurations;
         }
@@ -14483,13 +14483,13 @@ namespace OnvifMedia2
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Configurations")]
-        public OnvifMedia2.VideoEncoder2Configuration[] Configurations;
+        public SharpOnvifClient.Media2.VideoEncoder2Configuration[] Configurations;
         
         public GetVideoEncoderConfigurationsResponse()
         {
         }
         
-        public GetVideoEncoderConfigurationsResponse(OnvifMedia2.VideoEncoder2Configuration[] Configurations)
+        public GetVideoEncoderConfigurationsResponse(SharpOnvifClient.Media2.VideoEncoder2Configuration[] Configurations)
         {
             this.Configurations = Configurations;
         }
@@ -14528,13 +14528,13 @@ namespace OnvifMedia2
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Configurations")]
-        public OnvifMedia2.AudioSourceConfiguration[] Configurations;
+        public SharpOnvifClient.Media2.AudioSourceConfiguration[] Configurations;
         
         public GetAudioSourceConfigurationsResponse()
         {
         }
         
-        public GetAudioSourceConfigurationsResponse(OnvifMedia2.AudioSourceConfiguration[] Configurations)
+        public GetAudioSourceConfigurationsResponse(SharpOnvifClient.Media2.AudioSourceConfiguration[] Configurations)
         {
             this.Configurations = Configurations;
         }
@@ -14573,13 +14573,13 @@ namespace OnvifMedia2
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Configurations")]
-        public OnvifMedia2.AudioEncoder2Configuration[] Configurations;
+        public SharpOnvifClient.Media2.AudioEncoder2Configuration[] Configurations;
         
         public GetAudioEncoderConfigurationsResponse()
         {
         }
         
-        public GetAudioEncoderConfigurationsResponse(OnvifMedia2.AudioEncoder2Configuration[] Configurations)
+        public GetAudioEncoderConfigurationsResponse(SharpOnvifClient.Media2.AudioEncoder2Configuration[] Configurations)
         {
             this.Configurations = Configurations;
         }
@@ -14618,13 +14618,13 @@ namespace OnvifMedia2
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Configurations")]
-        public OnvifMedia2.VideoAnalyticsConfiguration[] Configurations;
+        public SharpOnvifClient.Media2.VideoAnalyticsConfiguration[] Configurations;
         
         public GetAnalyticsConfigurationsResponse()
         {
         }
         
-        public GetAnalyticsConfigurationsResponse(OnvifMedia2.VideoAnalyticsConfiguration[] Configurations)
+        public GetAnalyticsConfigurationsResponse(SharpOnvifClient.Media2.VideoAnalyticsConfiguration[] Configurations)
         {
             this.Configurations = Configurations;
         }
@@ -14663,13 +14663,13 @@ namespace OnvifMedia2
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Configurations")]
-        public OnvifMedia2.MetadataConfiguration[] Configurations;
+        public SharpOnvifClient.Media2.MetadataConfiguration[] Configurations;
         
         public GetMetadataConfigurationsResponse()
         {
         }
         
-        public GetMetadataConfigurationsResponse(OnvifMedia2.MetadataConfiguration[] Configurations)
+        public GetMetadataConfigurationsResponse(SharpOnvifClient.Media2.MetadataConfiguration[] Configurations)
         {
             this.Configurations = Configurations;
         }
@@ -14708,13 +14708,13 @@ namespace OnvifMedia2
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Configurations")]
-        public OnvifMedia2.AudioOutputConfiguration[] Configurations;
+        public SharpOnvifClient.Media2.AudioOutputConfiguration[] Configurations;
         
         public GetAudioOutputConfigurationsResponse()
         {
         }
         
-        public GetAudioOutputConfigurationsResponse(OnvifMedia2.AudioOutputConfiguration[] Configurations)
+        public GetAudioOutputConfigurationsResponse(SharpOnvifClient.Media2.AudioOutputConfiguration[] Configurations)
         {
             this.Configurations = Configurations;
         }
@@ -14753,13 +14753,13 @@ namespace OnvifMedia2
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Configurations")]
-        public OnvifMedia2.AudioDecoderConfiguration[] Configurations;
+        public SharpOnvifClient.Media2.AudioDecoderConfiguration[] Configurations;
         
         public GetAudioDecoderConfigurationsResponse()
         {
         }
         
-        public GetAudioDecoderConfigurationsResponse(OnvifMedia2.AudioDecoderConfiguration[] Configurations)
+        public GetAudioDecoderConfigurationsResponse(SharpOnvifClient.Media2.AudioDecoderConfiguration[] Configurations)
         {
             this.Configurations = Configurations;
         }
@@ -14798,13 +14798,13 @@ namespace OnvifMedia2
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Options")]
-        public OnvifMedia2.VideoEncoder2ConfigurationOptions[] Options;
+        public SharpOnvifClient.Media2.VideoEncoder2ConfigurationOptions[] Options;
         
         public GetVideoEncoderConfigurationOptionsResponse()
         {
         }
         
-        public GetVideoEncoderConfigurationOptionsResponse(OnvifMedia2.VideoEncoder2ConfigurationOptions[] Options)
+        public GetVideoEncoderConfigurationOptionsResponse(SharpOnvifClient.Media2.VideoEncoder2ConfigurationOptions[] Options)
         {
             this.Options = Options;
         }
@@ -14843,13 +14843,13 @@ namespace OnvifMedia2
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Options")]
-        public OnvifMedia2.AudioEncoder2ConfigurationOptions[] Options;
+        public SharpOnvifClient.Media2.AudioEncoder2ConfigurationOptions[] Options;
         
         public GetAudioEncoderConfigurationOptionsResponse()
         {
         }
         
-        public GetAudioEncoderConfigurationOptionsResponse(OnvifMedia2.AudioEncoder2ConfigurationOptions[] Options)
+        public GetAudioEncoderConfigurationOptionsResponse(SharpOnvifClient.Media2.AudioEncoder2ConfigurationOptions[] Options)
         {
             this.Options = Options;
         }
@@ -14888,13 +14888,13 @@ namespace OnvifMedia2
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Options")]
-        public OnvifMedia2.AudioEncoder2ConfigurationOptions[] Options;
+        public SharpOnvifClient.Media2.AudioEncoder2ConfigurationOptions[] Options;
         
         public GetAudioDecoderConfigurationOptionsResponse()
         {
         }
         
-        public GetAudioDecoderConfigurationOptionsResponse(OnvifMedia2.AudioEncoder2ConfigurationOptions[] Options)
+        public GetAudioDecoderConfigurationOptionsResponse(SharpOnvifClient.Media2.AudioEncoder2ConfigurationOptions[] Options)
         {
             this.Options = Options;
         }
@@ -15015,13 +15015,13 @@ namespace OnvifMedia2
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("VideoSourceModes")]
-        public OnvifMedia2.VideoSourceMode[] VideoSourceModes;
+        public SharpOnvifClient.Media2.VideoSourceMode[] VideoSourceModes;
         
         public GetVideoSourceModesResponse()
         {
         }
         
-        public GetVideoSourceModesResponse(OnvifMedia2.VideoSourceMode[] VideoSourceModes)
+        public GetVideoSourceModesResponse(SharpOnvifClient.Media2.VideoSourceMode[] VideoSourceModes)
         {
             this.VideoSourceModes = VideoSourceModes;
         }
@@ -15060,13 +15060,13 @@ namespace OnvifMedia2
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("OSDs")]
-        public OnvifMedia2.OSDConfiguration[] OSDs;
+        public SharpOnvifClient.Media2.OSDConfiguration[] OSDs;
         
         public GetOSDsResponse()
         {
         }
         
-        public GetOSDsResponse(OnvifMedia2.OSDConfiguration[] OSDs)
+        public GetOSDsResponse(SharpOnvifClient.Media2.OSDConfiguration[] OSDs)
         {
             this.OSDs = OSDs;
         }
@@ -15105,26 +15105,26 @@ namespace OnvifMedia2
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Masks")]
-        public OnvifMedia2.Mask[] Masks;
+        public SharpOnvifClient.Media2.Mask[] Masks;
         
         public GetMasksResponse()
         {
         }
         
-        public GetMasksResponse(OnvifMedia2.Mask[] Masks)
+        public GetMasksResponse(SharpOnvifClient.Media2.Mask[] Masks)
         {
             this.Masks = Masks;
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface Media2Channel : OnvifMedia2.Media2, System.ServiceModel.IClientChannel
+    public interface Media2Channel : SharpOnvifClient.Media2.Media2, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class Media2Client : System.ServiceModel.ClientBase<OnvifMedia2.Media2>, OnvifMedia2.Media2
+    public partial class Media2Client : System.ServiceModel.ClientBase<SharpOnvifClient.Media2.Media2>, SharpOnvifClient.Media2.Media2
     {
         
         public Media2Client(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
@@ -15132,66 +15132,66 @@ namespace OnvifMedia2
         {
         }
         
-        public System.Threading.Tasks.Task<OnvifMedia2.Capabilities2> GetServiceCapabilitiesAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.Media2.Capabilities2> GetServiceCapabilitiesAsync()
         {
             return base.Channel.GetServiceCapabilitiesAsync();
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifMedia2.CreateProfileResponse> OnvifMedia2.Media2.CreateProfileAsync(OnvifMedia2.CreateProfileRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.CreateProfileResponse> SharpOnvifClient.Media2.Media2.CreateProfileAsync(SharpOnvifClient.Media2.CreateProfileRequest request)
         {
             return base.Channel.CreateProfileAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifMedia2.CreateProfileResponse> CreateProfileAsync(string Name, OnvifMedia2.ConfigurationRef[] Configuration)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Media2.CreateProfileResponse> CreateProfileAsync(string Name, SharpOnvifClient.Media2.ConfigurationRef[] Configuration)
         {
-            OnvifMedia2.CreateProfileRequest inValue = new OnvifMedia2.CreateProfileRequest();
+            SharpOnvifClient.Media2.CreateProfileRequest inValue = new SharpOnvifClient.Media2.CreateProfileRequest();
             inValue.Name = Name;
             inValue.Configuration = Configuration;
-            return ((OnvifMedia2.Media2)(this)).CreateProfileAsync(inValue);
+            return ((SharpOnvifClient.Media2.Media2)(this)).CreateProfileAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifMedia2.GetProfilesResponse> OnvifMedia2.Media2.GetProfilesAsync(OnvifMedia2.GetProfilesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetProfilesResponse> SharpOnvifClient.Media2.Media2.GetProfilesAsync(SharpOnvifClient.Media2.GetProfilesRequest request)
         {
             return base.Channel.GetProfilesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifMedia2.GetProfilesResponse> GetProfilesAsync(string Token, string[] Type)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetProfilesResponse> GetProfilesAsync(string Token, string[] Type)
         {
-            OnvifMedia2.GetProfilesRequest inValue = new OnvifMedia2.GetProfilesRequest();
+            SharpOnvifClient.Media2.GetProfilesRequest inValue = new SharpOnvifClient.Media2.GetProfilesRequest();
             inValue.Token = Token;
             inValue.Type = Type;
-            return ((OnvifMedia2.Media2)(this)).GetProfilesAsync(inValue);
+            return ((SharpOnvifClient.Media2.Media2)(this)).GetProfilesAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifMedia2.AddConfigurationResponse> OnvifMedia2.Media2.AddConfigurationAsync(OnvifMedia2.AddConfigurationRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.AddConfigurationResponse> SharpOnvifClient.Media2.Media2.AddConfigurationAsync(SharpOnvifClient.Media2.AddConfigurationRequest request)
         {
             return base.Channel.AddConfigurationAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifMedia2.AddConfigurationResponse> AddConfigurationAsync(string ProfileToken, string Name, OnvifMedia2.ConfigurationRef[] Configuration)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Media2.AddConfigurationResponse> AddConfigurationAsync(string ProfileToken, string Name, SharpOnvifClient.Media2.ConfigurationRef[] Configuration)
         {
-            OnvifMedia2.AddConfigurationRequest inValue = new OnvifMedia2.AddConfigurationRequest();
+            SharpOnvifClient.Media2.AddConfigurationRequest inValue = new SharpOnvifClient.Media2.AddConfigurationRequest();
             inValue.ProfileToken = ProfileToken;
             inValue.Name = Name;
             inValue.Configuration = Configuration;
-            return ((OnvifMedia2.Media2)(this)).AddConfigurationAsync(inValue);
+            return ((SharpOnvifClient.Media2.Media2)(this)).AddConfigurationAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifMedia2.RemoveConfigurationResponse> OnvifMedia2.Media2.RemoveConfigurationAsync(OnvifMedia2.RemoveConfigurationRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.RemoveConfigurationResponse> SharpOnvifClient.Media2.Media2.RemoveConfigurationAsync(SharpOnvifClient.Media2.RemoveConfigurationRequest request)
         {
             return base.Channel.RemoveConfigurationAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifMedia2.RemoveConfigurationResponse> RemoveConfigurationAsync(string ProfileToken, OnvifMedia2.ConfigurationRef[] Configuration)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Media2.RemoveConfigurationResponse> RemoveConfigurationAsync(string ProfileToken, SharpOnvifClient.Media2.ConfigurationRef[] Configuration)
         {
-            OnvifMedia2.RemoveConfigurationRequest inValue = new OnvifMedia2.RemoveConfigurationRequest();
+            SharpOnvifClient.Media2.RemoveConfigurationRequest inValue = new SharpOnvifClient.Media2.RemoveConfigurationRequest();
             inValue.ProfileToken = ProfileToken;
             inValue.Configuration = Configuration;
-            return ((OnvifMedia2.Media2)(this)).RemoveConfigurationAsync(inValue);
+            return ((SharpOnvifClient.Media2.Media2)(this)).RemoveConfigurationAsync(inValue);
         }
         
         public System.Threading.Tasks.Task DeleteProfileAsync(string Token)
@@ -15200,231 +15200,231 @@ namespace OnvifMedia2
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifMedia2.GetVideoSourceConfigurationsResponse> OnvifMedia2.Media2.GetVideoSourceConfigurationsAsync(OnvifMedia2.GetVideoSourceConfigurationsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetVideoSourceConfigurationsResponse> SharpOnvifClient.Media2.Media2.GetVideoSourceConfigurationsAsync(SharpOnvifClient.Media2.GetVideoSourceConfigurationsRequest request)
         {
             return base.Channel.GetVideoSourceConfigurationsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifMedia2.GetVideoSourceConfigurationsResponse> GetVideoSourceConfigurationsAsync(string ConfigurationToken, string ProfileToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetVideoSourceConfigurationsResponse> GetVideoSourceConfigurationsAsync(string ConfigurationToken, string ProfileToken)
         {
-            OnvifMedia2.GetVideoSourceConfigurationsRequest inValue = new OnvifMedia2.GetVideoSourceConfigurationsRequest();
+            SharpOnvifClient.Media2.GetVideoSourceConfigurationsRequest inValue = new SharpOnvifClient.Media2.GetVideoSourceConfigurationsRequest();
             inValue.ConfigurationToken = ConfigurationToken;
             inValue.ProfileToken = ProfileToken;
-            return ((OnvifMedia2.Media2)(this)).GetVideoSourceConfigurationsAsync(inValue);
+            return ((SharpOnvifClient.Media2.Media2)(this)).GetVideoSourceConfigurationsAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifMedia2.GetVideoEncoderConfigurationsResponse> OnvifMedia2.Media2.GetVideoEncoderConfigurationsAsync(OnvifMedia2.GetVideoEncoderConfigurationsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetVideoEncoderConfigurationsResponse> SharpOnvifClient.Media2.Media2.GetVideoEncoderConfigurationsAsync(SharpOnvifClient.Media2.GetVideoEncoderConfigurationsRequest request)
         {
             return base.Channel.GetVideoEncoderConfigurationsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifMedia2.GetVideoEncoderConfigurationsResponse> GetVideoEncoderConfigurationsAsync(string ConfigurationToken, string ProfileToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetVideoEncoderConfigurationsResponse> GetVideoEncoderConfigurationsAsync(string ConfigurationToken, string ProfileToken)
         {
-            OnvifMedia2.GetVideoEncoderConfigurationsRequest inValue = new OnvifMedia2.GetVideoEncoderConfigurationsRequest();
+            SharpOnvifClient.Media2.GetVideoEncoderConfigurationsRequest inValue = new SharpOnvifClient.Media2.GetVideoEncoderConfigurationsRequest();
             inValue.ConfigurationToken = ConfigurationToken;
             inValue.ProfileToken = ProfileToken;
-            return ((OnvifMedia2.Media2)(this)).GetVideoEncoderConfigurationsAsync(inValue);
+            return ((SharpOnvifClient.Media2.Media2)(this)).GetVideoEncoderConfigurationsAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifMedia2.GetAudioSourceConfigurationsResponse> OnvifMedia2.Media2.GetAudioSourceConfigurationsAsync(OnvifMedia2.GetAudioSourceConfigurationsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetAudioSourceConfigurationsResponse> SharpOnvifClient.Media2.Media2.GetAudioSourceConfigurationsAsync(SharpOnvifClient.Media2.GetAudioSourceConfigurationsRequest request)
         {
             return base.Channel.GetAudioSourceConfigurationsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifMedia2.GetAudioSourceConfigurationsResponse> GetAudioSourceConfigurationsAsync(string ConfigurationToken, string ProfileToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetAudioSourceConfigurationsResponse> GetAudioSourceConfigurationsAsync(string ConfigurationToken, string ProfileToken)
         {
-            OnvifMedia2.GetAudioSourceConfigurationsRequest inValue = new OnvifMedia2.GetAudioSourceConfigurationsRequest();
+            SharpOnvifClient.Media2.GetAudioSourceConfigurationsRequest inValue = new SharpOnvifClient.Media2.GetAudioSourceConfigurationsRequest();
             inValue.ConfigurationToken = ConfigurationToken;
             inValue.ProfileToken = ProfileToken;
-            return ((OnvifMedia2.Media2)(this)).GetAudioSourceConfigurationsAsync(inValue);
+            return ((SharpOnvifClient.Media2.Media2)(this)).GetAudioSourceConfigurationsAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifMedia2.GetAudioEncoderConfigurationsResponse> OnvifMedia2.Media2.GetAudioEncoderConfigurationsAsync(OnvifMedia2.GetAudioEncoderConfigurationsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetAudioEncoderConfigurationsResponse> SharpOnvifClient.Media2.Media2.GetAudioEncoderConfigurationsAsync(SharpOnvifClient.Media2.GetAudioEncoderConfigurationsRequest request)
         {
             return base.Channel.GetAudioEncoderConfigurationsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifMedia2.GetAudioEncoderConfigurationsResponse> GetAudioEncoderConfigurationsAsync(string ConfigurationToken, string ProfileToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetAudioEncoderConfigurationsResponse> GetAudioEncoderConfigurationsAsync(string ConfigurationToken, string ProfileToken)
         {
-            OnvifMedia2.GetAudioEncoderConfigurationsRequest inValue = new OnvifMedia2.GetAudioEncoderConfigurationsRequest();
+            SharpOnvifClient.Media2.GetAudioEncoderConfigurationsRequest inValue = new SharpOnvifClient.Media2.GetAudioEncoderConfigurationsRequest();
             inValue.ConfigurationToken = ConfigurationToken;
             inValue.ProfileToken = ProfileToken;
-            return ((OnvifMedia2.Media2)(this)).GetAudioEncoderConfigurationsAsync(inValue);
+            return ((SharpOnvifClient.Media2.Media2)(this)).GetAudioEncoderConfigurationsAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifMedia2.GetAnalyticsConfigurationsResponse> OnvifMedia2.Media2.GetAnalyticsConfigurationsAsync(OnvifMedia2.GetAnalyticsConfigurationsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetAnalyticsConfigurationsResponse> SharpOnvifClient.Media2.Media2.GetAnalyticsConfigurationsAsync(SharpOnvifClient.Media2.GetAnalyticsConfigurationsRequest request)
         {
             return base.Channel.GetAnalyticsConfigurationsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifMedia2.GetAnalyticsConfigurationsResponse> GetAnalyticsConfigurationsAsync(string ConfigurationToken, string ProfileToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetAnalyticsConfigurationsResponse> GetAnalyticsConfigurationsAsync(string ConfigurationToken, string ProfileToken)
         {
-            OnvifMedia2.GetAnalyticsConfigurationsRequest inValue = new OnvifMedia2.GetAnalyticsConfigurationsRequest();
+            SharpOnvifClient.Media2.GetAnalyticsConfigurationsRequest inValue = new SharpOnvifClient.Media2.GetAnalyticsConfigurationsRequest();
             inValue.ConfigurationToken = ConfigurationToken;
             inValue.ProfileToken = ProfileToken;
-            return ((OnvifMedia2.Media2)(this)).GetAnalyticsConfigurationsAsync(inValue);
+            return ((SharpOnvifClient.Media2.Media2)(this)).GetAnalyticsConfigurationsAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifMedia2.GetMetadataConfigurationsResponse> OnvifMedia2.Media2.GetMetadataConfigurationsAsync(OnvifMedia2.GetMetadataConfigurationsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetMetadataConfigurationsResponse> SharpOnvifClient.Media2.Media2.GetMetadataConfigurationsAsync(SharpOnvifClient.Media2.GetMetadataConfigurationsRequest request)
         {
             return base.Channel.GetMetadataConfigurationsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifMedia2.GetMetadataConfigurationsResponse> GetMetadataConfigurationsAsync(string ConfigurationToken, string ProfileToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetMetadataConfigurationsResponse> GetMetadataConfigurationsAsync(string ConfigurationToken, string ProfileToken)
         {
-            OnvifMedia2.GetMetadataConfigurationsRequest inValue = new OnvifMedia2.GetMetadataConfigurationsRequest();
+            SharpOnvifClient.Media2.GetMetadataConfigurationsRequest inValue = new SharpOnvifClient.Media2.GetMetadataConfigurationsRequest();
             inValue.ConfigurationToken = ConfigurationToken;
             inValue.ProfileToken = ProfileToken;
-            return ((OnvifMedia2.Media2)(this)).GetMetadataConfigurationsAsync(inValue);
+            return ((SharpOnvifClient.Media2.Media2)(this)).GetMetadataConfigurationsAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifMedia2.GetAudioOutputConfigurationsResponse> OnvifMedia2.Media2.GetAudioOutputConfigurationsAsync(OnvifMedia2.GetAudioOutputConfigurationsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetAudioOutputConfigurationsResponse> SharpOnvifClient.Media2.Media2.GetAudioOutputConfigurationsAsync(SharpOnvifClient.Media2.GetAudioOutputConfigurationsRequest request)
         {
             return base.Channel.GetAudioOutputConfigurationsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifMedia2.GetAudioOutputConfigurationsResponse> GetAudioOutputConfigurationsAsync(string ConfigurationToken, string ProfileToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetAudioOutputConfigurationsResponse> GetAudioOutputConfigurationsAsync(string ConfigurationToken, string ProfileToken)
         {
-            OnvifMedia2.GetAudioOutputConfigurationsRequest inValue = new OnvifMedia2.GetAudioOutputConfigurationsRequest();
+            SharpOnvifClient.Media2.GetAudioOutputConfigurationsRequest inValue = new SharpOnvifClient.Media2.GetAudioOutputConfigurationsRequest();
             inValue.ConfigurationToken = ConfigurationToken;
             inValue.ProfileToken = ProfileToken;
-            return ((OnvifMedia2.Media2)(this)).GetAudioOutputConfigurationsAsync(inValue);
+            return ((SharpOnvifClient.Media2.Media2)(this)).GetAudioOutputConfigurationsAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifMedia2.GetAudioDecoderConfigurationsResponse> OnvifMedia2.Media2.GetAudioDecoderConfigurationsAsync(OnvifMedia2.GetAudioDecoderConfigurationsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetAudioDecoderConfigurationsResponse> SharpOnvifClient.Media2.Media2.GetAudioDecoderConfigurationsAsync(SharpOnvifClient.Media2.GetAudioDecoderConfigurationsRequest request)
         {
             return base.Channel.GetAudioDecoderConfigurationsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifMedia2.GetAudioDecoderConfigurationsResponse> GetAudioDecoderConfigurationsAsync(string ConfigurationToken, string ProfileToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetAudioDecoderConfigurationsResponse> GetAudioDecoderConfigurationsAsync(string ConfigurationToken, string ProfileToken)
         {
-            OnvifMedia2.GetAudioDecoderConfigurationsRequest inValue = new OnvifMedia2.GetAudioDecoderConfigurationsRequest();
+            SharpOnvifClient.Media2.GetAudioDecoderConfigurationsRequest inValue = new SharpOnvifClient.Media2.GetAudioDecoderConfigurationsRequest();
             inValue.ConfigurationToken = ConfigurationToken;
             inValue.ProfileToken = ProfileToken;
-            return ((OnvifMedia2.Media2)(this)).GetAudioDecoderConfigurationsAsync(inValue);
+            return ((SharpOnvifClient.Media2.Media2)(this)).GetAudioDecoderConfigurationsAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task SetVideoSourceConfigurationAsync(OnvifMedia2.VideoSourceConfiguration Configuration)
+        public System.Threading.Tasks.Task SetVideoSourceConfigurationAsync(SharpOnvifClient.Media2.VideoSourceConfiguration Configuration)
         {
             return base.Channel.SetVideoSourceConfigurationAsync(Configuration);
         }
         
-        public System.Threading.Tasks.Task SetVideoEncoderConfigurationAsync(OnvifMedia2.VideoEncoder2Configuration Configuration)
+        public System.Threading.Tasks.Task SetVideoEncoderConfigurationAsync(SharpOnvifClient.Media2.VideoEncoder2Configuration Configuration)
         {
             return base.Channel.SetVideoEncoderConfigurationAsync(Configuration);
         }
         
-        public System.Threading.Tasks.Task SetAudioSourceConfigurationAsync(OnvifMedia2.AudioSourceConfiguration Configuration)
+        public System.Threading.Tasks.Task SetAudioSourceConfigurationAsync(SharpOnvifClient.Media2.AudioSourceConfiguration Configuration)
         {
             return base.Channel.SetAudioSourceConfigurationAsync(Configuration);
         }
         
-        public System.Threading.Tasks.Task SetAudioEncoderConfigurationAsync(OnvifMedia2.AudioEncoder2Configuration Configuration)
+        public System.Threading.Tasks.Task SetAudioEncoderConfigurationAsync(SharpOnvifClient.Media2.AudioEncoder2Configuration Configuration)
         {
             return base.Channel.SetAudioEncoderConfigurationAsync(Configuration);
         }
         
-        public System.Threading.Tasks.Task SetMetadataConfigurationAsync(OnvifMedia2.MetadataConfiguration Configuration)
+        public System.Threading.Tasks.Task SetMetadataConfigurationAsync(SharpOnvifClient.Media2.MetadataConfiguration Configuration)
         {
             return base.Channel.SetMetadataConfigurationAsync(Configuration);
         }
         
-        public System.Threading.Tasks.Task SetAudioOutputConfigurationAsync(OnvifMedia2.AudioOutputConfiguration Configuration)
+        public System.Threading.Tasks.Task SetAudioOutputConfigurationAsync(SharpOnvifClient.Media2.AudioOutputConfiguration Configuration)
         {
             return base.Channel.SetAudioOutputConfigurationAsync(Configuration);
         }
         
-        public System.Threading.Tasks.Task SetAudioDecoderConfigurationAsync(OnvifMedia2.AudioDecoderConfiguration Configuration)
+        public System.Threading.Tasks.Task SetAudioDecoderConfigurationAsync(SharpOnvifClient.Media2.AudioDecoderConfiguration Configuration)
         {
             return base.Channel.SetAudioDecoderConfigurationAsync(Configuration);
         }
         
-        public System.Threading.Tasks.Task<OnvifMedia2.VideoSourceConfigurationOptions> GetVideoSourceConfigurationOptionsAsync(string ConfigurationToken, string ProfileToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Media2.VideoSourceConfigurationOptions> GetVideoSourceConfigurationOptionsAsync(string ConfigurationToken, string ProfileToken)
         {
             return base.Channel.GetVideoSourceConfigurationOptionsAsync(ConfigurationToken, ProfileToken);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifMedia2.GetVideoEncoderConfigurationOptionsResponse> OnvifMedia2.Media2.GetVideoEncoderConfigurationOptionsAsync(OnvifMedia2.GetVideoEncoderConfigurationOptionsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetVideoEncoderConfigurationOptionsResponse> SharpOnvifClient.Media2.Media2.GetVideoEncoderConfigurationOptionsAsync(SharpOnvifClient.Media2.GetVideoEncoderConfigurationOptionsRequest request)
         {
             return base.Channel.GetVideoEncoderConfigurationOptionsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifMedia2.GetVideoEncoderConfigurationOptionsResponse> GetVideoEncoderConfigurationOptionsAsync(string ConfigurationToken, string ProfileToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetVideoEncoderConfigurationOptionsResponse> GetVideoEncoderConfigurationOptionsAsync(string ConfigurationToken, string ProfileToken)
         {
-            OnvifMedia2.GetVideoEncoderConfigurationOptionsRequest inValue = new OnvifMedia2.GetVideoEncoderConfigurationOptionsRequest();
+            SharpOnvifClient.Media2.GetVideoEncoderConfigurationOptionsRequest inValue = new SharpOnvifClient.Media2.GetVideoEncoderConfigurationOptionsRequest();
             inValue.ConfigurationToken = ConfigurationToken;
             inValue.ProfileToken = ProfileToken;
-            return ((OnvifMedia2.Media2)(this)).GetVideoEncoderConfigurationOptionsAsync(inValue);
+            return ((SharpOnvifClient.Media2.Media2)(this)).GetVideoEncoderConfigurationOptionsAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifMedia2.AudioSourceConfigurationOptions> GetAudioSourceConfigurationOptionsAsync(string ConfigurationToken, string ProfileToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Media2.AudioSourceConfigurationOptions> GetAudioSourceConfigurationOptionsAsync(string ConfigurationToken, string ProfileToken)
         {
             return base.Channel.GetAudioSourceConfigurationOptionsAsync(ConfigurationToken, ProfileToken);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifMedia2.GetAudioEncoderConfigurationOptionsResponse> OnvifMedia2.Media2.GetAudioEncoderConfigurationOptionsAsync(OnvifMedia2.GetAudioEncoderConfigurationOptionsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetAudioEncoderConfigurationOptionsResponse> SharpOnvifClient.Media2.Media2.GetAudioEncoderConfigurationOptionsAsync(SharpOnvifClient.Media2.GetAudioEncoderConfigurationOptionsRequest request)
         {
             return base.Channel.GetAudioEncoderConfigurationOptionsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifMedia2.GetAudioEncoderConfigurationOptionsResponse> GetAudioEncoderConfigurationOptionsAsync(string ConfigurationToken, string ProfileToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetAudioEncoderConfigurationOptionsResponse> GetAudioEncoderConfigurationOptionsAsync(string ConfigurationToken, string ProfileToken)
         {
-            OnvifMedia2.GetAudioEncoderConfigurationOptionsRequest inValue = new OnvifMedia2.GetAudioEncoderConfigurationOptionsRequest();
+            SharpOnvifClient.Media2.GetAudioEncoderConfigurationOptionsRequest inValue = new SharpOnvifClient.Media2.GetAudioEncoderConfigurationOptionsRequest();
             inValue.ConfigurationToken = ConfigurationToken;
             inValue.ProfileToken = ProfileToken;
-            return ((OnvifMedia2.Media2)(this)).GetAudioEncoderConfigurationOptionsAsync(inValue);
+            return ((SharpOnvifClient.Media2.Media2)(this)).GetAudioEncoderConfigurationOptionsAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifMedia2.MetadataConfigurationOptions> GetMetadataConfigurationOptionsAsync(string ConfigurationToken, string ProfileToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Media2.MetadataConfigurationOptions> GetMetadataConfigurationOptionsAsync(string ConfigurationToken, string ProfileToken)
         {
             return base.Channel.GetMetadataConfigurationOptionsAsync(ConfigurationToken, ProfileToken);
         }
         
-        public System.Threading.Tasks.Task<OnvifMedia2.AudioOutputConfigurationOptions> GetAudioOutputConfigurationOptionsAsync(string ConfigurationToken, string ProfileToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Media2.AudioOutputConfigurationOptions> GetAudioOutputConfigurationOptionsAsync(string ConfigurationToken, string ProfileToken)
         {
             return base.Channel.GetAudioOutputConfigurationOptionsAsync(ConfigurationToken, ProfileToken);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifMedia2.GetAudioDecoderConfigurationOptionsResponse> OnvifMedia2.Media2.GetAudioDecoderConfigurationOptionsAsync(OnvifMedia2.GetAudioDecoderConfigurationOptionsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetAudioDecoderConfigurationOptionsResponse> SharpOnvifClient.Media2.Media2.GetAudioDecoderConfigurationOptionsAsync(SharpOnvifClient.Media2.GetAudioDecoderConfigurationOptionsRequest request)
         {
             return base.Channel.GetAudioDecoderConfigurationOptionsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifMedia2.GetAudioDecoderConfigurationOptionsResponse> GetAudioDecoderConfigurationOptionsAsync(string ConfigurationToken, string ProfileToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetAudioDecoderConfigurationOptionsResponse> GetAudioDecoderConfigurationOptionsAsync(string ConfigurationToken, string ProfileToken)
         {
-            OnvifMedia2.GetAudioDecoderConfigurationOptionsRequest inValue = new OnvifMedia2.GetAudioDecoderConfigurationOptionsRequest();
+            SharpOnvifClient.Media2.GetAudioDecoderConfigurationOptionsRequest inValue = new SharpOnvifClient.Media2.GetAudioDecoderConfigurationOptionsRequest();
             inValue.ConfigurationToken = ConfigurationToken;
             inValue.ProfileToken = ProfileToken;
-            return ((OnvifMedia2.Media2)(this)).GetAudioDecoderConfigurationOptionsAsync(inValue);
+            return ((SharpOnvifClient.Media2.Media2)(this)).GetAudioDecoderConfigurationOptionsAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifMedia2.EncoderInstanceInfo> GetVideoEncoderInstancesAsync(string ConfigurationToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Media2.EncoderInstanceInfo> GetVideoEncoderInstancesAsync(string ConfigurationToken)
         {
             return base.Channel.GetVideoEncoderInstancesAsync(ConfigurationToken);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifMedia2.GetStreamUriResponse> OnvifMedia2.Media2.GetStreamUriAsync(OnvifMedia2.GetStreamUriRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetStreamUriResponse> SharpOnvifClient.Media2.Media2.GetStreamUriAsync(SharpOnvifClient.Media2.GetStreamUriRequest request)
         {
             return base.Channel.GetStreamUriAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifMedia2.GetStreamUriResponse> GetStreamUriAsync(string Protocol, string ProfileToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetStreamUriResponse> GetStreamUriAsync(string Protocol, string ProfileToken)
         {
-            OnvifMedia2.GetStreamUriRequest inValue = new OnvifMedia2.GetStreamUriRequest();
+            SharpOnvifClient.Media2.GetStreamUriRequest inValue = new SharpOnvifClient.Media2.GetStreamUriRequest();
             inValue.Protocol = Protocol;
             inValue.ProfileToken = ProfileToken;
-            return ((OnvifMedia2.Media2)(this)).GetStreamUriAsync(inValue);
+            return ((SharpOnvifClient.Media2.Media2)(this)).GetStreamUriAsync(inValue);
         }
         
         public System.Threading.Tasks.Task StartMulticastStreamingAsync(string ProfileToken)
@@ -15443,29 +15443,29 @@ namespace OnvifMedia2
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifMedia2.GetSnapshotUriResponse> OnvifMedia2.Media2.GetSnapshotUriAsync(OnvifMedia2.GetSnapshotUriRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetSnapshotUriResponse> SharpOnvifClient.Media2.Media2.GetSnapshotUriAsync(SharpOnvifClient.Media2.GetSnapshotUriRequest request)
         {
             return base.Channel.GetSnapshotUriAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifMedia2.GetSnapshotUriResponse> GetSnapshotUriAsync(string ProfileToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetSnapshotUriResponse> GetSnapshotUriAsync(string ProfileToken)
         {
-            OnvifMedia2.GetSnapshotUriRequest inValue = new OnvifMedia2.GetSnapshotUriRequest();
+            SharpOnvifClient.Media2.GetSnapshotUriRequest inValue = new SharpOnvifClient.Media2.GetSnapshotUriRequest();
             inValue.ProfileToken = ProfileToken;
-            return ((OnvifMedia2.Media2)(this)).GetSnapshotUriAsync(inValue);
+            return ((SharpOnvifClient.Media2.Media2)(this)).GetSnapshotUriAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifMedia2.GetVideoSourceModesResponse> OnvifMedia2.Media2.GetVideoSourceModesAsync(OnvifMedia2.GetVideoSourceModesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetVideoSourceModesResponse> SharpOnvifClient.Media2.Media2.GetVideoSourceModesAsync(SharpOnvifClient.Media2.GetVideoSourceModesRequest request)
         {
             return base.Channel.GetVideoSourceModesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifMedia2.GetVideoSourceModesResponse> GetVideoSourceModesAsync(string VideoSourceToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetVideoSourceModesResponse> GetVideoSourceModesAsync(string VideoSourceToken)
         {
-            OnvifMedia2.GetVideoSourceModesRequest inValue = new OnvifMedia2.GetVideoSourceModesRequest();
+            SharpOnvifClient.Media2.GetVideoSourceModesRequest inValue = new SharpOnvifClient.Media2.GetVideoSourceModesRequest();
             inValue.VideoSourceToken = VideoSourceToken;
-            return ((OnvifMedia2.Media2)(this)).GetVideoSourceModesAsync(inValue);
+            return ((SharpOnvifClient.Media2.Media2)(this)).GetVideoSourceModesAsync(inValue);
         }
         
         public System.Threading.Tasks.Task<bool> SetVideoSourceModeAsync(string VideoSourceToken, string VideoSourceModeToken)
@@ -15474,30 +15474,30 @@ namespace OnvifMedia2
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifMedia2.GetOSDsResponse> OnvifMedia2.Media2.GetOSDsAsync(OnvifMedia2.GetOSDsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetOSDsResponse> SharpOnvifClient.Media2.Media2.GetOSDsAsync(SharpOnvifClient.Media2.GetOSDsRequest request)
         {
             return base.Channel.GetOSDsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifMedia2.GetOSDsResponse> GetOSDsAsync(string OSDToken, string ConfigurationToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetOSDsResponse> GetOSDsAsync(string OSDToken, string ConfigurationToken)
         {
-            OnvifMedia2.GetOSDsRequest inValue = new OnvifMedia2.GetOSDsRequest();
+            SharpOnvifClient.Media2.GetOSDsRequest inValue = new SharpOnvifClient.Media2.GetOSDsRequest();
             inValue.OSDToken = OSDToken;
             inValue.ConfigurationToken = ConfigurationToken;
-            return ((OnvifMedia2.Media2)(this)).GetOSDsAsync(inValue);
+            return ((SharpOnvifClient.Media2.Media2)(this)).GetOSDsAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifMedia2.OSDConfigurationOptions> GetOSDOptionsAsync(string ConfigurationToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Media2.OSDConfigurationOptions> GetOSDOptionsAsync(string ConfigurationToken)
         {
             return base.Channel.GetOSDOptionsAsync(ConfigurationToken);
         }
         
-        public System.Threading.Tasks.Task SetOSDAsync(OnvifMedia2.OSDConfiguration OSD)
+        public System.Threading.Tasks.Task SetOSDAsync(SharpOnvifClient.Media2.OSDConfiguration OSD)
         {
             return base.Channel.SetOSDAsync(OSD);
         }
         
-        public System.Threading.Tasks.Task<string> CreateOSDAsync(OnvifMedia2.OSDConfiguration OSD)
+        public System.Threading.Tasks.Task<string> CreateOSDAsync(SharpOnvifClient.Media2.OSDConfiguration OSD)
         {
             return base.Channel.CreateOSDAsync(OSD);
         }
@@ -15508,30 +15508,30 @@ namespace OnvifMedia2
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifMedia2.GetMasksResponse> OnvifMedia2.Media2.GetMasksAsync(OnvifMedia2.GetMasksRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetMasksResponse> SharpOnvifClient.Media2.Media2.GetMasksAsync(SharpOnvifClient.Media2.GetMasksRequest request)
         {
             return base.Channel.GetMasksAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifMedia2.GetMasksResponse> GetMasksAsync(string Token, string ConfigurationToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Media2.GetMasksResponse> GetMasksAsync(string Token, string ConfigurationToken)
         {
-            OnvifMedia2.GetMasksRequest inValue = new OnvifMedia2.GetMasksRequest();
+            SharpOnvifClient.Media2.GetMasksRequest inValue = new SharpOnvifClient.Media2.GetMasksRequest();
             inValue.Token = Token;
             inValue.ConfigurationToken = ConfigurationToken;
-            return ((OnvifMedia2.Media2)(this)).GetMasksAsync(inValue);
+            return ((SharpOnvifClient.Media2.Media2)(this)).GetMasksAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifMedia2.MaskOptions> GetMaskOptionsAsync(string ConfigurationToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Media2.MaskOptions> GetMaskOptionsAsync(string ConfigurationToken)
         {
             return base.Channel.GetMaskOptionsAsync(ConfigurationToken);
         }
         
-        public System.Threading.Tasks.Task SetMaskAsync(OnvifMedia2.Mask Mask)
+        public System.Threading.Tasks.Task SetMaskAsync(SharpOnvifClient.Media2.Mask Mask)
         {
             return base.Channel.SetMaskAsync(Mask);
         }
         
-        public System.Threading.Tasks.Task<string> CreateMaskAsync(OnvifMedia2.Mask Mask)
+        public System.Threading.Tasks.Task<string> CreateMaskAsync(SharpOnvifClient.Media2.Mask Mask)
         {
             return base.Channel.CreateMaskAsync(Mask);
         }

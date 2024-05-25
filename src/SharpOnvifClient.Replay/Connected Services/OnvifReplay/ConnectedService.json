@@ -8,7 +8,7 @@
       "System.Collections.Generic.Dictionary`2"
     ],
     "namespaceMappings": [
-      "*, OnvifReplay"
+      "*, SharpOnvifClient.Replay"
     ],
     "targetFramework": "netstandard2.0",
     "typeReuseMode": "All"

@@ -7,31 +7,31 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OnvifUplink
+namespace SharpOnvifClient.Uplink
 {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/uplink/wsdl", ConfigurationName="OnvifUplink.UplinkPort")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/uplink/wsdl", ConfigurationName="SharpOnvifClient.Uplink.UplinkPort")]
     public interface UplinkPort
     {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/uplink/wsdl/GetServiceCapabilities", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Capabilities")]
-        System.Threading.Tasks.Task<OnvifUplink.Capabilities> GetServiceCapabilitiesAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.Uplink.Capabilities> GetServiceCapabilitiesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/uplink/wsdl/GetUplinks", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifUplink.GetUplinksResponse> GetUplinksAsync(OnvifUplink.GetUplinksRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Uplink.GetUplinksResponse> GetUplinksAsync(SharpOnvifClient.Uplink.GetUplinksRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/uplink/wsdl/SetUplink", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task SetUplinkAsync(OnvifUplink.Configuration Configuration);
+        System.Threading.Tasks.Task SetUplinkAsync(SharpOnvifClient.Uplink.Configuration Configuration);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/uplink/wsdl/DeleteUplink", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifUplink.DeleteUplinkResponse> DeleteUplinkAsync(OnvifUplink.DeleteUplinkRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Uplink.DeleteUplinkResponse> DeleteUplinkAsync(SharpOnvifClient.Uplink.DeleteUplinkRequest request);
     }
     
     /// <remarks/>
@@ -215,13 +215,13 @@ namespace OnvifUplink
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/uplink/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Configuration")]
-        public OnvifUplink.Configuration[] Configuration;
+        public SharpOnvifClient.Uplink.Configuration[] Configuration;
         
         public GetUplinksResponse()
         {
         }
         
-        public GetUplinksResponse(OnvifUplink.Configuration[] Configuration)
+        public GetUplinksResponse(SharpOnvifClient.Uplink.Configuration[] Configuration)
         {
             this.Configuration = Configuration;
         }
@@ -261,13 +261,13 @@ namespace OnvifUplink
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface UplinkPortChannel : OnvifUplink.UplinkPort, System.ServiceModel.IClientChannel
+    public interface UplinkPortChannel : SharpOnvifClient.Uplink.UplinkPort, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class UplinkPortClient : System.ServiceModel.ClientBase<OnvifUplink.UplinkPort>, OnvifUplink.UplinkPort
+    public partial class UplinkPortClient : System.ServiceModel.ClientBase<SharpOnvifClient.Uplink.UplinkPort>, SharpOnvifClient.Uplink.UplinkPort
     {
         
         public UplinkPortClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
@@ -275,39 +275,39 @@ namespace OnvifUplink
         {
         }
         
-        public System.Threading.Tasks.Task<OnvifUplink.Capabilities> GetServiceCapabilitiesAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.Uplink.Capabilities> GetServiceCapabilitiesAsync()
         {
             return base.Channel.GetServiceCapabilitiesAsync();
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifUplink.GetUplinksResponse> OnvifUplink.UplinkPort.GetUplinksAsync(OnvifUplink.GetUplinksRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Uplink.GetUplinksResponse> SharpOnvifClient.Uplink.UplinkPort.GetUplinksAsync(SharpOnvifClient.Uplink.GetUplinksRequest request)
         {
             return base.Channel.GetUplinksAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifUplink.GetUplinksResponse> GetUplinksAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.Uplink.GetUplinksResponse> GetUplinksAsync()
         {
-            OnvifUplink.GetUplinksRequest inValue = new OnvifUplink.GetUplinksRequest();
-            return ((OnvifUplink.UplinkPort)(this)).GetUplinksAsync(inValue);
+            SharpOnvifClient.Uplink.GetUplinksRequest inValue = new SharpOnvifClient.Uplink.GetUplinksRequest();
+            return ((SharpOnvifClient.Uplink.UplinkPort)(this)).GetUplinksAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task SetUplinkAsync(OnvifUplink.Configuration Configuration)
+        public System.Threading.Tasks.Task SetUplinkAsync(SharpOnvifClient.Uplink.Configuration Configuration)
         {
             return base.Channel.SetUplinkAsync(Configuration);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifUplink.DeleteUplinkResponse> OnvifUplink.UplinkPort.DeleteUplinkAsync(OnvifUplink.DeleteUplinkRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Uplink.DeleteUplinkResponse> SharpOnvifClient.Uplink.UplinkPort.DeleteUplinkAsync(SharpOnvifClient.Uplink.DeleteUplinkRequest request)
         {
             return base.Channel.DeleteUplinkAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifUplink.DeleteUplinkResponse> DeleteUplinkAsync(string RemoteAddress)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Uplink.DeleteUplinkResponse> DeleteUplinkAsync(string RemoteAddress)
         {
-            OnvifUplink.DeleteUplinkRequest inValue = new OnvifUplink.DeleteUplinkRequest();
+            SharpOnvifClient.Uplink.DeleteUplinkRequest inValue = new SharpOnvifClient.Uplink.DeleteUplinkRequest();
             inValue.RemoteAddress = RemoteAddress;
-            return ((OnvifUplink.UplinkPort)(this)).DeleteUplinkAsync(inValue);
+            return ((SharpOnvifClient.Uplink.UplinkPort)(this)).DeleteUplinkAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()

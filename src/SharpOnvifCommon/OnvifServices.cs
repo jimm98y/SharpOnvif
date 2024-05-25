@@ -1,4 +1,4 @@
-﻿namespace SharpOnvifClient
+﻿namespace SharpOnvifCommon
 {
     public static class OnvifServices
     {

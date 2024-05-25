@@ -8,7 +8,7 @@
       "System.Collections.Generic.Dictionary`2"
     ],
     "namespaceMappings": [
-      "*, OnvifPTZ"
+      "*, SharpOnvifClient.PTZ"
     ],
     "targetFramework": "netstandard2.0",
     "typeReuseMode": "All"

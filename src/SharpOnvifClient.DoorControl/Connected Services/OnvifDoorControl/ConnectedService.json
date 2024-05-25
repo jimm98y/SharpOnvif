@@ -8,7 +8,7 @@
       "System.Collections.Generic.Dictionary`2"
     ],
     "namespaceMappings": [
-      "*, OnvifDoorControl"
+      "*, SharpOnvifClient.DoorControl"
     ],
     "references": [
       "dotnet-Microsoft.XmlSerializer.Generator, {Microsoft.XmlSerializer.Generator, 8.0.0}",

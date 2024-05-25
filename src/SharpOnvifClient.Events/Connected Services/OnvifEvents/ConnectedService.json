@@ -8,7 +8,7 @@
       "System.Collections.Generic.Dictionary`2"
     ],
     "namespaceMappings": [
-      "*, OnvifEvents"
+      "*, SharpOnvifClient.Events"
     ],
     "references": [
       "dotnet-Microsoft.XmlSerializer.Generator, {Microsoft.XmlSerializer.Generator, 8.0.0}",

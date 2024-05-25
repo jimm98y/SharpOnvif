@@ -1,4 +1,4 @@
-﻿using SharpOnvifClient;
+﻿using SharpOnvifCommon;
 using SharpOnvifServer.DeviceMgmt;
 
 namespace OnvifService.Onvif

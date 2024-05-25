@@ -7,33 +7,33 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OnvifReceiver
+namespace SharpOnvifClient.Receiver
 {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/receiver/wsdl", ConfigurationName="OnvifReceiver.ReceiverPort")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/receiver/wsdl", ConfigurationName="SharpOnvifClient.Receiver.ReceiverPort")]
     public interface ReceiverPort
     {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/receiver/wsdl/GetServiceCapabilities", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Capabilities")]
-        System.Threading.Tasks.Task<OnvifReceiver.Capabilities> GetServiceCapabilitiesAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.Receiver.Capabilities> GetServiceCapabilitiesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/receiver/wsdl/GetReceivers", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifReceiver.GetReceiversResponse> GetReceiversAsync(OnvifReceiver.GetReceiversRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.Receiver.GetReceiversResponse> GetReceiversAsync(SharpOnvifClient.Receiver.GetReceiversRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/receiver/wsdl/GetReceiver", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Receiver")]
-        System.Threading.Tasks.Task<OnvifReceiver.Receiver> GetReceiverAsync(string ReceiverToken);
+        System.Threading.Tasks.Task<SharpOnvifClient.Receiver.Receiver> GetReceiverAsync(string ReceiverToken);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/receiver/wsdl/CreateReceiver", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Receiver")]
-        System.Threading.Tasks.Task<OnvifReceiver.Receiver> CreateReceiverAsync(OnvifReceiver.ReceiverConfiguration Configuration);
+        System.Threading.Tasks.Task<SharpOnvifClient.Receiver.Receiver> CreateReceiverAsync(SharpOnvifClient.Receiver.ReceiverConfiguration Configuration);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/receiver/wsdl/DeleteReceiver", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -41,16 +41,16 @@ namespace OnvifReceiver
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/receiver/wsdl/ConfigureReceiver", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task ConfigureReceiverAsync(string ReceiverToken, OnvifReceiver.ReceiverConfiguration Configuration);
+        System.Threading.Tasks.Task ConfigureReceiverAsync(string ReceiverToken, SharpOnvifClient.Receiver.ReceiverConfiguration Configuration);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/receiver/wsdl/SetReceiverMode", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task SetReceiverModeAsync(string ReceiverToken, OnvifReceiver.ReceiverMode Mode);
+        System.Threading.Tasks.Task SetReceiverModeAsync(string ReceiverToken, SharpOnvifClient.Receiver.ReceiverMode Mode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/receiver/wsdl/GetReceiverState", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="ReceiverState")]
-        System.Threading.Tasks.Task<OnvifReceiver.ReceiverStateInformation> GetReceiverStateAsync(string ReceiverToken);
+        System.Threading.Tasks.Task<SharpOnvifClient.Receiver.ReceiverStateInformation> GetReceiverStateAsync(string ReceiverToken);
     }
     
     /// <remarks/>
@@ -594,26 +594,26 @@ namespace OnvifReceiver
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/receiver/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Receivers")]
-        public OnvifReceiver.Receiver[] Receivers;
+        public SharpOnvifClient.Receiver.Receiver[] Receivers;
         
         public GetReceiversResponse()
         {
         }
         
-        public GetReceiversResponse(OnvifReceiver.Receiver[] Receivers)
+        public GetReceiversResponse(SharpOnvifClient.Receiver.Receiver[] Receivers)
         {
             this.Receivers = Receivers;
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface ReceiverPortChannel : OnvifReceiver.ReceiverPort, System.ServiceModel.IClientChannel
+    public interface ReceiverPortChannel : SharpOnvifClient.Receiver.ReceiverPort, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class ReceiverPortClient : System.ServiceModel.ClientBase<OnvifReceiver.ReceiverPort>, OnvifReceiver.ReceiverPort
+    public partial class ReceiverPortClient : System.ServiceModel.ClientBase<SharpOnvifClient.Receiver.ReceiverPort>, SharpOnvifClient.Receiver.ReceiverPort
     {
         
         public ReceiverPortClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
@@ -621,29 +621,29 @@ namespace OnvifReceiver
         {
         }
         
-        public System.Threading.Tasks.Task<OnvifReceiver.Capabilities> GetServiceCapabilitiesAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.Receiver.Capabilities> GetServiceCapabilitiesAsync()
         {
             return base.Channel.GetServiceCapabilitiesAsync();
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifReceiver.GetReceiversResponse> OnvifReceiver.ReceiverPort.GetReceiversAsync(OnvifReceiver.GetReceiversRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.Receiver.GetReceiversResponse> SharpOnvifClient.Receiver.ReceiverPort.GetReceiversAsync(SharpOnvifClient.Receiver.GetReceiversRequest request)
         {
             return base.Channel.GetReceiversAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifReceiver.GetReceiversResponse> GetReceiversAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.Receiver.GetReceiversResponse> GetReceiversAsync()
         {
-            OnvifReceiver.GetReceiversRequest inValue = new OnvifReceiver.GetReceiversRequest();
-            return ((OnvifReceiver.ReceiverPort)(this)).GetReceiversAsync(inValue);
+            SharpOnvifClient.Receiver.GetReceiversRequest inValue = new SharpOnvifClient.Receiver.GetReceiversRequest();
+            return ((SharpOnvifClient.Receiver.ReceiverPort)(this)).GetReceiversAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifReceiver.Receiver> GetReceiverAsync(string ReceiverToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Receiver.Receiver> GetReceiverAsync(string ReceiverToken)
         {
             return base.Channel.GetReceiverAsync(ReceiverToken);
         }
         
-        public System.Threading.Tasks.Task<OnvifReceiver.Receiver> CreateReceiverAsync(OnvifReceiver.ReceiverConfiguration Configuration)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Receiver.Receiver> CreateReceiverAsync(SharpOnvifClient.Receiver.ReceiverConfiguration Configuration)
         {
             return base.Channel.CreateReceiverAsync(Configuration);
         }
@@ -653,17 +653,17 @@ namespace OnvifReceiver
             return base.Channel.DeleteReceiverAsync(ReceiverToken);
         }
         
-        public System.Threading.Tasks.Task ConfigureReceiverAsync(string ReceiverToken, OnvifReceiver.ReceiverConfiguration Configuration)
+        public System.Threading.Tasks.Task ConfigureReceiverAsync(string ReceiverToken, SharpOnvifClient.Receiver.ReceiverConfiguration Configuration)
         {
             return base.Channel.ConfigureReceiverAsync(ReceiverToken, Configuration);
         }
         
-        public System.Threading.Tasks.Task SetReceiverModeAsync(string ReceiverToken, OnvifReceiver.ReceiverMode Mode)
+        public System.Threading.Tasks.Task SetReceiverModeAsync(string ReceiverToken, SharpOnvifClient.Receiver.ReceiverMode Mode)
         {
             return base.Channel.SetReceiverModeAsync(ReceiverToken, Mode);
         }
         
-        public System.Threading.Tasks.Task<OnvifReceiver.ReceiverStateInformation> GetReceiverStateAsync(string ReceiverToken)
+        public System.Threading.Tasks.Task<SharpOnvifClient.Receiver.ReceiverStateInformation> GetReceiverStateAsync(string ReceiverToken)
         {
             return base.Channel.GetReceiverStateAsync(ReceiverToken);
         }

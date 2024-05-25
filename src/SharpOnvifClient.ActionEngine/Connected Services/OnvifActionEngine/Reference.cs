@@ -7,58 +7,58 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OnvifActionEngine
+namespace SharpOnvifClient.ActionEngine
 {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/actionengine/wsdl", ConfigurationName="OnvifActionEngine.ActionEnginePort")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/actionengine/wsdl", ConfigurationName="SharpOnvifClient.ActionEngine.ActionEnginePort")]
     public interface ActionEnginePort
     {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/actionengine/wsdl/GetSupportedActions", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="SupportedActions")]
-        System.Threading.Tasks.Task<OnvifActionEngine.SupportedActions> GetSupportedActionsAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.ActionEngine.SupportedActions> GetSupportedActionsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/actionengine/wsdl/GetActions", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifActionEngine.GetActionsResponse> GetActionsAsync(OnvifActionEngine.GetActionsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.ActionEngine.GetActionsResponse> GetActionsAsync(SharpOnvifClient.ActionEngine.GetActionsRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/actionengine/wsdl/CreateActions", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifActionEngine.CreateActionsResponse> CreateActionsAsync(OnvifActionEngine.CreateActionsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.ActionEngine.CreateActionsResponse> CreateActionsAsync(SharpOnvifClient.ActionEngine.CreateActionsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/actionengine/wsdl/DeleteActions", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifActionEngine.DeleteActionsResponse> DeleteActionsAsync(OnvifActionEngine.DeleteActionsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.ActionEngine.DeleteActionsResponse> DeleteActionsAsync(SharpOnvifClient.ActionEngine.DeleteActionsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/actionengine/wsdl/ModifyActions", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifActionEngine.ModifyActionsResponse> ModifyActionsAsync(OnvifActionEngine.ModifyActionsRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.ActionEngine.ModifyActionsResponse> ModifyActionsAsync(SharpOnvifClient.ActionEngine.ModifyActionsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/actionengine/wsdl/GetServiceCapabilities", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Capabilities")]
-        System.Threading.Tasks.Task<OnvifActionEngine.ActionEngineCapabilities> GetServiceCapabilitiesAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.ActionEngine.ActionEngineCapabilities> GetServiceCapabilitiesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/actionengine/wsdl/GetActionTriggers", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifActionEngine.GetActionTriggersResponse> GetActionTriggersAsync(OnvifActionEngine.GetActionTriggersRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.ActionEngine.GetActionTriggersResponse> GetActionTriggersAsync(SharpOnvifClient.ActionEngine.GetActionTriggersRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/actionengine/wsdl/CreateActionTriggers", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifActionEngine.CreateActionTriggersResponse> CreateActionTriggersAsync(OnvifActionEngine.CreateActionTriggersRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.ActionEngine.CreateActionTriggersResponse> CreateActionTriggersAsync(SharpOnvifClient.ActionEngine.CreateActionTriggersRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/actionengine/wsdl/DeleteActionTriggers", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifActionEngine.DeleteActionTriggersResponse> DeleteActionTriggersAsync(OnvifActionEngine.DeleteActionTriggersRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.ActionEngine.DeleteActionTriggersResponse> DeleteActionTriggersAsync(SharpOnvifClient.ActionEngine.DeleteActionTriggersRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/actionengine/wsdl/ModifyActionTriggers", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<OnvifActionEngine.ModifyActionTriggersResponse> ModifyActionTriggersAsync(OnvifActionEngine.ModifyActionTriggersRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.ActionEngine.ModifyActionTriggersResponse> ModifyActionTriggersAsync(SharpOnvifClient.ActionEngine.ModifyActionTriggersRequest request);
     }
     
     /// <remarks/>
@@ -1058,13 +1058,13 @@ namespace OnvifActionEngine
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/actionengine/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Action")]
-        public OnvifActionEngine.Action[] Action;
+        public SharpOnvifClient.ActionEngine.Action[] Action;
         
         public GetActionsResponse()
         {
         }
         
-        public GetActionsResponse(OnvifActionEngine.Action[] Action)
+        public GetActionsResponse(SharpOnvifClient.ActionEngine.Action[] Action)
         {
             this.Action = Action;
         }
@@ -1078,13 +1078,13 @@ namespace OnvifActionEngine
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/actionengine/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Action")]
-        public OnvifActionEngine.ActionConfiguration[] Action;
+        public SharpOnvifClient.ActionEngine.ActionConfiguration[] Action;
         
         public CreateActionsRequest()
         {
         }
         
-        public CreateActionsRequest(OnvifActionEngine.ActionConfiguration[] Action)
+        public CreateActionsRequest(SharpOnvifClient.ActionEngine.ActionConfiguration[] Action)
         {
             this.Action = Action;
         }
@@ -1098,13 +1098,13 @@ namespace OnvifActionEngine
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/actionengine/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Action")]
-        public OnvifActionEngine.Action[] Action;
+        public SharpOnvifClient.ActionEngine.Action[] Action;
         
         public CreateActionsResponse()
         {
         }
         
-        public CreateActionsResponse(OnvifActionEngine.Action[] Action)
+        public CreateActionsResponse(SharpOnvifClient.ActionEngine.Action[] Action)
         {
             this.Action = Action;
         }
@@ -1152,13 +1152,13 @@ namespace OnvifActionEngine
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/actionengine/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Action")]
-        public OnvifActionEngine.Action[] Action;
+        public SharpOnvifClient.ActionEngine.Action[] Action;
         
         public ModifyActionsRequest()
         {
         }
         
-        public ModifyActionsRequest(OnvifActionEngine.Action[] Action)
+        public ModifyActionsRequest(SharpOnvifClient.ActionEngine.Action[] Action)
         {
             this.Action = Action;
         }
@@ -1197,13 +1197,13 @@ namespace OnvifActionEngine
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/actionengine/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("ActionTrigger")]
-        public OnvifActionEngine.ActionTrigger[] ActionTrigger;
+        public SharpOnvifClient.ActionEngine.ActionTrigger[] ActionTrigger;
         
         public GetActionTriggersResponse()
         {
         }
         
-        public GetActionTriggersResponse(OnvifActionEngine.ActionTrigger[] ActionTrigger)
+        public GetActionTriggersResponse(SharpOnvifClient.ActionEngine.ActionTrigger[] ActionTrigger)
         {
             this.ActionTrigger = ActionTrigger;
         }
@@ -1217,13 +1217,13 @@ namespace OnvifActionEngine
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/actionengine/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("ActionTrigger")]
-        public OnvifActionEngine.ActionTriggerConfiguration[] ActionTrigger;
+        public SharpOnvifClient.ActionEngine.ActionTriggerConfiguration[] ActionTrigger;
         
         public CreateActionTriggersRequest()
         {
         }
         
-        public CreateActionTriggersRequest(OnvifActionEngine.ActionTriggerConfiguration[] ActionTrigger)
+        public CreateActionTriggersRequest(SharpOnvifClient.ActionEngine.ActionTriggerConfiguration[] ActionTrigger)
         {
             this.ActionTrigger = ActionTrigger;
         }
@@ -1237,13 +1237,13 @@ namespace OnvifActionEngine
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/actionengine/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("ActionTrigger")]
-        public OnvifActionEngine.ActionTrigger[] ActionTrigger;
+        public SharpOnvifClient.ActionEngine.ActionTrigger[] ActionTrigger;
         
         public CreateActionTriggersResponse()
         {
         }
         
-        public CreateActionTriggersResponse(OnvifActionEngine.ActionTrigger[] ActionTrigger)
+        public CreateActionTriggersResponse(SharpOnvifClient.ActionEngine.ActionTrigger[] ActionTrigger)
         {
             this.ActionTrigger = ActionTrigger;
         }
@@ -1291,13 +1291,13 @@ namespace OnvifActionEngine
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/actionengine/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("ActionTrigger")]
-        public OnvifActionEngine.ActionTrigger[] ActionTrigger;
+        public SharpOnvifClient.ActionEngine.ActionTrigger[] ActionTrigger;
         
         public ModifyActionTriggersRequest()
         {
         }
         
-        public ModifyActionTriggersRequest(OnvifActionEngine.ActionTrigger[] ActionTrigger)
+        public ModifyActionTriggersRequest(SharpOnvifClient.ActionEngine.ActionTrigger[] ActionTrigger)
         {
             this.ActionTrigger = ActionTrigger;
         }
@@ -1316,13 +1316,13 @@ namespace OnvifActionEngine
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface ActionEnginePortChannel : OnvifActionEngine.ActionEnginePort, System.ServiceModel.IClientChannel
+    public interface ActionEnginePortChannel : SharpOnvifClient.ActionEngine.ActionEnginePort, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class ActionEnginePortClient : System.ServiceModel.ClientBase<OnvifActionEngine.ActionEnginePort>, OnvifActionEngine.ActionEnginePort
+    public partial class ActionEnginePortClient : System.ServiceModel.ClientBase<SharpOnvifClient.ActionEngine.ActionEnginePort>, SharpOnvifClient.ActionEngine.ActionEnginePort
     {
         
         public ActionEnginePortClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
@@ -1330,100 +1330,100 @@ namespace OnvifActionEngine
         {
         }
         
-        public System.Threading.Tasks.Task<OnvifActionEngine.SupportedActions> GetSupportedActionsAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.ActionEngine.SupportedActions> GetSupportedActionsAsync()
         {
             return base.Channel.GetSupportedActionsAsync();
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifActionEngine.GetActionsResponse> OnvifActionEngine.ActionEnginePort.GetActionsAsync(OnvifActionEngine.GetActionsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.ActionEngine.GetActionsResponse> SharpOnvifClient.ActionEngine.ActionEnginePort.GetActionsAsync(SharpOnvifClient.ActionEngine.GetActionsRequest request)
         {
             return base.Channel.GetActionsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifActionEngine.GetActionsResponse> GetActionsAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.ActionEngine.GetActionsResponse> GetActionsAsync()
         {
-            OnvifActionEngine.GetActionsRequest inValue = new OnvifActionEngine.GetActionsRequest();
-            return ((OnvifActionEngine.ActionEnginePort)(this)).GetActionsAsync(inValue);
+            SharpOnvifClient.ActionEngine.GetActionsRequest inValue = new SharpOnvifClient.ActionEngine.GetActionsRequest();
+            return ((SharpOnvifClient.ActionEngine.ActionEnginePort)(this)).GetActionsAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifActionEngine.CreateActionsResponse> CreateActionsAsync(OnvifActionEngine.CreateActionsRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.ActionEngine.CreateActionsResponse> CreateActionsAsync(SharpOnvifClient.ActionEngine.CreateActionsRequest request)
         {
             return base.Channel.CreateActionsAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifActionEngine.DeleteActionsResponse> OnvifActionEngine.ActionEnginePort.DeleteActionsAsync(OnvifActionEngine.DeleteActionsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.ActionEngine.DeleteActionsResponse> SharpOnvifClient.ActionEngine.ActionEnginePort.DeleteActionsAsync(SharpOnvifClient.ActionEngine.DeleteActionsRequest request)
         {
             return base.Channel.DeleteActionsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifActionEngine.DeleteActionsResponse> DeleteActionsAsync(string[] Token)
+        public System.Threading.Tasks.Task<SharpOnvifClient.ActionEngine.DeleteActionsResponse> DeleteActionsAsync(string[] Token)
         {
-            OnvifActionEngine.DeleteActionsRequest inValue = new OnvifActionEngine.DeleteActionsRequest();
+            SharpOnvifClient.ActionEngine.DeleteActionsRequest inValue = new SharpOnvifClient.ActionEngine.DeleteActionsRequest();
             inValue.Token = Token;
-            return ((OnvifActionEngine.ActionEnginePort)(this)).DeleteActionsAsync(inValue);
+            return ((SharpOnvifClient.ActionEngine.ActionEnginePort)(this)).DeleteActionsAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifActionEngine.ModifyActionsResponse> OnvifActionEngine.ActionEnginePort.ModifyActionsAsync(OnvifActionEngine.ModifyActionsRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.ActionEngine.ModifyActionsResponse> SharpOnvifClient.ActionEngine.ActionEnginePort.ModifyActionsAsync(SharpOnvifClient.ActionEngine.ModifyActionsRequest request)
         {
             return base.Channel.ModifyActionsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifActionEngine.ModifyActionsResponse> ModifyActionsAsync(OnvifActionEngine.Action[] Action)
+        public System.Threading.Tasks.Task<SharpOnvifClient.ActionEngine.ModifyActionsResponse> ModifyActionsAsync(SharpOnvifClient.ActionEngine.Action[] Action)
         {
-            OnvifActionEngine.ModifyActionsRequest inValue = new OnvifActionEngine.ModifyActionsRequest();
+            SharpOnvifClient.ActionEngine.ModifyActionsRequest inValue = new SharpOnvifClient.ActionEngine.ModifyActionsRequest();
             inValue.Action = Action;
-            return ((OnvifActionEngine.ActionEnginePort)(this)).ModifyActionsAsync(inValue);
+            return ((SharpOnvifClient.ActionEngine.ActionEnginePort)(this)).ModifyActionsAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifActionEngine.ActionEngineCapabilities> GetServiceCapabilitiesAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.ActionEngine.ActionEngineCapabilities> GetServiceCapabilitiesAsync()
         {
             return base.Channel.GetServiceCapabilitiesAsync();
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifActionEngine.GetActionTriggersResponse> OnvifActionEngine.ActionEnginePort.GetActionTriggersAsync(OnvifActionEngine.GetActionTriggersRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.ActionEngine.GetActionTriggersResponse> SharpOnvifClient.ActionEngine.ActionEnginePort.GetActionTriggersAsync(SharpOnvifClient.ActionEngine.GetActionTriggersRequest request)
         {
             return base.Channel.GetActionTriggersAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifActionEngine.GetActionTriggersResponse> GetActionTriggersAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.ActionEngine.GetActionTriggersResponse> GetActionTriggersAsync()
         {
-            OnvifActionEngine.GetActionTriggersRequest inValue = new OnvifActionEngine.GetActionTriggersRequest();
-            return ((OnvifActionEngine.ActionEnginePort)(this)).GetActionTriggersAsync(inValue);
+            SharpOnvifClient.ActionEngine.GetActionTriggersRequest inValue = new SharpOnvifClient.ActionEngine.GetActionTriggersRequest();
+            return ((SharpOnvifClient.ActionEngine.ActionEnginePort)(this)).GetActionTriggersAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifActionEngine.CreateActionTriggersResponse> CreateActionTriggersAsync(OnvifActionEngine.CreateActionTriggersRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.ActionEngine.CreateActionTriggersResponse> CreateActionTriggersAsync(SharpOnvifClient.ActionEngine.CreateActionTriggersRequest request)
         {
             return base.Channel.CreateActionTriggersAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifActionEngine.DeleteActionTriggersResponse> OnvifActionEngine.ActionEnginePort.DeleteActionTriggersAsync(OnvifActionEngine.DeleteActionTriggersRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.ActionEngine.DeleteActionTriggersResponse> SharpOnvifClient.ActionEngine.ActionEnginePort.DeleteActionTriggersAsync(SharpOnvifClient.ActionEngine.DeleteActionTriggersRequest request)
         {
             return base.Channel.DeleteActionTriggersAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifActionEngine.DeleteActionTriggersResponse> DeleteActionTriggersAsync(string[] Token)
+        public System.Threading.Tasks.Task<SharpOnvifClient.ActionEngine.DeleteActionTriggersResponse> DeleteActionTriggersAsync(string[] Token)
         {
-            OnvifActionEngine.DeleteActionTriggersRequest inValue = new OnvifActionEngine.DeleteActionTriggersRequest();
+            SharpOnvifClient.ActionEngine.DeleteActionTriggersRequest inValue = new SharpOnvifClient.ActionEngine.DeleteActionTriggersRequest();
             inValue.Token = Token;
-            return ((OnvifActionEngine.ActionEnginePort)(this)).DeleteActionTriggersAsync(inValue);
+            return ((SharpOnvifClient.ActionEngine.ActionEnginePort)(this)).DeleteActionTriggersAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifActionEngine.ModifyActionTriggersResponse> OnvifActionEngine.ActionEnginePort.ModifyActionTriggersAsync(OnvifActionEngine.ModifyActionTriggersRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.ActionEngine.ModifyActionTriggersResponse> SharpOnvifClient.ActionEngine.ActionEnginePort.ModifyActionTriggersAsync(SharpOnvifClient.ActionEngine.ModifyActionTriggersRequest request)
         {
             return base.Channel.ModifyActionTriggersAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifActionEngine.ModifyActionTriggersResponse> ModifyActionTriggersAsync(OnvifActionEngine.ActionTrigger[] ActionTrigger)
+        public System.Threading.Tasks.Task<SharpOnvifClient.ActionEngine.ModifyActionTriggersResponse> ModifyActionTriggersAsync(SharpOnvifClient.ActionEngine.ActionTrigger[] ActionTrigger)
         {
-            OnvifActionEngine.ModifyActionTriggersRequest inValue = new OnvifActionEngine.ModifyActionTriggersRequest();
+            SharpOnvifClient.ActionEngine.ModifyActionTriggersRequest inValue = new SharpOnvifClient.ActionEngine.ModifyActionTriggersRequest();
             inValue.ActionTrigger = ActionTrigger;
-            return ((OnvifActionEngine.ActionEnginePort)(this)).ModifyActionTriggersAsync(inValue);
+            return ((SharpOnvifClient.ActionEngine.ActionEnginePort)(this)).ModifyActionTriggersAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()

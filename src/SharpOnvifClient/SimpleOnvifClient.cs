@@ -1,4 +1,6 @@
-﻿using OnvifEvents;
+﻿using SharpOnvifClient.DeviceMgmt;
+using SharpOnvifClient.Events;
+using SharpOnvifClient.Media;
 using SharpOnvifClient.Security;
 using SharpOnvifCommon;
 using System;
@@ -37,21 +39,21 @@ namespace SharpOnvifClient
 
         #region Device Management
 
-        public async Task<OnvifDeviceMgmt.GetDeviceInformationResponse> GetDeviceInformationAsync()
+        public async Task<GetDeviceInformationResponse> GetDeviceInformationAsync()
         {
-            using (var deviceClient = new OnvifDeviceMgmt.DeviceClient(
+            using (var deviceClient = new DeviceClient(
                 OnvifBindingFactory.CreateBinding(),
                 new System.ServiceModel.EndpointAddress(_onvifUri)))
             {
                 SetAuthentication(deviceClient.Endpoint, _auth);
-                var deviceInfo = await deviceClient.GetDeviceInformationAsync(new OnvifDeviceMgmt.GetDeviceInformationRequest()).ConfigureAwait(false);
+                var deviceInfo = await deviceClient.GetDeviceInformationAsync(new GetDeviceInformationRequest()).ConfigureAwait(false);
                 return deviceInfo;
             }
         }
 
-        public async Task<OnvifDeviceMgmt.GetServicesResponse> GetServicesAsync(bool includeCapability = false)
+        public async Task<GetServicesResponse> GetServicesAsync(bool includeCapability = false)
         {
-            using (var deviceClient = new OnvifDeviceMgmt.DeviceClient(
+            using (var deviceClient = new DeviceClient(
                 OnvifBindingFactory.CreateBinding(),
                 new System.ServiceModel.EndpointAddress(_onvifUri)))
             {
@@ -61,9 +63,9 @@ namespace SharpOnvifClient
             }
         }
 
-        public async Task<OnvifDeviceMgmt.SystemDateTime> GetSystemDateAndTimeAsync()
+        public async Task<SystemDateTime> GetSystemDateAndTimeAsync()
         {
-            using (var deviceClient = new OnvifDeviceMgmt.DeviceClient(
+            using (var deviceClient = new DeviceClient(
                 OnvifBindingFactory.CreateBinding(),
                 new System.ServiceModel.EndpointAddress(_onvifUri)))
             {
@@ -73,10 +75,10 @@ namespace SharpOnvifClient
             }
         }
 
-        public async Task<DateTime> GetSystemDateAndTimeUtcAsync()
+        public async Task<System.DateTime> GetSystemDateAndTimeUtcAsync()
         {
             var cameraTime = await GetSystemDateAndTimeAsync().ConfigureAwait(false);
-            var cameraDateTime = new DateTime(
+            var cameraDateTime = new System.DateTime(
                 cameraTime.UTCDateTime.Date.Year,
                 cameraTime.UTCDateTime.Date.Month,
                 cameraTime.UTCDateTime.Date.Day,
@@ -92,10 +94,10 @@ namespace SharpOnvifClient
 
         #region Media
 
-        public async Task<OnvifMedia.GetProfilesResponse> GetProfilesAsync()
+        public async Task<GetProfilesResponse> GetProfilesAsync()
         {
             string mediaUrl = await GetServiceUriAsync(OnvifServices.MEDIA).ConfigureAwait(false);
-            using (var mediaClient = new OnvifMedia.MediaClient(
+            using (var mediaClient = new MediaClient(
                 OnvifBindingFactory.CreateBinding(),
                 new System.ServiceModel.EndpointAddress(mediaUrl)))
             {
@@ -105,15 +107,15 @@ namespace SharpOnvifClient
             }
         }
 
-        public async Task<OnvifMedia.MediaUri> GetStreamUriAsync(string profileToken)
+        public async Task<MediaUri> GetStreamUriAsync(string profileToken)
         {
             string mediaUrl = await GetServiceUriAsync(OnvifServices.MEDIA).ConfigureAwait(false);
-            using (var mediaClient = new OnvifMedia.MediaClient(
+            using (var mediaClient = new MediaClient(
                 OnvifBindingFactory.CreateBinding(),
                 new System.ServiceModel.EndpointAddress(mediaUrl)))
             {
                 SetAuthentication(mediaClient.Endpoint, _auth);
-                var streamUri = await mediaClient.GetStreamUriAsync(new OnvifMedia.StreamSetup(), profileToken).ConfigureAwait(false);
+                var streamUri = await mediaClient.GetStreamUriAsync(new StreamSetup(), profileToken).ConfigureAwait(false);
                 return streamUri;
             }
         }

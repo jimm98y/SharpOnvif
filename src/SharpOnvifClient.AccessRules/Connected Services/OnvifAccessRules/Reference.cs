@@ -7,12 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OnvifAccessRules
+namespace SharpOnvifClient.AccessRules
 {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/accessrules/wsdl", ConfigurationName="OnvifAccessRules.AccessRulesPort")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.onvif.org/ver10/accessrules/wsdl", ConfigurationName="SharpOnvifClient.AccessRules.AccessRulesPort")]
     public interface AccessRulesPort
     {
         
@@ -20,45 +20,45 @@ namespace OnvifAccessRules
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Capabilities")]
-        System.Threading.Tasks.Task<OnvifAccessRules.ServiceCapabilities> GetServiceCapabilitiesAsync();
+        System.Threading.Tasks.Task<SharpOnvifClient.AccessRules.ServiceCapabilities> GetServiceCapabilitiesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/accessrules/wsdl/GetAccessProfileInfo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifAccessRules.GetAccessProfileInfoResponse> GetAccessProfileInfoAsync(OnvifAccessRules.GetAccessProfileInfoRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AccessRules.GetAccessProfileInfoResponse> GetAccessProfileInfoAsync(SharpOnvifClient.AccessRules.GetAccessProfileInfoRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/accessrules/wsdl/GetAccessProfileInfoList", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifAccessRules.GetAccessProfileInfoListResponse> GetAccessProfileInfoListAsync(OnvifAccessRules.GetAccessProfileInfoListRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AccessRules.GetAccessProfileInfoListResponse> GetAccessProfileInfoListAsync(SharpOnvifClient.AccessRules.GetAccessProfileInfoListRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/accessrules/wsdl/GetAccessProfiles", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifAccessRules.GetAccessProfilesResponse> GetAccessProfilesAsync(OnvifAccessRules.GetAccessProfilesRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AccessRules.GetAccessProfilesResponse> GetAccessProfilesAsync(SharpOnvifClient.AccessRules.GetAccessProfilesRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/accessrules/wsdl/GetAccessProfileList", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task<OnvifAccessRules.GetAccessProfileListResponse> GetAccessProfileListAsync(OnvifAccessRules.GetAccessProfileListRequest request);
+        System.Threading.Tasks.Task<SharpOnvifClient.AccessRules.GetAccessProfileListResponse> GetAccessProfileListAsync(SharpOnvifClient.AccessRules.GetAccessProfileListRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/accessrules/wsdl/CreateAccessProfile", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="Token")]
-        System.Threading.Tasks.Task<string> CreateAccessProfileAsync(OnvifAccessRules.AccessProfile AccessProfile);
+        System.Threading.Tasks.Task<string> CreateAccessProfileAsync(SharpOnvifClient.AccessRules.AccessProfile AccessProfile);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/accessrules/wsdl/ModifyAccessProfile", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task ModifyAccessProfileAsync(OnvifAccessRules.AccessProfile AccessProfile);
+        System.Threading.Tasks.Task ModifyAccessProfileAsync(SharpOnvifClient.AccessRules.AccessProfile AccessProfile);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/accessrules/wsdl/SetAccessProfile", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataEntity))]
-        System.Threading.Tasks.Task SetAccessProfileAsync(OnvifAccessRules.AccessProfile AccessProfile);
+        System.Threading.Tasks.Task SetAccessProfileAsync(SharpOnvifClient.AccessRules.AccessProfile AccessProfile);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.onvif.org/ver10/accessrules/wsdl/DeleteAccessProfile", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -433,13 +433,13 @@ namespace OnvifAccessRules
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/accessrules/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("AccessProfileInfo")]
-        public OnvifAccessRules.AccessProfileInfo[] AccessProfileInfo;
+        public SharpOnvifClient.AccessRules.AccessProfileInfo[] AccessProfileInfo;
         
         public GetAccessProfileInfoResponse()
         {
         }
         
-        public GetAccessProfileInfoResponse(OnvifAccessRules.AccessProfileInfo[] AccessProfileInfo)
+        public GetAccessProfileInfoResponse(SharpOnvifClient.AccessRules.AccessProfileInfo[] AccessProfileInfo)
         {
             this.AccessProfileInfo = AccessProfileInfo;
         }
@@ -479,13 +479,13 @@ namespace OnvifAccessRules
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/accessrules/wsdl", Order=1)]
         [System.Xml.Serialization.XmlElementAttribute("AccessProfileInfo")]
-        public OnvifAccessRules.AccessProfileInfo[] AccessProfileInfo;
+        public SharpOnvifClient.AccessRules.AccessProfileInfo[] AccessProfileInfo;
         
         public GetAccessProfileInfoListResponse()
         {
         }
         
-        public GetAccessProfileInfoListResponse(string NextStartReference, OnvifAccessRules.AccessProfileInfo[] AccessProfileInfo)
+        public GetAccessProfileInfoListResponse(string NextStartReference, SharpOnvifClient.AccessRules.AccessProfileInfo[] AccessProfileInfo)
         {
             this.NextStartReference = NextStartReference;
             this.AccessProfileInfo = AccessProfileInfo;
@@ -522,13 +522,13 @@ namespace OnvifAccessRules
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/accessrules/wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("AccessProfile")]
-        public OnvifAccessRules.AccessProfile[] AccessProfile;
+        public SharpOnvifClient.AccessRules.AccessProfile[] AccessProfile;
         
         public GetAccessProfilesResponse()
         {
         }
         
-        public GetAccessProfilesResponse(OnvifAccessRules.AccessProfile[] AccessProfile)
+        public GetAccessProfilesResponse(SharpOnvifClient.AccessRules.AccessProfile[] AccessProfile)
         {
             this.AccessProfile = AccessProfile;
         }
@@ -568,13 +568,13 @@ namespace OnvifAccessRules
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.onvif.org/ver10/accessrules/wsdl", Order=1)]
         [System.Xml.Serialization.XmlElementAttribute("AccessProfile")]
-        public OnvifAccessRules.AccessProfile[] AccessProfile;
+        public SharpOnvifClient.AccessRules.AccessProfile[] AccessProfile;
         
         public GetAccessProfileListResponse()
         {
         }
         
-        public GetAccessProfileListResponse(string NextStartReference, OnvifAccessRules.AccessProfile[] AccessProfile)
+        public GetAccessProfileListResponse(string NextStartReference, SharpOnvifClient.AccessRules.AccessProfile[] AccessProfile)
         {
             this.NextStartReference = NextStartReference;
             this.AccessProfile = AccessProfile;
@@ -582,13 +582,13 @@ namespace OnvifAccessRules
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface AccessRulesPortChannel : OnvifAccessRules.AccessRulesPort, System.ServiceModel.IClientChannel
+    public interface AccessRulesPortChannel : SharpOnvifClient.AccessRules.AccessRulesPort, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class AccessRulesPortClient : System.ServiceModel.ClientBase<OnvifAccessRules.AccessRulesPort>, OnvifAccessRules.AccessRulesPort
+    public partial class AccessRulesPortClient : System.ServiceModel.ClientBase<SharpOnvifClient.AccessRules.AccessRulesPort>, SharpOnvifClient.AccessRules.AccessRulesPort
     {
         
         public AccessRulesPortClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
@@ -596,58 +596,58 @@ namespace OnvifAccessRules
         {
         }
         
-        public System.Threading.Tasks.Task<OnvifAccessRules.ServiceCapabilities> GetServiceCapabilitiesAsync()
+        public System.Threading.Tasks.Task<SharpOnvifClient.AccessRules.ServiceCapabilities> GetServiceCapabilitiesAsync()
         {
             return base.Channel.GetServiceCapabilitiesAsync();
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAccessRules.GetAccessProfileInfoResponse> OnvifAccessRules.AccessRulesPort.GetAccessProfileInfoAsync(OnvifAccessRules.GetAccessProfileInfoRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AccessRules.GetAccessProfileInfoResponse> SharpOnvifClient.AccessRules.AccessRulesPort.GetAccessProfileInfoAsync(SharpOnvifClient.AccessRules.GetAccessProfileInfoRequest request)
         {
             return base.Channel.GetAccessProfileInfoAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAccessRules.GetAccessProfileInfoResponse> GetAccessProfileInfoAsync(string[] Token)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AccessRules.GetAccessProfileInfoResponse> GetAccessProfileInfoAsync(string[] Token)
         {
-            OnvifAccessRules.GetAccessProfileInfoRequest inValue = new OnvifAccessRules.GetAccessProfileInfoRequest();
+            SharpOnvifClient.AccessRules.GetAccessProfileInfoRequest inValue = new SharpOnvifClient.AccessRules.GetAccessProfileInfoRequest();
             inValue.Token = Token;
-            return ((OnvifAccessRules.AccessRulesPort)(this)).GetAccessProfileInfoAsync(inValue);
+            return ((SharpOnvifClient.AccessRules.AccessRulesPort)(this)).GetAccessProfileInfoAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifAccessRules.GetAccessProfileInfoListResponse> GetAccessProfileInfoListAsync(OnvifAccessRules.GetAccessProfileInfoListRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AccessRules.GetAccessProfileInfoListResponse> GetAccessProfileInfoListAsync(SharpOnvifClient.AccessRules.GetAccessProfileInfoListRequest request)
         {
             return base.Channel.GetAccessProfileInfoListAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnvifAccessRules.GetAccessProfilesResponse> OnvifAccessRules.AccessRulesPort.GetAccessProfilesAsync(OnvifAccessRules.GetAccessProfilesRequest request)
+        System.Threading.Tasks.Task<SharpOnvifClient.AccessRules.GetAccessProfilesResponse> SharpOnvifClient.AccessRules.AccessRulesPort.GetAccessProfilesAsync(SharpOnvifClient.AccessRules.GetAccessProfilesRequest request)
         {
             return base.Channel.GetAccessProfilesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnvifAccessRules.GetAccessProfilesResponse> GetAccessProfilesAsync(string[] Token)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AccessRules.GetAccessProfilesResponse> GetAccessProfilesAsync(string[] Token)
         {
-            OnvifAccessRules.GetAccessProfilesRequest inValue = new OnvifAccessRules.GetAccessProfilesRequest();
+            SharpOnvifClient.AccessRules.GetAccessProfilesRequest inValue = new SharpOnvifClient.AccessRules.GetAccessProfilesRequest();
             inValue.Token = Token;
-            return ((OnvifAccessRules.AccessRulesPort)(this)).GetAccessProfilesAsync(inValue);
+            return ((SharpOnvifClient.AccessRules.AccessRulesPort)(this)).GetAccessProfilesAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<OnvifAccessRules.GetAccessProfileListResponse> GetAccessProfileListAsync(OnvifAccessRules.GetAccessProfileListRequest request)
+        public System.Threading.Tasks.Task<SharpOnvifClient.AccessRules.GetAccessProfileListResponse> GetAccessProfileListAsync(SharpOnvifClient.AccessRules.GetAccessProfileListRequest request)
         {
             return base.Channel.GetAccessProfileListAsync(request);
         }
         
-        public System.Threading.Tasks.Task<string> CreateAccessProfileAsync(OnvifAccessRules.AccessProfile AccessProfile)
+        public System.Threading.Tasks.Task<string> CreateAccessProfileAsync(SharpOnvifClient.AccessRules.AccessProfile AccessProfile)
         {
             return base.Channel.CreateAccessProfileAsync(AccessProfile);
         }
         
-        public System.Threading.Tasks.Task ModifyAccessProfileAsync(OnvifAccessRules.AccessProfile AccessProfile)
+        public System.Threading.Tasks.Task ModifyAccessProfileAsync(SharpOnvifClient.AccessRules.AccessProfile AccessProfile)
         {
             return base.Channel.ModifyAccessProfileAsync(AccessProfile);
         }
         
-        public System.Threading.Tasks.Task SetAccessProfileAsync(OnvifAccessRules.AccessProfile AccessProfile)
+        public System.Threading.Tasks.Task SetAccessProfileAsync(SharpOnvifClient.AccessRules.AccessProfile AccessProfile)
         {
             return base.Channel.SetAccessProfileAsync(AccessProfile);
         }
