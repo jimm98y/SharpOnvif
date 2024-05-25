@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -21,12 +22,12 @@ namespace SharpOnvifCommon.Security
             return dateTime.ToString("yyyy-MM-ddTHH:mm:ss.fffZ");
         }
 
-        public static string CreateHashedPassword(string nonce, DateTime created, string password)
+        public static string CreateSoapDigest(string nonce, DateTime created, string password)
         {
-            return CreateHashedPassword(nonce, DateTimeToString(created), password);
+            return CreateSoapDigest(nonce, DateTimeToString(created), password);
         }
 
-        public static string CreateHashedPassword(string nonce, string created, string password)
+        public static string CreateSoapDigest(string nonce, string created, string password)
         {
             var nonceBytes = Convert.FromBase64String(nonce);
             var createdBytes = Encoding.UTF8.GetBytes(created);
@@ -40,6 +41,22 @@ namespace SharpOnvifCommon.Security
             using (var sha = SHA1.Create())
             {
                 return Convert.ToBase64String(sha.ComputeHash(combined));
+            }
+        }
+
+        public static string CreateWebDigestRFC2069(string userName, string realm, string password, string nonce, string method, string uri)
+        {
+            string HA1 = GenerateMD5Hash($"{userName}:{realm}:{password}");
+            string HA2 = GenerateMD5Hash($"{method}:{uri}");
+            string digest = GenerateMD5Hash($"{HA1}:{nonce}:{HA2}");
+            return digest;
+        }
+
+        private static string GenerateMD5Hash(string input)
+        {
+            using (MD5 hash = MD5.Create())
+            {
+                return string.Concat(hash.ComputeHash(Encoding.UTF8.GetBytes(input)).Select(x => x.ToString("x2")));
             }
         }
     }

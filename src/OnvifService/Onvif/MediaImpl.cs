@@ -1,4 +1,5 @@
-﻿using SharpOnvifServer.Media;
+﻿using SharpOnvifCommon;
+using SharpOnvifServer.Media;
 
 namespace OnvifService.Onvif
 {
@@ -32,7 +33,7 @@ namespace OnvifService.Onvif
         {
             return new MediaUri()
             {
-                Uri = "http://localhost/snapshot"
+                Uri = $"http://{NetworkHelpers.GetIPv4NetworkInterface()}:5000/preview"
             };
         }
 
@@ -40,7 +41,7 @@ namespace OnvifService.Onvif
         {
             return new MediaUri()
             {
-                Uri = "rtsp://localhost:554"
+                Uri = $"rtsp://{NetworkHelpers.GetIPv4NetworkInterface()}:554/"
             };
         }
 

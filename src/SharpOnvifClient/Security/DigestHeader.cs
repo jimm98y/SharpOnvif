@@ -32,7 +32,7 @@ namespace SharpOnvifClient.Security
         protected override void OnWriteHeaderContents(XmlDictionaryWriter writer, MessageVersion messageVersion)
         {
             var serializer = new XmlSerializer(typeof(UsernameToken));
-            var pass = DigestHelpers.CreateHashedPassword(_nonce, _created, _password);
+            var pass = DigestHelpers.CreateSoapDigest(_nonce, _created, _password);
             serializer.Serialize(writer,
                 new UsernameToken
                 {

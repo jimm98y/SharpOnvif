@@ -9,13 +9,19 @@ var builder = WebApplication.CreateBuilder();
 builder.Services.AddServiceModelServices();
 builder.Services.AddServiceModelMetadata();
 builder.Services.AddSingleton<IServiceBehavior, UseRequestHeadersForMetadataAddressBehavior>();
+
 builder.Services.AddSingleton<IUserRepository, UserRepository>();
 
 builder.Services.AddOnvifDigestAuthentication();
 builder.Services.AddOnvifDiscovery();
 
+builder.Services.AddControllers();
+builder.Services.AddRouting();
+
 var app = builder.Build();
+
 app.UseAuthentication();
+app.UseAuthorization();
 
 ((IApplicationBuilder)app).UseServiceModel(serviceBuilder =>
 {
@@ -35,5 +41,7 @@ app.UseAuthentication();
     var serviceMetadataBehavior = app.Services.GetRequiredService<ServiceMetadataBehavior>();
     serviceMetadataBehavior.HttpGetEnabled = true;
 });
+
+app.MapControllers();
 
 app.Run();

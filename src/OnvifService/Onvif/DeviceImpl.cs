@@ -13,7 +13,7 @@ namespace OnvifService.Onvif
                 {
                     Device = new DeviceCapabilities()
                     {
-                        XAddr = "http://localhost:5000/onvif/device_service",
+                        XAddr = $"http://{NetworkHelpers.GetIPv4NetworkInterface()}:5000/onvif/device_service",
                         Network = new NetworkCapabilities1()
                         {
                             IPFilter = true,
@@ -45,12 +45,12 @@ namespace OnvifService.Onvif
                     },
                     Media = new MediaCapabilities()
                     {
-                        XAddr = "http://localhost:5000/onvif/media_service"
+                        XAddr = $"http://{NetworkHelpers.GetIPv4NetworkInterface()}:5000/onvif/media_service"
                     },
                     Events = new EventCapabilities()
                     {
                         WSPullPointSupport = true,
-                        XAddr = "http://localhost:5000/onvif/events_service"
+                        XAddr = $"http://{NetworkHelpers.GetIPv4NetworkInterface()}:5000/onvif/events_service"
                     }
                 }
             };
@@ -135,7 +135,7 @@ namespace OnvifService.Onvif
                     new Service()
                     {
                         Namespace = OnvifServices.DEVICE_MGMT, 
-                        XAddr = "http://localhost:5000/onvif/device_service",
+                        XAddr = $"http://{NetworkHelpers.GetIPv4NetworkInterface()}:5000/onvif/device_service",
                         Version = new OnvifVersion()
                         {
                             Major = 17,
@@ -145,7 +145,7 @@ namespace OnvifService.Onvif
                     new Service()
                     {
                         Namespace = OnvifServices.MEDIA,
-                        XAddr = "http://localhost:5000/onvif/media_service",
+                        XAddr = $"http://{NetworkHelpers.GetIPv4NetworkInterface()}:5000/onvif/media_service",
                         Version = new OnvifVersion()
                         {
                             Major = 17,
@@ -155,7 +155,7 @@ namespace OnvifService.Onvif
                     new Service()
                     {
                         Namespace = OnvifServices.EVENTS,
-                        XAddr = "http://localhost:5000/onvif/events_service",
+                        XAddr = $"http://{NetworkHelpers.GetIPv4NetworkInterface()}:5000/onvif/events_service",
                         Version = new OnvifVersion()
                         {
                             Major = 17,

@@ -11,6 +11,14 @@
     <None Remove="_Generated\**" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="vaultboy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="vaultboy.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="CoreWCF.Http" Version="1.5.2" />
     <PackageReference Include="CoreWCF.Primitives" Version="1.5.2" />
   </ItemGroup>
