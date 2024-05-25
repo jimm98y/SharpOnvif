@@ -7,7 +7,7 @@ namespace SharpOnvifServer
     /// <summary>
     /// Helper class for the CoreWCF bindings.
     /// </summary>
-    public static class OnvifHelper
+    public static class OnvifBindingFactory
     {
         /// <summary>
         /// Create an Onvif CoreWCF binding for the Digest authentication using Soap 1.2.

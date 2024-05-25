@@ -1,4 +1,6 @@
 ﻿using OnvifEvents;
+using SharpOnvifClient.Security;
+using SharpOnvifCommon;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -22,7 +24,15 @@ namespace SharpOnvifClient
                 throw new ArgumentNullException("User name or password must not be empty!");
 
             _onvifUri = onvifUri;
-            _auth = OnvifHelper.CreateAuthenticationBehavior(userName, password);
+            _auth = new DigestBehavior(userName, password);
+        }
+
+        public static void SetAuthentication(ServiceEndpoint endpoint, IEndpointBehavior authenticationBehavior)
+        {
+            if (!endpoint.EndpointBehaviors.Contains(authenticationBehavior))
+            {
+                endpoint.EndpointBehaviors.Add(authenticationBehavior);
+            }
         }
 
         #region Device Management
@@ -30,10 +40,10 @@ namespace SharpOnvifClient
         public async Task<OnvifDeviceMgmt.GetDeviceInformationResponse> GetDeviceInformationAsync()
         {
             using (var deviceClient = new OnvifDeviceMgmt.DeviceClient(
-                OnvifHelper.CreateBinding(),
-                OnvifHelper.CreateEndpointAddress(_onvifUri)))
+                OnvifBindingFactory.CreateBinding(),
+                new System.ServiceModel.EndpointAddress(_onvifUri)))
             {
-                OnvifHelper.SetAuthentication(deviceClient.Endpoint, _auth);
+                SetAuthentication(deviceClient.Endpoint, _auth);
                 var deviceInfo = await deviceClient.GetDeviceInformationAsync(new OnvifDeviceMgmt.GetDeviceInformationRequest()).ConfigureAwait(false);
                 return deviceInfo;
             }
@@ -42,10 +52,10 @@ namespace SharpOnvifClient
         public async Task<OnvifDeviceMgmt.GetServicesResponse> GetServicesAsync(bool includeCapability = false)
         {
             using (var deviceClient = new OnvifDeviceMgmt.DeviceClient(
-                OnvifHelper.CreateBinding(),
-                OnvifHelper.CreateEndpointAddress(_onvifUri)))
+                OnvifBindingFactory.CreateBinding(),
+                new System.ServiceModel.EndpointAddress(_onvifUri)))
             {
-                OnvifHelper.SetAuthentication(deviceClient.Endpoint, _auth);
+                SetAuthentication(deviceClient.Endpoint, _auth);
                 var services = await deviceClient.GetServicesAsync(includeCapability).ConfigureAwait(false);
                 return services;
             }
@@ -54,10 +64,10 @@ namespace SharpOnvifClient
         public async Task<OnvifDeviceMgmt.SystemDateTime> GetSystemDateAndTimeAsync()
         {
             using (var deviceClient = new OnvifDeviceMgmt.DeviceClient(
-                OnvifHelper.CreateBinding(),
-                OnvifHelper.CreateEndpointAddress(_onvifUri)))
+                OnvifBindingFactory.CreateBinding(),
+                new System.ServiceModel.EndpointAddress(_onvifUri)))
             {
-                OnvifHelper.SetAuthentication(deviceClient.Endpoint, _auth);
+                SetAuthentication(deviceClient.Endpoint, _auth);
                 var cameraTime = await deviceClient.GetSystemDateAndTimeAsync().ConfigureAwait(false);
                 return cameraTime;
             }
@@ -86,10 +96,10 @@ namespace SharpOnvifClient
         {
             string mediaUrl = await GetServiceUriAsync(OnvifServices.MEDIA).ConfigureAwait(false);
             using (var mediaClient = new OnvifMedia.MediaClient(
-                OnvifHelper.CreateBinding(),
-                OnvifHelper.CreateEndpointAddress(mediaUrl)))
+                OnvifBindingFactory.CreateBinding(),
+                new System.ServiceModel.EndpointAddress(mediaUrl)))
             {
-                OnvifHelper.SetAuthentication(mediaClient.Endpoint, _auth);
+                SetAuthentication(mediaClient.Endpoint, _auth);
                 var profiles = await mediaClient.GetProfilesAsync().ConfigureAwait(false);
                 return profiles;
             }
@@ -99,10 +109,10 @@ namespace SharpOnvifClient
         {
             string mediaUrl = await GetServiceUriAsync(OnvifServices.MEDIA).ConfigureAwait(false);
             using (var mediaClient = new OnvifMedia.MediaClient(
-                OnvifHelper.CreateBinding(),
-                OnvifHelper.CreateEndpointAddress(mediaUrl)))
+                OnvifBindingFactory.CreateBinding(),
+                new System.ServiceModel.EndpointAddress(mediaUrl)))
             {
-                OnvifHelper.SetAuthentication(mediaClient.Endpoint, _auth);
+                SetAuthentication(mediaClient.Endpoint, _auth);
                 var streamUri = await mediaClient.GetStreamUriAsync(new OnvifMedia.StreamSetup(), profileToken).ConfigureAwait(false);
                 return streamUri;
             }
@@ -116,15 +126,15 @@ namespace SharpOnvifClient
         {
             string eventUri = await GetServiceUriAsync(OnvifServices.EVENTS);
             using (EventPortTypeClient eventPortTypeClient = new EventPortTypeClient(
-                            OnvifHelper.CreateBinding(),
-                            OnvifHelper.CreateEndpointAddress(eventUri)))
+                            OnvifBindingFactory.CreateBinding(),
+                            new System.ServiceModel.EndpointAddress(eventUri)))
             {
-                OnvifHelper.SetAuthentication(eventPortTypeClient.Endpoint, _auth);
+                SetAuthentication(eventPortTypeClient.Endpoint, _auth);
 
                 var subscribeResponse = await eventPortTypeClient.CreatePullPointSubscriptionAsync(
                     new CreatePullPointSubscriptionRequest()
                     {
-                        InitialTerminationTime = GetTimeoutInMinutes(initialTerminationTimeInMinutes)
+                        InitialTerminationTime = OnvifHelpers.GetTimeoutInMinutes(initialTerminationTimeInMinutes)
                     }).ConfigureAwait(false);
 
                 Debug.WriteLine($"Pull Point subscription termination time: {subscribeResponse.TerminationTime}");
@@ -137,14 +147,14 @@ namespace SharpOnvifClient
         {
             using (PullPointSubscriptionClient pullPointClient =
                 new PullPointSubscriptionClient(
-                    OnvifHelper.CreateBinding(),
-                    OnvifHelper.CreateEndpointAddress(subscriptionReferenceAddress)))
+                    OnvifBindingFactory.CreateBinding(),
+                    new System.ServiceModel.EndpointAddress(subscriptionReferenceAddress)))
             {
-                OnvifHelper.SetAuthentication(pullPointClient.Endpoint, _auth);
+                SetAuthentication(pullPointClient.Endpoint, _auth);
 
                 var messages = await pullPointClient.PullMessagesAsync(
                     new PullMessagesRequest(
-                        GetTimeoutInSeconds(timeoutInSeconds),
+                        OnvifHelpers.GetTimeoutInSeconds(timeoutInSeconds),
                         maxMessages,
                         Array.Empty<System.Xml.XmlElement>())).ConfigureAwait(false);
 
@@ -156,10 +166,10 @@ namespace SharpOnvifClient
         {
             using (PullPointSubscriptionClient pullPointClient =
                 new PullPointSubscriptionClient(
-                    OnvifHelper.CreateBinding(),
-                    OnvifHelper.CreateEndpointAddress(subscriptionReferenceAddress)))
+                    OnvifBindingFactory.CreateBinding(),
+                    new System.ServiceModel.EndpointAddress(subscriptionReferenceAddress)))
             {
-                OnvifHelper.SetAuthentication(pullPointClient.Endpoint, _auth);
+                SetAuthentication(pullPointClient.Endpoint, _auth);
                 var unsubscribeResponse = await pullPointClient.UnsubscribeAsync(new Unsubscribe()).ConfigureAwait(false);
                 return unsubscribeResponse;
             }
@@ -174,14 +184,14 @@ namespace SharpOnvifClient
             // Basic events need an exception in Windows Firewall + VS must run as Admin
             string eventUri = await GetServiceUriAsync(OnvifServices.EVENTS);
             using (NotificationProducerClient notificationProducerClient = new NotificationProducerClient(
-                            OnvifHelper.CreateBinding(),
-                            OnvifHelper.CreateEndpointAddress(eventUri)))
+                            OnvifBindingFactory.CreateBinding(),
+                            new System.ServiceModel.EndpointAddress(eventUri)))
             {
-                OnvifHelper.SetAuthentication(notificationProducerClient.Endpoint, _auth);
+                SetAuthentication(notificationProducerClient.Endpoint, _auth);
 
                 var subscriptionResult = await notificationProducerClient.SubscribeAsync(new Subscribe()
                 {
-                    InitialTerminationTime = GetTimeoutInMinutes(timeoutInMinutes),
+                    InitialTerminationTime = OnvifHelpers.GetTimeoutInMinutes(timeoutInMinutes),
                     ConsumerReference = new EndpointReferenceType()
                     {
                         Address = new AttributedURIType()
@@ -198,14 +208,14 @@ namespace SharpOnvifClient
         public async Task<RenewResponse1> BasicSubscriptionRenewAsync(string subscriptionReferenceAddress, int timeoutInMinutes = 5)
         {
             using (SubscriptionManagerClient subscriptionManagerClient = new SubscriptionManagerClient(
-                            OnvifHelper.CreateBinding(),
-                            OnvifHelper.CreateEndpointAddress(subscriptionReferenceAddress)))
+                            OnvifBindingFactory.CreateBinding(),
+                            new System.ServiceModel.EndpointAddress(subscriptionReferenceAddress)))
             {
-                OnvifHelper.SetAuthentication(subscriptionManagerClient.Endpoint, _auth);
+                SetAuthentication(subscriptionManagerClient.Endpoint, _auth);
 
                 var renewResult = await subscriptionManagerClient.RenewAsync(new Renew()
                 {
-                    TerminationTime = GetTimeoutInMinutes(timeoutInMinutes),
+                    TerminationTime = OnvifHelpers.GetTimeoutInMinutes(timeoutInMinutes),
                 }).ConfigureAwait(false);
 
                 return renewResult;
@@ -215,10 +225,10 @@ namespace SharpOnvifClient
         public async Task<UnsubscribeResponse1> BasicSubscriptionUnsubscribeAsync(string subscriptionReferenceAddress)
         {
             using (SubscriptionManagerClient subscriptionManagerClient = new SubscriptionManagerClient(
-                            OnvifHelper.CreateBinding(),
-                            OnvifHelper.CreateEndpointAddress(subscriptionReferenceAddress)))
+                            OnvifBindingFactory.CreateBinding(),
+                            new System.ServiceModel.EndpointAddress(subscriptionReferenceAddress)))
             {
-                OnvifHelper.SetAuthentication(subscriptionManagerClient.Endpoint, _auth);
+                SetAuthentication(subscriptionManagerClient.Endpoint, _auth);
                 var unsubscribeResult = await subscriptionManagerClient.UnsubscribeAsync(new Unsubscribe()).ConfigureAwait(false);
                 return unsubscribeResult;
             }
@@ -247,16 +257,6 @@ namespace SharpOnvifClient
                 return uri;
             else
                 throw new NotSupportedException($"The device does not support {ns} sevice!");
-        }
-
-        private static string GetTimeoutInSeconds(int timeoutInSeconds)
-        {
-            return $"PT{timeoutInSeconds}S";
-        }
-
-        private static string GetTimeoutInMinutes(int timeoutInMinutes)
-        {
-            return $"PT{timeoutInMinutes}M";
         }
 
         #endregion // Utility
