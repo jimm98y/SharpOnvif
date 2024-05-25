@@ -10,13 +10,11 @@ builder.Services.AddServiceModelServices();
 builder.Services.AddServiceModelMetadata();
 builder.Services.AddSingleton<IServiceBehavior, UseRequestHeadersForMetadataAddressBehavior>();
 
-builder.Services.AddSingleton<IUserRepository, UserRepository>();
+builder.Services.AddControllers();
 
+builder.Services.AddSingleton<IUserRepository, UserRepository>();
 builder.Services.AddOnvifDigestAuthentication();
 builder.Services.AddOnvifDiscovery();
-
-builder.Services.AddControllers();
-builder.Services.AddRouting();
 
 var app = builder.Build();
 
