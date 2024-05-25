@@ -21,6 +21,11 @@ namespace SharpOnvifServer
     {
         private readonly IUserRepository _userRepository;
 
+        /// <summary>
+        /// Maximum allowed time difference in between the client and the server in seconds.
+        /// </summary>
+        protected int MaxValidTimeDeltaInSeconds { get; set; } = 300;
+
         public DigestAuthenticationHandler(
             IOptionsMonitor<AuthenticationSchemeOptions> options,
             ILoggerFactory logger,
@@ -39,7 +44,7 @@ namespace SharpOnvifServer
             {
                 try
                 {
-                    if (await _userRepository.Authenticate(token.Username, token.Password.Text, token.Nonce.Text, token.Created))
+                    if (await Authenticate(token.Username, token.Password.Text, token.Nonce.Text, token.Created))
                     {
                         var identity = new GenericIdentity(token.Username);
                         var claimsPrincipal = new ClaimsPrincipal(identity);
@@ -55,6 +60,28 @@ namespace SharpOnvifServer
             }
 
             return AuthenticateResult.Fail("Invalid Authorization Header");
+        }
+
+        public async Task<bool> Authenticate(string userName, string password, string nonce, string created)
+        {
+            var user = await _userRepository.GetUser(userName);
+            if (user != null)
+            {
+                string hashedPassword = DigestHelpers.CreateHashedPassword(nonce, created, user.Password);
+                DateTime createdDateTime;
+                if (DateTime.TryParse(created, out createdDateTime))
+                {
+                    if (MaxValidTimeDeltaInSeconds < 0 || DateTime.UtcNow.Subtract(createdDateTime).TotalSeconds < MaxValidTimeDeltaInSeconds)
+                    {
+                        if (hashedPassword.CompareTo(password) == 0)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            return false;
         }
 
         protected override async Task HandleChallengeAsync(AuthenticationProperties properties)

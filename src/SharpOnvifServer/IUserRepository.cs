@@ -7,6 +7,11 @@ namespace SharpOnvifServer
     /// </summary>
     public interface IUserRepository
     {
-        public Task<bool> Authenticate(string username, string password, string nonce, string created);
+        /// <summary>
+        /// Get user from the user name. Returns null if the user does not exist.
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns><see cref="UserInfo"/> if the user exists, null otherwise.</returns>
+        public Task<UserInfo> GetUser(string userName);
     }
 }

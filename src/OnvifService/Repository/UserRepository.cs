@@ -1,23 +1,21 @@
 ﻿using SharpOnvifServer;
+using System.Threading.Tasks;
 
 namespace OnvifService.Repository
 {
-    public class UserRepository : UserRepositoryBase
+    public class UserRepository : IUserRepository
     {
         public string UserName { get; set; } = "admin";
         public string Password { get; set; } = "password";
 
-        protected override bool UserExists(string username)
+        public Task<UserInfo> GetUser(string userName)
         {
-            return username == UserName;
-        }
+            if (string.Compare(userName, UserName, true) == 0)
+            {
+                return Task.FromResult(new UserInfo() { UserName = userName, Password = Password });
+            }
 
-        protected override string GetPassword(string username)
-        {
-            if (username == UserName)
-                return Password;
-
-            throw new System.Exception("Unauthorized");
+            return Task.FromResult((UserInfo)null);
         }
     }
 }
