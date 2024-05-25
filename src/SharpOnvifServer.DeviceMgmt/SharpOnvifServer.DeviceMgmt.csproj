@@ -15,4 +15,8 @@
     <PackageReference Include="CoreWCF.Primitives" Version="1.5.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SharpOnvifServer\SharpOnvifServer.csproj" />
+  </ItemGroup>
+
 </Project>

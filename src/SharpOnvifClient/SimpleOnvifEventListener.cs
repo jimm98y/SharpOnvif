@@ -104,5 +104,4 @@ namespace SharpOnvifClient
             GC.SuppressFinalize(this);
         }
     }
-
 }
