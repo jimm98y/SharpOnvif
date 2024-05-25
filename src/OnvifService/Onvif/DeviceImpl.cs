@@ -3,7 +3,7 @@ using SharpOnvifServer.DeviceMgmt;
 
 namespace OnvifService.Onvif
 {
-    public class DeviceMgmtImpl : DeviceBase
+    public class DeviceImpl : DeviceBase
     {
         public override GetCapabilitiesResponse GetCapabilities(GetCapabilitiesRequest request)
         {

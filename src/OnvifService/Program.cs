@@ -19,15 +19,14 @@ app.UseAuthentication();
 
 ((IApplicationBuilder)app).UseServiceModel(serviceBuilder =>
 {
-    serviceBuilder.AddService<OnvifService.Onvif.DeviceMgmtImpl>();
-    serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.DeviceMgmtImpl, SharpOnvifServer.DeviceMgmt.Device>(OnvifBindingFactory.CreateBinding(), "/onvif/device_service");
+    serviceBuilder.AddService<OnvifService.Onvif.DeviceImpl>();
+    serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.DeviceImpl, SharpOnvifServer.DeviceMgmt.Device>(OnvifBindingFactory.CreateBinding(), "/onvif/device_service");
 
     serviceBuilder.AddService<OnvifService.Onvif.MediaImpl>();
     serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.MediaImpl, SharpOnvifServer.Media.Media>(OnvifBindingFactory.CreateBinding(), "/onvif/media_service");
 
-    serviceBuilder.AddService<OnvifService.Onvif.EventsImpl>();
-    serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.EventsImpl, SharpOnvifServer.Events.NotificationConsumer>(OnvifBindingFactory.CreateBinding(), "/onvif/events_service");
-
+    serviceBuilder.AddService<OnvifService.Onvif.NotificationProducerImpl>();
+    serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.NotificationProducerImpl, SharpOnvifServer.Events.NotificationProducer>(OnvifBindingFactory.CreateBinding(), "/onvif/events_service");
 
     // TODO: add more service endpoints
 
