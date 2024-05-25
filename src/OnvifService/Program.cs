@@ -27,6 +27,8 @@ app.UseAuthentication();
 
     serviceBuilder.AddService<OnvifService.Onvif.NotificationProducerImpl>();
     serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.NotificationProducerImpl, SharpOnvifServer.Events.NotificationProducer>(OnvifBindingFactory.CreateBinding(), "/onvif/events_service");
+    serviceBuilder.AddService<OnvifService.Onvif.SubscriptionManagerImpl>();
+    serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.SubscriptionManagerImpl, SharpOnvifServer.Events.SubscriptionManager>(OnvifBindingFactory.CreateBinding(), "/onvif/events_service");
 
     // TODO: add more service endpoints
 
