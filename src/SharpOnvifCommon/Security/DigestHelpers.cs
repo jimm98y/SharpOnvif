@@ -6,9 +6,9 @@ namespace SharpOnvifCommon.Security
 {
     public static class DigestHelpers
     {
-        public static string CalculateNonce()
+        public static string CalculateNonce(int length = 32)
         {
-            var byteArray = new byte[32];
+            var byteArray = new byte[length];
             using (var rnd = RandomNumberGenerator.Create())
             {
                 rnd.GetBytes(byteArray);
