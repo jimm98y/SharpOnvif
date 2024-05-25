@@ -59,7 +59,7 @@ namespace SharpOnvifClient
             });
         }
 
-        public string GetOnvifEventListenerUri(string host, int cameraID = 0)
+        public string GetOnvifEventListenerUri(string host = "0.0.0.0", int cameraID = 0)
         {
             return $"{GetHttpUri(host, _port)}{cameraID}/";
         }

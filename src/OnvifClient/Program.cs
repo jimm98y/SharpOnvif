@@ -2,6 +2,7 @@
 using SharpOnvifCommon;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 var devices = await DiscoveryClient.DiscoverAsync();
 var device = devices.FirstOrDefault(x => x.Contains("localhost"));
@@ -26,5 +27,54 @@ else
         var profiles = await client.GetProfilesAsync();
         var streamUri = await client.GetStreamUriAsync(profiles.Profiles.First());
         Console.WriteLine($"Stream URI: {streamUri.Uri}");
+    }
+
+    // check if event profile is available
+    if (services.Service.FirstOrDefault(x => x.Namespace == OnvifServices.EVENTS) != null)
+    {
+        // basic events vs pull point subscription
+        bool useBasicEvents = true; // = false;
+
+        if(useBasicEvents)
+            await BasicEventSubscription(client);
+        else
+            await PullPointEventSubscription(client);
+    }
+}
+
+static async Task PullPointEventSubscription(SimpleOnvifClient client)
+{
+    var subscription = await client.PullPointSubscribeAsync();
+    while (true)
+    {
+        var messages = await client.PullPointPullMessagesAsync(subscription);
+
+        foreach (var ev in messages.NotificationMessage)
+        {
+            if (OnvifEvents.IsMotionDetected(ev) != null)
+                Console.WriteLine($"Motion detected: {OnvifEvents.IsMotionDetected(ev)}");
+            else if (OnvifEvents.IsTamperDetected(ev) != null)
+                Console.WriteLine($"Tamper detected: {OnvifEvents.IsTamperDetected(ev)}");
+        }
+    }
+}
+
+static async Task BasicEventSubscription(SimpleOnvifClient client)
+{
+    // we must run as an Administrator for the Basic subscription to work
+    var eventListener = new SimpleOnvifEventListener((int cameraID, string ev) =>
+    {
+        if (OnvifEvents.IsMotionDetected(ev) != null)
+            Console.WriteLine($"Motion detected: {OnvifEvents.IsMotionDetected(ev)}");
+        else if (OnvifEvents.IsTamperDetected(ev) != null)
+            Console.WriteLine($"Tamper detected: {OnvifEvents.IsTamperDetected(ev)}");
+    });
+
+    var subscriptionResponse = await client.BasicSubscribeAsync(eventListener.GetOnvifEventListenerUri());
+
+    while (true)
+    {
+        await Task.Delay(1000 * 60 * 4);
+        var result = await client.BasicSubscriptionRenewAsync(subscriptionResponse);
     }
 }
