@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Microsoft.AspNetCore.Hosting.Server;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -22,6 +23,7 @@ namespace SharpOnvifServer.Discovery
     public class OnvifDiscoveryOptions
     {
         public List<string> ServiceAddresses { get; set; } = new List<string>();
+
         public List<string> Scopes { get; set; } = new List<string>()
         {
             "onvif://www.onvif.org/type/video_encoder",
@@ -40,15 +42,6 @@ namespace SharpOnvifServer.Discovery
         public string Hardware { get; set; }
         public string Name { get; set; }
         public string City { get; set; }
-
-        /// <summary>
-        /// Ctor.
-        /// </summary>
-        /// <param name="serviceAddress">Public Onvif endpoint service address.</param>
-        public OnvifDiscoveryOptions(string serviceAddress)
-        {
-            ServiceAddresses.Add(serviceAddress);
-        }
     }
 
     /// <summary>
@@ -67,51 +60,59 @@ namespace SharpOnvifServer.Discovery
         private Task _listenerTask;
 
         private readonly OnvifDiscoveryOptions _options = null;
+        private readonly IServer _server;
+        private readonly IHostApplicationLifetime _hostApplicationLifetime;
 
-        public DiscoveryService(OnvifDiscoveryOptions options)
+        public DiscoveryService(OnvifDiscoveryOptions options, IServer server, IHostApplicationLifetime hostApplicationLifetime)
         {
             this._options = options;
+            this._server = server;
+            this._hostApplicationLifetime = hostApplicationLifetime;
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            try
+            // we need to make sure everything is started and we can access the URL
+            _hostApplicationLifetime.ApplicationStarted.Register(() =>
             {
-                // to kill a process owning a port: Get-Process -Id (Get-NetUDPEndpoint -LocalPort 3702).OwningProcess
-                _udpClient = new UdpClient();
-                _udpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
-                _udpClient.Client.Bind(new IPEndPoint(IPAddress.Any, ONVIF_DISCOVERY_PORT));
-                _udpClient.JoinMulticastGroup(IPAddress.Parse(OnvifDiscoveryAddress));
-
-                _listenerTask = Task.Run(() =>
+                try
                 {
-                    while (!_cts.IsCancellationRequested)
-                    {
-                        try
-                        {
-                            var remoteEndpoint = new IPEndPoint(IPAddress.Any, 0);
-                            var recvResult = _udpClient.Receive(ref remoteEndpoint);
+                    // to kill a process owning a port: Get-Process -Id (Get-NetUDPEndpoint -LocalPort 3702).OwningProcess
+                    _udpClient = new UdpClient();
+                    _udpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+                    _udpClient.Client.Bind(new IPEndPoint(IPAddress.Any, ONVIF_DISCOVERY_PORT));
+                    _udpClient.JoinMulticastGroup(IPAddress.Parse(OnvifDiscoveryAddress));
 
-                            string message = Encoding.UTF8.GetString(recvResult);
-                            var parsedMessage = ReadOnvifEndpoint(message);
-                            if (parsedMessage != null && IsSearchingOurTypes(_options.Types, parsedMessage.Types)) 
+                    _listenerTask = Task.Run(() =>
+                    {
+                        while (!_cts.IsCancellationRequested)
+                        {
+                            try
                             {
-                                string reply = CreateDiscoveryResponse(_options, parsedMessage.MessageUuid);
-                                var replyBytes = Encoding.UTF8.GetBytes(reply);
-                                int sentBytes = _udpClient.Client.SendTo(replyBytes, remoteEndpoint);
+                                var remoteEndpoint = new IPEndPoint(IPAddress.Any, 0);
+                                var recvResult = _udpClient.Receive(ref remoteEndpoint);
+
+                                string message = Encoding.UTF8.GetString(recvResult);
+                                var parsedMessage = ReadOnvifEndpoint(message);
+                                if (parsedMessage != null && IsSearchingOurTypes(_options.Types, parsedMessage.Types))
+                                {
+                                    string reply = CreateDiscoveryResponse(_options, _server.GetHttpEndpoint(), parsedMessage.MessageUuid);
+                                    var replyBytes = Encoding.UTF8.GetBytes(reply);
+                                    int sentBytes = _udpClient.Client.SendTo(replyBytes, remoteEndpoint);
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                Debug.WriteLine(ex.Message);
                             }
                         }
-                        catch (Exception ex)
-                        {
-                            Debug.WriteLine(ex.Message);
-                        }
-                    }
-                });
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Failed to start broadcast listener: {ex.Message}");
-            }
+                    });
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Failed to start broadcast listener: {ex.Message}");
+                }
+            });
             return Task.CompletedTask;
         }
 
@@ -128,7 +129,7 @@ namespace SharpOnvifServer.Discovery
             return false;
         }
 
-        private static string CreateDiscoveryResponse(OnvifDiscoveryOptions options, string discoveryMessageUuid)
+        private static string CreateDiscoveryResponse(OnvifDiscoveryOptions options, string httpUri, string discoveryMessageUuid)
         {
             Dictionary<string, string> nsPrefixes = new Dictionary<string, string>
             {
@@ -165,7 +166,7 @@ namespace SharpOnvifServer.Discovery
                                 $"</wsadis:EndpointReference>\r\n" +
                                 $"<d:Types>{BuildTypes(options.Types, nsPrefixes)}</d:Types>\r\n" +
                                 $"<d:Scopes>{BuildScopes(options)}</d:Scopes>\r\n" +
-                                $"<d:XAddrs>{BuildAddresses(options.ServiceAddresses)}</d:XAddrs>\r\n" +
+                                $"<d:XAddrs>{BuildAddresses(options, httpUri)}</d:XAddrs>\r\n" +
                                 $"<d:MetadataVersion>10</d:MetadataVersion>\r\n" +
                             $"</d:ProbeMatch>\r\n" +
                         $"</d:ProbeMatches>\r\n" +
@@ -211,9 +212,17 @@ namespace SharpOnvifServer.Discovery
             return prefix;
         }
 
-        private static string BuildAddresses(IEnumerable<string> values)
+        private static string BuildAddresses(OnvifDiscoveryOptions options, string fallbackHttpUri)
         {
-            return string.Join(' ', values);
+            if (options.ServiceAddresses.Count > 0)
+            {
+                return string.Join(' ', options.ServiceAddresses);
+            }
+            else
+            {
+                // fallback
+                return $"{fallbackHttpUri}/onvif/device_service";
+            }
         }
 
         private static string BuildScopes(OnvifDiscoveryOptions options)

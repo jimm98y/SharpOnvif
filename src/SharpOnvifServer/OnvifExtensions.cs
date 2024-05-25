@@ -48,7 +48,7 @@ namespace SharpOnvifServer
         public static void AddOnvifDiscovery(this IServiceCollection services, OnvifDiscoveryOptions options = null)
         {
             if (options == null)
-                options = new OnvifDiscoveryOptions("http://localhost:5000/onvif/device_service");
+                options = new OnvifDiscoveryOptions();
 
             services.AddSingleton(options);
             services.AddHostedService<DiscoveryService>();

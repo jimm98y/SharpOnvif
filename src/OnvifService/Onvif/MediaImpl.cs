@@ -1,10 +1,18 @@
-﻿using SharpOnvifCommon;
+﻿using Microsoft.AspNetCore.Hosting.Server;
+using SharpOnvifServer;
 using SharpOnvifServer.Media;
 
 namespace OnvifService.Onvif
 {
     public class MediaImpl : MediaBase
     {
+        private readonly IServer _server;
+
+        public MediaImpl(IServer server)
+        {
+            _server = server;
+        }
+
         public override GetAudioSourcesResponse GetAudioSources(GetAudioSourcesRequest request)
         {
             return new GetAudioSourcesResponse()
@@ -33,7 +41,7 @@ namespace OnvifService.Onvif
         {
             return new MediaUri()
             {
-                Uri = $"http://{NetworkHelpers.GetIPv4NetworkInterface()}:5000/preview"
+                Uri = $"{_server.GetHttpEndpoint()}/preview"
             };
         }
 
@@ -41,7 +49,7 @@ namespace OnvifService.Onvif
         {
             return new MediaUri()
             {
-                Uri = $"rtsp://{NetworkHelpers.GetIPv4NetworkInterface()}:554/"
+                Uri = $"{_server.GetHttpEndpoint()}/preview"
             };
         }
 
