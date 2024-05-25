@@ -4,17 +4,27 @@ using System;
 using System.Linq;
 
 var devices = await DiscoveryClient.DiscoverAsync();
-var client = new SimpleOnvifClient(devices.First(x => x.Contains("localhost")), "admin", "password");
+var device = devices.FirstOrDefault(x => x.Contains("localhost"));
 
-var deviceInfo = await client.GetDeviceInformationAsync();
-var services = await client.GetServicesAsync(true);
-var cameraDateTime = await client.GetSystemDateAndTimeUtcAsync();
-var cameraTimeOffset = DateTime.UtcNow.Subtract(cameraDateTime);
-Console.WriteLine($"Camera time: {cameraDateTime}");
-
-if (services.Service.FirstOrDefault(x => x.Namespace == OnvifServices.MEDIA) != null)
+if (device == null)
 {
-    var profiles = await client.GetProfilesAsync();
-    var streamUri = await client.GetStreamUriAsync(profiles.Profiles.First());
-    Console.WriteLine($"Stream URI: {streamUri.Uri}");
+    Console.WriteLine("Please run OnvifService on the localhost as Administrator, or use a different camera URL and credentials.");
+}
+else
+{
+    var client = new SimpleOnvifClient(device, "admin", "password");
+
+    var deviceInfo = await client.GetDeviceInformationAsync();
+    var services = await client.GetServicesAsync(true);
+    var cameraDateTime = await client.GetSystemDateAndTimeUtcAsync();
+    var cameraTimeOffset = DateTime.UtcNow.Subtract(cameraDateTime);
+    Console.WriteLine($"Camera time: {cameraDateTime}");
+
+    // check if media profile is available
+    if (services.Service.FirstOrDefault(x => x.Namespace == OnvifServices.MEDIA) != null)
+    {
+        var profiles = await client.GetProfilesAsync();
+        var streamUri = await client.GetStreamUriAsync(profiles.Profiles.First());
+        Console.WriteLine($"Stream URI: {streamUri.Uri}");
+    }
 }
