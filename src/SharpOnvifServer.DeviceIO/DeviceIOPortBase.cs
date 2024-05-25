@@ -57,7 +57,7 @@ namespace SharpOnvifServer.DeviceIO
             throw new NotImplementedException();
         }
 
-        public virtual GetRelayOutputsResponse GetRelayOutputs(GetRelayOutputsRequest request)
+        public virtual DeviceMgmt.GetRelayOutputsResponse GetRelayOutputs(DeviceMgmt.GetRelayOutputsRequest request)
         {
             throw new NotImplementedException();
         }
@@ -138,7 +138,7 @@ namespace SharpOnvifServer.DeviceIO
             throw new NotImplementedException();
         }
 
-        public virtual void SetRelayOutputSettings(RelayOutput RelayOutput)
+        public virtual void SetRelayOutputSettings(DeviceMgmt.RelayOutput RelayOutput)
         {
             throw new NotImplementedException();
         }
