@@ -14,6 +14,11 @@ namespace SharpOnvifCommon
             return $"PT{timeoutInMinutes}M";
         }
 
+        public static string DateTimeToString(DateTime dateTime)
+        {
+            return dateTime.ToString("yyyy-MM-ddTHH:mm:ss.fffZ");
+        }
+
         public static TimeSpan FromTimeout(string timeout)
         {
             if(string.IsNullOrEmpty(timeout))

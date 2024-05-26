@@ -17,16 +17,6 @@ namespace SharpOnvifCommon.Security
             return Convert.ToBase64String(byteArray);
         }
 
-        public static string DateTimeToString(DateTime dateTime)
-        {
-            return dateTime.ToString("yyyy-MM-ddTHH:mm:ss.fffZ");
-        }
-
-        public static string CreateSoapDigest(string nonce, DateTime created, string password)
-        {
-            return CreateSoapDigest(nonce, DateTimeToString(created), password);
-        }
-
         public static string CreateSoapDigest(string nonce, string created, string password)
         {
             var nonceBytes = Convert.FromBase64String(nonce);

@@ -27,6 +27,8 @@ var app = builder.Build();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseOnvif();
+
 ((IApplicationBuilder)app).UseServiceModel(serviceBuilder =>
 {
     var serviceMetadataBehavior = app.Services.GetRequiredService<ServiceMetadataBehavior>();

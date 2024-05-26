@@ -1,6 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using SharpOnvifServer.Discovery;
+using System.IO.Pipelines;
+using System.Linq;
+using System.Text;
+using System.Xml.Linq;
 
 namespace SharpOnvifServer
 {
@@ -52,6 +57,37 @@ namespace SharpOnvifServer
 
             services.AddSingleton(options);
             services.AddHostedService<DiscoveryService>();
+        }
+
+        public static void UseOnvif(this WebApplication app)
+        {
+            // Onvif Device Manager sends an empty action in the Content-Type header for Event subscription
+            //  and instead puts the action inside the Soap Header. CoreWCF expects it in the Content-Type header,
+            //  so we have to move it there.
+            app.Use(async (context, next) =>
+            {
+                if (context.Request.ContentType != null && !context.Request.ContentType.Contains("action="))
+                {
+                    ReadResult requestBodyInBytes = await context.Request.BodyReader.ReadAsync().ConfigureAwait(false);
+                    string body = Encoding.UTF8.GetString(requestBodyInBytes.Buffer.FirstSpan);
+                    context.Request.BodyReader.AdvanceTo(requestBodyInBytes.Buffer.Start, requestBodyInBytes.Buffer.End);
+
+                    XNamespace ns = "http://www.w3.org/2003/05/soap-envelope";
+                    var soapEnvelope = XDocument.Parse(body);
+                    var headers = soapEnvelope.Descendants(ns + "Header").ToList();
+
+                    foreach (var header in headers)
+                    {
+                        var actionElement = header.Descendants().FirstOrDefault(x => x.Name.LocalName == "Action");
+                        if (actionElement != null)
+                        {
+                            context.Request.ContentType = $"{context.Request.ContentType}; action=\"{actionElement.Value}\"";
+                        }
+                    }
+                }
+
+                await next(context).ConfigureAwait(false);
+            });
         }
     }
 }

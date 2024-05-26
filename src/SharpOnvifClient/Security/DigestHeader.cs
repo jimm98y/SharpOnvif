@@ -1,4 +1,5 @@
-﻿using SharpOnvifCommon.Security;
+﻿using SharpOnvifCommon;
+using SharpOnvifCommon.Security;
 using System;
 using System.ServiceModel.Channels;
 using System.Xml;
@@ -14,14 +15,14 @@ namespace SharpOnvifClient.Security
     {
         private readonly string _username;
         private readonly string _nonce;
-        private readonly DateTime _created;
+        private readonly string _created;
         private readonly string _password;
 
         public DigestHeader(string username, string password, DateTime created)
         {
             _username = username;
             _nonce = DigestHelpers.CalculateNonce();
-            _created = created;
+            _created = OnvifHelpers.DateTimeToString(created);
             _password = password;
         }
 
@@ -47,7 +48,7 @@ namespace SharpOnvifClient.Security
                         Text = _nonce,
                         EncodingType = "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary"
                     },
-                    Created = DigestHelpers.DateTimeToString(_created)
+                    Created = _created
                 });
         }
     }

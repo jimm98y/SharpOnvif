@@ -211,10 +211,10 @@ namespace SharpOnvifServer
 
                 foreach (var header in headers)
                 {
-                    var securityElement = header.Descendants().FirstOrDefault();
+                    var securityElement = header.Descendants().FirstOrDefault(x => x.Name.LocalName == "Security");
                     if (securityElement != null)
                     {
-                        var userNameTokenElement = securityElement.Descendants().FirstOrDefault();
+                        var userNameTokenElement = securityElement.Descendants().FirstOrDefault(x => x.Name.LocalName == "UsernameToken");
                         if (userNameTokenElement != null)
                         {
                             var serializer = new XmlSerializer(typeof(UsernameToken));

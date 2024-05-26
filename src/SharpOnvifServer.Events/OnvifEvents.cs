@@ -70,47 +70,6 @@ namespace SharpOnvifServer.Events
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://docs.oasis-open.org/wsn/b-2")]
-    public partial class TopicExpressionType
-    {
-
-        private System.Xml.XmlNode[] anyField;
-
-        private string dialectField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order = 0)]
-        public System.Xml.XmlNode[] Any
-        {
-            get
-            {
-                return this.anyField;
-            }
-            set
-            {
-                this.anyField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "anyURI")]
-        public string Dialect
-        {
-            get
-            {
-                return this.dialectField;
-            }
-            set
-            {
-                this.dialectField = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2005/08/addressing")]
     public partial class MetadataType
     {
@@ -258,17 +217,28 @@ namespace SharpOnvifServer.Events
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://docs.oasis-open.org/wsn/b-2")]
     public partial class NotificationMessageHolderType
     {
+        private System.Xml.XmlElement[] anyField;
 
         private EndpointReferenceType subscriptionReferenceField;
 
-        private TopicExpressionType topicField;
-
         private EndpointReferenceType producerReferenceField;
 
-        private System.Xml.XmlElement messageField;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAnyElementAttribute(Order = 0)]
+        public System.Xml.XmlElement[] Any
+        {
+            get
+            {
+                return this.anyField;
+            }
+            set
+            {
+                this.anyField = value;
+            }
+        }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order = 0)]
+        [System.Xml.Serialization.XmlElementAttribute(Order = 1)]
         public EndpointReferenceType SubscriptionReference
         {
             get
@@ -278,20 +248,6 @@ namespace SharpOnvifServer.Events
             set
             {
                 this.subscriptionReferenceField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order = 1)]
-        public TopicExpressionType Topic
-        {
-            get
-            {
-                return this.topicField;
-            }
-            set
-            {
-                this.topicField = value;
             }
         }
 
@@ -306,20 +262,6 @@ namespace SharpOnvifServer.Events
             set
             {
                 this.producerReferenceField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order = 3)]
-        public System.Xml.XmlElement Message
-        {
-            get
-            {
-                return this.messageField;
-            }
-            set
-            {
-                this.messageField = value;
             }
         }
     }
@@ -1253,27 +1195,10 @@ namespace SharpOnvifServer.Events
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://docs.oasis-open.org/wsn/b-2")]
     public partial class GetCurrentMessage
     {
-
-        private TopicExpressionType topicField;
-
         private System.Xml.XmlElement[] anyField;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order = 0)]
-        public TopicExpressionType Topic
-        {
-            get
-            {
-                return this.topicField;
-            }
-            set
-            {
-                this.topicField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order = 1)]
+        [System.Xml.Serialization.XmlAnyElementAttribute(Order = 0)]
         public System.Xml.XmlElement[] Any
         {
             get
