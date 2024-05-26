@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting.Server;
+using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.Extensions.DependencyInjection;
 using SharpOnvifServer.Discovery;
 using System.IO.Pipelines;
@@ -95,5 +97,16 @@ namespace SharpOnvifServer
 
             return app;
         }
+
+        public static string GetHttpEndpoint(this IServer server)
+        {
+            return server.Features.Get<IServerAddressesFeature>().Addresses.FirstOrDefault(x => x.StartsWith("http://"));
+        }
+
+        public static string GetHttpsEndpoint(this IServer server)
+        {
+            return server.Features.Get<IServerAddressesFeature>().Addresses.FirstOrDefault(x => x.StartsWith("https://"));
+        }
+
     }
 }
