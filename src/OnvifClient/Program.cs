@@ -33,7 +33,7 @@ else
     if (services.Service.FirstOrDefault(x => x.Namespace == OnvifServices.EVENTS) != null)
     {
         // basic events vs pull point subscription
-        bool useBasicEvents = true; // = false;
+        bool useBasicEvents = false; // = false;
 
         if(useBasicEvents)
             await BasicEventSubscription(client);

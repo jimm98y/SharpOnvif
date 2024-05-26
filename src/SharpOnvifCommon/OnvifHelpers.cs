@@ -14,8 +14,11 @@ namespace SharpOnvifCommon
             return $"PT{timeoutInMinutes}M";
         }
 
-        public static TimeSpan? FromTimeout(string timeout)
+        public static TimeSpan FromTimeout(string timeout)
         {
+            if(string.IsNullOrEmpty(timeout))
+                return TimeSpan.Zero;
+
             timeout = timeout.ToUpperInvariant();
             if(timeout.StartsWith("PT"))
             {
@@ -33,7 +36,7 @@ namespace SharpOnvifCommon
                 }
             }
 
-            return null;
+            throw new NotSupportedException(timeout);
         }
     }
 }

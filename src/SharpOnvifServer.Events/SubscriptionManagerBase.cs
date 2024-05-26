@@ -4,8 +4,10 @@ using System;
 namespace SharpOnvifServer.Events
 {
     [DisableMustUnderstandValidation]
-    public class SubscriptionManagerBase : SubscriptionManager
+    public class SubscriptionManagerBase : SubscriptionManager, PausableSubscriptionManager
     {
+        #region SubscriptionManager
+
         public virtual RenewResponse1 Renew(RenewRequest request)
         {
             throw new NotImplementedException();
@@ -15,5 +17,21 @@ namespace SharpOnvifServer.Events
         {
             throw new NotImplementedException();
         }
+
+        #endregion // SubscriptionManager
+
+        #region PausableSubscriptionManager
+
+        public virtual PauseSubscriptionResponse1 PauseSubscription(PauseSubscriptionRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual ResumeSubscriptionResponse1 ResumeSubscription(ResumeSubscriptionRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion // PausableSubscriptionManager
     }
 }
