@@ -3,6 +3,8 @@ using SharpOnvifCommon;
 using SharpOnvifServer;
 using SharpOnvifServer.Events;
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace OnvifService.Onvif
 {
@@ -17,21 +19,34 @@ namespace OnvifService.Onvif
 
         public override PullMessagesResponse PullMessages(PullMessagesRequest request)
         {
+            Task.Delay(5000).Wait(); // forced delay
+
             return new PullMessagesResponse()
             {
-                CurrentTime = System.DateTime.UtcNow,
-                TerminationTime = System.DateTime.UtcNow.Add(OnvifHelpers.FromTimeout(request.Timeout)),
+                CurrentTime = DateTime.UtcNow,
+                TerminationTime = DateTime.UtcNow.Add(OnvifHelpers.FromTimeout(request.Timeout)),
                 NotificationMessage = new NotificationMessageHolderType[]
                 {
                     new NotificationMessageHolderType()
                     {
                         Any = OnvifEvents.CreateNotificationMessage(
-                            "tns1", 
-                            "http://www.onvif.org/ver10/topics", 
-                            "RuleEngine/CellMotionDetector/Motion",
-                            DateTime.UtcNow, 
-                            "Status", 
-                            OnvifHelpers.DateTimeToString(DateTime.UtcNow))
+                            new NotificationMessage()
+                            {
+                                TopicNamespacePrefix = "tns1",
+                                TopicNamespace = "http://www.onvif.org/ver10/topics",
+                                Topic = "RuleEngine/CellMotionDetector/Motion",
+                                Created = DateTime.UtcNow,
+                                Source = new Dictionary<string, string>()
+                                {
+                                    { "VideoSourceConfigurationToken", "VideoSourceToken" },
+                                    { "VideoAnalyticsConfigurationToken", "VideoAnalyticsToken" },
+                                    { "Rule", "MyMotionDetectorRule" }
+                                },
+                                Data = new Dictionary<string, string>()
+                                {
+                                    { "IsMotion", "true" }
+                                }
+                            })
                     }
                 }
             };
