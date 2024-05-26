@@ -4,7 +4,7 @@ using System;
 namespace SharpOnvifServer.Events
 {
     [DisableMustUnderstandValidation]
-    public class SubscriptionManagerBase : SubscriptionManager, PausableSubscriptionManager
+    public class SubscriptionManagerBase : SubscriptionManager, PausableSubscriptionManager, PullPointSubscription
     {
         #region SubscriptionManager
 
@@ -33,5 +33,24 @@ namespace SharpOnvifServer.Events
         }
 
         #endregion // PausableSubscriptionManager
+
+        #region PullPointSubscription
+
+        public virtual PullMessagesResponse PullMessages(PullMessagesRequest request)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public virtual SeekResponse Seek(SeekRequest request)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public virtual void SetSynchronizationPoint()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        #endregion // PullPointSubscription
     }
 }

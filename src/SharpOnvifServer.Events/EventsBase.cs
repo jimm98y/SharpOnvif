@@ -12,7 +12,7 @@ namespace SharpOnvifServer.Events
     ///  should be available on a single endpoint here.
     /// </remarks>
     [DisableMustUnderstandValidation]
-    public class EventsBase : NotificationProducer, EventPortType, PullPoint, PullPointSubscription
+    public class EventsBase : NotificationProducer, EventPortType, PullPoint
     {
         #region NotificationProducer
 
@@ -82,29 +82,5 @@ namespace SharpOnvifServer.Events
         }
 
         #endregion // PullPoint
-
-        #region PullPointSubscription
-
-        public virtual PullMessagesResponse PullMessages(PullMessagesRequest request)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public virtual SeekResponse Seek(SeekRequest request)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public virtual void SetSynchronizationPoint()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public virtual UnsubscribeResponse1 Unsubscribe(UnsubscribeRequest request)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        #endregion // PullPointSubscription
     }
 }
