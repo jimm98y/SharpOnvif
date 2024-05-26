@@ -15,7 +15,7 @@ namespace SharpOnvifServer
         /// Add Digest authentication handler.
         /// </summary>
         /// <param name="services"><see cref="IServiceCollection"/></param>
-        public static void AddOnvifDigestAuthentication(this IServiceCollection services)
+        public static IServiceCollection AddOnvifDigestAuthentication(this IServiceCollection services)
         {
             const string SCHEME_DIGEST = "Digest";
 
@@ -44,22 +44,26 @@ namespace SharpOnvifServer
                 await next(context);
             });
             */
+
+            return services;
         }
 
         /// <summary>
         /// Adds a UDP listener for Onvif discovery.
         /// </summary>
         /// <param name="services"><see cref="IServiceCollection"/></param>
-        public static void AddOnvifDiscovery(this IServiceCollection services, OnvifDiscoveryOptions options = null)
+        public static IServiceCollection AddOnvifDiscovery(this IServiceCollection services, OnvifDiscoveryOptions options = null)
         {
             if (options == null)
                 options = new OnvifDiscoveryOptions();
 
             services.AddSingleton(options);
             services.AddHostedService<DiscoveryService>();
+
+            return services;
         }
 
-        public static void UseOnvif(this WebApplication app)
+        public static WebApplication UseOnvif(this WebApplication app)
         {
             // Onvif Device Manager sends an empty action in the Content-Type header for Event subscription
             //  and instead puts the action inside the Soap Header. CoreWCF expects it in the Content-Type header,
@@ -88,6 +92,8 @@ namespace SharpOnvifServer
 
                 await next(context).ConfigureAwait(false);
             });
+
+            return app;
         }
     }
 }
