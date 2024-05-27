@@ -1,8 +1,8 @@
 # SharpOnvif
-A C# implementation of the ONVIF protocol - client as well as the server. All profiles are supported.
+A C# implementation of the ONVIF interface - client as well as the server. All profiles are supported.
 
 ## SharpOnvifServer
-Onvif server provides NET8 CoreWCF bindings generated using svcutil.exe. It makes it easy to implement only parts of the Onvif specification needed for your project.
+ONVIF server provides NET8 CoreWCF bindings generated using svcutil.exe. It makes it easy to implement only parts of the ONVIF specification needed for your project.
 
 Start with creating a new CoreWCF service:
 ```cs
@@ -11,7 +11,7 @@ builder.Services.AddServiceModelServices();
 builder.Services.AddServiceModelMetadata();
 builder.Services.AddSingleton<IServiceBehavior, UseRequestHeadersForMetadataAddressBehavior>();
 ```
-Add Digest authentication for Onvif:
+Add Digest authentication for ONVIF:
 ```cs
 builder.Services.AddSingleton<IUserRepository, UserRepository>();
 builder.Services.AddOnvifDigestAuthentication();
@@ -34,7 +34,7 @@ public class UserRepository : IUserRepository
     }
 }
 ```
-Optionally, add Onvif discovery to make your service discoverable on the network:
+Optionally, add ONVIF discovery to make your service discoverable on the network:
 ```cs
 builder.Services.AddOnvifDiscovery();
 ```
@@ -80,10 +80,10 @@ And finally call `app.Run()`:
 ```cs
 app.Run();
 ```
-Your Onvif service should now be discoverable on the network and you should be able to use Onvif Device Manager or similar tool to call your endpoint.
+Your ONVIF service should now be discoverable on the network and you should be able to use ONVIF Device Manager or similar tool to call your endpoint.
 
 ## SharpOnvifClient
-Onvif client provides netstandard2.0 WCF bindings generated using `dotnet-svcutil`. `SimpleOnvifClient` wraps common API calls to get basic information from the camera and includes both Pull Point as well as Basic event subscriptions. 
+ONVIF client provides netstandard2.0 WCF bindings generated using `dotnet-svcutil`. `SimpleOnvifClient` wraps common API calls to get basic information from the camera and includes both Pull Point as well as Basic event subscriptions. 
 
 To discover Onvif devices on your network, use:
 ```cs
@@ -105,7 +105,7 @@ Call `GetServicesAsync` to retrieve a list of all services supported by the devi
 var services = await client.GetServicesAsync();
 ```
 
-Some operations require the device to support a service. For instance, to retrieve the stream URI a device must support the media service. To check whether the Onvif service is supported by the device, call:
+Some operations require the device to support a service. For instance, to retrieve the stream URI a device must support the media service. To check whether the ONVIF service is supported by the device, call:
 ```cs
 if (services.Service.FirstOrDefault(x => x.Namespace == OnvifServices.MEDIA) != null)
 {
@@ -149,7 +149,7 @@ First add a reference to the DLL that implements the clients (e.g. `SharpOnvifCl
 ```cs
 var auth = new DigestBehavior("admin", "password");
 ```
-Create the Onvif client and set the authentication behavior before you use it:
+Create the ONVIF client and set the authentication behavior before you use it:
 ```cs
  using (var deviceClient = new DeviceClient(
      OnvifBindingFactory.CreateBinding(),
@@ -166,7 +166,7 @@ var deviceInfo = await deviceClient.GetDeviceInformationAsync(new GetDeviceInfor
 ```
 ## Testing
 Only the DeviceMgmt, Media and Events were tested with Hikvision cameras. 
-Server implementation was tested using Onvif Device Manager.
+Server implementation was tested using ONVIF Device Manager.
 
 ## Credits
 Special thanks to Piotr Stapp for figuring out the SOAP security headers in NET8: https://stapp.space/using-soap-security-in-dotnet-core/.
