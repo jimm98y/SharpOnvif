@@ -164,9 +164,9 @@ Call any method on the client like:
 ```cs
 var deviceInfo = await deviceClient.GetDeviceInformationAsync(new GetDeviceInformationRequest()).ConfigureAwait(false);
 ```
-# Testing
+## Testing
 Only the DeviceMgmt, Media and Events were tested with Hikvision cameras. 
 Server implementation was tested using Onvif Device Manager.
 
-# Credits
+## Credits
 Special thanks to Piotr Stapp for figuring out the SOAP security headers in NET8: https://stapp.space/using-soap-security-in-dotnet-core/.
