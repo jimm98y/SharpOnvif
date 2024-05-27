@@ -61,7 +61,7 @@ var app = builder.Build();
 app.UseAuthentication();
 app.UseAuthorization();
 ```
-And makes sure to call `app.UseOnvif()` to handle Soap requests with action in the Soap message instead of the Content-Type header:
+And makes sure to call `app.UseOnvif()` to handle SOAP requests with action in the SOAP message instead of the Content-Type header:
 ```cs
 app.UseOnvif();
 ```
@@ -72,8 +72,8 @@ Add the CoreWCF service endpoint:
     var serviceMetadataBehavior = app.Services.GetRequiredService<ServiceMetadataBehavior>();
     serviceMetadataBehavior.HttpGetEnabled = true;
 
-    serviceBuilder.AddService<OnvifService.Onvif.DeviceImpl>();
-    serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.DeviceImpl, SharpOnvifServer.DeviceMgmt.Device>(OnvifBindingFactory.CreateBinding(), "/onvif/device_service");
+    serviceBuilder.AddService<DeviceImpl>();
+    serviceBuilder.AddServiceEndpoint<DeviceImpl, SharpOnvifServer.DeviceMgmt.Device>(OnvifBindingFactory.CreateBinding(), "/onvif/device_service");
 });
 ```
 And finally call `app.Run()`:
@@ -165,5 +165,8 @@ Call any method on the client like:
 var deviceInfo = await deviceClient.GetDeviceInformationAsync(new GetDeviceInformationRequest()).ConfigureAwait(false);
 ```
 # Testing
-Only the DeviceMgmt and Events were tested with Hikvision cameras. 
+Only the DeviceMgmt, Media and Events were tested with Hikvision cameras. 
 Server implementation was tested using Onvif Device Manager.
+
+# Credits
+Special thanks to Piotr Stapp for figuring out the SOAP security headers in NET8: https://stapp.space/using-soap-security-in-dotnet-core/.
