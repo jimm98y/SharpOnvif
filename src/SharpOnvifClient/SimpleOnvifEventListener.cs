@@ -20,12 +20,12 @@ namespace SharpOnvifClient
 
         public HttpListener Listener { get; } = new HttpListener();
 
-        public SimpleOnvifEventListener(Action<int, string> onEvent, int port = 9999)
+        public SimpleOnvifEventListener(Action<int, string> onEvent, int port = 9999, string host = "+")
         {
             _onEvent = onEvent ?? throw new ArgumentNullException(nameof(onEvent));
             _port = port;
 
-            string httpUri = GetHttpUri("+", port);
+            string httpUri = GetHttpUri(host, port);
             Listener.Prefixes.Add(httpUri);
             Listener.Start();
             _listenerTask = Task.Run(async () =>
@@ -60,9 +60,9 @@ namespace SharpOnvifClient
             });
         }
 
-        public string GetOnvifEventListenerUri(string host = "0.0.0.0", int cameraID = 0)
+        public string GetOnvifEventListenerUri(string host = "+", int cameraID = 0)
         {
-            if (host == "0.0.0.0")
+            if (host == "+")
                 host = NetworkHelpers.GetIPv4NetworkInterface();
             return $"{GetHttpUri(host, _port)}{cameraID}/";
         }
