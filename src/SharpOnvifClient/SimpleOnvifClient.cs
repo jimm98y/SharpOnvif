@@ -258,7 +258,7 @@ namespace SharpOnvifClient
             if (_supportedServices.TryGetValue(ns, out uri))
                 return uri;
             else
-                throw new NotSupportedException($"The device does not support {ns} sevice!");
+                throw new NotSupportedException($"The device does not support {ns} service!");
         }
 
         #endregion // Utility
