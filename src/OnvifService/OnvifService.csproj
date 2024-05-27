@@ -5,12 +5,6 @@
 	<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="_Generated\**" />
-    <Content Remove="_Generated\**" />
-    <EmbeddedResource Remove="_Generated\**" />
-    <None Remove="_Generated\**" />
-  </ItemGroup>
-  <ItemGroup>
     <None Remove="vaultboy.jpg" />
   </ItemGroup>
   <ItemGroup>
