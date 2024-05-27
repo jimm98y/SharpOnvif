@@ -62,7 +62,8 @@ static async Task PullPointEventSubscription(SimpleOnvifClient client)
 static async Task BasicEventSubscription(SimpleOnvifClient client)
 {
     // we must run as an Administrator for the Basic subscription to work
-    var eventListener = new SimpleOnvifEventListener((int cameraID, string ev) =>
+    var eventListener = new SimpleOnvifEventListener();
+    eventListener.Start((int cameraID, string ev) =>
     {
         if (OnvifEvents.IsMotionDetected(ev) != null)
             Console.WriteLine($"Motion detected: {OnvifEvents.IsMotionDetected(ev)}");

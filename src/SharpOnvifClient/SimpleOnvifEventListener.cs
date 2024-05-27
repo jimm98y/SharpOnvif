@@ -14,18 +14,24 @@ namespace SharpOnvifClient
     public class SimpleOnvifEventListener : IDisposable
     {
         private bool _disposedValue;
-        private readonly Action<int, string> _onEvent;
-        private readonly int _port;
-        private readonly Task _listenerTask;
+        private Action<int, string> _onEvent;
+        private readonly string _host;
+        private readonly ushort _port;
+        private Task _listenerTask;
 
         public HttpListener Listener { get; } = new HttpListener();
 
-        public SimpleOnvifEventListener(Action<int, string> onEvent, int port = 9999, string host = "+")
+        public SimpleOnvifEventListener(string host = "+", ushort port = 9999)
+        {
+            _host = host;
+            _port = port;
+        }
+
+        public void Start(Action<int, string> onEvent)
         {
             _onEvent = onEvent ?? throw new ArgumentNullException(nameof(onEvent));
-            _port = port;
 
-            string httpUri = GetHttpUri(host, port);
+            string httpUri = GetHttpUri(_host, _port);
             Listener.Prefixes.Add(httpUri);
             Listener.Start();
             _listenerTask = Task.Run(async () =>
@@ -60,10 +66,14 @@ namespace SharpOnvifClient
             });
         }
 
-        public string GetOnvifEventListenerUri(string host = "+", int cameraID = 0)
+        public string GetOnvifEventListenerUri(int cameraID = 0)
         {
+            string host = _host;
             if (host == "+")
+            {
                 host = NetworkHelpers.GetIPv4NetworkInterface();
+            }
+
             return $"{GetHttpUri(host, _port)}{cameraID}/";
         }
 
