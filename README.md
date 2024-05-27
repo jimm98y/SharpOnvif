@@ -146,7 +146,7 @@ eventListener.Start((int cameraID, string ev) =>
     }
 });
 
-var subscriptionResponse = await client.BasicSubscribeAsync(eventListener.GetOnvifEventListenerUri(cameraID));
+var subscriptionResponse = await client.BasicSubscribeAsync(eventListener.GetOnvifEventListenerUri(CAMERA1));
 ```
 ### Using the generated WCF clients
 First add a reference to the DLL that implements the clients (e.g. `SharpOnvifClient.DeviceMgmt`). Create the authentication behavior:
