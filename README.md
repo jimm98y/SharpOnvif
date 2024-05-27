@@ -133,15 +133,19 @@ foreach (var notification in notifications)
 ### Basic event subscription
 Basic event subscription utilizes a callback from the camera when an event occurs. This requires the camera to be able to reach your machine through a firewall/NAT. To listen for incoming notifications, you must run `SimpleOnvifEventListener`:
 ```cs
+// ID 1 will identify this camera in the callback
+const int CAMERA1 = 1;
+
 var eventListener = new SimpleOnvifEventListener();
 eventListener.Start((int cameraID, string ev) =>
 {
-    // handle the notification message
     bool? isTamper = SharpOnvifClient.OnvifEvents.IsTamperDetected(notification);
+    if(cameraID == CAMERA1)
+    {
+        // handle the notification message for CAMERA1
+    }
 });
 
-// ID 1 will identify this camera in the callback
-const int cameraID = 1;
 var subscriptionResponse = await client.BasicSubscribeAsync(eventListener.GetOnvifEventListenerUri(cameraID));
 ```
 ### Using the generated WCF clients
@@ -162,7 +166,7 @@ Create the ONVIF client and set the authentication behavior before you use it:
 ```
 Call any method on the client like:
 ```cs
-var deviceInfo = await deviceClient.GetDeviceInformationAsync(new GetDeviceInformationRequest()).ConfigureAwait(false);
+var deviceInfo = await deviceClient.GetDeviceInformationAsync(new GetDeviceInformationRequest());
 ```
 ## Testing
 Only the DeviceMgmt, Media and Events were tested with Hikvision cameras. 
