@@ -16,7 +16,7 @@
 		<AssemblyVersion>0.0.1</AssemblyVersion>
 		<FileVersion>0.0.1</FileVersion>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<Description>A C# implementation of the Onvif protocol.</Description>
+		<Description>A C# implementation of the ONVIF interface - client as well as the server. All profiles are supported.</Description>
 	</PropertyGroup>
 	<ItemGroup>
 		<None Include="..\..\README.md">
