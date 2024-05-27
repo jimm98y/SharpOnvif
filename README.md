@@ -61,7 +61,7 @@ var app = builder.Build();
 app.UseAuthentication();
 app.UseAuthorization();
 ```
-And makes sure to call `app.UseOnvif()` to handle SOAP requests with action in the SOAP message instead of the Content-Type header:
+And make sure to call `app.UseOnvif()` to handle SOAP requests with action in the SOAP message instead of the Content-Type header:
 ```cs
 app.UseOnvif();
 ```
@@ -76,7 +76,7 @@ Add the CoreWCF service endpoint:
     serviceBuilder.AddServiceEndpoint<DeviceImpl, SharpOnvifServer.DeviceMgmt.Device>(OnvifBindingFactory.CreateBinding(), "/onvif/device_service");
 });
 ```
-And finally call `app.Run()`:
+Finally call `app.Run()`:
 ```cs
 app.Run();
 ```
@@ -85,7 +85,7 @@ Your ONVIF service should now be discoverable on the network and you should be a
 ## SharpOnvifClient
 ONVIF client provides netstandard2.0 WCF bindings generated using `dotnet-svcutil`. `SimpleOnvifClient` wraps common API calls to get basic information from the camera and includes both Pull Point as well as Basic event subscriptions. 
 
-To discover Onvif devices on your network, use:
+To discover ONVIF devices on your network, use:
 ```cs
 string[] onvifDeviceUris = await DiscoveryClient.DiscoverAsync();
 ```
@@ -105,14 +105,14 @@ Call `GetServicesAsync` to retrieve a list of all services supported by the devi
 var services = await client.GetServicesAsync();
 ```
 
-Some operations require the device to support a service. For instance, to retrieve the stream URI a device must support the media service. To check whether the ONVIF service is supported by the device, call:
+Some operations require the device to support a service. For instance, to retrieve the stream URI the device must support the media service. To check whether the ONVIF service is supported by the device, call:
 ```cs
 if (services.Service.FirstOrDefault(x => x.Namespace == OnvifServices.MEDIA) != null)
 {
     // operation only available when the service is supported
 }
 ```
-Full list of services that can be supported by a device is available in `SharpOnvifCommon.OnvifServices`.
+Full list of services that can be supported by the device is available in `SharpOnvifCommon.OnvifServices`.
 
 ### Pull Point event subscription
 Pull point event subscription does not require any special networking configuration and it should work in most networks. 
