@@ -2887,7 +2887,7 @@ namespace SharpOnvifServer.Analytics
         
         private Vector centerOfGravityField;
         
-        private Vector[][] polygonField;
+        private Vector[,] polygonField;
         
         private ShapeDescriptorExtension extensionField;
         
@@ -2926,7 +2926,7 @@ namespace SharpOnvifServer.Analytics
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayAttribute(Order=2)]
         [System.Xml.Serialization.XmlArrayItemAttribute("Point", typeof(Vector), IsNullable=false)]
-        public Vector[][] Polygon
+        public Vector[,] Polygon
         {
             get
             {
@@ -22157,7 +22157,7 @@ namespace SharpOnvifServer.Analytics
     public partial class PolylineArray
     {
         
-        private Vector[][] segmentField;
+        private Vector[,] segmentField;
         
         private PolylineArrayExtension extensionField;
         
@@ -22166,7 +22166,7 @@ namespace SharpOnvifServer.Analytics
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayAttribute(Order=0)]
         [System.Xml.Serialization.XmlArrayItemAttribute("Point", typeof(Vector), IsNullable=false)]
-        public Vector[][] Segment
+        public Vector[,] Segment
         {
             get
             {

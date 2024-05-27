@@ -9195,7 +9195,7 @@ namespace SharpOnvifServer.AdvancedSecurity
         
         private DNAttributeTypeAndValue[] genericAttributeField;
         
-        private DNAttributeTypeAndValue[][] multiValuedRDNField;
+        private DNAttributeTypeAndValue[,] multiValuedRDNField;
         
         private DistinguishedNameAnyAttribute anyAttributeField;
         
@@ -9414,7 +9414,7 @@ namespace SharpOnvifServer.AdvancedSecurity
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayAttribute(Order=15)]
         [System.Xml.Serialization.XmlArrayItemAttribute("Attribute", typeof(DNAttributeTypeAndValue), IsNullable=false)]
-        public DNAttributeTypeAndValue[][] MultiValuedRDN
+        public DNAttributeTypeAndValue[,] MultiValuedRDN
         {
             get
             {
