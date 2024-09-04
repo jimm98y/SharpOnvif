@@ -1,7 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0;net8.0</TargetFrameworks>
+		<SGenProxyTypes>false</SGenProxyTypes>
+		<SGenVerbose>false</SGenVerbose>
+		<SGenReferences>$([System.Text.RegularExpressions.Regex]::Replace(@(ReferencePath), `(?'pre'[\\/])ref(?'post'[\\/](netstandard|netcoreapp|net)\d+(\.\d+)*[\\/])`, `${pre}lib${post}`))</SGenReferences>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<DotNetCliToolReference Include="Microsoft.XmlSerializer.Generator" Version="8.0.0" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' != 'netstandard2.0'">
+		<PackageReference Include="Microsoft.XmlSerializer.Generator" Version="8.0.0" />
+		<PackageReference Include="System.ServiceModel.Primitives" Version="8.0.0" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+		<PackageReference Include="Microsoft.XmlSerializer.Generator" Version="8.0.0" />
+		<PackageReference Include="System.ServiceModel.Primitives" Version="4.*" />
+	</ItemGroup>
 
 </Project>
