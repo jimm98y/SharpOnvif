@@ -115,7 +115,7 @@ namespace SharpOnvifClient
                 new System.ServiceModel.EndpointAddress(mediaUrl)))
             {
                 SetAuthentication(mediaClient.Endpoint, _auth);
-                var streamUri = await mediaClient.GetStreamUriAsync(new StreamSetup(), profileToken).ConfigureAwait(false);
+                var streamUri = await mediaClient.GetStreamUriAsync(new StreamSetup() { Transport = new Transport() {  Protocol = TransportProtocol.RTSP } }, profileToken).ConfigureAwait(false);
                 return streamUri;
             }
         }
