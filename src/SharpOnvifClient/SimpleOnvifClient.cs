@@ -14,7 +14,7 @@ namespace SharpOnvifClient
     public class SimpleOnvifClient
     {
         private readonly string _onvifUri;
-        private readonly IEndpointBehavior _auth;
+        private readonly DigestBehavior _auth;
         private Dictionary<string, string> _supportedServices;
 
         public SimpleOnvifClient(string onvifUri, string userName, string password)
@@ -27,6 +27,11 @@ namespace SharpOnvifClient
 
             _onvifUri = onvifUri;
             _auth = new DigestBehavior(userName, password);
+        }
+
+        public void SetCameraUtcNowOffset(TimeSpan utcNowOffset)
+        {
+            _auth.UtcNowOffset = utcNowOffset;
         }
 
         public static void SetAuthentication(ServiceEndpoint endpoint, IEndpointBehavior authenticationBehavior)

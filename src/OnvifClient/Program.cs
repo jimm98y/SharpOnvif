@@ -19,6 +19,7 @@ else
     var services = await client.GetServicesAsync(true);
     var cameraDateTime = await client.GetSystemDateAndTimeUtcAsync();
     var cameraTimeOffset = DateTime.UtcNow.Subtract(cameraDateTime);
+    client.SetCameraUtcNowOffset(cameraTimeOffset);
     Console.WriteLine($"Camera time: {cameraDateTime}");
 
     // check if media profile is available
