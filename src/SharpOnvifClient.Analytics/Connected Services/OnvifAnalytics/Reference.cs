@@ -9562,7 +9562,7 @@ namespace SharpOnvifClient.Analytics
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2003/05/soap-envelope")]
-    public partial class detail
+    public partial class Detail
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -9586,7 +9586,7 @@ namespace SharpOnvifClient.Analytics
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2003/05/soap-envelope")]
-    public partial class reasontext
+    public partial class ReasonText
     {
         
         private string langField;
@@ -9626,12 +9626,12 @@ namespace SharpOnvifClient.Analytics
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2003/05/soap-envelope")]
-    public partial class subcode
+    public partial class SubCode
     {
         
         private System.Xml.XmlQualifiedName valueField;
         
-        private subcode subcodeField;
+        private SubCode subcodeField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
@@ -9649,7 +9649,7 @@ namespace SharpOnvifClient.Analytics
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public subcode Subcode
+        public SubCode Subcode
         {
             get
             {
@@ -9666,12 +9666,12 @@ namespace SharpOnvifClient.Analytics
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2003/05/soap-envelope")]
-    public partial class faultcode
+    public partial class FaultCode
     {
         
         private System.Xml.XmlQualifiedName valueField;
         
-        private subcode subcodeField;
+        private SubCode subcodeField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
@@ -9689,7 +9689,7 @@ namespace SharpOnvifClient.Analytics
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public subcode Subcode
+        public SubCode Subcode
         {
             get
             {
@@ -9709,19 +9709,19 @@ namespace SharpOnvifClient.Analytics
     public partial class Fault
     {
         
-        private faultcode codeField;
+        private FaultCode codeField;
         
-        private reasontext[] reasonField;
+        private ReasonText[] reasonField;
         
         private string nodeField;
         
         private string roleField;
         
-        private detail detailField;
+        private Detail detailField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public faultcode Code
+        public FaultCode Code
         {
             get
             {
@@ -9736,7 +9736,7 @@ namespace SharpOnvifClient.Analytics
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayAttribute(Order=1)]
         [System.Xml.Serialization.XmlArrayItemAttribute("Text", IsNullable=false)]
-        public reasontext[] Reason
+        public ReasonText[] Reason
         {
             get
             {
@@ -9778,7 +9778,7 @@ namespace SharpOnvifClient.Analytics
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public detail Detail
+        public Detail Detail
         {
             get
             {
