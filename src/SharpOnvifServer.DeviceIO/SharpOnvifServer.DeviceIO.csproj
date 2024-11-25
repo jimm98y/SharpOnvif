@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>disable</ImplicitUsings>
-    <Nullable>disable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>disable</ImplicitUsings>
+		<Nullable>disable</Nullable>
+	</PropertyGroup>
 
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
@@ -16,13 +16,17 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.XmlSerializer.Generator" Version="8.0.0" />
-    <PackageReference Include="CoreWCF.Http" Version="1.6.0" />
-    <PackageReference Include="CoreWCF.Primitives" Version="1.6.0" />
-  </ItemGroup>
+		<PackageReference Include="CoreWCF.Http" Version="1.6.0" />
+		<PackageReference Include="CoreWCF.Primitives" Version="1.6.0" />
+		<PackageReference Include="System.Text.Encodings.Web" Version="4.5.1" />
+		<PackageReference Include="System.Text.Json" Version="8.0.5" />
+		<PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
+		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="8.0.1" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\SharpOnvifServer.DeviceMgmt\SharpOnvifServer.DeviceMgmt.csproj" />
-    <ProjectReference Include="..\SharpOnvifServer\SharpOnvifServer.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\SharpOnvifServer.DeviceMgmt\SharpOnvifServer.DeviceMgmt.csproj" />
+		<ProjectReference Include="..\SharpOnvifServer\SharpOnvifServer.csproj" />
+	</ItemGroup>
 
 </Project>
