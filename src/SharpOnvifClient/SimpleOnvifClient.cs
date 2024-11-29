@@ -1,6 +1,7 @@
 ﻿using SharpOnvifClient.DeviceMgmt;
 using SharpOnvifClient.Events;
 using SharpOnvifClient.Media;
+using SharpOnvifClient.PTZ;
 using SharpOnvifClient.Security;
 using SharpOnvifCommon;
 using System;
@@ -41,6 +42,56 @@ namespace SharpOnvifClient
                 endpoint.EndpointBehaviors.Add(authenticationBehavior);
             }
         }
+
+        #region PTZ
+
+        public async Task AbsoluteMoveAsync(string profileToken, float pan, float tilt, float zoom, float panSpeed = 1, float tiltSpeed = 1, float zoomSpeed = 1)
+        {
+            string ptzURL = await GetServiceUriAsync(OnvifServices.PTZ).ConfigureAwait(false);
+            using (var ptzClient = new PTZClient(
+                OnvifBindingFactory.CreateBinding(),
+                new System.ServiceModel.EndpointAddress(ptzURL)))
+            {
+                SetAuthentication(ptzClient.Endpoint, _auth);
+                await ptzClient.AbsoluteMoveAsync(
+                    profileToken,
+                    new PTZVector()
+                    {
+                        PanTilt = new PTZ.Vector2D() { x = pan, y = tilt },
+                        Zoom = new PTZ.Vector1D() { x = zoom }
+                    },
+                    new PTZ.PTZSpeed()
+                    {
+                        PanTilt = new PTZ.Vector2D() { x = panSpeed, y = tiltSpeed },
+                        Zoom = new PTZ.Vector1D() { x = zoomSpeed }
+                    }).ConfigureAwait(false);
+            }
+        }
+
+        public async Task RelativeMoveAsync(string profileToken, float pan, float tilt, float zoom, float panSpeed = 1, float tiltSpeed = 1, float zoomSpeed = 1)
+        {
+            string ptzURL = await GetServiceUriAsync(OnvifServices.PTZ).ConfigureAwait(false);
+            using (var ptzClient = new PTZClient(
+                OnvifBindingFactory.CreateBinding(),
+                new System.ServiceModel.EndpointAddress(ptzURL)))
+            {
+                SetAuthentication(ptzClient.Endpoint, _auth);
+                await ptzClient.RelativeMoveAsync(
+                    profileToken,
+                    new PTZVector()
+                    {
+                        PanTilt = new PTZ.Vector2D() { x = pan, y = tilt },
+                        Zoom = new PTZ.Vector1D() { x = zoom }
+                    },
+                    new PTZ.PTZSpeed()
+                    {
+                        PanTilt = new PTZ.Vector2D() { x = panSpeed, y = tiltSpeed },
+                        Zoom = new PTZ.Vector1D() { x = zoomSpeed }
+                    }).ConfigureAwait(false);
+            }
+        }
+
+        #endregion PTZ
 
         #region Device Management
 
