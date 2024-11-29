@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
@@ -29,18 +30,56 @@ namespace SharpOnvifClient
         private static readonly SemaphoreSlim _discoverySlim = new SemaphoreSlim(1);
 
         /// <summary>
-        /// Discover ONVIF devices in the local network.
+        /// Discover ONVIF devices in the local network. Sends broadcast messages to all available IP network interfaces.
         /// </summary>
-        /// <param name="ipAddress">IP address of the network interface to use (IP of the host computer).</param>
         /// <param name="onDeviceDiscovered">Callback to be called when a new device is discovered.</param>
         /// <param name="broadcastTimeout"><see cref="ONVIF_BROADCAST_TIMEOUT"/>.</param>
         /// <param name="broadcastPort">Broadcast port - 0 to let the OS choose any free port.</param>
         /// <param name="deviceType">Device type we are searching for.</param>
         /// <returns>A list of discovered devices.</returns>
-        public static async Task<IList<string>> DiscoverAsync(string ipAddress = "0.0.0.0", Action<string> onDeviceDiscovered = null, int broadcastTimeout = ONVIF_BROADCAST_TIMEOUT, int broadcastPort = 0, string deviceType = "NetworkVideoTransmitter")
+        public static async Task<IList<string>> DiscoverAsync(Action<string> onDeviceDiscovered = null, int broadcastTimeout = ONVIF_BROADCAST_TIMEOUT, int broadcastPort = 0, string deviceType = "NetworkVideoTransmitter")
+        {
+            NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
+            List<Task<IList<string>>> discoveryTasks = new List<Task<IList<string>>>();
+
+            foreach (NetworkInterface adapter in nics)
+            {
+                if (adapter.NetworkInterfaceType != NetworkInterfaceType.Ethernet)
+                    continue; 
+
+                if (!(adapter.Supports(NetworkInterfaceComponent.IPv4) || adapter.Supports(NetworkInterfaceComponent.IPv6)))
+                    continue;
+
+                IPInterfaceProperties adapterProperties = adapter.GetIPProperties();
+                foreach (var ua in adapterProperties.UnicastAddresses)
+                {
+                    if (ua.Address.AddressFamily == AddressFamily.InterNetwork)
+                    {
+                        var discoveryTask = DiscoverAsync(ua.Address.ToString(), onDeviceDiscovered, broadcastTimeout, broadcastPort, deviceType);
+                        discoveryTasks.Add(discoveryTask);  
+                    }
+                }                
+            }
+
+            await Task.WhenAll(discoveryTasks);
+
+            return discoveryTasks.Where(x => x.IsCompleted && !x.IsFaulted && !x.IsCanceled).SelectMany(x => x.Result).Distinct().ToList();
+        }
+
+
+        /// <summary>
+        /// Discover ONVIF devices in the local network.
+        /// </summary>
+        /// <param name="ipAddress">IP address of the network interface to use (IP of the host computer on the NIC you want to use for discovery).</param>
+        /// <param name="onDeviceDiscovered">Callback to be called when a new device is discovered.</param>
+        /// <param name="broadcastTimeout"><see cref="ONVIF_BROADCAST_TIMEOUT"/>.</param>
+        /// <param name="broadcastPort">Broadcast port - 0 to let the OS choose any free port.</param>
+        /// <param name="deviceType">Device type we are searching for.</param>
+        /// <returns>A list of discovered devices.</returns>
+        public static async Task<IList<string>> DiscoverAsync(string ipAddress, Action<string> onDeviceDiscovered = null, int broadcastTimeout = ONVIF_BROADCAST_TIMEOUT, int broadcastPort = 0, string deviceType = "NetworkVideoTransmitter")
         {
             if (ipAddress == null)
-                return new List<string>();
+                throw new ArgumentNullException(nameof(ipAddress));
 
             await _discoverySlim.WaitAsync();
 
