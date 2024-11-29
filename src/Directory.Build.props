@@ -4,7 +4,7 @@
 		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
 		<Nullable>disable</Nullable>
 		<Title>$(ProjectName)</Title>
-		<Version>0.0.5</Version>
+		<Version>0.0.6</Version>
 		<Authors>Lukas Volf</Authors>
 		<Copyright>MIT</Copyright>
 		<PackageProjectUrl>https://github.com/jimm98y/SharpOnvif</PackageProjectUrl>
