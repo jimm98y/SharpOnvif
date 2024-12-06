@@ -5,19 +5,19 @@ using System.ServiceModel.Dispatcher;
 
 namespace SharpOnvifClient.Security
 {
-    public class DigestBehavior : IEndpointBehavior
+    public class WsUsernameTokenBehavior : IEndpointBehavior, IHasUtcOffset
     {
         public string Username { get; set; }
         public string Password { get; set; }
         public TimeSpan UtcNowOffset { get; set; } = TimeSpan.Zero;
 
-        public DigestBehavior(string username, string password)
+        public WsUsernameTokenBehavior(string username, string password)
         {
             this.Username = username;
             this.Password = password;
         }
 
-        public DigestBehavior(string username, string password, TimeSpan utcNowOffset) : this(username, password)
+        public WsUsernameTokenBehavior(string username, string password, TimeSpan utcNowOffset) : this(username, password)
         {
             this.UtcNowOffset = utcNowOffset;
         }
@@ -29,7 +29,7 @@ namespace SharpOnvifClient.Security
 
         public void ApplyClientBehavior(ServiceEndpoint endpoint, ClientRuntime clientRuntime)
         {
-            clientRuntime.ClientMessageInspectors.Add(new DigestHeaderInspector(this.Username, this.Password, UtcNowOffset));
+            clientRuntime.ClientMessageInspectors.Add(new WsUsernameTokenHeaderInspector(this.Username, this.Password, UtcNowOffset));
         }
 
         public void ApplyDispatchBehavior(ServiceEndpoint endpoint, EndpointDispatcher endpointDispatcher)

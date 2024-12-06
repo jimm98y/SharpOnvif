@@ -8,17 +8,17 @@ using System.Xml.Serialization;
 namespace SharpOnvifClient.Security
 {
     /// <summary>
-    /// Security header for the Digest authentication.
+    /// Security header for the WsUsernameToken authentication.
     /// </summary>
     /// <remarks>https://stapp.space/using-soap-security-in-dotnet-core/</remarks>
-    public class DigestHeader : MessageHeader
+    public class WsUsernameTokenHeader : MessageHeader
     {
         private readonly string _username;
         private readonly string _nonce;
         private readonly string _created;
         private readonly string _password;
 
-        public DigestHeader(string username, string password, DateTime created)
+        public WsUsernameTokenHeader(string username, string password, DateTime created)
         {
             _username = username;
             _nonce = DigestHelpers.CalculateNonce();

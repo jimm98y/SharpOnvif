@@ -7,6 +7,7 @@ using SharpOnvifCommon;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.ServiceModel;
 using System.ServiceModel.Description;
 using System.Threading.Tasks;
 
@@ -15,8 +16,9 @@ namespace SharpOnvifClient
     public class SimpleOnvifClient
     {
         private readonly string _onvifUri;
-        private readonly DigestBehavior _auth;
         private Dictionary<string, string> _supportedServices;
+
+        private readonly System.Net.NetworkCredential _credentials;
 
         public SimpleOnvifClient(string onvifUri, string userName, string password)
         {
@@ -27,20 +29,12 @@ namespace SharpOnvifClient
                 throw new ArgumentNullException("User name or password must not be empty!");
 
             _onvifUri = onvifUri;
-            _auth = new DigestBehavior(userName, password);
+            _credentials = new System.Net.NetworkCredential(userName, password);
         }
 
-        public void SetCameraUtcNowOffset(TimeSpan utcNowOffset)
+        private void SetAuthentication<TChannel>(ClientBase<TChannel> channel) where TChannel : class
         {
-            _auth.UtcNowOffset = utcNowOffset;
-        }
-
-        public static void SetAuthentication(ServiceEndpoint endpoint, IEndpointBehavior authenticationBehavior)
-        {
-            if (!endpoint.EndpointBehaviors.Contains(authenticationBehavior))
-            {
-                endpoint.EndpointBehaviors.Add(authenticationBehavior);
-            }
+            channel.ClientCredentials.HttpDigest.ClientCredential = _credentials;
         }
 
         #region PTZ
@@ -52,7 +46,7 @@ namespace SharpOnvifClient
                 OnvifBindingFactory.CreateBinding(),
                 new System.ServiceModel.EndpointAddress(ptzURL)))
             {
-                SetAuthentication(ptzClient.Endpoint, _auth);
+                SetAuthentication(ptzClient);
                 var status = await ptzClient.GetStatusAsync(
                     profileToken).ConfigureAwait(false);
 
@@ -100,7 +94,7 @@ namespace SharpOnvifClient
                 OnvifBindingFactory.CreateBinding(),
                 new System.ServiceModel.EndpointAddress(ptzURL)))
             {
-                SetAuthentication(ptzClient.Endpoint, _auth);
+                SetAuthentication(ptzClient);
                 await ptzClient.AbsoluteMoveAsync(
                     profileToken,
                     new PTZVector()
@@ -156,7 +150,7 @@ namespace SharpOnvifClient
                 OnvifBindingFactory.CreateBinding(),
                 new System.ServiceModel.EndpointAddress(ptzURL)))
             {
-                SetAuthentication(ptzClient.Endpoint, _auth);
+                SetAuthentication(ptzClient);
                 await ptzClient.RelativeMoveAsync(
                     profileToken,
                     new PTZVector()
@@ -206,7 +200,7 @@ namespace SharpOnvifClient
                 OnvifBindingFactory.CreateBinding(),
                 new System.ServiceModel.EndpointAddress(ptzURL)))
             {
-                SetAuthentication(ptzClient.Endpoint, _auth);
+                SetAuthentication(ptzClient);
                 await ptzClient.ContinuousMoveAsync(
                     profileToken,
                     new PTZ.PTZSpeed()
@@ -225,7 +219,7 @@ namespace SharpOnvifClient
                 OnvifBindingFactory.CreateBinding(),
                 new System.ServiceModel.EndpointAddress(ptzURL)))
             {
-                SetAuthentication(ptzClient.Endpoint, _auth);
+                SetAuthentication(ptzClient);
                 var presets = await ptzClient.GetPresetsAsync(
                     profileToken).ConfigureAwait(false);
                 return presets;
@@ -239,7 +233,7 @@ namespace SharpOnvifClient
                 OnvifBindingFactory.CreateBinding(),
                 new System.ServiceModel.EndpointAddress(ptzURL)))
             {
-                SetAuthentication(ptzClient.Endpoint, _auth);
+                SetAuthentication(ptzClient);
                 await ptzClient.GotoPresetAsync(
                     profileToken,
                     presetToken,
@@ -258,7 +252,7 @@ namespace SharpOnvifClient
                 OnvifBindingFactory.CreateBinding(),
                 new System.ServiceModel.EndpointAddress(ptzURL)))
             {
-                SetAuthentication(ptzClient.Endpoint, _auth);
+                SetAuthentication(ptzClient);
                 
                 var result = await ptzClient.SetPresetAsync(
                     new SetPresetRequest(profileToken, presetName, null)
@@ -275,7 +269,7 @@ namespace SharpOnvifClient
                 OnvifBindingFactory.CreateBinding(),
                 new System.ServiceModel.EndpointAddress(ptzURL)))
             {
-                SetAuthentication(ptzClient.Endpoint, _auth);
+                SetAuthentication(ptzClient);
                 await ptzClient.RemovePresetAsync(
                     profileToken,
                     presetToken).ConfigureAwait(false);
@@ -292,7 +286,7 @@ namespace SharpOnvifClient
                 OnvifBindingFactory.CreateBinding(),
                 new System.ServiceModel.EndpointAddress(_onvifUri)))
             {
-                SetAuthentication(deviceClient.Endpoint, _auth);
+                SetAuthentication(deviceClient);
                 var deviceInfo = await deviceClient.GetDeviceInformationAsync(new GetDeviceInformationRequest()).ConfigureAwait(false);
                 return deviceInfo;
             }
@@ -304,7 +298,7 @@ namespace SharpOnvifClient
                 OnvifBindingFactory.CreateBinding(),
                 new System.ServiceModel.EndpointAddress(_onvifUri)))
             {
-                SetAuthentication(deviceClient.Endpoint, _auth);
+                SetAuthentication(deviceClient);
                 var services = await deviceClient.GetServicesAsync(includeCapability).ConfigureAwait(false);
                 return services;
             }
@@ -316,7 +310,7 @@ namespace SharpOnvifClient
                 OnvifBindingFactory.CreateBinding(),
                 new System.ServiceModel.EndpointAddress(_onvifUri)))
             {
-                SetAuthentication(deviceClient.Endpoint, _auth);
+                SetAuthentication(deviceClient);
                 var cameraTime = await deviceClient.GetSystemDateAndTimeAsync().ConfigureAwait(false);
                 return cameraTime;
             }
@@ -348,7 +342,7 @@ namespace SharpOnvifClient
                 OnvifBindingFactory.CreateBinding(),
                 new System.ServiceModel.EndpointAddress(mediaUrl)))
             {
-                SetAuthentication(mediaClient.Endpoint, _auth);
+                SetAuthentication(mediaClient);
                 var profiles = await mediaClient.GetProfilesAsync().ConfigureAwait(false);
                 return profiles;
             }
@@ -361,7 +355,7 @@ namespace SharpOnvifClient
                 OnvifBindingFactory.CreateBinding(),
                 new System.ServiceModel.EndpointAddress(mediaUrl)))
             {
-                SetAuthentication(mediaClient.Endpoint, _auth);
+                SetAuthentication(mediaClient);
                 var streamUri = await mediaClient.GetStreamUriAsync(new StreamSetup() { Transport = new Transport() {  Protocol = TransportProtocol.RTSP } }, profileToken).ConfigureAwait(false);
                 return streamUri;
             }
@@ -378,7 +372,7 @@ namespace SharpOnvifClient
                             OnvifBindingFactory.CreateBinding(),
                             new System.ServiceModel.EndpointAddress(eventUri)))
             {
-                SetAuthentication(eventPortTypeClient.Endpoint, _auth);
+                SetAuthentication(eventPortTypeClient);
 
                 var subscribeResponse = await eventPortTypeClient.CreatePullPointSubscriptionAsync(
                     new CreatePullPointSubscriptionRequest()
@@ -399,7 +393,7 @@ namespace SharpOnvifClient
                     OnvifBindingFactory.CreateBinding(),
                     new System.ServiceModel.EndpointAddress(subscriptionReferenceAddress)))
             {
-                SetAuthentication(pullPointClient.Endpoint, _auth);
+                SetAuthentication(pullPointClient);
 
                 var messages = await pullPointClient.PullMessagesAsync(
                     new PullMessagesRequest(
@@ -418,7 +412,7 @@ namespace SharpOnvifClient
                     OnvifBindingFactory.CreateBinding(),
                     new System.ServiceModel.EndpointAddress(subscriptionReferenceAddress)))
             {
-                SetAuthentication(pullPointClient.Endpoint, _auth);
+                SetAuthentication(pullPointClient);
                 var unsubscribeResponse = await pullPointClient.UnsubscribeAsync(new Unsubscribe()).ConfigureAwait(false);
                 return unsubscribeResponse;
             }
@@ -436,7 +430,7 @@ namespace SharpOnvifClient
                             OnvifBindingFactory.CreateBinding(),
                             new System.ServiceModel.EndpointAddress(eventUri)))
             {
-                SetAuthentication(notificationProducerClient.Endpoint, _auth);
+                SetAuthentication(notificationProducerClient);
 
                 var subscriptionResult = await notificationProducerClient.SubscribeAsync(new Subscribe()
                 {
@@ -460,7 +454,7 @@ namespace SharpOnvifClient
                             OnvifBindingFactory.CreateBinding(),
                             new System.ServiceModel.EndpointAddress(subscriptionReferenceAddress)))
             {
-                SetAuthentication(subscriptionManagerClient.Endpoint, _auth);
+                SetAuthentication(subscriptionManagerClient);
 
                 var renewResult = await subscriptionManagerClient.RenewAsync(new Renew()
                 {
@@ -477,7 +471,7 @@ namespace SharpOnvifClient
                             OnvifBindingFactory.CreateBinding(),
                             new System.ServiceModel.EndpointAddress(subscriptionReferenceAddress)))
             {
-                SetAuthentication(subscriptionManagerClient.Endpoint, _auth);
+                SetAuthentication(subscriptionManagerClient);
                 var unsubscribeResult = await subscriptionManagerClient.UnsubscribeAsync(new Unsubscribe()).ConfigureAwait(false);
                 return unsubscribeResult;
             }
