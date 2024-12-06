@@ -20,6 +20,7 @@ builder.Services.AddOnvifDiscovery();
 builder.Services.AddSingleton((sp) => { return new OnvifService.Onvif.DeviceImpl(sp.GetService<IServer>()); });
 builder.Services.AddSingleton((sp) => { return new OnvifService.Onvif.MediaImpl(sp.GetService<IServer>()); });
 builder.Services.AddSingleton((sp) => { return new OnvifService.Onvif.EventsImpl(sp.GetService<IServer>()); });
+builder.Services.AddSingleton((sp) => { return new OnvifService.Onvif.PTZImpl(sp.GetService<IServer>()); });
 builder.Services.AddSingleton((sp) => { return new OnvifService.Onvif.SubscriptionManagerImpl(sp.GetService<IServer>()); });
 
 var app = builder.Build();
@@ -51,6 +52,9 @@ app.UseOnvif();
     serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.SubscriptionManagerImpl, SharpOnvifServer.Events.SubscriptionManager>(subscriptionBinding, "/onvif/Events/SubManager");
     serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.SubscriptionManagerImpl, SharpOnvifServer.Events.PausableSubscriptionManager>(subscriptionBinding, "/onvif/Events/SubManager");
     serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.SubscriptionManagerImpl, SharpOnvifServer.Events.PullPointSubscription>(subscriptionBinding, "/onvif/Events/SubManager");
+
+    serviceBuilder.AddService<OnvifService.Onvif.PTZImpl>();
+    serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.PTZImpl, SharpOnvifServer.PTZ.PTZ>(OnvifBindingFactory.CreateBinding(), "/onvif/ptz_service");
 
     // TODO: add more service endpoints
 });

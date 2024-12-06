@@ -7,7 +7,6 @@ using SharpOnvifCommon;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.ServiceModel.Description;
 using System.Threading.Tasks;
 
@@ -46,7 +45,7 @@ namespace SharpOnvifClient
 
         #region PTZ
 
-        public async Task<PtzStatusResult> GetStatusAsync(string profileToken)
+        public async Task<PTZStatus> GetStatusAsync(string profileToken)
         {
             string ptzURL = await GetServiceUriAsync(OnvifServices.PTZ).ConfigureAwait(false);
             using (var ptzClient = new PTZClient(
@@ -57,25 +56,11 @@ namespace SharpOnvifClient
                 var status = await ptzClient.GetStatusAsync(
                     profileToken).ConfigureAwait(false);
 
-                int? moveStatusPanTilt = status.MoveStatus != null ? (status.MoveStatus.PanTiltSpecified ? (int?)status.MoveStatus.PanTilt : null) : null;
-                int? moveStatusZoom = status.MoveStatus != null ? (status.MoveStatus.ZoomSpecified ? (int?)status.MoveStatus.Zoom : null) : null;
-
-                float? panTiltX = status.Position?.PanTilt.x;
-                float? panTiltY = status.Position?.PanTilt.y;
-                string panTiltSpace = status.Position.PanTilt.space;
-
-                return new PtzStatusResult(
-                    moveStatusPanTilt,
-                    moveStatusZoom,
-                    panTiltX,
-                    panTiltY,
-                    panTiltSpace,
-                    status.UtcTime,
-                    status.Error);
+                return status;
             }
         }
 
-        public Task AbsoluteMoveAsync(string profileToken, float zoom, float zoomSpeed = 1)
+        public Task AbsoluteMoveAsync(string profileToken, float zoom, float zoomSpeed)
         {
             return AbsoluteMoveAsync(
                 profileToken,
@@ -86,7 +71,7 @@ namespace SharpOnvifClient
             );
         }
 
-        public Task AbsoluteMoveAsync(string profileToken, float pan, float tilt, float panSpeed = 1, float tiltSpeed = 1)
+        public Task AbsoluteMoveAsync(string profileToken, float pan, float tilt, float panSpeed, float tiltSpeed)
         {
             return AbsoluteMoveAsync(
                 profileToken,
@@ -97,7 +82,7 @@ namespace SharpOnvifClient
             );
         }
 
-        public Task AbsoluteMoveAsync(string profileToken, float pan, float tilt, float zoom, float panSpeed = 1, float tiltSpeed = 1, float zoomSpeed = 1)
+        public Task AbsoluteMoveAsync(string profileToken, float pan, float tilt, float zoom, float panSpeed, float tiltSpeed, float zoomSpeed)
         {
             return AbsoluteMoveAsync(
                 profileToken,
@@ -131,7 +116,7 @@ namespace SharpOnvifClient
             }
         }
 
-        public Task RelativeMoveAsync(string profileToken, float zoom, float zoomSpeed = 1)
+        public Task RelativeMoveAsync(string profileToken, float zoom, float zoomSpeed)
         {
             return RelativeMoveAsync(
                 profileToken,
@@ -142,7 +127,7 @@ namespace SharpOnvifClient
             );
         }
 
-        public Task RelativeMoveAsync(string profileToken, float pan, float tilt, float panSpeed = 1, float tiltSpeed = 1)
+        public Task RelativeMoveAsync(string profileToken, float pan, float tilt, float panSpeed, float tiltSpeed)
         {
             return RelativeMoveAsync(
                 profileToken,
@@ -153,7 +138,7 @@ namespace SharpOnvifClient
             );
         }
 
-        public Task RelativeMoveAsync(string profileToken, float pan, float tilt, float zoom, float panSpeed = 1, float tiltSpeed = 1, float zoomSpeed = 1)
+        public Task RelativeMoveAsync(string profileToken, float pan, float tilt, float zoom, float panSpeed, float tiltSpeed, float zoomSpeed)
         {
             return RelativeMoveAsync(
                 profileToken,
@@ -233,7 +218,7 @@ namespace SharpOnvifClient
             }
         }
 
-        public async Task<PtzPreset[]> GetPresetsAsync(string profileToken)
+        public async Task<GetPresetsResponse> GetPresetsAsync(string profileToken)
         {
             string ptzURL = await GetServiceUriAsync(OnvifServices.PTZ).ConfigureAwait(false);
             using (var ptzClient = new PTZClient(
@@ -243,12 +228,11 @@ namespace SharpOnvifClient
                 SetAuthentication(ptzClient.Endpoint, _auth);
                 var presets = await ptzClient.GetPresetsAsync(
                     profileToken).ConfigureAwait(false);
-
-                return presets.Preset.Select(x => new PtzPreset(x.Name, x.token, x.PTZPosition.PanTilt.x, x.PTZPosition.PanTilt.y, x.PTZPosition.Zoom.x)).ToArray();
+                return presets;
             }
         }
 
-        public async Task GoToPresetAsync(string profileToken, string presetToken, float panSpeed = 1, float tiltSpeed = 1, float zoomSpeed = 1)
+        public async Task GoToPresetAsync(string profileToken, string presetToken, float panSpeed, float tiltSpeed, float zoomSpeed)
         {
             string ptzURL = await GetServiceUriAsync(OnvifServices.PTZ).ConfigureAwait(false);
             using (var ptzClient = new PTZClient(
@@ -525,45 +509,5 @@ namespace SharpOnvifClient
         }
 
         #endregion // Utility
-    }
-
-    public class PtzPreset
-    {
-        public string Name { get; set; }
-        public string Token { get; set; }
-        public float Pan { get; set; }
-        public float Tilt { get; set; }
-        public float Zoom { get; set; }
-
-        public PtzPreset(string name, string token, float pan, float tilt, float zoom)
-        {
-            this.Name = name;
-            this.Token = token;
-            this.Pan = pan;
-            this.Tilt = tilt;
-            this.Zoom = zoom;
-        }
-    }
-
-    public class PtzStatusResult
-    {
-        public PtzStatusResult(int? moveStatusPanTilt, int? moveStatusZoom, float? panTiltX, float? panTiltY, string panTiltSpace, System.DateTime utcTime, string error)
-        {
-            MoveStatusPanTilt = moveStatusPanTilt;
-            MoveStatusZoom = moveStatusZoom;
-            PanTiltX = panTiltX;
-            PanTiltY = panTiltY;
-            PanTiltSpace = panTiltSpace;
-            UtcTime = utcTime;
-            Error = error;
-        }
-
-        public int? MoveStatusPanTilt { get; }
-        public int? MoveStatusZoom { get; }
-        public float? PanTiltX { get; }
-        public float? PanTiltY { get; }
-        public string PanTiltSpace { get; }
-        public System.DateTime UtcTime { get; }
-        public string Error { get; }
     }
 }

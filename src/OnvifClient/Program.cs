@@ -30,13 +30,25 @@ else
         Console.WriteLine($"Stream URI: {streamUri.Uri}");
     }
 
+    // check if ptz profile is available
+    if (services.Service.FirstOrDefault(x => x.Namespace == OnvifServices.PTZ) != null)
+    {
+        var profiles = await client.GetProfilesAsync();
+        await client.AbsoluteMoveAsync(profiles.Profiles.First().token, 1f, 1f, 1f, 1f, 1f, 1f);
+
+        var currentPosition = await client.GetStatusAsync(profiles.Profiles.First().token);
+        Console.WriteLine($"Current pan: {currentPosition.Position.PanTilt.x}");
+        Console.WriteLine($"Current tilt: {currentPosition.Position.PanTilt.y}");
+        Console.WriteLine($"Current zoom: {currentPosition.Position.Zoom.x}");
+    }
+
     // check if event profile is available
     if (services.Service.FirstOrDefault(x => x.Namespace == OnvifServices.EVENTS) != null)
     {
         // basic events vs pull point subscription
         bool useBasicEvents = false; // = false;
 
-        if(useBasicEvents)
+        if (useBasicEvents)
             await BasicEventSubscription(client);
         else
             await PullPointEventSubscription(client);
