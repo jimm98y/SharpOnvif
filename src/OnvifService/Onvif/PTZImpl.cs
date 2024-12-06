@@ -7,21 +7,6 @@ using System.Linq;
 
 namespace OnvifService.Onvif
 {
-    public class PTZPresetImpl
-    {
-        public string Name { get; set; }
-        public float Pan { get; set; }
-        public float Tilt { get; set; }
-        public float Zoom { get; set; }
-        public PTZPresetImpl(string name, float pan, float tilt, float zoom)
-        {
-            this.Name = name;
-            this.Pan = pan;
-            this.Tilt = tilt;
-            this.Zoom = zoom;
-        }
-    }
-
     public class PTZImpl : PTZBase
     {
         private IServer server;
@@ -33,7 +18,7 @@ namespace OnvifService.Onvif
         public MoveStatus PanTiltStatus { get; set; } = MoveStatus.IDLE;
         public MoveStatus ZoomStatus { get; set; } = MoveStatus.IDLE;
 
-        private Dictionary<string, PTZPresetImpl> Presets { get; } = new Dictionary<string, PTZPresetImpl> ();
+        private Dictionary<string, PTZPreset> Presets { get; } = new Dictionary<string, PTZPreset> ();
 
         public PTZImpl(IServer server)
         {
@@ -96,7 +81,16 @@ namespace OnvifService.Onvif
         public override SetPresetResponse SetPreset(SetPresetRequest request)
         {
             string token = Guid.NewGuid().ToString();
-            this.Presets.Add(token, new PTZPresetImpl(request.PresetName, Pan, Tilt, Zoom));
+            this.Presets.Add(token, new PTZPreset()
+            {
+                Name = request.PresetName,
+                token = token,
+                PTZPosition = new PTZVector()
+                {
+                    PanTilt = new Vector2D() { x = Pan, y = Tilt },
+                    Zoom = new Vector1D() { x = Zoom }
+                }
+            });
             return new SetPresetResponse(token);
         }
 
@@ -105,16 +99,7 @@ namespace OnvifService.Onvif
         {
             return new GetPresetsResponse()
             {
-                Preset = Presets.Select(x => new PTZPreset()
-                {
-                    Name = x.Value.Name,
-                    token = x.Key,
-                    PTZPosition = new PTZVector()
-                    {
-                        PanTilt = new Vector2D() { x = x.Value.Pan, y = x.Value.Tilt },
-                        Zoom = new Vector1D() { x = x.Value.Zoom }
-                    }
-                }).ToArray()
+                Preset = Presets.Values.ToArray()
             };
         }
 
@@ -122,9 +107,9 @@ namespace OnvifService.Onvif
         {
             if(Presets.TryGetValue(PresetToken, out var preset))
             {
-                this.Pan = preset.Pan;
-                this.Tilt = preset.Tilt;
-                this.Zoom = preset.Zoom;
+                this.Pan = preset.PTZPosition.PanTilt.x;
+                this.Tilt = preset.PTZPosition.PanTilt.y;
+                this.Zoom = preset.PTZPosition.Zoom.x;
             }
         }
     }
