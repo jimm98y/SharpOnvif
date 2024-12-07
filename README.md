@@ -159,10 +159,46 @@ Create the ONVIF client and set the authentication behavior before you use it:
      OnvifBindingFactory.CreateBinding(),
      new System.ServiceModel.EndpointAddress("http://192.168.1.10/onvif/device_service")))
  {
-     deviceClient.Endpoint.EndpointBehaviors.Add(auth);
+     SetAuthentication(deviceClient);
      
      // use the client
  }
+```
+Where the `SetAuthentication` method might look like:
+```cs
+[Flags]
+public enum AuthenticationMethod
+{
+    None = 0,
+    WsUsernameToken = 1,
+    HttpDigest = 2
+}
+
+private readonly AuthenticationMethod _authentication;
+
+private void SetAuthentication<TChannel>(ClientBase<TChannel> channel) where TChannel : class
+{
+    if(_authentication == AuthenticationMethod.None)
+    {
+        Debug.WriteLine("Authentication is disabled");
+        return;
+    }
+
+    if (_authentication.HasFlag(AuthenticationMethod.HttpDigest))
+    {
+        // HTTP Digest authentication is handled by WCF
+        channel.ClientCredentials.HttpDigest.ClientCredential = _credentials;
+    }
+
+    if (_authentication.HasFlag(AuthenticationMethod.WsUsernameToken))
+    {
+        // Legacy WsUsernameToken authenticaiton must be handled using a custom behavior
+        if (!channel.Endpoint.EndpointBehaviors.Contains(_legacyAuth))
+        {
+            channel.Endpoint.EndpointBehaviors.Add(_legacyAuth);
+        }
+    }
+}
 ```
 Call any method on the client like:
 ```cs
