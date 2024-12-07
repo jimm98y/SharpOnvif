@@ -4,7 +4,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-var devices = await DiscoveryClient.DiscoverAsync();
+var devices = await OnvifDiscoveryClient.DiscoverAsync();
 var device = devices.FirstOrDefault(x => x.Contains("localhost"));
 
 if (device == null)

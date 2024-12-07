@@ -13,7 +13,7 @@ using System.Xml.XPath;
 
 namespace SharpOnvifClient
 {
-    public static class DiscoveryClient
+    public static class OnvifDiscoveryClient
     {
         private class UdpState
         {
