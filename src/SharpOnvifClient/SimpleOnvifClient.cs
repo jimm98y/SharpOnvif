@@ -92,7 +92,7 @@ namespace SharpOnvifClient
 
             if (_authentication.HasFlag(AuthenticationMethod.WsUsernameToken))
             {
-                // Legacy WsUsernameToken authenticaiton must be handled using a custom behavior
+                // Legacy WsUsernameToken authentication must be handled using a custom behavior
                 if (!channel.Endpoint.EndpointBehaviors.Contains(_legacyAuth))
                 {
                     channel.Endpoint.EndpointBehaviors.Add(_legacyAuth);

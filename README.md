@@ -1,8 +1,8 @@
 # SharpOnvif
-A C# implementation of the ONVIF interface - client as well as the server. All profiles are supported.
+A C# implementation of the Onvif interface - client as well as the server. All profiles are supported.
 
 ## SharpOnvifServer
-ONVIF server provides NET8 CoreWCF bindings generated using svcutil.exe. It makes it easy to implement only parts of the ONVIF specification needed for your project.
+Onvif server provides NET8 CoreWCF bindings generated using svcutil.exe. It makes it easy to implement only parts of the Onvif specification needed for your project.
 
 Start with creating a new CoreWCF service:
 ```cs
@@ -11,7 +11,7 @@ builder.Services.AddServiceModelServices();
 builder.Services.AddServiceModelMetadata();
 builder.Services.AddSingleton<IServiceBehavior, UseRequestHeadersForMetadataAddressBehavior>();
 ```
-Add Digest authentication for ONVIF:
+Add Digest authentication for Onvif:
 ```cs
 builder.Services.AddSingleton<IUserRepository, UserRepository>();
 builder.Services.AddOnvifDigestAuthentication();
@@ -34,7 +34,7 @@ public class UserRepository : IUserRepository
     }
 }
 ```
-Optionally, add ONVIF discovery to make your service discoverable on the network:
+Optionally, add Onvif discovery to make your service discoverable on the network:
 ```cs
 builder.Services.AddOnvifDiscovery();
 ```
@@ -80,12 +80,12 @@ Finally call `app.Run()`:
 ```cs
 app.Run();
 ```
-Your ONVIF service should now be discoverable on the network and you should be able to use ONVIF Device Manager or similar tool to call your endpoint.
+Your Onvif service should now be discoverable on the network and you should be able to use Onvif Device Manager or similar tool to call your endpoint.
 
 ## SharpOnvifClient
-ONVIF client provides netstandard2.0 WCF bindings generated using `dotnet-svcutil`. `SimpleOnvifClient` wraps common API calls to get basic information from the camera and includes both Pull Point as well as Basic event subscriptions. 
+Onvif client provides netstandard2.0 ans NET8.0 WCF bindings generated using `dotnet-svcutil`. `SimpleOnvifClient` wraps common API calls to get basic information from the camera and includes both Pull Point as well as Basic event subscriptions. 
 
-To discover ONVIF devices on your network, use:
+To discover Onvif devices on your network, use:
 ```cs
 string[] onvifDeviceUris = await DiscoveryClient.DiscoverAsync();
 ```
@@ -153,7 +153,7 @@ First add a reference to the DLL that implements the clients (e.g. `SharpOnvifCl
 ```cs
 var auth = new DigestBehavior("admin", "password");
 ```
-Create the ONVIF client and set the authentication behavior before you use it:
+Create the Onvif client and set the authentication behavior before you use it:
 ```cs
  using (var deviceClient = new DeviceClient(
      OnvifBindingFactory.CreateBinding(),
@@ -174,13 +174,20 @@ public enum AuthenticationMethod
     HttpDigest = 2
 }
 
-private readonly AuthenticationMethod _authentication;
+private readonly System.Net.NetworkCredential _credentials;
+private readonly AuthenticationMethod _authentication = AuthenticationMethod.WsUsernameToken | AuthenticationMethod.HttpDigest;
+private readonly IEndpointBehavior _legacyAuth;
+
+// ctor
+...
+_credentials = new System.Net.NetworkCredential(userName, password);
+_legacyAuth = new WsUsernameTokenBehavior(_credentials);
+...
 
 private void SetAuthentication<TChannel>(ClientBase<TChannel> channel) where TChannel : class
 {
     if(_authentication == AuthenticationMethod.None)
     {
-        Debug.WriteLine("Authentication is disabled");
         return;
     }
 
@@ -192,7 +199,7 @@ private void SetAuthentication<TChannel>(ClientBase<TChannel> channel) where TCh
 
     if (_authentication.HasFlag(AuthenticationMethod.WsUsernameToken))
     {
-        // Legacy WsUsernameToken authenticaiton must be handled using a custom behavior
+        // Legacy WsUsernameToken authentication must be handled using a custom behavior
         if (!channel.Endpoint.EndpointBehaviors.Contains(_legacyAuth))
         {
             channel.Endpoint.EndpointBehaviors.Add(_legacyAuth);
@@ -206,7 +213,7 @@ var deviceInfo = await deviceClient.GetDeviceInformationAsync(new GetDeviceInfor
 ```
 ## Testing
 Only the DeviceMgmt, Media and Events were tested with Hikvision cameras. 
-Server implementation was tested using ONVIF Device Manager.
+Server implementation was tested using Onvif Device Manager.
 
 ## Credits
 Special thanks to Piotr Stapp for figuring out the SOAP security headers in NET8: https://stapp.space/using-soap-security-in-dotnet-core/.
