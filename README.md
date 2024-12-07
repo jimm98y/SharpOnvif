@@ -105,7 +105,7 @@ Call `GetServicesAsync` to retrieve a list of all services supported by the devi
 var services = await client.GetServicesAsync();
 ```
 
-Some operations require the device to support a service. For instance, to retrieve the stream URI the device must support the media service. To check whether the ONVIF service is supported by the device, call:
+Some operations require the device to support a service. For instance, to retrieve the stream URI the device must support the media service. To check whether the Onvif service is supported by the device, call:
 ```cs
 if (services.Service.FirstOrDefault(x => x.Namespace == OnvifServices.MEDIA) != null)
 {
@@ -149,16 +149,14 @@ eventListener.Start((int cameraID, string ev) =>
 var subscriptionResponse = await client.BasicSubscribeAsync(eventListener.GetOnvifEventListenerUri(CAMERA1));
 ```
 ### Using the generated WCF clients
-First add a reference to the DLL that implements the clients (e.g. `SharpOnvifClient.DeviceMgmt`). Create the authentication behavior:
+First add a reference to the DLL that implements the clients (e.g. `SharpOnvifClient.DeviceMgmt`). Add the usings:
 ```cs
-var auth = new DigestBehavior("admin", "password");
+using SharpOnvifClient;
 ```
 Create the Onvif client and set the authentication behavior using `SetOnvifAuthentication` extension method from `SharpOnvifClient.OnvifAuthenticationExtensions` before you use it:
 ```cs
-using SharpOnvifClient;
-
 System.Net.NetworkCredential credentials = new System.Net.NetworkCredential(userName, password);
-IEndpointBehavior legacyAuth = new WsUsernameTokenBehavior(_credentials);
+IEndpointBehavior legacyAuth = new WsUsernameTokenBehavior(credentials);
 
 using (var deviceClient = new DeviceClient(
     OnvifBindingFactory.CreateBinding(),
