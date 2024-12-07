@@ -1,23 +1,23 @@
 ﻿using System;
+using System.Net;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Dispatcher;
 
 namespace SharpOnvifClient.Security
 {
-    public class WsUsernameTokenBehavior : IEndpointBehavior, IHasUtcOffset
+    public sealed class WsUsernameTokenBehavior : IEndpointBehavior, IHasUtcOffset
     {
-        public string Username { get; set; }
-        public string Password { get; set; }
+        private readonly NetworkCredential _credentials;
+
         public TimeSpan UtcNowOffset { get; set; } = TimeSpan.Zero;
 
-        public WsUsernameTokenBehavior(string username, string password)
+        public WsUsernameTokenBehavior(NetworkCredential credentials)
         {
-            this.Username = username;
-            this.Password = password;
+            this._credentials = credentials;
         }
 
-        public WsUsernameTokenBehavior(string username, string password, TimeSpan utcNowOffset) : this(username, password)
+        public WsUsernameTokenBehavior(NetworkCredential credentials, TimeSpan utcNowOffset) : this(credentials)
         {
             this.UtcNowOffset = utcNowOffset;
         }
@@ -29,7 +29,7 @@ namespace SharpOnvifClient.Security
 
         public void ApplyClientBehavior(ServiceEndpoint endpoint, ClientRuntime clientRuntime)
         {
-            clientRuntime.ClientMessageInspectors.Add(new WsUsernameTokenHeaderInspector(this.Username, this.Password, UtcNowOffset));
+            clientRuntime.ClientMessageInspectors.Add(new WsUsernameTokenHeaderInspector(_credentials, UtcNowOffset));
         }
 
         public void ApplyDispatchBehavior(ServiceEndpoint endpoint, EndpointDispatcher endpointDispatcher)

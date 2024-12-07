@@ -1,6 +1,7 @@
 ﻿using SharpOnvifCommon;
 using SharpOnvifCommon.Security;
 using System;
+using System.Net;
 using System.ServiceModel.Channels;
 using System.Xml;
 using System.Xml.Serialization;
@@ -11,19 +12,17 @@ namespace SharpOnvifClient.Security
     /// Security header for the WsUsernameToken authentication.
     /// </summary>
     /// <remarks>https://stapp.space/using-soap-security-in-dotnet-core/</remarks>
-    public class WsUsernameTokenHeader : MessageHeader
+    public sealed class WsUsernameTokenHeader : MessageHeader
     {
-        private readonly string _username;
         private readonly string _nonce;
         private readonly string _created;
-        private readonly string _password;
+        private NetworkCredential _credentials;
 
-        public WsUsernameTokenHeader(string username, string password, DateTime created)
+        public WsUsernameTokenHeader(NetworkCredential credentials, DateTime created)
         {
-            _username = username;
+            this._credentials = credentials;
             _nonce = DigestHelpers.CalculateNonce();
             _created = OnvifHelpers.DateTimeToString(created);
-            _password = password;
         }
 
         public override string Name { get; } = "Security";
@@ -33,11 +32,11 @@ namespace SharpOnvifClient.Security
         protected override void OnWriteHeaderContents(XmlDictionaryWriter writer, MessageVersion messageVersion)
         {
             var serializer = new XmlSerializer(typeof(UsernameToken));
-            var pass = DigestHelpers.CreateSoapDigest(_nonce, _created, _password);
+            var pass = DigestHelpers.CreateSoapDigest(_nonce, _created, _credentials.Password);
             serializer.Serialize(writer,
                 new UsernameToken
                 {
-                    Username = _username,
+                    Username = _credentials.UserName,
                     Password = new Password
                     {
                         Text = pass,
