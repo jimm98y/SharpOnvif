@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using System;
-using System.Diagnostics;
 using SharpOnvifCommon.Security;
 using System.Text.RegularExpressions;
+using System.Globalization;
 
 namespace SharpOnvifServer
 {
@@ -73,50 +73,80 @@ namespace SharpOnvifServer
 
         protected async override Task<AuthenticateResult> HandleAuthenticateAsync()
         {
-            SoapDigestAuth token = await GetSecurityHeaderFromSoapEnvelope(Request);
-
-            if (token != null)
+            // according to the Onvif specification, we must first authenticate the Digest if it's present
+            WebDigestAuth webToken = await GetSecurityHeaderFromHeaders(Request);
+            if (webToken != null)
             {
                 try
                 {
-                    if (await AuthenticateSoapDigest(token.UserName, token.Password, token.Nonce, token.Created))
+                    if (await AuthenticateWebDigest(webToken.UserName, Realm, webToken.Response, webToken.Nonce, Request.Method, webToken.Uri))
                     {
-                        var identity = new GenericIdentity(token.UserName);
+                        // now in case the request also contains WsUsernameToken, we must verify it
+                        SoapDigestAuth token = await GetSecurityHeaderFromSoapEnvelope(Request);
+                        if (token != null)
+                        {
+                            try
+                            {
+                                if (await AuthenticateSoapDigest(token.UserName, token.Password, token.Nonce, token.Created))
+                                {
+                                    if (string.Compare(token.UserName, webToken.UserName, false, CultureInfo.InvariantCulture) != 0)
+                                    {
+                                        return AuthenticateResult.Fail("HTTP Digest and WsUsernameToken users do not match.");
+                                    }
+                                }
+                                else
+                                {
+                                    return AuthenticateResult.Fail("HTTP Digest authentication succeeded, but WsUsernameToken authentication has failed.");
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                return AuthenticateResult.Fail($"HTTP Digest authentication succeeded, but WsUsernameToken authentication has failed: {ex.Message}");
+                            }
+                        }
+
+                        var identity = new GenericIdentity(webToken.UserName);
                         var claimsPrincipal = new ClaimsPrincipal(identity);
                         var ticket = new AuthenticationTicket(claimsPrincipal, Scheme.Name);
                         return AuthenticateResult.Success(ticket);
                     }
+                    else
+                    {
+                        return AuthenticateResult.Fail("HTTP Digest authentication failed.");
+                    }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    Debug.WriteLine(ex.Message);
-                    return AuthenticateResult.Fail("Failed to authenticate the user.");
+                    return AuthenticateResult.Fail($"HTTP Digest authentication failed: {ex.Message}");
                 }
             }
             else
             {
-                WebDigestAuth webToken = await GetSecurityHeaderFromHeaders(Request);
-                if(webToken != null)
+                SoapDigestAuth token = await GetSecurityHeaderFromSoapEnvelope(Request);
+                if (token != null)
                 {
                     try
                     {
-                        if (await AuthenticateWebDigest(webToken.UserName, Realm, webToken.Response, webToken.Nonce, Request.Method, webToken.Uri))
+                        if (await AuthenticateSoapDigest(token.UserName, token.Password, token.Nonce, token.Created))
                         {
-                            var identity = new GenericIdentity(webToken.UserName);
+                            var identity = new GenericIdentity(token.UserName);
                             var claimsPrincipal = new ClaimsPrincipal(identity);
                             var ticket = new AuthenticationTicket(claimsPrincipal, Scheme.Name);
                             return AuthenticateResult.Success(ticket);
                         }
+                        else
+                        {
+                            return AuthenticateResult.Fail("WsUsernameToken authentication failed.");
+                        }
                     }
                     catch (Exception ex)
                     {
-                        Debug.WriteLine(ex.Message);
-                        return AuthenticateResult.Fail("Failed to authenticate the user.");
+                        return AuthenticateResult.Fail($"WsUsernameToken authentication failed: {ex.Message}");
                     }
                 }
             }
 
-            return AuthenticateResult.Fail("Invalid Authorization Header");
+            return AuthenticateResult.Fail("No authentication found");
         }
 
         public async Task<bool> AuthenticateSoapDigest(string userName, string password, string nonce, string created)

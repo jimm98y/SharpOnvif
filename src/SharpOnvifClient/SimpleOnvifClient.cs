@@ -30,7 +30,7 @@ namespace SharpOnvifClient
         private Dictionary<string, string> _supportedServices;
 
         private object _syncRoot = new object();
-        private Dictionary<string, ICommunicationObject> _clients = new Dictionary<string, ICommunicationObject>();
+        private readonly Dictionary<string, ICommunicationObject> _clients = new Dictionary<string, ICommunicationObject>();
         private readonly System.Net.NetworkCredential _credentials;
         private readonly AuthenticationMethod _authentication;
         private readonly IEndpointBehavior _legacyAuth;
@@ -62,14 +62,17 @@ namespace SharpOnvifClient
         public void SetCameraUtcNowOffset(TimeSpan utcNowOffset)
         {
             // used for WsUsernameToken authentication method
-            var utcOffsetBehavior = _legacyAuth as IHasUtcOffset;
-            if (utcOffsetBehavior != null)
+            if (_authentication.HasFlag(AuthenticationMethod.WsUsernameToken))
             {
-                utcOffsetBehavior.UtcNowOffset = utcNowOffset;
+                var utcOffsetBehavior = _legacyAuth as IHasUtcOffset;
+                if (utcOffsetBehavior != null)
+                {
+                    utcOffsetBehavior.UtcNowOffset = utcNowOffset;
+                }
             }
             else
             {
-                throw new NotSupportedException();
+                throw new NotSupportedException("Time offset is only supported for WsUsernameToken authentication");
             }
         }
 
@@ -180,7 +183,6 @@ namespace SharpOnvifClient
         public async Task<CreatePullPointSubscriptionResponse> PullPointSubscribeAsync(int initialTerminationTimeInMinutes = 5)
         {
             string eventUri = await GetServiceUriAsync(OnvifServices.EVENTS);
-
             var eventPortTypeClient = GetOrCreateClient<EventPortTypeClient, EventPortType>(eventUri, (u) => new EventPortTypeClient(OnvifBindingFactory.CreateBinding(), new EndpointAddress(u)));
             var subscribeResponse = await eventPortTypeClient.CreatePullPointSubscriptionAsync(
                 new CreatePullPointSubscriptionRequest()
