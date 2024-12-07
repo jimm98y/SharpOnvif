@@ -6,7 +6,6 @@ using SharpOnvifClient.Security;
 using SharpOnvifCommon;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Description;
@@ -14,14 +13,6 @@ using System.Threading.Tasks;
 
 namespace SharpOnvifClient
 {
-    [Flags]
-    public enum AuthenticationMethod
-    {
-        None = 0,
-        WsUsernameToken = 1,
-        HttpDigest = 2
-    }
-
     public class SimpleOnvifClient : IDisposable
     {
         private bool _disposedValue;
@@ -32,27 +23,31 @@ namespace SharpOnvifClient
         private object _syncRoot = new object();
         private readonly Dictionary<string, ICommunicationObject> _clients = new Dictionary<string, ICommunicationObject>();
         private readonly System.Net.NetworkCredential _credentials;
-        private readonly AuthenticationMethod _authentication;
+        private readonly OnvifAuthentication _authentication;
         private readonly IEndpointBehavior _legacyAuth;
 
-        public SimpleOnvifClient(string onvifUri) : this(onvifUri, null, null, AuthenticationMethod.None)
+        public SimpleOnvifClient(string onvifUri) : this(onvifUri, null, null, OnvifAuthentication.None)
         { }
 
-        public SimpleOnvifClient(string onvifUri, string userName, string password) : this(onvifUri, userName, password, AuthenticationMethod.WsUsernameToken | AuthenticationMethod.HttpDigest)
+        public SimpleOnvifClient(string onvifUri, string userName, string password) : this(onvifUri, userName, password, OnvifAuthentication.WsUsernameToken | OnvifAuthentication.HttpDigest)
         { }
 
-        public SimpleOnvifClient(string onvifUri, string userName, string password, AuthenticationMethod authentication)
+        public SimpleOnvifClient(string onvifUri, string userName, string password, OnvifAuthentication authentication)
         {
             if (string.IsNullOrWhiteSpace(onvifUri))
                 throw new ArgumentNullException(nameof(onvifUri));
 
-            if(authentication != AuthenticationMethod.None)
+            if(authentication != OnvifAuthentication.None)
             {
                 if (string.IsNullOrWhiteSpace(userName) || string.IsNullOrWhiteSpace(password))
                     throw new ArgumentNullException("User name or password must not be empty!");
 
                 _credentials = new System.Net.NetworkCredential(userName, password);
-                _legacyAuth = new WsUsernameTokenBehavior(_credentials);
+
+                if (authentication.HasFlag(OnvifAuthentication.WsUsernameToken))
+                {
+                    _legacyAuth = new WsUsernameTokenBehavior(_credentials);
+                }
             }
 
             _onvifUri = onvifUri;
@@ -61,42 +56,13 @@ namespace SharpOnvifClient
 
         public void SetCameraUtcNowOffset(TimeSpan utcNowOffset)
         {
-            // used for WsUsernameToken authentication method
-            if (_authentication.HasFlag(AuthenticationMethod.WsUsernameToken))
+            if (_authentication.HasFlag(OnvifAuthentication.WsUsernameToken))
             {
-                var utcOffsetBehavior = _legacyAuth as IHasUtcOffset;
-                if (utcOffsetBehavior != null)
-                {
-                    utcOffsetBehavior.UtcNowOffset = utcNowOffset;
-                }
+                ((IHasUtcOffset)_legacyAuth).UtcNowOffset = utcNowOffset;
             }
             else
             {
                 throw new NotSupportedException("Time offset is only supported for WsUsernameToken authentication");
-            }
-        }
-
-        private void SetAuthentication<TChannel>(ClientBase<TChannel> channel) where TChannel : class
-        {
-            if(_authentication == AuthenticationMethod.None)
-            {
-                Debug.WriteLine("Authentication is disabled");
-                return;
-            }
-
-            if (_authentication.HasFlag(AuthenticationMethod.HttpDigest))
-            {
-                // HTTP Digest authentication is handled by WCF
-                channel.ClientCredentials.HttpDigest.ClientCredential = _credentials;
-            }
-
-            if (_authentication.HasFlag(AuthenticationMethod.WsUsernameToken))
-            {
-                // Legacy WsUsernameToken authentication must be handled using a custom behavior
-                if (!channel.Endpoint.EndpointBehaviors.Contains(_legacyAuth))
-                {
-                    channel.Endpoint.EndpointBehaviors.Add(_legacyAuth);
-                }
             }
         }
 
@@ -111,7 +77,7 @@ namespace SharpOnvifClient
                 else
                 {
                     var client = creator(uri);
-                    SetAuthentication(client);
+                    client.SetOnvifAuthentication(_authentication, _credentials, _legacyAuth);
                     _clients.Add(uri, client);
                     return client;
                 }
@@ -189,9 +155,6 @@ namespace SharpOnvifClient
                 {
                     InitialTerminationTime = OnvifHelpers.GetTimeoutInMinutes(initialTerminationTimeInMinutes)
                 }).ConfigureAwait(false);
-
-            Debug.WriteLine($"Pull Point subscription termination time: {subscribeResponse.TerminationTime}");
-
             return subscribeResponse;
         }
 
@@ -233,7 +196,6 @@ namespace SharpOnvifClient
                     }
                 }
             }).ConfigureAwait(false);
-
             return subscriptionResult;
         }
 

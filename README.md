@@ -38,7 +38,7 @@ Optionally, add Onvif discovery to make your service discoverable on the network
 ```cs
 builder.Services.AddOnvifDiscovery();
 ```
-Simple DeviceImpl just extends `SharpOnvifServer.DeviceMgmt.DeviceBase` and overrides a method you want to implement - for instance `GetDeviceInformation`:
+Simple `DeviceImpl` just extends `SharpOnvifServer.DeviceMgmt.DeviceBase` and overrides a method you want to implement - for instance `GetDeviceInformation`:
 ```cs
 public class DeviceImpl : DeviceBase
 {
@@ -153,61 +153,23 @@ First add a reference to the DLL that implements the clients (e.g. `SharpOnvifCl
 ```cs
 var auth = new DigestBehavior("admin", "password");
 ```
-Create the Onvif client and set the authentication behavior before you use it:
+Create the Onvif client and set the authentication behavior using `SetOnvifAuthentication` extension method from `SharpOnvifClient.OnvifAuthenticationExtensions` before you use it:
 ```cs
- using (var deviceClient = new DeviceClient(
-     OnvifBindingFactory.CreateBinding(),
-     new System.ServiceModel.EndpointAddress("http://192.168.1.10/onvif/device_service")))
- {
-     SetAuthentication(deviceClient);
-     
-     // use the client
- }
-```
-Where the `SetAuthentication` method might look like:
-```cs
-[Flags]
-public enum AuthenticationMethod
+using SharpOnvifClient;
+
+System.Net.NetworkCredential credentials = new System.Net.NetworkCredential(userName, password);
+IEndpointBehavior legacyAuth = new WsUsernameTokenBehavior(_credentials);
+
+using (var deviceClient = new DeviceClient(
+    OnvifBindingFactory.CreateBinding(),
+    new System.ServiceModel.EndpointAddress("http://192.168.1.10/onvif/device_service")))
 {
-    None = 0,
-    WsUsernameToken = 1,
-    HttpDigest = 2
-}
-
-private readonly System.Net.NetworkCredential _credentials;
-private readonly AuthenticationMethod _authentication = AuthenticationMethod.WsUsernameToken | AuthenticationMethod.HttpDigest;
-private readonly IEndpointBehavior _legacyAuth;
-
-// ctor
-...
-_credentials = new System.Net.NetworkCredential(userName, password);
-_legacyAuth = new WsUsernameTokenBehavior(_credentials);
-...
-
-private void SetAuthentication<TChannel>(ClientBase<TChannel> channel) where TChannel : class
-{
-    if(_authentication == AuthenticationMethod.None)
-    {
-        return;
-    }
-
-    if (_authentication.HasFlag(AuthenticationMethod.HttpDigest))
-    {
-        // HTTP Digest authentication is handled by WCF
-        channel.ClientCredentials.HttpDigest.ClientCredential = _credentials;
-    }
-
-    if (_authentication.HasFlag(AuthenticationMethod.WsUsernameToken))
-    {
-        // Legacy WsUsernameToken authentication must be handled using a custom behavior
-        if (!channel.Endpoint.EndpointBehaviors.Contains(_legacyAuth))
-        {
-            channel.Endpoint.EndpointBehaviors.Add(_legacyAuth);
-        }
-    }
+    deviceClient.SetOnvifAuthentication(OnvifAuthentication.WsUsernameToken | OnvifAuthentication.HttpDigest, credentials, legacyAuth);
+    
+    // use the client
 }
 ```
-Call any method on the client like:
+Call any method on the client, e.g.:
 ```cs
 var deviceInfo = await deviceClient.GetDeviceInformationAsync(new GetDeviceInformationRequest());
 ```
