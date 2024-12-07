@@ -20,6 +20,7 @@
     <ProjectReference Include="..\SharpOnvifServer.DeviceMgmt\SharpOnvifServer.DeviceMgmt.csproj" />
     <ProjectReference Include="..\SharpOnvifServer.Events\SharpOnvifServer.Events.csproj" />
     <ProjectReference Include="..\SharpOnvifServer.Media\SharpOnvifServer.Media.csproj" />
+    <ProjectReference Include="..\SharpOnvifServer.PTZ\SharpOnvifServer.PTZ.csproj" />
     <ProjectReference Include="..\SharpOnvifServer\SharpOnvifServer.csproj">
       <Private>True</Private>
     </ProjectReference>

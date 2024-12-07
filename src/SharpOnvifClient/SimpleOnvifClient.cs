@@ -1,6 +1,7 @@
 ﻿using SharpOnvifClient.DeviceMgmt;
 using SharpOnvifClient.Events;
 using SharpOnvifClient.Media;
+using SharpOnvifClient.PTZ;
 using SharpOnvifClient.Security;
 using SharpOnvifCommon;
 using System;
@@ -41,6 +42,247 @@ namespace SharpOnvifClient
                 endpoint.EndpointBehaviors.Add(authenticationBehavior);
             }
         }
+
+        #region PTZ
+
+        public async Task<PTZStatus> GetStatusAsync(string profileToken)
+        {
+            string ptzURL = await GetServiceUriAsync(OnvifServices.PTZ).ConfigureAwait(false);
+            using (var ptzClient = new PTZClient(
+                OnvifBindingFactory.CreateBinding(),
+                new System.ServiceModel.EndpointAddress(ptzURL)))
+            {
+                SetAuthentication(ptzClient.Endpoint, _auth);
+                var status = await ptzClient.GetStatusAsync(
+                    profileToken).ConfigureAwait(false);
+
+                return status;
+            }
+        }
+
+        public Task AbsoluteMoveAsync(string profileToken, float zoom, float zoomSpeed)
+        {
+            return AbsoluteMoveAsync(
+                profileToken,
+                null,
+                new PTZ.Vector1D() { x = zoom },
+                null,
+                new PTZ.Vector1D() { x = zoomSpeed }
+            );
+        }
+
+        public Task AbsoluteMoveAsync(string profileToken, float pan, float tilt, float panSpeed, float tiltSpeed)
+        {
+            return AbsoluteMoveAsync(
+                profileToken,
+                new PTZ.Vector2D() { x = pan, y = tilt },
+                null,
+                new PTZ.Vector2D() { x = panSpeed, y = tiltSpeed },
+                null
+            );
+        }
+
+        public Task AbsoluteMoveAsync(string profileToken, float pan, float tilt, float zoom, float panSpeed, float tiltSpeed, float zoomSpeed)
+        {
+            return AbsoluteMoveAsync(
+                profileToken,
+                new PTZ.Vector2D() { x = pan, y = tilt },
+                new PTZ.Vector1D() { x = zoom },
+                new PTZ.Vector2D() { x = panSpeed, y = tiltSpeed },
+                new PTZ.Vector1D() { x = zoomSpeed }
+            );
+        }
+
+        private async Task AbsoluteMoveAsync(string profileToken, PTZ.Vector2D vectorPanTilt, PTZ.Vector1D vectorZoom, PTZ.Vector2D speedPanTilt, PTZ.Vector1D speedZoom)
+        {
+            string ptzURL = await GetServiceUriAsync(OnvifServices.PTZ).ConfigureAwait(false);
+            using (var ptzClient = new PTZClient(
+                OnvifBindingFactory.CreateBinding(),
+                new System.ServiceModel.EndpointAddress(ptzURL)))
+            {
+                SetAuthentication(ptzClient.Endpoint, _auth);
+                await ptzClient.AbsoluteMoveAsync(
+                    profileToken,
+                    new PTZVector()
+                    {
+                        PanTilt = vectorPanTilt,
+                        Zoom = vectorZoom
+                    },
+                    new PTZ.PTZSpeed()
+                    {
+                        PanTilt = speedPanTilt,
+                        Zoom = speedZoom
+                    }).ConfigureAwait(false);
+            }
+        }
+
+        public Task RelativeMoveAsync(string profileToken, float zoom, float zoomSpeed)
+        {
+            return RelativeMoveAsync(
+                profileToken,
+                null,
+                new PTZ.Vector1D() { x = zoom },
+                null,
+                new PTZ.Vector1D() { x = zoomSpeed }
+            );
+        }
+
+        public Task RelativeMoveAsync(string profileToken, float pan, float tilt, float panSpeed, float tiltSpeed)
+        {
+            return RelativeMoveAsync(
+                profileToken,
+                new PTZ.Vector2D() { x = pan, y = tilt },
+                null,
+                new PTZ.Vector2D() { x = panSpeed, y = tiltSpeed },
+                null
+            );
+        }
+
+        public Task RelativeMoveAsync(string profileToken, float pan, float tilt, float zoom, float panSpeed, float tiltSpeed, float zoomSpeed)
+        {
+            return RelativeMoveAsync(
+                profileToken,
+                new PTZ.Vector2D() { x = pan, y = tilt },
+                new PTZ.Vector1D() { x = zoom },
+                new PTZ.Vector2D() { x = panSpeed, y = tiltSpeed },
+                new PTZ.Vector1D() { x = zoomSpeed }
+            );
+        }
+
+        private async Task RelativeMoveAsync(string profileToken, PTZ.Vector2D vectorPanTilt, PTZ.Vector1D vectorZoom, PTZ.Vector2D speedPanTilt, PTZ.Vector1D speedZoom)
+        {
+            string ptzURL = await GetServiceUriAsync(OnvifServices.PTZ).ConfigureAwait(false);
+            using (var ptzClient = new PTZClient(
+                OnvifBindingFactory.CreateBinding(),
+                new System.ServiceModel.EndpointAddress(ptzURL)))
+            {
+                SetAuthentication(ptzClient.Endpoint, _auth);
+                await ptzClient.RelativeMoveAsync(
+                    profileToken,
+                    new PTZVector()
+                    {
+                        PanTilt = vectorPanTilt,
+                        Zoom = vectorZoom
+                    },
+                    new PTZ.PTZSpeed()
+                    {
+                        PanTilt = speedPanTilt,
+                        Zoom = speedZoom
+                    }).ConfigureAwait(false);
+            }
+        }
+
+        public Task ContinuousMoveAsync(string profileToken, float zoomSpeed, string timeout = null)
+        {
+            return ContinuousMoveAsync(
+                profileToken,
+                null,
+                new PTZ.Vector1D() { x = zoomSpeed },
+                timeout);
+        }
+
+        public Task ContinuousMoveAsync(string profileToken, float panSpeed, float tiltSpeed, string timeout = null)
+        {
+            return ContinuousMoveAsync(
+                profileToken,
+                new PTZ.Vector2D() { x = panSpeed, y = tiltSpeed },
+                null,
+                timeout);
+        }
+
+        public Task ContinuousMoveAsync(string profileToken, float panSpeed, float tiltSpeed, float zoomSpeed, string timeout = null)
+        {
+            return ContinuousMoveAsync(
+                profileToken,
+                new PTZ.Vector2D() { x = panSpeed, y = tiltSpeed },
+                new PTZ.Vector1D() { x = zoomSpeed },
+                timeout);
+        }
+
+        private async Task ContinuousMoveAsync(string profileToken, PTZ.Vector2D speedPanTilt, PTZ.Vector1D speedZoom, string timeout = null)
+        {
+            string ptzURL = await GetServiceUriAsync(OnvifServices.PTZ).ConfigureAwait(false);
+            using (var ptzClient = new PTZClient(
+                OnvifBindingFactory.CreateBinding(),
+                new System.ServiceModel.EndpointAddress(ptzURL)))
+            {
+                SetAuthentication(ptzClient.Endpoint, _auth);
+                await ptzClient.ContinuousMoveAsync(
+                    profileToken,
+                    new PTZ.PTZSpeed()
+                    {
+                        PanTilt = speedPanTilt,
+                        Zoom = speedZoom
+                    },
+                    timeout).ConfigureAwait(false);
+            }
+        }
+
+        public async Task<GetPresetsResponse> GetPresetsAsync(string profileToken)
+        {
+            string ptzURL = await GetServiceUriAsync(OnvifServices.PTZ).ConfigureAwait(false);
+            using (var ptzClient = new PTZClient(
+                OnvifBindingFactory.CreateBinding(),
+                new System.ServiceModel.EndpointAddress(ptzURL)))
+            {
+                SetAuthentication(ptzClient.Endpoint, _auth);
+                var presets = await ptzClient.GetPresetsAsync(
+                    profileToken).ConfigureAwait(false);
+                return presets;
+            }
+        }
+
+        public async Task GoToPresetAsync(string profileToken, string presetToken, float panSpeed, float tiltSpeed, float zoomSpeed)
+        {
+            string ptzURL = await GetServiceUriAsync(OnvifServices.PTZ).ConfigureAwait(false);
+            using (var ptzClient = new PTZClient(
+                OnvifBindingFactory.CreateBinding(),
+                new System.ServiceModel.EndpointAddress(ptzURL)))
+            {
+                SetAuthentication(ptzClient.Endpoint, _auth);
+                await ptzClient.GotoPresetAsync(
+                    profileToken,
+                    presetToken,
+                    new PTZ.PTZSpeed()
+                    {
+                        PanTilt = new PTZ.Vector2D() { x = panSpeed, y = tiltSpeed },
+                        Zoom = new PTZ.Vector1D() { x = zoomSpeed }
+                    }).ConfigureAwait(false);
+            }
+        }
+
+        public async Task<string> SetPresetAsync(string profileToken, string presetName)
+        {
+            string ptzURL = await GetServiceUriAsync(OnvifServices.PTZ).ConfigureAwait(false);
+            using (var ptzClient = new PTZClient(
+                OnvifBindingFactory.CreateBinding(),
+                new System.ServiceModel.EndpointAddress(ptzURL)))
+            {
+                SetAuthentication(ptzClient.Endpoint, _auth);
+                
+                var result = await ptzClient.SetPresetAsync(
+                    new SetPresetRequest(profileToken, presetName, null)
+                ).ConfigureAwait(false);
+
+                return result.PresetToken;
+            }
+        }
+
+        public async Task RemovePresetAsync(string profileToken, string presetToken)
+        {
+            string ptzURL = await GetServiceUriAsync(OnvifServices.PTZ).ConfigureAwait(false);
+            using (var ptzClient = new PTZClient(
+                OnvifBindingFactory.CreateBinding(),
+                new System.ServiceModel.EndpointAddress(ptzURL)))
+            {
+                SetAuthentication(ptzClient.Endpoint, _auth);
+                await ptzClient.RemovePresetAsync(
+                    profileToken,
+                    presetToken).ConfigureAwait(false);
+            }
+        }
+
+        #endregion PTZ
 
         #region Device Management
 

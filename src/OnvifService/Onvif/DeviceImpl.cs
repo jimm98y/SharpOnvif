@@ -60,6 +60,10 @@ namespace OnvifService.Onvif
                     {
                         WSPullPointSupport = true,
                         XAddr = $"{_server.GetHttpEndpoint()}/onvif/events_service"
+                    },
+                    PTZ = new PTZCapabilities()
+                    {
+                        XAddr = $"{_server.GetHttpEndpoint()}/onvif/ptz_service"
                     }
                 }
             };
@@ -170,7 +174,17 @@ namespace OnvifService.Onvif
                             Major = 17,
                             Minor = 12
                         },
-                    }
+                    },
+                    new Service()
+                    {
+                        Namespace = OnvifServices.PTZ,
+                        XAddr = $"{_server.GetHttpEndpoint()}/onvif/ptz_service",
+                        Version = new OnvifVersion()
+                        {
+                            Major = 17,
+                            Minor = 12
+                        },
+                    },
                 }
             };
         }
