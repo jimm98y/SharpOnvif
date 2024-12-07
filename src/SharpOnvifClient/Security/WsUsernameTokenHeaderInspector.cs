@@ -1,21 +1,20 @@
 ﻿using System;
+using System.Net;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Dispatcher;
 
 namespace SharpOnvifClient.Security
 {
-    public class DigestHeaderInspector : IClientMessageInspector
+    public sealed class WsUsernameTokenHeaderInspector : IClientMessageInspector
     {
-        private readonly string _username;
-        private readonly string _password;
         private readonly TimeSpan _utcNowOffset = TimeSpan.Zero;
+        private readonly NetworkCredential _credentials;
 
-        public DigestHeaderInspector(string username, string password, TimeSpan utcNowOffset)
+        public WsUsernameTokenHeaderInspector(NetworkCredential credentials, TimeSpan utcNowOffset)
         {
-            _username = username;
-            _password = password;
-            _utcNowOffset = utcNowOffset;
+            this._credentials = credentials;
+            this._utcNowOffset = utcNowOffset;
         }
 
         public void AfterReceiveReply(ref Message reply, object correlationState)
@@ -23,7 +22,7 @@ namespace SharpOnvifClient.Security
 
         public object BeforeSendRequest(ref Message request, IClientChannel channel)
         {
-            request.Headers.Add(new DigestHeader(_username, _password, DateTime.UtcNow.Add(_utcNowOffset)));
+            request.Headers.Add(new WsUsernameTokenHeader(_credentials, DateTime.UtcNow.Add(_utcNowOffset)));
             return null;
         }
     }
