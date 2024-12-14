@@ -185,7 +185,7 @@ namespace OnvifService.Onvif
                         {
                             XRange = new FloatRange() { Min = -1, Max = 1 },
                             YRange =  new FloatRange() { Min = -1, Max = 1 },
-                            URI = "http://www.onvif.org/ver10/tptz/PanTiltSpaces/PositionGenericSpace"
+                            URI = SpacesPanTilt.POSITION_GENERIC_SPACE
                         },
                     },
                     AbsoluteZoomPositionSpace = new Space1DDescription[]
@@ -193,7 +193,7 @@ namespace OnvifService.Onvif
                         new Space1DDescription()
                         {
                             XRange = new FloatRange() { Min = 0, Max = 1 },
-                            URI = "http://www.onvif.org/ver10/tptz/ZoomSpaces/PositionGenericSpace"
+                            URI = SpacesZoom.POSITION_GENERIC_SPACE
                         }
                     },
                     RelativePanTiltTranslationSpace = new Space2DDescription[]
@@ -202,7 +202,7 @@ namespace OnvifService.Onvif
                         {
                             XRange = new FloatRange() { Min = -1, Max = 1 },
                             YRange =  new FloatRange() { Min = -1, Max = 1 },
-                            URI = "http://www.onvif.org/ver10/tptz/PanTiltSpaces/TranslationGenericSpace"
+                            URI = SpacesPanTilt.TRANSLATION_GENERIC_SPACE
                         },
                     },
                     RelativeZoomTranslationSpace = new Space1DDescription[]
@@ -210,7 +210,7 @@ namespace OnvifService.Onvif
                         new Space1DDescription()
                         {
                             XRange = new FloatRange() { Min = -1, Max = 1 },
-                            URI = "http://www.onvif.org/ver10/tptz/ZoomSpaces/TranslationGenericSpace"
+                            URI = SpacesZoom.TRANSLATION_GENERIC_SPACE
                         }
                     },
                     PanTiltSpeedSpace = new Space1DDescription[]
@@ -218,8 +218,15 @@ namespace OnvifService.Onvif
                         new Space1DDescription()
                         {
                             XRange = new FloatRange { Min = -1, Max = 1 },
-                            URI = "http://www.onvif.org/ver10/tptz/ZoomSpaces/NormalizedDigitalSpeedSpace"
+                            URI = SpacesPanTilt.SPEED_GENERIC_SPACE
                         }
+                    },
+                    ZoomSpeedSpace = new Space1DDescription[] {
+                        new Space1DDescription()
+                        {
+                            XRange = new FloatRange { Min = -1, Max = 1 },
+                            URI = SpacesZoom.SPEED_GENERIC_SPACE
+                        } 
                     },
                     ContinuousPanTiltVelocitySpace = new Space2DDescription[]
                     {
@@ -227,7 +234,7 @@ namespace OnvifService.Onvif
                         {
                             XRange = new FloatRange() { Min = -1, Max = 1 },
                             YRange =  new FloatRange() { Min = -1, Max = 1 },
-                            URI = "http://www.onvif.org/ver10/tptz/PanTiltSpaces/VelocityGenericSpace"
+                            URI = SpacesPanTilt.VELOCITY_GENERIC_SPACE
                         },
                     },
                     ContinuousZoomVelocitySpace = new Space1DDescription[]
@@ -235,7 +242,7 @@ namespace OnvifService.Onvif
                         new Space1DDescription()
                         {
                             XRange = new FloatRange { Min = -1, Max = 1 },
-                            URI = "http://www.onvif.org/ver10/tptz/ZoomSpaces/VelocityGenericSpace"
+                            URI = SpacesZoom.VELOCITY_GENERIC_SPACE
                         }
                     },
                 },

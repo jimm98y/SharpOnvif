@@ -165,7 +165,7 @@ namespace OnvifService.Onvif
                     {
                         XRange = new FloatRange() { Min = -1, Max = 1 },
                         YRange = new FloatRange() { Min = -1, Max = 1 },
-                        URI = "http://www.onvif.org/ver10/tptz/PanTiltSpaces/PositionGenericSpace"
+                        URI = SharpOnvifServer.PTZ.SpacesPanTilt.POSITION_GENERIC_SPACE
                     },
                 },
                 ZoomLimits = new ZoomLimits()
@@ -173,15 +173,16 @@ namespace OnvifService.Onvif
                     Range = new Space1DDescription()
                     {
                         XRange = new FloatRange() { Min = 0, Max = 1 },
-                        URI = "http://www.onvif.org/ver10/tptz/ZoomSpaces/PositionGenericSpace"
+                        URI = SharpOnvifServer.PTZ.SpacesZoom.POSITION_GENERIC_SPACE
                     }
                 },
-                DefaultAbsolutePantTiltPositionSpace = "http://www.onvif.org/ver10/tptz/PanTiltSpaces/PositionGenericSpace",
-                DefaultAbsoluteZoomPositionSpace = "http://www.onvif.org/ver10/tptz/ZoomSpaces/PositionGenericSpace",
-                DefaultRelativePanTiltTranslationSpace = "http://www.onvif.org/ver10/tptz/PanTiltSpaces/TranslationGenericSpace",
-                DefaultRelativeZoomTranslationSpace = "http://www.onvif.org/ver10/tptz/ZoomSpaces/TranslationGenericSpace",
-                DefaultContinuousPanTiltVelocitySpace = "http://www.onvif.org/ver10/tptz/PanTiltSpaces/VelocityGenericSpace",
-                DefaultContinuousZoomVelocitySpace = "http://www.onvif.org/ver10/tptz/ZoomSpaces/VelocityGenericSpace",
+                DefaultAbsolutePantTiltPositionSpace = SharpOnvifServer.PTZ.SpacesPanTilt.POSITION_GENERIC_SPACE,
+                DefaultAbsoluteZoomPositionSpace = SharpOnvifServer.PTZ.SpacesZoom.POSITION_GENERIC_SPACE,
+                DefaultRelativePanTiltTranslationSpace = SharpOnvifServer.PTZ.SpacesPanTilt.TRANSLATION_GENERIC_SPACE,
+                DefaultRelativeZoomTranslationSpace = SharpOnvifServer.PTZ.SpacesZoom.TRANSLATION_GENERIC_SPACE,
+                DefaultContinuousPanTiltVelocitySpace = SharpOnvifServer.PTZ.SpacesPanTilt.VELOCITY_GENERIC_SPACE,
+                DefaultContinuousZoomVelocitySpace = SharpOnvifServer.PTZ.SpacesZoom.VELOCITY_GENERIC_SPACE,
+                DefaultPTZTimeout = "PT5S",
                 Name = "PTZConfig",
                 UseCount = 1,
             };
@@ -213,8 +214,7 @@ namespace OnvifService.Onvif
                 {
                     GovLength = 15,
                     H264Profile = H264Profile.Main
-                },
-                SessionTimeout = "PT5S"
+                }
             };
         }
 
@@ -224,7 +224,8 @@ namespace OnvifService.Onvif
             {
                 Encoding = AudioEncoding.AAC,
                 SampleRate = AUDIO_SAMPLE_RATE,
-                Name = "AudioSource_1"
+                Name = "AudioSource_1",
+                UseCount = 1
             };
         }
 
@@ -233,7 +234,8 @@ namespace OnvifService.Onvif
             return new AudioSourceConfiguration()
             {
                 SourceToken = AUDIO_SOURCE_TOKEN,
-                Name = "AudioSourceConfig"
+                Name = "AudioSourceConfig",
+                UseCount = 1
             };
         }
     }
