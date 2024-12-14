@@ -4,7 +4,7 @@
 		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
 		<Nullable>disable</Nullable>
 		<Title>$(ProjectName)</Title>
-		<Version>0.1.0</Version>
+		<Version>0.1.1</Version>
 		<Authors>Lukas Volf</Authors>
 		<Copyright>MIT</Copyright>
 		<PackageProjectUrl>https://github.com/jimm98y/SharpOnvif</PackageProjectUrl>
@@ -16,7 +16,7 @@
 		<AssemblyVersion>$(Version)</AssemblyVersion>
 		<FileVersion>$(Version)</FileVersion>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<Description>A C# implementation of the ONVIF interface - client as well as the server. All profiles are supported.</Description>
+		<Description>A C# implementation of the Onvif interface - client as well as the server. All profiles are supported.</Description>
 	</PropertyGroup>
 	<ItemGroup>
 		<None Include="..\..\README.md">
