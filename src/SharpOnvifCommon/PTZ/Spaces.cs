@@ -1,4 +1,4 @@
-﻿namespace SharpOnvifServer.PTZ
+﻿namespace SharpOnvifCommon.PTZ
 {
     public static class SpacesPanTilt
     {

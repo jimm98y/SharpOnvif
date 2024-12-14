@@ -1,5 +1,6 @@
 ﻿using CoreWCF;
 using Microsoft.AspNetCore.Hosting.Server;
+using SharpOnvifCommon.PTZ;
 using SharpOnvifServer.PTZ;
 using System;
 using System.Collections.Generic;

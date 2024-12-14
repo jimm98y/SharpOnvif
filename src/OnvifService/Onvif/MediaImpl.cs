@@ -1,8 +1,8 @@
 ﻿using CoreWCF;
 using Microsoft.AspNetCore.Hosting.Server;
+using SharpOnvifCommon.PTZ;
 using SharpOnvifServer;
 using SharpOnvifServer.Media;
-using System;
 
 namespace OnvifService.Onvif
 {
@@ -165,7 +165,7 @@ namespace OnvifService.Onvif
                     {
                         XRange = new FloatRange() { Min = -1, Max = 1 },
                         YRange = new FloatRange() { Min = -1, Max = 1 },
-                        URI = SharpOnvifServer.PTZ.SpacesPanTilt.POSITION_GENERIC_SPACE
+                        URI = SpacesPanTilt.POSITION_GENERIC_SPACE
                     },
                 },
                 ZoomLimits = new ZoomLimits()
@@ -173,15 +173,15 @@ namespace OnvifService.Onvif
                     Range = new Space1DDescription()
                     {
                         XRange = new FloatRange() { Min = 0, Max = 1 },
-                        URI = SharpOnvifServer.PTZ.SpacesZoom.POSITION_GENERIC_SPACE
+                        URI = SpacesZoom.POSITION_GENERIC_SPACE
                     }
                 },
-                DefaultAbsolutePantTiltPositionSpace = SharpOnvifServer.PTZ.SpacesPanTilt.POSITION_GENERIC_SPACE,
-                DefaultAbsoluteZoomPositionSpace = SharpOnvifServer.PTZ.SpacesZoom.POSITION_GENERIC_SPACE,
-                DefaultRelativePanTiltTranslationSpace = SharpOnvifServer.PTZ.SpacesPanTilt.TRANSLATION_GENERIC_SPACE,
-                DefaultRelativeZoomTranslationSpace = SharpOnvifServer.PTZ.SpacesZoom.TRANSLATION_GENERIC_SPACE,
-                DefaultContinuousPanTiltVelocitySpace = SharpOnvifServer.PTZ.SpacesPanTilt.VELOCITY_GENERIC_SPACE,
-                DefaultContinuousZoomVelocitySpace = SharpOnvifServer.PTZ.SpacesZoom.VELOCITY_GENERIC_SPACE,
+                DefaultAbsolutePantTiltPositionSpace = SpacesPanTilt.POSITION_GENERIC_SPACE,
+                DefaultAbsoluteZoomPositionSpace = SpacesZoom.POSITION_GENERIC_SPACE,
+                DefaultRelativePanTiltTranslationSpace = SpacesPanTilt.TRANSLATION_GENERIC_SPACE,
+                DefaultRelativeZoomTranslationSpace = SpacesZoom.TRANSLATION_GENERIC_SPACE,
+                DefaultContinuousPanTiltVelocitySpace = SpacesPanTilt.VELOCITY_GENERIC_SPACE,
+                DefaultContinuousZoomVelocitySpace = SpacesZoom.VELOCITY_GENERIC_SPACE,
                 DefaultPTZTimeout = "PT5S",
                 Name = "PTZConfig",
                 UseCount = 1,
