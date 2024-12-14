@@ -1,11 +1,27 @@
-﻿using Microsoft.AspNetCore.Hosting.Server;
+﻿using CoreWCF;
+using Microsoft.AspNetCore.Hosting.Server;
 using SharpOnvifServer;
 using SharpOnvifServer.Media;
+using System;
 
 namespace OnvifService.Onvif
 {
     public class MediaImpl : MediaBase
     {
+        public const string VIDEO_SOURCE_TOKEN = "VideoSource_1";
+        public const string AUDIO_SOURCE_TOKEN = "AudioSource_1";
+        public const string PROFILE_TOKEN = "Profile_1";
+
+        // TODO: Update to match your video source
+        // You can use https://github.com/jimm98y/SharpRealTimeStreaming to stream RTSP
+        private const int VIDEO_WIDTH = 640;
+        private const int VIDEO_HEIGHT = 360;
+        private const int VIDEO_FPS = 25;
+        private const string VIDEO_RTSP_URI = "rtsp://localhost:8554/";
+
+        private const int AUDIO_CHANNELS = 1;
+        private const int AUDIO_SAMPLE_RATE = 44100;
+
         private readonly IServer _server;
 
         public MediaImpl(IServer server)
@@ -18,7 +34,13 @@ namespace OnvifService.Onvif
             return new GetAudioSourcesResponse()
             {
                 AudioSources = new AudioSource[]
-                { }
+                { 
+                    new AudioSource()
+                    {
+                        token = AUDIO_SOURCE_TOKEN,
+                        Channels = AUDIO_CHANNELS,
+                    }
+                }
             };
         }
 
@@ -28,13 +50,15 @@ namespace OnvifService.Onvif
             {
                 Profiles = new Profile[]
                 {
-                    new Profile()
-                    {
-                        Name = "mainStream",
-                        token = "Profile_1"
-                    }
+                    GetMyProfile()
                 }
             };
+        }
+
+        [return: MessageParameter(Name = "Profile")]
+        public override Profile GetProfile(string ProfileToken)
+        {
+            return GetMyProfile();
         }
 
         public override MediaUri GetSnapshotUri(string ProfileToken)
@@ -49,7 +73,7 @@ namespace OnvifService.Onvif
         {
             return new MediaUri()
             {
-                Uri = $"{_server.GetHttpEndpoint()}/preview"
+                Uri = VIDEO_RTSP_URI,
             };
         }
 
@@ -61,224 +85,156 @@ namespace OnvifService.Onvif
                 {
                     new VideoSource()
                     {
-                        token = "VideoSourceToken",
+                        token = VIDEO_SOURCE_TOKEN,
                         Resolution = new VideoResolution()
                         {
-                            Width = 1920,
-                            Height = 1080
+                            Width = VIDEO_WIDTH,
+                            Height = VIDEO_HEIGHT
+                        },
+                        Framerate = VIDEO_FPS,
+                        Imaging = new ImagingSettings()
+                        {
+                            Brightness = 100
                         }
                     }
                 }
             };
         }
+
+        [return: MessageParameter(Name = "Configuration")]
+        public override VideoSourceConfiguration GetVideoSourceConfiguration(string ConfigurationToken)
+        {
+            return GetMyVideoSourceConfiguration();
+        }
+
+        [return: MessageParameter(Name = "Configuration")]
+        public override VideoEncoderConfiguration GetVideoEncoderConfiguration(string ConfigurationToken)
+        {
+            return GetMyVideoEncoderConfiguration();
+        }
+
+        [return: MessageParameter(Name = "Options")]
+        public override VideoEncoderConfigurationOptions GetVideoEncoderConfigurationOptions(string ConfigurationToken, string ProfileToken)
+        {
+            return new VideoEncoderConfigurationOptions()
+            {
+                // TODO: Update to match your video source
+                H264 = new H264Options()
+                {
+                    GovLengthRange = new IntRange() { Min = 15, Max = 15 },
+                    H264ProfilesSupported = new H264Profile[] { H264Profile.Main },
+                    EncodingIntervalRange = new IntRange() { Min = 1, Max = 100 },
+                    FrameRateRange = new IntRange() {  Min = 1, Max = 100 },
+                    ResolutionsAvailable = new VideoResolution[] 
+                    {
+                        new VideoResolution() 
+                        { 
+                            Width = VIDEO_WIDTH,
+                            Height = VIDEO_HEIGHT
+                        }
+                    }
+                },
+                QualityRange = new IntRange() { Min = 1, Max = 100 },
+            };
+        }
+
+        // TODO: Update to match your video source
+        private static Profile GetMyProfile()
+        {
+            return new Profile()
+            {
+                Name = "mainStream",
+                token = PROFILE_TOKEN,
+                VideoSourceConfiguration = GetMyVideoSourceConfiguration(),
+                VideoEncoderConfiguration = GetMyVideoEncoderConfiguration(),
+                AudioSourceConfiguration = GetMyAudioSourceConfiguration(),
+                AudioEncoderConfiguration = GetMyAudioEncoderConfiguration(),
+                PTZConfiguration = GetMyPtzConfiguration(),
+            };
+        }
+
+        // TODO: Update to match your video source
+        private static PTZConfiguration GetMyPtzConfiguration()
+        {
+            return new PTZConfiguration()
+            {
+                NodeToken = PTZImpl.PTZ_NODE_TOKEN,
+                PanTiltLimits = new PanTiltLimits()
+                {
+                    Range = new Space2DDescription()
+                    {
+                        XRange = new FloatRange() { Min = -1, Max = 1 },
+                        YRange = new FloatRange() { Min = -1, Max = 1 },
+                        URI = "http://www.onvif.org/ver10/tptz/PanTiltSpaces/PositionGenericSpace"
+                    },
+                },
+                ZoomLimits = new ZoomLimits()
+                {
+                    Range = new Space1DDescription()
+                    {
+                        XRange = new FloatRange() { Min = 0, Max = 1 },
+                        URI = "http://www.onvif.org/ver10/tptz/ZoomSpaces/PositionGenericSpace"
+                    }
+                },
+                DefaultAbsolutePantTiltPositionSpace = "http://www.onvif.org/ver10/tptz/PanTiltSpaces/PositionGenericSpace",
+                DefaultAbsoluteZoomPositionSpace = "http://www.onvif.org/ver10/tptz/ZoomSpaces/PositionGenericSpace",
+                DefaultRelativePanTiltTranslationSpace = "http://www.onvif.org/ver10/tptz/PanTiltSpaces/TranslationGenericSpace",
+                DefaultRelativeZoomTranslationSpace = "http://www.onvif.org/ver10/tptz/ZoomSpaces/TranslationGenericSpace",
+                DefaultContinuousPanTiltVelocitySpace = "http://www.onvif.org/ver10/tptz/PanTiltSpaces/VelocityGenericSpace",
+                DefaultContinuousZoomVelocitySpace = "http://www.onvif.org/ver10/tptz/ZoomSpaces/VelocityGenericSpace",
+                Name = "PTZConfig",
+                UseCount = 1,
+            };
+        }
+
+        // TODO: Update to match your video source
+        private static VideoSourceConfiguration GetMyVideoSourceConfiguration()
+        {
+            return new VideoSourceConfiguration()
+            {
+                SourceToken = VIDEO_SOURCE_TOKEN,
+                Name = "VideoSourceConfig",
+                Bounds = new IntRectangle() { x = 0, y = 0, width = VIDEO_WIDTH, height = VIDEO_HEIGHT },
+                UseCount = 1
+            };
+        }
+
+        // TODO: Update to match your video source
+        private static VideoEncoderConfiguration GetMyVideoEncoderConfiguration()
+        {
+            return new VideoEncoderConfiguration()
+            {
+                Name = "VideoEncoder_1",
+                UseCount = 1,
+                Encoding = VideoEncoding.H264,
+                Resolution = new VideoResolution() { Width = VIDEO_WIDTH, Height = VIDEO_HEIGHT },
+                Quality = 5.0f,
+                H264 = new H264Configuration()
+                {
+                    GovLength = 15,
+                    H264Profile = H264Profile.Main
+                },
+                SessionTimeout = "PT5S"
+            };
+        }
+
+        private static AudioEncoderConfiguration GetMyAudioEncoderConfiguration()
+        {
+            return new AudioEncoderConfiguration()
+            {
+                Encoding = AudioEncoding.AAC,
+                SampleRate = AUDIO_SAMPLE_RATE,
+                Name = "AudioSource_1"
+            };
+        }
+
+        private static AudioSourceConfiguration GetMyAudioSourceConfiguration()
+        {
+            return new AudioSourceConfiguration()
+            {
+                SourceToken = AUDIO_SOURCE_TOKEN,
+                Name = "AudioSourceConfig"
+            };
+        }
     }
 }
-
-/*
-<?xml version="1.0" encoding="UTF-8"?>
-<env:Envelope xmlns:env="http://www.w3.org/2003/05/soap-envelope" xmlns:soapenc="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tt="http://www.onvif.org/ver10/schema" xmlns:tds="http://www.onvif.org/ver10/device/wsdl" xmlns:trt="http://www.onvif.org/ver10/media/wsdl" xmlns:timg="http://www.onvif.org/ver20/imaging/wsdl" xmlns:tev="http://www.onvif.org/ver10/events/wsdl" xmlns:tptz="http://www.onvif.org/ver20/ptz/wsdl" xmlns:tan="http://www.onvif.org/ver20/analytics/wsdl" xmlns:tst="http://www.onvif.org/ver10/storage/wsdl" xmlns:ter="http://www.onvif.org/ver10/error" xmlns:dn="http://www.onvif.org/ver10/network/wsdl" xmlns:tns1="http://www.onvif.org/ver10/topics" xmlns:tmd="http://www.onvif.org/ver10/deviceIO/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl" xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12" xmlns:http="http://schemas.xmlsoap.org/wsdl/http" xmlns:d="http://schemas.xmlsoap.org/ws/2005/04/discovery" xmlns:wsadis="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsnt="http://docs.oasis-open.org/wsn/b-2" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:wstop="http://docs.oasis-open.org/wsn/t-1" xmlns:wsrf-bf="http://docs.oasis-open.org/wsrf/bf-2" xmlns:wsntw="http://docs.oasis-open.org/wsn/bw-2" xmlns:wsrf-rw="http://docs.oasis-open.org/wsrf/rw-2" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsrf-r="http://docs.oasis-open.org/wsrf/r-2" xmlns:trc="http://www.onvif.org/ver10/recording/wsdl" xmlns:tse="http://www.onvif.org/ver10/search/wsdl" xmlns:trp="http://www.onvif.org/ver10/replay/wsdl" xmlns:tnshik="http://www.hikvision.com/2011/event/topics" xmlns:hikwsd="http://www.onvifext.com/onvif/ext/ver10/wsdl" xmlns:hikxsd="http://www.onvifext.com/onvif/ext/ver10/schema" xmlns:tas="http://www.onvif.org/ver10/advancedsecurity/wsdl" xmlns:tr2="http://www.onvif.org/ver20/media/wsdl" xmlns:axt="http://www.onvif.org/ver20/analytics"><env:Body><trt:GetProfilesResponse><trt:Profiles token="Profile_1" fixed="true"><tt:Name>mainStream</tt:Name>
-<tt:VideoSourceConfiguration token="VideoSourceToken"><tt:Name>VideoSourceConfig</tt:Name>
-<tt:UseCount>2</tt:UseCount>
-<tt:SourceToken>VideoSource_1</tt:SourceToken>
-<tt:Bounds x="0" y="0" width="2688" height="1520"></tt:Bounds>
-</tt:VideoSourceConfiguration>
-<tt:VideoEncoderConfiguration token="VideoEncoderToken_1" encoding="H265"><tt:Name>VideoEncoder_1</tt:Name>
-<tt:UseCount>1</tt:UseCount>
-<tt:Encoding>H264</tt:Encoding>
-<tt:Resolution><tt:Width>1920</tt:Width>
-<tt:Height>1080</tt:Height>
-</tt:Resolution>
-<tt:Quality>5.000000</tt:Quality>
-<tt:RateControl><tt:FrameRateLimit>10</tt:FrameRateLimit>
-<tt:EncodingInterval>1</tt:EncodingInterval>
-<tt:BitrateLimit>16384</tt:BitrateLimit>
-</tt:RateControl>
-<tt:H264><tt:GovLength>10</tt:GovLength>
-<tt:H264Profile>Main</tt:H264Profile>
-</tt:H264>
-<tt:Multicast><tt:Address><tt:Type>IPv4</tt:Type>
-<tt:IPv4Address>0.0.0.0</tt:IPv4Address>
-</tt:Address>
-<tt:Port>8860</tt:Port>
-<tt:TTL>128</tt:TTL>
-<tt:AutoStart>false</tt:AutoStart>
-</tt:Multicast>
-<tt:SessionTimeout>PT5S</tt:SessionTimeout>
-</tt:VideoEncoderConfiguration>
-<tt:VideoAnalyticsConfiguration token="VideoAnalyticsToken"><tt:Name>VideoAnalyticsName</tt:Name>
-<tt:UseCount>2</tt:UseCount>
-<tt:AnalyticsEngineConfiguration><tt:AnalyticsModule Name="MyCellMotionModule" Type="tt:CellMotionEngine"><tt:Parameters><tt:SimpleItem Name="Sensitivity" Value="80"/>
-<tt:ElementItem Name="Layout"><tt:CellLayout Columns="22" Rows="18"><tt:Transformation><tt:Translate x="-1.000000" y="-1.000000"/>
-<tt:Scale x="0.090909" y="0.111111"/>
-</tt:Transformation>
-</tt:CellLayout>
-</tt:ElementItem>
-</tt:Parameters>
-</tt:AnalyticsModule>
-<tt:AnalyticsModule Name="MyLineDetectorModule" Type="tt:LineDetectorEngine"><tt:Parameters><tt:SimpleItem Name="Sensitivity" Value="50"/>
-<tt:ElementItem Name="Layout"><tt:Transformation><tt:Translate x="-1.000000" y="-1.000000"/>
-<tt:Scale x="0.002000" y="0.002000"/>
-</tt:Transformation>
-</tt:ElementItem>
-<tt:ElementItem Name="Field"><tt:PolygonConfiguration><tt:Polygon><tt:Point x="0" y="0"/>
-<tt:Point x="0" y="1000"/>
-<tt:Point x="1000" y="1000"/>
-<tt:Point x="1000" y="0"/>
-</tt:Polygon>
-</tt:PolygonConfiguration>
-</tt:ElementItem>
-</tt:Parameters>
-</tt:AnalyticsModule>
-<tt:AnalyticsModule Name="MyFieldDetectorModule" Type="tt:FieldDetectorEngine"><tt:Parameters><tt:SimpleItem Name="Sensitivity" Value="50"/>
-<tt:ElementItem Name="Layout"><tt:Transformation><tt:Translate x="-1.000000" y="-1.000000"/>
-<tt:Scale x="0.002000" y="0.002000"/>
-</tt:Transformation>
-</tt:ElementItem>
-<tt:ElementItem Name="Field"><tt:PolygonConfiguration><tt:Polygon><tt:Point x="0" y="0"/>
-<tt:Point x="0" y="1000"/>
-<tt:Point x="1000" y="1000"/>
-<tt:Point x="1000" y="0"/>
-</tt:Polygon>
-</tt:PolygonConfiguration>
-</tt:ElementItem>
-</tt:Parameters>
-</tt:AnalyticsModule>
-<tt:AnalyticsModule Name="MyTamperDetecModule" Type="hikxsd:TamperEngine"><tt:Parameters><tt:SimpleItem Name="Sensitivity" Value="0"/>
-<tt:ElementItem Name="Transformation"><tt:Transformation><tt:Translate x="-1.000000" y="-1.000000"/>
-<tt:Scale x="0.002841" y="0.003472"/>
-</tt:Transformation>
-</tt:ElementItem>
-<tt:ElementItem Name="Field"><tt:PolygonConfiguration><tt:Polygon><tt:Point x="0" y="0"/>
-<tt:Point x="0" y="576"/>
-<tt:Point x="704" y="576"/>
-<tt:Point x="704" y="0"/>
-</tt:Polygon>
-</tt:PolygonConfiguration>
-</tt:ElementItem>
-</tt:Parameters>
-</tt:AnalyticsModule>
-</tt:AnalyticsEngineConfiguration>
-<tt:RuleEngineConfiguration><tt:Rule Name="MyMotionDetectorRule" Type="tt:CellMotionDetector"><tt:Parameters><tt:SimpleItem Name="MinCount" Value="5"/>
-<tt:SimpleItem Name="AlarmOnDelay" Value="1000"/>
-<tt:SimpleItem Name="AlarmOffDelay" Value="1000"/>
-<tt:SimpleItem Name="ActiveCells" Value="0P8A8A=="/>
-</tt:Parameters>
-</tt:Rule>
-<tt:Rule Name="MyTamperDetectorRule" Type="hikxsd:TamperDetector"><tt:Parameters><tt:ElementItem Name="Field"><tt:PolygonConfiguration><tt:Polygon><tt:Point x="0" y="0"/>
-<tt:Point x="0" y="0"/>
-<tt:Point x="0" y="0"/>
-<tt:Point x="0" y="0"/>
-</tt:Polygon>
-</tt:PolygonConfiguration>
-</tt:ElementItem>
-</tt:Parameters>
-</tt:Rule>
-</tt:RuleEngineConfiguration>
-</tt:VideoAnalyticsConfiguration>
-<tt:Extension></tt:Extension>
-</trt:Profiles>
-<trt:Profiles token="Profile_2" fixed="true"><tt:Name>subStream</tt:Name>
-<tt:VideoSourceConfiguration token="VideoSourceToken"><tt:Name>VideoSourceConfig</tt:Name>
-<tt:UseCount>2</tt:UseCount>
-<tt:SourceToken>VideoSource_1</tt:SourceToken>
-<tt:Bounds x="0" y="0" width="2688" height="1520"></tt:Bounds>
-</tt:VideoSourceConfiguration>
-<tt:VideoEncoderConfiguration token="VideoEncoderToken_2"><tt:Name>VideoEncoder_2</tt:Name>
-<tt:UseCount>1</tt:UseCount>
-<tt:Encoding>H264</tt:Encoding>
-<tt:Resolution><tt:Width>640</tt:Width>
-<tt:Height>360</tt:Height>
-</tt:Resolution>
-<tt:Quality>3.000000</tt:Quality>
-<tt:RateControl><tt:FrameRateLimit>25</tt:FrameRateLimit>
-<tt:EncodingInterval>1</tt:EncodingInterval>
-<tt:BitrateLimit>768</tt:BitrateLimit>
-</tt:RateControl>
-<tt:H264><tt:GovLength>50</tt:GovLength>
-<tt:H264Profile>Main</tt:H264Profile>
-</tt:H264>
-<tt:Multicast><tt:Address><tt:Type>IPv4</tt:Type>
-<tt:IPv4Address>0.0.0.0</tt:IPv4Address>
-</tt:Address>
-<tt:Port>8866</tt:Port>
-<tt:TTL>128</tt:TTL>
-<tt:AutoStart>false</tt:AutoStart>
-</tt:Multicast>
-<tt:SessionTimeout>PT5S</tt:SessionTimeout>
-</tt:VideoEncoderConfiguration>
-<tt:VideoAnalyticsConfiguration token="VideoAnalyticsToken"><tt:Name>VideoAnalyticsName</tt:Name>
-<tt:UseCount>2</tt:UseCount>
-<tt:AnalyticsEngineConfiguration><tt:AnalyticsModule Name="MyCellMotionModule" Type="tt:CellMotionEngine"><tt:Parameters><tt:SimpleItem Name="Sensitivity" Value="80"/>
-<tt:ElementItem Name="Layout"><tt:CellLayout Columns="22" Rows="18"><tt:Transformation><tt:Translate x="-1.000000" y="-1.000000"/>
-<tt:Scale x="0.090909" y="0.111111"/>
-</tt:Transformation>
-</tt:CellLayout>
-</tt:ElementItem>
-</tt:Parameters>
-</tt:AnalyticsModule>
-<tt:AnalyticsModule Name="MyLineDetectorModule" Type="tt:LineDetectorEngine"><tt:Parameters><tt:SimpleItem Name="Sensitivity" Value="50"/>
-<tt:ElementItem Name="Layout"><tt:Transformation><tt:Translate x="-1.000000" y="-1.000000"/>
-<tt:Scale x="0.002000" y="0.002000"/>
-</tt:Transformation>
-</tt:ElementItem>
-<tt:ElementItem Name="Field"><tt:PolygonConfiguration><tt:Polygon><tt:Point x="0" y="0"/>
-<tt:Point x="0" y="1000"/>
-<tt:Point x="1000" y="1000"/>
-<tt:Point x="1000" y="0"/>
-</tt:Polygon>
-</tt:PolygonConfiguration>
-</tt:ElementItem>
-</tt:Parameters>
-</tt:AnalyticsModule>
-<tt:AnalyticsModule Name="MyFieldDetectorModule" Type="tt:FieldDetectorEngine"><tt:Parameters><tt:SimpleItem Name="Sensitivity" Value="50"/>
-<tt:ElementItem Name="Layout"><tt:Transformation><tt:Translate x="-1.000000" y="-1.000000"/>
-<tt:Scale x="0.002000" y="0.002000"/>
-</tt:Transformation>
-</tt:ElementItem>
-<tt:ElementItem Name="Field"><tt:PolygonConfiguration><tt:Polygon><tt:Point x="0" y="0"/>
-<tt:Point x="0" y="1000"/>
-<tt:Point x="1000" y="1000"/>
-<tt:Point x="1000" y="0"/>
-</tt:Polygon>
-</tt:PolygonConfiguration>
-</tt:ElementItem>
-</tt:Parameters>
-</tt:AnalyticsModule>
-<tt:AnalyticsModule Name="MyTamperDetecModule" Type="hikxsd:TamperEngine"><tt:Parameters><tt:SimpleItem Name="Sensitivity" Value="0"/>
-<tt:ElementItem Name="Transformation"><tt:Transformation><tt:Translate x="-1.000000" y="-1.000000"/>
-<tt:Scale x="0.002841" y="0.003472"/>
-</tt:Transformation>
-</tt:ElementItem>
-<tt:ElementItem Name="Field"><tt:PolygonConfiguration><tt:Polygon><tt:Point x="0" y="0"/>
-<tt:Point x="0" y="576"/>
-<tt:Point x="704" y="576"/>
-<tt:Point x="704" y="0"/>
-</tt:Polygon>
-</tt:PolygonConfiguration>
-</tt:ElementItem>
-</tt:Parameters>
-</tt:AnalyticsModule>
-</tt:AnalyticsEngineConfiguration>
-<tt:RuleEngineConfiguration><tt:Rule Name="MyMotionDetectorRule" Type="tt:CellMotionDetector"><tt:Parameters><tt:SimpleItem Name="MinCount" Value="5"/>
-<tt:SimpleItem Name="AlarmOnDelay" Value="1000"/>
-<tt:SimpleItem Name="AlarmOffDelay" Value="1000"/>
-<tt:SimpleItem Name="ActiveCells" Value="0P8A8A=="/>
-</tt:Parameters>
-</tt:Rule>
-<tt:Rule Name="MyTamperDetectorRule" Type="hikxsd:TamperDetector"><tt:Parameters><tt:ElementItem Name="Field"><tt:PolygonConfiguration><tt:Polygon><tt:Point x="0" y="0"/>
-<tt:Point x="0" y="0"/>
-<tt:Point x="0" y="0"/>
-<tt:Point x="0" y="0"/>
-</tt:Polygon>
-</tt:PolygonConfiguration>
-</tt:ElementItem>
-</tt:Parameters>
-</tt:Rule>
-</tt:RuleEngineConfiguration>
-</tt:VideoAnalyticsConfiguration>
-<tt:Extension></tt:Extension>
-</trt:Profiles>
-</trt:GetProfilesResponse>
-</env:Body>
-</env:Envelope>
- */

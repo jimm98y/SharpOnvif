@@ -1,12 +1,16 @@
-﻿using Microsoft.AspNetCore.Hosting.Server;
+﻿using CoreWCF;
+using Microsoft.AspNetCore.Hosting.Server;
 using SharpOnvifCommon;
 using SharpOnvifServer;
 using SharpOnvifServer.DeviceMgmt;
+using System;
 
 namespace OnvifService.Onvif
 {
     public class DeviceImpl : DeviceBase
     {
+        private const string CERTIFICATE_ID = "Cert_1";
+
         private readonly IServer _server;
 
         public DeviceImpl(IServer server)
@@ -40,7 +44,7 @@ namespace OnvifService.Onvif
                                     Major = 16,
                                     Minor = 12
                                 }
-                            }
+                            },
                         },
                         IO = new IOCapabilities()
                         {
@@ -54,7 +58,12 @@ namespace OnvifService.Onvif
                     },
                     Media = new MediaCapabilities()
                     {
-                        XAddr = $"{_server.GetHttpEndpoint()}/onvif/media_service"
+                        XAddr = $"{_server.GetHttpEndpoint()}/onvif/media_service",
+                        StreamingCapabilities = new RealTimeStreamingCapabilities()
+                        {
+                            RTP_RTSP_TCP = true,
+                            RTP_RTSP_TCPSpecified = true,
+                        }
                     },
                     Events = new EventCapabilities()
                     {
@@ -63,7 +72,7 @@ namespace OnvifService.Onvif
                     },
                     PTZ = new PTZCapabilities()
                     {
-                        XAddr = $"{_server.GetHttpEndpoint()}/onvif/ptz_service"
+                        XAddr = $"{_server.GetHttpEndpoint()}/onvif/ptz_service",
                     }
                 }
             };
@@ -77,7 +86,7 @@ namespace OnvifService.Onvif
                 HardwareId = "1.0",
                 Manufacturer = "Lukas Volf",
                 Model = "1",
-                SerialNumber = "1"
+                SerialNumber = "1",
             };
         }
 
@@ -85,12 +94,11 @@ namespace OnvifService.Onvif
         {
             return new DNSInformation()
             {
-                FromDHCP = false,
-                DNSManual = new IPAddress[]
+                DNSManual = new SharpOnvifServer.DeviceMgmt.IPAddress[]
                 {
-                    new IPAddress()
+                    new SharpOnvifServer.DeviceMgmt.IPAddress()
                     {
-                        IPv4Address = "8.8.8.8"
+                        IPv4Address = NetworkHelpers.GetIPv4NetworkInterfaceDns()
                     }
                 }
             };
@@ -100,18 +108,92 @@ namespace OnvifService.Onvif
         {
             return new GetNetworkInterfacesResponse()
             {
-                NetworkInterfaces = new NetworkInterface[]
+                NetworkInterfaces = new SharpOnvifServer.DeviceMgmt.NetworkInterface[]
                 {
-                    new NetworkInterface()
+                    new SharpOnvifServer.DeviceMgmt.NetworkInterface()
                     {
                         Enabled = true,
                         Info = new NetworkInterfaceInfo()
                         {
-                            Name = "eth0"
+                            Name = "eth0",
+                            HwAddress = NetworkHelpers.GetPrimaryNetworkInterfaceMAC(),
+                        },
+                        Link = new NetworkInterfaceLink()
+                        {
+                             AdminSettings = new NetworkInterfaceConnectionSetting(),
+                             OperSettings = new NetworkInterfaceConnectionSetting(), 
+                        },
+                        IPv4 = new IPv4NetworkInterface()
+                        {
+                            Config = new IPv4Configuration()
+                            {
+                                Manual = new PrefixedIPv4Address[] 
+                                {
+                                    new PrefixedIPv4Address()
+                                    {
+                                        Address = NetworkHelpers.GetIPv4NetworkInterface(),
+                                        PrefixLength = 24
+                                    }
+                                },
+                            },
+                            Enabled = true,
                         }
                     },
                 }
             };
+        }
+
+        [return: MessageParameter(Name = "NTPInformation")]
+        public override NTPInformation GetNTP()
+        {
+            return new NTPInformation()
+            {
+                NTPManual = new NetworkHost[]
+                {
+                    new NetworkHost() { IPv4Address = NetworkHelpers.GetIPv4NTPAddress() }
+                }
+            };
+        }
+
+        [return: MessageParameter(Name = "HostnameInformation")]
+        public override HostnameInformation GetHostname()
+        {
+            return new HostnameInformation()
+            {
+                Name = new Uri(_server.GetHttpEndpoint()).Host
+            };
+        }
+
+        [return: MessageParameter(Name = "NetworkProtocols")]
+        public override GetNetworkProtocolsResponse GetNetworkProtocols(GetNetworkProtocolsRequest request)
+        {
+            return new GetNetworkProtocolsResponse()
+            {
+                NetworkProtocols = new NetworkProtocol[]
+                {
+                    new NetworkProtocol()
+                    {
+                         Enabled = true,
+                         Name = NetworkProtocolType.RTSP,
+                         Port = new int[] { 8554 }, // TODO: change this when modifying the RTSP URI
+                    }
+                }
+            };
+        }
+
+        [return: MessageParameter(Name = "NetworkGateway")]
+        public override NetworkGateway GetNetworkDefaultGateway()
+        {
+            return new NetworkGateway()
+            {
+                IPv4Address = new string[] { NetworkHelpers.GetIPv4NetworkInterfaceGateway() }
+            };
+        }
+
+        [return: MessageParameter(Name = "DiscoveryMode")]
+        public override DiscoveryMode GetDiscoveryMode()
+        {
+            return DiscoveryMode.Discoverable;
         }
 
         public override GetScopesResponse GetScopes(GetScopesRequest request)
@@ -210,6 +292,95 @@ namespace OnvifService.Onvif
                     }
                 }
             };
+        }
+
+        [return: MessageParameter(Name = "Capabilities")]
+        public override DeviceServiceCapabilities GetServiceCapabilities()
+        {
+            return new DeviceServiceCapabilities();
+        }
+
+        public override void SetSystemFactoryDefault(FactoryDefaultType FactoryDefault)
+        {
+            LogAction("Device: SetSystemFactoryDefault");
+        }
+
+        [return: MessageParameter(Name = "Message")]
+        public override string SystemReboot()
+        {
+            LogAction("Device: SystemReboot");
+            return "";
+        }
+
+        [return: MessageParameter(Name = "User")]
+        public override GetUsersResponse GetUsers(GetUsersRequest request)
+        {
+            return new GetUsersResponse()
+            {
+                User = new User[]
+                {
+                    new User()
+                    {
+                        Username = "admin",
+                        UserLevel = UserLevel.Administrator
+                    }
+                }
+            };
+        }
+
+        [return: MessageParameter(Name = "SystemLog")]
+        public override SystemLog GetSystemLog(SystemLogType LogType)
+        {
+            return new SystemLog()
+            {
+                String = "log"
+            };
+        }
+
+        [return: MessageParameter(Name = "NvtCertificate")]
+        public override GetCertificatesResponse GetCertificates(GetCertificatesRequest request)
+        {
+            return new GetCertificatesResponse()
+            {
+                NvtCertificate = new Certificate[] 
+                {
+                    new Certificate()
+                    {
+                        Certificate1 = new BinaryData()
+                        {
+                            contentType = "",
+                            Data = new byte[] { } // TODO
+                        },
+                        CertificateID = CERTIFICATE_ID
+                    }
+                }
+            };
+        }
+
+        [return: MessageParameter(Name = "CertificateStatus")]
+        public override GetCertificatesStatusResponse GetCertificatesStatus(GetCertificatesStatusRequest request)
+        {
+            return new GetCertificatesStatusResponse()
+            {
+                CertificateStatus = new CertificateStatus[]
+                {
+                    new CertificateStatus()
+                    {
+                        CertificateID = CERTIFICATE_ID,
+                        Status = true
+                    }
+                }
+            };
+        }
+
+        public override void SetSystemDateAndTime(SetDateTimeType DateTimeType, bool DaylightSavings, SharpOnvifServer.DeviceMgmt.TimeZone TimeZone, SharpOnvifServer.DeviceMgmt.DateTime UTCDateTime)
+        {
+            LogAction("Device: SetSystemDateAndTime");
+        }
+
+        private static void LogAction(string log)
+        {
+            Console.WriteLine(log);
         }
     }
 }

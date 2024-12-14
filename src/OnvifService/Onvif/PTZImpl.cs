@@ -9,6 +9,8 @@ namespace OnvifService.Onvif
 {
     public class PTZImpl : PTZBase
     {
+        public const string PTZ_NODE_TOKEN = "PTZ_Node_1";
+
         private IServer server;
 
         public float Pan { get; set; } = 0.5f;
@@ -18,7 +20,7 @@ namespace OnvifService.Onvif
         public MoveStatus PanTiltStatus { get; set; } = MoveStatus.IDLE;
         public MoveStatus ZoomStatus { get; set; } = MoveStatus.IDLE;
 
-        private Dictionary<string, PTZPreset> Presets { get; } = new Dictionary<string, PTZPreset> ();
+        private Dictionary<string, PTZPreset> Presets { get; } = new Dictionary<string, PTZPreset>();
 
         public PTZImpl(IServer server)
         {
@@ -55,9 +57,18 @@ namespace OnvifService.Onvif
         {
             if(Position != null)
             {
-                this.Pan = Position.PanTilt.x;
-                this.Tilt = Position.PanTilt.y;
-                this.Zoom = Position.Zoom.x;
+                if (Position.PanTilt != null)
+                {
+                    this.Pan = Position.PanTilt.x;
+                    this.Tilt = Position.PanTilt.y;
+                    LogAction($"PTZ: AbsoluteMove: pan: {Position.PanTilt.x}, tilt: {Position.PanTilt.y}");
+                }
+
+                if (Position.Zoom != null)
+                {
+                    this.Zoom = Position.Zoom.x;
+                    LogAction($"PTZ: AbsoluteMove: zoom: {Position.Zoom.x}");
+                }
             }
         }
 
@@ -65,16 +76,33 @@ namespace OnvifService.Onvif
         {
             if (Translation != null)
             {
-                this.Pan += Translation.PanTilt.x;
-                this.Tilt += Translation.PanTilt.y;
-                this.Zoom += Translation.Zoom.x;
+                if (Translation.PanTilt != null)
+                {
+                    this.Pan += Translation.PanTilt.x;
+                    this.Tilt += Translation.PanTilt.y;
+                    LogAction($"PTZ: RelativeMove: panDelta: {Translation.PanTilt.x}, tiltDelta: {Translation.PanTilt.y}");
+                }
+
+                if (Translation.Zoom != null)
+                {
+                    this.Zoom += Translation.Zoom.x;
+                    LogAction($"PTZ: RelativeMove: zoomDelta: {Translation.Zoom.x}");
+                }
             }
+        }
+
+        public override void Stop(string ProfileToken, bool PanTilt, bool Zoom)
+        {
+            LogAction($"PTZ: Stop");
         }
 
         public override ContinuousMoveResponse ContinuousMove(ContinuousMoveRequest request)
         {
-            this.PanTiltStatus = request.Velocity.PanTilt != null ? MoveStatus.MOVING : MoveStatus.IDLE;
-            this.ZoomStatus = request.Velocity.Zoom != null ? MoveStatus.MOVING : MoveStatus.IDLE;
+            var panTiltStatus = request.Velocity.PanTilt != null ? MoveStatus.MOVING : MoveStatus.IDLE;
+            var zoomStatus = request.Velocity.Zoom != null ? MoveStatus.MOVING : MoveStatus.IDLE;
+            this.PanTiltStatus = panTiltStatus;
+            this.ZoomStatus = zoomStatus;
+            LogAction($"PTZ: ContinuousMove: panTilt: {panTiltStatus}, zoom {zoomStatus}");
             return new ContinuousMoveResponse();
         }
 
@@ -91,6 +119,7 @@ namespace OnvifService.Onvif
                     Zoom = new Vector1D() { x = Zoom }
                 }
             });
+            LogAction($"PTZ: SetPreset: {request.ProfileToken}/{token}");
             return new SetPresetResponse(token);
         }
 
@@ -110,7 +139,113 @@ namespace OnvifService.Onvif
                 this.Pan = preset.PTZPosition.PanTilt.x;
                 this.Tilt = preset.PTZPosition.PanTilt.y;
                 this.Zoom = preset.PTZPosition.Zoom.x;
+
+                LogAction($"PTZ: GoToPreset: {ProfileToken}/{PresetToken} pan: {preset.PTZPosition.PanTilt.x}, tilt: {preset.PTZPosition.PanTilt.y}, zoom: {preset.PTZPosition.Zoom.x}");
             }
+            else
+            {
+                LogAction($"PTZ: GoToPreset: unknown");
+            }
+        }
+
+        [return: MessageParameter(Name = "PTZNode")]
+        public override GetNodesResponse GetNodes(GetNodesRequest request)
+        {
+            return new GetNodesResponse()
+            {
+                PTZNode = new PTZNode[]
+                {
+                    GetMyNode()
+                }
+            };
+        }
+
+        [return: MessageParameter(Name = "PTZNode")]
+        public override PTZNode GetNode(string NodeToken)
+        {
+            return GetMyNode();
+        }
+
+        public override void GotoHomePosition(string ProfileToken, PTZSpeed Speed)
+        {
+            LogAction("PTZ: GoToHomePosition");
+        }
+
+        private static PTZNode GetMyNode()
+        {
+            return new PTZNode()
+            {
+                token = PTZ_NODE_TOKEN,
+                Name = "Default",
+                SupportedPTZSpaces = new PTZSpaces()
+                {
+                    AbsolutePanTiltPositionSpace = new Space2DDescription[]
+                    {
+                        new Space2DDescription()
+                        {
+                            XRange = new FloatRange() { Min = -1, Max = 1 },
+                            YRange =  new FloatRange() { Min = -1, Max = 1 },
+                            URI = "http://www.onvif.org/ver10/tptz/PanTiltSpaces/PositionGenericSpace"
+                        },
+                    },
+                    AbsoluteZoomPositionSpace = new Space1DDescription[]
+                    {
+                        new Space1DDescription()
+                        {
+                            XRange = new FloatRange() { Min = 0, Max = 1 },
+                            URI = "http://www.onvif.org/ver10/tptz/ZoomSpaces/PositionGenericSpace"
+                        }
+                    },
+                    RelativePanTiltTranslationSpace = new Space2DDescription[]
+                    {
+                        new Space2DDescription()
+                        {
+                            XRange = new FloatRange() { Min = -1, Max = 1 },
+                            YRange =  new FloatRange() { Min = -1, Max = 1 },
+                            URI = "http://www.onvif.org/ver10/tptz/PanTiltSpaces/TranslationGenericSpace"
+                        },
+                    },
+                    RelativeZoomTranslationSpace = new Space1DDescription[]
+                    {
+                        new Space1DDescription()
+                        {
+                            XRange = new FloatRange() { Min = -1, Max = 1 },
+                            URI = "http://www.onvif.org/ver10/tptz/ZoomSpaces/TranslationGenericSpace"
+                        }
+                    },
+                    PanTiltSpeedSpace = new Space1DDescription[]
+                    {
+                        new Space1DDescription()
+                        {
+                            XRange = new FloatRange { Min = -1, Max = 1 },
+                            URI = "http://www.onvif.org/ver10/tptz/ZoomSpaces/NormalizedDigitalSpeedSpace"
+                        }
+                    },
+                    ContinuousPanTiltVelocitySpace = new Space2DDescription[]
+                    {
+                        new Space2DDescription()
+                        {
+                            XRange = new FloatRange() { Min = -1, Max = 1 },
+                            YRange =  new FloatRange() { Min = -1, Max = 1 },
+                            URI = "http://www.onvif.org/ver10/tptz/PanTiltSpaces/VelocityGenericSpace"
+                        },
+                    },
+                    ContinuousZoomVelocitySpace = new Space1DDescription[]
+                    {
+                        new Space1DDescription()
+                        {
+                            XRange = new FloatRange { Min = -1, Max = 1 },
+                            URI = "http://www.onvif.org/ver10/tptz/ZoomSpaces/VelocityGenericSpace"
+                        }
+                    },
+                },
+                HomeSupported = true,
+            };
+        }
+
+        private static void LogAction(string log)
+        {
+            Console.WriteLine(log);
         }
     }
 }
