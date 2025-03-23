@@ -8,12 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SharpOnvifClient.DeviceMgmt\SharpOnvifClient.DeviceMgmt.csproj" />
-    <ProjectReference Include="..\SharpOnvifClient\SharpOnvifClient.csproj" />
+    <Compile Remove="Properties\**" />
+    <EmbeddedResource Remove="Properties\**" />
+    <None Remove="Properties\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Properties\" />
+    <ProjectReference Include="..\SharpOnvifClient.DeviceMgmt\SharpOnvifClient.DeviceMgmt.csproj" />
+    <ProjectReference Include="..\SharpOnvifClient\SharpOnvifClient.csproj" />
   </ItemGroup>
 
 </Project>

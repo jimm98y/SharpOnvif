@@ -68,17 +68,18 @@ namespace SharpOnvifClient
 
         public TClient GetOrCreateClient<TClient, TChannel>(string uri, Func<string, TClient> creator) where TClient : ClientBase<TChannel> where TChannel : class
         {
+            string key = $"{typeof(TClient)}|{uri}";
             lock (_syncRoot)
             {
-                if (_clients.ContainsKey(uri))
+                if (_clients.ContainsKey(key))
                 {
-                    return (TClient)_clients[uri];
+                    return (TClient)_clients[key];
                 }
                 else
                 {
                     var client = creator(uri);
                     client.SetOnvifAuthentication(_authentication, _credentials, _legacyAuth);
-                    _clients.Add(uri, client);
+                    _clients.Add(key, client);
                     return client;
                 }
             }
