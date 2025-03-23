@@ -13,10 +13,10 @@
 
 	<ItemGroup Condition="'$(TargetFramework)' != 'netstandard2.0'">
 		<PackageReference Include="Microsoft.XmlSerializer.Generator" Version="8.0.0" />
-		<PackageReference Include="System.ServiceModel.Primitives" Version="8.0.0" />
-		<PackageReference Include="System.ServiceModel.Http" Version="8.0.0" />
-		<PackageReference Include="System.ServiceModel.NetTcp" Version="8.0.0" />
-	  <PackageReference Include="System.Formats.Asn1" Version="8.0.1" />
+		<PackageReference Include="System.ServiceModel.Primitives" Version="8.1.2" />
+		<PackageReference Include="System.ServiceModel.Http" Version="8.1.2" />
+		<PackageReference Include="System.ServiceModel.NetTcp" Version="8.1.2" />
+	  <PackageReference Include="System.Formats.Asn1" Version="8.0.2" />
 	  <PackageReference Include="System.Security.Cryptography.Pkcs" Version="8.0.1" />
 	</ItemGroup>
 
@@ -27,7 +27,7 @@
 		<PackageReference Include="System.ServiceModel.Http" Version="4.*" />
 		<PackageReference Include="System.ServiceModel.NetTcp" Version="4.*" />
 		<PackageReference Include="System.ServiceModel.Security" Version="4.*" />
-		<PackageReference Include="System.Formats.Asn1" Version="8.0.1" />
+		<PackageReference Include="System.Formats.Asn1" Version="8.0.2" />
 		<PackageReference Include="System.Security.Cryptography.Pkcs" Version="8.0.1" />
 	</ItemGroup>
 

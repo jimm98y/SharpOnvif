@@ -16,9 +16,9 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.XmlSerializer.Generator" Version="8.0.0" />
-		<PackageReference Include="CoreWCF.Http" Version="1.6.0" />
-		<PackageReference Include="CoreWCF.Primitives" Version="1.6.0" />
-		<PackageReference Include="System.Text.Encodings.Web" Version="4.5.1" />
+		<PackageReference Include="CoreWCF.Http" Version="1.7.0" />
+		<PackageReference Include="CoreWCF.Primitives" Version="1.7.0" />
+		<PackageReference Include="System.Text.Encodings.Web" Version="8.0.0" />
 		<PackageReference Include="System.Text.Json" Version="8.0.5" />
 		<PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
 		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="8.0.1" />
