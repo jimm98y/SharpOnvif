@@ -14,6 +14,9 @@ using System.Threading.Tasks;
 
 namespace SharpOnvifClient
 {
+    /// <summary>
+    /// Simple Onvif client implements the basic Onvif device operations such as device information, media profiles, stream URI, PTZ operations and event subscriptions.
+    /// </summary>
     public class SimpleOnvifClient : IDisposable
     {
         private bool _disposedValue;
@@ -28,12 +31,33 @@ namespace SharpOnvifClient
         private readonly IEndpointBehavior _legacyAuth;
         private readonly IEndpointBehavior _disableExpect100ContinueBehavior;
 
+        /// <summary>
+        /// Creates an instance of <see cref="SimpleOnvifClient"/>.
+        /// </summary>
+        /// <param name="onvifUri">Onvif URI.</param>
+        /// <param name="disableExpect100Continue">Disables the default Expect: 100-continue HTTP header.</param>
         public SimpleOnvifClient(string onvifUri, bool disableExpect100Continue = false) : this(onvifUri, null, null, OnvifAuthentication.None, disableExpect100Continue)
         { }
 
+        /// <summary>
+        /// Creates an instance of <see cref="SimpleOnvifClient"/>.
+        /// </summary>
+        /// <param name="onvifUri">Onvif URI.</param>
+        /// <param name="userName">User name.</param>
+        /// <param name="password">Password.</param>
+        /// <param name="disableExpect100Continue">Disables the default Expect: 100-continue HTTP header.</param>
         public SimpleOnvifClient(string onvifUri, string userName, string password, bool disableExpect100Continue = false) : this(onvifUri, userName, password, OnvifAuthentication.WsUsernameToken | OnvifAuthentication.HttpDigest, disableExpect100Continue)
         { }
 
+        /// <summary>
+        /// Creates an instance of <see cref="SimpleOnvifClient"/>.
+        /// </summary>
+        /// <param name="onvifUri">Onvif URI.</param>
+        /// <param name="userName">User name.</param>
+        /// <param name="password">Password.</param>
+        /// <param name="authentication">Type of the authentication to use: <see cref="OnvifAuthentication"/>.</param>
+        /// <param name="disableExpect100Continue">Disables the default Expect: 100-continue HTTP header.</param>
+        /// <exception cref="ArgumentNullException">Thrown when onvifUri is empty.</exception>
         public SimpleOnvifClient(string onvifUri, string userName, string password, OnvifAuthentication authentication, bool disableExpect100Continue = false)
         {
             if (string.IsNullOrWhiteSpace(onvifUri))
