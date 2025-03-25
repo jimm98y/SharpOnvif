@@ -13,7 +13,7 @@ if (device == null)
 }
 else
 {
-    using (var client = new SimpleOnvifClient(device, "admin", "password"))
+    using (var client = new SimpleOnvifClient(device, "admin", "password", true))
     {
         var deviceInfo = await client.GetDeviceInformationAsync();
         var services = await client.GetServicesAsync(true);

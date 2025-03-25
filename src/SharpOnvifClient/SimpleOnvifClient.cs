@@ -1,4 +1,5 @@
-﻿using SharpOnvifClient.DeviceMgmt;
+﻿using SharpOnvifClient.Behaviors;
+using SharpOnvifClient.DeviceMgmt;
 using SharpOnvifClient.Events;
 using SharpOnvifClient.Media;
 using SharpOnvifClient.PTZ;
@@ -25,14 +26,15 @@ namespace SharpOnvifClient
         private readonly System.Net.NetworkCredential _credentials;
         private readonly OnvifAuthentication _authentication;
         private readonly IEndpointBehavior _legacyAuth;
+        private readonly IEndpointBehavior _disableExpect100ContinueBehavior;
 
-        public SimpleOnvifClient(string onvifUri) : this(onvifUri, null, null, OnvifAuthentication.None)
+        public SimpleOnvifClient(string onvifUri, bool disableExpect100Continue = false) : this(onvifUri, null, null, OnvifAuthentication.None, disableExpect100Continue)
         { }
 
-        public SimpleOnvifClient(string onvifUri, string userName, string password) : this(onvifUri, userName, password, OnvifAuthentication.WsUsernameToken | OnvifAuthentication.HttpDigest)
+        public SimpleOnvifClient(string onvifUri, string userName, string password, bool disableExpect100Continue = false) : this(onvifUri, userName, password, OnvifAuthentication.WsUsernameToken | OnvifAuthentication.HttpDigest, disableExpect100Continue)
         { }
 
-        public SimpleOnvifClient(string onvifUri, string userName, string password, OnvifAuthentication authentication)
+        public SimpleOnvifClient(string onvifUri, string userName, string password, OnvifAuthentication authentication, bool disableExpect100Continue = false)
         {
             if (string.IsNullOrWhiteSpace(onvifUri))
                 throw new ArgumentNullException(nameof(onvifUri));
@@ -48,6 +50,11 @@ namespace SharpOnvifClient
                 {
                     _legacyAuth = new WsUsernameTokenBehavior(_credentials);
                 }
+            }
+
+            if (disableExpect100Continue)
+            {
+                _disableExpect100ContinueBehavior = new DisableExpect100ContinueBehavior();
             }
 
             _onvifUri = onvifUri;
@@ -79,6 +86,7 @@ namespace SharpOnvifClient
                 {
                     var client = creator(uri);
                     client.SetOnvifAuthentication(_authentication, _credentials, _legacyAuth);
+                    client.SetDisableExpect100Continue(_disableExpect100ContinueBehavior);
                     _clients.Add(key, client);
                     return client;
                 }
