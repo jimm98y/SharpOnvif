@@ -4,7 +4,7 @@
 		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
 		<Nullable>disable</Nullable>
 		<Title>$(ProjectName)</Title>
-		<Version>0.1.3</Version>
+		<Version>0.1.4</Version>
 		<Authors>Lukas Volf</Authors>
 		<Copyright>MIT</Copyright>
 		<PackageProjectUrl>https://github.com/jimm98y/SharpOnvif</PackageProjectUrl>
@@ -13,7 +13,7 @@
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>onvif;camera;netstandard20;net8</PackageTags>
 		<NeutralLanguage>en-US</NeutralLanguage>
-		<AssemblyVersion>$(Version)</AssemblyVersion>
+		<AssemblyVersion>1.0.0</AssemblyVersion>
 		<FileVersion>$(Version)</FileVersion>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<Description>A C# implementation of the Onvif interface - client as well as the server. All profiles are supported.</Description>
