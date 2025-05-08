@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.0;net8.0</TargetFrameworks>
+		<TargetFrameworks>netstandard2.0;net481;net8.0</TargetFrameworks>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -10,6 +10,10 @@
 	  <ProjectReference Include="..\SharpOnvifClient.Media\SharpOnvifClient.Media.csproj" />
 	  <ProjectReference Include="..\SharpOnvifClient.PTZ\SharpOnvifClient.PTZ.csproj" />
 	  <ProjectReference Include="..\SharpOnvifCommon\SharpOnvifCommon.csproj" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net481'">
+		<Reference Include="System.Net.Http" />
 	</ItemGroup>
 
 </Project>

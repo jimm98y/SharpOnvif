@@ -2,6 +2,9 @@
 using System.Diagnostics;
 using System.Net;
 using System.ServiceModel;
+#if NETSTANDARD
+using System.Reflection;
+#endif
 
 namespace SharpOnvifClient
 {
@@ -29,6 +32,25 @@ namespace SharpOnvifClient
 
             if (authentication.HasFlag(OnvifAuthentication.HttpDigest))
             {
+#if NETSTANDARD
+                // Workaround for netstandard2.0 where when used in NETFramework 4.8.1 the AllowedImpersonationLevel property is set to Identification instead of Impersonation.
+                try
+                {
+                    var allowedImpersonationLevelProperty = channel.ClientCredentials.HttpDigest.GetType().GetTypeInfo().GetProperty("AllowedImpersonationLevel", BindingFlags.Instance | BindingFlags.Public);
+                    if (allowedImpersonationLevelProperty != null)
+                    {
+                        // Due to the limitations of Digest authentication, when the client is using non-default credentials, only Impersonation and Delegation levels are allowed.
+                        allowedImpersonationLevelProperty.SetValue(channel.ClientCredentials.HttpDigest, System.Security.Principal.TokenImpersonationLevel.Impersonation);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Error setting impersonation level: {ex.Message}");
+                }
+#elif NETFRAMEWORK
+                channel.ClientCredentials.HttpDigest.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;
+#endif
+
                 // HTTP Digest authentication is handled by WCF
                 channel.ClientCredentials.HttpDigest.ClientCredential = credentials;
             }
