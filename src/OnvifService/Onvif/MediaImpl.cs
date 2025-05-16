@@ -138,6 +138,54 @@ namespace OnvifService.Onvif
             };
         }
 
+        [return: MessageParameter(Name = "Configurations")]
+        public override GetAudioEncoderConfigurationsResponse GetAudioEncoderConfigurations(GetAudioEncoderConfigurationsRequest request)
+        {
+            return new GetAudioEncoderConfigurationsResponse()
+            {
+                Configurations = new AudioEncoderConfiguration[]
+                {
+                    GetMyAudioEncoderConfiguration()
+                }
+            };
+        }
+
+        [return: MessageParameter(Name = "Configurations")]
+        public override GetAudioSourceConfigurationsResponse GetAudioSourceConfigurations(GetAudioSourceConfigurationsRequest request)
+        {
+            return new GetAudioSourceConfigurationsResponse()
+            {
+                Configurations = new AudioSourceConfiguration[]
+                {
+                    GetMyAudioSourceConfiguration()
+                }
+            };
+        }
+
+        [return: MessageParameter(Name = "Configurations")]
+        public override GetVideoEncoderConfigurationsResponse GetVideoEncoderConfigurations(GetVideoEncoderConfigurationsRequest request)
+        {
+            return new GetVideoEncoderConfigurationsResponse()
+            {
+                Configurations = new VideoEncoderConfiguration[]
+                {
+                    GetMyVideoEncoderConfiguration()
+                }
+            };
+        }
+
+        [return: MessageParameter(Name = "Configurations")]
+        public override GetVideoSourceConfigurationsResponse GetVideoSourceConfigurations(GetVideoSourceConfigurationsRequest request)
+        {
+            return new GetVideoSourceConfigurationsResponse()
+            {
+                Configurations = new VideoSourceConfiguration[]
+                {
+                    GetMyVideoSourceConfiguration()
+                }
+            };
+        }
+
         // TODO: Update to match your video source
         private static Profile GetMyProfile()
         {
