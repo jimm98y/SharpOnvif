@@ -1,7 +1,6 @@
 ﻿using CoreWCF.Configuration;
 using CoreWCF.Description;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.Extensions.DependencyInjection;
 using OnvifService.Repository;
 using SharpOnvifServer;
@@ -17,11 +16,11 @@ builder.Services.AddSingleton<IUserRepository, UserRepository>();
 builder.Services.AddOnvifDigestAuthentication();
 builder.Services.AddOnvifDiscovery();
 
-builder.Services.AddSingleton((sp) => { return new OnvifService.Onvif.DeviceImpl(sp.GetService<IServer>()); });
-builder.Services.AddSingleton((sp) => { return new OnvifService.Onvif.MediaImpl(sp.GetService<IServer>()); });
-builder.Services.AddSingleton((sp) => { return new OnvifService.Onvif.EventsImpl(sp.GetService<IServer>()); });
-builder.Services.AddSingleton((sp) => { return new OnvifService.Onvif.PTZImpl(sp.GetService<IServer>()); });
-builder.Services.AddSingleton((sp) => { return new OnvifService.Onvif.SubscriptionManagerImpl(sp.GetService<IServer>()); });
+builder.Services.AddSingleton<OnvifService.Onvif.DeviceImpl>();
+builder.Services.AddSingleton<OnvifService.Onvif.MediaImpl>();
+builder.Services.AddSingleton<OnvifService.Onvif.EventsImpl>();
+builder.Services.AddSingleton<OnvifService.Onvif.PTZImpl>();
+builder.Services.AddSingleton<OnvifService.Onvif.SubscriptionManagerImpl>();
 
 var app = builder.Build();
 

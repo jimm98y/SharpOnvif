@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Hosting.Server;
+using Microsoft.Extensions.Logging;
 using SharpOnvifCommon;
 using SharpOnvifServer;
 using SharpOnvifServer.Events;
@@ -10,10 +11,12 @@ namespace OnvifService.Onvif
     public class EventsImpl : EventsBase
     {
         private readonly IServer _server;
+        private readonly ILogger<EventsImpl> _logger;
 
-        public EventsImpl(IServer server)
+        public EventsImpl(IServer server, ILogger<EventsImpl> logger)
         {
             _server = server;
+            _logger = logger;
         }
 
         #region NotificationProducer

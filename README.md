@@ -55,6 +55,10 @@ public class DeviceImpl : DeviceBase
     }
 }
 ```
+Add it as a singleton:
+```cs
+builder.Services.AddSingleton<DeviceImpl>();
+```
 Add authentication:
 ```cs
 var app = builder.Build();

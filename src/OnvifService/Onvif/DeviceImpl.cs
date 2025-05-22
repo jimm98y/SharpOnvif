@@ -1,5 +1,6 @@
 ﻿using CoreWCF;
 using Microsoft.AspNetCore.Hosting.Server;
+using Microsoft.Extensions.Logging;
 using SharpOnvifCommon;
 using SharpOnvifServer;
 using SharpOnvifServer.DeviceMgmt;
@@ -12,10 +13,12 @@ namespace OnvifService.Onvif
         private const string CERTIFICATE_ID = "Cert_1";
 
         private readonly IServer _server;
+        private readonly ILogger<DeviceImpl> _logger;
 
-        public DeviceImpl(IServer server)
+        public DeviceImpl(IServer server, ILogger<DeviceImpl> logger)
         {
             _server = server;
+            _logger = logger;
         }
 
         public override GetCapabilitiesResponse GetCapabilities(GetCapabilitiesRequest request)
@@ -302,13 +305,13 @@ namespace OnvifService.Onvif
 
         public override void SetSystemFactoryDefault(FactoryDefaultType FactoryDefault)
         {
-            LogAction("Device: SetSystemFactoryDefault");
+            _logger.LogInformation("Device: SetSystemFactoryDefault");
         }
 
         [return: MessageParameter(Name = "Message")]
         public override string SystemReboot()
         {
-            LogAction("Device: SystemReboot");
+            _logger.LogInformation("Device: SystemReboot");
             return "";
         }
 
@@ -375,12 +378,7 @@ namespace OnvifService.Onvif
 
         public override void SetSystemDateAndTime(SetDateTimeType DateTimeType, bool DaylightSavings, SharpOnvifServer.DeviceMgmt.TimeZone TimeZone, SharpOnvifServer.DeviceMgmt.DateTime UTCDateTime)
         {
-            LogAction("Device: SetSystemDateAndTime");
-        }
-
-        private static void LogAction(string log)
-        {
-            Console.WriteLine(log);
+            _logger.LogInformation("Device: SetSystemDateAndTime");
         }
     }
 }

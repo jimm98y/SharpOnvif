@@ -1,5 +1,6 @@
 ﻿using CoreWCF;
 using Microsoft.AspNetCore.Hosting.Server;
+using Microsoft.Extensions.Logging;
 using SharpOnvifCommon.PTZ;
 using SharpOnvifServer;
 using SharpOnvifServer.Media;
@@ -23,10 +24,12 @@ namespace OnvifService.Onvif
         private const int AUDIO_SAMPLE_RATE = 44100;
 
         private readonly IServer _server;
+        private readonly ILogger<MediaImpl> _logger;
 
-        public MediaImpl(IServer server)
+        public MediaImpl(IServer server, ILogger<MediaImpl> logger)
         {
             _server = server;
+            _logger = logger;
         }
 
         public override GetAudioSourcesResponse GetAudioSources(GetAudioSourcesRequest request)

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Hosting.Server;
+using Microsoft.Extensions.Logging;
 using SharpOnvifCommon;
 using SharpOnvifServer;
 using SharpOnvifServer.Events;
@@ -11,10 +12,12 @@ namespace OnvifService.Onvif
     public class SubscriptionManagerImpl : SubscriptionManagerBase
     {
         private readonly IServer _server;
+        private readonly ILogger<SubscriptionManagerImpl> _logger;
 
-        public SubscriptionManagerImpl(IServer server)
+        public SubscriptionManagerImpl(IServer server, ILogger<SubscriptionManagerImpl> logger)
         {
             _server = server;
+            _logger = logger;
         }
 
         public override PullMessagesResponse PullMessages(PullMessagesRequest request)

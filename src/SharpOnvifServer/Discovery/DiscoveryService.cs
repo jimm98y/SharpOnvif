@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -62,12 +62,14 @@ namespace SharpOnvifServer.Discovery
         private readonly OnvifDiscoveryOptions _options = null;
         private readonly IServer _server;
         private readonly IHostApplicationLifetime _hostApplicationLifetime;
+        private readonly ILogger<DiscoveryService> _logger;
 
-        public DiscoveryService(OnvifDiscoveryOptions options, IServer server, IHostApplicationLifetime hostApplicationLifetime)
+        public DiscoveryService(OnvifDiscoveryOptions options, IServer server, IHostApplicationLifetime hostApplicationLifetime, ILogger<DiscoveryService> logger)
         {
             this._options = options;
             this._server = server;
             this._hostApplicationLifetime = hostApplicationLifetime;
+            this._logger = logger;
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
@@ -82,6 +84,7 @@ namespace SharpOnvifServer.Discovery
                     _udpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
                     _udpClient.Client.Bind(new IPEndPoint(IPAddress.Any, ONVIF_DISCOVERY_PORT));
                     _udpClient.JoinMulticastGroup(IPAddress.Parse(OnvifDiscoveryAddress));
+                    _logger.LogInformation($"Starting the DiscoveryService");
 
                     _listenerTask = Task.Run(() =>
                     {
@@ -93,24 +96,27 @@ namespace SharpOnvifServer.Discovery
                                 var recvResult = _udpClient.Receive(ref remoteEndpoint);
 
                                 string message = Encoding.UTF8.GetString(recvResult);
+                                _logger.LogDebug($"Received Discovery request:\r\n{message}");
+
                                 var parsedMessage = ReadOnvifEndpoint(message);
                                 if (parsedMessage != null && IsSearchingOurTypes(_options.Types, parsedMessage.Types))
                                 {
                                     string reply = CreateDiscoveryResponse(_options, _server.GetHttpEndpoint(), parsedMessage.MessageUuid);
                                     var replyBytes = Encoding.UTF8.GetBytes(reply);
                                     int sentBytes = _udpClient.Client.SendTo(replyBytes, remoteEndpoint);
+                                    _logger.LogDebug($"Sent Discovery response:\r\n{reply}");
                                 }
                             }
                             catch (Exception ex)
                             {
-                                Debug.WriteLine(ex.Message);
+                                _logger.LogError($"Failed to process Discovery request: {ex.Message}");
                             }
                         }
                     });
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine($"Failed to start broadcast listener: {ex.Message}");
+                    _logger.LogError($"Failed to start broadcast listener: {ex.Message}");
                 }
             });
             return Task.CompletedTask;
@@ -260,11 +266,11 @@ namespace SharpOnvifServer.Discovery
                 var node = navigator.SelectSingleNode("//*[local-name()='Types']/text()");
                 if (node != null)
                 {
-                    string[] parsedTypes = node.Value.Split(new char[] { ' ' });
+                    string[] parsedTypes = node.Value.Split(new char[] { ' ' }).Where(x => !string.IsNullOrEmpty(x)).ToArray();
                     foreach(var type in parsedTypes)
                     {
                         string[] parsedTypeNs = type.Split(new char[] { ':' });
-                        requestedTypes.Add(new Tuple<string, string>(node.LookupNamespace(parsedTypeNs[0]), parsedTypeNs[1]));
+                        requestedTypes.Add(new Tuple<string, string>(node.LookupNamespace(parsedTypeNs[0].Trim()), parsedTypeNs[1].Trim()));
                     }
                 }
 
