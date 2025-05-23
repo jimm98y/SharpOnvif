@@ -380,5 +380,31 @@ namespace OnvifService.Onvif
         {
             _logger.LogInformation("Device: SetSystemDateAndTime");
         }
+
+        public override void SetRelayOutputState(string RelayOutputToken, RelayLogicalState LogicalState)
+        {
+            _logger.LogInformation("Device: SetRelayOutputState");
+        }
+
+        [return: MessageParameter(Name = "RelayOutputs")]
+        public override GetRelayOutputsResponse GetRelayOutputs(GetRelayOutputsRequest request)
+        {
+            return new GetRelayOutputsResponse()
+            {
+                RelayOutputs = new RelayOutput[]
+                {
+                     new RelayOutput()
+                     {
+                          Properties = new RelayOutputSettings()
+                          {
+                               DelayTime = OnvifHelpers.GetTimeoutInSeconds(5),
+                               IdleState = RelayIdleState.closed,
+                               Mode = RelayMode.Monostable
+                          },
+                          token = "RelayOutput_1"
+                     }
+                 }
+            };
+        }
     }
 }

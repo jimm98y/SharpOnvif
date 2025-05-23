@@ -32,6 +32,24 @@ namespace OnvifService.Onvif
             this._logger = logger;
         }
 
+        [return: MessageParameter(Name = "Capabilities")]
+        public override Capabilities GetServiceCapabilities()
+        {
+            return new Capabilities()
+            {
+                EFlip = true,
+                EFlipSpecified = true,
+                Reverse = true,
+                ReverseSpecified = true,
+                GetCompatibleConfigurations = true,
+                GetCompatibleConfigurationsSpecified = true,
+                MoveStatus = true,
+                MoveStatusSpecified = true,
+                StatusPosition = true,
+                StatusPositionSpecified = true,
+            };
+        }
+
         [return: MessageParameter(Name = "PTZStatus")]
         public override PTZStatus GetStatus(string ProfileToken)
         {

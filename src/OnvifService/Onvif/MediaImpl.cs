@@ -189,6 +189,116 @@ namespace OnvifService.Onvif
             };
         }
 
+        [return: MessageParameter(Name = "Options")]
+        public override VideoSourceConfigurationOptions GetVideoSourceConfigurationOptions(string ConfigurationToken, string ProfileToken)
+        {
+            return new VideoSourceConfigurationOptions()
+            {
+                VideoSourceTokensAvailable = new string[] { VIDEO_SOURCE_TOKEN },
+                Extension = new VideoSourceConfigurationOptionsExtension()
+                {
+                    Rotate = new RotateOptions()
+                    {
+                        Reboot = true,
+                        Mode = new RotateMode[] { RotateMode.ON, RotateMode.OFF, RotateMode.AUTO },
+                        DegreeList = new int[] { 0, 90, 180, 270 },
+                        RebootSpecified = true,
+                    }
+                },
+                BoundsRange = new IntRectangleRange()
+                {
+                    XRange = new IntRange() { Min = 0, Max = VIDEO_WIDTH },
+                    YRange = new IntRange() { Min = 0, Max = VIDEO_HEIGHT },
+                    WidthRange = new IntRange() { Min = 0, Max = VIDEO_WIDTH },
+                    HeightRange = new IntRange() { Min = 0, Max = VIDEO_HEIGHT }
+                },
+                MaximumNumberOfProfiles = 10,
+                MaximumNumberOfProfilesSpecified = true,
+            };
+        }
+
+        [return: MessageParameter(Name = "Configurations")]
+        public override GetCompatibleVideoEncoderConfigurationsResponse GetCompatibleVideoEncoderConfigurations(GetCompatibleVideoEncoderConfigurationsRequest request)
+        {
+            return new GetCompatibleVideoEncoderConfigurationsResponse()
+            {
+                Configurations = new VideoEncoderConfiguration[]
+                {
+                    GetMyVideoEncoderConfiguration()
+                }
+            };
+        }
+
+        [return: MessageParameter(Name = "Configurations")]
+        public override GetCompatibleAudioDecoderConfigurationsResponse GetCompatibleAudioDecoderConfigurations(GetCompatibleAudioDecoderConfigurationsRequest request)
+        {
+            return new GetCompatibleAudioDecoderConfigurationsResponse()
+            {
+                Configurations = new AudioDecoderConfiguration[]
+                {
+                    new AudioDecoderConfiguration()
+                    {
+                        Name = "AudioDecoder_1",
+                        token = "AudioDecoder_1"
+                    }
+                }
+            };
+        }
+
+        [return: MessageParameter(Name = "Configurations")]
+        public override GetAudioOutputConfigurationsResponse GetAudioOutputConfigurations(GetAudioOutputConfigurationsRequest request)
+        {
+            return new GetAudioOutputConfigurationsResponse()
+            {
+                Configurations = new AudioOutputConfiguration[]
+                 {
+                     new AudioOutputConfiguration()
+                     {
+                          token = "AudioOutput_1",
+                          Name = "AudioOutput_1",
+                          OutputToken = "AudioOutput_1"
+                     }
+                 }
+            };
+        }
+
+        [return: MessageParameter(Name = "Options")]
+        public override AudioEncoderConfigurationOptions GetAudioEncoderConfigurationOptions(string ConfigurationToken, string ProfileToken)
+        {
+            return new AudioEncoderConfigurationOptions()
+            {
+                Options = new AudioEncoderConfigurationOption[]
+                 {
+                     new AudioEncoderConfigurationOption()
+                     {
+                         BitrateList = new int[] { 32, 64, 128 },
+                         Encoding = AudioEncoding.AAC,
+                         SampleRateList = new int[] { 8000, 16000, 32000, 44100 },
+                     }
+                 }
+            };
+        }
+
+        public override void SetVideoEncoderConfiguration(VideoEncoderConfiguration Configuration, bool ForcePersistence)
+        {
+            _logger.LogInformation("MediaImpl: SetVideoEncoderConfiguration");
+        }
+
+        public override void AddPTZConfiguration(string ProfileToken, string ConfigurationToken)
+        {
+            _logger.LogInformation("MediaImpl: AddPTZConfiguration");
+        }
+
+        public override void AddAudioOutputConfiguration(string ProfileToken, string ConfigurationToken)
+        {
+            _logger.LogInformation("MediaImpl: AddAudioOutputConfiguration");
+        }
+
+        public override void AddAudioDecoderConfiguration(string ProfileToken, string ConfigurationToken)
+        {
+            _logger.LogInformation("MediaImpl: AddAudioDecoderConfiguration");
+        }
+
         // TODO: Update to match your video source
         private static Profile GetMyProfile()
         {
