@@ -278,53 +278,68 @@ namespace OnvifService.Onvif
         {
             return new GetConfigurationsResponse()
             {
-                PTZConfiguration = new PTZConfiguration[]
+                PTZConfiguration = GetMyPTZConfiguration()
+            };
+        }
+
+        [return: MessageParameter(Name = "PTZConfiguration")]
+        public override GetCompatibleConfigurationsResponse GetCompatibleConfigurations(GetCompatibleConfigurationsRequest request)
+        {
+            return new GetCompatibleConfigurationsResponse()
+            {
+                 PTZConfiguration = GetMyPTZConfiguration()
+            };
+        }
+
+        private PTZConfiguration[] GetMyPTZConfiguration()
+        {
+            return new PTZConfiguration[]
+            {
+                new PTZConfiguration()
                 {
-                    new PTZConfiguration()
+                    Name = "Default",
+                    UseCount = 2,
+                    NodeToken = PTZ_NODE_TOKEN,
+                    DefaultAbsolutePantTiltPositionSpace = SpacesPanTilt.POSITION_GENERIC_SPACE,
+                    DefaultAbsoluteZoomPositionSpace = SpacesZoom.POSITION_GENERIC_SPACE,
+                    DefaultRelativePanTiltTranslationSpace = SpacesPanTilt.TRANSLATION_GENERIC_SPACE,
+                    DefaultRelativeZoomTranslationSpace = SpacesZoom.TRANSLATION_GENERIC_SPACE,
+                    DefaultContinuousPanTiltVelocitySpace = SpacesPanTilt.VELOCITY_GENERIC_SPACE,
+                    DefaultContinuousZoomVelocitySpace = SpacesZoom.VELOCITY_GENERIC_SPACE,
+                    DefaultPTZSpeed = new PTZSpeed()
                     {
-                        Name = "Default",
-                        UseCount = 2,
-                        NodeToken = PTZ_NODE_TOKEN,
-                        DefaultAbsolutePantTiltPositionSpace = SpacesPanTilt.POSITION_GENERIC_SPACE,
-                        DefaultAbsoluteZoomPositionSpace = SpacesZoom.POSITION_GENERIC_SPACE,
-                        DefaultRelativePanTiltTranslationSpace = SpacesPanTilt.TRANSLATION_GENERIC_SPACE,
-                        DefaultRelativeZoomTranslationSpace = SpacesZoom.TRANSLATION_GENERIC_SPACE,
-                        DefaultContinuousPanTiltVelocitySpace = SpacesPanTilt.VELOCITY_GENERIC_SPACE,
-                        DefaultContinuousZoomVelocitySpace = SpacesZoom.VELOCITY_GENERIC_SPACE,
-                        DefaultPTZSpeed = new PTZSpeed()
+                        PanTilt = new Vector2D()
                         {
-                            PanTilt = new Vector2D()
-                            {
-                                x = 0.5f,
-                                y = 0.5f,
-                                space = SpacesPanTilt.SPEED_GENERIC_SPACE
-                            },
-                            Zoom = new Vector1D()
-                            {
-                                x = 0.5f,
-                                space = SpacesZoom.SPEED_GENERIC_SPACE
-                            }
+                            x = 0.5f,
+                            y = 0.5f,
+                            space = SpacesPanTilt.SPEED_GENERIC_SPACE
                         },
-                        DefaultPTZTimeout = OnvifHelpers.GetTimeoutInSeconds(10),
-                        PanTiltLimits = new PanTiltLimits()
+                        Zoom = new Vector1D()
                         {
-                            Range = new Space2DDescription()
-                            {
-                                XRange = new FloatRange() { Min = -1, Max = 1 },
-                                YRange = new FloatRange() { Min = -1, Max = 1 }
-                            }
-                        },
-                        ZoomLimits = new ZoomLimits()
+                            x = 0.5f,
+                            space = SpacesZoom.SPEED_GENERIC_SPACE
+                        }
+                    },
+                    DefaultPTZTimeout = OnvifHelpers.GetTimeoutInSeconds(10),
+                    PanTiltLimits = new PanTiltLimits()
+                    {
+                        Range = new Space2DDescription()
                         {
-                            Range = new Space1DDescription()
-                            {
-                                XRange = new FloatRange() { Min = 0, Max = 1 }
-                            }
-                        },
-                        token = PTZ_NODE_TOKEN
-                    }
+                            XRange = new FloatRange() { Min = -1, Max = 1 },
+                            YRange = new FloatRange() { Min = -1, Max = 1 }
+                        }
+                    },
+                    ZoomLimits = new ZoomLimits()
+                    {
+                        Range = new Space1DDescription()
+                        {
+                            XRange = new FloatRange() { Min = 0, Max = 1 }
+                        }
+                    },
+                    token = PTZ_NODE_TOKEN
                 }
             };
         }
+
     }
 }

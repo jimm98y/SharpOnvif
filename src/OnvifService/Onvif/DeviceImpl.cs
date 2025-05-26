@@ -386,6 +386,11 @@ namespace OnvifService.Onvif
             _logger.LogInformation("Device: SetRelayOutputState");
         }
 
+        public override void SetRelayOutputSettings(string RelayOutputToken, RelayOutputSettings Properties)
+        {
+            _logger.LogInformation("Device: SetRelayOutputSettings");
+        }
+
         [return: MessageParameter(Name = "RelayOutputs")]
         public override GetRelayOutputsResponse GetRelayOutputs(GetRelayOutputsRequest request)
         {
