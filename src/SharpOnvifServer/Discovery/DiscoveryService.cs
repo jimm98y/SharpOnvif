@@ -148,7 +148,7 @@ namespace SharpOnvifServer.Discovery
             {
                 foreach(var type in options.Types) 
                 {
-                    nsPrefixes.Add(type.Item1, GetPrefix(nsPrefixes));
+                    nsPrefixes.TryAdd(type.Item1, GetPrefix(nsPrefixes)); // TryAdd -> support multiple different types from the same namespace
                 }
             }
 
