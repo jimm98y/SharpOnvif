@@ -135,12 +135,12 @@ namespace SharpOnvifServer.Discovery
                                                 string reply = CreateDiscoveryResponse(_options, _server.GetHttpEndpoint(), parsedMessage.MessageUuid);
                                                 var replyBytes = Encoding.UTF8.GetBytes(reply);
                                                 int sentBytes = udpClient.Client.SendTo(replyBytes, remoteEndpoint);
-                                                _logger.LogDebug($"Sent Discovery response on {ua.Address.ToString()}:\r\n{reply}");
+                                                _logger.LogDebug($"Sent Discovery response on {nicIPAddress}:\r\n{reply}");
                                             }
                                         }
                                         catch (Exception ex)
                                         {
-                                            _logger.LogError($"Failed to process Discovery request on {ua.Address.ToString()}: {ex.Message}");
+                                            _logger.LogError($"Failed to process Discovery request on {nicIPAddress}: {ex.Message}");
                                         }
                                     }
                                 });
