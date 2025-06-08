@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
@@ -22,6 +23,8 @@ namespace SharpOnvifServer.Discovery
 
     public class OnvifDiscoveryOptions
     {
+        public List<string> NetworkInterfaces { get; set; } = new List<string>();
+
         public List<string> ServiceAddresses { get; set; } = new List<string>();
 
         public List<string> Scopes { get; set; } = new List<string>()
@@ -55,9 +58,9 @@ namespace SharpOnvifServer.Discovery
         public const int ONVIF_DISCOVERY_PORT = 3702;
         public static string OnvifDiscoveryAddress = "239.255.255.250"; // only IPv4 networks are currently supported
 
-        private UdpClient _udpClient;
+        private List<UdpClient> _udpClients = new List<UdpClient>();
         private readonly CancellationTokenSource _cts = new CancellationTokenSource();
-        private Task _listenerTask;
+        private List<Task> _listenerTasks=  new List<Task>();
 
         private readonly OnvifDiscoveryOptions _options = null;
         private readonly IServer _server;
@@ -77,46 +80,79 @@ namespace SharpOnvifServer.Discovery
             // we need to make sure everything is started and we can access the URL
             _hostApplicationLifetime.ApplicationStarted.Register(() =>
             {
-                try
-                {
-                    // to kill a process owning a port: Get-Process -Id (Get-NetUDPEndpoint -LocalPort 3702).OwningProcess
-                    _udpClient = new UdpClient();
-                    _udpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
-                    _udpClient.Client.Bind(new IPEndPoint(IPAddress.Any, ONVIF_DISCOVERY_PORT));
-                    _udpClient.JoinMulticastGroup(IPAddress.Parse(OnvifDiscoveryAddress));
-                    _logger.LogInformation($"Starting the DiscoveryService");
+                NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
+                List<Task<IList<string>>> discoveryTasks = new List<Task<IList<string>>>();
 
-                    _listenerTask = Task.Run(() =>
+                _logger.LogInformation($"Starting the DiscoveryService");
+
+                foreach (NetworkInterface adapter in nics)
+                {
+                    if (adapter.NetworkInterfaceType != NetworkInterfaceType.Ethernet)
+                        continue;
+
+                    if (!(adapter.Supports(NetworkInterfaceComponent.IPv4) || adapter.Supports(NetworkInterfaceComponent.IPv6)))
+                        continue;
+
+                    IPInterfaceProperties adapterProperties = adapter.GetIPProperties();
+                    foreach (var ua in adapterProperties.UnicastAddresses)
                     {
-                        while (!_cts.IsCancellationRequested)
+                        if (ua.Address.AddressFamily == AddressFamily.InterNetwork)
                         {
+                            string nicIPAddress = ua.Address.ToString();
+
+                            if (!(_options.NetworkInterfaces == null || _options.NetworkInterfaces.Count == 0 || _options.NetworkInterfaces.Contains("0.0.0.0")) && !_options.NetworkInterfaces.Contains(nicIPAddress))
+                                continue;
+
                             try
                             {
-                                var remoteEndpoint = new IPEndPoint(IPAddress.Any, 0);
-                                var recvResult = _udpClient.Receive(ref remoteEndpoint);
+                                // to kill a process owning a port: Get-Process -Id (Get-NetUDPEndpoint -LocalPort 3702).OwningProcess
+                                var udpClient = new UdpClient();
+                                _udpClients.Add(udpClient);
 
-                                string message = Encoding.UTF8.GetString(recvResult);
-                                _logger.LogDebug($"Received Discovery request:\r\n{message}");
+                                udpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
 
-                                var parsedMessage = ReadOnvifEndpoint(message);
-                                if (parsedMessage != null && IsSearchingOurTypes(_options.Types, parsedMessage.Types))
+                                // because of the multicast, we cannot use IPAddress.Any - it would have joined the multicast group only on the default NIC on multihomed system
+                                udpClient.Client.Bind(new IPEndPoint(IPAddress.Parse(nicIPAddress), ONVIF_DISCOVERY_PORT)); 
+                                udpClient.JoinMulticastGroup(IPAddress.Parse(OnvifDiscoveryAddress));
+
+                                _logger.LogInformation($"DiscoveryService is listening on the {nicIPAddress} network interface");
+
+                                var listenerTask = Task.Run(() =>
                                 {
-                                    string reply = CreateDiscoveryResponse(_options, _server.GetHttpEndpoint(), parsedMessage.MessageUuid);
-                                    var replyBytes = Encoding.UTF8.GetBytes(reply);
-                                    int sentBytes = _udpClient.Client.SendTo(replyBytes, remoteEndpoint);
-                                    _logger.LogDebug($"Sent Discovery response:\r\n{reply}");
-                                }
+                                    while (!_cts.IsCancellationRequested)
+                                    {
+                                        try
+                                        {
+                                            var remoteEndpoint = new IPEndPoint(IPAddress.Any, 0);
+                                            var recvResult = udpClient.Receive(ref remoteEndpoint);
+
+                                            string message = Encoding.UTF8.GetString(recvResult);
+                                            _logger.LogDebug($"Received Discovery request on {nicIPAddress}:\r\n{message}");
+
+                                            var parsedMessage = ReadOnvifEndpoint(message);
+                                            if (parsedMessage != null && IsSearchingOurTypes(_options.Types, parsedMessage.Types))
+                                            {
+                                                string reply = CreateDiscoveryResponse(_options, _server.GetHttpEndpoint(), parsedMessage.MessageUuid);
+                                                var replyBytes = Encoding.UTF8.GetBytes(reply);
+                                                int sentBytes = udpClient.Client.SendTo(replyBytes, remoteEndpoint);
+                                                _logger.LogDebug($"Sent Discovery response on {ua.Address.ToString()}:\r\n{reply}");
+                                            }
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            _logger.LogError($"Failed to process Discovery request on {ua.Address.ToString()}: {ex.Message}");
+                                        }
+                                    }
+                                });
+
+                                _listenerTasks.Add(listenerTask);
                             }
                             catch (Exception ex)
                             {
-                                _logger.LogError($"Failed to process Discovery request: {ex.Message}");
+                                _logger.LogError($"Failed to start broadcast listener: {ex.Message}");
                             }
                         }
-                    });
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError($"Failed to start broadcast listener: {ex.Message}");
+                    }
                 }
             });
             return Task.CompletedTask;
@@ -292,7 +328,19 @@ namespace SharpOnvifServer.Discovery
         {
             await _cts.CancelAsync();
             _cts.Dispose();
-            _udpClient.Dispose();
+
+            if (_udpClients.Count > 0)
+            {
+                foreach (var udpClient in _udpClients)
+                {
+                    udpClient.Dispose();
+                }
+
+                _udpClients.Clear();
+            }
+
+            await Task.WhenAll(_listenerTasks);
+            _listenerTasks.Clear();
         }
     }
 }
