@@ -20,6 +20,8 @@ namespace SharpOnvifServer
 {
     public class DigestAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
     {
+        public const string ANONYMOUS_USER = "Anonymous";
+
         private readonly IUserRepository _userRepository;
 
         public string Realm { get; set; } = "IP Camera";
@@ -142,6 +144,31 @@ namespace SharpOnvifServer
                     catch (Exception ex)
                     {
                         return AuthenticateResult.Fail($"WsUsernameToken authentication failed: {ex.Message}");
+                    }
+                }
+                else
+                {
+                    // according to the Onvif specification, these functions are in the access class PRE_AUTH and do not require any authentication:
+                    if (
+                        Request.ContentType != null && 
+                        (
+                            Request.ContentType.Contains("action=\"http://www.onvif.org/ver10/device/wsdl/GetWsdlUrl\"") ||
+                            Request.ContentType.Contains("action=\"http://www.onvif.org/ver10/device/wsdl/GetServices\"") ||
+                            Request.ContentType.Contains("action=\"http://www.onvif.org/ver10/device/wsdl/GetServiceCapabilities\"") ||
+                            Request.ContentType.Contains("action=\"http://www.onvif.org/ver10/device/wsdl/GetCapabilities\"") ||
+                            Request.ContentType.Contains("action=\"http://www.onvif.org/ver10/device/wsdl/GetHostname\"") ||
+                            Request.ContentType.Contains("action=\"http://www.onvif.org/ver10/device/wsdl/GetSystemDateAndTime\"") ||
+                            Request.ContentType.Contains("action=\"http://www.onvif.org/ver10/device/wsdl/GetEndpointReference\"")
+                        ) && 
+                        (
+                            Request.ContentType.Split("action=\"").Count() - 1) == 1
+                        )
+                    {
+                        // use Anonymous user
+                        var identity = new GenericIdentity(ANONYMOUS_USER);
+                        var claimsPrincipal = new ClaimsPrincipal(identity);
+                        var ticket = new AuthenticationTicket(claimsPrincipal, Scheme.Name);
+                        return AuthenticateResult.Success(ticket);
                     }
                 }
             }

@@ -128,16 +128,26 @@ namespace SharpOnvifClient
 
         public async Task<GetServicesResponse> GetServicesAsync(bool includeCapability = false)
         {
-            var deviceClient = GetOrCreateClient<DeviceClient, Device>(_onvifUri, (u) => new DeviceClient(OnvifBindingFactory.CreateBinding(), new EndpointAddress(u)));
-            var services = await deviceClient.GetServicesAsync(includeCapability).ConfigureAwait(false);
-            return services;
+            // PRE_AUTH action http://www.onvif.org/ver10/device/wsdl/GetServices
+            using (var deviceClient = new DeviceClient(OnvifBindingFactory.CreateBinding(), new EndpointAddress(_onvifUri)))
+            {
+                deviceClient.SetDisableExpect100Continue(_disableExpect100ContinueBehavior);
+
+                var services = await deviceClient.GetServicesAsync(includeCapability).ConfigureAwait(false);
+                return services;
+            }
         }
 
         public async Task<SystemDateTime> GetSystemDateAndTimeAsync()
         {
-            var deviceClient = GetOrCreateClient<DeviceClient, Device>(_onvifUri, (u) => new DeviceClient(OnvifBindingFactory.CreateBinding(), new EndpointAddress(u)));
-            var cameraTime = await deviceClient.GetSystemDateAndTimeAsync().ConfigureAwait(false);
-            return cameraTime;
+            // PRE_AUTH action http://www.onvif.org/ver10/device/wsdl/GetSystemDateAndTime
+            using (var deviceClient = new DeviceClient(OnvifBindingFactory.CreateBinding(), new EndpointAddress(_onvifUri)))
+            {
+                deviceClient.SetDisableExpect100Continue(_disableExpect100ContinueBehavior);
+
+                var cameraTime = await deviceClient.GetSystemDateAndTimeAsync().ConfigureAwait(false);
+                return cameraTime;
+            }
         }
 
         public async Task<System.DateTime> GetSystemDateAndTimeUtcAsync()

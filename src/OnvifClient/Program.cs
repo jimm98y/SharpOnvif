@@ -24,12 +24,14 @@ public static class Program
         {
             using (var client = new SimpleOnvifClient(device, "admin", "password", true))
             {
-                var deviceInfo = await client.GetDeviceInformationAsync();
                 var services = await client.GetServicesAsync(true);
                 var cameraDateTime = await client.GetSystemDateAndTimeUtcAsync();
-                var cameraTimeOffset = DateTime.UtcNow.Subtract(cameraDateTime);
-                client.SetCameraUtcNowOffset(cameraTimeOffset); // this is only supported when using WsUsernameToken legacy authentication
+                var cameraTimeOffset = cameraDateTime.Subtract(DateTime.UtcNow);
                 Console.WriteLine($"Camera time: {cameraDateTime}");
+                client.SetCameraUtcNowOffset(cameraTimeOffset); // this is only supported when using WsUsernameToken legacy authentication
+                
+                var deviceInfo = await client.GetDeviceInformationAsync();
+                Console.WriteLine($"Device Manufacturer: {deviceInfo.Manufacturer}");
 
                 // check if media profile is available
                 if (services.Service.FirstOrDefault(x => x.Namespace == OnvifServices.MEDIA) != null)
