@@ -22,6 +22,8 @@ namespace SharpOnvifClient
         private bool _disposedValue;
 
         private readonly string _onvifUri;
+        public string OnvifUri {  get { return _onvifUri; } }
+
         private Dictionary<string, string> _supportedServices;
 
         private object _syncRoot = new object();

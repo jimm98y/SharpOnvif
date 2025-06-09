@@ -27,25 +27,7 @@ namespace SharpOnvifServer
                 .AddScheme<AuthenticationSchemeOptions, DigestAuthenticationHandler>(SCHEME_DIGEST, null);
 
             // CoreWCF cannot have a contract with some endpoints anonymous and some requiring the authentication
-            services.AddAuthorization(); // this means we require Digest on all endpoints
-
-            // Possible workaround would be to not use services.AddAuthorization()/app.UseAuthentication(); und use something like:
-            /*
-            app.Use(async (context, next) =>
-            {
-                // TODO: Custom logic here
-                if (context.Request.Path.StartsWithSegments("/onvif/device_service"))
-                {
-                    var authResult = await context.AuthenticateAsync("Digest");
-                    if (authResult.None)
-                    {
-                        await context.ChallengeAsync("Digest");
-                        return;
-                    }
-                }
-                await next(context);
-            });
-            */
+            services.AddAuthorization(); // this means we require Digest on all endpoints => Unauthenticated users will have to default to "Anonymous" user account
 
             return services;
         }
@@ -107,6 +89,5 @@ namespace SharpOnvifServer
         {
             return server.Features.Get<IServerAddressesFeature>().Addresses.FirstOrDefault(x => x.StartsWith("https://"));
         }
-
     }
 }

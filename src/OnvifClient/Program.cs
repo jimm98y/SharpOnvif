@@ -1,7 +1,12 @@
 ﻿using SharpOnvifClient;
+using SharpOnvifClient.Events;
 using SharpOnvifCommon;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.NetworkInformation;
+using System.Net.Sockets;
 using System.Threading.Tasks;
 
 public static class Program
@@ -88,7 +93,8 @@ public static class Program
     static async Task BasicEventSubscription(SimpleOnvifClient client)
     {
         // we must run as an Administrator for the Basic subscription to work
-        var eventListener = new SimpleOnvifEventListener();
+        string onvifInterfaceIp = FindNetworkInterface(client.OnvifUri);
+        SimpleOnvifEventListener eventListener = new SimpleOnvifEventListener(onvifInterfaceIp);
         eventListener.Start((int cameraID, string ev) =>
         {
             if (OnvifEvents.IsMotionDetected(ev) != null)
@@ -97,12 +103,64 @@ public static class Program
                 Console.WriteLine($"Tamper detected: {OnvifEvents.IsTamperDetected(ev)}");
         });
 
-        var subscriptionResponse = await client.BasicSubscribeAsync(eventListener.GetOnvifEventListenerUri());
+        SubscribeResponse1 subscriptionResponse = await client.BasicSubscribeAsync(eventListener.GetOnvifEventListenerUri());
 
         while (true)
         {
             await Task.Delay(1000 * 60 * 4);
             var result = await client.BasicSubscriptionRenewAsync(subscriptionResponse);
         }
+    }
+
+    private static string FindNetworkInterface(string onvifUri)
+    {
+        IPAddress[] ipAddresses = null;
+        string onvifHost = new Uri(onvifUri).Host;
+        try
+        {
+            ipAddresses = Dns.GetHostAddresses(onvifHost, AddressFamily.InterNetwork);
+        }
+        catch (SocketException)
+        {
+            Console.WriteLine($"Cannot resolve host {onvifHost}");
+            return null;
+        }
+
+        IPAddress onvifDeviceIpAddress = ipAddresses.First();
+        IEnumerable<NetworkInterface> networkInterfaces = NetworkInterface.GetAllNetworkInterfaces().Where(
+                i =>
+                //i.NetworkInterfaceType != NetworkInterfaceType.Loopback &&
+                i.NetworkInterfaceType != NetworkInterfaceType.Tunnel &&
+                i.OperationalStatus == OperationalStatus.Up
+            );
+        NetworkInterface matchingInterface = networkInterfaces.FirstOrDefault(x =>
+        {
+            UnicastIPAddressInformation addr = x.GetIPProperties().UnicastAddresses.FirstOrDefault(x => x.Address.AddressFamily == AddressFamily.InterNetwork);
+            return addr.Address.GetNetworkAddress(addr.IPv4Mask).IsInSameSubnet(onvifDeviceIpAddress.GetNetworkAddress(addr.IPv4Mask), addr.IPv4Mask);
+        });
+        return matchingInterface.GetIPProperties().UnicastAddresses.FirstOrDefault(x => x.Address.AddressFamily == AddressFamily.InterNetwork)?.Address.ToString();
+    }
+
+    public static bool IsInSameSubnet(this IPAddress address2, IPAddress address, IPAddress subnetMask)
+    {
+        IPAddress network1 = address.GetNetworkAddress(subnetMask);
+        IPAddress network2 = address2.GetNetworkAddress(subnetMask);
+        return network1.Equals(network2);
+    }
+
+    public static IPAddress GetNetworkAddress(this IPAddress address, IPAddress subnetMask)
+    {
+        byte[] ipAdressBytes = address.GetAddressBytes();
+        byte[] subnetMaskBytes = subnetMask.GetAddressBytes();
+
+        if (ipAdressBytes.Length != subnetMaskBytes.Length)
+            throw new ArgumentException("IP address and subnet mask lengths do not match.");
+
+        byte[] broadcastAddress = new byte[ipAdressBytes.Length];
+        for (int i = 0; i < broadcastAddress.Length; i++)
+        {
+            broadcastAddress[i] = (byte)(ipAdressBytes[i] & (subnetMaskBytes[i]));
+        }
+        return new IPAddress(broadcastAddress);
     }
 }

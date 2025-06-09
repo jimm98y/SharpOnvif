@@ -1,8 +1,9 @@
-﻿using SharpOnvifCommon;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 
 namespace SharpOnvifClient
@@ -19,7 +20,7 @@ namespace SharpOnvifClient
         private readonly ushort _port;
         private Task _listenerTask;
 
-        public HttpListener Listener { get; } = new HttpListener();
+        private HttpListener _listener = new HttpListener();
 
         public SimpleOnvifEventListener(string host = "+", ushort port = 9999)
         {
@@ -32,13 +33,13 @@ namespace SharpOnvifClient
             _onEvent = onEvent ?? throw new ArgumentNullException(nameof(onEvent));
 
             string httpUri = GetHttpUri(_host, _port);
-            Listener.Prefixes.Add(httpUri);
-            Listener.Start();
+            _listener.Prefixes.Add(httpUri);
+            _listener.Start();
             _listenerTask = Task.Run(async () =>
             {
                 while (!_disposedValue)
                 {
-                    HttpListenerContext ctx = await Listener.GetContextAsync();
+                    HttpListenerContext ctx = await _listener.GetContextAsync();
                     using (HttpListenerResponse resp = ctx.Response)
                     {
                         try
@@ -71,7 +72,12 @@ namespace SharpOnvifClient
             string host = _host;
             if (host == "+")
             {
-                host = NetworkHelpers.GetIPv4NetworkInterface();
+                // fallback, pick the first active interface that matches our criteria
+                host = NetworkInterface.GetAllNetworkInterfaces().First(
+                    i => i.NetworkInterfaceType != NetworkInterfaceType.Loopback &&
+                    i.NetworkInterfaceType != NetworkInterfaceType.Tunnel && 
+                    i.OperationalStatus == OperationalStatus.Up
+                ).GetIPProperties().UnicastAddresses.First(x => x.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork).Address.ToString();
             }
 
             return $"{GetHttpUri(host, _port)}{cameraID}/";
@@ -105,7 +111,7 @@ namespace SharpOnvifClient
             {
                 if (disposing)
                 {
-                    Listener.Close();
+                    _listener.Close();
                 }
                 _disposedValue = true;
             }

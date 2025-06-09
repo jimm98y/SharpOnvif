@@ -66,5 +66,13 @@ namespace OnvifService.Onvif
                 }
             };
         }
+
+        public override UnsubscribeResponse1 Unsubscribe(UnsubscribeRequest request)
+        {
+            return new UnsubscribeResponse1()
+            {
+                UnsubscribeResponse = new UnsubscribeResponse()
+            };
+        }
     }
 }

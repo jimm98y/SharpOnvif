@@ -20,6 +20,8 @@ builder.Services.AddSingleton<OnvifService.Onvif.DeviceImpl>();
 builder.Services.AddSingleton<OnvifService.Onvif.MediaImpl>();
 builder.Services.AddSingleton<OnvifService.Onvif.EventsImpl>();
 builder.Services.AddSingleton<OnvifService.Onvif.PTZImpl>();
+
+#warning TODO: Subscription Manager should be instantiated dynamically per connection, now it will work only for a single connection
 builder.Services.AddSingleton<OnvifService.Onvif.SubscriptionManagerImpl>();
 
 var app = builder.Build();
