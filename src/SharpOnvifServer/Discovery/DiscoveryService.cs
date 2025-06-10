@@ -90,10 +90,20 @@ namespace SharpOnvifServer.Discovery
                     if (adapter.NetworkInterfaceType != NetworkInterfaceType.Ethernet)
                         continue;
 
+                    if (adapter.OperationalStatus != OperationalStatus.Up)
+                        continue;
+
+                    if (!adapter.SupportsMulticast)
+                        continue;
+
                     if (!(adapter.Supports(NetworkInterfaceComponent.IPv4) || adapter.Supports(NetworkInterfaceComponent.IPv6)))
                         continue;
 
                     IPInterfaceProperties adapterProperties = adapter.GetIPProperties();
+
+                    if (adapterProperties.GetIPv4Properties() == null)
+                        continue;
+
                     foreach (var ua in adapterProperties.UnicastAddresses)
                     {
                         if (ua.Address.AddressFamily == AddressFamily.InterNetwork)
