@@ -153,6 +153,9 @@ namespace SharpOnvifServer.Discovery
 
         private bool IsSearchingOurTypes(List<OnvifType> types1, List<OnvifType> types2)
         {
+            if (types1 == null)
+                return false;
+
             var types1combined = types1.Select(x => $"{x.TypeNamespace}#{x.TypeName}").ToArray();
             var types2combined = types2.Select(x => $"{x.TypeNamespace}#{x.TypeName}").ToArray();
             foreach(var type in types2combined)
@@ -173,7 +176,7 @@ namespace SharpOnvifServer.Discovery
                 { "http://schemas.xmlsoap.org/ws/2004/08/addressing", "wsadis" }
             };
 
-            if (options.Types.Count > 0)
+            if (options.Types != null && options.Types.Count > 0)
             {
                 foreach(var type in options.Types) 
                 {
@@ -199,7 +202,7 @@ namespace SharpOnvifServer.Discovery
                                 $"<wsadis:EndpointReference>" +
                                     $"<wsadis:Address>urn:uuid:{uuid}</wsadis:Address>\r\n" +
                                 $"</wsadis:EndpointReference>\r\n" +
-                                $"<d:Types>{BuildTypes(options.Types, nsPrefixes)}</d:Types>\r\n" +
+                                $"<d:Types>{BuildTypes(options, nsPrefixes)}</d:Types>\r\n" +
                                 $"<d:Scopes>{BuildScopes(options)}</d:Scopes>\r\n" +
                                 $"<d:XAddrs>{BuildAddresses(options, httpUri)}</d:XAddrs>\r\n" +
                                 $"<d:MetadataVersion>10</d:MetadataVersion>\r\n" +
@@ -220,10 +223,13 @@ namespace SharpOnvifServer.Discovery
             return ret.ToString();
         }
 
-        private static string BuildTypes(List<OnvifType> values, Dictionary<string, string> nsPrefixes)
+        private static string BuildTypes(OnvifDiscoveryOptions options, Dictionary<string, string> nsPrefixes)
         {
+            if (options.Types == null)
+                return string.Empty;
+
             StringBuilder ret = new StringBuilder();
-            foreach (var type in values)
+            foreach (var type in options.Types)
             {
                 ret.Append($"{nsPrefixes[type.TypeNamespace]}:{type.TypeName}");
             }
@@ -232,7 +238,7 @@ namespace SharpOnvifServer.Discovery
 
         private static string GetPrefix(Dictionary<string, string> nsPrefixes)
         {
-            string prefix = "";
+            string prefix = string.Empty;
             const int minLen = 2;
 
             while (true)
@@ -263,7 +269,9 @@ namespace SharpOnvifServer.Discovery
         private static string BuildScopes(OnvifDiscoveryOptions options)
         {
             List<string> scopes = options.Scopes;
-            
+            if (scopes == null)
+                return string.Empty;
+
             if (!string.IsNullOrEmpty(options.MAC))
                 scopes.Add($"onvif://www.onvif.org/MAC/{Uri.EscapeDataString(options.MAC)}");
 
@@ -303,7 +311,7 @@ namespace SharpOnvifServer.Discovery
                     }
                 }
 
-                string uuid = "";
+                string uuid = string.Empty;
                 node = navigator.SelectSingleNode("//*[local-name()='MessageID']/text()");
                 if (node != null)
                 {
