@@ -15,38 +15,6 @@ using System.Xml.XPath;
 
 namespace SharpOnvifServer.Discovery
 {
-    public class OnvifDiscoveryMessage
-    {
-        public List<Tuple<string, string>> Types { get; set; }
-        public string MessageUuid { get; set; }
-    }
-
-    public class OnvifDiscoveryOptions
-    {
-        public List<string> NetworkInterfaces { get; set; } = new List<string>();
-
-        public List<string> ServiceAddresses { get; set; } = new List<string>();
-
-        public List<string> Scopes { get; set; } = new List<string>()
-        {
-            "onvif://www.onvif.org/type/video_encoder",
-            "onvif://www.onvif.org/Profile/Streaming",
-            "onvif://www.onvif.org/Profile/G",
-            "onvif://www.onvif.org/Profile/T"
-        };
-
-        public List<Tuple<string, string>> Types { get; set; } = new List<Tuple<string, string>>
-        {
-            new Tuple<string, string>("http://www.onvif.org/ver10/network/wsdl", "NetworkVideoTransmitter"),
-            new Tuple<string, string>("http://www.onvif.org/ver10/device/wsdl", "Device")
-        };
-
-        public string MAC { get; set; }
-        public string Hardware { get; set; }
-        public string Name { get; set; }
-        public string City { get; set; }
-    }
-
     /// <summary>
     /// Onvif discovery implementation.
     /// Workaround until CoreWCF supports the discovery.
@@ -67,7 +35,11 @@ namespace SharpOnvifServer.Discovery
         private readonly IHostApplicationLifetime _hostApplicationLifetime;
         private readonly ILogger<DiscoveryService> _logger;
 
-        public DiscoveryService(OnvifDiscoveryOptions options, IServer server, IHostApplicationLifetime hostApplicationLifetime, ILogger<DiscoveryService> logger)
+        public DiscoveryService(
+            OnvifDiscoveryOptions options, 
+            IServer server, 
+            IHostApplicationLifetime hostApplicationLifetime, 
+            ILogger<DiscoveryService> logger)
         {
             this._options = options;
             this._server = server;
@@ -179,10 +151,10 @@ namespace SharpOnvifServer.Discovery
             return Task.CompletedTask;
         }
 
-        private bool IsSearchingOurTypes(List<Tuple<string, string>> types1, List<Tuple<string, string>> types2)
+        private bool IsSearchingOurTypes(List<OnvifType> types1, List<OnvifType> types2)
         {
-            var types1combined = types1.Select(x => $"{x.Item1}#{x.Item2}").ToArray();
-            var types2combined = types2.Select(x => $"{x.Item1}#{x.Item2}").ToArray();
+            var types1combined = types1.Select(x => $"{x.TypeNamespace}#{x.TypeName}").ToArray();
+            var types2combined = types2.Select(x => $"{x.TypeNamespace}#{x.TypeName}").ToArray();
             foreach(var type in types2combined)
             {
                 if(types1combined.Contains(type))
@@ -205,7 +177,7 @@ namespace SharpOnvifServer.Discovery
             {
                 foreach(var type in options.Types) 
                 {
-                    nsPrefixes.TryAdd(type.Item1, GetPrefix(nsPrefixes)); // TryAdd -> support multiple different types from the same namespace
+                    nsPrefixes.TryAdd(type.TypeNamespace, GetPrefix(nsPrefixes)); // TryAdd -> support multiple different types from the same namespace
                 }
             }
 
@@ -248,12 +220,12 @@ namespace SharpOnvifServer.Discovery
             return ret.ToString();
         }
 
-        private static string BuildTypes(List<Tuple<string, string>> values, Dictionary<string, string> nsPrefixes)
+        private static string BuildTypes(List<OnvifType> values, Dictionary<string, string> nsPrefixes)
         {
             StringBuilder ret = new StringBuilder();
             foreach (var type in values)
             {
-                ret.Append($"{nsPrefixes[type.Item1]}:{type.Item2}");
+                ret.Append($"{nsPrefixes[type.TypeNamespace]}:{type.TypeName}");
             }
             return ret.ToString();
         }
@@ -277,7 +249,7 @@ namespace SharpOnvifServer.Discovery
 
         private static string BuildAddresses(OnvifDiscoveryOptions options, string fallbackHttpUri)
         {
-            if (options.ServiceAddresses.Count > 0)
+            if (options.ServiceAddresses != null && options.ServiceAddresses.Count > 0)
             {
                 return string.Join(' ', options.ServiceAddresses);
             }
@@ -317,7 +289,7 @@ namespace SharpOnvifServer.Discovery
                 var document = new XPathDocument(textReader);
                 var navigator = document.CreateNavigator();
 
-                List<Tuple<string, string>> requestedTypes = new List<Tuple<string, string>>();
+                List<OnvifType> requestedTypes = new List<OnvifType>();
 
                 // local-name is used to ignore the namespace
                 var node = navigator.SelectSingleNode("//*[local-name()='Types']/text()");
@@ -327,7 +299,7 @@ namespace SharpOnvifServer.Discovery
                     foreach(var type in parsedTypes)
                     {
                         string[] parsedTypeNs = type.Split(new char[] { ':' });
-                        requestedTypes.Add(new Tuple<string, string>(node.LookupNamespace(parsedTypeNs[0].Trim()), parsedTypeNs[1].Trim()));
+                        requestedTypes.Add(new OnvifType(node.LookupNamespace(parsedTypeNs[0].Trim()), parsedTypeNs[1].Trim()));
                     }
                 }
 

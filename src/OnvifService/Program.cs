@@ -1,9 +1,11 @@
 ﻿using CoreWCF.Configuration;
 using CoreWCF.Description;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OnvifService.Repository;
 using SharpOnvifServer;
+using SharpOnvifServer.Discovery;
 
 var builder = WebApplication.CreateBuilder();
 builder.Services.AddServiceModelServices();
@@ -14,7 +16,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddSingleton<IUserRepository, UserRepository>();
 builder.Services.AddOnvifDigestAuthentication();
-builder.Services.AddOnvifDiscovery();
+builder.Services.AddOnvifDiscovery(builder.Configuration.GetSection("OnvifDiscovery").Get<OnvifDiscoveryOptions>());
 
 builder.Services.AddSingleton<OnvifService.Onvif.DeviceImpl>();
 builder.Services.AddSingleton<OnvifService.Onvif.MediaImpl>();

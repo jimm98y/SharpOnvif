@@ -39,7 +39,21 @@ namespace SharpOnvifServer
         public static IServiceCollection AddOnvifDiscovery(this IServiceCollection services, OnvifDiscoveryOptions options = null)
         {
             if (options == null)
+            {
+                // if not specified, fill in the defaults
                 options = new OnvifDiscoveryOptions();
+                options.Scopes = new System.Collections.Generic.List<string>() {
+                  "onvif://www.onvif.org/type/video_encoder",
+                  "onvif://www.onvif.org/Profile/Streaming",
+                  "onvif://www.onvif.org/Profile/G",
+                  "onvif://www.onvif.org/Profile/T"
+                };
+                options.Types = new System.Collections.Generic.List<OnvifType>()
+                {
+                    new OnvifType("http://www.onvif.org/ver10/network/wsdl", "NetworkVideoTransmitter"),
+                    new OnvifType("http://www.onvif.org/ver10/device/wsdl", "Device")
+                };
+            }
 
             services.AddSingleton(options);
             services.AddHostedService<DiscoveryService>();
