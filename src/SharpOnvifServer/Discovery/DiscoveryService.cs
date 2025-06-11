@@ -87,7 +87,14 @@ namespace SharpOnvifServer.Discovery
 
                 foreach (NetworkInterface adapter in nics)
                 {
-                    if (adapter.NetworkInterfaceType != NetworkInterfaceType.Ethernet)
+                    if (!(adapter.NetworkInterfaceType == NetworkInterfaceType.Loopback ||
+                        adapter.NetworkInterfaceType == NetworkInterfaceType.FastEthernetT ||
+                        adapter.NetworkInterfaceType == NetworkInterfaceType.FastEthernetFx ||
+                        adapter.NetworkInterfaceType == NetworkInterfaceType.Ethernet ||
+                        adapter.NetworkInterfaceType == NetworkInterfaceType.Ethernet3Megabit ||
+                        adapter.NetworkInterfaceType == NetworkInterfaceType.GigabitEthernet ||
+                        adapter.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || 
+                        adapter.NetworkInterfaceType == NetworkInterfaceType.Fddi))
                         continue;
 
                     if (adapter.OperationalStatus != OperationalStatus.Up)
@@ -96,7 +103,7 @@ namespace SharpOnvifServer.Discovery
                     if (!adapter.SupportsMulticast)
                         continue;
 
-                    if (!(adapter.Supports(NetworkInterfaceComponent.IPv4) || adapter.Supports(NetworkInterfaceComponent.IPv6)))
+                    if (!adapter.Supports(NetworkInterfaceComponent.IPv4))
                         continue;
 
                     IPInterfaceProperties adapterProperties = adapter.GetIPProperties();
@@ -108,6 +115,10 @@ namespace SharpOnvifServer.Discovery
                     {
                         if (ua.Address.AddressFamily == AddressFamily.InterNetwork)
                         {
+                            byte[] ipAddrBytes = ua.Address.GetAddressBytes();
+                            if (ipAddrBytes[0] == 169 && ipAddrBytes[1] == 254)
+                                continue; // skip link-local address
+
                             string nicIPAddress = ua.Address.ToString();
 
                             if (!(_options.NetworkInterfaces == null || _options.NetworkInterfaces.Count == 0 || _options.NetworkInterfaces.Contains("0.0.0.0")) && !_options.NetworkInterfaces.Contains(nicIPAddress))
