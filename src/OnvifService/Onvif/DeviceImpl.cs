@@ -441,31 +441,111 @@ namespace OnvifService.Onvif
 
         public static string GetPrimaryIPv4Address()
         {
+            string ret = "0.0.0.0";
             var nic = GetPrimaryNetworkInterface();
-            return nic.GetIPProperties().UnicastAddresses.FirstOrDefault(x => x.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)?.Address.ToString();
+            if (nic != null)
+            {
+                var nicProperties = nic.GetIPProperties();
+                if (nicProperties != null)
+                {
+                    var unicastAddresses = nicProperties.UnicastAddresses;
+                    if (unicastAddresses != null)
+                    {
+                        var unicastAddress = unicastAddresses.FirstOrDefault(x => x.Address != null && x.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork);
+                        if (unicastAddress != null)
+                        {
+                            if (unicastAddress.Address != null)
+                            {
+                                ret = unicastAddress.Address.ToString();
+                            }
+                        }
+                    }
+                }
+            }
+            return ret;
         }
 
         public static string GetPrimaryIPv4DNS()
         {
+            string ret = "0.0.0.0";
             var nic = GetPrimaryNetworkInterface();
-            return nic.GetIPProperties().DnsAddresses.FirstOrDefault(x => x.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)?.ToString();
-        }
-
-        public static string GetPrimaryMACAddress()
-        {
-            var nic = GetPrimaryNetworkInterface();
-            return nic.GetPhysicalAddress().ToString();
+            if (nic != null)
+            {
+                var nicProperties = nic.GetIPProperties();
+                if (nicProperties != null)
+                {
+                    var dnsAddresses = nicProperties.DnsAddresses;
+                    if (dnsAddresses != null)
+                    {
+                        var dnsAddress = dnsAddresses.FirstOrDefault(x => x.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork);
+                        if (dnsAddress != null)
+                        {
+                            ret = dnsAddress.ToString();
+                        }
+                    }
+                }
+            }
+            return ret;
         }
 
         public static string GetPrimaryNTPAddress(string ntp = "time.windows.com")
         {
-            return System.Net.Dns.GetHostEntry(ntp).AddressList.FirstOrDefault(x => x.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)?.ToString();
+            string ret = "0.0.0.0";
+            var dnsHostEntry = System.Net.Dns.GetHostEntry(ntp);
+            if (dnsHostEntry != null)
+            {
+                var addressList = dnsHostEntry.AddressList;
+                if(addressList != null)
+                {
+                    var ntpAddress = addressList.FirstOrDefault(x => x.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork);
+                    if(ntpAddress != null)
+                    {
+                        ret = ntpAddress.ToString();
+                    }
+                }
+            }
+            return ret;
         }
 
         public static string GetPrimaryIPv4Gateway()
         {
+            string ret = "0.0.0.0";
             var nic = GetPrimaryNetworkInterface();
-            return nic.GetIPProperties().GatewayAddresses.FirstOrDefault(x => x.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork).Address?.ToString();
+            if (nic != null)
+            {
+                var nicProperties = nic.GetIPProperties();
+                if (nicProperties != null)
+                {
+                    var gatewayAddresses = nicProperties.GatewayAddresses;
+                    if (gatewayAddresses != null)
+                    {
+                        var gatewayAddress = gatewayAddresses.FirstOrDefault(x => x.Address != null && x.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork);
+                        if (gatewayAddress != null)
+                        {
+                            if (gatewayAddress.Address != null)
+                            {
+                                ret = gatewayAddress.Address.ToString();
+                            }
+                        }
+                    }
+                }
+            }
+            return ret;
+        }
+
+        public static string GetPrimaryMACAddress()
+        {
+            string ret = "00:00:00:00:00:00";
+            var nic = GetPrimaryNetworkInterface();
+            if (nic != null)
+            {
+                var nicPhysicalAddress = nic.GetPhysicalAddress();
+                if (nicPhysicalAddress != null)
+                {
+                    ret = nicPhysicalAddress.ToString();
+                }
+            }
+            return ret;
         }
 
         #endregion // Network Helpers
