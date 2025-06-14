@@ -32,9 +32,10 @@ namespace OnvifService.Onvif
 
             DateTime now = DateTime.UtcNow;
             DateTime termination = OnvifHelpers.FromAbsoluteOrRelativeDateTimeUTC(now, request.Subscribe.InitialTerminationTime, now.AddMinutes(1));
-            
+
             // Basic uses the notification endpoint from the request
-            int subscriptionID = _eventSubscriptionManager.AddSubscription(ActivatorUtilities.CreateInstance<SubscriptionManagerImpl>(_serviceProvider, termination, termination.Subtract(now), notificationEndpoint));
+            var subscription = ActivatorUtilities.CreateInstance<SubscriptionManagerImpl>(_serviceProvider, termination, termination.Subtract(now), notificationEndpoint);
+            int subscriptionID = _eventSubscriptionManager.AddSubscription(subscription);
             string subscriptionReferenceUri = $"{_server.GetHttpEndpoint()}/onvif/Events/Subscription/{subscriptionID}/";
 
             _logger.LogDebug($"{nameof(EventsImpl)}: Subscribed Basic {subscriptionID} on {subscriptionReferenceUri}");
@@ -63,7 +64,8 @@ namespace OnvifService.Onvif
             DateTime termination = OnvifHelpers.FromAbsoluteOrRelativeDateTimeUTC(now, request.InitialTerminationTime, now.AddMinutes(1));
 
             // PullPoint uses "" for the notification endpoint
-            int subscriptionID = _eventSubscriptionManager.AddSubscription(ActivatorUtilities.CreateInstance<SubscriptionManagerImpl>(_serviceProvider, termination, termination.Subtract(now), ""));
+            var subscription = ActivatorUtilities.CreateInstance<SubscriptionManagerImpl>(_serviceProvider, termination, termination.Subtract(now), "");
+            int subscriptionID = _eventSubscriptionManager.AddSubscription(subscription);
             string subscriptionReferenceUri = $"{_server.GetHttpEndpoint()}/onvif/Events/Subscription/{subscriptionID}/";
 
             _logger.LogDebug($"{nameof(EventsImpl)}: Subscribed PullPoint {subscriptionID} on {subscriptionReferenceUri}");
@@ -74,7 +76,10 @@ namespace OnvifService.Onvif
                 TerminationTime = termination,
                 SubscriptionReference = new EndpointReferenceType()
                 {
-                    Address = new AttributedURIType() { Value = subscriptionReferenceUri }
+                    Address = new AttributedURIType() 
+                    {
+                        Value = subscriptionReferenceUri
+                    }
                 }
             };
         }

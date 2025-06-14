@@ -20,12 +20,15 @@ builder.Services.AddSingleton<IUserRepository, UserRepository>();
 builder.Services.AddOnvifDigestAuthentication();
 builder.Services.AddOnvifDiscovery(builder.Configuration.GetSection("OnvifDiscovery").Get<OnvifDiscoveryOptions>());
 
-builder.Services.AddSingleton<IEventSubscriptionManager<SubscriptionManagerImpl>, DefaultEventSubscriptionManager<SubscriptionManagerImpl>>();
-
 builder.Services.AddSingleton<OnvifService.Onvif.DeviceImpl>();
 builder.Services.AddSingleton<OnvifService.Onvif.MediaImpl>();
-builder.Services.AddSingleton<OnvifService.Onvif.EventsImpl>();
 builder.Services.AddSingleton<OnvifService.Onvif.PTZImpl>();
+
+// events
+builder.Services.AddHttpClient();
+builder.Services.AddSingleton<IEventSource, EventSourceImpl>();
+builder.Services.AddSingleton<IEventSubscriptionManager<SubscriptionManagerImpl>, DefaultEventSubscriptionManager<SubscriptionManagerImpl>>();
+builder.Services.AddSingleton<OnvifService.Onvif.EventsImpl>();
 builder.Services.AddSingleton<OnvifService.Onvif.RouterSubscriptionManagerImpl>();
 
 var app = builder.Build();

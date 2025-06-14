@@ -25,7 +25,7 @@ namespace SharpOnvifServer.Events
             {
                 foreach(var subscription in _subscriptions)
                 {
-                    if(subscription.Value.ExpirationUTC < DateTime.UtcNow)
+                    if(subscription.Value.ExpirationTime < DateTime.UtcNow)
                     {
                         subscriptionsToRemove.Add(subscription.Key);
                     }
@@ -49,19 +49,24 @@ namespace SharpOnvifServer.Events
 
         public T GetSubscription(int subscriptionID)
         {
-            T ret = null;
             lock (_syncRoot)
             {
+                T ret = null;
                 _subscriptions.TryGetValue(subscriptionID, out ret);
+                return ret;
             }
-            return ret;
         }
 
         public void RemoveSubscription(int subscriptionID)
         {
             lock (_syncRoot)
             {
-                _subscriptions.Remove(subscriptionID);
+                T subscription;
+                if(_subscriptions.TryGetValue(subscriptionID, out subscription))
+                {
+                    subscription.Detach();
+                    _subscriptions.Remove(subscriptionID);
+                }
             }
         }
 
