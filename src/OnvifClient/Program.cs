@@ -75,7 +75,7 @@ public static class Program
 
     static async Task PullPointEventSubscription(SimpleOnvifClient client)
     {
-        var subscription = await client.PullPointSubscribeAsync();
+        var subscription = await client.PullPointSubscribeAsync(1);
         while (true)
         {
             var messages = await client.PullPointPullMessagesAsync(subscription);
@@ -107,7 +107,7 @@ public static class Program
 
         while (true)
         {
-            await Task.Delay(1000 * 60 * 4);
+            await Task.Delay(1000 * 60);
             var result = await client.BasicSubscriptionRenewAsync(subscriptionResponse);
         }
     }

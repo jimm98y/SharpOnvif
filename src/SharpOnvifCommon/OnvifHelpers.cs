@@ -19,6 +19,26 @@ namespace SharpOnvifCommon
             return dateTime.ToString("yyyy-MM-ddTHH:mm:ss.fffZ");
         }
 
+        public static DateTime StringToDateTime(string dateTime)
+        {
+            return DateTime.Parse(dateTime);
+        }
+
+        public static DateTime FromAbsoluteOrRelativeDateTimeUTC(DateTime now, string value, DateTime defaultValue)
+        {
+            if (string.IsNullOrEmpty(value))
+                return defaultValue;
+
+            if(value.ToUpperInvariant().StartsWith("PT"))
+            {
+                return now.Add(FromTimeout(value));
+            }
+            else
+            {
+                return StringToDateTime(value);
+            }
+        }
+
         public static TimeSpan FromTimeout(string timeout)
         {
             if(string.IsNullOrEmpty(timeout))

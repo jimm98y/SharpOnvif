@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.Extensions.DependencyInjection;
 using SharpOnvifServer.Discovery;
+using SharpOnvifServer.Events;
 using System.IO.Pipelines;
 using System.Linq;
 using System.Text;
@@ -63,11 +64,33 @@ namespace SharpOnvifServer
 
         public static WebApplication UseOnvif(this WebApplication app)
         {
-            // Onvif Device Manager sends an empty action in the Content-Type header for Event subscription
-            //  and instead puts the action inside the Soap Header. CoreWCF expects it in the Content-Type header,
-            //  so we have to move it there.
             app.Use(async (context, next) =>
             {
+                // SubscriptionManager should be instantiated per subscription, which is not supported by CoreWCF. The way it works now is:
+                //  In EventsImpl Subscribe we create a new SubscriptionManagerImpl and we register it in IEventSubscription singleton. We get back 
+                //   subscription ID, which we return in the SubscriptionReferenceUri as "/onvif/Events/Subscription/<subscriptionID>/". When the client 
+                //   calls us again with this ID, we have no service registered for such endpoint, so we use this ASP.NET middleware to strip the 
+                //   subscription ID from the request and we route it to the global RouterSubscriptionManagerImpl. We also store the subscription ID 
+                //   in the HttpContext so that the RouterSubscriptionManagerImpl can retrieve it. It uses the subscription ID to resolve the registered 
+                //   SubscriptionManagerImpl and it forwards all the requests.
+                // Note: It would have been easier to use a parameter, e.g. /Events/Subscription?Idx=<subscriptionID>. However, it seems like SOAP has some 
+                //  strict requirements and one of them is to have parameters in a request body and/or headers. 
+                const string EventsRoute = "/Events/Subscription/";
+                if (context.Request.Path != null && context.Request.Path.HasValue && context.Request.Path.Value.Contains(EventsRoute))
+                {
+                    int subscriptionLength = context.Request.Path.Value.IndexOf(EventsRoute) + EventsRoute.Length;
+                    string subscription = context.Request.Path.Value.Substring(subscriptionLength).Trim('/');
+                    int subscriptionID = 0;
+                    if (int.TryParse(subscription, out subscriptionID))
+                    {
+                        context.Items[OnvifEvents.ONVIF_SUBSCRIPTION_ID] = subscriptionID;
+                        context.Request.Path = new Microsoft.AspNetCore.Http.PathString(context.Request.Path.Value.Substring(0, subscriptionLength));
+                    }
+                }
+
+                // Onvif Device Manager sends an empty action in the Content-Type header for Event subscription
+                //  and instead puts the action inside the Soap Header. CoreWCF expects it in the Content-Type header,
+                //  so we have to move it there.
                 if (context.Request.ContentType != null && !context.Request.ContentType.Contains("action="))
                 {
                     ReadResult requestBodyInBytes = await context.Request.BodyReader.ReadAsync().ConfigureAwait(false);
