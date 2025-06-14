@@ -191,14 +191,14 @@ namespace SharpOnvifClient
 
         #region Pull Point subscription
 
-        public async Task<CreatePullPointSubscriptionResponse> PullPointSubscribeAsync(int initialTerminationTimeInMinutes = 5)
+        public async Task<CreatePullPointSubscriptionResponse> PullPointSubscribeAsync(int initialTerminationTimeInSeconds = 60)
         {
             string eventUri = await GetServiceUriAsync(OnvifServices.EVENTS);
             var eventPortTypeClient = GetOrCreateClient<EventPortTypeClient, EventPortType>(eventUri, (u) => new EventPortTypeClient(OnvifBindingFactory.CreateBinding(), new EndpointAddress(u)));
             var subscribeResponse = await eventPortTypeClient.CreatePullPointSubscriptionAsync(
                 new CreatePullPointSubscriptionRequest()
                 {
-                    InitialTerminationTime = OnvifHelpers.GetTimeoutInMinutes(initialTerminationTimeInMinutes)
+                    InitialTerminationTime = OnvifHelpers.GetTimeoutInSeconds(initialTerminationTimeInSeconds)
                 }).ConfigureAwait(false);
             return subscribeResponse;
         }
@@ -225,14 +225,14 @@ namespace SharpOnvifClient
 
         #region Basic subscription
 
-        public async Task<SubscribeResponse1> BasicSubscribeAsync(string onvifEventListenerUri, int timeoutInMinutes = 5)
+        public async Task<SubscribeResponse1> BasicSubscribeAsync(string onvifEventListenerUri, int timeoutInSeconds = 60)
         {
             // Basic events need an exception in Windows Firewall + VS must run as Admin
             string eventUri = await GetServiceUriAsync(OnvifServices.EVENTS);
             var notificationProducerClient = GetOrCreateClient<NotificationProducerClient, NotificationProducer>(eventUri, (u) => new NotificationProducerClient(OnvifBindingFactory.CreateBinding(), new EndpointAddress(u)));
             var subscriptionResult = await notificationProducerClient.SubscribeAsync(new Subscribe()
             {
-                InitialTerminationTime = OnvifHelpers.GetTimeoutInMinutes(timeoutInMinutes),
+                InitialTerminationTime = OnvifHelpers.GetTimeoutInSeconds(timeoutInSeconds),
                 ConsumerReference = new EndpointReferenceType()
                 {
                     Address = new AttributedURIType()
@@ -244,12 +244,12 @@ namespace SharpOnvifClient
             return subscriptionResult;
         }
 
-        public async Task<RenewResponse1> BasicSubscriptionRenewAsync(string subscriptionReferenceAddress, int timeoutInMinutes = 5)
+        public async Task<RenewResponse1> BasicSubscriptionRenewAsync(string subscriptionReferenceAddress, int timeoutInSeconds = 60)
         {
             var subscriptionManagerClient = GetOrCreateClient<SubscriptionManagerClient, SubscriptionManager>(subscriptionReferenceAddress, (u) => new SubscriptionManagerClient(OnvifBindingFactory.CreateBinding(), new EndpointAddress(u)));
             var renewResult = await subscriptionManagerClient.RenewAsync(new Renew()
             {
-                TerminationTime = OnvifHelpers.GetTimeoutInMinutes(timeoutInMinutes),
+                TerminationTime = OnvifHelpers.GetTimeoutInSeconds(timeoutInSeconds),
             }).ConfigureAwait(false);
             return renewResult;
         }

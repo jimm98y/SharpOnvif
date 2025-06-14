@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Hosting.Server;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SharpOnvifCommon;
 using SharpOnvifServer;
@@ -12,11 +13,15 @@ namespace OnvifService.Onvif
     {
         private readonly IServer _server;
         private readonly ILogger<EventsImpl> _logger;
+        private readonly IEventSubscriptionManager<SubscriptionManagerImpl> _eventSubscriptionManager;
+        private readonly IServiceProvider _serviceProvider;
 
-        public EventsImpl(IServer server, ILogger<EventsImpl> logger)
+        public EventsImpl(IServer server, ILogger<EventsImpl> logger, IEventSubscriptionManager<SubscriptionManagerImpl> eventSubscriptionManager, IServiceProvider serviceProvider)
         {
             _server = server;
             _logger = logger;
+            _eventSubscriptionManager = eventSubscriptionManager;
+            _serviceProvider = serviceProvider;
         }
 
         #region NotificationProducer
@@ -24,9 +29,16 @@ namespace OnvifService.Onvif
         public override SubscribeResponse1 Subscribe(SubscribeRequest request)
         {
             string notificationEndpoint = request.Subscribe.ConsumerReference.Address.Value;
-            string subscriptionReferenceUri = $"{_server.GetHttpEndpoint()}/onvif/Events/SubManager";
+
             DateTime now = DateTime.UtcNow;
-            DateTime termination = DateTime.UtcNow.Add(OnvifHelpers.FromTimeout(request.Subscribe.InitialTerminationTime));
+            DateTime termination = OnvifHelpers.FromAbsoluteOrRelativeDateTimeUTC(now, request.Subscribe.InitialTerminationTime, now.AddMinutes(1));
+
+            // Basic uses the notification endpoint from the request
+            var subscription = ActivatorUtilities.CreateInstance<SubscriptionManagerImpl>(_serviceProvider, termination, termination.Subtract(now), notificationEndpoint);
+            int subscriptionID = _eventSubscriptionManager.AddSubscription(subscription);
+            string subscriptionReferenceUri = $"{_server.GetHttpEndpoint()}/onvif/Events/Subscription/{subscriptionID}/";
+
+            _logger.LogDebug($"{nameof(EventsImpl)}: Subscribed Basic {subscriptionID} on {subscriptionReferenceUri}");
 
             return new SubscribeResponse1(new SubscribeResponse()
             {
@@ -48,14 +60,26 @@ namespace OnvifService.Onvif
 
         public override CreatePullPointSubscriptionResponse CreatePullPointSubscription(CreatePullPointSubscriptionRequest request)
         {
-            string subscriptionReferenceUri = $"{_server.GetHttpEndpoint()}/onvif/Events/SubManager";
+            DateTime now = DateTime.UtcNow;
+            DateTime termination = OnvifHelpers.FromAbsoluteOrRelativeDateTimeUTC(now, request.InitialTerminationTime, now.AddMinutes(1));
+
+            // PullPoint uses "" for the notification endpoint
+            var subscription = ActivatorUtilities.CreateInstance<SubscriptionManagerImpl>(_serviceProvider, termination, termination.Subtract(now), "");
+            int subscriptionID = _eventSubscriptionManager.AddSubscription(subscription);
+            string subscriptionReferenceUri = $"{_server.GetHttpEndpoint()}/onvif/Events/Subscription/{subscriptionID}/";
+
+            _logger.LogDebug($"{nameof(EventsImpl)}: Subscribed PullPoint {subscriptionID} on {subscriptionReferenceUri}");
+
             return new CreatePullPointSubscriptionResponse()
             {
-                CurrentTime = System.DateTime.UtcNow,
-                TerminationTime = System.DateTime.UtcNow.Add(OnvifHelpers.FromTimeout(request.InitialTerminationTime)),
+                CurrentTime = now,
+                TerminationTime = termination,
                 SubscriptionReference = new EndpointReferenceType()
                 {
-                    Address = new AttributedURIType() { Value = subscriptionReferenceUri }
+                    Address = new AttributedURIType() 
+                    {
+                        Value = subscriptionReferenceUri
+                    }
                 }
             };
         }

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Xml;
 
-namespace SharpOnvifServer
+namespace SharpOnvifServer.Events
 {
     public class NotificationMessage
     {
@@ -19,6 +19,8 @@ namespace SharpOnvifServer
 
     public static class OnvifEvents
     {
+        public const string ONVIF_SUBSCRIPTION_ID = "OnvifSubscriptionID";
+
         /*
         <wsnt:NotificationMessage>
             <wsnt:Topic Dialect="http://www.onvif.org/ver10/tev/topicExpression/ConcreteSet">
