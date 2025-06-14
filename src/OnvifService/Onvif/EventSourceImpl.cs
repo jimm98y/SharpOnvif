@@ -8,9 +8,10 @@ namespace OnvifService.Onvif
     /// <summary>
     /// Sample Event Source implementation that generates a new motion event every 10 seconds.
     /// </summary>
-    public class EventSourceImpl : IEventSource
+    public class EventSourceImpl : IEventSource, IDisposable
     {
         private readonly Timer _timer;
+        private bool _disposedValue;
 
         public event EventHandler<NotificationEventArgs> OnEvent;
 
@@ -42,5 +43,28 @@ namespace OnvifService.Onvif
                 }
             ));
         }
+
+        #region IDisposable implementation
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    _timer.Dispose();
+                }
+
+                _disposedValue = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+
+        #endregion // IDisposable implementation
     }
 }
