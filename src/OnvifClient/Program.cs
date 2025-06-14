@@ -42,7 +42,7 @@ public static class Program
                 if (services.Service.FirstOrDefault(x => x.Namespace == OnvifServices.MEDIA) != null)
                 {
                     var profiles = await client.GetProfilesAsync();
-                    var streamUri = await client.GetStreamUriAsync(profiles.Profiles.First());
+                    var streamUri = await client.GetStreamUriAsync(profiles.Profiles.First().token);
                     Console.WriteLine($"Stream URI: {streamUri.Uri}");
                 }
 
@@ -78,7 +78,7 @@ public static class Program
         var subscription = await client.PullPointSubscribeAsync(1);
         while (true)
         {
-            var messages = await client.PullPointPullMessagesAsync(subscription);
+            var messages = await client.PullPointPullMessagesAsync(subscription.SubscriptionReference.Address.Value);
 
             foreach (var ev in messages.NotificationMessage)
             {
@@ -108,7 +108,7 @@ public static class Program
         while (true)
         {
             await Task.Delay(1000 * 60);
-            var result = await client.BasicSubscriptionRenewAsync(subscriptionResponse);
+            var result = await client.BasicSubscriptionRenewAsync(subscriptionResponse.SubscribeResponse.SubscriptionReference.Address.Value);
         }
     }
 
