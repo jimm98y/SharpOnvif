@@ -14,7 +14,7 @@ using System.Xml.Serialization;
 namespace OnvifService.Onvif
 {
     /// <summary>
-    /// Onvif Event Subscription.
+    /// Onvif Event Subscription Manager.
     /// </summary>
     public class SubscriptionManagerImpl : SubscriptionManagerBase, IEventSubscription
     {

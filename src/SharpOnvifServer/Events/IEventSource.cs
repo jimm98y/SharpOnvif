@@ -2,20 +2,14 @@
 
 namespace SharpOnvifServer.Events
 {
-    public class NotificationEventArgs : EventArgs
-    {
-        public DateTime Created { get; set; } = DateTime.UtcNow;
-
-        public NotificationMessage Message { get; set; }
-        
-        public NotificationEventArgs(NotificationMessage message)
-        {
-            this.Message = message;
-        }
-    }
-
+    /// <summary>
+    /// Event source generates events that can be subscribed by the clients.
+    /// </summary>
     public interface IEventSource
     {
+        /// <summary>
+        /// Raised when a new event is generated. Subscribed by all currently active subscriptions.
+        /// </summary>
         event EventHandler<NotificationEventArgs> OnEvent;
     }
 }

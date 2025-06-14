@@ -5,6 +5,9 @@ using System.Threading;
 
 namespace OnvifService.Onvif
 {
+    /// <summary>
+    /// Sample Event Source implementation that generates a new motion event every 10 seconds.
+    /// </summary>
     public class EventSourceImpl : IEventSource
     {
         private readonly Timer _timer;
@@ -19,6 +22,7 @@ namespace OnvifService.Onvif
         private void OnTick(object state)
         {
             OnEvent?.Invoke(this, new NotificationEventArgs(
+                // sample Motion detected event
                 new NotificationMessage()
                 {
                     TopicNamespacePrefix = "tns1",

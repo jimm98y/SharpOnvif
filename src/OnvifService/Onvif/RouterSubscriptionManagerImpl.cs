@@ -5,6 +5,9 @@ using SharpOnvifServer.Events;
 
 namespace OnvifService.Onvif
 {
+    /// <summary>
+    /// Routes all incoming Subscription Manager requests to the corresponding Subscription Manager instances.
+    /// </summary>
     public class RouterSubscriptionManagerImpl : SubscriptionManagerBase
     {
         private readonly ILogger<RouterSubscriptionManagerImpl> _logger;
@@ -28,10 +31,12 @@ namespace OnvifService.Onvif
 
         public override UnsubscribeResponse1 Unsubscribe(UnsubscribeRequest request)
         {
-            int subscriptionID = GetSubscriptionID();
             var ret = GetSubscriptionManager().Unsubscribe(request);
+            
+            int subscriptionID = GetSubscriptionID();
             _eventSubscriptionManager.RemoveSubscription(subscriptionID);
             _logger.LogDebug($"{nameof(RouterSubscriptionManagerImpl)}: Unsubscribed {subscriptionID}");
+
             return ret;
         }
 
@@ -63,6 +68,10 @@ namespace OnvifService.Onvif
             return subscription;
         }
 
+        /// <summary>
+        /// Retrieves the Subscription ID from the <see cref="HttpContext"/>.
+        /// </summary>
+        /// <returns>Subscription ID of the current request.</returns>
         private static int GetSubscriptionID()
         {
             HttpContext httpContext = OperationContext.Current.IncomingMessageProperties["Microsoft.AspNetCore.Http.HttpContext"] as HttpContext;

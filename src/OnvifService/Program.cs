@@ -36,7 +36,7 @@ var app = builder.Build();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseOnvif();
+app.UseOnvif().UseOnvifEvents("/onvif/Events/Subscription");
 
 ((IApplicationBuilder)app).UseServiceModel(serviceBuilder =>
 {
@@ -48,6 +48,9 @@ app.UseOnvif();
 
     serviceBuilder.AddService<OnvifService.Onvif.MediaImpl>();
     serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.MediaImpl, SharpOnvifServer.Media.Media>(OnvifBindingFactory.CreateBinding(), "/onvif/media_service");
+
+    serviceBuilder.AddService<OnvifService.Onvif.PTZImpl>();
+    serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.PTZImpl, SharpOnvifServer.PTZ.PTZ>(OnvifBindingFactory.CreateBinding(), "/onvif/ptz_service");
 
     var eventBinding = OnvifBindingFactory.CreateBinding();
     serviceBuilder.AddService<OnvifService.Onvif.EventsImpl>();
@@ -61,10 +64,7 @@ app.UseOnvif();
     serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.RouterSubscriptionManagerImpl, SharpOnvifServer.Events.PausableSubscriptionManager>(subscriptionBinding, "/onvif/Events/Subscription");
     serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.RouterSubscriptionManagerImpl, SharpOnvifServer.Events.PullPointSubscription>(subscriptionBinding, "/onvif/Events/Subscription");
 
-    serviceBuilder.AddService<OnvifService.Onvif.PTZImpl>();
-    serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.PTZImpl, SharpOnvifServer.PTZ.PTZ>(OnvifBindingFactory.CreateBinding(), "/onvif/ptz_service");
-
-    // TODO: add more service endpoints
+    // add more service endpoints
 });
 
 app.MapControllers();
