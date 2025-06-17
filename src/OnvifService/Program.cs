@@ -36,13 +36,33 @@ var app = builder.Build();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseOnvif().UseOnvifEvents("/onvif/Events/Subscription");
+const string URI_EVENTS_SUBSCRIPTION = "/onvif/Events/Subscription";
+app.UseOnvif().UseOnvifEvents(URI_EVENTS_SUBSCRIPTION);
 
 ((IApplicationBuilder)app).UseServiceModel(serviceBuilder =>
 {
     var serviceMetadataBehavior = app.Services.GetRequiredService<ServiceMetadataBehavior>();
     serviceMetadataBehavior.HttpGetEnabled = true;
+    serviceMetadataBehavior.HttpsGetEnabled = true;
 
+    // Note: CoreWCF does not allow multiple services on a single endpoint. This means it is not possible to use a single endpoint address "/onvif/device_service" for both DeviceImpl and MediaImpl. 
+    // To run it all on a single address, one would have to create a OnvifImpl base class that implements all the underlying interfaces:
+    /*
+    public class OnvifImpl : Device, Media, PTZ, NotificationProducer, EventPortType, PullPoint
+    {
+    ...
+    }
+
+    const string URI_DEVICE_SERVICE = "/onvif/device_service";
+    var onvifBinding = OnvifBindingFactory.CreateBinding();
+    serviceBuilder.AddService<OnvifService.Onvif.OnvifImpl>();
+    serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.OnvifImpl, SharpOnvifServer.DeviceMgmt.Device>(onvifBinding, URI_DEVICE_SERVICE);
+    serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.OnvifImpl, SharpOnvifServer.Media.Media>(onvifBinding, URI_DEVICE_SERVICE);
+    serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.OnvifImpl, SharpOnvifServer.PTZ.PTZ>(onvifBinding, URI_DEVICE_SERVICE);
+    serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.OnvifImpl, SharpOnvifServer.Events.NotificationProducer>(eventBinding, URI_DEVICE_SERVICE);
+    serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.OnvifImpl, SharpOnvifServer.Events.EventPortType>(eventBinding, URI_DEVICE_SERVICE);
+    serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.OnvifImpl, SharpOnvifServer.Events.PullPoint>(eventBinding, URI_DEVICE_SERVICE);
+    */
     serviceBuilder.AddService<OnvifService.Onvif.DeviceImpl>();
     serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.DeviceImpl, SharpOnvifServer.DeviceMgmt.Device>(OnvifBindingFactory.CreateBinding(), "/onvif/device_service");
 
@@ -52,17 +72,18 @@ app.UseOnvif().UseOnvifEvents("/onvif/Events/Subscription");
     serviceBuilder.AddService<OnvifService.Onvif.PTZImpl>();
     serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.PTZImpl, SharpOnvifServer.PTZ.PTZ>(OnvifBindingFactory.CreateBinding(), "/onvif/ptz_service");
 
+    const string URI_EVENTS_SERVICE = "/onvif/events_service";
     var eventBinding = OnvifBindingFactory.CreateBinding();
     serviceBuilder.AddService<OnvifService.Onvif.EventsImpl>();
-    serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.EventsImpl, SharpOnvifServer.Events.NotificationProducer>(eventBinding, "/onvif/events_service");
-    serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.EventsImpl, SharpOnvifServer.Events.EventPortType>(eventBinding, "/onvif/events_service");
-    serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.EventsImpl, SharpOnvifServer.Events.PullPoint>(eventBinding, "/onvif/events_service");
+    serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.EventsImpl, SharpOnvifServer.Events.NotificationProducer>(eventBinding, URI_EVENTS_SERVICE);
+    serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.EventsImpl, SharpOnvifServer.Events.EventPortType>(eventBinding, URI_EVENTS_SERVICE);
+    serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.EventsImpl, SharpOnvifServer.Events.PullPoint>(eventBinding, URI_EVENTS_SERVICE);
 
     var subscriptionBinding = OnvifBindingFactory.CreateBinding();
     serviceBuilder.AddService<OnvifService.Onvif.RouterSubscriptionManagerImpl>();
-    serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.RouterSubscriptionManagerImpl, SharpOnvifServer.Events.SubscriptionManager>(subscriptionBinding, "/onvif/Events/Subscription");
-    serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.RouterSubscriptionManagerImpl, SharpOnvifServer.Events.PausableSubscriptionManager>(subscriptionBinding, "/onvif/Events/Subscription");
-    serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.RouterSubscriptionManagerImpl, SharpOnvifServer.Events.PullPointSubscription>(subscriptionBinding, "/onvif/Events/Subscription");
+    serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.RouterSubscriptionManagerImpl, SharpOnvifServer.Events.SubscriptionManager>(subscriptionBinding, URI_EVENTS_SUBSCRIPTION);
+    serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.RouterSubscriptionManagerImpl, SharpOnvifServer.Events.PausableSubscriptionManager>(subscriptionBinding, URI_EVENTS_SUBSCRIPTION);
+    serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.RouterSubscriptionManagerImpl, SharpOnvifServer.Events.PullPointSubscription>(subscriptionBinding, URI_EVENTS_SUBSCRIPTION);
 
     // add more service endpoints
 });
