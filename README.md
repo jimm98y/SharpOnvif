@@ -91,12 +91,12 @@ Onvif client provides netstandard2.0 and NET8.0 WCF bindings generated using `do
 
 To discover Onvif devices on your network, use:
 ```cs
-string[] onvifDeviceUris = await OnvifDiscoveryClient.DiscoverAsync();
+var onvifDevices = await OnvifDiscoveryClient.DiscoverAsync();
 ```
 
 To create the `SimpleOnvifClient`, use:
 ```cs
-var client = new SimpleOnvifClient(onvifDeviceUri, "admin", "password");
+var client = new SimpleOnvifClient(onvifDevices[0].Addresses[0], "admin", "password");
 ```
 
 Call `GetDeviceInformationAsync` to retrieve information about the device:
