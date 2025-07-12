@@ -268,21 +268,27 @@ namespace SharpOnvifServer.Discovery
 
         private static string BuildScopes(OnvifDiscoveryOptions options)
         {
-            List<string> scopes = options.Scopes;
+            List<string> scopes = options.Scopes.ToList(); // because we are adding additional scopes here, we need a copy of the collection
             if (scopes == null)
                 return string.Empty;
 
-            if (!string.IsNullOrEmpty(options.MAC))
-                scopes.Add($"onvif://www.onvif.org/MAC/{Uri.EscapeDataString(options.MAC)}");
+            if (!string.IsNullOrEmpty(options.City))
+                scopes.Add($"{SharpOnvifCommon.Discovery.Scopes.City}{Uri.EscapeDataString(options.City)}");
+
+            if (!string.IsNullOrEmpty(options.Country))
+                scopes.Add($"{SharpOnvifCommon.Discovery.Scopes.Country}{Uri.EscapeDataString(options.Country)}");
 
             if (!string.IsNullOrEmpty(options.Hardware))
-                scopes.Add($"onvif://www.onvif.org/hardware/{Uri.EscapeDataString(options.Hardware)}");
+                scopes.Add($"{SharpOnvifCommon.Discovery.Scopes.Hardware}{Uri.EscapeDataString(options.Hardware)}");
+
+            if (!string.IsNullOrEmpty(options.MAC))
+                scopes.Add($"{SharpOnvifCommon.Discovery.Scopes.MAC}{Uri.EscapeDataString(options.MAC)}");
+
+            if (!string.IsNullOrEmpty(options.Manufacturer))
+                scopes.Add($"{SharpOnvifCommon.Discovery.Scopes.Manufacturer}{Uri.EscapeDataString(options.Manufacturer)}");
 
             if (!string.IsNullOrEmpty(options.Name))
-                scopes.Add($"onvif://www.onvif.org/name/{Uri.EscapeDataString(options.Name)}");
-
-            if (!string.IsNullOrEmpty(options.City))
-                scopes.Add($"onvif://www.onvif.org/location/city/{Uri.EscapeDataString(options.City)}");
+                scopes.Add($"{SharpOnvifCommon.Discovery.Scopes.Name}{Uri.EscapeDataString(options.Name)}");
 
             return string.Join(' ', scopes);
         }

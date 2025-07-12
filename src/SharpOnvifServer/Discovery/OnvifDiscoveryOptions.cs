@@ -9,8 +9,10 @@ namespace SharpOnvifServer.Discovery
         public List<string> Scopes { get; set; }
         public List<OnvifType> Types { get; set; }
         public string MAC { get; set; }
+        public string Manufacturer { get; set; }
         public string Hardware { get; set; }
         public string Name { get; set; }
         public string City { get; set; }
+        public string Country { get; set; }
     }
 }

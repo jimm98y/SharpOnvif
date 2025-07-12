@@ -19,7 +19,19 @@ public static class Program
     static async Task MainAsync(string[] args)
     {
         var devices = await OnvifDiscoveryClient.DiscoverAsync();
-        var device = devices.FirstOrDefault(x => x.Contains("localhost"));
+
+        if (devices == null || devices.Count == 0)
+        {
+            Console.WriteLine("No ONVIF devices found. Please check your network connection and try again.");
+            return;
+        }
+
+        foreach (var onvifDevice in devices)
+        {
+            Console.WriteLine($"Found device: Manufacturer = {onvifDevice.Manufacturer}, Model = {onvifDevice.Hardware}");
+        }
+
+        var device = devices.FirstOrDefault(x => x.Addresses.First().Contains("localhost"));
 
         if (device == null)
         {
@@ -27,7 +39,7 @@ public static class Program
         }
         else
         {
-            using (var client = new SimpleOnvifClient(device, "admin", "password", true))
+            using (var client = new SimpleOnvifClient(device.Addresses.First(), "admin", "password", true))
             {
                 var services = await client.GetServicesAsync(true);
                 var cameraDateTime = await client.GetSystemDateAndTimeUtcAsync();

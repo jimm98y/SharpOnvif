@@ -13,16 +13,11 @@ using System.Xml.XPath;
 
 namespace SharpOnvifClient
 {
+    /// <summary>
+    /// Discovers Onvif devices on the network by sending a multicast discovery request. IPv4 only.
+    /// </summary>
     public static class OnvifDiscoveryClient
     {
-        private class UdpState
-        {
-            public UdpClient Client { get; set; }
-            public IPEndPoint Endpoint { get; set; }
-            public IList<string> Result { get; set; }
-            public Action<string> Callback { get; set; }
-        }
-
         public const int ONVIF_BROADCAST_TIMEOUT = 4000; // 4s timeout
         public const int ONVIF_DISCOVERY_PORT = 3702;
         public static string OnvifDiscoveryAddress = "239.255.255.250"; // only IPv4 networks are currently supported
@@ -37,10 +32,37 @@ namespace SharpOnvifClient
         /// <param name="broadcastPort">Broadcast port - 0 to let the OS choose any free port.</param>
         /// <param name="deviceType">Device type we are searching for.</param>
         /// <returns>A list of discovered devices.</returns>
-        public static async Task<IList<string>> DiscoverAsync(Action<string> onDeviceDiscovered = null, int broadcastTimeout = ONVIF_BROADCAST_TIMEOUT, int broadcastPort = 0, string deviceType = "NetworkVideoTransmitter")
+        public static async Task<IList<OnvifDiscoveryResult>> DiscoverAsync(Action<OnvifDiscoveryResult> onDeviceDiscovered = null, int broadcastTimeout = ONVIF_BROADCAST_TIMEOUT, int broadcastPort = 0, string deviceType = "NetworkVideoTransmitter")
+        {
+            return await DiscoverAllAsync(onDeviceDiscovered, broadcastTimeout, broadcastPort, deviceType);
+        }
+
+        /// <summary>
+        /// Discover ONVIF devices in the local network using a given network interface.
+        /// </summary>
+        /// <param name="ipAddress">IP address of the network interface to use (IP of the host computer on the NIC you want to use for discovery).</param>
+        /// <param name="onDeviceDiscovered">Callback to be called when a new device is discovered.</param>
+        /// <param name="broadcastTimeout"><see cref="ONVIF_BROADCAST_TIMEOUT"/>.</param>
+        /// <param name="broadcastPort">Broadcast port - 0 to let the OS choose any free port.</param>
+        /// <param name="deviceType">Device type we are searching for.</param>
+        /// <returns>A list of discovered devices.</returns>
+        public static async Task<IList<OnvifDiscoveryResult>> DiscoverAsync(string ipAddress, Action<OnvifDiscoveryResult> onDeviceDiscovered = null, int broadcastTimeout = ONVIF_BROADCAST_TIMEOUT, int broadcastPort = 0, string deviceType = "NetworkVideoTransmitter")
+        {
+            return await DiscoverAllAsync(ipAddress, onDeviceDiscovered, broadcastTimeout, broadcastPort, deviceType);
+        }
+
+        /// <summary>
+        /// Internal method to discover ONVIF devices in the local network and retrieve detailed information about them.
+        /// </summary>
+        /// <param name="onDeviceDiscovered"></param>
+        /// <param name="broadcastTimeout"></param>
+        /// <param name="broadcastPort"></param>
+        /// <param name="deviceType"></param>
+        /// <returns>A list of discovered devices with make and model.</returns>
+        internal static async Task<IList<OnvifDiscoveryResult>> DiscoverAllAsync(Action<OnvifDiscoveryResult> onDeviceDiscovered = null, int broadcastTimeout = ONVIF_BROADCAST_TIMEOUT, int broadcastPort = 0, string deviceType = "NetworkVideoTransmitter")
         {
             NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
-            List<Task<IList<string>>> discoveryTasks = new List<Task<IList<string>>>();
+            List<Task<IList<OnvifDiscoveryResult>>> discoveryTasks = new List<Task<IList<OnvifDiscoveryResult>>>();
 
             foreach (NetworkInterface adapter in nics)
             {
@@ -58,7 +80,7 @@ namespace SharpOnvifClient
                     continue;
 
                 if (!adapter.SupportsMulticast)
-                    continue; 
+                    continue;
 
                 if (!adapter.Supports(NetworkInterfaceComponent.IPv4))
                     continue;
@@ -76,28 +98,27 @@ namespace SharpOnvifClient
                         if (ipAddrBytes[0] == 169 && ipAddrBytes[1] == 254)
                             continue; // skip link-local address
 
-                        var discoveryTask = DiscoverAsync(ua.Address.ToString(), onDeviceDiscovered, broadcastTimeout, broadcastPort, deviceType);
-                        discoveryTasks.Add(discoveryTask);  
+                        var discoveryTask = DiscoverAllAsync(ua.Address.ToString(), onDeviceDiscovered, broadcastTimeout, broadcastPort, deviceType);
+                        discoveryTasks.Add(discoveryTask);
                     }
-                }                
+                }
             }
 
             await Task.WhenAll(discoveryTasks);
 
-            return discoveryTasks.Where(x => x.IsCompleted && !x.IsFaulted && !x.IsCanceled).SelectMany(x => x.Result).Distinct().ToList();
+            return discoveryTasks.Where(x => x.IsCompleted && !x.IsFaulted && !x.IsCanceled).SelectMany(x => x.Result).GroupBy(r => r.Addresses.FirstOrDefault()).Select(g => g.First()).ToList();
         }
 
-
         /// <summary>
-        /// Discover ONVIF devices in the local network.
+        /// Internal method to discover ONVIF devices on all network interfaces and retrieve detailed information about them.
         /// </summary>
-        /// <param name="ipAddress">IP address of the network interface to use (IP of the host computer on the NIC you want to use for discovery).</param>
-        /// <param name="onDeviceDiscovered">Callback to be called when a new device is discovered.</param>
-        /// <param name="broadcastTimeout"><see cref="ONVIF_BROADCAST_TIMEOUT"/>.</param>
-        /// <param name="broadcastPort">Broadcast port - 0 to let the OS choose any free port.</param>
-        /// <param name="deviceType">Device type we are searching for.</param>
-        /// <returns>A list of discovered devices.</returns>
-        public static async Task<IList<string>> DiscoverAsync(string ipAddress, Action<string> onDeviceDiscovered = null, int broadcastTimeout = ONVIF_BROADCAST_TIMEOUT, int broadcastPort = 0, string deviceType = "NetworkVideoTransmitter")
+        /// <param name="ipAddress"></param>
+        /// <param name="onDeviceDiscovered"></param>
+        /// <param name="broadcastTimeout"></param>
+        /// <param name="broadcastPort"></param>
+        /// <param name="deviceType"></param>
+        /// <returns>A list of discovered devices with make and model.</returns>
+        internal static async Task<IList<OnvifDiscoveryResult>> DiscoverAllAsync(string ipAddress, Action<OnvifDiscoveryResult> onDeviceDiscovered = null, int broadcastTimeout = ONVIF_BROADCAST_TIMEOUT, int broadcastPort = 0, string deviceType = "NetworkVideoTransmitter")
         {
             if (ipAddress == null)
                 throw new ArgumentNullException(nameof(ipAddress));
@@ -109,7 +130,7 @@ namespace SharpOnvifClient
             "<s:Envelope xmlns:s=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:a=\"http://schemas.xmlsoap.org/ws/2004/08/addressing\">\r\n" +
             "   <s:Header>\r\n" +
             "      <a:Action s:mustUnderstand=\"1\">http://schemas.xmlsoap.org/ws/2005/04/discovery/Probe</a:Action>\r\n" +
-            "      <a:MessageID>urn:uuid:" + uuid + "</a:MessageID>\r\n" + // uuid has to be unique for each request
+            "      <a:MessageID>urn:uuid:" + uuid + "</a:MessageID>\r\n" +
             "      <a:ReplyTo>\r\n" +
             "        <a:Address>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</a:Address>\r\n" +
             "      </a:ReplyTo>\r\n" +
@@ -122,7 +143,10 @@ namespace SharpOnvifClient
             "   </s:Body>\r\n" +
             "</s:Envelope>\r\n";
 
-            IList<string> devices = new List<string>();
+            var results = new List<OnvifDiscoveryResult>();
+            var endpoints = new HashSet<string>();
+            var cts = new CancellationTokenSource();
+
             IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse(ipAddress), broadcastPort);
             IPEndPoint multicastEndpoint = new IPEndPoint(IPAddress.Parse(OnvifDiscoveryAddress), ONVIF_DISCOVERY_PORT);
 
@@ -130,85 +154,118 @@ namespace SharpOnvifClient
             {
                 using (UdpClient client = new UdpClient(endPoint))
                 {
-                    UdpState s = new UdpState
+                    void ReceiveCallback(IAsyncResult ar)
                     {
-                        Endpoint = endPoint,
-                        Client = client,
-                        Result = devices,
-                        Callback = onDeviceDiscovered
-                    };
+                        try
+                        {
+                            IPEndPoint remote = null;
+                            byte[] receiveBytes = client.EndReceive(ar, ref remote);
+                            string response = Encoding.UTF8.GetString(receiveBytes);
 
-                    client.BeginReceive(DiscoveryMessageReceived, s);
+                            var parsed = ParseDiscoveryResponse(response);
+
+                            if (parsed.Addresses != null && parsed.Addresses.Length > 0)
+                            {
+                                lock (results)
+                                {
+                                    if (endpoints.Add(parsed.Addresses.First()))
+                                    {
+                                        results.Add(parsed);
+                                        onDeviceDiscovered?.Invoke(parsed);
+                                    }
+                                }
+                            }
+                            // continue receiving
+                            if (!cts.IsCancellationRequested)
+                                client.BeginReceive(ReceiveCallback, null);
+                        }
+                        catch
+                        {
+                            // ignore exceptions on shutdown
+                        }
+                    }
+
+                    client.BeginReceive(ReceiveCallback, null);
 
                     byte[] message = Encoding.UTF8.GetBytes(onvifDiscoveryProbe);
-                    await client.SendAsync(message, message.Count(), multicastEndpoint);
+                    await client.SendAsync(message, message.Length, multicastEndpoint);
 
-                    // make sure we do not wait forever
-                    await Task.Delay(broadcastTimeout);
+                    await Task.Delay(broadcastTimeout, cts.Token);
+                    cts.Cancel();
 
-                    return s.Result.OrderBy(x => x).ToArray();
+                    // return a snapshot of the results
+                    lock (results)
+                    {
+                        return results.ToList();
+                    }
                 }
             }
             finally
             {
+                cts.Dispose();
                 _discoverySlim.Release();
             }
         }
 
-        private static void DiscoveryMessageReceived(IAsyncResult result)
+        private static OnvifDiscoveryResult ParseDiscoveryResponse(string response)
         {
-            try
-            {
-                UdpClient client = ((UdpState)result.AsyncState).Client;
-                IPEndPoint endpoint = ((UdpState)result.AsyncState).Endpoint;
-                byte[] receiveBytes = client.EndReceive(result, ref endpoint);
-                string message = Encoding.UTF8.GetString(receiveBytes);
-                string host = endpoint.Address.ToString();
-                var devices = ((UdpState)result.AsyncState).Result;
-                var deviceEndpoint = ReadOnvifEndpoint(message);
-                if (deviceEndpoint != null)
-                {
-                    devices.Add(deviceEndpoint);
-
-                    var callback = ((UdpState)result.AsyncState).Callback;
-                    if (callback != null)
-                    {
-                        try
-                        {
-                            callback.Invoke(deviceEndpoint);
-                        }
-                        catch (Exception ex)
-                        {
-                            Debug.WriteLine(ex.Message);
-                        }
-                    }
-                }
-                client.BeginReceive(DiscoveryMessageReceived, result.AsyncState);
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
-        }
-
-        private static string ReadOnvifEndpoint(string message)
-        {
-            using (var textReader = new StringReader(message))
+            using (var textReader = new StringReader(response))
             {
                 var document = new XPathDocument(textReader);
                 var navigator = document.CreateNavigator();
 
+                OnvifDiscoveryResult result = new OnvifDiscoveryResult();
+                result.Raw = response;
+
                 // local-name is used to ignore the namespace
+
+                // parse the XAddrs
                 var node = navigator.SelectSingleNode("//*[local-name()='XAddrs']/text()");
                 if (node != null)
                 {
                     string[] addresses = node.Value.Split(' ');
-                    return addresses.First();
+                    result.Addresses = addresses;
                 }
-                else
+
+                // parse Scopes
+                var scopesNode = navigator.SelectSingleNode("//*[local-name()='Scopes']/text()");
+                if (scopesNode != null)
                 {
-                    return null;
+                    string allScopes = scopesNode.Value;
+
+                    string[] scopes = allScopes.Split(' ');
+                    result.Scopes = scopes;
+
+                    try
+                    {
+                        foreach (var scope in scopes)
+                        {
+                            if (scope.StartsWith(SharpOnvifCommon.Discovery.Scopes.MAC, StringComparison.OrdinalIgnoreCase))
+                                result.MAC = Uri.UnescapeDataString(scope.Substring(SharpOnvifCommon.Discovery.Scopes.MAC.Length));
+
+                            if (scope.StartsWith(SharpOnvifCommon.Discovery.Scopes.Manufacturer, StringComparison.OrdinalIgnoreCase))
+                                result.Manufacturer = Uri.UnescapeDataString(scope.Substring(SharpOnvifCommon.Discovery.Scopes.Manufacturer.Length));
+
+                            if (scope.StartsWith(SharpOnvifCommon.Discovery.Scopes.Hardware, StringComparison.OrdinalIgnoreCase))
+                                result.Hardware = Uri.UnescapeDataString(scope.Substring(SharpOnvifCommon.Discovery.Scopes.Hardware.Length));
+
+                            if (scope.StartsWith(SharpOnvifCommon.Discovery.Scopes.Name, StringComparison.OrdinalIgnoreCase))
+                                result.Name = Uri.UnescapeDataString(scope.Substring(SharpOnvifCommon.Discovery.Scopes.Name.Length));
+
+                            if (scope.StartsWith(SharpOnvifCommon.Discovery.Scopes.City, StringComparison.OrdinalIgnoreCase))
+                                result.City = Uri.UnescapeDataString(scope.Substring(SharpOnvifCommon.Discovery.Scopes.City.Length));
+
+                            if (scope.StartsWith(SharpOnvifCommon.Discovery.Scopes.Country, StringComparison.OrdinalIgnoreCase))
+                                result.Country = Uri.UnescapeDataString(scope.Substring(SharpOnvifCommon.Discovery.Scopes.Country.Length));
+                        }
+                    }
+                    catch(Exception ex)
+                    {
+                        Debug.WriteLine($"{nameof(OnvifDiscoveryClient)}.{nameof(ParseDiscoveryResponse)} failed to parse scopes:\r\n{ex.Message}\r\nContinuing...");
+                    }
                 }
+
+                return result;
             }
         }
     }
