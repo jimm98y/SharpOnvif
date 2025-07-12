@@ -18,7 +18,7 @@ public static class Program
 
     static async Task MainAsync(string[] args)
     {
-        var devices = await OnvifDiscoveryClient.DiscoverAsyncWithMake();
+        var devices = await OnvifDiscoveryClient.DiscoverAsync();
 
         if (devices == null || devices.Count == 0)
         {
@@ -28,10 +28,10 @@ public static class Program
 
         foreach (var onvifDevice in devices)
         {
-            Console.WriteLine($"Found device: Make = {onvifDevice.Make}, Model = {onvifDevice.Model}");
+            Console.WriteLine($"Found device: Manufacturer = {onvifDevice.Manufacturer}, Model = {onvifDevice.Hardware}");
         }
 
-        var device = devices.FirstOrDefault(x => x.Endpoint != null && x.Endpoint.Contains("localhost"));
+        var device = devices.FirstOrDefault(x => x.Addresses.First().Contains("localhost"));
 
         if (device == null)
         {
@@ -39,7 +39,7 @@ public static class Program
         }
         else
         {
-            using (var client = new SimpleOnvifClient(device.Endpoint, "admin", "password", true))
+            using (var client = new SimpleOnvifClient(device.Addresses.First(), "admin", "password", true))
             {
                 var services = await client.GetServicesAsync(true);
                 var cameraDateTime = await client.GetSystemDateAndTimeUtcAsync();

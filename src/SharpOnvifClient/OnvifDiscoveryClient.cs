@@ -13,15 +13,9 @@ using System.Xml.XPath;
 
 namespace SharpOnvifClient
 {
-
-    public class OnvifDiscoveryResult
-    {
-        public string Endpoint { get; set; }
-        public string Make { get; set; }
-        public string Model { get; set; }
-    }
-
-
+    /// <summary>
+    /// Discovers Onvif devices on the network by sending a multicast discovery request. IPv4 only.
+    /// </summary>
     public static class OnvifDiscoveryClient
     {
         public const int ONVIF_BROADCAST_TIMEOUT = 4000; // 4s timeout
@@ -38,10 +32,9 @@ namespace SharpOnvifClient
         /// <param name="broadcastPort">Broadcast port - 0 to let the OS choose any free port.</param>
         /// <param name="deviceType">Device type we are searching for.</param>
         /// <returns>A list of discovered devices.</returns>
-        public static async Task<IList<string>> DiscoverAsync(Action<string> onDeviceDiscovered = null, int broadcastTimeout = ONVIF_BROADCAST_TIMEOUT, int broadcastPort = 0, string deviceType = "NetworkVideoTransmitter")
+        public static async Task<IList<OnvifDiscoveryResult>> DiscoverAsync(Action<OnvifDiscoveryResult> onDeviceDiscovered = null, int broadcastTimeout = ONVIF_BROADCAST_TIMEOUT, int broadcastPort = 0, string deviceType = "NetworkVideoTransmitter")
         {
-            var results = await DiscoverAllAsync(r => onDeviceDiscovered?.Invoke(r), broadcastTimeout, broadcastPort, deviceType);
-            return results.Select(r => r.Endpoint).ToList();
+            return await DiscoverAllAsync(onDeviceDiscovered, broadcastTimeout, broadcastPort, deviceType);
         }
 
         /// <summary>
@@ -53,38 +46,9 @@ namespace SharpOnvifClient
         /// <param name="broadcastPort">Broadcast port - 0 to let the OS choose any free port.</param>
         /// <param name="deviceType">Device type we are searching for.</param>
         /// <returns>A list of discovered devices.</returns>
-        public static async Task<IList<string>> DiscoverAsync(string ipAddress, Action<string> onDeviceDiscovered = null, int broadcastTimeout = ONVIF_BROADCAST_TIMEOUT, int broadcastPort = 0, string deviceType = "NetworkVideoTransmitter")
+        public static async Task<IList<OnvifDiscoveryResult>> DiscoverAsync(string ipAddress, Action<OnvifDiscoveryResult> onDeviceDiscovered = null, int broadcastTimeout = ONVIF_BROADCAST_TIMEOUT, int broadcastPort = 0, string deviceType = "NetworkVideoTransmitter")
         {
-            var results = await DiscoverAllAsync(ipAddress, r => onDeviceDiscovered?.Invoke(r), broadcastTimeout, broadcastPort, deviceType);
-
-            return results.Select(r => r.Endpoint).ToList();
-        }
-
-        /// <summary>
-        /// Discover ONVIF devices in the local network on all network interfaces and return detailed information (endpoint, make, model).
-        /// </summary>
-        /// <param name="onDeviceDiscovered">Callback to be called when a new device is discovered.</param>
-        /// <param name="broadcastTimeout">Timeout for discovery in milliseconds.</param>
-        /// <param name="broadcastPort">Broadcast port - 0 to let the OS choose any free port.</param>
-        /// <param name="deviceType">Device type to search for.</param>
-        /// <returns>A list of discovered devices with endpoint, make, and model.</returns>
-        public static async Task<IList<OnvifDiscoveryResult>> DiscoverAsyncWithMake(Action<string> onDeviceDiscovered = null, int broadcastTimeout = ONVIF_BROADCAST_TIMEOUT, int broadcastPort = 0, string deviceType = "NetworkVideoTransmitter")
-        {
-            return await DiscoverAllAsync(r => onDeviceDiscovered?.Invoke(r), broadcastTimeout, broadcastPort, deviceType);
-        }
-
-        /// <summary>
-        /// Discover ONVIF devices in the local network using a given network interface.
-        /// </summary>
-        /// <param name="ipAddress">IP address of the network interface to use (IP of the host computer on the NIC you want to use for discovery).</param>
-        /// <param name="onDeviceDiscovered">Callback to be called when a new device is discovered.</param>
-        /// <param name="broadcastTimeout"><see cref="ONVIF_BROADCAST_TIMEOUT"/>.</param>
-        /// <param name="broadcastPort">Broadcast port - 0 to let the OS choose any free port.</param>
-        /// <param name="deviceType">Device type we are searching for.</param>
-        /// <returns>A list of discovered devices with make and model.</returns>
-        public static async Task<IList<OnvifDiscoveryResult>> DiscoverAsyncWithMake(string ipAddress, Action<string> onDeviceDiscovered = null, int broadcastTimeout = ONVIF_BROADCAST_TIMEOUT, int broadcastPort = 0, string deviceType = "NetworkVideoTransmitter")
-        {
-            return await DiscoverAllAsync(ipAddress, r => onDeviceDiscovered?.Invoke(r), broadcastTimeout, broadcastPort, deviceType);
+            return await DiscoverAllAsync(ipAddress, onDeviceDiscovered, broadcastTimeout, broadcastPort, deviceType);
         }
 
         /// <summary>
@@ -95,7 +59,7 @@ namespace SharpOnvifClient
         /// <param name="broadcastPort"></param>
         /// <param name="deviceType"></param>
         /// <returns>A list of discovered devices with make and model.</returns>
-        internal static async Task<IList<OnvifDiscoveryResult>> DiscoverAllAsync(Action<string> onDeviceDiscovered = null, int broadcastTimeout = ONVIF_BROADCAST_TIMEOUT, int broadcastPort = 0, string deviceType = "NetworkVideoTransmitter")
+        internal static async Task<IList<OnvifDiscoveryResult>> DiscoverAllAsync(Action<OnvifDiscoveryResult> onDeviceDiscovered = null, int broadcastTimeout = ONVIF_BROADCAST_TIMEOUT, int broadcastPort = 0, string deviceType = "NetworkVideoTransmitter")
         {
             NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
             List<Task<IList<OnvifDiscoveryResult>>> discoveryTasks = new List<Task<IList<OnvifDiscoveryResult>>>();
@@ -142,7 +106,7 @@ namespace SharpOnvifClient
 
             await Task.WhenAll(discoveryTasks);
 
-            return discoveryTasks.Where(x => x.IsCompleted && !x.IsFaulted && !x.IsCanceled).SelectMany(x => x.Result).GroupBy(r => r.Endpoint).Select(g => g.First()).ToList();
+            return discoveryTasks.Where(x => x.IsCompleted && !x.IsFaulted && !x.IsCanceled).SelectMany(x => x.Result).GroupBy(r => r.Addresses.FirstOrDefault()).Select(g => g.First()).ToList();
         }
 
         /// <summary>
@@ -154,7 +118,7 @@ namespace SharpOnvifClient
         /// <param name="broadcastPort"></param>
         /// <param name="deviceType"></param>
         /// <returns>A list of discovered devices with make and model.</returns>
-        internal static async Task<IList<OnvifDiscoveryResult>> DiscoverAllAsync(string ipAddress, Action<string> onDeviceDiscovered = null, int broadcastTimeout = ONVIF_BROADCAST_TIMEOUT, int broadcastPort = 0, string deviceType = "NetworkVideoTransmitter")
+        internal static async Task<IList<OnvifDiscoveryResult>> DiscoverAllAsync(string ipAddress, Action<OnvifDiscoveryResult> onDeviceDiscovered = null, int broadcastTimeout = ONVIF_BROADCAST_TIMEOUT, int broadcastPort = 0, string deviceType = "NetworkVideoTransmitter")
         {
             if (ipAddress == null)
                 throw new ArgumentNullException(nameof(ipAddress));
@@ -198,28 +162,26 @@ namespace SharpOnvifClient
                             byte[] receiveBytes = client.EndReceive(ar, ref remote);
                             string response = Encoding.UTF8.GetString(receiveBytes);
 
-                            var endpoint = ReadOnvifEndpoint(response);
-                            var (make, model) = ReadOnvifMakeModelFromScopes(response);
+                            var parsed = ParseDiscoveryResponse(response);
 
-                            if (!string.IsNullOrEmpty(endpoint))
+                            if (parsed.Addresses != null && parsed.Addresses.Length > 0)
                             {
                                 lock (results)
                                 {
-                                    if (endpoints.Add(endpoint))
+                                    if (endpoints.Add(parsed.Addresses.First()))
                                     {
-                                        var device = new OnvifDiscoveryResult { Endpoint = endpoint, Make = make, Model = model };
-                                        results.Add(device);
-                                        onDeviceDiscovered?.Invoke(device.Endpoint);
+                                        results.Add(parsed);
+                                        onDeviceDiscovered?.Invoke(parsed);
                                     }
                                 }
                             }
-                            // Continue receiving
+                            // continue receiving
                             if (!cts.IsCancellationRequested)
                                 client.BeginReceive(ReceiveCallback, null);
                         }
                         catch
                         {
-                            // Ignore exceptions on shutdown
+                            // ignore exceptions on shutdown
                         }
                     }
 
@@ -231,7 +193,7 @@ namespace SharpOnvifClient
                     await Task.Delay(broadcastTimeout, cts.Token);
                     cts.Cancel();
 
-                    // Return a snapshot of the results
+                    // return a snapshot of the results
                     lock (results)
                     {
                         return results.ToList();
@@ -240,75 +202,71 @@ namespace SharpOnvifClient
             }
             finally
             {
+                cts.Dispose();
                 _discoverySlim.Release();
             }
         }
 
-
-
-        private static string ReadOnvifEndpoint(string message)
+        private static OnvifDiscoveryResult ParseDiscoveryResponse(string response)
         {
-            using (var textReader = new StringReader(message))
+            using (var textReader = new StringReader(response))
             {
                 var document = new XPathDocument(textReader);
                 var navigator = document.CreateNavigator();
 
+                OnvifDiscoveryResult result = new OnvifDiscoveryResult();
+                result.Raw = response;
+
                 // local-name is used to ignore the namespace
+
+                // parse the XAddrs
                 var node = navigator.SelectSingleNode("//*[local-name()='XAddrs']/text()");
                 if (node != null)
                 {
                     string[] addresses = node.Value.Split(' ');
-                    return addresses.First();
+                    result.Addresses = addresses;
                 }
-                else
-                {
-                    return null;
-                }
-            }
-        }
 
-        private static (string Make, string Model) ReadOnvifMakeModelFromScopes(string message)
-        {
-            using (var textReader = new StringReader(message))
-            {
-                var document = new XPathDocument(textReader);
-                var navigator = document.CreateNavigator();
-
+                // parse Scopes
                 var scopesNode = navigator.SelectSingleNode("//*[local-name()='Scopes']/text()");
                 if (scopesNode != null)
                 {
-                    string scopes = scopesNode.Value;
-                    string make = null, model = null;
-                    foreach (var scope in scopes.Split(' '))
+                    string allScopes = scopesNode.Value;
+
+                    string[] scopes = allScopes.Split(' ');
+                    result.Scopes = scopes;
+
+                    try
                     {
-                        if (scope.StartsWith("onvif://www.onvif.org/hardware/", StringComparison.OrdinalIgnoreCase))
-                            model = scope.Substring("onvif://www.onvif.org/hardware/".Length);
-                        if (scope.StartsWith("onvif://www.onvif.org/Manufacturer/", StringComparison.OrdinalIgnoreCase))
-                            make = scope.Substring("onvif://www.onvif.org/Manufacturer/".Length);
-                        if (scope.StartsWith("onvif://www.onvif.org/name/", StringComparison.OrdinalIgnoreCase))
+                        foreach (var scope in scopes)
                         {
-                            var nameValue = scope.Substring("onvif://www.onvif.org/name/".Length);
-                            // Only use this if Manufacturer is missing
-                            if (make == null && !string.IsNullOrEmpty(nameValue))
-                            {
-                                var parts = nameValue.Split(new[] { "%20" }, StringSplitOptions.None);
-                                if (parts.Length > 0)
-                                {
-                                    make = parts[0];
-                                    // If model is still null, try to use the rest as model
-                                    if (model == null && parts.Length > 1)
-                                        model = string.Join(" ", parts.Skip(1));
-                                }
-                            }
-                            // If model is still null, fallback to the whole name value
-                            if (model == null && !string.IsNullOrEmpty(nameValue))
-                                model = Uri.UnescapeDataString(nameValue);
+                            if (scope.StartsWith(SharpOnvifCommon.Discovery.Scopes.MAC, StringComparison.OrdinalIgnoreCase))
+                                result.MAC = Uri.UnescapeDataString(scope.Substring(SharpOnvifCommon.Discovery.Scopes.MAC.Length));
+
+                            if (scope.StartsWith(SharpOnvifCommon.Discovery.Scopes.Manufacturer, StringComparison.OrdinalIgnoreCase))
+                                result.Manufacturer = Uri.UnescapeDataString(scope.Substring(SharpOnvifCommon.Discovery.Scopes.Manufacturer.Length));
+
+                            if (scope.StartsWith(SharpOnvifCommon.Discovery.Scopes.Hardware, StringComparison.OrdinalIgnoreCase))
+                                result.Hardware = Uri.UnescapeDataString(scope.Substring(SharpOnvifCommon.Discovery.Scopes.Hardware.Length));
+
+                            if (scope.StartsWith(SharpOnvifCommon.Discovery.Scopes.Name, StringComparison.OrdinalIgnoreCase))
+                                result.Name = Uri.UnescapeDataString(scope.Substring(SharpOnvifCommon.Discovery.Scopes.Name.Length));
+
+                            if (scope.StartsWith(SharpOnvifCommon.Discovery.Scopes.City, StringComparison.OrdinalIgnoreCase))
+                                result.City = Uri.UnescapeDataString(scope.Substring(SharpOnvifCommon.Discovery.Scopes.City.Length));
+
+                            if (scope.StartsWith(SharpOnvifCommon.Discovery.Scopes.Country, StringComparison.OrdinalIgnoreCase))
+                                result.Country = Uri.UnescapeDataString(scope.Substring(SharpOnvifCommon.Discovery.Scopes.Country.Length));
                         }
                     }
-                    return (make, model);
+                    catch(Exception ex)
+                    {
+                        Debug.WriteLine($"{nameof(OnvifDiscoveryClient)}.{nameof(ParseDiscoveryResponse)} failed to parse scopes:\r\n{ex.Message}\r\nContinuing...");
+                    }
                 }
+
+                return result;
             }
-            return (null, null);
         }
     }
 }
