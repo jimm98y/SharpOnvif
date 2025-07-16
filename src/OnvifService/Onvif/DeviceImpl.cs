@@ -18,6 +18,7 @@ namespace OnvifService.Onvif
         private readonly ILogger<DeviceImpl> _logger;
         private readonly IConfiguration _configuration;
 
+        public string PrimaryNICName { get; private set; }
         public string PrimaryIPv4Address { get; private set; }
         public string PrimaryIPv4DNS { get; private set; }
         public string PrimaryMACAddress { get; private set; }
@@ -30,6 +31,8 @@ namespace OnvifService.Onvif
             _logger = logger;
             _configuration = configuration;
 
+            PrimaryNICName = _configuration.GetValue("DeviceImpl:PrimaryNICName", "");
+            if (string.IsNullOrEmpty(PrimaryNICName)) PrimaryNICName = GetPrimaryNICName();
             PrimaryIPv4Address = _configuration.GetValue("DeviceImpl:PrimaryIPv4Address", "");
             if (string.IsNullOrEmpty(PrimaryIPv4Address)) PrimaryIPv4Address = GetPrimaryIPv4Address();
             PrimaryIPv4DNS = _configuration.GetValue("DeviceImpl:PrimaryIPv4DNS", "");
@@ -139,7 +142,7 @@ namespace OnvifService.Onvif
                         Enabled = true,
                         Info = new NetworkInterfaceInfo()
                         {
-                            Name = "eth0",
+                            Name = PrimaryNICName,
                             HwAddress = PrimaryMACAddress,
                         },
                         Link = new NetworkInterfaceLink()
@@ -549,6 +552,16 @@ namespace OnvifService.Onvif
                 {
                     ret = BitConverter.ToString(nicPhysicalAddress.GetAddressBytes()).Replace('-', ':');
                 }
+            }
+            return ret;
+        }
+        private string GetPrimaryNICName()
+        {
+            string ret = "eth0";
+            var nic = GetPrimaryNetworkInterface();
+            if (nic != null)
+            {
+                ret = nic.Name;
             }
             return ret;
         }
