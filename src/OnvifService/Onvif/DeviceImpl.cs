@@ -30,11 +30,16 @@ namespace OnvifService.Onvif
             _logger = logger;
             _configuration = configuration;
 
-            PrimaryIPv4Address = _configuration.GetValue("DeviceImpl:PrimaryIPv4Address", GetPrimaryIPv4Address());
-            PrimaryIPv4DNS = _configuration.GetValue("DeviceImpl:PrimaryIPv4DNS", GetPrimaryIPv4DNS());
-            PrimaryMACAddress = _configuration.GetValue("DeviceImpl:PrimaryMACAddress", GetPrimaryMACAddress());
-            PrimaryNTPAddress = _configuration.GetValue("DeviceImpl:PrimaryNTPAddress", GetPrimaryNTPAddress());
-            PrimaryIPv4Gateway = _configuration.GetValue("DeviceImpl:PrimaryIPv4Gateway", GetPrimaryIPv4Gateway());
+            PrimaryIPv4Address = _configuration.GetValue("DeviceImpl:PrimaryIPv4Address", "");
+            if (string.IsNullOrEmpty(PrimaryIPv4Address)) PrimaryIPv4Address = GetPrimaryIPv4Address();
+            PrimaryIPv4DNS = _configuration.GetValue("DeviceImpl:PrimaryIPv4DNS", "");
+            if (string.IsNullOrEmpty(PrimaryIPv4DNS)) PrimaryIPv4DNS = GetPrimaryIPv4DNS();
+            PrimaryMACAddress = _configuration.GetValue("DeviceImpl:PrimaryMACAddress", "");
+            if (string.IsNullOrEmpty(PrimaryMACAddress)) PrimaryMACAddress = GetPrimaryMACAddress();
+            PrimaryNTPAddress = _configuration.GetValue("DeviceImpl:PrimaryNTPAddress", "");
+            if (string.IsNullOrEmpty(PrimaryNTPAddress)) PrimaryNTPAddress = GetPrimaryNTPAddress();
+            PrimaryIPv4Gateway = _configuration.GetValue("DeviceImpl:PrimaryIPv4Gateway", "");
+            if (string.IsNullOrEmpty(PrimaryIPv4Gateway)) PrimaryIPv4Gateway = GetPrimaryIPv4Gateway();
         }
 
         public override GetCapabilitiesResponse GetCapabilities(GetCapabilitiesRequest request)
@@ -542,7 +547,7 @@ namespace OnvifService.Onvif
                 var nicPhysicalAddress = nic.GetPhysicalAddress();
                 if (nicPhysicalAddress != null)
                 {
-                    ret = nicPhysicalAddress.ToString();
+                    ret = BitConverter.ToString(nicPhysicalAddress.GetAddressBytes()).Replace('-', ':');
                 }
             }
             return ret;
