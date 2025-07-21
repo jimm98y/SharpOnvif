@@ -147,12 +147,14 @@ namespace SharpOnvifServer
 
         public static string GetHttpEndpoint(this IServer server)
         {
-            return server.Features.Get<IServerAddressesFeature>().Addresses.FirstOrDefault(x => x.StartsWith("http://"));
+            var addresses = server.Features.Get<IServerAddressesFeature>().Addresses;
+            return addresses.FirstOrDefault(x => x.StartsWith("http://"));
         }
 
         public static string GetHttpsEndpoint(this IServer server)
         {
-            return server.Features.Get<IServerAddressesFeature>().Addresses.FirstOrDefault(x => x.StartsWith("https://"));
+            var addresses = server.Features.Get<IServerAddressesFeature>().Addresses;
+            return addresses.FirstOrDefault(x => x.StartsWith("https://"));
         }
     }
 }
