@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Hosting.Server;
+﻿using CoreWCF;
+using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SharpOnvifCommon;
-using SharpOnvifServer;
 using SharpOnvifServer.Events;
 using System;
 using System.Xml;
@@ -28,6 +28,8 @@ namespace OnvifService.Onvif
 
         public override SubscribeResponse1 Subscribe(SubscribeRequest request)
         {
+            Uri endpointUri = OperationContext.Current.IncomingMessageProperties.Via;
+
             string notificationEndpoint = request.Subscribe.ConsumerReference.Address.Value;
 
             DateTime now = DateTime.UtcNow;
@@ -36,7 +38,7 @@ namespace OnvifService.Onvif
             // Basic uses the notification endpoint from the request
             var subscription = ActivatorUtilities.CreateInstance<SubscriptionManagerImpl>(_serviceProvider, termination, termination.Subtract(now), notificationEndpoint);
             int subscriptionID = _eventSubscriptionManager.AddSubscription(subscription);
-            string subscriptionReferenceUri = $"{_server.GetHttpEndpoint()}/onvif/Events/Subscription/{subscriptionID}/";
+            string subscriptionReferenceUri = OnvifHelpers.ChangeUriPath(endpointUri, $"/onvif/Events/Subscription/{subscriptionID}/").ToString();
 
             _logger.LogDebug($"{nameof(EventsImpl)}: Subscribed Basic {subscriptionID} on {subscriptionReferenceUri}");
 
@@ -60,13 +62,15 @@ namespace OnvifService.Onvif
 
         public override CreatePullPointSubscriptionResponse CreatePullPointSubscription(CreatePullPointSubscriptionRequest request)
         {
+            Uri endpointUri = OperationContext.Current.IncomingMessageProperties.Via;
+
             DateTime now = DateTime.UtcNow;
             DateTime termination = OnvifHelpers.FromAbsoluteOrRelativeDateTimeUTC(now, request.InitialTerminationTime, now.AddMinutes(1));
 
             // PullPoint uses "" for the notification endpoint
             var subscription = ActivatorUtilities.CreateInstance<SubscriptionManagerImpl>(_serviceProvider, termination, termination.Subtract(now), "");
             int subscriptionID = _eventSubscriptionManager.AddSubscription(subscription);
-            string subscriptionReferenceUri = $"{_server.GetHttpEndpoint()}/onvif/Events/Subscription/{subscriptionID}/";
+            string subscriptionReferenceUri = OnvifHelpers.ChangeUriPath(endpointUri, $"/onvif/Events/Subscription/{subscriptionID}/").ToString();
 
             _logger.LogDebug($"{nameof(EventsImpl)}: Subscribed PullPoint {subscriptionID} on {subscriptionReferenceUri}");
 

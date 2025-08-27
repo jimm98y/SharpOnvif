@@ -63,5 +63,12 @@ namespace SharpOnvifCommon
 
             throw new NotSupportedException(timeout);
         }
+
+        public static Uri ChangeUriPath(Uri serviceBaseUri, string path)
+        {
+            UriBuilder builder = new UriBuilder(serviceBaseUri);
+            builder.Path = path;
+            return builder.Uri;
+        }
     }
 }

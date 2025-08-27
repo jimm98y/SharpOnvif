@@ -4,8 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using SharpOnvifCommon;
 using SharpOnvifCommon.PTZ;
-using SharpOnvifServer;
 using SharpOnvifServer.Media;
+using System;
 
 namespace OnvifService.Onvif
 {
@@ -78,9 +78,11 @@ namespace OnvifService.Onvif
 
         public override MediaUri GetSnapshotUri(string ProfileToken)
         {
+            Uri endpointUri = OperationContext.Current.IncomingMessageProperties.Via;
+
             return new MediaUri()
             {
-                Uri = string.IsNullOrEmpty(VideoSnapshotUri) ? $"{_server.GetHttpEndpoint()}/preview" : VideoSnapshotUri
+                Uri = string.IsNullOrEmpty(VideoSnapshotUri) ? OnvifHelpers.ChangeUriPath(endpointUri, "/preview").ToString() : VideoSnapshotUri
             };
         }
 

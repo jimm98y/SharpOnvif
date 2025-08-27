@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SharpOnvifServer.Discovery;
 using SharpOnvifServer.Events;
 using System;
+using System.Collections.Generic;
 using System.IO.Pipelines;
 using System.Linq;
 using System.Text;
@@ -147,14 +148,24 @@ namespace SharpOnvifServer
 
         public static string GetHttpEndpoint(this IServer server)
         {
+            return GetHttpEndpoints(server).FirstOrDefault();
+        }
+
+        public static IEnumerable<string> GetHttpEndpoints(this IServer server)
+        {
             var addresses = server.Features.Get<IServerAddressesFeature>().Addresses;
-            return addresses.FirstOrDefault(x => x.StartsWith("http://"));
+            return addresses.Where(x => x.StartsWith("http://"));
         }
 
         public static string GetHttpsEndpoint(this IServer server)
         {
+            return GetHttpsEndpoints(server).FirstOrDefault();
+        }
+
+        public static IEnumerable<string> GetHttpsEndpoints(this IServer server)
+        {
             var addresses = server.Features.Get<IServerAddressesFeature>().Addresses;
-            return addresses.FirstOrDefault(x => x.StartsWith("https://"));
+            return addresses.Where(x => x.StartsWith("https://"));
         }
     }
 }

@@ -47,13 +47,15 @@ namespace OnvifService.Onvif
 
         public override GetCapabilitiesResponse GetCapabilities(GetCapabilitiesRequest request)
         {
+            Uri endpointUri = OperationContext.Current.IncomingMessageProperties.Via;
+
             return new GetCapabilitiesResponse()
             {
                 Capabilities = new Capabilities()
                 {
                     Device = new DeviceCapabilities()
                     {
-                        XAddr = $"{_server.GetHttpEndpoint()}/onvif/device_service",
+                        XAddr = OnvifHelpers.ChangeUriPath(endpointUri, "/onvif/device_service").ToString(),
                         Network = new NetworkCapabilities1()
                         {
                             IPFilter = true,
@@ -85,7 +87,7 @@ namespace OnvifService.Onvif
                     },
                     Media = new MediaCapabilities()
                     {
-                        XAddr = $"{_server.GetHttpEndpoint()}/onvif/media_service",
+                        XAddr = OnvifHelpers.ChangeUriPath(endpointUri, "/onvif/media_service").ToString(),
                         StreamingCapabilities = new RealTimeStreamingCapabilities()
                         {
                             RTP_RTSP_TCP = true,
@@ -95,11 +97,11 @@ namespace OnvifService.Onvif
                     Events = new EventCapabilities()
                     {
                         WSPullPointSupport = true,
-                        XAddr = $"{_server.GetHttpEndpoint()}/onvif/events_service"
+                        XAddr = OnvifHelpers.ChangeUriPath(endpointUri, "/onvif/events_service").ToString()
                     },
                     PTZ = new PTZCapabilities()
                     {
-                        XAddr = $"{_server.GetHttpEndpoint()}/onvif/ptz_service",
+                        XAddr = OnvifHelpers.ChangeUriPath(endpointUri, "/onvif/ptz_service").ToString(),
                     }
                 }
             };
@@ -185,9 +187,11 @@ namespace OnvifService.Onvif
         [return: MessageParameter(Name = "HostnameInformation")]
         public override HostnameInformation GetHostname()
         {
+            Uri endpointUri = OperationContext.Current.IncomingMessageProperties.Via;
+
             return new HostnameInformation()
             {
-                Name = new Uri(_server.GetHttpEndpoint()).Host
+                Name = endpointUri.Host
             };
         }
 
@@ -250,6 +254,8 @@ namespace OnvifService.Onvif
 
         public override GetServicesResponse GetServices(GetServicesRequest request)
         {
+            Uri endpointUri = OperationContext.Current.IncomingMessageProperties.Via;
+
             return new GetServicesResponse()
             {
                 Service = new Service[]
@@ -257,7 +263,7 @@ namespace OnvifService.Onvif
                     new Service()
                     {
                         Namespace = OnvifServices.DEVICE_MGMT, 
-                        XAddr = $"{_server.GetHttpEndpoint()}/onvif/device_service",
+                        XAddr = OnvifHelpers.ChangeUriPath(endpointUri, "/onvif/device_service").ToString(),
                         Version = new OnvifVersion()
                         {
                             Major = 17,
@@ -267,7 +273,7 @@ namespace OnvifService.Onvif
                     new Service()
                     {
                         Namespace = OnvifServices.MEDIA,
-                        XAddr = $"{_server.GetHttpEndpoint()}/onvif/media_service",
+                        XAddr = OnvifHelpers.ChangeUriPath(endpointUri, "/onvif/media_service").ToString(),
                         Version = new OnvifVersion()
                         {
                             Major = 17,
@@ -277,7 +283,7 @@ namespace OnvifService.Onvif
                     new Service()
                     {
                         Namespace = OnvifServices.EVENTS,
-                        XAddr = $"{_server.GetHttpEndpoint()}/onvif/events_service",
+                        XAddr = OnvifHelpers.ChangeUriPath(endpointUri, "/onvif/events_service").ToString(),
                         Version = new OnvifVersion()
                         {
                             Major = 17,
@@ -287,7 +293,7 @@ namespace OnvifService.Onvif
                     new Service()
                     {
                         Namespace = OnvifServices.PTZ,
-                        XAddr = $"{_server.GetHttpEndpoint()}/onvif/ptz_service",
+                        XAddr = OnvifHelpers.ChangeUriPath(endpointUri, "/onvif/ptz_service").ToString(),
                         Version = new OnvifVersion()
                         {
                             Major = 17,
@@ -342,13 +348,17 @@ namespace OnvifService.Onvif
         [return: MessageParameter(Name = "User")]
         public override GetUsersResponse GetUsers(GetUsersRequest request)
         {
+            string userName = _configuration.GetValue("UserRepository:UserName", "");
+            if (string.IsNullOrWhiteSpace(userName))
+                userName = "admin"; 
+
             return new GetUsersResponse()
             {
                 User = new User[]
                 {
                     new User()
                     {
-                        Username = "admin",
+                        Username = userName,
                         UserLevel = UserLevel.Administrator
                     }
                 }
@@ -555,6 +565,7 @@ namespace OnvifService.Onvif
             }
             return ret;
         }
+
         private string GetPrimaryNICName()
         {
             string ret = "eth0";

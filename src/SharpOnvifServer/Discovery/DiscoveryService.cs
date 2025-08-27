@@ -57,6 +57,10 @@ namespace SharpOnvifServer.Discovery
 
                 _logger.LogInformation($"Starting the DiscoveryService");
 
+                List<Uri> listeningUris = new List<Uri>();
+
+                var httpEndpoints = _server.GetHttpEndpoints();
+
                 foreach (NetworkInterface adapter in nics)
                 {
                     if (!(adapter.NetworkInterfaceType == NetworkInterfaceType.Loopback ||
@@ -96,6 +100,11 @@ namespace SharpOnvifServer.Discovery
                             if (!(_options.NetworkInterfaces == null || _options.NetworkInterfaces.Count == 0 || _options.NetworkInterfaces.Contains("0.0.0.0")) && !_options.NetworkInterfaces.Contains(nicIPAddress))
                                 continue;
 
+                            // TODO: Support HTTPS, host names... https://learn.microsoft.com/en-us/aspnet/core/fundamentals/servers/kestrel/endpoints?view=aspnetcore-9.0#configure-endpoints-with-urls
+                            var httpUriBuilder = new UriBuilder(new Uri(httpEndpoints.FirstOrDefault()));
+                            httpUriBuilder.Host = nicIPAddress.ToString();
+                            listeningUris.Add(httpUriBuilder.Uri);
+
                             try
                             {
                                 // to kill a process owning a port: Get-Process -Id (Get-NetUDPEndpoint -LocalPort 3702).OwningProcess
@@ -124,8 +133,8 @@ namespace SharpOnvifServer.Discovery
 
                                             var parsedMessage = ReadOnvifEndpoint(message);
                                             if (parsedMessage != null && IsSearchingOurTypes(_options.Types, parsedMessage.Types))
-                                            {
-                                                string reply = CreateDiscoveryResponse(_options, _server.GetHttpEndpoint(), parsedMessage.MessageUuid);
+                                            {                                                
+                                                string reply = CreateDiscoveryResponse(_options, listeningUris, parsedMessage.MessageUuid);
                                                 var replyBytes = Encoding.UTF8.GetBytes(reply);
                                                 int sentBytes = udpClient.Client.SendTo(replyBytes, remoteEndpoint);
                                                 _logger.LogDebug($"Sent Discovery response on {nicIPAddress}:\r\n{reply}");
@@ -167,7 +176,7 @@ namespace SharpOnvifServer.Discovery
             return false;
         }
 
-        private static string CreateDiscoveryResponse(OnvifDiscoveryOptions options, string httpUri, string discoveryMessageUuid)
+        private static string CreateDiscoveryResponse(OnvifDiscoveryOptions options, IEnumerable<Uri> httpUri, string discoveryMessageUuid)
         {
             Dictionary<string, string> nsPrefixes = new Dictionary<string, string>
             {
@@ -253,7 +262,7 @@ namespace SharpOnvifServer.Discovery
             return prefix;
         }
 
-        private static string BuildAddresses(OnvifDiscoveryOptions options, string fallbackHttpUri)
+        private static string BuildAddresses(OnvifDiscoveryOptions options, IEnumerable<Uri> fallbackHttpUri)
         {
             if (options.ServiceAddresses != null && options.ServiceAddresses.Count > 0)
             {
@@ -261,8 +270,15 @@ namespace SharpOnvifServer.Discovery
             }
             else
             {
+                List<string> uris = new List<string>();
                 // fallback
-                return $"{fallbackHttpUri}/onvif/device_service";
+                foreach (var uri in fallbackHttpUri)
+                {
+                    var httpUriBuilder = new UriBuilder(uri);
+                    httpUriBuilder.Path = "/onvif/device_service";
+                    uris.Add(httpUriBuilder.Uri.ToString());
+                }
+                return string.Join(' ', uris);
             }
         }
 
