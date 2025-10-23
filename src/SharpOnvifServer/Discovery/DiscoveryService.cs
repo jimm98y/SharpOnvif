@@ -114,8 +114,8 @@ namespace SharpOnvifServer.Discovery
                                 udpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
 
                                 // because of the multicast, we cannot use IPAddress.Any - it would have joined the multicast group only on the default NIC on multihomed system
-                                udpClient.Client.Bind(new IPEndPoint(IPAddress.Parse(nicIPAddress), ONVIF_DISCOVERY_PORT)); 
-                                udpClient.JoinMulticastGroup(IPAddress.Parse(OnvifDiscoveryAddress));
+                                udpClient.Client.Bind(new IPEndPoint(IPAddress.Parse(nicIPAddress), ONVIF_DISCOVERY_PORT));
+                                udpClient.JoinMulticastGroup(IPAddress.Parse(OnvifDiscoveryAddress), IPAddress.Parse(nicIPAddress));
 
                                 _logger.LogInformation($"DiscoveryService is listening on the {nicIPAddress} network interface");
 
