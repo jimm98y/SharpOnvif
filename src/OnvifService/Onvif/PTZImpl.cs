@@ -12,6 +12,7 @@ namespace OnvifService.Onvif
 {
     public class PTZImpl : PTZBase
     {
+        public const string PTZ_CONFIGURATION_TOKEN = "PTZ_1";
         public const string PTZ_NODE_TOKEN = "PTZ_Node_1";
 
         private IServer server;
@@ -199,7 +200,7 @@ namespace OnvifService.Onvif
             return new PTZNode()
             {
                 token = PTZ_NODE_TOKEN,
-                Name = "Default",
+                Name = PTZ_NODE_TOKEN,
                 SupportedPTZSpaces = new PTZSpaces()
                 {
                     AbsolutePanTiltPositionSpace = new Space2DDescription[]
@@ -297,7 +298,8 @@ namespace OnvifService.Onvif
             {
                 new PTZConfiguration()
                 {
-                    Name = "Default",
+                    token = PTZ_CONFIGURATION_TOKEN,
+                    Name = PTZ_CONFIGURATION_TOKEN,
                     UseCount = 2,
                     NodeToken = PTZ_NODE_TOKEN,
                     DefaultAbsolutePantTiltPositionSpace = SpacesPanTilt.POSITION_GENERIC_SPACE,
@@ -335,8 +337,7 @@ namespace OnvifService.Onvif
                         {
                             XRange = new FloatRange() { Min = 0, Max = 1 }
                         }
-                    },
-                    token = PTZ_NODE_TOKEN
+                    }
                 }
             };
         }

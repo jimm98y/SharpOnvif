@@ -6,24 +6,36 @@ using SharpOnvifCommon;
 using SharpOnvifCommon.PTZ;
 using SharpOnvifServer.Media;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace OnvifService.Onvif
 {
     public class MediaImpl : MediaBase
     {
-        public const string VIDEO_SOURCE_TOKEN = "VideoSource_1";
-        public const string AUDIO_SOURCE_TOKEN = "AudioSource_1";
-        public const string PROFILE_TOKEN = "Profile_1";
+        public class MediaProfile
+        {
+            public string ProfileToken { get; set; } = "Profile_1";
+            public string VideoSourceToken { get; set; } = "VideoSource_1";
+            public string AudioSourceToken { get; set; } = "AudioSource_1";
+            public string VideoEncoderToken { get; set; } = "VideoEncoder_1";
+            public string AudioEncoderToken { get; set; } = "AudioEncoder_1";
+            public string AudioOutputToken { get; set; } = "AudioOutput_1";
+            public string AudioDecoderToken { get; set; } = "AudioDecoder_1";
+            public int VideoWidth { get; set; } = 640;
+            public int VideoHeight { get; set; } = 360;
+            public int VideoFps { get; set; } = 25;
+            public string VideoRtspUri { get; set; } = "rtsp://localhost:8554/";
+            public string VideoSnapshotUri { get; set; } = null;
+            public int AudioChannels { get; set; } = 1;
+            public int AudioSampleBitrate { get; set; } = 44100;
+            public string PtzToken { get; set; } = PTZImpl.PTZ_CONFIGURATION_TOKEN;
+            public string PtzNodeToken { get; set; } = PTZImpl.PTZ_NODE_TOKEN;
+        }
 
-        // You can use https://github.com/jimm98y/SharpRealTimeStreaming to stream RTSP
-        private int VideoWidth { get; set; } = 640;
-        private int VideoHeight { get; set; } = 360;
-        private int VideoFps { get; set; } = 25;
-        private string VideoRtspUri { get; set; } = "rtsp://localhost:8554/";
-        private string VideoSnapshotUri { get; set; } = null;
-        private int AudioChannels { get; set; } = 1;
-        private int AudioSampleBitrate { get; set; } = 44100;
+        public Dictionary<string, MediaProfile> Profiles { get; set; } = new Dictionary<string, MediaProfile>();
 
+        // You can use https://github.com/jimm98y/SharpRealTimeStreaming to stream RTSP       
         private readonly IServer _server;
         private readonly ILogger<MediaImpl> _logger;
         private readonly IConfiguration _configuration;
@@ -33,107 +45,99 @@ namespace OnvifService.Onvif
             _server = server;
             _logger = logger;
             _configuration = configuration;
-
-            VideoWidth = _configuration.GetValue<int>("MediaImpl:VideoWidth");
-            VideoHeight = _configuration.GetValue<int>("MediaImpl:VideoHeight");
-            VideoFps = _configuration.GetValue<int>("MediaImpl:VideoFps");
-            VideoRtspUri = _configuration.GetValue<string>("MediaImpl:VideoRtspUri");
-            VideoSnapshotUri = _configuration.GetValue<string>("MediaImpl:VideoSnapshotUri");
-
-            AudioChannels = _configuration.GetValue<int>("MediaImpl:AudioChannels");
-            AudioSampleBitrate = _configuration.GetValue<int>("MediaImpl:AudioSampleBitrate");
+            Profiles = _configuration.GetSection("MediaImpl:Profiles").Get<MediaProfile[]>()?.ToDictionary(x => x.ProfileToken, x => x);
         }
 
         public override GetAudioSourcesResponse GetAudioSources(GetAudioSourcesRequest request)
         {
+            if (Profiles == null)
+                return new GetAudioSourcesResponse();
+
             return new GetAudioSourcesResponse()
             {
-                AudioSources = new AudioSource[]
-                { 
-                    new AudioSource()
-                    {
-                        token = AUDIO_SOURCE_TOKEN,
-                        Channels = AudioChannels,
-                    }
-                }
+                AudioSources = Profiles.Values.Select(GetMyAudioSource).ToArray()
             };
         }
 
         public override GetProfilesResponse GetProfiles(GetProfilesRequest request)
         {
+            if (Profiles == null)
+                return new GetProfilesResponse();
+
             return new GetProfilesResponse()
             {
-                Profiles = new Profile[]
-                {
-                    GetMyProfile()
-                }
+                Profiles = Profiles.Values.Select(CreateProfile).ToArray()
             };
         }
 
         [return: MessageParameter(Name = "Profile")]
         public override Profile GetProfile(string ProfileToken)
         {
-            return GetMyProfile();
+            if (Profiles == null || !Profiles.ContainsKey(ProfileToken))
+                return new Profile();
+
+            return CreateProfile(Profiles[ProfileToken]);
         }
 
         public override MediaUri GetSnapshotUri(string ProfileToken)
         {
             Uri endpointUri = OperationContext.Current.IncomingMessageProperties.Via;
 
+            if (Profiles == null || !Profiles.ContainsKey(ProfileToken))
+                return new MediaUri();
+
             return new MediaUri()
             {
-                Uri = string.IsNullOrEmpty(VideoSnapshotUri) ? OnvifHelpers.ChangeUriPath(endpointUri, "/preview").ToString() : VideoSnapshotUri
+                Uri = string.IsNullOrEmpty(Profiles[ProfileToken].VideoSnapshotUri) ? OnvifHelpers.ChangeUriPath(endpointUri, "/preview").ToString() : Profiles[ProfileToken].VideoSnapshotUri
             };
         }
 
         public override MediaUri GetStreamUri(StreamSetup StreamSetup, string ProfileToken)
         {
+            if (Profiles == null || !Profiles.ContainsKey(ProfileToken))
+                return new MediaUri();
+
             return new MediaUri()
             {
-                Uri = VideoRtspUri,
+                Uri = Profiles[ProfileToken].VideoRtspUri,
             };
         }
 
         public override GetVideoSourcesResponse GetVideoSources(GetVideoSourcesRequest request)
         {
+            if (Profiles == null)
+                return new GetVideoSourcesResponse();
+
             return new GetVideoSourcesResponse()
             {
-                // TODO: Update to match your video source
-                VideoSources = new VideoSource[]
-                {
-                    new VideoSource()
-                    {
-                        token = VIDEO_SOURCE_TOKEN,
-                        Resolution = new VideoResolution()
-                        {
-                            Width = VideoWidth,
-                            Height = VideoHeight
-                        },
-                        Framerate = VideoFps,
-                        Imaging = new ImagingSettings()
-                        {
-                            Brightness = 100
-                        }
-                    }
-                }
+                VideoSources = Profiles.Values.Select(CreateMyVideoSource).ToArray()
             };
         }
 
         [return: MessageParameter(Name = "Configuration")]
         public override VideoSourceConfiguration GetVideoSourceConfiguration(string ConfigurationToken)
         {
-            return GetMyVideoSourceConfiguration();
+            if (ConfigurationToken == null || Profiles == null || Profiles.Values.FirstOrDefault(x => x.VideoSourceToken == ConfigurationToken) == null)
+                return new VideoSourceConfiguration();
+
+            return GetMyVideoSourceConfiguration(Profiles.Values.First(x => x.VideoSourceToken == ConfigurationToken));
         }
 
         [return: MessageParameter(Name = "Configuration")]
         public override VideoEncoderConfiguration GetVideoEncoderConfiguration(string ConfigurationToken)
         {
-            return GetMyVideoEncoderConfiguration();
+            if (ConfigurationToken == null || Profiles == null || Profiles.Values.FirstOrDefault(x => x.VideoEncoderToken == ConfigurationToken) == null)
+                return new VideoEncoderConfiguration();
+
+            return GetMyVideoEncoderConfiguration(Profiles.Values.First(x => x.VideoEncoderToken == ConfigurationToken));
         }
 
         [return: MessageParameter(Name = "Options")]
         public override VideoEncoderConfigurationOptions GetVideoEncoderConfigurationOptions(string ConfigurationToken, string ProfileToken)
         {
+            if (Profiles == null || !Profiles.ContainsKey(ProfileToken))
+                return new VideoEncoderConfigurationOptions();
+
             return new VideoEncoderConfigurationOptions()
             {
                 // TODO: Update to match your video source
@@ -147,8 +151,8 @@ namespace OnvifService.Onvif
                     {
                         new VideoResolution() 
                         { 
-                            Width = VideoWidth,
-                            Height = VideoHeight
+                            Width = Profiles[ProfileToken].VideoWidth,
+                            Height = Profiles[ProfileToken].VideoHeight
                         }
                     }
                 },
@@ -159,57 +163,60 @@ namespace OnvifService.Onvif
         [return: MessageParameter(Name = "Configurations")]
         public override GetAudioEncoderConfigurationsResponse GetAudioEncoderConfigurations(GetAudioEncoderConfigurationsRequest request)
         {
+            if (Profiles == null)
+                return new GetAudioEncoderConfigurationsResponse();
+
             return new GetAudioEncoderConfigurationsResponse()
             {
-                Configurations = new AudioEncoderConfiguration[]
-                {
-                    GetMyAudioEncoderConfiguration()
-                }
+                Configurations = Profiles.Values.Select(GetMyAudioEncoderConfiguration).ToArray() 
             };
         }
 
         [return: MessageParameter(Name = "Configurations")]
         public override GetAudioSourceConfigurationsResponse GetAudioSourceConfigurations(GetAudioSourceConfigurationsRequest request)
         {
+            if (Profiles == null)
+                return new GetAudioSourceConfigurationsResponse();
+
             return new GetAudioSourceConfigurationsResponse()
             {
-                Configurations = new AudioSourceConfiguration[]
-                {
-                    GetMyAudioSourceConfiguration()
-                }
+                Configurations = Profiles.Values.Select(GetMyAudioSourceConfiguration).ToArray()
             };
         }
 
         [return: MessageParameter(Name = "Configurations")]
         public override GetVideoEncoderConfigurationsResponse GetVideoEncoderConfigurations(GetVideoEncoderConfigurationsRequest request)
         {
+            if (Profiles == null)
+                return new GetVideoEncoderConfigurationsResponse();
+
             return new GetVideoEncoderConfigurationsResponse()
             {
-                Configurations = new VideoEncoderConfiguration[]
-                {
-                    GetMyVideoEncoderConfiguration()
-                }
+                Configurations = Profiles.Values.Select(GetMyVideoEncoderConfiguration).ToArray()
             };
         }
 
         [return: MessageParameter(Name = "Configurations")]
         public override GetVideoSourceConfigurationsResponse GetVideoSourceConfigurations(GetVideoSourceConfigurationsRequest request)
         {
+            if (Profiles == null)
+                return new GetVideoSourceConfigurationsResponse();
+
             return new GetVideoSourceConfigurationsResponse()
             {
-                Configurations = new VideoSourceConfiguration[]
-                {
-                    GetMyVideoSourceConfiguration()
-                }
+                Configurations = Profiles.Values.Select(GetMyVideoSourceConfiguration).ToArray()
             };
         }
 
         [return: MessageParameter(Name = "Options")]
         public override VideoSourceConfigurationOptions GetVideoSourceConfigurationOptions(string ConfigurationToken, string ProfileToken)
         {
+            if (Profiles == null || !Profiles.ContainsKey(ProfileToken))
+                return new VideoSourceConfigurationOptions();
+
             return new VideoSourceConfigurationOptions()
             {
-                VideoSourceTokensAvailable = new string[] { VIDEO_SOURCE_TOKEN },
+                VideoSourceTokensAvailable = new string[] { Profiles[ProfileToken].VideoSourceToken },
                 Extension = new VideoSourceConfigurationOptionsExtension()
                 {
                     Rotate = new RotateOptions()
@@ -222,10 +229,10 @@ namespace OnvifService.Onvif
                 },
                 BoundsRange = new IntRectangleRange()
                 {
-                    XRange = new IntRange() { Min = 0, Max = VideoWidth },
-                    YRange = new IntRange() { Min = 0, Max = VideoHeight },
-                    WidthRange = new IntRange() { Min = 0, Max = VideoWidth },
-                    HeightRange = new IntRange() { Min = 0, Max = VideoHeight }
+                    XRange = new IntRange() { Min = 0, Max = Profiles[ProfileToken].VideoWidth },
+                    YRange = new IntRange() { Min = 0, Max = Profiles[ProfileToken].VideoHeight },
+                    WidthRange = new IntRange() { Min = 0, Max = Profiles[ProfileToken].VideoWidth },
+                    HeightRange = new IntRange() { Min = 0, Max = Profiles[ProfileToken].VideoHeight }
                 },
                 MaximumNumberOfProfiles = 10,
                 MaximumNumberOfProfilesSpecified = true,
@@ -235,12 +242,12 @@ namespace OnvifService.Onvif
         [return: MessageParameter(Name = "Configurations")]
         public override GetCompatibleVideoEncoderConfigurationsResponse GetCompatibleVideoEncoderConfigurations(GetCompatibleVideoEncoderConfigurationsRequest request)
         {
+            if (Profiles == null)
+                return new GetCompatibleVideoEncoderConfigurationsResponse();
+
             return new GetCompatibleVideoEncoderConfigurationsResponse()
             {
-                Configurations = new VideoEncoderConfiguration[]
-                {
-                    GetMyVideoEncoderConfiguration()
-                }
+                Configurations = Profiles.Values.Select(GetMyVideoEncoderConfiguration).ToArray()
             };
         }
 
@@ -249,14 +256,16 @@ namespace OnvifService.Onvif
         {
             return new GetCompatibleAudioDecoderConfigurationsResponse()
             {
-                Configurations = new AudioDecoderConfiguration[]
-                {
-                    new AudioDecoderConfiguration()
-                    {
-                        Name = "AudioDecoder_1",
-                        token = "AudioDecoder_1"
-                    }
-                }
+                Configurations = Profiles.Values.Select(CreateMyAudioDecoderConfiguration).ToArray()
+            };
+        }
+
+        private AudioDecoderConfiguration CreateMyAudioDecoderConfiguration(MediaProfile profile)
+        {
+            return new AudioDecoderConfiguration()
+            {
+                token = profile.AudioDecoderToken,
+                Name = profile.AudioDecoderToken,
             };
         }
 
@@ -265,15 +274,7 @@ namespace OnvifService.Onvif
         {
             return new GetAudioOutputConfigurationsResponse()
             {
-                Configurations = new AudioOutputConfiguration[]
-                 {
-                     new AudioOutputConfiguration()
-                     {
-                          token = "AudioOutput_1",
-                          Name = "AudioOutput_1",
-                          OutputToken = "AudioOutput_1"
-                     }
-                 }
+                Configurations = Profiles.Values.Select(CreateMyAudioOutputConfiguration).ToArray()
             };
         }
 
@@ -282,7 +283,7 @@ namespace OnvifService.Onvif
         {
             return new AudioEncoderConfigurationOptions()
             {
-                Options = new AudioEncoderConfigurationOption[]
+                 Options = new AudioEncoderConfigurationOption[]
                  {
                      new AudioEncoderConfigurationOption()
                      {
@@ -314,19 +315,21 @@ namespace OnvifService.Onvif
             _logger.LogInformation("MediaImpl: AddAudioDecoderConfiguration");
         }
 
-        private Profile GetMyProfile()
+        private static Profile CreateProfile(MediaProfile profile)
         {
             return new Profile()
             {
-                Name = "mainStream",
-                token = PROFILE_TOKEN,
-                VideoSourceConfiguration = GetMyVideoSourceConfiguration(),
-                VideoEncoderConfiguration = GetMyVideoEncoderConfiguration(),
-                AudioSourceConfiguration = GetMyAudioSourceConfiguration(),
-                AudioEncoderConfiguration = GetMyAudioEncoderConfiguration(),
+                token = profile.ProfileToken,
+                Name = profile.ProfileToken,
+                VideoSourceConfiguration = GetMyVideoSourceConfiguration(profile),
+                VideoEncoderConfiguration = GetMyVideoEncoderConfiguration(profile),
+                AudioSourceConfiguration = GetMyAudioSourceConfiguration(profile),
+                AudioEncoderConfiguration = GetMyAudioEncoderConfiguration(profile),
                 PTZConfiguration = new PTZConfiguration()
                 {
-                    NodeToken = PTZImpl.PTZ_NODE_TOKEN,
+                    token = profile.PtzToken,
+                    Name = profile.PtzToken,
+                    NodeToken = profile.PtzNodeToken,
                     PanTiltLimits = new PanTiltLimits()
                     {
                         Range = new Space2DDescription()
@@ -351,41 +354,60 @@ namespace OnvifService.Onvif
                     DefaultContinuousPanTiltVelocitySpace = SpacesPanTilt.VELOCITY_GENERIC_SPACE,
                     DefaultContinuousZoomVelocitySpace = SpacesZoom.VELOCITY_GENERIC_SPACE,
                     DefaultPTZTimeout = OnvifHelpers.GetTimeoutInSeconds(5),
-                    Name = "PTZConfig",
                     UseCount = 1,
                 }
             };
         }
 
-        private VideoSourceConfiguration GetMyVideoSourceConfiguration()
+        private static VideoSource CreateMyVideoSource(MediaProfile profile)
+        {
+            return new VideoSource()
+            {
+                token = profile.VideoSourceToken,
+                Resolution = new VideoResolution()
+                {
+                    Width = profile.VideoWidth,
+                    Height = profile.VideoHeight
+                },
+                Framerate = profile.VideoFps,
+                Imaging = new ImagingSettings()
+                {
+                    Brightness = 100
+                }
+            };
+        }
+
+        private static VideoSourceConfiguration GetMyVideoSourceConfiguration(MediaProfile profile)
         {
             return new VideoSourceConfiguration()
             {
-                SourceToken = VIDEO_SOURCE_TOKEN,
-                Name = "VideoSourceConfig",
+                token = profile.VideoSourceToken,
+                Name = profile.VideoSourceToken,
+                SourceToken = profile.VideoSourceToken,
                 Bounds = new IntRectangle() 
                 { 
                     x = 0,
                     y = 0,
-                    width = VideoWidth, 
-                    height = VideoHeight 
+                    width = profile.VideoWidth, 
+                    height = profile.VideoHeight
                 },
-                UseCount = 1
+                UseCount = 1,
             };
         }
 
         // TODO: Update to match your video source
-        private VideoEncoderConfiguration GetMyVideoEncoderConfiguration()
+        private static VideoEncoderConfiguration GetMyVideoEncoderConfiguration(MediaProfile profile)
         {
             return new VideoEncoderConfiguration()
             {
-                Name = "VideoEncoder_1",
+                token = profile.VideoEncoderToken,
+                Name = profile.VideoEncoderToken,
                 UseCount = 1,
                 Encoding = VideoEncoding.H264,
                 Resolution = new VideoResolution()
                 { 
-                    Width = VideoWidth,
-                    Height = VideoHeight
+                    Width = profile.VideoWidth,
+                    Height = profile.VideoHeight
                 },
                 Quality = 5.0f,
                 H264 = new H264Configuration()
@@ -396,24 +418,45 @@ namespace OnvifService.Onvif
             };
         }
 
-        private AudioEncoderConfiguration GetMyAudioEncoderConfiguration()
+        private static AudioEncoderConfiguration GetMyAudioEncoderConfiguration(MediaProfile profile)
         {
             return new AudioEncoderConfiguration()
             {
+                token = profile.AudioEncoderToken,
+                Name = profile.AudioEncoderToken,
                 Encoding = AudioEncoding.AAC,
-                SampleRate = AudioSampleBitrate,
-                Name = "AudioSource_1",
+                SampleRate = profile.AudioSampleBitrate,
                 UseCount = 1
             };
         }
 
-        private AudioSourceConfiguration GetMyAudioSourceConfiguration()
+        private static AudioSourceConfiguration GetMyAudioSourceConfiguration(MediaProfile profile)
         {
             return new AudioSourceConfiguration()
             {
-                SourceToken = AUDIO_SOURCE_TOKEN,
-                Name = "AudioSourceConfig",
+                token = profile.AudioSourceToken,
+                Name = profile.AudioSourceToken,
+                SourceToken = profile.AudioSourceToken,
                 UseCount = 1
+            };
+        }
+
+        private static AudioSource GetMyAudioSource(MediaProfile profile)
+        {
+            return new AudioSource()
+            {
+                token = profile.AudioSourceToken,
+                Channels = profile.AudioChannels,
+            };
+        }
+
+        private static AudioOutputConfiguration CreateMyAudioOutputConfiguration(MediaProfile profile)
+        {
+            return new AudioOutputConfiguration()
+            {
+                token = profile.AudioOutputToken,
+                Name = profile.AudioOutputToken,
+                OutputToken = profile.AudioOutputToken,
             };
         }
     }
