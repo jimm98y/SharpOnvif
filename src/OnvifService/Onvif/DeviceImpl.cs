@@ -77,8 +77,10 @@ namespace OnvifService.Onvif
                         },
                         IO = new IOCapabilities()
                         {
-                            InputConnectors = 0,
-                            RelayOutputs = 0
+                            InputConnectors = 1,
+                            RelayOutputs = 1,
+                            RelayOutputsSpecified = true,
+                            InputConnectorsSpecified = true
                         },
                         Security = new SecurityCapabilities1()
                         {
