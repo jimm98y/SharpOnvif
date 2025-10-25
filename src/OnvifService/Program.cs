@@ -19,6 +19,7 @@ builder.Services.AddOnvifDiscovery(builder.Configuration.GetSection("OnvifDiscov
 builder.Services.AddSingleton<OnvifService.Onvif.DeviceImpl>();
 builder.Services.AddSingleton<OnvifService.Onvif.MediaImpl>();
 builder.Services.AddSingleton<OnvifService.Onvif.PTZImpl>();
+builder.Services.AddSingleton<OnvifService.Onvif.DeviceIOImpl>();
 
 // events
 builder.Services.AddHttpClient();
@@ -71,6 +72,9 @@ app.UseOnvif().UseOnvifEvents(URI_EVENTS_SUBSCRIPTION);
 
     serviceBuilder.AddService<OnvifService.Onvif.PTZImpl>();
     serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.PTZImpl, SharpOnvifServer.PTZ.PTZ>(OnvifBindingFactory.CreateBinding(), "/onvif/ptz_service");
+
+    serviceBuilder.AddService<OnvifService.Onvif.DeviceIOImpl>();
+    serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.DeviceIOImpl, SharpOnvifServer.DeviceIO.DeviceIOPort>(OnvifBindingFactory.CreateBinding(), "/onvif/deviceio_service");
 
     const string URI_EVENTS_SERVICE = "/onvif/events_service";
     var eventBinding = OnvifBindingFactory.CreateBinding();
