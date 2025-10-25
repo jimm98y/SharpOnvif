@@ -195,6 +195,11 @@ namespace OnvifService.Onvif
             _logger.LogInformation("PTZ: GoToHomePosition");
         }
 
+        public override void SetHomePosition(string ProfileToken)
+        {
+            _logger.LogInformation("PTZ: SetHomePosition");
+        }
+
         private static PTZNode GetMyNode()
         {
             return new PTZNode()
