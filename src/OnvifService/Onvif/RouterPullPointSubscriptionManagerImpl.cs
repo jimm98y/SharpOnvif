@@ -6,33 +6,48 @@ using SharpOnvifServer.Events;
 namespace OnvifService.Onvif
 {
     /// <summary>
-    /// Routes all incoming Subscription Manager requests to the corresponding Subscription Manager instances.
+    /// Routes all incoming Pull Point Subscription Manager requests to the corresponding Subscription Manager instances.
     /// </summary>
-    public class RouterSubscriptionManagerImpl : SubscriptionManagerBase
+    public class RouterPullPointSubscriptionManagerImpl : PullPointSubscriptionManagerBase
     {
         private readonly ILogger<RouterSubscriptionManagerImpl> _logger;
         private readonly IEventSubscriptionManager<SubscriptionManagerImpl> _eventSubscriptionManager;
 
-        public RouterSubscriptionManagerImpl(ILogger<RouterSubscriptionManagerImpl> logger, IEventSubscriptionManager<SubscriptionManagerImpl> eventSubscriptionManager)
+        public RouterPullPointSubscriptionManagerImpl(ILogger<RouterSubscriptionManagerImpl> logger, IEventSubscriptionManager<SubscriptionManagerImpl> eventSubscriptionManager)
         {
             _logger = logger;
             _eventSubscriptionManager = eventSubscriptionManager;
         }
 
-        public override RenewResponse1 Renew(RenewRequest request)
-        {
-            return GetSubscriptionManager().Renew(request);
-        }
-
         public override UnsubscribeResponse1 Unsubscribe(UnsubscribeRequest request)
         {
             var ret = GetSubscriptionManager().Unsubscribe(request);
-            
+
             int subscriptionID = GetSubscriptionID();
             _eventSubscriptionManager.RemoveSubscription(subscriptionID);
             _logger.LogDebug($"{nameof(RouterSubscriptionManagerImpl)}: Unsubscribed {subscriptionID}");
 
             return ret;
+        }
+
+        public override PullMessagesResponse PullMessages(PullMessagesRequest request)
+        {
+            return GetSubscriptionManager().PullMessages(request);
+        }
+
+        public override SeekResponse Seek(SeekRequest request)
+        {
+            return GetSubscriptionManager().Seek(request);
+        }
+
+        public override void SetSynchronizationPoint()
+        {
+            GetSubscriptionManager().SetSynchronizationPoint();
+        }
+
+        public override RenewResponse1 Renew(RenewRequest request)
+        {
+            return GetSubscriptionManager().Renew(request);
         }
 
         private SubscriptionManagerImpl GetSubscriptionManager()

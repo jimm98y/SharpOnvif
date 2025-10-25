@@ -3298,6 +3298,14 @@ namespace SharpOnvifServer.Events
         [CoreWCF.FaultContractAttribute(typeof(SharpOnvifServer.Events.UnableToDestroySubscriptionFaultType), Action = "http://docs.oasis-open.org/wsn/bw-2/SubscriptionManager/UnsubscribeRequest", Name = "UnableToDestroySubscriptionFault", Namespace = "http://docs.oasis-open.org/wsn/b-2")]
         [CoreWCF.XmlSerializerFormatAttribute(SupportFaults = true)]
         SharpOnvifServer.Events.UnsubscribeResponse1 Unsubscribe(SharpOnvifServer.Events.UnsubscribeRequest request);
+
+        // LukasV: added, see https://github.com/onvif/specs/issues/506 - Onvif Device Manager is calling it
+        // CODEGEN: Generating message contract since the operation Renew is neither RPC nor document wrapped.
+        [CoreWCF.OperationContractAttribute(Action = "http://docs.oasis-open.org/wsn/bw-2/SubscriptionManager/RenewRequest", ReplyAction = "*")]
+        [CoreWCF.FaultContractAttribute(typeof(SharpOnvifServer.Events.ResourceUnknownFaultType), Action = "http://docs.oasis-open.org/wsn/bw-2/SubscriptionManager/RenewRequest", Name = "ResourceUnknownFault", Namespace = "http://docs.oasis-open.org/wsrf/r-2")]
+        [CoreWCF.FaultContractAttribute(typeof(SharpOnvifServer.Events.UnacceptableTerminationTimeFaultType), Action = "http://docs.oasis-open.org/wsn/bw-2/SubscriptionManager/RenewRequest", Name = "UnacceptableTerminationTimeFault", Namespace = "http://docs.oasis-open.org/wsn/b-2")]
+        [CoreWCF.XmlSerializerFormatAttribute(SupportFaults = true)]
+        SharpOnvifServer.Events.RenewResponse1 Renew(SharpOnvifServer.Events.RenewRequest request);
     }
 
     [System.Diagnostics.DebuggerStepThroughAttribute()]

@@ -26,6 +26,7 @@ builder.Services.AddSingleton<SharpOnvifServer.Events.IEventSource, OnvifService
 builder.Services.AddSingleton<SharpOnvifServer.Events.IEventSubscriptionManager<OnvifService.Onvif.SubscriptionManagerImpl>, SharpOnvifServer.Events.DefaultEventSubscriptionManager<OnvifService.Onvif.SubscriptionManagerImpl>>();
 builder.Services.AddSingleton<OnvifService.Onvif.EventsImpl>();
 builder.Services.AddSingleton<OnvifService.Onvif.RouterSubscriptionManagerImpl>();
+builder.Services.AddSingleton<OnvifService.Onvif.RouterPullPointSubscriptionManagerImpl>();
 
 var app = builder.Build();
 
@@ -36,7 +37,10 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 const string URI_EVENTS_SUBSCRIPTION = "/onvif/Events/Subscription";
-app.UseOnvif().UseOnvifEvents(URI_EVENTS_SUBSCRIPTION);
+const string URI_EVENTS_PULLPOINT_SUBSCRIPTION = "/onvif/Events/PullPointSubscription";
+app.UseOnvif()
+   .UseOnvifEvents(URI_EVENTS_SUBSCRIPTION)
+   .UseOnvifEvents(URI_EVENTS_PULLPOINT_SUBSCRIPTION);
 
 ((IApplicationBuilder)app).UseServiceModel(serviceBuilder =>
 {
@@ -79,11 +83,11 @@ app.UseOnvif().UseOnvifEvents(URI_EVENTS_SUBSCRIPTION);
     serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.EventsImpl, SharpOnvifServer.Events.EventPortType>(eventBinding, URI_EVENTS_SERVICE);
     serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.EventsImpl, SharpOnvifServer.Events.PullPoint>(eventBinding, URI_EVENTS_SERVICE);
 
-    var subscriptionBinding = OnvifBindingFactory.CreateBinding();
     serviceBuilder.AddService<OnvifService.Onvif.RouterSubscriptionManagerImpl>();
-    serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.RouterSubscriptionManagerImpl, SharpOnvifServer.Events.SubscriptionManager>(subscriptionBinding, URI_EVENTS_SUBSCRIPTION);
-    serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.RouterSubscriptionManagerImpl, SharpOnvifServer.Events.PausableSubscriptionManager>(subscriptionBinding, URI_EVENTS_SUBSCRIPTION);
-    serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.RouterSubscriptionManagerImpl, SharpOnvifServer.Events.PullPointSubscription>(subscriptionBinding, URI_EVENTS_SUBSCRIPTION);
+    serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.RouterSubscriptionManagerImpl, SharpOnvifServer.Events.SubscriptionManager>(OnvifBindingFactory.CreateBinding(), URI_EVENTS_SUBSCRIPTION);
+
+    serviceBuilder.AddService<OnvifService.Onvif.RouterPullPointSubscriptionManagerImpl>();
+    serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.RouterPullPointSubscriptionManagerImpl, SharpOnvifServer.Events.PullPointSubscription>(OnvifBindingFactory.CreateBinding(), URI_EVENTS_PULLPOINT_SUBSCRIPTION);
 
     // add more service endpoints
 });

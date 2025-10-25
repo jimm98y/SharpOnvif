@@ -16,7 +16,7 @@ namespace OnvifService.Onvif
     /// <summary>
     /// Onvif Event Subscription Manager.
     /// </summary>
-    public class SubscriptionManagerImpl : SubscriptionManagerBase, IEventSubscription
+    public class SubscriptionManagerImpl : SubscriptionManager, PullPointSubscription, IEventSubscription
     {
         private readonly ILogger<SubscriptionManagerImpl> _logger;
         private readonly IHttpClientFactory _httpClientFactory;
@@ -62,7 +62,7 @@ namespace OnvifService.Onvif
             }
         }
 
-        public override PullMessagesResponse PullMessages(PullMessagesRequest request)
+        public PullMessagesResponse PullMessages(PullMessagesRequest request)
         {
             if (!string.IsNullOrEmpty(_notificationEndpoint))
                 throw new InvalidOperationException($"{nameof(SubscriptionManagerImpl)}: {nameof(PullMessages)} is not supported on Basic event subscription!");
@@ -97,7 +97,7 @@ namespace OnvifService.Onvif
             };
         }
 
-        public override RenewResponse1 Renew(RenewRequest request)
+        public RenewResponse1 Renew(RenewRequest request)
         {
             DateTime now = DateTime.UtcNow;
             DateTime expiration = OnvifHelpers.FromAbsoluteOrRelativeDateTimeUTC(now, request.Renew.TerminationTime, now.AddMinutes(1));
@@ -113,7 +113,7 @@ namespace OnvifService.Onvif
             };
         }
 
-        public override UnsubscribeResponse1 Unsubscribe(UnsubscribeRequest request)
+        public UnsubscribeResponse1 Unsubscribe(UnsubscribeRequest request)
         {
             return new UnsubscribeResponse1()
             {
@@ -165,6 +165,17 @@ namespace OnvifService.Onvif
                     _logger.LogError($"{nameof(SubscriptionManagerImpl)}: Failed to send Basic event to {_notificationEndpoint} because of an exception: {ex.Message}.");
                 }
             }
+        }
+
+        public SeekResponse Seek(SeekRequest request)
+        {
+            _logger.LogError($"{nameof(Seek)} is currently not supported");
+            return new SeekResponse();
+        }
+
+        public void SetSynchronizationPoint()
+        {
+            _logger.LogError($"{nameof(SetSynchronizationPoint)} is currently not supported");
         }
     }
 }

@@ -3734,8 +3734,14 @@ namespace SharpOnvifClient.Events
         [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.UnableToDestroySubscriptionFaultType), Action="http://docs.oasis-open.org/wsn/bw-2/SubscriptionManager/UnsubscribeRequest", Name="UnableToDestroySubscriptionFault", Namespace="http://docs.oasis-open.org/wsn/b-2")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SharpOnvifClient.Events.UnsubscribeResponse1> UnsubscribeAsync(SharpOnvifClient.Events.UnsubscribeRequest request);
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://docs.oasis-open.org/wsn/bw-2/SubscriptionManager/RenewRequest", ReplyAction = "*")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.ResourceUnknownFaultType), Action = "http://docs.oasis-open.org/wsn/bw-2/SubscriptionManager/RenewRequest", Name = "ResourceUnknownFault", Namespace = "http://docs.oasis-open.org/wsrf/r-2")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SharpOnvifClient.Events.UnacceptableTerminationTimeFaultType), Action = "http://docs.oasis-open.org/wsn/bw-2/SubscriptionManager/RenewRequest", Name = "UnacceptableTerminationTimeFault", Namespace = "http://docs.oasis-open.org/wsn/b-2")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults = true)]
+        System.Threading.Tasks.Task<SharpOnvifClient.Events.RenewResponse1> RenewAsync(SharpOnvifClient.Events.RenewRequest request);
     }
-    
+
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="PullMessages", WrapperNamespace="http://www.onvif.org/ver10/events/wsdl", IsWrapped=true)]
@@ -3898,5 +3904,10 @@ namespace SharpOnvifClient.Events
             return System.Threading.Tasks.Task.Factory.FromAsync(((System.ServiceModel.ICommunicationObject)(this)).BeginClose(null, null), new System.Action<System.IAsyncResult>(((System.ServiceModel.ICommunicationObject)(this)).EndClose));
         }
 #endif
+
+        public virtual System.Threading.Tasks.Task<RenewResponse1> RenewAsync(RenewRequest request)
+        {
+            return base.Channel.RenewAsync(request);
+        }
     }
 }
