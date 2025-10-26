@@ -4,6 +4,8 @@ A C# implementation of the Onvif interface - client as well as the server. All p
 ## SharpOnvifServer
 Onvif server provides NET8 CoreWCF bindings generated using svcutil.exe. It makes it easy to implement only parts of the Onvif specification needed for your project.
 
+[![NuGet version](https://img.shields.io/nuget/v/SharpOnvifServer.svg?style=flat-square)](https://www.nuget.org/packages/SharpOnvifServer)
+
 Start with creating a new CoreWCF service:
 ```cs
 var builder = WebApplication.CreateBuilder();
@@ -88,6 +90,8 @@ Your Onvif service should now be discoverable on the network and you should be a
 
 ## SharpOnvifClient
 Onvif client provides netstandard2.0 and NET8.0 WCF bindings generated using `dotnet-svcutil`. `SimpleOnvifClient` wraps common API calls to get basic information from the camera and includes both Pull Point as well as Basic event subscriptions. 
+
+[![NuGet version](https://img.shields.io/nuget/v/SharpOnvifClient.svg?style=flat-square)](https://www.nuget.org/packages/SharpOnvifClient)
 
 To discover Onvif devices on your network, use:
 ```cs
