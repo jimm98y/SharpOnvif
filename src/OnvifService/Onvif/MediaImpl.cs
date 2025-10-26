@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using SharpOnvifCommon;
 using SharpOnvifCommon.PTZ;
+using SharpOnvifServer;
 using SharpOnvifServer.Media;
 using System;
 using System.Collections.Generic;
@@ -50,23 +51,17 @@ namespace OnvifService.Onvif
 
         public override GetAudioSourcesResponse GetAudioSources(GetAudioSourcesRequest request)
         {
-            if (Profiles == null)
-                return new GetAudioSourcesResponse();
-
             return new GetAudioSourcesResponse()
             {
-                AudioSources = Profiles.Values.Select(GetMyAudioSource).ToArray()
+                AudioSources = Profiles?.Values.Select(GetMyAudioSource).ToArray()
             };
         }
 
         public override GetProfilesResponse GetProfiles(GetProfilesRequest request)
         {
-            if (Profiles == null)
-                return new GetProfilesResponse();
-
             return new GetProfilesResponse()
             {
-                Profiles = Profiles.Values.Select(CreateProfile).ToArray()
+                Profiles = Profiles?.Values.Select(CreateMyProfile).ToArray()
             };
         }
 
@@ -74,9 +69,9 @@ namespace OnvifService.Onvif
         public override Profile GetProfile(string ProfileToken)
         {
             if (Profiles == null || !Profiles.ContainsKey(ProfileToken))
-                return new Profile();
+                OnvifErrors.ReturnSenderInvalidArg();
 
-            return CreateProfile(Profiles[ProfileToken]);
+            return CreateMyProfile(Profiles[ProfileToken]);
         }
 
         public override MediaUri GetSnapshotUri(string ProfileToken)
@@ -84,7 +79,7 @@ namespace OnvifService.Onvif
             Uri endpointUri = OperationContext.Current.IncomingMessageProperties.Via;
 
             if (Profiles == null || !Profiles.ContainsKey(ProfileToken))
-                return new MediaUri();
+                OnvifErrors.ReturnSenderInvalidArg();
 
             return new MediaUri()
             {
@@ -95,7 +90,7 @@ namespace OnvifService.Onvif
         public override MediaUri GetStreamUri(StreamSetup StreamSetup, string ProfileToken)
         {
             if (Profiles == null || !Profiles.ContainsKey(ProfileToken))
-                return new MediaUri();
+                OnvifErrors.ReturnSenderInvalidArg();
 
             return new MediaUri()
             {
@@ -105,12 +100,9 @@ namespace OnvifService.Onvif
 
         public override GetVideoSourcesResponse GetVideoSources(GetVideoSourcesRequest request)
         {
-            if (Profiles == null)
-                return new GetVideoSourcesResponse();
-
             return new GetVideoSourcesResponse()
             {
-                VideoSources = Profiles.Values.Select(CreateMyVideoSource).ToArray()
+                VideoSources = Profiles?.Values.Select(CreateMyVideoSource).ToArray()
             };
         }
 
@@ -118,7 +110,7 @@ namespace OnvifService.Onvif
         public override VideoSourceConfiguration GetVideoSourceConfiguration(string ConfigurationToken)
         {
             if (ConfigurationToken == null || Profiles == null || Profiles.Values.FirstOrDefault(x => x.VideoSourceToken == ConfigurationToken) == null)
-                return new VideoSourceConfiguration();
+                OnvifErrors.ReturnSenderInvalidArg();
 
             return GetMyVideoSourceConfiguration(Profiles.Values.First(x => x.VideoSourceToken == ConfigurationToken));
         }
@@ -127,7 +119,7 @@ namespace OnvifService.Onvif
         public override VideoEncoderConfiguration GetVideoEncoderConfiguration(string ConfigurationToken)
         {
             if (ConfigurationToken == null || Profiles == null || Profiles.Values.FirstOrDefault(x => x.VideoEncoderToken == ConfigurationToken) == null)
-                return new VideoEncoderConfiguration();
+                OnvifErrors.ReturnSenderInvalidArg();
 
             return GetMyVideoEncoderConfiguration(Profiles.Values.First(x => x.VideoEncoderToken == ConfigurationToken));
         }
@@ -135,8 +127,8 @@ namespace OnvifService.Onvif
         [return: MessageParameter(Name = "Options")]
         public override VideoEncoderConfigurationOptions GetVideoEncoderConfigurationOptions(string ConfigurationToken, string ProfileToken)
         {
-            if (Profiles == null || !Profiles.ContainsKey(ProfileToken))
-                return new VideoEncoderConfigurationOptions();
+            if (Profiles == null || !Profiles.ContainsKey(ProfileToken) || Profiles.Values.FirstOrDefault(x => x.VideoEncoderToken == ConfigurationToken) == null)
+                OnvifErrors.ReturnSenderInvalidArg();
 
             return new VideoEncoderConfigurationOptions()
             {
@@ -163,56 +155,44 @@ namespace OnvifService.Onvif
         [return: MessageParameter(Name = "Configurations")]
         public override GetAudioEncoderConfigurationsResponse GetAudioEncoderConfigurations(GetAudioEncoderConfigurationsRequest request)
         {
-            if (Profiles == null)
-                return new GetAudioEncoderConfigurationsResponse();
-
             return new GetAudioEncoderConfigurationsResponse()
             {
-                Configurations = Profiles.Values.Select(GetMyAudioEncoderConfiguration).ToArray() 
+                Configurations = Profiles?.Values.Select(GetMyAudioEncoderConfiguration).ToArray() 
             };
         }
 
         [return: MessageParameter(Name = "Configurations")]
         public override GetAudioSourceConfigurationsResponse GetAudioSourceConfigurations(GetAudioSourceConfigurationsRequest request)
         {
-            if (Profiles == null)
-                return new GetAudioSourceConfigurationsResponse();
-
             return new GetAudioSourceConfigurationsResponse()
             {
-                Configurations = Profiles.Values.Select(GetMyAudioSourceConfiguration).ToArray()
+                Configurations = Profiles?.Values.Select(GetMyAudioSourceConfiguration).ToArray()
             };
         }
 
         [return: MessageParameter(Name = "Configurations")]
         public override GetVideoEncoderConfigurationsResponse GetVideoEncoderConfigurations(GetVideoEncoderConfigurationsRequest request)
         {
-            if (Profiles == null)
-                return new GetVideoEncoderConfigurationsResponse();
-
             return new GetVideoEncoderConfigurationsResponse()
             {
-                Configurations = Profiles.Values.Select(GetMyVideoEncoderConfiguration).ToArray()
+                Configurations = Profiles?.Values.Select(GetMyVideoEncoderConfiguration).ToArray()
             };
         }
 
         [return: MessageParameter(Name = "Configurations")]
         public override GetVideoSourceConfigurationsResponse GetVideoSourceConfigurations(GetVideoSourceConfigurationsRequest request)
         {
-            if (Profiles == null)
-                return new GetVideoSourceConfigurationsResponse();
-
             return new GetVideoSourceConfigurationsResponse()
             {
-                Configurations = Profiles.Values.Select(GetMyVideoSourceConfiguration).ToArray()
+                Configurations = Profiles?.Values.Select(GetMyVideoSourceConfiguration).ToArray()
             };
         }
 
         [return: MessageParameter(Name = "Options")]
         public override VideoSourceConfigurationOptions GetVideoSourceConfigurationOptions(string ConfigurationToken, string ProfileToken)
         {
-            if (Profiles == null || !Profiles.ContainsKey(ProfileToken))
-                return new VideoSourceConfigurationOptions();
+            if (Profiles == null || !Profiles.ContainsKey(ProfileToken) || Profiles.Values.FirstOrDefault(x => x.VideoSourceToken == ConfigurationToken) == null)
+                OnvifErrors.ReturnSenderInvalidArg();
 
             return new VideoSourceConfigurationOptions()
             {
@@ -243,7 +223,7 @@ namespace OnvifService.Onvif
         public override GetCompatibleVideoEncoderConfigurationsResponse GetCompatibleVideoEncoderConfigurations(GetCompatibleVideoEncoderConfigurationsRequest request)
         {
             if (Profiles == null)
-                return new GetCompatibleVideoEncoderConfigurationsResponse();
+                OnvifErrors.ReturnSenderInvalidArg();
 
             return new GetCompatibleVideoEncoderConfigurationsResponse()
             {
@@ -256,16 +236,7 @@ namespace OnvifService.Onvif
         {
             return new GetCompatibleAudioDecoderConfigurationsResponse()
             {
-                Configurations = Profiles.Values.Select(CreateMyAudioDecoderConfiguration).ToArray()
-            };
-        }
-
-        private AudioDecoderConfiguration CreateMyAudioDecoderConfiguration(MediaProfile profile)
-        {
-            return new AudioDecoderConfiguration()
-            {
-                token = profile.AudioDecoderToken,
-                Name = profile.AudioDecoderToken,
+                Configurations = Profiles?.Values.Select(CreateMyAudioDecoderConfiguration).ToArray()
             };
         }
 
@@ -315,7 +286,16 @@ namespace OnvifService.Onvif
             _logger.LogInformation("MediaImpl: AddAudioDecoderConfiguration");
         }
 
-        private static Profile CreateProfile(MediaProfile profile)
+        private AudioDecoderConfiguration CreateMyAudioDecoderConfiguration(MediaProfile profile)
+        {
+            return new AudioDecoderConfiguration()
+            {
+                token = profile.AudioDecoderToken,
+                Name = profile.AudioDecoderToken,
+            };
+        }
+
+        private static Profile CreateMyProfile(MediaProfile profile)
         {
             return new Profile()
             {

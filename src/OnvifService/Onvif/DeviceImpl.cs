@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using SharpOnvifCommon;
-using SharpOnvifServer;
 using SharpOnvifServer.DeviceMgmt;
 using System;
 using System.Linq;

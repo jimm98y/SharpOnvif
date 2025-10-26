@@ -15,6 +15,7 @@
   <ItemGroup>
     <PackageReference Include="CoreWCF.Http" Version="1.8.0" />
     <PackageReference Include="CoreWCF.Primitives" Version="1.8.0" />
+    <PackageReference Include="CoreWCF.WebHttp" Version="1.8.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SharpOnvifServer.DeviceMgmt\SharpOnvifServer.DeviceMgmt.csproj" />
