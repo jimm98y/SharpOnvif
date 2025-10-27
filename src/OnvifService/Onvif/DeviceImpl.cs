@@ -18,11 +18,17 @@ namespace OnvifService.Onvif
         private readonly IConfiguration _configuration;
 
         public string PrimaryNICName { get; private set; }
+        
         public string PrimaryIPv4Address { get; private set; }
         public string PrimaryIPv4DNS { get; private set; }
+        public string PrimaryIPv4Gateway { get; private set; }
+
+        public string PrimaryIPv6Address { get; private set; }
+        public string PrimaryIPv6DNS { get; private set; }
+        public string PrimaryIPv6Gateway { get; private set; }
+
         public string PrimaryMACAddress { get; private set; }
         public string PrimaryNTPAddress { get; private set; }
-        public string PrimaryIPv4Gateway { get; private set; }
 
         public DeviceImpl(IServer server, ILogger<DeviceImpl> logger, IConfiguration configuration)
         {
@@ -32,16 +38,25 @@ namespace OnvifService.Onvif
 
             PrimaryNICName = _configuration.GetValue("DeviceImpl:PrimaryNICName", "");
             if (string.IsNullOrEmpty(PrimaryNICName)) PrimaryNICName = GetPrimaryNICName();
+            
             PrimaryIPv4Address = _configuration.GetValue("DeviceImpl:PrimaryIPv4Address", "");
             if (string.IsNullOrEmpty(PrimaryIPv4Address)) PrimaryIPv4Address = GetPrimaryIPv4Address();
             PrimaryIPv4DNS = _configuration.GetValue("DeviceImpl:PrimaryIPv4DNS", "");
             if (string.IsNullOrEmpty(PrimaryIPv4DNS)) PrimaryIPv4DNS = GetPrimaryIPv4DNS();
+            PrimaryIPv4Gateway = _configuration.GetValue("DeviceImpl:PrimaryIPv4Gateway", "");
+            if (string.IsNullOrEmpty(PrimaryIPv4Gateway)) PrimaryIPv4Gateway = GetPrimaryIPv4Gateway();
+
+            PrimaryIPv6Address = _configuration.GetValue("DeviceImpl:PrimaryIPv6Address", "");
+            if (string.IsNullOrEmpty(PrimaryIPv6Address)) PrimaryIPv6Address = GetPrimaryIPv6Address();
+            PrimaryIPv6DNS = _configuration.GetValue("DeviceImpl:PrimaryIPv6DNS", "");
+            if (string.IsNullOrEmpty(PrimaryIPv6DNS)) PrimaryIPv6DNS = GetPrimaryIPv6DNS();
+            PrimaryIPv6Gateway = _configuration.GetValue("DeviceImpl:PrimaryIPv6Gateway", "");
+            if (string.IsNullOrEmpty(PrimaryIPv6Gateway)) PrimaryIPv6Gateway = GetPrimaryIPv6Gateway();
+
             PrimaryMACAddress = _configuration.GetValue("DeviceImpl:PrimaryMACAddress", "");
             if (string.IsNullOrEmpty(PrimaryMACAddress)) PrimaryMACAddress = GetPrimaryMACAddress();
             PrimaryNTPAddress = _configuration.GetValue("DeviceImpl:PrimaryNTPAddress", "");
             if (string.IsNullOrEmpty(PrimaryNTPAddress)) PrimaryNTPAddress = GetPrimaryNTPAddress();
-            PrimaryIPv4Gateway = _configuration.GetValue("DeviceImpl:PrimaryIPv4Gateway", "");
-            if (string.IsNullOrEmpty(PrimaryIPv4Gateway)) PrimaryIPv4Gateway = GetPrimaryIPv4Gateway();
         }
 
         public override GetCapabilitiesResponse GetCapabilities(GetCapabilitiesRequest request)
@@ -167,6 +182,20 @@ namespace OnvifService.Onvif
                                 },
                             },
                             Enabled = true,
+                        },
+                        IPv6 = new IPv6NetworkInterface()
+                        {
+                            Config = new IPv6Configuration()
+                            {
+                                Manual = new PrefixedIPv6Address[]
+                                {
+                                    new PrefixedIPv6Address()
+                                    {
+                                        Address = PrimaryIPv6Address
+                                    }
+                                },
+                            },
+                            Enabled = true,
                         }
                     },
                 }
@@ -218,7 +247,8 @@ namespace OnvifService.Onvif
         {
             return new NetworkGateway()
             {
-                IPv4Address = new string[] { PrimaryIPv4Gateway }
+                IPv4Address = new string[] { PrimaryIPv4Gateway },
+                IPv6Address = new string[] { PrimaryIPv6Gateway }
             };
         }
 
@@ -460,7 +490,7 @@ namespace OnvifService.Onvif
 
         public static string GetPrimaryIPv4Address()
         {
-            string ret = "0.0.0.0";
+            string ret = "127.0.0.1";
             var nic = GetPrimaryNetworkInterface();
             if (nic != null)
             {
@@ -486,7 +516,7 @@ namespace OnvifService.Onvif
 
         public static string GetPrimaryIPv4DNS()
         {
-            string ret = "0.0.0.0";
+            string ret = "127.0.0.1";
             var nic = GetPrimaryNetworkInterface();
             if (nic != null)
             {
@@ -507,28 +537,9 @@ namespace OnvifService.Onvif
             return ret;
         }
 
-        public static string GetPrimaryNTPAddress(string ntp = "time.windows.com")
-        {
-            string ret = "0.0.0.0";
-            var dnsHostEntry = System.Net.Dns.GetHostEntry(ntp);
-            if (dnsHostEntry != null)
-            {
-                var addressList = dnsHostEntry.AddressList;
-                if(addressList != null)
-                {
-                    var ntpAddress = addressList.FirstOrDefault(x => x.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork);
-                    if(ntpAddress != null)
-                    {
-                        ret = ntpAddress.ToString();
-                    }
-                }
-            }
-            return ret;
-        }
-
         public static string GetPrimaryIPv4Gateway()
         {
-            string ret = "0.0.0.0";
+            string ret = "127.0.0.1";
             var nic = GetPrimaryNetworkInterface();
             if (nic != null)
             {
@@ -546,6 +557,100 @@ namespace OnvifService.Onvif
                                 ret = gatewayAddress.Address.ToString();
                             }
                         }
+                    }
+                }
+            }
+            return ret;
+        }
+
+        public static string GetPrimaryIPv6Address()
+        {
+            string ret = "::1";
+            var nic = GetPrimaryNetworkInterface();
+            if (nic != null)
+            {
+                var nicProperties = nic.GetIPProperties();
+                if (nicProperties != null)
+                {
+                    var unicastAddresses = nicProperties.UnicastAddresses;
+                    if (unicastAddresses != null)
+                    {
+                        var unicastAddress = unicastAddresses.FirstOrDefault(x => x.Address != null && x.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6);
+                        if (unicastAddress != null)
+                        {
+                            if (unicastAddress.Address != null)
+                            {
+                                ret = unicastAddress.Address.ToString();
+                            }
+                        }
+                    }
+                }
+            }
+            return ret;
+        }
+
+        public static string GetPrimaryIPv6DNS()
+        {
+            string ret = "::1";
+            var nic = GetPrimaryNetworkInterface();
+            if (nic != null)
+            {
+                var nicProperties = nic.GetIPProperties();
+                if (nicProperties != null)
+                {
+                    var dnsAddresses = nicProperties.DnsAddresses;
+                    if (dnsAddresses != null)
+                    {
+                        var dnsAddress = dnsAddresses.FirstOrDefault(x => x.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6);
+                        if (dnsAddress != null)
+                        {
+                            ret = dnsAddress.ToString();
+                        }
+                    }
+                }
+            }
+            return ret;
+        }
+
+        public static string GetPrimaryIPv6Gateway()
+        {
+            string ret = "::1";
+            var nic = GetPrimaryNetworkInterface();
+            if (nic != null)
+            {
+                var nicProperties = nic.GetIPProperties();
+                if (nicProperties != null)
+                {
+                    var gatewayAddresses = nicProperties.GatewayAddresses;
+                    if (gatewayAddresses != null)
+                    {
+                        var gatewayAddress = gatewayAddresses.FirstOrDefault(x => x.Address != null && x.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6);
+                        if (gatewayAddress != null)
+                        {
+                            if (gatewayAddress.Address != null)
+                            {
+                                ret = gatewayAddress.Address.ToString();
+                            }
+                        }
+                    }
+                }
+            }
+            return ret;
+        }
+
+        public static string GetPrimaryNTPAddress(string ntp = "time.windows.com")
+        {
+            string ret = "127.0.0.1";
+            var dnsHostEntry = System.Net.Dns.GetHostEntry(ntp);
+            if (dnsHostEntry != null)
+            {
+                var addressList = dnsHostEntry.AddressList;
+                if(addressList != null)
+                {
+                    var ntpAddress = addressList.FirstOrDefault(x => x.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork);
+                    if(ntpAddress != null)
+                    {
+                        ret = ntpAddress.ToString();
                     }
                 }
             }
