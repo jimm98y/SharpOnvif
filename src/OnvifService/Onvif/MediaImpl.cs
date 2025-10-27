@@ -6,7 +6,6 @@ using SharpOnvifCommon;
 using SharpOnvifCommon.PTZ;
 using SharpOnvifServer;
 using SharpOnvifServer.Media;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -76,14 +75,12 @@ namespace OnvifService.Onvif
 
         public override MediaUri GetSnapshotUri(string ProfileToken)
         {
-            Uri endpointUri = OperationContext.Current.IncomingMessageProperties.Via;
-
             if (Profiles == null || !Profiles.ContainsKey(ProfileToken))
                 OnvifErrors.ReturnSenderInvalidArg();
 
             return new MediaUri()
             {
-                Uri = string.IsNullOrEmpty(Profiles[ProfileToken].VideoSnapshotUri) ? OnvifHelpers.ChangeUriPath(endpointUri, "/preview").ToString() : Profiles[ProfileToken].VideoSnapshotUri
+                Uri = string.IsNullOrEmpty(Profiles[ProfileToken].VideoSnapshotUri) ? OnvifHelpers.ChangeUriPath(OperationContext.Current.IncomingMessageProperties.Via, "/preview").ToString() : Profiles[ProfileToken].VideoSnapshotUri
             };
         }
 
