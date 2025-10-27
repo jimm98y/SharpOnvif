@@ -31,7 +31,7 @@ public static class Program
             Console.WriteLine($"Found device: Manufacturer = {onvifDevice.Manufacturer}, Model = {onvifDevice.Hardware}");
         }
 
-        var device = devices.FirstOrDefault(x => x.Addresses != null && x.Addresses.FirstOrDefault(x => x.Contains("127.0.0.1")) != null);
+        var device = devices.FirstOrDefault(x => x.Addresses != null && x.Addresses.FirstOrDefault(x => x.Contains("127.0.0.1") || x.Contains("[::1]")) != null);
 
         if (device == null)
         {
@@ -39,7 +39,7 @@ public static class Program
         }
         else
         {
-            using (var client = new SimpleOnvifClient(device.Addresses.First(x => x.Contains("127.0.0.1")), "admin", "password", true))
+            using (var client = new SimpleOnvifClient(device.Addresses.First(x => x.Contains("127.0.0.1") || x.Contains("[::1]")), "admin", "password", true))
             {
                 var services = await client.GetServicesAsync(true);
                 var cameraDateTime = await client.GetSystemDateAndTimeUtcAsync();

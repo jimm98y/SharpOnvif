@@ -24,16 +24,19 @@ namespace SharpOnvifServer.Discovery
         private static readonly Random _rnd = new Random();
 
         public const int ONVIF_DISCOVERY_PORT = 3702;
-        public static string OnvifDiscoveryAddress = "239.255.255.250"; // only IPv4 networks are currently supported
+        public static string OnvifDiscoveryAddressIPV4 = "239.255.255.250";
+        public static string OnvifDiscoveryAddressIPV6 = "ff02::c"; 
 
         private List<UdpClient> _udpClients = new List<UdpClient>();
         private readonly CancellationTokenSource _cts = new CancellationTokenSource();
-        private List<Task> _listenerTasks=  new List<Task>();
+        private List<Task> _listenerTasks = new List<Task>();
 
         private readonly OnvifDiscoveryOptions _options = null;
         private readonly IServer _server;
         private readonly IHostApplicationLifetime _hostApplicationLifetime;
         private readonly ILogger<DiscoveryService> _logger;
+
+        private readonly List<Uri> _listeningUris = new List<Uri>();
 
         public DiscoveryService(
             OnvifDiscoveryOptions options, 
@@ -57,10 +60,6 @@ namespace SharpOnvifServer.Discovery
 
                 _logger.LogInformation($"Starting the DiscoveryService");
 
-                List<Uri> listeningUris = new List<Uri>();
-
-                var httpEndpoints = _server.GetHttpEndpoints();
-
                 foreach (NetworkInterface adapter in nics)
                 {
                     if (!(adapter.NetworkInterfaceType == NetworkInterfaceType.Loopback ||
@@ -79,12 +78,12 @@ namespace SharpOnvifServer.Discovery
                     if (!adapter.SupportsMulticast)
                         continue;
 
-                    if (!adapter.Supports(NetworkInterfaceComponent.IPv4))
+                    if (!(adapter.Supports(NetworkInterfaceComponent.IPv4) || adapter.Supports(NetworkInterfaceComponent.IPv6)))
                         continue;
 
                     IPInterfaceProperties adapterProperties = adapter.GetIPProperties();
 
-                    if (adapterProperties.GetIPv4Properties() == null)
+                    if (adapterProperties.GetIPv4Properties() == null && adapterProperties.GetIPv6Properties() == null)
                         continue;
 
                     foreach (var ua in adapterProperties.UnicastAddresses)
@@ -95,69 +94,105 @@ namespace SharpOnvifServer.Discovery
                             if (ipAddrBytes[0] == 169 && ipAddrBytes[1] == 254)
                                 continue; // skip link-local address
 
-                            string nicIPAddress = ua.Address.ToString();
-
-                            if (!(_options.NetworkInterfaces == null || _options.NetworkInterfaces.Count == 0 || _options.NetworkInterfaces.Contains("0.0.0.0")) && !_options.NetworkInterfaces.Contains(nicIPAddress))
+                            if (!(_options.NetworkInterfaces == null || _options.NetworkInterfaces.Count == 0 || _options.NetworkInterfaces.Contains("0.0.0.0")) && !_options.NetworkInterfaces.Contains(ua.Address.ToString()))
+                                continue;
+                            
+                            Listen(OnvifDiscoveryAddressIPV4, ua.Address);
+                        }
+                        else if(ua.Address.AddressFamily == AddressFamily.InterNetworkV6)
+                        {
+                            if (ua.Address.IsIPv6LinkLocal)
                                 continue;
 
-                            // TODO: Support HTTPS, host names... https://learn.microsoft.com/en-us/aspnet/core/fundamentals/servers/kestrel/endpoints?view=aspnetcore-9.0#configure-endpoints-with-urls
-                            var httpUriBuilder = new UriBuilder(new Uri(httpEndpoints.FirstOrDefault()));
-                            httpUriBuilder.Host = nicIPAddress.ToString();
-                            listeningUris.Add(httpUriBuilder.Uri);
+                            if (!(_options.NetworkInterfaces == null || _options.NetworkInterfaces.Count == 0 || _options.NetworkInterfaces.Contains("::") || _options.NetworkInterfaces.Contains("[::]")) && !_options.NetworkInterfaces.Contains(ua.Address.ToString()))
+                                continue;
 
-                            try
-                            {
-                                // to kill a process owning a port: Get-Process -Id (Get-NetUDPEndpoint -LocalPort 3702).OwningProcess
-                                var udpClient = new UdpClient();
-                                _udpClients.Add(udpClient);
-
-                                udpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
-
-                                // because of the multicast, we cannot use IPAddress.Any - it would have joined the multicast group only on the default NIC on multihomed system
-                                udpClient.Client.Bind(new IPEndPoint(IPAddress.Parse(nicIPAddress), ONVIF_DISCOVERY_PORT));
-                                udpClient.JoinMulticastGroup(IPAddress.Parse(OnvifDiscoveryAddress), IPAddress.Parse(nicIPAddress));
-
-                                _logger.LogInformation($"DiscoveryService is listening on the {nicIPAddress} network interface");
-
-                                var listenerTask = Task.Run(() =>
-                                {
-                                    while (!_cts.IsCancellationRequested)
-                                    {
-                                        try
-                                        {
-                                            var remoteEndpoint = new IPEndPoint(IPAddress.Any, 0);
-                                            var recvResult = udpClient.Receive(ref remoteEndpoint);
-
-                                            string message = Encoding.UTF8.GetString(recvResult);
-                                            _logger.LogDebug($"Received Discovery request on {nicIPAddress}:\r\n{message}");
-
-                                            var parsedMessage = ReadOnvifEndpoint(message);
-                                            if (parsedMessage != null && IsSearchingOurTypes(_options.Types, parsedMessage.Types))
-                                            {                                                
-                                                string reply = CreateDiscoveryResponse(_options, listeningUris, parsedMessage.MessageUuid);
-                                                var replyBytes = Encoding.UTF8.GetBytes(reply);
-                                                int sentBytes = udpClient.Client.SendTo(replyBytes, remoteEndpoint);
-                                                _logger.LogDebug($"Sent Discovery response on {nicIPAddress}:\r\n{reply}");
-                                            }
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            _logger.LogError($"Failed to process Discovery request on {nicIPAddress}: {ex.Message}");
-                                        }
-                                    }
-                                });
-
-                                _listenerTasks.Add(listenerTask);
-                            }
-                            catch (Exception ex)
-                            {
-                                _logger.LogError($"Failed to start broadcast listener: {ex.Message}");
-                            }
+                            Listen(OnvifDiscoveryAddressIPV6, ua.Address);
                         }
                     }
                 }
             });
             return Task.CompletedTask;
+        }
+
+        private void Listen(string discoveryAddress, IPAddress nicAddress)
+        {
+            string nicIPAddress = nicAddress.ToString();
+
+            var httpEndpoints = _server.GetHttpEndpoints();
+            var httpsEndpoints = _server.GetHttpsEndpoints();
+            var allEndpoints = httpEndpoints.Concat(httpsEndpoints).ToArray();
+
+            foreach (var endpoint in allEndpoints)
+            {
+                var httpUriBuilder = new UriBuilder(new Uri(endpoint));
+                httpUriBuilder.Host = nicIPAddress.ToString();
+                _listeningUris.Add(httpUriBuilder.Uri);
+            }
+
+            try
+            {
+                // to kill a process owning a port: Get-Process -Id (Get-NetUDPEndpoint -LocalPort 3702).OwningProcess
+                var udpClient = new UdpClient(nicAddress.AddressFamily);
+                _udpClients.Add(udpClient);
+
+                udpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+
+                // because of the multicast, we cannot use IPAddress.Any - it would have joined the multicast group only on the default NIC on multihomed system
+                udpClient.Client.Bind(new IPEndPoint(IPAddress.Parse(nicIPAddress), ONVIF_DISCOVERY_PORT));
+
+                if (nicAddress.AddressFamily == AddressFamily.InterNetworkV6)
+                {
+                    IPv6MulticastOption ipv6MulticastOption = new IPv6MulticastOption(IPAddress.Parse(discoveryAddress));
+                    IPAddress group = ipv6MulticastOption.Group;
+                    long interfaceIndex = ipv6MulticastOption.InterfaceIndex;
+                    udpClient.JoinMulticastGroup((int)ipv6MulticastOption.InterfaceIndex, ipv6MulticastOption.Group);
+                }
+                else if(nicAddress.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    udpClient.JoinMulticastGroup(IPAddress.Parse(discoveryAddress), IPAddress.Parse(nicIPAddress));
+                }
+                else
+                {
+                    throw new NotSupportedException();
+                }
+
+                _logger.LogInformation($"DiscoveryService is listening on the {nicIPAddress} network interface");
+
+                var listenerTask = Task.Run(() =>
+                {
+                    while (!_cts.IsCancellationRequested)
+                    {
+                        try
+                        {
+                            var remoteEndpoint = new IPEndPoint(IPAddress.Any, 0);
+                            var recvResult = udpClient.Receive(ref remoteEndpoint);
+
+                            string message = Encoding.UTF8.GetString(recvResult);
+                            _logger.LogDebug($"Received Discovery request on {nicIPAddress}:\r\n{message}");
+
+                            var parsedMessage = ReadOnvifEndpoint(message);
+                            if (parsedMessage != null && IsSearchingOurTypes(_options.Types, parsedMessage.Types))
+                            {
+                                string reply = CreateDiscoveryResponse(_options, _listeningUris.ToArray(), parsedMessage.MessageUuid);
+                                var replyBytes = Encoding.UTF8.GetBytes(reply);
+                                int sentBytes = udpClient.Client.SendTo(replyBytes, remoteEndpoint);
+                                _logger.LogDebug($"Sent Discovery response on {nicIPAddress}:\r\n{reply}");
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            _logger.LogError($"Failed to process Discovery request on {nicIPAddress}: {ex.Message}");
+                        }
+                    }
+                });
+
+                _listenerTasks.Add(listenerTask);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Failed to start multicast listener: {ex.Message}");
+            }
         }
 
         private bool IsSearchingOurTypes(List<OnvifType> types1, List<OnvifType> types2)

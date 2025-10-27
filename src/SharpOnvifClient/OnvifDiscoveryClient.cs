@@ -14,27 +14,28 @@ using System.Xml.XPath;
 namespace SharpOnvifClient
 {
     /// <summary>
-    /// Discovers Onvif devices on the network by sending a multicast discovery request. IPv4 only.
+    /// Discovers Onvif devices on the network by sending a multicast discovery request. 
     /// </summary>
     public static class OnvifDiscoveryClient
     {
-        public const int ONVIF_BROADCAST_TIMEOUT = 4000; // 4s timeout
+        public const int ONVIF_MULTICAST_TIMEOUT = 5000; // 5s timeout
         public const int ONVIF_DISCOVERY_PORT = 3702;
-        public static string OnvifDiscoveryAddress = "239.255.255.250"; // only IPv4 networks are currently supported
+        public static string OnvifDiscoveryAddressIPV4 = "239.255.255.250";
+        public static string OnvifDiscoveryAddressIPV6 = "ff02::c";
 
         private static readonly SemaphoreSlim _discoverySlim = new SemaphoreSlim(1);
 
         /// <summary>
-        /// Discover ONVIF devices in the local network. Sends broadcast messages to all available IP network interfaces.
+        /// Discover ONVIF devices in the local network. Sends multicast messages to all available IP network interfaces.
         /// </summary>
         /// <param name="onDeviceDiscovered">Callback to be called when a new device is discovered.</param>
-        /// <param name="broadcastTimeout"><see cref="ONVIF_BROADCAST_TIMEOUT"/>.</param>
-        /// <param name="broadcastPort">Broadcast port - 0 to let the OS choose any free port.</param>
+        /// <param name="multicastTimeout"><see cref="ONVIF_MULTICAST_TIMEOUT"/>.</param>
+        /// <param name="multicastPort">Multicast port - 0 to let the OS choose any free port.</param>
         /// <param name="deviceType">Device type we are searching for.</param>
         /// <returns>A list of discovered devices.</returns>
-        public static async Task<IList<OnvifDiscoveryResult>> DiscoverAsync(Action<OnvifDiscoveryResult> onDeviceDiscovered = null, int broadcastTimeout = ONVIF_BROADCAST_TIMEOUT, int broadcastPort = 0, string deviceType = "NetworkVideoTransmitter")
+        public static async Task<IList<OnvifDiscoveryResult>> DiscoverAsync(Action<OnvifDiscoveryResult> onDeviceDiscovered = null, int multicastTimeout = ONVIF_MULTICAST_TIMEOUT, int multicastPort = 0, string deviceType = "NetworkVideoTransmitter")
         {
-            return await DiscoverAllAsync(onDeviceDiscovered, broadcastTimeout, broadcastPort, deviceType);
+            return await DiscoverAllAsync(onDeviceDiscovered, multicastTimeout, multicastPort, deviceType);
         }
 
         /// <summary>
@@ -42,24 +43,24 @@ namespace SharpOnvifClient
         /// </summary>
         /// <param name="ipAddress">IP address of the network interface to use (IP of the host computer on the NIC you want to use for discovery).</param>
         /// <param name="onDeviceDiscovered">Callback to be called when a new device is discovered.</param>
-        /// <param name="broadcastTimeout"><see cref="ONVIF_BROADCAST_TIMEOUT"/>.</param>
-        /// <param name="broadcastPort">Broadcast port - 0 to let the OS choose any free port.</param>
+        /// <param name="multicastTimeout"><see cref="ONVIF_MULTICAST_TIMEOUT"/>.</param>
+        /// <param name="multicastPort">Multicast port - 0 to let the OS choose any free port.</param>
         /// <param name="deviceType">Device type we are searching for.</param>
         /// <returns>A list of discovered devices.</returns>
-        public static async Task<IList<OnvifDiscoveryResult>> DiscoverAsync(string ipAddress, Action<OnvifDiscoveryResult> onDeviceDiscovered = null, int broadcastTimeout = ONVIF_BROADCAST_TIMEOUT, int broadcastPort = 0, string deviceType = "NetworkVideoTransmitter")
+        public static async Task<IList<OnvifDiscoveryResult>> DiscoverAsync(string ipAddress, Action<OnvifDiscoveryResult> onDeviceDiscovered = null, int multicastTimeout = ONVIF_MULTICAST_TIMEOUT, int multicastPort = 0, string deviceType = "NetworkVideoTransmitter")
         {
-            return await DiscoverAllAsync(ipAddress, onDeviceDiscovered, broadcastTimeout, broadcastPort, deviceType);
+            return await DiscoverAllAsync(ipAddress, onDeviceDiscovered, multicastTimeout, multicastPort, deviceType);
         }
 
         /// <summary>
         /// Internal method to discover ONVIF devices in the local network and retrieve detailed information about them.
         /// </summary>
-        /// <param name="onDeviceDiscovered"></param>
-        /// <param name="broadcastTimeout"></param>
-        /// <param name="broadcastPort"></param>
-        /// <param name="deviceType"></param>
+        /// <param name="onDeviceDiscovered">Callback to be called when a new device is discovered.</param>
+        /// <param name="multicastTimeout"><see cref="ONVIF_MULTICAST_TIMEOUT"/>.</param>
+        /// <param name="multicastPort">Multicast port - 0 to let the OS choose any free port.</param>
+        /// <param name="deviceType">Device type we are searching for.</param>
         /// <returns>A list of discovered devices with make and model.</returns>
-        internal static async Task<IList<OnvifDiscoveryResult>> DiscoverAllAsync(Action<OnvifDiscoveryResult> onDeviceDiscovered = null, int broadcastTimeout = ONVIF_BROADCAST_TIMEOUT, int broadcastPort = 0, string deviceType = "NetworkVideoTransmitter")
+        internal static async Task<IList<OnvifDiscoveryResult>> DiscoverAllAsync(Action<OnvifDiscoveryResult> onDeviceDiscovered = null, int multicastTimeout = ONVIF_MULTICAST_TIMEOUT, int multicastPort = 0, string deviceType = "NetworkVideoTransmitter")
         {
             NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
             List<Task<IList<OnvifDiscoveryResult>>> discoveryTasks = new List<Task<IList<OnvifDiscoveryResult>>>();
@@ -82,12 +83,12 @@ namespace SharpOnvifClient
                 if (!adapter.SupportsMulticast)
                     continue;
 
-                if (!adapter.Supports(NetworkInterfaceComponent.IPv4))
+                if (!(adapter.Supports(NetworkInterfaceComponent.IPv4) || adapter.Supports(NetworkInterfaceComponent.IPv6)))
                     continue;
 
                 IPInterfaceProperties adapterProperties = adapter.GetIPProperties();
 
-                if (adapterProperties.GetIPv4Properties() == null)
+                if (adapterProperties.GetIPv4Properties() == null && adapterProperties.GetIPv6Properties() == null)
                     continue;
 
                 foreach (var ua in adapterProperties.UnicastAddresses)
@@ -98,7 +99,15 @@ namespace SharpOnvifClient
                         if (ipAddrBytes[0] == 169 && ipAddrBytes[1] == 254)
                             continue; // skip link-local address
 
-                        var discoveryTask = DiscoverAllAsync(ua.Address.ToString(), onDeviceDiscovered, broadcastTimeout, broadcastPort, deviceType);
+                        var discoveryTask = DiscoverAllAsync(ua.Address.ToString(), onDeviceDiscovered, multicastTimeout, multicastPort, deviceType);
+                        discoveryTasks.Add(discoveryTask);
+                    }
+                    else if (ua.Address.AddressFamily == AddressFamily.InterNetworkV6)
+                    {
+                        if(ua.Address.IsIPv6LinkLocal)
+                            continue; // skip link-local address
+
+                        var discoveryTask = DiscoverAllAsync(ua.Address.ToString(), onDeviceDiscovered, multicastTimeout, multicastPort, deviceType);
                         discoveryTasks.Add(discoveryTask);
                     }
                 }
@@ -114,11 +123,11 @@ namespace SharpOnvifClient
         /// </summary>
         /// <param name="ipAddress"></param>
         /// <param name="onDeviceDiscovered"></param>
-        /// <param name="broadcastTimeout"></param>
-        /// <param name="broadcastPort"></param>
+        /// <param name="multicastTimeout"></param>
+        /// <param name="multicastPort"></param>
         /// <param name="deviceType"></param>
         /// <returns>A list of discovered devices with make and model.</returns>
-        internal static async Task<IList<OnvifDiscoveryResult>> DiscoverAllAsync(string ipAddress, Action<OnvifDiscoveryResult> onDeviceDiscovered = null, int broadcastTimeout = ONVIF_BROADCAST_TIMEOUT, int broadcastPort = 0, string deviceType = "NetworkVideoTransmitter")
+        internal static async Task<IList<OnvifDiscoveryResult>> DiscoverAllAsync(string ipAddress, Action<OnvifDiscoveryResult> onDeviceDiscovered = null, int multicastTimeout = ONVIF_MULTICAST_TIMEOUT, int multicastPort = 0, string deviceType = "NetworkVideoTransmitter")
         {
             if (ipAddress == null)
                 throw new ArgumentNullException(nameof(ipAddress));
@@ -147,8 +156,10 @@ namespace SharpOnvifClient
             var endpoints = new HashSet<string>();
             var cts = new CancellationTokenSource();
 
-            IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse(ipAddress), broadcastPort);
-            IPEndPoint multicastEndpoint = new IPEndPoint(IPAddress.Parse(OnvifDiscoveryAddress), ONVIF_DISCOVERY_PORT);
+            var nicAddress = IPAddress.Parse(ipAddress);
+            string discoveryAddress = nicAddress.AddressFamily == AddressFamily.InterNetwork ? OnvifDiscoveryAddressIPV4 : OnvifDiscoveryAddressIPV6;
+            IPEndPoint endPoint = new IPEndPoint(nicAddress, multicastPort);
+            IPEndPoint multicastEndpoint = new IPEndPoint(IPAddress.Parse(discoveryAddress), ONVIF_DISCOVERY_PORT);
 
             try
             {
@@ -190,7 +201,7 @@ namespace SharpOnvifClient
                     byte[] message = Encoding.UTF8.GetBytes(onvifDiscoveryProbe);
                     await client.SendAsync(message, message.Length, multicastEndpoint);
 
-                    await Task.Delay(broadcastTimeout, cts.Token);
+                    await Task.Delay(multicastTimeout, cts.Token);
                     cts.Cancel();
 
                     // return a snapshot of the results

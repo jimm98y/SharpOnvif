@@ -65,6 +65,8 @@ app.UseOnvif()
     serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.OnvifImpl, SharpOnvifServer.Events.NotificationProducer>(onvifBinding, URI_DEVICE_SERVICE);
     serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.OnvifImpl, SharpOnvifServer.Events.EventPortType>(onvifBinding, URI_DEVICE_SERVICE);
     serviceBuilder.AddServiceEndpoint<OnvifService.Onvif.OnvifImpl, SharpOnvifServer.Events.PullPoint>(onvifBinding, URI_DEVICE_SERVICE);
+
+    Note: this would only work as long as there are no collisions, meaning 2 interfaces must not implement the same method
     */
 
     serviceBuilder.AddService<OnvifService.Onvif.DeviceImpl>();
