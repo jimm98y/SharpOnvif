@@ -117,13 +117,18 @@ namespace SharpOnvifServer.Discovery
 
         private void Listen(string discoveryAddress, IPAddress nicAddress)
         {
-            var httpEndpoints = _server.GetHttpEndpoints();
             string nicIPAddress = nicAddress.ToString();
 
-            // TODO: Support HTTPS, host names... https://learn.microsoft.com/en-us/aspnet/core/fundamentals/servers/kestrel/endpoints?view=aspnetcore-9.0#configure-endpoints-with-urls
-            var httpUriBuilder = new UriBuilder(new Uri(httpEndpoints.FirstOrDefault()));
-            httpUriBuilder.Host = nicIPAddress.ToString();
-            _listeningUris.Add(httpUriBuilder.Uri);
+            var httpEndpoints = _server.GetHttpEndpoints();
+            var httpsEndpoints = _server.GetHttpsEndpoints();
+            var allEndpoints = httpEndpoints.Concat(httpsEndpoints).ToArray();
+
+            foreach (var endpoint in allEndpoints)
+            {
+                var httpUriBuilder = new UriBuilder(new Uri(endpoint));
+                httpUriBuilder.Host = nicIPAddress.ToString();
+                _listeningUris.Add(httpUriBuilder.Uri);
+            }
 
             try
             {
