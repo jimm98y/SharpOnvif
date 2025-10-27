@@ -104,7 +104,7 @@ namespace SharpOnvifServer.Discovery
                             if (ua.Address.IsIPv6LinkLocal)
                                 continue;
 
-                            if (!(_options.NetworkInterfaces == null || _options.NetworkInterfaces.Count == 0 || _options.NetworkInterfaces.Contains("::")) && !_options.NetworkInterfaces.Contains(ua.Address.ToString()))
+                            if (!(_options.NetworkInterfaces == null || _options.NetworkInterfaces.Count == 0 || _options.NetworkInterfaces.Contains("::") || _options.NetworkInterfaces.Contains("[::]")) && !_options.NetworkInterfaces.Contains(ua.Address.ToString()))
                                 continue;
 
                             Listen(OnvifDiscoveryAddressIPV6, ua.Address);
@@ -186,7 +186,7 @@ namespace SharpOnvifServer.Discovery
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Failed to start broadcast listener: {ex.Message}");
+                _logger.LogError($"Failed to start multicast listener: {ex.Message}");
             }
         }
 
