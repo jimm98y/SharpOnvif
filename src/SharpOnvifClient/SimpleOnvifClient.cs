@@ -38,7 +38,7 @@ namespace SharpOnvifClient
         /// </summary>
         /// <param name="onvifUri">Onvif URI.</param>
         /// <param name="disableExpect100Continue">Disables the default Expect: 100-continue HTTP header.</param>
-        public SimpleOnvifClient(string onvifUri, bool disableExpect100Continue = false) : this(onvifUri, null, null, OnvifAuthentication.None, disableExpect100Continue)
+        public SimpleOnvifClient(string onvifUri, bool disableExpect100Continue = true) : this(onvifUri, null, null, OnvifAuthentication.None, disableExpect100Continue)
         { }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace SharpOnvifClient
         /// <param name="userName">User name.</param>
         /// <param name="password">Password.</param>
         /// <param name="disableExpect100Continue">Disables the default Expect: 100-continue HTTP header.</param>
-        public SimpleOnvifClient(string onvifUri, string userName, string password, bool disableExpect100Continue = false) : this(onvifUri, userName, password, OnvifAuthentication.WsUsernameToken | OnvifAuthentication.HttpDigest, disableExpect100Continue)
+        public SimpleOnvifClient(string onvifUri, string userName, string password, bool disableExpect100Continue = true) : this(onvifUri, userName, password, OnvifAuthentication.WsUsernameToken | OnvifAuthentication.HttpDigest, disableExpect100Continue)
         { }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace SharpOnvifClient
         /// <param name="authentication">Type of the authentication to use: <see cref="OnvifAuthentication"/>.</param>
         /// <param name="disableExpect100Continue">Disables the default Expect: 100-continue HTTP header.</param>
         /// <exception cref="ArgumentNullException">Thrown when onvifUri is empty.</exception>
-        public SimpleOnvifClient(string onvifUri, string userName, string password, OnvifAuthentication authentication, bool disableExpect100Continue = false)
+        public SimpleOnvifClient(string onvifUri, string userName, string password, OnvifAuthentication authentication, bool disableExpect100Continue = true)
         {
             if (string.IsNullOrWhiteSpace(onvifUri))
                 throw new ArgumentNullException(nameof(onvifUri));
