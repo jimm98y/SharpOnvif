@@ -182,10 +182,10 @@ namespace SharpOnvifServer
             if (user != null)
             {
                 string hashedPassword = DigestHelpers.CreateSoapDigest(nonce, created, user.Password);
-                DateTime createdDateTime;
-                if (DateTime.TryParse(created, out createdDateTime))
+                DateTimeOffset createdDateTime;
+                if (DateTimeOffset.TryParse(created, out createdDateTime))
                 {
-                    if (MaxValidTimeDeltaInSeconds < 0 || DateTime.UtcNow.Subtract(createdDateTime).TotalSeconds < MaxValidTimeDeltaInSeconds)
+                    if (MaxValidTimeDeltaInSeconds < 0 || DateTimeOffset.UtcNow.Subtract(createdDateTime).TotalSeconds < MaxValidTimeDeltaInSeconds)
                     {
                         if (hashedPassword.CompareTo(password) == 0)
                         {
