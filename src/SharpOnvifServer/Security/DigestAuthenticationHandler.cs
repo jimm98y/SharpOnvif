@@ -18,13 +18,11 @@ using System.Globalization;
 
 namespace SharpOnvifServer
 {
-    public class DigestAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
+    public class DigestAuthenticationHandler : AuthenticationHandler<DigestAuthenticationSchemeOptions>
     {
         public const string ANONYMOUS_USER = "Anonymous";
 
         private readonly IUserRepository _userRepository;
-
-        public string Realm { get; set; } = "IP Camera";
 
         private class SoapDigestAuth
         {
@@ -58,13 +56,8 @@ namespace SharpOnvifServer
             public string Uri { get; }
         }
 
-        /// <summary>
-        /// Maximum allowed time difference in between the client and the server in seconds.
-        /// </summary>
-        protected int MaxValidTimeDeltaInSeconds { get; set; } = 300;
-
         public DigestAuthenticationHandler(
-            IOptionsMonitor<AuthenticationSchemeOptions> options,
+            IOptionsMonitor<DigestAuthenticationSchemeOptions> options,
             ILoggerFactory logger,
             UrlEncoder encoder,
             IUserRepository userRepository) :
@@ -81,7 +74,7 @@ namespace SharpOnvifServer
             {
                 try
                 {
-                    if (await AuthenticateWebDigest(webToken.UserName, Realm, webToken.Response, webToken.Nonce, Request.Method, webToken.Uri))
+                    if (await AuthenticateWebDigest(webToken.UserName, OptionsMonitor.CurrentValue.Realm, webToken.Response, webToken.Nonce, Request.Method, webToken.Uri))
                     {
                         // now in case the request also contains WsUsernameToken, we must verify it
                         SoapDigestAuth token = await GetSecurityHeaderFromSoapEnvelope(Request);
@@ -182,10 +175,14 @@ namespace SharpOnvifServer
             if (user != null)
             {
                 string hashedPassword = DigestHelpers.CreateSoapDigest(nonce, created, user.Password);
+                
                 DateTime createdDateTime;
-                if (DateTime.TryParse(created, out createdDateTime))
+
+                // All times MUST be in UTC format as specified https://docs.oasis-open.org/wss-m/wss/v1.1.1/os/wss-SOAPMessageSecurity-v1.1.1-os.html
+                if (DateTime.TryParse(created, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal, out createdDateTime))
                 {
-                    if (MaxValidTimeDeltaInSeconds < 0 || DateTime.UtcNow.Subtract(createdDateTime).TotalSeconds < MaxValidTimeDeltaInSeconds)
+                    if (OptionsMonitor.CurrentValue.MaxValidTimeDeltaInSeconds < 0 || 
+                        Math.Abs(DateTime.UtcNow.Subtract(createdDateTime.ToUniversalTime()).TotalSeconds) < OptionsMonitor.CurrentValue.MaxValidTimeDeltaInSeconds)
                     {
                         if (hashedPassword.CompareTo(password) == 0)
                         {
@@ -218,7 +215,7 @@ namespace SharpOnvifServer
             if(request.Headers.Authorization.Count > 0)
             {
                 string auth = request.Headers.Authorization[0];
-                if(auth.StartsWith("Digest ") && GetValueFromHeader(auth, "realm") == Realm)
+                if(auth.StartsWith("Digest ") && GetValueFromHeader(auth, "realm") == OptionsMonitor.CurrentValue.Realm)
                 {
                     string userName = GetValueFromHeader(auth, "username");
                     string nonce = GetValueFromHeader(auth, "nonce");
@@ -248,7 +245,7 @@ namespace SharpOnvifServer
 
             // RFC 2069
             // TODO: RFC 2617
-            Response.Headers.Append("WWW-Authenticate", $"Digest realm=\"{Realm}\", nonce=\"{nonce}\", stale=\"FALSE\"");
+            Response.Headers.Append("WWW-Authenticate", $"Digest realm=\"{OptionsMonitor.CurrentValue.Realm}\", nonce=\"{nonce}\", stale=\"FALSE\"");
             
             await Context.Response.WriteAsync("You are not logged in via Digest auth").ConfigureAwait(false);
         }
