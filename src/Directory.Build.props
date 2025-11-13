@@ -3,7 +3,7 @@
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Nullable>disable</Nullable>
 		<Title>$(ProjectName)</Title>
-		<Version>0.6.0</Version>
+		<Version>0.6.1</Version>
 		<Authors>Lukas Volf</Authors>
 		<Copyright>MIT</Copyright>
 		<PackageProjectUrl>https://github.com/jimm98y/SharpOnvif</PackageProjectUrl>
