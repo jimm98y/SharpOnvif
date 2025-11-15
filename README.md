@@ -2,7 +2,7 @@
 A C# implementation of the Onvif interface - client as well as the server. All profiles are supported.
 
 ## SharpOnvifServer
-Onvif server provides NET8 CoreWCF bindings generated using svcutil.exe. It makes it easy to implement only parts of the Onvif specification needed for your project.
+Onvif server provides NET10 CoreWCF bindings generated using svcutil.exe. It makes it easy to implement only parts of the Onvif specification needed for your project.
 
 [![NuGet version](https://img.shields.io/nuget/v/SharpOnvifServer.svg?style=flat-square)](https://www.nuget.org/packages/SharpOnvifServer)
 
