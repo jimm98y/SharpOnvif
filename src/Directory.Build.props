@@ -3,14 +3,14 @@
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Nullable>disable</Nullable>
 		<Title>$(ProjectName)</Title>
-		<Version>0.6.1</Version>
+		<Version>0.7.0</Version>
 		<Authors>Lukas Volf</Authors>
 		<Copyright>MIT</Copyright>
 		<PackageProjectUrl>https://github.com/jimm98y/SharpOnvif</PackageProjectUrl>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<RepositoryUrl>https://github.com/jimm98y/SharpOnvif</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<PackageTags>camera;rtsp;onvif;onvif-client;netstandard20;onvif-camera;onvif-ptz;onvif-events;onvif-discovery;net8</PackageTags>
+		<PackageTags>camera;rtsp;onvif;onvif-client;onvif-camera;onvif-ptz;onvif-events;onvif-discovery;netstandard20;net10</PackageTags>
 		<NeutralLanguage>en-US</NeutralLanguage>
 		<AssemblyVersion>1.0.0</AssemblyVersion>
 		<FileVersion>$(Version)</FileVersion>
