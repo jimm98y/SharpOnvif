@@ -11,13 +11,15 @@
 		<DotNetCliToolReference Include="Microsoft.XmlSerializer.Generator" Version="10.0.0" />
 	</ItemGroup>
 
+	<ItemGroup Condition="'$(TargetFramework)' == 'net481' OR '$(TargetFramework)' == 'netstandard2.0'">
+		<PackageReference Include="System.Memory" Version="4.6.3" />
+	</ItemGroup>
+
 	<ItemGroup>
 		<PackageReference Include="Microsoft.XmlSerializer.Generator" Version="10.0.0" />
 		<PackageReference Include="System.ServiceModel.Primitives" Version="10.0.652802" />
 		<PackageReference Include="System.ServiceModel.Http" Version="10.0.652802" />
 		<PackageReference Include="System.ServiceModel.NetTcp" Version="10.0.652802" />
-		<PackageReference Include="System.Formats.Asn1" Version="10.0.0" />
-		<PackageReference Include="System.Security.Cryptography.Pkcs" Version="10.0.0" />
 	</ItemGroup>
 
 </Project>
