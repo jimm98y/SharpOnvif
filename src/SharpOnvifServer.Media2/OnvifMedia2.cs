@@ -12625,6 +12625,9 @@ namespace SharpOnvifServer.Media2
         
         /// <remarks/>
         H264,
+
+        /// <remarks/>
+        H265,
     }
     
     /// <remarks/>
