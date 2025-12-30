@@ -18195,6 +18195,12 @@ namespace SharpOnvifServer.Analytics
         
         /// <remarks/>
         H264,
+
+        /// <remarks/>
+        H265,
+
+        /// <remarks/>
+        AV1,
     }
     
     /// <remarks/>

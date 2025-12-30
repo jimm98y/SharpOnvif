@@ -1735,6 +1735,12 @@ namespace SharpOnvifServer.Display
         
         /// <remarks/>
         H264,
+
+        /// <remarks/>
+        H265,
+
+        /// <remarks/>
+        AV1,
     }
     
     /// <remarks/>

@@ -453,6 +453,13 @@ namespace SharpOnvifClient
             await ptzClient.RemovePresetAsync(profileToken, presetToken).ConfigureAwait(false);
         }
 
+        public async Task StopAsync(string profileToken, bool panTilt = true, bool zoom = true)
+        {
+            string ptzURL = await GetServiceUriAsync(OnvifServices.PTZ).ConfigureAwait(false);
+            var ptzClient = GetOrCreateClient<PTZClient, PTZ.PTZ>(ptzURL, (u) => new PTZClient(OnvifBindingFactory.CreateBinding(), new EndpointAddress(u)));
+            await ptzClient.StopAsync(profileToken, panTilt, zoom).ConfigureAwait(false);
+        }
+
         #endregion PTZ
 
         #region Utility
