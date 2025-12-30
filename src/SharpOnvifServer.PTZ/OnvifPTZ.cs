@@ -4596,6 +4596,9 @@ namespace SharpOnvifServer.PTZ
 
         /// <remarks/>
         H265,
+
+        /// <remarks/>
+        AV1,
     }
     
     /// <remarks/>

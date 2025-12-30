@@ -5263,6 +5263,9 @@ namespace SharpOnvifClient.Media
 
         /// <remarks/>
         H265,
+
+        /// <remarks/>
+        AV1,
     }
     
     /// <remarks/>

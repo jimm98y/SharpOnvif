@@ -3967,6 +3967,9 @@ namespace SharpOnvifClient.PTZ
 
         /// <remarks/>
         H265,
+
+        /// <remarks/>
+        AV1,
     }
     
     /// <remarks/>

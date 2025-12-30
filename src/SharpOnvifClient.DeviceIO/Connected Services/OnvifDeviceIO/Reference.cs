@@ -3070,6 +3070,9 @@ namespace SharpOnvifClient.DeviceIO
 
         /// <remarks/>
         H265,
+
+        /// <remarks/>
+        AV1,
     }
     
     /// <remarks/>
