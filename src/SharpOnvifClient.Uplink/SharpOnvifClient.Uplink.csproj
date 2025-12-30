@@ -8,7 +8,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<DotNetCliToolReference Include="Microsoft.XmlSerializer.Generator" Version="10.0.0" />
+		<DotNetCliToolReference Include="Microsoft.XmlSerializer.Generator" Version="10.0.1" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net481' OR '$(TargetFramework)' == 'netstandard2.0'">
