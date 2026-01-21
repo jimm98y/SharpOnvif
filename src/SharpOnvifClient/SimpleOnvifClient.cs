@@ -31,6 +31,7 @@ namespace SharpOnvifClient
         private readonly System.Net.NetworkCredential _credentials;
         private readonly OnvifAuthentication _authentication;
         private readonly IEndpointBehavior _legacyAuth;
+        private readonly IEndpointBehavior _digestAuth;
         private readonly IEndpointBehavior _disableExpect100ContinueBehavior;
 
         /// <summary>
@@ -76,6 +77,11 @@ namespace SharpOnvifClient
                 {
                     _legacyAuth = new WsUsernameTokenBehavior(_credentials);
                 }
+
+                if (authentication.HasFlag(OnvifAuthentication.HttpDigest))
+                {
+                    _digestAuth = new HttpDigestBehavior(_credentials);
+                }                
             }
 
             if (disableExpect100Continue)
@@ -111,7 +117,7 @@ namespace SharpOnvifClient
                 else
                 {
                     var client = creator(uri);
-                    client.SetOnvifAuthentication(_authentication, _credentials, _legacyAuth);
+                    client.SetOnvifAuthentication(_authentication, _credentials, _digestAuth, _legacyAuth);
                     client.SetDisableExpect100Continue(_disableExpect100ContinueBehavior);
                     _clients.Add(key, client);
                     return client;

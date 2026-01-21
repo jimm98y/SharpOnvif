@@ -2,9 +2,6 @@
 using System.Diagnostics;
 using System.Net;
 using System.ServiceModel;
-#if NETSTANDARD
-using System.Reflection;
-#endif
 
 namespace SharpOnvifClient
 {
@@ -22,7 +19,8 @@ namespace SharpOnvifClient
             this ClientBase<TChannel> channel,
             OnvifAuthentication authentication, 
             NetworkCredential credentials, 
-            System.ServiceModel.Description.IEndpointBehavior legacyAuth = null) where TChannel : class
+            System.ServiceModel.Description.IEndpointBehavior digestAuth,
+            System.ServiceModel.Description.IEndpointBehavior legacyAuth) where TChannel : class
         {
             if (authentication == OnvifAuthentication.None)
             {
@@ -32,27 +30,14 @@ namespace SharpOnvifClient
 
             if (authentication.HasFlag(OnvifAuthentication.HttpDigest))
             {
-#if NETSTANDARD
-                // Workaround for netstandard2.0 where when used in NETFramework 4.8.1 the AllowedImpersonationLevel property is set to Identification instead of Impersonation.
-                try
-                {
-                    var allowedImpersonationLevelProperty = channel.ClientCredentials.HttpDigest.GetType().GetTypeInfo().GetProperty("AllowedImpersonationLevel", BindingFlags.Instance | BindingFlags.Public);
-                    if (allowedImpersonationLevelProperty != null)
-                    {
-                        // Due to the limitations of Digest authentication, when the client is using non-default credentials, only Impersonation and Delegation levels are allowed.
-                        allowedImpersonationLevelProperty.SetValue(channel.ClientCredentials.HttpDigest, System.Security.Principal.TokenImpersonationLevel.Impersonation);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine($"Error setting impersonation level: {ex.Message}");
-                }
-#elif NETFRAMEWORK
-                channel.ClientCredentials.HttpDigest.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;
-#endif
+                // HTTP Digest authentication in NET Framework supports only MD5 (RFC 2069)
+                if (digestAuth == null)
+                    throw new ArgumentNullException(nameof(digestAuth));
 
-                // HTTP Digest authentication is handled by WCF
-                channel.ClientCredentials.HttpDigest.ClientCredential = credentials;
+                if (!channel.Endpoint.EndpointBehaviors.Contains(digestAuth))
+                {
+                    channel.Endpoint.EndpointBehaviors.Add(digestAuth);
+                }
             }
 
             if (authentication.HasFlag(OnvifAuthentication.WsUsernameToken))

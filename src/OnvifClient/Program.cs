@@ -39,13 +39,13 @@ public static class Program
         }
         else
         {
-            using (var client = new SimpleOnvifClient(device.Addresses.First(x => x.Contains("127.0.0.1") || x.Contains("[::1]")), "admin", "password", true))
+            using (var client = new SimpleOnvifClient(device.Addresses.First(x => x.Contains("127.0.0.1") || x.Contains("[::1]")), "admin", "password", OnvifAuthentication.HttpDigest, true))
             {
                 var services = await client.GetServicesAsync(true);
                 var cameraDateTime = await client.GetSystemDateAndTimeUtcAsync();
                 var cameraTimeOffset = cameraDateTime.Subtract(DateTime.UtcNow);
                 Console.WriteLine($"Camera time: {cameraDateTime}");
-                client.SetCameraUtcNowOffset(cameraTimeOffset); // this is only supported when using WsUsernameToken legacy authentication
+                //client.SetCameraUtcNowOffset(cameraTimeOffset); // this is only supported when using WsUsernameToken legacy authentication
                 
                 var deviceInfo = await client.GetDeviceInformationAsync();
                 Console.WriteLine($"Device Manufacturer: {deviceInfo.Manufacturer}");
