@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Dispatcher;

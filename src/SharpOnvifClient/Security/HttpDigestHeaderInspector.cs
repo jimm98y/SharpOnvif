@@ -1,49 +1,98 @@
 ﻿using SharpOnvifCommon.Security;
+using System;
+using System.Diagnostics;
 using System.Net;
+using System.Net.Http;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Dispatcher;
+using System.Text.RegularExpressions;
 
-namespace SharpOnvifClient.Security
+public class HttpDigestHeaderInspector : IClientMessageInspector
 {
-    public class HttpDigestHeaderInspector : IClientMessageInspector
-    {
-        private NetworkCredential _credentials;
+    private NetworkCredential _credentials;
+    private static readonly HttpClient _httpClient = new HttpClient();
 
-        public HttpDigestHeaderInspector(NetworkCredential credentials)
+    public HttpDigestHeaderInspector(NetworkCredential credentials)
+    {
+        this._credentials = credentials;
+    }
+
+    public void AfterReceiveReply(ref Message reply, object correlationState)
+    { }
+
+    public object BeforeSendRequest(ref Message request, IClientChannel channel)
+    {
+        HttpRequestMessageProperty httpRequestMessage;
+
+        if (request.Properties.TryGetValue(HttpRequestMessageProperty.Name, out var httpRequestMessageObject))
         {
-            this._credentials = credentials;
+            httpRequestMessage = httpRequestMessageObject as HttpRequestMessageProperty;
+        }
+        else
+        {
+            httpRequestMessage = new HttpRequestMessageProperty();
+            httpRequestMessage.Method = "POST";
         }
 
-        public void AfterReceiveReply(ref Message reply, object correlationState)
-        { }
+        string nonce = "";
+        string realm = "";
+        string qop;
 
-        public object BeforeSendRequest(ref Message request, IClientChannel channel)
+        // pre-flight request to get the www-auth header from the server
+        using (var req = new HttpRequestMessage(HttpMethod.Head, channel.RemoteAddress.Uri))
         {
-            HttpRequestMessageProperty httpRequestMessage;
-            object httpRequestMessageObject;
-            if (request.Properties.TryGetValue(HttpRequestMessageProperty.Name, out httpRequestMessageObject))
+            HttpResponseMessage resp = null;
+
+            try
             {
-                httpRequestMessage = httpRequestMessageObject as HttpRequestMessageProperty;
-                if (string.IsNullOrEmpty(httpRequestMessage.Headers["WWW-Authenticate"]))
+#if NET5_0_OR_GREATER
+                resp = _httpClient.Send(req, HttpCompletionOption.ResponseHeadersRead);
+#else
+                resp = _httpClient.SendAsync(req, HttpCompletionOption.ResponseHeadersRead).Result;
+#endif
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return null;
+            }
+
+            using (resp)
+            {
+                if (resp.StatusCode == HttpStatusCode.Unauthorized && resp.Headers.WwwAuthenticate != null)
                 {
-                    // Digest username="admin", realm="IP Camera", nonce="U/MVAKMI/Ue5j+rjWvTD3flLEYqZHtxBl/TSWaZgzg8=", uri="/onvif/device_service", response="b55aa61c96f1a169a43138189a268037"
-                    string nonce = DigestHelpers.CalculateNonce();
-                    string digest = DigestHelpers.CreateWebDigestRFC2069(_credentials.UserName, _credentials.Domain, _credentials.Password, nonce, request.Headers.Action, request.Properties.Via?.ToString());
-                    httpRequestMessage.Headers["WWW-Authenticate"] = $"Digest username=\"{_credentials.UserName}\", realm=\"{_credentials.Domain}\", nonce=\"{nonce}\", uri=\"/onvif/device_service\", response=\"{digest}\"";
+                    var receivedWwwAuth = resp.Headers.WwwAuthenticate.ToString();
+                    var receivedNonce = Regex.Match(receivedWwwAuth, "nonce=\"(?<n>[^\"]+)\"", RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
+                    var receivedRealm = Regex.Match(receivedWwwAuth, "realm=\"(?<r>[^\"]+)\"", RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
+                    var receivedQop = Regex.Match(receivedWwwAuth, "qop=\"(?<q>[^\"]+)\"", RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
+
+                    if (receivedNonce.Success)
+                    {
+                        nonce = receivedNonce.Groups["n"].Value;
+                        realm = receivedRealm.Success ? receivedRealm.Groups["r"].Value : null;
+                        qop = receivedQop.Success ? receivedQop.Groups["q"].Value : null;
+                    }
                 }
             }
-            else
-            {
-                httpRequestMessage = new HttpRequestMessageProperty();
-
-                string nonce = DigestHelpers.CalculateNonce();
-                string digest = DigestHelpers.CreateWebDigestRFC2069(_credentials.UserName, _credentials.Domain, _credentials.Password, nonce, request.Headers.Action, request.Properties.Via?.ToString());
-
-                httpRequestMessage.Headers.Add("WWW-Authenticate", $"Digest username=\"{_credentials.UserName}\", realm=\"{_credentials.Domain}\", nonce=\"{nonce}\", uri=\"/onvif/device_service\", response=\"{digest}\"");
-                request.Properties.Add(HttpRequestMessageProperty.Name, httpRequestMessage);
-            }
-            return null;
         }
+
+        if (!string.IsNullOrEmpty(nonce))
+        {
+            var method = string.IsNullOrEmpty(httpRequestMessage.Method) ? "POST" : httpRequestMessage.Method;
+            string digest = DigestHelpers.CreateWebDigestRFC2069(
+                _credentials.UserName,
+                realm,
+                _credentials.Password,
+                nonce,
+                method,
+                channel.RemoteAddress.Uri.PathAndQuery);
+
+            httpRequestMessage.Headers["Authorization"] = $"Digest username=\"{_credentials.UserName}\", realm=\"{realm}\", nonce=\"{nonce}\", uri=\"{channel.RemoteAddress.Uri.PathAndQuery}\", response=\"{digest}\"";
+        }
+
+        request.Properties[HttpRequestMessageProperty.Name] = httpRequestMessage;
+
+        return null;
     }
 }

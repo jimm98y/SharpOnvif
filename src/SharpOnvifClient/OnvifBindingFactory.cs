@@ -21,7 +21,7 @@ namespace SharpOnvifClient
         {
             var httpTransportBinding = new HttpTransportBindingElement
             {
-                AuthenticationScheme = AuthenticationSchemes.Digest,
+                AuthenticationScheme = AuthenticationSchemes.Anonymous,
                 MaxReceivedMessageSize = MAX_MESSAGE_SIZE,
                 MaxBufferSize = MAX_MESSAGE_SIZE
             };
