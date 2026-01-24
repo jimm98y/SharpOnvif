@@ -82,9 +82,11 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
 
         if (!string.IsNullOrEmpty(nonce))
         {
-            var method = string.IsNullOrEmpty(httpRequestMessage.Method) ? "POST" : httpRequestMessage.Method;
+            const string algorithm = "MD5";
+
+            string method = string.IsNullOrEmpty(httpRequestMessage.Method) ? "POST" : httpRequestMessage.Method;
             string digest = DigestAuthentication.CreateWebDigestRFC2069(
-                "MD5",
+                algorithm,
                 _credentials.UserName,
                 realm,
                 _credentials.Password,
@@ -92,7 +94,7 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
                 method,
                 channel.RemoteAddress.Uri.PathAndQuery);
 
-            string authorization = DigestAuthentication.CreateAuthorizationRFC2069(_credentials.UserName, realm, nonce, channel.RemoteAddress.Uri.PathAndQuery, digest, opaque);
+            string authorization = DigestAuthentication.CreateAuthorizationRFC2069(_credentials.UserName, realm, nonce, channel.RemoteAddress.Uri.PathAndQuery, digest, opaque, algorithm);
             httpRequestMessage.Headers["Authorization"] = authorization;
         }
 
