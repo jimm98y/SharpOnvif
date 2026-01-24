@@ -11,8 +11,16 @@ namespace SharpOnvif.Tests
         [TestMethod]
         public void TestDigest(string algorithm, string userName, string password, string realm, string uri, string nonce, string method, string opaque, int nc, string cnonce, string qop, string expectedResponse)
         {
-            string digest = DigestHelpers.CreateWebDigestRFC2617(algorithm, userName, realm, password, nonce, method, uri, nc, cnonce, qop);
+            string digest = DigestAuthentication.CreateWebDigestRFC2617(algorithm, userName, realm, password, nonce, method, uri, nc, cnonce, qop);
             Assert.AreEqual(expectedResponse, digest);
+        }
+
+        [DataRow("SHA-512-256", "J\u00E4s\u00F8n Doe", "api@example.org", "488869477bf257147b804c45308cd62ac4e25eb717b12b298c79e62dcea254ec")]
+        [TestMethod]
+        public void TestHashedUserName(string algorithm, string userName, string realm, string expectedResult)
+        {
+            string hashedUserName = DigestAuthentication.CreateUserNameHashRFC7616(algorithm, userName, realm);
+            Assert.AreEqual(expectedResult, hashedUserName);
         }
     }
 }

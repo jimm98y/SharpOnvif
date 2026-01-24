@@ -37,7 +37,8 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
 
         string nonce = "";
         string realm = "";
-        string qop;
+        string opaque = "";
+        //string qop;
 
         // pre-flight request to get the www-auth header from the server
         using (var req = new HttpRequestMessage(HttpMethod.Head, channel.RemoteAddress.Uri))
@@ -65,13 +66,15 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
                     var receivedWwwAuth = resp.Headers.WwwAuthenticate.ToString();
                     var receivedNonce = Regex.Match(receivedWwwAuth, "nonce=\"(?<n>[^\"]+)\"", RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
                     var receivedRealm = Regex.Match(receivedWwwAuth, "realm=\"(?<r>[^\"]+)\"", RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
-                    var receivedQop = Regex.Match(receivedWwwAuth, "qop=\"(?<q>[^\"]+)\"", RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
+                    var receivedOpaque = Regex.Match(receivedWwwAuth, "opaque=\"(?<o>[^\"]+)\"", RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
+                    //var receivedQop = Regex.Match(receivedWwwAuth, "qop=\"(?<q>[^\"]+)\"", RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
 
                     if (receivedNonce.Success)
                     {
                         nonce = receivedNonce.Groups["n"].Value;
                         realm = receivedRealm.Success ? receivedRealm.Groups["r"].Value : null;
-                        qop = receivedQop.Success ? receivedQop.Groups["q"].Value : null;
+                        opaque = receivedOpaque.Success ? receivedOpaque.Groups["o"].Value : null;
+                        //qop = receivedQop.Success ? receivedQop.Groups["q"].Value : null;
                     }
                 }
             }
@@ -81,6 +84,7 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
         {
             var method = string.IsNullOrEmpty(httpRequestMessage.Method) ? "POST" : httpRequestMessage.Method;
             string digest = DigestAuthentication.CreateWebDigestRFC2069(
+                "MD5",
                 _credentials.UserName,
                 realm,
                 _credentials.Password,
@@ -88,7 +92,8 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
                 method,
                 channel.RemoteAddress.Uri.PathAndQuery);
 
-            httpRequestMessage.Headers["Authorization"] = $"Digest username=\"{_credentials.UserName}\", realm=\"{realm}\", nonce=\"{nonce}\", uri=\"{channel.RemoteAddress.Uri.PathAndQuery}\", response=\"{digest}\"";
+            string authorization = DigestAuthentication.CreateAuthorizationRFC2069(_credentials.UserName, realm, nonce, channel.RemoteAddress.Uri.PathAndQuery, digest, opaque);
+            httpRequestMessage.Headers["Authorization"] = authorization;
         }
 
         request.Properties[HttpRequestMessageProperty.Name] = httpRequestMessage;

@@ -186,7 +186,7 @@ namespace SharpOnvifServer
             var user = await _userRepository.GetUser(userName);
             if (user != null)
             {
-                string hashedPassword = WsDigestHelpers.CreateSoapDigest(nonce, created, user.Password);
+                string hashedPassword = WsDigestAuthentication.CreateSoapDigest(nonce, created, user.Password);
                 
                 DateTime createdDateTime;
 
@@ -212,10 +212,10 @@ namespace SharpOnvifServer
             var user = await _userRepository.GetUser(webToken.UserName);
             if (user != null)
             {
-                if (DigestHelpers.ValidateServerNonce(NONCE_HASH_ALGORITHM, BinarySerializationType.Hex, webToken.Nonce, DateTimeOffset.UtcNow, null, NONCE_SALT_LENGTH) == 0)
+                if (DigestAuthentication.ValidateServerNonce(NONCE_HASH_ALGORITHM, BinarySerializationType.Hex, webToken.Nonce, DateTimeOffset.UtcNow, null, NONCE_SALT_LENGTH) == 0)
                 {
                     // validate the digest
-                    string digest = DigestHelpers.CreateWebDigestRFC2069(webToken.UserName, realm, user.Password, webToken.Nonce, method, webToken.Uri);
+                    string digest = DigestAuthentication.CreateWebDigestRFC2069(webToken.Algorithm, webToken.UserName, realm, user.Password, webToken.Nonce, method, webToken.Uri);
                     if (digest.CompareTo(webToken.Response) == 0)
                     {
                         return true;
@@ -264,17 +264,16 @@ namespace SharpOnvifServer
         {
             Response.StatusCode = 401;
             
-            string serverNonce = DigestHelpers.GenerateServerNonce(NONCE_HASH_ALGORITHM, BinarySerializationType.Hex, DateTimeOffset.UtcNow, null, DigestHelpers.GenerateRandom(NONCE_SALT_LENGTH));
-            bool isStale = false;
-            string opaque = "";
-            string algorithm = ""; // MD5 is the default
-            string qop = "auth"; // RFC a list of values, e.g. "auth, auth-int"
-            string charset = "UTF-8"; // optional
-            bool isUserhashSupported = false;
+            string wwwAuth = 
+                DigestAuthentication.CreateWwwAuthenticateRFC2069(
+                    NONCE_HASH_ALGORITHM,
+                    BinarySerializationType.Hex, 
+                    DateTimeOffset.UtcNow, 
+                    null, 
+                    DigestAuthentication.GenerateRandom(NONCE_SALT_LENGTH), 
+                    OptionsMonitor.CurrentValue.Realm);
 
-            // RFC 2069
-            // TODO: RFC 2617
-            Response.Headers.Append("WWW-Authenticate", $"Digest realm=\"{OptionsMonitor.CurrentValue.Realm}\", nonce=\"{serverNonce}\", stale=\"{isStale.ToString().ToUpperInvariant()}\"");
+            Response.Headers.Append("WWW-Authenticate", wwwAuth);
             
             await Context.Response.WriteAsync("You are not logged in via Digest auth").ConfigureAwait(false);
         }

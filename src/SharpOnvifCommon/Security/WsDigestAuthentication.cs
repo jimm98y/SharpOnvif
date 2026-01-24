@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SharpOnvifCommon.Security
 {
-    public static class WsDigestHelpers
+    public static class WsDigestAuthentication
     {
         public static string CalculateNonce(int length = 32)
         {
