@@ -44,16 +44,18 @@ namespace SharpOnvifServer
 
         private class WebDigestAuth
         {
-            public WebDigestAuth(string userName, string response, string nonce, string uri)
+            public WebDigestAuth(string userName, string realm, string response, string nonce, string uri)
             {
-                UserName = userName;
                 Response = response;
+                UserName = userName;
+                Realm = realm;
                 Nonce = nonce;
                 Uri = uri;
             }
 
-            public string UserName { get; }
             public string Response { get; }
+            public string UserName { get; }
+            public string Realm { get; }
             public string Nonce { get; }
             public string Uri { get; }
         }
@@ -221,13 +223,17 @@ namespace SharpOnvifServer
             if(request.Headers.Authorization.Count > 0)
             {
                 string auth = request.Headers.Authorization[0];
-                if(auth.StartsWith("Digest ") && GetValueFromHeader(auth, "realm") == OptionsMonitor.CurrentValue.Realm)
+                if(auth.StartsWith("Digest ", StringComparison.OrdinalIgnoreCase))
                 {
-                    string userName = GetValueFromHeader(auth, "username");
-                    string nonce = GetValueFromHeader(auth, "nonce");
-                    string response = GetValueFromHeader(auth, "response");
-                    string uri = GetValueFromHeader(auth, "uri");
-                    return Task.FromResult(new WebDigestAuth(userName, response, nonce, uri));
+                    string realm = GetValueFromHeader(auth, "realm");
+                    if (realm == OptionsMonitor.CurrentValue.Realm)
+                    {
+                        string userName = GetValueFromHeader(auth, "username");
+                        string response = GetValueFromHeader(auth, "response");
+                        string nonce = GetValueFromHeader(auth, "nonce");
+                        string uri = GetValueFromHeader(auth, "uri");
+                        return Task.FromResult(new WebDigestAuth(userName, realm, response, nonce, uri));
+                    }
                 }
             }
             return Task.FromResult((WebDigestAuth)null);
@@ -235,11 +241,13 @@ namespace SharpOnvifServer
 
         private static string GetValueFromHeader(string header, string key)
         {
-            var regHeader = new Regex($@"{key}=""([^""]*)""");
+            var regHeader = new Regex($@"{key}=""([^""]*)""", RegexOptions.IgnoreCase);
             var matchHeader = regHeader.Match(header);
 
-            if (matchHeader.Success) 
+            if (matchHeader.Success)
+            {
                 return matchHeader.Groups[1].Value;
+            }
 
             throw new Exception($"Header {key} not found");
         }
