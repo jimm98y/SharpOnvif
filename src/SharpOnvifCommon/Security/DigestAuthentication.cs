@@ -155,8 +155,7 @@ namespace SharpOnvifCommon.Security
             {
                 string HA1 = ToHex(Hash(algorithm, hash, EncodingGetBytes($"{userName}:{realm}:{password}")));
                 string HA2 = ToHex(Hash(algorithm, hash, EncodingGetBytes($"{method}:{uri}")));
-                string digest = ToHex(Hash(algorithm, hash, EncodingGetBytes($"{HA1}:{nonce}:{HA2}")));
-                return digest;
+                return ToHex(Hash(algorithm, hash, EncodingGetBytes($"{HA1}:{nonce}:{HA2}")));
             }
         }
 
@@ -204,6 +203,11 @@ namespace SharpOnvifCommon.Security
                                 
                 return ToHex(Hash(algorithm, hash, EncodingGetBytes($"{HA1}:{nonce}:{ConvertIntToNC(nc)}:{cnonce}:{qop}:{HA2}")));
             }
+        }
+
+        public static string CreateWebDigestRFC7616(string algorithm, string userName, string realm, string password, string nonce, string method, string uri, int nc, string cnonce, string qop, byte[] entityBody = null, string noncePrime = null, string cnoncePrime = null)
+        {
+            return CreateWebDigestRFC2617(algorithm, userName, realm, password, nonce, method, uri, nc, cnonce, qop, entityBody, noncePrime, cnoncePrime);
         }
 
         public static string CreateWwwAuthenticateRFC2069(
