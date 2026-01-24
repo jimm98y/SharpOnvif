@@ -12,7 +12,7 @@ namespace SharpOnvifCommon.Security
         Base64
     }
 
-    public static class DigestHelpers
+    public static class DigestAuthentication
     {
 
         public static byte[] NoncePrivateKey = GenerateRandom();
@@ -66,18 +66,38 @@ namespace SharpOnvifCommon.Security
 
             byte[] nonceBytes = null;
 
-            try
+            if (nonceType == BinarySerializationType.Base64)
             {
-                nonceBytes = Convert.FromBase64String(nonce);
+                try
+                {
+                    nonceBytes = Convert.FromBase64String(nonce);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Nonce is not valid base64 string");
+                    Debug.WriteLine(ex.Message);
+                    return -2;
+                }
             }
-            catch(Exception ex)
+            else if(nonceType == BinarySerializationType.Hex)
             {
-                Debug.WriteLine("Nonce is not valid base64");
-                Debug.WriteLine(ex.Message);
-                return -2;
+                try
+                {
+                    nonceBytes = HexStringToByteArray(nonce);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Nonce is not valid hexadecimal string");
+                    Debug.WriteLine(ex.Message);
+                    return -2;
+                }
+            }
+            else
+            {
+                throw new NotSupportedException();
             }
 
-            if(nonceBytes.Length <= 8 + saltLength) // 8 byte timestamp + salt
+            if (nonceBytes.Length <= 8 + saltLength) // 8 byte timestamp + salt
             {
                 return -3;
             }
@@ -189,7 +209,7 @@ namespace SharpOnvifCommon.Security
                 throw new ArgumentException(nameof(nc));
             }
 
-            byte[] ncBytes = StringToByteArray(nc);
+            byte[] ncBytes = HexStringToByteArray(nc);
             int ret =
                  (ncBytes[0] << 24) |
                  (ncBytes[1] << 16) |
@@ -198,7 +218,7 @@ namespace SharpOnvifCommon.Security
             return ret;
         }
 
-        private static byte[] StringToByteArray(string hex)
+        private static byte[] HexStringToByteArray(string hex)
         {
             byte[] bytes = new byte[hex.Length / 2];
             for (int i = 0; i < hex.Length; i += 2)
