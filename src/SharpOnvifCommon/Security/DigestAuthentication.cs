@@ -285,7 +285,7 @@ namespace SharpOnvifCommon.Security
             return $"Digest username=\"{userName}\", realm=\"{realm}\", uri=\"{uri}\"{responseAlgorithm}, nonce=\"{nonce}\", qop={qop}, nc={ConvertIntToNC(nc)}, cnonce=\"{cnonce}\", response=\"{response}\"{responseOpaque}";
         }
 
-        public static string CreateAuthorizationRFC7616(string userName, string realm, string nonce, string uri, string response, string opaque, string algorithm, string qop, int nc, string cnonce, string charset, bool userhash)
+        public static string CreateAuthorizationRFC7616(string userName, string realm, string nonce, string uri, string response, string opaque, string algorithm, string qop, int nc, string cnonce, bool userhash)
         {
             string responseOpaque = string.IsNullOrEmpty(opaque) ? "" : $", opaque=\"{opaque}\"";
             string responseAlgorithm = string.IsNullOrEmpty(algorithm) || algorithm == "MD5" ? "" : $", algorithm=\"{algorithm}\"";
