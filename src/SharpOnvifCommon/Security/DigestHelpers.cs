@@ -6,8 +6,15 @@ using System.Text;
 
 namespace SharpOnvifCommon.Security
 {
+    public enum BinarySerializationType
+    {
+        Hex,
+        Base64
+    }
+
     public static class DigestHelpers
     {
+
         public static byte[] NoncePrivateKey = GenerateRandom();
 
         public static byte[] GenerateRandom(int length = 32)
@@ -20,10 +27,10 @@ namespace SharpOnvifCommon.Security
             return byteArray;
         }
 
-        public static string GenerateServerNonce(DateTimeOffset currentTimestamp, byte[] etag = null, byte[] salt = null)
+        public static string GenerateServerNonce(string algorithm, BinarySerializationType nonceType, DateTimeOffset currentTimestamp, byte[] etag = null, byte[] salt = null)
         {
             long timestamp = currentTimestamp.ToUnixTimeMilliseconds();
-            using (MD5 hash = MD5.Create())
+            using (var hash = GetHashAlgorithm(algorithm))
             {
                 // RFC 2617: nonce includes a timestamp and it is generated from a known private key so that it can be validated
                 // time-stamp H(time-stamp ":" ETag ":" private-key)
@@ -40,16 +47,17 @@ namespace SharpOnvifCommon.Security
                 };
 
                 // we add some salt to the mix to compensate the lack of an etag
-                return Convert.ToBase64String(
-                    timestampBytes
-                    .Concat(salt ?? new byte[0])
-                    .Concat(Hash(hash, Encoding.UTF8.GetBytes($"{timestamp}:{Hex(salt)}{Hex(etag)}:{Hex(NoncePrivateKey)}")))
-                    .ToArray()
-                );
+                return
+                    BytesToString(nonceType,
+                        timestampBytes
+                        .Concat(salt ?? new byte[0])
+                        .Concat(Hash(algorithm, hash, EncodingGetBytes($"{timestamp}:{Hex(salt)}{Hex(etag)}:{Hex(NoncePrivateKey)}")))
+                        .ToArray()
+                    );
             }
         }
 
-        public static int ValidateServerNonce(string nonce, DateTimeOffset currentTimestamp, byte[] etag = null, int saltLength = 0, int lifetimeMiliseconds = 30000)
+        public static int ValidateServerNonce(string algorithm, BinarySerializationType nonceType, string nonce, DateTimeOffset currentTimestamp, byte[] etag = null, int saltLength = 0, int lifetimeMiliseconds = 30000)
         {
             if (string.IsNullOrEmpty(nonce))
             {
@@ -99,7 +107,7 @@ namespace SharpOnvifCommon.Security
 
             byte[] salt = nonceBytes.Skip(8).Take(saltLength).ToArray();
 
-            string generatedNonce = GenerateServerNonce(nonceDateTime, etag, salt);
+            string generatedNonce = GenerateServerNonce(algorithm, nonceType, nonceDateTime, etag, salt);
             if(string.Compare(generatedNonce, nonce) != 0)
             {
                 Debug.WriteLine("Nonce is invalid");
@@ -111,18 +119,146 @@ namespace SharpOnvifCommon.Security
 
         public static string CreateWebDigestRFC2069(string userName, string realm, string password, string nonce, string method, string uri)
         {
-            using (MD5 hash = MD5.Create())
+            const string algorithm = "MD5";
+            using (var hash = GetHashAlgorithm(algorithm))
             {
-                string HA1 = Hex(Hash(hash, Encoding.UTF8.GetBytes($"{userName}:{realm}:{password}")));
-                string HA2 = Hex(Hash(hash, Encoding.UTF8.GetBytes($"{method}:{uri}")));
-                string digest = Hex(Hash(hash, Encoding.UTF8.GetBytes($"{HA1}:{nonce}:{HA2}")));
+                string HA1 = Hex(Hash(algorithm, hash, EncodingGetBytes($"{userName}:{realm}:{password}")));
+                string HA2 = Hex(Hash(algorithm, hash, EncodingGetBytes($"{method}:{uri}")));
+                string digest = Hex(Hash(algorithm, hash, EncodingGetBytes($"{HA1}:{nonce}:{HA2}")));
                 return digest;
             }
         }
 
-        private static byte[] Hash(HashAlgorithm hash, byte[] input)
+        public static string CreateWebDigestRFC2617(string algorithm, string userName, string realm, string password, string nonce, string method, string uri, int nc, string cnonce, string qop, string noncePrime = null, string cnoncePrime = null, string bodyHash = null)
         {
-            return hash.ComputeHash(input);
+            using (var hash = GetHashAlgorithm(algorithm))
+            {
+                var bbb = EncodingGetBytes($"{userName}:{realm}:{password}");
+                string HA1 = Hex(Hash(algorithm, hash, bbb));
+
+                if (algorithm.EndsWith("-sess", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (noncePrime == null)
+                    {
+                        throw new ArgumentNullException(nameof(noncePrime));
+                    }
+                    if (cnoncePrime == null)
+                    {
+                        throw new ArgumentNullException(nameof(noncePrime));
+                    }
+
+                    HA1 = Hex(Hash(algorithm, hash, EncodingGetBytes($"{HA1}:{noncePrime}:{cnoncePrime}")));
+                }
+                    
+                string HA2;
+
+                if(string.IsNullOrEmpty(qop) || string.Compare(qop, "auth", true) == 0)
+                {
+                    HA2 = Hex(Hash(algorithm, hash, EncodingGetBytes($"{method}:{uri}")));
+                }
+                else if (string.Compare(qop, "auth-int", true) == 0)
+                {
+                    if (bodyHash == null)
+                    {
+                        throw new ArgumentNullException(nameof(bodyHash));
+                    }
+
+                    HA2 = Hex(Hash(algorithm, hash, EncodingGetBytes($"{method}:{uri}:{bodyHash}")));
+                }
+                else
+                {
+                    throw new NotSupportedException(nameof(qop));
+                }
+
+                byte[] ncBytes = new byte[]
+                {
+                     (byte)((nc >> 24) & 0xff),
+                     (byte)((nc >> 16) & 0xff),
+                     (byte)((nc >> 8) & 0xff),
+                     (byte)((nc >> 0) & 0xff),
+                };
+
+                return Hex(Hash(algorithm, hash, EncodingGetBytes($"{HA1}:{nonce}:{Hex(ncBytes)}:{cnonce}:{qop}:{HA2}")));
+            }
+        }
+
+        public static int ParseNC(string nc)
+        {
+            if (string.IsNullOrEmpty(nc) || nc.Length != 8)
+            {
+                throw new ArgumentException(nameof(nc));
+            }
+
+            byte[] ncBytes = StringToByteArray(nc);
+            int ret =
+                 (ncBytes[0] << 24) |
+                 (ncBytes[1] << 16) |
+                 (ncBytes[2] << 8) |
+                 (ncBytes[3]);
+            return ret;
+        }
+
+        private static byte[] StringToByteArray(string hex)
+        {
+            byte[] bytes = new byte[hex.Length / 2];
+            for (int i = 0; i < hex.Length; i += 2)
+            {
+                bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
+            }
+            return bytes;
+        }
+
+        private static HashAlgorithm GetHashAlgorithm(string algorithm)
+        {
+            switch (algorithm?.ToUpperInvariant())
+            {
+                case "SHA-512-256":
+                case "SHA-512-256-SESS":
+                    return SHA512.Create();
+
+                case "SHA-256":
+                case "SHA-256-SESS":
+                    return SHA256.Create();
+
+                case "MD5":
+                case "MD5-SESS":
+                default:
+                    return MD5.Create();
+            }
+        }
+
+        private static int GetHashLength(string algorithm)
+        {
+            switch (algorithm?.ToUpperInvariant())
+            {
+                case "SHA-512-256":
+                case "SHA-512-256-SESS":
+                    return 32;
+
+                case "SHA-256":
+                case "SHA-256-SESS":
+                    return 32;
+
+                case "MD5":
+                case "MD5-SESS":
+                default:
+                    return 16;
+            }
+        }
+
+        private static byte[] Hash(string algorithm, HashAlgorithm hash, byte[] input)
+        {
+            var result = hash.ComputeHash(input);
+            int length = GetHashLength(algorithm); 
+
+            if(result.Length > length)
+            {
+                return result.Take(length).ToArray(); // SHA-512-256 - 512 bit digest truncated to 256 bit
+            }
+            else
+            {
+                return result;
+            }
         }
 
         private static string Hex(byte[] input)
@@ -131,6 +267,26 @@ namespace SharpOnvifCommon.Security
                 return string.Empty;
             else
                 return string.Concat(input.Select(x => x.ToString("x2")));
+        }
+
+        private static byte[] EncodingGetBytes(string input)
+        {
+            return Encoding.UTF8.GetBytes(input);
+        }
+
+        private static string BytesToString(BinarySerializationType serialization, byte[] input)
+        {
+            switch (serialization)
+            {
+                case BinarySerializationType.Base64:
+                    return Convert.ToBase64String(input);
+
+                case BinarySerializationType.Hex:
+                    return Hex(input);
+
+                default:
+                    throw new NotSupportedException(serialization.ToString());
+            }
         }
     }
 }

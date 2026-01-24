@@ -15,12 +15,14 @@ using System;
 using SharpOnvifCommon.Security;
 using System.Text.RegularExpressions;
 using System.Globalization;
+using System.Security.Cryptography;
 
 namespace SharpOnvifServer
 {
     public class DigestAuthenticationHandler : AuthenticationHandler<DigestAuthenticationSchemeOptions>
     {
         private const int NONCE_SALT_LENGTH = 12;
+        private const string NONCE_HASH_ALGORITHM = "SHA-256";
 
         public const string ANONYMOUS_USER = "Anonymous";
 
@@ -58,6 +60,12 @@ namespace SharpOnvifServer
             public string Realm { get; }
             public string Nonce { get; }
             public string Uri { get; }
+
+            public string Algorithm { get; }
+            public string Qop { get; }
+            public string Cnonce { get; }
+            public string Nc { get; }
+            public bool Userhash { get; }
         }
 
         public DigestAuthenticationHandler(
@@ -78,7 +86,7 @@ namespace SharpOnvifServer
             {
                 try
                 {
-                    if (await AuthenticateWebDigest(webToken.UserName, OptionsMonitor.CurrentValue.Realm, webToken.Response, webToken.Nonce, Request.Method, webToken.Uri))
+                    if (await AuthenticateWebDigest(OptionsMonitor.CurrentValue.Realm, Request.Method, webToken))
                     {
                         // now in case the request also contains WsUsernameToken, we must verify it
                         SoapDigestAuth token = await GetSecurityHeaderFromSoapEnvelope(Request);
@@ -199,16 +207,16 @@ namespace SharpOnvifServer
             return false;
         }
 
-        private async Task<bool> AuthenticateWebDigest(string userName, string realm, string response, string nonce, string method, string uri)
+        private async Task<bool> AuthenticateWebDigest(string realm, string method, WebDigestAuth webToken)
         {
-            var user = await _userRepository.GetUser(userName);
+            var user = await _userRepository.GetUser(webToken.UserName);
             if (user != null)
             {
-                if (DigestHelpers.ValidateServerNonce(nonce, DateTimeOffset.UtcNow, null, NONCE_SALT_LENGTH) == 0)
+                if (DigestHelpers.ValidateServerNonce(NONCE_HASH_ALGORITHM, BinarySerializationType.Hex, webToken.Nonce, DateTimeOffset.UtcNow, null, NONCE_SALT_LENGTH) == 0)
                 {
                     // validate the digest
-                    string digest = DigestHelpers.CreateWebDigestRFC2069(userName, realm, user.Password, nonce, method, uri);
-                    if (digest.CompareTo(response) == 0)
+                    string digest = DigestHelpers.CreateWebDigestRFC2069(webToken.UserName, realm, user.Password, webToken.Nonce, method, webToken.Uri);
+                    if (digest.CompareTo(webToken.Response) == 0)
                     {
                         return true;
                     }
@@ -255,11 +263,18 @@ namespace SharpOnvifServer
         protected override async Task HandleChallengeAsync(AuthenticationProperties properties)
         {
             Response.StatusCode = 401;
-            string nonce = DigestHelpers.GenerateServerNonce(DateTimeOffset.UtcNow, null, DigestHelpers.GenerateRandom(NONCE_SALT_LENGTH));
+            
+            string serverNonce = DigestHelpers.GenerateServerNonce(NONCE_HASH_ALGORITHM, BinarySerializationType.Hex, DateTimeOffset.UtcNow, null, DigestHelpers.GenerateRandom(NONCE_SALT_LENGTH));
+            bool isStale = false;
+            string opaque = "";
+            string algorithm = ""; // MD5 is the default
+            string qop = "auth"; // RFC a list of values, e.g. "auth, auth-int"
+            string charset = "UTF-8"; // optional
+            bool isUserhashSupported = false;
 
             // RFC 2069
             // TODO: RFC 2617
-            Response.Headers.Append("WWW-Authenticate", $"Digest realm=\"{OptionsMonitor.CurrentValue.Realm}\", nonce=\"{nonce}\", stale=\"FALSE\"");
+            Response.Headers.Append("WWW-Authenticate", $"Digest realm=\"{OptionsMonitor.CurrentValue.Realm}\", nonce=\"{serverNonce}\", stale=\"{isStale.ToString().ToUpperInvariant()}\"");
             
             await Context.Response.WriteAsync("You are not logged in via Digest auth").ConfigureAwait(false);
         }

@@ -81,6 +81,7 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
         {
             var method = string.IsNullOrEmpty(httpRequestMessage.Method) ? "POST" : httpRequestMessage.Method;
             string digest = DigestHelpers.CreateWebDigestRFC2069(
+                "MD5",
                 _credentials.UserName,
                 realm,
                 _credentials.Password,
