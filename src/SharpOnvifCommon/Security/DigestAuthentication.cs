@@ -160,7 +160,7 @@ namespace SharpOnvifCommon.Security
             }
         }
 
-        public static string CreateWebDigestRFC2617(string algorithm, string userName, string realm, string password, string nonce, string method, string uri, int nc, string cnonce, string qop, string noncePrime = null, string cnoncePrime = null, string bodyHash = null)
+        public static string CreateWebDigestRFC2617(string algorithm, string userName, string realm, string password, string nonce, string method, string uri, int nc, string cnonce, string qop, byte[] entityBody = null, string noncePrime = null, string cnoncePrime = null)
         {
             using (var hash = GetHashAlgorithm(algorithm))
             {
@@ -189,12 +189,13 @@ namespace SharpOnvifCommon.Security
                 }
                 else if (string.Compare(qop, "auth-int", true) == 0)
                 {
-                    if (bodyHash == null)
+                    if (entityBody == null)
                     {
-                        throw new ArgumentNullException(nameof(bodyHash));
+                        throw new ArgumentNullException(nameof(entityBody));
                     }
 
-                    HA2 = ToHex(Hash(algorithm, hash, EncodingGetBytes($"{method}:{uri}:{bodyHash}")));
+                    string entityBodyHash = ToHex(Hash(algorithm, hash, entityBody));
+                    HA2 = ToHex(Hash(algorithm, hash, EncodingGetBytes($"{method}:{uri}:{entityBodyHash}")));
                 }
                 else
                 {
@@ -262,16 +263,6 @@ namespace SharpOnvifCommon.Security
             return $"Digest realm=\"{realm}\", qop=\"{qop}\"{responseAlgorithm}, nonce=\"{serverNonce}\", opaque=\"{opaque}\"{responseCharset}{responseUserhash}, stale=\"{isStale.ToString().ToUpperInvariant()}\"";
         }
 
-        public static string CreateUserNameHashRFC7616(string algorithm, string userName, string realm)
-        {
-            using (var hash = GetHashAlgorithm(algorithm))
-            {
-                // username = H( unq(username) ":" unq(realm) )
-                // TODO: store this in the users database and use it for lookups
-                return ToHex(Hash(algorithm, hash, EncodingGetBytes($"{userName}:{realm}")));
-            }
-        }
-
         public static string CreateAuthorizationRFC2069(string userName, string realm, string nonce, string uri, string response, string opaque)
         {
             string responseOpaque = string.IsNullOrEmpty(opaque) ? "" : $", opaque=\"{opaque}\"";
@@ -301,6 +292,16 @@ namespace SharpOnvifCommon.Security
                 responseUserName = $"username=\"{userName}\"";
             }
             return $"Digest {responseUserName}, realm=\"{realm}\", uri=\"{uri}\"{responseAlgorithm}, nonce=\"{nonce}\", qop={qop}, nc={ConvertIntToNC(nc)}, cnonce=\"{cnonce}\", response=\"{response}\"{responseOpaque}{responseUserhash}";
+        }
+
+        public static string CreateUserNameHashRFC7616(string algorithm, string userName, string realm)
+        {
+            using (var hash = GetHashAlgorithm(algorithm))
+            {
+                // username = H( unq(username) ":" unq(realm) )
+                // TODO: store this in the users database and use it for lookups
+                return ToHex(Hash(algorithm, hash, EncodingGetBytes($"{userName}:{realm}")));
+            }
         }
 
         public static int ConvertNCToInt(string nc)
