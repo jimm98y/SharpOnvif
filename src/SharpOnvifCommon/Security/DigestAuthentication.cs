@@ -267,10 +267,11 @@ namespace SharpOnvifCommon.Security
             return $"Digest realm=\"{realm}\", qop=\"{qop}\"{responseAlgorithm}, nonce=\"{serverNonce}\", opaque=\"{opaque}\"{responseCharset}{responseUserhash}, stale=\"{isStale.ToString().ToUpperInvariant()}\"";
         }
 
-        public static string CreateAuthorizationRFC2069(string userName, string realm, string nonce, string uri, string response, string opaque)
+        public static string CreateAuthorizationRFC2069(string userName, string realm, string nonce, string uri, string response, string opaque, string algorithm)
         {
             string responseOpaque = string.IsNullOrEmpty(opaque) ? "" : $", opaque=\"{opaque}\"";
-            return $"Digest username=\"{userName}\", realm=\"{realm}\", nonce=\"{nonce}\", uri=\"{uri}\", response=\"{response}\"{responseOpaque}";
+            string responseAlgorithm = string.IsNullOrEmpty(algorithm) || algorithm == "MD5" ? "" : $", algorithm=\"{algorithm}\"";
+            return $"Digest username=\"{userName}\", realm=\"{realm}\", uri=\"{uri}\"{responseAlgorithm}, nonce=\"{nonce}\", response=\"{response}\"{responseOpaque}";
         }
 
         public static string CreateAuthorizationRFC2617(string userName, string realm, string nonce, string uri, string response, string opaque, string algorithm, string qop, int nc, string cnonce)
