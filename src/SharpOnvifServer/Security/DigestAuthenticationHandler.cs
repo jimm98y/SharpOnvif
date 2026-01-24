@@ -277,7 +277,7 @@ namespace SharpOnvifServer
                     BinarySerializationType.Hex, 
                     DateTimeOffset.UtcNow, 
                     null, 
-                    DigestAuthentication.GenerateRandom(NONCE_SALT_LENGTH), 
+                    DigestAuthentication.CreateNonceSessionSalt(NONCE_SALT_LENGTH), 
                     OptionsMonitor.CurrentValue.Realm);
 
             Response.Headers.Append("WWW-Authenticate", wwwAuth);

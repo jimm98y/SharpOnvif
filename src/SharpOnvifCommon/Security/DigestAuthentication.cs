@@ -22,16 +22,16 @@ namespace SharpOnvifCommon.Security
         public const int ERROR_NONCE_EXPIRED = -5;
         public const int ERROR_NONCE_INVALID = -6;
 
-        public static byte[] NoncePrivateKey = GenerateRandom();
+        public static byte[] NoncePrivateKey = GenerateRandom(32);
 
-        public static byte[] GenerateRandom(int length = 32)
+        public static void RegenerateNoncePrivateKey(int length = 32)
         {
-            var byteArray = new byte[length];
-            using (var rnd = RandomNumberGenerator.Create())
-            {
-                rnd.GetBytes(byteArray);
-            }
-            return byteArray;
+            NoncePrivateKey = GenerateRandom(length);
+        }
+
+        public static byte[] CreateNonceSessionSalt(int length = 12)
+        {
+            return GenerateRandom(length);
         }
 
         public static string GenerateServerNonce(string nonceAlgorithm, BinarySerializationType nonceType, DateTimeOffset currentTimestamp, byte[] etag = null, byte[] salt = null)
@@ -425,6 +425,16 @@ namespace SharpOnvifCommon.Security
                 default:
                     throw new NotSupportedException(serialization.ToString());
             }
+        }
+
+        private static byte[] GenerateRandom(int length)
+        {
+            var byteArray = new byte[length];
+            using (var rnd = RandomNumberGenerator.Create())
+            {
+                rnd.GetBytes(byteArray);
+            }
+            return byteArray;
         }
     }
 }
