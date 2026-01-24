@@ -20,6 +20,8 @@ namespace SharpOnvifServer
 {
     public class DigestAuthenticationHandler : AuthenticationHandler<DigestAuthenticationSchemeOptions>
     {
+        private const int NONCE_SALT_LENGTH = 12;
+
         public const string ANONYMOUS_USER = "Anonymous";
 
         private readonly IUserRepository _userRepository;
@@ -174,7 +176,7 @@ namespace SharpOnvifServer
             var user = await _userRepository.GetUser(userName);
             if (user != null)
             {
-                string hashedPassword = DigestHelpers.CreateSoapDigest(nonce, created, user.Password);
+                string hashedPassword = WsDigestHelpers.CreateSoapDigest(nonce, created, user.Password);
                 
                 DateTime createdDateTime;
 
@@ -200,10 +202,14 @@ namespace SharpOnvifServer
             var user = await _userRepository.GetUser(userName);
             if (user != null)
             {
-                string digest = DigestHelpers.CreateWebDigestRFC2069(userName, realm, user.Password, nonce, method, uri);
-                if (digest.CompareTo(response) == 0)
+                if (DigestHelpers.ValidateServerNonce(nonce, DateTimeOffset.UtcNow, null, NONCE_SALT_LENGTH) == 0)
                 {
-                    return true;
+                    // validate the digest
+                    string digest = DigestHelpers.CreateWebDigestRFC2069(userName, realm, user.Password, nonce, method, uri);
+                    if (digest.CompareTo(response) == 0)
+                    {
+                        return true;
+                    }
                 }
             }
 
@@ -241,7 +247,7 @@ namespace SharpOnvifServer
         protected override async Task HandleChallengeAsync(AuthenticationProperties properties)
         {
             Response.StatusCode = 401;
-            string nonce = DigestHelpers.CalculateNonce();
+            string nonce = DigestHelpers.GenerateServerNonce(DateTimeOffset.UtcNow, null, DigestHelpers.GenerateRandom(NONCE_SALT_LENGTH));
 
             // RFC 2069
             // TODO: RFC 2617
