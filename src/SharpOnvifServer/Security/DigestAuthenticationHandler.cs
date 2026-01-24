@@ -15,7 +15,6 @@ using System;
 using SharpOnvifCommon.Security;
 using System.Text.RegularExpressions;
 using System.Globalization;
-using System.Security.Cryptography;
 
 namespace SharpOnvifServer
 {
@@ -60,12 +59,12 @@ namespace SharpOnvifServer
             public string Realm { get; }
             public string Nonce { get; }
             public string Uri { get; }
-
             public string Algorithm { get; }
-            public string Qop { get; }
-            public string Cnonce { get; }
-            public string Nc { get; }
-            public bool Userhash { get; }
+
+            //public string Qop { get; }
+            //public string Cnonce { get; }
+            //public string Nc { get; }
+            //public bool Userhash { get; }
         }
 
         public DigestAuthenticationHandler(
@@ -215,7 +214,15 @@ namespace SharpOnvifServer
                 if (DigestAuthentication.ValidateServerNonce(NONCE_HASH_ALGORITHM, BinarySerializationType.Hex, webToken.Nonce, DateTimeOffset.UtcNow, null, NONCE_SALT_LENGTH) == 0)
                 {
                     // validate the digest
-                    string digest = DigestAuthentication.CreateWebDigestRFC2069(webToken.Algorithm, webToken.UserName, realm, user.Password, webToken.Nonce, method, webToken.Uri);
+                    string digest = DigestAuthentication.CreateWebDigestRFC2069(
+                        webToken.Algorithm, 
+                        webToken.UserName, 
+                        realm, 
+                        user.Password,
+                        webToken.Nonce, 
+                        method,
+                        webToken.Uri);
+
                     if (digest.CompareTo(webToken.Response) == 0)
                     {
                         return true;

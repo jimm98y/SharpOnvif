@@ -34,10 +34,10 @@ namespace SharpOnvifCommon.Security
             return byteArray;
         }
 
-        public static string GenerateServerNonce(string algorithm, BinarySerializationType nonceType, DateTimeOffset currentTimestamp, byte[] etag = null, byte[] salt = null)
+        public static string GenerateServerNonce(string nonceAlgorithm, BinarySerializationType nonceType, DateTimeOffset currentTimestamp, byte[] etag = null, byte[] salt = null)
         {
             long timestamp = currentTimestamp.ToUnixTimeMilliseconds();
-            using (var hash = GetHashAlgorithm(algorithm))
+            using (var hash = GetHashAlgorithm(nonceAlgorithm))
             {
                 // RFC 2617: nonce includes a timestamp and it is generated from a known private key so that it can be validated
                 // time-stamp H(time-stamp ":" ETag ":" private-key)
@@ -58,7 +58,7 @@ namespace SharpOnvifCommon.Security
                     BytesToString(nonceType,
                         timestampBytes
                         .Concat(salt ?? new byte[0])
-                        .Concat(Hash(algorithm, hash, EncodingGetBytes($"{timestamp}:{ToHex(salt)}{ToHex(etag)}:{ToHex(NoncePrivateKey)}")))
+                        .Concat(Hash(nonceAlgorithm, hash, EncodingGetBytes($"{timestamp}:{ToHex(salt)}{ToHex(etag)}:{ToHex(NoncePrivateKey)}")))
                         .ToArray()
                     );
             }
@@ -69,7 +69,7 @@ namespace SharpOnvifCommon.Security
             return BytesToString(nonceType, GenerateRandom(cnonceLength));
         }
 
-        public static int ValidateServerNonce(string algorithm, BinarySerializationType nonceType, string nonce, DateTimeOffset currentTimestamp, byte[] etag = null, int saltLength = 0, int lifetimeMiliseconds = 30000)
+        public static int ValidateServerNonce(string nonceAlgorithm, BinarySerializationType nonceType, string nonce, DateTimeOffset currentTimestamp, byte[] etag = null, int saltLength = 0, int lifetimeMiliseconds = 30000)
         {
             if (string.IsNullOrEmpty(nonce))
             {
@@ -139,7 +139,7 @@ namespace SharpOnvifCommon.Security
 
             byte[] salt = nonceBytes.Skip(8).Take(saltLength).ToArray();
 
-            string generatedNonce = GenerateServerNonce(algorithm, nonceType, nonceDateTime, etag, salt);
+            string generatedNonce = GenerateServerNonce(nonceAlgorithm, nonceType, nonceDateTime, etag, salt);
             if(string.Compare(generatedNonce, nonce) != 0)
             {
                 Debug.WriteLine("Nonce is invalid");
@@ -211,7 +211,7 @@ namespace SharpOnvifCommon.Security
         }
 
         public static string CreateWwwAuthenticateRFC2069(
-            string algorithm, 
+            string nonceAlgorithm, 
             BinarySerializationType binarySerialization,
             DateTimeOffset currentTimestamp, 
             byte[] etag,
@@ -219,7 +219,7 @@ namespace SharpOnvifCommon.Security
             string realm,
             bool isStale = false)
         {
-            string serverNonce = GenerateServerNonce(algorithm, binarySerialization, currentTimestamp, etag, salt);
+            string serverNonce = GenerateServerNonce(nonceAlgorithm, binarySerialization, currentTimestamp, etag, salt);
             return $"Digest realm=\"{realm}\", nonce=\"{serverNonce}\", stale=\"{isStale.ToString().ToUpperInvariant()}\"";
         }
 
