@@ -33,7 +33,7 @@ namespace SharpOnvifClient
         private readonly IEndpointBehavior _legacyAuth;
         private readonly IEndpointBehavior _digestAuth;
         private readonly IEndpointBehavior _disableExpect100ContinueBehavior;
-        private readonly List<string> _supportedHashAlgorithms;
+        private readonly string[] _supportedHashAlgorithms;
 
         /// <summary>
         /// Creates an instance of <see cref="SimpleOnvifClient"/>.
@@ -75,12 +75,12 @@ namespace SharpOnvifClient
         /// <param name="supportedHashAlgorithms">Hash algorithms to use in Digest authenitication.</param>
         /// <param name="disableExpect100Continue">Disables the default Expect: 100-continue HTTP header.</param>
         /// <exception cref="ArgumentNullException">Thrown when onvifUri is empty.</exception>
-        public SimpleOnvifClient(string onvifUri, string userName, string password, OnvifAuthentication authentication, List<string> supportedHashAlgorithms, bool disableExpect100Continue = true)
+        public SimpleOnvifClient(string onvifUri, string userName, string password, OnvifAuthentication authentication, string[] supportedHashAlgorithms, bool disableExpect100Continue = true)
         {
             if (string.IsNullOrWhiteSpace(onvifUri))
                 throw new ArgumentNullException(nameof(onvifUri));
 
-            this._supportedHashAlgorithms = supportedHashAlgorithms ?? new List<string>() { "MD5", "SHA-256", "SHA-512-256" };
+            this._supportedHashAlgorithms = supportedHashAlgorithms ?? new string[] { "MD5", "SHA-256", "SHA-512-256" };
 
             if (authentication != OnvifAuthentication.None)
             {

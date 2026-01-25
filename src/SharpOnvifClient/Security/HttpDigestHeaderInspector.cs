@@ -1,7 +1,7 @@
 ﻿using SharpOnvifCommon.Security;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.ServiceModel;
@@ -11,10 +11,10 @@ using System.ServiceModel.Dispatcher;
 public class HttpDigestHeaderInspector : IClientMessageInspector
 {
     private NetworkCredential _credentials;
-    private readonly List<string> _supportedHashAlgorithms;
+    private readonly string[] _supportedHashAlgorithms;
     private static readonly HttpClient _httpClient = new HttpClient();
 
-    public HttpDigestHeaderInspector(NetworkCredential credentials, List<string> supportedHashAlgorithms)
+    public HttpDigestHeaderInspector(NetworkCredential credentials, string[] supportedHashAlgorithms)
     {
         this._credentials = credentials ?? throw new ArgumentNullException(nameof(credentials));
         this._supportedHashAlgorithms = supportedHashAlgorithms ?? throw new ArgumentNullException(nameof(supportedHashAlgorithms)); 
