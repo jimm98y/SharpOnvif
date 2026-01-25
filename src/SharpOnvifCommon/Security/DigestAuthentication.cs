@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.Caching;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -22,8 +23,12 @@ namespace SharpOnvifCommon.Security
         public const int ERROR_NONCE_FUTURE = -4;
         public const int ERROR_NONCE_EXPIRED = -5;
         public const int ERROR_NONCE_INVALID = -6;
+        public const int ERROR_NONCE_REUSE = -7;
 
         public static byte[] NoncePrivateKey = GenerateRandom(32);
+
+        private static MemoryCache _nonceCache = new MemoryCache("nonce");
+        private static object _nonceCacheSyncRoot = new object();
 
         public static void RegenerateNoncePrivateKey(int length = 32)
         {
@@ -75,18 +80,52 @@ namespace SharpOnvifCommon.Security
             return BytesToString(nonceType, GenerateRandom(cnonceLength));
         }
 
+        /// <remarks>
+        /// When nonce replay protection is used, this method shall be called only once. 
+        /// Calling it for the second time will trigger replay protection and fail the validaiton.
+        /// </remarks>
         public static int ValidateServerNonce(
             string nonceAlgorithm, 
             BinarySerializationType nonceType,
             string nonce, 
+            int nc, // for RFC 2069 nc can be set to 0
             DateTimeOffset currentTimestamp, 
             byte[] etag = null,
             int saltLength = 0,
-            int lifetimeMiliseconds = 30000)
+            int lifetimeMiliseconds = 30000, // 30 seconds is the default lifetime of the nonce
+            bool useNonceReplayProtection = true) // nonce replay protection is stateful
         {
             if (string.IsNullOrEmpty(nonce))
             {
                 return ERROR_NONCE_EMPTY;
+            }
+
+            int estimatedNonceSize = 8 + saltLength + GetHashLength(nonceAlgorithm);
+            if (nonceType == BinarySerializationType.Hex)
+            {
+                estimatedNonceSize = estimatedNonceSize * 2;
+                if (nonce.Length != estimatedNonceSize)
+                {
+                    return ERROR_NONCE_LENGTH;
+                }
+            }
+            else if (nonceType == BinarySerializationType.Base64)
+            {
+                int estimatedMinNonceSize = (int)(Math.Floor(estimatedNonceSize / 3d) * 4);
+                int estimatedMaxNonceSize = (int)(Math.Ceiling(estimatedNonceSize / 3d) * 4);
+                if (nonce.Length < estimatedMinNonceSize || nonce.Length > estimatedMaxNonceSize)
+                {
+                    return ERROR_NONCE_LENGTH;
+                }
+            }
+            else
+            {
+                throw new NotSupportedException();
+            }
+
+            if (nonce.Length != estimatedNonceSize)
+            {
+                return ERROR_NONCE_LENGTH;
             }
 
             byte[] nonceBytes = null;
@@ -157,6 +196,39 @@ namespace SharpOnvifCommon.Security
             {
                 Debug.WriteLine("Nonce is invalid");
                 return ERROR_NONCE_INVALID;
+            }
+
+            if (useNonceReplayProtection)
+            {
+                // Check for nonce re-use and add nonce to the cache for the entire duration of the nonce validity.
+                // This operation is done last after all other checks were successful.
+                lock (_nonceCacheSyncRoot)
+                {
+                    var cachedNonceCount = _nonceCache.Get(nonce, null);
+                    if (cachedNonceCount == null)
+                    {
+                        CacheItemPolicy cip = new CacheItemPolicy()
+                        {
+                            AbsoluteExpiration = new DateTimeOffset(DateTime.UtcNow.AddMilliseconds(lifetimeMiliseconds))
+                        };
+                        _nonceCache.Set(nonce, 1, cip);
+                    }
+                    else
+                    {
+                        if (nc <= ((int)cachedNonceCount))
+                        {
+                            return ERROR_NONCE_REUSE;
+                        }
+                        else
+                        {
+                            CacheItemPolicy cip = new CacheItemPolicy()
+                            {
+                                AbsoluteExpiration = new DateTimeOffset(DateTime.UtcNow.AddMilliseconds(lifetimeMiliseconds))
+                            };
+                            _nonceCache.Set(nonce, nc, cip);
+                        }
+                    }
+                }
             }
 
             return 0;

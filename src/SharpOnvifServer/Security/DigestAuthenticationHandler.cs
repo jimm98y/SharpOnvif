@@ -216,7 +216,7 @@ namespace SharpOnvifServer
             var user = await _userRepository.GetUser(webToken.UserName);
             if (user != null)
             {
-                if (DigestAuthentication.ValidateServerNonce(NONCE_HASH_ALGORITHM, BinarySerializationType.Hex, webToken.Nonce, DateTimeOffset.UtcNow, null, NONCE_SALT_LENGTH) == 0)
+                if (DigestAuthentication.ValidateServerNonce(NONCE_HASH_ALGORITHM, BinarySerializationType.Hex, webToken.Nonce, DigestAuthentication.ConvertNCToInt(webToken.Nc), DateTimeOffset.UtcNow, null, NONCE_SALT_LENGTH) == 0)
                 {
                     string digest;
 
