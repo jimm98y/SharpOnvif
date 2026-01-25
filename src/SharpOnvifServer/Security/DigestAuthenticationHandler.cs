@@ -219,6 +219,8 @@ namespace SharpOnvifServer
                 if (DigestAuthentication.ValidateServerNonce(NONCE_HASH_ALGORITHM, BinarySerializationType.Hex, webToken.Nonce, DateTimeOffset.UtcNow, null, NONCE_SALT_LENGTH) == 0)
                 {
                     string digest;
+
+                    // legacy, not officially supported by Onvif Core specs
                     /*
                     digest = DigestAuthentication.CreateWebDigestRFC2069(
                         webToken.Algorithm, 
@@ -229,6 +231,7 @@ namespace SharpOnvifServer
                         method,
                         webToken.Uri);
                     */
+
                     digest = DigestAuthentication.CreateWebDigestRFC7616(
                         webToken.Algorithm,
                         webToken.UserName,
@@ -278,7 +281,13 @@ namespace SharpOnvifServer
                         string nonce = DigestAuthentication.GetValueFromHeader(auth, "nonce", true);
                         string uri = DigestAuthentication.GetValueFromHeader(auth, "uri", true);
 
+                        // some implementations put quotes around qop (ODM)
                         string qop = DigestAuthentication.GetValueFromHeader(auth, "qop", false);
+                        if(!string.IsNullOrEmpty(qop) && qop.Contains("\""))
+                        {
+                            qop = qop.Replace("\"", "");
+                        }
+
                         string cnonce = DigestAuthentication.GetValueFromHeader(auth, "cnonce", true);
                         string nc = DigestAuthentication.GetValueFromHeader(auth, "nc", false);
                         string userHash = DigestAuthentication.GetValueFromHeader(auth, "userhash", false);
@@ -295,6 +304,8 @@ namespace SharpOnvifServer
             Response.StatusCode = 401;
 
             string wwwAuth;
+
+            // legacy, not officially supported by Onvif Core spec
             /*
             wwwAuth = DigestAuthentication.CreateWwwAuthenticateRFC2069(
                     NONCE_HASH_ALGORITHM,
@@ -306,21 +317,27 @@ namespace SharpOnvifServer
                     OptionsMonitor.CurrentValue.Realm);
             */
 
-            wwwAuth = DigestAuthentication.CreateWwwAuthenticateRFC7616(
-                    NONCE_HASH_ALGORITHM,
-                    BinarySerializationType.Hex,
-                    DateTimeOffset.UtcNow,
-                    "SHA-256",
-                    null,
-                    DigestAuthentication.CreateNonceSessionSalt(NONCE_SALT_LENGTH),
-                    OptionsMonitor.CurrentValue.Realm,
-                    "00000000",
-                    "auth",
-                    "",
-                    false);
+            byte[] salt = DigestAuthentication.CreateNonceSessionSalt(NONCE_SALT_LENGTH);
+            var now = DateTimeOffset.UtcNow;
 
-            Response.Headers.Append("WWW-Authenticate", wwwAuth);
-            
+            var hashingAlgorithms = OptionsMonitor.CurrentValue.HashingAlgorithms == null ? new System.Collections.Generic.List<string>() { "MD5" } : OptionsMonitor.CurrentValue.HashingAlgorithms.ToList();
+            foreach (var algorithm in hashingAlgorithms)
+            {
+                wwwAuth = DigestAuthentication.CreateWwwAuthenticateRFC7616(
+                        NONCE_HASH_ALGORITHM,
+                        BinarySerializationType.Hex,
+                        now,
+                        algorithm,
+                        null,
+                        salt,
+                        OptionsMonitor.CurrentValue.Realm,
+                        "00000000",
+                        "auth",
+                        "",
+                        false);
+                Response.Headers.Append("WWW-Authenticate", wwwAuth);
+            }
+
             await Context.Response.WriteAsync("You are not logged in via Digest auth").ConfigureAwait(false);
         }
 
