@@ -13,7 +13,6 @@ using System.Xml.Linq;
 using System.Xml.Serialization;
 using System;
 using SharpOnvifCommon.Security;
-using System.Text.RegularExpressions;
 using System.Globalization;
 
 namespace SharpOnvifServer
@@ -45,13 +44,19 @@ namespace SharpOnvifServer
 
         private class WebDigestAuth
         {
-            public WebDigestAuth(string userName, string realm, string response, string nonce, string uri)
+            public WebDigestAuth(string algorithm, string userName, string realm, string nonce, string uri, string response, string qop, string cnonce, string nc, string userHash)
             {
-                Response = response;
-                UserName = userName;
-                Realm = realm;
-                Nonce = nonce;
-                Uri = uri;
+                Algorithm = string.IsNullOrEmpty(algorithm) ? "" : algorithm;
+                UserName = userName ?? throw new ArgumentNullException(nameof(userName));
+                Realm = realm ?? throw new ArgumentNullException(nameof(realm));
+                Nonce = nonce ?? throw new ArgumentNullException(nameof(nonce));
+                Uri = uri ?? throw new ArgumentNullException(nameof(uri));
+                Response = response ?? throw new ArgumentNullException(nameof(response));
+
+                Qop = qop;
+                CNonce = cnonce;
+                Nc = nc;
+                UserHash = userHash;
             }
 
             public string Response { get; }
@@ -61,10 +66,10 @@ namespace SharpOnvifServer
             public string Uri { get; }
             public string Algorithm { get; }
 
-            //public string Qop { get; }
-            //public string Cnonce { get; }
-            //public string Nc { get; }
-            //public bool Userhash { get; }
+            public string Qop { get; }
+            public string CNonce { get; }
+            public string Nc { get; }
+            public string UserHash { get; }
         }
 
         public DigestAuthenticationHandler(
@@ -213,8 +218,9 @@ namespace SharpOnvifServer
             {
                 if (DigestAuthentication.ValidateServerNonce(NONCE_HASH_ALGORITHM, BinarySerializationType.Hex, webToken.Nonce, DateTimeOffset.UtcNow, null, NONCE_SALT_LENGTH) == 0)
                 {
-                    // validate the digest
-                    string digest = DigestAuthentication.CreateWebDigestRFC2069(
+                    string digest;
+                    /*
+                    digest = DigestAuthentication.CreateWebDigestRFC2069(
                         webToken.Algorithm, 
                         webToken.UserName, 
                         realm, 
@@ -222,6 +228,18 @@ namespace SharpOnvifServer
                         webToken.Nonce, 
                         method,
                         webToken.Uri);
+                    */
+                    digest = DigestAuthentication.CreateWebDigestRFC7616(
+                        webToken.Algorithm,
+                        webToken.UserName,
+                        realm,
+                        user.Password,
+                        webToken.Nonce,
+                        method,
+                        webToken.Uri,
+                        DigestAuthentication.ConvertNCToInt(webToken.Nc),
+                        webToken.CNonce,
+                        webToken.Qop);
 
                     if (digest.CompareTo(webToken.Response) == 0)
                     {
@@ -240,45 +258,66 @@ namespace SharpOnvifServer
                 string auth = request.Headers.Authorization[0];
                 if(auth.StartsWith("Digest ", StringComparison.OrdinalIgnoreCase))
                 {
-                    string realm = GetValueFromHeader(auth, "realm");
+                    string realm = DigestAuthentication.GetValueFromHeader(auth, "realm", true);
                     if (realm == OptionsMonitor.CurrentValue.Realm)
                     {
-                        string userName = GetValueFromHeader(auth, "username");
-                        string response = GetValueFromHeader(auth, "response");
-                        string nonce = GetValueFromHeader(auth, "nonce");
-                        string uri = GetValueFromHeader(auth, "uri");
-                        return Task.FromResult(new WebDigestAuth(userName, realm, response, nonce, uri));
+                        string algorithm = DigestAuthentication.GetValueFromHeader(auth, "algorithm", true) ?? "";
+                        string userName = DigestAuthentication.GetValueFromHeader(auth, "username", true);
+
+                        // read username*
+                        if (string.IsNullOrEmpty(userName))
+                        {
+                            userName = DigestAuthentication.GetValueFromHeader(auth, "username\\*", false); // username*
+                            if(!string.IsNullOrEmpty(userName) && userName.StartsWith("UTF-8''"))
+                            {
+                                userName = Uri.UnescapeDataString(userName.Substring("UTF-8''".Length));
+                            }
+                        }
+
+                        string response = DigestAuthentication.GetValueFromHeader(auth, "response", true);
+                        string nonce = DigestAuthentication.GetValueFromHeader(auth, "nonce", true);
+                        string uri = DigestAuthentication.GetValueFromHeader(auth, "uri", true);
+
+                        string qop = DigestAuthentication.GetValueFromHeader(auth, "qop", false);
+                        string cnonce = DigestAuthentication.GetValueFromHeader(auth, "cnonce", true);
+                        string nc = DigestAuthentication.GetValueFromHeader(auth, "nc", false);
+                        string userHash = DigestAuthentication.GetValueFromHeader(auth, "userhash", false);
+
+                        return Task.FromResult(new WebDigestAuth(algorithm, userName, realm, nonce, uri, response, qop, cnonce, nc, userHash));
                     }
                 }
             }
             return Task.FromResult((WebDigestAuth)null);
         }
 
-        private static string GetValueFromHeader(string header, string key)
-        {
-            var regHeader = new Regex($@"{key}=""([^""]*)""", RegexOptions.IgnoreCase);
-            var matchHeader = regHeader.Match(header);
-
-            if (matchHeader.Success)
-            {
-                return matchHeader.Groups[1].Value;
-            }
-
-            throw new Exception($"Header {key} not found");
-        }
-
         protected override async Task HandleChallengeAsync(AuthenticationProperties properties)
         {
             Response.StatusCode = 401;
-            
-            string wwwAuth = 
-                DigestAuthentication.CreateWwwAuthenticateRFC2069(
+
+            string wwwAuth;
+            /*
+            wwwAuth = DigestAuthentication.CreateWwwAuthenticateRFC2069(
                     NONCE_HASH_ALGORITHM,
                     BinarySerializationType.Hex, 
                     DateTimeOffset.UtcNow, 
+                    "MD5",
                     null, 
                     DigestAuthentication.CreateNonceSessionSalt(NONCE_SALT_LENGTH), 
                     OptionsMonitor.CurrentValue.Realm);
+            */
+
+            wwwAuth = DigestAuthentication.CreateWwwAuthenticateRFC7616(
+                    NONCE_HASH_ALGORITHM,
+                    BinarySerializationType.Hex,
+                    DateTimeOffset.UtcNow,
+                    "SHA-256",
+                    null,
+                    DigestAuthentication.CreateNonceSessionSalt(NONCE_SALT_LENGTH),
+                    OptionsMonitor.CurrentValue.Realm,
+                    "00000000",
+                    "auth",
+                    "",
+                    false);
 
             Response.Headers.Append("WWW-Authenticate", wwwAuth);
             

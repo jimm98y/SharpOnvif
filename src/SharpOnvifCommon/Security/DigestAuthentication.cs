@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace SharpOnvifCommon.Security
 {
@@ -34,7 +35,12 @@ namespace SharpOnvifCommon.Security
             return GenerateRandom(length);
         }
 
-        public static string GenerateServerNonce(string nonceAlgorithm, BinarySerializationType nonceType, DateTimeOffset currentTimestamp, byte[] etag = null, byte[] salt = null)
+        public static string GenerateServerNonce(
+            string nonceAlgorithm,
+            BinarySerializationType nonceType, 
+            DateTimeOffset currentTimestamp,
+            byte[] etag = null,
+            byte[] salt = null)
         {
             long timestamp = currentTimestamp.ToUnixTimeMilliseconds();
             using (var hash = GetHashAlgorithm(nonceAlgorithm))
@@ -69,7 +75,14 @@ namespace SharpOnvifCommon.Security
             return BytesToString(nonceType, GenerateRandom(cnonceLength));
         }
 
-        public static int ValidateServerNonce(string nonceAlgorithm, BinarySerializationType nonceType, string nonce, DateTimeOffset currentTimestamp, byte[] etag = null, int saltLength = 0, int lifetimeMiliseconds = 30000)
+        public static int ValidateServerNonce(
+            string nonceAlgorithm, 
+            BinarySerializationType nonceType,
+            string nonce, 
+            DateTimeOffset currentTimestamp, 
+            byte[] etag = null,
+            int saltLength = 0,
+            int lifetimeMiliseconds = 30000)
         {
             if (string.IsNullOrEmpty(nonce))
             {
@@ -149,7 +162,14 @@ namespace SharpOnvifCommon.Security
             return 0;
         }
 
-        public static string CreateWebDigestRFC2069(string algorithm, string userName, string realm, string password, string nonce, string method, string uri)
+        public static string CreateWebDigestRFC2069(
+            string algorithm, 
+            string userName, 
+            string realm, 
+            string password,
+            string nonce,
+            string method,
+            string uri)
         {
             using (var hash = GetHashAlgorithm(algorithm))
             {
@@ -159,7 +179,20 @@ namespace SharpOnvifCommon.Security
             }
         }
 
-        public static string CreateWebDigestRFC2617(string algorithm, string userName, string realm, string password, string nonce, string method, string uri, int nc, string cnonce, string qop, byte[] entityBody = null, string noncePrime = null, string cnoncePrime = null)
+        public static string CreateWebDigestRFC2617(
+            string algorithm, 
+            string userName, 
+            string realm, 
+            string password, 
+            string nonce, 
+            string method, 
+            string uri, 
+            int nc, 
+            string cnonce,
+            string qop,
+            byte[] entityBody = null, 
+            string noncePrime = null,
+            string cnoncePrime = null)
         {
             using (var hash = GetHashAlgorithm(algorithm))
             {
@@ -205,49 +238,80 @@ namespace SharpOnvifCommon.Security
             }
         }
 
-        public static string CreateWebDigestRFC7616(string algorithm, string userName, string realm, string password, string nonce, string method, string uri, int nc, string cnonce, string qop, byte[] entityBody = null, string noncePrime = null, string cnoncePrime = null)
+        public static string CreateWebDigestRFC7616(
+            string algorithm, 
+            string userName, 
+            string realm, 
+            string password, 
+            string nonce, 
+            string method,
+            string uri, 
+            int nc, 
+            string cnonce, 
+            string qop,
+            byte[] entityBody = null,
+            string noncePrime = null,
+            string cnoncePrime = null)
         {
-            return CreateWebDigestRFC2617(algorithm, userName, realm, password, nonce, method, uri, nc, cnonce, qop, entityBody, noncePrime, cnoncePrime);
+            return CreateWebDigestRFC2617(
+                algorithm, 
+                userName,
+                realm, 
+                password,
+                nonce,
+                method, 
+                uri, 
+                nc, 
+                cnonce, 
+                qop, 
+                entityBody,
+                noncePrime, 
+                cnoncePrime);
         }
 
         public static string CreateWwwAuthenticateRFC2069(
             string nonceAlgorithm, 
             BinarySerializationType binarySerialization,
-            DateTimeOffset currentTimestamp, 
+            DateTimeOffset currentTimestamp,
+            string algorithm,
             byte[] etag,
             byte[] salt,
             string realm,
-            bool isStale = false)
+            bool stale = false)
         {
             string serverNonce = GenerateServerNonce(nonceAlgorithm, binarySerialization, currentTimestamp, etag, salt);
-            return $"Digest realm=\"{realm}\", nonce=\"{serverNonce}\", stale=\"{isStale.ToString().ToUpperInvariant()}\"";
+
+            // optional
+            string responseAlgorithm = (string.IsNullOrEmpty(algorithm) || algorithm == "MD5") ? "" : $", algorithm={algorithm}";
+
+            return $"Digest realm=\"{realm}\"{responseAlgorithm}, nonce=\"{serverNonce}\", stale=\"{stale.ToString().ToUpperInvariant()}\"";
         }
 
         public static string CreateWwwAuthenticateRFC2617(
             string nonceAlgorithm, 
             BinarySerializationType nonceSerialization, 
-            string algorithm,
             DateTimeOffset currentTimestamp, 
+            string algorithm,
             byte[] etag, 
             byte[] salt, 
             string realm, 
             string opaque = "00000000", 
             string qop = "auth, auth-int",
-            bool isStale = false)
+            bool stale = false)
         {
             string serverNonce = GenerateServerNonce(nonceAlgorithm, nonceSerialization, currentTimestamp, etag, salt);
 
             // optional
             string responseAlgorithm = (string.IsNullOrEmpty(algorithm) || algorithm == "MD5") ? "" : $", algorithm={algorithm}";
 
-            return $"Digest realm=\"{realm}\", qop=\"{qop}\"{responseAlgorithm}, nonce=\"{serverNonce}\", opaque=\"{opaque}\", stale=\"{isStale.ToString().ToUpperInvariant()}\"";
+            return $"Digest realm=\"{realm}\", qop=\"{qop}\"{responseAlgorithm}, nonce=\"{serverNonce}\", opaque=\"{opaque}\", stale=\"{stale.ToString().ToUpperInvariant()}\"";
         }
 
         public static string CreateWwwAuthenticateRFC7616(
             string nonceAlgorithm,
             BinarySerializationType nonceSerialization,
-            string algorithm,
             DateTimeOffset currentTimestamp,
+            string algorithm,
             byte[] etag,
             byte[] salt,
             string realm,
@@ -255,7 +319,7 @@ namespace SharpOnvifCommon.Security
             string qop = "auth, auth-int",
             string charset = "UTF-8",
             bool userhash = false,
-            bool isStale = false)
+            bool stale = false)
         {
             string serverNonce = GenerateServerNonce(nonceAlgorithm, nonceSerialization, currentTimestamp, etag, salt);
 
@@ -264,24 +328,52 @@ namespace SharpOnvifCommon.Security
             string responseCharset = string.IsNullOrEmpty(charset) ? "" : $", charset={charset}"; // UTF-8
             string responseUserhash = userhash ? $", userhash={userhash.ToString().ToUpperInvariant()}" : ""; // see CreateUserNameHashRFC7616
 
-            return $"Digest realm=\"{realm}\", qop=\"{qop}\"{responseAlgorithm}, nonce=\"{serverNonce}\", opaque=\"{opaque}\"{responseCharset}{responseUserhash}, stale=\"{isStale.ToString().ToUpperInvariant()}\"";
+            return $"Digest realm=\"{realm}\", qop=\"{qop}\"{responseAlgorithm}, nonce=\"{serverNonce}\", opaque=\"{opaque}\"{responseCharset}{responseUserhash}, stale=\"{stale.ToString().ToUpperInvariant()}\"";
         }
 
-        public static string CreateAuthorizationRFC2069(string userName, string realm, string nonce, string uri, string response, string opaque, string algorithm)
+        public static string CreateAuthorizationRFC2069(
+            string userName, 
+            string realm, 
+            string nonce, 
+            string uri, 
+            string response, 
+            string opaque, 
+            string algorithm)
         {
             string responseOpaque = string.IsNullOrEmpty(opaque) ? "" : $", opaque=\"{opaque}\"";
             string responseAlgorithm = string.IsNullOrEmpty(algorithm) || algorithm == "MD5" ? "" : $", algorithm=\"{algorithm}\"";
             return $"Digest username=\"{userName}\", realm=\"{realm}\", uri=\"{uri}\"{responseAlgorithm}, nonce=\"{nonce}\", response=\"{response}\"{responseOpaque}";
         }
 
-        public static string CreateAuthorizationRFC2617(string userName, string realm, string nonce, string uri, string response, string opaque, string algorithm, string qop, int nc, string cnonce)
+        public static string CreateAuthorizationRFC2617(
+            string userName,
+            string realm, 
+            string nonce, 
+            string uri,
+            string response,
+            string opaque,
+            string algorithm,
+            string qop, 
+            int nc, 
+            string cnonce)
         {
             string responseOpaque = string.IsNullOrEmpty(opaque) ? "" : $", opaque=\"{opaque}\"";
             string responseAlgorithm = string.IsNullOrEmpty(algorithm) || algorithm == "MD5" ? "" : $", algorithm=\"{algorithm}\"";
             return $"Digest username=\"{userName}\", realm=\"{realm}\", uri=\"{uri}\"{responseAlgorithm}, nonce=\"{nonce}\", qop={qop}, nc={ConvertIntToNC(nc)}, cnonce=\"{cnonce}\", response=\"{response}\"{responseOpaque}";
         }
 
-        public static string CreateAuthorizationRFC7616(string userName, string realm, string nonce, string uri, string response, string opaque, string algorithm, string qop, int nc, string cnonce, bool userhash)
+        public static string CreateAuthorizationRFC7616(
+            string userName, 
+            string realm, 
+            string nonce, 
+            string uri, 
+            string response,
+            string opaque,
+            string algorithm,
+            string qop, 
+            int nc, 
+            string cnonce,
+            bool userhash)
         {
             string responseOpaque = string.IsNullOrEmpty(opaque) ? "" : $", opaque=\"{opaque}\"";
             string responseAlgorithm = string.IsNullOrEmpty(algorithm) || algorithm == "MD5" ? "" : $", algorithm=\"{algorithm}\"";
@@ -335,6 +427,28 @@ namespace SharpOnvifCommon.Security
                 (byte)(nc & 0xff),
             };
             return ToHex(ncBytes);
+        }
+
+        public static string GetValueFromHeader(string header, string key, bool hasQuotes)
+        {
+            Regex regHeader;
+            if (hasQuotes)
+            {
+                regHeader = new Regex($@"{key}=""([^""]*)""", RegexOptions.IgnoreCase);
+            }
+            else
+            {
+                regHeader = new Regex($@"{key}=([^\s,]*)", RegexOptions.IgnoreCase);
+            }
+
+            Match matchHeader = regHeader.Match(header);
+
+            if (matchHeader.Success)
+            {
+                return matchHeader.Groups[1].Value;
+            }
+
+            return null;
         }
 
         private static HashAlgorithm GetHashAlgorithm(string algorithm)
