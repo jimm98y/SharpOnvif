@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using SharpOnvifCommon.Security;
 using SharpOnvifServer;
 using System.Threading.Tasks;
 
@@ -19,6 +20,25 @@ namespace OnvifService.Repository
             {
                 string password = _configuration.GetValue<string>("UserRepository:Password");
                 return Task.FromResult(new UserInfo() { UserName = userName, Password = password });
+            }
+
+            return Task.FromResult((UserInfo)null);
+        }
+
+        /// <summary>
+        /// Get the user from the hashed user name.
+        /// </summary>
+        /// <param name="algorithm"></param>
+        /// <param name="userName"></param>
+        /// <param name="realm"></param>
+        /// <returns></returns>
+        public Task<UserInfo> GetUserByHash(string algorithm, string userName, string realm)
+        {
+            if (string.Compare(DigestAuthentication.CreateUserNameHashRFC7616(algorithm, _configuration.GetValue<string>("UserRepository:UserName"), realm), userName, true) == 0)
+            {
+                string user = _configuration.GetValue<string>("UserRepository:UserName");
+                string password = _configuration.GetValue<string>("UserRepository:Password");
+                return Task.FromResult(new UserInfo() { UserName = user, Password = password });
             }
 
             return Task.FromResult((UserInfo)null);

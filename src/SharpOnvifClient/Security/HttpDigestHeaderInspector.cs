@@ -43,6 +43,7 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
         string algorithm = "";
         string qop = "";
         bool stale = false;
+        bool userhash = false;
         bool isSupported = false;
 
         // pre-flight request to get the www-auth header from the server
@@ -76,6 +77,7 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
                         opaque = DigestAuthentication.GetValueFromHeader(receivedWwwAuth, "opaque", true);
                         algorithm = DigestAuthentication.GetValueFromHeader(receivedWwwAuth, "algorithm", false) ?? "";
                         stale = (DigestAuthentication.GetValueFromHeader(receivedWwwAuth, "stale", false) ?? "").ToUpperInvariant() == "TRUE";
+                        userhash = (DigestAuthentication.GetValueFromHeader(receivedWwwAuth, "userhash", false) ?? "").ToUpperInvariant() == "TRUE";
                         qop = DigestAuthentication.GetValueFromHeader(receivedWwwAuth, "qop", true);
 
                         if (!string.IsNullOrEmpty(nonce))
@@ -154,8 +156,18 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
                     selectedQop
                     );
 
+                string username;
+                if(userhash)
+                {
+                    username = DigestAuthentication.CreateUserNameHashRFC7616(algorithm, _credentials.UserName, realm);
+                }
+                else
+                {
+                    username = _credentials.UserName;
+                }
+
                 authorization = DigestAuthentication.CreateAuthorizationRFC7616(
-                    _credentials.UserName,
+                    username,
                     realm,
                     nonce,
                     channel.RemoteAddress.Uri.PathAndQuery,
@@ -165,7 +177,7 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
                     selectedQop,
                     nc,
                     cnonce,
-                    false);
+                    userhash);
             }            
 
             httpRequestMessage.Headers["Authorization"] = authorization;

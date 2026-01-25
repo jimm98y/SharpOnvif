@@ -28,5 +28,14 @@ namespace SharpOnvifServer
         /// <param name="userName"></param>
         /// <returns><see cref="UserInfo"/> if the user exists, null otherwise.</returns>
         public Task<UserInfo> GetUser(string userName);
+
+        /// <summary>
+        /// Get the user from the hashed user name.
+        /// </summary>
+        /// <param name="algorithm"></param>
+        /// <param name="userName"></param>
+        /// <param name="realm"></param>
+        /// <returns></returns>
+        public Task<UserInfo> GetUserByHash(string algorithm, string userName, string realm);
     }
 }

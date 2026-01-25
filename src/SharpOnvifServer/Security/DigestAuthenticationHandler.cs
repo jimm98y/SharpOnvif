@@ -70,6 +70,9 @@ namespace SharpOnvifServer
             public string CNonce { get; }
             public string Nc { get; }
             public string UserHash { get; }
+
+            // The real username after resolving the optional userhash in RFC 7616
+            public string RealUserName { get; internal set; }
         }
 
         public DigestAuthenticationHandler(
@@ -100,7 +103,7 @@ namespace SharpOnvifServer
                             {
                                 if (await AuthenticateSoapDigest(token.UserName, token.Password, token.Nonce, token.Created))
                                 {
-                                    if (string.Compare(token.UserName, webToken.UserName, false, CultureInfo.InvariantCulture) != 0)
+                                    if (string.Compare(token.UserName, webToken.RealUserName, false, CultureInfo.InvariantCulture) != 0)
                                     {
                                         return AuthenticateResult.Fail("HTTP Digest and WsUsernameToken users do not match.");
                                     }
@@ -213,7 +216,19 @@ namespace SharpOnvifServer
 
         private async Task<bool> AuthenticateWebDigest(string realm, string method, WebDigestAuth webToken)
         {
-            var user = await _userRepository.GetUser(webToken.UserName);
+            UserInfo user = null;
+
+            if (!string.IsNullOrEmpty(webToken.UserHash) && webToken.UserHash.ToUpperInvariant() == "TRUE")
+            {
+                user = await _userRepository.GetUserByHash(webToken.Algorithm, webToken.UserName, webToken.Realm);
+                webToken.RealUserName = user.UserName;
+            }
+            else
+            {
+                user = await _userRepository.GetUser(webToken.UserName);
+                webToken.RealUserName = user.UserName;
+            }
+
             if (user != null)
             {
                 if (DigestAuthentication.ValidateServerNonce(NONCE_HASH_ALGORITHM, BinarySerializationType.Hex, webToken.Nonce, DigestAuthentication.ConvertNCToInt(webToken.Nc), DateTimeOffset.UtcNow, null, NONCE_SALT_LENGTH) == 0)
@@ -224,7 +239,7 @@ namespace SharpOnvifServer
                     /*
                     digest = DigestAuthentication.CreateWebDigestRFC2069(
                         webToken.Algorithm, 
-                        webToken.UserName, 
+                        webToken.RealUserName, 
                         realm, 
                         user.Password,
                         webToken.Nonce, 
@@ -234,7 +249,7 @@ namespace SharpOnvifServer
 
                     digest = DigestAuthentication.CreateWebDigestRFC7616(
                         webToken.Algorithm,
-                        webToken.UserName,
+                        webToken.RealUserName,
                         realm,
                         user.Password,
                         webToken.Nonce,
@@ -334,7 +349,7 @@ namespace SharpOnvifServer
                         "00000000",
                         "auth",
                         "",
-                        false);
+                        true);
                 Response.Headers.Append("WWW-Authenticate", wwwAuth);
             }
 
