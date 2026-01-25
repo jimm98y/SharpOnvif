@@ -15,7 +15,7 @@ namespace SharpOnvifCommon.Security
 
     public static class DigestAuthentication
     {
-        public const int ERROR_SUCCESS = 0;
+        public const int ERROR_NONCE_SUCCESS = 0;
         public const int ERROR_NONCE_EMPTY = -1;
         public const int ERROR_NONCE_FORMAT = -2;
         public const int ERROR_NONCE_LENGTH = -3;
