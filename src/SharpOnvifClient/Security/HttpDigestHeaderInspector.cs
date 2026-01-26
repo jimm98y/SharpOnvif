@@ -83,6 +83,12 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
                         userhash = (DigestAuthentication.GetValueFromHeader(receivedWwwAuth, "userhash", false) ?? "").ToUpperInvariant() == "TRUE";
                         qop = DigestAuthentication.GetValueFromHeader(receivedWwwAuth, "qop", true);
 
+                        if(string.IsNullOrEmpty(qop))
+                        {
+                            // RFC 2069 is not allowed by the Onvif Core specification
+                            continue;
+                        }
+
                         if (!string.IsNullOrEmpty(nonce))
                         {
                             if(string.IsNullOrEmpty(algorithm))
