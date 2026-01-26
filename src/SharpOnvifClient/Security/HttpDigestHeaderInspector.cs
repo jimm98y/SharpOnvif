@@ -199,7 +199,6 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
                                     content = Encoding.UTF8.GetString(bXML, 0, bXML.Length);
                                 }
 
-                                // this includes Soap message header which we cannot authenticate because it is being modified by the WCF
                                 XmlDocument xmlDoc = new XmlDocument();
                                 xmlDoc.PreserveWhitespace = true;
                                 xmlDoc.LoadXml(content);
@@ -218,14 +217,13 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
                                         parent.ParentNode.RemoveChild(parent);
                                     }
                                 }
-                                using (var mms = new MemoryStream())
+                                using (var modifiedOutput = new MemoryStream())
                                 {
-                                    xmlDoc.Save(mms);
-                                    content = Encoding.UTF8.GetString(mms.ToArray());
+                                    xmlDoc.Save(modifiedOutput);
+                                    content = Encoding.UTF8.GetString(modifiedOutput.ToArray());
                                 }
                                 // Workaround: The XmlWriter always adds a space before the ending tag, remove it
                                 content = content.Replace("\" />", "\"/>");
-
                                 body = Encoding.UTF8.GetBytes(content);
                             }
                         }

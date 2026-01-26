@@ -34,6 +34,7 @@ namespace OnvifService.Repository
         /// <returns></returns>
         public Task<UserInfo> GetUserByHash(string algorithm, string userName, string realm)
         {
+            // TODO: store this in the users database and use it for lookups
             if (string.Compare(DigestAuthentication.CreateUserNameHashRFC7616(algorithm, _configuration.GetValue<string>("UserRepository:UserName"), realm), userName, true) == 0)
             {
                 string user = _configuration.GetValue<string>("UserRepository:UserName");
