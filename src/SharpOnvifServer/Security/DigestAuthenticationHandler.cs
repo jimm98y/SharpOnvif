@@ -14,6 +14,7 @@ using System.Xml.Serialization;
 using System;
 using SharpOnvifCommon.Security;
 using System.Globalization;
+using System.IO;
 
 namespace SharpOnvifServer
 {
@@ -93,7 +94,16 @@ namespace SharpOnvifServer
             {
                 try
                 {
-                    if (await AuthenticateWebDigest(OptionsMonitor.CurrentValue.Realm, Request.Method, webToken))
+                    byte[] body = null;
+                    if (string.Compare("auth-int", webToken.Qop, true) == 0)
+                    {
+                        ReadResult requestBodyInBytes = await Request.BodyReader.ReadAsync();
+                        string content = Encoding.UTF8.GetString(requestBodyInBytes.Buffer.FirstSpan);
+                        Request.BodyReader.AdvanceTo(requestBodyInBytes.Buffer.Start, requestBodyInBytes.Buffer.End);
+                        body = Encoding.UTF8.GetBytes(content);
+                    }
+
+                    if (await AuthenticateWebDigest(OptionsMonitor.CurrentValue.Realm, Request.Method, webToken, body))
                     {
                         // now in case the request also contains WsUsernameToken, we must verify it
                         SoapDigestAuth token = await GetSecurityHeaderFromSoapEnvelope(Request);
@@ -214,7 +224,7 @@ namespace SharpOnvifServer
             return false;
         }
 
-        private async Task<bool> AuthenticateWebDigest(string realm, string method, WebDigestAuth webToken)
+        private async Task<bool> AuthenticateWebDigest(string realm, string method, WebDigestAuth webToken, byte[] body = null)
         {
             UserInfo user = null;
 
@@ -257,7 +267,8 @@ namespace SharpOnvifServer
                         webToken.Uri,
                         DigestAuthentication.ConvertNCToInt(webToken.Nc),
                         webToken.CNonce,
-                        webToken.Qop);
+                        webToken.Qop,
+                        body);
 
                     if (digest.CompareTo(webToken.Response) == 0)
                     {
@@ -300,11 +311,20 @@ namespace SharpOnvifServer
                         string qop = DigestAuthentication.GetValueFromHeader(auth, "qop", false);
                         if(!string.IsNullOrEmpty(qop) && qop.Contains("\""))
                         {
+                            // Note that this is against RFC 7616 that says: For historical reasons, a sender MUST NOT
+                            //  generate the quoted string syntax for the following parameters: qop and nc
                             qop = qop.Replace("\"", "");
                         }
 
                         string cnonce = DigestAuthentication.GetValueFromHeader(auth, "cnonce", true);
                         string nc = DigestAuthentication.GetValueFromHeader(auth, "nc", false);
+                        if (!string.IsNullOrEmpty(nc) && nc.Contains("\""))
+                        {
+                            // Note that this is against RFC 7616 that says: For historical reasons, a sender MUST NOT
+                            //  generate the quoted string syntax for the following parameters: qop and nc
+                            nc = nc.Replace("\"", "");
+                        }
+
                         string userHash = DigestAuthentication.GetValueFromHeader(auth, "userhash", false);
 
                         return Task.FromResult(new WebDigestAuth(algorithm, userName, realm, nonce, uri, response, qop, cnonce, nc, userHash));
@@ -347,7 +367,7 @@ namespace SharpOnvifServer
                         salt,
                         OptionsMonitor.CurrentValue.Realm,
                         "00000000",
-                        "auth",
+                        "auth, auth-int",
                         "",
                         true);
                 Response.Headers.Append("WWW-Authenticate", wwwAuth);

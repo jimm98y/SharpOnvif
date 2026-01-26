@@ -28,22 +28,11 @@ namespace SharpOnvifClient
                 return;
             }
 
-            if (authentication.HasFlag(OnvifAuthentication.HttpDigest))
-            {
-                // HTTP Digest authentication in NET Framework supports only MD5 (RFC 2069)
-                if (digestAuth == null)
-                    throw new ArgumentNullException(nameof(digestAuth));
-
-                if (!channel.Endpoint.EndpointBehaviors.Contains(digestAuth))
-                {
-                    channel.Endpoint.EndpointBehaviors.Add(digestAuth);
-                }
-            }
-
+            // we need HttpDigest last in the behavior pipeline so that it has the final request to calculate the hash
             if (authentication.HasFlag(OnvifAuthentication.WsUsernameToken))
             {
-                if(legacyAuth == null)
-                    throw new ArgumentNullException(nameof(legacyAuth));    
+                if (legacyAuth == null)
+                    throw new ArgumentNullException(nameof(legacyAuth));
 
                 // legacy WsUsernameToken authentication must be handled using a custom behavior
                 if (!channel.Endpoint.EndpointBehaviors.Contains(legacyAuth))
@@ -51,6 +40,17 @@ namespace SharpOnvifClient
                     channel.Endpoint.EndpointBehaviors.Add(legacyAuth);
                 }
             }
+
+            if (authentication.HasFlag(OnvifAuthentication.HttpDigest))
+            {
+                if (digestAuth == null)
+                    throw new ArgumentNullException(nameof(digestAuth));
+
+                if (!channel.Endpoint.EndpointBehaviors.Contains(digestAuth))
+                {
+                    channel.Endpoint.EndpointBehaviors.Add(digestAuth);
+                }
+            }            
         }
     }
 }

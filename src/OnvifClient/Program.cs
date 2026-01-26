@@ -18,7 +18,7 @@ public static class Program
 
     static async Task MainAsync(string[] args)
     {
-        var devices = await OnvifDiscoveryClient.DiscoverAsync();
+        var devices = await OnvifDiscoveryClient.DiscoverAsync(null, 1000);
 
         if (devices == null || devices.Count == 0)
         {
