@@ -235,6 +235,7 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
                     _credentials.UserName,
                     realm,
                     _credentials.Password,
+                    false,
                     nonce,
                     method,
                     channel.RemoteAddress.Uri.PathAndQuery,

@@ -7,6 +7,11 @@ namespace SharpOnvifServer
         public string UserName { get; set; }
         public string Password { get; set; }
 
+        /// <summary>
+        /// Set to true when we are storing HA1 in the user database instead of plaintext password. Otherwise defaults to false.
+        /// </summary>
+        public bool IsPasswordAlreadyHashed { get; set; }
+
         public UserInfo()
         { }
 

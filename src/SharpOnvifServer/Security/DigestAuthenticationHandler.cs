@@ -45,7 +45,17 @@ namespace SharpOnvifServer
 
         private class WebDigestAuth
         {
-            public WebDigestAuth(string algorithm, string userName, string realm, string nonce, string uri, string response, string qop, string cnonce, string nc, string userHash)
+            public WebDigestAuth(
+                string algorithm,
+                string userName, 
+                string realm, 
+                string nonce, 
+                string uri, 
+                string response,
+                string qop,
+                string cnonce,
+                string nc, 
+                string userHash)
             {
                 Algorithm = string.IsNullOrEmpty(algorithm) ? "" : algorithm;
                 UserName = userName ?? throw new ArgumentNullException(nameof(userName));
@@ -198,13 +208,15 @@ namespace SharpOnvifServer
             return AuthenticateResult.Fail("No authentication found");
         }
 
-        public async Task<bool> AuthenticateSoapDigest(string userName, string password, string nonce, string created)
+        public async Task<bool> AuthenticateSoapDigest(string userName, string digest, string nonce, string created)
         {
             var user = await _userRepository.GetUser(userName);
             if (user != null)
             {
-                string hashedPassword = WsDigestAuthentication.CreateSoapDigest(nonce, created, user.Password);
-                
+                if (user.IsPasswordAlreadyHashed)
+                    throw new NotSupportedException("WsUsernameToken is not compatible with pre-hashed (HA1) passwords.");
+
+                string calculatedDigest = WsDigestAuthentication.CreateSoapDigest(nonce, created, user.Password);                
                 DateTime createdDateTime;
 
                 // All times MUST be in UTC format as specified https://docs.oasis-open.org/wss-m/wss/v1.1.1/os/wss-SOAPMessageSecurity-v1.1.1-os.html
@@ -213,7 +225,7 @@ namespace SharpOnvifServer
                     if (OptionsMonitor.CurrentValue.MaxValidTimeDeltaInSeconds < 0 || 
                         Math.Abs(DateTime.UtcNow.Subtract(createdDateTime.ToUniversalTime()).TotalSeconds) < OptionsMonitor.CurrentValue.MaxValidTimeDeltaInSeconds)
                     {
-                        if (hashedPassword.CompareTo(password) == 0)
+                        if (calculatedDigest.CompareTo(digest) == 0)
                         {
                             return true;
                         }
@@ -252,6 +264,7 @@ namespace SharpOnvifServer
                         webToken.RealUserName, 
                         realm, 
                         user.Password,
+                        user.IsPasswordAlreadyHashed,
                         webToken.Nonce, 
                         method,
                         webToken.Uri);
@@ -262,6 +275,7 @@ namespace SharpOnvifServer
                         webToken.RealUserName,
                         realm,
                         user.Password,
+                        user.IsPasswordAlreadyHashed,
                         webToken.Nonce,
                         method,
                         webToken.Uri,

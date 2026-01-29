@@ -239,6 +239,7 @@ namespace SharpOnvifCommon.Security
             string userName, 
             string realm, 
             string password,
+            bool isPasswordAlreadyHashed,
             string nonce,
             string method,
             string uri)
@@ -252,14 +253,15 @@ namespace SharpOnvifCommon.Security
         }
 
         public static string CreateWebDigestRFC2617(
-            string algorithm, 
-            string userName, 
-            string realm, 
-            string password, 
-            string nonce, 
-            string method, 
-            string uri, 
-            int nc, 
+            string algorithm,
+            string userName,
+            string realm,
+            string password,
+            bool isPasswordAlreadyHashed,
+            string nonce,
+            string method,
+            string uri,
+            int nc,
             string cnonce,
             string qop,
             byte[] entityBody = null, 
@@ -268,8 +270,16 @@ namespace SharpOnvifCommon.Security
         {
             using (var hash = GetHashAlgorithm(algorithm))
             {
-                var bbb = EncodingGetBytes($"{userName}:{realm}:{password}");
-                string HA1 = ToHex(Hash(algorithm, hash, bbb));
+                string HA1;
+
+                if (!isPasswordAlreadyHashed)
+                {
+                    HA1 = CreatePreHashedPassword(algorithm, userName, realm, password);
+                }
+                else
+                {
+                    HA1 = password;
+                }
 
                 if (algorithm.EndsWith("-sess", StringComparison.OrdinalIgnoreCase))
                 {
@@ -310,11 +320,23 @@ namespace SharpOnvifCommon.Security
             }
         }
 
+        public static string CreatePreHashedPassword(string algorithm, string userName, string realm, string password)
+        {
+            // This can be used for storing HA1 in the database instead of the plaintext password.
+            // Because this can still be used for authentication, the benefits in case of digest authentication
+            //  are limited.
+            using (var hash = GetHashAlgorithm(algorithm))
+            {
+                return ToHex(Hash(algorithm, hash, EncodingGetBytes($"{userName}:{realm}:{password}")));
+            }
+        }
+
         public static string CreateWebDigestRFC7616(
             string algorithm, 
             string userName, 
             string realm, 
-            string password, 
+            string password,
+            bool isPasswordAlreadyHashed,
             string nonce, 
             string method,
             string uri, 
@@ -330,6 +352,7 @@ namespace SharpOnvifCommon.Security
                 userName,
                 realm, 
                 password,
+                isPasswordAlreadyHashed,
                 nonce,
                 method, 
                 uri, 
@@ -468,7 +491,6 @@ namespace SharpOnvifCommon.Security
             using (var hash = GetHashAlgorithm(algorithm))
             {
                 // username = H( unq(username) ":" unq(realm) )
-                // TODO: store this in the users database and use it for lookups
                 return ToHex(Hash(algorithm, hash, EncodingGetBytes($"{userName}:{realm}")));
             }
         }
