@@ -81,9 +81,6 @@ namespace SharpOnvifServer
             public string CNonce { get; }
             public string Nc { get; }
             public string UserHash { get; }
-
-            // The real username after resolving the optional userhash in RFC 7616
-            public string RealUserName { get; internal set; }
         }
 
         public DigestAuthenticationHandler(
@@ -123,7 +120,19 @@ namespace SharpOnvifServer
                             {
                                 if (await AuthenticateSoapDigest(token.UserName, token.Password, token.Nonce, token.Created))
                                 {
-                                    if (string.Compare(token.UserName, webToken.RealUserName, false, CultureInfo.InvariantCulture) != 0)
+                                    UserInfo user = null;
+
+                                    // TODO: move to an extension method
+                                    if (!string.IsNullOrEmpty(webToken.UserHash) && webToken.UserHash.ToUpperInvariant() == "TRUE")
+                                    {
+                                        user = await _userRepository.GetUserByHashAsync(webToken.Algorithm, webToken.UserName, webToken.Realm);
+                                    }
+                                    else
+                                    {
+                                        user = await _userRepository.GetUserAsync(webToken.UserName);
+                                    }
+
+                                    if (string.Compare(token.UserName, user.UserName, false, CultureInfo.InvariantCulture) != 0)
                                     {
                                         return AuthenticateResult.Fail("HTTP Digest and WsUsernameToken users do not match.");
                                     }
@@ -210,7 +219,7 @@ namespace SharpOnvifServer
 
         public async Task<bool> AuthenticateSoapDigest(string userName, string digest, string nonce, string created)
         {
-            var user = await _userRepository.GetUser(userName);
+            var user = await _userRepository.GetUserAsync(userName);
             if (user != null)
             {
                 if (user.IsPasswordAlreadyHashed)
@@ -240,15 +249,14 @@ namespace SharpOnvifServer
         {
             UserInfo user = null;
 
+            // TODO: move to an extension method
             if (!string.IsNullOrEmpty(webToken.UserHash) && webToken.UserHash.ToUpperInvariant() == "TRUE")
             {
-                user = await _userRepository.GetUserByHash(webToken.Algorithm, webToken.UserName, webToken.Realm);
-                webToken.RealUserName = user.UserName;
+                user = await _userRepository.GetUserByHashAsync(webToken.Algorithm, webToken.UserName, webToken.Realm);
             }
             else
             {
-                user = await _userRepository.GetUser(webToken.UserName);
-                webToken.RealUserName = user.UserName;
+                user = await _userRepository.GetUserAsync(webToken.UserName);
             }
 
             if (user != null)
@@ -261,7 +269,7 @@ namespace SharpOnvifServer
                     /*
                     digest = DigestAuthentication.CreateWebDigestRFC2069(
                         webToken.Algorithm, 
-                        webToken.RealUserName, 
+                        user.UserName, 
                         realm, 
                         user.Password,
                         user.IsPasswordAlreadyHashed,
@@ -272,7 +280,7 @@ namespace SharpOnvifServer
 
                     digest = DigestAuthentication.CreateWebDigestRFC7616(
                         webToken.Algorithm,
-                        webToken.RealUserName,
+                        user.UserName,
                         realm,
                         user.Password,
                         user.IsPasswordAlreadyHashed,
@@ -302,7 +310,7 @@ namespace SharpOnvifServer
                 if(auth.StartsWith("Digest ", StringComparison.OrdinalIgnoreCase))
                 {
                     string realm = DigestAuthentication.GetValueFromHeader(auth, "realm", true);
-                    string algorithm = DigestAuthentication.GetValueFromHeader(auth, "algorithm", true) ?? "";
+                    string algorithm = DigestAuthentication.GetValueFromHeader(auth, "algorithm", false) ?? "";
                     string userName = DigestAuthentication.GetValueFromHeader(auth, "username", true);
 
                     // read username*

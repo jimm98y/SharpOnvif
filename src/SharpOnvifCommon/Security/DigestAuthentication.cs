@@ -414,7 +414,7 @@ namespace SharpOnvifCommon.Security
             string algorithm)
         {
             string responseOpaque = string.IsNullOrEmpty(opaque) ? "" : $", opaque=\"{opaque}\"";
-            string responseAlgorithm = string.IsNullOrEmpty(algorithm) || algorithm == "MD5" ? "" : $", algorithm=\"{algorithm}\"";
+            string responseAlgorithm = string.IsNullOrEmpty(algorithm) || algorithm == "MD5" ? "" : $", algorithm={algorithm}";
             return $"Digest username=\"{userName}\", realm=\"{realm}\", uri=\"{uri}\"{responseAlgorithm}, nonce=\"{nonce}\", response=\"{response}\"{responseOpaque}";
         }
 
@@ -431,7 +431,7 @@ namespace SharpOnvifCommon.Security
             string cnonce)
         {
             string responseOpaque = string.IsNullOrEmpty(opaque) ? "" : $", opaque=\"{opaque}\"";
-            string responseAlgorithm = string.IsNullOrEmpty(algorithm) || algorithm == "MD5" ? "" : $", algorithm=\"{algorithm}\"";
+            string responseAlgorithm = string.IsNullOrEmpty(algorithm) || algorithm == "MD5" ? "" : $", algorithm={algorithm}";
             return $"Digest username=\"{userName}\", realm=\"{realm}\", uri=\"{uri}\"{responseAlgorithm}, nonce=\"{nonce}\", qop={qop}, nc={ConvertIntToNC(nc)}, cnonce=\"{cnonce}\", response=\"{response}\"{responseOpaque}";
         }
 
@@ -449,7 +449,7 @@ namespace SharpOnvifCommon.Security
             bool userhash)
         {
             string responseOpaque = string.IsNullOrEmpty(opaque) ? "" : $", opaque=\"{opaque}\"";
-            string responseAlgorithm = string.IsNullOrEmpty(algorithm) || algorithm == "MD5" ? "" : $", algorithm=\"{algorithm}\"";
+            string responseAlgorithm = string.IsNullOrEmpty(algorithm) || algorithm == "MD5" ? "" : $", algorithm={algorithm}";
             string responseUserhash = userhash ? $", userhash={userhash.ToString().ToLowerInvariant()}" : "";
             string responseUserName;
             string escapedUserName = Uri.EscapeDataString(userName);
@@ -464,17 +464,17 @@ namespace SharpOnvifCommon.Security
             return $"Digest {responseUserName}, realm=\"{realm}\", uri=\"{uri}\"{responseAlgorithm}, nonce=\"{nonce}\", qop={qop}, nc={ConvertIntToNC(nc)}, cnonce=\"{cnonce}\", response=\"{response}\"{responseOpaque}{responseUserhash}";
         }
 
-        public static string CreateAuthenticationInfoRFC2617(string algorithm, string uri, string qop, string cnonce, int nc, string nextNonce = null, byte[] entityBody = null)
+        public static string CreateAuthenticationInfoRFC2617(string algorithm, string userName, string realm, string password, bool isPasswordAlreadyHashed, string nonce, string uri, int nc, string cnonce, string qop, byte[] entityBody = null, string nextNonce = null, string noncePrime = null, string cnoncePrime = null)
         {
             string optionalNextnonce = string.IsNullOrEmpty(nextNonce) ? "" : $", nextnonce=\"{nextNonce}\"";
-            string responseAuth = CalculateHA2(algorithm, "", uri, qop, entityBody);
+            string responseAuth = CreateWebDigestRFC2617(algorithm, userName, realm, password, isPasswordAlreadyHashed, nonce, "", uri, nc, cnonce, qop, entityBody, noncePrime, cnoncePrime);
             // For historical reasons, a sender MUST NOT generate the quoted string syntax for the following parameters: qop and nc.
             return $"qop={qop}{optionalNextnonce}, rspauth=\"{responseAuth}\", cnonce=\"{cnonce}\", nc={ConvertIntToNC(nc)}";
         }
 
-        public static string CreateAuthenticationInfoRFC7616(string algorithm, string uri, string qop, string cnonce, int nc, string nextNonce = null, byte[] entityBody = null)
+        public static string CreateAuthenticationInfoRFC7616(string algorithm, string userName, string realm, string password, bool isPasswordAlreadyHashed, string nonce, string uri, int nc, string cnonce, string qop, byte[] entityBody = null, string nextNonce = null, string noncePrime = null, string cnoncePrime = null)
         {
-            return CreateAuthenticationInfoRFC2617(algorithm, uri, qop, cnonce, nc, nextNonce, entityBody);
+            return CreateAuthenticationInfoRFC2617(algorithm, userName, realm, password, isPasswordAlreadyHashed, nonce, uri, nc, cnonce, qop, entityBody, nextNonce, noncePrime, cnoncePrime);
         }
 
         public static string CreateUserNameHashRFC7616(string algorithm, string userName, string realm)

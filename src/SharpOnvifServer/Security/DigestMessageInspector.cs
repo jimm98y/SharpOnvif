@@ -4,6 +4,7 @@ using CoreWCF.Dispatcher;
 using Microsoft.AspNetCore.Http;
 using SharpOnvifCommon.Security;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Xml;
@@ -13,10 +14,12 @@ namespace SharpOnvifServer.Security
     public class DigestMessageInspector : IDispatchMessageInspector
     {
         private IHttpContextAccessor HttpContextAccessor { get; }
+        private IUserRepository UserRepository { get; }
 
-        public DigestMessageInspector(IHttpContextAccessor httpContextAccessor)
+        public DigestMessageInspector(IHttpContextAccessor httpContextAccessor, IUserRepository userRepository)
         {
             HttpContextAccessor = httpContextAccessor;
+            UserRepository = userRepository;
         }
 
         public object AfterReceiveRequest(ref Message request, IClientChannel channel, InstanceContext instanceContext)
@@ -89,21 +92,42 @@ namespace SharpOnvifServer.Security
                                 }
                                 // Workaround: The XmlWriter always adds a space before the ending tag, remove it
                                 content = content.Replace("\" />", "\"/>");
+
+                                Debug.WriteLine("-----------------------------------");
+                                Debug.WriteLine(content);
+                                Debug.WriteLine("-----------------------------------");
+
                                 body = Encoding.UTF8.GetBytes(content);
                             }
                         }
                     }
                 }
+                
+                // TODO: move to an extension method
+                UserInfo user;
+                if (!string.IsNullOrEmpty(webToken.UserHash) && webToken.UserHash.ToUpperInvariant() == "TRUE")
+                {
+                    user = UserRepository.GetUserByHash(webToken.Algorithm, webToken.UserName, webToken.Realm);
+                }
+                else
+                {
+                    user = UserRepository.GetUser(webToken.UserName);
+                }
 
                 string authenticationInfo =
                     DigestAuthentication.CreateAuthenticationInfoRFC7616(
                         webToken.Algorithm,
-                        webToken.Uri,
-                        webToken.Qop,
-                        webToken.CNonce,
-                        DigestAuthentication.ConvertNCToInt(webToken.Nc),
-                        null,
-                        body);
+                        user.UserName, 
+                        webToken.Realm,
+                        user.Password,
+                        user.IsPasswordAlreadyHashed,
+                        webToken.Nonce, 
+                        webToken.Uri, 
+                        DigestAuthentication.ConvertNCToInt(webToken.Nc), 
+                        webToken.CNonce, 
+                        webToken.Qop, 
+                        body,
+                        null);
                 HttpContextAccessor.HttpContext.Response.Headers.Append("Authentication-Info", authenticationInfo);
             }
         }

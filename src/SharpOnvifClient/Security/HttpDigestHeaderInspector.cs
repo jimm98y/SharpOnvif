@@ -5,6 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Reflection;
+using System.Security.Authentication;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Dispatcher;
@@ -13,6 +15,18 @@ using System.Xml;
 
 public class HttpDigestHeaderInspector : IClientMessageInspector
 {
+    private class HttpDigestCorrelation
+    {
+        public string Authorization { get; set; }
+        public string Uri { get; }
+
+        public HttpDigestCorrelation(string authorization, string uri)
+        {
+            Authorization = authorization;
+            Uri = uri;
+        }
+    }
+
     private NetworkCredential _credentials;
     private readonly string[] _supportedHashAlgorithms;
     private static readonly HttpClient _httpClient = new HttpClient();
@@ -24,7 +38,123 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
     }
 
     public void AfterReceiveReply(ref Message reply, object correlationState)
-    {  }
+    {
+        HttpDigestCorrelation corellation = (HttpDigestCorrelation)correlationState;
+        if(corellation == null)
+        {
+            // no auth
+            return;
+        }
+
+        if (reply.Properties.TryGetValue(HttpResponseMessageProperty.Name, out var httpResponseMessageObject))
+        {
+            HttpResponseMessageProperty httpResponseMessage = httpResponseMessageObject as HttpResponseMessageProperty;
+            var authenticationInfoHeaders = httpResponseMessage.Headers.GetValues("Authentication-Info");
+            if (authenticationInfoHeaders != null && authenticationInfoHeaders.Length == 1)
+            {
+                string receivedAuthenticationInfo = authenticationInfoHeaders.Single();
+
+                // validate
+                string nextnonce;
+                string qop;
+                string rspauth;
+                string cnonce;
+                string nc;
+
+                nextnonce = DigestAuthentication.GetValueFromHeader(receivedAuthenticationInfo, "nextnonce", true);
+                qop = DigestAuthentication.GetValueFromHeader(receivedAuthenticationInfo, "qop", false);
+                rspauth = DigestAuthentication.GetValueFromHeader(receivedAuthenticationInfo, "rspauth", true);
+                cnonce = DigestAuthentication.GetValueFromHeader(receivedAuthenticationInfo, "cnonce", true);
+                nc = DigestAuthentication.GetValueFromHeader(receivedAuthenticationInfo, "nc", false);
+
+                string algorithm = DigestAuthentication.GetValueFromHeader(corellation.Authorization, "algorithm", false) ?? "";
+                string authorizationNonce = DigestAuthentication.GetValueFromHeader(corellation.Authorization, "nonce", true);
+                string authorizationCnonce = DigestAuthentication.GetValueFromHeader(corellation.Authorization, "cnonce", true);
+                string authorizationNc = DigestAuthentication.GetValueFromHeader(corellation.Authorization, "nc", false);
+                string authorizationRealm = DigestAuthentication.GetValueFromHeader(corellation.Authorization, "realm", true);
+                string authorizationQop = DigestAuthentication.GetValueFromHeader(corellation.Authorization, "qop", false);
+
+                if(!string.IsNullOrEmpty(nextnonce))
+                {
+                    Debug.WriteLine($"Nextnonce received: {nextnonce}, but it's currently not supported.");
+                }
+
+                if (string.IsNullOrEmpty(qop))
+                {
+                    throw new AuthenticationException("qop is missing in the Authentication-Info response header!");
+                }
+
+                if (string.IsNullOrEmpty(cnonce))
+                {
+                    throw new AuthenticationException("cnonce is missing in the Authentication-Info response header!");
+                }
+
+                if (string.IsNullOrEmpty(nc))
+                {
+                    throw new AuthenticationException("nc is missing in the Authentication-Info response header!");
+                }
+
+                if (string.IsNullOrEmpty(rspauth))
+                {
+                    throw new AuthenticationException("rspauth is missing in the Authentication-Info response header!");
+                }
+
+                if(string.Compare(authorizationCnonce, cnonce) != 0)
+                {
+                    throw new AuthenticationException("cnonce mismatch!");
+                }
+
+                if (string.Compare(authorizationNc, nc) != 0)
+                {
+                    throw new AuthenticationException("nc mismatch!");
+                }
+
+                if(qop.Contains("\""))
+                {
+                    // some implementations incorrectly put qop in quotes
+                    qop = qop.Replace("\"", "");    
+                }
+
+                if(string.Compare("auth", qop) != 0 && string.Compare("auth-int", qop) != 0)
+                {
+                    throw new AuthenticationException("qop invalid!");
+                }
+
+                if(string.Compare(qop, authorizationQop) != 0)
+                {
+                    throw new AuthenticationException("qop mismatch!");
+                }
+
+                byte[] body = null;
+                if (string.Compare("auth-int", qop, true) == 0)
+                {
+                    // Workaround: private reflection is unfortunate, look for better solution
+                    object messageData = reply.GetType().GetProperty("MessageData", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(reply, null);
+                    var buffer = (ArraySegment<byte>)messageData.GetType().GetProperty("Buffer").GetValue(messageData, null);
+                    body = buffer.Array.Skip(buffer.Offset).Take(buffer.Count).ToArray();
+                }
+
+                string calculatedRspauth = DigestAuthentication.CreateWebDigestRFC7616(
+                    algorithm,
+                    _credentials.UserName,
+                    authorizationRealm,
+                    _credentials.Password,
+                    false,
+                    authorizationNonce,
+                    "",
+                    corellation.Uri,
+                    DigestAuthentication.ConvertNCToInt(authorizationNc),
+                    authorizationCnonce,
+                    authorizationQop,
+                    body);
+
+                if(string.Compare(calculatedRspauth, rspauth) != 0)
+                {
+                    throw new AuthenticationException("rspauth validation failed!");
+                }
+            }
+        }
+    }
 
     public object BeforeSendRequest(ref Message request, IClientChannel channel)
     {
@@ -272,7 +402,8 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
             httpRequestMessage.Headers["Authorization"] = authorization;
             request.Properties[HttpRequestMessageProperty.Name] = httpRequestMessage;
 
-            return cnonce;
+            // return the content of the authorization header so that we can use it to verify the Authentication-Info response
+            return new HttpDigestCorrelation(authorization, channel.RemoteAddress.Uri.PathAndQuery);
         }
 
         return null;

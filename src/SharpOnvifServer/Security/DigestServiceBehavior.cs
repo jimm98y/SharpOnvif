@@ -11,10 +11,12 @@ namespace SharpOnvifServer
     public class DigestServiceBehavior : IServiceBehavior
     {
         private IHttpContextAccessor HttpContextAccessor { get; }
+        private IUserRepository UserRepository { get; }
 
-        public DigestServiceBehavior(IHttpContextAccessor httpContextAccessor)
+        public DigestServiceBehavior(IHttpContextAccessor httpContextAccessor, IUserRepository userRepository)
         {
             HttpContextAccessor = httpContextAccessor;
+            UserRepository = userRepository;
         }
 
         public void AddBindingParameters(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase, Collection<ServiceEndpoint> endpoints, BindingParameterCollection bindingParameters)
@@ -29,7 +31,7 @@ namespace SharpOnvifServer
                 {
                     if (!endpointDispatcher.IsSystemEndpoint)
                     {
-                        endpointDispatcher.DispatchRuntime.MessageInspectors.Add(new DigestMessageInspector(HttpContextAccessor));
+                        endpointDispatcher.DispatchRuntime.MessageInspectors.Add(new DigestMessageInspector(HttpContextAccessor, UserRepository));
                     }
                 }
             }
