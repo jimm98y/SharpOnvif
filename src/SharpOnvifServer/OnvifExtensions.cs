@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using CoreWCF.Description;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,9 +26,10 @@ namespace SharpOnvifServer
             const string SCHEME_DIGEST = "Digest";
 
             // all endpoints must have [DisableMustUnderstandValidation] for this to work
-            services
-                .AddAuthentication(SCHEME_DIGEST)
-                .AddScheme<DigestAuthenticationSchemeOptions, DigestAuthenticationHandler>(SCHEME_DIGEST, options);
+            services.AddHttpContextAccessor()
+                    .AddSingleton<IServiceBehavior, DigestServiceBehavior>()
+                    .AddAuthentication(SCHEME_DIGEST)
+                    .AddScheme<DigestAuthenticationSchemeOptions, DigestAuthenticationHandler>(SCHEME_DIGEST, options);
 
             // CoreWCF cannot have a contract with some endpoints anonymous and some requiring the authentication
             services.AddAuthorization(); // this means we require Digest on all endpoints => Unauthenticated users will have to default to "Anonymous" user account

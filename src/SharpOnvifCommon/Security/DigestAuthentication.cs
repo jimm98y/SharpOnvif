@@ -246,7 +246,15 @@ namespace SharpOnvifCommon.Security
         {
             using (var hash = GetHashAlgorithm(algorithm))
             {
-                string HA1 = ToHex(Hash(algorithm, hash, EncodingGetBytes($"{userName}:{realm}:{password}")));
+                string HA1;
+                if (!isPasswordAlreadyHashed)
+                {
+                    HA1 = CreatePreHashedPassword(algorithm, userName, realm, password);
+                }
+                else
+                {
+                    HA1 = password;
+                }
                 string HA2 = ToHex(Hash(algorithm, hash, EncodingGetBytes($"{method}:{uri}")));
                 return ToHex(Hash(algorithm, hash, EncodingGetBytes($"{HA1}:{nonce}:{HA2}")));
             }
@@ -294,40 +302,10 @@ namespace SharpOnvifCommon.Security
 
                     HA1 = ToHex(Hash(algorithm, hash, EncodingGetBytes($"{HA1}:{noncePrime}:{cnoncePrime}")));
                 }
-                    
-                string HA2;
 
-                if(string.IsNullOrEmpty(qop) || string.Compare(qop, "auth", true) == 0)
-                {
-                    HA2 = ToHex(Hash(algorithm, hash, EncodingGetBytes($"{method}:{uri}")));
-                }
-                else if (string.Compare(qop, "auth-int", true) == 0)
-                {
-                    if (entityBody == null)
-                    {
-                        throw new ArgumentNullException(nameof(entityBody));
-                    }
+                string HA2 = CalculateHA2(algorithm, method, uri, qop, entityBody);
 
-                    string entityBodyHash = ToHex(Hash(algorithm, hash, entityBody));
-                    HA2 = ToHex(Hash(algorithm, hash, EncodingGetBytes($"{method}:{uri}:{entityBodyHash}")));
-                }
-                else
-                {
-                    throw new NotSupportedException(nameof(qop));
-                }
-                                
                 return ToHex(Hash(algorithm, hash, EncodingGetBytes($"{HA1}:{nonce}:{ConvertIntToNC(nc)}:{cnonce}:{qop}:{HA2}")));
-            }
-        }
-
-        public static string CreatePreHashedPassword(string algorithm, string userName, string realm, string password)
-        {
-            // This can be used for storing HA1 in the database instead of the plaintext password.
-            // Because this can still be used for authentication, the benefits in case of digest authentication
-            //  are limited.
-            using (var hash = GetHashAlgorithm(algorithm))
-            {
-                return ToHex(Hash(algorithm, hash, EncodingGetBytes($"{userName}:{realm}:{password}")));
             }
         }
 
@@ -486,12 +464,65 @@ namespace SharpOnvifCommon.Security
             return $"Digest {responseUserName}, realm=\"{realm}\", uri=\"{uri}\"{responseAlgorithm}, nonce=\"{nonce}\", qop={qop}, nc={ConvertIntToNC(nc)}, cnonce=\"{cnonce}\", response=\"{response}\"{responseOpaque}{responseUserhash}";
         }
 
+        public static string CreateAuthenticationInfoRFC2617(string algorithm, string uri, string qop, string cnonce, int nc, string nextNonce = null, byte[] entityBody = null)
+        {
+            string optionalNextnonce = string.IsNullOrEmpty(nextNonce) ? "" : $", nextnonce=\"{nextNonce}\"";
+            string responseAuth = CalculateHA2(algorithm, "", uri, qop, entityBody);
+            // For historical reasons, a sender MUST NOT generate the quoted string syntax for the following parameters: qop and nc.
+            return $"qop={qop}{optionalNextnonce}, rspauth=\"{responseAuth}\", cnonce=\"{cnonce}\", nc={ConvertIntToNC(nc)}";
+        }
+
+        public static string CreateAuthenticationInfoRFC7616(string algorithm, string uri, string qop, string cnonce, int nc, string nextNonce = null, byte[] entityBody = null)
+        {
+            return CreateAuthenticationInfoRFC2617(algorithm, uri, qop, cnonce, nc, nextNonce, entityBody);
+        }
+
         public static string CreateUserNameHashRFC7616(string algorithm, string userName, string realm)
         {
             using (var hash = GetHashAlgorithm(algorithm))
             {
                 // username = H( unq(username) ":" unq(realm) )
                 return ToHex(Hash(algorithm, hash, EncodingGetBytes($"{userName}:{realm}")));
+            }
+        }
+
+        private static string CalculateHA2(string algorithm, string method, string uri, string qop, byte[] entityBody)
+        {
+            using (var hash = GetHashAlgorithm(algorithm))
+            {
+                string HA2;
+
+                if (string.IsNullOrEmpty(qop) || string.Compare(qop, "auth", true) == 0)
+                {
+                    HA2 = ToHex(Hash(algorithm, hash, EncodingGetBytes($"{method}:{uri}")));
+                }
+                else if (string.Compare(qop, "auth-int", true) == 0)
+                {
+                    if (entityBody == null)
+                    {
+                        throw new ArgumentNullException(nameof(entityBody));
+                    }
+
+                    string entityBodyHash = ToHex(Hash(algorithm, hash, entityBody));
+                    HA2 = ToHex(Hash(algorithm, hash, EncodingGetBytes($"{method}:{uri}:{entityBodyHash}")));
+                }
+                else
+                {
+                    throw new NotSupportedException(nameof(qop));
+                }
+
+                return HA2;
+            }
+        }
+
+        public static string CreatePreHashedPassword(string algorithm, string userName, string realm, string password)
+        {
+            // This can be used for storing HA1 in the database instead of the plaintext password.
+            // Because this can still be used for authentication, the benefits in case of digest authentication
+            //  are limited.
+            using (var hash = GetHashAlgorithm(algorithm))
+            {
+                return ToHex(Hash(algorithm, hash, EncodingGetBytes($"{userName}:{realm}:{password}")));
             }
         }
 

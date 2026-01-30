@@ -43,7 +43,7 @@ namespace SharpOnvifServer
             public string Created { get; set; }
         }
 
-        private class WebDigestAuth
+        public class WebDigestAuth
         {
             public WebDigestAuth(
                 string algorithm,
@@ -99,8 +99,8 @@ namespace SharpOnvifServer
         protected async override Task<AuthenticateResult> HandleAuthenticateAsync()
         {
             // according to the Onvif specification, we must first authenticate the Digest if it's present
-            WebDigestAuth webToken = await GetSecurityHeaderFromHeaders(Request);
-            if (webToken != null)
+            WebDigestAuth webToken = GetSecurityHeaderFromHeaders(Request);
+            if (webToken != null && webToken.Realm == OptionsMonitor.CurrentValue.Realm)
             {
                 try
                 {
@@ -137,7 +137,7 @@ namespace SharpOnvifServer
                             {
                                 return AuthenticateResult.Fail($"HTTP Digest authentication succeeded, but WsUsernameToken authentication has failed: {ex.Message}");
                             }
-                        }
+                        }                       
 
                         var identity = new GenericIdentity(webToken.UserName);
                         var claimsPrincipal = new ClaimsPrincipal(identity);
@@ -294,7 +294,7 @@ namespace SharpOnvifServer
             return false;
         }
 
-        private Task<WebDigestAuth> GetSecurityHeaderFromHeaders(HttpRequest request)
+        internal static WebDigestAuth GetSecurityHeaderFromHeaders(HttpRequest request)
         {
             if(request.Headers.Authorization.Count > 0)
             {
@@ -302,50 +302,47 @@ namespace SharpOnvifServer
                 if(auth.StartsWith("Digest ", StringComparison.OrdinalIgnoreCase))
                 {
                     string realm = DigestAuthentication.GetValueFromHeader(auth, "realm", true);
-                    if (realm == OptionsMonitor.CurrentValue.Realm)
+                    string algorithm = DigestAuthentication.GetValueFromHeader(auth, "algorithm", true) ?? "";
+                    string userName = DigestAuthentication.GetValueFromHeader(auth, "username", true);
+
+                    // read username*
+                    if (string.IsNullOrEmpty(userName))
                     {
-                        string algorithm = DigestAuthentication.GetValueFromHeader(auth, "algorithm", true) ?? "";
-                        string userName = DigestAuthentication.GetValueFromHeader(auth, "username", true);
-
-                        // read username*
-                        if (string.IsNullOrEmpty(userName))
+                        userName = DigestAuthentication.GetValueFromHeader(auth, "username\\*", false); // username*
+                        if(!string.IsNullOrEmpty(userName) && userName.StartsWith("UTF-8''"))
                         {
-                            userName = DigestAuthentication.GetValueFromHeader(auth, "username\\*", false); // username*
-                            if(!string.IsNullOrEmpty(userName) && userName.StartsWith("UTF-8''"))
-                            {
-                                userName = Uri.UnescapeDataString(userName.Substring("UTF-8''".Length));
-                            }
+                            userName = Uri.UnescapeDataString(userName.Substring("UTF-8''".Length));
                         }
-
-                        string response = DigestAuthentication.GetValueFromHeader(auth, "response", true);
-                        string nonce = DigestAuthentication.GetValueFromHeader(auth, "nonce", true);
-                        string uri = DigestAuthentication.GetValueFromHeader(auth, "uri", true);
-
-                        // some implementations put quotes around qop (ODM)
-                        string qop = DigestAuthentication.GetValueFromHeader(auth, "qop", false);
-                        if(!string.IsNullOrEmpty(qop) && qop.Contains("\""))
-                        {
-                            // Note that this is against RFC 7616 that says: For historical reasons, a sender MUST NOT
-                            //  generate the quoted string syntax for the following parameters: qop and nc
-                            qop = qop.Replace("\"", "");
-                        }
-
-                        string cnonce = DigestAuthentication.GetValueFromHeader(auth, "cnonce", true);
-                        string nc = DigestAuthentication.GetValueFromHeader(auth, "nc", false);
-                        if (!string.IsNullOrEmpty(nc) && nc.Contains("\""))
-                        {
-                            // Note that this is against RFC 7616 that says: For historical reasons, a sender MUST NOT
-                            //  generate the quoted string syntax for the following parameters: qop and nc
-                            nc = nc.Replace("\"", "");
-                        }
-
-                        string userHash = DigestAuthentication.GetValueFromHeader(auth, "userhash", false);
-
-                        return Task.FromResult(new WebDigestAuth(algorithm, userName, realm, nonce, uri, response, qop, cnonce, nc, userHash));
                     }
+
+                    string response = DigestAuthentication.GetValueFromHeader(auth, "response", true);
+                    string nonce = DigestAuthentication.GetValueFromHeader(auth, "nonce", true);
+                    string uri = DigestAuthentication.GetValueFromHeader(auth, "uri", true);
+
+                    // some implementations put quotes around qop (ODM)
+                    string qop = DigestAuthentication.GetValueFromHeader(auth, "qop", false);
+                    if(!string.IsNullOrEmpty(qop) && qop.Contains("\""))
+                    {
+                        // Note that this is against RFC 7616 that says: For historical reasons, a sender MUST NOT
+                        //  generate the quoted string syntax for the following parameters: qop and nc
+                        qop = qop.Replace("\"", "");
+                    }
+
+                    string cnonce = DigestAuthentication.GetValueFromHeader(auth, "cnonce", true);
+                    string nc = DigestAuthentication.GetValueFromHeader(auth, "nc", false);
+                    if (!string.IsNullOrEmpty(nc) && nc.Contains("\""))
+                    {
+                        // Note that this is against RFC 7616 that says: For historical reasons, a sender MUST NOT
+                        //  generate the quoted string syntax for the following parameters: qop and nc
+                        nc = nc.Replace("\"", "");
+                    }
+
+                    string userHash = DigestAuthentication.GetValueFromHeader(auth, "userhash", false);
+
+                    return new WebDigestAuth(algorithm, userName, realm, nonce, uri, response, qop, cnonce, nc, userHash);
                 }
             }
-            return Task.FromResult((WebDigestAuth)null);
+            return null;
         }
 
         protected override async Task HandleChallengeAsync(AuthenticationProperties properties)
