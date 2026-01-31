@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Net;
 using System.ServiceModel;
 
-namespace SharpOnvifClient
+namespace SharpOnvifClient.Security
 {
     [Flags]
     public enum OnvifAuthentication
@@ -17,6 +17,16 @@ namespace SharpOnvifClient
     {
         public static void SetOnvifAuthentication<TChannel>(
             this ClientBase<TChannel> channel,
+            OnvifAuthentication authentication,
+            NetworkCredential credentials,
+            System.ServiceModel.Description.IEndpointBehavior digestAuth,
+            System.ServiceModel.Description.IEndpointBehavior legacyAuth) where TChannel : class
+        {
+            SetOnvifAuthentication(channel as TChannel, authentication, credentials, digestAuth, legacyAuth);
+        }
+
+        public static void SetOnvifAuthentication<TChannel>(
+            TChannel wcfChannel,
             OnvifAuthentication authentication, 
             NetworkCredential credentials, 
             System.ServiceModel.Description.IEndpointBehavior digestAuth,
@@ -28,7 +38,10 @@ namespace SharpOnvifClient
                 return;
             }
 
-            // we need HttpDigest last in the behavior pipeline so that it has the final request to calculate the hash
+            var channel = wcfChannel as ClientBase<TChannel>;
+            if (channel == null)
+                throw new ArgumentException($"{wcfChannel} is not WCF {nameof(ClientBase<TChannel>)}");
+
             if (authentication.HasFlag(OnvifAuthentication.WsUsernameToken))
             {
                 if (legacyAuth == null)
@@ -41,6 +54,7 @@ namespace SharpOnvifClient
                 }
             }
 
+            // we need HttpDigest last in the behavior pipeline so that it has the final request to calculate the hash
             if (authentication.HasFlag(OnvifAuthentication.HttpDigest))
             {
                 if (digestAuth == null)

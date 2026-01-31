@@ -1,5 +1,6 @@
 ﻿using SharpOnvifClient;
 using SharpOnvifClient.Events;
+using SharpOnvifClient.Security;
 using SharpOnvifCommon;
 using System;
 using System.Collections.Generic;
