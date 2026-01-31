@@ -1,4 +1,5 @@
-﻿using SharpOnvifCommon.Security;
+﻿using SharpOnvifClient.Security;
+using SharpOnvifCommon.Security;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -11,6 +12,7 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Dispatcher;
 using System.Text;
+using System.Threading;
 using System.Xml;
 
 public class HttpDigestHeaderInspector : IClientMessageInspector
@@ -30,13 +32,15 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
     private NetworkCredential _credentials;
     private readonly string[] _supportedHashAlgorithms;
     private readonly string[] _supportedQop;
+    private readonly HttpDigestState _state;
     private static readonly HttpClient _httpClient = new HttpClient();
 
-    public HttpDigestHeaderInspector(NetworkCredential credentials, string[] supportedHashAlgorithms, string[] supportedQop)
+    public HttpDigestHeaderInspector(NetworkCredential credentials, string[] supportedHashAlgorithms, string[] supportedQop, HttpDigestState state)
     {
         this._credentials = credentials ?? throw new ArgumentNullException(nameof(credentials));
         this._supportedHashAlgorithms = supportedHashAlgorithms ?? throw new ArgumentNullException(nameof(supportedHashAlgorithms)); 
-        this._supportedQop = supportedQop ?? throw new ArgumentNullException(nameof(supportedQop)); 
+        this._supportedQop = supportedQop ?? throw new ArgumentNullException(nameof(supportedQop));
+        this._state = state;
     }
 
     public void AfterReceiveReply(ref Message reply, object correlationState)
@@ -175,65 +179,44 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
         bool userhash = false;
         bool isSupported = false;
 
-        // pre-flight request to get the www-auth header from the server
-        using (var req = new HttpRequestMessage(HttpMethod.Head, channel.RemoteAddress.Uri))
+        var headers = _state.Headers?.ToArray();
+
+        if (headers != null)
         {
-            HttpResponseMessage resp = null;
+            foreach (var header in headers)
+            {
+                string receivedWwwAuth = header.ToString();
+                nonce = HttpDigestAuthentication.GetValueFromHeader(receivedWwwAuth, "nonce", true);
+                realm = HttpDigestAuthentication.GetValueFromHeader(receivedWwwAuth, "realm", true);
+                opaque = HttpDigestAuthentication.GetValueFromHeader(receivedWwwAuth, "opaque", true);
+                algorithm = HttpDigestAuthentication.GetValueFromHeader(receivedWwwAuth, "algorithm", false) ?? "";
+                stale = (HttpDigestAuthentication.GetValueFromHeader(receivedWwwAuth, "stale", false) ?? "").ToUpperInvariant() == "TRUE";
+                userhash = (HttpDigestAuthentication.GetValueFromHeader(receivedWwwAuth, "userhash", false) ?? "").ToUpperInvariant() == "TRUE";
+                qop = HttpDigestAuthentication.GetValueFromHeader(receivedWwwAuth, "qop", true);
 
-            try
-            {
-#if NET5_0_OR_GREATER
-                resp = _httpClient.Send(req, HttpCompletionOption.ResponseHeadersRead);
-#else
-                resp = _httpClient.SendAsync(req, HttpCompletionOption.ResponseHeadersRead).Result;
-#endif
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-                return null;
-            }
-
-            using (resp)
-            {
-                if (resp.StatusCode == HttpStatusCode.Unauthorized && resp.Headers.WwwAuthenticate != null)
+                if(string.IsNullOrEmpty(qop))
                 {
-                    foreach (var header in resp.Headers.WwwAuthenticate)
+                    // RFC 2069 is not allowed by the Onvif Core specification
+                    continue;
+                }
+
+                if (!string.IsNullOrEmpty(nonce))
+                {
+                    if(string.IsNullOrEmpty(algorithm))
                     {
-                        string receivedWwwAuth = header.ToString();
-                        nonce = HttpDigestAuthentication.GetValueFromHeader(receivedWwwAuth, "nonce", true);
-                        realm = HttpDigestAuthentication.GetValueFromHeader(receivedWwwAuth, "realm", true);
-                        opaque = HttpDigestAuthentication.GetValueFromHeader(receivedWwwAuth, "opaque", true);
-                        algorithm = HttpDigestAuthentication.GetValueFromHeader(receivedWwwAuth, "algorithm", false) ?? "";
-                        stale = (HttpDigestAuthentication.GetValueFromHeader(receivedWwwAuth, "stale", false) ?? "").ToUpperInvariant() == "TRUE";
-                        userhash = (HttpDigestAuthentication.GetValueFromHeader(receivedWwwAuth, "userhash", false) ?? "").ToUpperInvariant() == "TRUE";
-                        qop = HttpDigestAuthentication.GetValueFromHeader(receivedWwwAuth, "qop", true);
-
-                        if(string.IsNullOrEmpty(qop))
+                        if(_supportedHashAlgorithms.Contains("") || _supportedHashAlgorithms.Contains("MD5"))
                         {
-                            // RFC 2069 is not allowed by the Onvif Core specification
-                            continue;
+                            isSupported = true;
+                            break;
                         }
-
-                        if (!string.IsNullOrEmpty(nonce))
+                    }
+                    else
+                    {
+                        if (_supportedHashAlgorithms.Contains(algorithm))
                         {
-                            if(string.IsNullOrEmpty(algorithm))
-                            {
-                                if(_supportedHashAlgorithms.Contains("") || _supportedHashAlgorithms.Contains("MD5"))
-                                {
-                                    isSupported = true;
-                                    break;
-                                }
-                            }
-                            else
-                            {
-                                if (_supportedHashAlgorithms.Contains(algorithm))
-                                {
-                                    // select the first supported header
-                                    isSupported = true;
-                                    break;
-                                }
-                            }
+                            // select the first supported header
+                            isSupported = true;
+                            break;
                         }
                     }
                 }
@@ -273,6 +256,7 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
             }
             else
             {
+                int nextNc = _state.GetAndUpdateNC();
                 string cnonce = HttpDigestAuthentication.GenerateClientNonce(BinarySerializationType.Hex);
                 string selectedQop = null;
                 string[] serverSupportedQop = qop.Split(',');
@@ -288,7 +272,6 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
                     }
                 }
 
-                int nc = 1;
                 byte[] body = null;
 
                 if (string.Compare("auth-int", selectedQop, true) == 0)
@@ -305,7 +288,7 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
                     nonce,
                     method,
                     uri,
-                    nc,
+                    nextNc,
                     cnonce,
                     selectedQop,
                     body
@@ -330,7 +313,7 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
                     opaque,
                     algorithm,
                     selectedQop,
-                    nc,
+                    nextNc,
                     cnonce,
                     userhash);
             }            

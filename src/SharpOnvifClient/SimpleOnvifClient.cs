@@ -31,7 +31,6 @@ namespace SharpOnvifClient
         private readonly System.Net.NetworkCredential _credentials;
         private readonly OnvifAuthentication _authentication;
         private readonly IEndpointBehavior _legacyAuth;
-        private readonly IEndpointBehavior _digestAuth;
         private readonly IEndpointBehavior _disableExpect100ContinueBehavior;
         private readonly string[] _supportedHashAlgorithms;
         private readonly string[] _supportedQop;
@@ -96,11 +95,6 @@ namespace SharpOnvifClient
                 {
                     _legacyAuth = new WsUsernameTokenBehavior(_credentials);
                 }
-
-                if (authentication.HasFlag(OnvifAuthentication.HttpDigest))
-                {
-                    _digestAuth = new HttpDigestBehavior(_credentials, _supportedHashAlgorithms, _supportedQop);
-                }                
             }
 
             if (disableExpect100Continue)
@@ -136,10 +130,19 @@ namespace SharpOnvifClient
                 else
                 {
                     var client = creator(uri);
-                    OnvifAuthenticationExtensions.SetOnvifAuthentication(client, _authentication, _credentials, _digestAuth, _legacyAuth);
                     DisableExpect100ContinueBehaviorExtensions.SetDisableExpect100Continue(client, _disableExpect100ContinueBehavior);
-                    
-                    var proxy = HttpDigestProxy<TChannel>.CreateProxy(client);
+
+                    // we use the state to let both HttpDigestProxy and HttpDigestBehavior communicate
+                    var state = new HttpDigestState();
+                    var proxy = HttpDigestProxy<TChannel>.CreateProxy(client, state);
+
+                    IEndpointBehavior digestAuth = null;
+                    if (_authentication.HasFlag(OnvifAuthentication.HttpDigest))
+                    {
+                        digestAuth = new HttpDigestBehavior(_credentials, _supportedHashAlgorithms, _supportedQop, state);
+                    }
+                    OnvifAuthenticationExtensions.SetOnvifAuthentication(client, _authentication, _credentials, digestAuth, _legacyAuth);
+
                     _clients.Add(key, proxy);
                     return proxy;
                 }

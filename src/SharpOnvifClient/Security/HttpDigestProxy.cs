@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace SharpOnvifClient.Security
@@ -7,6 +11,7 @@ namespace SharpOnvifClient.Security
     public class HttpDigestProxy<T> : DispatchProxy where T : class
     {
         public T Target { get; private set; }
+        public HttpDigestState State { get; private set; }
 
         protected override object Invoke(MethodInfo targetMethod, object[] args)
         {
@@ -25,6 +30,8 @@ namespace SharpOnvifClient.Security
                     }
                     catch(System.ServiceModel.Security.MessageSecurityException ex)
                     {
+                        State.SetResponse(ParseMessageSecurityException(ex.Message));
+
                         resultTask = targetMethod.Invoke(Target, args) as Task;
                         await resultTask.ConfigureAwait(false);
                     }
@@ -43,6 +50,8 @@ namespace SharpOnvifClient.Security
                     }
                     catch (System.ServiceModel.Security.MessageSecurityException ex)
                     {
+                        State.SetResponse(ParseMessageSecurityException(ex.Message));
+
                         resultTask = targetMethod.Invoke(Target, args) as Task;
                         await resultTask.ConfigureAwait(false);
                     }
@@ -63,10 +72,56 @@ namespace SharpOnvifClient.Security
                 }
                 catch (System.ServiceModel.Security.MessageSecurityException ex)
                 {
+                    State.SetResponse(ParseMessageSecurityException(ex.Message));
+
                     result = targetMethod.Invoke(Target, args);
                 }
                 return result;
             }            
+        }
+
+        private IEnumerable<string> ParseMessageSecurityException(string message)
+        {
+            // the message currently looks like:
+            /*            
+            The HTTP request is unauthorized with client authentication scheme 'Anonymous'. 
+            The authentication header received from the server was 
+            'Digest realm="IP Camera", qop="auth, auth-int", nonce="0000019c15330aa11b968762b51d15c40ba2f12eb2cb1ec02427a1d82440325adbff100bc3f35d74a401e5d533f271cd5e81101a", opaque="00000000", userhash=TRUE, stale="FALSE", Digest realm="IP Camera", qop="auth, auth-int", algorithm=SHA-256, nonce="0000019c15330aa11b968762b51d15c40ba2f12eb2cb1ec02427a1d82440325adbff100bc3f35d74a401e5d533f271cd5e81101a", opaque="00000000", userhash=TRUE, stale="FALSE", Digest realm="IP Camera", qop="auth, auth-int", algorithm=SHA-512-256, nonce="0000019c15330aa11b968762b51d15c40ba2f12eb2cb1ec02427a1d82440325adbff100bc3f35d74a401e5d533f271cd5e81101a", opaque="00000000", userhash=TRUE, stale="FALSE"'.
+            */
+            string[] parts = message.Split('\'');
+            string wwwAuthenticateHeadersConcatenated = parts.Single(x => x.StartsWith("Digest", StringComparison.InvariantCultureIgnoreCase));
+            string[] wwwAuthenticateHeaderParts = wwwAuthenticateHeadersConcatenated.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+
+            List<string> wwwAuthenticateHeaders = new List<string>();
+            StringBuilder stringBuilder = null;
+            for (int i = 0; i < wwwAuthenticateHeaderParts.Length; i++)
+            {
+                if(wwwAuthenticateHeaderParts[i].TrimStart().StartsWith("Digest"))
+                {
+                    if(stringBuilder != null)
+                    {
+                        wwwAuthenticateHeaders.Add(stringBuilder.ToString());
+                    }
+
+                    stringBuilder = new StringBuilder();
+                    stringBuilder.Append(wwwAuthenticateHeaderParts[i].TrimStart());
+                }
+                else if(stringBuilder != null)
+                {
+                    stringBuilder.Append(",");
+                    stringBuilder.Append(wwwAuthenticateHeaderParts[i]);
+                }
+                else
+                {
+                    Debug.WriteLine($"Error parsing MessageException text");
+                }
+            }
+            if(stringBuilder != null)
+            {
+                wwwAuthenticateHeaders.Add(stringBuilder.ToString());
+            }
+
+            return wwwAuthenticateHeaders;
         }
 
         public static async Task<TResult> Cast<TResult>(Task<object> task)
@@ -74,10 +129,11 @@ namespace SharpOnvifClient.Security
             return (TResult)await task.ConfigureAwait(false);
         }
 
-        public static T CreateProxy(T target)
+        public static T CreateProxy(T target, HttpDigestState state)
         {
             var proxy = Create<T, HttpDigestProxy<T>>() as HttpDigestProxy<T>;
             proxy.Target = target;
+            proxy.State = state;
             return proxy as T;
         }
     }
