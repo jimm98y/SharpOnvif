@@ -48,9 +48,6 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
             return;
         }
 
-        // Workaround to make sure no spaces are lost https://github.com/dotnet/wcf/issues/4771
-        reply = Message.CreateMessage(reply.Version, reply.Headers.Action, reply.GetReaderAtBodyContents());
-
         if (reply.Properties.TryGetValue(HttpResponseMessageProperty.Name, out var httpResponseMessageObject))
         {
             HttpResponseMessageProperty httpResponseMessage = httpResponseMessageObject as HttpResponseMessageProperty;
