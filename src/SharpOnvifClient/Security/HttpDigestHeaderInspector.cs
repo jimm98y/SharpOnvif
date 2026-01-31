@@ -56,18 +56,18 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
             {
                 string receivedAuthenticationInfo = authenticationInfoHeaders.Single();
 
-                string nextnonce = DigestAuthentication.GetValueFromHeader(receivedAuthenticationInfo, "nextnonce", true);
-                string qop = DigestAuthentication.GetValueFromHeader(receivedAuthenticationInfo, "qop", false);
-                string rspauth = DigestAuthentication.GetValueFromHeader(receivedAuthenticationInfo, "rspauth", true);
-                string cnonce = DigestAuthentication.GetValueFromHeader(receivedAuthenticationInfo, "cnonce", true);
-                string nc = DigestAuthentication.GetValueFromHeader(receivedAuthenticationInfo, "nc", false);
+                string nextnonce = HttpDigestAuthentication.GetValueFromHeader(receivedAuthenticationInfo, "nextnonce", true);
+                string qop = HttpDigestAuthentication.GetValueFromHeader(receivedAuthenticationInfo, "qop", false);
+                string rspauth = HttpDigestAuthentication.GetValueFromHeader(receivedAuthenticationInfo, "rspauth", true);
+                string cnonce = HttpDigestAuthentication.GetValueFromHeader(receivedAuthenticationInfo, "cnonce", true);
+                string nc = HttpDigestAuthentication.GetValueFromHeader(receivedAuthenticationInfo, "nc", false);
 
-                string algorithm = DigestAuthentication.GetValueFromHeader(correlation.Authorization, "algorithm", false) ?? "";
-                string authorizationNonce = DigestAuthentication.GetValueFromHeader(correlation.Authorization, "nonce", true);
-                string authorizationCnonce = DigestAuthentication.GetValueFromHeader(correlation.Authorization, "cnonce", true);
-                string authorizationNc = DigestAuthentication.GetValueFromHeader(correlation.Authorization, "nc", false);
-                string authorizationRealm = DigestAuthentication.GetValueFromHeader(correlation.Authorization, "realm", true);
-                string authorizationQop = DigestAuthentication.GetValueFromHeader(correlation.Authorization, "qop", false);
+                string algorithm = HttpDigestAuthentication.GetValueFromHeader(correlation.Authorization, "algorithm", false) ?? "";
+                string authorizationNonce = HttpDigestAuthentication.GetValueFromHeader(correlation.Authorization, "nonce", true);
+                string authorizationCnonce = HttpDigestAuthentication.GetValueFromHeader(correlation.Authorization, "cnonce", true);
+                string authorizationNc = HttpDigestAuthentication.GetValueFromHeader(correlation.Authorization, "nc", false);
+                string authorizationRealm = HttpDigestAuthentication.GetValueFromHeader(correlation.Authorization, "realm", true);
+                string authorizationQop = HttpDigestAuthentication.GetValueFromHeader(correlation.Authorization, "qop", false);
 
                 if(!string.IsNullOrEmpty(nextnonce))
                 {
@@ -130,7 +130,7 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
                     body = buffer.Array.Skip(buffer.Offset).Take(buffer.Count).ToArray();
                 }
 
-                string calculatedRspauth = DigestAuthentication.CreateWebDigestRFC7616(
+                string calculatedRspauth = HttpDigestAuthentication.CreateWebDigestRFC7616(
                     algorithm,
                     _credentials.UserName,
                     authorizationRealm,
@@ -139,7 +139,7 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
                     authorizationNonce,
                     "",
                     correlation.Uri,
-                    DigestAuthentication.ConvertNCToInt(authorizationNc),
+                    HttpDigestAuthentication.ConvertNCToInt(authorizationNc),
                     authorizationCnonce,
                     authorizationQop,
                     body);
@@ -201,13 +201,13 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
                     foreach (var header in resp.Headers.WwwAuthenticate)
                     {
                         string receivedWwwAuth = header.ToString();
-                        nonce = DigestAuthentication.GetValueFromHeader(receivedWwwAuth, "nonce", true);
-                        realm = DigestAuthentication.GetValueFromHeader(receivedWwwAuth, "realm", true);
-                        opaque = DigestAuthentication.GetValueFromHeader(receivedWwwAuth, "opaque", true);
-                        algorithm = DigestAuthentication.GetValueFromHeader(receivedWwwAuth, "algorithm", false) ?? "";
-                        stale = (DigestAuthentication.GetValueFromHeader(receivedWwwAuth, "stale", false) ?? "").ToUpperInvariant() == "TRUE";
-                        userhash = (DigestAuthentication.GetValueFromHeader(receivedWwwAuth, "userhash", false) ?? "").ToUpperInvariant() == "TRUE";
-                        qop = DigestAuthentication.GetValueFromHeader(receivedWwwAuth, "qop", true);
+                        nonce = HttpDigestAuthentication.GetValueFromHeader(receivedWwwAuth, "nonce", true);
+                        realm = HttpDigestAuthentication.GetValueFromHeader(receivedWwwAuth, "realm", true);
+                        opaque = HttpDigestAuthentication.GetValueFromHeader(receivedWwwAuth, "opaque", true);
+                        algorithm = HttpDigestAuthentication.GetValueFromHeader(receivedWwwAuth, "algorithm", false) ?? "";
+                        stale = (HttpDigestAuthentication.GetValueFromHeader(receivedWwwAuth, "stale", false) ?? "").ToUpperInvariant() == "TRUE";
+                        userhash = (HttpDigestAuthentication.GetValueFromHeader(receivedWwwAuth, "userhash", false) ?? "").ToUpperInvariant() == "TRUE";
+                        qop = HttpDigestAuthentication.GetValueFromHeader(receivedWwwAuth, "qop", true);
 
                         if(string.IsNullOrEmpty(qop))
                         {
@@ -273,7 +273,7 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
             }
             else
             {
-                string cnonce = DigestAuthentication.GenerateClientNonce(BinarySerializationType.Hex);
+                string cnonce = HttpDigestAuthentication.GenerateClientNonce(BinarySerializationType.Hex);
                 string selectedQop = null;
                 string[] serverSupportedQop = qop.Split(',');
                 foreach (string offeredQop in serverSupportedQop)
@@ -296,7 +296,7 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
                     body = ReadRequestBody(ref request);
                 }
 
-                response = DigestAuthentication.CreateWebDigestRFC7616(
+                response = HttpDigestAuthentication.CreateWebDigestRFC7616(
                     algorithm,
                     _credentials.UserName,
                     realm,
@@ -314,14 +314,14 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
                 string username;
                 if(userhash)
                 {
-                    username = DigestAuthentication.CreateUserNameHashRFC7616(algorithm, _credentials.UserName, realm);
+                    username = HttpDigestAuthentication.CreateUserNameHashRFC7616(algorithm, _credentials.UserName, realm);
                 }
                 else
                 {
                     username = _credentials.UserName;
                 }
 
-                authorization = DigestAuthentication.CreateAuthorizationRFC7616(
+                authorization = HttpDigestAuthentication.CreateAuthorizationRFC7616(
                     username,
                     realm,
                     nonce,

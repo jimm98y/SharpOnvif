@@ -10,7 +10,7 @@ namespace SharpOnvif.Tests
         [TestMethod]
         public void TestDigest(string algorithm, string userName, string password, string realm, string uri, string nonce, string method, string opaque, int nc, string cnonce, string qop, string expectedResponse)
         {
-            string digest = DigestAuthentication.CreateWebDigestRFC2617(algorithm, userName, realm, password, false, nonce, method, uri, nc, cnonce, qop);
+            string digest = HttpDigestAuthentication.CreateWebDigestRFC2617(algorithm, userName, realm, password, false, nonce, method, uri, nc, cnonce, qop);
             Assert.AreEqual(expectedResponse, digest);
         }
     }

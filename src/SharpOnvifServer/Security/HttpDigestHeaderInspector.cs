@@ -49,7 +49,7 @@ namespace SharpOnvifServer.Security
                 }
 
                 string authenticationInfo =
-                    DigestAuthentication.CreateAuthenticationInfoRFC7616(
+                    HttpDigestAuthentication.CreateAuthenticationInfoRFC7616(
                         webToken.Algorithm,
                         user.UserName, 
                         webToken.Realm,
@@ -57,7 +57,7 @@ namespace SharpOnvifServer.Security
                         user.IsPasswordAlreadyHashed,
                         webToken.Nonce, 
                         webToken.Uri, 
-                        DigestAuthentication.ConvertNCToInt(webToken.Nc), 
+                        HttpDigestAuthentication.ConvertNCToInt(webToken.Nc), 
                         webToken.CNonce, 
                         webToken.Qop, 
                         body,

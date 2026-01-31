@@ -14,7 +14,7 @@ namespace SharpOnvifCommon.Security
         Base64
     }
 
-    public static class DigestAuthentication
+    public static class HttpDigestAuthentication
     {
         public const int ERROR_NONCE_SUCCESS = 0;
         public const int ERROR_NONCE_EMPTY = -1;

@@ -262,7 +262,7 @@ namespace SharpOnvifServer
 
             if (user != null)
             {
-                if (DigestAuthentication.ValidateServerNonce(NONCE_HASH_ALGORITHM, BinarySerializationType.Hex, webToken.Nonce, DigestAuthentication.ConvertNCToInt(webToken.Nc), DateTimeOffset.UtcNow, null, NONCE_SALT_LENGTH) == 0)
+                if (HttpDigestAuthentication.ValidateServerNonce(NONCE_HASH_ALGORITHM, BinarySerializationType.Hex, webToken.Nonce, HttpDigestAuthentication.ConvertNCToInt(webToken.Nc), DateTimeOffset.UtcNow, null, NONCE_SALT_LENGTH) == 0)
                 {
                     string digest;
 
@@ -279,7 +279,7 @@ namespace SharpOnvifServer
                         webToken.Uri);
                     */
 
-                    digest = DigestAuthentication.CreateWebDigestRFC7616(
+                    digest = HttpDigestAuthentication.CreateWebDigestRFC7616(
                         webToken.Algorithm,
                         user.UserName,
                         realm,
@@ -288,7 +288,7 @@ namespace SharpOnvifServer
                         webToken.Nonce,
                         method,
                         webToken.Uri,
-                        DigestAuthentication.ConvertNCToInt(webToken.Nc),
+                        HttpDigestAuthentication.ConvertNCToInt(webToken.Nc),
                         webToken.CNonce,
                         webToken.Qop,
                         body);
@@ -310,26 +310,26 @@ namespace SharpOnvifServer
                 string auth = request.Headers.Authorization[0];
                 if(auth.StartsWith("Digest ", StringComparison.OrdinalIgnoreCase))
                 {
-                    string realm = DigestAuthentication.GetValueFromHeader(auth, "realm", true);
-                    string algorithm = DigestAuthentication.GetValueFromHeader(auth, "algorithm", false) ?? "";
-                    string userName = DigestAuthentication.GetValueFromHeader(auth, "username", true);
+                    string realm = HttpDigestAuthentication.GetValueFromHeader(auth, "realm", true);
+                    string algorithm = HttpDigestAuthentication.GetValueFromHeader(auth, "algorithm", false) ?? "";
+                    string userName = HttpDigestAuthentication.GetValueFromHeader(auth, "username", true);
 
                     // read username*
                     if (string.IsNullOrEmpty(userName))
                     {
-                        userName = DigestAuthentication.GetValueFromHeader(auth, "username\\*", false); // username*
+                        userName = HttpDigestAuthentication.GetValueFromHeader(auth, "username\\*", false); // username*
                         if(!string.IsNullOrEmpty(userName) && userName.StartsWith("UTF-8''"))
                         {
                             userName = Uri.UnescapeDataString(userName.Substring("UTF-8''".Length));
                         }
                     }
 
-                    string response = DigestAuthentication.GetValueFromHeader(auth, "response", true);
-                    string nonce = DigestAuthentication.GetValueFromHeader(auth, "nonce", true);
-                    string uri = DigestAuthentication.GetValueFromHeader(auth, "uri", true);
+                    string response = HttpDigestAuthentication.GetValueFromHeader(auth, "response", true);
+                    string nonce = HttpDigestAuthentication.GetValueFromHeader(auth, "nonce", true);
+                    string uri = HttpDigestAuthentication.GetValueFromHeader(auth, "uri", true);
 
                     // some implementations put quotes around qop (ODM)
-                    string qop = DigestAuthentication.GetValueFromHeader(auth, "qop", false);
+                    string qop = HttpDigestAuthentication.GetValueFromHeader(auth, "qop", false);
                     if(!string.IsNullOrEmpty(qop) && qop.Contains("\""))
                     {
                         // Note that this is against RFC 7616 that says: For historical reasons, a sender MUST NOT
@@ -337,8 +337,8 @@ namespace SharpOnvifServer
                         qop = qop.Replace("\"", "");
                     }
 
-                    string cnonce = DigestAuthentication.GetValueFromHeader(auth, "cnonce", true);
-                    string nc = DigestAuthentication.GetValueFromHeader(auth, "nc", false);
+                    string cnonce = HttpDigestAuthentication.GetValueFromHeader(auth, "cnonce", true);
+                    string nc = HttpDigestAuthentication.GetValueFromHeader(auth, "nc", false);
                     if (!string.IsNullOrEmpty(nc) && nc.Contains("\""))
                     {
                         // Note that this is against RFC 7616 that says: For historical reasons, a sender MUST NOT
@@ -346,7 +346,7 @@ namespace SharpOnvifServer
                         nc = nc.Replace("\"", "");
                     }
 
-                    string userHash = DigestAuthentication.GetValueFromHeader(auth, "userhash", false);
+                    string userHash = HttpDigestAuthentication.GetValueFromHeader(auth, "userhash", false);
 
                     return new WebDigestAuth(algorithm, userName, realm, nonce, uri, response, qop, cnonce, nc, userHash);
                 }
@@ -372,7 +372,7 @@ namespace SharpOnvifServer
                     OptionsMonitor.CurrentValue.Realm);
             */
 
-            byte[] salt = DigestAuthentication.CreateNonceSessionSalt(NONCE_SALT_LENGTH);
+            byte[] salt = HttpDigestAuthentication.CreateNonceSessionSalt(NONCE_SALT_LENGTH);
             var now = DateTimeOffset.UtcNow;
 
             var hashingAlgorithms = OptionsMonitor.CurrentValue.HashingAlgorithms == null ? new List<string>() { "MD5" } : OptionsMonitor.CurrentValue.HashingAlgorithms.ToList();
@@ -380,7 +380,7 @@ namespace SharpOnvifServer
             const string opaque = "00000000"; // we're not using opaque for anything, set it to all zeroes
             foreach (var algorithm in hashingAlgorithms)
             {
-                wwwAuth = DigestAuthentication.CreateWwwAuthenticateRFC7616(
+                wwwAuth = HttpDigestAuthentication.CreateWwwAuthenticateRFC7616(
                         NONCE_HASH_ALGORITHM,
                         BinarySerializationType.Hex,
                         now,
