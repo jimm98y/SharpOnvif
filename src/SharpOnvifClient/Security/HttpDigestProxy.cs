@@ -8,10 +8,19 @@ using System.Threading.Tasks;
 
 namespace SharpOnvifClient.Security
 {
+    /// <summary>
+    /// HttpDigestProxy intercepts calls into all methods of the proxied object.
+    /// In WCF, this is necessary to handle the <see cref="System.ServiceModel.Security.MessageSecurityException"/>
+    ///  and re-try the request. <see cref="System.ServiceModel.Dispatcher.IClientMessageInspector"/> is not
+    ///  going to be invoked after such exception is thrown.
+    /// To retrieve the WwwAuthenticate header, the proxy parses it from the <see cref="System.ServiceModel.Security.MessageSecurityException"/>
+    ///  message. 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class HttpDigestProxy<T> : DispatchProxy where T : class
     {
         public T Target { get; private set; }
-        public HttpDigestState State { get; private set; }
+        public IHttpMessageState State { get; private set; }
 
         protected override object Invoke(MethodInfo targetMethod, object[] args)
         {
@@ -132,11 +141,11 @@ namespace SharpOnvifClient.Security
             return (TResult)await task.ConfigureAwait(false);
         }
 
-        public static T CreateProxy(T target, HttpDigestState state)
+        public static T CreateProxy(T target, IHttpMessageState state)
         {
             var proxy = Create<T, HttpDigestProxy<T>>() as HttpDigestProxy<T>;
             proxy.Target = target;
-            proxy.State = state;
+            proxy.State = state; 
             return proxy as T;
         }
     }

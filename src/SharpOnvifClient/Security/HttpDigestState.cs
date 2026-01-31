@@ -4,7 +4,15 @@ using System.Linq;
 
 namespace SharpOnvifClient.Security
 {
-    public class HttpDigestState
+    public interface IHttpMessageState
+    {
+        int PeekNC();
+        int GetAndUpdateNC();
+        string[] GetHeaders();
+        void SetResponse(IEnumerable<string> headers);
+    }
+
+    public class HttpDigestState : IHttpMessageState
     {
         private readonly object _syncRoot = new object();
 

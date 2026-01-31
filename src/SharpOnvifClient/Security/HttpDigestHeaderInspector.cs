@@ -30,9 +30,9 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
     private NetworkCredential _credentials;
     private readonly string[] _supportedHashAlgorithms;
     private readonly string[] _supportedQop;
-    private readonly HttpDigestState _state;
+    private readonly IHttpMessageState _state;
 
-    public HttpDigestHeaderInspector(NetworkCredential credentials, string[] supportedHashAlgorithms, string[] supportedQop, HttpDigestState state)
+    public HttpDigestHeaderInspector(NetworkCredential credentials, string[] supportedHashAlgorithms, string[] supportedQop, IHttpMessageState state)
     {
         this._credentials = credentials ?? throw new ArgumentNullException(nameof(credentials));
         this._supportedHashAlgorithms = supportedHashAlgorithms ?? throw new ArgumentNullException(nameof(supportedHashAlgorithms)); 

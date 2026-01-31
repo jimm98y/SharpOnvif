@@ -353,10 +353,7 @@ namespace SharpOnvifCommon.Security
             bool stale = false)
         {
             string serverNonce = GenerateServerNonce(nonceAlgorithm, binarySerialization, currentTimestamp, etag, salt);
-
-            // optional
             string responseAlgorithm = (string.IsNullOrEmpty(algorithm) || algorithm == "MD5") ? "" : $", algorithm={algorithm}";
-
             return $"Digest realm=\"{realm}\"{responseAlgorithm}, nonce=\"{serverNonce}\", stale=\"{stale.ToString().ToUpperInvariant()}\"";
         }
 
@@ -373,10 +370,7 @@ namespace SharpOnvifCommon.Security
             bool stale = false)
         {
             string serverNonce = GenerateServerNonce(nonceAlgorithm, nonceSerialization, currentTimestamp, etag, salt);
-
-            // optional
             string responseAlgorithm = (string.IsNullOrEmpty(algorithm) || algorithm == "MD5") ? "" : $", algorithm={algorithm}";
-
             return $"Digest realm=\"{realm}\", qop=\"{qop}\"{responseAlgorithm}, nonce=\"{serverNonce}\", opaque=\"{opaque}\", stale=\"{stale.ToString().ToUpperInvariant()}\"";
         }
 
@@ -395,12 +389,9 @@ namespace SharpOnvifCommon.Security
             bool stale = false)
         {
             string serverNonce = GenerateServerNonce(nonceAlgorithm, nonceSerialization, currentTimestamp, etag, salt);
-
-            // optional
             string responseAlgorithm = (string.IsNullOrEmpty(algorithm) || algorithm == "MD5") ? "" : $", algorithm={algorithm}";
             string responseCharset = string.IsNullOrEmpty(charset) ? "" : $", charset={charset}"; // UTF-8
             string responseUserhash = userhash ? $", userhash={userhash.ToString().ToUpperInvariant()}" : ""; // see CreateUserNameHashRFC7616
-
             return $"Digest realm=\"{realm}\", qop=\"{qop}\"{responseAlgorithm}, nonce=\"{serverNonce}\", opaque=\"{opaque}\"{responseCharset}{responseUserhash}, stale=\"{stale.ToString().ToUpperInvariant()}\"";
         }
 
