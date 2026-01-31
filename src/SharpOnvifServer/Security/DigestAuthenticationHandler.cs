@@ -2,19 +2,20 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using SharpOnvifCommon.Security;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.IO.Pipelines;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Security.Principal;
-using System.Text;
 using System.Text.Encodings.Web;
+using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.Serialization;
-using System;
-using SharpOnvifCommon.Security;
-using System.Globalization;
-using System.IO;
 
 namespace SharpOnvifServer
 {
@@ -374,7 +375,9 @@ namespace SharpOnvifServer
             byte[] salt = DigestAuthentication.CreateNonceSessionSalt(NONCE_SALT_LENGTH);
             var now = DateTimeOffset.UtcNow;
 
-            var hashingAlgorithms = OptionsMonitor.CurrentValue.HashingAlgorithms == null ? new System.Collections.Generic.List<string>() { "MD5" } : OptionsMonitor.CurrentValue.HashingAlgorithms.ToList();
+            var hashingAlgorithms = OptionsMonitor.CurrentValue.HashingAlgorithms == null ? new List<string>() { "MD5" } : OptionsMonitor.CurrentValue.HashingAlgorithms.ToList();
+            var allowedQop = OptionsMonitor.CurrentValue.AllowedQop == null ? "auth" : string.Join(", ", OptionsMonitor.CurrentValue.AllowedQop.ToList());
+            const string opaque = "00000000"; // we're not using opaque for anything, set it to all zeroes
             foreach (var algorithm in hashingAlgorithms)
             {
                 wwwAuth = DigestAuthentication.CreateWwwAuthenticateRFC7616(
@@ -385,8 +388,8 @@ namespace SharpOnvifServer
                         null,
                         salt,
                         OptionsMonitor.CurrentValue.Realm,
-                        "00000000",
-                        "auth, auth-int",
+                        opaque,
+                        allowedQop,
                         "",
                         true);
                 Response.Headers.Append("WWW-Authenticate", wwwAuth);

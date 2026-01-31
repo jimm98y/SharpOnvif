@@ -34,6 +34,7 @@ namespace SharpOnvifClient
         private readonly IEndpointBehavior _digestAuth;
         private readonly IEndpointBehavior _disableExpect100ContinueBehavior;
         private readonly string[] _supportedHashAlgorithms;
+        private readonly string[] _supportedQop;
 
         /// <summary>
         /// Creates an instance of <see cref="SimpleOnvifClient"/>.
@@ -62,7 +63,7 @@ namespace SharpOnvifClient
         /// <param name="authentication">Type of the authentication to use: <see cref="OnvifAuthentication"/>.</param>
         /// <param name="disableExpect100Continue">Disables the default Expect: 100-continue HTTP header.</param>
         /// <exception cref="ArgumentNullException">Thrown when onvifUri is empty.</exception>
-        public SimpleOnvifClient(string onvifUri, string userName, string password, OnvifAuthentication authentication, bool disableExpect100Continue = true) : this(onvifUri, userName, password, authentication, null, disableExpect100Continue)
+        public SimpleOnvifClient(string onvifUri, string userName, string password, OnvifAuthentication authentication, bool disableExpect100Continue = true) : this(onvifUri, userName, password, authentication, null, null, disableExpect100Continue)
         { }
 
         /// <summary>
@@ -72,15 +73,17 @@ namespace SharpOnvifClient
         /// <param name="userName">User name.</param>
         /// <param name="password">Password.</param>
         /// <param name="authentication">Type of the authentication to use: <see cref="OnvifAuthentication"/>.</param>
-        /// <param name="supportedHashAlgorithms">Hash algorithms to use in Digest authenitication.</param>
+        /// <param name="supportedHashAlgorithms">Hash algorithms to use in Digest authentication.</param>
+        /// <param name="supportedQop">Supported qop, listed from the most preferred one to the least preferred one.</param>
         /// <param name="disableExpect100Continue">Disables the default Expect: 100-continue HTTP header.</param>
         /// <exception cref="ArgumentNullException">Thrown when onvifUri is empty.</exception>
-        public SimpleOnvifClient(string onvifUri, string userName, string password, OnvifAuthentication authentication, string[] supportedHashAlgorithms, bool disableExpect100Continue = true)
+        public SimpleOnvifClient(string onvifUri, string userName, string password, OnvifAuthentication authentication, string[] supportedHashAlgorithms, string[] supportedQop, bool disableExpect100Continue = true)
         {
             if (string.IsNullOrWhiteSpace(onvifUri))
                 throw new ArgumentNullException(nameof(onvifUri));
 
             this._supportedHashAlgorithms = supportedHashAlgorithms ?? new string[] { "MD5", "SHA-256", "SHA-512-256" };
+            this._supportedQop = supportedQop ?? new string[] { "auth", "auth-int" };
 
             if (authentication != OnvifAuthentication.None)
             {
@@ -96,7 +99,7 @@ namespace SharpOnvifClient
 
                 if (authentication.HasFlag(OnvifAuthentication.HttpDigest))
                 {
-                    _digestAuth = new HttpDigestBehavior(_credentials, _supportedHashAlgorithms);
+                    _digestAuth = new HttpDigestBehavior(_credentials, _supportedHashAlgorithms, _supportedQop);
                 }                
             }
 

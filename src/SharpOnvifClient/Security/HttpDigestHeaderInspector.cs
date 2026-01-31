@@ -29,22 +29,27 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
 
     private NetworkCredential _credentials;
     private readonly string[] _supportedHashAlgorithms;
+    private readonly string[] _supportedQop;
     private static readonly HttpClient _httpClient = new HttpClient();
 
-    public HttpDigestHeaderInspector(NetworkCredential credentials, string[] supportedHashAlgorithms)
+    public HttpDigestHeaderInspector(NetworkCredential credentials, string[] supportedHashAlgorithms, string[] supportedQop)
     {
         this._credentials = credentials ?? throw new ArgumentNullException(nameof(credentials));
         this._supportedHashAlgorithms = supportedHashAlgorithms ?? throw new ArgumentNullException(nameof(supportedHashAlgorithms)); 
+        this._supportedQop = supportedQop ?? throw new ArgumentNullException(nameof(supportedQop)); 
     }
 
     public void AfterReceiveReply(ref Message reply, object correlationState)
     {
-        HttpDigestCorrelation corellation = (HttpDigestCorrelation)correlationState;
-        if(corellation == null)
+        HttpDigestCorrelation correlation = (HttpDigestCorrelation)correlationState;
+        if(correlation == null)
         {
             // no auth
             return;
         }
+
+        // Workaround to make sure no spaces are lost https://github.com/dotnet/wcf/issues/4771
+        reply = Message.CreateMessage(reply.Version, reply.Headers.Action, reply.GetReaderAtBodyContents());
 
         if (reply.Properties.TryGetValue(HttpResponseMessageProperty.Name, out var httpResponseMessageObject))
         {
@@ -54,25 +59,18 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
             {
                 string receivedAuthenticationInfo = authenticationInfoHeaders.Single();
 
-                // validate
-                string nextnonce;
-                string qop;
-                string rspauth;
-                string cnonce;
-                string nc;
+                string nextnonce = DigestAuthentication.GetValueFromHeader(receivedAuthenticationInfo, "nextnonce", true);
+                string qop = DigestAuthentication.GetValueFromHeader(receivedAuthenticationInfo, "qop", false);
+                string rspauth = DigestAuthentication.GetValueFromHeader(receivedAuthenticationInfo, "rspauth", true);
+                string cnonce = DigestAuthentication.GetValueFromHeader(receivedAuthenticationInfo, "cnonce", true);
+                string nc = DigestAuthentication.GetValueFromHeader(receivedAuthenticationInfo, "nc", false);
 
-                nextnonce = DigestAuthentication.GetValueFromHeader(receivedAuthenticationInfo, "nextnonce", true);
-                qop = DigestAuthentication.GetValueFromHeader(receivedAuthenticationInfo, "qop", false);
-                rspauth = DigestAuthentication.GetValueFromHeader(receivedAuthenticationInfo, "rspauth", true);
-                cnonce = DigestAuthentication.GetValueFromHeader(receivedAuthenticationInfo, "cnonce", true);
-                nc = DigestAuthentication.GetValueFromHeader(receivedAuthenticationInfo, "nc", false);
-
-                string algorithm = DigestAuthentication.GetValueFromHeader(corellation.Authorization, "algorithm", false) ?? "";
-                string authorizationNonce = DigestAuthentication.GetValueFromHeader(corellation.Authorization, "nonce", true);
-                string authorizationCnonce = DigestAuthentication.GetValueFromHeader(corellation.Authorization, "cnonce", true);
-                string authorizationNc = DigestAuthentication.GetValueFromHeader(corellation.Authorization, "nc", false);
-                string authorizationRealm = DigestAuthentication.GetValueFromHeader(corellation.Authorization, "realm", true);
-                string authorizationQop = DigestAuthentication.GetValueFromHeader(corellation.Authorization, "qop", false);
+                string algorithm = DigestAuthentication.GetValueFromHeader(correlation.Authorization, "algorithm", false) ?? "";
+                string authorizationNonce = DigestAuthentication.GetValueFromHeader(correlation.Authorization, "nonce", true);
+                string authorizationCnonce = DigestAuthentication.GetValueFromHeader(correlation.Authorization, "cnonce", true);
+                string authorizationNc = DigestAuthentication.GetValueFromHeader(correlation.Authorization, "nc", false);
+                string authorizationRealm = DigestAuthentication.GetValueFromHeader(correlation.Authorization, "realm", true);
+                string authorizationQop = DigestAuthentication.GetValueFromHeader(correlation.Authorization, "qop", false);
 
                 if(!string.IsNullOrEmpty(nextnonce))
                 {
@@ -128,7 +126,8 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
                 byte[] body = null;
                 if (string.Compare("auth-int", qop, true) == 0)
                 {
-                    // Workaround: private reflection is unfortunate, look for better solution
+                    // Workaround: private reflection is unfortunate
+                    // TODO: look for better solution
                     object messageData = reply.GetType().GetProperty("MessageData", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(reply, null);
                     var buffer = (ArraySegment<byte>)messageData.GetType().GetProperty("Buffer").GetValue(messageData, null);
                     body = buffer.Array.Skip(buffer.Offset).Take(buffer.Count).ToArray();
@@ -142,7 +141,7 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
                     false,
                     authorizationNonce,
                     "",
-                    corellation.Uri,
+                    correlation.Uri,
                     DigestAuthentication.ConvertNCToInt(authorizationNc),
                     authorizationCnonce,
                     authorizationQop,
@@ -278,18 +277,18 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
             else
             {
                 cnonce = DigestAuthentication.GenerateClientNonce(BinarySerializationType.Hex);
-                string selectedQop; 
-                if(qop.Contains("auth-int"))
+                string selectedQop = null;
+                string[] serverSupportedQop = qop.Split(',');
+                foreach (string offeredQop in serverSupportedQop)
                 {
-                    selectedQop = "auth-int";
-                }
-                else if(qop.Contains("auth"))
-                {
-                    selectedQop = "auth";
-                }
-                else
-                {
-                    throw new NotSupportedException($"Invalid qop={qop}");
+                    foreach (string supportedQop in this._supportedQop)
+                    {
+                        if (string.Compare(offeredQop.Trim(), supportedQop.Trim(), true) == 0)
+                        {
+                            selectedQop = supportedQop.Trim();
+                            break;
+                        }
+                    }
                 }
 
                 int nc = 1;
@@ -297,67 +296,7 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
 
                 if (string.Compare("auth-int", selectedQop, true) == 0)
                 {
-                    // we have to create a copy of the message because it can only be read once
-                    using (MessageBuffer mb = request.CreateBufferedCopy(int.MaxValue))
-                    {
-                        using (MemoryStream s = new MemoryStream())
-                        {
-                            using (XmlWriter xw = XmlWriter.Create(s, new XmlWriterSettings() { OmitXmlDeclaration = true }))
-                            {
-                                // make sure the original message is set to a value which has not been copied
-                                request = mb.CreateMessage();
-
-                                using (var msg = mb.CreateMessage())
-                                {
-                                    msg.WriteMessage(xw);
-                                    xw.Flush();
-                                }
-
-                                s.Position = 0;
-
-                                byte[] bXML = new byte[s.Length];
-                                s.Read(bXML, 0, (int)s.Length);
-
-                                string content = "";
-
-                                if (bXML[0] != (byte)'<')
-                                {
-                                    content = Encoding.UTF8.GetString(bXML, 3, bXML.Length - 3);
-                                }
-                                else
-                                {
-                                    content = Encoding.UTF8.GetString(bXML, 0, bXML.Length);
-                                }
-
-                                XmlDocument xmlDoc = new XmlDocument();
-                                xmlDoc.PreserveWhitespace = true;
-                                xmlDoc.LoadXml(content);
-                                // Workaround: For HTTP Digest authentication, the Headers section includes an Action element which
-                                //   is removed before the message is sent. Therefore we have to remove it to calculate the hash.
-                                //   see https://web.archive.org/web/20130110115740/http://www.oreillynet.com/xml/blog/2002/11/unraveling_the_mystery_of_soap.html
-                                XmlNode xNode = xmlDoc.SelectSingleNode("//*[local-name()='Action']");
-                                if (xNode != null)
-                                {
-                                    var parent = xNode.ParentNode;
-                                    parent.RemoveChild(xNode);
-
-                                    // remove also the Header section if empty
-                                    if (parent.ChildNodes.Count == 0)
-                                    {
-                                        parent.ParentNode.RemoveChild(parent);
-                                    }
-                                }
-                                using (var modifiedOutput = new MemoryStream())
-                                {
-                                    xmlDoc.Save(modifiedOutput);
-                                    content = Encoding.UTF8.GetString(modifiedOutput.ToArray());
-                                }
-                                // Workaround: The XmlWriter always adds a space before the ending tag, remove it
-                                content = content.Replace("\" />", "\"/>");
-                                body = Encoding.UTF8.GetBytes(content);
-                            }
-                        }
-                    }
+                    body = ReadBody(ref request);
                 }
 
                 response = DigestAuthentication.CreateWebDigestRFC7616(
@@ -407,5 +346,77 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
         }
 
         return null;
+    }
+
+    private static byte[] ReadBody(ref Message request)
+    {
+        byte[] body;
+        // we have to create a copy of the message because it can only be read once
+        using (MessageBuffer mb = request.CreateBufferedCopy(int.MaxValue))
+        {
+            using (MemoryStream s = new MemoryStream())
+            {
+                using (XmlWriter xw = XmlWriter.Create(s, new XmlWriterSettings() { OmitXmlDeclaration = true }))
+                {
+                    // make sure the original message is set to a value which has not been copied
+                    request = mb.CreateMessage();
+
+                    using (var msg = mb.CreateMessage())
+                    {
+                        msg.WriteMessage(xw);
+                        xw.Flush();
+                    }
+
+                    s.Position = 0;
+
+                    byte[] bXML = new byte[s.Length];
+                    s.Read(bXML, 0, (int)s.Length);
+
+                    string content = "";
+
+                    if (bXML[0] != (byte)'<')
+                    {
+                        content = Encoding.UTF8.GetString(bXML, 3, bXML.Length - 3);
+                    }
+                    else
+                    {
+                        content = Encoding.UTF8.GetString(bXML, 0, bXML.Length);
+                    }
+
+                    XmlDocument xmlDoc = new XmlDocument();
+                    xmlDoc.PreserveWhitespace = true;
+                    xmlDoc.LoadXml(content);
+                    // Workaround: For HTTP Digest authentication, the Headers section includes an Action element which
+                    //   is removed before the message is sent. Therefore we have to remove it to calculate the hash.
+                    //   see https://web.archive.org/web/20130110115740/http://www.oreillynet.com/xml/blog/2002/11/unraveling_the_mystery_of_soap.html
+                    XmlNode xNode = xmlDoc.SelectSingleNode("//*[local-name()='Action']");
+                    if (xNode != null)
+                    {
+                        var parent = xNode.ParentNode;
+                        parent.RemoveChild(xNode);
+
+                        // remove also the Header section if empty
+                        if (parent.ChildNodes.Count == 0)
+                        {
+                            parent.ParentNode.RemoveChild(parent);
+                        }
+                    }
+                    using (var modifiedOutput = new MemoryStream())
+                    {
+                        xmlDoc.Save(modifiedOutput);
+                        content = Encoding.UTF8.GetString(modifiedOutput.ToArray());
+                    }
+                    // Workaround: The XmlWriter always adds a space before the ending tag, remove it
+                    content = content.Replace("\" />", "\"/>");
+
+                    // Here we are making an assumption that whatever we just created is exactly 
+                    //  what will be sent on the wire. This seems to be true for most requests 
+                    //  I have tested so far, but it seems very fragile.
+                    body = Encoding.UTF8.GetBytes(content);
+                }
+            }
+        }
+
+        return body;
     }
 }

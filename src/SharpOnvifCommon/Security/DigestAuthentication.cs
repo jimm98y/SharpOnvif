@@ -528,7 +528,12 @@ namespace SharpOnvifCommon.Security
 
         public static int ConvertNCToInt(string nc)
         {
-            if (string.IsNullOrEmpty(nc) || nc.Length != 8)
+            if (string.IsNullOrEmpty(nc))
+            {
+                return 0; // for RFC 2069 nc can be 0
+            }
+
+            if (nc.Length != 8)
             {
                 throw new ArgumentException(nameof(nc));
             }
