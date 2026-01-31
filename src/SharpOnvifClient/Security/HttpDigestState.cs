@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
+using System.Linq;
 
 namespace SharpOnvifClient.Security
 {
     public class HttpDigestState
     {
+        private readonly object _syncRoot = new object();
+
+        private IEnumerable<string> _headers = null;
         public int _nc = 1;
-        public IEnumerable<string> Headers { get; private set; }
 
         public int PeekNC()
         {
@@ -16,13 +18,29 @@ namespace SharpOnvifClient.Security
 
         public int GetAndUpdateNC()
         {
-            return Interlocked.Increment(ref _nc);
+            lock (_syncRoot)
+            {
+                int nc = _nc;
+                _nc++;
+                return nc;
+            }
+        }
+
+        public string[] GetHeaders()
+        {
+            lock (_syncRoot)
+            {
+                return _headers?.ToArray();
+            }
         }
 
         public void SetResponse(IEnumerable<string> headers)
         {
-            this.Headers = headers;
-            Interlocked.Exchange(ref _nc, 1);
+            lock (_syncRoot)
+            {
+                _headers = headers;
+                _nc = 1;
+            }
         }
     }
 }

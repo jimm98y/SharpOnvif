@@ -5,14 +5,12 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Reflection;
 using System.Security.Authentication;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Dispatcher;
 using System.Text;
-using System.Threading;
 using System.Xml;
 
 public class HttpDigestHeaderInspector : IClientMessageInspector
@@ -33,14 +31,13 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
     private readonly string[] _supportedHashAlgorithms;
     private readonly string[] _supportedQop;
     private readonly HttpDigestState _state;
-    private static readonly HttpClient _httpClient = new HttpClient();
 
     public HttpDigestHeaderInspector(NetworkCredential credentials, string[] supportedHashAlgorithms, string[] supportedQop, HttpDigestState state)
     {
         this._credentials = credentials ?? throw new ArgumentNullException(nameof(credentials));
         this._supportedHashAlgorithms = supportedHashAlgorithms ?? throw new ArgumentNullException(nameof(supportedHashAlgorithms)); 
         this._supportedQop = supportedQop ?? throw new ArgumentNullException(nameof(supportedQop));
-        this._state = state;
+        this._state = state ?? throw new ArgumentNullException(nameof(state));
     }
 
     public void AfterReceiveReply(ref Message reply, object correlationState)
@@ -179,7 +176,7 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
         bool userhash = false;
         bool isSupported = false;
 
-        var headers = _state.Headers?.ToArray();
+        var headers = _state.GetHeaders();
 
         if (headers != null)
         {

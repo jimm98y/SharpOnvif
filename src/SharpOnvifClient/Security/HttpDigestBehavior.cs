@@ -18,7 +18,7 @@ namespace SharpOnvifClient.Security
             this._credentials = credentials ?? throw new ArgumentNullException(nameof(credentials));
             this._supportedHashAlgorithms = supportedHashAlgorithms ?? throw new ArgumentNullException(nameof(supportedHashAlgorithms));
             this._supportedQop = supportedQop ?? throw new ArgumentNullException(nameof(supportedQop));
-            this._state = state;
+            this._state = state ?? throw new ArgumentNullException(nameof(state));
         }
 
         public void AddBindingParameters(ServiceEndpoint endpoint, BindingParameterCollection bindingParameters)

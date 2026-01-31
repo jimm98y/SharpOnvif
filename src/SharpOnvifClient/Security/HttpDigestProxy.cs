@@ -82,7 +82,10 @@ namespace SharpOnvifClient.Security
 
         private IEnumerable<string> ParseMessageSecurityException(string message)
         {
-            // the message currently looks like:
+            // Workaround: The only way to get the response WwwAuthenticate headers from WCF seems to be
+            //  by parsing them from the Exception message text. This is not ideal and we have to be careful
+            //  to not use any hardcoded strings as the exception message might be localized.
+
             /*            
             The HTTP request is unauthorized with client authentication scheme 'Anonymous'. 
             The authentication header received from the server was 
@@ -96,7 +99,7 @@ namespace SharpOnvifClient.Security
             StringBuilder stringBuilder = null;
             for (int i = 0; i < wwwAuthenticateHeaderParts.Length; i++)
             {
-                if(wwwAuthenticateHeaderParts[i].TrimStart().StartsWith("Digest"))
+                if(wwwAuthenticateHeaderParts[i].TrimStart().StartsWith("Digest", StringComparison.InvariantCultureIgnoreCase))
                 {
                     if(stringBuilder != null)
                     {
