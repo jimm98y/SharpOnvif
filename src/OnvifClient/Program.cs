@@ -32,7 +32,7 @@ public static class Program
             Console.WriteLine($"Found device: Manufacturer = {onvifDevice.Manufacturer}, Model = {onvifDevice.Hardware}");
         }
 
-        var device = devices.FirstOrDefault(x => x.Addresses != null && x.Addresses.FirstOrDefault(x => x.Contains("127.0.0.1") || x.Contains("[::1]")) != null);
+        var device = devices.FirstOrDefault(x => x.Addresses != null && x.Addresses.FirstOrDefault(xx => xx.Contains("127.0.0.1") || xx.Contains("[::1]")) != null);
 
         if (device == null)
         {
@@ -40,7 +40,7 @@ public static class Program
         }
         else
         {
-            OnvifAuthentication authentication = OnvifAuthentication.HttpDigest | OnvifAuthentication.WsUsernameToken;
+            OnvifAuthentication authentication = OnvifAuthentication.HttpDigest; // | OnvifAuthentication.WsUsernameToken;
             using (var client = new SimpleOnvifClient(device.Addresses.First(x => x.Contains("127.0.0.1") || x.Contains("[::1]")), "admin", "password", authentication, new string[] { "SHA-256" }, new string[] { "auth-int", "auth" }, true))
             {
                 var services = await client.GetServicesAsync(true);
@@ -135,7 +135,7 @@ public static class Program
         string onvifHost = new Uri(onvifUri).Host;
         try
         {
-            ipAddresses = Dns.GetHostAddresses(onvifHost, AddressFamily.InterNetwork);
+            ipAddresses = Dns.GetHostAddresses(onvifHost);
         }
         catch (SocketException)
         {
@@ -152,7 +152,7 @@ public static class Program
             );
         NetworkInterface matchingInterface = networkInterfaces.FirstOrDefault(x =>
         {
-            UnicastIPAddressInformation addr = x.GetIPProperties().UnicastAddresses.FirstOrDefault(x => x.Address.AddressFamily == AddressFamily.InterNetwork);
+            UnicastIPAddressInformation addr = x.GetIPProperties().UnicastAddresses.FirstOrDefault(xx => xx.Address.AddressFamily == AddressFamily.InterNetwork);
             return addr.Address.GetNetworkAddress(addr.IPv4Mask).IsInSameSubnet(onvifDeviceIpAddress.GetNetworkAddress(addr.IPv4Mask), addr.IPv4Mask);
         });
         return matchingInterface.GetIPProperties().UnicastAddresses.FirstOrDefault(x => x.Address.AddressFamily == AddressFamily.InterNetwork)?.Address.ToString();

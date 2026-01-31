@@ -139,9 +139,9 @@ namespace SharpOnvifClient
                     OnvifAuthenticationExtensions.SetOnvifAuthentication(client, _authentication, _credentials, _digestAuth, _legacyAuth);
                     DisableExpect100ContinueBehaviorExtensions.SetDisableExpect100Continue(client, _disableExpect100ContinueBehavior);
                     
-                    var proxy = BasicObjectProxy<TChannel>.CreateProxy(client);
+                    var proxy = HttpDigestProxy<TChannel>.CreateProxy(client);
                     _clients.Add(key, proxy);
-                    return client;
+                    return proxy;
                 }
             }
         }

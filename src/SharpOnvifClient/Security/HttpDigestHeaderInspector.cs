@@ -188,7 +188,7 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
                 resp = _httpClient.SendAsync(req, HttpCompletionOption.ResponseHeadersRead).Result;
 #endif
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
                 return null;
