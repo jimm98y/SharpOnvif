@@ -27,7 +27,7 @@ namespace SharpOnvifServer
 
             // all endpoints must have [DisableMustUnderstandValidation] for this to work
             services.AddHttpContextAccessor()
-                    .AddSingleton<IServiceBehavior, DigestServiceBehavior>()
+                    .AddSingleton<IServiceBehavior, HttpDigestBehavior>()
                     .AddAuthentication(SCHEME_DIGEST)
                     .AddScheme<DigestAuthenticationSchemeOptions, DigestAuthenticationHandler>(SCHEME_DIGEST, options);
 

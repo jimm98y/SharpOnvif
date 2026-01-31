@@ -8,12 +8,12 @@ using System.Collections.ObjectModel;
 
 namespace SharpOnvifServer
 {
-    public class DigestServiceBehavior : IServiceBehavior
+    public class HttpDigestBehavior : IServiceBehavior
     {
         private IHttpContextAccessor HttpContextAccessor { get; }
         private IUserRepository UserRepository { get; }
 
-        public DigestServiceBehavior(IHttpContextAccessor httpContextAccessor, IUserRepository userRepository)
+        public HttpDigestBehavior(IHttpContextAccessor httpContextAccessor, IUserRepository userRepository)
         {
             HttpContextAccessor = httpContextAccessor;
             UserRepository = userRepository;
@@ -31,7 +31,7 @@ namespace SharpOnvifServer
                 {
                     if (!endpointDispatcher.IsSystemEndpoint)
                     {
-                        endpointDispatcher.DispatchRuntime.MessageInspectors.Add(new DigestMessageInspector(HttpContextAccessor, UserRepository));
+                        endpointDispatcher.DispatchRuntime.MessageInspectors.Add(new HttpDigestHeaderInspector(HttpContextAccessor, UserRepository));
                     }
                 }
             }

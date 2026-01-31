@@ -10,12 +10,12 @@ using System.Xml;
 
 namespace SharpOnvifServer.Security
 {
-    public class DigestMessageInspector : IDispatchMessageInspector
+    public class HttpDigestHeaderInspector : IDispatchMessageInspector
     {
         private IHttpContextAccessor HttpContextAccessor { get; }
         private IUserRepository UserRepository { get; }
 
-        public DigestMessageInspector(IHttpContextAccessor httpContextAccessor, IUserRepository userRepository)
+        public HttpDigestHeaderInspector(IHttpContextAccessor httpContextAccessor, IUserRepository userRepository)
         {
             HttpContextAccessor = httpContextAccessor;
             UserRepository = userRepository;
