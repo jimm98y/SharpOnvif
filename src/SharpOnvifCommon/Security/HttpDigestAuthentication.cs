@@ -82,7 +82,7 @@ namespace SharpOnvifCommon.Security
 
         /// <remarks>
         /// When nonce replay protection is used, this method shall be called only once. 
-        /// Calling it for the second time will trigger replay protection and fail the validaiton.
+        /// Calling it for the second time will trigger replay protection and fail the validation.
         /// </remarks>
         public static int ValidateServerNonce(
             string nonceAlgorithm, 
@@ -92,7 +92,7 @@ namespace SharpOnvifCommon.Security
             DateTimeOffset currentTimestamp, 
             byte[] etag = null,
             int saltLength = 0,
-            int lifetimeMiliseconds = 30000, // 30 seconds is the default lifetime of the nonce
+            int lifetimeMilliseconds = 30000, // 30 seconds is the default lifetime of the nonce
             bool useNonceReplayProtection = true) // nonce replay protection is stateful
         {
             if (string.IsNullOrEmpty(nonce))
@@ -183,7 +183,7 @@ namespace SharpOnvifCommon.Security
                 return ERROR_NONCE_FUTURE;
             }
 
-            if (currentTimestamp.Subtract(nonceDateTime).TotalMilliseconds >= lifetimeMiliseconds)
+            if (currentTimestamp.Subtract(nonceDateTime).TotalMilliseconds >= lifetimeMilliseconds)
             {
                 Debug.WriteLine("Nonce is expired");
                 return ERROR_NONCE_EXPIRED;
@@ -209,7 +209,7 @@ namespace SharpOnvifCommon.Security
                     {
                         CacheItemPolicy cip = new CacheItemPolicy()
                         {
-                            AbsoluteExpiration = new DateTimeOffset(DateTime.UtcNow.AddMilliseconds(lifetimeMiliseconds))
+                            AbsoluteExpiration = new DateTimeOffset(DateTime.UtcNow.AddMilliseconds(lifetimeMilliseconds))
                         };
                         _nonceCache.Set(nonce, 1, cip);
                     }
@@ -223,7 +223,7 @@ namespace SharpOnvifCommon.Security
                         {
                             CacheItemPolicy cip = new CacheItemPolicy()
                             {
-                                AbsoluteExpiration = new DateTimeOffset(DateTime.UtcNow.AddMilliseconds(lifetimeMiliseconds))
+                                AbsoluteExpiration = new DateTimeOffset(DateTime.UtcNow.AddMilliseconds(lifetimeMilliseconds))
                             };
                             _nonceCache.Set(nonce, nc, cip);
                         }
@@ -354,7 +354,7 @@ namespace SharpOnvifCommon.Security
         {
             string serverNonce = GenerateServerNonce(nonceAlgorithm, binarySerialization, currentTimestamp, etag, salt);
             string responseAlgorithm = (string.IsNullOrEmpty(algorithm) || algorithm == "MD5") ? "" : $", algorithm={algorithm}";
-            return $"Digest realm=\"{realm}\"{responseAlgorithm}, nonce=\"{serverNonce}\", stale=\"{stale.ToString().ToUpperInvariant()}\"";
+            return $"Digest realm=\"{realm}\"{responseAlgorithm}, nonce=\"{serverNonce}\", stale={stale.ToString().ToUpperInvariant()}";
         }
 
         public static string CreateWwwAuthenticateRFC2617(
@@ -371,7 +371,7 @@ namespace SharpOnvifCommon.Security
         {
             string serverNonce = GenerateServerNonce(nonceAlgorithm, nonceSerialization, currentTimestamp, etag, salt);
             string responseAlgorithm = (string.IsNullOrEmpty(algorithm) || algorithm == "MD5") ? "" : $", algorithm={algorithm}";
-            return $"Digest realm=\"{realm}\", qop=\"{qop}\"{responseAlgorithm}, nonce=\"{serverNonce}\", opaque=\"{opaque}\", stale=\"{stale.ToString().ToUpperInvariant()}\"";
+            return $"Digest realm=\"{realm}\", qop=\"{qop}\"{responseAlgorithm}, nonce=\"{serverNonce}\", opaque=\"{opaque}\", stale={stale.ToString().ToUpperInvariant()}";
         }
 
         public static string CreateWwwAuthenticateRFC7616(
@@ -392,7 +392,7 @@ namespace SharpOnvifCommon.Security
             string responseAlgorithm = (string.IsNullOrEmpty(algorithm) || algorithm == "MD5") ? "" : $", algorithm={algorithm}";
             string responseCharset = string.IsNullOrEmpty(charset) ? "" : $", charset={charset}"; // UTF-8
             string responseUserhash = userhash ? $", userhash={userhash.ToString().ToUpperInvariant()}" : ""; // see CreateUserNameHashRFC7616
-            return $"Digest realm=\"{realm}\", qop=\"{qop}\"{responseAlgorithm}, nonce=\"{serverNonce}\", opaque=\"{opaque}\"{responseCharset}{responseUserhash}, stale=\"{stale.ToString().ToUpperInvariant()}\"";
+            return $"Digest realm=\"{realm}\", qop=\"{qop}\"{responseAlgorithm}, nonce=\"{serverNonce}\", opaque=\"{opaque}\"{responseCharset}{responseUserhash}, stale={stale.ToString().ToUpperInvariant()}";
         }
 
         public static string CreateAuthorizationRFC2069(

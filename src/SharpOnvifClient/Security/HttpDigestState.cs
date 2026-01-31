@@ -1,6 +1,8 @@
-﻿using System;
+﻿using SharpOnvifCommon.Security;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Authentication;
 
 namespace SharpOnvifClient.Security
 {
@@ -44,10 +46,40 @@ namespace SharpOnvifClient.Security
 
         public void SetResponse(IEnumerable<string> headers)
         {
+            ValidateHeaders(_headers?.ToArray(), headers?.ToArray());
             lock (_syncRoot)
             {
                 _headers = headers;
                 _nc = 1;
+            }
+        }
+
+        private void ValidateHeaders(string[] oldHeaders, string[] newHeaders)
+        {
+            if(newHeaders == null)
+            {
+                throw new ArgumentNullException(nameof(newHeaders));
+            }
+
+            // the first time stale is FALSE because it's the first WWW-Authenticate response
+            if(oldHeaders != null)
+            {
+                bool wasStale = false;
+                for (int i = 0; i < oldHeaders.Length; i++)
+                {
+                    wasStale |= (HttpDigestAuthentication.GetValueFromHeader(oldHeaders[i], "stale", false) ?? "").ToUpperInvariant() == "TRUE";
+                }
+
+                bool isStale = false;
+                for (int i = 0; i < newHeaders.Length; i++)
+                {
+                    isStale |= (HttpDigestAuthentication.GetValueFromHeader(newHeaders[i], "stale", false) ?? "").ToUpperInvariant() == "TRUE";
+                }
+
+                if(wasStale == false && isStale == false)
+                {
+                    throw new InvalidCredentialException();
+                }
             }
         }
     }
