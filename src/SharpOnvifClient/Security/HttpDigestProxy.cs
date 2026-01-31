@@ -39,7 +39,7 @@ namespace SharpOnvifClient.Security
                     }
                     catch(System.ServiceModel.Security.MessageSecurityException ex)
                     {
-                        State.SetResponse(ParseMessageSecurityException(ex.Message));
+                        State.SetHeaders(ParseMessageSecurityException(ex.Message));
 
                         resultTask = targetMethod.Invoke(Target, args) as Task;
                         await resultTask.ConfigureAwait(false);
@@ -59,7 +59,7 @@ namespace SharpOnvifClient.Security
                     }
                     catch (System.ServiceModel.Security.MessageSecurityException ex)
                     {
-                        State.SetResponse(ParseMessageSecurityException(ex.Message));
+                        State.SetHeaders(ParseMessageSecurityException(ex.Message));
 
                         resultTask = targetMethod.Invoke(Target, args) as Task;
                         await resultTask.ConfigureAwait(false);
@@ -81,7 +81,7 @@ namespace SharpOnvifClient.Security
                 }
                 catch (System.ServiceModel.Security.MessageSecurityException ex)
                 {
-                    State.SetResponse(ParseMessageSecurityException(ex.Message));
+                    State.SetHeaders(ParseMessageSecurityException(ex.Message));
 
                     result = targetMethod.Invoke(Target, args);
                 }

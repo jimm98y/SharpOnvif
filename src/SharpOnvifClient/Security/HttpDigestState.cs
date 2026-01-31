@@ -11,7 +11,7 @@ namespace SharpOnvifClient.Security
         int PeekNC();
         int GetAndUpdateNC();
         string[] GetHeaders();
-        void SetResponse(IEnumerable<string> headers);
+        void SetHeaders(IEnumerable<string> headers);
     }
 
     public class HttpDigestState : IHttpMessageState
@@ -44,7 +44,7 @@ namespace SharpOnvifClient.Security
             }
         }
 
-        public void SetResponse(IEnumerable<string> headers)
+        public void SetHeaders(IEnumerable<string> headers)
         {
             ValidateHeaders(_headers?.ToArray(), headers?.ToArray());
             lock (_syncRoot)
