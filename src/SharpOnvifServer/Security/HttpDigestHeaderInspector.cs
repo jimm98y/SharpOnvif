@@ -34,7 +34,7 @@ namespace SharpOnvifServer.Security
                 byte[] body = null;
                 if (string.Compare("auth-int", webToken.Qop, true) == 0)
                 {
-                    body = ReadBody(ref reply);
+                    body = ReadResponseBody(ref reply);
                 }
 
                 // TODO: move to an extension method
@@ -66,7 +66,7 @@ namespace SharpOnvifServer.Security
             }
         }
 
-        private static byte[] ReadBody(ref Message reply)
+        private static byte[] ReadResponseBody(ref Message reply)
         {
             byte[] body;
             // we have to create a copy of the message because it can only be read once

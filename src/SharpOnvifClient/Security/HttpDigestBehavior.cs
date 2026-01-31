@@ -20,9 +20,7 @@ namespace SharpOnvifClient.Security
         }
 
         public void AddBindingParameters(ServiceEndpoint endpoint, BindingParameterCollection bindingParameters)
-        {
-            // do nothing
-        }
+        { }
 
         public void ApplyClientBehavior(ServiceEndpoint endpoint, ClientRuntime clientRuntime)
         {
@@ -33,6 +31,6 @@ namespace SharpOnvifClient.Security
         { }
 
         public void Validate(ServiceEndpoint endpoint)
-        {  }
+        { }
     }
 }

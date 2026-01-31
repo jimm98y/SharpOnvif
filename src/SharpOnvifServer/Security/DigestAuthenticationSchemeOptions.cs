@@ -30,7 +30,7 @@ namespace SharpOnvifServer
         public List<string> HashingAlgorithms { get; set; } = new List<string>() { "MD5", "SHA-256", "SHA-512-256" };
 
         /// <summary>
-        /// Allowed qop.
+        /// Allowed qop. Valid values are "auth" and "auth-int".
         /// </summary>
         public List<string> AllowedQop { get; set; } = new List<string>() { "auth", "auth-int" };
     }

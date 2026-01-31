@@ -20,7 +20,7 @@ namespace SharpOnvifServer
         }
 
         public void AddBindingParameters(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase, Collection<ServiceEndpoint> endpoints, BindingParameterCollection bindingParameters)
-        {  }
+        { }
 
         public void ApplyDispatchBehavior(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)
         {
@@ -38,6 +38,6 @@ namespace SharpOnvifServer
         }
 
         public void Validate(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)
-        {  }
+        { }
     }
 }

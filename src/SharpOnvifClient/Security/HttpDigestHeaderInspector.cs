@@ -200,7 +200,7 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
                 {
                     foreach (var header in resp.Headers.WwwAuthenticate)
                     {
-                        var receivedWwwAuth = header.ToString();
+                        string receivedWwwAuth = header.ToString();
                         nonce = DigestAuthentication.GetValueFromHeader(receivedWwwAuth, "nonce", true);
                         realm = DigestAuthentication.GetValueFromHeader(receivedWwwAuth, "realm", true);
                         opaque = DigestAuthentication.GetValueFromHeader(receivedWwwAuth, "opaque", true);
@@ -240,9 +240,9 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
             }
         }
 
-        string cnonce = null;
         if (isSupported)
         {
+            string uri = channel.RemoteAddress.Uri.PathAndQuery;
             string method = string.IsNullOrEmpty(httpRequestMessage.Method) ? "POST" : httpRequestMessage.Method;
             string response;
             string authorization;
@@ -259,13 +259,13 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
                     _credentials.Password,
                     nonce,
                     method,
-                    channel.RemoteAddress.Uri.PathAndQuery);
+                    uri);
 
                 authorization = DigestAuthentication.CreateAuthorizationRFC2069(
                     _credentials.UserName, 
                     realm, 
                     nonce, 
-                    channel.RemoteAddress.Uri.PathAndQuery, 
+                    uri, 
                     response, 
                     opaque,
                     algorithm);
@@ -273,7 +273,7 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
             }
             else
             {
-                cnonce = DigestAuthentication.GenerateClientNonce(BinarySerializationType.Hex);
+                string cnonce = DigestAuthentication.GenerateClientNonce(BinarySerializationType.Hex);
                 string selectedQop = null;
                 string[] serverSupportedQop = qop.Split(',');
                 foreach (string offeredQop in serverSupportedQop)
@@ -293,7 +293,7 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
 
                 if (string.Compare("auth-int", selectedQop, true) == 0)
                 {
-                    body = ReadBody(ref request);
+                    body = ReadRequestBody(ref request);
                 }
 
                 response = DigestAuthentication.CreateWebDigestRFC7616(
@@ -304,7 +304,7 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
                     false,
                     nonce,
                     method,
-                    channel.RemoteAddress.Uri.PathAndQuery,
+                    uri,
                     nc,
                     cnonce,
                     selectedQop,
@@ -325,7 +325,7 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
                     username,
                     realm,
                     nonce,
-                    channel.RemoteAddress.Uri.PathAndQuery,
+                    uri,
                     response,
                     opaque,
                     algorithm,
@@ -339,13 +339,13 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
             request.Properties[HttpRequestMessageProperty.Name] = httpRequestMessage;
 
             // return the content of the authorization header so that we can use it to verify the Authentication-Info response
-            return new HttpDigestCorrelation(authorization, channel.RemoteAddress.Uri.PathAndQuery);
+            return new HttpDigestCorrelation(authorization, uri);
         }
 
         return null;
     }
 
-    private static byte[] ReadBody(ref Message request)
+    private static byte[] ReadRequestBody(ref Message request)
     {
         byte[] body;
         // we have to create a copy of the message because it can only be read once
