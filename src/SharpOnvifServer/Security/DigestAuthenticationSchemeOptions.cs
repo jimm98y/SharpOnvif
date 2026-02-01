@@ -5,15 +5,21 @@ namespace SharpOnvifServer.Security
 {
     public class DigestAuthenticationSchemeOptions : AuthenticationSchemeOptions
     {
+        #region WsUsernameToken
+
         /// <summary>
         /// Maximum allowed time difference in between the client and the server in seconds. Negative value will disable the timestamp verification.
         /// </summary>
-        public double MaxValidTimeDeltaInSeconds { get; set; } = 300;
+        public double WsUsernameTokenMaxTimeDeltaInMilliseconds { get; set; } = 300000;
+
+        #endregion // WsUsernameToken
+
+        #region HTTP Digest
 
         /// <summary>
         /// Realm.
         /// </summary>
-        public string Realm { get; set; } = "IP Camera";
+        public string HttpDigestRealm { get; set; } = "IP Camera";
 
         /// <summary>
         /// Hashing algorithm(s). MD5 is the default when empty. Accepted values are: "MD5", "MD5-sess", "SHA-256", "SHA-256-sess", "SHA-512-256", "SHA-512-256-sess".
@@ -27,7 +33,7 @@ namespace SharpOnvifServer.Security
         ///  
         /// WWW-Authenticate challenges will be generated in the same order they are listed here.
         /// </summary>
-        public List<string> HashingAlgorithms { get; set; } = new List<string>() 
+        public List<string> HttpDigestHashingAlgorithms { get; set; } = new List<string>() 
         { 
             "MD5",
             "MD5-sess",
@@ -40,7 +46,7 @@ namespace SharpOnvifServer.Security
         /// <summary>
         /// Offered quality of protection levels. Valid values are "auth" and "auth-int".
         /// </summary>
-        public List<string> AllowedQop { get; set; } = new List<string>() 
+        public List<string> HttpDigestAllowedQop { get; set; } = new List<string>() 
         {
             "auth",
             "auth-int",
@@ -49,12 +55,19 @@ namespace SharpOnvifServer.Security
         /// <summary>
         /// Indicates whether the server should offer User hashing.
         /// </summary>
-        public bool IsUserHashSupported { get; set; } = true;
+        public bool HttpDigestIsUserHashSupported { get; set; } = true;
+
+        /// <summary>
+        /// How long the server nonce is valid in milliseconds. Defaults to 30 seconds.
+        /// </summary>
+        public double HttpDigestNonceLifetimeMilliseconds { get; set; } = 30000;
 
         /// <summary>
         /// When true, forces the client to use the nonce from the last response. 
         /// This breaks pipelining of the client requests, but it lets the server enforce single-use nonces.
         /// </summary>
-        //public bool IsUsingNextNonce { get; set; } = false;
+        //public bool HttpDigestIsUsingNextNonce { get; set; } = false;
+
+        #endregion // HTTP Digest
     }
 }

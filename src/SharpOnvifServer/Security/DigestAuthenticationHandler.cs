@@ -24,7 +24,6 @@ namespace SharpOnvifServer.Security
         private const string CONTEXT_AUTHENTICATE_WEB_DIGEST_RESULT = "authenticateWebDigestResult_07E740A9-0079-42CF-9FDE-510FDAB3A1D9";
         private const string CONTEXT_OPAQUE = "opaque_E768DBA5-D7A8-4735-BD34-FE9F0D65DE54";
 
-        private const int NONCE_LIFESPAN = 30000; // 30 seconds in milliseconds
         private const int NONCE_SALT_LENGTH = 12;
         private const string NONCE_HASH_ALGORITHM = "SHA-256";
         private const BinarySerializationType PREFERRED_SERIALIZATION = BinarySerializationType.Hex;
@@ -49,7 +48,7 @@ namespace SharpOnvifServer.Security
             WebDigestAuth webToken = Request.GetSecurityHeaderFromHeaders();
             if (webToken != null)
             {
-                if(string.Compare(webToken.Realm, OptionsMonitor.CurrentValue.Realm) != 0)
+                if(string.Compare(webToken.Realm, OptionsMonitor.CurrentValue.HttpDigestRealm) != 0)
                 {
                     return AuthenticateResult.Fail("HTTP Digest has invalid realm.");
                 }
@@ -65,13 +64,10 @@ namespace SharpOnvifServer.Security
                     byte[] body = null;
                     if (string.Compare("auth-int", webToken.Qop, true) == 0)
                     {
-                        ReadResult requestBodyInBytes = await Request.BodyReader.ReadAsync().ConfigureAwait(false);
-                        string content = Encoding.UTF8.GetString(requestBodyInBytes.Buffer.FirstSpan);
-                        Request.BodyReader.AdvanceTo(requestBodyInBytes.Buffer.Start, requestBodyInBytes.Buffer.End);
-                        body = Encoding.UTF8.GetBytes(content);
+                        body = await ReadRequestBodyAsync(body).ConfigureAwait(false);
                     }
 
-                    int authenticateWebDigestResult = await AuthenticateWebDigestAsync(OptionsMonitor.CurrentValue.Realm, Request.Method, webToken, body).ConfigureAwait(false);
+                    int authenticateWebDigestResult = await AuthenticateWebDigestAsync(OptionsMonitor.CurrentValue.HttpDigestRealm, Request.Method, webToken, body).ConfigureAwait(false);
                     if (authenticateWebDigestResult == 0)
                     {
                         // now in case the request also contains WsUsernameToken, we must verify it
@@ -152,21 +148,7 @@ namespace SharpOnvifServer.Security
                 }
                 else
                 {
-                    // according to the Onvif specification, these functions are in the access class PRE_AUTH and do not require any authentication:
-                    if (
-                        Request.ContentType != null && 
-                        (
-                            Request.ContentType.Contains("action=\"http://www.onvif.org/ver10/device/wsdl/GetWsdlUrl\"") ||
-                            Request.ContentType.Contains("action=\"http://www.onvif.org/ver10/device/wsdl/GetServices\"") ||
-                            Request.ContentType.Contains("action=\"http://www.onvif.org/ver10/device/wsdl/GetServiceCapabilities\"") ||
-                            Request.ContentType.Contains("action=\"http://www.onvif.org/ver10/device/wsdl/GetCapabilities\"") ||
-                            Request.ContentType.Contains("action=\"http://www.onvif.org/ver10/device/wsdl/GetHostname\"") ||
-                            Request.ContentType.Contains("action=\"http://www.onvif.org/ver10/device/wsdl/GetSystemDateAndTime\"") ||
-                            Request.ContentType.Contains("action=\"http://www.onvif.org/ver10/device/wsdl/GetEndpointReference\"")
-                        ) && 
-                        (
-                            Request.ContentType.Split("action=\"").Count() - 1) == 1
-                        )
+                    if (AllowAnonymousAccess(Request.ContentType))
                     {
                         // use Anonymous user
                         var identity = new GenericIdentity(ANONYMOUS_USER);
@@ -178,6 +160,30 @@ namespace SharpOnvifServer.Security
             }
 
             return AuthenticateResult.Fail("No authentication found");
+        }
+
+        private static bool AllowAnonymousAccess(string contentType)
+        {
+            // according to the Onvif specification, these functions are in the access class PRE_AUTH and do not require any authentication:
+            return contentType != null &&
+            (
+                contentType.Contains("action=\"http://www.onvif.org/ver10/device/wsdl/GetWsdlUrl\"") ||
+                contentType.Contains("action=\"http://www.onvif.org/ver10/device/wsdl/GetServices\"") ||
+                contentType.Contains("action=\"http://www.onvif.org/ver10/device/wsdl/GetServiceCapabilities\"") ||
+                contentType.Contains("action=\"http://www.onvif.org/ver10/device/wsdl/GetCapabilities\"") ||
+                contentType.Contains("action=\"http://www.onvif.org/ver10/device/wsdl/GetHostname\"") ||
+                contentType.Contains("action=\"http://www.onvif.org/ver10/device/wsdl/GetSystemDateAndTime\"") ||
+                contentType.Contains("action=\"http://www.onvif.org/ver10/device/wsdl/GetEndpointReference\"")
+            ) && (contentType.Split("action=\"").Count() - 1) == 1;
+        }
+
+        private async Task<byte[]> ReadRequestBodyAsync(byte[] body)
+        {
+            ReadResult requestBodyInBytes = await Request.BodyReader.ReadAsync().ConfigureAwait(false);
+            string content = Encoding.UTF8.GetString(requestBodyInBytes.Buffer.FirstSpan);
+            Request.BodyReader.AdvanceTo(requestBodyInBytes.Buffer.Start, requestBodyInBytes.Buffer.End);
+            body = Encoding.UTF8.GetBytes(content);
+            return body;
         }
 
         public async Task<int> AuthenticateSoapDigestAsync(string userName, string digest, string nonce, string created)
@@ -194,8 +200,8 @@ namespace SharpOnvifServer.Security
                 // All times MUST be in UTC format as specified https://docs.oasis-open.org/wss-m/wss/v1.1.1/os/wss-SOAPMessageSecurity-v1.1.1-os.html
                 if (DateTime.TryParse(created, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal, out createdDateTime))
                 {
-                    if (OptionsMonitor.CurrentValue.MaxValidTimeDeltaInSeconds < 0 || 
-                        Math.Abs(DateTime.UtcNow.Subtract(createdDateTime.ToUniversalTime()).TotalSeconds) < OptionsMonitor.CurrentValue.MaxValidTimeDeltaInSeconds)
+                    if (OptionsMonitor.CurrentValue.WsUsernameTokenMaxTimeDeltaInMilliseconds < 0 || 
+                        Math.Abs(DateTime.UtcNow.Subtract(createdDateTime.ToUniversalTime()).TotalMilliseconds) < OptionsMonitor.CurrentValue.WsUsernameTokenMaxTimeDeltaInMilliseconds)
                     {
                         if (calculatedDigest.CompareTo(digest) == 0)
                         {
@@ -222,7 +228,7 @@ namespace SharpOnvifServer.Security
                     DateTimeOffset.UtcNow, 
                     null, 
                     NONCE_SALT_LENGTH,
-                    NONCE_LIFESPAN,
+                    OptionsMonitor.CurrentValue.HttpDigestNonceLifetimeMilliseconds,
                     true);
                 if (nonceValidationResult == 0)
                 {
@@ -292,7 +298,7 @@ namespace SharpOnvifServer.Security
             
             if (!string.IsNullOrEmpty(opaque))
             {
-                // remove it from the cache, but keep opaque value
+                // remove it from the cache, but keep opaque value (use the same session)
                 HttpDigestAuthentication.RemoveNoncePrime(opaque);
             }
 
@@ -314,8 +320,8 @@ namespace SharpOnvifServer.Security
             */
 
             var now = DateTimeOffset.UtcNow;
-            var hashingAlgorithms = OptionsMonitor.CurrentValue.HashingAlgorithms == null ? new List<string>() { "MD5" } : OptionsMonitor.CurrentValue.HashingAlgorithms.ToList();
-            var allowedQop = OptionsMonitor.CurrentValue.AllowedQop == null ? "auth" : string.Join(", ", OptionsMonitor.CurrentValue.AllowedQop.ToList());
+            var hashingAlgorithms = OptionsMonitor.CurrentValue.HttpDigestHashingAlgorithms == null ? new List<string>() { "MD5" } : OptionsMonitor.CurrentValue.HttpDigestHashingAlgorithms.ToList();
+            var allowedQop = OptionsMonitor.CurrentValue.HttpDigestAllowedQop == null ? "auth" : string.Join(", ", OptionsMonitor.CurrentValue.HttpDigestAllowedQop.ToList());
             
             foreach (var algorithm in hashingAlgorithms)
             {
@@ -326,11 +332,11 @@ namespace SharpOnvifServer.Security
                         algorithm,
                         null,
                         HttpDigestAuthentication.CreateNonceSessionSalt(NONCE_SALT_LENGTH),
-                        OptionsMonitor.CurrentValue.Realm,
+                        OptionsMonitor.CurrentValue.HttpDigestRealm,
                         opaque,
                         allowedQop,
                         "",
-                        OptionsMonitor.CurrentValue.IsUserHashSupported,
+                        OptionsMonitor.CurrentValue.HttpDigestIsUserHashSupported,
                         isStale);
                 Response.Headers.Append("WWW-Authenticate", wwwAuth);
             }
