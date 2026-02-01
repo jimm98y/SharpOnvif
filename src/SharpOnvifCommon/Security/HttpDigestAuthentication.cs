@@ -774,7 +774,7 @@ namespace SharpOnvifCommon.Security
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine("Nonce is not valid base64 string");
+                    Debug.WriteLine("Opaque is not valid base64 string");
                     Debug.WriteLine(ex.Message);
                     return ERROR_NONCE_FORMAT;
                 }
@@ -787,7 +787,7 @@ namespace SharpOnvifCommon.Security
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine("Nonce is not valid hexadecimal string");
+                    Debug.WriteLine("Opaque is not valid hexadecimal string");
                     Debug.WriteLine(ex.Message);
                     return ERROR_NONCE_FORMAT;
                 }
