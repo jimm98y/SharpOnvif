@@ -29,18 +29,16 @@ namespace SharpOnvifClient
         private object _syncRoot = new object();
         private readonly Dictionary<string, object> _clients = new Dictionary<string, object>();
         private readonly System.Net.NetworkCredential _credentials;
-        private readonly OnvifAuthentication _authentication;
+        private readonly DigestAuthenticationSchemeOptions _authentication;
         private readonly IEndpointBehavior _legacyAuth;
         private readonly IEndpointBehavior _disableExpect100ContinueBehavior;
-        private readonly string[] _supportedHashAlgorithms;
-        private readonly string[] _supportedQop;
 
         /// <summary>
         /// Creates an instance of <see cref="SimpleOnvifClient"/>.
         /// </summary>
         /// <param name="onvifUri">Onvif URI.</param>
         /// <param name="disableExpect100Continue">Disables the default Expect: 100-continue HTTP header.</param>
-        public SimpleOnvifClient(string onvifUri, bool disableExpect100Continue = true) : this(onvifUri, null, null, OnvifAuthentication.None, disableExpect100Continue)
+        public SimpleOnvifClient(string onvifUri, bool disableExpect100Continue = true) : this(onvifUri, null, null, new DigestAuthenticationSchemeOptions(OnvifAuthentication.None), disableExpect100Continue)
         { }
 
         /// <summary>
@@ -50,19 +48,7 @@ namespace SharpOnvifClient
         /// <param name="userName">User name.</param>
         /// <param name="password">Password.</param>
         /// <param name="disableExpect100Continue">Disables the default Expect: 100-continue HTTP header.</param>
-        public SimpleOnvifClient(string onvifUri, string userName, string password, bool disableExpect100Continue = true) : this(onvifUri, userName, password, OnvifAuthentication.WsUsernameToken | OnvifAuthentication.HttpDigest, disableExpect100Continue)
-        { }
-
-        /// <summary>
-        /// Creates an instance of <see cref="SimpleOnvifClient"/>.
-        /// </summary>
-        /// <param name="onvifUri">Onvif URI.</param>
-        /// <param name="userName">User name.</param>
-        /// <param name="password">Password.</param>
-        /// <param name="authentication">Type of the authentication to use: <see cref="OnvifAuthentication"/>.</param>
-        /// <param name="disableExpect100Continue">Disables the default Expect: 100-continue HTTP header.</param>
-        /// <exception cref="ArgumentNullException">Thrown when onvifUri is empty.</exception>
-        public SimpleOnvifClient(string onvifUri, string userName, string password, OnvifAuthentication authentication, bool disableExpect100Continue = true) : this(onvifUri, userName, password, authentication, null, null, disableExpect100Continue)
+        public SimpleOnvifClient(string onvifUri, string userName, string password, bool disableExpect100Continue = true) : this(onvifUri, userName, password, new DigestAuthenticationSchemeOptions(OnvifAuthentication.WsUsernameToken | OnvifAuthentication.HttpDigest), disableExpect100Continue)
         { }
 
         /// <summary>
@@ -76,22 +62,21 @@ namespace SharpOnvifClient
         /// <param name="supportedQop">Supported qop, listed from the most preferred one to the least preferred one.</param>
         /// <param name="disableExpect100Continue">Disables the default Expect: 100-continue HTTP header.</param>
         /// <exception cref="ArgumentNullException">Thrown when onvifUri is empty.</exception>
-        public SimpleOnvifClient(string onvifUri, string userName, string password, OnvifAuthentication authentication, string[] supportedHashAlgorithms, string[] supportedQop, bool disableExpect100Continue = true)
+        public SimpleOnvifClient(string onvifUri, string userName, string password, DigestAuthenticationSchemeOptions authentication, bool disableExpect100Continue = true)
         {
             if (string.IsNullOrWhiteSpace(onvifUri))
                 throw new ArgumentNullException(nameof(onvifUri));
 
-            this._supportedHashAlgorithms = supportedHashAlgorithms ?? new string[] { "MD5", "SHA-256", "SHA-512-256" };
-            this._supportedQop = supportedQop ?? new string[] { "auth", "auth-int" };
+            this._authentication = authentication ?? new DigestAuthenticationSchemeOptions();
 
-            if (authentication != OnvifAuthentication.None)
+            if (authentication.Authentication != OnvifAuthentication.None)
             {
                 if (string.IsNullOrWhiteSpace(userName) || string.IsNullOrWhiteSpace(password))
                     throw new ArgumentNullException("User name or password must not be empty!");
 
                 _credentials = new System.Net.NetworkCredential(userName, password);
 
-                if (authentication.HasFlag(OnvifAuthentication.WsUsernameToken))
+                if (authentication.Authentication.HasFlag(OnvifAuthentication.WsUsernameToken))
                 {
                     _legacyAuth = new WsUsernameTokenBehavior(_credentials);
                 }
@@ -108,7 +93,7 @@ namespace SharpOnvifClient
 
         public void SetCameraUtcNowOffset(TimeSpan utcNowOffset)
         {
-            if (_authentication.HasFlag(OnvifAuthentication.WsUsernameToken))
+            if (_authentication.Authentication.HasFlag(OnvifAuthentication.WsUsernameToken))
             {
                 ((IHasUtcOffset)_legacyAuth).UtcNowOffset = utcNowOffset;
             }
@@ -131,20 +116,9 @@ namespace SharpOnvifClient
                 {
                     var client = creator(uri);
                     DisableExpect100ContinueBehaviorExtensions.SetDisableExpect100Continue(client, _disableExpect100ContinueBehavior);
-
-                    // we use the state to let both HttpDigestProxy and HttpDigestBehavior communicate
-                    var state = new HttpDigestState();
-                    var proxy = HttpDigestProxy<TChannel>.CreateProxy(client, state);
-
-                    IEndpointBehavior digestAuth = null;
-                    if (_authentication.HasFlag(OnvifAuthentication.HttpDigest))
-                    {
-                        digestAuth = new HttpDigestBehavior(_credentials, _supportedHashAlgorithms, _supportedQop, state);
-                    }
-                    OnvifAuthenticationExtensions.SetOnvifAuthentication(client, _authentication, _credentials, digestAuth, _legacyAuth);
-
-                    _clients.Add(key, proxy);
-                    return proxy;
+                    client = OnvifAuthenticationExtensions.SetOnvifAuthentication(client, _credentials, _authentication, _legacyAuth);
+                    _clients.Add(key, client);
+                    return client;
                 }
             }
         }

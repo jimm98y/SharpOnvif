@@ -320,8 +320,8 @@ namespace SharpOnvifServer.Security
             */
 
             var now = DateTimeOffset.UtcNow;
-            var hashingAlgorithms = OptionsMonitor.CurrentValue.HttpDigestHashingAlgorithms == null ? new List<string>() { "MD5" } : OptionsMonitor.CurrentValue.HttpDigestHashingAlgorithms.ToList();
-            var allowedQop = OptionsMonitor.CurrentValue.HttpDigestAllowedQop == null ? "auth" : string.Join(", ", OptionsMonitor.CurrentValue.HttpDigestAllowedQop.ToList());
+            var hashingAlgorithms = OptionsMonitor.CurrentValue.HttpDigestAlgorithms == null ? new List<string>() { "MD5" } : OptionsMonitor.CurrentValue.HttpDigestAlgorithms.ToList();
+            var allowedQop = OptionsMonitor.CurrentValue.HttpDigestQop == null ? "auth" : string.Join(", ", OptionsMonitor.CurrentValue.HttpDigestQop.ToList());
             
             foreach (var algorithm in hashingAlgorithms)
             {
@@ -336,7 +336,7 @@ namespace SharpOnvifServer.Security
                         opaque,
                         allowedQop,
                         "",
-                        OptionsMonitor.CurrentValue.HttpDigestIsUserHashSupported,
+                        OptionsMonitor.CurrentValue.HttpDigestUserHash,
                         isStale);
                 Response.Headers.Append("WWW-Authenticate", wwwAuth);
             }

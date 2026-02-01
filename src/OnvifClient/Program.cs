@@ -44,21 +44,7 @@ public static class Program
             using (var client = new SimpleOnvifClient(device.Addresses.First(x => x.Contains("127.0.0.1") || x.Contains("[::1]")),
                 "admin", 
                 "password", 
-                authentication, 
-                new string[] 
-                { 
-                    "MD5",
-                    "MD5-sess",
-                    "SHA-256",
-                    "SHA-256-sess",
-                    "SHA-512-256",
-                    "SHA-512-256-sess",
-                }, 
-                new string[] 
-                { 
-                    "auth",
-                    "auth-int"
-                },
+                new DigestAuthenticationSchemeOptions(authentication),
                 true))
             {
                 var services = await client.GetServicesAsync(true);

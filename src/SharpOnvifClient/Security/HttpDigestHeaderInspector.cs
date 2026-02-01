@@ -27,16 +27,14 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
         }
     }
 
-    private NetworkCredential _credentials;
-    private readonly string[] _supportedHashAlgorithms;
-    private readonly string[] _supportedQop;
+    private readonly NetworkCredential _credentials;
+    private readonly DigestAuthenticationSchemeOptions _authentication;
     private readonly IHttpMessageState _state;
 
-    public HttpDigestHeaderInspector(NetworkCredential credentials, string[] supportedHashAlgorithms, string[] supportedQop, IHttpMessageState state)
+    public HttpDigestHeaderInspector(NetworkCredential credentials, DigestAuthenticationSchemeOptions authentication, IHttpMessageState state)
     {
         this._credentials = credentials ?? throw new ArgumentNullException(nameof(credentials));
-        this._supportedHashAlgorithms = supportedHashAlgorithms ?? throw new ArgumentNullException(nameof(supportedHashAlgorithms)); 
-        this._supportedQop = supportedQop ?? throw new ArgumentNullException(nameof(supportedQop));
+        this._authentication = authentication ?? throw new ArgumentNullException(nameof(authentication));
         this._state = state ?? throw new ArgumentNullException(nameof(state));
     }
 
@@ -212,7 +210,7 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
                 {
                     if(string.IsNullOrEmpty(algorithm))
                     {
-                        if(_supportedHashAlgorithms.Contains("") || _supportedHashAlgorithms.Contains("MD5"))
+                        if(_authentication.HttpDigestAlgorithms.Contains("") || _authentication.HttpDigestAlgorithms.Contains("MD5"))
                         {
                             isSupported = true;
                             break;
@@ -220,7 +218,7 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
                     }
                     else
                     {
-                        if (_supportedHashAlgorithms.Contains(algorithm))
+                        if (_authentication.HttpDigestAlgorithms.Contains(algorithm))
                         {
                             // select the first supported header
                             isSupported = true;
@@ -280,7 +278,7 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
                 string[] serverSupportedQop = qop.Split(',');
                 foreach (string offeredQop in serverSupportedQop)
                 {
-                    foreach (string supportedQop in this._supportedQop)
+                    foreach (string supportedQop in this._authentication.HttpDigestQop)
                     {
                         if (string.Compare(offeredQop.Trim(), supportedQop.Trim(), true) == 0)
                         {

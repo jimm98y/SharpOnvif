@@ -1,25 +1,10 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace SharpOnvifServer.Security
+namespace SharpOnvifClient.Security
 {
-    public class DigestAuthenticationSchemeOptions : AuthenticationSchemeOptions
+    public class DigestAuthenticationSchemeOptions
     {
-        #region WsUsernameToken
-
-        /// <summary>
-        /// Maximum allowed time difference in between the client and the server in seconds. Negative value will disable the timestamp verification.
-        /// </summary>
-        public double WsUsernameTokenMaxTimeDeltaInMilliseconds { get; set; } = 300000;
-
-        #endregion // WsUsernameToken
-
-        #region HTTP Digest
-
-        /// <summary>
-        /// Realm.
-        /// </summary>
-        public string HttpDigestRealm { get; set; } = "IP Camera";
+        public OnvifAuthentication Authentication { get; set; } = OnvifAuthentication.WsUsernameToken | OnvifAuthentication.HttpDigest;
 
         /// <summary>
         /// Hashing algorithm(s). MD5 is the default when empty. Accepted values are: "MD5", "MD5-sess", "SHA-256", "SHA-256-sess", "SHA-512-256", "SHA-512-256-sess".
@@ -33,8 +18,8 @@ namespace SharpOnvifServer.Security
         ///  
         /// WWW-Authenticate challenges will be generated in the same order they are listed here.
         /// </summary>
-        public List<string> HttpDigestAlgorithms { get; set; } = new List<string>() 
-        { 
+        public List<string> HttpDigestAlgorithms { get; set; } = new List<string>()
+        {
             "MD5",
             "MD5-sess",
             "SHA-256",
@@ -46,7 +31,7 @@ namespace SharpOnvifServer.Security
         /// <summary>
         /// Offered quality of protection levels. Valid values are "auth" and "auth-int".
         /// </summary>
-        public List<string> HttpDigestQop { get; set; } = new List<string>() 
+        public List<string> HttpDigestQop { get; set; } = new List<string>()
         {
             "auth",
             "auth-int",
@@ -57,17 +42,12 @@ namespace SharpOnvifServer.Security
         /// </summary>
         public bool HttpDigestUserHash { get; set; } = true;
 
-        /// <summary>
-        /// How long the server nonce is valid in milliseconds. Defaults to 30 seconds.
-        /// </summary>
-        public double HttpDigestNonceLifetimeMilliseconds { get; set; } = 30000;
+        public DigestAuthenticationSchemeOptions()
+        { }
 
-        /// <summary>
-        /// When true, forces the client to use the nonce from the last response. 
-        /// This breaks pipelining of the client requests, but it lets the server enforce single-use nonces.
-        /// </summary>
-        //public bool HttpDigestIsUsingNextNonce { get; set; } = false;
-
-        #endregion // HTTP Digest
+        public DigestAuthenticationSchemeOptions(OnvifAuthentication authentication)
+        {
+            this.Authentication = authentication;
+        }
     }
 }

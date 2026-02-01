@@ -15,34 +15,32 @@ namespace SharpOnvifClient.Security
 
     public static class OnvifAuthenticationExtensions
     {
-        public static void SetOnvifAuthentication<TChannel>(
+        public static TChannel SetOnvifAuthentication<TChannel>(
             this ClientBase<TChannel> channel,
-            OnvifAuthentication authentication,
             NetworkCredential credentials,
-            System.ServiceModel.Description.IEndpointBehavior digestAuth,
+            DigestAuthenticationSchemeOptions authentication,
             System.ServiceModel.Description.IEndpointBehavior legacyAuth) where TChannel : class
         {
-            SetOnvifAuthentication(channel as TChannel, authentication, credentials, digestAuth, legacyAuth);
+            return SetOnvifAuthentication(channel as TChannel, credentials, authentication, legacyAuth);
         }
 
-        public static void SetOnvifAuthentication<TChannel>(
+        public static TChannel SetOnvifAuthentication<TChannel>(
             TChannel wcfChannel,
-            OnvifAuthentication authentication, 
-            NetworkCredential credentials, 
-            System.ServiceModel.Description.IEndpointBehavior digestAuth,
+            NetworkCredential credentials,
+            DigestAuthenticationSchemeOptions authentication, 
             System.ServiceModel.Description.IEndpointBehavior legacyAuth) where TChannel : class
         {
-            if (authentication == OnvifAuthentication.None)
+            if (authentication.Authentication == OnvifAuthentication.None)
             {
                 Debug.WriteLine("Authentication is disabled");
-                return;
+                return wcfChannel;
             }
 
             var channel = wcfChannel as ClientBase<TChannel>;
             if (channel == null)
                 throw new ArgumentException($"{wcfChannel} is not WCF {nameof(ClientBase<TChannel>)}");
 
-            if (authentication.HasFlag(OnvifAuthentication.WsUsernameToken))
+            if (authentication.Authentication.HasFlag(OnvifAuthentication.WsUsernameToken))
             {
                 if (legacyAuth == null)
                     throw new ArgumentNullException(nameof(legacyAuth));
@@ -55,16 +53,22 @@ namespace SharpOnvifClient.Security
             }
 
             // we need HttpDigest last in the behavior pipeline so that it has the final request to calculate the hash
-            if (authentication.HasFlag(OnvifAuthentication.HttpDigest))
+            if (authentication.Authentication.HasFlag(OnvifAuthentication.HttpDigest))
             {
-                if (digestAuth == null)
-                    throw new ArgumentNullException(nameof(digestAuth));
+                var state = new HttpDigestState();
+                var proxy = HttpDigestProxy<TChannel>.CreateProxy(wcfChannel, state);
 
                 if (!channel.Endpoint.EndpointBehaviors.Contains(digestAuth))
                 {
                     channel.Endpoint.EndpointBehaviors.Add(digestAuth);
                 }
-            }            
+
+                return proxy;
+            }
+            else
+            {
+                return wcfChannel;
+            }
         }
     }
 }
