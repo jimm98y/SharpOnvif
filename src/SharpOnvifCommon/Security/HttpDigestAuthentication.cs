@@ -244,7 +244,7 @@ namespace SharpOnvifCommon.Security
                 string HA1;
                 if (!isPasswordAlreadyHashed)
                 {
-                    HA1 = CreatePreHashedPassword(algorithm, userName, realm, password);
+                    HA1 = CalculateHA1(algorithm, userName, realm, password);
                 }
                 else
                 {
@@ -277,7 +277,7 @@ namespace SharpOnvifCommon.Security
 
                 if (!isPasswordAlreadyHashed)
                 {
-                    HA1 = CreatePreHashedPassword(algorithm, userName, realm, password);
+                    HA1 = CalculateHA1(algorithm, userName, realm, password);
                 }
                 else
                 {
@@ -472,6 +472,14 @@ namespace SharpOnvifCommon.Security
             }
         }
 
+        private static string CalculateHA1(string algorithm, string userName, string realm, string password)
+        {
+            using (var hash = GetHashAlgorithm(algorithm))
+            {
+                return ToHex(Hash(algorithm, hash, EncodingGetBytes($"{userName}:{realm}:{password}")));
+            }
+        }
+
         private static string CalculateHA2(string algorithm, string method, string uri, string qop, byte[] entityBody)
         {
             using (var hash = GetHashAlgorithm(algorithm))
@@ -506,10 +514,7 @@ namespace SharpOnvifCommon.Security
             // This can be used for storing HA1 in the database instead of the plaintext password.
             // Because this can still be used for authentication, the benefits in case of digest authentication
             //  are limited.
-            using (var hash = GetHashAlgorithm(algorithm))
-            {
-                return ToHex(Hash(algorithm, hash, EncodingGetBytes($"{userName}:{realm}:{password}")));
-            }
+            return CalculateHA1(algorithm, userName, realm, password);
         }
 
         public static int ConvertNCToInt(string nc)
