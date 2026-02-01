@@ -1,10 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace SharpOnvifClient.Security
 {
+    [Flags]
+    public enum DigestAuthentication
+    {
+        None = 0,
+        WsUsernameToken = 1,
+        HttpDigest = 2
+    }
+
     public class DigestAuthenticationSchemeOptions
     {
-        public OnvifAuthentication Authentication { get; set; } = OnvifAuthentication.WsUsernameToken | OnvifAuthentication.HttpDigest;
+        public DigestAuthentication Authentication { get; set; } = DigestAuthentication.WsUsernameToken | DigestAuthentication.HttpDigest;
 
         /// <summary>
         /// Hashing algorithm(s). MD5 is the default when empty. Accepted values are: "MD5", "MD5-sess", "SHA-256", "SHA-256-sess", "SHA-512-256", "SHA-512-256-sess".
@@ -45,7 +54,7 @@ namespace SharpOnvifClient.Security
         public DigestAuthenticationSchemeOptions()
         { }
 
-        public DigestAuthenticationSchemeOptions(OnvifAuthentication authentication)
+        public DigestAuthenticationSchemeOptions(DigestAuthentication authentication)
         {
             this.Authentication = authentication;
         }

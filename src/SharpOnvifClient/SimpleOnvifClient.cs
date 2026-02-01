@@ -38,7 +38,7 @@ namespace SharpOnvifClient
         /// </summary>
         /// <param name="onvifUri">Onvif URI.</param>
         /// <param name="disableExpect100Continue">Disables the default Expect: 100-continue HTTP header.</param>
-        public SimpleOnvifClient(string onvifUri, bool disableExpect100Continue = true) : this(onvifUri, null, null, new DigestAuthenticationSchemeOptions(OnvifAuthentication.None), disableExpect100Continue)
+        public SimpleOnvifClient(string onvifUri, bool disableExpect100Continue = true) : this(onvifUri, null, null, new DigestAuthenticationSchemeOptions(DigestAuthentication.None), disableExpect100Continue)
         { }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace SharpOnvifClient
         /// <param name="userName">User name.</param>
         /// <param name="password">Password.</param>
         /// <param name="disableExpect100Continue">Disables the default Expect: 100-continue HTTP header.</param>
-        public SimpleOnvifClient(string onvifUri, string userName, string password, bool disableExpect100Continue = true) : this(onvifUri, userName, password, new DigestAuthenticationSchemeOptions(OnvifAuthentication.WsUsernameToken | OnvifAuthentication.HttpDigest), disableExpect100Continue)
+        public SimpleOnvifClient(string onvifUri, string userName, string password, bool disableExpect100Continue = true) : this(onvifUri, userName, password, new DigestAuthenticationSchemeOptions(DigestAuthentication.WsUsernameToken | DigestAuthentication.HttpDigest), disableExpect100Continue)
         { }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace SharpOnvifClient
         /// <param name="onvifUri">Onvif URI.</param>
         /// <param name="userName">User name.</param>
         /// <param name="password">Password.</param>
-        /// <param name="authentication">Type of the authentication to use: <see cref="OnvifAuthentication"/>.</param>
+        /// <param name="authentication">Type of the authentication to use: <see cref="DigestAuthentication"/>.</param>
         /// <param name="supportedHashAlgorithms">Hash algorithms to use in Digest authentication.</param>
         /// <param name="supportedQop">Supported qop, listed from the most preferred one to the least preferred one.</param>
         /// <param name="disableExpect100Continue">Disables the default Expect: 100-continue HTTP header.</param>
@@ -69,14 +69,14 @@ namespace SharpOnvifClient
 
             this._authentication = authentication ?? new DigestAuthenticationSchemeOptions();
 
-            if (authentication.Authentication != OnvifAuthentication.None)
+            if (authentication.Authentication != DigestAuthentication.None)
             {
                 if (string.IsNullOrWhiteSpace(userName) || string.IsNullOrWhiteSpace(password))
                     throw new ArgumentNullException("User name or password must not be empty!");
 
                 _credentials = new System.Net.NetworkCredential(userName, password);
 
-                if (authentication.Authentication.HasFlag(OnvifAuthentication.WsUsernameToken))
+                if (authentication.Authentication.HasFlag(DigestAuthentication.WsUsernameToken))
                 {
                     _legacyAuth = new WsUsernameTokenBehavior(_credentials);
                 }
@@ -93,7 +93,7 @@ namespace SharpOnvifClient
 
         public void SetCameraUtcNowOffset(TimeSpan utcNowOffset)
         {
-            if (_authentication.Authentication.HasFlag(OnvifAuthentication.WsUsernameToken))
+            if (_authentication.Authentication.HasFlag(DigestAuthentication.WsUsernameToken))
             {
                 ((IHasUtcOffset)_legacyAuth).UtcNowOffset = utcNowOffset;
             }

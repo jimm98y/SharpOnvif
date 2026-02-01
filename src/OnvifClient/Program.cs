@@ -40,7 +40,7 @@ public static class Program
         }
         else
         {
-            OnvifAuthentication authentication = OnvifAuthentication.HttpDigest | OnvifAuthentication.WsUsernameToken;
+            DigestAuthentication authentication = DigestAuthentication.HttpDigest | DigestAuthentication.WsUsernameToken;
             using (var client = new SimpleOnvifClient(device.Addresses.First(x => x.Contains("127.0.0.1") || x.Contains("[::1]")),
                 "admin", 
                 "password", 
@@ -51,7 +51,7 @@ public static class Program
                 var cameraDateTime = await client.GetSystemDateAndTimeUtcAsync();
                 var cameraTimeOffset = cameraDateTime.Subtract(DateTime.UtcNow);
                 Console.WriteLine($"Camera time: {cameraDateTime}");
-                if (authentication.HasFlag(OnvifAuthentication.WsUsernameToken))
+                if (authentication.HasFlag(DigestAuthentication.WsUsernameToken))
                 {
                     client.SetCameraUtcNowOffset(cameraTimeOffset); // this is only supported when using WsUsernameToken legacy authentication
                 }

@@ -5,14 +5,6 @@ using System.ServiceModel;
 
 namespace SharpOnvifClient.Security
 {
-    [Flags]
-    public enum OnvifAuthentication
-    {
-        None = 0,
-        WsUsernameToken = 1,
-        HttpDigest = 2
-    }
-
     public static class OnvifAuthenticationExtensions
     {
         public static TChannel SetOnvifAuthentication<TChannel>(
@@ -30,7 +22,7 @@ namespace SharpOnvifClient.Security
             DigestAuthenticationSchemeOptions authentication, 
             System.ServiceModel.Description.IEndpointBehavior legacyAuth) where TChannel : class
         {
-            if (authentication.Authentication == OnvifAuthentication.None)
+            if (authentication.Authentication == DigestAuthentication.None)
             {
                 Debug.WriteLine("Authentication is disabled");
                 return wcfChannel;
@@ -40,7 +32,7 @@ namespace SharpOnvifClient.Security
             if (channel == null)
                 throw new ArgumentException($"{wcfChannel} is not WCF {nameof(ClientBase<TChannel>)}");
 
-            if (authentication.Authentication.HasFlag(OnvifAuthentication.WsUsernameToken))
+            if (authentication.Authentication.HasFlag(DigestAuthentication.WsUsernameToken))
             {
                 if (legacyAuth == null)
                     throw new ArgumentNullException(nameof(legacyAuth));
@@ -53,7 +45,7 @@ namespace SharpOnvifClient.Security
             }
 
             // we need HttpDigest last in the behavior pipeline so that it has the final request to calculate the hash
-            if (authentication.Authentication.HasFlag(OnvifAuthentication.HttpDigest))
+            if (authentication.Authentication.HasFlag(DigestAuthentication.HttpDigest))
             {
                 var state = new HttpDigestState();
                 var proxy = HttpDigestProxy<TChannel>.CreateProxy(wcfChannel, state);
