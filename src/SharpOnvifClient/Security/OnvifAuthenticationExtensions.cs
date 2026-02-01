@@ -57,6 +57,7 @@ namespace SharpOnvifClient.Security
             {
                 var state = new HttpDigestState();
                 var proxy = HttpDigestProxy<TChannel>.CreateProxy(wcfChannel, state);
+                var digestAuth = new HttpDigestBehavior(credentials, authentication, state);
 
                 if (!channel.Endpoint.EndpointBehaviors.Contains(digestAuth))
                 {
