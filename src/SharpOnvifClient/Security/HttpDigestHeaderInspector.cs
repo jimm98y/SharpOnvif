@@ -68,11 +68,6 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
                 string authorizationRealm = HttpDigestAuthentication.GetValueFromHeader(correlation.Authorization, "realm", true);
                 string authorizationQop = HttpDigestAuthentication.GetValueFromHeader(correlation.Authorization, "qop", false);
 
-                if(!string.IsNullOrEmpty(nextnonce))
-                {
-                    Debug.WriteLine($"Nextnonce received: {nextnonce}, but it's currently not supported.");
-                }
-
                 if (string.IsNullOrEmpty(qop))
                 {
                     throw new AuthenticationException("qop is missing in the Authentication-Info response header!");
@@ -157,6 +152,12 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
                 if(string.Compare(calculatedRspauth, rspauth) != 0)
                 {
                     throw new AuthenticationException("rspauth validation failed!");
+                }
+
+                // after we validate the response, set nextnonce if present
+                if (!string.IsNullOrEmpty(nextnonce))
+                {
+                    _state.SetNextNonce(nextnonce);
                 }
             }
         }
@@ -272,6 +273,13 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
                     // the first nonce from the server and the first generated cnonce
                     prime = (nonce, cnonce);
                     _state.SetNoncePrime(prime);
+                }
+
+                string nextnonce = _state.GetNextNonce();
+                if(!string.IsNullOrEmpty(nextnonce))
+                {
+                    // use nextnonce if we have it
+                    nonce = nextnonce;
                 }
 
                 string selectedQop = null;

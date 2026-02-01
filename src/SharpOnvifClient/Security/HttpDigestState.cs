@@ -14,6 +14,8 @@ namespace SharpOnvifClient.Security
         void SetHeaders(IEnumerable<string> headers);
         (string nonce, string cnonce)? GetNoncePrime();
         void SetNoncePrime((string nonce, string cnonce)? nonce);
+        void SetNextNonce(string nextnonce);
+        string GetNextNonce();
     }
 
     public class HttpDigestState : IHttpMessageState
@@ -23,6 +25,7 @@ namespace SharpOnvifClient.Security
         private IEnumerable<string> _headers = null;
         private int _nc = 1;
         private (string nonce, string cnonce)? _prime;
+        private string _nextNonce;
 
         public (string nonce, string cnonce)? GetNoncePrime()
         {
@@ -71,6 +74,7 @@ namespace SharpOnvifClient.Security
                 _headers = headers;
                 _nc = 1;
                 _prime = null;
+                _nextNonce = null;
             }
         }
 
@@ -100,6 +104,22 @@ namespace SharpOnvifClient.Security
                 {
                     throw new InvalidCredentialException();
                 }
+            }
+        }
+
+        public void SetNextNonce(string nextnonce)
+        {
+            lock (_syncRoot)
+            {
+                _nextNonce = nextnonce;
+            }
+        }
+
+        public string GetNextNonce()
+        {
+            lock (_syncRoot)
+            {
+                return _nextNonce;
             }
         }
     }
