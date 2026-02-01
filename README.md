@@ -197,6 +197,9 @@ Call any method on the client, e.g.:
 ```cs
 var deviceInfo = await deviceClient.GetDeviceInformationAsync(new GetDeviceInformationRequest()).ConfigureAwait(false);
 ```
+## Digest authentication
+Onvif supports two types of Digest authentication. Legacy [WS-UsernameToken](https://docs.oasis-open.org/wss/v1.1/wss-v1.1-spec-pr-UsernameTokenProfile-01.htm) authentication carried inside the SOAP headers and HTTP Digest authentication as defined in [RFC 7616](https://www.rfc-editor.org/rfc/rfc7616). Both types of authentication are now supported on both the client and the server.
+
 ## Testing
 Only the DeviceMgmt, Media and Events were tested with Hikvision cameras. 
 Server implementation was tested using Onvif Device Manager.
