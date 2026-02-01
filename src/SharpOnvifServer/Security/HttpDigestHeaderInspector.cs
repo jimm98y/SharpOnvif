@@ -48,6 +48,18 @@ namespace SharpOnvifServer.Security
                     user = UserRepository.GetUser(webToken.UserName);
                 }
 
+                string noncePrime = webToken.Nonce;
+                string cnoncePrime = webToken.CNonce;
+                if (!string.IsNullOrEmpty(webToken.Opaque))
+                {
+                    var prime = HttpDigestAuthentication.GetNoncePrime(webToken.Opaque);
+                    if (prime != null)
+                    {
+                        noncePrime = prime.Value.nonce;
+                        cnoncePrime = prime.Value.cnonce;
+                    }
+                }
+
                 string authenticationInfo =
                     HttpDigestAuthentication.CreateAuthenticationInfoRFC7616(
                         webToken.Algorithm,
@@ -61,7 +73,9 @@ namespace SharpOnvifServer.Security
                         webToken.CNonce, 
                         webToken.Qop, 
                         body,
-                        null);
+                        null,
+                        noncePrime,
+                        cnoncePrime);
                 HttpContextAccessor.HttpContext.Response.Headers.Append("Authentication-Info", authenticationInfo);
             }
         }

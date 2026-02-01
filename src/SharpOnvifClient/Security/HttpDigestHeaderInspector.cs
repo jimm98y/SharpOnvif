@@ -131,6 +131,15 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
                     body = buffer.Array.Skip(buffer.Offset).Take(buffer.Count).ToArray();
                 }
 
+                string noncePrime = authorizationNonce;
+                string cnoncePrime = authorizationCnonce;
+                var prime = _state.GetNoncePrime();
+                if (prime != null)
+                {
+                    noncePrime = prime.Value.nonce;
+                    cnoncePrime = prime.Value.cnonce;
+                }
+
                 string calculatedRspauth = HttpDigestAuthentication.CreateWebDigestRFC7616(
                     algorithm,
                     _credentials.UserName,
@@ -143,7 +152,9 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
                     HttpDigestAuthentication.ConvertNCToInt(authorizationNc),
                     authorizationCnonce,
                     authorizationQop,
-                    body);
+                    body,
+                    noncePrime,
+                    cnoncePrime);
 
                 if(string.Compare(calculatedRspauth, rspauth) != 0)
                 {
@@ -255,6 +266,16 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
             {
                 int nextNc = _state.GetAndUpdateNC();
                 string cnonce = HttpDigestAuthentication.GenerateClientNonce(BinarySerializationType.Hex);
+
+                // used only by the "session" (-sess) algorithms
+                var prime = _state.GetNoncePrime();
+                if (prime == null)
+                {
+                    // the first nonce from the server and the first generated cnonce
+                    prime = (nonce, cnonce);
+                    _state.SetNoncePrime(prime);
+                }
+
                 string selectedQop = null;
                 string[] serverSupportedQop = qop.Split(',');
                 foreach (string offeredQop in serverSupportedQop)
@@ -288,8 +309,9 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
                     nextNc,
                     cnonce,
                     selectedQop,
-                    body
-                    );
+                    body,
+                    prime.Value.nonce,
+                    prime.Value.cnonce);
 
                 string username;
                 if(userhash)

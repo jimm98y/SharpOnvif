@@ -92,7 +92,7 @@ namespace SharpOnvifCommon.Security
             DateTimeOffset currentTimestamp, 
             byte[] etag = null,
             int saltLength = 0,
-            int lifetimeMilliseconds = 30000, // 30 seconds is the default lifetime of the nonce
+            double lifetimeMilliseconds = 30000, // 30 seconds is the default lifetime of the nonce
             bool useNonceReplayProtection = true) // nonce replay protection is stateful
         {
             if (string.IsNullOrEmpty(nonce))
@@ -121,11 +121,6 @@ namespace SharpOnvifCommon.Security
             else
             {
                 throw new NotSupportedException();
-            }
-
-            if (nonce.Length != estimatedNonceSize)
-            {
-                return ERROR_NONCE_LENGTH;
             }
 
             byte[] nonceBytes = null;
@@ -672,5 +667,130 @@ namespace SharpOnvifCommon.Security
             }
             return byteArray;
         }
+
+        #region Nonce prime
+
+        private const int OPAQUE_LENGTH = 32;
+        private static MemoryCache _primeCache = new MemoryCache("prime");
+        private static object _primeCacheSyncRoot = new object();
+
+        public static (string nonce, string cnonce)? GetNoncePrime(string sessionID)
+        {
+            lock (_primeCacheSyncRoot)
+            {
+                return _primeCache.Get(sessionID, null) as (string nonce, string cnonce)?;
+            }
+        }
+
+        public static void RemoveNoncePrime(string sessionID)
+        {
+            lock (_primeCacheSyncRoot)
+            {
+                _primeCache.Remove(sessionID, null);
+            }
+        }
+
+        public static bool TrySetNoncePrime(string sessionID, (string nonce, string cnonce)? primeCandidate, double lifetimeMilliseconds = 5 * 60 * 1000)
+        {
+            lock (_primeCacheSyncRoot)
+            {
+                var currentPrime = _primeCache.Get(sessionID, null);
+                if (currentPrime == null)
+                {
+                    // we have a new prime
+                    CacheItemPolicy cip = new CacheItemPolicy()
+                    {
+                        AbsoluteExpiration = new DateTimeOffset(DateTime.UtcNow.AddMilliseconds(lifetimeMilliseconds))
+                    };
+                    _primeCache.Set(sessionID, primeCandidate, cip);
+                    return true;
+                }
+                else
+                {
+                    // update the expiration
+                    CacheItemPolicy cip = new CacheItemPolicy()
+                    {
+                        AbsoluteExpiration = new DateTimeOffset(DateTime.UtcNow.AddMilliseconds(lifetimeMilliseconds))
+                    };
+                    _primeCache.Set(sessionID, currentPrime, cip);
+                    return false;
+                }
+            }
+        }
+
+        public static string GenerateOpaque(BinarySerializationType opaqueType, byte[] opaque = null)
+        {
+            if (opaque == null)
+            {
+                opaque = GenerateRandom(OPAQUE_LENGTH);
+            }
+            return BytesToString(opaqueType, opaque);
+        }
+
+        public static int ValidateOpaque(BinarySerializationType opaqueType, string opaque)
+        {
+            if (string.IsNullOrEmpty(opaque))
+                return ERROR_NONCE_EMPTY;
+
+            int estimatedOpaqueSize = OPAQUE_LENGTH;
+            if (opaqueType == BinarySerializationType.Hex)
+            {
+                estimatedOpaqueSize = estimatedOpaqueSize * 2;
+                if (opaque.Length != estimatedOpaqueSize)
+                {
+                    return ERROR_NONCE_LENGTH;
+                }
+            }
+            else if (opaqueType == BinarySerializationType.Base64)
+            {
+                int estimatedMinNonceSize = (int)(Math.Floor(estimatedOpaqueSize / 3d) * 4);
+                int estimatedMaxNonceSize = (int)(Math.Ceiling(estimatedOpaqueSize / 3d) * 4);
+                if (opaque.Length < estimatedMinNonceSize || opaque.Length > estimatedMaxNonceSize)
+                {
+                    return ERROR_NONCE_LENGTH;
+                }
+            }
+            else
+            {
+                throw new NotSupportedException();
+            }
+
+            byte[] opaqueBytes = null;
+
+            if (opaqueType == BinarySerializationType.Base64)
+            {
+                try
+                {
+                    opaqueBytes = Convert.FromBase64String(opaque);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Nonce is not valid base64 string");
+                    Debug.WriteLine(ex.Message);
+                    return ERROR_NONCE_FORMAT;
+                }
+            }
+            else if (opaqueType == BinarySerializationType.Hex)
+            {
+                try
+                {
+                    opaqueBytes = FromHex(opaque);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Nonce is not valid hexadecimal string");
+                    Debug.WriteLine(ex.Message);
+                    return ERROR_NONCE_FORMAT;
+                }
+            }
+            else
+            {
+                throw new NotSupportedException();
+            }
+
+            return ERROR_NONCE_SUCCESS;
+        }
+
+        #endregion // Nonce prime
     }
 }

@@ -12,6 +12,8 @@ namespace SharpOnvifClient.Security
         int GetAndUpdateNC();
         string[] GetHeaders();
         void SetHeaders(IEnumerable<string> headers);
+        (string nonce, string cnonce)? GetNoncePrime();
+        void SetNoncePrime((string nonce, string cnonce)? nonce);
     }
 
     public class HttpDigestState : IHttpMessageState
@@ -19,7 +21,24 @@ namespace SharpOnvifClient.Security
         private readonly object _syncRoot = new object();
 
         private IEnumerable<string> _headers = null;
-        public int _nc = 1;
+        private int _nc = 1;
+        private (string nonce, string cnonce)? _prime;
+
+        public (string nonce, string cnonce)? GetNoncePrime()
+        {
+            lock(_syncRoot)
+            {
+                return _prime;
+            }
+        }
+
+        public void SetNoncePrime((string nonce, string cnonce)? prime)
+        {
+            lock(_syncRoot)
+            {
+                _prime = prime;
+            }
+        }
 
         public int PeekNC()
         {
@@ -51,6 +70,7 @@ namespace SharpOnvifClient.Security
             {
                 _headers = headers;
                 _nc = 1;
+                _prime = null;
             }
         }
 

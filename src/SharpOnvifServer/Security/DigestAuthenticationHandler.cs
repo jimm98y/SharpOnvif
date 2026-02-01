@@ -21,10 +21,13 @@ namespace SharpOnvifServer
 {
     public class DigestAuthenticationHandler : AuthenticationHandler<DigestAuthenticationSchemeOptions>
     {
-        private const string CONTEXT_AUTHENTICATE_WEB_DIGEST_RESULT = "authenticateWebDigestResult07E740A9-0079-42CF-9FDE-510FDAB3A1D9";
+        private const string CONTEXT_AUTHENTICATE_WEB_DIGEST_RESULT = "authenticateWebDigestResult_07E740A9-0079-42CF-9FDE-510FDAB3A1D9";
+        private const string CONTEXT_OPAQUE = "opaque_E768DBA5-D7A8-4735-BD34-FE9F0D65DE54";
+
         private const int NONCE_LIFESPAN = 30000; // 30 seconds in milliseconds
         private const int NONCE_SALT_LENGTH = 12;
         private const string NONCE_HASH_ALGORITHM = "SHA-256";
+        private const BinarySerializationType PREFERRED_SERIALIZATION = BinarySerializationType.Hex;
 
         public const string ANONYMOUS_USER = "Anonymous";
 
@@ -58,7 +61,8 @@ namespace SharpOnvifServer
                 string qop,
                 string cnonce,
                 string nc, 
-                string userHash)
+                string userHash,
+                string opaque)
             {
                 Algorithm = string.IsNullOrEmpty(algorithm) ? "" : algorithm;
                 UserName = userName ?? throw new ArgumentNullException(nameof(userName));
@@ -66,6 +70,7 @@ namespace SharpOnvifServer
                 Nonce = nonce ?? throw new ArgumentNullException(nameof(nonce));
                 Uri = uri ?? throw new ArgumentNullException(nameof(uri));
                 Response = response ?? throw new ArgumentNullException(nameof(response));
+                Opaque = opaque;
 
                 Qop = qop;
                 CNonce = cnonce;
@@ -79,6 +84,7 @@ namespace SharpOnvifServer
             public string Nonce { get; }
             public string Uri { get; }
             public string Algorithm { get; }
+            public string Opaque { get; }
 
             public string Qop { get; }
             public string CNonce { get; }
@@ -100,8 +106,19 @@ namespace SharpOnvifServer
         {
             // according to the Onvif specification, we must first authenticate the Digest if it's present
             WebDigestAuth webToken = GetSecurityHeaderFromHeaders(Request);
-            if (webToken != null && webToken.Realm == OptionsMonitor.CurrentValue.Realm)
+            if (webToken != null)
             {
+                if(string.Compare(webToken.Realm, OptionsMonitor.CurrentValue.Realm) != 0)
+                {
+                    return AuthenticateResult.Fail("HTTP Digest has invalid realm.");
+                }
+
+                // store the opaque for the duration of this request
+                if (HttpDigestAuthentication.ValidateOpaque(PREFERRED_SERIALIZATION, webToken.Opaque) == 0)
+                {
+                    Context.Items[CONTEXT_OPAQUE] = webToken.Opaque;
+                }
+
                 try
                 {
                     byte[] body = null;
@@ -150,7 +167,12 @@ namespace SharpOnvifServer
                             {
                                 return AuthenticateResult.Fail($"HTTP Digest authentication succeeded, but WsUsernameToken authentication has failed: {ex.Message}");
                             }
-                        }                       
+                        }
+
+                        if (!string.IsNullOrEmpty(webToken.Opaque))
+                        {
+                            HttpDigestAuthentication.TrySetNoncePrime(webToken.Opaque, (webToken.Nonce, webToken.CNonce));
+                        }
 
                         var identity = new GenericIdentity(webToken.UserName);
                         var claimsPrincipal = new ClaimsPrincipal(identity);
@@ -272,8 +294,8 @@ namespace SharpOnvifServer
             if (user != null)
             {
                 int nonceValidationResult = HttpDigestAuthentication.ValidateServerNonce(
-                    NONCE_HASH_ALGORITHM, 
-                    BinarySerializationType.Hex,
+                    NONCE_HASH_ALGORITHM,
+                    PREFERRED_SERIALIZATION,
                     webToken.Nonce,
                     HttpDigestAuthentication.ConvertNCToInt(webToken.Nc),
                     DateTimeOffset.UtcNow, 
@@ -298,6 +320,18 @@ namespace SharpOnvifServer
                         webToken.Uri);
                     */
 
+                    string noncePrime = webToken.Nonce;
+                    string cnoncePrime = webToken.CNonce;
+                    if (!string.IsNullOrEmpty(webToken.Opaque))
+                    {
+                        var prime = HttpDigestAuthentication.GetNoncePrime(webToken.Opaque);
+                        if(prime != null)
+                        {
+                            noncePrime = prime.Value.nonce;
+                            cnoncePrime = prime.Value.cnonce;
+                        }
+                    }
+
                     digest = HttpDigestAuthentication.CreateWebDigestRFC7616(
                         webToken.Algorithm,
                         user.UserName,
@@ -310,7 +344,9 @@ namespace SharpOnvifServer
                         HttpDigestAuthentication.ConvertNCToInt(webToken.Nc),
                         webToken.CNonce,
                         webToken.Qop,
-                        body);
+                        body,
+                        noncePrime,
+                        cnoncePrime);
 
                     if (digest.CompareTo(webToken.Response) == 0)
                     {
@@ -350,6 +386,7 @@ namespace SharpOnvifServer
                     string response = HttpDigestAuthentication.GetValueFromHeader(auth, "response", true);
                     string nonce = HttpDigestAuthentication.GetValueFromHeader(auth, "nonce", true);
                     string uri = HttpDigestAuthentication.GetValueFromHeader(auth, "uri", true);
+                    string opaque = HttpDigestAuthentication.GetValueFromHeader(auth, "opaque", true);
 
                     // some implementations put quotes around qop (ODM)
                     string qop = HttpDigestAuthentication.GetValueFromHeader(auth, "qop", false);
@@ -371,7 +408,7 @@ namespace SharpOnvifServer
 
                     string userHash = HttpDigestAuthentication.GetValueFromHeader(auth, "userhash", false);
 
-                    return new WebDigestAuth(algorithm, userName, realm, nonce, uri, response, qop, cnonce, nc, userHash);
+                    return new WebDigestAuth(algorithm, userName, realm, nonce, uri, response, qop, cnonce, nc, userHash, opaque);
                 }
             }
             return null;
@@ -382,6 +419,14 @@ namespace SharpOnvifServer
             Response.StatusCode = 401;
 
             object authenticateWebDigestResult = Context.Items[CONTEXT_AUTHENTICATE_WEB_DIGEST_RESULT];
+            string opaque = Context.Items[CONTEXT_OPAQUE]?.ToString();
+            
+            if (!string.IsNullOrEmpty(opaque))
+            {
+                // remove it from the cache, but keep opaque value
+                HttpDigestAuthentication.RemoveNoncePrime(opaque);
+            }
+
             bool isStale =
                 authenticateWebDigestResult != null &&
                 (int)authenticateWebDigestResult == HttpDigestAuthentication.ERROR_NONCE_EXPIRED;
@@ -391,7 +436,7 @@ namespace SharpOnvifServer
             /*
             wwwAuth = DigestAuthentication.CreateWwwAuthenticateRFC2069(
                     NONCE_HASH_ALGORITHM,
-                    BinarySerializationType.Hex, 
+                    PREFERRED_SERIALIZATION, 
                     DateTimeOffset.UtcNow, 
                     "MD5",
                     null, 
@@ -399,21 +444,19 @@ namespace SharpOnvifServer
                     OptionsMonitor.CurrentValue.Realm);
             */
 
-            byte[] salt = HttpDigestAuthentication.CreateNonceSessionSalt(NONCE_SALT_LENGTH);
             var now = DateTimeOffset.UtcNow;
-
             var hashingAlgorithms = OptionsMonitor.CurrentValue.HashingAlgorithms == null ? new List<string>() { "MD5" } : OptionsMonitor.CurrentValue.HashingAlgorithms.ToList();
             var allowedQop = OptionsMonitor.CurrentValue.AllowedQop == null ? "auth" : string.Join(", ", OptionsMonitor.CurrentValue.AllowedQop.ToList());
-            const string opaque = "00000000"; // we're not using opaque for anything, set it to all zeroes
+            
             foreach (var algorithm in hashingAlgorithms)
             {
                 wwwAuth = HttpDigestAuthentication.CreateWwwAuthenticateRFC7616(
                         NONCE_HASH_ALGORITHM,
-                        BinarySerializationType.Hex,
+                        PREFERRED_SERIALIZATION,
                         now,
                         algorithm,
                         null,
-                        salt,
+                        HttpDigestAuthentication.CreateNonceSessionSalt(NONCE_SALT_LENGTH),
                         OptionsMonitor.CurrentValue.Realm,
                         opaque,
                         allowedQop,
