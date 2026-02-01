@@ -27,7 +27,7 @@ public class UserRepository : IUserRepository
 
     public Task<UserInfo> GetUser(string userName)
     {
-        if (string.Compare(userName, UserName, true) == 0)
+        if (string.Compare(userName, UserName, false) == 0)
         {
             return Task.FromResult(new UserInfo() { UserName = userName, Password = Password });
         }

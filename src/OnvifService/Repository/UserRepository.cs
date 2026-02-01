@@ -16,7 +16,7 @@ namespace OnvifService.Repository
 
         public UserInfo GetUser(string userName)
         {
-            if (string.Compare(userName, _configuration.GetValue<string>("UserRepository:UserName"), true) == 0)
+            if (string.Compare(userName, _configuration.GetValue<string>("UserRepository:UserName"), false) == 0)
             {
                 string password = _configuration.GetValue<string>("UserRepository:Password");
                 return new UserInfo() { UserName = userName, Password = password };
