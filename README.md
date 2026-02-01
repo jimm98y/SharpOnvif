@@ -34,6 +34,22 @@ public class UserRepository : IUserRepository
 
         return Task.FromResult((UserInfo)null);
     }
+
+    public Task<UserInfo> GetUserAsync(string userName)
+    {
+        return Task.FromResult(GetUser(userName));
+    }
+
+    // used only when userhash=TRUE - see the examples for an implementation
+    public UserInfo GetUserByHash(string algorithm, string userName, string realm)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<UserInfo> GetUserByHashAsync(string algorithm, string userName, string realm)
+    {
+        throw new NotImplementedException();
+    }
 }
 ```
 Optionally, add Onvif discovery to make your service discoverable on the network:
@@ -128,7 +144,7 @@ To create a new Pull Point subscription, call:
 ```cs
 var subscription = await client.PullPointSubscribeAsync();
 ```
-To retrive the current notifications from the Pull Point subscription, call:
+To retrieve the current notifications from the Pull Point subscription, call:
 ```cs
 var notifications = await client.PullPointPullMessagesAsync(subscription);
 foreach (var notification in notifications)
@@ -157,12 +173,13 @@ eventListener.Start((int cameraID, string ev) =>
 var subscriptionResponse = await client.BasicSubscribeAsync(eventListener.GetOnvifEventListenerUri(CAMERA1));
 ```
 ### Using the generated WCF clients
-First add a reference to the DLL that implements the clients (e.g. `SharpOnvifClient.DeviceMgmt`). Add the usings:
+First add a reference to the DLL that implements the clients (e.g. `SharpOnvifClient.DeviceMgmt`). Add the using:
 ```cs
 using SharpOnvifClient;
 ```
 Create the Onvif client and set the authentication behavior using `SetOnvifAuthentication` extension method from `SharpOnvifClient.OnvifAuthenticationExtensions` before you use it:
 ```cs
+var authentication = new DigestAuthenticationSchemeOptions();
 System.Net.NetworkCredential credentials = new System.Net.NetworkCredential(userName, password);
 IEndpointBehavior legacyAuth = new WsUsernameTokenBehavior(credentials);
 
@@ -170,14 +187,15 @@ using (var deviceClient = new DeviceClient(
     OnvifBindingFactory.CreateBinding(),
     new System.ServiceModel.EndpointAddress("http://192.168.1.10/onvif/device_service")))
 {
-    deviceClient.SetOnvifAuthentication(OnvifAuthentication.WsUsernameToken | OnvifAuthentication.HttpDigest, credentials, legacyAuth);
+    DisableExpect100ContinueBehaviorExtensions.SetDisableExpect100Continue(client, true);
+    var proxyClient = OnvifAuthenticationExtensions.SetOnvifAuthentication(client, credentials, authentication, legacyAuth);
     
-    // use the client
+    // use the proxyClient
 }
 ```
 Call any method on the client, e.g.:
 ```cs
-var deviceInfo = await deviceClient.GetDeviceInformationAsync(new GetDeviceInformationRequest());
+var deviceInfo = await deviceClient.GetDeviceInformationAsync(new GetDeviceInformationRequest()).ConfigureAwait(false);
 ```
 ## Testing
 Only the DeviceMgmt, Media and Events were tested with Hikvision cameras. 
