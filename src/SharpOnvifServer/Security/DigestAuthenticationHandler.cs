@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
-namespace SharpOnvifServer
+namespace SharpOnvifServer.Security
 {
     public class DigestAuthenticationHandler : AuthenticationHandler<DigestAuthenticationSchemeOptions>
     {
@@ -33,65 +33,6 @@ namespace SharpOnvifServer
 
         private readonly IUserRepository _userRepository;
 
-        private class SoapDigestAuth
-        {
-            public SoapDigestAuth(string username, string password, string nonce, string created)
-            {
-                UserName = username;
-                Password = password;
-                Nonce = nonce;
-                Created = created;
-            }
-
-            public string UserName { get; set; }
-            public string Password { get; set; }
-            public string Nonce { get; set; }
-            public string Created { get; set; }
-        }
-
-        public class WebDigestAuth
-        {
-            public WebDigestAuth(
-                string algorithm,
-                string userName, 
-                string realm, 
-                string nonce, 
-                string uri, 
-                string response,
-                string qop,
-                string cnonce,
-                string nc, 
-                string userHash,
-                string opaque)
-            {
-                Algorithm = string.IsNullOrEmpty(algorithm) ? "" : algorithm;
-                UserName = userName ?? throw new ArgumentNullException(nameof(userName));
-                Realm = realm ?? throw new ArgumentNullException(nameof(realm));
-                Nonce = nonce ?? throw new ArgumentNullException(nameof(nonce));
-                Uri = uri ?? throw new ArgumentNullException(nameof(uri));
-                Response = response ?? throw new ArgumentNullException(nameof(response));
-                Opaque = opaque;
-
-                Qop = qop;
-                CNonce = cnonce;
-                Nc = nc;
-                UserHash = userHash;
-            }
-
-            public string Response { get; }
-            public string UserName { get; }
-            public string Realm { get; }
-            public string Nonce { get; }
-            public string Uri { get; }
-            public string Algorithm { get; }
-            public string Opaque { get; }
-
-            public string Qop { get; }
-            public string CNonce { get; }
-            public string Nc { get; }
-            public string UserHash { get; }
-        }
-
         public DigestAuthenticationHandler(
             IOptionsMonitor<DigestAuthenticationSchemeOptions> options,
             ILoggerFactory logger,
@@ -105,7 +46,7 @@ namespace SharpOnvifServer
         protected async override Task<AuthenticateResult> HandleAuthenticateAsync()
         {
             // according to the Onvif specification, we must first authenticate the Digest if it's present
-            WebDigestAuth webToken = GetSecurityHeaderFromHeaders(Request);
+            WebDigestAuth webToken = Request.GetSecurityHeaderFromHeaders();
             if (webToken != null)
             {
                 if(string.Compare(webToken.Realm, OptionsMonitor.CurrentValue.Realm) != 0)
@@ -130,28 +71,18 @@ namespace SharpOnvifServer
                         body = Encoding.UTF8.GetBytes(content);
                     }
 
-                    int authenticateWebDigestResult = await AuthenticateWebDigest(OptionsMonitor.CurrentValue.Realm, Request.Method, webToken, body).ConfigureAwait(false);
+                    int authenticateWebDigestResult = await AuthenticateWebDigestAsync(OptionsMonitor.CurrentValue.Realm, Request.Method, webToken, body).ConfigureAwait(false);
                     if (authenticateWebDigestResult == 0)
                     {
                         // now in case the request also contains WsUsernameToken, we must verify it
-                        SoapDigestAuth token = await GetSecurityHeaderFromSoapEnvelope(Request).ConfigureAwait(false);
+                        SoapDigestAuth token = await GetSecurityHeaderFromSoapEnvelopeAsync(Request).ConfigureAwait(false);
                         if (token != null)
                         {
                             try
                             {
                                 if (await AuthenticateSoapDigest(token.UserName, token.Password, token.Nonce, token.Created).ConfigureAwait(false) == 0)
                                 {
-                                    UserInfo user = null;
-
-                                    // TODO: move to an extension method
-                                    if (!string.IsNullOrEmpty(webToken.UserHash) && webToken.UserHash.ToUpperInvariant() == "TRUE")
-                                    {
-                                        user = await _userRepository.GetUserByHashAsync(webToken.Algorithm, webToken.UserName, webToken.Realm).ConfigureAwait(false);
-                                    }
-                                    else
-                                    {
-                                        user = await _userRepository.GetUserAsync(webToken.UserName).ConfigureAwait(false);
-                                    }
+                                    UserInfo user = await _userRepository.GetUserAsync(webToken).ConfigureAwait(false);
 
                                     if (string.Compare(token.UserName, user.UserName, false, CultureInfo.InvariantCulture) != 0)
                                     {
@@ -197,7 +128,7 @@ namespace SharpOnvifServer
             }
             else
             {
-                SoapDigestAuth token = await GetSecurityHeaderFromSoapEnvelope(Request).ConfigureAwait(false);
+                SoapDigestAuth token = await GetSecurityHeaderFromSoapEnvelopeAsync(Request).ConfigureAwait(false);
                 if (token != null)
                 {
                     try
@@ -277,19 +208,9 @@ namespace SharpOnvifServer
             return 1;
         }
 
-        private async Task<int> AuthenticateWebDigest(string realm, string method, WebDigestAuth webToken, byte[] body = null)
+        private async Task<int> AuthenticateWebDigestAsync(string realm, string method, WebDigestAuth webToken, byte[] body = null)
         {
-            UserInfo user = null;
-
-            // TODO: move to an extension method
-            if (!string.IsNullOrEmpty(webToken.UserHash) && webToken.UserHash.ToUpperInvariant() == "TRUE")
-            {
-                user = await _userRepository.GetUserByHashAsync(webToken.Algorithm, webToken.UserName, webToken.Realm).ConfigureAwait(false);
-            }
-            else
-            {
-                user = await _userRepository.GetUserAsync(webToken.UserName).ConfigureAwait(false);
-            }
+            UserInfo user = await _userRepository.GetUserAsync(webToken).ConfigureAwait(false);
 
             if (user != null)
             {
@@ -362,58 +283,6 @@ namespace SharpOnvifServer
             return 1;
         }
 
-        internal static WebDigestAuth GetSecurityHeaderFromHeaders(HttpRequest request)
-        {
-            if(request.Headers.Authorization.Count > 0)
-            {
-                string auth = request.Headers.Authorization[0];
-                if(auth.StartsWith("Digest ", StringComparison.OrdinalIgnoreCase))
-                {
-                    string realm = HttpDigestAuthentication.GetValueFromHeader(auth, "realm", true);
-                    string algorithm = HttpDigestAuthentication.GetValueFromHeader(auth, "algorithm", false) ?? "";
-                    string userName = HttpDigestAuthentication.GetValueFromHeader(auth, "username", true);
-
-                    // read username*
-                    if (string.IsNullOrEmpty(userName))
-                    {
-                        userName = HttpDigestAuthentication.GetValueFromHeader(auth, "username\\*", false); // username*
-                        if(!string.IsNullOrEmpty(userName) && userName.StartsWith("UTF-8''"))
-                        {
-                            userName = Uri.UnescapeDataString(userName.Substring("UTF-8''".Length));
-                        }
-                    }
-
-                    string response = HttpDigestAuthentication.GetValueFromHeader(auth, "response", true);
-                    string nonce = HttpDigestAuthentication.GetValueFromHeader(auth, "nonce", true);
-                    string uri = HttpDigestAuthentication.GetValueFromHeader(auth, "uri", true);
-                    string opaque = HttpDigestAuthentication.GetValueFromHeader(auth, "opaque", true);
-
-                    // some implementations put quotes around qop (ODM)
-                    string qop = HttpDigestAuthentication.GetValueFromHeader(auth, "qop", false);
-                    if(!string.IsNullOrEmpty(qop) && qop.Contains("\""))
-                    {
-                        // Note that this is against RFC 7616 that says: For historical reasons, a sender MUST NOT
-                        //  generate the quoted string syntax for the following parameters: qop and nc
-                        qop = qop.Replace("\"", "");
-                    }
-
-                    string cnonce = HttpDigestAuthentication.GetValueFromHeader(auth, "cnonce", true);
-                    string nc = HttpDigestAuthentication.GetValueFromHeader(auth, "nc", false);
-                    if (!string.IsNullOrEmpty(nc) && nc.Contains("\""))
-                    {
-                        // Note that this is against RFC 7616 that says: For historical reasons, a sender MUST NOT
-                        //  generate the quoted string syntax for the following parameters: qop and nc
-                        nc = nc.Replace("\"", "");
-                    }
-
-                    string userHash = HttpDigestAuthentication.GetValueFromHeader(auth, "userhash", false);
-
-                    return new WebDigestAuth(algorithm, userName, realm, nonce, uri, response, qop, cnonce, nc, userHash, opaque);
-                }
-            }
-            return null;
-        }
-
         protected override async Task HandleChallengeAsync(AuthenticationProperties properties)
         {
             Response.StatusCode = 401;
@@ -469,7 +338,7 @@ namespace SharpOnvifServer
             await Context.Response.WriteAsync("You are not logged in via Digest auth").ConfigureAwait(false);
         }
 
-        private static async Task<SoapDigestAuth> GetSecurityHeaderFromSoapEnvelope(HttpRequest request)
+        private static async Task<SoapDigestAuth> GetSecurityHeaderFromSoapEnvelopeAsync(HttpRequest request)
         {
             ReadResult requestBodyInBytes = await request.BodyReader.ReadAsync().ConfigureAwait(false);
             string body = Encoding.UTF8.GetString(requestBodyInBytes.Buffer.FirstSpan);

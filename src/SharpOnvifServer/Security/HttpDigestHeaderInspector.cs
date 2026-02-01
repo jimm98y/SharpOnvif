@@ -28,7 +28,7 @@ namespace SharpOnvifServer.Security
 
         public void BeforeSendReply(ref Message reply, object correlationState)
         {
-            var webToken = DigestAuthenticationHandler.GetSecurityHeaderFromHeaders(HttpContextAccessor.HttpContext.Request);
+            var webToken = HttpContextAccessor.HttpContext.Request.GetSecurityHeaderFromHeaders();
             if (webToken != null)
             {
                 byte[] body = null;
@@ -37,16 +37,7 @@ namespace SharpOnvifServer.Security
                     body = ReadResponseBody(ref reply);
                 }
 
-                // TODO: move to an extension method
-                UserInfo user;
-                if (!string.IsNullOrEmpty(webToken.UserHash) && webToken.UserHash.ToUpperInvariant() == "TRUE")
-                {
-                    user = UserRepository.GetUserByHash(webToken.Algorithm, webToken.UserName, webToken.Realm);
-                }
-                else
-                {
-                    user = UserRepository.GetUser(webToken.UserName);
-                }
+                UserInfo user = UserRepository.GetUser(webToken);
 
                 string noncePrime = webToken.Nonce;
                 string cnoncePrime = webToken.CNonce;
@@ -63,15 +54,15 @@ namespace SharpOnvifServer.Security
                 string authenticationInfo =
                     HttpDigestAuthentication.CreateAuthenticationInfoRFC7616(
                         webToken.Algorithm,
-                        user.UserName, 
+                        user.UserName,
                         webToken.Realm,
                         user.Password,
                         user.IsPasswordAlreadyHashed,
-                        webToken.Nonce, 
-                        webToken.Uri, 
-                        HttpDigestAuthentication.ConvertNCToInt(webToken.Nc), 
-                        webToken.CNonce, 
-                        webToken.Qop, 
+                        webToken.Nonce,
+                        webToken.Uri,
+                        HttpDigestAuthentication.ConvertNCToInt(webToken.Nc),
+                        webToken.CNonce,
+                        webToken.Qop,
                         body,
                         null,
                         noncePrime,
@@ -79,6 +70,8 @@ namespace SharpOnvifServer.Security
                 HttpContextAccessor.HttpContext.Response.Headers.Append("Authentication-Info", authenticationInfo);
             }
         }
+
+        
 
         private static byte[] ReadResponseBody(ref Message reply)
         {

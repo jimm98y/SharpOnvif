@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using SharpOnvifServer.Security;
+using System.Threading.Tasks;
 
 namespace SharpOnvifServer
 {
@@ -58,5 +59,52 @@ namespace SharpOnvifServer
         /// <param name="realm"></param>
         /// <returns></returns>
         public Task<UserInfo> GetUserByHashAsync(string algorithm, string userName, string realm);
+    }
+
+    public static class IUserRepositoryExtensions
+    {
+        /// <summary>
+        /// Resolves the user based upon the HTTP Digest Authentication header. Supports user name as well as user hash.
+        /// </summary>
+        /// <param name="userRepository">User repository that implements <see cref="IUserRepository"/>.</param>
+        /// <param name="webToken">HTTP Digest web token <see cref="WebDigestAuth"/>.</param>
+        /// <returns><see cref="UserInfo"/>.</returns>
+        public static UserInfo GetUser(this IUserRepository userRepository, WebDigestAuth webToken)
+        {
+            UserInfo user = null;
+
+            if (!string.IsNullOrEmpty(webToken.UserHash) && webToken.UserHash.ToUpperInvariant() == "TRUE")
+            {
+                user = userRepository.GetUserByHash(webToken.Algorithm, webToken.UserName, webToken.Realm);
+            }
+            else
+            {
+                user = userRepository.GetUser(webToken.UserName);
+            }
+
+            return user;
+        }
+
+        /// <summary>
+        /// Resolves the user based upon the HTTP Digest Authentication header. Supports user name as well as user hash.
+        /// </summary>
+        /// <param name="userRepository">User repository that implements <see cref="IUserRepository"/>.</param>
+        /// <param name="webToken">HTTP Digest web token <see cref="WebDigestAuth"/>.</param>
+        /// <returns>Awaitable <see cref="Task{UserInfo}"/>.</returns>
+        public static async Task<UserInfo> GetUserAsync(this IUserRepository userRepository, WebDigestAuth webToken)
+        {
+            UserInfo user = null;
+
+            if (!string.IsNullOrEmpty(webToken.UserHash) && webToken.UserHash.ToUpperInvariant() == "TRUE")
+            {
+                user = await userRepository.GetUserByHashAsync(webToken.Algorithm, webToken.UserName, webToken.Realm).ConfigureAwait(false);
+            }
+            else
+            {
+                user = await userRepository.GetUserAsync(webToken.UserName).ConfigureAwait(false);
+            }
+
+            return user;
+        }
     }
 }

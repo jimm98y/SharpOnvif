@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using System.Collections.Generic;
 
-namespace SharpOnvifServer
+namespace SharpOnvifServer.Security
 {
     public class DigestAuthenticationSchemeOptions : AuthenticationSchemeOptions
     {

@@ -3,10 +3,9 @@ using CoreWCF.Channels;
 using CoreWCF.Description;
 using CoreWCF.Dispatcher;
 using Microsoft.AspNetCore.Http;
-using SharpOnvifServer.Security;
 using System.Collections.ObjectModel;
 
-namespace SharpOnvifServer
+namespace SharpOnvifServer.Security
 {
     public class HttpDigestBehavior : IServiceBehavior
     {

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.Extensions.DependencyInjection;
 using SharpOnvifServer.Discovery;
 using SharpOnvifServer.Events;
+using SharpOnvifServer.Security;
 using System;
 using System.Collections.Generic;
 using System.IO.Pipelines;
