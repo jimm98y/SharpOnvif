@@ -40,8 +40,26 @@ public static class Program
         }
         else
         {
-            OnvifAuthentication authentication = OnvifAuthentication.HttpDigest; // | OnvifAuthentication.WsUsernameToken;
-            using (var client = new SimpleOnvifClient(device.Addresses.First(x => x.Contains("127.0.0.1") || x.Contains("[::1]")), "admin", "password", authentication, new string[] { "SHA-256" }, new string[] { "auth-int", "auth" }, true))
+            OnvifAuthentication authentication = OnvifAuthentication.HttpDigest | OnvifAuthentication.WsUsernameToken;
+            using (var client = new SimpleOnvifClient(device.Addresses.First(x => x.Contains("127.0.0.1") || x.Contains("[::1]")),
+                "admin", 
+                "password", 
+                authentication, 
+                new string[] 
+                { 
+                    "MD5",
+                    "MD5-sess",
+                    "SHA-256",
+                    "SHA-256-sess",
+                    "SHA-512-256",
+                    "SHA-512-256-sess",
+                }, 
+                new string[] 
+                { 
+                    "auth",
+                    "auth-int"
+                },
+                true))
             {
                 var services = await client.GetServicesAsync(true);
                 var cameraDateTime = await client.GetSystemDateAndTimeUtcAsync();

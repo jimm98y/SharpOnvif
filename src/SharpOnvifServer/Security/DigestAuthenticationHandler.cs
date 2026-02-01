@@ -461,7 +461,7 @@ namespace SharpOnvifServer
                         opaque,
                         allowedQop,
                         "",
-                        true,
+                        OptionsMonitor.CurrentValue.IsUserHashSupported,
                         isStale);
                 Response.Headers.Append("WWW-Authenticate", wwwAuth);
             }

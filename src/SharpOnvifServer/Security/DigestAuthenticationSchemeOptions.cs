@@ -16,7 +16,7 @@ namespace SharpOnvifServer
         public string Realm { get; set; } = "IP Camera";
 
         /// <summary>
-        /// Hashing algorithm(s). MD5 is the default when empty. Accepted values are: "MD5", "SHA-256", "SHA-512-256".
+        /// Hashing algorithm(s). MD5 is the default when empty. Accepted values are: "MD5", "MD5-sess", "SHA-256", "SHA-256-sess", "SHA-512-256", "SHA-512-256-sess".
         /// 
         /// Onvif specific: According to the RFC 7616 we should add the algorithms in the order of server preference, starting
         ///  with the most preferred one. When the client receives the first challenge, it should use the first one it supports. 
@@ -27,11 +27,28 @@ namespace SharpOnvifServer
         ///  
         /// WWW-Authenticate challenges will be generated in the same order they are listed here.
         /// </summary>
-        public List<string> HashingAlgorithms { get; set; } = new List<string>() { "MD5", "SHA-256", "SHA-512-256" };
+        public List<string> HashingAlgorithms { get; set; } = new List<string>() 
+        { 
+            "MD5",
+            "MD5-sess",
+            "SHA-256",
+            "SHA-256-sess",
+            "SHA-512-256",
+            "SHA-512-256-sess",
+        };
 
         /// <summary>
-        /// Allowed qop. Valid values are "auth" and "auth-int".
+        /// Offered quality of protection levels. Valid values are "auth" and "auth-int".
         /// </summary>
-        public List<string> AllowedQop { get; set; } = new List<string>() { "auth", "auth-int" };
+        public List<string> AllowedQop { get; set; } = new List<string>() 
+        {
+            "auth",
+            "auth-int",
+        };
+
+        /// <summary>
+        /// Indicates whether the server should offer User hashing.
+        /// </summary>
+        public bool IsUserHashSupported { get; set; } = true;
     }
 }
