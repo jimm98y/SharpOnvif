@@ -71,8 +71,6 @@ namespace SharpOnvifServer.Security
             }
         }
 
-        
-
         private static byte[] ReadResponseBody(ref Message reply)
         {
             byte[] body;

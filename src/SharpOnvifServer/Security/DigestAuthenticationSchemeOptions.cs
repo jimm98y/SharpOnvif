@@ -50,5 +50,11 @@ namespace SharpOnvifServer.Security
         /// Indicates whether the server should offer User hashing.
         /// </summary>
         public bool IsUserHashSupported { get; set; } = true;
+
+        /// <summary>
+        /// When true, forces the client to use the nonce from the last response. 
+        /// This breaks pipelining of the client requests, but it lets the server enforce single-use nonces.
+        /// </summary>
+        //public bool IsUsingNextNonce { get; set; } = false;
     }
 }

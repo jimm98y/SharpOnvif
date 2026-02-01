@@ -80,7 +80,7 @@ namespace SharpOnvifServer.Security
                         {
                             try
                             {
-                                if (await AuthenticateSoapDigest(token.UserName, token.Password, token.Nonce, token.Created).ConfigureAwait(false) == 0)
+                                if (await AuthenticateSoapDigestAsync(token.UserName, token.Password, token.Nonce, token.Created).ConfigureAwait(false) == 0)
                                 {
                                     UserInfo user = await _userRepository.GetUserAsync(webToken).ConfigureAwait(false);
 
@@ -133,7 +133,7 @@ namespace SharpOnvifServer.Security
                 {
                     try
                     {
-                        if (await AuthenticateSoapDigest(token.UserName, token.Password, token.Nonce, token.Created).ConfigureAwait(false) == 0)
+                        if (await AuthenticateSoapDigestAsync(token.UserName, token.Password, token.Nonce, token.Created).ConfigureAwait(false) == 0)
                         {
                             var identity = new GenericIdentity(token.UserName);
                             var claimsPrincipal = new ClaimsPrincipal(identity);
@@ -180,7 +180,7 @@ namespace SharpOnvifServer.Security
             return AuthenticateResult.Fail("No authentication found");
         }
 
-        public async Task<int> AuthenticateSoapDigest(string userName, string digest, string nonce, string created)
+        public async Task<int> AuthenticateSoapDigestAsync(string userName, string digest, string nonce, string created)
         {
             var user = await _userRepository.GetUserAsync(userName).ConfigureAwait(false);
             if (user != null)

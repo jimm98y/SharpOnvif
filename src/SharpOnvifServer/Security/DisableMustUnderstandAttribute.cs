@@ -13,9 +13,13 @@ namespace SharpOnvifServer.Security
     [AttributeUsage(AttributeTargets.Class)]
     public class DisableMustUnderstandValidationAttribute : Attribute, IServiceBehavior
     {
-        void IServiceBehavior.Validate(ServiceDescription description, ServiceHostBase serviceHostBase) { }
-        void IServiceBehavior.AddBindingParameters(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase, Collection<ServiceEndpoint> endpoints, BindingParameterCollection bindingParameters) { }
-        void IServiceBehavior.ApplyDispatchBehavior(ServiceDescription description, ServiceHostBase serviceHostBase)
+        public void Validate(ServiceDescription description, ServiceHostBase serviceHostBase)
+        { }
+
+        public void AddBindingParameters(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase, Collection<ServiceEndpoint> endpoints, BindingParameterCollection bindingParameters) 
+        { }
+
+        public void ApplyDispatchBehavior(ServiceDescription description, ServiceHostBase serviceHostBase)
         {
             for (int i = 0; i < serviceHostBase.ChannelDispatchers.Count; i++)
             {
