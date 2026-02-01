@@ -21,7 +21,7 @@ namespace SharpOnvifClient.Security
         public WsUsernameTokenHeader(NetworkCredential credentials, DateTime created)
         {
             this._credentials = credentials;
-            _nonce = DigestHelpers.CalculateNonce();
+            _nonce = WsDigestAuthentication.CalculateNonce();
             _created = OnvifHelpers.DateTimeToString(created);
         }
 
@@ -32,7 +32,7 @@ namespace SharpOnvifClient.Security
         protected override void OnWriteHeaderContents(XmlDictionaryWriter writer, MessageVersion messageVersion)
         {
             var serializer = new XmlSerializer(typeof(UsernameToken));
-            var pass = DigestHelpers.CreateSoapDigest(_nonce, _created, _credentials.Password);
+            var pass = WsDigestAuthentication.CreateSoapDigest(_nonce, _created, _credentials.Password);
             serializer.Serialize(writer,
                 new UsernameToken
                 {

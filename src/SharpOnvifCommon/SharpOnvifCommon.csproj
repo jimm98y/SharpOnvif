@@ -17,5 +17,6 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.XmlSerializer.Generator" Version="10.0.1" />
+		<PackageReference Include="System.Runtime.Caching" Version="10.0.2" />
 	</ItemGroup>
 </Project>

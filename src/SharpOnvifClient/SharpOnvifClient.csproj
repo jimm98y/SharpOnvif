@@ -14,6 +14,11 @@
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net481'">
 		<Reference Include="System.Net.Http" />
+		<PackageReference Include="System.Reflection.DispatchProxy" Version="4.8.2" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+		<PackageReference Include="System.Reflection.DispatchProxy" Version="4.8.2" />
 	</ItemGroup>
 
 </Project>

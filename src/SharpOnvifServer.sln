@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.9.34607.119
+# Visual Studio Version 18
+VisualStudioVersion = 18.2.11415.280 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnvifService", "OnvifService\OnvifService.csproj", "{B029D3AA-1FF8-4402-A899-E1F5FE0D5855}"
 EndProject
@@ -64,6 +64,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifServer.Uplink", "SharpOnvifServer.Uplink\SharpOnvifServer.Uplink.csproj", "{C6A8BF48-6116-4D58-B663-F05C4F5F7069}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpOnvifCommon", "SharpOnvifCommon\SharpOnvifCommon.csproj", "{C72D1B63-CF18-4C9E-8596-436142817D8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpOnvif.Tests", "SharpOnvif.Tests\SharpOnvif.Tests.csproj", "{38CA4204-97AD-424E-8C11-F5940F320BF4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -183,6 +185,10 @@ Global
 		{C72D1B63-CF18-4C9E-8596-436142817D8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C72D1B63-CF18-4C9E-8596-436142817D8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C72D1B63-CF18-4C9E-8596-436142817D8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38CA4204-97AD-424E-8C11-F5940F320BF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38CA4204-97AD-424E-8C11-F5940F320BF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38CA4204-97AD-424E-8C11-F5940F320BF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38CA4204-97AD-424E-8C11-F5940F320BF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,5 +1,6 @@
 ﻿using SharpOnvifClient;
 using SharpOnvifClient.Events;
+using SharpOnvifClient.Security;
 using SharpOnvifCommon;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ public static class Program
 
     static async Task MainAsync(string[] args)
     {
-        var devices = await OnvifDiscoveryClient.DiscoverAsync();
+        var devices = await OnvifDiscoveryClient.DiscoverAsync(null, 1000);
 
         if (devices == null || devices.Count == 0)
         {
@@ -31,7 +32,7 @@ public static class Program
             Console.WriteLine($"Found device: Manufacturer = {onvifDevice.Manufacturer}, Model = {onvifDevice.Hardware}");
         }
 
-        var device = devices.FirstOrDefault(x => x.Addresses != null && x.Addresses.FirstOrDefault(x => x.Contains("127.0.0.1") || x.Contains("[::1]")) != null);
+        var device = devices.FirstOrDefault(x => x.Addresses != null && x.Addresses.FirstOrDefault(xx => xx.Contains("127.0.0.1") || xx.Contains("[::1]")) != null);
 
         if (device == null)
         {
@@ -39,14 +40,22 @@ public static class Program
         }
         else
         {
-            using (var client = new SimpleOnvifClient(device.Addresses.First(x => x.Contains("127.0.0.1") || x.Contains("[::1]")), "admin", "password", true))
+            DigestAuthentication authentication = DigestAuthentication.HttpDigest | DigestAuthentication.WsUsernameToken;
+            using (var client = new SimpleOnvifClient(device.Addresses.First(x => x.Contains("127.0.0.1") || x.Contains("[::1]")),
+                "admin", 
+                "password", 
+                new DigestAuthenticationSchemeOptions(authentication),
+                true))
             {
                 var services = await client.GetServicesAsync(true);
                 var cameraDateTime = await client.GetSystemDateAndTimeUtcAsync();
                 var cameraTimeOffset = cameraDateTime.Subtract(DateTime.UtcNow);
                 Console.WriteLine($"Camera time: {cameraDateTime}");
-                client.SetCameraUtcNowOffset(cameraTimeOffset); // this is only supported when using WsUsernameToken legacy authentication
-                
+                if (authentication.HasFlag(DigestAuthentication.WsUsernameToken))
+                {
+                    client.SetCameraUtcNowOffset(cameraTimeOffset); // this is only supported when using WsUsernameToken legacy authentication
+                }
+                    
                 var deviceInfo = await client.GetDeviceInformationAsync();
                 Console.WriteLine($"Device Manufacturer: {deviceInfo.Manufacturer}");
 
@@ -130,7 +139,7 @@ public static class Program
         string onvifHost = new Uri(onvifUri).Host;
         try
         {
-            ipAddresses = Dns.GetHostAddresses(onvifHost, AddressFamily.InterNetwork);
+            ipAddresses = Dns.GetHostAddresses(onvifHost);
         }
         catch (SocketException)
         {
@@ -147,7 +156,7 @@ public static class Program
             );
         NetworkInterface matchingInterface = networkInterfaces.FirstOrDefault(x =>
         {
-            UnicastIPAddressInformation addr = x.GetIPProperties().UnicastAddresses.FirstOrDefault(x => x.Address.AddressFamily == AddressFamily.InterNetwork);
+            UnicastIPAddressInformation addr = x.GetIPProperties().UnicastAddresses.FirstOrDefault(xx => xx.Address.AddressFamily == AddressFamily.InterNetwork);
             return addr.Address.GetNetworkAddress(addr.IPv4Mask).IsInSameSubnet(onvifDeviceIpAddress.GetNetworkAddress(addr.IPv4Mask), addr.IPv4Mask);
         });
         return matchingInterface.GetIPProperties().UnicastAddresses.FirstOrDefault(x => x.Address.AddressFamily == AddressFamily.InterNetwork)?.Address.ToString();
