@@ -69,14 +69,14 @@ namespace SharpOnvifClient
 
             this._authentication = authentication ?? new DigestAuthenticationSchemeOptions();
 
-            if (authentication.Authentication != DigestAuthentication.None)
+            if (this._authentication.Authentication != DigestAuthentication.None)
             {
                 if (string.IsNullOrWhiteSpace(userName) || string.IsNullOrWhiteSpace(password))
                     throw new ArgumentNullException("User name or password must not be empty!");
 
                 _credentials = new System.Net.NetworkCredential(userName, password);
 
-                if (authentication.Authentication.HasFlag(DigestAuthentication.WsUsernameToken))
+                if (this._authentication.Authentication.HasFlag(DigestAuthentication.WsUsernameToken))
                 {
                     _legacyAuth = new WsUsernameTokenBehavior(_credentials);
                 }
@@ -88,7 +88,6 @@ namespace SharpOnvifClient
             }
 
             _onvifUri = onvifUri;
-            _authentication = authentication;
         }
 
         public void SetCameraUtcNowOffset(TimeSpan utcNowOffset)

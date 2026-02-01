@@ -8,15 +8,6 @@ namespace SharpOnvifClient.Security
     public static class OnvifAuthenticationExtensions
     {
         public static TChannel SetOnvifAuthentication<TChannel>(
-            this ClientBase<TChannel> channel,
-            NetworkCredential credentials,
-            DigestAuthenticationSchemeOptions authentication,
-            System.ServiceModel.Description.IEndpointBehavior legacyAuth) where TChannel : class
-        {
-            return SetOnvifAuthentication(channel as TChannel, credentials, authentication, legacyAuth);
-        }
-
-        public static TChannel SetOnvifAuthentication<TChannel>(
             TChannel wcfChannel,
             NetworkCredential credentials,
             DigestAuthenticationSchemeOptions authentication, 

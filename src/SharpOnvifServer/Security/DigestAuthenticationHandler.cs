@@ -44,85 +44,104 @@ namespace SharpOnvifServer.Security
 
         protected async override Task<AuthenticateResult> HandleAuthenticateAsync()
         {
-            // according to the Onvif specification, we must first authenticate the Digest if it's present
-            WebDigestAuth webToken = Request.GetSecurityHeaderFromHeaders();
-            if (webToken != null)
+            if(OptionsMonitor.CurrentValue.Authentication == DigestAuthentication.None || AllowAnonymousAccess(Request.ContentType))
             {
-                if(string.Compare(webToken.Realm, OptionsMonitor.CurrentValue.HttpDigestRealm) != 0)
-                {
-                    return AuthenticateResult.Fail("HTTP Digest has invalid realm.");
-                }
+                // use Anonymous user either when auth is turned off, or for selected Onvif actions that do not require authentication
+                var identity = new GenericIdentity(ANONYMOUS_USER);
+                var claimsPrincipal = new ClaimsPrincipal(identity);
+                var ticket = new AuthenticationTicket(claimsPrincipal, Scheme.Name);
+                return AuthenticateResult.Success(ticket);
+            }
 
-                // store the opaque for the duration of this request
-                if (HttpDigestAuthentication.ValidateOpaque(PREFERRED_SERIALIZATION, webToken.Opaque) == 0)
-                {
-                    Context.Items[CONTEXT_OPAQUE] = webToken.Opaque;
-                }
+            if (OptionsMonitor.CurrentValue.Authentication.HasFlag(DigestAuthentication.HttpDigest))
+            {
+                // according to the Onvif specification, we must first authenticate the Digest if it's present
+                WebDigestAuth webToken = Request.GetSecurityHeaderFromHeaders();
 
-                try
+                if (webToken != null)
                 {
-                    byte[] body = null;
-                    if (string.Compare("auth-int", webToken.Qop, true) == 0)
+                    if (string.Compare(webToken.Realm, OptionsMonitor.CurrentValue.HttpDigestRealm) != 0)
                     {
-                        body = await ReadRequestBodyAsync(body).ConfigureAwait(false);
+                        return AuthenticateResult.Fail("HTTP Digest has invalid realm.");
                     }
 
-                    int authenticateWebDigestResult = await AuthenticateWebDigestAsync(OptionsMonitor.CurrentValue.HttpDigestRealm, Request.Method, webToken, body).ConfigureAwait(false);
-                    if (authenticateWebDigestResult == 0)
+                    // store the opaque for the duration of this request
+                    if (HttpDigestAuthentication.ValidateOpaque(PREFERRED_SERIALIZATION, webToken.Opaque) == 0)
                     {
-                        // now in case the request also contains WsUsernameToken, we must verify it
-                        SoapDigestAuth token = await GetSecurityHeaderFromSoapEnvelopeAsync(Request).ConfigureAwait(false);
-                        if (token != null)
-                        {
-                            try
-                            {
-                                if (await AuthenticateSoapDigestAsync(token.UserName, token.Password, token.Nonce, token.Created).ConfigureAwait(false) == 0)
-                                {
-                                    UserInfo user = await _userRepository.GetUserAsync(webToken).ConfigureAwait(false);
+                        Context.Items[CONTEXT_OPAQUE] = webToken.Opaque;
+                    }
 
-                                    if (string.Compare(token.UserName, user.UserName, false, CultureInfo.InvariantCulture) != 0)
+                    try
+                    {
+                        byte[] body = null;
+                        if (string.Compare("auth-int", webToken.Qop, true) == 0)
+                        {
+                            body = await ReadRequestBodyAsync(body).ConfigureAwait(false);
+                        }
+
+                        int authenticateWebDigestResult = await AuthenticateWebDigestAsync(OptionsMonitor.CurrentValue.HttpDigestRealm, Request.Method, webToken, body).ConfigureAwait(false);
+                        if (authenticateWebDigestResult == 0)
+                        {
+                            // now in case the request also contains WsUsernameToken, we must verify it
+                            SoapDigestAuth token = await GetSecurityHeaderFromSoapEnvelopeAsync(Request).ConfigureAwait(false);
+                            if (token != null)
+                            {
+                                if(!OptionsMonitor.CurrentValue.Authentication.HasFlag(DigestAuthentication.WsUsernameToken))
+                                {
+                                    // WsUsernameToken is explicitly disallowed, fail
+                                    return AuthenticateResult.Fail($"HTTP Digest authentication succeeded, but WsUsernameToken authentication is not allowed.");
+                                }
+
+                                try
+                                {
+                                    if (await AuthenticateSoapDigestAsync(token.UserName, token.Password, token.Nonce, token.Created).ConfigureAwait(false) == 0)
                                     {
-                                        return AuthenticateResult.Fail("HTTP Digest and WsUsernameToken users do not match.");
+                                        UserInfo user = await _userRepository.GetUserAsync(webToken).ConfigureAwait(false);
+
+                                        if (string.Compare(token.UserName, user.UserName, false, CultureInfo.InvariantCulture) != 0)
+                                        {
+                                            return AuthenticateResult.Fail("HTTP Digest and WsUsernameToken users do not match.");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        return AuthenticateResult.Fail("HTTP Digest authentication succeeded, but WsUsernameToken authentication has failed.");
                                     }
                                 }
-                                else
+                                catch (Exception ex)
                                 {
-                                    return AuthenticateResult.Fail("HTTP Digest authentication succeeded, but WsUsernameToken authentication has failed.");
+                                    return AuthenticateResult.Fail($"HTTP Digest authentication succeeded, but WsUsernameToken authentication has failed: {ex.Message}");
                                 }
                             }
-                            catch (Exception ex)
+
+                            if (!string.IsNullOrEmpty(webToken.Opaque))
                             {
-                                return AuthenticateResult.Fail($"HTTP Digest authentication succeeded, but WsUsernameToken authentication has failed: {ex.Message}");
+                                HttpDigestAuthentication.TrySetNoncePrime(webToken.Opaque, (webToken.Nonce, webToken.CNonce));
                             }
-                        }
 
-                        if (!string.IsNullOrEmpty(webToken.Opaque))
+                            var identity = new GenericIdentity(webToken.UserName);
+                            var claimsPrincipal = new ClaimsPrincipal(identity);
+                            var ticket = new AuthenticationTicket(claimsPrincipal, Scheme.Name);
+                            return AuthenticateResult.Success(ticket);
+                        }
+                        else if (authenticateWebDigestResult == HttpDigestAuthentication.ERROR_NONCE_EXPIRED)
                         {
-                            HttpDigestAuthentication.TrySetNoncePrime(webToken.Opaque, (webToken.Nonce, webToken.CNonce));
+                            // using the Fail(, properties) parameter does not work, the information is lost in ASP.NET
+                            Context.Items[CONTEXT_AUTHENTICATE_WEB_DIGEST_RESULT] = authenticateWebDigestResult;
+                            return AuthenticateResult.Fail("HTTP Digest nonce has expired.");
                         }
-
-                        var identity = new GenericIdentity(webToken.UserName);
-                        var claimsPrincipal = new ClaimsPrincipal(identity);
-                        var ticket = new AuthenticationTicket(claimsPrincipal, Scheme.Name);
-                        return AuthenticateResult.Success(ticket);
+                        else
+                        {
+                            return AuthenticateResult.Fail("HTTP Digest authentication failed.");
+                        }
                     }
-                    else if(authenticateWebDigestResult == HttpDigestAuthentication.ERROR_NONCE_EXPIRED)
+                    catch (Exception ex)
                     {
-                        // using the Fail(, properties) parameter does not work, the information is lost in ASP.NET
-                        Context.Items[CONTEXT_AUTHENTICATE_WEB_DIGEST_RESULT] = authenticateWebDigestResult;
-                        return AuthenticateResult.Fail("HTTP Digest nonce has expired.");
+                        return AuthenticateResult.Fail($"HTTP Digest authentication failed: {ex.Message}");
                     }
-                    else
-                    {
-                        return AuthenticateResult.Fail("HTTP Digest authentication failed.");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    return AuthenticateResult.Fail($"HTTP Digest authentication failed: {ex.Message}");
                 }
             }
-            else
+            else if(OptionsMonitor.CurrentValue.Authentication.HasFlag(DigestAuthentication.WsUsernameToken))
             {
                 SoapDigestAuth token = await GetSecurityHeaderFromSoapEnvelopeAsync(Request).ConfigureAwait(false);
                 if (token != null)
@@ -144,17 +163,6 @@ namespace SharpOnvifServer.Security
                     catch (Exception ex)
                     {
                         return AuthenticateResult.Fail($"WsUsernameToken authentication failed: {ex.Message}");
-                    }
-                }
-                else
-                {
-                    if (AllowAnonymousAccess(Request.ContentType))
-                    {
-                        // use Anonymous user
-                        var identity = new GenericIdentity(ANONYMOUS_USER);
-                        var claimsPrincipal = new ClaimsPrincipal(identity);
-                        var ticket = new AuthenticationTicket(claimsPrincipal, Scheme.Name);
-                        return AuthenticateResult.Success(ticket);
                     }
                 }
             }
@@ -279,6 +287,10 @@ namespace SharpOnvifServer.Security
                     {
                         return 0;
                     }
+                    else
+                    {
+                        return 2;
+                    }
                 }
                 else
                 {
@@ -293,55 +305,66 @@ namespace SharpOnvifServer.Security
         {
             Response.StatusCode = 401;
 
-            object authenticateWebDigestResult = Context.Items[CONTEXT_AUTHENTICATE_WEB_DIGEST_RESULT];
-            string opaque = Context.Items[CONTEXT_OPAQUE]?.ToString();
-            
-            if (!string.IsNullOrEmpty(opaque))
+            if (OptionsMonitor.CurrentValue.Authentication.HasFlag(DigestAuthentication.HttpDigest))
             {
-                // remove it from the cache, but keep opaque value (use the same session)
-                HttpDigestAuthentication.RemoveNoncePrime(opaque);
-            }
+                object authenticateWebDigestResult = Context.Items[CONTEXT_AUTHENTICATE_WEB_DIGEST_RESULT];
+                string opaque = Context.Items[CONTEXT_OPAQUE]?.ToString();
 
-            bool isStale =
-                authenticateWebDigestResult != null &&
-                (int)authenticateWebDigestResult == HttpDigestAuthentication.ERROR_NONCE_EXPIRED;
+                if (!string.IsNullOrEmpty(opaque))
+                {
+                    // remove it from the cache, but keep opaque value (use the same session)
+                    HttpDigestAuthentication.RemoveNoncePrime(opaque);
+                }
+                else
+                {
+                    opaque = HttpDigestAuthentication.GenerateOpaque(PREFERRED_SERIALIZATION);
+                }
 
-            string wwwAuth;
-            // legacy, not officially supported by Onvif Core spec
-            /*
-            wwwAuth = DigestAuthentication.CreateWwwAuthenticateRFC2069(
-                    NONCE_HASH_ALGORITHM,
-                    PREFERRED_SERIALIZATION, 
-                    DateTimeOffset.UtcNow, 
-                    "MD5",
-                    null, 
-                    DigestAuthentication.CreateNonceSessionSalt(NONCE_SALT_LENGTH), 
-                    OptionsMonitor.CurrentValue.Realm);
-            */
+                bool isStale =
+                    authenticateWebDigestResult != null &&
+                    (int)authenticateWebDigestResult == HttpDigestAuthentication.ERROR_NONCE_EXPIRED;
 
-            var now = DateTimeOffset.UtcNow;
-            var hashingAlgorithms = OptionsMonitor.CurrentValue.HttpDigestAlgorithms == null ? new List<string>() { "MD5" } : OptionsMonitor.CurrentValue.HttpDigestAlgorithms.ToList();
-            var allowedQop = OptionsMonitor.CurrentValue.HttpDigestQop == null ? "auth" : string.Join(", ", OptionsMonitor.CurrentValue.HttpDigestQop.ToList());
-            
-            foreach (var algorithm in hashingAlgorithms)
-            {
-                wwwAuth = HttpDigestAuthentication.CreateWwwAuthenticateRFC7616(
+                string wwwAuth;
+                // legacy, not officially supported by Onvif Core spec
+                /*
+                wwwAuth = DigestAuthentication.CreateWwwAuthenticateRFC2069(
                         NONCE_HASH_ALGORITHM,
-                        PREFERRED_SERIALIZATION,
-                        now,
-                        algorithm,
-                        null,
-                        HttpDigestAuthentication.CreateNonceSessionSalt(NONCE_SALT_LENGTH),
-                        OptionsMonitor.CurrentValue.HttpDigestRealm,
-                        opaque,
-                        allowedQop,
-                        "",
-                        OptionsMonitor.CurrentValue.HttpDigestUserHash,
-                        isStale);
-                Response.Headers.Append("WWW-Authenticate", wwwAuth);
-            }
+                        PREFERRED_SERIALIZATION, 
+                        DateTimeOffset.UtcNow, 
+                        "MD5",
+                        null, 
+                        DigestAuthentication.CreateNonceSessionSalt(NONCE_SALT_LENGTH), 
+                        OptionsMonitor.CurrentValue.Realm);
+                */
 
-            await Context.Response.WriteAsync("You are not logged in via Digest auth").ConfigureAwait(false);
+                var now = DateTimeOffset.UtcNow;
+                var hashingAlgorithms = OptionsMonitor.CurrentValue.HttpDigestAlgorithms == null ? new List<string>() { "MD5" } : OptionsMonitor.CurrentValue.HttpDigestAlgorithms.ToList();
+                var allowedQop = OptionsMonitor.CurrentValue.HttpDigestQop == null ? "auth" : string.Join(", ", OptionsMonitor.CurrentValue.HttpDigestQop.ToList());
+
+                foreach (var algorithm in hashingAlgorithms)
+                {
+                    wwwAuth = HttpDigestAuthentication.CreateWwwAuthenticateRFC7616(
+                            NONCE_HASH_ALGORITHM,
+                            PREFERRED_SERIALIZATION,
+                            now,
+                            algorithm,
+                            null,
+                            HttpDigestAuthentication.CreateNonceSessionSalt(NONCE_SALT_LENGTH),
+                            OptionsMonitor.CurrentValue.HttpDigestRealm,
+                            opaque,
+                            allowedQop,
+                            "",
+                            OptionsMonitor.CurrentValue.HttpDigestUserHash,
+                            isStale);
+                    Response.Headers.Append("WWW-Authenticate", wwwAuth);
+                }
+
+                await Context.Response.WriteAsync("You are not logged in via Digest auth").ConfigureAwait(false);
+            }
+            else
+            {
+                await Context.Response.WriteAsync("You are not logged in").ConfigureAwait(false);
+            }
         }
 
         private static async Task<SoapDigestAuth> GetSecurityHeaderFromSoapEnvelopeAsync(HttpRequest request)

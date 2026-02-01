@@ -345,11 +345,13 @@ namespace SharpOnvifCommon.Security
             byte[] etag,
             byte[] salt,
             string realm,
+            string opaque = "00000000",
             bool stale = false)
         {
             string serverNonce = GenerateServerNonce(nonceAlgorithm, binarySerialization, currentTimestamp, etag, salt);
             string responseAlgorithm = (string.IsNullOrEmpty(algorithm) || algorithm == "MD5") ? "" : $", algorithm={algorithm}";
-            return $"Digest realm=\"{realm}\"{responseAlgorithm}, nonce=\"{serverNonce}\", stale={stale.ToString().ToUpperInvariant()}";
+            string responseOpaque = string.IsNullOrEmpty(opaque) ? "" : $", opaque=\"{opaque}\"";
+            return $"Digest realm=\"{realm}\"{responseAlgorithm}, nonce=\"{serverNonce}\"{responseOpaque}, stale={stale.ToString().ToUpperInvariant()}";
         }
 
         public static string CreateWwwAuthenticateRFC2617(
@@ -366,7 +368,8 @@ namespace SharpOnvifCommon.Security
         {
             string serverNonce = GenerateServerNonce(nonceAlgorithm, nonceSerialization, currentTimestamp, etag, salt);
             string responseAlgorithm = (string.IsNullOrEmpty(algorithm) || algorithm == "MD5") ? "" : $", algorithm={algorithm}";
-            return $"Digest realm=\"{realm}\", qop=\"{qop}\"{responseAlgorithm}, nonce=\"{serverNonce}\", opaque=\"{opaque}\", stale={stale.ToString().ToUpperInvariant()}";
+            string responseOpaque = string.IsNullOrEmpty(opaque) ? "" : $", opaque=\"{opaque}\"";
+            return $"Digest realm=\"{realm}\", qop=\"{qop}\"{responseAlgorithm}, nonce=\"{serverNonce}\"{responseOpaque}, stale={stale.ToString().ToUpperInvariant()}";
         }
 
         public static string CreateWwwAuthenticateRFC7616(
@@ -387,7 +390,8 @@ namespace SharpOnvifCommon.Security
             string responseAlgorithm = (string.IsNullOrEmpty(algorithm) || algorithm == "MD5") ? "" : $", algorithm={algorithm}";
             string responseCharset = string.IsNullOrEmpty(charset) ? "" : $", charset={charset}"; // UTF-8
             string responseUserhash = userhash ? $", userhash={userhash.ToString().ToUpperInvariant()}" : ""; // see CreateUserNameHashRFC7616
-            return $"Digest realm=\"{realm}\", qop=\"{qop}\"{responseAlgorithm}, nonce=\"{serverNonce}\", opaque=\"{opaque}\"{responseCharset}{responseUserhash}, stale={stale.ToString().ToUpperInvariant()}";
+            string responseOpaque = string.IsNullOrEmpty(opaque) ? "" : $", opaque=\"{opaque}\"";
+            return $"Digest realm=\"{realm}\", qop=\"{qop}\"{responseAlgorithm}, nonce=\"{serverNonce}\"{responseOpaque}{responseCharset}{responseUserhash}, stale={stale.ToString().ToUpperInvariant()}";
         }
 
         public static string CreateAuthorizationRFC2069(

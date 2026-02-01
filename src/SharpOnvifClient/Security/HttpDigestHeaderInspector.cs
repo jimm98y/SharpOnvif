@@ -312,7 +312,7 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
                     prime.Value.cnonce);
 
                 string username;
-                if(userhash)
+                if(userhash && _authentication.HttpDigestUserHash)
                 {
                     username = HttpDigestAuthentication.CreateUserNameHashRFC7616(algorithm, _credentials.UserName, realm);
                 }
@@ -332,7 +332,7 @@ public class HttpDigestHeaderInspector : IClientMessageInspector
                     selectedQop,
                     nextNc,
                     cnonce,
-                    userhash);
+                    userhash && _authentication.HttpDigestUserHash);
             }            
 
             httpRequestMessage.Headers["Authorization"] = authorization;

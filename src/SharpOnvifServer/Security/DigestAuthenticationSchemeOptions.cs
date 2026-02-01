@@ -1,10 +1,21 @@
 ﻿using Microsoft.AspNetCore.Authentication;
+using System;
 using System.Collections.Generic;
 
 namespace SharpOnvifServer.Security
 {
+    [Flags]
+    public enum DigestAuthentication
+    {
+        None = 0,
+        WsUsernameToken = 1,
+        HttpDigest = 2
+    }
+
     public class DigestAuthenticationSchemeOptions : AuthenticationSchemeOptions
     {
+        public DigestAuthentication Authentication { get; set; } = DigestAuthentication.WsUsernameToken | DigestAuthentication.HttpDigest;
+
         #region WsUsernameToken
 
         /// <summary>
