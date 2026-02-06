@@ -31,7 +31,7 @@ namespace SharpOnvifCommon
         public const string APP_MGMT = "http://www.onvif.org/ver10/appmgmt/wsdl";
         public const string AUTHENTICATION_BEHAVIOR = "http://www.onvif.org/ver10/authenticationbehavior/wsdl";
         public const string CREDENTIAL = "http://www.onvif.org/ver10/credential/wsdl";
-        public const string DEVICE_IO = "http://www.onvif.org/ver10/device/wsdl";
+        public const string DEVICE_IO = "https://www.onvif.org/ver10/deviceio.wsdl";
         public const string DEVICE_MGMT = "http://www.onvif.org/ver10/device/wsdl";
         public const string DISPLAY = "http://www.onvif.org/ver10/display/wsdl";
         public const string DOOR_CONTROL = "http://www.onvif.org/ver10/doorcontrol/wsdl";
