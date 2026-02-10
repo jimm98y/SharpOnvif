@@ -79,8 +79,6 @@ namespace SharpOnvifClient
         /// <param name="userName">User name.</param>
         /// <param name="password">Password.</param>
         /// <param name="authentication">Type of the authentication to use: <see cref="DigestAuthentication"/>.</param>
-        /// <param name="supportedHashAlgorithms">Hash algorithms to use in Digest authentication.</param>
-        /// <param name="supportedQop">Supported qop, listed from the most preferred one to the least preferred one.</param>
         /// <param name="disableExpect100Continue">Disables the default Expect: 100-continue HTTP header.</param>
         /// <exception cref="ArgumentNullException">Thrown when onvifUri is empty.</exception>
         public SimpleOnvifClient(string onvifUri, string userName, string password, DigestAuthenticationSchemeOptions authentication, bool disableExpect100Continue = true)
