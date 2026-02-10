@@ -88,6 +88,9 @@ namespace SharpOnvifClient
             if (string.IsNullOrWhiteSpace(onvifUri))
                 throw new ArgumentNullException(nameof(onvifUri));
 
+            if(!onvifUri.StartsWith("http://", StringComparison.OrdinalIgnoreCase) && !onvifUri.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
+                throw new ArgumentException("Onvif URI must start with http:// or https://");
+
             this._authentication = authentication ?? new DigestAuthenticationSchemeOptions();
 
             if (this._authentication.Authentication != DigestAuthentication.None)
