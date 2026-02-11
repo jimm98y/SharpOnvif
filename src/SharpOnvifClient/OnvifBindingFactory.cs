@@ -19,6 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
 // SOFTWARE.
 
+using System;
 using System.Net;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
@@ -38,14 +39,35 @@ namespace SharpOnvifClient
         /// <summary>
         /// Create an Onvif WCF binding for the Digest authentication using Soap 1.2.
         /// </summary>
-        public static Binding CreateBinding()
+        public static Binding CreateBinding(string onvifUri)
         {
-            var httpTransportBinding = new HttpTransportBindingElement
+            if(string.IsNullOrEmpty(onvifUri))
+                throw new ArgumentNullException($"{nameof(onvifUri)} cannot be null or empty");
+
+            TransportBindingElement httpTransportBinding = null;
+            if (onvifUri.StartsWith("http://", StringComparison.OrdinalIgnoreCase))
             {
-                AuthenticationScheme = AuthenticationSchemes.Anonymous,
-                MaxReceivedMessageSize = MAX_MESSAGE_SIZE,
-                MaxBufferSize = MAX_MESSAGE_SIZE
-            };
+                httpTransportBinding = new HttpTransportBindingElement
+                {
+                    AuthenticationScheme = AuthenticationSchemes.Anonymous,
+                    MaxReceivedMessageSize = MAX_MESSAGE_SIZE,
+                    MaxBufferSize = MAX_MESSAGE_SIZE,
+                };
+            }
+            else if(onvifUri.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
+            {
+                httpTransportBinding = new HttpsTransportBindingElement
+                {
+                    AuthenticationScheme = AuthenticationSchemes.Anonymous,
+                    MaxReceivedMessageSize = MAX_MESSAGE_SIZE,
+                    MaxBufferSize = MAX_MESSAGE_SIZE,
+                };
+            }
+            else
+            {
+                throw new NotSupportedException(onvifUri);
+            }
+
             var textMessageEncodingBinding = new TextMessageEncodingBindingElement
             {
                 MessageVersion = MessageVersion.CreateVersion(EnvelopeVersion.Soap12, AddressingVersion.None)
