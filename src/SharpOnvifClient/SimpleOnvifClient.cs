@@ -158,10 +158,6 @@ namespace SharpOnvifClient
             // PRE_AUTH action http://www.onvif.org/ver10/device/wsdl/GetServices
             using (var deviceClient = new DeviceClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(_onvifUri)))
             {
-                while (deviceClient.Endpoint == null)
-                {
-                    await Task.Delay(100).ConfigureAwait(false);
-                }
                 deviceClient.SetDisableExpect100Continue(_disableExpect100ContinueBehavior);
 
                 var services = await deviceClient.GetServicesAsync(includeCapability).ConfigureAwait(false);
