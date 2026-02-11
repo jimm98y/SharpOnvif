@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net10.0</TargetFramework>
+		<TargetFrameworks>net8.0;net10.0</TargetFrameworks>
 		<ImplicitUsings>disable</ImplicitUsings>
 		<Nullable>disable</Nullable>
 	</PropertyGroup>
@@ -9,13 +9,13 @@
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 	</ItemGroup>
-
+	
 	<ItemGroup>
-		<DotNetCliToolReference Include="Microsoft.XmlSerializer.Generator" Version="10.0.1" />
+		<DotNetCliToolReference Include="Microsoft.XmlSerializer.Generator" Version="10.0.3" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.XmlSerializer.Generator" Version="10.0.1" />
+		<PackageReference Include="Microsoft.XmlSerializer.Generator" Version="10.0.3" />
 		<PackageReference Include="CoreWCF.Http" Version="1.8.0" />
 		<PackageReference Include="CoreWCF.Primitives" Version="1.8.0" />
 	</ItemGroup>

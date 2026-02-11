@@ -2,7 +2,7 @@
 A C# implementation of the Onvif interface - client as well as the server. All profiles are supported.
 
 ## SharpOnvifServer
-Onvif server provides NET10 CoreWCF bindings generated using svcutil.exe. It makes it easy to implement only parts of the Onvif specification needed for your project.
+Onvif server provides NET8 and NET10 CoreWCF bindings generated using svcutil.exe. It makes it easy to implement only parts of the Onvif specification needed for your project.
 
 [![NuGet version](https://img.shields.io/nuget/v/SharpOnvifServer.svg?style=flat-square)](https://www.nuget.org/packages/SharpOnvifServer)
 
@@ -105,7 +105,7 @@ app.Run();
 Your Onvif service should now be discoverable on the network and you should be able to use Onvif Device Manager or similar tool to call your endpoint.
 
 ## SharpOnvifClient
-Onvif client provides netstandard2.0 and NET8.0 WCF bindings generated using `dotnet-svcutil`. `SimpleOnvifClient` wraps common API calls to get basic information from the camera and includes both Pull Point as well as Basic event subscriptions. 
+Onvif client provides NET Framework 4.8.1, NET8.0 and NET10.0 WCF bindings generated using `dotnet-svcutil`. `SimpleOnvifClient` wraps common API calls to get basic information from the camera and includes both Pull Point as well as Basic event subscriptions. 
 
 [![NuGet version](https://img.shields.io/nuget/v/SharpOnvifClient.svg?style=flat-square)](https://www.nuget.org/packages/SharpOnvifClient)
 
@@ -179,23 +179,25 @@ using SharpOnvifClient;
 ```
 Create the Onvif client and set the authentication behavior using `SetOnvifAuthentication` extension method from `SharpOnvifClient.OnvifAuthenticationExtensions` before you use it:
 ```cs
-var authentication = new DigestAuthenticationSchemeOptions();
+DigestAuthenticationSchemeOptions authentication = new DigestAuthenticationSchemeOptions();
 System.Net.NetworkCredential credentials = new System.Net.NetworkCredential(userName, password);
-IEndpointBehavior legacyAuth = new WsUsernameTokenBehavior(credentials);
+System.ServiceModel.Description.IEndpointBehavior legacyAuth = new WsUsernameTokenBehavior(credentials);
+DisableExpect100ContinueBehavior disableExpect100Continue = new DisableExpect100ContinueBehavior();
+string uri = "http://192.168.1.10/onvif/device_service";
 
-using (var deviceClient = new DeviceClient(
-    OnvifBindingFactory.CreateBinding(),
-    new System.ServiceModel.EndpointAddress("http://192.168.1.10/onvif/device_service")))
+using (var deviceClient = new SharpOnvifClient.DeviceMgmt.DeviceClient(
+    OnvifBindingFactory.CreateBinding(uri),
+    new System.ServiceModel.EndpointAddress(uri)))
 {
-    DisableExpect100ContinueBehaviorExtensions.SetDisableExpect100Continue(client, true);
-    var proxyClient = OnvifAuthenticationExtensions.SetOnvifAuthentication(client, credentials, authentication, legacyAuth);
-    
+    SharpOnvifClient.Behaviors.DisableExpect100ContinueBehaviorExtensions.SetDisableExpect100Continue(deviceClient, disableExpect100Continue);
+    var proxyClient = OnvifAuthenticationExtensions.SetOnvifAuthentication(deviceClient, credentials, authentication, legacyAuth);
+
     // use the proxyClient
 }
 ```
 Call any method on the client, e.g.:
 ```cs
-var deviceInfo = await deviceClient.GetDeviceInformationAsync(new GetDeviceInformationRequest()).ConfigureAwait(false);
+var deviceInfo = await proxyClient.GetDeviceInformationAsync(new GetDeviceInformationRequest()).ConfigureAwait(false);
 ```
 ## Digest authentication
 Onvif supports two types of Digest authentication. Legacy [WS-UsernameToken](https://docs.oasis-open.org/wss/v1.1/wss-v1.1-spec-pr-UsernameTokenProfile-01.htm) authentication carried inside the SOAP headers and HTTP Digest authentication as defined in [RFC 7616](https://www.rfc-editor.org/rfc/rfc7616). Both types of authentication are now supported on both the client and the server.

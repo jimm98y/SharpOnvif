@@ -1,25 +1,33 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.0;net481;net10.0</TargetFrameworks>
+		<TargetFrameworks>net481;net8.0;net10.0</TargetFrameworks>
 		<SGenProxyTypes>false</SGenProxyTypes>
 		<SGenVerbose>false</SGenVerbose>
 		<SGenReferences>$([System.Text.RegularExpressions.Regex]::Replace(@(ReferencePath), `(?'pre'[\\/])ref(?'post'[\\/](netstandard|netcoreapp|net)\d+(\.\d+)*[\\/])`, `${pre}lib${post}`))</SGenReferences>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<DotNetCliToolReference Include="Microsoft.XmlSerializer.Generator" Version="10.0.1" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(TargetFramework)' == 'net481' OR '$(TargetFramework)' == 'netstandard2.0'">
-		<PackageReference Include="System.Memory" Version="4.6.3" />
+		<DotNetCliToolReference Include="Microsoft.XmlSerializer.Generator" Version="10.0.3" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.XmlSerializer.Generator" Version="10.0.1" />
+		<PackageReference Include="Microsoft.XmlSerializer.Generator" Version="10.0.3" />
+	</ItemGroup>
+
+	<ItemGroup Condition=" $(TargetFramework.StartsWith('net4')) ">
+		<Reference Include="System.ServiceModel" />
+		<PackageReference Include="System.Memory" Version="4.6.3" />
+	</ItemGroup>
+
+	<ItemGroup Condition=" $(TargetFramework.StartsWith('net10.')) ">
 		<PackageReference Include="System.ServiceModel.Primitives" Version="10.0.652802" />
 		<PackageReference Include="System.ServiceModel.Http" Version="10.0.652802" />
-		<PackageReference Include="System.ServiceModel.NetTcp" Version="10.0.652802" />
+	</ItemGroup>
+
+	<ItemGroup Condition=" $(TargetFramework.StartsWith('net8.')) ">
+		<PackageReference Include="System.ServiceModel.Primitives" Version="8.1.2" />
+		<PackageReference Include="System.ServiceModel.Http" Version="8.1.2" />
 	</ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.0;net481;net10.0</TargetFrameworks>
+		<TargetFrameworks>net481;net8.0;net10.0</TargetFrameworks>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -12,12 +12,9 @@
 	  <ProjectReference Include="..\SharpOnvifCommon\SharpOnvifCommon.csproj" />
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)' == 'net481'">
+	<ItemGroup Condition=" $(TargetFramework.StartsWith('net4')) ">
 		<Reference Include="System.Net.Http" />
-		<PackageReference Include="System.Reflection.DispatchProxy" Version="4.8.2" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+		<Reference Include="System.ServiceModel" />
 		<PackageReference Include="System.Reflection.DispatchProxy" Version="4.8.2" />
 	</ItemGroup>
 
