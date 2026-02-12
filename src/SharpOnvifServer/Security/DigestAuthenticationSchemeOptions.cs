@@ -101,5 +101,23 @@ namespace SharpOnvifServer.Security
         //public bool HttpDigestIsUsingNextNonce { get; set; } = false;
 
         #endregion // HTTP Digest
+
+        #region PreAuth actions
+
+        /// <summary> 
+        /// List of actions that should be allowed without authentication. This is needed for example for the GetCapabilities action, which is called by clients before they authenticate.
+        /// </summary>
+        public List<string> PreAuthActions { get; set; } = new List<string>()
+        {
+            "http://www.onvif.org/ver10/device/wsdl/GetWsdlUrl",
+            "http://www.onvif.org/ver10/device/wsdl/GetServices",
+            "http://www.onvif.org/ver10/device/wsdl/GetServiceCapabilities",
+            "http://www.onvif.org/ver10/device/wsdl/GetCapabilities",
+            "http://www.onvif.org/ver10/device/wsdl/GetHostname",
+            "http://www.onvif.org/ver10/device/wsdl/GetSystemDateAndTime",
+            "http://www.onvif.org/ver10/device/wsdl/GetEndpointReference",
+        };
+
+        #endregion // PreAuth actions
     }
 }

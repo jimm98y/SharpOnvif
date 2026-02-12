@@ -191,19 +191,10 @@ namespace SharpOnvifServer.Security
             return AuthenticateResult.Fail("No authentication found");
         }
 
-        private static bool AllowAnonymousAccess(string contentType)
+        private bool AllowAnonymousAccess(string contentType)
         {
             // according to the Onvif specification, these functions are in the access class PRE_AUTH and do not require any authentication:
-            return contentType != null &&
-            (
-                contentType.Contains("action=\"http://www.onvif.org/ver10/device/wsdl/GetWsdlUrl\"") ||
-                contentType.Contains("action=\"http://www.onvif.org/ver10/device/wsdl/GetServices\"") ||
-                contentType.Contains("action=\"http://www.onvif.org/ver10/device/wsdl/GetServiceCapabilities\"") ||
-                contentType.Contains("action=\"http://www.onvif.org/ver10/device/wsdl/GetCapabilities\"") ||
-                contentType.Contains("action=\"http://www.onvif.org/ver10/device/wsdl/GetHostname\"") ||
-                contentType.Contains("action=\"http://www.onvif.org/ver10/device/wsdl/GetSystemDateAndTime\"") ||
-                contentType.Contains("action=\"http://www.onvif.org/ver10/device/wsdl/GetEndpointReference\"")
-            ) && (contentType.Split("action=\"").Count() - 1) == 1;
+            return contentType != null && (OptionsMonitor.CurrentValue.PreAuthActions.FirstOrDefault(x => contentType.Contains($"action=\"{x}\"")) != null) && (contentType.Split("action=\"").Count() - 1) == 1;
         }
 
         private async Task<byte[]> ReadRequestBodyAsync(byte[] body)

@@ -42,17 +42,36 @@ namespace SharpOnvifClient
     {
         private bool _disposedValue;
 
-        private readonly string _onvifUri;
+        protected readonly string _onvifUri;
         public string OnvifUri {  get { return _onvifUri; } }
 
-        private Dictionary<string, string> _supportedServices;
+        protected Dictionary<string, string> _supportedServices;
 
-        private object _syncRoot = new object();
-        private readonly Dictionary<string, object> _clients = new Dictionary<string, object>();
-        private readonly System.Net.NetworkCredential _credentials;
-        private readonly DigestAuthenticationSchemeOptions _authentication;
-        private readonly IEndpointBehavior _legacyAuth;
-        private readonly IEndpointBehavior _disableExpect100ContinueBehavior;
+        protected object _syncRoot = new object();
+        protected readonly Dictionary<string, object> _clients = new Dictionary<string, object>();
+        protected readonly System.Net.NetworkCredential _credentials;
+        protected readonly DigestAuthenticationSchemeOptions _authentication;
+        protected readonly IEndpointBehavior _legacyAuth;
+        protected readonly IEndpointBehavior _disableExpect100ContinueBehavior;
+
+        /// <summary> 
+        /// List of actions that should be allowed without authentication. 
+        /// This is needed for example for the GetCapabilities action, which is called by clients before they authenticate.
+        /// </summary>
+        /// <remarks>
+        /// Some cameras (Vivotec) require authentication for GetServices, which is also a PRE_AUTH action according to the Onvif Core specification.
+        /// This list allows to specify such exceptions.
+        /// </remarks>
+        public List<string> PreAuthActions { get; set; } = new List<string>()
+        {
+            "http://www.onvif.org/ver10/device/wsdl/GetWsdlUrl",
+            "http://www.onvif.org/ver10/device/wsdl/GetServices",
+            "http://www.onvif.org/ver10/device/wsdl/GetServiceCapabilities",
+            "http://www.onvif.org/ver10/device/wsdl/GetCapabilities",
+            "http://www.onvif.org/ver10/device/wsdl/GetHostname",
+            "http://www.onvif.org/ver10/device/wsdl/GetSystemDateAndTime",
+            "http://www.onvif.org/ver10/device/wsdl/GetEndpointReference",
+        };
 
         /// <summary>
         /// Creates an instance of <see cref="SimpleOnvifClient"/>.
@@ -124,7 +143,7 @@ namespace SharpOnvifClient
             }
         }
 
-        public TChannel GetOrCreateClient<TChannel>(string uri, Func<string, TChannel> creator) where TChannel : class
+        protected TChannel GetOrCreateClient<TChannel>(string uri, Func<string, TChannel> creator) where TChannel : class
         {
             string key = $"{typeof(TChannel)}|{uri}";
             lock (_syncRoot)
@@ -153,39 +172,48 @@ namespace SharpOnvifClient
             return deviceInfo;
         }
 
-        public async Task<GetServicesResponse> GetServicesAsync(bool includeCapability = false)
+        public virtual async Task<GetServicesResponse> GetServicesAsync(bool includeCapability = false)
         {
             // PRE_AUTH action http://www.onvif.org/ver10/device/wsdl/GetServices
-            using (var deviceClient = new DeviceClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(_onvifUri)))
-            {
-                deviceClient.SetDisableExpect100Continue(_disableExpect100ContinueBehavior);
+            if(PreAuthActions.Contains("http://www.onvif.org/ver10/device/wsdl/GetServices"))
+            { 
+                using (var deviceClient = new DeviceClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(_onvifUri)))
+                {
+                    deviceClient.SetDisableExpect100Continue(_disableExpect100ContinueBehavior);
 
-                var services = await deviceClient.GetServicesAsync(includeCapability).ConfigureAwait(false);
+                    var services = await deviceClient.GetServicesAsync(includeCapability).ConfigureAwait(false);
+                    return services;
+                }
+            }
+            else
+            {
+                // According to the Onvif Core specification, GetServices is in the PRE_AUTH category and should not require authentication.
+                // However, some cameras (Vivotec) do not follow this specification and require authentication for GetServices. This method
+                //  allows to get services with authentication if needed.
+                var deviceClient = GetOrCreateClient<Device>(_onvifUri, (u) => new DeviceClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(u)));
+                var services = await deviceClient.GetServicesAsync(new GetServicesRequest(includeCapability)).ConfigureAwait(false);
                 return services;
             }
-        }
-
-        /// <remarks>
-        /// According to the Onvif Core specification, GetServices is in the PRE_AUTH category and should not require authentication.
-        /// However, some cameras (Vivotec) do not follow this specification and require authentication for GetServices. This method
-        ///  allows to get services with authentication if needed.
-        /// </remarks>
-        public async Task<GetServicesResponse> GetServicesAuthenticatedAsync(bool includeCapability = false)
-        {
-            var deviceClient = GetOrCreateClient<Device>(_onvifUri, (u) => new DeviceClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(u)));
-            var services = await deviceClient.GetServicesAsync(new GetServicesRequest(includeCapability)).ConfigureAwait(false);
-            return services;
         }
 
         public async Task<SystemDateTime> GetSystemDateAndTimeAsync()
         {
             // PRE_AUTH action http://www.onvif.org/ver10/device/wsdl/GetSystemDateAndTime
-            using (var deviceClient = new DeviceClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(_onvifUri)))
+            if (PreAuthActions.Contains("http://www.onvif.org/ver10/device/wsdl/GetSystemDateAndTime"))
             {
-                deviceClient.SetDisableExpect100Continue(_disableExpect100ContinueBehavior);
+                using (var deviceClient = new DeviceClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(_onvifUri)))
+                {
+                    deviceClient.SetDisableExpect100Continue(_disableExpect100ContinueBehavior);
 
-                var cameraTime = await deviceClient.GetSystemDateAndTimeAsync().ConfigureAwait(false);
-                return cameraTime;
+                    var cameraTime = await deviceClient.GetSystemDateAndTimeAsync().ConfigureAwait(false);
+                    return cameraTime;
+                }
+            }
+            else
+            {
+                var deviceClient = GetOrCreateClient<Device>(_onvifUri, (u) => new DeviceClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(u)));
+                var services = await deviceClient.GetSystemDateAndTimeAsync().ConfigureAwait(false);
+                return services;
             }
         }
 
@@ -501,11 +529,11 @@ namespace SharpOnvifClient
 
         #region Utility
 
-        private async Task<string> GetServiceUriAsync(string ns)
+        protected virtual async Task<string> GetServiceUriAsync(string ns)
         {
             if (_supportedServices == null)
             {
-                var services = await GetServicesAsync().ConfigureAwait(false);
+                GetServicesResponse services = await GetServicesAsync().ConfigureAwait(false);
                 Dictionary<string, string> supportedServices = new Dictionary<string, string>();
                 foreach (var service in services.Service)
                 {
