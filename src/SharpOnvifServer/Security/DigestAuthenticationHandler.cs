@@ -194,7 +194,11 @@ namespace SharpOnvifServer.Security
         private bool AllowAnonymousAccess(string contentType)
         {
             // according to the Onvif specification, these functions are in the access class PRE_AUTH and do not require any authentication:
-            return contentType != null && (OptionsMonitor.CurrentValue.PreAuthActions.FirstOrDefault(x => contentType.Contains($"action=\"{x}\"")) != null) && (contentType.Split("action=\"").Count() - 1) == 1;
+            return
+                contentType != null &&
+                OptionsMonitor.CurrentValue.PreAuthActions != null && 
+                (OptionsMonitor.CurrentValue.PreAuthActions.FirstOrDefault(x => contentType.Contains($"action=\"{x}\"")) != null) && 
+                (contentType.Split("action=\"").Count() - 1) == 1;
         }
 
         private async Task<byte[]> ReadRequestBodyAsync(byte[] body)

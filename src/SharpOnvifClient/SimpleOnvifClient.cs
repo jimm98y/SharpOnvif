@@ -156,7 +156,7 @@ namespace SharpOnvifClient
         public virtual async Task<GetServicesResponse> GetServicesAsync(bool includeCapability = false)
         {
             // PRE_AUTH action http://www.onvif.org/ver10/device/wsdl/GetServices
-            if(_authentication.PreAuthActions.Contains("http://www.onvif.org/ver10/device/wsdl/GetServices"))
+            if(_authentication.PreAuthActions == null || _authentication.PreAuthActions.Contains("http://www.onvif.org/ver10/device/wsdl/GetServices"))
             { 
                 using (var deviceClient = new DeviceClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(_onvifUri)))
                 {
@@ -180,7 +180,7 @@ namespace SharpOnvifClient
         public async Task<SystemDateTime> GetSystemDateAndTimeAsync()
         {
             // PRE_AUTH action http://www.onvif.org/ver10/device/wsdl/GetSystemDateAndTime
-            if (_authentication.PreAuthActions.Contains("http://www.onvif.org/ver10/device/wsdl/GetSystemDateAndTime"))
+            if (_authentication.PreAuthActions == null || _authentication.PreAuthActions.Contains("http://www.onvif.org/ver10/device/wsdl/GetSystemDateAndTime"))
             {
                 using (var deviceClient = new DeviceClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(_onvifUri)))
                 {
