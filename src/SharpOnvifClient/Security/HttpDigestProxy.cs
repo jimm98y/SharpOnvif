@@ -38,8 +38,10 @@ namespace SharpOnvifClient.Security
     ///  message. 
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class HttpDigestProxy<T> : DispatchProxy where T : class
+    public class HttpDigestProxy<T> : DispatchProxy, IDisposable where T : class
     {
+        private bool disposedValue;
+
         public T Target { get; private set; }
         public IHttpMessageState State { get; private set; }
 
@@ -168,6 +170,29 @@ namespace SharpOnvifClient.Security
             proxy.Target = target;
             proxy.State = state; 
             return proxy as T;
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    var disposableTarget = Target as IDisposable;
+                    if(disposableTarget != null)
+                    {
+                        disposableTarget.Dispose();
+                    }
+                }
+
+                disposedValue = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
     }
 }
