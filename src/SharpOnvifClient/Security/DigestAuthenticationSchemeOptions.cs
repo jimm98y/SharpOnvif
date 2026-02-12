@@ -72,6 +72,25 @@ namespace SharpOnvifClient.Security
         /// </summary>
         public bool HttpDigestUserHash { get; set; } = true;
 
+        /// <summary> 
+        /// List of actions that should be allowed without authentication. 
+        /// This is needed for example for the GetCapabilities action, which is called by clients before they authenticate.
+        /// </summary>
+        /// <remarks>
+        /// Some cameras (Vivotec) require authentication for GetServices, which is also a PRE_AUTH action according to the Onvif Core specification.
+        /// This list allows to specify such exceptions.
+        /// </remarks>
+        public List<string> PreAuthActions { get; set; } = new List<string>()
+        {
+            "http://www.onvif.org/ver10/device/wsdl/GetWsdlUrl",
+            "http://www.onvif.org/ver10/device/wsdl/GetServices",
+            "http://www.onvif.org/ver10/device/wsdl/GetServiceCapabilities",
+            "http://www.onvif.org/ver10/device/wsdl/GetCapabilities",
+            "http://www.onvif.org/ver10/device/wsdl/GetHostname",
+            "http://www.onvif.org/ver10/device/wsdl/GetSystemDateAndTime",
+            "http://www.onvif.org/ver10/device/wsdl/GetEndpointReference",
+        };
+
         public DigestAuthenticationSchemeOptions()
         { }
 

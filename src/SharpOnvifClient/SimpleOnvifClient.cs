@@ -54,25 +54,6 @@ namespace SharpOnvifClient
         protected readonly IEndpointBehavior _legacyAuth;
         protected readonly IEndpointBehavior _disableExpect100ContinueBehavior;
 
-        /// <summary> 
-        /// List of actions that should be allowed without authentication. 
-        /// This is needed for example for the GetCapabilities action, which is called by clients before they authenticate.
-        /// </summary>
-        /// <remarks>
-        /// Some cameras (Vivotec) require authentication for GetServices, which is also a PRE_AUTH action according to the Onvif Core specification.
-        /// This list allows to specify such exceptions.
-        /// </remarks>
-        public List<string> PreAuthActions { get; set; } = new List<string>()
-        {
-            "http://www.onvif.org/ver10/device/wsdl/GetWsdlUrl",
-            "http://www.onvif.org/ver10/device/wsdl/GetServices",
-            "http://www.onvif.org/ver10/device/wsdl/GetServiceCapabilities",
-            "http://www.onvif.org/ver10/device/wsdl/GetCapabilities",
-            "http://www.onvif.org/ver10/device/wsdl/GetHostname",
-            "http://www.onvif.org/ver10/device/wsdl/GetSystemDateAndTime",
-            "http://www.onvif.org/ver10/device/wsdl/GetEndpointReference",
-        };
-
         /// <summary>
         /// Creates an instance of <see cref="SimpleOnvifClient"/>.
         /// </summary>
@@ -175,7 +156,7 @@ namespace SharpOnvifClient
         public virtual async Task<GetServicesResponse> GetServicesAsync(bool includeCapability = false)
         {
             // PRE_AUTH action http://www.onvif.org/ver10/device/wsdl/GetServices
-            if(PreAuthActions.Contains("http://www.onvif.org/ver10/device/wsdl/GetServices"))
+            if(_authentication.PreAuthActions.Contains("http://www.onvif.org/ver10/device/wsdl/GetServices"))
             { 
                 using (var deviceClient = new DeviceClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(_onvifUri)))
                 {
@@ -199,7 +180,7 @@ namespace SharpOnvifClient
         public async Task<SystemDateTime> GetSystemDateAndTimeAsync()
         {
             // PRE_AUTH action http://www.onvif.org/ver10/device/wsdl/GetSystemDateAndTime
-            if (PreAuthActions.Contains("http://www.onvif.org/ver10/device/wsdl/GetSystemDateAndTime"))
+            if (_authentication.PreAuthActions.Contains("http://www.onvif.org/ver10/device/wsdl/GetSystemDateAndTime"))
             {
                 using (var deviceClient = new DeviceClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(_onvifUri)))
                 {
