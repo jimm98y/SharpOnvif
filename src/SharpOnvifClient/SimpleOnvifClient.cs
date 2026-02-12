@@ -165,6 +165,18 @@ namespace SharpOnvifClient
             }
         }
 
+        /// <remarks>
+        /// According to the Onvif Core specification, GetServices is in the PRE_AUTH category and should not require authentication.
+        /// However, some cameras (Vivotec) do not follow this specification and require authentication for GetServices. This method
+        ///  allows to get services with authentication if needed.
+        /// </remarks>
+        public async Task<GetServicesResponse> GetServicesAuthenticatedAsync(bool includeCapability = false)
+        {
+            var deviceClient = GetOrCreateClient<Device>(_onvifUri, (u) => new DeviceClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(u)));
+            var services = await deviceClient.GetServicesAsync(new GetServicesRequest(includeCapability)).ConfigureAwait(false);
+            return services;
+        }
+
         public async Task<SystemDateTime> GetSystemDateAndTimeAsync()
         {
             // PRE_AUTH action http://www.onvif.org/ver10/device/wsdl/GetSystemDateAndTime
