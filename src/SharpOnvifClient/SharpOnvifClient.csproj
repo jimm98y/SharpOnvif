@@ -7,6 +7,7 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\SharpOnvifClient.DeviceMgmt\SharpOnvifClient.DeviceMgmt.csproj" />
 	  <ProjectReference Include="..\SharpOnvifClient.Events\SharpOnvifClient.Events.csproj" />
+	  <ProjectReference Include="..\SharpOnvifClient.Media2\SharpOnvifClient.Media2.csproj" />
 	  <ProjectReference Include="..\SharpOnvifClient.Media\SharpOnvifClient.Media.csproj" />
 	  <ProjectReference Include="..\SharpOnvifClient.PTZ\SharpOnvifClient.PTZ.csproj" />
 	  <ProjectReference Include="..\SharpOnvifCommon\SharpOnvifCommon.csproj" />

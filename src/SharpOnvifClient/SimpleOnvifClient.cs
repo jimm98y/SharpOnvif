@@ -225,15 +225,51 @@ namespace SharpOnvifClient
             return profiles;
         }
 
-        public async Task<MediaUri> GetStreamUriAsync(string profileToken)
+        public async Task<MediaUri> GetStreamUriAsync(string profileToken, TransportProtocol protocol = TransportProtocol.RTSP)
         {
             string mediaUri = await GetServiceUriAsync(OnvifServices.MEDIA).ConfigureAwait(false);
             var mediaClient = GetOrCreateClient<Media.Media>(mediaUri, (u) => new MediaClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(u)));
-            var streamUri = await mediaClient.GetStreamUriAsync(new StreamSetup() { Transport = new Transport() {  Protocol = TransportProtocol.RTSP } }, profileToken).ConfigureAwait(false);
+            var streamUri = await mediaClient.GetStreamUriAsync(new StreamSetup() { Transport = new Transport() {  Protocol = protocol } }, profileToken).ConfigureAwait(false);
+            return streamUri;
+        }
+
+        public async Task<MediaUri> GetSnapshotUriAsync(string profileToken)
+        {
+            string mediaUri = await GetServiceUriAsync(OnvifServices.MEDIA).ConfigureAwait(false);
+            var mediaClient = GetOrCreateClient<Media.Media>(mediaUri, (u) => new MediaClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(u)));
+            var streamUri = await mediaClient.GetSnapshotUriAsync(profileToken).ConfigureAwait(false);
             return streamUri;
         }
 
         #endregion // Media
+
+        #region Media2
+
+        public async Task<Media2.GetProfilesResponse> GetProfiles2Async()
+        {
+            string mediaUri = await GetServiceUriAsync(OnvifServices.MEDIA2).ConfigureAwait(false);
+            var mediaClient = GetOrCreateClient<Media2.Media2>(mediaUri, (u) => new Media2.Media2Client(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(u)));
+            var profiles = await mediaClient.GetProfilesAsync(new Media2.GetProfilesRequest()).ConfigureAwait(false);
+            return profiles;
+        }
+
+        public async Task<Media2.GetStreamUriResponse> GetStreamUri2Async(string profileToken, string protocol)
+        {
+            string mediaUri = await GetServiceUriAsync(OnvifServices.MEDIA2).ConfigureAwait(false);
+            var mediaClient = GetOrCreateClient<Media2.Media2>(mediaUri, (u) => new Media2.Media2Client(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(u)));
+            var streamUri = await mediaClient.GetStreamUriAsync(new Media2.GetStreamUriRequest(protocol, profileToken)).ConfigureAwait(false);
+            return streamUri;
+        }
+
+        public async Task<Media2.GetSnapshotUriResponse> GetSnapshotUri2Async(string profileToken)
+        {
+            string mediaUri = await GetServiceUriAsync(OnvifServices.MEDIA2).ConfigureAwait(false);
+            var mediaClient = GetOrCreateClient<Media2.Media2>(mediaUri, (u) => new Media2.Media2Client(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(u)));
+            var streamUri = await mediaClient.GetSnapshotUriAsync(new Media2.GetSnapshotUriRequest(profileToken)).ConfigureAwait(false);
+            return streamUri;
+        }
+
+        #endregion // Media2
 
         #region Pull Point subscription
 

@@ -87,6 +87,12 @@ public static class Program
                     var streamUri = await client.GetStreamUriAsync(profiles.Profiles.First().token);
                     Console.WriteLine($"Stream URI: {streamUri.Uri}");
                 }
+                else if(services.Service.FirstOrDefault(x => x.Namespace == OnvifServices.MEDIA2) != null)
+                {
+                    var profiles = await client.GetProfiles2Async();
+                    var streamUri = await client.GetStreamUri2Async(profiles.Profiles.First().token, "RTSP");
+                    Console.WriteLine($"Stream URI: {streamUri.Uri}");
+                }
 
                 // check if ptz profile is available
                 if (services.Service.FirstOrDefault(x => x.Namespace == OnvifServices.PTZ) != null)
