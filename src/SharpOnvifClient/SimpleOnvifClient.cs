@@ -542,6 +542,14 @@ namespace SharpOnvifClient
             await ptzClient.StopAsync(profileToken, panTilt, zoom).ConfigureAwait(false);
         }
 
+        public async Task<GetConfigurationsResponse> GetConfigurationsAsync()
+        {
+            string ptzURL = await GetServiceUriAsync(OnvifServices.PTZ).ConfigureAwait(false);
+            var ptzClient = GetOrCreateClient<PTZ.PTZ>(ptzURL, (u) => new PTZClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(u)));
+            var configurations = await ptzClient.GetConfigurationsAsync(new GetConfigurationsRequest()).ConfigureAwait(false);
+            return configurations;
+        }
+
         #endregion PTZ
 
         #region Utility
