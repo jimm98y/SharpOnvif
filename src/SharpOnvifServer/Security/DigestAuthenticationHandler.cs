@@ -151,10 +151,6 @@ namespace SharpOnvifServer.Security
                             Context.Items[CONTEXT_AUTHENTICATE_WEB_DIGEST_RESULT] = authenticateWebDigestResult;
                             return AuthenticateResult.Fail("HTTP Digest nonce has expired.");
                         }
-                        else
-                        {
-                            return AuthenticateResult.Fail("HTTP Digest authentication failed.");
-                        }
                     }
                     catch (Exception ex)
                     {
@@ -162,7 +158,8 @@ namespace SharpOnvifServer.Security
                     }
                 }
             }
-            else if(Options.Authentication.HasFlag(DigestAuthentication.WsUsernameToken))
+            
+            if(Options.Authentication.HasFlag(DigestAuthentication.WsUsernameToken))
             {
                 SoapDigestAuth token = await GetSecurityHeaderFromSoapEnvelopeAsync(Request).ConfigureAwait(false);
                 if (token != null)
