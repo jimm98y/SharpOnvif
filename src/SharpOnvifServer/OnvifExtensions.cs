@@ -43,6 +43,29 @@ namespace SharpOnvifServer
         /// </summary>
         /// <param name="services"><see cref="IServiceCollection"/></param>
         /// <param name="options">Digest authentication options.</param>
+        public static IServiceCollection AddOnvifDigestAuthentication(this IServiceCollection services, DigestAuthenticationSchemeOptions options = null)
+        {
+            return services.AddOnvifDigestAuthentication((digestOptions) =>
+            {
+                if (options != null)
+                {
+                    digestOptions.Authentication = options.Authentication;
+                    digestOptions.HttpDigestQop = options.HttpDigestQop;
+                    digestOptions.HttpDigestRealm = options.HttpDigestRealm;
+                    digestOptions.HttpDigestUserHash = options.HttpDigestUserHash;
+                    digestOptions.HttpDigestAlgorithms = options.HttpDigestAlgorithms;
+                    digestOptions.HttpDigestNonceLifetimeMilliseconds = options.HttpDigestNonceLifetimeMilliseconds;
+                    digestOptions.PreAuthActions = options.PreAuthActions;
+                    digestOptions.WsUsernameTokenMaxTimeDeltaInMilliseconds = options.WsUsernameTokenMaxTimeDeltaInMilliseconds;
+                }
+            });
+        }
+
+        /// <summary>
+        /// Add Digest authentication handler.
+        /// </summary>
+        /// <param name="services"><see cref="IServiceCollection"/></param>
+        /// <param name="options">Digest authentication options callback.</param>
         public static IServiceCollection AddOnvifDigestAuthentication(this IServiceCollection services, Action<DigestAuthenticationSchemeOptions> options = null)
         {
             const string SCHEME_DIGEST = "Digest";

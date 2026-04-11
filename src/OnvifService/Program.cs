@@ -34,12 +34,7 @@ builder.Services.AddSingleton<IServiceBehavior, UseRequestHeadersForMetadataAddr
 builder.Services.AddControllers();
 
 builder.Services.AddSingleton<SharpOnvifServer.IUserRepository, OnvifService.Repository.UserRepository>();
-builder.Services.AddOnvifDigestAuthentication((digestConfig) =>
-{
-    // ODM requires WsUsernameToken for Onvif (it cannot use HttpDigest for SOAP) and it also requires HttpDigest for images/video
-    digestConfig.Authentication = SharpOnvifServer.Security.DigestAuthentication.WsUsernameToken | SharpOnvifServer.Security.DigestAuthentication.HttpDigest;
-    digestConfig.HttpDigestRealm = "My IP Camera";
-});
+builder.Services.AddOnvifDigestAuthentication(builder.Configuration.GetSection("DigestAuthenticationOptions").Get<SharpOnvifServer.Security.DigestAuthenticationSchemeOptions>());
 builder.Services.AddOnvifDiscovery(builder.Configuration.GetSection("OnvifDiscovery").Get<SharpOnvifServer.Discovery.OnvifDiscoveryOptions>());
 
 builder.Services.AddSingleton<OnvifService.Onvif.DeviceImpl>();

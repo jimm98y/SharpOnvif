@@ -41,6 +41,9 @@ namespace SharpOnvifServer.Security
         public DigestAuthenticationSchemeOptions()
         {  }
 
+        /// <summary>
+        /// Authentication type allowed.
+        /// </summary>
         public DigestAuthentication Authentication { get; set; } = DigestAuthentication.WsUsernameToken | DigestAuthentication.HttpDigest;
 
         #region WsUsernameToken
