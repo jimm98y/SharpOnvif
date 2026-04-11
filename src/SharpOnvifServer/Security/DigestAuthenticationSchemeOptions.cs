@@ -35,6 +35,12 @@ namespace SharpOnvifServer.Security
 
     public class DigestAuthenticationSchemeOptions : AuthenticationSchemeOptions
     {
+        /// <summary>
+        /// Default ctor.
+        /// </summary>
+        public DigestAuthenticationSchemeOptions()
+        {  }
+
         public DigestAuthentication Authentication { get; set; } = DigestAuthentication.WsUsernameToken | DigestAuthentication.HttpDigest;
 
         #region WsUsernameToken
