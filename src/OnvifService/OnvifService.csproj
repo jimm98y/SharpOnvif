@@ -15,6 +15,7 @@
     <PackageReference Include="CoreWCF.WebHttp" Version="1.8.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SharpOnvif.Tests\SharpOnvif.Tests.csproj" />
     <ProjectReference Include="..\SharpOnvifServer.DeviceMgmt\SharpOnvifServer.DeviceMgmt.csproj" />
     <ProjectReference Include="..\SharpOnvifServer.Events\SharpOnvifServer.Events.csproj" />
     <ProjectReference Include="..\SharpOnvifServer.Media\SharpOnvifServer.Media.csproj" />
