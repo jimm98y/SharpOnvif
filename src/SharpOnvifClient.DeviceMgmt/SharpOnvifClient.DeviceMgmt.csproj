@@ -8,11 +8,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<DotNetCliToolReference Include="Microsoft.XmlSerializer.Generator" Version="10.0.3" />
+		<DotNetCliToolReference Include="Microsoft.XmlSerializer.Generator" Version="$(Microsoft_XmlSerializer_Generator)" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.XmlSerializer.Generator" Version="10.0.3" />
+		<PackageReference Include="Microsoft.XmlSerializer.Generator" Version="$(Microsoft_XmlSerializer_Generator)" />
 	</ItemGroup>
 
 	<ItemGroup Condition=" $(TargetFramework.StartsWith('net4')) ">

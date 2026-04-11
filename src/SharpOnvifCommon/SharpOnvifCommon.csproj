@@ -8,7 +8,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<DotNetCliToolReference Include="Microsoft.XmlSerializer.Generator" Version="10.0.5" />
+		<DotNetCliToolReference Include="Microsoft.XmlSerializer.Generator" Version="$(Microsoft_XmlSerializer_Generator)" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.XmlSerializer.Generator" Version="$(Microsoft_XmlSerializer_Generator)" />
 	</ItemGroup>
 
 	<ItemGroup Condition=" $(TargetFramework.StartsWith('net4')) ">
@@ -16,7 +20,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.XmlSerializer.Generator" Version="10.0.5" />
 		<PackageReference Include="System.Runtime.Caching" Version="10.0.5" />
 	</ItemGroup>
 </Project>
