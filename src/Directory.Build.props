@@ -3,7 +3,7 @@
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Nullable>disable</Nullable>
 		<Title>$(ProjectName)</Title>
-		<Version>0.9.2</Version>
+		<Version>0.9.3</Version>
 		<Authors>Lukas Volf</Authors>
 		<Copyright>MIT</Copyright>
 		<PackageProjectUrl>https://github.com/jimm98y/SharpOnvif</PackageProjectUrl>
@@ -30,6 +30,6 @@
 	</PropertyGroup>
 
 	<PropertyGroup>
-		<Microsoft_XmlSerializer_Generator>10.0.5</Microsoft_XmlSerializer_Generator>
+		<Microsoft_XmlSerializer_Generator>10.0.8</Microsoft_XmlSerializer_Generator>
 	</PropertyGroup>
 </Project>
