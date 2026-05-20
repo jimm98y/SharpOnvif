@@ -212,7 +212,7 @@ namespace SharpOnvifServer.Discovery
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Failed to start multicast listener: {ex.Message}");
+                _logger.LogError($"Failed to start multicast listener on {nicIPAddress}: {ex.Message}");
             }
         }
 

@@ -220,7 +220,15 @@ namespace SharpOnvifClient
                     client.BeginReceive(ReceiveCallback, null);
 
                     byte[] message = Encoding.UTF8.GetBytes(onvifDiscoveryProbe);
-                    await client.SendAsync(message, message.Length, multicastEndpoint);
+
+                    try
+                    {
+                        await client.SendAsync(message, message.Length, multicastEndpoint);
+                    }
+                    catch(System.Net.Sockets.SocketException ex)
+                    {
+                        Debug.WriteLine($"Discovery on {ipAddress} failed with an exception: {ex.Message}");
+                    }
 
                     await Task.Delay(multicastTimeout, cts.Token);
                     cts.Cancel();
