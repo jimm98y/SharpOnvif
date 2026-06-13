@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="WsdlGenerator/WsdlGenerator.csproj" />
+  <Project Path="WsdlGenerator.Tests/WsdlGenerator.Tests.csproj" />
+</Solution>
