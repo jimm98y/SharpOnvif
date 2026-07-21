@@ -29,7 +29,7 @@
 	<ItemGroup Condition=" $(TargetFramework.StartsWith('net8.')) ">
 		<PackageReference Include="System.ServiceModel.Primitives" Version="8.1.2" />
 		<PackageReference Include="System.ServiceModel.Http" Version="8.1.2" />
-		<PackageReference Include="System.Security.Cryptography.Xml" Version="8.0.3" />
+		<PackageReference Include="System.Security.Cryptography.Xml" Version="9.0.18" />
 	</ItemGroup>
 
 </Project>
