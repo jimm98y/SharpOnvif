@@ -22,8 +22,9 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
-using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace SharpOnvifClient.Security
@@ -61,7 +62,11 @@ namespace SharpOnvifClient.Security
                     }
                     catch (System.ServiceModel.Security.MessageSecurityException ex)
                     {
-                        State.SetHeaders(ParseMessageSecurityException(ex.Message));
+                        IEnumerable<string> wwwAuthenticateHeaders = ParseMessageSecurityException(ex.Message);
+                        if (!wwwAuthenticateHeaders.Any())
+                            throw; // the request failed for another reason, report the original error
+
+                        State.SetHeaders(wwwAuthenticateHeaders);
 
                         resultTask = targetMethod.Invoke(Target, args) as Task;
                         await resultTask.ConfigureAwait(false);
@@ -81,7 +86,11 @@ namespace SharpOnvifClient.Security
                     }
                     catch (System.ServiceModel.Security.MessageSecurityException ex)
                     {
-                        State.SetHeaders(ParseMessageSecurityException(ex.Message));
+                        IEnumerable<string> wwwAuthenticateHeaders = ParseMessageSecurityException(ex.Message);
+                        if (!wwwAuthenticateHeaders.Any())
+                            throw; // the request failed for another reason, report the original error
+
+                        State.SetHeaders(wwwAuthenticateHeaders);
 
                         resultTask = targetMethod.Invoke(Target, args) as Task;
                         await resultTask.ConfigureAwait(false);
@@ -103,7 +112,11 @@ namespace SharpOnvifClient.Security
                 }
                 catch (System.ServiceModel.Security.MessageSecurityException ex)
                 {
-                    State.SetHeaders(ParseMessageSecurityException(ex.Message));
+                    IEnumerable<string> wwwAuthenticateHeaders = ParseMessageSecurityException(ex.Message);
+                    if (!wwwAuthenticateHeaders.Any())
+                        throw; // the request failed for another reason, report the original error
+
+                    State.SetHeaders(wwwAuthenticateHeaders);
 
                     result = targetMethod.Invoke(Target, args);
                 }
@@ -111,56 +124,59 @@ namespace SharpOnvifClient.Security
             }
         }
 
+        /// <summary>
+        /// RFC 7235 auth-param: a token, followed by either a quoted-string or another token.
+        /// The token is deliberately narrower than the RFC 7230 one, which also allows characters such as
+        ///  the apostrophe and the dot. Those are the characters the exception message ends with, and an
+        ///  unquoted value would swallow them together with the rest of the sentence. Every value an Onvif
+        ///  device sends unquoted (algorithm, qop, stale, userhash, charset, nc) fits in this set.
+        /// </summary>
+        private const string AUTH_PARAM = @"[\w-]+\s*=\s*(?:""[^""]*""|[\w-]+)";
+
+        /// <summary>
+        /// A "Digest" challenge and the comma separated list of its auth-params. Several challenges can
+        ///  follow each other, which is why the list stops at anything that is not an auth-param.
+        /// </summary>
+        private static readonly Regex _digestChallengeRegex = new Regex(
+            $@"(?<!\w)Digest\s+(?<param>{AUTH_PARAM})(?:\s*,\s*(?<param>{AUTH_PARAM}))*",
+            RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+
+        /// <returns>
+        /// The WwwAuthenticate headers, or an empty array when the message carries no Digest challenge -
+        ///  MessageSecurityException is also what WCF throws for a 403, where there is nothing to retry.
+        /// </returns>
         private IEnumerable<string> ParseMessageSecurityException(string message)
         {
             // Workaround: The only way to get the response WwwAuthenticate headers from WCF seems to be
             //  by parsing them from the Exception message text. This is not ideal and we have to be careful
             //  to not use any hardcoded strings as the exception message might be localized.
+            // The message quotes the header differently in every language - with apostrophes, with double
+            //  quotes (which the challenge itself is full of), with typographic quotes, and in some
+            //  languages it is not quoted at all. The quoting is therefore ignored and the challenges are
+            //  matched by their own grammar instead, which is what separates them from the text around them.
 
-            /*            
-            The HTTP request is unauthorized with client authentication scheme 'Anonymous'. 
-            The authentication header received from the server was 
+            /*
+            The HTTP request is unauthorized with client authentication scheme 'Anonymous'.
+            The authentication header received from the server was
             'Digest realm="IP Camera", qop="auth, auth-int", nonce="0000019c15330aa11b968762b51d15c40ba2f12eb2cb1ec02427a1d82440325adbff100bc3f35d74a401e5d533f271cd5e81101a", opaque="00000000", userhash=TRUE, stale="FALSE", Digest realm="IP Camera", qop="auth, auth-int", algorithm=SHA-256, nonce="0000019c15330aa11b968762b51d15c40ba2f12eb2cb1ec02427a1d82440325adbff100bc3f35d74a401e5d533f271cd5e81101a", opaque="00000000", userhash=TRUE, stale="FALSE", Digest realm="IP Camera", qop="auth, auth-int", algorithm=SHA-512-256, nonce="0000019c15330aa11b968762b51d15c40ba2f12eb2cb1ec02427a1d82440325adbff100bc3f35d74a401e5d533f271cd5e81101a", opaque="00000000", userhash=TRUE, stale="FALSE"'.
+
+            Hikvision, Chinese Windows - the header is enclosed in typographic quotes:
+            HTTP 请求未经客户端身份验证方案“Anonymous”授权。从服务器收到的身份验证标头为“Digest qop="auth", realm="IP Camera(FN636)", nonce="663338373a34393137373736373ace51538fd6d7317abb7651757a8a65af", stale="FALSE"”。
+
+            Czech Windows - the header is not enclosed in anything:
+            Požadavek protokolu HTTP je neoprávněný se schématem autorizace klienta Anonymous. Záhlaví ověření přijaté ze serveru je Digest realm="IP Camera", qop="auth, auth-int", nonce="0000019c15330aa11b968762b51d15c40ba2f12eb2cb1ec02427a1d82440325adbff100bc3f35d74a401e5d533f271cd5e81101a", opaque="00000000", userhash=TRUE, stale="FALSE".
             */
-            int digestHeaderStart = message.IndexOf("Digest", StringComparison.OrdinalIgnoreCase);
-            if (digestHeaderStart < 0)
-            {
-                throw new InvalidOperationException("The MessageSecurityException does not contain a Digest authentication header.", new FormatException(message));
-            }
-
-            int digestHeaderEnd = message.IndexOf('\'', digestHeaderStart);
-            string wwwAuthenticateHeadersConcatenated = digestHeaderEnd >= 0
-                ? message.Substring(digestHeaderStart, digestHeaderEnd - digestHeaderStart)
-                : message.Substring(digestHeaderStart);
-            string[] wwwAuthenticateHeaderParts = wwwAuthenticateHeadersConcatenated.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
-
             List<string> wwwAuthenticateHeaders = new List<string>();
-            StringBuilder stringBuilder = null;
-            for (int i = 0; i < wwwAuthenticateHeaderParts.Length; i++)
-            {
-                if (wwwAuthenticateHeaderParts[i].TrimStart().StartsWith("Digest", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    if (stringBuilder != null)
-                    {
-                        wwwAuthenticateHeaders.Add(stringBuilder.ToString());
-                    }
 
-                    stringBuilder = new StringBuilder();
-                    stringBuilder.Append(wwwAuthenticateHeaderParts[i].TrimStart());
-                }
-                else if (stringBuilder != null)
-                {
-                    stringBuilder.Append(",");
-                    stringBuilder.Append(wwwAuthenticateHeaderParts[i]);
-                }
-                else
-                {
-                    Debug.WriteLine($"Error parsing MessageException text");
-                }
-            }
-            if (stringBuilder != null)
+            foreach (Match match in _digestChallengeRegex.Matches(message))
             {
-                wwwAuthenticateHeaders.Add(stringBuilder.ToString());
+                var authParams = match.Groups["param"].Captures.Cast<Capture>().Select(x => x.Value);
+                wwwAuthenticateHeaders.Add($"Digest {string.Join(", ", authParams)}");
+            }
+
+            if (wwwAuthenticateHeaders.Count == 0)
+            {
+                Debug.WriteLine($"No WWW-Authenticate Digest challenge was found in: {message}");
             }
 
             return wwwAuthenticateHeaders;
