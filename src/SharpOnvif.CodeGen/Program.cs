@@ -36,8 +36,10 @@ foreach (var service in ServiceCatalog.All)
 
     var model = new ModelBuilder(service.Name, schema, wsdl, service.GenerateEntireSchema).Build();
 
-    written += Emit(outputRoot, $"SharpOnvifClient.{service.Name}", model, server: false);
-    written += Emit(outputRoot, $"SharpOnvifServer.{service.Name}", model, server: true);
+    // Both sides of a service are generated from one model into the single client and server
+    // projects, each service in its own folder and its own namespace.
+    written += Emit(outputRoot, "SharpOnvifClient", service.Name, model, server: false);
+    written += Emit(outputRoot, "SharpOnvifServer", service.Name, model, server: true);
 
     int serviceOperations = model.Services.Sum(s => s.Operations.Count);
     operations += serviceOperations;
@@ -54,9 +56,10 @@ Console.WriteLine(written == 0
     ? $"{outputRoot}: already up to date"
     : $"{outputRoot}: {written} file(s) written");
 
-static int Emit(string outputRoot, string @namespace, CsModel model, bool server)
+static int Emit(string outputRoot, string project, string service, CsModel model, bool server)
 {
-    string directory = Path.Combine(outputRoot, @namespace, "Generated");
+    string @namespace = project + "." + service;
+    string directory = Path.Combine(outputRoot, project, "Generated", service);
 
     var contracts = new GeneratedFile(
         Path.Combine(directory, "DataContracts.cs"),

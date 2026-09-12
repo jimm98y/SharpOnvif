@@ -1,8 +1,16 @@
 # SharpOnvif code generation
 
-SharpOnvif no longer uses WCF, CoreWCF, or `svcutil`. The bindings under `SharpOnvifClient.*`
-and `SharpOnvifServer.*` are produced by `src/SharpOnvif.CodeGen`, a purpose-built WSDL/XSD
-compiler in this repository.
+SharpOnvif no longer uses WCF, CoreWCF, or `svcutil`. The Onvif service bindings are produced by
+`src/SharpOnvif.CodeGen`, a purpose-built WSDL/XSD compiler in this repository.
+
+All 25 services are generated into two projects, one namespace each:
+
+```
+src/SharpOnvifClient/Generated/<Service>/DataContracts.cs   namespace SharpOnvifClient.<Service>
+src/SharpOnvifClient/Generated/<Service>/Client.cs
+src/SharpOnvifServer/Generated/<Service>/DataContracts.cs   namespace SharpOnvifServer.<Service>
+src/SharpOnvifServer/Generated/<Service>/Service.cs
+```
 
 ## Running the generator
 
@@ -10,7 +18,9 @@ compiler in this repository.
 dotnet run --project src/SharpOnvif.CodeGen
 ```
 
-It reads the offline schema mirror in `wsdl/` and rewrites the generated sources in place.
+It reads the offline schema mirror in `wsdl/` and rewrites the generated sources in place. Pass
+`--out <directory>` to write elsewhere, which is useful for reviewing a generator change against
+what is committed.
 Generated files are committed, so a normal build never runs the generator and never needs
 network access. Review the diff whenever you regenerate.
 

@@ -21,8 +21,6 @@
     <ProjectReference Include="..\SharpOnvifClient\SharpOnvifClient.csproj" />
     <ProjectReference Include="..\SharpOnvifCommon\SharpOnvifCommon.csproj" />
     <ProjectReference Include="..\SharpOnvifServer\SharpOnvifServer.csproj" />
-    <ProjectReference Include="..\SharpOnvifServer.DeviceMgmt\SharpOnvifServer.DeviceMgmt.csproj" />
-    <ProjectReference Include="..\SharpOnvifServer.Media\SharpOnvifServer.Media.csproj" />
   </ItemGroup>
 
   <ItemGroup>

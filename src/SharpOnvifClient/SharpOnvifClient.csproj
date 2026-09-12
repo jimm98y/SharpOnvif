@@ -1,16 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFrameworks>net481;net8.0;net10.0</TargetFrameworks>
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\SharpOnvifClient.DeviceMgmt\SharpOnvifClient.DeviceMgmt.csproj" />
-	  <ProjectReference Include="..\SharpOnvifClient.Events\SharpOnvifClient.Events.csproj" />
-	  <ProjectReference Include="..\SharpOnvifClient.Media2\SharpOnvifClient.Media2.csproj" />
-	  <ProjectReference Include="..\SharpOnvifClient.Media\SharpOnvifClient.Media.csproj" />
-	  <ProjectReference Include="..\SharpOnvifClient.PTZ\SharpOnvifClient.PTZ.csproj" />
-	  <ProjectReference Include="..\SharpOnvifCommon\SharpOnvifCommon.csproj" />
+		<ProjectReference Include="..\SharpOnvifCommon\SharpOnvifCommon.csproj" />
 	</ItemGroup>
 
 	<ItemGroup Condition=" $(TargetFramework.StartsWith('net4')) ">
