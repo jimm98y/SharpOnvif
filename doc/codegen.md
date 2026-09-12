@@ -22,15 +22,53 @@ only the types its own WSDL declares, plus its operations.
 dotnet run --project src/SharpOnvif.CodeGen
 ```
 
-It reads the offline schema mirror in `wsdl/` and rewrites the generated sources in place. Pass
-`--out <directory>` to write elsewhere, which is useful for reviewing a generator change against
-what is committed.
+With no arguments it reads the offline schema mirror in `wsdl/` and rewrites this repository's
+generated sources in place.
 Generated files are committed, so a normal build never runs the generator and never needs
 network access. Review the diff whenever you regenerate.
 
 To pick up upstream specification changes, run `wsdl/fetch.sh` first. It re-downloads every
 document listed in `wsdl/sources.txt`, mirroring the remote URL layout under `wsdl/` so that
 relative `schemaLocation` and `location` references resolve offline.
+
+## Using it for other services
+
+Nothing in the compiler is specific to Onvif - it reads WSDL and XML Schema - so it will generate
+from any document/literal SOAP 1.2 service:
+
+```
+dotnet run --project src/SharpOnvif.CodeGen -- \
+    --wsdl ./bank.wsdl \
+    --namespace Example.Banking \
+    --out ./Generated
+```
+
+That produces `Generated/Bank/{DataContracts,Client,Service}.cs` in `Example.Banking.Bank`, with
+the types its schemas share in `Example.Banking.Schema`. The service name comes from the file
+name; write `--wsdl Accounts=./bank.wsdl` to choose one. Repeat `--wsdl` for several services, and
+they share their common schemas the same way the Onvif services do.
+
+| option | |
+| --- | --- |
+| `--wsdl <uri>` | A WSDL, as a file path or an http(s) URL. Repeatable. `<name>=<uri>` names the service. |
+| `--namespace <ns>` | Root namespace; a service lands in `<ns>.<Service>`. |
+| `--out <dir>` | Output directory; a service lands in `<dir>/<Service>`. |
+| `--shared-namespace <ns>` | Namespace for shared types. Defaults to `<ns>.Schema`. |
+| `--shared-out <dir>` | Directory for shared types. Defaults to `<dir>/Schema`. |
+| `--client` / `--server` | Generate one side only. Both by default. |
+| `--mirror <dir>` | Resolve every document from a local mirror rather than from disk and the network. |
+
+Relative `xs:import` and `wsdl:import` references resolve against the document that made them, so
+a WSDL on disk can pull in schemas beside it and one fetched over http can pull in its siblings.
+Pass `--mirror` to keep a run offline and reproducible, which is how this repository generates its
+own bindings.
+
+Generated code depends on `SharpOnvifCommon`, and the server side additionally on
+`SharpOnvifServer`. Despite the names, neither is Onvif-specific: they carry the SOAP 1.2
+envelope, the XML reading and writing, and the ASP.NET Core dispatch the generated code drives.
+
+`SharpOnvif.Tests.TestCodeGenerator` runs the generator over a small banking WSDL to keep this
+path working.
 
 ## Schema subset
 

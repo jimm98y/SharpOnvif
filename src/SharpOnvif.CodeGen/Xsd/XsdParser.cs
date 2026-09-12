@@ -93,7 +93,7 @@ internal sealed class XsdParser
             return;
         }
 
-        string url = DocumentResolver.Combine(location, documentUrl);
+        string url = _resolver.Combine(location, documentUrl);
         var document = _resolver.Load(url);
 
         // The referenced document may be a bare schema or a WSDL carrying inline schemas.

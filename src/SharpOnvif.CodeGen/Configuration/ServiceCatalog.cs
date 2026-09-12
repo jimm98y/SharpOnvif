@@ -14,6 +14,27 @@ internal sealed record ServiceDefinition(
 internal static class ServiceCatalog
 {
     /// <summary>
+    /// How this repository generates its own bindings: from the mirror in <c>wsdl/</c>, with the
+    /// client and the server in separate assemblies and the schemas they share in a third.
+    /// </summary>
+    public static GeneratorOptions OnvifOptions(string repositoryRoot, string outputRoot) => new()
+    {
+        Services = All,
+        MirrorRoot = Path.Combine(repositoryRoot, "wsdl"),
+        SharedNamespace = "SharpOnvifCommon.Onvif",
+        SharedDirectory = Path.Combine(outputRoot, "SharpOnvifCommon", "Generated"),
+        Targets =
+        [
+            new GenerationTarget(
+                "SharpOnvifClient", Path.Combine(outputRoot, "SharpOnvifClient", "Generated"),
+                Client: true, Server: false),
+            new GenerationTarget(
+                "SharpOnvifServer", Path.Combine(outputRoot, "SharpOnvifServer", "Generated"),
+                Client: false, Server: true),
+        ],
+    };
+
+    /// <summary>
     /// Every ONVIF service SharpOnvif ships bindings for. The WSDL URLs match wsdl/sources.txt
     /// and the names match the existing project suffixes, so regenerating overwrites in place.
     /// </summary>

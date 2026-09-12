@@ -21,6 +21,12 @@
     <ProjectReference Include="..\SharpOnvifClient\SharpOnvifClient.csproj" />
     <ProjectReference Include="..\SharpOnvifCommon\SharpOnvifCommon.csproj" />
     <ProjectReference Include="..\SharpOnvifServer\SharpOnvifServer.csproj" />
+    <ProjectReference Include="..\SharpOnvif.CodeGen\SharpOnvif.CodeGen.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- A small WSDL that is not Onvif, for testing the generator against something else. -->
+    <None Include="Wsdl\**" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>

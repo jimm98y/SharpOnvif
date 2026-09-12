@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:m="urn:example:money" targetNamespace="urn:example:money"
+           elementFormDefault="qualified">
+  <xs:complexType name="Money">
+    <xs:sequence>
+      <xs:element name="Amount" type="xs:decimal"/>
+      <xs:element name="Currency" type="m:Currency"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="Currency">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="EUR"/>
+      <xs:enumeration value="USD"/>
+      <xs:enumeration value="CZK"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

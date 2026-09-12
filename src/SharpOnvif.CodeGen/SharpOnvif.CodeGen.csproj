@@ -12,4 +12,9 @@
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 	</PropertyGroup>
 
+	<ItemGroup>
+		<!-- The generator is exercised by the test project, which drives its internals directly. -->
+		<InternalsVisibleTo Include="SharpOnvif.Tests" />
+	</ItemGroup>
+
 </Project>

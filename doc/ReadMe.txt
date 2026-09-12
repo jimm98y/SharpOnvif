@@ -10,4 +10,10 @@ To pick up changes to the Onvif specifications first:
 
     wsdl/fetch.sh
 
+The generator is not specific to Onvif. To generate from any document/literal SOAP 1.2 WSDL:
+
+    dotnet run --project src/SharpOnvif.CodeGen -- --wsdl <uri> --namespace <ns> --out <dir>
+
+Run it with --help for the full set of options.
+
 See doc/codegen.md for what the generator does and why.

@@ -40,10 +40,9 @@ internal sealed class ModelBuilder
         string serviceName,
         XsdSchemaSet schema,
         WsdlParser wsdl,
-        bool generateEntireSchema = false,
         string csNamespace = "",
         SharedTypeIndex? shared = null)
-        : this(serviceName, schema, [wsdl], generateEntireSchema, csNamespace, shared, null, true)
+        : this(serviceName, schema, [wsdl], generateEntireSchema: false, csNamespace, shared, null, true)
     {
     }
 

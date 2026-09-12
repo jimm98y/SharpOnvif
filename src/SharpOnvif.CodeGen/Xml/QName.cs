@@ -59,9 +59,14 @@ internal sealed class SchemaException : Exception
     private static string Describe(System.Xml.Linq.XObject? at)
     {
         if (at is null) return "";
+
+        // The document records where it came from; XObject.BaseUri only knows about readers that
+        // had a URI of their own, which the loader does not use.
+        string where = at.Document?.Annotation<DocumentResolver.DocumentUri>()?.Value ?? "";
+
         var line = at as System.Xml.IXmlLineInfo;
-        string where = at.BaseUri ?? "";
         if (line is not null && line.HasLineInfo()) where += $"({line.LineNumber},{line.LinePosition})";
+
         return where.Length == 0 ? "" : where + ": ";
     }
 }

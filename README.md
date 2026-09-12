@@ -229,6 +229,13 @@ this repository, from the specification documents mirrored in `wsdl/`. Generated
 committed, so a normal build needs no network access and no external tooling. See
 [doc/codegen.md](doc/codegen.md) for how to regenerate them and what the generator does.
 
+The generator is not tied to Onvif. It reads WSDL and XML Schema, so it will generate a client and
+a service for any document/literal SOAP 1.2 WSDL:
+
+```
+dotnet run --project src/SharpOnvif.CodeGen -- --wsdl ./bank.wsdl --namespace Example.Banking --out ./Generated
+```
+
 All 25 Onvif services ship in `SharpOnvifClient` and `SharpOnvifServer`, one namespace per
 service. The Onvif data model itself - `Profile`, `VideoResolution`, `PTZVector` and the rest of
 `onvif.xsd` - lives once in `SharpOnvifCommon.Onvif` and is shared by both, so a value read by the

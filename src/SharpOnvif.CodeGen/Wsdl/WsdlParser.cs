@@ -57,7 +57,7 @@ internal sealed class WsdlParser
     /// <summary>Parses the document at <paramref name="url"/> and everything it imports.</summary>
     public void Parse(string url)
     {
-        url = DocumentResolver.Combine(url, null);
+        url = _resolver.Combine(url, null);
         if (_rootDocument.Length == 0) _rootDocument = url;
         if (!_parsed.Add(url)) return;
 
@@ -74,7 +74,7 @@ internal sealed class WsdlParser
         foreach (var import in definitions.Elements(W + "import"))
         {
             if (import.Attribute("location")?.Value is { } location)
-                Parse(DocumentResolver.Combine(location, url));
+                Parse(_resolver.Combine(location, url));
         }
 
         foreach (var schema in definitions.Elements(W + "types").Elements(Xs + "schema"))

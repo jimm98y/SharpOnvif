@@ -19,19 +19,26 @@ internal sealed class DataContractEmitter
     private readonly string _namespace;
     private readonly Dictionary<string, string> _namespaceConstants = new(StringComparer.Ordinal);
 
-    public DataContractEmitter(CsModel model, string @namespace)
+    private readonly bool _isShared;
+    private readonly string? _sharedNamespace;
+
+    /// <param name="isShared">
+    /// True for the model of the schemas the services share. Its helpers are called from the
+    /// other assemblies, so they cannot be internal the way a service's own helpers are.
+    /// </param>
+    /// <param name="sharedNamespace">
+    /// Where the shared types live, so a service's xsi:type factory can defer to theirs. Null for
+    /// the shared model itself.
+    /// </param>
+    public DataContractEmitter(CsModel model, string @namespace, bool isShared, string? sharedNamespace = null)
     {
         _model = model;
         _namespace = @namespace;
+        _isShared = isShared;
+        _sharedNamespace = sharedNamespace;
     }
 
-    /// <summary>
-    /// True for the shared schema model. Its helpers are called from the client and server
-    /// assemblies, so they cannot be internal the way a service's own helpers are.
-    /// </summary>
-    private bool IsShared => _namespace.StartsWith("SharpOnvifCommon", StringComparison.Ordinal);
-
-    private string HelperVisibility => IsShared ? "public" : "internal";
+    private string HelperVisibility => _isShared ? "public" : "internal";
 
     public string Emit()
     {
@@ -62,7 +69,7 @@ internal sealed class DataContractEmitter
             }
 
             writer.Line();
-            XmlTypeFactoryEmitter.Emit(writer, _model, HelperVisibility, IsShared ? null : "SharpOnvifCommon.Onvif");
+            XmlTypeFactoryEmitter.Emit(writer, _model, HelperVisibility, _isShared ? null : _sharedNamespace);
 
             writer.Line();
             OnvifActionsEmitter.Emit(writer, _model);
