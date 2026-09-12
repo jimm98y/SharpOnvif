@@ -59,7 +59,7 @@ namespace SharpOnvifServer.Recording
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual CreateRecordingResponse CreateRecording(RecordingConfiguration RecordingConfiguration)
+        public virtual CreateRecordingResponse CreateRecording(SharpOnvifCommon.Onvif.RecordingConfiguration RecordingConfiguration)
         {
             throw new System.NotImplementedException();
         }
@@ -126,7 +126,7 @@ namespace SharpOnvifServer.Recording
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetRecordingConfigurationResponse SetRecordingConfiguration(string RecordingToken, RecordingConfiguration RecordingConfiguration)
+        public virtual SetRecordingConfigurationResponse SetRecordingConfiguration(string RecordingToken, SharpOnvifCommon.Onvif.RecordingConfiguration RecordingConfiguration)
         {
             throw new System.NotImplementedException();
         }
@@ -190,7 +190,7 @@ namespace SharpOnvifServer.Recording
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual CreateTrackResponse CreateTrack(string RecordingToken, TrackConfiguration TrackConfiguration)
+        public virtual CreateTrackResponse CreateTrack(string RecordingToken, SharpOnvifCommon.Onvif.TrackConfiguration TrackConfiguration)
         {
             throw new System.NotImplementedException();
         }
@@ -251,7 +251,7 @@ namespace SharpOnvifServer.Recording
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetTrackConfigurationResponse SetTrackConfiguration(string RecordingToken, string TrackToken, TrackConfiguration TrackConfiguration)
+        public virtual SetTrackConfigurationResponse SetTrackConfiguration(string RecordingToken, string TrackToken, SharpOnvifCommon.Onvif.TrackConfiguration TrackConfiguration)
         {
             throw new System.NotImplementedException();
         }
@@ -274,7 +274,7 @@ namespace SharpOnvifServer.Recording
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual CreateRecordingJobResponse CreateRecordingJob(RecordingJobConfiguration JobConfiguration)
+        public virtual CreateRecordingJobResponse CreateRecordingJob(SharpOnvifCommon.Onvif.RecordingJobConfiguration JobConfiguration)
         {
             throw new System.NotImplementedException();
         }
@@ -338,7 +338,7 @@ namespace SharpOnvifServer.Recording
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetRecordingJobConfigurationResponse SetRecordingJobConfiguration(string JobToken, RecordingJobConfiguration JobConfiguration)
+        public virtual SetRecordingJobConfigurationResponse SetRecordingJobConfiguration(string JobToken, SharpOnvifCommon.Onvif.RecordingJobConfiguration JobConfiguration)
         {
             throw new System.NotImplementedException();
         }
@@ -420,7 +420,7 @@ namespace SharpOnvifServer.Recording
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual ListRecordedSegmentsResponse ListRecordedSegments(DateTimeRange Time, string RecordingToken, int MaxResults)
+        public virtual ListRecordedSegmentsResponse ListRecordedSegments(SharpOnvifCommon.Onvif.DateTimeRange Time, string RecordingToken, int MaxResults)
         {
             throw new System.NotImplementedException();
         }
@@ -441,7 +441,7 @@ namespace SharpOnvifServer.Recording
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual ExportRecordedSegmentsResponse ExportRecordedSegments(DateTimeRange Time, string RecordingToken, string Alias, string StorageToken, string Track, System.Xml.XmlElement[] Any)
+        public virtual ExportRecordedSegmentsResponse ExportRecordedSegments(SharpOnvifCommon.Onvif.DateTimeRange Time, string RecordingToken, string Alias, string StorageToken, string Track, System.Xml.XmlElement[] Any)
         {
             throw new System.NotImplementedException();
         }
@@ -482,7 +482,7 @@ namespace SharpOnvifServer.Recording
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual ExportRecordedDataResponse ExportRecordedData(System.DateTime StartPoint, System.DateTime EndPoint, SearchScope SearchScope, string FileFormat, StorageReferencePath StorageDestination)
+        public virtual ExportRecordedDataResponse ExportRecordedData(System.DateTime StartPoint, System.DateTime EndPoint, SharpOnvifCommon.Onvif.SearchScope SearchScope, string FileFormat, SharpOnvifCommon.Onvif.StorageReferencePath StorageDestination)
         {
             throw new System.NotImplementedException();
         }
@@ -960,7 +960,7 @@ namespace SharpOnvifServer.Recording
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }

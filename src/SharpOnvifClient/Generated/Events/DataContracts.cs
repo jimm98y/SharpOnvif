@@ -14,12 +14,8 @@ namespace SharpOnvifClient.Events
     internal static class Ns
     {
         public const string B2 = "http://docs.oasis-open.org/wsn/b-2";
-        public const string Bf2 = "http://docs.oasis-open.org/wsrf/bf-2";
-        public const string R2 = "http://docs.oasis-open.org/wsrf/r-2";
         public const string T1 = "http://docs.oasis-open.org/wsn/t-1";
         public const string Ver10Events = "http://www.onvif.org/ver10/events/wsdl";
-        public const string i08Addressing = "http://www.w3.org/2005/08/addressing";
-        public const string i1998Namespace = "http://www.w3.org/XML/1998/namespace";
     }
 
     /// <summary>Conversions between the generated enums and their XML lexical forms.</summary>
@@ -33,7 +29,7 @@ namespace SharpOnvifClient.Events
     /// already exists with the same Address, the existing configuration shall be modified.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddEventBroker", Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class AddEventBrokerRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class AddEventBrokerRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private EventBrokerConfig eventBrokerField;
 
@@ -78,7 +74,7 @@ namespace SharpOnvifClient.Events
     /// already exists with the same Address, the existing configuration shall be modified.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddEventBrokerResponse", Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class AddEventBrokerResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class AddEventBrokerResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public AddEventBrokerResponse()
         {
@@ -86,278 +82,8 @@ namespace SharpOnvifClient.Events
 
     }
 
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2005/08/addressing")]
-    public partial class AttributedURIType : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string valueField;
-
-        [System.Xml.Serialization.XmlTextAttribute(DataType="anyURI")]
-        public string Value
-        {
-            get { return this.valueField; }
-            set { this.valueField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "AttributedURIType"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.i08Addressing; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteText(this.valueField);
-        }
-
-        protected override void ReadXmlText(SharpOnvifCommon.Xml.OnvifXmlReader reader, string text)
-        {
-            this.valueField = text;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(InvalidFilterFaultType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(InvalidMessageContentExpressionFaultType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(InvalidProducerPropertiesExpressionFaultType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(InvalidTopicExpressionFaultType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(MultipleTopicsSpecifiedFaultType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(NoCurrentMessageOnTopicFaultType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(NotifyMessageNotSupportedFaultType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(PauseFailedFaultType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(ResourceUnavailableFaultType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(ResourceUnknownFaultType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(ResumeFailedFaultType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SubscribeCreationFailedFaultType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(TopicExpressionDialectUnknownFaultType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(TopicNotSupportedFaultType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(UnableToCreatePullPointFaultType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(UnableToDestroyPullPointFaultType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(UnableToDestroySubscriptionFaultType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(UnableToGetMessagesFaultType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(UnacceptableInitialTerminationTimeFaultType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(UnacceptableTerminationTimeFaultType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(UnrecognizedPolicyRequestFaultType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(UnsupportedPolicyRequestFaultType))]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsrf/bf-2")]
-    public partial class BaseFaultType : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        private System.DateTime timestampField;
-
-        private EndpointReferenceType originatorField;
-
-        private BaseFaultTypeErrorCode errorCodeField;
-
-        private BaseFaultTypeDescription[] descriptionField;
-
-        private System.Xml.XmlElement faultCauseField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public System.DateTime Timestamp
-        {
-            get { return this.timestampField; }
-            set { this.timestampField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public EndpointReferenceType Originator
-        {
-            get { return this.originatorField; }
-            set { this.originatorField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public BaseFaultTypeErrorCode ErrorCode
-        {
-            get { return this.errorCodeField; }
-            set { this.errorCodeField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute("Description", Order=4)]
-        public BaseFaultTypeDescription[] Description
-        {
-            get { return this.descriptionField; }
-            set { this.descriptionField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public System.Xml.XmlElement FaultCause
-        {
-            get { return this.faultCauseField; }
-            set { this.faultCauseField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "BaseFaultType"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Bf2; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-            writer.WriteElementString(Ns.Bf2, "Timestamp", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.timestampField));
-            writer.WriteElement(Ns.Bf2, "Originator", this.originatorField, Ns.i08Addressing, "EndpointReferenceType");
-            writer.WriteElement(Ns.Bf2, "ErrorCode", this.errorCodeField, null, null);
-            if (this.descriptionField != null)
-            {
-                for (int i = 0; i < this.descriptionField.Length; i++)
-                {
-                    writer.WriteElement(Ns.Bf2, "Description", this.descriptionField[i], null, null);
-                }
-            }
-            writer.WriteAnyElement(this.faultCauseField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Timestamp":
-                    if (reader.NamespaceUri != Ns.Bf2) break;
-                    this.timestampField = SharpOnvifCommon.Xml.XmlPrimitives.ToDateTime(reader.ReadElementText());
-                    return true;
-                case "Originator":
-                    if (reader.NamespaceUri != Ns.Bf2) break;
-                    this.originatorField = reader.ReadElementObject<EndpointReferenceType>(() => new EndpointReferenceType());
-                    return true;
-                case "ErrorCode":
-                    if (reader.NamespaceUri != Ns.Bf2) break;
-                    this.errorCodeField = reader.ReadElementObject<BaseFaultTypeErrorCode>(() => new BaseFaultTypeErrorCode());
-                    return true;
-                case "Description":
-                    if (reader.NamespaceUri != Ns.Bf2) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.descriptionField, reader.ReadElementObject<BaseFaultTypeDescription>(() => new BaseFaultTypeDescription()));
-                    return true;
-                case "FaultCause":
-                    if (reader.NamespaceUri != Ns.Bf2) break;
-                    this.faultCauseField = reader.ReadAnyElement();
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    public partial class BaseFaultTypeDescription : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string valueField;
-
-        private string langField;
-
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string Value
-        {
-            get { return this.valueField; }
-            set { this.valueField = value; }
-        }
-
-        /// <summary>
-        /// lang (as an attribute name) denotes an attribute whose value is a language code for the natural
-        /// language of the content of any element; its value is inherited. This name is reserved by virtue of
-        /// its definition in the XML specification.Notes Attempting to install the relevant ISO 2- and 3-letter
-        /// codes as the enumerated possible values is probably never going to be a realistic possibility. See
-        /// BCP 47 at http://www.rfc-editor.org/rfc/bcp/bcp47.txt and the IANA language subtag registry at
-        /// http://www.iana.org/assignments/language-subtag-registry for further information. The union allows
-        /// for the 'un-declaration' of xml:lang with the empty string.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute(Form=System.Xml.Schema.XmlSchemaForm.Qualified, Namespace="http://www.w3.org/XML/1998/namespace")]
-        public string lang
-        {
-            get { return this.langField; }
-            set { this.langField = value; }
-        }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAttributeString(Ns.i1998Namespace, "lang", this.langField);
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteText(this.valueField);
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "lang":
-                    if (reader.NamespaceUri != Ns.i1998Namespace) break;
-                    this.langField = reader.AttributeValue;
-                    return true;
-            }
-            return false;
-        }
-
-        protected override void ReadXmlText(SharpOnvifCommon.Xml.OnvifXmlReader reader, string text)
-        {
-            this.valueField = text;
-        }
-
-    }
-
-    public partial class BaseFaultTypeErrorCode : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string[] textField;
-
-        private string dialectField;
-
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string[] Text
-        {
-            get { return this.textField; }
-            set { this.textField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
-        public string dialect
-        {
-            get { return this.dialectField; }
-            set { this.dialectField = value; }
-        }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAttributeString(null, "dialect", this.dialectField);
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            if (this.textField != null)
-            {
-                for (int i = 0; i < this.textField.Length; i++)
-                {
-                    writer.WriteText(this.textField[i]);
-                }
-            }
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "dialect":
-                    this.dialectField = reader.AttributeValue;
-                    return true;
-            }
-            return false;
-        }
-
-        protected override void ReadXmlText(SharpOnvifCommon.Xml.OnvifXmlReader reader, string text)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.textField, text);
-        }
-
-    }
-
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class Capabilities : SharpOnvifCommon.Xml.OnvifObject
+    public partial class Capabilities : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -639,7 +365,7 @@ namespace SharpOnvifClient.Events
     }
 
     [System.Xml.Serialization.XmlRootAttribute("CreatePullPoint", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class CreatePullPointRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CreatePullPointRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -673,14 +399,14 @@ namespace SharpOnvifClient.Events
     }
 
     [System.Xml.Serialization.XmlRootAttribute("CreatePullPointResponse", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class CreatePullPointResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CreatePullPointResponse : SharpOnvifCommon.Xml.OnvifContract
     {
-        private EndpointReferenceType pullPointField;
+        private SharpOnvifCommon.Onvif.EndpointReferenceType pullPointField;
 
         private System.Xml.XmlElement[] anyField;
 
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public EndpointReferenceType PullPoint
+        public SharpOnvifCommon.Onvif.EndpointReferenceType PullPoint
         {
             get { return this.pullPointField; }
             set { this.pullPointField = value; }
@@ -697,7 +423,7 @@ namespace SharpOnvifClient.Events
         {
         }
 
-        public CreatePullPointResponse(EndpointReferenceType pullPoint, System.Xml.XmlElement[] any)
+        public CreatePullPointResponse(SharpOnvifCommon.Onvif.EndpointReferenceType pullPoint, System.Xml.XmlElement[] any)
         {
             this.pullPointField = pullPoint;
             this.anyField = any;
@@ -705,7 +431,7 @@ namespace SharpOnvifClient.Events
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            writer.WriteElement(Ns.B2, "PullPoint", this.pullPointField, Ns.i08Addressing, "EndpointReferenceType");
+            writer.WriteElement(Ns.B2, "PullPoint", this.pullPointField, "http://www.w3.org/2005/08/addressing", "EndpointReferenceType");
             writer.WriteAny(this.anyField);
         }
 
@@ -715,7 +441,7 @@ namespace SharpOnvifClient.Events
             {
                 case "PullPoint":
                     if (reader.NamespaceUri != Ns.B2) break;
-                    this.pullPointField = reader.ReadElementObject<EndpointReferenceType>(() => new EndpointReferenceType());
+                    this.pullPointField = reader.ReadElementObject<SharpOnvifCommon.Onvif.EndpointReferenceType>(() => new SharpOnvifCommon.Onvif.EndpointReferenceType());
                     return true;
             }
             SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
@@ -731,9 +457,9 @@ namespace SharpOnvifClient.Events
     /// client. This method is mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreatePullPointSubscription", Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class CreatePullPointSubscriptionRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CreatePullPointSubscriptionRequest : SharpOnvifCommon.Xml.OnvifContract
     {
-        private FilterType filterField;
+        private SharpOnvifCommon.Onvif.FilterType filterField;
 
         private string initialTerminationTimeField;
 
@@ -745,7 +471,7 @@ namespace SharpOnvifClient.Events
         /// Optional XPATH expression to select specific topics.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public FilterType Filter
+        public SharpOnvifCommon.Onvif.FilterType Filter
         {
             get { return this.filterField; }
             set { this.filterField = value; }
@@ -782,7 +508,7 @@ namespace SharpOnvifClient.Events
         {
         }
 
-        public CreatePullPointSubscriptionRequest(FilterType filter, string initialTerminationTime, CreatePullPointSubscriptionSubscriptionPolicy subscriptionPolicy, System.Xml.XmlElement[] any)
+        public CreatePullPointSubscriptionRequest(SharpOnvifCommon.Onvif.FilterType filter, string initialTerminationTime, CreatePullPointSubscriptionSubscriptionPolicy subscriptionPolicy, System.Xml.XmlElement[] any)
         {
             this.filterField = filter;
             this.initialTerminationTimeField = initialTerminationTime;
@@ -804,7 +530,7 @@ namespace SharpOnvifClient.Events
             {
                 case "Filter":
                     if (reader.NamespaceUri != Ns.Ver10Events) break;
-                    this.filterField = reader.ReadElementObject<FilterType>(() => new FilterType());
+                    this.filterField = reader.ReadElementObject<SharpOnvifCommon.Onvif.FilterType>(() => new SharpOnvifCommon.Onvif.FilterType());
                     return true;
                 case "InitialTerminationTime":
                     if (reader.NamespaceUri != Ns.Ver10Events) break;
@@ -833,9 +559,9 @@ namespace SharpOnvifClient.Events
     /// client. This method is mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreatePullPointSubscriptionResponse", Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class CreatePullPointSubscriptionResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CreatePullPointSubscriptionResponse : SharpOnvifCommon.Xml.OnvifContract
     {
-        private EndpointReferenceType subscriptionReferenceField;
+        private SharpOnvifCommon.Onvif.EndpointReferenceType subscriptionReferenceField;
 
         private System.DateTime currentTimeField;
 
@@ -847,7 +573,7 @@ namespace SharpOnvifClient.Events
         /// Endpoint reference of the subscription to be used for pulling the messages.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public EndpointReferenceType SubscriptionReference
+        public SharpOnvifCommon.Onvif.EndpointReferenceType SubscriptionReference
         {
             get { return this.subscriptionReferenceField; }
             set { this.subscriptionReferenceField = value; }
@@ -878,7 +604,7 @@ namespace SharpOnvifClient.Events
         {
         }
 
-        public CreatePullPointSubscriptionResponse(EndpointReferenceType subscriptionReference, System.DateTime currentTime, System.DateTime terminationTime, System.Xml.XmlElement[] any)
+        public CreatePullPointSubscriptionResponse(SharpOnvifCommon.Onvif.EndpointReferenceType subscriptionReference, System.DateTime currentTime, System.DateTime terminationTime, System.Xml.XmlElement[] any)
         {
             this.subscriptionReferenceField = subscriptionReference;
             this.currentTimeField = currentTime;
@@ -888,7 +614,7 @@ namespace SharpOnvifClient.Events
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            writer.WriteElement(Ns.Ver10Events, "SubscriptionReference", this.subscriptionReferenceField, Ns.i08Addressing, "EndpointReferenceType");
+            writer.WriteElement(Ns.Ver10Events, "SubscriptionReference", this.subscriptionReferenceField, "http://www.w3.org/2005/08/addressing", "EndpointReferenceType");
             writer.WriteElementString(Ns.B2, "CurrentTime", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.currentTimeField));
             writer.WriteElementString(Ns.B2, "TerminationTime", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.terminationTimeField));
             writer.WriteAny(this.anyField);
@@ -900,7 +626,7 @@ namespace SharpOnvifClient.Events
             {
                 case "SubscriptionReference":
                     if (reader.NamespaceUri != Ns.Ver10Events) break;
-                    this.subscriptionReferenceField = reader.ReadElementObject<EndpointReferenceType>(() => new EndpointReferenceType());
+                    this.subscriptionReferenceField = reader.ReadElementObject<SharpOnvifCommon.Onvif.EndpointReferenceType>(() => new SharpOnvifCommon.Onvif.EndpointReferenceType());
                     return true;
                 case "CurrentTime":
                     if (reader.NamespaceUri != Ns.B2) break;
@@ -922,7 +648,7 @@ namespace SharpOnvifClient.Events
 
     }
 
-    public partial class CreatePullPointSubscriptionSubscriptionPolicy : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CreatePullPointSubscriptionSubscriptionPolicy : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -951,7 +677,7 @@ namespace SharpOnvifClient.Events
     /// device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteEventBroker", Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class DeleteEventBrokerRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteEventBrokerRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string addressField;
 
@@ -995,7 +721,7 @@ namespace SharpOnvifClient.Events
     /// device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteEventBrokerResponse", Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class DeleteEventBrokerResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteEventBrokerResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public DeleteEventBrokerResponse()
         {
@@ -1004,7 +730,7 @@ namespace SharpOnvifClient.Events
     }
 
     [System.Xml.Serialization.XmlRootAttribute("DestroyPullPoint", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class DestroyPullPointRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DestroyPullPointRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -1038,7 +764,7 @@ namespace SharpOnvifClient.Events
     }
 
     [System.Xml.Serialization.XmlRootAttribute("DestroyPullPointResponse", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class DestroyPullPointResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DestroyPullPointResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -1071,111 +797,8 @@ namespace SharpOnvifClient.Events
 
     }
 
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/t-1")]
-    public partial class Documentation : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlNode[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlNode[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "Documentation"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.T1; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyNode());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2005/08/addressing")]
-    public partial class EndpointReferenceType : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private AttributedURIType addressField;
-
-        private ReferenceParametersType referenceParametersField;
-
-        private MetadataType metadataField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public AttributedURIType Address
-        {
-            get { return this.addressField; }
-            set { this.addressField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public ReferenceParametersType ReferenceParameters
-        {
-            get { return this.referenceParametersField; }
-            set { this.referenceParametersField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public MetadataType Metadata
-        {
-            get { return this.metadataField; }
-            set { this.metadataField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=3)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "EndpointReferenceType"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.i08Addressing; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElement(Ns.i08Addressing, "Address", this.addressField, Ns.i08Addressing, "AttributedURIType");
-            writer.WriteElement(Ns.i08Addressing, "ReferenceParameters", this.referenceParametersField, Ns.i08Addressing, "ReferenceParametersType");
-            writer.WriteElement(Ns.i08Addressing, "Metadata", this.metadataField, Ns.i08Addressing, "MetadataType");
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Address":
-                    if (reader.NamespaceUri != Ns.i08Addressing) break;
-                    this.addressField = reader.ReadElementObject<AttributedURIType>(() => new AttributedURIType());
-                    return true;
-                case "ReferenceParameters":
-                    if (reader.NamespaceUri != Ns.i08Addressing) break;
-                    this.referenceParametersField = reader.ReadElementObject<ReferenceParametersType>(() => new ReferenceParametersType());
-                    return true;
-                case "Metadata":
-                    if (reader.NamespaceUri != Ns.i08Addressing) break;
-                    this.metadataField = reader.ReadElementObject<MetadataType>(() => new MetadataType());
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class EventBrokerConfig : SharpOnvifCommon.Xml.OnvifObject
+    public partial class EventBrokerConfig : SharpOnvifCommon.Xml.OnvifContract
     {
         private string addressField;
 
@@ -1187,7 +810,7 @@ namespace SharpOnvifClient.Events
 
         private string certificateIDField;
 
-        private FilterType publishFilterField;
+        private SharpOnvifCommon.Onvif.FilterType publishFilterField;
 
         private int qoSField;
         private bool qoSFieldSpecified;
@@ -1196,7 +819,7 @@ namespace SharpOnvifClient.Events
 
         private string certPathValidationPolicyIDField;
 
-        private FilterType metadataFilterField;
+        private SharpOnvifCommon.Onvif.FilterType metadataFilterField;
 
         private System.Xml.XmlElement[] anyField;
 
@@ -1258,7 +881,7 @@ namespace SharpOnvifClient.Events
         /// Concrete Topic Expression to select specific event topics to publish.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public FilterType PublishFilter
+        public SharpOnvifCommon.Onvif.FilterType PublishFilter
         {
             get { return this.publishFilterField; }
             set { this.publishFilterField = value; }
@@ -1312,7 +935,7 @@ namespace SharpOnvifClient.Events
         /// Concrete Topic Expression to select specific metadata topics to publish.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=9)]
-        public FilterType MetadataFilter
+        public SharpOnvifCommon.Onvif.FilterType MetadataFilter
         {
             get { return this.metadataFilterField; }
             set { this.metadataFilterField = value; }
@@ -1373,7 +996,7 @@ namespace SharpOnvifClient.Events
                     return true;
                 case "PublishFilter":
                     if (reader.NamespaceUri != Ns.Ver10Events) break;
-                    this.publishFilterField = reader.ReadElementObject<FilterType>(() => new FilterType());
+                    this.publishFilterField = reader.ReadElementObject<SharpOnvifCommon.Onvif.FilterType>(() => new SharpOnvifCommon.Onvif.FilterType());
                     return true;
                 case "QoS":
                     if (reader.NamespaceUri != Ns.Ver10Events) break;
@@ -1390,76 +1013,9 @@ namespace SharpOnvifClient.Events
                     return true;
                 case "MetadataFilter":
                     if (reader.NamespaceUri != Ns.Ver10Events) break;
-                    this.metadataFilterField = reader.ReadElementObject<FilterType>(() => new FilterType());
+                    this.metadataFilterField = reader.ReadElementObject<SharpOnvifCommon.Onvif.FilterType>(() => new SharpOnvifCommon.Onvif.FilterType());
                     return true;
             }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(TopicNamespaceType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(TopicSetType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(TopicType))]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/t-1")]
-    public partial class ExtensibleDocumented : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private Documentation documentationField;
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public Documentation documentation
-        {
-            get { return this.documentationField; }
-            set { this.documentationField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "ExtensibleDocumented"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.T1; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElement(Ns.T1, "documentation", this.documentationField, Ns.T1, "Documentation");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "documentation":
-                    if (reader.NamespaceUri != Ns.T1) break;
-                    this.documentationField = reader.ReadElementObject<Documentation>(() => new Documentation());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class FilterType : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "FilterType"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
             SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
@@ -1467,14 +1023,14 @@ namespace SharpOnvifClient.Events
     }
 
     [System.Xml.Serialization.XmlRootAttribute("GetCurrentMessage", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class GetCurrentMessageRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetCurrentMessageRequest : SharpOnvifCommon.Xml.OnvifContract
     {
-        private TopicExpressionType topicField;
+        private SharpOnvifCommon.Onvif.TopicExpressionType topicField;
 
         private System.Xml.XmlElement[] anyField;
 
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public TopicExpressionType Topic
+        public SharpOnvifCommon.Onvif.TopicExpressionType Topic
         {
             get { return this.topicField; }
             set { this.topicField = value; }
@@ -1491,7 +1047,7 @@ namespace SharpOnvifClient.Events
         {
         }
 
-        public GetCurrentMessageRequest(TopicExpressionType topic, System.Xml.XmlElement[] any)
+        public GetCurrentMessageRequest(SharpOnvifCommon.Onvif.TopicExpressionType topic, System.Xml.XmlElement[] any)
         {
             this.topicField = topic;
             this.anyField = any;
@@ -1509,7 +1065,7 @@ namespace SharpOnvifClient.Events
             {
                 case "Topic":
                     if (reader.NamespaceUri != Ns.B2) break;
-                    this.topicField = reader.ReadElementObject<TopicExpressionType>(() => new TopicExpressionType());
+                    this.topicField = reader.ReadElementObject<SharpOnvifCommon.Onvif.TopicExpressionType>(() => new SharpOnvifCommon.Onvif.TopicExpressionType());
                     return true;
             }
             SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
@@ -1519,7 +1075,7 @@ namespace SharpOnvifClient.Events
     }
 
     [System.Xml.Serialization.XmlRootAttribute("GetCurrentMessageResponse", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class GetCurrentMessageResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetCurrentMessageResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -1556,7 +1112,7 @@ namespace SharpOnvifClient.Events
     /// The GetEventBrokers command lets a client retrieve event broker configurations from the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetEventBrokers", Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class GetEventBrokersRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetEventBrokersRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string addressField;
 
@@ -1599,7 +1155,7 @@ namespace SharpOnvifClient.Events
     /// The GetEventBrokers command lets a client retrieve event broker configurations from the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetEventBrokersResponse", Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class GetEventBrokersResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetEventBrokersResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private EventBrokerConfig[] eventBrokerField;
 
@@ -1651,7 +1207,7 @@ namespace SharpOnvifClient.Events
     /// information about the FilterDialects, Schema files and topics supported by the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetEventProperties", Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class GetEventPropertiesRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetEventPropertiesRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         public GetEventPropertiesRequest()
         {
@@ -1666,13 +1222,13 @@ namespace SharpOnvifClient.Events
     /// information about the FilterDialects, Schema files and topics supported by the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetEventPropertiesResponse", Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class GetEventPropertiesResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetEventPropertiesResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private string[] topicNamespaceLocationField;
 
         private bool fixedTopicSetField;
 
-        private TopicSetType topicSetField;
+        private SharpOnvifCommon.Onvif.TopicSetType topicSetField;
 
         private string[] topicExpressionDialectField;
 
@@ -1702,7 +1258,7 @@ namespace SharpOnvifClient.Events
         }
 
         [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public TopicSetType TopicSet
+        public SharpOnvifCommon.Onvif.TopicSetType TopicSet
         {
             get { return this.topicSetField; }
             set { this.topicSetField = value; }
@@ -1764,7 +1320,7 @@ namespace SharpOnvifClient.Events
         {
         }
 
-        public GetEventPropertiesResponse(string[] topicNamespaceLocation, bool fixedTopicSet, TopicSetType topicSet, string[] topicExpressionDialect, string[] messageContentFilterDialect, string[] producerPropertiesFilterDialect, string[] messageContentSchemaLocation, System.Xml.XmlElement[] any)
+        public GetEventPropertiesResponse(string[] topicNamespaceLocation, bool fixedTopicSet, SharpOnvifCommon.Onvif.TopicSetType topicSet, string[] topicExpressionDialect, string[] messageContentFilterDialect, string[] producerPropertiesFilterDialect, string[] messageContentSchemaLocation, System.Xml.XmlElement[] any)
         {
             this.topicNamespaceLocationField = topicNamespaceLocation;
             this.fixedTopicSetField = fixedTopicSet;
@@ -1832,7 +1388,7 @@ namespace SharpOnvifClient.Events
                     return true;
                 case "TopicSet":
                     if (reader.NamespaceUri != Ns.T1) break;
-                    this.topicSetField = reader.ReadElementObject<TopicSetType>(() => new TopicSetType());
+                    this.topicSetField = reader.ReadElementObject<SharpOnvifCommon.Onvif.TopicSetType>(() => new SharpOnvifCommon.Onvif.TopicSetType());
                     return true;
                 case "TopicExpressionDialect":
                     if (reader.NamespaceUri != Ns.B2) break;
@@ -1858,7 +1414,7 @@ namespace SharpOnvifClient.Events
     }
 
     [System.Xml.Serialization.XmlRootAttribute("GetMessages", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class GetMessagesRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetMessagesRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string maximumNumberField;
 
@@ -1910,14 +1466,14 @@ namespace SharpOnvifClient.Events
     }
 
     [System.Xml.Serialization.XmlRootAttribute("GetMessagesResponse", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class GetMessagesResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetMessagesResponse : SharpOnvifCommon.Xml.OnvifContract
     {
-        private NotificationMessageHolderType[] notificationMessageField;
+        private SharpOnvifCommon.Onvif.NotificationMessageHolderType[] notificationMessageField;
 
         private System.Xml.XmlElement[] anyField;
 
         [System.Xml.Serialization.XmlElementAttribute("NotificationMessage", Order=0)]
-        public NotificationMessageHolderType[] NotificationMessage
+        public SharpOnvifCommon.Onvif.NotificationMessageHolderType[] NotificationMessage
         {
             get { return this.notificationMessageField; }
             set { this.notificationMessageField = value; }
@@ -1934,7 +1490,7 @@ namespace SharpOnvifClient.Events
         {
         }
 
-        public GetMessagesResponse(NotificationMessageHolderType[] notificationMessage, System.Xml.XmlElement[] any)
+        public GetMessagesResponse(SharpOnvifCommon.Onvif.NotificationMessageHolderType[] notificationMessage, System.Xml.XmlElement[] any)
         {
             this.notificationMessageField = notificationMessage;
             this.anyField = any;
@@ -1958,7 +1514,7 @@ namespace SharpOnvifClient.Events
             {
                 case "NotificationMessage":
                     if (reader.NamespaceUri != Ns.B2) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.notificationMessageField, reader.ReadElementObject<NotificationMessageHolderType>(() => new NotificationMessageHolderType()));
+                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.notificationMessageField, reader.ReadElementObject<SharpOnvifCommon.Onvif.NotificationMessageHolderType>(() => new SharpOnvifCommon.Onvif.NotificationMessageHolderType()));
                     return true;
             }
             SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
@@ -1971,7 +1527,7 @@ namespace SharpOnvifClient.Events
     /// Returns the capabilities of the event service. The result is returned in a typed answer.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilities", Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         public GetServiceCapabilitiesRequest()
         {
@@ -1983,7 +1539,7 @@ namespace SharpOnvifClient.Events
     /// Returns the capabilities of the event service. The result is returned in a typed answer.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilitiesResponse", Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private Capabilities capabilitiesField;
 
@@ -2025,218 +1581,15 @@ namespace SharpOnvifClient.Events
 
     }
 
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class InvalidFilterFaultType : BaseFaultType
-    {
-        private System.Xml.XmlQualifiedName[] unknownFilterField;
-
-        [System.Xml.Serialization.XmlElementAttribute("UnknownFilter", Order=0)]
-        public System.Xml.XmlQualifiedName[] UnknownFilter
-        {
-            get { return this.unknownFilterField; }
-            set { this.unknownFilterField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "InvalidFilterFaultType"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlContent(writer);
-            if (this.unknownFilterField != null)
-            {
-                for (int i = 0; i < this.unknownFilterField.Length; i++)
-                {
-                    writer.WriteElementQualifiedName(Ns.B2, "UnknownFilter", this.unknownFilterField[i]);
-                }
-            }
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "UnknownFilter":
-                    if (reader.NamespaceUri != Ns.B2) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.unknownFilterField, reader.ReadElementQualifiedName());
-                    return true;
-            }
-            if (base.ReadXmlElement(reader)) return true;
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class InvalidMessageContentExpressionFaultType : BaseFaultType
-    {
-        protected override string OnvifXmlTypeName { get { return "InvalidMessageContentExpressionFaultType"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class InvalidProducerPropertiesExpressionFaultType : BaseFaultType
-    {
-        protected override string OnvifXmlTypeName { get { return "InvalidProducerPropertiesExpressionFaultType"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class InvalidTopicExpressionFaultType : BaseFaultType
-    {
-        protected override string OnvifXmlTypeName { get { return "InvalidTopicExpressionFaultType"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2005/08/addressing")]
-    public partial class MetadataType : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "MetadataType"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.i08Addressing; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class MultipleTopicsSpecifiedFaultType : BaseFaultType
-    {
-        protected override string OnvifXmlTypeName { get { return "MultipleTopicsSpecifiedFaultType"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class NoCurrentMessageOnTopicFaultType : BaseFaultType
-    {
-        protected override string OnvifXmlTypeName { get { return "NoCurrentMessageOnTopicFaultType"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class NotificationMessageHolderType : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private EndpointReferenceType subscriptionReferenceField;
-
-        private TopicExpressionType topicField;
-
-        private EndpointReferenceType producerReferenceField;
-
-        private System.Xml.XmlElement messageField;
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public EndpointReferenceType SubscriptionReference
-        {
-            get { return this.subscriptionReferenceField; }
-            set { this.subscriptionReferenceField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public TopicExpressionType Topic
-        {
-            get { return this.topicField; }
-            set { this.topicField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public EndpointReferenceType ProducerReference
-        {
-            get { return this.producerReferenceField; }
-            set { this.producerReferenceField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public System.Xml.XmlElement Message
-        {
-            get { return this.messageField; }
-            set { this.messageField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "NotificationMessageHolderType"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElement(Ns.B2, "SubscriptionReference", this.subscriptionReferenceField, Ns.i08Addressing, "EndpointReferenceType");
-            writer.WriteElement(Ns.B2, "Topic", this.topicField, Ns.B2, "TopicExpressionType");
-            writer.WriteElement(Ns.B2, "ProducerReference", this.producerReferenceField, Ns.i08Addressing, "EndpointReferenceType");
-            writer.WriteAnyElement(this.messageField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "SubscriptionReference":
-                    if (reader.NamespaceUri != Ns.B2) break;
-                    this.subscriptionReferenceField = reader.ReadElementObject<EndpointReferenceType>(() => new EndpointReferenceType());
-                    return true;
-                case "Topic":
-                    if (reader.NamespaceUri != Ns.B2) break;
-                    this.topicField = reader.ReadElementObject<TopicExpressionType>(() => new TopicExpressionType());
-                    return true;
-                case "ProducerReference":
-                    if (reader.NamespaceUri != Ns.B2) break;
-                    this.producerReferenceField = reader.ReadElementObject<EndpointReferenceType>(() => new EndpointReferenceType());
-                    return true;
-                case "Message":
-                    if (reader.NamespaceUri != Ns.B2) break;
-                    this.messageField = reader.ReadAnyElement();
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class NotifyMessageNotSupportedFaultType : BaseFaultType
-    {
-        protected override string OnvifXmlTypeName { get { return "NotifyMessageNotSupportedFaultType"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
-
-    }
-
     [System.Xml.Serialization.XmlRootAttribute("Notify", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class NotifyRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class NotifyRequest : SharpOnvifCommon.Xml.OnvifContract
     {
-        private NotificationMessageHolderType[] notificationMessageField;
+        private SharpOnvifCommon.Onvif.NotificationMessageHolderType[] notificationMessageField;
 
         private System.Xml.XmlElement[] anyField;
 
         [System.Xml.Serialization.XmlElementAttribute("NotificationMessage", Order=0)]
-        public NotificationMessageHolderType[] NotificationMessage
+        public SharpOnvifCommon.Onvif.NotificationMessageHolderType[] NotificationMessage
         {
             get { return this.notificationMessageField; }
             set { this.notificationMessageField = value; }
@@ -2253,7 +1606,7 @@ namespace SharpOnvifClient.Events
         {
         }
 
-        public NotifyRequest(NotificationMessageHolderType[] notificationMessage, System.Xml.XmlElement[] any)
+        public NotifyRequest(SharpOnvifCommon.Onvif.NotificationMessageHolderType[] notificationMessage, System.Xml.XmlElement[] any)
         {
             this.notificationMessageField = notificationMessage;
             this.anyField = any;
@@ -2277,7 +1630,7 @@ namespace SharpOnvifClient.Events
             {
                 case "NotificationMessage":
                     if (reader.NamespaceUri != Ns.B2) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.notificationMessageField, reader.ReadElementObject<NotificationMessageHolderType>(() => new NotificationMessageHolderType()));
+                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.notificationMessageField, reader.ReadElementObject<SharpOnvifCommon.Onvif.NotificationMessageHolderType>(() => new SharpOnvifCommon.Onvif.NotificationMessageHolderType()));
                     return true;
             }
             SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
@@ -2286,7 +1639,7 @@ namespace SharpOnvifClient.Events
 
     }
 
-    public partial class NotifyResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class NotifyResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public NotifyResponse()
         {
@@ -2294,17 +1647,8 @@ namespace SharpOnvifClient.Events
 
     }
 
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class PauseFailedFaultType : BaseFaultType
-    {
-        protected override string OnvifXmlTypeName { get { return "PauseFailedFaultType"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
-
-    }
-
     [System.Xml.Serialization.XmlRootAttribute("PauseSubscription", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class PauseSubscriptionRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class PauseSubscriptionRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -2338,7 +1682,7 @@ namespace SharpOnvifClient.Events
     }
 
     [System.Xml.Serialization.XmlRootAttribute("PauseSubscriptionResponse", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class PauseSubscriptionResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class PauseSubscriptionResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -2380,7 +1724,7 @@ namespace SharpOnvifClient.Events
     /// requested it shall return these without generating a fault.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("PullMessages", Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class PullMessagesRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class PullMessagesRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string timeoutField;
 
@@ -2462,13 +1806,13 @@ namespace SharpOnvifClient.Events
     /// requested it shall return these without generating a fault.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("PullMessagesResponse", Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class PullMessagesResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class PullMessagesResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.DateTime currentTimeField;
 
         private System.DateTime terminationTimeField;
 
-        private NotificationMessageHolderType[] notificationMessageField;
+        private SharpOnvifCommon.Onvif.NotificationMessageHolderType[] notificationMessageField;
 
         /// <summary>
         /// The date and time when the messages have been delivered by the web server to the client.
@@ -2491,7 +1835,7 @@ namespace SharpOnvifClient.Events
         }
 
         [System.Xml.Serialization.XmlElementAttribute("NotificationMessage", Order=2)]
-        public NotificationMessageHolderType[] NotificationMessage
+        public SharpOnvifCommon.Onvif.NotificationMessageHolderType[] NotificationMessage
         {
             get { return this.notificationMessageField; }
             set { this.notificationMessageField = value; }
@@ -2501,7 +1845,7 @@ namespace SharpOnvifClient.Events
         {
         }
 
-        public PullMessagesResponse(System.DateTime currentTime, System.DateTime terminationTime, NotificationMessageHolderType[] notificationMessage)
+        public PullMessagesResponse(System.DateTime currentTime, System.DateTime terminationTime, SharpOnvifCommon.Onvif.NotificationMessageHolderType[] notificationMessage)
         {
             this.currentTimeField = currentTime;
             this.terminationTimeField = terminationTime;
@@ -2535,99 +1879,16 @@ namespace SharpOnvifClient.Events
                     return true;
                 case "NotificationMessage":
                     if (reader.NamespaceUri != Ns.B2) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.notificationMessageField, reader.ReadElementObject<NotificationMessageHolderType>(() => new NotificationMessageHolderType()));
+                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.notificationMessageField, reader.ReadElementObject<SharpOnvifCommon.Onvif.NotificationMessageHolderType>(() => new SharpOnvifCommon.Onvif.NotificationMessageHolderType()));
                     return true;
             }
             return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/t-1")]
-    public partial class QueryExpressionType : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlNode[] anyField;
-
-        private string dialectField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlNode[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
-        public string Dialect
-        {
-            get { return this.dialectField; }
-            set { this.dialectField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "QueryExpressionType"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.T1; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAttributeString(null, "Dialect", this.dialectField);
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Dialect":
-                    this.dialectField = reader.AttributeValue;
-                    return true;
-            }
-            return false;
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyNode());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2005/08/addressing")]
-    public partial class ReferenceParametersType : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "ReferenceParametersType"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.i08Addressing; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
         }
 
     }
 
     [System.Xml.Serialization.XmlRootAttribute("Renew", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class RenewRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class RenewRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string terminationTimeField;
 
@@ -2684,7 +1945,7 @@ namespace SharpOnvifClient.Events
     }
 
     [System.Xml.Serialization.XmlRootAttribute("RenewResponse", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class RenewResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class RenewResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.DateTime terminationTimeField;
 
@@ -2772,35 +2033,8 @@ namespace SharpOnvifClient.Events
 
     }
 
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsrf/r-2")]
-    public partial class ResourceUnavailableFaultType : BaseFaultType
-    {
-        protected override string OnvifXmlTypeName { get { return "ResourceUnavailableFaultType"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.R2; } }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsrf/r-2")]
-    public partial class ResourceUnknownFaultType : BaseFaultType
-    {
-        protected override string OnvifXmlTypeName { get { return "ResourceUnknownFaultType"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.R2; } }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class ResumeFailedFaultType : BaseFaultType
-    {
-        protected override string OnvifXmlTypeName { get { return "ResumeFailedFaultType"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
-
-    }
-
     [System.Xml.Serialization.XmlRootAttribute("ResumeSubscription", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class ResumeSubscriptionRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ResumeSubscriptionRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -2834,7 +2068,7 @@ namespace SharpOnvifClient.Events
     }
 
     [System.Xml.Serialization.XmlRootAttribute("ResumeSubscriptionResponse", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class ResumeSubscriptionResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ResumeSubscriptionResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -2875,7 +2109,7 @@ namespace SharpOnvifClient.Events
     /// attribute on a NotificationMessage.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("Seek", Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class SeekRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SeekRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.DateTime utcTimeField;
 
@@ -2972,7 +2206,7 @@ namespace SharpOnvifClient.Events
     /// attribute on a NotificationMessage.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SeekResponse", Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class SeekResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SeekResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public SeekResponse()
         {
@@ -2991,7 +2225,7 @@ namespace SharpOnvifClient.Events
     /// mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetSynchronizationPoint", Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class SetSynchronizationPointRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetSynchronizationPointRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         public SetSynchronizationPointRequest()
         {
@@ -3010,7 +2244,7 @@ namespace SharpOnvifClient.Events
     /// mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetSynchronizationPointResponse", Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class SetSynchronizationPointResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetSynchronizationPointResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public SetSynchronizationPointResponse()
         {
@@ -3018,21 +2252,12 @@ namespace SharpOnvifClient.Events
 
     }
 
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class SubscribeCreationFailedFaultType : BaseFaultType
-    {
-        protected override string OnvifXmlTypeName { get { return "SubscribeCreationFailedFaultType"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
-
-    }
-
     [System.Xml.Serialization.XmlRootAttribute("Subscribe", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class SubscribeRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SubscribeRequest : SharpOnvifCommon.Xml.OnvifContract
     {
-        private EndpointReferenceType consumerReferenceField;
+        private SharpOnvifCommon.Onvif.EndpointReferenceType consumerReferenceField;
 
-        private FilterType filterField;
+        private SharpOnvifCommon.Onvif.FilterType filterField;
 
         private string initialTerminationTimeField;
 
@@ -3041,14 +2266,14 @@ namespace SharpOnvifClient.Events
         private System.Xml.XmlElement[] anyField;
 
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public EndpointReferenceType ConsumerReference
+        public SharpOnvifCommon.Onvif.EndpointReferenceType ConsumerReference
         {
             get { return this.consumerReferenceField; }
             set { this.consumerReferenceField = value; }
         }
 
         [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public FilterType Filter
+        public SharpOnvifCommon.Onvif.FilterType Filter
         {
             get { return this.filterField; }
             set { this.filterField = value; }
@@ -3079,7 +2304,7 @@ namespace SharpOnvifClient.Events
         {
         }
 
-        public SubscribeRequest(EndpointReferenceType consumerReference, FilterType filter, string initialTerminationTime, SubscribeSubscriptionPolicy subscriptionPolicy, System.Xml.XmlElement[] any)
+        public SubscribeRequest(SharpOnvifCommon.Onvif.EndpointReferenceType consumerReference, SharpOnvifCommon.Onvif.FilterType filter, string initialTerminationTime, SubscribeSubscriptionPolicy subscriptionPolicy, System.Xml.XmlElement[] any)
         {
             this.consumerReferenceField = consumerReference;
             this.filterField = filter;
@@ -3090,7 +2315,7 @@ namespace SharpOnvifClient.Events
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            writer.WriteElement(Ns.B2, "ConsumerReference", this.consumerReferenceField, Ns.i08Addressing, "EndpointReferenceType");
+            writer.WriteElement(Ns.B2, "ConsumerReference", this.consumerReferenceField, "http://www.w3.org/2005/08/addressing", "EndpointReferenceType");
             writer.WriteElement(Ns.B2, "Filter", this.filterField, Ns.B2, "FilterType");
             writer.WriteElementString(Ns.B2, "InitialTerminationTime", this.initialTerminationTimeField);
             writer.WriteElement(Ns.B2, "SubscriptionPolicy", this.subscriptionPolicyField, null, null);
@@ -3103,11 +2328,11 @@ namespace SharpOnvifClient.Events
             {
                 case "ConsumerReference":
                     if (reader.NamespaceUri != Ns.B2) break;
-                    this.consumerReferenceField = reader.ReadElementObject<EndpointReferenceType>(() => new EndpointReferenceType());
+                    this.consumerReferenceField = reader.ReadElementObject<SharpOnvifCommon.Onvif.EndpointReferenceType>(() => new SharpOnvifCommon.Onvif.EndpointReferenceType());
                     return true;
                 case "Filter":
                     if (reader.NamespaceUri != Ns.B2) break;
-                    this.filterField = reader.ReadElementObject<FilterType>(() => new FilterType());
+                    this.filterField = reader.ReadElementObject<SharpOnvifCommon.Onvif.FilterType>(() => new SharpOnvifCommon.Onvif.FilterType());
                     return true;
                 case "InitialTerminationTime":
                     if (reader.NamespaceUri != Ns.B2) break;
@@ -3130,9 +2355,9 @@ namespace SharpOnvifClient.Events
     }
 
     [System.Xml.Serialization.XmlRootAttribute("SubscribeResponse", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class SubscribeResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SubscribeResponse : SharpOnvifCommon.Xml.OnvifContract
     {
-        private EndpointReferenceType subscriptionReferenceField;
+        private SharpOnvifCommon.Onvif.EndpointReferenceType subscriptionReferenceField;
 
         private System.DateTime currentTimeField;
         private bool currentTimeFieldSpecified;
@@ -3143,7 +2368,7 @@ namespace SharpOnvifClient.Events
         private System.Xml.XmlElement[] anyField;
 
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public EndpointReferenceType SubscriptionReference
+        public SharpOnvifCommon.Onvif.EndpointReferenceType SubscriptionReference
         {
             get { return this.subscriptionReferenceField; }
             set { this.subscriptionReferenceField = value; }
@@ -3196,7 +2421,7 @@ namespace SharpOnvifClient.Events
         {
         }
 
-        public SubscribeResponse(EndpointReferenceType subscriptionReference, System.DateTime currentTime, System.DateTime terminationTime, System.Xml.XmlElement[] any)
+        public SubscribeResponse(SharpOnvifCommon.Onvif.EndpointReferenceType subscriptionReference, System.DateTime currentTime, System.DateTime terminationTime, System.Xml.XmlElement[] any)
         {
             this.subscriptionReferenceField = subscriptionReference;
             this.currentTimeField = currentTime;
@@ -3208,7 +2433,7 @@ namespace SharpOnvifClient.Events
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            writer.WriteElement(Ns.B2, "SubscriptionReference", this.subscriptionReferenceField, Ns.i08Addressing, "EndpointReferenceType");
+            writer.WriteElement(Ns.B2, "SubscriptionReference", this.subscriptionReferenceField, "http://www.w3.org/2005/08/addressing", "EndpointReferenceType");
             if (this.currentTimeFieldSpecified)
             {
                 writer.WriteElementString(Ns.B2, "CurrentTime", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.currentTimeField));
@@ -3226,7 +2451,7 @@ namespace SharpOnvifClient.Events
             {
                 case "SubscriptionReference":
                     if (reader.NamespaceUri != Ns.B2) break;
-                    this.subscriptionReferenceField = reader.ReadElementObject<EndpointReferenceType>(() => new EndpointReferenceType());
+                    this.subscriptionReferenceField = reader.ReadElementObject<SharpOnvifCommon.Onvif.EndpointReferenceType>(() => new SharpOnvifCommon.Onvif.EndpointReferenceType());
                     return true;
                 case "CurrentTime":
                     if (reader.NamespaceUri != Ns.B2) break;
@@ -3250,7 +2475,7 @@ namespace SharpOnvifClient.Events
 
     }
 
-    public partial class SubscribeSubscriptionPolicy : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SubscribeSubscriptionPolicy : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -3270,617 +2495,12 @@ namespace SharpOnvifClient.Events
         {
             SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class TopicExpressionDialectUnknownFaultType : BaseFaultType
-    {
-        protected override string OnvifXmlTypeName { get { return "TopicExpressionDialectUnknownFaultType"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class TopicExpressionType : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlNode[] anyField;
-
-        private string dialectField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlNode[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
-        public string Dialect
-        {
-            get { return this.dialectField; }
-            set { this.dialectField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "TopicExpressionType"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAttributeString(null, "Dialect", this.dialectField);
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Dialect":
-                    this.dialectField = reader.AttributeValue;
-                    return true;
-            }
-            return false;
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyNode());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/t-1")]
-    public partial class TopicNamespaceType : ExtensibleDocumented
-    {
-        private TopicNamespaceTypeTopic[] topicField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        private string nameField;
-
-        private string targetNamespaceField;
-
-        private bool finalField;
-        private bool finalFieldSpecified;
-
-        [System.Xml.Serialization.XmlElementAttribute("Topic", Order=0)]
-        public TopicNamespaceTypeTopic[] Topic
-        {
-            get { return this.topicField; }
-            set { this.topicField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=1)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="NCName")]
-        public string name
-        {
-            get { return this.nameField; }
-            set { this.nameField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
-        public string targetNamespace
-        {
-            get { return this.targetNamespaceField; }
-            set { this.targetNamespaceField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool final
-        {
-            get { return this.finalField; }
-            set { this.finalField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="final"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool finalSpecified
-        {
-            get { return this.finalFieldSpecified; }
-            set { this.finalFieldSpecified = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "TopicNamespaceType"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.T1; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlAttributes(writer);
-            writer.WriteAttributeString(null, "name", this.nameField);
-            writer.WriteAttributeString(null, "targetNamespace", this.targetNamespaceField);
-            if (this.finalFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "final", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.finalField));
-            }
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlContent(writer);
-            if (this.topicField != null)
-            {
-                for (int i = 0; i < this.topicField.Length; i++)
-                {
-                    writer.WriteElement(Ns.T1, "Topic", this.topicField[i], null, null);
-                }
-            }
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "name":
-                    this.nameField = reader.AttributeValue;
-                    return true;
-                case "targetNamespace":
-                    this.targetNamespaceField = reader.AttributeValue;
-                    return true;
-                case "final":
-                    this.finalField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
-                    this.finalFieldSpecified = true;
-                    return true;
-            }
-            return base.ReadXmlAttribute(reader);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Topic":
-                    if (reader.NamespaceUri != Ns.T1) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.topicField, reader.ReadElementObject<TopicNamespaceTypeTopic>(() => new TopicNamespaceTypeTopic()));
-                    return true;
-            }
-            if (base.ReadXmlElement(reader)) return true;
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    public partial class TopicNamespaceTypeTopic : TopicType
-    {
-        private string parentField;
-
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="token")]
-        public string parent
-        {
-            get { return this.parentField; }
-            set { this.parentField = value; }
-        }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlAttributes(writer);
-            writer.WriteAttributeString(null, "parent", this.parentField);
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "parent":
-                    this.parentField = reader.AttributeValue;
-                    return true;
-            }
-            return base.ReadXmlAttribute(reader);
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class TopicNotSupportedFaultType : BaseFaultType
-    {
-        protected override string OnvifXmlTypeName { get { return "TopicNotSupportedFaultType"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/t-1")]
-    public partial class TopicSetType : ExtensibleDocumented
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "TopicSetType"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.T1; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlContent(writer);
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            if (base.ReadXmlElement(reader)) return true;
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(TopicNamespaceTypeTopic))]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/t-1")]
-    public partial class TopicType : ExtensibleDocumented
-    {
-        private QueryExpressionType messagePatternField;
-
-        private TopicType[] topicField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        private string nameField;
-
-        private System.Xml.XmlQualifiedName[] messageTypesField;
-
-        private bool finalField;
-        private bool finalFieldSpecified;
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public QueryExpressionType MessagePattern
-        {
-            get { return this.messagePatternField; }
-            set { this.messagePatternField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute("Topic", Order=1)]
-        public TopicType[] Topic
-        {
-            get { return this.topicField; }
-            set { this.topicField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=2)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="NCName")]
-        public string name
-        {
-            get { return this.nameField; }
-            set { this.nameField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public System.Xml.XmlQualifiedName[] messageTypes
-        {
-            get { return this.messageTypesField; }
-            set { this.messageTypesField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool final
-        {
-            get { return this.finalField; }
-            set { this.finalField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="final"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool finalSpecified
-        {
-            get { return this.finalFieldSpecified; }
-            set { this.finalFieldSpecified = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "TopicType"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.T1; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlAttributes(writer);
-            writer.WriteAttributeString(null, "name", this.nameField);
-            writer.WriteAttributeString(null, "messageTypes", SharpOnvifCommon.Xml.OnvifArray.JoinList(System.Array.ConvertAll(this.messageTypesField, x => writer.QualifiedNameToString(x))));
-            if (this.finalFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "final", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.finalField));
-            }
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlContent(writer);
-            writer.WriteElement(Ns.T1, "MessagePattern", this.messagePatternField, Ns.T1, "QueryExpressionType");
-            if (this.topicField != null)
-            {
-                for (int i = 0; i < this.topicField.Length; i++)
-                {
-                    writer.WriteElement(Ns.T1, "Topic", this.topicField[i], Ns.T1, "TopicType");
-                }
-            }
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "name":
-                    this.nameField = reader.AttributeValue;
-                    return true;
-                case "messageTypes":
-                    this.messageTypesField = System.Array.ConvertAll(SharpOnvifCommon.Xml.OnvifArray.SplitList(reader.AttributeValue), x => reader.ToQualifiedName(x));
-                    return true;
-                case "final":
-                    this.finalField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
-                    this.finalFieldSpecified = true;
-                    return true;
-            }
-            return base.ReadXmlAttribute(reader);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "MessagePattern":
-                    if (reader.NamespaceUri != Ns.T1) break;
-                    this.messagePatternField = reader.ReadElementObject<QueryExpressionType>(() => new QueryExpressionType());
-                    return true;
-                case "Topic":
-                    if (reader.NamespaceUri != Ns.T1) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.topicField, reader.ReadElementObject<TopicType>(() => new TopicType()));
-                    return true;
-            }
-            if (base.ReadXmlElement(reader)) return true;
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class UnableToCreatePullPointFaultType : BaseFaultType
-    {
-        protected override string OnvifXmlTypeName { get { return "UnableToCreatePullPointFaultType"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class UnableToDestroyPullPointFaultType : BaseFaultType
-    {
-        protected override string OnvifXmlTypeName { get { return "UnableToDestroyPullPointFaultType"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class UnableToDestroySubscriptionFaultType : BaseFaultType
-    {
-        protected override string OnvifXmlTypeName { get { return "UnableToDestroySubscriptionFaultType"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class UnableToGetMessagesFaultType : BaseFaultType
-    {
-        protected override string OnvifXmlTypeName { get { return "UnableToGetMessagesFaultType"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class UnacceptableInitialTerminationTimeFaultType : BaseFaultType
-    {
-        private System.DateTime minimumTimeField;
-
-        private System.DateTime maximumTimeField;
-        private bool maximumTimeFieldSpecified;
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public System.DateTime MinimumTime
-        {
-            get { return this.minimumTimeField; }
-            set { this.minimumTimeField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public System.DateTime MaximumTime
-        {
-            get { return this.maximumTimeField; }
-            set { this.maximumTimeField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="MaximumTime"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool MaximumTimeSpecified
-        {
-            get { return this.maximumTimeFieldSpecified; }
-            set { this.maximumTimeFieldSpecified = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "UnacceptableInitialTerminationTimeFaultType"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlContent(writer);
-            writer.WriteElementString(Ns.B2, "MinimumTime", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.minimumTimeField));
-            if (this.maximumTimeFieldSpecified)
-            {
-                writer.WriteElementString(Ns.B2, "MaximumTime", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maximumTimeField));
-            }
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "MinimumTime":
-                    if (reader.NamespaceUri != Ns.B2) break;
-                    this.minimumTimeField = SharpOnvifCommon.Xml.XmlPrimitives.ToDateTime(reader.ReadElementText());
-                    return true;
-                case "MaximumTime":
-                    if (reader.NamespaceUri != Ns.B2) break;
-                    this.maximumTimeField = SharpOnvifCommon.Xml.XmlPrimitives.ToDateTime(reader.ReadElementText());
-                    this.maximumTimeFieldSpecified = true;
-                    return true;
-            }
-            if (base.ReadXmlElement(reader)) return true;
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class UnacceptableTerminationTimeFaultType : BaseFaultType
-    {
-        private System.DateTime minimumTimeField;
-
-        private System.DateTime maximumTimeField;
-        private bool maximumTimeFieldSpecified;
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public System.DateTime MinimumTime
-        {
-            get { return this.minimumTimeField; }
-            set { this.minimumTimeField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public System.DateTime MaximumTime
-        {
-            get { return this.maximumTimeField; }
-            set { this.maximumTimeField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="MaximumTime"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool MaximumTimeSpecified
-        {
-            get { return this.maximumTimeFieldSpecified; }
-            set { this.maximumTimeFieldSpecified = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "UnacceptableTerminationTimeFaultType"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlContent(writer);
-            writer.WriteElementString(Ns.B2, "MinimumTime", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.minimumTimeField));
-            if (this.maximumTimeFieldSpecified)
-            {
-                writer.WriteElementString(Ns.B2, "MaximumTime", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maximumTimeField));
-            }
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "MinimumTime":
-                    if (reader.NamespaceUri != Ns.B2) break;
-                    this.minimumTimeField = SharpOnvifCommon.Xml.XmlPrimitives.ToDateTime(reader.ReadElementText());
-                    return true;
-                case "MaximumTime":
-                    if (reader.NamespaceUri != Ns.B2) break;
-                    this.maximumTimeField = SharpOnvifCommon.Xml.XmlPrimitives.ToDateTime(reader.ReadElementText());
-                    this.maximumTimeFieldSpecified = true;
-                    return true;
-            }
-            if (base.ReadXmlElement(reader)) return true;
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class UnrecognizedPolicyRequestFaultType : BaseFaultType
-    {
-        private System.Xml.XmlQualifiedName[] unrecognizedPolicyField;
-
-        [System.Xml.Serialization.XmlElementAttribute("UnrecognizedPolicy", Order=0)]
-        public System.Xml.XmlQualifiedName[] UnrecognizedPolicy
-        {
-            get { return this.unrecognizedPolicyField; }
-            set { this.unrecognizedPolicyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "UnrecognizedPolicyRequestFaultType"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlContent(writer);
-            if (this.unrecognizedPolicyField != null)
-            {
-                for (int i = 0; i < this.unrecognizedPolicyField.Length; i++)
-                {
-                    writer.WriteElementQualifiedName(Ns.B2, "UnrecognizedPolicy", this.unrecognizedPolicyField[i]);
-                }
-            }
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "UnrecognizedPolicy":
-                    if (reader.NamespaceUri != Ns.B2) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.unrecognizedPolicyField, reader.ReadElementQualifiedName());
-                    return true;
-            }
-            if (base.ReadXmlElement(reader)) return true;
-            return false;
         }
 
     }
 
     [System.Xml.Serialization.XmlRootAttribute("Unsubscribe", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class UnsubscribeRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class UnsubscribeRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -3914,7 +2534,7 @@ namespace SharpOnvifClient.Events
     }
 
     [System.Xml.Serialization.XmlRootAttribute("UnsubscribeResponse", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class UnsubscribeResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class UnsubscribeResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -3947,139 +2567,12 @@ namespace SharpOnvifClient.Events
 
     }
 
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class UnsupportedPolicyRequestFaultType : BaseFaultType
-    {
-        private System.Xml.XmlQualifiedName[] unsupportedPolicyField;
-
-        [System.Xml.Serialization.XmlElementAttribute("UnsupportedPolicy", Order=0)]
-        public System.Xml.XmlQualifiedName[] UnsupportedPolicy
-        {
-            get { return this.unsupportedPolicyField; }
-            set { this.unsupportedPolicyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "UnsupportedPolicyRequestFaultType"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlContent(writer);
-            if (this.unsupportedPolicyField != null)
-            {
-                for (int i = 0; i < this.unsupportedPolicyField.Length; i++)
-                {
-                    writer.WriteElementQualifiedName(Ns.B2, "UnsupportedPolicy", this.unsupportedPolicyField[i]);
-                }
-            }
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "UnsupportedPolicy":
-                    if (reader.NamespaceUri != Ns.B2) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.unsupportedPolicyField, reader.ReadElementQualifiedName());
-                    return true;
-            }
-            if (base.ReadXmlElement(reader)) return true;
-            return false;
-        }
-
-    }
-
     /// <summary>Constructs a contract named by an xsi:type attribute.</summary>
     internal static class XmlTypeFactory
     {
-        public static SharpOnvifCommon.Xml.OnvifObject Create(string ns, string name)
+        public static SharpOnvifCommon.Xml.OnvifContract Create(string ns, string name)
         {
-            switch (name)
-            {
-                case "BaseFaultType":
-                    if (ns == "http://docs.oasis-open.org/wsrf/bf-2") return new BaseFaultType();
-                    break;
-                case "ExtensibleDocumented":
-                    if (ns == "http://docs.oasis-open.org/wsn/t-1") return new ExtensibleDocumented();
-                    break;
-                case "InvalidFilterFaultType":
-                    if (ns == "http://docs.oasis-open.org/wsn/b-2") return new InvalidFilterFaultType();
-                    break;
-                case "InvalidMessageContentExpressionFaultType":
-                    if (ns == "http://docs.oasis-open.org/wsn/b-2") return new InvalidMessageContentExpressionFaultType();
-                    break;
-                case "InvalidProducerPropertiesExpressionFaultType":
-                    if (ns == "http://docs.oasis-open.org/wsn/b-2") return new InvalidProducerPropertiesExpressionFaultType();
-                    break;
-                case "InvalidTopicExpressionFaultType":
-                    if (ns == "http://docs.oasis-open.org/wsn/b-2") return new InvalidTopicExpressionFaultType();
-                    break;
-                case "MultipleTopicsSpecifiedFaultType":
-                    if (ns == "http://docs.oasis-open.org/wsn/b-2") return new MultipleTopicsSpecifiedFaultType();
-                    break;
-                case "NoCurrentMessageOnTopicFaultType":
-                    if (ns == "http://docs.oasis-open.org/wsn/b-2") return new NoCurrentMessageOnTopicFaultType();
-                    break;
-                case "NotifyMessageNotSupportedFaultType":
-                    if (ns == "http://docs.oasis-open.org/wsn/b-2") return new NotifyMessageNotSupportedFaultType();
-                    break;
-                case "PauseFailedFaultType":
-                    if (ns == "http://docs.oasis-open.org/wsn/b-2") return new PauseFailedFaultType();
-                    break;
-                case "ResourceUnavailableFaultType":
-                    if (ns == "http://docs.oasis-open.org/wsrf/r-2") return new ResourceUnavailableFaultType();
-                    break;
-                case "ResourceUnknownFaultType":
-                    if (ns == "http://docs.oasis-open.org/wsrf/r-2") return new ResourceUnknownFaultType();
-                    break;
-                case "ResumeFailedFaultType":
-                    if (ns == "http://docs.oasis-open.org/wsn/b-2") return new ResumeFailedFaultType();
-                    break;
-                case "SubscribeCreationFailedFaultType":
-                    if (ns == "http://docs.oasis-open.org/wsn/b-2") return new SubscribeCreationFailedFaultType();
-                    break;
-                case "TopicExpressionDialectUnknownFaultType":
-                    if (ns == "http://docs.oasis-open.org/wsn/b-2") return new TopicExpressionDialectUnknownFaultType();
-                    break;
-                case "TopicNamespaceType":
-                    if (ns == "http://docs.oasis-open.org/wsn/t-1") return new TopicNamespaceType();
-                    break;
-                case "TopicNotSupportedFaultType":
-                    if (ns == "http://docs.oasis-open.org/wsn/b-2") return new TopicNotSupportedFaultType();
-                    break;
-                case "TopicSetType":
-                    if (ns == "http://docs.oasis-open.org/wsn/t-1") return new TopicSetType();
-                    break;
-                case "TopicType":
-                    if (ns == "http://docs.oasis-open.org/wsn/t-1") return new TopicType();
-                    break;
-                case "UnableToCreatePullPointFaultType":
-                    if (ns == "http://docs.oasis-open.org/wsn/b-2") return new UnableToCreatePullPointFaultType();
-                    break;
-                case "UnableToDestroyPullPointFaultType":
-                    if (ns == "http://docs.oasis-open.org/wsn/b-2") return new UnableToDestroyPullPointFaultType();
-                    break;
-                case "UnableToDestroySubscriptionFaultType":
-                    if (ns == "http://docs.oasis-open.org/wsn/b-2") return new UnableToDestroySubscriptionFaultType();
-                    break;
-                case "UnableToGetMessagesFaultType":
-                    if (ns == "http://docs.oasis-open.org/wsn/b-2") return new UnableToGetMessagesFaultType();
-                    break;
-                case "UnacceptableInitialTerminationTimeFaultType":
-                    if (ns == "http://docs.oasis-open.org/wsn/b-2") return new UnacceptableInitialTerminationTimeFaultType();
-                    break;
-                case "UnacceptableTerminationTimeFaultType":
-                    if (ns == "http://docs.oasis-open.org/wsn/b-2") return new UnacceptableTerminationTimeFaultType();
-                    break;
-                case "UnrecognizedPolicyRequestFaultType":
-                    if (ns == "http://docs.oasis-open.org/wsn/b-2") return new UnrecognizedPolicyRequestFaultType();
-                    break;
-                case "UnsupportedPolicyRequestFaultType":
-                    if (ns == "http://docs.oasis-open.org/wsn/b-2") return new UnsupportedPolicyRequestFaultType();
-                    break;
-            }
-            return null;
+            return SharpOnvifCommon.Onvif.XmlTypeFactory.Create(ns, name);
         }
     }
 

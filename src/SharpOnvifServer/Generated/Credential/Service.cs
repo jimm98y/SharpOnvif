@@ -172,7 +172,7 @@ namespace SharpOnvifServer.Credential
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual CreateCredentialResponse CreateCredential(Credential Credential, CredentialState State)
+        public virtual CreateCredentialResponse CreateCredential(OnvifCredential Credential, CredentialState State)
         {
             throw new System.NotImplementedException();
         }
@@ -218,7 +218,7 @@ namespace SharpOnvifServer.Credential
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual ModifyCredentialResponse ModifyCredential(Credential Credential)
+        public virtual ModifyCredentialResponse ModifyCredential(OnvifCredential Credential)
         {
             throw new System.NotImplementedException();
         }
@@ -1086,7 +1086,7 @@ namespace SharpOnvifServer.Credential
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }

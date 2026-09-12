@@ -95,9 +95,9 @@ namespace SharpOnvif.Tests
             {
                 return new SharpOnvifServer.DeviceMgmt.GetSystemDateAndTimeResponse
                 {
-                    SystemDateAndTime = new SharpOnvifServer.DeviceMgmt.SystemDateTime
+                    SystemDateAndTime = new SharpOnvifCommon.Onvif.SystemDateTime
                     {
-                        DateTimeType = SharpOnvifServer.DeviceMgmt.SetDateTimeType.NTP,
+                        DateTimeType = SharpOnvifCommon.Onvif.SetDateTimeType.NTP,
                     },
                 };
             }
@@ -176,7 +176,7 @@ namespace SharpOnvif.Tests
             {
                 var response = await device.GetSystemDateAndTimeAsync();
 
-                Assert.AreEqual(SharpOnvifClient.DeviceMgmt.SetDateTimeType.NTP,
+                Assert.AreEqual(SharpOnvifCommon.Onvif.SetDateTimeType.NTP,
                     response.SystemDateAndTime.DateTimeType);
             }
         }

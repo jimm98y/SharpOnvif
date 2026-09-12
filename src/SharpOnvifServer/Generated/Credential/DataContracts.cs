@@ -14,7 +14,6 @@ namespace SharpOnvifServer.Credential
     internal static class Ns
     {
         public const string Ver10Credential = "http://www.onvif.org/ver10/credential/wsdl";
-        public const string Ver10Pacs = "http://www.onvif.org/ver10/pacs";
     }
 
     /// <summary>Conversions between the generated enums and their XML lexical forms.</summary>
@@ -28,7 +27,7 @@ namespace SharpOnvifServer.Credential
     /// also is whitelisted, the item shall be removed from the whitelist.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddToBlacklist", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class AddToBlacklistRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class AddToBlacklistRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private CredentialIdentifierItem[] identifierField;
 
@@ -94,7 +93,7 @@ namespace SharpOnvifServer.Credential
     /// also is whitelisted, the item shall be removed from the whitelist.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddToBlacklistResponse", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class AddToBlacklistResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class AddToBlacklistResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public AddToBlacklistResponse()
         {
@@ -108,7 +107,7 @@ namespace SharpOnvifServer.Credential
     /// also is blacklisted, the item shall be removed from the blacklist.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddToWhitelist", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class AddToWhitelistRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class AddToWhitelistRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private CredentialIdentifierItem[] identifierField;
 
@@ -174,7 +173,7 @@ namespace SharpOnvifServer.Credential
     /// also is blacklisted, the item shall be removed from the blacklist.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddToWhitelistResponse", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class AddToWhitelistResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class AddToWhitelistResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public AddToWhitelistResponse()
         {
@@ -186,7 +185,7 @@ namespace SharpOnvifServer.Credential
     /// A structure containing anti-passback related state information.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class AntipassbackState : SharpOnvifCommon.Xml.OnvifObject
+    public partial class AntipassbackState : SharpOnvifCommon.Xml.OnvifContract
     {
         private bool antipassbackViolatedField;
 
@@ -235,82 +234,6 @@ namespace SharpOnvifServer.Credential
     }
 
     /// <summary>
-    /// Attributes contains a Name and an optional Value and type.
-    /// </summary>
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/pacs")]
-    public partial class Attribute : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        private string nameField;
-
-        private string valueField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        /// <summary>
-        /// Name of attribute. Key names starting with "ONVIF" (any case) are reserved for ONVIF use.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name
-        {
-            get { return this.nameField; }
-            set { this.nameField = value; }
-        }
-
-        /// <summary>
-        /// Value of attribute
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Value
-        {
-            get { return this.valueField; }
-            set { this.valueField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "Attribute"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Pacs; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAttributeString(null, "Name", this.nameField);
-            writer.WriteAttributeString(null, "Value", this.valueField);
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Name":
-                    this.nameField = reader.AttributeValue;
-                    return true;
-                case "Value":
-                    this.valueField = reader.AttributeValue;
-                    return true;
-            }
-            return false;
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    /// <summary>
     /// This operation creates a credential. A call to this method takes a credential structure and a
     /// credential state structure as input parameters. The credential state can be created in disabled or
     /// enabled state. The token field of the credential shall be empty, the device shall allocate a token
@@ -318,9 +241,9 @@ namespace SharpOnvifServer.Credential
     /// value in the token field, the device shall return InvalidArgVal as generic fault code.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateCredential", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class CreateCredentialRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CreateCredentialRequest : SharpOnvifCommon.Xml.OnvifContract
     {
-        private Credential credentialField;
+        private OnvifCredential credentialField;
 
         private CredentialState stateField;
 
@@ -328,7 +251,7 @@ namespace SharpOnvifServer.Credential
         /// The credential to create.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public Credential Credential
+        public OnvifCredential Credential
         {
             get { return this.credentialField; }
             set { this.credentialField = value; }
@@ -348,7 +271,7 @@ namespace SharpOnvifServer.Credential
         {
         }
 
-        public CreateCredentialRequest(Credential credential, CredentialState state)
+        public CreateCredentialRequest(OnvifCredential credential, CredentialState state)
         {
             this.credentialField = credential;
             this.stateField = state;
@@ -366,7 +289,7 @@ namespace SharpOnvifServer.Credential
             {
                 case "Credential":
                     if (reader.NamespaceUri != Ns.Ver10Credential) break;
-                    this.credentialField = reader.ReadElementObject<Credential>(() => new Credential());
+                    this.credentialField = reader.ReadElementObject<OnvifCredential>(() => new OnvifCredential());
                     return true;
                 case "State":
                     if (reader.NamespaceUri != Ns.Ver10Credential) break;
@@ -386,7 +309,7 @@ namespace SharpOnvifServer.Credential
     /// value in the token field, the device shall return InvalidArgVal as generic fault code.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateCredentialResponse", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class CreateCredentialResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CreateCredentialResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -429,158 +352,10 @@ namespace SharpOnvifServer.Credential
     }
 
     /// <summary>
-    /// A Credential is a physical/tangible object, a piece of knowledge, or a facet of a person's physical
-    /// being, that enables an individual access to a given physical facility or computer-based information
-    /// system. A credential holds one or more credential identifiers. To gain access one or more
-    /// identifiers may be required.
-    /// </summary>
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class Credential : CredentialInfo
-    {
-        private CredentialIdentifier[] credentialIdentifierField;
-
-        private CredentialAccessProfile[] credentialAccessProfileField;
-
-        private bool extendedGrantTimeField;
-        private bool extendedGrantTimeFieldSpecified;
-
-        private Attribute[] attributeField;
-
-        private CredentialExtension extensionField;
-
-        /// <summary>
-        /// A list of credential identifier structures. At least one credential identifier is required. Maximum
-        /// one credential identifier structure per type is allowed.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("CredentialIdentifier", Order=0)]
-        public CredentialIdentifier[] CredentialIdentifier
-        {
-            get { return this.credentialIdentifierField; }
-            set { this.credentialIdentifierField = value; }
-        }
-
-        /// <summary>
-        /// A list of credential access profile structures.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("CredentialAccessProfile", Order=1)]
-        public CredentialAccessProfile[] CredentialAccessProfile
-        {
-            get { return this.credentialAccessProfileField; }
-            set { this.credentialAccessProfileField = value; }
-        }
-
-        /// <summary>
-        /// A boolean indicating that the credential holder needs extra time to get through the door.
-        /// ExtendedReleaseTime will be added to ReleaseTime, and ExtendedOpenTime will be added to OpenTime
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public bool ExtendedGrantTime
-        {
-            get { return this.extendedGrantTimeField; }
-            set { this.extendedGrantTimeField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="ExtendedGrantTime"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ExtendedGrantTimeSpecified
-        {
-            get { return this.extendedGrantTimeFieldSpecified; }
-            set { this.extendedGrantTimeFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// A list of credential attributes as name value pairs. Key names starting with the prefix pt: are
-        /// reserved to define PACS specific attributes following the "pt:&lt;Name&gt;" syntax.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("Attribute", Order=3)]
-        public Attribute[] Attribute
-        {
-            get { return this.attributeField; }
-            set { this.attributeField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public CredentialExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "Credential"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Credential; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlContent(writer);
-            if (this.credentialIdentifierField != null)
-            {
-                for (int i = 0; i < this.credentialIdentifierField.Length; i++)
-                {
-                    writer.WriteElement(Ns.Ver10Credential, "CredentialIdentifier", this.credentialIdentifierField[i], Ns.Ver10Credential, "CredentialIdentifier");
-                }
-            }
-            if (this.credentialAccessProfileField != null)
-            {
-                for (int i = 0; i < this.credentialAccessProfileField.Length; i++)
-                {
-                    writer.WriteElement(Ns.Ver10Credential, "CredentialAccessProfile", this.credentialAccessProfileField[i], Ns.Ver10Credential, "CredentialAccessProfile");
-                }
-            }
-            if (this.extendedGrantTimeFieldSpecified)
-            {
-                writer.WriteElementString(Ns.Ver10Credential, "ExtendedGrantTime", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.extendedGrantTimeField));
-            }
-            if (this.attributeField != null)
-            {
-                for (int i = 0; i < this.attributeField.Length; i++)
-                {
-                    writer.WriteElement(Ns.Ver10Credential, "Attribute", this.attributeField[i], Ns.Ver10Pacs, "Attribute");
-                }
-            }
-            writer.WriteElement(Ns.Ver10Credential, "Extension", this.extensionField, Ns.Ver10Credential, "CredentialExtension");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "CredentialIdentifier":
-                    if (reader.NamespaceUri != Ns.Ver10Credential) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.credentialIdentifierField, reader.ReadElementObject<CredentialIdentifier>(() => new CredentialIdentifier()));
-                    return true;
-                case "CredentialAccessProfile":
-                    if (reader.NamespaceUri != Ns.Ver10Credential) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.credentialAccessProfileField, reader.ReadElementObject<CredentialAccessProfile>(() => new CredentialAccessProfile()));
-                    return true;
-                case "ExtendedGrantTime":
-                    if (reader.NamespaceUri != Ns.Ver10Credential) break;
-                    this.extendedGrantTimeField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
-                    this.extendedGrantTimeFieldSpecified = true;
-                    return true;
-                case "Attribute":
-                    if (reader.NamespaceUri != Ns.Ver10Credential) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.attributeField, reader.ReadElementObject<Attribute>(() => new Attribute()));
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.Ver10Credential) break;
-                    this.extensionField = reader.ReadElementObject<CredentialExtension>(() => new CredentialExtension());
-                    return true;
-            }
-            if (base.ReadXmlElement(reader)) return true;
-            return false;
-        }
-
-    }
-
-    /// <summary>
     /// The association between a credential and an access profile.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class CredentialAccessProfile : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CredentialAccessProfile : SharpOnvifCommon.Xml.OnvifContract
     {
         private string accessProfileTokenField;
 
@@ -691,9 +466,9 @@ namespace SharpOnvifServer.Credential
     /// Contains information about a format type.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class CredentialData : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CredentialData : SharpOnvifCommon.Xml.OnvifContract
     {
-        private Credential credentialField;
+        private OnvifCredential credentialField;
 
         private CredentialState credentialStateField;
 
@@ -705,7 +480,7 @@ namespace SharpOnvifServer.Credential
         /// manufacturers can define their own format types.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public Credential Credential
+        public OnvifCredential Credential
         {
             get { return this.credentialField; }
             set { this.credentialField = value; }
@@ -748,7 +523,7 @@ namespace SharpOnvifServer.Credential
             {
                 case "Credential":
                     if (reader.NamespaceUri != Ns.Ver10Credential) break;
-                    this.credentialField = reader.ReadElementObject<Credential>(() => new Credential());
+                    this.credentialField = reader.ReadElementObject<OnvifCredential>(() => new OnvifCredential());
                     return true;
                 case "CredentialState":
                     if (reader.NamespaceUri != Ns.Ver10Credential) break;
@@ -765,7 +540,7 @@ namespace SharpOnvifServer.Credential
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class CredentialDataExtension : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CredentialDataExtension : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -794,7 +569,7 @@ namespace SharpOnvifServer.Credential
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class CredentialExtension : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CredentialExtension : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -827,7 +602,7 @@ namespace SharpOnvifServer.Credential
     /// as fingerprint, iris, vein, face recognition, that can be validated in an access point.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class CredentialIdentifier : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CredentialIdentifier : SharpOnvifCommon.Xml.OnvifContract
     {
         private CredentialIdentifierType typeField;
 
@@ -915,7 +690,7 @@ namespace SharpOnvifServer.Credential
     /// Contains information about a format type.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class CredentialIdentifierFormatTypeInfo : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CredentialIdentifierFormatTypeInfo : SharpOnvifCommon.Xml.OnvifContract
     {
         private string formatTypeField;
 
@@ -989,7 +764,7 @@ namespace SharpOnvifServer.Credential
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class CredentialIdentifierFormatTypeInfoExtension : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CredentialIdentifierFormatTypeInfoExtension : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -1022,7 +797,7 @@ namespace SharpOnvifServer.Credential
     /// as fingerprint, iris, vein, face recognition, that can be validated in an access point.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class CredentialIdentifierItem : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CredentialIdentifierItem : SharpOnvifCommon.Xml.OnvifContract
     {
         private CredentialIdentifierType typeField;
 
@@ -1091,7 +866,7 @@ namespace SharpOnvifServer.Credential
     /// Specifies the name of credential identifier type and its format for the credential value.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class CredentialIdentifierType : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CredentialIdentifierType : SharpOnvifCommon.Xml.OnvifContract
     {
         private string nameField;
 
@@ -1161,9 +936,9 @@ namespace SharpOnvifServer.Credential
     /// basic information of a specific credential instance. The device shall provide the following fields
     /// for each credential.
     /// </summary>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Credential))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(OnvifCredential))]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class CredentialInfo : DataEntity
+    public partial class CredentialInfo : SharpOnvifCommon.Xml.OnvifContract
     {
         private string descriptionField;
 
@@ -1246,7 +1021,6 @@ namespace SharpOnvifServer.Credential
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            base.WriteXmlContent(writer);
             writer.WriteElementString(Ns.Ver10Credential, "Description", this.descriptionField);
             writer.WriteElementString(Ns.Ver10Credential, "CredentialHolderReference", this.credentialHolderReferenceField);
             if (this.validFromFieldSpecified)
@@ -1282,7 +1056,6 @@ namespace SharpOnvifServer.Credential
                     this.validToFieldSpecified = true;
                     return true;
             }
-            if (base.ReadXmlElement(reader)) return true;
             return false;
         }
 
@@ -1293,7 +1066,7 @@ namespace SharpOnvifServer.Credential
     /// the reason of why the credential was disabled.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class CredentialState : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CredentialState : SharpOnvifCommon.Xml.OnvifContract
     {
         private bool enabledField;
 
@@ -1381,7 +1154,7 @@ namespace SharpOnvifServer.Credential
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class CredentialStateExtension : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CredentialStateExtension : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -1410,53 +1183,12 @@ namespace SharpOnvifServer.Credential
     }
 
     /// <summary>
-    /// General datastructure referenced by a token. Should be used as extension base.
-    /// </summary>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(CredentialInfo))]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/pacs")]
-    public partial class DataEntity : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string tokenField;
-
-        /// <summary>
-        /// A service-unique identifier of the item.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string token
-        {
-            get { return this.tokenField; }
-            set { this.tokenField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "DataEntity"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Pacs; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAttributeString(null, "token", this.tokenField);
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "token":
-                    this.tokenField = reader.AttributeValue;
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    /// <summary>
     /// This command deletes all credential identifiers from the blacklist. A device with capability
     /// MaxBlacklistedItems greater than zero, shall implement this command. This command is idempotent and
     /// is safe to repeat even if the blacklist already is empty.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteBlacklist", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class DeleteBlacklistRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteBlacklistRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         public DeleteBlacklistRequest()
         {
@@ -1470,7 +1202,7 @@ namespace SharpOnvifServer.Credential
     /// is safe to repeat even if the blacklist already is empty.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteBlacklistResponse", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class DeleteBlacklistResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteBlacklistResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public DeleteBlacklistResponse()
         {
@@ -1484,7 +1216,7 @@ namespace SharpOnvifServer.Credential
     /// ignored without any response.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteCredentialAccessProfiles", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class DeleteCredentialAccessProfilesRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteCredentialAccessProfilesRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string credentialTokenField;
 
@@ -1556,7 +1288,7 @@ namespace SharpOnvifServer.Credential
     /// ignored without any response.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteCredentialAccessProfilesResponse", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class DeleteCredentialAccessProfilesResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteCredentialAccessProfilesResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public DeleteCredentialAccessProfilesResponse()
         {
@@ -1569,7 +1301,7 @@ namespace SharpOnvifServer.Credential
     /// type name doesn’t exist in the device, it will be silently ignored without any response.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteCredentialIdentifier", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class DeleteCredentialIdentifierRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteCredentialIdentifierRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string credentialTokenField;
 
@@ -1634,7 +1366,7 @@ namespace SharpOnvifServer.Credential
     /// type name doesn’t exist in the device, it will be silently ignored without any response.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteCredentialIdentifierResponse", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class DeleteCredentialIdentifierResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteCredentialIdentifierResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public DeleteCredentialIdentifierResponse()
         {
@@ -1648,7 +1380,7 @@ namespace SharpOnvifServer.Credential
     /// generated.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteCredential", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class DeleteCredentialRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteCredentialRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -1696,7 +1428,7 @@ namespace SharpOnvifServer.Credential
     /// generated.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteCredentialResponse", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class DeleteCredentialResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteCredentialResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public DeleteCredentialResponse()
         {
@@ -1710,7 +1442,7 @@ namespace SharpOnvifServer.Credential
     /// is safe to repeat even if the whitelist already is empty.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteWhitelist", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class DeleteWhitelistRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteWhitelistRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         public DeleteWhitelistRequest()
         {
@@ -1724,7 +1456,7 @@ namespace SharpOnvifServer.Credential
     /// is safe to repeat even if the whitelist already is empty.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteWhitelistResponse", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class DeleteWhitelistResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteWhitelistResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public DeleteWhitelistResponse()
         {
@@ -1736,7 +1468,7 @@ namespace SharpOnvifServer.Credential
     /// This method is used to disable a credential.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DisableCredential", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class DisableCredentialRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DisableCredentialRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -1800,7 +1532,7 @@ namespace SharpOnvifServer.Credential
     /// This method is used to disable a credential.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DisableCredentialResponse", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class DisableCredentialResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DisableCredentialResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public DisableCredentialResponse()
         {
@@ -1812,7 +1544,7 @@ namespace SharpOnvifServer.Credential
     /// This method is used to enable a credential.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("EnableCredential", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class EnableCredentialRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class EnableCredentialRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -1876,7 +1608,7 @@ namespace SharpOnvifServer.Credential
     /// This method is used to enable a credential.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("EnableCredentialResponse", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class EnableCredentialResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class EnableCredentialResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public EnableCredentialResponse()
         {
@@ -1889,7 +1621,7 @@ namespace SharpOnvifServer.Credential
     /// capability MaxBlacklistedItems greater than zero, shall implement this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetBlacklist", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class GetBlacklistRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetBlacklistRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private int limitField;
         private bool limitFieldSpecified;
@@ -2039,7 +1771,7 @@ namespace SharpOnvifServer.Credential
     /// capability MaxBlacklistedItems greater than zero, shall implement this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetBlacklistResponse", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class GetBlacklistResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetBlacklistResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private string nextStartReferenceField;
 
@@ -2109,7 +1841,7 @@ namespace SharpOnvifServer.Credential
     /// This method returns all the credential access profiles for a credential.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCredentialAccessProfiles", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class GetCredentialAccessProfilesRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetCredentialAccessProfilesRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string credentialTokenField;
 
@@ -2155,7 +1887,7 @@ namespace SharpOnvifServer.Credential
     /// This method returns all the credential access profiles for a credential.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCredentialAccessProfilesResponse", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class GetCredentialAccessProfilesResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetCredentialAccessProfilesResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private CredentialAccessProfile[] credentialAccessProfileField;
 
@@ -2207,7 +1939,7 @@ namespace SharpOnvifServer.Credential
     /// This method returns all the credential identifiers for a credential.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCredentialIdentifiers", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class GetCredentialIdentifiersRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetCredentialIdentifiersRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string credentialTokenField;
 
@@ -2253,7 +1985,7 @@ namespace SharpOnvifServer.Credential
     /// This method returns all the credential identifiers for a credential.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCredentialIdentifiersResponse", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class GetCredentialIdentifiersResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetCredentialIdentifiersResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private CredentialIdentifier[] credentialIdentifierField;
 
@@ -2309,7 +2041,7 @@ namespace SharpOnvifServer.Credential
     /// not be greater than the Limit parameter.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCredentialInfoList", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class GetCredentialInfoListRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetCredentialInfoListRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private int limitField;
         private bool limitFieldSpecified;
@@ -2396,7 +2128,7 @@ namespace SharpOnvifServer.Credential
     /// not be greater than the Limit parameter.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCredentialInfoListResponse", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class GetCredentialInfoListResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetCredentialInfoListResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private string nextStartReferenceField;
 
@@ -2469,7 +2201,7 @@ namespace SharpOnvifServer.Credential
     /// is greater than MaxLimit, a TooManyItems fault shall be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCredentialInfo", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class GetCredentialInfoRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetCredentialInfoRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string[] tokenField;
 
@@ -2524,7 +2256,7 @@ namespace SharpOnvifServer.Credential
     /// is greater than MaxLimit, a TooManyItems fault shall be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCredentialInfoResponse", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class GetCredentialInfoResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetCredentialInfoResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private CredentialInfo[] credentialInfoField;
 
@@ -2580,7 +2312,7 @@ namespace SharpOnvifServer.Credential
     /// the Limit parameter.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCredentialList", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class GetCredentialListRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetCredentialListRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private int limitField;
         private bool limitFieldSpecified;
@@ -2667,11 +2399,11 @@ namespace SharpOnvifServer.Credential
     /// the Limit parameter.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCredentialListResponse", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class GetCredentialListResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetCredentialListResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private string nextStartReferenceField;
 
-        private Credential[] credentialField;
+        private OnvifCredential[] credentialField;
 
         /// <summary>
         /// StartReference to use in next call to get the following items. If absent, no more items to get.
@@ -2687,7 +2419,7 @@ namespace SharpOnvifServer.Credential
         /// List of Credential items.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute("Credential", Order=1)]
-        public Credential[] Credential
+        public OnvifCredential[] Credential
         {
             get { return this.credentialField; }
             set { this.credentialField = value; }
@@ -2697,7 +2429,7 @@ namespace SharpOnvifServer.Credential
         {
         }
 
-        public GetCredentialListResponse(string nextStartReference, Credential[] credential)
+        public GetCredentialListResponse(string nextStartReference, OnvifCredential[] credential)
         {
             this.nextStartReferenceField = nextStartReference;
             this.credentialField = credential;
@@ -2725,7 +2457,7 @@ namespace SharpOnvifServer.Credential
                     return true;
                 case "Credential":
                     if (reader.NamespaceUri != Ns.Ver10Credential) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.credentialField, reader.ReadElementObject<Credential>(() => new Credential()));
+                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.credentialField, reader.ReadElementObject<OnvifCredential>(() => new OnvifCredential()));
                     return true;
             }
             return false;
@@ -2739,7 +2471,7 @@ namespace SharpOnvifServer.Credential
     /// the returned credential state structure.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCredentialState", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class GetCredentialStateRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetCredentialStateRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -2787,7 +2519,7 @@ namespace SharpOnvifServer.Credential
     /// the returned credential state structure.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCredentialStateResponse", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class GetCredentialStateResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetCredentialStateResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private CredentialState stateField;
 
@@ -2836,7 +2568,7 @@ namespace SharpOnvifServer.Credential
     /// is greater than MaxLimit, a TooManyItems fault shall be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCredentials", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class GetCredentialsRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetCredentialsRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string[] tokenField;
 
@@ -2891,15 +2623,15 @@ namespace SharpOnvifServer.Credential
     /// is greater than MaxLimit, a TooManyItems fault shall be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCredentialsResponse", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class GetCredentialsResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetCredentialsResponse : SharpOnvifCommon.Xml.OnvifContract
     {
-        private Credential[] credentialField;
+        private OnvifCredential[] credentialField;
 
         /// <summary>
         /// List of Credential items.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute("Credential", Order=0)]
-        public Credential[] Credential
+        public OnvifCredential[] Credential
         {
             get { return this.credentialField; }
             set { this.credentialField = value; }
@@ -2909,7 +2641,7 @@ namespace SharpOnvifServer.Credential
         {
         }
 
-        public GetCredentialsResponse(Credential[] credential)
+        public GetCredentialsResponse(OnvifCredential[] credential)
         {
             this.credentialField = credential;
         }
@@ -2931,7 +2663,7 @@ namespace SharpOnvifServer.Credential
             {
                 case "Credential":
                     if (reader.NamespaceUri != Ns.Ver10Credential) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.credentialField, reader.ReadElementObject<Credential>(() => new Credential()));
+                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.credentialField, reader.ReadElementObject<OnvifCredential>(() => new OnvifCredential()));
                     return true;
             }
             return false;
@@ -2943,7 +2675,7 @@ namespace SharpOnvifServer.Credential
     /// This operation returns the capabilities of the credential service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilities", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         public GetServiceCapabilitiesRequest()
         {
@@ -2955,7 +2687,7 @@ namespace SharpOnvifServer.Credential
     /// This operation returns the capabilities of the credential service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilitiesResponse", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private ServiceCapabilities capabilitiesField;
 
@@ -3003,7 +2735,7 @@ namespace SharpOnvifServer.Credential
     /// by the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSupportedFormatTypes", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class GetSupportedFormatTypesRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetSupportedFormatTypesRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string credentialIdentifierTypeNameField;
 
@@ -3050,7 +2782,7 @@ namespace SharpOnvifServer.Credential
     /// by the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSupportedFormatTypesResponse", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class GetSupportedFormatTypesResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetSupportedFormatTypesResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private CredentialIdentifierFormatTypeInfo[] formatTypeInfoField;
 
@@ -3103,7 +2835,7 @@ namespace SharpOnvifServer.Credential
     /// capability MaxWhitelistedItems greater than zero, shall implement this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetWhitelist", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class GetWhitelistRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetWhitelistRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private int limitField;
         private bool limitFieldSpecified;
@@ -3253,7 +2985,7 @@ namespace SharpOnvifServer.Credential
     /// capability MaxWhitelistedItems greater than zero, shall implement this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetWhitelistResponse", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class GetWhitelistResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetWhitelistResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private string nextStartReferenceField;
 
@@ -3329,15 +3061,15 @@ namespace SharpOnvifServer.Credential
     /// with the specified entities.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ModifyCredential", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class ModifyCredentialRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ModifyCredentialRequest : SharpOnvifCommon.Xml.OnvifContract
     {
-        private Credential credentialField;
+        private OnvifCredential credentialField;
 
         /// <summary>
         /// Details of the credential.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public Credential Credential
+        public OnvifCredential Credential
         {
             get { return this.credentialField; }
             set { this.credentialField = value; }
@@ -3347,7 +3079,7 @@ namespace SharpOnvifServer.Credential
         {
         }
 
-        public ModifyCredentialRequest(Credential credential)
+        public ModifyCredentialRequest(OnvifCredential credential)
         {
             this.credentialField = credential;
         }
@@ -3363,7 +3095,7 @@ namespace SharpOnvifServer.Credential
             {
                 case "Credential":
                     if (reader.NamespaceUri != Ns.Ver10Credential) break;
-                    this.credentialField = reader.ReadElementObject<Credential>(() => new Credential());
+                    this.credentialField = reader.ReadElementObject<OnvifCredential>(() => new OnvifCredential());
                     return true;
             }
             return false;
@@ -3381,10 +3113,158 @@ namespace SharpOnvifServer.Credential
     /// with the specified entities.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ModifyCredentialResponse", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class ModifyCredentialResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ModifyCredentialResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public ModifyCredentialResponse()
         {
+        }
+
+    }
+
+    /// <summary>
+    /// A Credential is a physical/tangible object, a piece of knowledge, or a facet of a person's physical
+    /// being, that enables an individual access to a given physical facility or computer-based information
+    /// system. A credential holds one or more credential identifiers. To gain access one or more
+    /// identifiers may be required.
+    /// </summary>
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/credential/wsdl")]
+    public partial class OnvifCredential : CredentialInfo
+    {
+        private CredentialIdentifier[] credentialIdentifierField;
+
+        private CredentialAccessProfile[] credentialAccessProfileField;
+
+        private bool extendedGrantTimeField;
+        private bool extendedGrantTimeFieldSpecified;
+
+        private SharpOnvifCommon.Onvif.OnvifAttribute[] attributeField;
+
+        private CredentialExtension extensionField;
+
+        /// <summary>
+        /// A list of credential identifier structures. At least one credential identifier is required. Maximum
+        /// one credential identifier structure per type is allowed.
+        /// </summary>
+        [System.Xml.Serialization.XmlElementAttribute("CredentialIdentifier", Order=0)]
+        public CredentialIdentifier[] CredentialIdentifier
+        {
+            get { return this.credentialIdentifierField; }
+            set { this.credentialIdentifierField = value; }
+        }
+
+        /// <summary>
+        /// A list of credential access profile structures.
+        /// </summary>
+        [System.Xml.Serialization.XmlElementAttribute("CredentialAccessProfile", Order=1)]
+        public CredentialAccessProfile[] CredentialAccessProfile
+        {
+            get { return this.credentialAccessProfileField; }
+            set { this.credentialAccessProfileField = value; }
+        }
+
+        /// <summary>
+        /// A boolean indicating that the credential holder needs extra time to get through the door.
+        /// ExtendedReleaseTime will be added to ReleaseTime, and ExtendedOpenTime will be added to OpenTime
+        /// </summary>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public bool ExtendedGrantTime
+        {
+            get { return this.extendedGrantTimeField; }
+            set { this.extendedGrantTimeField = value; }
+        }
+
+        /// <summary>
+        /// Whether <see cref="ExtendedGrantTime"/> was present. The value type cannot
+        /// otherwise distinguish an absent optional element from a zero one.
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ExtendedGrantTimeSpecified
+        {
+            get { return this.extendedGrantTimeFieldSpecified; }
+            set { this.extendedGrantTimeFieldSpecified = value; }
+        }
+
+        /// <summary>
+        /// A list of credential attributes as name value pairs. Key names starting with the prefix pt: are
+        /// reserved to define PACS specific attributes following the "pt:&lt;Name&gt;" syntax.
+        /// </summary>
+        [System.Xml.Serialization.XmlElementAttribute("Attribute", Order=3)]
+        public SharpOnvifCommon.Onvif.OnvifAttribute[] Attribute
+        {
+            get { return this.attributeField; }
+            set { this.attributeField = value; }
+        }
+
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public CredentialExtension Extension
+        {
+            get { return this.extensionField; }
+            set { this.extensionField = value; }
+        }
+
+        protected override string OnvifXmlTypeName { get { return "Credential"; } }
+
+        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Credential; } }
+
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        {
+            base.WriteXmlContent(writer);
+            if (this.credentialIdentifierField != null)
+            {
+                for (int i = 0; i < this.credentialIdentifierField.Length; i++)
+                {
+                    writer.WriteElement(Ns.Ver10Credential, "CredentialIdentifier", this.credentialIdentifierField[i], Ns.Ver10Credential, "CredentialIdentifier");
+                }
+            }
+            if (this.credentialAccessProfileField != null)
+            {
+                for (int i = 0; i < this.credentialAccessProfileField.Length; i++)
+                {
+                    writer.WriteElement(Ns.Ver10Credential, "CredentialAccessProfile", this.credentialAccessProfileField[i], Ns.Ver10Credential, "CredentialAccessProfile");
+                }
+            }
+            if (this.extendedGrantTimeFieldSpecified)
+            {
+                writer.WriteElementString(Ns.Ver10Credential, "ExtendedGrantTime", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.extendedGrantTimeField));
+            }
+            if (this.attributeField != null)
+            {
+                for (int i = 0; i < this.attributeField.Length; i++)
+                {
+                    writer.WriteElement(Ns.Ver10Credential, "Attribute", this.attributeField[i], "http://www.onvif.org/ver10/pacs", "Attribute");
+                }
+            }
+            writer.WriteElement(Ns.Ver10Credential, "Extension", this.extensionField, Ns.Ver10Credential, "CredentialExtension");
+        }
+
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        {
+            switch (reader.LocalName)
+            {
+                case "CredentialIdentifier":
+                    if (reader.NamespaceUri != Ns.Ver10Credential) break;
+                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.credentialIdentifierField, reader.ReadElementObject<CredentialIdentifier>(() => new CredentialIdentifier()));
+                    return true;
+                case "CredentialAccessProfile":
+                    if (reader.NamespaceUri != Ns.Ver10Credential) break;
+                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.credentialAccessProfileField, reader.ReadElementObject<CredentialAccessProfile>(() => new CredentialAccessProfile()));
+                    return true;
+                case "ExtendedGrantTime":
+                    if (reader.NamespaceUri != Ns.Ver10Credential) break;
+                    this.extendedGrantTimeField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
+                    this.extendedGrantTimeFieldSpecified = true;
+                    return true;
+                case "Attribute":
+                    if (reader.NamespaceUri != Ns.Ver10Credential) break;
+                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.attributeField, reader.ReadElementObject<SharpOnvifCommon.Onvif.OnvifAttribute>(() => new SharpOnvifCommon.Onvif.OnvifAttribute()));
+                    return true;
+                case "Extension":
+                    if (reader.NamespaceUri != Ns.Ver10Credential) break;
+                    this.extensionField = reader.ReadElementObject<CredentialExtension>(() => new CredentialExtension());
+                    return true;
+            }
+            if (base.ReadXmlElement(reader)) return true;
+            return false;
         }
 
     }
@@ -3395,7 +3275,7 @@ namespace SharpOnvifServer.Credential
     /// idempotent and is safe to repeat even if the specified blacklist items do not exist.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RemoveFromBlacklist", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class RemoveFromBlacklistRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class RemoveFromBlacklistRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private CredentialIdentifierItem[] identifierField;
 
@@ -3461,7 +3341,7 @@ namespace SharpOnvifServer.Credential
     /// idempotent and is safe to repeat even if the specified blacklist items do not exist.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RemoveFromBlacklistResponse", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class RemoveFromBlacklistResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class RemoveFromBlacklistResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public RemoveFromBlacklistResponse()
         {
@@ -3475,7 +3355,7 @@ namespace SharpOnvifServer.Credential
     /// idempotent and is safe to repeat even if the specified whitelist items do not exist.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RemoveFromWhitelist", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class RemoveFromWhitelistRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class RemoveFromWhitelistRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private CredentialIdentifierItem[] identifierField;
 
@@ -3541,7 +3421,7 @@ namespace SharpOnvifServer.Credential
     /// idempotent and is safe to repeat even if the specified whitelist items do not exist.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RemoveFromWhitelistResponse", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class RemoveFromWhitelistResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class RemoveFromWhitelistResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public RemoveFromWhitelistResponse()
         {
@@ -3553,7 +3433,7 @@ namespace SharpOnvifServer.Credential
     /// This method is used to reset anti-passback violations for a specified credential.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ResetAntipassbackViolation", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class ResetAntipassbackViolationRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ResetAntipassbackViolationRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string credentialTokenField;
 
@@ -3599,7 +3479,7 @@ namespace SharpOnvifServer.Credential
     /// This method is used to reset anti-passback violations for a specified credential.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ResetAntipassbackViolationResponse", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class ResetAntipassbackViolationResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ResetAntipassbackViolationResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public ResetAntipassbackViolationResponse()
         {
@@ -3612,7 +3492,7 @@ namespace SharpOnvifServer.Credential
     /// does not change during device operation. The following capabilities are available:
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class ServiceCapabilities : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ServiceCapabilities : SharpOnvifCommon.Xml.OnvifContract
     {
         private string[] supportedIdentifierTypeField;
 
@@ -3917,7 +3797,7 @@ namespace SharpOnvifServer.Credential
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class ServiceCapabilitiesExtension : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ServiceCapabilitiesExtension : SharpOnvifCommon.Xml.OnvifContract
     {
         private string[] supportedExemptionTypeField;
 
@@ -3979,7 +3859,7 @@ namespace SharpOnvifServer.Credential
     /// profile matches. Otherwise the credential access profile is added.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetCredentialAccessProfiles", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class SetCredentialAccessProfilesRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetCredentialAccessProfilesRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string credentialTokenField;
 
@@ -4051,7 +3931,7 @@ namespace SharpOnvifServer.Credential
     /// profile matches. Otherwise the credential access profile is added.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetCredentialAccessProfilesResponse", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class SetCredentialAccessProfilesResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetCredentialAccessProfilesResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public SetCredentialAccessProfilesResponse()
         {
@@ -4065,7 +3945,7 @@ namespace SharpOnvifServer.Credential
     /// Otherwise the credential identifier is added.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetCredentialIdentifier", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class SetCredentialIdentifierRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetCredentialIdentifierRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string credentialTokenField;
 
@@ -4131,7 +4011,7 @@ namespace SharpOnvifServer.Credential
     /// Otherwise the credential identifier is added.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetCredentialIdentifierResponse", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class SetCredentialIdentifierResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetCredentialIdentifierResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public SetCredentialIdentifierResponse()
         {
@@ -4143,7 +4023,7 @@ namespace SharpOnvifServer.Credential
     /// This method is used to synchronize a credential in a client with the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetCredential", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class SetCredentialRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetCredentialRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private CredentialData credentialDataField;
 
@@ -4189,7 +4069,7 @@ namespace SharpOnvifServer.Credential
     /// This method is used to synchronize a credential in a client with the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetCredentialResponse", Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class SetCredentialResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetCredentialResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public SetCredentialResponse()
         {
@@ -4200,21 +4080,18 @@ namespace SharpOnvifServer.Credential
     /// <summary>Constructs a contract named by an xsi:type attribute.</summary>
     internal static class XmlTypeFactory
     {
-        public static SharpOnvifCommon.Xml.OnvifObject Create(string ns, string name)
+        public static SharpOnvifCommon.Xml.OnvifContract Create(string ns, string name)
         {
             switch (name)
             {
                 case "Credential":
-                    if (ns == "http://www.onvif.org/ver10/credential/wsdl") return new Credential();
+                    if (ns == "http://www.onvif.org/ver10/credential/wsdl") return new OnvifCredential();
                     break;
                 case "CredentialInfo":
                     if (ns == "http://www.onvif.org/ver10/credential/wsdl") return new CredentialInfo();
                     break;
-                case "DataEntity":
-                    if (ns == "http://www.onvif.org/ver10/pacs") return new DataEntity();
-                    break;
             }
-            return null;
+            return SharpOnvifCommon.Onvif.XmlTypeFactory.Create(ns, name);
         }
     }
 

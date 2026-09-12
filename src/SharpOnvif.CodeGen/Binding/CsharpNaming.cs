@@ -44,6 +44,60 @@ internal static class CsharpNaming
         return builder.ToString();
     }
 
+    /// <summary>
+    /// Type names a generated type must not take, because a consumer is almost certain to have
+    /// them in scope already and the two would be ambiguous.
+    /// <para>
+    /// Drawn from the net10.0 reference assemblies for the namespaces a consumer typically has
+    /// imported: the implicit usings of a modern project (System, System.Collections.Generic,
+    /// System.IO, System.Linq, System.Net.Http, System.Threading, System.Threading.Tasks) plus
+    /// the networking, text and XML namespaces this domain pulls in. With implicit usings on,
+    /// System is always in scope, so a contract called DateTime would be ambiguous in any file
+    /// that also imports the Onvif namespace.
+    /// </para>
+    /// <para>
+    /// The list is deliberately wider than the names that collide today, so that a future
+    /// specification revision introducing, say, a Stream or a Task type does not reintroduce the
+    /// problem. A name in this list is prefixed with "Onvif"; the XML name is untouched, so the
+    /// wire format does not move.
+    /// </para>
+    /// </summary>
+    private static readonly HashSet<string> FrameworkTypeNames = new(StringComparer.Ordinal)
+    {
+        // Colliding with the Onvif schema today.
+        "Action", "Attribute", "DateTime", "IPAddress", "NetworkInterface", "Object", "Scope",
+        "TimeZone",
+
+        // System, and the parts of it that carry names a schema might plausibly reuse.
+        "Array", "Boolean", "Buffer", "Byte", "Char", "Comparison", "Console", "Convert",
+        "DateOnly", "DateTimeOffset", "Decimal", "Delegate", "Double", "Enum", "Environment",
+        "Exception", "Func", "Guid", "Half", "Index", "Int16", "Int32", "Int64", "Math",
+        "Nullable", "Predicate", "Random", "Range", "Single", "String", "TimeOnly", "TimeSpan",
+        "TimeProvider", "Tuple", "Type", "UInt16", "UInt32", "UInt64", "Uri", "UriBuilder",
+        "ValueType", "Version", "Void",
+
+        // Collections, IO, threading and tasks.
+        "Comparer", "Dictionary", "HashSet", "KeyValuePair", "List", "Queue", "Stack",
+        "Directory", "File", "Path", "Stream", "StreamReader", "StreamWriter", "TextReader",
+        "TextWriter", "CancellationToken", "Mutex", "Semaphore", "Task", "Timer",
+
+        // Networking, text and XML.
+        "Cookie", "Credential", "DnsEndPoint", "EndPoint", "HttpClient", "HttpMethod",
+        "IPEndPoint", "NetworkCredential", "Socket", "WebClient", "WebRequest", "WebResponse",
+        "Encoding", "Rune", "StringBuilder", "XmlDocument", "XmlElement", "XmlNode", "XmlReader",
+        "XmlWriter", "XmlQualifiedName",
+    };
+
+    /// <summary>
+    /// Gives a generated type a name that will not be ambiguous with a framework type a consumer
+    /// has in scope. Only the C# name changes; the schema name it serialises as does not.
+    /// </summary>
+    public static string TypeName(string localName)
+    {
+        string identifier = Identifier(localName);
+        return FrameworkTypeNames.Contains(identifier) ? "Onvif" + identifier : identifier;
+    }
+
     /// <summary>Escapes a C# keyword so it can still be used as an identifier.</summary>
     public static string Escape(string identifier) =>
         Keywords.Contains(identifier) ? "@" + identifier : identifier;

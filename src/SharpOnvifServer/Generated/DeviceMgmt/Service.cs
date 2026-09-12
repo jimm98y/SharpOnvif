@@ -99,7 +99,7 @@ namespace SharpOnvifServer.DeviceMgmt
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetSystemDateAndTimeResponse SetSystemDateAndTime(SetDateTimeType DateTimeType, bool DaylightSavings, TimeZone TimeZone, DateTime UTCDateTime)
+        public virtual SetSystemDateAndTimeResponse SetSystemDateAndTime(SharpOnvifCommon.Onvif.SetDateTimeType DateTimeType, bool DaylightSavings, SharpOnvifCommon.Onvif.OnvifTimeZone TimeZone, SharpOnvifCommon.Onvif.OnvifDateTime UTCDateTime)
         {
             throw new System.NotImplementedException();
         }
@@ -142,7 +142,7 @@ namespace SharpOnvifServer.DeviceMgmt
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetSystemFactoryDefaultResponse SetSystemFactoryDefault(FactoryDefaultType FactoryDefault)
+        public virtual SetSystemFactoryDefaultResponse SetSystemFactoryDefault(SharpOnvifCommon.Onvif.FactoryDefaultType FactoryDefault)
         {
             throw new System.NotImplementedException();
         }
@@ -165,7 +165,7 @@ namespace SharpOnvifServer.DeviceMgmt
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual UpgradeSystemFirmwareResponse UpgradeSystemFirmware(AttachmentData Firmware)
+        public virtual UpgradeSystemFirmwareResponse UpgradeSystemFirmware(SharpOnvifCommon.Onvif.AttachmentData Firmware)
         {
             throw new System.NotImplementedException();
         }
@@ -208,7 +208,7 @@ namespace SharpOnvifServer.DeviceMgmt
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual RestoreSystemResponse RestoreSystem(BackupFile[] BackupFiles)
+        public virtual RestoreSystemResponse RestoreSystem(SharpOnvifCommon.Onvif.BackupFile[] BackupFiles)
         {
             throw new System.NotImplementedException();
         }
@@ -252,7 +252,7 @@ namespace SharpOnvifServer.DeviceMgmt
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual GetSystemLogResponse GetSystemLog(SystemLogType LogType)
+        public virtual GetSystemLogResponse GetSystemLog(SharpOnvifCommon.Onvif.SystemLogType LogType)
         {
             throw new System.NotImplementedException();
         }
@@ -410,7 +410,7 @@ namespace SharpOnvifServer.DeviceMgmt
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetDiscoveryModeResponse SetDiscoveryMode(DiscoveryMode DiscoveryMode)
+        public virtual SetDiscoveryModeResponse SetDiscoveryMode(SharpOnvifCommon.Onvif.DiscoveryMode DiscoveryMode)
         {
             throw new System.NotImplementedException();
         }
@@ -454,7 +454,7 @@ namespace SharpOnvifServer.DeviceMgmt
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetRemoteDiscoveryModeResponse SetRemoteDiscoveryMode(DiscoveryMode RemoteDiscoveryMode)
+        public virtual SetRemoteDiscoveryModeResponse SetRemoteDiscoveryMode(SharpOnvifCommon.Onvif.DiscoveryMode RemoteDiscoveryMode)
         {
             throw new System.NotImplementedException();
         }
@@ -498,7 +498,7 @@ namespace SharpOnvifServer.DeviceMgmt
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetDPAddressesResponse SetDPAddresses(NetworkHost[] DPAddress)
+        public virtual SetDPAddressesResponse SetDPAddresses(SharpOnvifCommon.Onvif.NetworkHost[] DPAddress)
         {
             throw new System.NotImplementedException();
         }
@@ -564,7 +564,7 @@ namespace SharpOnvifServer.DeviceMgmt
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetUserRoleResponse SetUserRole(UserRole UserRole)
+        public virtual SetUserRoleResponse SetUserRole(SharpOnvifCommon.Onvif.UserRole UserRole)
         {
             throw new System.NotImplementedException();
         }
@@ -632,7 +632,7 @@ namespace SharpOnvifServer.DeviceMgmt
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetRemoteUserResponse SetRemoteUser(RemoteUser RemoteUser)
+        public virtual SetRemoteUserResponse SetRemoteUser(SharpOnvifCommon.Onvif.RemoteUser RemoteUser)
         {
             throw new System.NotImplementedException();
         }
@@ -679,7 +679,7 @@ namespace SharpOnvifServer.DeviceMgmt
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual CreateUsersResponse CreateUsers(User[] User)
+        public virtual CreateUsersResponse CreateUsers(SharpOnvifCommon.Onvif.User[] User)
         {
             throw new System.NotImplementedException();
         }
@@ -725,7 +725,7 @@ namespace SharpOnvifServer.DeviceMgmt
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetUserResponse SetUser(User[] User)
+        public virtual SetUserResponse SetUser(SharpOnvifCommon.Onvif.User[] User)
         {
             throw new System.NotImplementedException();
         }
@@ -929,7 +929,7 @@ namespace SharpOnvifServer.DeviceMgmt
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual GetCapabilitiesResponse GetCapabilities(CapabilityCategory[] Category)
+        public virtual GetCapabilitiesResponse GetCapabilities(SharpOnvifCommon.Onvif.CapabilityCategory[] Category)
         {
             throw new System.NotImplementedException();
         }
@@ -1035,7 +1035,7 @@ namespace SharpOnvifServer.DeviceMgmt
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetDNSResponse SetDNS(bool FromDHCP, string[] SearchDomain, IPAddress[] DNSManual)
+        public virtual SetDNSResponse SetDNS(bool FromDHCP, string[] SearchDomain, SharpOnvifCommon.Onvif.OnvifIPAddress[] DNSManual)
         {
             throw new System.NotImplementedException();
         }
@@ -1080,7 +1080,7 @@ namespace SharpOnvifServer.DeviceMgmt
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetNTPResponse SetNTP(bool FromDHCP, NetworkHost[] NTPManual)
+        public virtual SetNTPResponse SetNTP(bool FromDHCP, SharpOnvifCommon.Onvif.NetworkHost[] NTPManual)
         {
             throw new System.NotImplementedException();
         }
@@ -1124,7 +1124,7 @@ namespace SharpOnvifServer.DeviceMgmt
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetDynamicDNSResponse SetDynamicDNS(DynamicDNSType Type, string Name, string TTL)
+        public virtual SetDynamicDNSResponse SetDynamicDNS(SharpOnvifCommon.Onvif.DynamicDNSType Type, string Name, string TTL)
         {
             throw new System.NotImplementedException();
         }
@@ -1169,7 +1169,7 @@ namespace SharpOnvifServer.DeviceMgmt
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetNetworkInterfacesResponse SetNetworkInterfaces(string InterfaceToken, NetworkInterfaceSetConfiguration NetworkInterface)
+        public virtual SetNetworkInterfacesResponse SetNetworkInterfaces(string InterfaceToken, SharpOnvifCommon.Onvif.NetworkInterfaceSetConfiguration NetworkInterface)
         {
             throw new System.NotImplementedException();
         }
@@ -1211,7 +1211,7 @@ namespace SharpOnvifServer.DeviceMgmt
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetNetworkProtocolsResponse SetNetworkProtocols(NetworkProtocol[] NetworkProtocols)
+        public virtual SetNetworkProtocolsResponse SetNetworkProtocols(SharpOnvifCommon.Onvif.NetworkProtocol[] NetworkProtocols)
         {
             throw new System.NotImplementedException();
         }
@@ -1341,7 +1341,7 @@ namespace SharpOnvifServer.DeviceMgmt
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetIPAddressFilterResponse SetIPAddressFilter(IPAddressFilter IPAddressFilter)
+        public virtual SetIPAddressFilterResponse SetIPAddressFilter(SharpOnvifCommon.Onvif.IPAddressFilter IPAddressFilter)
         {
             throw new System.NotImplementedException();
         }
@@ -1363,7 +1363,7 @@ namespace SharpOnvifServer.DeviceMgmt
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual AddIPAddressFilterResponse AddIPAddressFilter(IPAddressFilter IPAddressFilter)
+        public virtual AddIPAddressFilterResponse AddIPAddressFilter(SharpOnvifCommon.Onvif.IPAddressFilter IPAddressFilter)
         {
             throw new System.NotImplementedException();
         }
@@ -1385,7 +1385,7 @@ namespace SharpOnvifServer.DeviceMgmt
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual RemoveIPAddressFilterResponse RemoveIPAddressFilter(IPAddressFilter IPAddressFilter)
+        public virtual RemoveIPAddressFilterResponse RemoveIPAddressFilter(SharpOnvifCommon.Onvif.IPAddressFilter IPAddressFilter)
         {
             throw new System.NotImplementedException();
         }
@@ -1433,7 +1433,7 @@ namespace SharpOnvifServer.DeviceMgmt
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetAccessPolicyResponse SetAccessPolicy(BinaryData PolicyFile)
+        public virtual SetAccessPolicyResponse SetAccessPolicy(SharpOnvifCommon.Onvif.BinaryData PolicyFile)
         {
             throw new System.NotImplementedException();
         }
@@ -1475,7 +1475,7 @@ namespace SharpOnvifServer.DeviceMgmt
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetRelayOutputSettingsResponse SetRelayOutputSettings(string RelayOutputToken, RelayOutputSettings Properties)
+        public virtual SetRelayOutputSettingsResponse SetRelayOutputSettings(string RelayOutputToken, SharpOnvifCommon.Onvif.RelayOutputSettings Properties)
         {
             throw new System.NotImplementedException();
         }
@@ -1496,7 +1496,7 @@ namespace SharpOnvifServer.DeviceMgmt
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetRelayOutputStateResponse SetRelayOutputState(string RelayOutputToken, RelayLogicalState LogicalState)
+        public virtual SetRelayOutputStateResponse SetRelayOutputState(string RelayOutputToken, SharpOnvifCommon.Onvif.RelayLogicalState LogicalState)
         {
             throw new System.NotImplementedException();
         }
@@ -1852,7 +1852,7 @@ namespace SharpOnvifServer.DeviceMgmt
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetGeoLocationResponse SetGeoLocation(LocationEntity[] Location)
+        public virtual SetGeoLocationResponse SetGeoLocation(SharpOnvifCommon.Onvif.LocationEntity[] Location)
         {
             throw new System.NotImplementedException();
         }
@@ -1872,7 +1872,7 @@ namespace SharpOnvifServer.DeviceMgmt
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual DeleteGeoLocationResponse DeleteGeoLocation(LocationEntity[] Location)
+        public virtual DeleteGeoLocationResponse DeleteGeoLocation(SharpOnvifCommon.Onvif.LocationEntity[] Location)
         {
             throw new System.NotImplementedException();
         }
@@ -1960,7 +1960,7 @@ namespace SharpOnvifServer.DeviceMgmt
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetCertificatesStatusResponse SetCertificatesStatus(CertificateStatus[] CertificateStatus)
+        public virtual SetCertificatesStatusResponse SetCertificatesStatus(SharpOnvifCommon.Onvif.CertificateStatus[] CertificateStatus)
         {
             throw new System.NotImplementedException();
         }
@@ -1994,7 +1994,7 @@ namespace SharpOnvifServer.DeviceMgmt
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual GetPkcs10RequestResponse GetPkcs10Request(string CertificateID, string Subject, BinaryData Attributes)
+        public virtual GetPkcs10RequestResponse GetPkcs10Request(string CertificateID, string Subject, SharpOnvifCommon.Onvif.BinaryData Attributes)
         {
             throw new System.NotImplementedException();
         }
@@ -2011,7 +2011,7 @@ namespace SharpOnvifServer.DeviceMgmt
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual LoadCertificatesResponse LoadCertificates(Certificate[] NVTCertificate)
+        public virtual LoadCertificatesResponse LoadCertificates(SharpOnvifCommon.Onvif.Certificate[] NVTCertificate)
         {
             throw new System.NotImplementedException();
         }
@@ -2079,7 +2079,7 @@ namespace SharpOnvifServer.DeviceMgmt
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual LoadCertificateWithPrivateKeyResponse LoadCertificateWithPrivateKey(CertificateWithPrivateKey[] CertificateWithPrivateKey)
+        public virtual LoadCertificateWithPrivateKeyResponse LoadCertificateWithPrivateKey(SharpOnvifCommon.Onvif.CertificateWithPrivateKey[] CertificateWithPrivateKey)
         {
             throw new System.NotImplementedException();
         }
@@ -2113,7 +2113,7 @@ namespace SharpOnvifServer.DeviceMgmt
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual LoadCACertificatesResponse LoadCACertificates(Certificate[] CACertificate)
+        public virtual LoadCACertificatesResponse LoadCACertificates(SharpOnvifCommon.Onvif.Certificate[] CACertificate)
         {
             throw new System.NotImplementedException();
         }
@@ -2130,7 +2130,7 @@ namespace SharpOnvifServer.DeviceMgmt
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual CreateDot1XConfigurationResponse CreateDot1XConfiguration(Dot1XConfiguration Dot1XConfiguration)
+        public virtual CreateDot1XConfigurationResponse CreateDot1XConfiguration(SharpOnvifCommon.Onvif.Dot1XConfiguration Dot1XConfiguration)
         {
             throw new System.NotImplementedException();
         }
@@ -2147,7 +2147,7 @@ namespace SharpOnvifServer.DeviceMgmt
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetDot1XConfigurationResponse SetDot1XConfiguration(Dot1XConfiguration Dot1XConfiguration)
+        public virtual SetDot1XConfigurationResponse SetDot1XConfiguration(SharpOnvifCommon.Onvif.Dot1XConfiguration Dot1XConfiguration)
         {
             throw new System.NotImplementedException();
         }
@@ -3786,7 +3786,7 @@ namespace SharpOnvifServer.DeviceMgmt
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }

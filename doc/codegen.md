@@ -3,14 +3,18 @@
 SharpOnvif no longer uses WCF, CoreWCF, or `svcutil`. The Onvif service bindings are produced by
 `src/SharpOnvif.CodeGen`, a purpose-built WSDL/XSD compiler in this repository.
 
-All 25 services are generated into two projects, one namespace each:
+Output goes to three places:
 
 ```
-src/SharpOnvifClient/Generated/<Service>/DataContracts.cs   namespace SharpOnvifClient.<Service>
+src/SharpOnvifCommon/Generated/DataContracts.cs              namespace SharpOnvifCommon.Onvif
+src/SharpOnvifClient/Generated/<Service>/DataContracts.cs    namespace SharpOnvifClient.<Service>
 src/SharpOnvifClient/Generated/<Service>/Client.cs
-src/SharpOnvifServer/Generated/<Service>/DataContracts.cs   namespace SharpOnvifServer.<Service>
+src/SharpOnvifServer/Generated/<Service>/DataContracts.cs    namespace SharpOnvifServer.<Service>
 src/SharpOnvifServer/Generated/<Service>/Service.cs
 ```
+
+The Onvif data model lives in `SharpOnvifCommon.Onvif` and is generated once. Each service gets
+only the types its own WSDL declares, plus its operations.
 
 ## Running the generator
 
@@ -101,6 +105,47 @@ SystemDateTime time = response.SystemDateAndTime;
 ```
 
 `SimpleOnvifClient` keeps its own convenience shapes and is unaffected.
+
+## Shared and service types
+
+A type belongs to a service when that service's own WSDL declares it: the request and response
+contracts, and whatever else sits in the WSDL's target namespace. Everything else comes from a
+schema the services share - `onvif.xsd` above all, plus `common.xsd`, the PACS and metadata
+schemas, and the OASIS WS-Notification and W3C schemas the event service pulls in.
+
+Shared types are generated once, into `SharpOnvifCommon.Onvif`, and referenced from both sides.
+That matters for more than size: `SharpOnvifCommon.Onvif.Profile` is one CLR type, so a value the
+client reads can be handed to a server implementation unchanged.
+
+The split is safe because the dependency only runs one way. No type in a shared schema refers to
+one declared by a service, so the common assembly needs no reference back - the generator checks
+this implicitly by failing to resolve such a reference, and no mirrored schema violates it.
+
+Generating the shared schema in full, rather than only the types some operation reaches, keeps the
+common assembly a complete rendering of the Onvif data model. It also removed a per-service
+`GenerateEntireSchema` flag that existed solely so the Analytics and DeviceIO assemblies could
+publish all of `onvif.xsd` the way svcutil had.
+
+Deduplication took the generated output from 4,188 types to 747 shared plus 1,480 per service, of
+which 1,254 are the request and response wrappers for the 627 operations.
+
+## Names that would collide with the framework
+
+A generated type whose name matches one a consumer already has in scope would make both ambiguous
+wherever the two namespaces are imported together. With implicit usings, `System` is always in
+scope, so a contract called `DateTime` would be ambiguous in any file that also imports
+`SharpOnvifCommon.Onvif`.
+
+The generator prefixes those names with `Onvif`. The schema name is untouched, so nothing moves on
+the wire: `OnvifDateTime` still serialises as `DateTime`.
+
+Eight names need it today - `Action`, `Attribute`, `DateTime`, `IPAddress`, `NetworkInterface`,
+`Object`, `Scope` and `TimeZone`. `CsharpNaming.FrameworkTypeNames` lists a wider set than that,
+drawn from the net10.0 reference assemblies for the namespaces a consumer typically imports, so a
+future specification revision introducing a `Stream` or a `Task` does not reintroduce the problem.
+
+`SharpOnvif.Tests.TestNamespaceCoexistence` imports every relevant framework and Onvif namespace
+at once with no aliases. It exists to be compiled: a name that collided would break the build.
 
 ## Generated type surface
 

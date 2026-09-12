@@ -13,1302 +13,12 @@ namespace SharpOnvifClient.Media2
     /// <summary>XML namespaces used by this service's contracts.</summary>
     internal static class Ns
     {
-        public const string B2 = "http://docs.oasis-open.org/wsn/b-2";
-        public const string OnvifVer10 = "http://www.onvif.org/ver10/schema";
         public const string Ver20Media = "http://www.onvif.org/ver20/media/wsdl";
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public enum AudioEncoding
-    {
-        G711,
-
-        G726,
-
-        AAC,
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public enum AutoFocusMode
-    {
-        AUTO,
-
-        MANUAL,
-
-    }
-
-    /// <summary>
-    /// Enumeration describing the available backlight compenstation modes.
-    /// </summary>
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public enum BacklightCompensationMode
-    {
-        /// <summary>
-        /// Backlight compensation is disabled.
-        /// </summary>
-        OFF,
-
-        /// <summary>
-        /// Backlight compensation is enabled.
-        /// </summary>
-        ON,
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public enum DigitalIdleState
-    {
-        closed,
-
-        open,
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public enum Dot11Cipher
-    {
-        CCMP,
-
-        TKIP,
-
-        Any,
-
-        Extended,
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public enum Dot11SecurityMode
-    {
-        None,
-
-        WEP,
-
-        PSK,
-
-        Dot1X,
-
-        Extended,
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public enum Dot11StationMode
-    {
-        [System.Xml.Serialization.XmlEnumAttribute("Ad-hoc")]
-        Adhoc,
-
-        Infrastructure,
-
-        Extended,
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public enum Duplex
-    {
-        Full,
-
-        Half,
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public enum EFlipMode
-    {
-        OFF,
-
-        ON,
-
-        Extended,
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public enum ExposureMode
-    {
-        AUTO,
-
-        MANUAL,
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public enum ExposurePriority
-    {
-        LowNoise,
-
-        FrameRate,
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public enum H264Profile
-    {
-        Baseline,
-
-        Main,
-
-        Extended,
-
-        High,
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public enum IPType
-    {
-        IPv4,
-
-        IPv6,
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public enum IPv6DHCPConfiguration
-    {
-        Auto,
-
-        Stateful,
-
-        Stateless,
-
-        Off,
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public enum ImageStabilizationMode
-    {
-        OFF,
-
-        ON,
-
-        AUTO,
-
-        Extended,
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public enum IrCutFilterMode
-    {
-        ON,
-
-        OFF,
-
-        AUTO,
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public enum ModeOfOperation
-    {
-        Idle,
-
-        Active,
-
-        /// <summary>
-        /// This case should never happen.
-        /// </summary>
-        Unknown,
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public enum Mpeg4Profile
-    {
-        SP,
-
-        ASP,
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public enum OSDType
-    {
-        Text,
-
-        Image,
-
-        Extended,
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public enum PTZPresetTourOperation
-    {
-        Start,
-
-        Stop,
-
-        Pause,
-
-        Extended,
-
-    }
-
-    /// <summary>
-    /// Specifies a receiver connection mode.
-    /// </summary>
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public enum ReceiverMode
-    {
-        /// <summary>
-        /// The receiver connects on demand, as required by consumers of the media streams.
-        /// </summary>
-        AutoConnect,
-
-        /// <summary>
-        /// The receiver attempts to maintain a persistent connection to the configured endpoint.
-        /// </summary>
-        AlwaysConnect,
-
-        /// <summary>
-        /// The receiver does not attempt to connect.
-        /// </summary>
-        NeverConnect,
-
-        /// <summary>
-        /// This case should never happen.
-        /// </summary>
-        Unknown,
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public enum RelayIdleState
-    {
-        closed,
-
-        open,
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public enum RelayMode
-    {
-        Monostable,
-
-        Bistable,
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public enum ReverseMode
-    {
-        OFF,
-
-        ON,
-
-        AUTO,
-
-        Extended,
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public enum RotateMode
-    {
-        /// <summary>
-        /// Enable the Rotate feature. Degree of rotation is specified Degree parameter.
-        /// </summary>
-        OFF,
-
-        /// <summary>
-        /// Disable the Rotate feature.
-        /// </summary>
-        ON,
-
-        /// <summary>
-        /// Rotate feature is automatically activated by the device.
-        /// </summary>
-        AUTO,
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public enum SceneOrientationMode
-    {
-        MANUAL,
-
-        AUTO,
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public enum StreamType
-    {
-        [System.Xml.Serialization.XmlEnumAttribute("RTP-Unicast")]
-        RTPUnicast,
-
-        [System.Xml.Serialization.XmlEnumAttribute("RTP-Multicast")]
-        RTPMulticast,
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public enum TransportProtocol
-    {
-        UDP,
-
-        /// <summary>
-        /// This value is deprecated.
-        /// </summary>
-        TCP,
-
-        RTSP,
-
-        HTTP,
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public enum VideoEncoding
-    {
-        JPEG,
-
-        MPEG4,
-
-        H264,
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public enum WhiteBalanceMode
-    {
-        AUTO,
-
-        MANUAL,
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public enum WideDynamicMode
-    {
-        OFF,
-
-        ON,
-
     }
 
     /// <summary>Conversions between the generated enums and their XML lexical forms.</summary>
     internal static class EnumXml
     {
-        public static string ToXml(AudioEncoding value)
-        {
-            switch (value)
-            {
-                case AudioEncoding.G711:
-                    return "G711";
-                case AudioEncoding.G726:
-                    return "G726";
-                case AudioEncoding.AAC:
-                    return "AAC";
-                default:
-                    return null;
-            }
-        }
-
-        public static AudioEncoding ParseAudioEncoding(string text)
-        {
-            switch (text)
-            {
-                case "G711":
-                    return AudioEncoding.G711;
-                case "G726":
-                    return AudioEncoding.G726;
-                case "AAC":
-                    return AudioEncoding.AAC;
-                default:
-                    return default(AudioEncoding);
-            }
-        }
-
-        public static string ToXml(AutoFocusMode value)
-        {
-            switch (value)
-            {
-                case AutoFocusMode.AUTO:
-                    return "AUTO";
-                case AutoFocusMode.MANUAL:
-                    return "MANUAL";
-                default:
-                    return null;
-            }
-        }
-
-        public static AutoFocusMode ParseAutoFocusMode(string text)
-        {
-            switch (text)
-            {
-                case "AUTO":
-                    return AutoFocusMode.AUTO;
-                case "MANUAL":
-                    return AutoFocusMode.MANUAL;
-                default:
-                    return default(AutoFocusMode);
-            }
-        }
-
-        public static string ToXml(BacklightCompensationMode value)
-        {
-            switch (value)
-            {
-                case BacklightCompensationMode.OFF:
-                    return "OFF";
-                case BacklightCompensationMode.ON:
-                    return "ON";
-                default:
-                    return null;
-            }
-        }
-
-        public static BacklightCompensationMode ParseBacklightCompensationMode(string text)
-        {
-            switch (text)
-            {
-                case "OFF":
-                    return BacklightCompensationMode.OFF;
-                case "ON":
-                    return BacklightCompensationMode.ON;
-                default:
-                    return default(BacklightCompensationMode);
-            }
-        }
-
-        public static string ToXml(DigitalIdleState value)
-        {
-            switch (value)
-            {
-                case DigitalIdleState.closed:
-                    return "closed";
-                case DigitalIdleState.open:
-                    return "open";
-                default:
-                    return null;
-            }
-        }
-
-        public static DigitalIdleState ParseDigitalIdleState(string text)
-        {
-            switch (text)
-            {
-                case "closed":
-                    return DigitalIdleState.closed;
-                case "open":
-                    return DigitalIdleState.open;
-                default:
-                    return default(DigitalIdleState);
-            }
-        }
-
-        public static string ToXml(Dot11Cipher value)
-        {
-            switch (value)
-            {
-                case Dot11Cipher.CCMP:
-                    return "CCMP";
-                case Dot11Cipher.TKIP:
-                    return "TKIP";
-                case Dot11Cipher.Any:
-                    return "Any";
-                case Dot11Cipher.Extended:
-                    return "Extended";
-                default:
-                    return null;
-            }
-        }
-
-        public static Dot11Cipher ParseDot11Cipher(string text)
-        {
-            switch (text)
-            {
-                case "CCMP":
-                    return Dot11Cipher.CCMP;
-                case "TKIP":
-                    return Dot11Cipher.TKIP;
-                case "Any":
-                    return Dot11Cipher.Any;
-                case "Extended":
-                    return Dot11Cipher.Extended;
-                default:
-                    return default(Dot11Cipher);
-            }
-        }
-
-        public static string ToXml(Dot11SecurityMode value)
-        {
-            switch (value)
-            {
-                case Dot11SecurityMode.None:
-                    return "None";
-                case Dot11SecurityMode.WEP:
-                    return "WEP";
-                case Dot11SecurityMode.PSK:
-                    return "PSK";
-                case Dot11SecurityMode.Dot1X:
-                    return "Dot1X";
-                case Dot11SecurityMode.Extended:
-                    return "Extended";
-                default:
-                    return null;
-            }
-        }
-
-        public static Dot11SecurityMode ParseDot11SecurityMode(string text)
-        {
-            switch (text)
-            {
-                case "None":
-                    return Dot11SecurityMode.None;
-                case "WEP":
-                    return Dot11SecurityMode.WEP;
-                case "PSK":
-                    return Dot11SecurityMode.PSK;
-                case "Dot1X":
-                    return Dot11SecurityMode.Dot1X;
-                case "Extended":
-                    return Dot11SecurityMode.Extended;
-                default:
-                    return default(Dot11SecurityMode);
-            }
-        }
-
-        public static string ToXml(Dot11StationMode value)
-        {
-            switch (value)
-            {
-                case Dot11StationMode.Adhoc:
-                    return "Ad-hoc";
-                case Dot11StationMode.Infrastructure:
-                    return "Infrastructure";
-                case Dot11StationMode.Extended:
-                    return "Extended";
-                default:
-                    return null;
-            }
-        }
-
-        public static Dot11StationMode ParseDot11StationMode(string text)
-        {
-            switch (text)
-            {
-                case "Ad-hoc":
-                    return Dot11StationMode.Adhoc;
-                case "Infrastructure":
-                    return Dot11StationMode.Infrastructure;
-                case "Extended":
-                    return Dot11StationMode.Extended;
-                default:
-                    return default(Dot11StationMode);
-            }
-        }
-
-        public static string ToXml(Duplex value)
-        {
-            switch (value)
-            {
-                case Duplex.Full:
-                    return "Full";
-                case Duplex.Half:
-                    return "Half";
-                default:
-                    return null;
-            }
-        }
-
-        public static Duplex ParseDuplex(string text)
-        {
-            switch (text)
-            {
-                case "Full":
-                    return Duplex.Full;
-                case "Half":
-                    return Duplex.Half;
-                default:
-                    return default(Duplex);
-            }
-        }
-
-        public static string ToXml(EFlipMode value)
-        {
-            switch (value)
-            {
-                case EFlipMode.OFF:
-                    return "OFF";
-                case EFlipMode.ON:
-                    return "ON";
-                case EFlipMode.Extended:
-                    return "Extended";
-                default:
-                    return null;
-            }
-        }
-
-        public static EFlipMode ParseEFlipMode(string text)
-        {
-            switch (text)
-            {
-                case "OFF":
-                    return EFlipMode.OFF;
-                case "ON":
-                    return EFlipMode.ON;
-                case "Extended":
-                    return EFlipMode.Extended;
-                default:
-                    return default(EFlipMode);
-            }
-        }
-
-        public static string ToXml(ExposureMode value)
-        {
-            switch (value)
-            {
-                case ExposureMode.AUTO:
-                    return "AUTO";
-                case ExposureMode.MANUAL:
-                    return "MANUAL";
-                default:
-                    return null;
-            }
-        }
-
-        public static ExposureMode ParseExposureMode(string text)
-        {
-            switch (text)
-            {
-                case "AUTO":
-                    return ExposureMode.AUTO;
-                case "MANUAL":
-                    return ExposureMode.MANUAL;
-                default:
-                    return default(ExposureMode);
-            }
-        }
-
-        public static string ToXml(ExposurePriority value)
-        {
-            switch (value)
-            {
-                case ExposurePriority.LowNoise:
-                    return "LowNoise";
-                case ExposurePriority.FrameRate:
-                    return "FrameRate";
-                default:
-                    return null;
-            }
-        }
-
-        public static ExposurePriority ParseExposurePriority(string text)
-        {
-            switch (text)
-            {
-                case "LowNoise":
-                    return ExposurePriority.LowNoise;
-                case "FrameRate":
-                    return ExposurePriority.FrameRate;
-                default:
-                    return default(ExposurePriority);
-            }
-        }
-
-        public static string ToXml(H264Profile value)
-        {
-            switch (value)
-            {
-                case H264Profile.Baseline:
-                    return "Baseline";
-                case H264Profile.Main:
-                    return "Main";
-                case H264Profile.Extended:
-                    return "Extended";
-                case H264Profile.High:
-                    return "High";
-                default:
-                    return null;
-            }
-        }
-
-        public static H264Profile ParseH264Profile(string text)
-        {
-            switch (text)
-            {
-                case "Baseline":
-                    return H264Profile.Baseline;
-                case "Main":
-                    return H264Profile.Main;
-                case "Extended":
-                    return H264Profile.Extended;
-                case "High":
-                    return H264Profile.High;
-                default:
-                    return default(H264Profile);
-            }
-        }
-
-        public static string ToXml(IPType value)
-        {
-            switch (value)
-            {
-                case IPType.IPv4:
-                    return "IPv4";
-                case IPType.IPv6:
-                    return "IPv6";
-                default:
-                    return null;
-            }
-        }
-
-        public static IPType ParseIPType(string text)
-        {
-            switch (text)
-            {
-                case "IPv4":
-                    return IPType.IPv4;
-                case "IPv6":
-                    return IPType.IPv6;
-                default:
-                    return default(IPType);
-            }
-        }
-
-        public static string ToXml(IPv6DHCPConfiguration value)
-        {
-            switch (value)
-            {
-                case IPv6DHCPConfiguration.Auto:
-                    return "Auto";
-                case IPv6DHCPConfiguration.Stateful:
-                    return "Stateful";
-                case IPv6DHCPConfiguration.Stateless:
-                    return "Stateless";
-                case IPv6DHCPConfiguration.Off:
-                    return "Off";
-                default:
-                    return null;
-            }
-        }
-
-        public static IPv6DHCPConfiguration ParseIPv6DHCPConfiguration(string text)
-        {
-            switch (text)
-            {
-                case "Auto":
-                    return IPv6DHCPConfiguration.Auto;
-                case "Stateful":
-                    return IPv6DHCPConfiguration.Stateful;
-                case "Stateless":
-                    return IPv6DHCPConfiguration.Stateless;
-                case "Off":
-                    return IPv6DHCPConfiguration.Off;
-                default:
-                    return default(IPv6DHCPConfiguration);
-            }
-        }
-
-        public static string ToXml(ImageStabilizationMode value)
-        {
-            switch (value)
-            {
-                case ImageStabilizationMode.OFF:
-                    return "OFF";
-                case ImageStabilizationMode.ON:
-                    return "ON";
-                case ImageStabilizationMode.AUTO:
-                    return "AUTO";
-                case ImageStabilizationMode.Extended:
-                    return "Extended";
-                default:
-                    return null;
-            }
-        }
-
-        public static ImageStabilizationMode ParseImageStabilizationMode(string text)
-        {
-            switch (text)
-            {
-                case "OFF":
-                    return ImageStabilizationMode.OFF;
-                case "ON":
-                    return ImageStabilizationMode.ON;
-                case "AUTO":
-                    return ImageStabilizationMode.AUTO;
-                case "Extended":
-                    return ImageStabilizationMode.Extended;
-                default:
-                    return default(ImageStabilizationMode);
-            }
-        }
-
-        public static string ToXml(IrCutFilterMode value)
-        {
-            switch (value)
-            {
-                case IrCutFilterMode.ON:
-                    return "ON";
-                case IrCutFilterMode.OFF:
-                    return "OFF";
-                case IrCutFilterMode.AUTO:
-                    return "AUTO";
-                default:
-                    return null;
-            }
-        }
-
-        public static IrCutFilterMode ParseIrCutFilterMode(string text)
-        {
-            switch (text)
-            {
-                case "ON":
-                    return IrCutFilterMode.ON;
-                case "OFF":
-                    return IrCutFilterMode.OFF;
-                case "AUTO":
-                    return IrCutFilterMode.AUTO;
-                default:
-                    return default(IrCutFilterMode);
-            }
-        }
-
-        public static string ToXml(ModeOfOperation value)
-        {
-            switch (value)
-            {
-                case ModeOfOperation.Idle:
-                    return "Idle";
-                case ModeOfOperation.Active:
-                    return "Active";
-                case ModeOfOperation.Unknown:
-                    return "Unknown";
-                default:
-                    return null;
-            }
-        }
-
-        public static ModeOfOperation ParseModeOfOperation(string text)
-        {
-            switch (text)
-            {
-                case "Idle":
-                    return ModeOfOperation.Idle;
-                case "Active":
-                    return ModeOfOperation.Active;
-                case "Unknown":
-                    return ModeOfOperation.Unknown;
-                default:
-                    return default(ModeOfOperation);
-            }
-        }
-
-        public static string ToXml(Mpeg4Profile value)
-        {
-            switch (value)
-            {
-                case Mpeg4Profile.SP:
-                    return "SP";
-                case Mpeg4Profile.ASP:
-                    return "ASP";
-                default:
-                    return null;
-            }
-        }
-
-        public static Mpeg4Profile ParseMpeg4Profile(string text)
-        {
-            switch (text)
-            {
-                case "SP":
-                    return Mpeg4Profile.SP;
-                case "ASP":
-                    return Mpeg4Profile.ASP;
-                default:
-                    return default(Mpeg4Profile);
-            }
-        }
-
-        public static string ToXml(OSDType value)
-        {
-            switch (value)
-            {
-                case OSDType.Text:
-                    return "Text";
-                case OSDType.Image:
-                    return "Image";
-                case OSDType.Extended:
-                    return "Extended";
-                default:
-                    return null;
-            }
-        }
-
-        public static OSDType ParseOSDType(string text)
-        {
-            switch (text)
-            {
-                case "Text":
-                    return OSDType.Text;
-                case "Image":
-                    return OSDType.Image;
-                case "Extended":
-                    return OSDType.Extended;
-                default:
-                    return default(OSDType);
-            }
-        }
-
-        public static string ToXml(PTZPresetTourOperation value)
-        {
-            switch (value)
-            {
-                case PTZPresetTourOperation.Start:
-                    return "Start";
-                case PTZPresetTourOperation.Stop:
-                    return "Stop";
-                case PTZPresetTourOperation.Pause:
-                    return "Pause";
-                case PTZPresetTourOperation.Extended:
-                    return "Extended";
-                default:
-                    return null;
-            }
-        }
-
-        public static PTZPresetTourOperation ParsePTZPresetTourOperation(string text)
-        {
-            switch (text)
-            {
-                case "Start":
-                    return PTZPresetTourOperation.Start;
-                case "Stop":
-                    return PTZPresetTourOperation.Stop;
-                case "Pause":
-                    return PTZPresetTourOperation.Pause;
-                case "Extended":
-                    return PTZPresetTourOperation.Extended;
-                default:
-                    return default(PTZPresetTourOperation);
-            }
-        }
-
-        public static string ToXml(ReceiverMode value)
-        {
-            switch (value)
-            {
-                case ReceiverMode.AutoConnect:
-                    return "AutoConnect";
-                case ReceiverMode.AlwaysConnect:
-                    return "AlwaysConnect";
-                case ReceiverMode.NeverConnect:
-                    return "NeverConnect";
-                case ReceiverMode.Unknown:
-                    return "Unknown";
-                default:
-                    return null;
-            }
-        }
-
-        public static ReceiverMode ParseReceiverMode(string text)
-        {
-            switch (text)
-            {
-                case "AutoConnect":
-                    return ReceiverMode.AutoConnect;
-                case "AlwaysConnect":
-                    return ReceiverMode.AlwaysConnect;
-                case "NeverConnect":
-                    return ReceiverMode.NeverConnect;
-                case "Unknown":
-                    return ReceiverMode.Unknown;
-                default:
-                    return default(ReceiverMode);
-            }
-        }
-
-        public static string ToXml(RelayIdleState value)
-        {
-            switch (value)
-            {
-                case RelayIdleState.closed:
-                    return "closed";
-                case RelayIdleState.open:
-                    return "open";
-                default:
-                    return null;
-            }
-        }
-
-        public static RelayIdleState ParseRelayIdleState(string text)
-        {
-            switch (text)
-            {
-                case "closed":
-                    return RelayIdleState.closed;
-                case "open":
-                    return RelayIdleState.open;
-                default:
-                    return default(RelayIdleState);
-            }
-        }
-
-        public static string ToXml(RelayMode value)
-        {
-            switch (value)
-            {
-                case RelayMode.Monostable:
-                    return "Monostable";
-                case RelayMode.Bistable:
-                    return "Bistable";
-                default:
-                    return null;
-            }
-        }
-
-        public static RelayMode ParseRelayMode(string text)
-        {
-            switch (text)
-            {
-                case "Monostable":
-                    return RelayMode.Monostable;
-                case "Bistable":
-                    return RelayMode.Bistable;
-                default:
-                    return default(RelayMode);
-            }
-        }
-
-        public static string ToXml(ReverseMode value)
-        {
-            switch (value)
-            {
-                case ReverseMode.OFF:
-                    return "OFF";
-                case ReverseMode.ON:
-                    return "ON";
-                case ReverseMode.AUTO:
-                    return "AUTO";
-                case ReverseMode.Extended:
-                    return "Extended";
-                default:
-                    return null;
-            }
-        }
-
-        public static ReverseMode ParseReverseMode(string text)
-        {
-            switch (text)
-            {
-                case "OFF":
-                    return ReverseMode.OFF;
-                case "ON":
-                    return ReverseMode.ON;
-                case "AUTO":
-                    return ReverseMode.AUTO;
-                case "Extended":
-                    return ReverseMode.Extended;
-                default:
-                    return default(ReverseMode);
-            }
-        }
-
-        public static string ToXml(RotateMode value)
-        {
-            switch (value)
-            {
-                case RotateMode.OFF:
-                    return "OFF";
-                case RotateMode.ON:
-                    return "ON";
-                case RotateMode.AUTO:
-                    return "AUTO";
-                default:
-                    return null;
-            }
-        }
-
-        public static RotateMode ParseRotateMode(string text)
-        {
-            switch (text)
-            {
-                case "OFF":
-                    return RotateMode.OFF;
-                case "ON":
-                    return RotateMode.ON;
-                case "AUTO":
-                    return RotateMode.AUTO;
-                default:
-                    return default(RotateMode);
-            }
-        }
-
-        public static string ToXml(SceneOrientationMode value)
-        {
-            switch (value)
-            {
-                case SceneOrientationMode.MANUAL:
-                    return "MANUAL";
-                case SceneOrientationMode.AUTO:
-                    return "AUTO";
-                default:
-                    return null;
-            }
-        }
-
-        public static SceneOrientationMode ParseSceneOrientationMode(string text)
-        {
-            switch (text)
-            {
-                case "MANUAL":
-                    return SceneOrientationMode.MANUAL;
-                case "AUTO":
-                    return SceneOrientationMode.AUTO;
-                default:
-                    return default(SceneOrientationMode);
-            }
-        }
-
-        public static string ToXml(StreamType value)
-        {
-            switch (value)
-            {
-                case StreamType.RTPUnicast:
-                    return "RTP-Unicast";
-                case StreamType.RTPMulticast:
-                    return "RTP-Multicast";
-                default:
-                    return null;
-            }
-        }
-
-        public static StreamType ParseStreamType(string text)
-        {
-            switch (text)
-            {
-                case "RTP-Unicast":
-                    return StreamType.RTPUnicast;
-                case "RTP-Multicast":
-                    return StreamType.RTPMulticast;
-                default:
-                    return default(StreamType);
-            }
-        }
-
-        public static string ToXml(TransportProtocol value)
-        {
-            switch (value)
-            {
-                case TransportProtocol.UDP:
-                    return "UDP";
-                case TransportProtocol.TCP:
-                    return "TCP";
-                case TransportProtocol.RTSP:
-                    return "RTSP";
-                case TransportProtocol.HTTP:
-                    return "HTTP";
-                default:
-                    return null;
-            }
-        }
-
-        public static TransportProtocol ParseTransportProtocol(string text)
-        {
-            switch (text)
-            {
-                case "UDP":
-                    return TransportProtocol.UDP;
-                case "TCP":
-                    return TransportProtocol.TCP;
-                case "RTSP":
-                    return TransportProtocol.RTSP;
-                case "HTTP":
-                    return TransportProtocol.HTTP;
-                default:
-                    return default(TransportProtocol);
-            }
-        }
-
-        public static string ToXml(VideoEncoding value)
-        {
-            switch (value)
-            {
-                case VideoEncoding.JPEG:
-                    return "JPEG";
-                case VideoEncoding.MPEG4:
-                    return "MPEG4";
-                case VideoEncoding.H264:
-                    return "H264";
-                default:
-                    return null;
-            }
-        }
-
-        public static VideoEncoding ParseVideoEncoding(string text)
-        {
-            switch (text)
-            {
-                case "JPEG":
-                    return VideoEncoding.JPEG;
-                case "MPEG4":
-                    return VideoEncoding.MPEG4;
-                case "H264":
-                    return VideoEncoding.H264;
-                default:
-                    return default(VideoEncoding);
-            }
-        }
-
-        public static string ToXml(WhiteBalanceMode value)
-        {
-            switch (value)
-            {
-                case WhiteBalanceMode.AUTO:
-                    return "AUTO";
-                case WhiteBalanceMode.MANUAL:
-                    return "MANUAL";
-                default:
-                    return null;
-            }
-        }
-
-        public static WhiteBalanceMode ParseWhiteBalanceMode(string text)
-        {
-            switch (text)
-            {
-                case "AUTO":
-                    return WhiteBalanceMode.AUTO;
-                case "MANUAL":
-                    return WhiteBalanceMode.MANUAL;
-                default:
-                    return default(WhiteBalanceMode);
-            }
-        }
-
-        public static string ToXml(WideDynamicMode value)
-        {
-            switch (value)
-            {
-                case WideDynamicMode.OFF:
-                    return "OFF";
-                case WideDynamicMode.ON:
-                    return "ON";
-                default:
-                    return null;
-            }
-        }
-
-        public static WideDynamicMode ParseWideDynamicMode(string text)
-        {
-            switch (text)
-            {
-                case "OFF":
-                    return WideDynamicMode.OFF;
-                case "ON":
-                    return WideDynamicMode.ON;
-                default:
-                    return default(WideDynamicMode);
-            }
-        }
     }
 
     /// <summary>
@@ -1318,7 +28,7 @@ namespace SharpOnvifClient.Media2
     /// time, the associated audio clip configuration will be permanently removed from the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddAudioClip", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class AddAudioClipRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class AddAudioClipRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -1385,7 +95,7 @@ namespace SharpOnvifClient.Media2
     /// time, the associated audio clip configuration will be permanently removed from the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddAudioClipResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class AddAudioClipResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class AddAudioClipResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -1470,7 +180,7 @@ namespace SharpOnvifClient.Media2
     /// data of such a profile. Note that OSD elements must be added via the CreateOSD command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddConfiguration", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class AddConfigurationRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class AddConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string profileTokenField;
 
@@ -1563,7 +273,7 @@ namespace SharpOnvifClient.Media2
     /// data of such a profile. Note that OSD elements must be added via the CreateOSD command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddConfigurationResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class AddConfigurationResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class AddConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public AddConfigurationResponse()
         {
@@ -1577,7 +287,7 @@ namespace SharpOnvifClient.Media2
     /// and TTS Configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddTTSAudioClip", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class AddTTSAudioClipRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class AddTTSAudioClipRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -1661,7 +371,7 @@ namespace SharpOnvifClient.Media2
     /// and TTS Configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddTTSAudioClipResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class AddTTSAudioClipResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class AddTTSAudioClipResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -1703,535 +413,8 @@ namespace SharpOnvifClient.Media2
 
     }
 
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AnalyticsDeviceEngineConfiguration : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private EngineConfiguration[] engineConfigurationField;
-
-        private AnalyticsDeviceEngineConfigurationExtension extensionField;
-
-        [System.Xml.Serialization.XmlElementAttribute("EngineConfiguration", Order=0)]
-        public EngineConfiguration[] EngineConfiguration
-        {
-            get { return this.engineConfigurationField; }
-            set { this.engineConfigurationField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public AnalyticsDeviceEngineConfigurationExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "AnalyticsDeviceEngineConfiguration"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            if (this.engineConfigurationField != null)
-            {
-                for (int i = 0; i < this.engineConfigurationField.Length; i++)
-                {
-                    writer.WriteElement(Ns.OnvifVer10, "EngineConfiguration", this.engineConfigurationField[i], Ns.OnvifVer10, "EngineConfiguration");
-                }
-            }
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "AnalyticsDeviceEngineConfigurationExtension");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "EngineConfiguration":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.engineConfigurationField, reader.ReadElementObject<EngineConfiguration>(() => new EngineConfiguration()));
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<AnalyticsDeviceEngineConfigurationExtension>(() => new AnalyticsDeviceEngineConfigurationExtension());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AnalyticsDeviceEngineConfigurationExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "AnalyticsDeviceEngineConfigurationExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AnalyticsEngine : ConfigurationEntity
-    {
-        private AnalyticsDeviceEngineConfiguration analyticsEngineConfigurationField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public AnalyticsDeviceEngineConfiguration AnalyticsEngineConfiguration
-        {
-            get { return this.analyticsEngineConfigurationField; }
-            set { this.analyticsEngineConfigurationField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=1)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "AnalyticsEngine"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlContent(writer);
-            writer.WriteElement(Ns.OnvifVer10, "AnalyticsEngineConfiguration", this.analyticsEngineConfigurationField, Ns.OnvifVer10, "AnalyticsDeviceEngineConfiguration");
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "AnalyticsEngineConfiguration":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.analyticsEngineConfigurationField = reader.ReadElementObject<AnalyticsDeviceEngineConfiguration>(() => new AnalyticsDeviceEngineConfiguration());
-                    return true;
-            }
-            if (base.ReadXmlElement(reader)) return true;
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AnalyticsEngineConfiguration : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private Config[] analyticsModuleField;
-
-        private AnalyticsEngineConfigurationExtension extensionField;
-
-        [System.Xml.Serialization.XmlElementAttribute("AnalyticsModule", Order=0)]
-        public Config[] AnalyticsModule
-        {
-            get { return this.analyticsModuleField; }
-            set { this.analyticsModuleField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public AnalyticsEngineConfigurationExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "AnalyticsEngineConfiguration"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            if (this.analyticsModuleField != null)
-            {
-                for (int i = 0; i < this.analyticsModuleField.Length; i++)
-                {
-                    writer.WriteElement(Ns.OnvifVer10, "AnalyticsModule", this.analyticsModuleField[i], Ns.OnvifVer10, "Config");
-                }
-            }
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "AnalyticsEngineConfigurationExtension");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "AnalyticsModule":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.analyticsModuleField, reader.ReadElementObject<Config>(() => new Config()));
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<AnalyticsEngineConfigurationExtension>(() => new AnalyticsEngineConfigurationExtension());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AnalyticsEngineConfigurationExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "AnalyticsEngineConfigurationExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AnalyticsEngineControl : ConfigurationEntity
-    {
-        private string engineTokenField;
-
-        private string engineConfigTokenField;
-
-        private string[] inputTokenField;
-
-        private string[] receiverTokenField;
-
-        private MulticastConfiguration multicastField;
-
-        private Config subscriptionField;
-
-        private ModeOfOperation modeField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        /// <summary>
-        /// Token of the analytics engine (AnalyticsEngine) being controlled.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string EngineToken
-        {
-            get { return this.engineTokenField; }
-            set { this.engineTokenField = value; }
-        }
-
-        /// <summary>
-        /// Token of the analytics engine configuration (VideoAnalyticsConfiguration) in effect.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public string EngineConfigToken
-        {
-            get { return this.engineConfigTokenField; }
-            set { this.engineConfigTokenField = value; }
-        }
-
-        /// <summary>
-        /// Tokens of the input (AnalyticsEngineInput) configuration applied.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("InputToken", Order=2)]
-        public string[] InputToken
-        {
-            get { return this.inputTokenField; }
-            set { this.inputTokenField = value; }
-        }
-
-        /// <summary>
-        /// Tokens of the receiver providing media input data. The order of ReceiverToken shall exactly match
-        /// the order of InputToken.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("ReceiverToken", Order=3)]
-        public string[] ReceiverToken
-        {
-            get { return this.receiverTokenField; }
-            set { this.receiverTokenField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public MulticastConfiguration Multicast
-        {
-            get { return this.multicastField; }
-            set { this.multicastField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public Config Subscription
-        {
-            get { return this.subscriptionField; }
-            set { this.subscriptionField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
-        public ModeOfOperation Mode
-        {
-            get { return this.modeField; }
-            set { this.modeField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=7)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "AnalyticsEngineControl"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlContent(writer);
-            writer.WriteElementString(Ns.OnvifVer10, "EngineToken", this.engineTokenField);
-            writer.WriteElementString(Ns.OnvifVer10, "EngineConfigToken", this.engineConfigTokenField);
-            if (this.inputTokenField != null)
-            {
-                for (int i = 0; i < this.inputTokenField.Length; i++)
-                {
-                    writer.WriteElementString(Ns.OnvifVer10, "InputToken", this.inputTokenField[i]);
-                }
-            }
-            if (this.receiverTokenField != null)
-            {
-                for (int i = 0; i < this.receiverTokenField.Length; i++)
-                {
-                    writer.WriteElementString(Ns.OnvifVer10, "ReceiverToken", this.receiverTokenField[i]);
-                }
-            }
-            writer.WriteElement(Ns.OnvifVer10, "Multicast", this.multicastField, Ns.OnvifVer10, "MulticastConfiguration");
-            writer.WriteElement(Ns.OnvifVer10, "Subscription", this.subscriptionField, Ns.OnvifVer10, "Config");
-            writer.WriteElementString(Ns.OnvifVer10, "Mode", EnumXml.ToXml(this.modeField));
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "EngineToken":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.engineTokenField = reader.ReadElementText();
-                    return true;
-                case "EngineConfigToken":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.engineConfigTokenField = reader.ReadElementText();
-                    return true;
-                case "InputToken":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.inputTokenField, reader.ReadElementText());
-                    return true;
-                case "ReceiverToken":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.receiverTokenField, reader.ReadElementText());
-                    return true;
-                case "Multicast":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.multicastField = reader.ReadElementObject<MulticastConfiguration>(() => new MulticastConfiguration());
-                    return true;
-                case "Subscription":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.subscriptionField = reader.ReadElementObject<Config>(() => new Config());
-                    return true;
-                case "Mode":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.modeField = EnumXml.ParseModeOfOperation(reader.ReadElementText());
-                    return true;
-            }
-            if (base.ReadXmlElement(reader)) return true;
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AnalyticsEngineInput : ConfigurationEntity
-    {
-        private SourceIdentification sourceIdentificationField;
-
-        private VideoEncoderConfiguration videoInputField;
-
-        private MetadataInput metadataInputField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public SourceIdentification SourceIdentification
-        {
-            get { return this.sourceIdentificationField; }
-            set { this.sourceIdentificationField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public VideoEncoderConfiguration VideoInput
-        {
-            get { return this.videoInputField; }
-            set { this.videoInputField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public MetadataInput MetadataInput
-        {
-            get { return this.metadataInputField; }
-            set { this.metadataInputField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=3)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "AnalyticsEngineInput"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlContent(writer);
-            writer.WriteElement(Ns.OnvifVer10, "SourceIdentification", this.sourceIdentificationField, Ns.OnvifVer10, "SourceIdentification");
-            writer.WriteElement(Ns.OnvifVer10, "VideoInput", this.videoInputField, Ns.OnvifVer10, "VideoEncoderConfiguration");
-            writer.WriteElement(Ns.OnvifVer10, "MetadataInput", this.metadataInputField, Ns.OnvifVer10, "MetadataInput");
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "SourceIdentification":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.sourceIdentificationField = reader.ReadElementObject<SourceIdentification>(() => new SourceIdentification());
-                    return true;
-                case "VideoInput":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.videoInputField = reader.ReadElementObject<VideoEncoderConfiguration>(() => new VideoEncoderConfiguration());
-                    return true;
-                case "MetadataInput":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.metadataInputField = reader.ReadElementObject<MetadataInput>(() => new MetadataInput());
-                    return true;
-            }
-            if (base.ReadXmlElement(reader)) return true;
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AnalyticsEngineInputInfo : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private Config inputInfoField;
-
-        private AnalyticsEngineInputInfoExtension extensionField;
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public Config InputInfo
-        {
-            get { return this.inputInfoField; }
-            set { this.inputInfoField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public AnalyticsEngineInputInfoExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "AnalyticsEngineInputInfo"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElement(Ns.OnvifVer10, "InputInfo", this.inputInfoField, Ns.OnvifVer10, "Config");
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "AnalyticsEngineInputInfoExtension");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "InputInfo":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.inputInfoField = reader.ReadElementObject<Config>(() => new Config());
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<AnalyticsEngineInputInfoExtension>(() => new AnalyticsEngineInputInfoExtension());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AnalyticsEngineInputInfoExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "AnalyticsEngineInputInfoExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class AudioClip : SharpOnvifCommon.Xml.OnvifObject
+    public partial class AudioClip : SharpOnvifCommon.Xml.OnvifContract
     {
         private bool enabledField;
 
@@ -2441,7 +624,7 @@ namespace SharpOnvifClient.Media2
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class AudioClipCapabilities : SharpOnvifCommon.Xml.OnvifObject
+    public partial class AudioClipCapabilities : SharpOnvifCommon.Xml.OnvifContract
     {
         private TTSCapabilities tTSCapabilitiesField;
 
@@ -2581,1189 +764,8 @@ namespace SharpOnvifClient.Media2
 
     }
 
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AudioDecoder2Options : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string encodingField;
-
-        private int[] bitrateListField;
-
-        private int[] sampleRateListField;
-
-        private int rTPPayloadTypeField;
-        private bool rTPPayloadTypeFieldSpecified;
-
-        private System.Xml.XmlElement[] anyField;
-
-        /// <summary>
-        /// Audio Media Subtype for the audio format. For definitions see tt:AudioEncodingMimeNames and IANA
-        /// Media Types.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string Encoding
-        {
-            get { return this.encodingField; }
-            set { this.encodingField = value; }
-        }
-
-        /// <summary>
-        /// List of supported bitrates in kbps for the specified Encoding.
-        /// </summary>
-        [System.Xml.Serialization.XmlArrayAttribute(Order=1)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("Items", IsNullable=false)]
-        public int[] BitrateList
-        {
-            get { return this.bitrateListField; }
-            set { this.bitrateListField = value; }
-        }
-
-        /// <summary>
-        /// List of supported Sample Rates in kHz for the specified Encoding
-        /// </summary>
-        [System.Xml.Serialization.XmlArrayAttribute(Order=2)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("Items", IsNullable=false)]
-        public int[] SampleRateList
-        {
-            get { return this.sampleRateListField; }
-            set { this.sampleRateListField = value; }
-        }
-
-        /// <summary>
-        /// Optional element for specifying the RTP payload type, particularly when it is fixed for a specific
-        /// audio encoding as defined in IANA RTP Payload Types.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public int RTPPayloadType
-        {
-            get { return this.rTPPayloadTypeField; }
-            set { this.rTPPayloadTypeField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="RTPPayloadType"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool RTPPayloadTypeSpecified
-        {
-            get { return this.rTPPayloadTypeFieldSpecified; }
-            set { this.rTPPayloadTypeFieldSpecified = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=4)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "AudioDecoder2Options"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Encoding", this.encodingField);
-            if (this.bitrateListField != null)
-            {
-                writer.WriteStartElement(Ns.OnvifVer10, "BitrateList");
-                for (int i = 0; i < this.bitrateListField.Length; i++)
-                {
-                    writer.WriteElementString(Ns.OnvifVer10, "Items", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.bitrateListField[i]));
-                }
-                writer.WriteEndElement();
-            }
-            if (this.sampleRateListField != null)
-            {
-                writer.WriteStartElement(Ns.OnvifVer10, "SampleRateList");
-                for (int i = 0; i < this.sampleRateListField.Length; i++)
-                {
-                    writer.WriteElementString(Ns.OnvifVer10, "Items", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.sampleRateListField[i]));
-                }
-                writer.WriteEndElement();
-            }
-            if (this.rTPPayloadTypeFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "RTPPayloadType", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.rTPPayloadTypeField));
-            }
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Encoding":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.encodingField = reader.ReadElementText();
-                    return true;
-                case "BitrateList":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    reader.ReadWrappedArray(Ns.OnvifVer10, "Items", () =>
-                    {
-                        SharpOnvifCommon.Xml.OnvifArray.Append(ref this.bitrateListField, SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText()));
-                    }
-                    );
-                    return true;
-                case "SampleRateList":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    reader.ReadWrappedArray(Ns.OnvifVer10, "Items", () =>
-                    {
-                        SharpOnvifCommon.Xml.OnvifArray.Append(ref this.sampleRateListField, SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText()));
-                    }
-                    );
-                    return true;
-                case "RTPPayloadType":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.rTPPayloadTypeField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    this.rTPPayloadTypeFieldSpecified = true;
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    /// <summary>
-    /// The Audio Decoder Configuration does not contain any that parameter to configure the decoding .A
-    /// decoder shall decode every data it receives (according to its capabilities).
-    /// </summary>
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AudioDecoderConfiguration : ConfigurationEntity
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "AudioDecoderConfiguration"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlContent(writer);
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            if (base.ReadXmlElement(reader)) return true;
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AudioEncoder2Configuration : ConfigurationEntity
-    {
-        private string encodingField;
-
-        private MulticastConfiguration multicastField;
-
-        private int bitrateField;
-
-        private int sampleRateField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        private string secureStreamingProtocolAlgorithmField;
-
-        /// <summary>
-        /// Audio Media Subtype for the audio format. For definitions see tt:AudioEncodingMimeNames and IANA
-        /// Media Types.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string Encoding
-        {
-            get { return this.encodingField; }
-            set { this.encodingField = value; }
-        }
-
-        /// <summary>
-        /// Optional multicast configuration of the audio stream.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public MulticastConfiguration Multicast
-        {
-            get { return this.multicastField; }
-            set { this.multicastField = value; }
-        }
-
-        /// <summary>
-        /// The output bitrate in kbps.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public int Bitrate
-        {
-            get { return this.bitrateField; }
-            set { this.bitrateField = value; }
-        }
-
-        /// <summary>
-        /// The output sample rate in kHz.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public int SampleRate
-        {
-            get { return this.sampleRateField; }
-            set { this.sampleRateField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=4)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        /// <summary>
-        /// Defines the cryptographic algorithm to use as defined by tt:SrtpSecurityAlgorithms
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string SecureStreamingProtocolAlgorithm
-        {
-            get { return this.secureStreamingProtocolAlgorithmField; }
-            set { this.secureStreamingProtocolAlgorithmField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "AudioEncoder2Configuration"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlAttributes(writer);
-            writer.WriteAttributeString(null, "SecureStreamingProtocolAlgorithm", this.secureStreamingProtocolAlgorithmField);
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlContent(writer);
-            writer.WriteElementString(Ns.OnvifVer10, "Encoding", this.encodingField);
-            writer.WriteElement(Ns.OnvifVer10, "Multicast", this.multicastField, Ns.OnvifVer10, "MulticastConfiguration");
-            writer.WriteElementString(Ns.OnvifVer10, "Bitrate", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.bitrateField));
-            writer.WriteElementString(Ns.OnvifVer10, "SampleRate", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.sampleRateField));
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "SecureStreamingProtocolAlgorithm":
-                    this.secureStreamingProtocolAlgorithmField = reader.AttributeValue;
-                    return true;
-            }
-            return base.ReadXmlAttribute(reader);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Encoding":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.encodingField = reader.ReadElementText();
-                    return true;
-                case "Multicast":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.multicastField = reader.ReadElementObject<MulticastConfiguration>(() => new MulticastConfiguration());
-                    return true;
-                case "Bitrate":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.bitrateField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    return true;
-                case "SampleRate":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.sampleRateField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    return true;
-            }
-            if (base.ReadXmlElement(reader)) return true;
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AudioEncoder2ConfigurationOptions : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string encodingField;
-
-        private int[] bitrateListField;
-
-        private int[] sampleRateListField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        private string[] secureStreamingProtocolAlgorithmsField;
-
-        /// <summary>
-        /// Audio Media Subtype for the audio format. For definitions see tt:AudioEncodingMimeNames and IANA
-        /// Media Types.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string Encoding
-        {
-            get { return this.encodingField; }
-            set { this.encodingField = value; }
-        }
-
-        /// <summary>
-        /// List of supported bitrates in kbps for the specified Encoding.
-        /// </summary>
-        [System.Xml.Serialization.XmlArrayAttribute(Order=1)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("Items", IsNullable=false)]
-        public int[] BitrateList
-        {
-            get { return this.bitrateListField; }
-            set { this.bitrateListField = value; }
-        }
-
-        /// <summary>
-        /// List of supported Sample Rates in kHz for the specified Encoding
-        /// </summary>
-        [System.Xml.Serialization.XmlArrayAttribute(Order=2)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("Items", IsNullable=false)]
-        public int[] SampleRateList
-        {
-            get { return this.sampleRateListField; }
-            set { this.sampleRateListField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=3)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        /// <summary>
-        /// If secure RTSP streaming is supported, this shall return the list of supported cryptographic
-        /// algorithms as defined by tt:SrtpSecurityAlgorithms.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string[] SecureStreamingProtocolAlgorithms
-        {
-            get { return this.secureStreamingProtocolAlgorithmsField; }
-            set { this.secureStreamingProtocolAlgorithmsField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "AudioEncoder2ConfigurationOptions"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAttributeString(null, "SecureStreamingProtocolAlgorithms", SharpOnvifCommon.Xml.OnvifArray.JoinList(this.secureStreamingProtocolAlgorithmsField));
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Encoding", this.encodingField);
-            if (this.bitrateListField != null)
-            {
-                writer.WriteStartElement(Ns.OnvifVer10, "BitrateList");
-                for (int i = 0; i < this.bitrateListField.Length; i++)
-                {
-                    writer.WriteElementString(Ns.OnvifVer10, "Items", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.bitrateListField[i]));
-                }
-                writer.WriteEndElement();
-            }
-            if (this.sampleRateListField != null)
-            {
-                writer.WriteStartElement(Ns.OnvifVer10, "SampleRateList");
-                for (int i = 0; i < this.sampleRateListField.Length; i++)
-                {
-                    writer.WriteElementString(Ns.OnvifVer10, "Items", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.sampleRateListField[i]));
-                }
-                writer.WriteEndElement();
-            }
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "SecureStreamingProtocolAlgorithms":
-                    this.secureStreamingProtocolAlgorithmsField = SharpOnvifCommon.Xml.OnvifArray.SplitList(reader.AttributeValue);
-                    return true;
-            }
-            return false;
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Encoding":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.encodingField = reader.ReadElementText();
-                    return true;
-                case "BitrateList":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    reader.ReadWrappedArray(Ns.OnvifVer10, "Items", () =>
-                    {
-                        SharpOnvifCommon.Xml.OnvifArray.Append(ref this.bitrateListField, SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText()));
-                    }
-                    );
-                    return true;
-                case "SampleRateList":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    reader.ReadWrappedArray(Ns.OnvifVer10, "Items", () =>
-                    {
-                        SharpOnvifCommon.Xml.OnvifArray.Append(ref this.sampleRateListField, SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText()));
-                    }
-                    );
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AudioEncoderConfiguration : ConfigurationEntity
-    {
-        private AudioEncoding encodingField;
-
-        private int bitrateField;
-
-        private int sampleRateField;
-
-        private MulticastConfiguration multicastField;
-
-        private string sessionTimeoutField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        /// <summary>
-        /// Audio codec used for encoding the audio input (either G.711, G.726 or AAC).
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public AudioEncoding Encoding
-        {
-            get { return this.encodingField; }
-            set { this.encodingField = value; }
-        }
-
-        /// <summary>
-        /// The output bitrate in kbps.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public int Bitrate
-        {
-            get { return this.bitrateField; }
-            set { this.bitrateField = value; }
-        }
-
-        /// <summary>
-        /// The output sample rate in kHz.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public int SampleRate
-        {
-            get { return this.sampleRateField; }
-            set { this.sampleRateField = value; }
-        }
-
-        /// <summary>
-        /// Defines the multicast settings that could be used for video streaming.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public MulticastConfiguration Multicast
-        {
-            get { return this.multicastField; }
-            set { this.multicastField = value; }
-        }
-
-        /// <summary>
-        /// The rtsp session timeout for the related audio stream
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=4, DataType="duration")]
-        public string SessionTimeout
-        {
-            get { return this.sessionTimeoutField; }
-            set { this.sessionTimeoutField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=5)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "AudioEncoderConfiguration"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlContent(writer);
-            writer.WriteElementString(Ns.OnvifVer10, "Encoding", EnumXml.ToXml(this.encodingField));
-            writer.WriteElementString(Ns.OnvifVer10, "Bitrate", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.bitrateField));
-            writer.WriteElementString(Ns.OnvifVer10, "SampleRate", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.sampleRateField));
-            writer.WriteElement(Ns.OnvifVer10, "Multicast", this.multicastField, Ns.OnvifVer10, "MulticastConfiguration");
-            writer.WriteElementString(Ns.OnvifVer10, "SessionTimeout", this.sessionTimeoutField);
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Encoding":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.encodingField = EnumXml.ParseAudioEncoding(reader.ReadElementText());
-                    return true;
-                case "Bitrate":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.bitrateField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    return true;
-                case "SampleRate":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.sampleRateField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    return true;
-                case "Multicast":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.multicastField = reader.ReadElementObject<MulticastConfiguration>(() => new MulticastConfiguration());
-                    return true;
-                case "SessionTimeout":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.sessionTimeoutField = reader.ReadElementText();
-                    return true;
-            }
-            if (base.ReadXmlElement(reader)) return true;
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    /// <summary>
-    /// Representation of a physical audio outputs.
-    /// </summary>
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AudioOutput : DeviceEntity
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "AudioOutput"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlContent(writer);
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            if (base.ReadXmlElement(reader)) return true;
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AudioOutputConfiguration : ConfigurationEntity
-    {
-        private string outputTokenField;
-
-        private string sendPrimacyField;
-
-        private int outputLevelField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        /// <summary>
-        /// Token of the physical Audio output.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string OutputToken
-        {
-            get { return this.outputTokenField; }
-            set { this.outputTokenField = value; }
-        }
-
-        /// <summary>
-        /// An audio channel MAY support different types of audio transmission. While for full duplex operation
-        /// no special handling is required, in half duplex operation the transmission direction needs to be
-        /// switched. The optional SendPrimacy parameter inside the AudioOutputConfiguration indicates which
-        /// direction is currently active. An NVC can switch between different modes by setting the
-        /// AudioOutputConfiguration. The following modes for the Send-Primacy are
-        /// defined:www.onvif.org/ver20/HalfDuplex/Server The server is allowed to send audio data to the
-        /// client. The client shall not send audio data via the backchannel to the NVT in this
-        /// mode.www.onvif.org/ver20/HalfDuplex/Client The client is allowed to send audio data via the
-        /// backchannel to the server. The NVT shall not send audio data to the client in this
-        /// mode.www.onvif.org/ver20/HalfDuplex/Auto It is up to the device how to deal with sending and
-        /// receiving audio data. Acoustic echo cancellation is out of ONVIF scope.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1, DataType="anyURI")]
-        public string SendPrimacy
-        {
-            get { return this.sendPrimacyField; }
-            set { this.sendPrimacyField = value; }
-        }
-
-        /// <summary>
-        /// Volume setting of the output. The applicable range is defined via the option
-        /// AudioOutputOptions.OutputLevelRange.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public int OutputLevel
-        {
-            get { return this.outputLevelField; }
-            set { this.outputLevelField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=3)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "AudioOutputConfiguration"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlContent(writer);
-            writer.WriteElementString(Ns.OnvifVer10, "OutputToken", this.outputTokenField);
-            writer.WriteElementString(Ns.OnvifVer10, "SendPrimacy", this.sendPrimacyField);
-            writer.WriteElementString(Ns.OnvifVer10, "OutputLevel", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.outputLevelField));
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "OutputToken":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.outputTokenField = reader.ReadElementText();
-                    return true;
-                case "SendPrimacy":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.sendPrimacyField = reader.ReadElementText();
-                    return true;
-                case "OutputLevel":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.outputLevelField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    return true;
-            }
-            if (base.ReadXmlElement(reader)) return true;
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AudioOutputConfigurationOptions : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string[] outputTokensAvailableField;
-
-        private string[] sendPrimacyOptionsField;
-
-        private IntRange outputLevelRangeField;
-
-        private bool eQPresetScheduleSupportField;
-        private bool eQPresetScheduleSupportFieldSpecified;
-
-        private EQPreset[] eQPresetsField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        /// <summary>
-        /// Tokens of the physical Audio outputs (typically one).
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("OutputTokensAvailable", Order=0)]
-        public string[] OutputTokensAvailable
-        {
-            get { return this.outputTokensAvailableField; }
-            set { this.outputTokensAvailableField = value; }
-        }
-
-        /// <summary>
-        /// An audio channel MAY support different types of audio transmission. While for full duplex operation
-        /// no special handling is required, in half duplex operation the transmission direction needs to be
-        /// switched. The optional SendPrimacy parameter inside the AudioOutputConfiguration indicates which
-        /// direction is currently active. An NVC can switch between different modes by setting the
-        /// AudioOutputConfiguration. The following modes for the Send-Primacy are
-        /// defined:www.onvif.org/ver20/HalfDuplex/Server The server is allowed to send audio data to the
-        /// client. The client shall not send audio data via the backchannel to the NVT in this
-        /// mode.www.onvif.org/ver20/HalfDuplex/Client The client is allowed to send audio data via the
-        /// backchannel to the server. The NVT shall not send audio data to the client in this
-        /// mode.www.onvif.org/ver20/HalfDuplex/Auto It is up to the device how to deal with sending and
-        /// receiving audio data. Acoustic echo cancellation is out of ONVIF scope.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("SendPrimacyOptions", Order=1, DataType="anyURI")]
-        public string[] SendPrimacyOptions
-        {
-            get { return this.sendPrimacyOptionsField; }
-            set { this.sendPrimacyOptionsField = value; }
-        }
-
-        /// <summary>
-        /// Minimum and maximum level range supported for this Output.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public IntRange OutputLevelRange
-        {
-            get { return this.outputLevelRangeField; }
-            set { this.outputLevelRangeField = value; }
-        }
-
-        /// <summary>
-        /// Indicates whether EQPreset scheduling is supported.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public bool EQPresetScheduleSupport
-        {
-            get { return this.eQPresetScheduleSupportField; }
-            set { this.eQPresetScheduleSupportField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="EQPresetScheduleSupport"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool EQPresetScheduleSupportSpecified
-        {
-            get { return this.eQPresetScheduleSupportFieldSpecified; }
-            set { this.eQPresetScheduleSupportFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// List of supported EQPresets.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("EQPresets", Order=4)]
-        public EQPreset[] EQPresets
-        {
-            get { return this.eQPresetsField; }
-            set { this.eQPresetsField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=5)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "AudioOutputConfigurationOptions"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            if (this.outputTokensAvailableField != null)
-            {
-                for (int i = 0; i < this.outputTokensAvailableField.Length; i++)
-                {
-                    writer.WriteElementString(Ns.OnvifVer10, "OutputTokensAvailable", this.outputTokensAvailableField[i]);
-                }
-            }
-            if (this.sendPrimacyOptionsField != null)
-            {
-                for (int i = 0; i < this.sendPrimacyOptionsField.Length; i++)
-                {
-                    writer.WriteElementString(Ns.OnvifVer10, "SendPrimacyOptions", this.sendPrimacyOptionsField[i]);
-                }
-            }
-            writer.WriteElement(Ns.OnvifVer10, "OutputLevelRange", this.outputLevelRangeField, Ns.OnvifVer10, "IntRange");
-            if (this.eQPresetScheduleSupportFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "EQPresetScheduleSupport", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.eQPresetScheduleSupportField));
-            }
-            if (this.eQPresetsField != null)
-            {
-                for (int i = 0; i < this.eQPresetsField.Length; i++)
-                {
-                    writer.WriteElement(Ns.OnvifVer10, "EQPresets", this.eQPresetsField[i], Ns.OnvifVer10, "EQPreset");
-                }
-            }
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "OutputTokensAvailable":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.outputTokensAvailableField, reader.ReadElementText());
-                    return true;
-                case "SendPrimacyOptions":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.sendPrimacyOptionsField, reader.ReadElementText());
-                    return true;
-                case "OutputLevelRange":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.outputLevelRangeField = reader.ReadElementObject<IntRange>(() => new IntRange());
-                    return true;
-                case "EQPresetScheduleSupport":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.eQPresetScheduleSupportField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
-                    this.eQPresetScheduleSupportFieldSpecified = true;
-                    return true;
-                case "EQPresets":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.eQPresetsField, reader.ReadElementObject<EQPreset>(() => new EQPreset()));
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    /// <summary>
-    /// Representation of a physical audio input.
-    /// </summary>
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AudioSource : DeviceEntity
-    {
-        private int channelsField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        /// <summary>
-        /// number of available audio channels. (1: mono, 2: stereo)
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public int Channels
-        {
-            get { return this.channelsField; }
-            set { this.channelsField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=1)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "AudioSource"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlContent(writer);
-            writer.WriteElementString(Ns.OnvifVer10, "Channels", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.channelsField));
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Channels":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.channelsField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    return true;
-            }
-            if (base.ReadXmlElement(reader)) return true;
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AudioSourceConfiguration : ConfigurationEntity
-    {
-        private string sourceTokenField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        /// <summary>
-        /// Token of the Audio Source the configuration applies to
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string SourceToken
-        {
-            get { return this.sourceTokenField; }
-            set { this.sourceTokenField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=1)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "AudioSourceConfiguration"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlContent(writer);
-            writer.WriteElementString(Ns.OnvifVer10, "SourceToken", this.sourceTokenField);
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "SourceToken":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.sourceTokenField = reader.ReadElementText();
-                    return true;
-            }
-            if (base.ReadXmlElement(reader)) return true;
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AudioSourceConfigurationOptions : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string[] inputTokensAvailableField;
-
-        private AudioSourceOptionsExtension extensionField;
-
-        /// <summary>
-        /// Tokens of the audio source the configuration can be used for.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("InputTokensAvailable", Order=0)]
-        public string[] InputTokensAvailable
-        {
-            get { return this.inputTokensAvailableField; }
-            set { this.inputTokensAvailableField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public AudioSourceOptionsExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "AudioSourceConfigurationOptions"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            if (this.inputTokensAvailableField != null)
-            {
-                for (int i = 0; i < this.inputTokensAvailableField.Length; i++)
-                {
-                    writer.WriteElementString(Ns.OnvifVer10, "InputTokensAvailable", this.inputTokensAvailableField[i]);
-                }
-            }
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "AudioSourceOptionsExtension");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "InputTokensAvailable":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.inputTokensAvailableField, reader.ReadElementText());
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<AudioSourceOptionsExtension>(() => new AudioSourceOptionsExtension());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AudioSourceOptionsExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "AudioSourceOptionsExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class BacklightCompensation : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private BacklightCompensationMode modeField;
-
-        private float levelField;
-
-        /// <summary>
-        /// Backlight compensation mode (on/off).
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public BacklightCompensationMode Mode
-        {
-            get { return this.modeField; }
-            set { this.modeField = value; }
-        }
-
-        /// <summary>
-        /// Optional level parameter (unit unspecified).
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public float Level
-        {
-            get { return this.levelField; }
-            set { this.levelField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "BacklightCompensation"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Mode", EnumXml.ToXml(this.modeField));
-            writer.WriteElementString(Ns.OnvifVer10, "Level", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.levelField));
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Mode":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.modeField = EnumXml.ParseBacklightCompensationMode(reader.ReadElementText());
-                    return true;
-                case "Level":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.levelField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    /// <summary>
-    /// Type describing whether BLC mode is enabled or disabled (on/off).
-    /// </summary>
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class BacklightCompensation20 : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private BacklightCompensationMode modeField;
-
-        private float levelField;
-        private bool levelFieldSpecified;
-
-        /// <summary>
-        /// Backlight compensation mode (on/off).
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public BacklightCompensationMode Mode
-        {
-            get { return this.modeField; }
-            set { this.modeField = value; }
-        }
-
-        /// <summary>
-        /// Optional level parameter (unit unspecified).
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public float Level
-        {
-            get { return this.levelField; }
-            set { this.levelField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="Level"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool LevelSpecified
-        {
-            get { return this.levelFieldSpecified; }
-            set { this.levelFieldSpecified = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "BacklightCompensation20"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Mode", EnumXml.ToXml(this.modeField));
-            if (this.levelFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "Level", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.levelField));
-            }
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Mode":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.modeField = EnumXml.ParseBacklightCompensationMode(reader.ReadElementText());
-                    return true;
-                case "Level":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.levelField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    this.levelFieldSpecified = true;
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class Capabilities2 : SharpOnvifCommon.Xml.OnvifObject
+    public partial class Capabilities2 : SharpOnvifCommon.Xml.OnvifContract
     {
         private ProfileCapabilities profileCapabilitiesField;
 
@@ -4149,444 +1151,8 @@ namespace SharpOnvifClient.Media2
 
     }
 
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Color : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private float xField;
-
-        private float yField;
-
-        private float zField;
-
-        private string colorspaceField;
-
-        private float likelihoodField;
-        private bool likelihoodFieldSpecified;
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public float X
-        {
-            get { return this.xField; }
-            set { this.xField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public float Y
-        {
-            get { return this.yField; }
-            set { this.yField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public float Z
-        {
-            get { return this.zField; }
-            set { this.zField = value; }
-        }
-
-        /// <summary>
-        /// Acceptable values: http://www.onvif.org/ver10/colorspace/YCbCr - YCbCr X attribute = Y valueY
-        /// attribute = Cb valueZ attribute = Cr valuehttp://www.onvif.org/ver10/colorspace/RGB - RGB X
-        /// attribute = R valueY attribute = G valueZ attribute = B value If the Colorspace attribute is absent
-        /// and not defined on higher level, YCbCr is implied. Deprecated values:
-        /// http://www.onvif.org/ver10/colorspace/CIELUV - CIE LUVhttp://www.onvif.org/ver10/colorspace/CIELAB -
-        /// CIE 1976 (L*a*b*)http://www.onvif.org/ver10/colorspace/HSV - HSV
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
-        public string Colorspace
-        {
-            get { return this.colorspaceField; }
-            set { this.colorspaceField = value; }
-        }
-
-        /// <summary>
-        /// Likelihood that the color is correct.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public float Likelihood
-        {
-            get { return this.likelihoodField; }
-            set { this.likelihoodField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="Likelihood"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool LikelihoodSpecified
-        {
-            get { return this.likelihoodFieldSpecified; }
-            set { this.likelihoodFieldSpecified = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "Color"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAttributeString(null, "X", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.xField));
-            writer.WriteAttributeString(null, "Y", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.yField));
-            writer.WriteAttributeString(null, "Z", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.zField));
-            writer.WriteAttributeString(null, "Colorspace", this.colorspaceField);
-            if (this.likelihoodFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "Likelihood", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.likelihoodField));
-            }
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "X":
-                    this.xField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.AttributeValue);
-                    return true;
-                case "Y":
-                    this.yField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.AttributeValue);
-                    return true;
-                case "Z":
-                    this.zField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.AttributeValue);
-                    return true;
-                case "Colorspace":
-                    this.colorspaceField = reader.AttributeValue;
-                    return true;
-                case "Likelihood":
-                    this.likelihoodField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.AttributeValue);
-                    this.likelihoodFieldSpecified = true;
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    /// <summary>
-    /// Describe the colors supported. Either list each color or define the range of color values.
-    /// </summary>
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ColorOptions : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private object[] itemsField;
-
-        [System.Xml.Serialization.XmlElementAttribute("ColorList", typeof(Color), Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("ColorspaceRange", typeof(ColorspaceRange), Order=0)]
-        public object[] Items
-        {
-            get { return this.itemsField; }
-            set { this.itemsField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "ColorOptions"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            if (this.itemsField != null)
-            {
-                for (int i = 0; i < this.itemsField.Length; i++)
-                {
-                    if (this.itemsField[i] is Color)
-                    {
-                        writer.WriteElement(Ns.OnvifVer10, "ColorList", ((Color)this.itemsField[i]), Ns.OnvifVer10, "Color");
-                    }
-                    else if (this.itemsField[i] is ColorspaceRange)
-                    {
-                        writer.WriteElement(Ns.OnvifVer10, "ColorspaceRange", ((ColorspaceRange)this.itemsField[i]), Ns.OnvifVer10, "ColorspaceRange");
-                    }
-                }
-            }
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "ColorList":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.itemsField, (object)reader.ReadElementObject<Color>(() => new Color()));
-                    return true;
-                case "ColorspaceRange":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.itemsField, (object)reader.ReadElementObject<ColorspaceRange>(() => new ColorspaceRange()));
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ColorspaceRange : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private FloatRange xField;
-
-        private FloatRange yField;
-
-        private FloatRange zField;
-
-        private string colorspaceField;
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public FloatRange X
-        {
-            get { return this.xField; }
-            set { this.xField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public FloatRange Y
-        {
-            get { return this.yField; }
-            set { this.yField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public FloatRange Z
-        {
-            get { return this.zField; }
-            set { this.zField = value; }
-        }
-
-        /// <summary>
-        /// Acceptable values are the same as in tt:Color.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3, DataType="anyURI")]
-        public string Colorspace
-        {
-            get { return this.colorspaceField; }
-            set { this.colorspaceField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "ColorspaceRange"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElement(Ns.OnvifVer10, "X", this.xField, Ns.OnvifVer10, "FloatRange");
-            writer.WriteElement(Ns.OnvifVer10, "Y", this.yField, Ns.OnvifVer10, "FloatRange");
-            writer.WriteElement(Ns.OnvifVer10, "Z", this.zField, Ns.OnvifVer10, "FloatRange");
-            writer.WriteElementString(Ns.OnvifVer10, "Colorspace", this.colorspaceField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "X":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.xField = reader.ReadElementObject<FloatRange>(() => new FloatRange());
-                    return true;
-                case "Y":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.yField = reader.ReadElementObject<FloatRange>(() => new FloatRange());
-                    return true;
-                case "Z":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.zField = reader.ReadElementObject<FloatRange>(() => new FloatRange());
-                    return true;
-                case "Colorspace":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.colorspaceField = reader.ReadElementText();
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Config : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private ItemList parametersField;
-
-        private string nameField;
-
-        private System.Xml.XmlQualifiedName typeField;
-
-        /// <summary>
-        /// List of configuration parameters as defined in the corresponding description.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public ItemList Parameters
-        {
-            get { return this.parametersField; }
-            set { this.parametersField = value; }
-        }
-
-        /// <summary>
-        /// Name of the configuration.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name
-        {
-            get { return this.nameField; }
-            set { this.nameField = value; }
-        }
-
-        /// <summary>
-        /// The Type attribute specifies the type of rule and shall be equal to value of one of Name attributes
-        /// of ConfigDescription elements returned by GetSupportedRules and GetSupportedAnalyticsModules
-        /// command.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public System.Xml.XmlQualifiedName Type
-        {
-            get { return this.typeField; }
-            set { this.typeField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "Config"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAttributeString(null, "Name", this.nameField);
-            writer.WriteAttributeString(null, "Type", writer.QualifiedNameToString(this.typeField));
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElement(Ns.OnvifVer10, "Parameters", this.parametersField, Ns.OnvifVer10, "ItemList");
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Name":
-                    this.nameField = reader.AttributeValue;
-                    return true;
-                case "Type":
-                    this.typeField = reader.ToQualifiedName(reader.AttributeValue);
-                    return true;
-            }
-            return false;
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Parameters":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.parametersField = reader.ReadElementObject<ItemList>(() => new ItemList());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    /// <summary>
-    /// Base type defining the common properties of a configuration.
-    /// </summary>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AnalyticsEngine))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AnalyticsEngineControl))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AnalyticsEngineInput))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AudioDecoderConfiguration))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AudioEncoder2Configuration))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AudioEncoderConfiguration))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AudioOutputConfiguration))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AudioSourceConfiguration))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(MetadataConfiguration))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(MulticastAudioDecoderConfiguration))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(PTZConfiguration))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(VideoAnalyticsConfiguration))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(VideoEncoder2Configuration))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(VideoEncoderConfiguration))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(VideoOutputConfiguration))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(VideoSourceConfiguration))]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ConfigurationEntity : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string nameField;
-
-        private int useCountField;
-
-        private string tokenField;
-
-        /// <summary>
-        /// User readable name. Length up to 64 characters.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string Name
-        {
-            get { return this.nameField; }
-            set { this.nameField = value; }
-        }
-
-        /// <summary>
-        /// Number of internal references currently using this configuration. This informational parameter is
-        /// read-only. Deprecated for Media2 Service.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public int UseCount
-        {
-            get { return this.useCountField; }
-            set { this.useCountField = value; }
-        }
-
-        /// <summary>
-        /// Token that uniquely references this configuration. Length up to 64 characters.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string token
-        {
-            get { return this.tokenField; }
-            set { this.tokenField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "ConfigurationEntity"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAttributeString(null, "token", this.tokenField);
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Name", this.nameField);
-            writer.WriteElementString(Ns.OnvifVer10, "UseCount", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.useCountField));
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "token":
-                    this.tokenField = reader.AttributeValue;
-                    return true;
-            }
-            return false;
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Name":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.nameField = reader.ReadElementText();
-                    return true;
-                case "UseCount":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.useCountField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class ConfigurationRef : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ConfigurationRef : SharpOnvifCommon.Xml.OnvifContract
     {
         private string typeField;
 
@@ -4648,25 +1214,25 @@ namespace SharpOnvifClient.Media2
     /// A set of media configurations.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class ConfigurationSet : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ConfigurationSet : SharpOnvifCommon.Xml.OnvifContract
     {
-        private VideoSourceConfiguration videoSourceField;
+        private SharpOnvifCommon.Onvif.VideoSourceConfiguration videoSourceField;
 
-        private AudioSourceConfiguration audioSourceField;
+        private SharpOnvifCommon.Onvif.AudioSourceConfiguration audioSourceField;
 
-        private VideoEncoder2Configuration videoEncoderField;
+        private SharpOnvifCommon.Onvif.VideoEncoder2Configuration videoEncoderField;
 
-        private AudioEncoder2Configuration audioEncoderField;
+        private SharpOnvifCommon.Onvif.AudioEncoder2Configuration audioEncoderField;
 
-        private VideoAnalyticsConfiguration analyticsField;
+        private SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration analyticsField;
 
-        private PTZConfiguration pTZField;
+        private SharpOnvifCommon.Onvif.PTZConfiguration pTZField;
 
-        private MetadataConfiguration metadataField;
+        private SharpOnvifCommon.Onvif.MetadataConfiguration metadataField;
 
-        private AudioOutputConfiguration audioOutputField;
+        private SharpOnvifCommon.Onvif.AudioOutputConfiguration audioOutputField;
 
-        private AudioDecoderConfiguration audioDecoderField;
+        private SharpOnvifCommon.Onvif.AudioDecoderConfiguration audioDecoderField;
 
         private ReceiverConfiguration receiverField;
 
@@ -4676,7 +1242,7 @@ namespace SharpOnvifClient.Media2
         /// Optional configuration of the Video input.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public VideoSourceConfiguration VideoSource
+        public SharpOnvifCommon.Onvif.VideoSourceConfiguration VideoSource
         {
             get { return this.videoSourceField; }
             set { this.videoSourceField = value; }
@@ -4686,7 +1252,7 @@ namespace SharpOnvifClient.Media2
         /// Optional configuration of the Audio input.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public AudioSourceConfiguration AudioSource
+        public SharpOnvifCommon.Onvif.AudioSourceConfiguration AudioSource
         {
             get { return this.audioSourceField; }
             set { this.audioSourceField = value; }
@@ -4696,7 +1262,7 @@ namespace SharpOnvifClient.Media2
         /// Optional configuration of the Video encoder.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public VideoEncoder2Configuration VideoEncoder
+        public SharpOnvifCommon.Onvif.VideoEncoder2Configuration VideoEncoder
         {
             get { return this.videoEncoderField; }
             set { this.videoEncoderField = value; }
@@ -4706,7 +1272,7 @@ namespace SharpOnvifClient.Media2
         /// Optional configuration of the Audio encoder.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public AudioEncoder2Configuration AudioEncoder
+        public SharpOnvifCommon.Onvif.AudioEncoder2Configuration AudioEncoder
         {
             get { return this.audioEncoderField; }
             set { this.audioEncoderField = value; }
@@ -4716,7 +1282,7 @@ namespace SharpOnvifClient.Media2
         /// Optional configuration of the analytics module and rule engine.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public VideoAnalyticsConfiguration Analytics
+        public SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration Analytics
         {
             get { return this.analyticsField; }
             set { this.analyticsField = value; }
@@ -4726,7 +1292,7 @@ namespace SharpOnvifClient.Media2
         /// Optional configuration of the pan tilt zoom unit.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public PTZConfiguration PTZ
+        public SharpOnvifCommon.Onvif.PTZConfiguration PTZ
         {
             get { return this.pTZField; }
             set { this.pTZField = value; }
@@ -4736,7 +1302,7 @@ namespace SharpOnvifClient.Media2
         /// Optional configuration of the metadata stream.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=6)]
-        public MetadataConfiguration Metadata
+        public SharpOnvifCommon.Onvif.MetadataConfiguration Metadata
         {
             get { return this.metadataField; }
             set { this.metadataField = value; }
@@ -4746,7 +1312,7 @@ namespace SharpOnvifClient.Media2
         /// Optional configuration of the Audio output.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=7)]
-        public AudioOutputConfiguration AudioOutput
+        public SharpOnvifCommon.Onvif.AudioOutputConfiguration AudioOutput
         {
             get { return this.audioOutputField; }
             set { this.audioOutputField = value; }
@@ -4756,7 +1322,7 @@ namespace SharpOnvifClient.Media2
         /// Optional configuration of the Audio decoder.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=8)]
-        public AudioDecoderConfiguration AudioDecoder
+        public SharpOnvifCommon.Onvif.AudioDecoderConfiguration AudioDecoder
         {
             get { return this.audioDecoderField; }
             set { this.audioDecoderField = value; }
@@ -4785,15 +1351,15 @@ namespace SharpOnvifClient.Media2
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            writer.WriteElement(Ns.Ver20Media, "VideoSource", this.videoSourceField, Ns.OnvifVer10, "VideoSourceConfiguration");
-            writer.WriteElement(Ns.Ver20Media, "AudioSource", this.audioSourceField, Ns.OnvifVer10, "AudioSourceConfiguration");
-            writer.WriteElement(Ns.Ver20Media, "VideoEncoder", this.videoEncoderField, Ns.OnvifVer10, "VideoEncoder2Configuration");
-            writer.WriteElement(Ns.Ver20Media, "AudioEncoder", this.audioEncoderField, Ns.OnvifVer10, "AudioEncoder2Configuration");
-            writer.WriteElement(Ns.Ver20Media, "Analytics", this.analyticsField, Ns.OnvifVer10, "VideoAnalyticsConfiguration");
-            writer.WriteElement(Ns.Ver20Media, "PTZ", this.pTZField, Ns.OnvifVer10, "PTZConfiguration");
-            writer.WriteElement(Ns.Ver20Media, "Metadata", this.metadataField, Ns.OnvifVer10, "MetadataConfiguration");
-            writer.WriteElement(Ns.Ver20Media, "AudioOutput", this.audioOutputField, Ns.OnvifVer10, "AudioOutputConfiguration");
-            writer.WriteElement(Ns.Ver20Media, "AudioDecoder", this.audioDecoderField, Ns.OnvifVer10, "AudioDecoderConfiguration");
+            writer.WriteElement(Ns.Ver20Media, "VideoSource", this.videoSourceField, "http://www.onvif.org/ver10/schema", "VideoSourceConfiguration");
+            writer.WriteElement(Ns.Ver20Media, "AudioSource", this.audioSourceField, "http://www.onvif.org/ver10/schema", "AudioSourceConfiguration");
+            writer.WriteElement(Ns.Ver20Media, "VideoEncoder", this.videoEncoderField, "http://www.onvif.org/ver10/schema", "VideoEncoder2Configuration");
+            writer.WriteElement(Ns.Ver20Media, "AudioEncoder", this.audioEncoderField, "http://www.onvif.org/ver10/schema", "AudioEncoder2Configuration");
+            writer.WriteElement(Ns.Ver20Media, "Analytics", this.analyticsField, "http://www.onvif.org/ver10/schema", "VideoAnalyticsConfiguration");
+            writer.WriteElement(Ns.Ver20Media, "PTZ", this.pTZField, "http://www.onvif.org/ver10/schema", "PTZConfiguration");
+            writer.WriteElement(Ns.Ver20Media, "Metadata", this.metadataField, "http://www.onvif.org/ver10/schema", "MetadataConfiguration");
+            writer.WriteElement(Ns.Ver20Media, "AudioOutput", this.audioOutputField, "http://www.onvif.org/ver10/schema", "AudioOutputConfiguration");
+            writer.WriteElement(Ns.Ver20Media, "AudioDecoder", this.audioDecoderField, "http://www.onvif.org/ver10/schema", "AudioDecoderConfiguration");
             writer.WriteElement(Ns.Ver20Media, "Receiver", this.receiverField, Ns.Ver20Media, "ReceiverConfiguration");
             writer.WriteAny(this.anyField);
         }
@@ -4804,39 +1370,39 @@ namespace SharpOnvifClient.Media2
             {
                 case "VideoSource":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.videoSourceField = reader.ReadElementObject<VideoSourceConfiguration>(() => new VideoSourceConfiguration());
+                    this.videoSourceField = reader.ReadElementObject<SharpOnvifCommon.Onvif.VideoSourceConfiguration>(() => new SharpOnvifCommon.Onvif.VideoSourceConfiguration());
                     return true;
                 case "AudioSource":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.audioSourceField = reader.ReadElementObject<AudioSourceConfiguration>(() => new AudioSourceConfiguration());
+                    this.audioSourceField = reader.ReadElementObject<SharpOnvifCommon.Onvif.AudioSourceConfiguration>(() => new SharpOnvifCommon.Onvif.AudioSourceConfiguration());
                     return true;
                 case "VideoEncoder":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.videoEncoderField = reader.ReadElementObject<VideoEncoder2Configuration>(() => new VideoEncoder2Configuration());
+                    this.videoEncoderField = reader.ReadElementObject<SharpOnvifCommon.Onvif.VideoEncoder2Configuration>(() => new SharpOnvifCommon.Onvif.VideoEncoder2Configuration());
                     return true;
                 case "AudioEncoder":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.audioEncoderField = reader.ReadElementObject<AudioEncoder2Configuration>(() => new AudioEncoder2Configuration());
+                    this.audioEncoderField = reader.ReadElementObject<SharpOnvifCommon.Onvif.AudioEncoder2Configuration>(() => new SharpOnvifCommon.Onvif.AudioEncoder2Configuration());
                     return true;
                 case "Analytics":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.analyticsField = reader.ReadElementObject<VideoAnalyticsConfiguration>(() => new VideoAnalyticsConfiguration());
+                    this.analyticsField = reader.ReadElementObject<SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration>(() => new SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration());
                     return true;
                 case "PTZ":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.pTZField = reader.ReadElementObject<PTZConfiguration>(() => new PTZConfiguration());
+                    this.pTZField = reader.ReadElementObject<SharpOnvifCommon.Onvif.PTZConfiguration>(() => new SharpOnvifCommon.Onvif.PTZConfiguration());
                     return true;
                 case "Metadata":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.metadataField = reader.ReadElementObject<MetadataConfiguration>(() => new MetadataConfiguration());
+                    this.metadataField = reader.ReadElementObject<SharpOnvifCommon.Onvif.MetadataConfiguration>(() => new SharpOnvifCommon.Onvif.MetadataConfiguration());
                     return true;
                 case "AudioOutput":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.audioOutputField = reader.ReadElementObject<AudioOutputConfiguration>(() => new AudioOutputConfiguration());
+                    this.audioOutputField = reader.ReadElementObject<SharpOnvifCommon.Onvif.AudioOutputConfiguration>(() => new SharpOnvifCommon.Onvif.AudioOutputConfiguration());
                     return true;
                 case "AudioDecoder":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.audioDecoderField = reader.ReadElementObject<AudioDecoderConfiguration>(() => new AudioDecoderConfiguration());
+                    this.audioDecoderField = reader.ReadElementObject<SharpOnvifCommon.Onvif.AudioDecoderConfiguration>(() => new SharpOnvifCommon.Onvif.AudioDecoderConfiguration());
                     return true;
                 case "Receiver":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
@@ -4853,7 +1419,7 @@ namespace SharpOnvifClient.Media2
     /// Create the Mask.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateMask", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class CreateMaskRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CreateMaskRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private Mask maskField;
 
@@ -4899,7 +1465,7 @@ namespace SharpOnvifClient.Media2
     /// Create the Mask.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateMaskResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class CreateMaskResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CreateMaskResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -4945,15 +1511,15 @@ namespace SharpOnvifClient.Media2
     /// Create the OSD.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateOSD", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class CreateOSDRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CreateOSDRequest : SharpOnvifCommon.Xml.OnvifContract
     {
-        private OSDConfiguration oSDField;
+        private SharpOnvifCommon.Onvif.OSDConfiguration oSDField;
 
         /// <summary>
         /// Contain the initial OSD configuration for create.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public OSDConfiguration OSD
+        public SharpOnvifCommon.Onvif.OSDConfiguration OSD
         {
             get { return this.oSDField; }
             set { this.oSDField = value; }
@@ -4963,14 +1529,14 @@ namespace SharpOnvifClient.Media2
         {
         }
 
-        public CreateOSDRequest(OSDConfiguration oSD)
+        public CreateOSDRequest(SharpOnvifCommon.Onvif.OSDConfiguration oSD)
         {
             this.oSDField = oSD;
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            writer.WriteElement(Ns.Ver20Media, "OSD", this.oSDField, Ns.OnvifVer10, "OSDConfiguration");
+            writer.WriteElement(Ns.Ver20Media, "OSD", this.oSDField, "http://www.onvif.org/ver10/schema", "OSDConfiguration");
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
@@ -4979,7 +1545,7 @@ namespace SharpOnvifClient.Media2
             {
                 case "OSD":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.oSDField = reader.ReadElementObject<OSDConfiguration>(() => new OSDConfiguration());
+                    this.oSDField = reader.ReadElementObject<SharpOnvifCommon.Onvif.OSDConfiguration>(() => new SharpOnvifCommon.Onvif.OSDConfiguration());
                     return true;
             }
             return false;
@@ -4991,7 +1557,7 @@ namespace SharpOnvifClient.Media2
     /// Create the OSD.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateOSDResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class CreateOSDResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CreateOSDResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private string oSDTokenField;
 
@@ -5039,7 +1605,7 @@ namespace SharpOnvifClient.Media2
     /// For details regarding profile assignement check also the method AddConfiguration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateProfile", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class CreateProfileRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CreateProfileRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string nameField;
 
@@ -5112,7 +1678,7 @@ namespace SharpOnvifClient.Media2
     /// For details regarding profile assignement check also the method AddConfiguration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateProfileResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class CreateProfileResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CreateProfileResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -5154,121 +1720,6 @@ namespace SharpOnvifClient.Media2
 
     }
 
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Defogging : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string modeField;
-
-        private float levelField;
-        private bool levelFieldSpecified;
-
-        private DefoggingExtension extensionField;
-
-        /// <summary>
-        /// Parameter to enable/disable or automatic Defogging feature. Its options shall be chosen from
-        /// tt:DefoggingMode Type.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string Mode
-        {
-            get { return this.modeField; }
-            set { this.modeField = value; }
-        }
-
-        /// <summary>
-        /// Optional level parameter specified with unitless normalized value from 0.0 to +1.0.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public float Level
-        {
-            get { return this.levelField; }
-            set { this.levelField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="Level"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool LevelSpecified
-        {
-            get { return this.levelFieldSpecified; }
-            set { this.levelFieldSpecified = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public DefoggingExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "Defogging"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Mode", this.modeField);
-            if (this.levelFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "Level", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.levelField));
-            }
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "DefoggingExtension");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Mode":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.modeField = reader.ReadElementText();
-                    return true;
-                case "Level":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.levelField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    this.levelFieldSpecified = true;
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<DefoggingExtension>(() => new DefoggingExtension());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class DefoggingExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "DefoggingExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
     /// <summary>
     /// This operation deletes the audio clip configuration and the associated audio clip on the device. The
     /// audio clip should be de-associated from the event or schedule trigger if it was previously
@@ -5276,7 +1727,7 @@ namespace SharpOnvifClient.Media2
     /// at the same time due to user operation, schedule, or event trigger.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteAudioClip", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class DeleteAudioClipRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteAudioClipRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -5325,7 +1776,7 @@ namespace SharpOnvifClient.Media2
     /// at the same time due to user operation, schedule, or event trigger.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteAudioClipResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class DeleteAudioClipResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteAudioClipResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public DeleteAudioClipResponse()
         {
@@ -5337,7 +1788,7 @@ namespace SharpOnvifClient.Media2
     /// Delete the Mask.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteMask", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class DeleteMaskRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteMaskRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -5383,7 +1834,7 @@ namespace SharpOnvifClient.Media2
     /// Delete the Mask.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteMaskResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class DeleteMaskResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteMaskResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public DeleteMaskResponse()
         {
@@ -5395,7 +1846,7 @@ namespace SharpOnvifClient.Media2
     /// Delete the OSD.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteOSD", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class DeleteOSDRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteOSDRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string oSDTokenField;
 
@@ -5441,7 +1892,7 @@ namespace SharpOnvifClient.Media2
     /// Delete the OSD.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteOSDResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class DeleteOSDResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteOSDResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public DeleteOSDResponse()
         {
@@ -5453,7 +1904,7 @@ namespace SharpOnvifClient.Media2
     /// This operation deletes a profile. Deletion of a profile is only possible for non-fixed profiles
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteProfile", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class DeleteProfileRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteProfileRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -5499,7 +1950,7 @@ namespace SharpOnvifClient.Media2
     /// This operation deletes a profile. Deletion of a profile is only possible for non-fixed profiles
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteProfileResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class DeleteProfileResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteProfileResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public DeleteProfileResponse()
         {
@@ -5507,696 +1958,8 @@ namespace SharpOnvifClient.Media2
 
     }
 
-    /// <summary>
-    /// Base class for physical entities like inputs and outputs.
-    /// </summary>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AudioOutput))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AudioSource))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(DigitalInput))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(NetworkInterface))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(OSDConfiguration))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(PTZNode))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(RelayOutput))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(VideoOutput))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(VideoSource))]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class DeviceEntity : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string tokenField;
-
-        /// <summary>
-        /// Unique identifier referencing the physical entity.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string token
-        {
-            get { return this.tokenField; }
-            set { this.tokenField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "DeviceEntity"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAttributeString(null, "token", this.tokenField);
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "token":
-                    this.tokenField = reader.AttributeValue;
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class DigitalInput : DeviceEntity
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        private DigitalIdleState idleStateField;
-        private bool idleStateFieldSpecified;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        /// <summary>
-        /// Indicate the Digital IdleState status.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public DigitalIdleState IdleState
-        {
-            get { return this.idleStateField; }
-            set { this.idleStateField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="IdleState"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IdleStateSpecified
-        {
-            get { return this.idleStateFieldSpecified; }
-            set { this.idleStateFieldSpecified = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "DigitalInput"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlAttributes(writer);
-            if (this.idleStateFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "IdleState", EnumXml.ToXml(this.idleStateField));
-            }
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlContent(writer);
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "IdleState":
-                    this.idleStateField = EnumXml.ParseDigitalIdleState(reader.AttributeValue);
-                    this.idleStateFieldSpecified = true;
-                    return true;
-            }
-            return base.ReadXmlAttribute(reader);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            if (base.ReadXmlElement(reader)) return true;
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Dot11Configuration : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private byte[] sSIDField;
-
-        private Dot11StationMode modeField;
-
-        private string aliasField;
-
-        private string priorityField;
-
-        private Dot11SecurityConfiguration securityField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=0, DataType="hexBinary")]
-        public byte[] SSID
-        {
-            get { return this.sSIDField; }
-            set { this.sSIDField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public Dot11StationMode Mode
-        {
-            get { return this.modeField; }
-            set { this.modeField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public string Alias
-        {
-            get { return this.aliasField; }
-            set { this.aliasField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=3, DataType="integer")]
-        public string Priority
-        {
-            get { return this.priorityField; }
-            set { this.priorityField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public Dot11SecurityConfiguration Security
-        {
-            get { return this.securityField; }
-            set { this.securityField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=5)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "Dot11Configuration"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "SSID", SharpOnvifCommon.Xml.XmlPrimitives.ToHexString(this.sSIDField));
-            writer.WriteElementString(Ns.OnvifVer10, "Mode", EnumXml.ToXml(this.modeField));
-            writer.WriteElementString(Ns.OnvifVer10, "Alias", this.aliasField);
-            writer.WriteElementString(Ns.OnvifVer10, "Priority", this.priorityField);
-            writer.WriteElement(Ns.OnvifVer10, "Security", this.securityField, Ns.OnvifVer10, "Dot11SecurityConfiguration");
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "SSID":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.sSIDField = SharpOnvifCommon.Xml.XmlPrimitives.FromHexString(reader.ReadElementText());
-                    return true;
-                case "Mode":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.modeField = EnumXml.ParseDot11StationMode(reader.ReadElementText());
-                    return true;
-                case "Alias":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.aliasField = reader.ReadElementText();
-                    return true;
-                case "Priority":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.priorityField = reader.ReadElementText();
-                    return true;
-                case "Security":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.securityField = reader.ReadElementObject<Dot11SecurityConfiguration>(() => new Dot11SecurityConfiguration());
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Dot11PSKSet : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private byte[] keyField;
-
-        private string passphraseField;
-
-        private Dot11PSKSetExtension extensionField;
-
-        /// <summary>
-        /// According to IEEE802.11-2007 H.4.1 the RSNA PSK consists of 256 bits, or 64 octets when represented
-        /// in hex Either Key or Passphrase shall be given, if both are supplied Key shall be used by the device
-        /// and Passphrase ignored.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0, DataType="hexBinary")]
-        public byte[] Key
-        {
-            get { return this.keyField; }
-            set { this.keyField = value; }
-        }
-
-        /// <summary>
-        /// According to IEEE802.11-2007 H.4.1 a pass-phrase is a sequence of between 8 and 63 ASCII-encoded
-        /// characters and each character in the pass-phrase must have an encoding in the range of 32 to 126
-        /// (decimal),inclusive. If only Passpharse is supplied the Key shall be derived using the algorithm
-        /// described in IEEE802.11-2007 section H.4
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public string Passphrase
-        {
-            get { return this.passphraseField; }
-            set { this.passphraseField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public Dot11PSKSetExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "Dot11PSKSet"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Key", SharpOnvifCommon.Xml.XmlPrimitives.ToHexString(this.keyField));
-            writer.WriteElementString(Ns.OnvifVer10, "Passphrase", this.passphraseField);
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "Dot11PSKSetExtension");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Key":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.keyField = SharpOnvifCommon.Xml.XmlPrimitives.FromHexString(reader.ReadElementText());
-                    return true;
-                case "Passphrase":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.passphraseField = reader.ReadElementText();
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<Dot11PSKSetExtension>(() => new Dot11PSKSetExtension());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Dot11PSKSetExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "Dot11PSKSetExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Dot11SecurityConfiguration : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private Dot11SecurityMode modeField;
-
-        private Dot11Cipher algorithmField;
-        private bool algorithmFieldSpecified;
-
-        private Dot11PSKSet pSKField;
-
-        private string dot1XField;
-
-        private Dot11SecurityConfigurationExtension extensionField;
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public Dot11SecurityMode Mode
-        {
-            get { return this.modeField; }
-            set { this.modeField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public Dot11Cipher Algorithm
-        {
-            get { return this.algorithmField; }
-            set { this.algorithmField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="Algorithm"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool AlgorithmSpecified
-        {
-            get { return this.algorithmFieldSpecified; }
-            set { this.algorithmFieldSpecified = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public Dot11PSKSet PSK
-        {
-            get { return this.pSKField; }
-            set { this.pSKField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public string Dot1X
-        {
-            get { return this.dot1XField; }
-            set { this.dot1XField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public Dot11SecurityConfigurationExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "Dot11SecurityConfiguration"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Mode", EnumXml.ToXml(this.modeField));
-            if (this.algorithmFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "Algorithm", EnumXml.ToXml(this.algorithmField));
-            }
-            writer.WriteElement(Ns.OnvifVer10, "PSK", this.pSKField, Ns.OnvifVer10, "Dot11PSKSet");
-            writer.WriteElementString(Ns.OnvifVer10, "Dot1X", this.dot1XField);
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "Dot11SecurityConfigurationExtension");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Mode":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.modeField = EnumXml.ParseDot11SecurityMode(reader.ReadElementText());
-                    return true;
-                case "Algorithm":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.algorithmField = EnumXml.ParseDot11Cipher(reader.ReadElementText());
-                    this.algorithmFieldSpecified = true;
-                    return true;
-                case "PSK":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.pSKField = reader.ReadElementObject<Dot11PSKSet>(() => new Dot11PSKSet());
-                    return true;
-                case "Dot1X":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.dot1XField = reader.ReadElementText();
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<Dot11SecurityConfigurationExtension>(() => new Dot11SecurityConfigurationExtension());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Dot11SecurityConfigurationExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "Dot11SecurityConfigurationExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Dot3Configuration : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "Dot3Configuration"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class EFlip : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private EFlipMode modeField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        /// <summary>
-        /// Parameter to enable/disable E-Flip feature.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public EFlipMode Mode
-        {
-            get { return this.modeField; }
-            set { this.modeField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Namespace="http://www.onvif.org/ver10/schema", Order=1)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "EFlip"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Mode", EnumXml.ToXml(this.modeField));
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Mode":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.modeField = EnumXml.ParseEFlipMode(reader.ReadElementText());
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class EQPreset : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string tokenField;
-
-        private string nameField;
-
-        private bool isDefaultField;
-
-        private string scheduleTokenField;
-
-        private bool isFrequencyDecibelEditableField;
-
-        private FrequencyDecibelPair[] frequencyDecibelPairField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        /// <summary>
-        /// Unique identifier for the preset.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string Token
-        {
-            get { return this.tokenField; }
-            set { this.tokenField = value; }
-        }
-
-        /// <summary>
-        /// Preset name. (Readonly)
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public string Name
-        {
-            get { return this.nameField; }
-            set { this.nameField = value; }
-        }
-
-        /// <summary>
-        /// This indicates whether the EQ preset is designated as the default. When the scheduler is inactive,
-        /// this preset will be applied. Only one preset can be set as the default among the EQ presets linked
-        /// to an audio output. If all presets have isDefault set to false, the device may automatically select
-        /// one preset as the default.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public bool isDefault
-        {
-            get { return this.isDefaultField; }
-            set { this.isDefaultField = value; }
-        }
-
-        /// <summary>
-        /// Optional schedule token (if supported).
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public string ScheduleToken
-        {
-            get { return this.scheduleTokenField; }
-            set { this.scheduleTokenField = value; }
-        }
-
-        /// <summary>
-        /// Indicates whether the device allows changing the decibel level for frequencies. (Readonly)
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public bool isFrequencyDecibelEditable
-        {
-            get { return this.isFrequencyDecibelEditableField; }
-            set { this.isFrequencyDecibelEditableField = value; }
-        }
-
-        /// <summary>
-        /// List of frequency decibel pairs, each defined by a center frequency and its corresponding decibel
-        /// value.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("FrequencyDecibelPair", Order=5)]
-        public FrequencyDecibelPair[] FrequencyDecibelPair
-        {
-            get { return this.frequencyDecibelPairField; }
-            set { this.frequencyDecibelPairField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=6)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "EQPreset"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Token", this.tokenField);
-            writer.WriteElementString(Ns.OnvifVer10, "Name", this.nameField);
-            writer.WriteElementString(Ns.OnvifVer10, "isDefault", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.isDefaultField));
-            writer.WriteElementString(Ns.OnvifVer10, "ScheduleToken", this.scheduleTokenField);
-            writer.WriteElementString(Ns.OnvifVer10, "isFrequencyDecibelEditable", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.isFrequencyDecibelEditableField));
-            if (this.frequencyDecibelPairField != null)
-            {
-                for (int i = 0; i < this.frequencyDecibelPairField.Length; i++)
-                {
-                    writer.WriteElement(Ns.OnvifVer10, "FrequencyDecibelPair", this.frequencyDecibelPairField[i], Ns.OnvifVer10, "FrequencyDecibelPair");
-                }
-            }
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Token":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.tokenField = reader.ReadElementText();
-                    return true;
-                case "Name":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.nameField = reader.ReadElementText();
-                    return true;
-                case "isDefault":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.isDefaultField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
-                    return true;
-                case "ScheduleToken":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.scheduleTokenField = reader.ReadElementText();
-                    return true;
-                case "isFrequencyDecibelEditable":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.isFrequencyDecibelEditableField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
-                    return true;
-                case "FrequencyDecibelPair":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.frequencyDecibelPairField, reader.ReadElementObject<FrequencyDecibelPair>(() => new FrequencyDecibelPair()));
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class EncoderInstance : SharpOnvifCommon.Xml.OnvifObject
+    public partial class EncoderInstance : SharpOnvifCommon.Xml.OnvifContract
     {
         private string encodingField;
 
@@ -6252,7 +2015,7 @@ namespace SharpOnvifClient.Media2
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class EncoderInstanceInfo : SharpOnvifCommon.Xml.OnvifObject
+    public partial class EncoderInstanceInfo : SharpOnvifCommon.Xml.OnvifContract
     {
         private EncoderInstance[] codecField;
 
@@ -6325,1237 +2088,13 @@ namespace SharpOnvifClient.Media2
 
     }
 
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class EngineConfiguration : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private VideoAnalyticsConfiguration videoAnalyticsConfigurationField;
-
-        private AnalyticsEngineInputInfo analyticsEngineInputInfoField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public VideoAnalyticsConfiguration VideoAnalyticsConfiguration
-        {
-            get { return this.videoAnalyticsConfigurationField; }
-            set { this.videoAnalyticsConfigurationField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public AnalyticsEngineInputInfo AnalyticsEngineInputInfo
-        {
-            get { return this.analyticsEngineInputInfoField; }
-            set { this.analyticsEngineInputInfoField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=2)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "EngineConfiguration"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElement(Ns.OnvifVer10, "VideoAnalyticsConfiguration", this.videoAnalyticsConfigurationField, Ns.OnvifVer10, "VideoAnalyticsConfiguration");
-            writer.WriteElement(Ns.OnvifVer10, "AnalyticsEngineInputInfo", this.analyticsEngineInputInfoField, Ns.OnvifVer10, "AnalyticsEngineInputInfo");
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "VideoAnalyticsConfiguration":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.videoAnalyticsConfigurationField = reader.ReadElementObject<VideoAnalyticsConfiguration>(() => new VideoAnalyticsConfiguration());
-                    return true;
-                case "AnalyticsEngineInputInfo":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.analyticsEngineInputInfoField = reader.ReadElementObject<AnalyticsEngineInputInfo>(() => new AnalyticsEngineInputInfo());
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class EventFilter : FilterType
-    {
-        protected override string OnvifXmlTypeName { get { return "EventFilter"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-    }
-
-    /// <summary>
-    /// Subscription handling in the same way as base notification subscription.
-    /// </summary>
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class EventSubscription : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private FilterType filterField;
-
-        private EventSubscriptionSubscriptionPolicy subscriptionPolicyField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public FilterType Filter
-        {
-            get { return this.filterField; }
-            set { this.filterField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public EventSubscriptionSubscriptionPolicy SubscriptionPolicy
-        {
-            get { return this.subscriptionPolicyField; }
-            set { this.subscriptionPolicyField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=2)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "EventSubscription"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElement(Ns.OnvifVer10, "Filter", this.filterField, Ns.B2, "FilterType");
-            writer.WriteElement(Ns.OnvifVer10, "SubscriptionPolicy", this.subscriptionPolicyField, null, null);
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Filter":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.filterField = reader.ReadElementObject<FilterType>(() => new FilterType());
-                    return true;
-                case "SubscriptionPolicy":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.subscriptionPolicyField = reader.ReadElementObject<EventSubscriptionSubscriptionPolicy>(() => new EventSubscriptionSubscriptionPolicy());
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    public partial class EventSubscriptionSubscriptionPolicy : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Exposure : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private ExposureMode modeField;
-
-        private ExposurePriority priorityField;
-
-        private Rectangle windowField;
-
-        private float minExposureTimeField;
-
-        private float maxExposureTimeField;
-
-        private float minGainField;
-
-        private float maxGainField;
-
-        private float minIrisField;
-
-        private float maxIrisField;
-
-        private float exposureTimeField;
-
-        private float gainField;
-
-        private float irisField;
-
-        /// <summary>
-        /// Exposure Mode Auto - Enabled the exposure algorithm on the NVT.Manual - Disabled exposure algorithm
-        /// on the NVT.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public ExposureMode Mode
-        {
-            get { return this.modeField; }
-            set { this.modeField = value; }
-        }
-
-        /// <summary>
-        /// The exposure priority mode (low noise/framerate).
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public ExposurePriority Priority
-        {
-            get { return this.priorityField; }
-            set { this.priorityField = value; }
-        }
-
-        /// <summary>
-        /// Rectangular exposure mask.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public Rectangle Window
-        {
-            get { return this.windowField; }
-            set { this.windowField = value; }
-        }
-
-        /// <summary>
-        /// Minimum value of exposure time range allowed to be used by the algorithm.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public float MinExposureTime
-        {
-            get { return this.minExposureTimeField; }
-            set { this.minExposureTimeField = value; }
-        }
-
-        /// <summary>
-        /// Maximum value of exposure time range allowed to be used by the algorithm.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public float MaxExposureTime
-        {
-            get { return this.maxExposureTimeField; }
-            set { this.maxExposureTimeField = value; }
-        }
-
-        /// <summary>
-        /// Minimum value of the sensor gain range that is allowed to be used by the algorithm.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public float MinGain
-        {
-            get { return this.minGainField; }
-            set { this.minGainField = value; }
-        }
-
-        /// <summary>
-        /// Maximum value of the sensor gain range that is allowed to be used by the algorithm.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
-        public float MaxGain
-        {
-            get { return this.maxGainField; }
-            set { this.maxGainField = value; }
-        }
-
-        /// <summary>
-        /// Minimum value of the iris range allowed to be used by the algorithm.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
-        public float MinIris
-        {
-            get { return this.minIrisField; }
-            set { this.minIrisField = value; }
-        }
-
-        /// <summary>
-        /// Maximum value of the iris range allowed to be used by the algorithm.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
-        public float MaxIris
-        {
-            get { return this.maxIrisField; }
-            set { this.maxIrisField = value; }
-        }
-
-        /// <summary>
-        /// The fixed exposure time used by the image sensor (μs).
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
-        public float ExposureTime
-        {
-            get { return this.exposureTimeField; }
-            set { this.exposureTimeField = value; }
-        }
-
-        /// <summary>
-        /// The fixed gain used by the image sensor (dB).
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
-        public float Gain
-        {
-            get { return this.gainField; }
-            set { this.gainField = value; }
-        }
-
-        /// <summary>
-        /// The fixed attenuation of input light affected by the iris (dB). 0dB maps to a fully opened iris.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=11)]
-        public float Iris
-        {
-            get { return this.irisField; }
-            set { this.irisField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "Exposure"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Mode", EnumXml.ToXml(this.modeField));
-            writer.WriteElementString(Ns.OnvifVer10, "Priority", EnumXml.ToXml(this.priorityField));
-            writer.WriteElement(Ns.OnvifVer10, "Window", this.windowField, Ns.OnvifVer10, "Rectangle");
-            writer.WriteElementString(Ns.OnvifVer10, "MinExposureTime", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.minExposureTimeField));
-            writer.WriteElementString(Ns.OnvifVer10, "MaxExposureTime", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxExposureTimeField));
-            writer.WriteElementString(Ns.OnvifVer10, "MinGain", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.minGainField));
-            writer.WriteElementString(Ns.OnvifVer10, "MaxGain", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxGainField));
-            writer.WriteElementString(Ns.OnvifVer10, "MinIris", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.minIrisField));
-            writer.WriteElementString(Ns.OnvifVer10, "MaxIris", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxIrisField));
-            writer.WriteElementString(Ns.OnvifVer10, "ExposureTime", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.exposureTimeField));
-            writer.WriteElementString(Ns.OnvifVer10, "Gain", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.gainField));
-            writer.WriteElementString(Ns.OnvifVer10, "Iris", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.irisField));
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Mode":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.modeField = EnumXml.ParseExposureMode(reader.ReadElementText());
-                    return true;
-                case "Priority":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.priorityField = EnumXml.ParseExposurePriority(reader.ReadElementText());
-                    return true;
-                case "Window":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.windowField = reader.ReadElementObject<Rectangle>(() => new Rectangle());
-                    return true;
-                case "MinExposureTime":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.minExposureTimeField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    return true;
-                case "MaxExposureTime":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.maxExposureTimeField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    return true;
-                case "MinGain":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.minGainField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    return true;
-                case "MaxGain":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.maxGainField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    return true;
-                case "MinIris":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.minIrisField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    return true;
-                case "MaxIris":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.maxIrisField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    return true;
-                case "ExposureTime":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.exposureTimeField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    return true;
-                case "Gain":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.gainField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    return true;
-                case "Iris":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.irisField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    /// <summary>
-    /// Type describing the exposure settings.
-    /// </summary>
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Exposure20 : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private ExposureMode modeField;
-
-        private ExposurePriority priorityField;
-        private bool priorityFieldSpecified;
-
-        private Rectangle windowField;
-
-        private float minExposureTimeField;
-        private bool minExposureTimeFieldSpecified;
-
-        private float maxExposureTimeField;
-        private bool maxExposureTimeFieldSpecified;
-
-        private float minGainField;
-        private bool minGainFieldSpecified;
-
-        private float maxGainField;
-        private bool maxGainFieldSpecified;
-
-        private float minIrisField;
-        private bool minIrisFieldSpecified;
-
-        private float maxIrisField;
-        private bool maxIrisFieldSpecified;
-
-        private float exposureTimeField;
-        private bool exposureTimeFieldSpecified;
-
-        private float gainField;
-        private bool gainFieldSpecified;
-
-        private float irisField;
-        private bool irisFieldSpecified;
-
-        /// <summary>
-        /// Exposure Mode Auto - Enabled the exposure algorithm on the device.Manual - Disabled exposure
-        /// algorithm on the device.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public ExposureMode Mode
-        {
-            get { return this.modeField; }
-            set { this.modeField = value; }
-        }
-
-        /// <summary>
-        /// The exposure priority mode (low noise/framerate).
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public ExposurePriority Priority
-        {
-            get { return this.priorityField; }
-            set { this.priorityField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="Priority"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool PrioritySpecified
-        {
-            get { return this.priorityFieldSpecified; }
-            set { this.priorityFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// Rectangular exposure mask.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public Rectangle Window
-        {
-            get { return this.windowField; }
-            set { this.windowField = value; }
-        }
-
-        /// <summary>
-        /// Minimum value of exposure time range allowed to be used by the algorithm.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public float MinExposureTime
-        {
-            get { return this.minExposureTimeField; }
-            set { this.minExposureTimeField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="MinExposureTime"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool MinExposureTimeSpecified
-        {
-            get { return this.minExposureTimeFieldSpecified; }
-            set { this.minExposureTimeFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// Maximum value of exposure time range allowed to be used by the algorithm.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public float MaxExposureTime
-        {
-            get { return this.maxExposureTimeField; }
-            set { this.maxExposureTimeField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="MaxExposureTime"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool MaxExposureTimeSpecified
-        {
-            get { return this.maxExposureTimeFieldSpecified; }
-            set { this.maxExposureTimeFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// Minimum value of the sensor gain range that is allowed to be used by the algorithm.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public float MinGain
-        {
-            get { return this.minGainField; }
-            set { this.minGainField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="MinGain"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool MinGainSpecified
-        {
-            get { return this.minGainFieldSpecified; }
-            set { this.minGainFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// Maximum value of the sensor gain range that is allowed to be used by the algorithm.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
-        public float MaxGain
-        {
-            get { return this.maxGainField; }
-            set { this.maxGainField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="MaxGain"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool MaxGainSpecified
-        {
-            get { return this.maxGainFieldSpecified; }
-            set { this.maxGainFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// Minimum value of the iris range allowed to be used by the algorithm. 0dB maps to a fully opened iris
-        /// and positive values map to higher attenuation.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
-        public float MinIris
-        {
-            get { return this.minIrisField; }
-            set { this.minIrisField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="MinIris"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool MinIrisSpecified
-        {
-            get { return this.minIrisFieldSpecified; }
-            set { this.minIrisFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// Maximum value of the iris range allowed to be used by the algorithm. 0dB maps to a fully opened iris
-        /// and positive values map to higher attenuation.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
-        public float MaxIris
-        {
-            get { return this.maxIrisField; }
-            set { this.maxIrisField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="MaxIris"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool MaxIrisSpecified
-        {
-            get { return this.maxIrisFieldSpecified; }
-            set { this.maxIrisFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// The fixed exposure time used by the image sensor (μs).
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
-        public float ExposureTime
-        {
-            get { return this.exposureTimeField; }
-            set { this.exposureTimeField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="ExposureTime"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ExposureTimeSpecified
-        {
-            get { return this.exposureTimeFieldSpecified; }
-            set { this.exposureTimeFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// The fixed gain used by the image sensor (dB).
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
-        public float Gain
-        {
-            get { return this.gainField; }
-            set { this.gainField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="Gain"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool GainSpecified
-        {
-            get { return this.gainFieldSpecified; }
-            set { this.gainFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// The fixed attenuation of input light affected by the iris (dB). 0dB maps to a fully opened iris and
-        /// positive values map to higher attenuation.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=11)]
-        public float Iris
-        {
-            get { return this.irisField; }
-            set { this.irisField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="Iris"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IrisSpecified
-        {
-            get { return this.irisFieldSpecified; }
-            set { this.irisFieldSpecified = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "Exposure20"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Mode", EnumXml.ToXml(this.modeField));
-            if (this.priorityFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "Priority", EnumXml.ToXml(this.priorityField));
-            }
-            writer.WriteElement(Ns.OnvifVer10, "Window", this.windowField, Ns.OnvifVer10, "Rectangle");
-            if (this.minExposureTimeFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "MinExposureTime", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.minExposureTimeField));
-            }
-            if (this.maxExposureTimeFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "MaxExposureTime", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxExposureTimeField));
-            }
-            if (this.minGainFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "MinGain", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.minGainField));
-            }
-            if (this.maxGainFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "MaxGain", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxGainField));
-            }
-            if (this.minIrisFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "MinIris", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.minIrisField));
-            }
-            if (this.maxIrisFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "MaxIris", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxIrisField));
-            }
-            if (this.exposureTimeFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "ExposureTime", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.exposureTimeField));
-            }
-            if (this.gainFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "Gain", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.gainField));
-            }
-            if (this.irisFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "Iris", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.irisField));
-            }
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Mode":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.modeField = EnumXml.ParseExposureMode(reader.ReadElementText());
-                    return true;
-                case "Priority":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.priorityField = EnumXml.ParseExposurePriority(reader.ReadElementText());
-                    this.priorityFieldSpecified = true;
-                    return true;
-                case "Window":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.windowField = reader.ReadElementObject<Rectangle>(() => new Rectangle());
-                    return true;
-                case "MinExposureTime":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.minExposureTimeField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    this.minExposureTimeFieldSpecified = true;
-                    return true;
-                case "MaxExposureTime":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.maxExposureTimeField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    this.maxExposureTimeFieldSpecified = true;
-                    return true;
-                case "MinGain":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.minGainField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    this.minGainFieldSpecified = true;
-                    return true;
-                case "MaxGain":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.maxGainField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    this.maxGainFieldSpecified = true;
-                    return true;
-                case "MinIris":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.minIrisField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    this.minIrisFieldSpecified = true;
-                    return true;
-                case "MaxIris":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.maxIrisField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    this.maxIrisFieldSpecified = true;
-                    return true;
-                case "ExposureTime":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.exposureTimeField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    this.exposureTimeFieldSpecified = true;
-                    return true;
-                case "Gain":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.gainField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    this.gainFieldSpecified = true;
-                    return true;
-                case "Iris":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.irisField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    this.irisFieldSpecified = true;
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(EventFilter))]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class FilterType : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "FilterType"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    /// <summary>
-    /// Range of values greater equal Min value and less equal Max value.
-    /// </summary>
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class FloatRange : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private float minField;
-
-        private float maxField;
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public float Min
-        {
-            get { return this.minField; }
-            set { this.minField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public float Max
-        {
-            get { return this.maxField; }
-            set { this.maxField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "FloatRange"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Min", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.minField));
-            writer.WriteElementString(Ns.OnvifVer10, "Max", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxField));
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Min":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.minField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    return true;
-                case "Max":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.maxField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class FocusConfiguration : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private AutoFocusMode autoFocusModeField;
-
-        private float defaultSpeedField;
-
-        private float nearLimitField;
-
-        private float farLimitField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public AutoFocusMode AutoFocusMode
-        {
-            get { return this.autoFocusModeField; }
-            set { this.autoFocusModeField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public float DefaultSpeed
-        {
-            get { return this.defaultSpeedField; }
-            set { this.defaultSpeedField = value; }
-        }
-
-        /// <summary>
-        /// Parameter to set autofocus near limit (unit: meter).
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public float NearLimit
-        {
-            get { return this.nearLimitField; }
-            set { this.nearLimitField = value; }
-        }
-
-        /// <summary>
-        /// Parameter to set autofocus far limit (unit: meter). If set to 0.0, infinity will be used.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public float FarLimit
-        {
-            get { return this.farLimitField; }
-            set { this.farLimitField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=4)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "FocusConfiguration"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "AutoFocusMode", EnumXml.ToXml(this.autoFocusModeField));
-            writer.WriteElementString(Ns.OnvifVer10, "DefaultSpeed", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.defaultSpeedField));
-            writer.WriteElementString(Ns.OnvifVer10, "NearLimit", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.nearLimitField));
-            writer.WriteElementString(Ns.OnvifVer10, "FarLimit", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.farLimitField));
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "AutoFocusMode":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.autoFocusModeField = EnumXml.ParseAutoFocusMode(reader.ReadElementText());
-                    return true;
-                case "DefaultSpeed":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.defaultSpeedField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    return true;
-                case "NearLimit":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.nearLimitField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    return true;
-                case "FarLimit":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.farLimitField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class FocusConfiguration20 : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private AutoFocusMode autoFocusModeField;
-
-        private float defaultSpeedField;
-        private bool defaultSpeedFieldSpecified;
-
-        private float nearLimitField;
-        private bool nearLimitFieldSpecified;
-
-        private float farLimitField;
-        private bool farLimitFieldSpecified;
-
-        private FocusConfiguration20Extension extensionField;
-
-        private string[] aFModeField;
-
-        /// <summary>
-        /// Mode of auto focus. AUTO - The device automatically adjusts focus.MANUAL - The device does not
-        /// automatically adjust focus. Note: for devices supporting both manual and auto operation at the same
-        /// time manual operation may be supported even if the Mode parameter is set to Auto.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public AutoFocusMode AutoFocusMode
-        {
-            get { return this.autoFocusModeField; }
-            set { this.autoFocusModeField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public float DefaultSpeed
-        {
-            get { return this.defaultSpeedField; }
-            set { this.defaultSpeedField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="DefaultSpeed"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DefaultSpeedSpecified
-        {
-            get { return this.defaultSpeedFieldSpecified; }
-            set { this.defaultSpeedFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// Parameter to set autofocus near limit (unit: meter).
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public float NearLimit
-        {
-            get { return this.nearLimitField; }
-            set { this.nearLimitField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="NearLimit"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool NearLimitSpecified
-        {
-            get { return this.nearLimitFieldSpecified; }
-            set { this.nearLimitFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// Parameter to set autofocus far limit (unit: meter).
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public float FarLimit
-        {
-            get { return this.farLimitField; }
-            set { this.farLimitField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="FarLimit"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool FarLimitSpecified
-        {
-            get { return this.farLimitFieldSpecified; }
-            set { this.farLimitFieldSpecified = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public FocusConfiguration20Extension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        /// <summary>
-        /// Zero or more modes as defined in enumeration tt:AFModes.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string[] AFMode
-        {
-            get { return this.aFModeField; }
-            set { this.aFModeField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "FocusConfiguration20"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAttributeString(null, "AFMode", SharpOnvifCommon.Xml.OnvifArray.JoinList(this.aFModeField));
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "AutoFocusMode", EnumXml.ToXml(this.autoFocusModeField));
-            if (this.defaultSpeedFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "DefaultSpeed", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.defaultSpeedField));
-            }
-            if (this.nearLimitFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "NearLimit", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.nearLimitField));
-            }
-            if (this.farLimitFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "FarLimit", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.farLimitField));
-            }
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "FocusConfiguration20Extension");
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "AFMode":
-                    this.aFModeField = SharpOnvifCommon.Xml.OnvifArray.SplitList(reader.AttributeValue);
-                    return true;
-            }
-            return false;
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "AutoFocusMode":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.autoFocusModeField = EnumXml.ParseAutoFocusMode(reader.ReadElementText());
-                    return true;
-                case "DefaultSpeed":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.defaultSpeedField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    this.defaultSpeedFieldSpecified = true;
-                    return true;
-                case "NearLimit":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.nearLimitField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    this.nearLimitFieldSpecified = true;
-                    return true;
-                case "FarLimit":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.farLimitField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    this.farLimitFieldSpecified = true;
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<FocusConfiguration20Extension>(() => new FocusConfiguration20Extension());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class FocusConfiguration20Extension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "FocusConfiguration20Extension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class FrequencyDecibelPair : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private int centerFrequencyField;
-
-        private float decibelField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        /// <summary>
-        /// The center frequency of the band in hertz (Readonly). For example, value of 1000 refers to 1kHz and
-        /// 2000 refers to 2kHz.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public int CenterFrequency
-        {
-            get { return this.centerFrequencyField; }
-            set { this.centerFrequencyField = value; }
-        }
-
-        /// <summary>
-        /// Decibel value associated with the center frequency.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public float Decibel
-        {
-            get { return this.decibelField; }
-            set { this.decibelField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=2)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "FrequencyDecibelPair"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "CenterFrequency", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.centerFrequencyField));
-            writer.WriteElementString(Ns.OnvifVer10, "Decibel", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.decibelField));
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "CenterFrequency":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.centerFrequencyField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    return true;
-                case "Decibel":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.decibelField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
     /// <summary>
     /// By default this operation lists all existing video analytics configurations for a device. Provide a
     /// profile token to list only configurations that are compatible with the profile. If a configuration
     /// token is provided only a single configuration will be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAnalyticsConfigurations", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetAnalyticsConfigurationsRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAnalyticsConfigurationsRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string configurationTokenField;
 
@@ -7621,15 +2160,15 @@ namespace SharpOnvifClient.Media2
     /// token is provided only a single configuration will be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAnalyticsConfigurationsResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetAnalyticsConfigurationsResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAnalyticsConfigurationsResponse : SharpOnvifCommon.Xml.OnvifContract
     {
-        private VideoAnalyticsConfiguration[] configurationsField;
+        private SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration[] configurationsField;
 
         /// <summary>
         /// This element contains a list of Analytics configurations.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute("Configurations", Order=0)]
-        public VideoAnalyticsConfiguration[] Configurations
+        public SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration[] Configurations
         {
             get { return this.configurationsField; }
             set { this.configurationsField = value; }
@@ -7639,7 +2178,7 @@ namespace SharpOnvifClient.Media2
         {
         }
 
-        public GetAnalyticsConfigurationsResponse(VideoAnalyticsConfiguration[] configurations)
+        public GetAnalyticsConfigurationsResponse(SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration[] configurations)
         {
             this.configurationsField = configurations;
         }
@@ -7650,7 +2189,7 @@ namespace SharpOnvifClient.Media2
             {
                 for (int i = 0; i < this.configurationsField.Length; i++)
                 {
-                    writer.WriteElement(Ns.Ver20Media, "Configurations", this.configurationsField[i], Ns.OnvifVer10, "VideoAnalyticsConfiguration");
+                    writer.WriteElement(Ns.Ver20Media, "Configurations", this.configurationsField[i], "http://www.onvif.org/ver10/schema", "VideoAnalyticsConfiguration");
                 }
             }
         }
@@ -7661,7 +2200,7 @@ namespace SharpOnvifClient.Media2
             {
                 case "Configurations":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.configurationsField, reader.ReadElementObject<VideoAnalyticsConfiguration>(() => new VideoAnalyticsConfiguration()));
+                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.configurationsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration>(() => new SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration()));
                     return true;
             }
             return false;
@@ -7675,7 +2214,7 @@ namespace SharpOnvifClient.Media2
     /// token is provided, the device shall return all audio clip configurations that exist on the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioClips", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetAudioClipsRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAudioClipsRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -7723,7 +2262,7 @@ namespace SharpOnvifClient.Media2
     /// token is provided, the device shall return all audio clip configurations that exist on the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioClipsResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetAudioClipsResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAudioClipsResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private GetAudioClipsResponseItem[] audioClipItemField;
 
@@ -7772,7 +2311,7 @@ namespace SharpOnvifClient.Media2
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetAudioClipsResponseItem : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAudioClipsResponseItem : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -7841,7 +2380,7 @@ namespace SharpOnvifClient.Media2
     /// This command list the audio decoding capabilities for a given profile and configuration of a device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioDecoderConfigurationOptions", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetAudioDecoderConfigurationOptionsRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAudioDecoderConfigurationOptionsRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string configurationTokenField;
 
@@ -7905,9 +2444,9 @@ namespace SharpOnvifClient.Media2
     /// This command list the audio decoding capabilities for a given profile and configuration of a device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioDecoderConfigurationOptionsResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetAudioDecoderConfigurationOptionsResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAudioDecoderConfigurationOptionsResponse : SharpOnvifCommon.Xml.OnvifContract
     {
-        private AudioEncoder2ConfigurationOptions[] optionsField;
+        private SharpOnvifCommon.Onvif.AudioEncoder2ConfigurationOptions[] optionsField;
 
         /// <summary>
         /// This message contains the audio decoder configuration options. If a audio decoder configuration is
@@ -7916,7 +2455,7 @@ namespace SharpOnvifClient.Media2
         /// shall be considered generic for the device.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute("Options", Order=0)]
-        public AudioEncoder2ConfigurationOptions[] Options
+        public SharpOnvifCommon.Onvif.AudioEncoder2ConfigurationOptions[] Options
         {
             get { return this.optionsField; }
             set { this.optionsField = value; }
@@ -7926,7 +2465,7 @@ namespace SharpOnvifClient.Media2
         {
         }
 
-        public GetAudioDecoderConfigurationOptionsResponse(AudioEncoder2ConfigurationOptions[] options)
+        public GetAudioDecoderConfigurationOptionsResponse(SharpOnvifCommon.Onvif.AudioEncoder2ConfigurationOptions[] options)
         {
             this.optionsField = options;
         }
@@ -7937,7 +2476,7 @@ namespace SharpOnvifClient.Media2
             {
                 for (int i = 0; i < this.optionsField.Length; i++)
                 {
-                    writer.WriteElement(Ns.Ver20Media, "Options", this.optionsField[i], Ns.OnvifVer10, "AudioEncoder2ConfigurationOptions");
+                    writer.WriteElement(Ns.Ver20Media, "Options", this.optionsField[i], "http://www.onvif.org/ver10/schema", "AudioEncoder2ConfigurationOptions");
                 }
             }
         }
@@ -7948,7 +2487,7 @@ namespace SharpOnvifClient.Media2
             {
                 case "Options":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.optionsField, reader.ReadElementObject<AudioEncoder2ConfigurationOptions>(() => new AudioEncoder2ConfigurationOptions()));
+                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.optionsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.AudioEncoder2ConfigurationOptions>(() => new SharpOnvifCommon.Onvif.AudioEncoder2ConfigurationOptions()));
                     return true;
             }
             return false;
@@ -7962,7 +2501,7 @@ namespace SharpOnvifClient.Media2
     /// token is provided only a single configuration will be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioDecoderConfigurations", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetAudioDecoderConfigurationsRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAudioDecoderConfigurationsRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string configurationTokenField;
 
@@ -8028,15 +2567,15 @@ namespace SharpOnvifClient.Media2
     /// token is provided only a single configuration will be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioDecoderConfigurationsResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetAudioDecoderConfigurationsResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAudioDecoderConfigurationsResponse : SharpOnvifCommon.Xml.OnvifContract
     {
-        private AudioDecoderConfiguration[] configurationsField;
+        private SharpOnvifCommon.Onvif.AudioDecoderConfiguration[] configurationsField;
 
         /// <summary>
         /// This element contains a list of audio decoder configurations
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute("Configurations", Order=0)]
-        public AudioDecoderConfiguration[] Configurations
+        public SharpOnvifCommon.Onvif.AudioDecoderConfiguration[] Configurations
         {
             get { return this.configurationsField; }
             set { this.configurationsField = value; }
@@ -8046,7 +2585,7 @@ namespace SharpOnvifClient.Media2
         {
         }
 
-        public GetAudioDecoderConfigurationsResponse(AudioDecoderConfiguration[] configurations)
+        public GetAudioDecoderConfigurationsResponse(SharpOnvifCommon.Onvif.AudioDecoderConfiguration[] configurations)
         {
             this.configurationsField = configurations;
         }
@@ -8057,7 +2596,7 @@ namespace SharpOnvifClient.Media2
             {
                 for (int i = 0; i < this.configurationsField.Length; i++)
                 {
-                    writer.WriteElement(Ns.Ver20Media, "Configurations", this.configurationsField[i], Ns.OnvifVer10, "AudioDecoderConfiguration");
+                    writer.WriteElement(Ns.Ver20Media, "Configurations", this.configurationsField[i], "http://www.onvif.org/ver10/schema", "AudioDecoderConfiguration");
                 }
             }
         }
@@ -8068,7 +2607,7 @@ namespace SharpOnvifClient.Media2
             {
                 case "Configurations":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.configurationsField, reader.ReadElementObject<AudioDecoderConfiguration>(() => new AudioDecoderConfiguration()));
+                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.configurationsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.AudioDecoderConfiguration>(() => new SharpOnvifCommon.Onvif.AudioDecoderConfiguration()));
                     return true;
             }
             return false;
@@ -8081,7 +2620,7 @@ namespace SharpOnvifClient.Media2
     /// configuration parameters) when the audio encoder parameters are reconfigured.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioEncoderConfigurationOptions", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetAudioEncoderConfigurationOptionsRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAudioEncoderConfigurationOptionsRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string configurationTokenField;
 
@@ -8146,9 +2685,9 @@ namespace SharpOnvifClient.Media2
     /// configuration parameters) when the audio encoder parameters are reconfigured.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioEncoderConfigurationOptionsResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetAudioEncoderConfigurationOptionsResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAudioEncoderConfigurationOptionsResponse : SharpOnvifCommon.Xml.OnvifContract
     {
-        private AudioEncoder2ConfigurationOptions[] optionsField;
+        private SharpOnvifCommon.Onvif.AudioEncoder2ConfigurationOptions[] optionsField;
 
         /// <summary>
         /// This message contains the audio encoder configuration options. If a audio encoder configuration is
@@ -8157,7 +2696,7 @@ namespace SharpOnvifClient.Media2
         /// shall be considered generic for the device.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute("Options", Order=0)]
-        public AudioEncoder2ConfigurationOptions[] Options
+        public SharpOnvifCommon.Onvif.AudioEncoder2ConfigurationOptions[] Options
         {
             get { return this.optionsField; }
             set { this.optionsField = value; }
@@ -8167,7 +2706,7 @@ namespace SharpOnvifClient.Media2
         {
         }
 
-        public GetAudioEncoderConfigurationOptionsResponse(AudioEncoder2ConfigurationOptions[] options)
+        public GetAudioEncoderConfigurationOptionsResponse(SharpOnvifCommon.Onvif.AudioEncoder2ConfigurationOptions[] options)
         {
             this.optionsField = options;
         }
@@ -8178,7 +2717,7 @@ namespace SharpOnvifClient.Media2
             {
                 for (int i = 0; i < this.optionsField.Length; i++)
                 {
-                    writer.WriteElement(Ns.Ver20Media, "Options", this.optionsField[i], Ns.OnvifVer10, "AudioEncoder2ConfigurationOptions");
+                    writer.WriteElement(Ns.Ver20Media, "Options", this.optionsField[i], "http://www.onvif.org/ver10/schema", "AudioEncoder2ConfigurationOptions");
                 }
             }
         }
@@ -8189,7 +2728,7 @@ namespace SharpOnvifClient.Media2
             {
                 case "Options":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.optionsField, reader.ReadElementObject<AudioEncoder2ConfigurationOptions>(() => new AudioEncoder2ConfigurationOptions()));
+                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.optionsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.AudioEncoder2ConfigurationOptions>(() => new SharpOnvifCommon.Onvif.AudioEncoder2ConfigurationOptions()));
                     return true;
             }
             return false;
@@ -8203,7 +2742,7 @@ namespace SharpOnvifClient.Media2
     /// token is provided only a single configuration will be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioEncoderConfigurations", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetAudioEncoderConfigurationsRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAudioEncoderConfigurationsRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string configurationTokenField;
 
@@ -8269,15 +2808,15 @@ namespace SharpOnvifClient.Media2
     /// token is provided only a single configuration will be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioEncoderConfigurationsResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetAudioEncoderConfigurationsResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAudioEncoderConfigurationsResponse : SharpOnvifCommon.Xml.OnvifContract
     {
-        private AudioEncoder2Configuration[] configurationsField;
+        private SharpOnvifCommon.Onvif.AudioEncoder2Configuration[] configurationsField;
 
         /// <summary>
         /// This element contains a list of audio encoder configurations.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute("Configurations", Order=0)]
-        public AudioEncoder2Configuration[] Configurations
+        public SharpOnvifCommon.Onvif.AudioEncoder2Configuration[] Configurations
         {
             get { return this.configurationsField; }
             set { this.configurationsField = value; }
@@ -8287,7 +2826,7 @@ namespace SharpOnvifClient.Media2
         {
         }
 
-        public GetAudioEncoderConfigurationsResponse(AudioEncoder2Configuration[] configurations)
+        public GetAudioEncoderConfigurationsResponse(SharpOnvifCommon.Onvif.AudioEncoder2Configuration[] configurations)
         {
             this.configurationsField = configurations;
         }
@@ -8298,7 +2837,7 @@ namespace SharpOnvifClient.Media2
             {
                 for (int i = 0; i < this.configurationsField.Length; i++)
                 {
-                    writer.WriteElement(Ns.Ver20Media, "Configurations", this.configurationsField[i], Ns.OnvifVer10, "AudioEncoder2Configuration");
+                    writer.WriteElement(Ns.Ver20Media, "Configurations", this.configurationsField[i], "http://www.onvif.org/ver10/schema", "AudioEncoder2Configuration");
                 }
             }
         }
@@ -8309,7 +2848,7 @@ namespace SharpOnvifClient.Media2
             {
                 case "Configurations":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.configurationsField, reader.ReadElementObject<AudioEncoder2Configuration>(() => new AudioEncoder2Configuration()));
+                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.configurationsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.AudioEncoder2Configuration>(() => new SharpOnvifCommon.Onvif.AudioEncoder2Configuration()));
                     return true;
             }
             return false;
@@ -8324,7 +2863,7 @@ namespace SharpOnvifClient.Media2
     /// signaled as true, the response shall include the FrequencyDecibelPair.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioOutputConfigurationOptions", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetAudioOutputConfigurationOptionsRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAudioOutputConfigurationOptionsRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string configurationTokenField;
 
@@ -8391,9 +2930,9 @@ namespace SharpOnvifClient.Media2
     /// signaled as true, the response shall include the FrequencyDecibelPair.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioOutputConfigurationOptionsResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetAudioOutputConfigurationOptionsResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAudioOutputConfigurationOptionsResponse : SharpOnvifCommon.Xml.OnvifContract
     {
-        private AudioOutputConfigurationOptions optionsField;
+        private SharpOnvifCommon.Onvif.AudioOutputConfigurationOptions optionsField;
 
         /// <summary>
         /// This message contains the audio output configuration options. If a audio output configuration is
@@ -8402,7 +2941,7 @@ namespace SharpOnvifClient.Media2
         /// shall be considered generic for the device.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public AudioOutputConfigurationOptions Options
+        public SharpOnvifCommon.Onvif.AudioOutputConfigurationOptions Options
         {
             get { return this.optionsField; }
             set { this.optionsField = value; }
@@ -8412,14 +2951,14 @@ namespace SharpOnvifClient.Media2
         {
         }
 
-        public GetAudioOutputConfigurationOptionsResponse(AudioOutputConfigurationOptions options)
+        public GetAudioOutputConfigurationOptionsResponse(SharpOnvifCommon.Onvif.AudioOutputConfigurationOptions options)
         {
             this.optionsField = options;
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            writer.WriteElement(Ns.Ver20Media, "Options", this.optionsField, Ns.OnvifVer10, "AudioOutputConfigurationOptions");
+            writer.WriteElement(Ns.Ver20Media, "Options", this.optionsField, "http://www.onvif.org/ver10/schema", "AudioOutputConfigurationOptions");
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
@@ -8428,7 +2967,7 @@ namespace SharpOnvifClient.Media2
             {
                 case "Options":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.optionsField = reader.ReadElementObject<AudioOutputConfigurationOptions>(() => new AudioOutputConfigurationOptions());
+                    this.optionsField = reader.ReadElementObject<SharpOnvifCommon.Onvif.AudioOutputConfigurationOptions>(() => new SharpOnvifCommon.Onvif.AudioOutputConfigurationOptions());
                     return true;
             }
             return false;
@@ -8442,7 +2981,7 @@ namespace SharpOnvifClient.Media2
     /// token is provided only a single configuration will be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioOutputConfigurations", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetAudioOutputConfigurationsRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAudioOutputConfigurationsRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string configurationTokenField;
 
@@ -8508,15 +3047,15 @@ namespace SharpOnvifClient.Media2
     /// token is provided only a single configuration will be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioOutputConfigurationsResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetAudioOutputConfigurationsResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAudioOutputConfigurationsResponse : SharpOnvifCommon.Xml.OnvifContract
     {
-        private AudioOutputConfiguration[] configurationsField;
+        private SharpOnvifCommon.Onvif.AudioOutputConfiguration[] configurationsField;
 
         /// <summary>
         /// This element contains a list of audio output configurations
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute("Configurations", Order=0)]
-        public AudioOutputConfiguration[] Configurations
+        public SharpOnvifCommon.Onvif.AudioOutputConfiguration[] Configurations
         {
             get { return this.configurationsField; }
             set { this.configurationsField = value; }
@@ -8526,7 +3065,7 @@ namespace SharpOnvifClient.Media2
         {
         }
 
-        public GetAudioOutputConfigurationsResponse(AudioOutputConfiguration[] configurations)
+        public GetAudioOutputConfigurationsResponse(SharpOnvifCommon.Onvif.AudioOutputConfiguration[] configurations)
         {
             this.configurationsField = configurations;
         }
@@ -8537,7 +3076,7 @@ namespace SharpOnvifClient.Media2
             {
                 for (int i = 0; i < this.configurationsField.Length; i++)
                 {
-                    writer.WriteElement(Ns.Ver20Media, "Configurations", this.configurationsField[i], Ns.OnvifVer10, "AudioOutputConfiguration");
+                    writer.WriteElement(Ns.Ver20Media, "Configurations", this.configurationsField[i], "http://www.onvif.org/ver10/schema", "AudioOutputConfiguration");
                 }
             }
         }
@@ -8548,7 +3087,7 @@ namespace SharpOnvifClient.Media2
             {
                 case "Configurations":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.configurationsField, reader.ReadElementObject<AudioOutputConfiguration>(() => new AudioOutputConfiguration()));
+                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.configurationsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.AudioOutputConfiguration>(() => new SharpOnvifCommon.Onvif.AudioOutputConfiguration()));
                     return true;
             }
             return false;
@@ -8563,7 +3102,7 @@ namespace SharpOnvifClient.Media2
     /// profile is specified, the options shall be compatible with that media profile.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioSourceConfigurationOptions", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetAudioSourceConfigurationOptionsRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAudioSourceConfigurationOptionsRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string configurationTokenField;
 
@@ -8630,9 +3169,9 @@ namespace SharpOnvifClient.Media2
     /// profile is specified, the options shall be compatible with that media profile.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioSourceConfigurationOptionsResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetAudioSourceConfigurationOptionsResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAudioSourceConfigurationOptionsResponse : SharpOnvifCommon.Xml.OnvifContract
     {
-        private AudioSourceConfigurationOptions optionsField;
+        private SharpOnvifCommon.Onvif.AudioSourceConfigurationOptions optionsField;
 
         /// <summary>
         /// This message contains the audio source configuration options. If a audio source configuration is
@@ -8641,7 +3180,7 @@ namespace SharpOnvifClient.Media2
         /// shall be considered generic for the device.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public AudioSourceConfigurationOptions Options
+        public SharpOnvifCommon.Onvif.AudioSourceConfigurationOptions Options
         {
             get { return this.optionsField; }
             set { this.optionsField = value; }
@@ -8651,14 +3190,14 @@ namespace SharpOnvifClient.Media2
         {
         }
 
-        public GetAudioSourceConfigurationOptionsResponse(AudioSourceConfigurationOptions options)
+        public GetAudioSourceConfigurationOptionsResponse(SharpOnvifCommon.Onvif.AudioSourceConfigurationOptions options)
         {
             this.optionsField = options;
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            writer.WriteElement(Ns.Ver20Media, "Options", this.optionsField, Ns.OnvifVer10, "AudioSourceConfigurationOptions");
+            writer.WriteElement(Ns.Ver20Media, "Options", this.optionsField, "http://www.onvif.org/ver10/schema", "AudioSourceConfigurationOptions");
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
@@ -8667,7 +3206,7 @@ namespace SharpOnvifClient.Media2
             {
                 case "Options":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.optionsField = reader.ReadElementObject<AudioSourceConfigurationOptions>(() => new AudioSourceConfigurationOptions());
+                    this.optionsField = reader.ReadElementObject<SharpOnvifCommon.Onvif.AudioSourceConfigurationOptions>(() => new SharpOnvifCommon.Onvif.AudioSourceConfigurationOptions());
                     return true;
             }
             return false;
@@ -8681,7 +3220,7 @@ namespace SharpOnvifClient.Media2
     /// token is provided only a single configuration will be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioSourceConfigurations", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetAudioSourceConfigurationsRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAudioSourceConfigurationsRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string configurationTokenField;
 
@@ -8747,15 +3286,15 @@ namespace SharpOnvifClient.Media2
     /// token is provided only a single configuration will be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioSourceConfigurationsResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetAudioSourceConfigurationsResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAudioSourceConfigurationsResponse : SharpOnvifCommon.Xml.OnvifContract
     {
-        private AudioSourceConfiguration[] configurationsField;
+        private SharpOnvifCommon.Onvif.AudioSourceConfiguration[] configurationsField;
 
         /// <summary>
         /// This element contains a list of audio source configurations.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute("Configurations", Order=0)]
-        public AudioSourceConfiguration[] Configurations
+        public SharpOnvifCommon.Onvif.AudioSourceConfiguration[] Configurations
         {
             get { return this.configurationsField; }
             set { this.configurationsField = value; }
@@ -8765,7 +3304,7 @@ namespace SharpOnvifClient.Media2
         {
         }
 
-        public GetAudioSourceConfigurationsResponse(AudioSourceConfiguration[] configurations)
+        public GetAudioSourceConfigurationsResponse(SharpOnvifCommon.Onvif.AudioSourceConfiguration[] configurations)
         {
             this.configurationsField = configurations;
         }
@@ -8776,7 +3315,7 @@ namespace SharpOnvifClient.Media2
             {
                 for (int i = 0; i < this.configurationsField.Length; i++)
                 {
-                    writer.WriteElement(Ns.Ver20Media, "Configurations", this.configurationsField[i], Ns.OnvifVer10, "AudioSourceConfiguration");
+                    writer.WriteElement(Ns.Ver20Media, "Configurations", this.configurationsField[i], "http://www.onvif.org/ver10/schema", "AudioSourceConfiguration");
                 }
             }
         }
@@ -8787,7 +3326,7 @@ namespace SharpOnvifClient.Media2
             {
                 case "Configurations":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.configurationsField, reader.ReadElementObject<AudioSourceConfiguration>(() => new AudioSourceConfiguration()));
+                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.configurationsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.AudioSourceConfiguration>(() => new SharpOnvifCommon.Onvif.AudioSourceConfiguration()));
                     return true;
             }
             return false;
@@ -8796,7 +3335,7 @@ namespace SharpOnvifClient.Media2
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetConfiguration : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetConfiguration : SharpOnvifCommon.Xml.OnvifContract
     {
         private string configurationTokenField;
 
@@ -8854,7 +3393,7 @@ namespace SharpOnvifClient.Media2
     /// Get the Mask Options.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetMaskOptions", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetMaskOptionsRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetMaskOptionsRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string configurationTokenField;
 
@@ -8901,7 +3440,7 @@ namespace SharpOnvifClient.Media2
     /// Get the Mask Options.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetMaskOptionsResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetMaskOptionsResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetMaskOptionsResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private MaskOptions optionsField;
 
@@ -8948,7 +3487,7 @@ namespace SharpOnvifClient.Media2
     /// shall respond with all available Mask configurations.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetMasks", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetMasksRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetMasksRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -9016,7 +3555,7 @@ namespace SharpOnvifClient.Media2
     /// shall respond with all available Mask configurations.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetMasksResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetMasksResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetMasksResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private Mask[] masksField;
 
@@ -9069,7 +3608,7 @@ namespace SharpOnvifClient.Media2
     /// parameters) for changing the metadata configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetMetadataConfigurationOptions", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetMetadataConfigurationOptionsRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetMetadataConfigurationOptionsRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string configurationTokenField;
 
@@ -9134,9 +3673,9 @@ namespace SharpOnvifClient.Media2
     /// parameters) for changing the metadata configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetMetadataConfigurationOptionsResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetMetadataConfigurationOptionsResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetMetadataConfigurationOptionsResponse : SharpOnvifCommon.Xml.OnvifContract
     {
-        private MetadataConfigurationOptions optionsField;
+        private SharpOnvifCommon.Onvif.MetadataConfigurationOptions optionsField;
 
         /// <summary>
         /// This message contains the metadata configuration options. If a metadata configuration is specified,
@@ -9145,7 +3684,7 @@ namespace SharpOnvifClient.Media2
         /// be considered generic for the device.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public MetadataConfigurationOptions Options
+        public SharpOnvifCommon.Onvif.MetadataConfigurationOptions Options
         {
             get { return this.optionsField; }
             set { this.optionsField = value; }
@@ -9155,14 +3694,14 @@ namespace SharpOnvifClient.Media2
         {
         }
 
-        public GetMetadataConfigurationOptionsResponse(MetadataConfigurationOptions options)
+        public GetMetadataConfigurationOptionsResponse(SharpOnvifCommon.Onvif.MetadataConfigurationOptions options)
         {
             this.optionsField = options;
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            writer.WriteElement(Ns.Ver20Media, "Options", this.optionsField, Ns.OnvifVer10, "MetadataConfigurationOptions");
+            writer.WriteElement(Ns.Ver20Media, "Options", this.optionsField, "http://www.onvif.org/ver10/schema", "MetadataConfigurationOptions");
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
@@ -9171,7 +3710,7 @@ namespace SharpOnvifClient.Media2
             {
                 case "Options":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.optionsField = reader.ReadElementObject<MetadataConfigurationOptions>(() => new MetadataConfigurationOptions());
+                    this.optionsField = reader.ReadElementObject<SharpOnvifCommon.Onvif.MetadataConfigurationOptions>(() => new SharpOnvifCommon.Onvif.MetadataConfigurationOptions());
                     return true;
             }
             return false;
@@ -9185,7 +3724,7 @@ namespace SharpOnvifClient.Media2
     /// provided only a single configuration will be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetMetadataConfigurations", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetMetadataConfigurationsRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetMetadataConfigurationsRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string configurationTokenField;
 
@@ -9251,15 +3790,15 @@ namespace SharpOnvifClient.Media2
     /// provided only a single configuration will be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetMetadataConfigurationsResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetMetadataConfigurationsResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetMetadataConfigurationsResponse : SharpOnvifCommon.Xml.OnvifContract
     {
-        private MetadataConfiguration[] configurationsField;
+        private SharpOnvifCommon.Onvif.MetadataConfiguration[] configurationsField;
 
         /// <summary>
         /// This element contains a list of metadata configurations
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute("Configurations", Order=0)]
-        public MetadataConfiguration[] Configurations
+        public SharpOnvifCommon.Onvif.MetadataConfiguration[] Configurations
         {
             get { return this.configurationsField; }
             set { this.configurationsField = value; }
@@ -9269,7 +3808,7 @@ namespace SharpOnvifClient.Media2
         {
         }
 
-        public GetMetadataConfigurationsResponse(MetadataConfiguration[] configurations)
+        public GetMetadataConfigurationsResponse(SharpOnvifCommon.Onvif.MetadataConfiguration[] configurations)
         {
             this.configurationsField = configurations;
         }
@@ -9280,7 +3819,7 @@ namespace SharpOnvifClient.Media2
             {
                 for (int i = 0; i < this.configurationsField.Length; i++)
                 {
-                    writer.WriteElement(Ns.Ver20Media, "Configurations", this.configurationsField[i], Ns.OnvifVer10, "MetadataConfiguration");
+                    writer.WriteElement(Ns.Ver20Media, "Configurations", this.configurationsField[i], "http://www.onvif.org/ver10/schema", "MetadataConfiguration");
                 }
             }
         }
@@ -9291,7 +3830,7 @@ namespace SharpOnvifClient.Media2
             {
                 case "Configurations":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.configurationsField, reader.ReadElementObject<MetadataConfiguration>(() => new MetadataConfiguration()));
+                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.configurationsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.MetadataConfiguration>(() => new SharpOnvifCommon.Onvif.MetadataConfiguration()));
                     return true;
             }
             return false;
@@ -9303,7 +3842,7 @@ namespace SharpOnvifClient.Media2
     /// This operation gets the available options for the MulticastAudioDecoder configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetMulticastAudioDecoderConfigurationOptions", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetMulticastAudioDecoderConfigurationOptionsRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetMulticastAudioDecoderConfigurationOptionsRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string configurationTokenField;
 
@@ -9350,12 +3889,12 @@ namespace SharpOnvifClient.Media2
     /// This operation gets the available options for the MulticastAudioDecoder configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetMulticastAudioDecoderConfigurationOptionsResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetMulticastAudioDecoderConfigurationOptionsResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetMulticastAudioDecoderConfigurationOptionsResponse : SharpOnvifCommon.Xml.OnvifContract
     {
-        private MulticastAudioDecoderConfigurationOptions[] optionsField;
+        private SharpOnvifCommon.Onvif.MulticastAudioDecoderConfigurationOptions[] optionsField;
 
         [System.Xml.Serialization.XmlElementAttribute("Options", Order=0)]
-        public MulticastAudioDecoderConfigurationOptions[] Options
+        public SharpOnvifCommon.Onvif.MulticastAudioDecoderConfigurationOptions[] Options
         {
             get { return this.optionsField; }
             set { this.optionsField = value; }
@@ -9365,7 +3904,7 @@ namespace SharpOnvifClient.Media2
         {
         }
 
-        public GetMulticastAudioDecoderConfigurationOptionsResponse(MulticastAudioDecoderConfigurationOptions[] options)
+        public GetMulticastAudioDecoderConfigurationOptionsResponse(SharpOnvifCommon.Onvif.MulticastAudioDecoderConfigurationOptions[] options)
         {
             this.optionsField = options;
         }
@@ -9376,7 +3915,7 @@ namespace SharpOnvifClient.Media2
             {
                 for (int i = 0; i < this.optionsField.Length; i++)
                 {
-                    writer.WriteElement(Ns.Ver20Media, "Options", this.optionsField[i], Ns.OnvifVer10, "MulticastAudioDecoderConfigurationOptions");
+                    writer.WriteElement(Ns.Ver20Media, "Options", this.optionsField[i], "http://www.onvif.org/ver10/schema", "MulticastAudioDecoderConfigurationOptions");
                 }
             }
         }
@@ -9387,7 +3926,7 @@ namespace SharpOnvifClient.Media2
             {
                 case "Options":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.optionsField, reader.ReadElementObject<MulticastAudioDecoderConfigurationOptions>(() => new MulticastAudioDecoderConfigurationOptions()));
+                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.optionsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.MulticastAudioDecoderConfigurationOptions>(() => new SharpOnvifCommon.Onvif.MulticastAudioDecoderConfigurationOptions()));
                     return true;
             }
             return false;
@@ -9399,7 +3938,7 @@ namespace SharpOnvifClient.Media2
     /// This operation gets the list of multicast audio decoder configurations.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetMulticastAudioDecoderConfigurations", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetMulticastAudioDecoderConfigurationsRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetMulticastAudioDecoderConfigurationsRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string configurationTokenField;
 
@@ -9446,15 +3985,15 @@ namespace SharpOnvifClient.Media2
     /// This operation gets the list of multicast audio decoder configurations.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetMulticastAudioDecoderConfigurationsResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetMulticastAudioDecoderConfigurationsResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetMulticastAudioDecoderConfigurationsResponse : SharpOnvifCommon.Xml.OnvifContract
     {
-        private MulticastAudioDecoderConfiguration[] configurationsField;
+        private SharpOnvifCommon.Onvif.MulticastAudioDecoderConfiguration[] configurationsField;
 
         /// <summary>
         /// This message contains the list of multicast audio decoder configurations.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute("Configurations", Order=0)]
-        public MulticastAudioDecoderConfiguration[] Configurations
+        public SharpOnvifCommon.Onvif.MulticastAudioDecoderConfiguration[] Configurations
         {
             get { return this.configurationsField; }
             set { this.configurationsField = value; }
@@ -9464,7 +4003,7 @@ namespace SharpOnvifClient.Media2
         {
         }
 
-        public GetMulticastAudioDecoderConfigurationsResponse(MulticastAudioDecoderConfiguration[] configurations)
+        public GetMulticastAudioDecoderConfigurationsResponse(SharpOnvifCommon.Onvif.MulticastAudioDecoderConfiguration[] configurations)
         {
             this.configurationsField = configurations;
         }
@@ -9475,7 +4014,7 @@ namespace SharpOnvifClient.Media2
             {
                 for (int i = 0; i < this.configurationsField.Length; i++)
                 {
-                    writer.WriteElement(Ns.Ver20Media, "Configurations", this.configurationsField[i], Ns.OnvifVer10, "MulticastAudioDecoderConfiguration");
+                    writer.WriteElement(Ns.Ver20Media, "Configurations", this.configurationsField[i], "http://www.onvif.org/ver10/schema", "MulticastAudioDecoderConfiguration");
                 }
             }
         }
@@ -9486,7 +4025,7 @@ namespace SharpOnvifClient.Media2
             {
                 case "Configurations":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.configurationsField, reader.ReadElementObject<MulticastAudioDecoderConfiguration>(() => new MulticastAudioDecoderConfiguration()));
+                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.configurationsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.MulticastAudioDecoderConfiguration>(() => new SharpOnvifCommon.Onvif.MulticastAudioDecoderConfiguration()));
                     return true;
             }
             return false;
@@ -9498,7 +4037,7 @@ namespace SharpOnvifClient.Media2
     /// Get the OSD Options.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetOSDOptions", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetOSDOptionsRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetOSDOptionsRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string configurationTokenField;
 
@@ -9545,12 +4084,12 @@ namespace SharpOnvifClient.Media2
     /// Get the OSD Options.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetOSDOptionsResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetOSDOptionsResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetOSDOptionsResponse : SharpOnvifCommon.Xml.OnvifContract
     {
-        private OSDConfigurationOptions oSDOptionsField;
+        private SharpOnvifCommon.Onvif.OSDConfigurationOptions oSDOptionsField;
 
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public OSDConfigurationOptions OSDOptions
+        public SharpOnvifCommon.Onvif.OSDConfigurationOptions OSDOptions
         {
             get { return this.oSDOptionsField; }
             set { this.oSDOptionsField = value; }
@@ -9560,14 +4099,14 @@ namespace SharpOnvifClient.Media2
         {
         }
 
-        public GetOSDOptionsResponse(OSDConfigurationOptions oSDOptions)
+        public GetOSDOptionsResponse(SharpOnvifCommon.Onvif.OSDConfigurationOptions oSDOptions)
         {
             this.oSDOptionsField = oSDOptions;
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            writer.WriteElement(Ns.Ver20Media, "OSDOptions", this.oSDOptionsField, Ns.OnvifVer10, "OSDConfigurationOptions");
+            writer.WriteElement(Ns.Ver20Media, "OSDOptions", this.oSDOptionsField, "http://www.onvif.org/ver10/schema", "OSDConfigurationOptions");
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
@@ -9576,7 +4115,7 @@ namespace SharpOnvifClient.Media2
             {
                 case "OSDOptions":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.oSDOptionsField = reader.ReadElementObject<OSDConfigurationOptions>(() => new OSDConfigurationOptions());
+                    this.oSDOptionsField = reader.ReadElementObject<SharpOnvifCommon.Onvif.OSDConfigurationOptions>(() => new SharpOnvifCommon.Onvif.OSDConfigurationOptions());
                     return true;
             }
             return false;
@@ -9592,7 +4131,7 @@ namespace SharpOnvifClient.Media2
     /// shall respond with all available OSD configurations.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetOSDs", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetOSDsRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetOSDsRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string oSDTokenField;
 
@@ -9661,15 +4200,15 @@ namespace SharpOnvifClient.Media2
     /// shall respond with all available OSD configurations.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetOSDsResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetOSDsResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetOSDsResponse : SharpOnvifCommon.Xml.OnvifContract
     {
-        private OSDConfiguration[] oSDsField;
+        private SharpOnvifCommon.Onvif.OSDConfiguration[] oSDsField;
 
         /// <summary>
         /// This element contains a list of requested OSDs.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute("OSDs", Order=0)]
-        public OSDConfiguration[] OSDs
+        public SharpOnvifCommon.Onvif.OSDConfiguration[] OSDs
         {
             get { return this.oSDsField; }
             set { this.oSDsField = value; }
@@ -9679,7 +4218,7 @@ namespace SharpOnvifClient.Media2
         {
         }
 
-        public GetOSDsResponse(OSDConfiguration[] oSDs)
+        public GetOSDsResponse(SharpOnvifCommon.Onvif.OSDConfiguration[] oSDs)
         {
             this.oSDsField = oSDs;
         }
@@ -9690,7 +4229,7 @@ namespace SharpOnvifClient.Media2
             {
                 for (int i = 0; i < this.oSDsField.Length; i++)
                 {
-                    writer.WriteElement(Ns.Ver20Media, "OSDs", this.oSDsField[i], Ns.OnvifVer10, "OSDConfiguration");
+                    writer.WriteElement(Ns.Ver20Media, "OSDs", this.oSDsField[i], "http://www.onvif.org/ver10/schema", "OSDConfiguration");
                 }
             }
         }
@@ -9701,7 +4240,7 @@ namespace SharpOnvifClient.Media2
             {
                 case "OSDs":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.oSDsField, reader.ReadElementObject<OSDConfiguration>(() => new OSDConfiguration()));
+                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.oSDsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.OSDConfiguration>(() => new SharpOnvifCommon.Onvif.OSDConfiguration()));
                     return true;
             }
             return false;
@@ -9713,7 +4252,7 @@ namespace SharpOnvifClient.Media2
     /// This operation retrieves audio clips information which are playing currently in the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetPlayingAudioClips", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetPlayingAudioClipsRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetPlayingAudioClipsRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         public GetPlayingAudioClipsRequest()
         {
@@ -9725,7 +4264,7 @@ namespace SharpOnvifClient.Media2
     /// This operation retrieves audio clips information which are playing currently in the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetPlayingAudioClipsResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetPlayingAudioClipsResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetPlayingAudioClipsResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private PlayingAudioClips[] playingAudioClipsField;
 
@@ -9780,7 +4319,7 @@ namespace SharpOnvifClient.Media2
     /// requested list of configurations shall for each profile include the configurations present as Type.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetProfiles", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetProfilesRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetProfilesRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -9853,7 +4392,7 @@ namespace SharpOnvifClient.Media2
     /// requested list of configurations shall for each profile include the configurations present as Type.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetProfilesResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetProfilesResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetProfilesResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private MediaProfile[] profilesField;
 
@@ -9906,7 +4445,7 @@ namespace SharpOnvifClient.Media2
     /// Returns the capabilities of the media service. The result is returned in a typed answer.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilities", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         public GetServiceCapabilitiesRequest()
         {
@@ -9918,7 +4457,7 @@ namespace SharpOnvifClient.Media2
     /// Returns the capabilities of the media service. The result is returned in a typed answer.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilitiesResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private Capabilities2 capabilitiesField;
 
@@ -9969,7 +4508,7 @@ namespace SharpOnvifClient.Media2
     /// calls to GetSnapshotUri.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSnapshotUri", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetSnapshotUriRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetSnapshotUriRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string profileTokenField;
 
@@ -10021,7 +4560,7 @@ namespace SharpOnvifClient.Media2
     /// calls to GetSnapshotUri.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSnapshotUriResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetSnapshotUriResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetSnapshotUriResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private string uriField;
 
@@ -10075,7 +4614,7 @@ namespace SharpOnvifClient.Media2
     /// compatibility with other ONVIF services a device should not generate Uris longer than 128 octets.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetStreamUri", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetStreamUriRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetStreamUriRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string protocolField;
 
@@ -10148,7 +4687,7 @@ namespace SharpOnvifClient.Media2
     /// compatibility with other ONVIF services a device should not generate Uris longer than 128 octets.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetStreamUriResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetStreamUriResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetStreamUriResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private string uriField;
 
@@ -10199,7 +4738,7 @@ namespace SharpOnvifClient.Media2
     /// be considered generic for the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoEncoderConfigurationOptions", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetVideoEncoderConfigurationOptionsRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetVideoEncoderConfigurationOptionsRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string configurationTokenField;
 
@@ -10268,12 +4807,12 @@ namespace SharpOnvifClient.Media2
     /// be considered generic for the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoEncoderConfigurationOptionsResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetVideoEncoderConfigurationOptionsResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetVideoEncoderConfigurationOptionsResponse : SharpOnvifCommon.Xml.OnvifContract
     {
-        private VideoEncoder2ConfigurationOptions[] optionsField;
+        private SharpOnvifCommon.Onvif.VideoEncoder2ConfigurationOptions[] optionsField;
 
         [System.Xml.Serialization.XmlElementAttribute("Options", Order=0)]
-        public VideoEncoder2ConfigurationOptions[] Options
+        public SharpOnvifCommon.Onvif.VideoEncoder2ConfigurationOptions[] Options
         {
             get { return this.optionsField; }
             set { this.optionsField = value; }
@@ -10283,7 +4822,7 @@ namespace SharpOnvifClient.Media2
         {
         }
 
-        public GetVideoEncoderConfigurationOptionsResponse(VideoEncoder2ConfigurationOptions[] options)
+        public GetVideoEncoderConfigurationOptionsResponse(SharpOnvifCommon.Onvif.VideoEncoder2ConfigurationOptions[] options)
         {
             this.optionsField = options;
         }
@@ -10294,7 +4833,7 @@ namespace SharpOnvifClient.Media2
             {
                 for (int i = 0; i < this.optionsField.Length; i++)
                 {
-                    writer.WriteElement(Ns.Ver20Media, "Options", this.optionsField[i], Ns.OnvifVer10, "VideoEncoder2ConfigurationOptions");
+                    writer.WriteElement(Ns.Ver20Media, "Options", this.optionsField[i], "http://www.onvif.org/ver10/schema", "VideoEncoder2ConfigurationOptions");
                 }
             }
         }
@@ -10305,7 +4844,7 @@ namespace SharpOnvifClient.Media2
             {
                 case "Options":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.optionsField, reader.ReadElementObject<VideoEncoder2ConfigurationOptions>(() => new VideoEncoder2ConfigurationOptions()));
+                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.optionsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.VideoEncoder2ConfigurationOptions>(() => new SharpOnvifCommon.Onvif.VideoEncoder2ConfigurationOptions()));
                     return true;
             }
             return false;
@@ -10319,7 +4858,7 @@ namespace SharpOnvifClient.Media2
     /// token is provided only a single configuration will be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoEncoderConfigurations", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetVideoEncoderConfigurationsRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetVideoEncoderConfigurationsRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string configurationTokenField;
 
@@ -10385,15 +4924,15 @@ namespace SharpOnvifClient.Media2
     /// token is provided only a single configuration will be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoEncoderConfigurationsResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetVideoEncoderConfigurationsResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetVideoEncoderConfigurationsResponse : SharpOnvifCommon.Xml.OnvifContract
     {
-        private VideoEncoder2Configuration[] configurationsField;
+        private SharpOnvifCommon.Onvif.VideoEncoder2Configuration[] configurationsField;
 
         /// <summary>
         /// This element contains a list of video encoder configurations.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute("Configurations", Order=0)]
-        public VideoEncoder2Configuration[] Configurations
+        public SharpOnvifCommon.Onvif.VideoEncoder2Configuration[] Configurations
         {
             get { return this.configurationsField; }
             set { this.configurationsField = value; }
@@ -10403,7 +4942,7 @@ namespace SharpOnvifClient.Media2
         {
         }
 
-        public GetVideoEncoderConfigurationsResponse(VideoEncoder2Configuration[] configurations)
+        public GetVideoEncoderConfigurationsResponse(SharpOnvifCommon.Onvif.VideoEncoder2Configuration[] configurations)
         {
             this.configurationsField = configurations;
         }
@@ -10414,7 +4953,7 @@ namespace SharpOnvifClient.Media2
             {
                 for (int i = 0; i < this.configurationsField.Length; i++)
                 {
-                    writer.WriteElement(Ns.Ver20Media, "Configurations", this.configurationsField[i], Ns.OnvifVer10, "VideoEncoder2Configuration");
+                    writer.WriteElement(Ns.Ver20Media, "Configurations", this.configurationsField[i], "http://www.onvif.org/ver10/schema", "VideoEncoder2Configuration");
                 }
             }
         }
@@ -10425,7 +4964,7 @@ namespace SharpOnvifClient.Media2
             {
                 case "Configurations":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.configurationsField, reader.ReadElementObject<VideoEncoder2Configuration>(() => new VideoEncoder2Configuration()));
+                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.configurationsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.VideoEncoder2Configuration>(() => new SharpOnvifCommon.Onvif.VideoEncoder2Configuration()));
                     return true;
             }
             return false;
@@ -10438,7 +4977,7 @@ namespace SharpOnvifClient.Media2
     /// encoder instances (applications) per Video Source Configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoEncoderInstances", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetVideoEncoderInstancesRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetVideoEncoderInstancesRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string configurationTokenField;
 
@@ -10485,7 +5024,7 @@ namespace SharpOnvifClient.Media2
     /// encoder instances (applications) per Video Source Configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoEncoderInstancesResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetVideoEncoderInstancesResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetVideoEncoderInstancesResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private EncoderInstanceInfo infoField;
 
@@ -10535,7 +5074,7 @@ namespace SharpOnvifClient.Media2
     /// profile is specified, the options shall be compatible with that media profile.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoSourceConfigurationOptions", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetVideoSourceConfigurationOptionsRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetVideoSourceConfigurationOptionsRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string configurationTokenField;
 
@@ -10602,9 +5141,9 @@ namespace SharpOnvifClient.Media2
     /// profile is specified, the options shall be compatible with that media profile.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoSourceConfigurationOptionsResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetVideoSourceConfigurationOptionsResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetVideoSourceConfigurationOptionsResponse : SharpOnvifCommon.Xml.OnvifContract
     {
-        private VideoSourceConfigurationOptions optionsField;
+        private SharpOnvifCommon.Onvif.VideoSourceConfigurationOptions optionsField;
 
         /// <summary>
         /// This message contains the video source configuration options. If a video source configuration is
@@ -10613,7 +5152,7 @@ namespace SharpOnvifClient.Media2
         /// shall be considered generic for the device.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public VideoSourceConfigurationOptions Options
+        public SharpOnvifCommon.Onvif.VideoSourceConfigurationOptions Options
         {
             get { return this.optionsField; }
             set { this.optionsField = value; }
@@ -10623,14 +5162,14 @@ namespace SharpOnvifClient.Media2
         {
         }
 
-        public GetVideoSourceConfigurationOptionsResponse(VideoSourceConfigurationOptions options)
+        public GetVideoSourceConfigurationOptionsResponse(SharpOnvifCommon.Onvif.VideoSourceConfigurationOptions options)
         {
             this.optionsField = options;
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            writer.WriteElement(Ns.Ver20Media, "Options", this.optionsField, Ns.OnvifVer10, "VideoSourceConfigurationOptions");
+            writer.WriteElement(Ns.Ver20Media, "Options", this.optionsField, "http://www.onvif.org/ver10/schema", "VideoSourceConfigurationOptions");
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
@@ -10639,7 +5178,7 @@ namespace SharpOnvifClient.Media2
             {
                 case "Options":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.optionsField = reader.ReadElementObject<VideoSourceConfigurationOptions>(() => new VideoSourceConfigurationOptions());
+                    this.optionsField = reader.ReadElementObject<SharpOnvifCommon.Onvif.VideoSourceConfigurationOptions>(() => new SharpOnvifCommon.Onvif.VideoSourceConfigurationOptions());
                     return true;
             }
             return false;
@@ -10653,7 +5192,7 @@ namespace SharpOnvifClient.Media2
     /// token is provided only a single configuration will be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoSourceConfigurations", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetVideoSourceConfigurationsRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetVideoSourceConfigurationsRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string configurationTokenField;
 
@@ -10719,15 +5258,15 @@ namespace SharpOnvifClient.Media2
     /// token is provided only a single configuration will be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoSourceConfigurationsResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetVideoSourceConfigurationsResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetVideoSourceConfigurationsResponse : SharpOnvifCommon.Xml.OnvifContract
     {
-        private VideoSourceConfiguration[] configurationsField;
+        private SharpOnvifCommon.Onvif.VideoSourceConfiguration[] configurationsField;
 
         /// <summary>
         /// This element contains a list of video source configurations.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute("Configurations", Order=0)]
-        public VideoSourceConfiguration[] Configurations
+        public SharpOnvifCommon.Onvif.VideoSourceConfiguration[] Configurations
         {
             get { return this.configurationsField; }
             set { this.configurationsField = value; }
@@ -10737,7 +5276,7 @@ namespace SharpOnvifClient.Media2
         {
         }
 
-        public GetVideoSourceConfigurationsResponse(VideoSourceConfiguration[] configurations)
+        public GetVideoSourceConfigurationsResponse(SharpOnvifCommon.Onvif.VideoSourceConfiguration[] configurations)
         {
             this.configurationsField = configurations;
         }
@@ -10748,7 +5287,7 @@ namespace SharpOnvifClient.Media2
             {
                 for (int i = 0; i < this.configurationsField.Length; i++)
                 {
-                    writer.WriteElement(Ns.Ver20Media, "Configurations", this.configurationsField[i], Ns.OnvifVer10, "VideoSourceConfiguration");
+                    writer.WriteElement(Ns.Ver20Media, "Configurations", this.configurationsField[i], "http://www.onvif.org/ver10/schema", "VideoSourceConfiguration");
                 }
             }
         }
@@ -10759,7 +5298,7 @@ namespace SharpOnvifClient.Media2
             {
                 case "Configurations":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.configurationsField, reader.ReadElementObject<VideoSourceConfiguration>(() => new VideoSourceConfiguration()));
+                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.configurationsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.VideoSourceConfiguration>(() => new SharpOnvifCommon.Onvif.VideoSourceConfiguration()));
                     return true;
             }
             return false;
@@ -10773,7 +5312,7 @@ namespace SharpOnvifClient.Media2
     /// command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoSourceModes", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetVideoSourceModesRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetVideoSourceModesRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string videoSourceTokenField;
 
@@ -10821,7 +5360,7 @@ namespace SharpOnvifClient.Media2
     /// command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoSourceModesResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetVideoSourceModesResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetVideoSourceModesResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private VideoSourceMode[] videoSourceModesField;
 
@@ -10873,7 +5412,7 @@ namespace SharpOnvifClient.Media2
     /// This operation gets the current WebRTC configuration for the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetWebRTCConfigurations", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetWebRTCConfigurationsRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetWebRTCConfigurationsRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         public GetWebRTCConfigurationsRequest()
         {
@@ -10885,7 +5424,7 @@ namespace SharpOnvifClient.Media2
     /// This operation gets the current WebRTC configuration for the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetWebRTCConfigurationsResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class GetWebRTCConfigurationsResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetWebRTCConfigurationsResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private WebRTCConfiguration[] webRTCConfigurationField;
 
@@ -10934,2539 +5473,16 @@ namespace SharpOnvifClient.Media2
 
     }
 
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class H264Configuration : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private int govLengthField;
-
-        private H264Profile h264ProfileField;
-
-        /// <summary>
-        /// Group of Video frames length. Determines typically the interval in which the I-Frames will be coded.
-        /// An entry of 1 indicates I-Frames are continuously generated. An entry of 2 indicates that every 2nd
-        /// image is an I-Frame, and 3 only every 3rd frame, etc. The frames in between are coded as P or B
-        /// Frames.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public int GovLength
-        {
-            get { return this.govLengthField; }
-            set { this.govLengthField = value; }
-        }
-
-        /// <summary>
-        /// the H.264 profile, either baseline, main, extended or high
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public H264Profile H264Profile
-        {
-            get { return this.h264ProfileField; }
-            set { this.h264ProfileField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "H264Configuration"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "GovLength", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.govLengthField));
-            writer.WriteElementString(Ns.OnvifVer10, "H264Profile", EnumXml.ToXml(this.h264ProfileField));
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "GovLength":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.govLengthField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    return true;
-                case "H264Profile":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.h264ProfileField = EnumXml.ParseH264Profile(reader.ReadElementText());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class IPAddress : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private IPType typeField;
-
-        private string iPv4AddressField;
-
-        private string iPv6AddressField;
-
-        /// <summary>
-        /// Indicates if the address is an IPv4 or IPv6 address.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public IPType Type
-        {
-            get { return this.typeField; }
-            set { this.typeField = value; }
-        }
-
-        /// <summary>
-        /// IPv4 address.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1, DataType="token")]
-        public string IPv4Address
-        {
-            get { return this.iPv4AddressField; }
-            set { this.iPv4AddressField = value; }
-        }
-
-        /// <summary>
-        /// IPv6 address
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2, DataType="token")]
-        public string IPv6Address
-        {
-            get { return this.iPv6AddressField; }
-            set { this.iPv6AddressField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "IPAddress"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Type", EnumXml.ToXml(this.typeField));
-            writer.WriteElementString(Ns.OnvifVer10, "IPv4Address", this.iPv4AddressField);
-            writer.WriteElementString(Ns.OnvifVer10, "IPv6Address", this.iPv6AddressField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Type":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.typeField = EnumXml.ParseIPType(reader.ReadElementText());
-                    return true;
-                case "IPv4Address":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.iPv4AddressField = reader.ReadElementText();
-                    return true;
-                case "IPv6Address":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.iPv6AddressField = reader.ReadElementText();
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class IPv4Configuration : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private PrefixedIPv4Address[] manualField;
-
-        private PrefixedIPv4Address linkLocalField;
-
-        private PrefixedIPv4Address fromDHCPField;
-
-        private bool dHCPField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        /// <summary>
-        /// List of manually added IPv4 addresses.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("Manual", Order=0)]
-        public PrefixedIPv4Address[] Manual
-        {
-            get { return this.manualField; }
-            set { this.manualField = value; }
-        }
-
-        /// <summary>
-        /// Link local address.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public PrefixedIPv4Address LinkLocal
-        {
-            get { return this.linkLocalField; }
-            set { this.linkLocalField = value; }
-        }
-
-        /// <summary>
-        /// IPv4 address configured by using DHCP.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public PrefixedIPv4Address FromDHCP
-        {
-            get { return this.fromDHCPField; }
-            set { this.fromDHCPField = value; }
-        }
-
-        /// <summary>
-        /// Indicates whether or not DHCP is used.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public bool DHCP
-        {
-            get { return this.dHCPField; }
-            set { this.dHCPField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=4)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "IPv4Configuration"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            if (this.manualField != null)
-            {
-                for (int i = 0; i < this.manualField.Length; i++)
-                {
-                    writer.WriteElement(Ns.OnvifVer10, "Manual", this.manualField[i], Ns.OnvifVer10, "PrefixedIPv4Address");
-                }
-            }
-            writer.WriteElement(Ns.OnvifVer10, "LinkLocal", this.linkLocalField, Ns.OnvifVer10, "PrefixedIPv4Address");
-            writer.WriteElement(Ns.OnvifVer10, "FromDHCP", this.fromDHCPField, Ns.OnvifVer10, "PrefixedIPv4Address");
-            writer.WriteElementString(Ns.OnvifVer10, "DHCP", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.dHCPField));
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Manual":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.manualField, reader.ReadElementObject<PrefixedIPv4Address>(() => new PrefixedIPv4Address()));
-                    return true;
-                case "LinkLocal":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.linkLocalField = reader.ReadElementObject<PrefixedIPv4Address>(() => new PrefixedIPv4Address());
-                    return true;
-                case "FromDHCP":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.fromDHCPField = reader.ReadElementObject<PrefixedIPv4Address>(() => new PrefixedIPv4Address());
-                    return true;
-                case "DHCP":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.dHCPField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class IPv4NetworkInterface : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private bool enabledField;
-
-        private IPv4Configuration configField;
-
-        /// <summary>
-        /// Indicates whether or not IPv4 is enabled.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public bool Enabled
-        {
-            get { return this.enabledField; }
-            set { this.enabledField = value; }
-        }
-
-        /// <summary>
-        /// IPv4 configuration.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public IPv4Configuration Config
-        {
-            get { return this.configField; }
-            set { this.configField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "IPv4NetworkInterface"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Enabled", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.enabledField));
-            writer.WriteElement(Ns.OnvifVer10, "Config", this.configField, Ns.OnvifVer10, "IPv4Configuration");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Enabled":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.enabledField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
-                    return true;
-                case "Config":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.configField = reader.ReadElementObject<IPv4Configuration>(() => new IPv4Configuration());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class IPv6Configuration : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private bool acceptRouterAdvertField;
-        private bool acceptRouterAdvertFieldSpecified;
-
-        private IPv6DHCPConfiguration dHCPField;
-
-        private PrefixedIPv6Address[] manualField;
-
-        private PrefixedIPv6Address[] linkLocalField;
-
-        private PrefixedIPv6Address[] fromDHCPField;
-
-        private PrefixedIPv6Address[] fromRAField;
-
-        private IPv6ConfigurationExtension extensionField;
-
-        /// <summary>
-        /// Indicates whether router advertisment is used.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public bool AcceptRouterAdvert
-        {
-            get { return this.acceptRouterAdvertField; }
-            set { this.acceptRouterAdvertField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="AcceptRouterAdvert"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool AcceptRouterAdvertSpecified
-        {
-            get { return this.acceptRouterAdvertFieldSpecified; }
-            set { this.acceptRouterAdvertFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// DHCP configuration.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public IPv6DHCPConfiguration DHCP
-        {
-            get { return this.dHCPField; }
-            set { this.dHCPField = value; }
-        }
-
-        /// <summary>
-        /// List of manually entered IPv6 addresses.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("Manual", Order=2)]
-        public PrefixedIPv6Address[] Manual
-        {
-            get { return this.manualField; }
-            set { this.manualField = value; }
-        }
-
-        /// <summary>
-        /// List of link local IPv6 addresses.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("LinkLocal", Order=3)]
-        public PrefixedIPv6Address[] LinkLocal
-        {
-            get { return this.linkLocalField; }
-            set { this.linkLocalField = value; }
-        }
-
-        /// <summary>
-        /// List of IPv6 addresses configured by using DHCP.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("FromDHCP", Order=4)]
-        public PrefixedIPv6Address[] FromDHCP
-        {
-            get { return this.fromDHCPField; }
-            set { this.fromDHCPField = value; }
-        }
-
-        /// <summary>
-        /// List of IPv6 addresses configured by using router advertisment.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("FromRA", Order=5)]
-        public PrefixedIPv6Address[] FromRA
-        {
-            get { return this.fromRAField; }
-            set { this.fromRAField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
-        public IPv6ConfigurationExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "IPv6Configuration"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            if (this.acceptRouterAdvertFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "AcceptRouterAdvert", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.acceptRouterAdvertField));
-            }
-            writer.WriteElementString(Ns.OnvifVer10, "DHCP", EnumXml.ToXml(this.dHCPField));
-            if (this.manualField != null)
-            {
-                for (int i = 0; i < this.manualField.Length; i++)
-                {
-                    writer.WriteElement(Ns.OnvifVer10, "Manual", this.manualField[i], Ns.OnvifVer10, "PrefixedIPv6Address");
-                }
-            }
-            if (this.linkLocalField != null)
-            {
-                for (int i = 0; i < this.linkLocalField.Length; i++)
-                {
-                    writer.WriteElement(Ns.OnvifVer10, "LinkLocal", this.linkLocalField[i], Ns.OnvifVer10, "PrefixedIPv6Address");
-                }
-            }
-            if (this.fromDHCPField != null)
-            {
-                for (int i = 0; i < this.fromDHCPField.Length; i++)
-                {
-                    writer.WriteElement(Ns.OnvifVer10, "FromDHCP", this.fromDHCPField[i], Ns.OnvifVer10, "PrefixedIPv6Address");
-                }
-            }
-            if (this.fromRAField != null)
-            {
-                for (int i = 0; i < this.fromRAField.Length; i++)
-                {
-                    writer.WriteElement(Ns.OnvifVer10, "FromRA", this.fromRAField[i], Ns.OnvifVer10, "PrefixedIPv6Address");
-                }
-            }
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "IPv6ConfigurationExtension");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "AcceptRouterAdvert":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.acceptRouterAdvertField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
-                    this.acceptRouterAdvertFieldSpecified = true;
-                    return true;
-                case "DHCP":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.dHCPField = EnumXml.ParseIPv6DHCPConfiguration(reader.ReadElementText());
-                    return true;
-                case "Manual":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.manualField, reader.ReadElementObject<PrefixedIPv6Address>(() => new PrefixedIPv6Address()));
-                    return true;
-                case "LinkLocal":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.linkLocalField, reader.ReadElementObject<PrefixedIPv6Address>(() => new PrefixedIPv6Address()));
-                    return true;
-                case "FromDHCP":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.fromDHCPField, reader.ReadElementObject<PrefixedIPv6Address>(() => new PrefixedIPv6Address()));
-                    return true;
-                case "FromRA":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.fromRAField, reader.ReadElementObject<PrefixedIPv6Address>(() => new PrefixedIPv6Address()));
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<IPv6ConfigurationExtension>(() => new IPv6ConfigurationExtension());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class IPv6ConfigurationExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "IPv6ConfigurationExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class IPv6NetworkInterface : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private bool enabledField;
-
-        private IPv6Configuration configField;
-
-        /// <summary>
-        /// Indicates whether or not IPv6 is enabled.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public bool Enabled
-        {
-            get { return this.enabledField; }
-            set { this.enabledField = value; }
-        }
-
-        /// <summary>
-        /// IPv6 configuration.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public IPv6Configuration Config
-        {
-            get { return this.configField; }
-            set { this.configField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "IPv6NetworkInterface"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Enabled", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.enabledField));
-            writer.WriteElement(Ns.OnvifVer10, "Config", this.configField, Ns.OnvifVer10, "IPv6Configuration");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Enabled":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.enabledField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
-                    return true;
-                case "Config":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.configField = reader.ReadElementObject<IPv6Configuration>(() => new IPv6Configuration());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ImageStabilization : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private ImageStabilizationMode modeField;
-
-        private float levelField;
-        private bool levelFieldSpecified;
-
-        private ImageStabilizationExtension extensionField;
-
-        /// <summary>
-        /// Parameter to enable/disable Image Stabilization feature.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public ImageStabilizationMode Mode
-        {
-            get { return this.modeField; }
-            set { this.modeField = value; }
-        }
-
-        /// <summary>
-        /// Optional level parameter (unit unspecified)
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public float Level
-        {
-            get { return this.levelField; }
-            set { this.levelField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="Level"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool LevelSpecified
-        {
-            get { return this.levelFieldSpecified; }
-            set { this.levelFieldSpecified = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public ImageStabilizationExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "ImageStabilization"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Mode", EnumXml.ToXml(this.modeField));
-            if (this.levelFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "Level", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.levelField));
-            }
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "ImageStabilizationExtension");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Mode":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.modeField = EnumXml.ParseImageStabilizationMode(reader.ReadElementText());
-                    return true;
-                case "Level":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.levelField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    this.levelFieldSpecified = true;
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<ImageStabilizationExtension>(() => new ImageStabilizationExtension());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ImageStabilizationExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "ImageStabilizationExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ImagingSettings : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private BacklightCompensation backlightCompensationField;
-
-        private float brightnessField;
-        private bool brightnessFieldSpecified;
-
-        private float colorSaturationField;
-        private bool colorSaturationFieldSpecified;
-
-        private float contrastField;
-        private bool contrastFieldSpecified;
-
-        private Exposure exposureField;
-
-        private FocusConfiguration focusField;
-
-        private IrCutFilterMode irCutFilterField;
-        private bool irCutFilterFieldSpecified;
-
-        private float sharpnessField;
-        private bool sharpnessFieldSpecified;
-
-        private WideDynamicRange wideDynamicRangeField;
-
-        private WhiteBalance whiteBalanceField;
-
-        private ImagingSettingsExtension extensionField;
-
-        /// <summary>
-        /// Enabled/disabled BLC mode (on/off).
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public BacklightCompensation BacklightCompensation
-        {
-            get { return this.backlightCompensationField; }
-            set { this.backlightCompensationField = value; }
-        }
-
-        /// <summary>
-        /// Image brightness (unit unspecified).
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public float Brightness
-        {
-            get { return this.brightnessField; }
-            set { this.brightnessField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="Brightness"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool BrightnessSpecified
-        {
-            get { return this.brightnessFieldSpecified; }
-            set { this.brightnessFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// Color saturation of the image (unit unspecified).
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public float ColorSaturation
-        {
-            get { return this.colorSaturationField; }
-            set { this.colorSaturationField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="ColorSaturation"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ColorSaturationSpecified
-        {
-            get { return this.colorSaturationFieldSpecified; }
-            set { this.colorSaturationFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// Contrast of the image (unit unspecified).
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public float Contrast
-        {
-            get { return this.contrastField; }
-            set { this.contrastField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="Contrast"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ContrastSpecified
-        {
-            get { return this.contrastFieldSpecified; }
-            set { this.contrastFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// Exposure mode of the device.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public Exposure Exposure
-        {
-            get { return this.exposureField; }
-            set { this.exposureField = value; }
-        }
-
-        /// <summary>
-        /// Focus configuration.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public FocusConfiguration Focus
-        {
-            get { return this.focusField; }
-            set { this.focusField = value; }
-        }
-
-        /// <summary>
-        /// Infrared Cutoff Filter settings.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
-        public IrCutFilterMode IrCutFilter
-        {
-            get { return this.irCutFilterField; }
-            set { this.irCutFilterField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="IrCutFilter"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IrCutFilterSpecified
-        {
-            get { return this.irCutFilterFieldSpecified; }
-            set { this.irCutFilterFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// Sharpness of the Video image.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
-        public float Sharpness
-        {
-            get { return this.sharpnessField; }
-            set { this.sharpnessField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="Sharpness"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool SharpnessSpecified
-        {
-            get { return this.sharpnessFieldSpecified; }
-            set { this.sharpnessFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// WDR settings.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
-        public WideDynamicRange WideDynamicRange
-        {
-            get { return this.wideDynamicRangeField; }
-            set { this.wideDynamicRangeField = value; }
-        }
-
-        /// <summary>
-        /// White balance settings.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
-        public WhiteBalance WhiteBalance
-        {
-            get { return this.whiteBalanceField; }
-            set { this.whiteBalanceField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
-        public ImagingSettingsExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "ImagingSettings"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElement(Ns.OnvifVer10, "BacklightCompensation", this.backlightCompensationField, Ns.OnvifVer10, "BacklightCompensation");
-            if (this.brightnessFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "Brightness", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.brightnessField));
-            }
-            if (this.colorSaturationFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "ColorSaturation", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.colorSaturationField));
-            }
-            if (this.contrastFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "Contrast", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.contrastField));
-            }
-            writer.WriteElement(Ns.OnvifVer10, "Exposure", this.exposureField, Ns.OnvifVer10, "Exposure");
-            writer.WriteElement(Ns.OnvifVer10, "Focus", this.focusField, Ns.OnvifVer10, "FocusConfiguration");
-            if (this.irCutFilterFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "IrCutFilter", EnumXml.ToXml(this.irCutFilterField));
-            }
-            if (this.sharpnessFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "Sharpness", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.sharpnessField));
-            }
-            writer.WriteElement(Ns.OnvifVer10, "WideDynamicRange", this.wideDynamicRangeField, Ns.OnvifVer10, "WideDynamicRange");
-            writer.WriteElement(Ns.OnvifVer10, "WhiteBalance", this.whiteBalanceField, Ns.OnvifVer10, "WhiteBalance");
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "ImagingSettingsExtension");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "BacklightCompensation":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.backlightCompensationField = reader.ReadElementObject<BacklightCompensation>(() => new BacklightCompensation());
-                    return true;
-                case "Brightness":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.brightnessField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    this.brightnessFieldSpecified = true;
-                    return true;
-                case "ColorSaturation":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.colorSaturationField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    this.colorSaturationFieldSpecified = true;
-                    return true;
-                case "Contrast":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.contrastField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    this.contrastFieldSpecified = true;
-                    return true;
-                case "Exposure":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.exposureField = reader.ReadElementObject<Exposure>(() => new Exposure());
-                    return true;
-                case "Focus":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.focusField = reader.ReadElementObject<FocusConfiguration>(() => new FocusConfiguration());
-                    return true;
-                case "IrCutFilter":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.irCutFilterField = EnumXml.ParseIrCutFilterMode(reader.ReadElementText());
-                    this.irCutFilterFieldSpecified = true;
-                    return true;
-                case "Sharpness":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.sharpnessField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    this.sharpnessFieldSpecified = true;
-                    return true;
-                case "WideDynamicRange":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.wideDynamicRangeField = reader.ReadElementObject<WideDynamicRange>(() => new WideDynamicRange());
-                    return true;
-                case "WhiteBalance":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.whiteBalanceField = reader.ReadElementObject<WhiteBalance>(() => new WhiteBalance());
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<ImagingSettingsExtension>(() => new ImagingSettingsExtension());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    /// <summary>
-    /// Type describing the ImagingSettings of a VideoSource. The supported options and ranges can be
-    /// obtained via the GetOptions command.
-    /// </summary>
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ImagingSettings20 : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private BacklightCompensation20 backlightCompensationField;
-
-        private float brightnessField;
-        private bool brightnessFieldSpecified;
-
-        private float colorSaturationField;
-        private bool colorSaturationFieldSpecified;
-
-        private float contrastField;
-        private bool contrastFieldSpecified;
-
-        private Exposure20 exposureField;
-
-        private FocusConfiguration20 focusField;
-
-        private IrCutFilterMode irCutFilterField;
-        private bool irCutFilterFieldSpecified;
-
-        private float sharpnessField;
-        private bool sharpnessFieldSpecified;
-
-        private WideDynamicRange20 wideDynamicRangeField;
-
-        private WhiteBalance20 whiteBalanceField;
-
-        private ImagingSettingsExtension20 extensionField;
-
-        /// <summary>
-        /// Enabled/disabled BLC mode (on/off).
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public BacklightCompensation20 BacklightCompensation
-        {
-            get { return this.backlightCompensationField; }
-            set { this.backlightCompensationField = value; }
-        }
-
-        /// <summary>
-        /// Image brightness (unit unspecified).
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public float Brightness
-        {
-            get { return this.brightnessField; }
-            set { this.brightnessField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="Brightness"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool BrightnessSpecified
-        {
-            get { return this.brightnessFieldSpecified; }
-            set { this.brightnessFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// Color saturation of the image (unit unspecified).
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public float ColorSaturation
-        {
-            get { return this.colorSaturationField; }
-            set { this.colorSaturationField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="ColorSaturation"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ColorSaturationSpecified
-        {
-            get { return this.colorSaturationFieldSpecified; }
-            set { this.colorSaturationFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// Contrast of the image (unit unspecified).
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public float Contrast
-        {
-            get { return this.contrastField; }
-            set { this.contrastField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="Contrast"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ContrastSpecified
-        {
-            get { return this.contrastFieldSpecified; }
-            set { this.contrastFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// Exposure mode of the device.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public Exposure20 Exposure
-        {
-            get { return this.exposureField; }
-            set { this.exposureField = value; }
-        }
-
-        /// <summary>
-        /// Focus configuration.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public FocusConfiguration20 Focus
-        {
-            get { return this.focusField; }
-            set { this.focusField = value; }
-        }
-
-        /// <summary>
-        /// Infrared Cutoff Filter settings.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
-        public IrCutFilterMode IrCutFilter
-        {
-            get { return this.irCutFilterField; }
-            set { this.irCutFilterField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="IrCutFilter"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IrCutFilterSpecified
-        {
-            get { return this.irCutFilterFieldSpecified; }
-            set { this.irCutFilterFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// Sharpness of the Video image.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
-        public float Sharpness
-        {
-            get { return this.sharpnessField; }
-            set { this.sharpnessField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="Sharpness"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool SharpnessSpecified
-        {
-            get { return this.sharpnessFieldSpecified; }
-            set { this.sharpnessFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// WDR settings.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
-        public WideDynamicRange20 WideDynamicRange
-        {
-            get { return this.wideDynamicRangeField; }
-            set { this.wideDynamicRangeField = value; }
-        }
-
-        /// <summary>
-        /// White balance settings.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
-        public WhiteBalance20 WhiteBalance
-        {
-            get { return this.whiteBalanceField; }
-            set { this.whiteBalanceField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
-        public ImagingSettingsExtension20 Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "ImagingSettings20"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElement(Ns.OnvifVer10, "BacklightCompensation", this.backlightCompensationField, Ns.OnvifVer10, "BacklightCompensation20");
-            if (this.brightnessFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "Brightness", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.brightnessField));
-            }
-            if (this.colorSaturationFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "ColorSaturation", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.colorSaturationField));
-            }
-            if (this.contrastFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "Contrast", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.contrastField));
-            }
-            writer.WriteElement(Ns.OnvifVer10, "Exposure", this.exposureField, Ns.OnvifVer10, "Exposure20");
-            writer.WriteElement(Ns.OnvifVer10, "Focus", this.focusField, Ns.OnvifVer10, "FocusConfiguration20");
-            if (this.irCutFilterFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "IrCutFilter", EnumXml.ToXml(this.irCutFilterField));
-            }
-            if (this.sharpnessFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "Sharpness", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.sharpnessField));
-            }
-            writer.WriteElement(Ns.OnvifVer10, "WideDynamicRange", this.wideDynamicRangeField, Ns.OnvifVer10, "WideDynamicRange20");
-            writer.WriteElement(Ns.OnvifVer10, "WhiteBalance", this.whiteBalanceField, Ns.OnvifVer10, "WhiteBalance20");
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "ImagingSettingsExtension20");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "BacklightCompensation":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.backlightCompensationField = reader.ReadElementObject<BacklightCompensation20>(() => new BacklightCompensation20());
-                    return true;
-                case "Brightness":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.brightnessField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    this.brightnessFieldSpecified = true;
-                    return true;
-                case "ColorSaturation":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.colorSaturationField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    this.colorSaturationFieldSpecified = true;
-                    return true;
-                case "Contrast":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.contrastField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    this.contrastFieldSpecified = true;
-                    return true;
-                case "Exposure":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.exposureField = reader.ReadElementObject<Exposure20>(() => new Exposure20());
-                    return true;
-                case "Focus":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.focusField = reader.ReadElementObject<FocusConfiguration20>(() => new FocusConfiguration20());
-                    return true;
-                case "IrCutFilter":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.irCutFilterField = EnumXml.ParseIrCutFilterMode(reader.ReadElementText());
-                    this.irCutFilterFieldSpecified = true;
-                    return true;
-                case "Sharpness":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.sharpnessField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    this.sharpnessFieldSpecified = true;
-                    return true;
-                case "WideDynamicRange":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.wideDynamicRangeField = reader.ReadElementObject<WideDynamicRange20>(() => new WideDynamicRange20());
-                    return true;
-                case "WhiteBalance":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.whiteBalanceField = reader.ReadElementObject<WhiteBalance20>(() => new WhiteBalance20());
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<ImagingSettingsExtension20>(() => new ImagingSettingsExtension20());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ImagingSettingsExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "ImagingSettingsExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ImagingSettingsExtension20 : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        private ImageStabilization imageStabilizationField;
-
-        private ImagingSettingsExtension202 extensionField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        /// <summary>
-        /// Optional element to configure Image Stabilization feature.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public ImageStabilization ImageStabilization
-        {
-            get { return this.imageStabilizationField; }
-            set { this.imageStabilizationField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public ImagingSettingsExtension202 Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "ImagingSettingsExtension20"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-            writer.WriteElement(Ns.OnvifVer10, "ImageStabilization", this.imageStabilizationField, Ns.OnvifVer10, "ImageStabilization");
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "ImagingSettingsExtension202");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "ImageStabilization":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.imageStabilizationField = reader.ReadElementObject<ImageStabilization>(() => new ImageStabilization());
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<ImagingSettingsExtension202>(() => new ImagingSettingsExtension202());
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ImagingSettingsExtension202 : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private IrCutFilterAutoAdjustment[] irCutFilterAutoAdjustmentField;
-
-        private ImagingSettingsExtension203 extensionField;
-
-        /// <summary>
-        /// An optional parameter applied to only auto mode to adjust timing of toggling Ir cut filter.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("IrCutFilterAutoAdjustment", Order=0)]
-        public IrCutFilterAutoAdjustment[] IrCutFilterAutoAdjustment
-        {
-            get { return this.irCutFilterAutoAdjustmentField; }
-            set { this.irCutFilterAutoAdjustmentField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public ImagingSettingsExtension203 Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "ImagingSettingsExtension202"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            if (this.irCutFilterAutoAdjustmentField != null)
-            {
-                for (int i = 0; i < this.irCutFilterAutoAdjustmentField.Length; i++)
-                {
-                    writer.WriteElement(Ns.OnvifVer10, "IrCutFilterAutoAdjustment", this.irCutFilterAutoAdjustmentField[i], Ns.OnvifVer10, "IrCutFilterAutoAdjustment");
-                }
-            }
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "ImagingSettingsExtension203");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "IrCutFilterAutoAdjustment":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.irCutFilterAutoAdjustmentField, reader.ReadElementObject<IrCutFilterAutoAdjustment>(() => new IrCutFilterAutoAdjustment()));
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<ImagingSettingsExtension203>(() => new ImagingSettingsExtension203());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ImagingSettingsExtension203 : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private ToneCompensation toneCompensationField;
-
-        private Defogging defoggingField;
-
-        private NoiseReduction noiseReductionField;
-
-        private ImagingSettingsExtension204 extensionField;
-
-        /// <summary>
-        /// Optional element to configure Image Contrast Compensation.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public ToneCompensation ToneCompensation
-        {
-            get { return this.toneCompensationField; }
-            set { this.toneCompensationField = value; }
-        }
-
-        /// <summary>
-        /// Optional element to configure Image Defogging.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public Defogging Defogging
-        {
-            get { return this.defoggingField; }
-            set { this.defoggingField = value; }
-        }
-
-        /// <summary>
-        /// Optional element to configure Image Noise Reduction.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public NoiseReduction NoiseReduction
-        {
-            get { return this.noiseReductionField; }
-            set { this.noiseReductionField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public ImagingSettingsExtension204 Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "ImagingSettingsExtension203"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElement(Ns.OnvifVer10, "ToneCompensation", this.toneCompensationField, Ns.OnvifVer10, "ToneCompensation");
-            writer.WriteElement(Ns.OnvifVer10, "Defogging", this.defoggingField, Ns.OnvifVer10, "Defogging");
-            writer.WriteElement(Ns.OnvifVer10, "NoiseReduction", this.noiseReductionField, Ns.OnvifVer10, "NoiseReduction");
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "ImagingSettingsExtension204");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "ToneCompensation":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.toneCompensationField = reader.ReadElementObject<ToneCompensation>(() => new ToneCompensation());
-                    return true;
-                case "Defogging":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.defoggingField = reader.ReadElementObject<Defogging>(() => new Defogging());
-                    return true;
-                case "NoiseReduction":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.noiseReductionField = reader.ReadElementObject<NoiseReduction>(() => new NoiseReduction());
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<ImagingSettingsExtension204>(() => new ImagingSettingsExtension204());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ImagingSettingsExtension204 : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Namespace="http://www.onvif.org/ver10/schema", Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "ImagingSettingsExtension204"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    /// <summary>
-    /// List of values.
-    /// </summary>
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class IntItems : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private int[] itemsField;
-
-        [System.Xml.Serialization.XmlElementAttribute("Items", Order=0)]
-        public int[] Items
-        {
-            get { return this.itemsField; }
-            set { this.itemsField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "IntItems"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            if (this.itemsField != null)
-            {
-                for (int i = 0; i < this.itemsField.Length; i++)
-                {
-                    writer.WriteElementString(Ns.OnvifVer10, "Items", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.itemsField[i]));
-                }
-            }
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Items":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.itemsField, SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText()));
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    /// <summary>
-    /// Range of values greater equal Min value and less equal Max value.
-    /// </summary>
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class IntRange : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private int minField;
-
-        private int maxField;
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public int Min
-        {
-            get { return this.minField; }
-            set { this.minField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public int Max
-        {
-            get { return this.maxField; }
-            set { this.maxField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "IntRange"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Min", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.minField));
-            writer.WriteElementString(Ns.OnvifVer10, "Max", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxField));
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Min":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.minField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    return true;
-                case "Max":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.maxField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    /// <summary>
-    /// Rectangle defined by lower left corner position and size. Units are pixel.
-    /// </summary>
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class IntRectangle : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private int xField;
-
-        private int yField;
-
-        private int widthField;
-
-        private int heightField;
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int x
-        {
-            get { return this.xField; }
-            set { this.xField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int y
-        {
-            get { return this.yField; }
-            set { this.yField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int width
-        {
-            get { return this.widthField; }
-            set { this.widthField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int height
-        {
-            get { return this.heightField; }
-            set { this.heightField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "IntRectangle"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAttributeString(null, "x", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.xField));
-            writer.WriteAttributeString(null, "y", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.yField));
-            writer.WriteAttributeString(null, "width", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.widthField));
-            writer.WriteAttributeString(null, "height", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.heightField));
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "x":
-                    this.xField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.AttributeValue);
-                    return true;
-                case "y":
-                    this.yField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.AttributeValue);
-                    return true;
-                case "width":
-                    this.widthField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.AttributeValue);
-                    return true;
-                case "height":
-                    this.heightField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.AttributeValue);
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    /// <summary>
-    /// Range of a rectangle. The rectangle itself is defined by lower left corner position and size. Units
-    /// are pixel.
-    /// </summary>
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class IntRectangleRange : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private IntRange xRangeField;
-
-        private IntRange yRangeField;
-
-        private IntRange widthRangeField;
-
-        private IntRange heightRangeField;
-
-        /// <summary>
-        /// Range of X-axis.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public IntRange XRange
-        {
-            get { return this.xRangeField; }
-            set { this.xRangeField = value; }
-        }
-
-        /// <summary>
-        /// Range of Y-axis.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public IntRange YRange
-        {
-            get { return this.yRangeField; }
-            set { this.yRangeField = value; }
-        }
-
-        /// <summary>
-        /// Range of width.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public IntRange WidthRange
-        {
-            get { return this.widthRangeField; }
-            set { this.widthRangeField = value; }
-        }
-
-        /// <summary>
-        /// Range of height.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public IntRange HeightRange
-        {
-            get { return this.heightRangeField; }
-            set { this.heightRangeField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "IntRectangleRange"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElement(Ns.OnvifVer10, "XRange", this.xRangeField, Ns.OnvifVer10, "IntRange");
-            writer.WriteElement(Ns.OnvifVer10, "YRange", this.yRangeField, Ns.OnvifVer10, "IntRange");
-            writer.WriteElement(Ns.OnvifVer10, "WidthRange", this.widthRangeField, Ns.OnvifVer10, "IntRange");
-            writer.WriteElement(Ns.OnvifVer10, "HeightRange", this.heightRangeField, Ns.OnvifVer10, "IntRange");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "XRange":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.xRangeField = reader.ReadElementObject<IntRange>(() => new IntRange());
-                    return true;
-                case "YRange":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.yRangeField = reader.ReadElementObject<IntRange>(() => new IntRange());
-                    return true;
-                case "WidthRange":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.widthRangeField = reader.ReadElementObject<IntRange>(() => new IntRange());
-                    return true;
-                case "HeightRange":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.heightRangeField = reader.ReadElementObject<IntRange>(() => new IntRange());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class IrCutFilterAutoAdjustment : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string boundaryTypeField;
-
-        private float boundaryOffsetField;
-        private bool boundaryOffsetFieldSpecified;
-
-        private string responseTimeField;
-
-        private IrCutFilterAutoAdjustmentExtension extensionField;
-
-        /// <summary>
-        /// Specifies which boundaries to automatically toggle Ir cut filter following parameters are applied
-        /// to. Its options shall be chosen from tt:IrCutFilterAutoBoundaryType.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string BoundaryType
-        {
-            get { return this.boundaryTypeField; }
-            set { this.boundaryTypeField = value; }
-        }
-
-        /// <summary>
-        /// Adjusts boundary exposure level for toggling Ir cut filter to on/off specified with unitless
-        /// normalized value from +1.0 to -1.0. Zero is default and -1.0 is the darkest adjustment (Unitless).
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public float BoundaryOffset
-        {
-            get { return this.boundaryOffsetField; }
-            set { this.boundaryOffsetField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="BoundaryOffset"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool BoundaryOffsetSpecified
-        {
-            get { return this.boundaryOffsetFieldSpecified; }
-            set { this.boundaryOffsetFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// Delay time of toggling Ir cut filter to on/off after crossing of the boundary exposure levels.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2, DataType="duration")]
-        public string ResponseTime
-        {
-            get { return this.responseTimeField; }
-            set { this.responseTimeField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public IrCutFilterAutoAdjustmentExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "IrCutFilterAutoAdjustment"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "BoundaryType", this.boundaryTypeField);
-            if (this.boundaryOffsetFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "BoundaryOffset", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.boundaryOffsetField));
-            }
-            writer.WriteElementString(Ns.OnvifVer10, "ResponseTime", this.responseTimeField);
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "IrCutFilterAutoAdjustmentExtension");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "BoundaryType":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.boundaryTypeField = reader.ReadElementText();
-                    return true;
-                case "BoundaryOffset":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.boundaryOffsetField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    this.boundaryOffsetFieldSpecified = true;
-                    return true;
-                case "ResponseTime":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.responseTimeField = reader.ReadElementText();
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<IrCutFilterAutoAdjustmentExtension>(() => new IrCutFilterAutoAdjustmentExtension());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class IrCutFilterAutoAdjustmentExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Namespace="http://www.onvif.org/ver10/schema", Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "IrCutFilterAutoAdjustmentExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ItemList : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private ItemListSimpleItem[] simpleItemField;
-
-        private ItemListElementItem[] elementItemField;
-
-        private ItemListExtension extensionField;
-
-        /// <summary>
-        /// Value name pair as defined by the corresponding description.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("SimpleItem", Order=0)]
-        public ItemListSimpleItem[] SimpleItem
-        {
-            get { return this.simpleItemField; }
-            set { this.simpleItemField = value; }
-        }
-
-        /// <summary>
-        /// Complex value structure.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("ElementItem", Order=1)]
-        public ItemListElementItem[] ElementItem
-        {
-            get { return this.elementItemField; }
-            set { this.elementItemField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public ItemListExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "ItemList"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            if (this.simpleItemField != null)
-            {
-                for (int i = 0; i < this.simpleItemField.Length; i++)
-                {
-                    writer.WriteElement(Ns.OnvifVer10, "SimpleItem", this.simpleItemField[i], null, null);
-                }
-            }
-            if (this.elementItemField != null)
-            {
-                for (int i = 0; i < this.elementItemField.Length; i++)
-                {
-                    writer.WriteElement(Ns.OnvifVer10, "ElementItem", this.elementItemField[i], null, null);
-                }
-            }
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "ItemListExtension");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "SimpleItem":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.simpleItemField, reader.ReadElementObject<ItemListSimpleItem>(() => new ItemListSimpleItem()));
-                    return true;
-                case "ElementItem":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.elementItemField, reader.ReadElementObject<ItemListElementItem>(() => new ItemListElementItem()));
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<ItemListExtension>(() => new ItemListExtension());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    public partial class ItemListElementItem : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        private string nameField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        /// <summary>
-        /// Item name.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name
-        {
-            get { return this.nameField; }
-            set { this.nameField = value; }
-        }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAttributeString(null, "Name", this.nameField);
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Name":
-                    this.nameField = reader.AttributeValue;
-                    return true;
-            }
-            return false;
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ItemListExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "ItemListExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    public partial class ItemListSimpleItem : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string nameField;
-
-        private string valueField;
-
-        /// <summary>
-        /// Item name.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name
-        {
-            get { return this.nameField; }
-            set { this.nameField = value; }
-        }
-
-        /// <summary>
-        /// Item value. The type is defined in the corresponding description.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Value
-        {
-            get { return this.valueField; }
-            set { this.valueField = value; }
-        }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAttributeString(null, "Name", this.nameField);
-            writer.WriteAttributeString(null, "Value", this.valueField);
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Name":
-                    this.nameField = reader.AttributeValue;
-                    return true;
-                case "Value":
-                    this.valueField = reader.AttributeValue;
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    /// <summary>
-    /// A layout describes a set of Video windows that are displayed simultaniously on a display.
-    /// </summary>
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Layout : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private PaneLayout[] paneLayoutField;
-
-        private LayoutExtension extensionField;
-
-        /// <summary>
-        /// List of panes assembling the display layout.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("PaneLayout", Order=0)]
-        public PaneLayout[] PaneLayout
-        {
-            get { return this.paneLayoutField; }
-            set { this.paneLayoutField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public LayoutExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "Layout"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            if (this.paneLayoutField != null)
-            {
-                for (int i = 0; i < this.paneLayoutField.Length; i++)
-                {
-                    writer.WriteElement(Ns.OnvifVer10, "PaneLayout", this.paneLayoutField[i], Ns.OnvifVer10, "PaneLayout");
-                }
-            }
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "LayoutExtension");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "PaneLayout":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.paneLayoutField, reader.ReadElementObject<PaneLayout>(() => new PaneLayout()));
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<LayoutExtension>(() => new LayoutExtension());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class LayoutExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "LayoutExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class LensDescription : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private LensOffset offsetField;
-
-        private LensProjection[] projectionField;
-
-        private float xFactorField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        private float focalLengthField;
-        private bool focalLengthFieldSpecified;
-
-        /// <summary>
-        /// Offset of the lens center to the imager center in normalized coordinates.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public LensOffset Offset
-        {
-            get { return this.offsetField; }
-            set { this.offsetField = value; }
-        }
-
-        /// <summary>
-        /// Radial description of the projection characteristics. The resulting curve is defined by the B-Spline
-        /// interpolation over the given elements. The element for Radius zero shall not be provided. The
-        /// projection points shall be ordered with ascending Radius. Items outside the last projection Radius
-        /// shall be assumed to be invisible (black).
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("Projection", Order=1)]
-        public LensProjection[] Projection
-        {
-            get { return this.projectionField; }
-            set { this.projectionField = value; }
-        }
-
-        /// <summary>
-        /// Compensation of the x coordinate needed for the ONVIF normalized coordinate system.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public float XFactor
-        {
-            get { return this.xFactorField; }
-            set { this.xFactorField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=3)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        /// <summary>
-        /// Optional focal length of the optical system.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public float FocalLength
-        {
-            get { return this.focalLengthField; }
-            set { this.focalLengthField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="FocalLength"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool FocalLengthSpecified
-        {
-            get { return this.focalLengthFieldSpecified; }
-            set { this.focalLengthFieldSpecified = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "LensDescription"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            if (this.focalLengthFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "FocalLength", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.focalLengthField));
-            }
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElement(Ns.OnvifVer10, "Offset", this.offsetField, Ns.OnvifVer10, "LensOffset");
-            if (this.projectionField != null)
-            {
-                for (int i = 0; i < this.projectionField.Length; i++)
-                {
-                    writer.WriteElement(Ns.OnvifVer10, "Projection", this.projectionField[i], Ns.OnvifVer10, "LensProjection");
-                }
-            }
-            writer.WriteElementString(Ns.OnvifVer10, "XFactor", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.xFactorField));
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "FocalLength":
-                    this.focalLengthField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.AttributeValue);
-                    this.focalLengthFieldSpecified = true;
-                    return true;
-            }
-            return false;
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Offset":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.offsetField = reader.ReadElementObject<LensOffset>(() => new LensOffset());
-                    return true;
-                case "Projection":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.projectionField, reader.ReadElementObject<LensProjection>(() => new LensProjection()));
-                    return true;
-                case "XFactor":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.xFactorField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class LensOffset : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private float xField;
-        private bool xFieldSpecified;
-
-        private float yField;
-        private bool yFieldSpecified;
-
-        /// <summary>
-        /// Optional horizontal offset of the lens center in normalized coordinates.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public float x
-        {
-            get { return this.xField; }
-            set { this.xField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="x"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool xSpecified
-        {
-            get { return this.xFieldSpecified; }
-            set { this.xFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// Optional vertical offset of the lens center in normalized coordinates.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public float y
-        {
-            get { return this.yField; }
-            set { this.yField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="y"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ySpecified
-        {
-            get { return this.yFieldSpecified; }
-            set { this.yFieldSpecified = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "LensOffset"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            if (this.xFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "x", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.xField));
-            }
-            if (this.yFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "y", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.yField));
-            }
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "x":
-                    this.xField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.AttributeValue);
-                    this.xFieldSpecified = true;
-                    return true;
-                case "y":
-                    this.yField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.AttributeValue);
-                    this.yFieldSpecified = true;
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class LensProjection : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private float angleField;
-
-        private float radiusField;
-
-        private float transmittanceField;
-        private bool transmittanceFieldSpecified;
-
-        private System.Xml.XmlElement[] anyField;
-
-        /// <summary>
-        /// Angle of incidence.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public float Angle
-        {
-            get { return this.angleField; }
-            set { this.angleField = value; }
-        }
-
-        /// <summary>
-        /// Mapping radius as a consequence of the emergent angle.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public float Radius
-        {
-            get { return this.radiusField; }
-            set { this.radiusField = value; }
-        }
-
-        /// <summary>
-        /// Optional ray absorption at the given angle due to vignetting. A value of one means no absorption.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public float Transmittance
-        {
-            get { return this.transmittanceField; }
-            set { this.transmittanceField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="Transmittance"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool TransmittanceSpecified
-        {
-            get { return this.transmittanceFieldSpecified; }
-            set { this.transmittanceFieldSpecified = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=3)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "LensProjection"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Angle", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.angleField));
-            writer.WriteElementString(Ns.OnvifVer10, "Radius", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.radiusField));
-            if (this.transmittanceFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "Transmittance", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.transmittanceField));
-            }
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Angle":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.angleField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    return true;
-                case "Radius":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.radiusField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    return true;
-                case "Transmittance":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.transmittanceField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    this.transmittanceFieldSpecified = true;
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class Mask : SharpOnvifCommon.Xml.OnvifObject
+    public partial class Mask : SharpOnvifCommon.Xml.OnvifContract
     {
         private string configurationTokenField;
 
-        private Vector[] polygonField;
+        private SharpOnvifCommon.Onvif.Vector[] polygonField;
 
         private string typeField;
 
-        private Color colorField;
+        private SharpOnvifCommon.Onvif.Color colorField;
 
         private bool enabledField;
 
@@ -13489,7 +5505,7 @@ namespace SharpOnvifClient.Media2
         /// </summary>
         [System.Xml.Serialization.XmlArrayAttribute(Order=1)]
         [System.Xml.Serialization.XmlArrayItemAttribute("Point", IsNullable=false)]
-        public Vector[] Polygon
+        public SharpOnvifCommon.Onvif.Vector[] Polygon
         {
             get { return this.polygonField; }
             set { this.polygonField = value; }
@@ -13511,7 +5527,7 @@ namespace SharpOnvifClient.Media2
         /// Color of the masked area.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public Color Color
+        public SharpOnvifCommon.Onvif.Color Color
         {
             get { return this.colorField; }
             set { this.colorField = value; }
@@ -13561,12 +5577,12 @@ namespace SharpOnvifClient.Media2
                 writer.WriteStartElement(Ns.Ver20Media, "Polygon");
                 for (int i = 0; i < this.polygonField.Length; i++)
                 {
-                    writer.WriteElement(Ns.OnvifVer10, "Point", this.polygonField[i], Ns.OnvifVer10, "Vector");
+                    writer.WriteElement("http://www.onvif.org/ver10/schema", "Point", this.polygonField[i], "http://www.onvif.org/ver10/schema", "Vector");
                 }
                 writer.WriteEndElement();
             }
             writer.WriteElementString(Ns.Ver20Media, "Type", this.typeField);
-            writer.WriteElement(Ns.Ver20Media, "Color", this.colorField, Ns.OnvifVer10, "Color");
+            writer.WriteElement(Ns.Ver20Media, "Color", this.colorField, "http://www.onvif.org/ver10/schema", "Color");
             writer.WriteElementString(Ns.Ver20Media, "Enabled", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.enabledField));
             writer.WriteAny(this.anyField);
         }
@@ -13592,9 +5608,9 @@ namespace SharpOnvifClient.Media2
                     return true;
                 case "Polygon":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    reader.ReadWrappedArray(Ns.OnvifVer10, "Point", () =>
+                    reader.ReadWrappedArray("http://www.onvif.org/ver10/schema", "Point", () =>
                     {
-                        SharpOnvifCommon.Xml.OnvifArray.Append(ref this.polygonField, reader.ReadElementObject<Vector>(() => new Vector()));
+                        SharpOnvifCommon.Xml.OnvifArray.Append(ref this.polygonField, reader.ReadElementObject<SharpOnvifCommon.Onvif.Vector>(() => new SharpOnvifCommon.Onvif.Vector()));
                     }
                     );
                     return true;
@@ -13604,7 +5620,7 @@ namespace SharpOnvifClient.Media2
                     return true;
                 case "Color":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.colorField = reader.ReadElementObject<Color>(() => new Color());
+                    this.colorField = reader.ReadElementObject<SharpOnvifCommon.Onvif.Color>(() => new SharpOnvifCommon.Onvif.Color());
                     return true;
                 case "Enabled":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
@@ -13618,7 +5634,7 @@ namespace SharpOnvifClient.Media2
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class MaskOptions : SharpOnvifCommon.Xml.OnvifObject
+    public partial class MaskOptions : SharpOnvifCommon.Xml.OnvifContract
     {
         private int maxMasksField;
 
@@ -13626,7 +5642,7 @@ namespace SharpOnvifClient.Media2
 
         private string[] typesField;
 
-        private ColorOptions colorField;
+        private SharpOnvifCommon.Onvif.ColorOptions colorField;
 
         private System.Xml.XmlElement[] anyField;
 
@@ -13671,7 +5687,7 @@ namespace SharpOnvifClient.Media2
         /// Colors supported.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public ColorOptions Color
+        public SharpOnvifCommon.Onvif.ColorOptions Color
         {
             get { return this.colorField; }
             set { this.colorField = value; }
@@ -13755,7 +5771,7 @@ namespace SharpOnvifClient.Media2
                     writer.WriteElementString(Ns.Ver20Media, "Types", this.typesField[i]);
                 }
             }
-            writer.WriteElement(Ns.Ver20Media, "Color", this.colorField, Ns.OnvifVer10, "ColorOptions");
+            writer.WriteElement(Ns.Ver20Media, "Color", this.colorField, "http://www.onvif.org/ver10/schema", "ColorOptions");
             writer.WriteAny(this.anyField);
         }
 
@@ -13793,7 +5809,7 @@ namespace SharpOnvifClient.Media2
                     return true;
                 case "Color":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.colorField = reader.ReadElementObject<ColorOptions>(() => new ColorOptions());
+                    this.colorField = reader.ReadElementObject<SharpOnvifCommon.Onvif.ColorOptions>(() => new SharpOnvifCommon.Onvif.ColorOptions());
                     return true;
             }
             SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
@@ -13802,190 +5818,11 @@ namespace SharpOnvifClient.Media2
 
     }
 
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class MaximumNumberOfOSDs : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private int totalField;
-
-        private int imageField;
-        private bool imageFieldSpecified;
-
-        private int plainTextField;
-        private bool plainTextFieldSpecified;
-
-        private int dateField;
-        private bool dateFieldSpecified;
-
-        private int timeField;
-        private bool timeFieldSpecified;
-
-        private int dateAndTimeField;
-        private bool dateAndTimeFieldSpecified;
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int Total
-        {
-            get { return this.totalField; }
-            set { this.totalField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int Image
-        {
-            get { return this.imageField; }
-            set { this.imageField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="Image"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ImageSpecified
-        {
-            get { return this.imageFieldSpecified; }
-            set { this.imageFieldSpecified = value; }
-        }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int PlainText
-        {
-            get { return this.plainTextField; }
-            set { this.plainTextField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="PlainText"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool PlainTextSpecified
-        {
-            get { return this.plainTextFieldSpecified; }
-            set { this.plainTextFieldSpecified = value; }
-        }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int Date
-        {
-            get { return this.dateField; }
-            set { this.dateField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="Date"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DateSpecified
-        {
-            get { return this.dateFieldSpecified; }
-            set { this.dateFieldSpecified = value; }
-        }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int Time
-        {
-            get { return this.timeField; }
-            set { this.timeField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="Time"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool TimeSpecified
-        {
-            get { return this.timeFieldSpecified; }
-            set { this.timeFieldSpecified = value; }
-        }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int DateAndTime
-        {
-            get { return this.dateAndTimeField; }
-            set { this.dateAndTimeField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="DateAndTime"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DateAndTimeSpecified
-        {
-            get { return this.dateAndTimeFieldSpecified; }
-            set { this.dateAndTimeFieldSpecified = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "MaximumNumberOfOSDs"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAttributeString(null, "Total", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.totalField));
-            if (this.imageFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "Image", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.imageField));
-            }
-            if (this.plainTextFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "PlainText", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.plainTextField));
-            }
-            if (this.dateFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "Date", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.dateField));
-            }
-            if (this.timeFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "Time", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.timeField));
-            }
-            if (this.dateAndTimeFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "DateAndTime", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.dateAndTimeField));
-            }
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Total":
-                    this.totalField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.AttributeValue);
-                    return true;
-                case "Image":
-                    this.imageField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.AttributeValue);
-                    this.imageFieldSpecified = true;
-                    return true;
-                case "PlainText":
-                    this.plainTextField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.AttributeValue);
-                    this.plainTextFieldSpecified = true;
-                    return true;
-                case "Date":
-                    this.dateField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.AttributeValue);
-                    this.dateFieldSpecified = true;
-                    return true;
-                case "Time":
-                    this.timeField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.AttributeValue);
-                    this.timeFieldSpecified = true;
-                    return true;
-                case "DateAndTime":
-                    this.dateAndTimeField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.AttributeValue);
-                    this.dateAndTimeFieldSpecified = true;
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
     /// <summary>
     /// A media profile consists of a set of media configurations.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class MediaProfile : SharpOnvifCommon.Xml.OnvifObject
+    public partial class MediaProfile : SharpOnvifCommon.Xml.OnvifContract
     {
         private string nameField;
 
@@ -14099,742 +5936,8 @@ namespace SharpOnvifClient.Media2
 
     }
 
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class MetadataConfiguration : ConfigurationEntity
-    {
-        private PTZFilter pTZStatusField;
-
-        private EventSubscription eventsField;
-
-        private bool analyticsField;
-        private bool analyticsFieldSpecified;
-
-        private MulticastConfiguration multicastField;
-
-        private string sessionTimeoutField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        private AnalyticsEngineConfiguration analyticsEngineConfigurationField;
-
-        private SensorDataFilter sensorDataField;
-
-        private MetadataConfigurationExtension extensionField;
-
-        private string compressionTypeField;
-
-        private bool geoLocationField;
-        private bool geoLocationFieldSpecified;
-
-        private bool shapePolygonField;
-        private bool shapePolygonFieldSpecified;
-
-        private string secureStreamingProtocolAlgorithmField;
-
-        /// <summary>
-        /// Optional element to configure which PTZ related data is to include in the metadata stream.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public PTZFilter PTZStatus
-        {
-            get { return this.pTZStatusField; }
-            set { this.pTZStatusField = value; }
-        }
-
-        /// <summary>
-        /// Optional element to configure the streaming of events. A client might be interested in receiving
-        /// all, none or some of the events produced by the device:To get all events: Include the Events element
-        /// but do not include a filter.To get no events: Do not include the Events element.To get only some
-        /// events: Include the Events element and include a filter in the element.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public EventSubscription Events
-        {
-            get { return this.eventsField; }
-            set { this.eventsField = value; }
-        }
-
-        /// <summary>
-        /// Defines whether the streamed metadata will include metadata from the analytics engines (video, cell
-        /// motion, audio etc.)
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public bool Analytics
-        {
-            get { return this.analyticsField; }
-            set { this.analyticsField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="Analytics"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool AnalyticsSpecified
-        {
-            get { return this.analyticsFieldSpecified; }
-            set { this.analyticsFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// Defines the multicast settings that could be used for video streaming.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public MulticastConfiguration Multicast
-        {
-            get { return this.multicastField; }
-            set { this.multicastField = value; }
-        }
-
-        /// <summary>
-        /// The rtsp session timeout for the related audio stream (when using Media2 Service, this value is
-        /// deprecated and ignored)
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=4, DataType="duration")]
-        public string SessionTimeout
-        {
-            get { return this.sessionTimeoutField; }
-            set { this.sessionTimeoutField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=5)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        /// <summary>
-        /// Indication which AnalyticsModules shall output metadata. Note that the streaming behavior is
-        /// undefined if the list includes items that are not part of the associated AnalyticsConfiguration.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
-        public AnalyticsEngineConfiguration AnalyticsEngineConfiguration
-        {
-            get { return this.analyticsEngineConfigurationField; }
-            set { this.analyticsEngineConfigurationField = value; }
-        }
-
-        /// <summary>
-        /// Optional element to configure which sensor data is to include in the metadata stream. A client might
-        /// be interested in receiving all, none or some of the sensor data produced by the device:To get all
-        /// sensor data: Include the SensorData element but do not include any filter criteria.To get no sensor
-        /// data: Do not include the SensorData element.To get only some sensor data: Include the SensorData
-        /// element and specify filter criteria (SensorID list, Type list, etc.).
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
-        public SensorDataFilter SensorData
-        {
-            get { return this.sensorDataField; }
-            set { this.sensorDataField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
-        public MetadataConfigurationExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        /// <summary>
-        /// Optional parameter to configure compression type of Metadata payload. Use values from enumeration
-        /// MetadataCompressionType.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string CompressionType
-        {
-            get { return this.compressionTypeField; }
-            set { this.compressionTypeField = value; }
-        }
-
-        /// <summary>
-        /// Optional parameter to configure if the metadata stream shall contain the Geo Location coordinates of
-        /// each target.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool GeoLocation
-        {
-            get { return this.geoLocationField; }
-            set { this.geoLocationField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="GeoLocation"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool GeoLocationSpecified
-        {
-            get { return this.geoLocationFieldSpecified; }
-            set { this.geoLocationFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// Optional parameter to configure if the generated metadata stream should contain shape information as
-        /// polygon.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool ShapePolygon
-        {
-            get { return this.shapePolygonField; }
-            set { this.shapePolygonField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="ShapePolygon"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ShapePolygonSpecified
-        {
-            get { return this.shapePolygonFieldSpecified; }
-            set { this.shapePolygonFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// The cryptographic algorithm used as defined by tt:SrtpSecurityAlgorithms
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string SecureStreamingProtocolAlgorithm
-        {
-            get { return this.secureStreamingProtocolAlgorithmField; }
-            set { this.secureStreamingProtocolAlgorithmField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "MetadataConfiguration"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlAttributes(writer);
-            writer.WriteAttributeString(null, "CompressionType", this.compressionTypeField);
-            if (this.geoLocationFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "GeoLocation", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.geoLocationField));
-            }
-            if (this.shapePolygonFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "ShapePolygon", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.shapePolygonField));
-            }
-            writer.WriteAttributeString(null, "SecureStreamingProtocolAlgorithm", this.secureStreamingProtocolAlgorithmField);
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlContent(writer);
-            writer.WriteElement(Ns.OnvifVer10, "PTZStatus", this.pTZStatusField, Ns.OnvifVer10, "PTZFilter");
-            writer.WriteElement(Ns.OnvifVer10, "Events", this.eventsField, Ns.OnvifVer10, "EventSubscription");
-            if (this.analyticsFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "Analytics", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.analyticsField));
-            }
-            writer.WriteElement(Ns.OnvifVer10, "Multicast", this.multicastField, Ns.OnvifVer10, "MulticastConfiguration");
-            writer.WriteElementString(Ns.OnvifVer10, "SessionTimeout", this.sessionTimeoutField);
-            writer.WriteAny(this.anyField);
-            writer.WriteElement(Ns.OnvifVer10, "AnalyticsEngineConfiguration", this.analyticsEngineConfigurationField, Ns.OnvifVer10, "AnalyticsEngineConfiguration");
-            writer.WriteElement(Ns.OnvifVer10, "SensorData", this.sensorDataField, Ns.OnvifVer10, "SensorDataFilter");
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "MetadataConfigurationExtension");
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "CompressionType":
-                    this.compressionTypeField = reader.AttributeValue;
-                    return true;
-                case "GeoLocation":
-                    this.geoLocationField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
-                    this.geoLocationFieldSpecified = true;
-                    return true;
-                case "ShapePolygon":
-                    this.shapePolygonField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
-                    this.shapePolygonFieldSpecified = true;
-                    return true;
-                case "SecureStreamingProtocolAlgorithm":
-                    this.secureStreamingProtocolAlgorithmField = reader.AttributeValue;
-                    return true;
-            }
-            return base.ReadXmlAttribute(reader);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "PTZStatus":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.pTZStatusField = reader.ReadElementObject<PTZFilter>(() => new PTZFilter());
-                    return true;
-                case "Events":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.eventsField = reader.ReadElementObject<EventSubscription>(() => new EventSubscription());
-                    return true;
-                case "Analytics":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.analyticsField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
-                    this.analyticsFieldSpecified = true;
-                    return true;
-                case "Multicast":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.multicastField = reader.ReadElementObject<MulticastConfiguration>(() => new MulticastConfiguration());
-                    return true;
-                case "SessionTimeout":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.sessionTimeoutField = reader.ReadElementText();
-                    return true;
-                case "AnalyticsEngineConfiguration":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.analyticsEngineConfigurationField = reader.ReadElementObject<AnalyticsEngineConfiguration>(() => new AnalyticsEngineConfiguration());
-                    return true;
-                case "SensorData":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.sensorDataField = reader.ReadElementObject<SensorDataFilter>(() => new SensorDataFilter());
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<MetadataConfigurationExtension>(() => new MetadataConfigurationExtension());
-                    return true;
-            }
-            if (base.ReadXmlElement(reader)) return true;
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class MetadataConfigurationExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Namespace="http://www.onvif.org/ver10/schema", Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "MetadataConfigurationExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class MetadataConfigurationOptions : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private PTZStatusFilterOptions pTZStatusFilterOptionsField;
-
-        private SensorDataFilterOptions sensorDataFilterOptionsField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        private MetadataConfigurationOptionsExtension extensionField;
-
-        private bool geoLocationField;
-        private bool geoLocationFieldSpecified;
-
-        private int maxContentFilterSizeField;
-        private bool maxContentFilterSizeFieldSpecified;
-
-        private string[] secureStreamingProtocolAlgorithmsField;
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public PTZStatusFilterOptions PTZStatusFilterOptions
-        {
-            get { return this.pTZStatusFilterOptionsField; }
-            set { this.pTZStatusFilterOptionsField = value; }
-        }
-
-        /// <summary>
-        /// Optional element indicating the sensor data filtering capabilities of the device.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public SensorDataFilterOptions SensorDataFilterOptions
-        {
-            get { return this.sensorDataFilterOptionsField; }
-            set { this.sensorDataFilterOptionsField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=2)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public MetadataConfigurationOptionsExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        /// <summary>
-        /// True if the device is able to stream the Geo Located positions of each target.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool GeoLocation
-        {
-            get { return this.geoLocationField; }
-            set { this.geoLocationField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="GeoLocation"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool GeoLocationSpecified
-        {
-            get { return this.geoLocationFieldSpecified; }
-            set { this.geoLocationFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// A device signalling support for content filtering shall support expressions with the provided
-        /// expression size.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int MaxContentFilterSize
-        {
-            get { return this.maxContentFilterSizeField; }
-            set { this.maxContentFilterSizeField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="MaxContentFilterSize"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool MaxContentFilterSizeSpecified
-        {
-            get { return this.maxContentFilterSizeFieldSpecified; }
-            set { this.maxContentFilterSizeFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// If secure RTSP streaming is supported, this shall return the list of supported cryptographic
-        /// algorithms as defined by tt:SrtpSecurityAlgorithms.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string[] SecureStreamingProtocolAlgorithms
-        {
-            get { return this.secureStreamingProtocolAlgorithmsField; }
-            set { this.secureStreamingProtocolAlgorithmsField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "MetadataConfigurationOptions"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            if (this.geoLocationFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "GeoLocation", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.geoLocationField));
-            }
-            if (this.maxContentFilterSizeFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "MaxContentFilterSize", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxContentFilterSizeField));
-            }
-            writer.WriteAttributeString(null, "SecureStreamingProtocolAlgorithms", SharpOnvifCommon.Xml.OnvifArray.JoinList(this.secureStreamingProtocolAlgorithmsField));
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElement(Ns.OnvifVer10, "PTZStatusFilterOptions", this.pTZStatusFilterOptionsField, Ns.OnvifVer10, "PTZStatusFilterOptions");
-            writer.WriteElement(Ns.OnvifVer10, "SensorDataFilterOptions", this.sensorDataFilterOptionsField, Ns.OnvifVer10, "SensorDataFilterOptions");
-            writer.WriteAny(this.anyField);
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "MetadataConfigurationOptionsExtension");
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "GeoLocation":
-                    this.geoLocationField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
-                    this.geoLocationFieldSpecified = true;
-                    return true;
-                case "MaxContentFilterSize":
-                    this.maxContentFilterSizeField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.AttributeValue);
-                    this.maxContentFilterSizeFieldSpecified = true;
-                    return true;
-                case "SecureStreamingProtocolAlgorithms":
-                    this.secureStreamingProtocolAlgorithmsField = SharpOnvifCommon.Xml.OnvifArray.SplitList(reader.AttributeValue);
-                    return true;
-            }
-            return false;
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "PTZStatusFilterOptions":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.pTZStatusFilterOptionsField = reader.ReadElementObject<PTZStatusFilterOptions>(() => new PTZStatusFilterOptions());
-                    return true;
-                case "SensorDataFilterOptions":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.sensorDataFilterOptionsField = reader.ReadElementObject<SensorDataFilterOptions>(() => new SensorDataFilterOptions());
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<MetadataConfigurationOptionsExtension>(() => new MetadataConfigurationOptionsExtension());
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class MetadataConfigurationOptionsExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string[] compressionTypeField;
-
-        private MetadataConfigurationOptionsExtension2 extensionField;
-
-        /// <summary>
-        /// List of supported metadata compression type. Its options shall be chosen from
-        /// tt:MetadataCompressionType.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("CompressionType", Order=0)]
-        public string[] CompressionType
-        {
-            get { return this.compressionTypeField; }
-            set { this.compressionTypeField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public MetadataConfigurationOptionsExtension2 Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "MetadataConfigurationOptionsExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            if (this.compressionTypeField != null)
-            {
-                for (int i = 0; i < this.compressionTypeField.Length; i++)
-                {
-                    writer.WriteElementString(Ns.OnvifVer10, "CompressionType", this.compressionTypeField[i]);
-                }
-            }
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "MetadataConfigurationOptionsExtension2");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "CompressionType":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.compressionTypeField, reader.ReadElementText());
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<MetadataConfigurationOptionsExtension2>(() => new MetadataConfigurationOptionsExtension2());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class MetadataConfigurationOptionsExtension2 : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Namespace="http://www.onvif.org/ver10/schema", Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "MetadataConfigurationOptionsExtension2"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class MetadataInput : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private Config[] metadataConfigField;
-
-        private MetadataInputExtension extensionField;
-
-        [System.Xml.Serialization.XmlElementAttribute("MetadataConfig", Order=0)]
-        public Config[] MetadataConfig
-        {
-            get { return this.metadataConfigField; }
-            set { this.metadataConfigField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public MetadataInputExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "MetadataInput"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            if (this.metadataConfigField != null)
-            {
-                for (int i = 0; i < this.metadataConfigField.Length; i++)
-                {
-                    writer.WriteElement(Ns.OnvifVer10, "MetadataConfig", this.metadataConfigField[i], Ns.OnvifVer10, "Config");
-                }
-            }
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "MetadataInputExtension");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "MetadataConfig":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.metadataConfigField, reader.ReadElementObject<Config>(() => new Config()));
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<MetadataInputExtension>(() => new MetadataInputExtension());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class MetadataInputExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "MetadataInputExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Mpeg4Configuration : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private int govLengthField;
-
-        private Mpeg4Profile mpeg4ProfileField;
-
-        /// <summary>
-        /// Determines the interval in which the I-Frames will be coded. An entry of 1 indicates I-Frames are
-        /// continuously generated. An entry of 2 indicates that every 2nd image is an I-Frame, and 3 only every
-        /// 3rd frame, etc. The frames in between are coded as P or B Frames.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public int GovLength
-        {
-            get { return this.govLengthField; }
-            set { this.govLengthField = value; }
-        }
-
-        /// <summary>
-        /// the Mpeg4 profile, either simple profile (SP) or advanced simple profile (ASP)
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public Mpeg4Profile Mpeg4Profile
-        {
-            get { return this.mpeg4ProfileField; }
-            set { this.mpeg4ProfileField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "Mpeg4Configuration"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "GovLength", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.govLengthField));
-            writer.WriteElementString(Ns.OnvifVer10, "Mpeg4Profile", EnumXml.ToXml(this.mpeg4ProfileField));
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "GovLength":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.govLengthField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    return true;
-                case "Mpeg4Profile":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.mpeg4ProfileField = EnumXml.ParseMpeg4Profile(reader.ReadElementText());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class MulticastAudioDecoderCapabilities : SharpOnvifCommon.Xml.OnvifObject
+    public partial class MulticastAudioDecoderCapabilities : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -14971,4150 +6074,10 @@ namespace SharpOnvifClient.Media2
     }
 
     /// <summary>
-    /// Configuration for the Multicast Audio Decoder.
-    /// </summary>
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class MulticastAudioDecoderConfiguration : ConfigurationEntity
-    {
-        private bool enableField;
-
-        private string[] audioOutputTokenField;
-
-        private string encodingField;
-
-        private int bitrateField;
-
-        private int samplingRateField;
-
-        private MulticastReceiverConfiguration multicastField;
-
-        private int rTPPayloadTypeField;
-
-        private int priorityField;
-
-        private string mediaFormatParametersField;
-
-        private SRTPPreShared sRTPPreSharedParametersField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        /// <summary>
-        /// Indicates whether the Multicast Audio Decoder is enabled or disabled.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public bool Enable
-        {
-            get { return this.enableField; }
-            set { this.enableField = value; }
-        }
-
-        /// <summary>
-        /// Token of the physical Audio output. This element is optional and can occur multiple times.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("AudioOutputToken", Order=1)]
-        public string[] AudioOutputToken
-        {
-            get { return this.audioOutputTokenField; }
-            set { this.audioOutputTokenField = value; }
-        }
-
-        /// <summary>
-        /// Specifies the encoding type according to IANA media types.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public string Encoding
-        {
-            get { return this.encodingField; }
-            set { this.encodingField = value; }
-        }
-
-        /// <summary>
-        /// The bitrate of the audio stream in bits per second.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public int Bitrate
-        {
-            get { return this.bitrateField; }
-            set { this.bitrateField = value; }
-        }
-
-        /// <summary>
-        /// The sampling rate of the audio stream in kHz.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public int SamplingRate
-        {
-            get { return this.samplingRateField; }
-            set { this.samplingRateField = value; }
-        }
-
-        /// <summary>
-        /// Contains configuration details for multicast settings.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public MulticastReceiverConfiguration Multicast
-        {
-            get { return this.multicastField; }
-            set { this.multicastField = value; }
-        }
-
-        /// <summary>
-        /// Defines the RTP payload type used for the audio stream. To ensure compatibility, it is recommended
-        /// to use dynamic payload types (96 and above), as specified in RFC 3551. Standard payload types (0-95)
-        /// should only be used for predefined audio formats matching the audio encoding as defined in IANA RTP
-        /// Payload Types, as using them for non-standard media may lead to unexpected errors or
-        /// interoperability issues.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
-        public int RTPPayloadType
-        {
-            get { return this.rTPPayloadTypeField; }
-            set { this.rTPPayloadTypeField = value; }
-        }
-
-        /// <summary>
-        /// Indicates the priority level when multiple configurations are active. A higher value signifies a
-        /// higher priority. If several configurations have the same priority value the order between those
-        /// configurations is undefined.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
-        public int Priority
-        {
-            get { return this.priorityField; }
-            set { this.priorityField = value; }
-        }
-
-        /// <summary>
-        /// Optional media format parameters as specified in SDP, such as: a=fmtp:101 stereo=1; sprop-stereo=1.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
-        public string MediaFormatParameters
-        {
-            get { return this.mediaFormatParametersField; }
-            set { this.mediaFormatParametersField = value; }
-        }
-
-        /// <summary>
-        /// Optional configuration parameters for SRTP pre-shared key usage, applicable when SRTP is supported.
-        /// When this configuration is present, RTP packets shall be encrypted.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
-        public SRTPPreShared SRTPPreSharedParameters
-        {
-            get { return this.sRTPPreSharedParametersField; }
-            set { this.sRTPPreSharedParametersField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=10)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "MulticastAudioDecoderConfiguration"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlContent(writer);
-            writer.WriteElementString(Ns.OnvifVer10, "Enable", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.enableField));
-            if (this.audioOutputTokenField != null)
-            {
-                for (int i = 0; i < this.audioOutputTokenField.Length; i++)
-                {
-                    writer.WriteElementString(Ns.OnvifVer10, "AudioOutputToken", this.audioOutputTokenField[i]);
-                }
-            }
-            writer.WriteElementString(Ns.OnvifVer10, "Encoding", this.encodingField);
-            writer.WriteElementString(Ns.OnvifVer10, "Bitrate", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.bitrateField));
-            writer.WriteElementString(Ns.OnvifVer10, "SamplingRate", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.samplingRateField));
-            writer.WriteElement(Ns.OnvifVer10, "Multicast", this.multicastField, Ns.OnvifVer10, "MulticastReceiverConfiguration");
-            writer.WriteElementString(Ns.OnvifVer10, "RTPPayloadType", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.rTPPayloadTypeField));
-            writer.WriteElementString(Ns.OnvifVer10, "Priority", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.priorityField));
-            writer.WriteElementString(Ns.OnvifVer10, "MediaFormatParameters", this.mediaFormatParametersField);
-            writer.WriteElement(Ns.OnvifVer10, "SRTPPreSharedParameters", this.sRTPPreSharedParametersField, Ns.OnvifVer10, "SRTPPreShared");
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Enable":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.enableField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
-                    return true;
-                case "AudioOutputToken":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.audioOutputTokenField, reader.ReadElementText());
-                    return true;
-                case "Encoding":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.encodingField = reader.ReadElementText();
-                    return true;
-                case "Bitrate":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.bitrateField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    return true;
-                case "SamplingRate":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.samplingRateField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    return true;
-                case "Multicast":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.multicastField = reader.ReadElementObject<MulticastReceiverConfiguration>(() => new MulticastReceiverConfiguration());
-                    return true;
-                case "RTPPayloadType":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.rTPPayloadTypeField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    return true;
-                case "Priority":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.priorityField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    return true;
-                case "MediaFormatParameters":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.mediaFormatParametersField = reader.ReadElementText();
-                    return true;
-                case "SRTPPreSharedParameters":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.sRTPPreSharedParametersField = reader.ReadElementObject<SRTPPreShared>(() => new SRTPPreShared());
-                    return true;
-            }
-            if (base.ReadXmlElement(reader)) return true;
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class MulticastAudioDecoderConfigurationOptions : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private AudioDecoder2Options encodingOptionsField;
-
-        private IntRange priorityRangeField;
-
-        private string[] audioOutputTokensField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        private string[] secureStreamingProtocolAlgorithmsField;
-
-        /// <summary>
-        /// Supported encoding options for the multicast audio decoder.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public AudioDecoder2Options EncodingOptions
-        {
-            get { return this.encodingOptionsField; }
-            set { this.encodingOptionsField = value; }
-        }
-
-        /// <summary>
-        /// Specifies the priority range as an integer. This indicates the priority level for audio
-        /// configuration.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public IntRange PriorityRange
-        {
-            get { return this.priorityRangeField; }
-            set { this.priorityRangeField = value; }
-        }
-
-        /// <summary>
-        /// Optional list of physical Audio output tokens. This element is used when only certain audio outputs
-        /// can be configured for this token.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public string[] AudioOutputTokens
-        {
-            get { return this.audioOutputTokensField; }
-            set { this.audioOutputTokensField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=3)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        /// <summary>
-        /// An optional parameter specifies the list of supported cryptographic algorithms when SRTP support is
-        /// signaled as 'true' in the GetServiceCapabilitiesResponse. Refer to tt:SrtpSecurityAlgorithms for the
-        /// acceptable values.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string[] SecureStreamingProtocolAlgorithms
-        {
-            get { return this.secureStreamingProtocolAlgorithmsField; }
-            set { this.secureStreamingProtocolAlgorithmsField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "MulticastAudioDecoderConfigurationOptions"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAttributeString(null, "SecureStreamingProtocolAlgorithms", SharpOnvifCommon.Xml.OnvifArray.JoinList(this.secureStreamingProtocolAlgorithmsField));
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElement(Ns.OnvifVer10, "EncodingOptions", this.encodingOptionsField, Ns.OnvifVer10, "AudioDecoder2Options");
-            writer.WriteElement(Ns.OnvifVer10, "PriorityRange", this.priorityRangeField, Ns.OnvifVer10, "IntRange");
-            writer.WriteElementString(Ns.OnvifVer10, "AudioOutputTokens", SharpOnvifCommon.Xml.OnvifArray.JoinList(this.audioOutputTokensField));
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "SecureStreamingProtocolAlgorithms":
-                    this.secureStreamingProtocolAlgorithmsField = SharpOnvifCommon.Xml.OnvifArray.SplitList(reader.AttributeValue);
-                    return true;
-            }
-            return false;
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "EncodingOptions":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.encodingOptionsField = reader.ReadElementObject<AudioDecoder2Options>(() => new AudioDecoder2Options());
-                    return true;
-                case "PriorityRange":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.priorityRangeField = reader.ReadElementObject<IntRange>(() => new IntRange());
-                    return true;
-                case "AudioOutputTokens":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.audioOutputTokensField = SharpOnvifCommon.Xml.OnvifArray.SplitList(reader.ReadElementText());
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class MulticastConfiguration : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private IPAddress addressField;
-
-        private int portField;
-
-        private int tTLField;
-
-        private bool autoStartField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        /// <summary>
-        /// The multicast address (if this address is set to 0 no multicast streaming is enabled)
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public IPAddress Address
-        {
-            get { return this.addressField; }
-            set { this.addressField = value; }
-        }
-
-        /// <summary>
-        /// The RTP mutlicast destination port. A device may support RTCP. In this case the port value shall be
-        /// even to allow the corresponding RTCP stream to be mapped to the next higher (odd) destination port
-        /// number as defined in the RTSP specification.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public int Port
-        {
-            get { return this.portField; }
-            set { this.portField = value; }
-        }
-
-        /// <summary>
-        /// In case of IPv6 the TTL value is assumed as the hop limit. Note that for IPV6 and administratively
-        /// scoped IPv4 multicast the primary use for hop limit / TTL is to prevent packets from (endlessly)
-        /// circulating and not limiting scope. In these cases the address contains the scope.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public int TTL
-        {
-            get { return this.tTLField; }
-            set { this.tTLField = value; }
-        }
-
-        /// <summary>
-        /// Read only property signalling that streaming is persistent. Use the methods StartMulticastStreaming
-        /// and StopMulticastStreaming to switch its state.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public bool AutoStart
-        {
-            get { return this.autoStartField; }
-            set { this.autoStartField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=4)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "MulticastConfiguration"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElement(Ns.OnvifVer10, "Address", this.addressField, Ns.OnvifVer10, "IPAddress");
-            writer.WriteElementString(Ns.OnvifVer10, "Port", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.portField));
-            writer.WriteElementString(Ns.OnvifVer10, "TTL", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.tTLField));
-            writer.WriteElementString(Ns.OnvifVer10, "AutoStart", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.autoStartField));
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Address":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.addressField = reader.ReadElementObject<IPAddress>(() => new IPAddress());
-                    return true;
-                case "Port":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.portField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    return true;
-                case "TTL":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.tTLField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    return true;
-                case "AutoStart":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.autoStartField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class MulticastReceiverConfiguration : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private IPAddress addressField;
-
-        private int portField;
-
-        private int tTLField;
-
-        private string[] interfaceTokenField;
-
-        private IPAddress sourceSpecificMulticastField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        /// <summary>
-        /// The multicast address (if this address is set to 0 no multicast streaming is enabled)
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public IPAddress Address
-        {
-            get { return this.addressField; }
-            set { this.addressField = value; }
-        }
-
-        /// <summary>
-        /// The RTP multicast destination port. A device may support RTCP. In this case the port value shall be
-        /// even to allow the corresponding RTCP stream to be mapped to the next higher (odd) destination port
-        /// number as defined in the RTSP specification.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public int Port
-        {
-            get { return this.portField; }
-            set { this.portField = value; }
-        }
-
-        /// <summary>
-        /// In case of IPv6 the TTL value is assumed as the hop limit. Note that for IPV6 and administratively
-        /// scoped IPv4 multicast the primary use for hop limit / TTL is to prevent packets from (endlessly)
-        /// circulating and not limiting scope. In these cases the address contains the scope.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public int TTL
-        {
-            get { return this.tTLField; }
-            set { this.tTLField = value; }
-        }
-
-        /// <summary>
-        /// Unique identifier of the network interface on the device. If not specified, all available interfaces
-        /// will be used for listening.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("InterfaceToken", Order=3)]
-        public string[] InterfaceToken
-        {
-            get { return this.interfaceTokenField; }
-            set { this.interfaceTokenField = value; }
-        }
-
-        /// <summary>
-        /// When a source-specific multicast address is configured, the device will process multicast data only
-        /// from the specified source, in accordance with SSM principles defined in RFC 4607.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public IPAddress SourceSpecificMulticast
-        {
-            get { return this.sourceSpecificMulticastField; }
-            set { this.sourceSpecificMulticastField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=5)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "MulticastReceiverConfiguration"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElement(Ns.OnvifVer10, "Address", this.addressField, Ns.OnvifVer10, "IPAddress");
-            writer.WriteElementString(Ns.OnvifVer10, "Port", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.portField));
-            writer.WriteElementString(Ns.OnvifVer10, "TTL", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.tTLField));
-            if (this.interfaceTokenField != null)
-            {
-                for (int i = 0; i < this.interfaceTokenField.Length; i++)
-                {
-                    writer.WriteElementString(Ns.OnvifVer10, "InterfaceToken", this.interfaceTokenField[i]);
-                }
-            }
-            writer.WriteElement(Ns.OnvifVer10, "SourceSpecificMulticast", this.sourceSpecificMulticastField, Ns.OnvifVer10, "IPAddress");
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Address":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.addressField = reader.ReadElementObject<IPAddress>(() => new IPAddress());
-                    return true;
-                case "Port":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.portField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    return true;
-                case "TTL":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.tTLField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    return true;
-                case "InterfaceToken":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.interfaceTokenField, reader.ReadElementText());
-                    return true;
-                case "SourceSpecificMulticast":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.sourceSpecificMulticastField = reader.ReadElementObject<IPAddress>(() => new IPAddress());
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class NetworkInterface : DeviceEntity
-    {
-        private bool enabledField;
-
-        private NetworkInterfaceInfo infoField;
-
-        private NetworkInterfaceLink linkField;
-
-        private IPv4NetworkInterface iPv4Field;
-
-        private IPv6NetworkInterface iPv6Field;
-
-        private NetworkInterfaceExtension extensionField;
-
-        /// <summary>
-        /// Indicates whether or not an interface is enabled.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public bool Enabled
-        {
-            get { return this.enabledField; }
-            set { this.enabledField = value; }
-        }
-
-        /// <summary>
-        /// Network interface information
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public NetworkInterfaceInfo Info
-        {
-            get { return this.infoField; }
-            set { this.infoField = value; }
-        }
-
-        /// <summary>
-        /// Link configuration.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public NetworkInterfaceLink Link
-        {
-            get { return this.linkField; }
-            set { this.linkField = value; }
-        }
-
-        /// <summary>
-        /// IPv4 network interface configuration.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public IPv4NetworkInterface IPv4
-        {
-            get { return this.iPv4Field; }
-            set { this.iPv4Field = value; }
-        }
-
-        /// <summary>
-        /// IPv6 network interface configuration.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public IPv6NetworkInterface IPv6
-        {
-            get { return this.iPv6Field; }
-            set { this.iPv6Field = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public NetworkInterfaceExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "NetworkInterface"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlContent(writer);
-            writer.WriteElementString(Ns.OnvifVer10, "Enabled", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.enabledField));
-            writer.WriteElement(Ns.OnvifVer10, "Info", this.infoField, Ns.OnvifVer10, "NetworkInterfaceInfo");
-            writer.WriteElement(Ns.OnvifVer10, "Link", this.linkField, Ns.OnvifVer10, "NetworkInterfaceLink");
-            writer.WriteElement(Ns.OnvifVer10, "IPv4", this.iPv4Field, Ns.OnvifVer10, "IPv4NetworkInterface");
-            writer.WriteElement(Ns.OnvifVer10, "IPv6", this.iPv6Field, Ns.OnvifVer10, "IPv6NetworkInterface");
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "NetworkInterfaceExtension");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Enabled":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.enabledField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
-                    return true;
-                case "Info":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.infoField = reader.ReadElementObject<NetworkInterfaceInfo>(() => new NetworkInterfaceInfo());
-                    return true;
-                case "Link":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.linkField = reader.ReadElementObject<NetworkInterfaceLink>(() => new NetworkInterfaceLink());
-                    return true;
-                case "IPv4":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.iPv4Field = reader.ReadElementObject<IPv4NetworkInterface>(() => new IPv4NetworkInterface());
-                    return true;
-                case "IPv6":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.iPv6Field = reader.ReadElementObject<IPv6NetworkInterface>(() => new IPv6NetworkInterface());
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<NetworkInterfaceExtension>(() => new NetworkInterfaceExtension());
-                    return true;
-            }
-            if (base.ReadXmlElement(reader)) return true;
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class NetworkInterfaceConnectionSetting : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private bool autoNegotiationField;
-
-        private int speedField;
-
-        private Duplex duplexField;
-
-        /// <summary>
-        /// Auto negotiation on/off.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public bool AutoNegotiation
-        {
-            get { return this.autoNegotiationField; }
-            set { this.autoNegotiationField = value; }
-        }
-
-        /// <summary>
-        /// Speed.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public int Speed
-        {
-            get { return this.speedField; }
-            set { this.speedField = value; }
-        }
-
-        /// <summary>
-        /// Duplex type, Half or Full.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public Duplex Duplex
-        {
-            get { return this.duplexField; }
-            set { this.duplexField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "NetworkInterfaceConnectionSetting"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "AutoNegotiation", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.autoNegotiationField));
-            writer.WriteElementString(Ns.OnvifVer10, "Speed", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.speedField));
-            writer.WriteElementString(Ns.OnvifVer10, "Duplex", EnumXml.ToXml(this.duplexField));
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "AutoNegotiation":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.autoNegotiationField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
-                    return true;
-                case "Speed":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.speedField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    return true;
-                case "Duplex":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.duplexField = EnumXml.ParseDuplex(reader.ReadElementText());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class NetworkInterfaceExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        private int interfaceTypeField;
-
-        private Dot3Configuration[] dot3Field;
-
-        private Dot11Configuration[] dot11Field;
-
-        private NetworkInterfaceExtension2 extensionField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public int InterfaceType
-        {
-            get { return this.interfaceTypeField; }
-            set { this.interfaceTypeField = value; }
-        }
-
-        /// <summary>
-        /// Extension point prepared for future 802.3 configuration.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("Dot3", Order=2)]
-        public Dot3Configuration[] Dot3
-        {
-            get { return this.dot3Field; }
-            set { this.dot3Field = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute("Dot11", Order=3)]
-        public Dot11Configuration[] Dot11
-        {
-            get { return this.dot11Field; }
-            set { this.dot11Field = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public NetworkInterfaceExtension2 Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "NetworkInterfaceExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-            writer.WriteElementString(Ns.OnvifVer10, "InterfaceType", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.interfaceTypeField));
-            if (this.dot3Field != null)
-            {
-                for (int i = 0; i < this.dot3Field.Length; i++)
-                {
-                    writer.WriteElement(Ns.OnvifVer10, "Dot3", this.dot3Field[i], Ns.OnvifVer10, "Dot3Configuration");
-                }
-            }
-            if (this.dot11Field != null)
-            {
-                for (int i = 0; i < this.dot11Field.Length; i++)
-                {
-                    writer.WriteElement(Ns.OnvifVer10, "Dot11", this.dot11Field[i], Ns.OnvifVer10, "Dot11Configuration");
-                }
-            }
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "NetworkInterfaceExtension2");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "InterfaceType":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.interfaceTypeField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    return true;
-                case "Dot3":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.dot3Field, reader.ReadElementObject<Dot3Configuration>(() => new Dot3Configuration()));
-                    return true;
-                case "Dot11":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.dot11Field, reader.ReadElementObject<Dot11Configuration>(() => new Dot11Configuration()));
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<NetworkInterfaceExtension2>(() => new NetworkInterfaceExtension2());
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class NetworkInterfaceExtension2 : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Namespace="http://www.onvif.org/ver10/schema", Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "NetworkInterfaceExtension2"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class NetworkInterfaceInfo : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string nameField;
-
-        private string hwAddressField;
-
-        private int mTUField;
-        private bool mTUFieldSpecified;
-
-        /// <summary>
-        /// Network interface name, for example eth0.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string Name
-        {
-            get { return this.nameField; }
-            set { this.nameField = value; }
-        }
-
-        /// <summary>
-        /// Network interface MAC address.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1, DataType="token")]
-        public string HwAddress
-        {
-            get { return this.hwAddressField; }
-            set { this.hwAddressField = value; }
-        }
-
-        /// <summary>
-        /// Maximum transmission unit.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public int MTU
-        {
-            get { return this.mTUField; }
-            set { this.mTUField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="MTU"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool MTUSpecified
-        {
-            get { return this.mTUFieldSpecified; }
-            set { this.mTUFieldSpecified = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "NetworkInterfaceInfo"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Name", this.nameField);
-            writer.WriteElementString(Ns.OnvifVer10, "HwAddress", this.hwAddressField);
-            if (this.mTUFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "MTU", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.mTUField));
-            }
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Name":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.nameField = reader.ReadElementText();
-                    return true;
-                case "HwAddress":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.hwAddressField = reader.ReadElementText();
-                    return true;
-                case "MTU":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.mTUField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    this.mTUFieldSpecified = true;
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class NetworkInterfaceLink : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private NetworkInterfaceConnectionSetting adminSettingsField;
-
-        private NetworkInterfaceConnectionSetting operSettingsField;
-
-        private int interfaceTypeField;
-
-        /// <summary>
-        /// Configured link settings.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public NetworkInterfaceConnectionSetting AdminSettings
-        {
-            get { return this.adminSettingsField; }
-            set { this.adminSettingsField = value; }
-        }
-
-        /// <summary>
-        /// Current active link settings.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public NetworkInterfaceConnectionSetting OperSettings
-        {
-            get { return this.operSettingsField; }
-            set { this.operSettingsField = value; }
-        }
-
-        /// <summary>
-        /// Integer indicating interface type, for example: 6 is ethernet.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public int InterfaceType
-        {
-            get { return this.interfaceTypeField; }
-            set { this.interfaceTypeField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "NetworkInterfaceLink"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElement(Ns.OnvifVer10, "AdminSettings", this.adminSettingsField, Ns.OnvifVer10, "NetworkInterfaceConnectionSetting");
-            writer.WriteElement(Ns.OnvifVer10, "OperSettings", this.operSettingsField, Ns.OnvifVer10, "NetworkInterfaceConnectionSetting");
-            writer.WriteElementString(Ns.OnvifVer10, "InterfaceType", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.interfaceTypeField));
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "AdminSettings":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.adminSettingsField = reader.ReadElementObject<NetworkInterfaceConnectionSetting>(() => new NetworkInterfaceConnectionSetting());
-                    return true;
-                case "OperSettings":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.operSettingsField = reader.ReadElementObject<NetworkInterfaceConnectionSetting>(() => new NetworkInterfaceConnectionSetting());
-                    return true;
-                case "InterfaceType":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.interfaceTypeField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class NoiseReduction : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private float levelField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        /// <summary>
-        /// Level parameter specified with unitless normalized value from 0.0 to +1.0. Level=0 means no noise
-        /// reduction or minimal noise reduction.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public float Level
-        {
-            get { return this.levelField; }
-            set { this.levelField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=1)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "NoiseReduction"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Level", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.levelField));
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Level":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.levelField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    /// <summary>
-    /// The value range of "Transparent" could be defined by vendors only should follow this rule: the
-    /// minimum value means non-transparent and the maximum value maens fully transparent.
-    /// </summary>
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OSDColor : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private Color colorField;
-
-        private int transparentField;
-        private bool transparentFieldSpecified;
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public Color Color
-        {
-            get { return this.colorField; }
-            set { this.colorField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int Transparent
-        {
-            get { return this.transparentField; }
-            set { this.transparentField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="Transparent"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool TransparentSpecified
-        {
-            get { return this.transparentFieldSpecified; }
-            set { this.transparentFieldSpecified = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "OSDColor"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            if (this.transparentFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "Transparent", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.transparentField));
-            }
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElement(Ns.OnvifVer10, "Color", this.colorField, Ns.OnvifVer10, "Color");
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Transparent":
-                    this.transparentField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.AttributeValue);
-                    this.transparentFieldSpecified = true;
-                    return true;
-            }
-            return false;
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Color":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.colorField = reader.ReadElementObject<Color>(() => new Color());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    /// <summary>
-    /// Describe the option of the color and its transparency.
-    /// </summary>
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OSDColorOptions : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private ColorOptions colorField;
-
-        private IntRange transparentField;
-
-        private OSDColorOptionsExtension extensionField;
-
-        /// <summary>
-        /// Optional list of supported colors.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public ColorOptions Color
-        {
-            get { return this.colorField; }
-            set { this.colorField = value; }
-        }
-
-        /// <summary>
-        /// Range of the transparent level. Larger means more tranparent.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public IntRange Transparent
-        {
-            get { return this.transparentField; }
-            set { this.transparentField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public OSDColorOptionsExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "OSDColorOptions"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElement(Ns.OnvifVer10, "Color", this.colorField, Ns.OnvifVer10, "ColorOptions");
-            writer.WriteElement(Ns.OnvifVer10, "Transparent", this.transparentField, Ns.OnvifVer10, "IntRange");
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "OSDColorOptionsExtension");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Color":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.colorField = reader.ReadElementObject<ColorOptions>(() => new ColorOptions());
-                    return true;
-                case "Transparent":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.transparentField = reader.ReadElementObject<IntRange>(() => new IntRange());
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<OSDColorOptionsExtension>(() => new OSDColorOptionsExtension());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OSDColorOptionsExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "OSDColorOptionsExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OSDConfiguration : DeviceEntity
-    {
-        private OSDReference videoSourceConfigurationTokenField;
-
-        private OSDType typeField;
-
-        private OSDPosConfiguration positionField;
-
-        private OSDTextConfiguration textStringField;
-
-        private OSDImgConfiguration imageField;
-
-        private OSDConfigurationExtension extensionField;
-
-        /// <summary>
-        /// Reference to the video source configuration.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public OSDReference VideoSourceConfigurationToken
-        {
-            get { return this.videoSourceConfigurationTokenField; }
-            set { this.videoSourceConfigurationTokenField = value; }
-        }
-
-        /// <summary>
-        /// Type of OSD.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public OSDType Type
-        {
-            get { return this.typeField; }
-            set { this.typeField = value; }
-        }
-
-        /// <summary>
-        /// Position configuration of OSD.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public OSDPosConfiguration Position
-        {
-            get { return this.positionField; }
-            set { this.positionField = value; }
-        }
-
-        /// <summary>
-        /// Text configuration of OSD. It shall be present when the value of Type field is Text.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public OSDTextConfiguration TextString
-        {
-            get { return this.textStringField; }
-            set { this.textStringField = value; }
-        }
-
-        /// <summary>
-        /// Image configuration of OSD. It shall be present when the value of Type field is Image
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public OSDImgConfiguration Image
-        {
-            get { return this.imageField; }
-            set { this.imageField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public OSDConfigurationExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "OSDConfiguration"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlContent(writer);
-            writer.WriteElement(Ns.OnvifVer10, "VideoSourceConfigurationToken", this.videoSourceConfigurationTokenField, Ns.OnvifVer10, "OSDReference");
-            writer.WriteElementString(Ns.OnvifVer10, "Type", EnumXml.ToXml(this.typeField));
-            writer.WriteElement(Ns.OnvifVer10, "Position", this.positionField, Ns.OnvifVer10, "OSDPosConfiguration");
-            writer.WriteElement(Ns.OnvifVer10, "TextString", this.textStringField, Ns.OnvifVer10, "OSDTextConfiguration");
-            writer.WriteElement(Ns.OnvifVer10, "Image", this.imageField, Ns.OnvifVer10, "OSDImgConfiguration");
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "OSDConfigurationExtension");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "VideoSourceConfigurationToken":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.videoSourceConfigurationTokenField = reader.ReadElementObject<OSDReference>(() => new OSDReference());
-                    return true;
-                case "Type":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.typeField = EnumXml.ParseOSDType(reader.ReadElementText());
-                    return true;
-                case "Position":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.positionField = reader.ReadElementObject<OSDPosConfiguration>(() => new OSDPosConfiguration());
-                    return true;
-                case "TextString":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.textStringField = reader.ReadElementObject<OSDTextConfiguration>(() => new OSDTextConfiguration());
-                    return true;
-                case "Image":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.imageField = reader.ReadElementObject<OSDImgConfiguration>(() => new OSDImgConfiguration());
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<OSDConfigurationExtension>(() => new OSDConfigurationExtension());
-                    return true;
-            }
-            if (base.ReadXmlElement(reader)) return true;
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OSDConfigurationExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "OSDConfigurationExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OSDConfigurationOptions : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private MaximumNumberOfOSDs maximumNumberOfOSDsField;
-
-        private OSDType[] typeField;
-
-        private string[] positionOptionField;
-
-        private OSDTextOptions textOptionField;
-
-        private OSDImgOptions imageOptionField;
-
-        private OSDConfigurationOptionsExtension extensionField;
-
-        /// <summary>
-        /// The maximum number of OSD configurations supported for the specified video source configuration. If
-        /// the configuration does not support OSDs, this value shall be zero and the Type and PositionOption
-        /// elements are ignored. If a device limits the number of instances by OSDType, it shall indicate the
-        /// supported number for each type via the related attribute.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public MaximumNumberOfOSDs MaximumNumberOfOSDs
-        {
-            get { return this.maximumNumberOfOSDsField; }
-            set { this.maximumNumberOfOSDsField = value; }
-        }
-
-        /// <summary>
-        /// List supported type of OSD configuration. When a device indicates the supported number for each
-        /// types in MaximumNumberOfOSDs, related type shall be presented. A device shall return Option element
-        /// relating to listed type.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("Type", Order=1)]
-        public OSDType[] Type
-        {
-            get { return this.typeField; }
-            set { this.typeField = value; }
-        }
-
-        /// <summary>
-        /// List available OSD position type. Following are the
-        /// pre-defined:UpperLeftUpperRightLowerLeftLowerRightCustom
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("PositionOption", Order=2)]
-        public string[] PositionOption
-        {
-            get { return this.positionOptionField; }
-            set { this.positionOptionField = value; }
-        }
-
-        /// <summary>
-        /// Option of the OSD text configuration. This element shall be returned if the device is signaling the
-        /// support for Text.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public OSDTextOptions TextOption
-        {
-            get { return this.textOptionField; }
-            set { this.textOptionField = value; }
-        }
-
-        /// <summary>
-        /// Option of the OSD image configuration. This element shall be returned if the device is signaling the
-        /// support for Image.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public OSDImgOptions ImageOption
-        {
-            get { return this.imageOptionField; }
-            set { this.imageOptionField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public OSDConfigurationOptionsExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "OSDConfigurationOptions"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElement(Ns.OnvifVer10, "MaximumNumberOfOSDs", this.maximumNumberOfOSDsField, Ns.OnvifVer10, "MaximumNumberOfOSDs");
-            if (this.typeField != null)
-            {
-                for (int i = 0; i < this.typeField.Length; i++)
-                {
-                    writer.WriteElementString(Ns.OnvifVer10, "Type", EnumXml.ToXml(this.typeField[i]));
-                }
-            }
-            if (this.positionOptionField != null)
-            {
-                for (int i = 0; i < this.positionOptionField.Length; i++)
-                {
-                    writer.WriteElementString(Ns.OnvifVer10, "PositionOption", this.positionOptionField[i]);
-                }
-            }
-            writer.WriteElement(Ns.OnvifVer10, "TextOption", this.textOptionField, Ns.OnvifVer10, "OSDTextOptions");
-            writer.WriteElement(Ns.OnvifVer10, "ImageOption", this.imageOptionField, Ns.OnvifVer10, "OSDImgOptions");
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "OSDConfigurationOptionsExtension");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "MaximumNumberOfOSDs":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.maximumNumberOfOSDsField = reader.ReadElementObject<MaximumNumberOfOSDs>(() => new MaximumNumberOfOSDs());
-                    return true;
-                case "Type":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.typeField, EnumXml.ParseOSDType(reader.ReadElementText()));
-                    return true;
-                case "PositionOption":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.positionOptionField, reader.ReadElementText());
-                    return true;
-                case "TextOption":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.textOptionField = reader.ReadElementObject<OSDTextOptions>(() => new OSDTextOptions());
-                    return true;
-                case "ImageOption":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.imageOptionField = reader.ReadElementObject<OSDImgOptions>(() => new OSDImgOptions());
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<OSDConfigurationOptionsExtension>(() => new OSDConfigurationOptionsExtension());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OSDConfigurationOptionsExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "OSDConfigurationOptionsExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OSDImgConfiguration : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string imgPathField;
-
-        private OSDImgConfigurationExtension extensionField;
-
-        /// <summary>
-        /// The URI of the image which to be displayed.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0, DataType="anyURI")]
-        public string ImgPath
-        {
-            get { return this.imgPathField; }
-            set { this.imgPathField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public OSDImgConfigurationExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "OSDImgConfiguration"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "ImgPath", this.imgPathField);
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "OSDImgConfigurationExtension");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "ImgPath":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.imgPathField = reader.ReadElementText();
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<OSDImgConfigurationExtension>(() => new OSDImgConfigurationExtension());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OSDImgConfigurationExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "OSDImgConfigurationExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OSDImgOptions : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string[] imagePathField;
-
-        private OSDImgOptionsExtension extensionField;
-
-        private string[] formatsSupportedField;
-
-        private int maxSizeField;
-        private bool maxSizeFieldSpecified;
-
-        private int maxWidthField;
-        private bool maxWidthFieldSpecified;
-
-        private int maxHeightField;
-        private bool maxHeightFieldSpecified;
-
-        /// <summary>
-        /// List of available image URIs.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("ImagePath", Order=0, DataType="anyURI")]
-        public string[] ImagePath
-        {
-            get { return this.imagePathField; }
-            set { this.imagePathField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public OSDImgOptionsExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        /// <summary>
-        /// List of supported image MIME types, such as "image/png".
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string[] FormatsSupported
-        {
-            get { return this.formatsSupportedField; }
-            set { this.formatsSupportedField = value; }
-        }
-
-        /// <summary>
-        /// The maximum size (in bytes) of the image that can be uploaded.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int MaxSize
-        {
-            get { return this.maxSizeField; }
-            set { this.maxSizeField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="MaxSize"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool MaxSizeSpecified
-        {
-            get { return this.maxSizeFieldSpecified; }
-            set { this.maxSizeFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// The maximum width (in pixels) of the image that can be uploaded.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int MaxWidth
-        {
-            get { return this.maxWidthField; }
-            set { this.maxWidthField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="MaxWidth"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool MaxWidthSpecified
-        {
-            get { return this.maxWidthFieldSpecified; }
-            set { this.maxWidthFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// The maximum height (in pixels) of the image that can be uploaded.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int MaxHeight
-        {
-            get { return this.maxHeightField; }
-            set { this.maxHeightField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="MaxHeight"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool MaxHeightSpecified
-        {
-            get { return this.maxHeightFieldSpecified; }
-            set { this.maxHeightFieldSpecified = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "OSDImgOptions"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAttributeString(null, "FormatsSupported", SharpOnvifCommon.Xml.OnvifArray.JoinList(this.formatsSupportedField));
-            if (this.maxSizeFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "MaxSize", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxSizeField));
-            }
-            if (this.maxWidthFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "MaxWidth", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxWidthField));
-            }
-            if (this.maxHeightFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "MaxHeight", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxHeightField));
-            }
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            if (this.imagePathField != null)
-            {
-                for (int i = 0; i < this.imagePathField.Length; i++)
-                {
-                    writer.WriteElementString(Ns.OnvifVer10, "ImagePath", this.imagePathField[i]);
-                }
-            }
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "OSDImgOptionsExtension");
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "FormatsSupported":
-                    this.formatsSupportedField = SharpOnvifCommon.Xml.OnvifArray.SplitList(reader.AttributeValue);
-                    return true;
-                case "MaxSize":
-                    this.maxSizeField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.AttributeValue);
-                    this.maxSizeFieldSpecified = true;
-                    return true;
-                case "MaxWidth":
-                    this.maxWidthField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.AttributeValue);
-                    this.maxWidthFieldSpecified = true;
-                    return true;
-                case "MaxHeight":
-                    this.maxHeightField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.AttributeValue);
-                    this.maxHeightFieldSpecified = true;
-                    return true;
-            }
-            return false;
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "ImagePath":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.imagePathField, reader.ReadElementText());
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<OSDImgOptionsExtension>(() => new OSDImgOptionsExtension());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OSDImgOptionsExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "OSDImgOptionsExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OSDPosConfiguration : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string typeField;
-
-        private Vector posField;
-
-        private OSDPosConfigurationExtension extensionField;
-
-        /// <summary>
-        /// For OSD position type, following are the pre-defined: UpperLeftUpperRightLowerLeftLowerRightCustom
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string Type
-        {
-            get { return this.typeField; }
-            set { this.typeField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public Vector Pos
-        {
-            get { return this.posField; }
-            set { this.posField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public OSDPosConfigurationExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "OSDPosConfiguration"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Type", this.typeField);
-            writer.WriteElement(Ns.OnvifVer10, "Pos", this.posField, Ns.OnvifVer10, "Vector");
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "OSDPosConfigurationExtension");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Type":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.typeField = reader.ReadElementText();
-                    return true;
-                case "Pos":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.posField = reader.ReadElementObject<Vector>(() => new Vector());
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<OSDPosConfigurationExtension>(() => new OSDPosConfigurationExtension());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OSDPosConfigurationExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "OSDPosConfigurationExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OSDReference : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string valueField;
-
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string Value
-        {
-            get { return this.valueField; }
-            set { this.valueField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "OSDReference"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteText(this.valueField);
-        }
-
-        protected override void ReadXmlText(SharpOnvifCommon.Xml.OnvifXmlReader reader, string text)
-        {
-            this.valueField = text;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OSDTextConfiguration : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string typeField;
-
-        private string dateFormatField;
-
-        private string timeFormatField;
-
-        private int fontSizeField;
-        private bool fontSizeFieldSpecified;
-
-        private OSDColor fontColorField;
-
-        private OSDColor backgroundColorField;
-
-        private string plainTextField;
-
-        private OSDTextConfigurationExtension extensionField;
-
-        private bool isPersistentTextField;
-        private bool isPersistentTextFieldSpecified;
-
-        /// <summary>
-        /// The following OSD Text Type are defined:Plain - The Plain type means the OSD is shown as a text
-        /// string which defined in the "PlainText" item.Date - The Date type means the OSD is shown as a date,
-        /// format of which should be present in the "DateFormat" item.Time - The Time type means the OSD is
-        /// shown as a time, format of which should be present in the "TimeFormat" item.DateAndTime - The
-        /// DateAndTime type means the OSD is shown as date and time, format of which should be present in the
-        /// "DateFormat" and the "TimeFormat" item.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string Type
-        {
-            get { return this.typeField; }
-            set { this.typeField = value; }
-        }
-
-        /// <summary>
-        /// List of supported OSD date formats. This element shall be present when the value of Type field has
-        /// Date or DateAndTime. The following DateFormat are defined:M/d/yyyy - e.g. 3/6/2013MM/dd/yyyy - e.g.
-        /// 03/06/2013dd/MM/yyyy - e.g. 06/03/2013yyyy/MM/dd - e.g. 2013/03/06yyyy-MM-dd - e.g. 2013-06-03dddd,
-        /// MMMM dd, yyyy - e.g. Wednesday, March 06, 2013MMMM dd, yyyy - e.g. March 06, 2013dd MMMM, yyyy -
-        /// e.g. 06 March, 2013
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public string DateFormat
-        {
-            get { return this.dateFormatField; }
-            set { this.dateFormatField = value; }
-        }
-
-        /// <summary>
-        /// List of supported OSD time formats. This element shall be present when the value of Type field has
-        /// Time or DateAndTime. The following TimeFormat are defined:h:mm:ss tt - e.g. 2:14:21 PMhh:mm:ss tt -
-        /// e.g. 02:14:21 PMH:mm:ss - e.g. 14:14:21HH:mm:ss - e.g. 14:14:21
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public string TimeFormat
-        {
-            get { return this.timeFormatField; }
-            set { this.timeFormatField = value; }
-        }
-
-        /// <summary>
-        /// Font size of the text in pt.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public int FontSize
-        {
-            get { return this.fontSizeField; }
-            set { this.fontSizeField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="FontSize"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool FontSizeSpecified
-        {
-            get { return this.fontSizeFieldSpecified; }
-            set { this.fontSizeFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// Font color of the text.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public OSDColor FontColor
-        {
-            get { return this.fontColorField; }
-            set { this.fontColorField = value; }
-        }
-
-        /// <summary>
-        /// Background color of the text.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public OSDColor BackgroundColor
-        {
-            get { return this.backgroundColorField; }
-            set { this.backgroundColorField = value; }
-        }
-
-        /// <summary>
-        /// The content of text to be displayed.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
-        public string PlainText
-        {
-            get { return this.plainTextField; }
-            set { this.plainTextField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
-        public OSDTextConfigurationExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        /// <summary>
-        /// This flag is applicable for Type Plain and defaults to true. When set to false the PlainText content
-        /// will not be persistent across device reboots.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool IsPersistentText
-        {
-            get { return this.isPersistentTextField; }
-            set { this.isPersistentTextField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="IsPersistentText"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IsPersistentTextSpecified
-        {
-            get { return this.isPersistentTextFieldSpecified; }
-            set { this.isPersistentTextFieldSpecified = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "OSDTextConfiguration"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            if (this.isPersistentTextFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "IsPersistentText", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.isPersistentTextField));
-            }
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Type", this.typeField);
-            writer.WriteElementString(Ns.OnvifVer10, "DateFormat", this.dateFormatField);
-            writer.WriteElementString(Ns.OnvifVer10, "TimeFormat", this.timeFormatField);
-            if (this.fontSizeFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "FontSize", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.fontSizeField));
-            }
-            writer.WriteElement(Ns.OnvifVer10, "FontColor", this.fontColorField, Ns.OnvifVer10, "OSDColor");
-            writer.WriteElement(Ns.OnvifVer10, "BackgroundColor", this.backgroundColorField, Ns.OnvifVer10, "OSDColor");
-            writer.WriteElementString(Ns.OnvifVer10, "PlainText", this.plainTextField);
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "OSDTextConfigurationExtension");
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "IsPersistentText":
-                    this.isPersistentTextField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
-                    this.isPersistentTextFieldSpecified = true;
-                    return true;
-            }
-            return false;
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Type":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.typeField = reader.ReadElementText();
-                    return true;
-                case "DateFormat":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.dateFormatField = reader.ReadElementText();
-                    return true;
-                case "TimeFormat":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.timeFormatField = reader.ReadElementText();
-                    return true;
-                case "FontSize":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.fontSizeField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    this.fontSizeFieldSpecified = true;
-                    return true;
-                case "FontColor":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.fontColorField = reader.ReadElementObject<OSDColor>(() => new OSDColor());
-                    return true;
-                case "BackgroundColor":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.backgroundColorField = reader.ReadElementObject<OSDColor>(() => new OSDColor());
-                    return true;
-                case "PlainText":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.plainTextField = reader.ReadElementText();
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<OSDTextConfigurationExtension>(() => new OSDTextConfigurationExtension());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OSDTextConfigurationExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "OSDTextConfigurationExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OSDTextOptions : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string[] typeField;
-
-        private IntRange fontSizeRangeField;
-
-        private string[] dateFormatField;
-
-        private string[] timeFormatField;
-
-        private OSDColorOptions fontColorField;
-
-        private OSDColorOptions backgroundColorField;
-
-        private OSDTextOptionsExtension extensionField;
-
-        /// <summary>
-        /// List of supported OSD text type. When a device indicates the supported number relating to Text type
-        /// in MaximumNumberOfOSDs, the type shall be presented.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("Type", Order=0)]
-        public string[] Type
-        {
-            get { return this.typeField; }
-            set { this.typeField = value; }
-        }
-
-        /// <summary>
-        /// Range of the font size value.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public IntRange FontSizeRange
-        {
-            get { return this.fontSizeRangeField; }
-            set { this.fontSizeRangeField = value; }
-        }
-
-        /// <summary>
-        /// List of supported date format.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("DateFormat", Order=2)]
-        public string[] DateFormat
-        {
-            get { return this.dateFormatField; }
-            set { this.dateFormatField = value; }
-        }
-
-        /// <summary>
-        /// List of supported time format.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("TimeFormat", Order=3)]
-        public string[] TimeFormat
-        {
-            get { return this.timeFormatField; }
-            set { this.timeFormatField = value; }
-        }
-
-        /// <summary>
-        /// List of supported font color.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public OSDColorOptions FontColor
-        {
-            get { return this.fontColorField; }
-            set { this.fontColorField = value; }
-        }
-
-        /// <summary>
-        /// List of supported background color.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public OSDColorOptions BackgroundColor
-        {
-            get { return this.backgroundColorField; }
-            set { this.backgroundColorField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
-        public OSDTextOptionsExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "OSDTextOptions"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            if (this.typeField != null)
-            {
-                for (int i = 0; i < this.typeField.Length; i++)
-                {
-                    writer.WriteElementString(Ns.OnvifVer10, "Type", this.typeField[i]);
-                }
-            }
-            writer.WriteElement(Ns.OnvifVer10, "FontSizeRange", this.fontSizeRangeField, Ns.OnvifVer10, "IntRange");
-            if (this.dateFormatField != null)
-            {
-                for (int i = 0; i < this.dateFormatField.Length; i++)
-                {
-                    writer.WriteElementString(Ns.OnvifVer10, "DateFormat", this.dateFormatField[i]);
-                }
-            }
-            if (this.timeFormatField != null)
-            {
-                for (int i = 0; i < this.timeFormatField.Length; i++)
-                {
-                    writer.WriteElementString(Ns.OnvifVer10, "TimeFormat", this.timeFormatField[i]);
-                }
-            }
-            writer.WriteElement(Ns.OnvifVer10, "FontColor", this.fontColorField, Ns.OnvifVer10, "OSDColorOptions");
-            writer.WriteElement(Ns.OnvifVer10, "BackgroundColor", this.backgroundColorField, Ns.OnvifVer10, "OSDColorOptions");
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "OSDTextOptionsExtension");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Type":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.typeField, reader.ReadElementText());
-                    return true;
-                case "FontSizeRange":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.fontSizeRangeField = reader.ReadElementObject<IntRange>(() => new IntRange());
-                    return true;
-                case "DateFormat":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.dateFormatField, reader.ReadElementText());
-                    return true;
-                case "TimeFormat":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.timeFormatField, reader.ReadElementText());
-                    return true;
-                case "FontColor":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.fontColorField = reader.ReadElementObject<OSDColorOptions>(() => new OSDColorOptions());
-                    return true;
-                case "BackgroundColor":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.backgroundColorField = reader.ReadElementObject<OSDColorOptions>(() => new OSDColorOptions());
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<OSDTextOptionsExtension>(() => new OSDTextOptionsExtension());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OSDTextOptionsExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "OSDTextOptionsExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTControlDirection : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private EFlip eFlipField;
-
-        private Reverse reverseField;
-
-        private PTControlDirectionExtension extensionField;
-
-        /// <summary>
-        /// Optional element to configure related parameters for E-Flip.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public EFlip EFlip
-        {
-            get { return this.eFlipField; }
-            set { this.eFlipField = value; }
-        }
-
-        /// <summary>
-        /// Optional element to configure related parameters for reversing of PT Control Direction.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public Reverse Reverse
-        {
-            get { return this.reverseField; }
-            set { this.reverseField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public PTControlDirectionExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "PTControlDirection"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElement(Ns.OnvifVer10, "EFlip", this.eFlipField, Ns.OnvifVer10, "EFlip");
-            writer.WriteElement(Ns.OnvifVer10, "Reverse", this.reverseField, Ns.OnvifVer10, "Reverse");
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "PTControlDirectionExtension");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "EFlip":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.eFlipField = reader.ReadElementObject<EFlip>(() => new EFlip());
-                    return true;
-                case "Reverse":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.reverseField = reader.ReadElementObject<Reverse>(() => new Reverse());
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<PTControlDirectionExtension>(() => new PTControlDirectionExtension());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTControlDirectionExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Namespace="http://www.onvif.org/ver10/schema", Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "PTControlDirectionExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZConfiguration : ConfigurationEntity
-    {
-        private string nodeTokenField;
-
-        private string defaultAbsolutePantTiltPositionSpaceField;
-
-        private string defaultAbsoluteZoomPositionSpaceField;
-
-        private string defaultRelativePanTiltTranslationSpaceField;
-
-        private string defaultRelativeZoomTranslationSpaceField;
-
-        private string defaultContinuousPanTiltVelocitySpaceField;
-
-        private string defaultContinuousZoomVelocitySpaceField;
-
-        private PTZSpeed defaultPTZSpeedField;
-
-        private string defaultPTZTimeoutField;
-
-        private PanTiltLimits panTiltLimitsField;
-
-        private ZoomLimits zoomLimitsField;
-
-        private PTZConfigurationExtension extensionField;
-
-        private int moveRampField;
-        private bool moveRampFieldSpecified;
-
-        private int presetRampField;
-        private bool presetRampFieldSpecified;
-
-        private int presetTourRampField;
-        private bool presetTourRampFieldSpecified;
-
-        /// <summary>
-        /// A mandatory reference to the PTZ Node that the PTZ Configuration belongs to.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string NodeToken
-        {
-            get { return this.nodeTokenField; }
-            set { this.nodeTokenField = value; }
-        }
-
-        /// <summary>
-        /// If the PTZ Node supports absolute Pan/Tilt movements, it shall specify one Absolute Pan/Tilt
-        /// Position Space as default.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1, DataType="anyURI")]
-        public string DefaultAbsolutePantTiltPositionSpace
-        {
-            get { return this.defaultAbsolutePantTiltPositionSpaceField; }
-            set { this.defaultAbsolutePantTiltPositionSpaceField = value; }
-        }
-
-        /// <summary>
-        /// If the PTZ Node supports absolute zoom movements, it shall specify one Absolute Zoom Position Space
-        /// as default.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2, DataType="anyURI")]
-        public string DefaultAbsoluteZoomPositionSpace
-        {
-            get { return this.defaultAbsoluteZoomPositionSpaceField; }
-            set { this.defaultAbsoluteZoomPositionSpaceField = value; }
-        }
-
-        /// <summary>
-        /// If the PTZ Node supports relative Pan/Tilt movements, it shall specify one RelativePan/Tilt
-        /// Translation Space as default.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3, DataType="anyURI")]
-        public string DefaultRelativePanTiltTranslationSpace
-        {
-            get { return this.defaultRelativePanTiltTranslationSpaceField; }
-            set { this.defaultRelativePanTiltTranslationSpaceField = value; }
-        }
-
-        /// <summary>
-        /// If the PTZ Node supports relative zoom movements, it shall specify one Relative Zoom Translation
-        /// Space as default.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=4, DataType="anyURI")]
-        public string DefaultRelativeZoomTranslationSpace
-        {
-            get { return this.defaultRelativeZoomTranslationSpaceField; }
-            set { this.defaultRelativeZoomTranslationSpaceField = value; }
-        }
-
-        /// <summary>
-        /// If the PTZ Node supports continuous Pan/Tilt movements, it shall specify one Continuous Pan/Tilt
-        /// Velocity Space as default.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=5, DataType="anyURI")]
-        public string DefaultContinuousPanTiltVelocitySpace
-        {
-            get { return this.defaultContinuousPanTiltVelocitySpaceField; }
-            set { this.defaultContinuousPanTiltVelocitySpaceField = value; }
-        }
-
-        /// <summary>
-        /// If the PTZ Node supports continuous zoom movements, it shall specify one Continuous Zoom Velocity
-        /// Space as default.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=6, DataType="anyURI")]
-        public string DefaultContinuousZoomVelocitySpace
-        {
-            get { return this.defaultContinuousZoomVelocitySpaceField; }
-            set { this.defaultContinuousZoomVelocitySpaceField = value; }
-        }
-
-        /// <summary>
-        /// If the PTZ Node supports absolute or relative PTZ movements, it shall specify corresponding default
-        /// Pan/Tilt and Zoom speeds.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
-        public PTZSpeed DefaultPTZSpeed
-        {
-            get { return this.defaultPTZSpeedField; }
-            set { this.defaultPTZSpeedField = value; }
-        }
-
-        /// <summary>
-        /// If the PTZ Node supports continuous movements, it shall specify a default timeout, after which the
-        /// movement stops.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=8, DataType="duration")]
-        public string DefaultPTZTimeout
-        {
-            get { return this.defaultPTZTimeoutField; }
-            set { this.defaultPTZTimeoutField = value; }
-        }
-
-        /// <summary>
-        /// The Pan/Tilt limits element should be present for a PTZ Node that supports an absolute Pan/Tilt. If
-        /// the element is present it signals the support for configurable Pan/Tilt limits. If limits are
-        /// enabled, the Pan/Tilt movements shall always stay within the specified range. The Pan/Tilt limits
-        /// are disabled by setting the limits to -INF or +INF.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
-        public PanTiltLimits PanTiltLimits
-        {
-            get { return this.panTiltLimitsField; }
-            set { this.panTiltLimitsField = value; }
-        }
-
-        /// <summary>
-        /// The Zoom limits element should be present for a PTZ Node that supports absolute zoom. If the element
-        /// is present it signals the supports for configurable Zoom limits. If limits are enabled the zoom
-        /// movements shall always stay within the specified range. The Zoom limits are disabled by settings the
-        /// limits to -INF and +INF.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
-        public ZoomLimits ZoomLimits
-        {
-            get { return this.zoomLimitsField; }
-            set { this.zoomLimitsField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=11)]
-        public PTZConfigurationExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        /// <summary>
-        /// The optional acceleration ramp used by the device when moving.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int MoveRamp
-        {
-            get { return this.moveRampField; }
-            set { this.moveRampField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="MoveRamp"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool MoveRampSpecified
-        {
-            get { return this.moveRampFieldSpecified; }
-            set { this.moveRampFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// The optional acceleration ramp used by the device when recalling presets.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int PresetRamp
-        {
-            get { return this.presetRampField; }
-            set { this.presetRampField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="PresetRamp"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool PresetRampSpecified
-        {
-            get { return this.presetRampFieldSpecified; }
-            set { this.presetRampFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// The optional acceleration ramp used by the device when executing PresetTours.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int PresetTourRamp
-        {
-            get { return this.presetTourRampField; }
-            set { this.presetTourRampField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="PresetTourRamp"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool PresetTourRampSpecified
-        {
-            get { return this.presetTourRampFieldSpecified; }
-            set { this.presetTourRampFieldSpecified = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "PTZConfiguration"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlAttributes(writer);
-            if (this.moveRampFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "MoveRamp", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.moveRampField));
-            }
-            if (this.presetRampFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "PresetRamp", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.presetRampField));
-            }
-            if (this.presetTourRampFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "PresetTourRamp", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.presetTourRampField));
-            }
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlContent(writer);
-            writer.WriteElementString(Ns.OnvifVer10, "NodeToken", this.nodeTokenField);
-            writer.WriteElementString(Ns.OnvifVer10, "DefaultAbsolutePantTiltPositionSpace", this.defaultAbsolutePantTiltPositionSpaceField);
-            writer.WriteElementString(Ns.OnvifVer10, "DefaultAbsoluteZoomPositionSpace", this.defaultAbsoluteZoomPositionSpaceField);
-            writer.WriteElementString(Ns.OnvifVer10, "DefaultRelativePanTiltTranslationSpace", this.defaultRelativePanTiltTranslationSpaceField);
-            writer.WriteElementString(Ns.OnvifVer10, "DefaultRelativeZoomTranslationSpace", this.defaultRelativeZoomTranslationSpaceField);
-            writer.WriteElementString(Ns.OnvifVer10, "DefaultContinuousPanTiltVelocitySpace", this.defaultContinuousPanTiltVelocitySpaceField);
-            writer.WriteElementString(Ns.OnvifVer10, "DefaultContinuousZoomVelocitySpace", this.defaultContinuousZoomVelocitySpaceField);
-            writer.WriteElement(Ns.OnvifVer10, "DefaultPTZSpeed", this.defaultPTZSpeedField, Ns.OnvifVer10, "PTZSpeed");
-            writer.WriteElementString(Ns.OnvifVer10, "DefaultPTZTimeout", this.defaultPTZTimeoutField);
-            writer.WriteElement(Ns.OnvifVer10, "PanTiltLimits", this.panTiltLimitsField, Ns.OnvifVer10, "PanTiltLimits");
-            writer.WriteElement(Ns.OnvifVer10, "ZoomLimits", this.zoomLimitsField, Ns.OnvifVer10, "ZoomLimits");
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "PTZConfigurationExtension");
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "MoveRamp":
-                    this.moveRampField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.AttributeValue);
-                    this.moveRampFieldSpecified = true;
-                    return true;
-                case "PresetRamp":
-                    this.presetRampField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.AttributeValue);
-                    this.presetRampFieldSpecified = true;
-                    return true;
-                case "PresetTourRamp":
-                    this.presetTourRampField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.AttributeValue);
-                    this.presetTourRampFieldSpecified = true;
-                    return true;
-            }
-            return base.ReadXmlAttribute(reader);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "NodeToken":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.nodeTokenField = reader.ReadElementText();
-                    return true;
-                case "DefaultAbsolutePantTiltPositionSpace":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.defaultAbsolutePantTiltPositionSpaceField = reader.ReadElementText();
-                    return true;
-                case "DefaultAbsoluteZoomPositionSpace":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.defaultAbsoluteZoomPositionSpaceField = reader.ReadElementText();
-                    return true;
-                case "DefaultRelativePanTiltTranslationSpace":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.defaultRelativePanTiltTranslationSpaceField = reader.ReadElementText();
-                    return true;
-                case "DefaultRelativeZoomTranslationSpace":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.defaultRelativeZoomTranslationSpaceField = reader.ReadElementText();
-                    return true;
-                case "DefaultContinuousPanTiltVelocitySpace":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.defaultContinuousPanTiltVelocitySpaceField = reader.ReadElementText();
-                    return true;
-                case "DefaultContinuousZoomVelocitySpace":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.defaultContinuousZoomVelocitySpaceField = reader.ReadElementText();
-                    return true;
-                case "DefaultPTZSpeed":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.defaultPTZSpeedField = reader.ReadElementObject<PTZSpeed>(() => new PTZSpeed());
-                    return true;
-                case "DefaultPTZTimeout":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.defaultPTZTimeoutField = reader.ReadElementText();
-                    return true;
-                case "PanTiltLimits":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.panTiltLimitsField = reader.ReadElementObject<PanTiltLimits>(() => new PanTiltLimits());
-                    return true;
-                case "ZoomLimits":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.zoomLimitsField = reader.ReadElementObject<ZoomLimits>(() => new ZoomLimits());
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<PTZConfigurationExtension>(() => new PTZConfigurationExtension());
-                    return true;
-            }
-            if (base.ReadXmlElement(reader)) return true;
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZConfigurationExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        private PTControlDirection pTControlDirectionField;
-
-        private PTZConfigurationExtension2 extensionField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        /// <summary>
-        /// Optional element to configure PT Control Direction related features.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public PTControlDirection PTControlDirection
-        {
-            get { return this.pTControlDirectionField; }
-            set { this.pTControlDirectionField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public PTZConfigurationExtension2 Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "PTZConfigurationExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-            writer.WriteElement(Ns.OnvifVer10, "PTControlDirection", this.pTControlDirectionField, Ns.OnvifVer10, "PTControlDirection");
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "PTZConfigurationExtension2");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "PTControlDirection":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.pTControlDirectionField = reader.ReadElementObject<PTControlDirection>(() => new PTControlDirection());
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<PTZConfigurationExtension2>(() => new PTZConfigurationExtension2());
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZConfigurationExtension2 : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Namespace="http://www.onvif.org/ver10/schema", Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "PTZConfigurationExtension2"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZFilter : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private bool statusField;
-
-        private bool positionField;
-
-        private bool fieldOfViewField;
-        private bool fieldOfViewFieldSpecified;
-
-        /// <summary>
-        /// True if the metadata stream shall contain the PTZ status (IDLE, MOVING or UNKNOWN).
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public bool Status
-        {
-            get { return this.statusField; }
-            set { this.statusField = value; }
-        }
-
-        /// <summary>
-        /// True if the metadata stream shall contain the PTZ position.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public bool Position
-        {
-            get { return this.positionField; }
-            set { this.positionField = value; }
-        }
-
-        /// <summary>
-        /// True if the metadata stream shall contain the field-of-view information.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public bool FieldOfView
-        {
-            get { return this.fieldOfViewField; }
-            set { this.fieldOfViewField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="FieldOfView"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool FieldOfViewSpecified
-        {
-            get { return this.fieldOfViewFieldSpecified; }
-            set { this.fieldOfViewFieldSpecified = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "PTZFilter"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Status", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.statusField));
-            writer.WriteElementString(Ns.OnvifVer10, "Position", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.positionField));
-            if (this.fieldOfViewFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "FieldOfView", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.fieldOfViewField));
-            }
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Status":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.statusField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
-                    return true;
-                case "Position":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.positionField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
-                    return true;
-                case "FieldOfView":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.fieldOfViewField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
-                    this.fieldOfViewFieldSpecified = true;
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZNode : DeviceEntity
-    {
-        private string nameField;
-
-        private PTZSpaces supportedPTZSpacesField;
-
-        private int maximumNumberOfPresetsField;
-
-        private bool homeSupportedField;
-
-        private string[] auxiliaryCommandsField;
-
-        private PTZNodeExtension extensionField;
-
-        private bool fixedHomePositionField;
-        private bool fixedHomePositionFieldSpecified;
-
-        private bool geoMoveField;
-        private bool geoMoveFieldSpecified;
-
-        /// <summary>
-        /// A unique identifier that is used to reference PTZ Nodes.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string Name
-        {
-            get { return this.nameField; }
-            set { this.nameField = value; }
-        }
-
-        /// <summary>
-        /// A list of Coordinate Systems available for the PTZ Node. For each Coordinate System, the PTZ Node
-        /// MUST specify its allowed range.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public PTZSpaces SupportedPTZSpaces
-        {
-            get { return this.supportedPTZSpacesField; }
-            set { this.supportedPTZSpacesField = value; }
-        }
-
-        /// <summary>
-        /// All preset operations MUST be available for this PTZ Node if one preset is supported.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public int MaximumNumberOfPresets
-        {
-            get { return this.maximumNumberOfPresetsField; }
-            set { this.maximumNumberOfPresetsField = value; }
-        }
-
-        /// <summary>
-        /// A boolean operator specifying the availability of a home position. If set to true, the Home Position
-        /// Operations MUST be available for this PTZ Node.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public bool HomeSupported
-        {
-            get { return this.homeSupportedField; }
-            set { this.homeSupportedField = value; }
-        }
-
-        /// <summary>
-        /// A list of supported Auxiliary commands. If the list is not empty, the Auxiliary Operations MUST be
-        /// available for this PTZ Node.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("AuxiliaryCommands", Order=4)]
-        public string[] AuxiliaryCommands
-        {
-            get { return this.auxiliaryCommandsField; }
-            set { this.auxiliaryCommandsField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public PTZNodeExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        /// <summary>
-        /// Indication whether the HomePosition of a Node is fixed or it can be changed via the SetHomePosition
-        /// command.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool FixedHomePosition
-        {
-            get { return this.fixedHomePositionField; }
-            set { this.fixedHomePositionField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="FixedHomePosition"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool FixedHomePositionSpecified
-        {
-            get { return this.fixedHomePositionFieldSpecified; }
-            set { this.fixedHomePositionFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// Indication whether the Node supports the geo-referenced move command.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool GeoMove
-        {
-            get { return this.geoMoveField; }
-            set { this.geoMoveField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="GeoMove"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool GeoMoveSpecified
-        {
-            get { return this.geoMoveFieldSpecified; }
-            set { this.geoMoveFieldSpecified = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "PTZNode"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlAttributes(writer);
-            if (this.fixedHomePositionFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "FixedHomePosition", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.fixedHomePositionField));
-            }
-            if (this.geoMoveFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "GeoMove", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.geoMoveField));
-            }
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlContent(writer);
-            writer.WriteElementString(Ns.OnvifVer10, "Name", this.nameField);
-            writer.WriteElement(Ns.OnvifVer10, "SupportedPTZSpaces", this.supportedPTZSpacesField, Ns.OnvifVer10, "PTZSpaces");
-            writer.WriteElementString(Ns.OnvifVer10, "MaximumNumberOfPresets", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maximumNumberOfPresetsField));
-            writer.WriteElementString(Ns.OnvifVer10, "HomeSupported", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.homeSupportedField));
-            if (this.auxiliaryCommandsField != null)
-            {
-                for (int i = 0; i < this.auxiliaryCommandsField.Length; i++)
-                {
-                    writer.WriteElementString(Ns.OnvifVer10, "AuxiliaryCommands", this.auxiliaryCommandsField[i]);
-                }
-            }
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "PTZNodeExtension");
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "FixedHomePosition":
-                    this.fixedHomePositionField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
-                    this.fixedHomePositionFieldSpecified = true;
-                    return true;
-                case "GeoMove":
-                    this.geoMoveField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
-                    this.geoMoveFieldSpecified = true;
-                    return true;
-            }
-            return base.ReadXmlAttribute(reader);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Name":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.nameField = reader.ReadElementText();
-                    return true;
-                case "SupportedPTZSpaces":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.supportedPTZSpacesField = reader.ReadElementObject<PTZSpaces>(() => new PTZSpaces());
-                    return true;
-                case "MaximumNumberOfPresets":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.maximumNumberOfPresetsField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    return true;
-                case "HomeSupported":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.homeSupportedField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
-                    return true;
-                case "AuxiliaryCommands":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.auxiliaryCommandsField, reader.ReadElementText());
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<PTZNodeExtension>(() => new PTZNodeExtension());
-                    return true;
-            }
-            if (base.ReadXmlElement(reader)) return true;
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZNodeExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        private PTZPresetTourSupported supportedPresetTourField;
-
-        private PTZNodeExtension2 extensionField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        /// <summary>
-        /// Detail of supported Preset Tour feature.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public PTZPresetTourSupported SupportedPresetTour
-        {
-            get { return this.supportedPresetTourField; }
-            set { this.supportedPresetTourField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public PTZNodeExtension2 Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "PTZNodeExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-            writer.WriteElement(Ns.OnvifVer10, "SupportedPresetTour", this.supportedPresetTourField, Ns.OnvifVer10, "PTZPresetTourSupported");
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "PTZNodeExtension2");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "SupportedPresetTour":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.supportedPresetTourField = reader.ReadElementObject<PTZPresetTourSupported>(() => new PTZPresetTourSupported());
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<PTZNodeExtension2>(() => new PTZNodeExtension2());
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZNodeExtension2 : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Namespace="http://www.onvif.org/ver10/schema", Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "PTZNodeExtension2"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZPresetTourSupported : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private int maximumNumberOfPresetToursField;
-
-        private PTZPresetTourOperation[] pTZPresetTourOperationField;
-
-        private PTZPresetTourSupportedExtension extensionField;
-
-        /// <summary>
-        /// Indicates number of preset tours that can be created. Required preset tour operations shall be
-        /// available for this PTZ Node if one or more preset tour is supported.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public int MaximumNumberOfPresetTours
-        {
-            get { return this.maximumNumberOfPresetToursField; }
-            set { this.maximumNumberOfPresetToursField = value; }
-        }
-
-        /// <summary>
-        /// Indicates which preset tour operations are available for this PTZ Node.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("PTZPresetTourOperation", Order=1)]
-        public PTZPresetTourOperation[] PTZPresetTourOperation
-        {
-            get { return this.pTZPresetTourOperationField; }
-            set { this.pTZPresetTourOperationField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public PTZPresetTourSupportedExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "PTZPresetTourSupported"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "MaximumNumberOfPresetTours", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maximumNumberOfPresetToursField));
-            if (this.pTZPresetTourOperationField != null)
-            {
-                for (int i = 0; i < this.pTZPresetTourOperationField.Length; i++)
-                {
-                    writer.WriteElementString(Ns.OnvifVer10, "PTZPresetTourOperation", EnumXml.ToXml(this.pTZPresetTourOperationField[i]));
-                }
-            }
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "PTZPresetTourSupportedExtension");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "MaximumNumberOfPresetTours":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.maximumNumberOfPresetToursField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    return true;
-                case "PTZPresetTourOperation":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.pTZPresetTourOperationField, EnumXml.ParsePTZPresetTourOperation(reader.ReadElementText()));
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<PTZPresetTourSupportedExtension>(() => new PTZPresetTourSupportedExtension());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZPresetTourSupportedExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "PTZPresetTourSupportedExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZSpaces : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private Space2DDescription[] absolutePanTiltPositionSpaceField;
-
-        private Space1DDescription[] absoluteZoomPositionSpaceField;
-
-        private Space2DDescription[] relativePanTiltTranslationSpaceField;
-
-        private Space1DDescription[] relativeZoomTranslationSpaceField;
-
-        private Space2DDescription[] continuousPanTiltVelocitySpaceField;
-
-        private Space1DDescription[] continuousZoomVelocitySpaceField;
-
-        private Space1DDescription[] panTiltSpeedSpaceField;
-
-        private Space1DDescription[] zoomSpeedSpaceField;
-
-        private PTZSpacesExtension extensionField;
-
-        /// <summary>
-        /// The Generic Pan/Tilt Position space is provided by every PTZ node that supports absolute Pan/Tilt,
-        /// since it does not relate to a specific physical range. Instead, the range should be defined as the
-        /// full range of the PTZ unit normalized to the range -1 to 1 resulting in the following space
-        /// description.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("AbsolutePanTiltPositionSpace", Order=0)]
-        public Space2DDescription[] AbsolutePanTiltPositionSpace
-        {
-            get { return this.absolutePanTiltPositionSpaceField; }
-            set { this.absolutePanTiltPositionSpaceField = value; }
-        }
-
-        /// <summary>
-        /// The Generic Zoom Position Space is provided by every PTZ node that supports absolute Zoom, since it
-        /// does not relate to a specific physical range. Instead, the range should be defined as the full range
-        /// of the Zoom normalized to the range 0 (wide) to 1 (tele). There is no assumption about how the
-        /// generic zoom range is mapped to magnification, FOV or other physical zoom dimension.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("AbsoluteZoomPositionSpace", Order=1)]
-        public Space1DDescription[] AbsoluteZoomPositionSpace
-        {
-            get { return this.absoluteZoomPositionSpaceField; }
-            set { this.absoluteZoomPositionSpaceField = value; }
-        }
-
-        /// <summary>
-        /// The Generic Pan/Tilt translation space is provided by every PTZ node that supports relative
-        /// Pan/Tilt, since it does not relate to a specific physical range. Instead, the range should be
-        /// defined as the full positive and negative translation range of the PTZ unit normalized to the range
-        /// -1 to 1, where positive translation would mean clockwise rotation or movement in right/up direction
-        /// resulting in the following space description.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("RelativePanTiltTranslationSpace", Order=2)]
-        public Space2DDescription[] RelativePanTiltTranslationSpace
-        {
-            get { return this.relativePanTiltTranslationSpaceField; }
-            set { this.relativePanTiltTranslationSpaceField = value; }
-        }
-
-        /// <summary>
-        /// The Generic Zoom Translation Space is provided by every PTZ node that supports relative Zoom, since
-        /// it does not relate to a specific physical range. Instead, the corresponding absolute range should be
-        /// defined as the full positive and negative translation range of the Zoom normalized to the range -1
-        /// to1, where a positive translation maps to a movement in TELE direction. The translation is signed to
-        /// indicate direction (negative is to wide, positive is to tele). There is no assumption about how the
-        /// generic zoom range is mapped to magnification, FOV or other physical zoom dimension. This results in
-        /// the following space description.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("RelativeZoomTranslationSpace", Order=3)]
-        public Space1DDescription[] RelativeZoomTranslationSpace
-        {
-            get { return this.relativeZoomTranslationSpaceField; }
-            set { this.relativeZoomTranslationSpaceField = value; }
-        }
-
-        /// <summary>
-        /// The generic Pan/Tilt velocity space shall be provided by every PTZ node, since it does not relate to
-        /// a specific physical range. Instead, the range should be defined as a range of the PTZ unit's speed
-        /// normalized to the range -1 to 1, where a positive velocity would map to clockwise rotation or
-        /// movement in the right/up direction. A signed speed can be independently specified for the pan and
-        /// tilt component resulting in the following space description.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("ContinuousPanTiltVelocitySpace", Order=4)]
-        public Space2DDescription[] ContinuousPanTiltVelocitySpace
-        {
-            get { return this.continuousPanTiltVelocitySpaceField; }
-            set { this.continuousPanTiltVelocitySpaceField = value; }
-        }
-
-        /// <summary>
-        /// The generic zoom velocity space specifies a zoom factor velocity without knowing the underlying
-        /// physical model. The range should be normalized from -1 to 1, where a positive velocity would map to
-        /// TELE direction. A generic zoom velocity space description resembles the following.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("ContinuousZoomVelocitySpace", Order=5)]
-        public Space1DDescription[] ContinuousZoomVelocitySpace
-        {
-            get { return this.continuousZoomVelocitySpaceField; }
-            set { this.continuousZoomVelocitySpaceField = value; }
-        }
-
-        /// <summary>
-        /// The speed space specifies the speed for a Pan/Tilt movement when moving to an absolute position or
-        /// to a relative translation. In contrast to the velocity spaces, speed spaces do not contain any
-        /// directional information. The speed of a combined Pan/Tilt movement is represented by a single
-        /// non-negative scalar value.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("PanTiltSpeedSpace", Order=6)]
-        public Space1DDescription[] PanTiltSpeedSpace
-        {
-            get { return this.panTiltSpeedSpaceField; }
-            set { this.panTiltSpeedSpaceField = value; }
-        }
-
-        /// <summary>
-        /// The speed space specifies the speed for a Zoom movement when moving to an absolute position or to a
-        /// relative translation. In contrast to the velocity spaces, speed spaces do not contain any
-        /// directional information.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("ZoomSpeedSpace", Order=7)]
-        public Space1DDescription[] ZoomSpeedSpace
-        {
-            get { return this.zoomSpeedSpaceField; }
-            set { this.zoomSpeedSpaceField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
-        public PTZSpacesExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "PTZSpaces"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            if (this.absolutePanTiltPositionSpaceField != null)
-            {
-                for (int i = 0; i < this.absolutePanTiltPositionSpaceField.Length; i++)
-                {
-                    writer.WriteElement(Ns.OnvifVer10, "AbsolutePanTiltPositionSpace", this.absolutePanTiltPositionSpaceField[i], Ns.OnvifVer10, "Space2DDescription");
-                }
-            }
-            if (this.absoluteZoomPositionSpaceField != null)
-            {
-                for (int i = 0; i < this.absoluteZoomPositionSpaceField.Length; i++)
-                {
-                    writer.WriteElement(Ns.OnvifVer10, "AbsoluteZoomPositionSpace", this.absoluteZoomPositionSpaceField[i], Ns.OnvifVer10, "Space1DDescription");
-                }
-            }
-            if (this.relativePanTiltTranslationSpaceField != null)
-            {
-                for (int i = 0; i < this.relativePanTiltTranslationSpaceField.Length; i++)
-                {
-                    writer.WriteElement(Ns.OnvifVer10, "RelativePanTiltTranslationSpace", this.relativePanTiltTranslationSpaceField[i], Ns.OnvifVer10, "Space2DDescription");
-                }
-            }
-            if (this.relativeZoomTranslationSpaceField != null)
-            {
-                for (int i = 0; i < this.relativeZoomTranslationSpaceField.Length; i++)
-                {
-                    writer.WriteElement(Ns.OnvifVer10, "RelativeZoomTranslationSpace", this.relativeZoomTranslationSpaceField[i], Ns.OnvifVer10, "Space1DDescription");
-                }
-            }
-            if (this.continuousPanTiltVelocitySpaceField != null)
-            {
-                for (int i = 0; i < this.continuousPanTiltVelocitySpaceField.Length; i++)
-                {
-                    writer.WriteElement(Ns.OnvifVer10, "ContinuousPanTiltVelocitySpace", this.continuousPanTiltVelocitySpaceField[i], Ns.OnvifVer10, "Space2DDescription");
-                }
-            }
-            if (this.continuousZoomVelocitySpaceField != null)
-            {
-                for (int i = 0; i < this.continuousZoomVelocitySpaceField.Length; i++)
-                {
-                    writer.WriteElement(Ns.OnvifVer10, "ContinuousZoomVelocitySpace", this.continuousZoomVelocitySpaceField[i], Ns.OnvifVer10, "Space1DDescription");
-                }
-            }
-            if (this.panTiltSpeedSpaceField != null)
-            {
-                for (int i = 0; i < this.panTiltSpeedSpaceField.Length; i++)
-                {
-                    writer.WriteElement(Ns.OnvifVer10, "PanTiltSpeedSpace", this.panTiltSpeedSpaceField[i], Ns.OnvifVer10, "Space1DDescription");
-                }
-            }
-            if (this.zoomSpeedSpaceField != null)
-            {
-                for (int i = 0; i < this.zoomSpeedSpaceField.Length; i++)
-                {
-                    writer.WriteElement(Ns.OnvifVer10, "ZoomSpeedSpace", this.zoomSpeedSpaceField[i], Ns.OnvifVer10, "Space1DDescription");
-                }
-            }
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "PTZSpacesExtension");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "AbsolutePanTiltPositionSpace":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.absolutePanTiltPositionSpaceField, reader.ReadElementObject<Space2DDescription>(() => new Space2DDescription()));
-                    return true;
-                case "AbsoluteZoomPositionSpace":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.absoluteZoomPositionSpaceField, reader.ReadElementObject<Space1DDescription>(() => new Space1DDescription()));
-                    return true;
-                case "RelativePanTiltTranslationSpace":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.relativePanTiltTranslationSpaceField, reader.ReadElementObject<Space2DDescription>(() => new Space2DDescription()));
-                    return true;
-                case "RelativeZoomTranslationSpace":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.relativeZoomTranslationSpaceField, reader.ReadElementObject<Space1DDescription>(() => new Space1DDescription()));
-                    return true;
-                case "ContinuousPanTiltVelocitySpace":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.continuousPanTiltVelocitySpaceField, reader.ReadElementObject<Space2DDescription>(() => new Space2DDescription()));
-                    return true;
-                case "ContinuousZoomVelocitySpace":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.continuousZoomVelocitySpaceField, reader.ReadElementObject<Space1DDescription>(() => new Space1DDescription()));
-                    return true;
-                case "PanTiltSpeedSpace":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.panTiltSpeedSpaceField, reader.ReadElementObject<Space1DDescription>(() => new Space1DDescription()));
-                    return true;
-                case "ZoomSpeedSpace":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.zoomSpeedSpaceField, reader.ReadElementObject<Space1DDescription>(() => new Space1DDescription()));
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<PTZSpacesExtension>(() => new PTZSpacesExtension());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZSpacesExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "PTZSpacesExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZSpeed : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private Vector2D panTiltField;
-
-        private Vector1D zoomField;
-
-        /// <summary>
-        /// Pan and tilt speed. The x component corresponds to pan and the y component to tilt. If omitted in a
-        /// request, the current (if any) PanTilt movement should not be affected.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public Vector2D PanTilt
-        {
-            get { return this.panTiltField; }
-            set { this.panTiltField = value; }
-        }
-
-        /// <summary>
-        /// A zoom speed. If omitted in a request, the current (if any) Zoom movement should not be affected.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public Vector1D Zoom
-        {
-            get { return this.zoomField; }
-            set { this.zoomField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "PTZSpeed"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElement(Ns.OnvifVer10, "PanTilt", this.panTiltField, Ns.OnvifVer10, "Vector2D");
-            writer.WriteElement(Ns.OnvifVer10, "Zoom", this.zoomField, Ns.OnvifVer10, "Vector1D");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "PanTilt":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.panTiltField = reader.ReadElementObject<Vector2D>(() => new Vector2D());
-                    return true;
-                case "Zoom":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.zoomField = reader.ReadElementObject<Vector1D>(() => new Vector1D());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZStatusFilterOptions : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private bool panTiltStatusSupportedField;
-
-        private bool zoomStatusSupportedField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        private bool panTiltPositionSupportedField;
-        private bool panTiltPositionSupportedFieldSpecified;
-
-        private bool zoomPositionSupportedField;
-        private bool zoomPositionSupportedFieldSpecified;
-
-        private PTZStatusFilterOptionsExtension extensionField;
-
-        private bool fieldOfViewSupportedField;
-        private bool fieldOfViewSupportedFieldSpecified;
-
-        /// <summary>
-        /// True if the device is able to stream pan or tilt status information.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public bool PanTiltStatusSupported
-        {
-            get { return this.panTiltStatusSupportedField; }
-            set { this.panTiltStatusSupportedField = value; }
-        }
-
-        /// <summary>
-        /// True if the device is able to stream zoom status inforamtion.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public bool ZoomStatusSupported
-        {
-            get { return this.zoomStatusSupportedField; }
-            set { this.zoomStatusSupportedField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=2)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        /// <summary>
-        /// True if the device is able to stream the pan or tilt position.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public bool PanTiltPositionSupported
-        {
-            get { return this.panTiltPositionSupportedField; }
-            set { this.panTiltPositionSupportedField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="PanTiltPositionSupported"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool PanTiltPositionSupportedSpecified
-        {
-            get { return this.panTiltPositionSupportedFieldSpecified; }
-            set { this.panTiltPositionSupportedFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// True if the device is able to stream zoom position information.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public bool ZoomPositionSupported
-        {
-            get { return this.zoomPositionSupportedField; }
-            set { this.zoomPositionSupportedField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="ZoomPositionSupported"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ZoomPositionSupportedSpecified
-        {
-            get { return this.zoomPositionSupportedFieldSpecified; }
-            set { this.zoomPositionSupportedFieldSpecified = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public PTZStatusFilterOptionsExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        /// <summary>
-        /// True if the device is able to stream the field-of-view information.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
-        public bool FieldOfViewSupported
-        {
-            get { return this.fieldOfViewSupportedField; }
-            set { this.fieldOfViewSupportedField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="FieldOfViewSupported"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool FieldOfViewSupportedSpecified
-        {
-            get { return this.fieldOfViewSupportedFieldSpecified; }
-            set { this.fieldOfViewSupportedFieldSpecified = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "PTZStatusFilterOptions"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "PanTiltStatusSupported", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.panTiltStatusSupportedField));
-            writer.WriteElementString(Ns.OnvifVer10, "ZoomStatusSupported", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.zoomStatusSupportedField));
-            writer.WriteAny(this.anyField);
-            if (this.panTiltPositionSupportedFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "PanTiltPositionSupported", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.panTiltPositionSupportedField));
-            }
-            if (this.zoomPositionSupportedFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "ZoomPositionSupported", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.zoomPositionSupportedField));
-            }
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "PTZStatusFilterOptionsExtension");
-            if (this.fieldOfViewSupportedFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "FieldOfViewSupported", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.fieldOfViewSupportedField));
-            }
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "PanTiltStatusSupported":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.panTiltStatusSupportedField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
-                    return true;
-                case "ZoomStatusSupported":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.zoomStatusSupportedField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
-                    return true;
-                case "PanTiltPositionSupported":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.panTiltPositionSupportedField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
-                    this.panTiltPositionSupportedFieldSpecified = true;
-                    return true;
-                case "ZoomPositionSupported":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.zoomPositionSupportedField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
-                    this.zoomPositionSupportedFieldSpecified = true;
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<PTZStatusFilterOptionsExtension>(() => new PTZStatusFilterOptionsExtension());
-                    return true;
-                case "FieldOfViewSupported":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.fieldOfViewSupportedField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
-                    this.fieldOfViewSupportedFieldSpecified = true;
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZStatusFilterOptionsExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Namespace="http://www.onvif.org/ver10/schema", Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "PTZStatusFilterOptionsExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PanTiltLimits : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private Space2DDescription rangeField;
-
-        /// <summary>
-        /// A range of pan tilt limits.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public Space2DDescription Range
-        {
-            get { return this.rangeField; }
-            set { this.rangeField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "PanTiltLimits"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElement(Ns.OnvifVer10, "Range", this.rangeField, Ns.OnvifVer10, "Space2DDescription");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Range":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.rangeField = reader.ReadElementObject<Space2DDescription>(() => new Space2DDescription());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    /// <summary>
-    /// A pane layout describes one Video window of a display. It links a pane configuration to a region of
-    /// the screen.
-    /// </summary>
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PaneLayout : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string paneField;
-
-        private Rectangle areaField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        /// <summary>
-        /// Reference to the configuration of the streaming and coding parameters.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string Pane
-        {
-            get { return this.paneField; }
-            set { this.paneField = value; }
-        }
-
-        /// <summary>
-        /// Describes the location and size of the area on the monitor. The area coordinate values are espressed
-        /// in normalized units [-1.0, 1.0].
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public Rectangle Area
-        {
-            get { return this.areaField; }
-            set { this.areaField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=2)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "PaneLayout"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Pane", this.paneField);
-            writer.WriteElement(Ns.OnvifVer10, "Area", this.areaField, Ns.OnvifVer10, "Rectangle");
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Pane":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.paneField = reader.ReadElementText();
-                    return true;
-                case "Area":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.areaField = reader.ReadElementObject<Rectangle>(() => new Rectangle());
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    /// <summary>
     /// This operation plays or stops the ongoing audio clip on the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("PlayAudioClip", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class PlayAudioClipRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class PlayAudioClipRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -19240,7 +6203,7 @@ namespace SharpOnvifClient.Media2
     /// This operation plays or stops the ongoing audio clip on the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("PlayAudioClipResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class PlayAudioClipResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class PlayAudioClipResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public PlayAudioClipResponse()
         {
@@ -19249,7 +6212,7 @@ namespace SharpOnvifClient.Media2
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class PlayingAudioClips : SharpOnvifCommon.Xml.OnvifObject
+    public partial class PlayingAudioClips : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -19371,159 +6334,8 @@ namespace SharpOnvifClient.Media2
 
     }
 
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Polygon : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private Vector[] pointField;
-
-        [System.Xml.Serialization.XmlElementAttribute("Point", Order=0)]
-        public Vector[] Point
-        {
-            get { return this.pointField; }
-            set { this.pointField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "Polygon"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            if (this.pointField != null)
-            {
-                for (int i = 0; i < this.pointField.Length; i++)
-                {
-                    writer.WriteElement(Ns.OnvifVer10, "Point", this.pointField[i], Ns.OnvifVer10, "Vector");
-                }
-            }
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Point":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.pointField, reader.ReadElementObject<Vector>(() => new Vector()));
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PrefixedIPv4Address : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string addressField;
-
-        private int prefixLengthField;
-
-        /// <summary>
-        /// IPv4 address
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0, DataType="token")]
-        public string Address
-        {
-            get { return this.addressField; }
-            set { this.addressField = value; }
-        }
-
-        /// <summary>
-        /// Prefix/submask length
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public int PrefixLength
-        {
-            get { return this.prefixLengthField; }
-            set { this.prefixLengthField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "PrefixedIPv4Address"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Address", this.addressField);
-            writer.WriteElementString(Ns.OnvifVer10, "PrefixLength", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.prefixLengthField));
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Address":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.addressField = reader.ReadElementText();
-                    return true;
-                case "PrefixLength":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.prefixLengthField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PrefixedIPv6Address : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string addressField;
-
-        private int prefixLengthField;
-
-        /// <summary>
-        /// IPv6 address
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0, DataType="token")]
-        public string Address
-        {
-            get { return this.addressField; }
-            set { this.addressField = value; }
-        }
-
-        /// <summary>
-        /// Prefix/submask length
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public int PrefixLength
-        {
-            get { return this.prefixLengthField; }
-            set { this.prefixLengthField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "PrefixedIPv6Address"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Address", this.addressField);
-            writer.WriteElementString(Ns.OnvifVer10, "PrefixLength", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.prefixLengthField));
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Address":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.addressField = reader.ReadElementText();
-                    return true;
-                case "PrefixLength":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.prefixLengthField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class ProfileCapabilities : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ProfileCapabilities : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -19613,7 +6425,7 @@ namespace SharpOnvifClient.Media2
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class ReceiverConfiguration : ReceiverConfiguration1
+    public partial class ReceiverConfiguration : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -19630,7 +6442,6 @@ namespace SharpOnvifClient.Media2
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            base.WriteXmlAttributes(writer);
             writer.WriteAttributeString(null, "token", this.tokenField);
         }
 
@@ -19640,292 +6451,6 @@ namespace SharpOnvifClient.Media2
             {
                 case "token":
                     this.tokenField = reader.AttributeValue;
-                    return true;
-            }
-            return base.ReadXmlAttribute(reader);
-        }
-
-    }
-
-    /// <summary>
-    /// Describes the configuration of a receiver.
-    /// </summary>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(ReceiverConfiguration))]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ReceiverConfiguration1 : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private ReceiverMode modeField;
-
-        private string mediaUriField;
-
-        private StreamSetup streamSetupField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        /// <summary>
-        /// The following connection modes are defined:
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public ReceiverMode Mode
-        {
-            get { return this.modeField; }
-            set { this.modeField = value; }
-        }
-
-        /// <summary>
-        /// Details of the URI to which the receiver should connect.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1, DataType="anyURI")]
-        public string MediaUri
-        {
-            get { return this.mediaUriField; }
-            set { this.mediaUriField = value; }
-        }
-
-        /// <summary>
-        /// Stream connection parameters.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public StreamSetup StreamSetup
-        {
-            get { return this.streamSetupField; }
-            set { this.streamSetupField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=3)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "ReceiverConfiguration"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Mode", EnumXml.ToXml(this.modeField));
-            writer.WriteElementString(Ns.OnvifVer10, "MediaUri", this.mediaUriField);
-            writer.WriteElement(Ns.OnvifVer10, "StreamSetup", this.streamSetupField, Ns.OnvifVer10, "StreamSetup");
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Mode":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.modeField = EnumXml.ParseReceiverMode(reader.ReadElementText());
-                    return true;
-                case "MediaUri":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.mediaUriField = reader.ReadElementText();
-                    return true;
-                case "StreamSetup":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.streamSetupField = reader.ReadElementObject<StreamSetup>(() => new StreamSetup());
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Rectangle : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private float bottomField;
-
-        private float topField;
-
-        private float rightField;
-
-        private float leftField;
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public float bottom
-        {
-            get { return this.bottomField; }
-            set { this.bottomField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public float top
-        {
-            get { return this.topField; }
-            set { this.topField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public float right
-        {
-            get { return this.rightField; }
-            set { this.rightField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public float left
-        {
-            get { return this.leftField; }
-            set { this.leftField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "Rectangle"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAttributeString(null, "bottom", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.bottomField));
-            writer.WriteAttributeString(null, "top", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.topField));
-            writer.WriteAttributeString(null, "right", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.rightField));
-            writer.WriteAttributeString(null, "left", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.leftField));
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "bottom":
-                    this.bottomField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.AttributeValue);
-                    return true;
-                case "top":
-                    this.topField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.AttributeValue);
-                    return true;
-                case "right":
-                    this.rightField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.AttributeValue);
-                    return true;
-                case "left":
-                    this.leftField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.AttributeValue);
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class RelayOutput : DeviceEntity
-    {
-        private RelayOutputSettings propertiesField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public RelayOutputSettings Properties
-        {
-            get { return this.propertiesField; }
-            set { this.propertiesField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=1)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "RelayOutput"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlContent(writer);
-            writer.WriteElement(Ns.OnvifVer10, "Properties", this.propertiesField, Ns.OnvifVer10, "RelayOutputSettings");
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Properties":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.propertiesField = reader.ReadElementObject<RelayOutputSettings>(() => new RelayOutputSettings());
-                    return true;
-            }
-            if (base.ReadXmlElement(reader)) return true;
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class RelayOutputSettings : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private RelayMode modeField;
-
-        private string delayTimeField;
-
-        private RelayIdleState idleStateField;
-
-        /// <summary>
-        /// 'Bistable' or 'Monostable' Bistable - After setting the state, the relay remains in this
-        /// state.Monostable - After setting the state, the relay returns to its idle state after the specified
-        /// time.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public RelayMode Mode
-        {
-            get { return this.modeField; }
-            set { this.modeField = value; }
-        }
-
-        /// <summary>
-        /// Time after which the relay returns to its idle state if it is in monostable mode. If the Mode field
-        /// is set to bistable mode the value of the parameter can be ignored.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1, DataType="duration")]
-        public string DelayTime
-        {
-            get { return this.delayTimeField; }
-            set { this.delayTimeField = value; }
-        }
-
-        /// <summary>
-        /// 'open' or 'closed' 'open' means that the relay is open when the relay state is set to 'inactive'
-        /// through the trigger command and closed when the state is set to 'active' through the same
-        /// command.'closed' means that the relay is closed when the relay state is set to 'inactive' through
-        /// the trigger command and open when the state is set to 'active' through the same command.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public RelayIdleState IdleState
-        {
-            get { return this.idleStateField; }
-            set { this.idleStateField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "RelayOutputSettings"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Mode", EnumXml.ToXml(this.modeField));
-            writer.WriteElementString(Ns.OnvifVer10, "DelayTime", this.delayTimeField);
-            writer.WriteElementString(Ns.OnvifVer10, "IdleState", EnumXml.ToXml(this.idleStateField));
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Mode":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.modeField = EnumXml.ParseRelayMode(reader.ReadElementText());
-                    return true;
-                case "DelayTime":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.delayTimeField = reader.ReadElementText();
-                    return true;
-                case "IdleState":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.idleStateField = EnumXml.ParseRelayIdleState(reader.ReadElementText());
                     return true;
             }
             return false;
@@ -19938,7 +6463,7 @@ namespace SharpOnvifClient.Media2
     /// profile does not contain one of the listed configurations that item shall be ignored.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RemoveConfiguration", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class RemoveConfigurationRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class RemoveConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string profileTokenField;
 
@@ -20012,808 +6537,10 @@ namespace SharpOnvifClient.Media2
     /// profile does not contain one of the listed configurations that item shall be ignored.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RemoveConfigurationResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class RemoveConfigurationResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class RemoveConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public RemoveConfigurationResponse()
         {
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Reverse : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private ReverseMode modeField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        /// <summary>
-        /// Parameter to enable/disable Reverse feature.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public ReverseMode Mode
-        {
-            get { return this.modeField; }
-            set { this.modeField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Namespace="http://www.onvif.org/ver10/schema", Order=1)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "Reverse"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Mode", EnumXml.ToXml(this.modeField));
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Mode":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.modeField = EnumXml.ParseReverseMode(reader.ReadElementText());
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Rotate : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private RotateMode modeField;
-
-        private int degreeField;
-        private bool degreeFieldSpecified;
-
-        private RotateExtension extensionField;
-
-        private bool mirrorField;
-        private bool mirrorFieldSpecified;
-
-        /// <summary>
-        /// Parameter to enable/disable Rotation feature.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public RotateMode Mode
-        {
-            get { return this.modeField; }
-            set { this.modeField = value; }
-        }
-
-        /// <summary>
-        /// Optional parameter to configure how much degree of clockwise rotation of image for On mode. Omitting
-        /// this parameter for On mode means 180 degree rotation.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public int Degree
-        {
-            get { return this.degreeField; }
-            set { this.degreeField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="Degree"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DegreeSpecified
-        {
-            get { return this.degreeFieldSpecified; }
-            set { this.degreeFieldSpecified = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public RotateExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        /// <summary>
-        /// When enabled, the video will be flipped horizontally. If applied alongside rotation, the mirror
-        /// effect shall be executed after the rotation. Additionally, when Mirror is enabled and Reverse=Auto
-        /// is set in PTControlDirection or if the device doesn't support Reverse in PTControlDirection, the
-        /// device shall automatically adjust the pan direction.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool Mirror
-        {
-            get { return this.mirrorField; }
-            set { this.mirrorField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="Mirror"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool MirrorSpecified
-        {
-            get { return this.mirrorFieldSpecified; }
-            set { this.mirrorFieldSpecified = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "Rotate"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            if (this.mirrorFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "Mirror", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.mirrorField));
-            }
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Mode", EnumXml.ToXml(this.modeField));
-            if (this.degreeFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "Degree", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.degreeField));
-            }
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "RotateExtension");
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Mirror":
-                    this.mirrorField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
-                    this.mirrorFieldSpecified = true;
-                    return true;
-            }
-            return false;
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Mode":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.modeField = EnumXml.ParseRotateMode(reader.ReadElementText());
-                    return true;
-                case "Degree":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.degreeField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    this.degreeFieldSpecified = true;
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<RotateExtension>(() => new RotateExtension());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class RotateExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Namespace="http://www.onvif.org/ver10/schema", Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "RotateExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class RotateOptions : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private RotateMode[] modeField;
-
-        private int[] degreeListField;
-
-        private RotateOptionsExtension extensionField;
-
-        private bool rebootField;
-        private bool rebootFieldSpecified;
-
-        private bool mirrorField;
-        private bool mirrorFieldSpecified;
-
-        /// <summary>
-        /// Supported options of Rotate mode parameter.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("Mode", Order=0)]
-        public RotateMode[] Mode
-        {
-            get { return this.modeField; }
-            set { this.modeField = value; }
-        }
-
-        /// <summary>
-        /// List of supported degree value for rotation.
-        /// </summary>
-        [System.Xml.Serialization.XmlArrayAttribute(Order=1)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("Items", IsNullable=false)]
-        public int[] DegreeList
-        {
-            get { return this.degreeListField; }
-            set { this.degreeListField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public RotateOptionsExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        /// <summary>
-        /// Signals if a device requires a reboot after changing the rotation or mirror. If a device can handle
-        /// rotation changes or mirror changes without rebooting this value shall be set to false.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool Reboot
-        {
-            get { return this.rebootField; }
-            set { this.rebootField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="Reboot"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool RebootSpecified
-        {
-            get { return this.rebootFieldSpecified; }
-            set { this.rebootFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// Signals if video source mirroring is supported.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool Mirror
-        {
-            get { return this.mirrorField; }
-            set { this.mirrorField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="Mirror"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool MirrorSpecified
-        {
-            get { return this.mirrorFieldSpecified; }
-            set { this.mirrorFieldSpecified = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "RotateOptions"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            if (this.rebootFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "Reboot", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.rebootField));
-            }
-            if (this.mirrorFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "Mirror", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.mirrorField));
-            }
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            if (this.modeField != null)
-            {
-                for (int i = 0; i < this.modeField.Length; i++)
-                {
-                    writer.WriteElementString(Ns.OnvifVer10, "Mode", EnumXml.ToXml(this.modeField[i]));
-                }
-            }
-            if (this.degreeListField != null)
-            {
-                writer.WriteStartElement(Ns.OnvifVer10, "DegreeList");
-                for (int i = 0; i < this.degreeListField.Length; i++)
-                {
-                    writer.WriteElementString(Ns.OnvifVer10, "Items", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.degreeListField[i]));
-                }
-                writer.WriteEndElement();
-            }
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "RotateOptionsExtension");
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Reboot":
-                    this.rebootField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
-                    this.rebootFieldSpecified = true;
-                    return true;
-                case "Mirror":
-                    this.mirrorField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
-                    this.mirrorFieldSpecified = true;
-                    return true;
-            }
-            return false;
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Mode":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.modeField, EnumXml.ParseRotateMode(reader.ReadElementText()));
-                    return true;
-                case "DegreeList":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    reader.ReadWrappedArray(Ns.OnvifVer10, "Items", () =>
-                    {
-                        SharpOnvifCommon.Xml.OnvifArray.Append(ref this.degreeListField, SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText()));
-                    }
-                    );
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<RotateOptionsExtension>(() => new RotateOptionsExtension());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class RotateOptionsExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Namespace="http://www.onvif.org/ver10/schema", Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "RotateOptionsExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class RuleEngineConfiguration : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private Config[] ruleField;
-
-        private RuleEngineConfigurationExtension extensionField;
-
-        [System.Xml.Serialization.XmlElementAttribute("Rule", Order=0)]
-        public Config[] Rule
-        {
-            get { return this.ruleField; }
-            set { this.ruleField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public RuleEngineConfigurationExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "RuleEngineConfiguration"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            if (this.ruleField != null)
-            {
-                for (int i = 0; i < this.ruleField.Length; i++)
-                {
-                    writer.WriteElement(Ns.OnvifVer10, "Rule", this.ruleField[i], Ns.OnvifVer10, "Config");
-                }
-            }
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "RuleEngineConfigurationExtension");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Rule":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.ruleField, reader.ReadElementObject<Config>(() => new Config()));
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<RuleEngineConfigurationExtension>(() => new RuleEngineConfigurationExtension());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class RuleEngineConfigurationExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "RuleEngineConfigurationExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class SRTPPreShared : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string sRTPPSKField;
-
-        private int rOCExtMapIDField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        private string secureStreamingProtocolAlgorithmField;
-
-        /// <summary>
-        /// SRTP Pre-Shared Key (PSK) represented as a hexadecimal string. This includes both the SRTP master
-        /// key, followed by the master salt. The sizes of the key and salt depend on the specified
-        /// SecureStreamingProtocolAlgorithm. When this element contains a non-empty value, RTP packets shall be
-        /// encrypted. The SRTPPSK shall be returned as an empty string on a get method.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string SRTPPSK
-        {
-            get { return this.sRTPPSKField; }
-            set { this.sRTPPSKField = value; }
-        }
-
-        /// <summary>
-        /// The RTP header extension ID (ExtMapID) used to identify the ROC extension, as defined in RFC 8285.
-        /// Valid values are 1 to 14 for one-byte header extensions.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public int ROCExtMapID
-        {
-            get { return this.rOCExtMapIDField; }
-            set { this.rOCExtMapIDField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=2)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        /// <summary>
-        /// Specifies the cryptographic algorithm when using SRTP, selecting from predefined values provided in
-        /// the GetMulticastAudioDecoderConfigurationOptions response.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string SecureStreamingProtocolAlgorithm
-        {
-            get { return this.secureStreamingProtocolAlgorithmField; }
-            set { this.secureStreamingProtocolAlgorithmField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "SRTPPreShared"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAttributeString(null, "SecureStreamingProtocolAlgorithm", this.secureStreamingProtocolAlgorithmField);
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "SRTPPSK", this.sRTPPSKField);
-            writer.WriteElementString(Ns.OnvifVer10, "ROCExtMapID", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.rOCExtMapIDField));
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "SecureStreamingProtocolAlgorithm":
-                    this.secureStreamingProtocolAlgorithmField = reader.AttributeValue;
-                    return true;
-            }
-            return false;
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "SRTPPSK":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.sRTPPSKField = reader.ReadElementText();
-                    return true;
-                case "ROCExtMapID":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.rOCExtMapIDField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class SceneOrientation : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private SceneOrientationMode modeField;
-
-        private string orientationField;
-
-        /// <summary>
-        /// Parameter to assign the way the camera determines the scene orientation.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public SceneOrientationMode Mode
-        {
-            get { return this.modeField; }
-            set { this.modeField = value; }
-        }
-
-        /// <summary>
-        /// Assigned or determined scene orientation based on the Mode. When assigning the Mode to AUTO, this
-        /// field is optional and will be ignored by the device. When assigning the Mode to MANUAL, this field
-        /// is required and the device will return an InvalidArgs fault if missing.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public string Orientation
-        {
-            get { return this.orientationField; }
-            set { this.orientationField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "SceneOrientation"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Mode", EnumXml.ToXml(this.modeField));
-            writer.WriteElementString(Ns.OnvifVer10, "Orientation", this.orientationField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Mode":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.modeField = EnumXml.ParseSceneOrientationMode(reader.ReadElementText());
-                    return true;
-                case "Orientation":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.orientationField = reader.ReadElementText();
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    /// <summary>
-    /// Optional element to configure which sensor data is to include in the metadata stream. A client might
-    /// be interested in receiving all, none or some of the sensor data produced by the device: To get all
-    /// sensor data: Include the SensorData element but do not include any filter criteria.To get no sensor
-    /// data: Do not include the SensorData element.To get only some sensor data: Include the SensorData
-    /// element and specify filter criteria (SensorID list, Type list, etc.).
-    /// </summary>
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class SensorDataFilter : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string[] sensorIDField;
-
-        private string[] typeField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        /// <summary>
-        /// List of SensorID values to include in the metadata stream. If not specified or empty, all sensor IDs
-        /// are included (unless other filters exclude them).
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("SensorID", Order=0)]
-        public string[] SensorID
-        {
-            get { return this.sensorIDField; }
-            set { this.sensorIDField = value; }
-        }
-
-        /// <summary>
-        /// List of sensor Type values to include in the metadata stream. If not specified or empty, all sensor
-        /// types are included (unless other filters exclude them).
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("Type", Order=1)]
-        public string[] Type
-        {
-            get { return this.typeField; }
-            set { this.typeField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=2)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "SensorDataFilter"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            if (this.sensorIDField != null)
-            {
-                for (int i = 0; i < this.sensorIDField.Length; i++)
-                {
-                    writer.WriteElementString(Ns.OnvifVer10, "SensorID", this.sensorIDField[i]);
-                }
-            }
-            if (this.typeField != null)
-            {
-                for (int i = 0; i < this.typeField.Length; i++)
-                {
-                    writer.WriteElementString(Ns.OnvifVer10, "Type", this.typeField[i]);
-                }
-            }
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "SensorID":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.sensorIDField, reader.ReadElementText());
-                    return true;
-                case "Type":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.typeField, reader.ReadElementText());
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class SensorDataFilterOptions : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private bool sensorIDFilterSupportedField;
-
-        private bool typeFilterSupportedField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        /// <summary>
-        /// True if the device supports filtering sensor data by SensorID.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public bool SensorIDFilterSupported
-        {
-            get { return this.sensorIDFilterSupportedField; }
-            set { this.sensorIDFilterSupportedField = value; }
-        }
-
-        /// <summary>
-        /// True if the device supports filtering sensor data by Type.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public bool TypeFilterSupported
-        {
-            get { return this.typeFilterSupportedField; }
-            set { this.typeFilterSupportedField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=2)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "SensorDataFilterOptions"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "SensorIDFilterSupported", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.sensorIDFilterSupportedField));
-            writer.WriteElementString(Ns.OnvifVer10, "TypeFilterSupported", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.typeFilterSupportedField));
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "SensorIDFilterSupported":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.sensorIDFilterSupportedField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
-                    return true;
-                case "TypeFilterSupported":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.typeFilterSupportedField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
         }
 
     }
@@ -20822,7 +6549,7 @@ namespace SharpOnvifClient.Media2
     /// This operation modifies the existing audio clip configuration on the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetAudioClip", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class SetAudioClipRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetAudioClipRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -20886,7 +6613,7 @@ namespace SharpOnvifClient.Media2
     /// This operation modifies the existing audio clip configuration on the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetAudioClipResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class SetAudioClipResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetAudioClipResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public SetAudioClipResponse()
         {
@@ -20898,15 +6625,15 @@ namespace SharpOnvifClient.Media2
     /// This operation modifies an audio decoder configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetAudioDecoderConfiguration", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class SetAudioDecoderConfigurationRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetAudioDecoderConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
     {
-        private AudioDecoderConfiguration configurationField;
+        private SharpOnvifCommon.Onvif.AudioDecoderConfiguration configurationField;
 
         /// <summary>
         /// Contains the modified audio decoder configuration. The configuration shall exist in the device.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public AudioDecoderConfiguration Configuration
+        public SharpOnvifCommon.Onvif.AudioDecoderConfiguration Configuration
         {
             get { return this.configurationField; }
             set { this.configurationField = value; }
@@ -20916,14 +6643,14 @@ namespace SharpOnvifClient.Media2
         {
         }
 
-        public SetAudioDecoderConfigurationRequest(AudioDecoderConfiguration configuration)
+        public SetAudioDecoderConfigurationRequest(SharpOnvifCommon.Onvif.AudioDecoderConfiguration configuration)
         {
             this.configurationField = configuration;
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            writer.WriteElement(Ns.Ver20Media, "Configuration", this.configurationField, Ns.OnvifVer10, "AudioDecoderConfiguration");
+            writer.WriteElement(Ns.Ver20Media, "Configuration", this.configurationField, "http://www.onvif.org/ver10/schema", "AudioDecoderConfiguration");
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
@@ -20932,7 +6659,7 @@ namespace SharpOnvifClient.Media2
             {
                 case "Configuration":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.configurationField = reader.ReadElementObject<AudioDecoderConfiguration>(() => new AudioDecoderConfiguration());
+                    this.configurationField = reader.ReadElementObject<SharpOnvifCommon.Onvif.AudioDecoderConfiguration>(() => new SharpOnvifCommon.Onvif.AudioDecoderConfiguration());
                     return true;
             }
             return false;
@@ -20944,7 +6671,7 @@ namespace SharpOnvifClient.Media2
     /// This operation modifies an audio decoder configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetAudioDecoderConfigurationResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class SetAudioDecoderConfigurationResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetAudioDecoderConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public SetAudioDecoderConfigurationResponse()
         {
@@ -20959,15 +6686,15 @@ namespace SharpOnvifClient.Media2
     /// changing a running stream are out of scope for this specification.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetAudioEncoderConfiguration", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class SetAudioEncoderConfigurationRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetAudioEncoderConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
     {
-        private AudioEncoder2Configuration configurationField;
+        private SharpOnvifCommon.Onvif.AudioEncoder2Configuration configurationField;
 
         /// <summary>
         /// Contains the modified audio encoder configuration. The configuration shall exist in the device.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public AudioEncoder2Configuration Configuration
+        public SharpOnvifCommon.Onvif.AudioEncoder2Configuration Configuration
         {
             get { return this.configurationField; }
             set { this.configurationField = value; }
@@ -20977,14 +6704,14 @@ namespace SharpOnvifClient.Media2
         {
         }
 
-        public SetAudioEncoderConfigurationRequest(AudioEncoder2Configuration configuration)
+        public SetAudioEncoderConfigurationRequest(SharpOnvifCommon.Onvif.AudioEncoder2Configuration configuration)
         {
             this.configurationField = configuration;
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            writer.WriteElement(Ns.Ver20Media, "Configuration", this.configurationField, Ns.OnvifVer10, "AudioEncoder2Configuration");
+            writer.WriteElement(Ns.Ver20Media, "Configuration", this.configurationField, "http://www.onvif.org/ver10/schema", "AudioEncoder2Configuration");
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
@@ -20993,7 +6720,7 @@ namespace SharpOnvifClient.Media2
             {
                 case "Configuration":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.configurationField = reader.ReadElementObject<AudioEncoder2Configuration>(() => new AudioEncoder2Configuration());
+                    this.configurationField = reader.ReadElementObject<SharpOnvifCommon.Onvif.AudioEncoder2Configuration>(() => new SharpOnvifCommon.Onvif.AudioEncoder2Configuration());
                     return true;
             }
             return false;
@@ -21008,7 +6735,7 @@ namespace SharpOnvifClient.Media2
     /// changing a running stream are out of scope for this specification.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetAudioEncoderConfigurationResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class SetAudioEncoderConfigurationResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetAudioEncoderConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public SetAudioEncoderConfigurationResponse()
         {
@@ -21020,15 +6747,15 @@ namespace SharpOnvifClient.Media2
     /// This operation modifies an audio output configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetAudioOutputConfiguration", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class SetAudioOutputConfigurationRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetAudioOutputConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
     {
-        private AudioOutputConfiguration configurationField;
+        private SharpOnvifCommon.Onvif.AudioOutputConfiguration configurationField;
 
         /// <summary>
         /// Contains the modified audio output configuration. The configuration shall exist in the device.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public AudioOutputConfiguration Configuration
+        public SharpOnvifCommon.Onvif.AudioOutputConfiguration Configuration
         {
             get { return this.configurationField; }
             set { this.configurationField = value; }
@@ -21038,14 +6765,14 @@ namespace SharpOnvifClient.Media2
         {
         }
 
-        public SetAudioOutputConfigurationRequest(AudioOutputConfiguration configuration)
+        public SetAudioOutputConfigurationRequest(SharpOnvifCommon.Onvif.AudioOutputConfiguration configuration)
         {
             this.configurationField = configuration;
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            writer.WriteElement(Ns.Ver20Media, "Configuration", this.configurationField, Ns.OnvifVer10, "AudioOutputConfiguration");
+            writer.WriteElement(Ns.Ver20Media, "Configuration", this.configurationField, "http://www.onvif.org/ver10/schema", "AudioOutputConfiguration");
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
@@ -21054,7 +6781,7 @@ namespace SharpOnvifClient.Media2
             {
                 case "Configuration":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.configurationField = reader.ReadElementObject<AudioOutputConfiguration>(() => new AudioOutputConfiguration());
+                    this.configurationField = reader.ReadElementObject<SharpOnvifCommon.Onvif.AudioOutputConfiguration>(() => new SharpOnvifCommon.Onvif.AudioOutputConfiguration());
                     return true;
             }
             return false;
@@ -21066,7 +6793,7 @@ namespace SharpOnvifClient.Media2
     /// This operation modifies an audio output configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetAudioOutputConfigurationResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class SetAudioOutputConfigurationResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetAudioOutputConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public SetAudioOutputConfigurationResponse()
         {
@@ -21081,15 +6808,15 @@ namespace SharpOnvifClient.Media2
     /// changing a running stream are out of scope for this specification.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetAudioSourceConfiguration", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class SetAudioSourceConfigurationRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetAudioSourceConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
     {
-        private AudioSourceConfiguration configurationField;
+        private SharpOnvifCommon.Onvif.AudioSourceConfiguration configurationField;
 
         /// <summary>
         /// Contains the modified audio source configuration. The configuration shall exist in the device.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public AudioSourceConfiguration Configuration
+        public SharpOnvifCommon.Onvif.AudioSourceConfiguration Configuration
         {
             get { return this.configurationField; }
             set { this.configurationField = value; }
@@ -21099,14 +6826,14 @@ namespace SharpOnvifClient.Media2
         {
         }
 
-        public SetAudioSourceConfigurationRequest(AudioSourceConfiguration configuration)
+        public SetAudioSourceConfigurationRequest(SharpOnvifCommon.Onvif.AudioSourceConfiguration configuration)
         {
             this.configurationField = configuration;
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            writer.WriteElement(Ns.Ver20Media, "Configuration", this.configurationField, Ns.OnvifVer10, "AudioSourceConfiguration");
+            writer.WriteElement(Ns.Ver20Media, "Configuration", this.configurationField, "http://www.onvif.org/ver10/schema", "AudioSourceConfiguration");
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
@@ -21115,7 +6842,7 @@ namespace SharpOnvifClient.Media2
             {
                 case "Configuration":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.configurationField = reader.ReadElementObject<AudioSourceConfiguration>(() => new AudioSourceConfiguration());
+                    this.configurationField = reader.ReadElementObject<SharpOnvifCommon.Onvif.AudioSourceConfiguration>(() => new SharpOnvifCommon.Onvif.AudioSourceConfiguration());
                     return true;
             }
             return false;
@@ -21130,7 +6857,7 @@ namespace SharpOnvifClient.Media2
     /// changing a running stream are out of scope for this specification.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetAudioSourceConfigurationResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class SetAudioSourceConfigurationResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetAudioSourceConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public SetAudioSourceConfigurationResponse()
         {
@@ -21139,7 +6866,7 @@ namespace SharpOnvifClient.Media2
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class SetConfigurationResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         protected override string OnvifXmlTypeName { get { return "SetConfigurationResponse"; } }
 
@@ -21151,15 +6878,15 @@ namespace SharpOnvifClient.Media2
     /// This command is to configure Audio EQPreset.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetEQPresetConfiguration", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class SetEQPresetRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetEQPresetRequest : SharpOnvifCommon.Xml.OnvifContract
     {
-        private EQPreset configurationField;
+        private SharpOnvifCommon.Onvif.EQPreset configurationField;
 
         /// <summary>
         /// Contains the modified EQ Preset configuration.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public EQPreset Configuration
+        public SharpOnvifCommon.Onvif.EQPreset Configuration
         {
             get { return this.configurationField; }
             set { this.configurationField = value; }
@@ -21169,14 +6896,14 @@ namespace SharpOnvifClient.Media2
         {
         }
 
-        public SetEQPresetRequest(EQPreset configuration)
+        public SetEQPresetRequest(SharpOnvifCommon.Onvif.EQPreset configuration)
         {
             this.configurationField = configuration;
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            writer.WriteElement(Ns.Ver20Media, "Configuration", this.configurationField, Ns.OnvifVer10, "EQPreset");
+            writer.WriteElement(Ns.Ver20Media, "Configuration", this.configurationField, "http://www.onvif.org/ver10/schema", "EQPreset");
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
@@ -21185,7 +6912,7 @@ namespace SharpOnvifClient.Media2
             {
                 case "Configuration":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.configurationField = reader.ReadElementObject<EQPreset>(() => new EQPreset());
+                    this.configurationField = reader.ReadElementObject<SharpOnvifCommon.Onvif.EQPreset>(() => new SharpOnvifCommon.Onvif.EQPreset());
                     return true;
             }
             return false;
@@ -21197,7 +6924,7 @@ namespace SharpOnvifClient.Media2
     /// This command is to configure Audio EQPreset.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetEQPresetConfigurationResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class SetEQPresetResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetEQPresetResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public SetEQPresetResponse()
         {
@@ -21209,7 +6936,7 @@ namespace SharpOnvifClient.Media2
     /// Set the Mask
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetMask", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class SetMaskRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetMaskRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private Mask maskField;
 
@@ -21255,7 +6982,7 @@ namespace SharpOnvifClient.Media2
     /// Set the Mask
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetMaskResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class SetMaskResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetMaskResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public SetMaskResponse()
         {
@@ -21270,15 +6997,15 @@ namespace SharpOnvifClient.Media2
     /// changing a running stream are out of scope for this specification.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetMetadataConfiguration", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class SetMetadataConfigurationRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetMetadataConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
     {
-        private MetadataConfiguration configurationField;
+        private SharpOnvifCommon.Onvif.MetadataConfiguration configurationField;
 
         /// <summary>
         /// Contains the modified metadata configuration. The configuration shall exist in the device.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public MetadataConfiguration Configuration
+        public SharpOnvifCommon.Onvif.MetadataConfiguration Configuration
         {
             get { return this.configurationField; }
             set { this.configurationField = value; }
@@ -21288,14 +7015,14 @@ namespace SharpOnvifClient.Media2
         {
         }
 
-        public SetMetadataConfigurationRequest(MetadataConfiguration configuration)
+        public SetMetadataConfigurationRequest(SharpOnvifCommon.Onvif.MetadataConfiguration configuration)
         {
             this.configurationField = configuration;
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            writer.WriteElement(Ns.Ver20Media, "Configuration", this.configurationField, Ns.OnvifVer10, "MetadataConfiguration");
+            writer.WriteElement(Ns.Ver20Media, "Configuration", this.configurationField, "http://www.onvif.org/ver10/schema", "MetadataConfiguration");
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
@@ -21304,7 +7031,7 @@ namespace SharpOnvifClient.Media2
             {
                 case "Configuration":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.configurationField = reader.ReadElementObject<MetadataConfiguration>(() => new MetadataConfiguration());
+                    this.configurationField = reader.ReadElementObject<SharpOnvifCommon.Onvif.MetadataConfiguration>(() => new SharpOnvifCommon.Onvif.MetadataConfiguration());
                     return true;
             }
             return false;
@@ -21319,7 +7046,7 @@ namespace SharpOnvifClient.Media2
     /// changing a running stream are out of scope for this specification.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetMetadataConfigurationResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class SetMetadataConfigurationResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetMetadataConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public SetMetadataConfigurationResponse()
         {
@@ -21331,16 +7058,16 @@ namespace SharpOnvifClient.Media2
     /// This operation sets the MulticastAudioDecoderConfiguration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetMulticastAudioDecoderConfiguration", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class SetMulticastAudioDecoderConfigurationRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetMulticastAudioDecoderConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
     {
-        private MulticastAudioDecoderConfiguration configurationField;
+        private SharpOnvifCommon.Onvif.MulticastAudioDecoderConfiguration configurationField;
 
         /// <summary>
         /// Contains the modified multicast audio decoder configuration. The configuration shall exist in the
         /// device.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public MulticastAudioDecoderConfiguration Configuration
+        public SharpOnvifCommon.Onvif.MulticastAudioDecoderConfiguration Configuration
         {
             get { return this.configurationField; }
             set { this.configurationField = value; }
@@ -21350,14 +7077,14 @@ namespace SharpOnvifClient.Media2
         {
         }
 
-        public SetMulticastAudioDecoderConfigurationRequest(MulticastAudioDecoderConfiguration configuration)
+        public SetMulticastAudioDecoderConfigurationRequest(SharpOnvifCommon.Onvif.MulticastAudioDecoderConfiguration configuration)
         {
             this.configurationField = configuration;
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            writer.WriteElement(Ns.Ver20Media, "Configuration", this.configurationField, Ns.OnvifVer10, "MulticastAudioDecoderConfiguration");
+            writer.WriteElement(Ns.Ver20Media, "Configuration", this.configurationField, "http://www.onvif.org/ver10/schema", "MulticastAudioDecoderConfiguration");
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
@@ -21366,7 +7093,7 @@ namespace SharpOnvifClient.Media2
             {
                 case "Configuration":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.configurationField = reader.ReadElementObject<MulticastAudioDecoderConfiguration>(() => new MulticastAudioDecoderConfiguration());
+                    this.configurationField = reader.ReadElementObject<SharpOnvifCommon.Onvif.MulticastAudioDecoderConfiguration>(() => new SharpOnvifCommon.Onvif.MulticastAudioDecoderConfiguration());
                     return true;
             }
             return false;
@@ -21378,7 +7105,7 @@ namespace SharpOnvifClient.Media2
     /// This operation sets the MulticastAudioDecoderConfiguration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetMulticastAudioDecoderConfigurationResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class SetMulticastAudioDecoderConfigurationResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetMulticastAudioDecoderConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public SetMulticastAudioDecoderConfigurationResponse()
         {
@@ -21390,15 +7117,15 @@ namespace SharpOnvifClient.Media2
     /// Set the OSD
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetOSD", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class SetOSDRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetOSDRequest : SharpOnvifCommon.Xml.OnvifContract
     {
-        private OSDConfiguration oSDField;
+        private SharpOnvifCommon.Onvif.OSDConfiguration oSDField;
 
         /// <summary>
         /// Contains the modified OSD configuration.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public OSDConfiguration OSD
+        public SharpOnvifCommon.Onvif.OSDConfiguration OSD
         {
             get { return this.oSDField; }
             set { this.oSDField = value; }
@@ -21408,14 +7135,14 @@ namespace SharpOnvifClient.Media2
         {
         }
 
-        public SetOSDRequest(OSDConfiguration oSD)
+        public SetOSDRequest(SharpOnvifCommon.Onvif.OSDConfiguration oSD)
         {
             this.oSDField = oSD;
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            writer.WriteElement(Ns.Ver20Media, "OSD", this.oSDField, Ns.OnvifVer10, "OSDConfiguration");
+            writer.WriteElement(Ns.Ver20Media, "OSD", this.oSDField, "http://www.onvif.org/ver10/schema", "OSDConfiguration");
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
@@ -21424,7 +7151,7 @@ namespace SharpOnvifClient.Media2
             {
                 case "OSD":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.oSDField = reader.ReadElementObject<OSDConfiguration>(() => new OSDConfiguration());
+                    this.oSDField = reader.ReadElementObject<SharpOnvifCommon.Onvif.OSDConfiguration>(() => new SharpOnvifCommon.Onvif.OSDConfiguration());
                     return true;
             }
             return false;
@@ -21436,7 +7163,7 @@ namespace SharpOnvifClient.Media2
     /// Set the OSD
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetOSDResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class SetOSDResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetOSDResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public SetOSDResponse()
         {
@@ -21457,7 +7184,7 @@ namespace SharpOnvifClient.Media2
     /// stream.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetSynchronizationPoint", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class SetSynchronizationPointRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetSynchronizationPointRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string profileTokenField;
 
@@ -21512,7 +7239,7 @@ namespace SharpOnvifClient.Media2
     /// stream.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetSynchronizationPointResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class SetSynchronizationPointResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetSynchronizationPointResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public SetSynchronizationPointResponse()
         {
@@ -21530,15 +7257,15 @@ namespace SharpOnvifClient.Media2
     /// shall adhere to the timeout value signaled via RTSP.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetVideoEncoderConfiguration", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class SetVideoEncoderConfigurationRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetVideoEncoderConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
     {
-        private VideoEncoder2Configuration configurationField;
+        private SharpOnvifCommon.Onvif.VideoEncoder2Configuration configurationField;
 
         /// <summary>
         /// Contains the modified video encoder configuration. The configuration shall exist in the device.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public VideoEncoder2Configuration Configuration
+        public SharpOnvifCommon.Onvif.VideoEncoder2Configuration Configuration
         {
             get { return this.configurationField; }
             set { this.configurationField = value; }
@@ -21548,14 +7275,14 @@ namespace SharpOnvifClient.Media2
         {
         }
 
-        public SetVideoEncoderConfigurationRequest(VideoEncoder2Configuration configuration)
+        public SetVideoEncoderConfigurationRequest(SharpOnvifCommon.Onvif.VideoEncoder2Configuration configuration)
         {
             this.configurationField = configuration;
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            writer.WriteElement(Ns.Ver20Media, "Configuration", this.configurationField, Ns.OnvifVer10, "VideoEncoder2Configuration");
+            writer.WriteElement(Ns.Ver20Media, "Configuration", this.configurationField, "http://www.onvif.org/ver10/schema", "VideoEncoder2Configuration");
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
@@ -21564,7 +7291,7 @@ namespace SharpOnvifClient.Media2
             {
                 case "Configuration":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.configurationField = reader.ReadElementObject<VideoEncoder2Configuration>(() => new VideoEncoder2Configuration());
+                    this.configurationField = reader.ReadElementObject<SharpOnvifCommon.Onvif.VideoEncoder2Configuration>(() => new SharpOnvifCommon.Onvif.VideoEncoder2Configuration());
                     return true;
             }
             return false;
@@ -21582,7 +7309,7 @@ namespace SharpOnvifClient.Media2
     /// shall adhere to the timeout value signaled via RTSP.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetVideoEncoderConfigurationResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class SetVideoEncoderConfigurationResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetVideoEncoderConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public SetVideoEncoderConfigurationResponse()
         {
@@ -21597,15 +7324,15 @@ namespace SharpOnvifClient.Media2
     /// changing a running stream are out of scope for this specification.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetVideoSourceConfiguration", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class SetVideoSourceConfigurationRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetVideoSourceConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
     {
-        private VideoSourceConfiguration configurationField;
+        private SharpOnvifCommon.Onvif.VideoSourceConfiguration configurationField;
 
         /// <summary>
         /// Contains the modified video source configuration. The configuration shall exist in the device.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public VideoSourceConfiguration Configuration
+        public SharpOnvifCommon.Onvif.VideoSourceConfiguration Configuration
         {
             get { return this.configurationField; }
             set { this.configurationField = value; }
@@ -21615,14 +7342,14 @@ namespace SharpOnvifClient.Media2
         {
         }
 
-        public SetVideoSourceConfigurationRequest(VideoSourceConfiguration configuration)
+        public SetVideoSourceConfigurationRequest(SharpOnvifCommon.Onvif.VideoSourceConfiguration configuration)
         {
             this.configurationField = configuration;
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            writer.WriteElement(Ns.Ver20Media, "Configuration", this.configurationField, Ns.OnvifVer10, "VideoSourceConfiguration");
+            writer.WriteElement(Ns.Ver20Media, "Configuration", this.configurationField, "http://www.onvif.org/ver10/schema", "VideoSourceConfiguration");
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
@@ -21631,7 +7358,7 @@ namespace SharpOnvifClient.Media2
             {
                 case "Configuration":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.configurationField = reader.ReadElementObject<VideoSourceConfiguration>(() => new VideoSourceConfiguration());
+                    this.configurationField = reader.ReadElementObject<SharpOnvifCommon.Onvif.VideoSourceConfiguration>(() => new SharpOnvifCommon.Onvif.VideoSourceConfiguration());
                     return true;
             }
             return false;
@@ -21646,7 +7373,7 @@ namespace SharpOnvifClient.Media2
     /// changing a running stream are out of scope for this specification.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetVideoSourceConfigurationResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class SetVideoSourceConfigurationResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetVideoSourceConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public SetVideoSourceConfigurationResponse()
         {
@@ -21660,7 +7387,7 @@ namespace SharpOnvifClient.Media2
     /// command. The behavior after changing the mode is not defined in this specification.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetVideoSourceMode", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class SetVideoSourceModeRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetVideoSourceModeRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string videoSourceTokenField;
 
@@ -21726,7 +7453,7 @@ namespace SharpOnvifClient.Media2
     /// command. The behavior after changing the mode is not defined in this specification.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetVideoSourceModeResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class SetVideoSourceModeResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetVideoSourceModeResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private bool rebootField;
 
@@ -21773,7 +7500,7 @@ namespace SharpOnvifClient.Media2
     /// This operation sets the WebRTC configuration for the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetWebRTCConfigurations", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class SetWebRTCConfigurationsRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetWebRTCConfigurationsRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private WebRTCConfiguration[] webRTCConfigurationField;
 
@@ -21826,235 +7553,10 @@ namespace SharpOnvifClient.Media2
     /// This operation sets the WebRTC configuration for the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetWebRTCConfigurationsResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class SetWebRTCConfigurationsResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetWebRTCConfigurationsResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public SetWebRTCConfigurationsResponse()
         {
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class SourceIdentification : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string nameField;
-
-        private string[] tokenField;
-
-        private SourceIdentificationExtension extensionField;
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string Name
-        {
-            get { return this.nameField; }
-            set { this.nameField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute("Token", Order=1)]
-        public string[] Token
-        {
-            get { return this.tokenField; }
-            set { this.tokenField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public SourceIdentificationExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "SourceIdentification"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Name", this.nameField);
-            if (this.tokenField != null)
-            {
-                for (int i = 0; i < this.tokenField.Length; i++)
-                {
-                    writer.WriteElementString(Ns.OnvifVer10, "Token", this.tokenField[i]);
-                }
-            }
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "SourceIdentificationExtension");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Name":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.nameField = reader.ReadElementText();
-                    return true;
-                case "Token":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.tokenField, reader.ReadElementText());
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<SourceIdentificationExtension>(() => new SourceIdentificationExtension());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class SourceIdentificationExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "SourceIdentificationExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Space1DDescription : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string uRIField;
-
-        private FloatRange xRangeField;
-
-        /// <summary>
-        /// A URI of coordinate systems.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0, DataType="anyURI")]
-        public string URI
-        {
-            get { return this.uRIField; }
-            set { this.uRIField = value; }
-        }
-
-        /// <summary>
-        /// A range of x-axis.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public FloatRange XRange
-        {
-            get { return this.xRangeField; }
-            set { this.xRangeField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "Space1DDescription"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "URI", this.uRIField);
-            writer.WriteElement(Ns.OnvifVer10, "XRange", this.xRangeField, Ns.OnvifVer10, "FloatRange");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "URI":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.uRIField = reader.ReadElementText();
-                    return true;
-                case "XRange":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.xRangeField = reader.ReadElementObject<FloatRange>(() => new FloatRange());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Space2DDescription : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string uRIField;
-
-        private FloatRange xRangeField;
-
-        private FloatRange yRangeField;
-
-        /// <summary>
-        /// A URI of coordinate systems.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0, DataType="anyURI")]
-        public string URI
-        {
-            get { return this.uRIField; }
-            set { this.uRIField = value; }
-        }
-
-        /// <summary>
-        /// A range of x-axis.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public FloatRange XRange
-        {
-            get { return this.xRangeField; }
-            set { this.xRangeField = value; }
-        }
-
-        /// <summary>
-        /// A range of y-axis.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public FloatRange YRange
-        {
-            get { return this.yRangeField; }
-            set { this.yRangeField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "Space2DDescription"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "URI", this.uRIField);
-            writer.WriteElement(Ns.OnvifVer10, "XRange", this.xRangeField, Ns.OnvifVer10, "FloatRange");
-            writer.WriteElement(Ns.OnvifVer10, "YRange", this.yRangeField, Ns.OnvifVer10, "FloatRange");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "URI":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.uRIField = reader.ReadElementText();
-                    return true;
-                case "XRange":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.xRangeField = reader.ReadElementObject<FloatRange>(() => new FloatRange());
-                    return true;
-                case "YRange":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.yRangeField = reader.ReadElementObject<FloatRange>(() => new FloatRange());
-                    return true;
-            }
-            return false;
         }
 
     }
@@ -22067,7 +7569,7 @@ namespace SharpOnvifClient.Media2
     /// MetadataConfiguration respectively.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("StartMulticastStreaming", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class StartMulticastStreamingRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class StartMulticastStreamingRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string profileTokenField;
 
@@ -22117,7 +7619,7 @@ namespace SharpOnvifClient.Media2
     /// MetadataConfiguration respectively.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("StartMulticastStreamingResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class StartMulticastStreamingResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class StartMulticastStreamingResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public StartMulticastStreamingResponse()
         {
@@ -22126,7 +7628,7 @@ namespace SharpOnvifClient.Media2
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class StartStopMulticastStreaming : SharpOnvifCommon.Xml.OnvifObject
+    public partial class StartStopMulticastStreaming : SharpOnvifCommon.Xml.OnvifContract
     {
         private string profileTokenField;
 
@@ -22167,7 +7669,7 @@ namespace SharpOnvifClient.Media2
     /// This command stops multicast streaming using a specified media profile of a device
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("StopMulticastStreaming", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class StopMulticastStreamingRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class StopMulticastStreamingRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string profileTokenField;
 
@@ -22213,7 +7715,7 @@ namespace SharpOnvifClient.Media2
     /// This command stops multicast streaming using a specified media profile of a device
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("StopMulticastStreamingResponse", Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class StopMulticastStreamingResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class StopMulticastStreamingResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public StopMulticastStreamingResponse()
         {
@@ -22221,71 +7723,8 @@ namespace SharpOnvifClient.Media2
 
     }
 
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class StreamSetup : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private StreamType streamField;
-
-        private Transport transportField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        /// <summary>
-        /// Defines if a multicast or unicast stream is requested.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public StreamType Stream
-        {
-            get { return this.streamField; }
-            set { this.streamField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public Transport Transport
-        {
-            get { return this.transportField; }
-            set { this.transportField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=2)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "StreamSetup"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Stream", EnumXml.ToXml(this.streamField));
-            writer.WriteElement(Ns.OnvifVer10, "Transport", this.transportField, Ns.OnvifVer10, "Transport");
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Stream":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.streamField = EnumXml.ParseStreamType(reader.ReadElementText());
-                    return true;
-                case "Transport":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.transportField = reader.ReadElementObject<Transport>(() => new Transport());
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class StreamingCapabilities : SharpOnvifCommon.Xml.OnvifObject
+    public partial class StreamingCapabilities : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -22535,7 +7974,7 @@ namespace SharpOnvifClient.Media2
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class TTSAudio : SharpOnvifCommon.Xml.OnvifObject
+    public partial class TTSAudio : SharpOnvifCommon.Xml.OnvifContract
     {
         private string contentField;
 
@@ -22623,7 +8062,7 @@ namespace SharpOnvifClient.Media2
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class TTSCapabilities : SharpOnvifCommon.Xml.OnvifObject
+    public partial class TTSCapabilities : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -22730,2529 +8169,12 @@ namespace SharpOnvifClient.Media2
 
     }
 
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ToneCompensation : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string modeField;
-
-        private float levelField;
-        private bool levelFieldSpecified;
-
-        private ToneCompensationExtension extensionField;
-
-        /// <summary>
-        /// Parameter to enable/disable or automatic ToneCompensation feature. Its options shall be chosen from
-        /// tt:ToneCompensationMode Type.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string Mode
-        {
-            get { return this.modeField; }
-            set { this.modeField = value; }
-        }
-
-        /// <summary>
-        /// Optional level parameter specified with unitless normalized value from 0.0 to +1.0.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public float Level
-        {
-            get { return this.levelField; }
-            set { this.levelField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="Level"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool LevelSpecified
-        {
-            get { return this.levelFieldSpecified; }
-            set { this.levelFieldSpecified = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public ToneCompensationExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "ToneCompensation"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Mode", this.modeField);
-            if (this.levelFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "Level", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.levelField));
-            }
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "ToneCompensationExtension");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Mode":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.modeField = reader.ReadElementText();
-                    return true;
-                case "Level":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.levelField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    this.levelFieldSpecified = true;
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<ToneCompensationExtension>(() => new ToneCompensationExtension());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ToneCompensationExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Namespace="http://www.onvif.org/ver10/schema", Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "ToneCompensationExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Transport : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private TransportProtocol protocolField;
-
-        private TransportTunnel tunnelField;
-
-        /// <summary>
-        /// Defines the network protocol for streaming, either UDP=RTP/UDP, RTSP=RTP/RTSP/TCP or
-        /// HTTP=RTP/RTSP/HTTP/TCP.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public TransportProtocol Protocol
-        {
-            get { return this.protocolField; }
-            set { this.protocolField = value; }
-        }
-
-        /// <summary>
-        /// Deprecated: optional element to describe further tunnel options.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public TransportTunnel Tunnel
-        {
-            get { return this.tunnelField; }
-            set { this.tunnelField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "Transport"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Protocol", EnumXml.ToXml(this.protocolField));
-            writer.WriteElement(Ns.OnvifVer10, "Tunnel", this.tunnelField, null, null);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Protocol":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.protocolField = EnumXml.ParseTransportProtocol(reader.ReadElementText());
-                    return true;
-                case "Tunnel":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.tunnelField = reader.ReadElementObject<TransportTunnel>(() => new TransportTunnel());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    public partial class TransportTunnel : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Vector : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private float xField;
-
-        private float yField;
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public float x
-        {
-            get { return this.xField; }
-            set { this.xField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public float y
-        {
-            get { return this.yField; }
-            set { this.yField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "Vector"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAttributeString(null, "x", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.xField));
-            writer.WriteAttributeString(null, "y", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.yField));
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "x":
-                    this.xField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.AttributeValue);
-                    return true;
-                case "y":
-                    this.yField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.AttributeValue);
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Vector1D : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private float xField;
-
-        private string spaceField;
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public float x
-        {
-            get { return this.xField; }
-            set { this.xField = value; }
-        }
-
-        /// <summary>
-        /// Zoom coordinate space selector. The following options are defined:
-        /// http://www.onvif.org/ver10/tptz/ZoomSpaces/PositionGenericSpace
-        /// http://www.onvif.org/ver10/tptz/ZoomSpaces/TranslationGenericSpace
-        /// http://www.onvif.org/ver10/tptz/ZoomSpaces/VelocityGenericSpace
-        /// http://www.onvif.org/ver10/tptz/ZoomSpaces/ZoomGenericSpeedSpace
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
-        public string space
-        {
-            get { return this.spaceField; }
-            set { this.spaceField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "Vector1D"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAttributeString(null, "x", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.xField));
-            writer.WriteAttributeString(null, "space", this.spaceField);
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "x":
-                    this.xField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.AttributeValue);
-                    return true;
-                case "space":
-                    this.spaceField = reader.AttributeValue;
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Vector2D : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private float xField;
-
-        private float yField;
-
-        private string spaceField;
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public float x
-        {
-            get { return this.xField; }
-            set { this.xField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public float y
-        {
-            get { return this.yField; }
-            set { this.yField = value; }
-        }
-
-        /// <summary>
-        /// Pan/tilt coordinate space selector. The following options are defined:
-        /// http://www.onvif.org/ver10/tptz/PanTiltSpaces/PositionGenericSpace
-        /// http://www.onvif.org/ver10/tptz/PanTiltSpaces/TranslationGenericSpace
-        /// http://www.onvif.org/ver10/tptz/PanTiltSpaces/VelocityGenericSpace
-        /// http://www.onvif.org/ver10/tptz/PanTiltSpaces/GenericSpeedSpace
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
-        public string space
-        {
-            get { return this.spaceField; }
-            set { this.spaceField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "Vector2D"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAttributeString(null, "x", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.xField));
-            writer.WriteAttributeString(null, "y", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.yField));
-            writer.WriteAttributeString(null, "space", this.spaceField);
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "x":
-                    this.xField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.AttributeValue);
-                    return true;
-                case "y":
-                    this.yField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.AttributeValue);
-                    return true;
-                case "space":
-                    this.spaceField = reader.AttributeValue;
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoAnalyticsConfiguration : ConfigurationEntity
-    {
-        private AnalyticsEngineConfiguration analyticsEngineConfigurationField;
-
-        private RuleEngineConfiguration ruleEngineConfigurationField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public AnalyticsEngineConfiguration AnalyticsEngineConfiguration
-        {
-            get { return this.analyticsEngineConfigurationField; }
-            set { this.analyticsEngineConfigurationField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public RuleEngineConfiguration RuleEngineConfiguration
-        {
-            get { return this.ruleEngineConfigurationField; }
-            set { this.ruleEngineConfigurationField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=2)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "VideoAnalyticsConfiguration"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlContent(writer);
-            writer.WriteElement(Ns.OnvifVer10, "AnalyticsEngineConfiguration", this.analyticsEngineConfigurationField, Ns.OnvifVer10, "AnalyticsEngineConfiguration");
-            writer.WriteElement(Ns.OnvifVer10, "RuleEngineConfiguration", this.ruleEngineConfigurationField, Ns.OnvifVer10, "RuleEngineConfiguration");
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "AnalyticsEngineConfiguration":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.analyticsEngineConfigurationField = reader.ReadElementObject<AnalyticsEngineConfiguration>(() => new AnalyticsEngineConfiguration());
-                    return true;
-                case "RuleEngineConfiguration":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.ruleEngineConfigurationField = reader.ReadElementObject<RuleEngineConfiguration>(() => new RuleEngineConfiguration());
-                    return true;
-            }
-            if (base.ReadXmlElement(reader)) return true;
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoEncoder2Configuration : ConfigurationEntity
-    {
-        private string encodingField;
-
-        private VideoResolution2 resolutionField;
-
-        private VideoRateControl2 rateControlField;
-
-        private MulticastConfiguration multicastField;
-
-        private float qualityField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        private int govLengthField;
-        private bool govLengthFieldSpecified;
-
-        private int anchorFrameDistanceField;
-        private bool anchorFrameDistanceFieldSpecified;
-
-        private string profileField;
-
-        private bool guaranteedFrameRateField;
-        private bool guaranteedFrameRateFieldSpecified;
-
-        private bool signedField;
-        private bool signedFieldSpecified;
-
-        private string secureStreamingProtocolAlgorithmField;
-
-        /// <summary>
-        /// Video Media Subtype for the video format. For definitions see tt:VideoEncodingMimeNames and IANA
-        /// Media Types.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string Encoding
-        {
-            get { return this.encodingField; }
-            set { this.encodingField = value; }
-        }
-
-        /// <summary>
-        /// Configured video resolution
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public VideoResolution2 Resolution
-        {
-            get { return this.resolutionField; }
-            set { this.resolutionField = value; }
-        }
-
-        /// <summary>
-        /// Optional element to configure rate control related parameters.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public VideoRateControl2 RateControl
-        {
-            get { return this.rateControlField; }
-            set { this.rateControlField = value; }
-        }
-
-        /// <summary>
-        /// Defines the multicast settings that could be used for video streaming.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public MulticastConfiguration Multicast
-        {
-            get { return this.multicastField; }
-            set { this.multicastField = value; }
-        }
-
-        /// <summary>
-        /// Relative value for the video quantizers and the quality of the video. A high value within supported
-        /// quality range means higher quality
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public float Quality
-        {
-            get { return this.qualityField; }
-            set { this.qualityField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=5)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        /// <summary>
-        /// Group of Video frames length. Determines typically the interval in which the I-Frames will be coded.
-        /// An entry of 1 indicates I-Frames are continuously generated. An entry of 2 indicates that every 2nd
-        /// image is an I-Frame, and 3 only every 3rd frame, etc. The frames in between are coded as P or B
-        /// Frames.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int GovLength
-        {
-            get { return this.govLengthField; }
-            set { this.govLengthField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="GovLength"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool GovLengthSpecified
-        {
-            get { return this.govLengthFieldSpecified; }
-            set { this.govLengthFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// Distance between anchor frames of type I-Frame and P-Frame. '1' indicates no B-Frames, '2' indicates
-        /// that every 2nd frame is encoded as B-Frame, '3' indicates a structure like IBBPBBP..., etc.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int AnchorFrameDistance
-        {
-            get { return this.anchorFrameDistanceField; }
-            set { this.anchorFrameDistanceField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="AnchorFrameDistance"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool AnchorFrameDistanceSpecified
-        {
-            get { return this.anchorFrameDistanceFieldSpecified; }
-            set { this.anchorFrameDistanceFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// The encoder profile as defined in tt:VideoEncodingProfiles.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Profile
-        {
-            get { return this.profileField; }
-            set { this.profileField = value; }
-        }
-
-        /// <summary>
-        /// A value of true indicates that frame rate is a fixed value rather than an upper limit, and that the
-        /// video encoder shall prioritize frame rate over all other adaptable configuration values such as
-        /// bitrate. Default is false.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool GuaranteedFrameRate
-        {
-            get { return this.guaranteedFrameRateField; }
-            set { this.guaranteedFrameRateField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="GuaranteedFrameRate"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool GuaranteedFrameRateSpecified
-        {
-            get { return this.guaranteedFrameRateFieldSpecified; }
-            set { this.guaranteedFrameRateFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// Indicates if this stream will be signed according to the Media Signing Specification.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool Signed
-        {
-            get { return this.signedField; }
-            set { this.signedField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="Signed"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool SignedSpecified
-        {
-            get { return this.signedFieldSpecified; }
-            set { this.signedFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// Defines the cryptographic algorithm to use as defined by tt:SrtpSecurityAlgorithms
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string SecureStreamingProtocolAlgorithm
-        {
-            get { return this.secureStreamingProtocolAlgorithmField; }
-            set { this.secureStreamingProtocolAlgorithmField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "VideoEncoder2Configuration"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlAttributes(writer);
-            if (this.govLengthFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "GovLength", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.govLengthField));
-            }
-            if (this.anchorFrameDistanceFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "AnchorFrameDistance", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.anchorFrameDistanceField));
-            }
-            writer.WriteAttributeString(null, "Profile", this.profileField);
-            if (this.guaranteedFrameRateFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "GuaranteedFrameRate", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.guaranteedFrameRateField));
-            }
-            if (this.signedFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "Signed", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.signedField));
-            }
-            writer.WriteAttributeString(null, "SecureStreamingProtocolAlgorithm", this.secureStreamingProtocolAlgorithmField);
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlContent(writer);
-            writer.WriteElementString(Ns.OnvifVer10, "Encoding", this.encodingField);
-            writer.WriteElement(Ns.OnvifVer10, "Resolution", this.resolutionField, Ns.OnvifVer10, "VideoResolution2");
-            writer.WriteElement(Ns.OnvifVer10, "RateControl", this.rateControlField, Ns.OnvifVer10, "VideoRateControl2");
-            writer.WriteElement(Ns.OnvifVer10, "Multicast", this.multicastField, Ns.OnvifVer10, "MulticastConfiguration");
-            writer.WriteElementString(Ns.OnvifVer10, "Quality", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.qualityField));
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "GovLength":
-                    this.govLengthField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.AttributeValue);
-                    this.govLengthFieldSpecified = true;
-                    return true;
-                case "AnchorFrameDistance":
-                    this.anchorFrameDistanceField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.AttributeValue);
-                    this.anchorFrameDistanceFieldSpecified = true;
-                    return true;
-                case "Profile":
-                    this.profileField = reader.AttributeValue;
-                    return true;
-                case "GuaranteedFrameRate":
-                    this.guaranteedFrameRateField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
-                    this.guaranteedFrameRateFieldSpecified = true;
-                    return true;
-                case "Signed":
-                    this.signedField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
-                    this.signedFieldSpecified = true;
-                    return true;
-                case "SecureStreamingProtocolAlgorithm":
-                    this.secureStreamingProtocolAlgorithmField = reader.AttributeValue;
-                    return true;
-            }
-            return base.ReadXmlAttribute(reader);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Encoding":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.encodingField = reader.ReadElementText();
-                    return true;
-                case "Resolution":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.resolutionField = reader.ReadElementObject<VideoResolution2>(() => new VideoResolution2());
-                    return true;
-                case "RateControl":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.rateControlField = reader.ReadElementObject<VideoRateControl2>(() => new VideoRateControl2());
-                    return true;
-                case "Multicast":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.multicastField = reader.ReadElementObject<MulticastConfiguration>(() => new MulticastConfiguration());
-                    return true;
-                case "Quality":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.qualityField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    return true;
-            }
-            if (base.ReadXmlElement(reader)) return true;
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoEncoder2ConfigurationOptions : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string encodingField;
-
-        private FloatRange qualityRangeField;
-
-        private VideoResolution2[] resolutionsAvailableField;
-
-        private IntRange bitrateRangeField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        private int[] govLengthRangeField;
-
-        private int maxAnchorFrameDistanceField;
-        private bool maxAnchorFrameDistanceFieldSpecified;
-
-        private float[] frameRatesSupportedField;
-
-        private string[] profilesSupportedField;
-
-        private bool constantBitRateSupportedField;
-        private bool constantBitRateSupportedFieldSpecified;
-
-        private bool averageBitRateSupportedField;
-        private bool averageBitRateSupportedFieldSpecified;
-
-        private bool guaranteedFrameRateSupportedField;
-        private bool guaranteedFrameRateSupportedFieldSpecified;
-
-        private string[] secureStreamingProtocolAlgorithmsField;
-
-        private bool signingSupportedField;
-        private bool signingSupportedFieldSpecified;
-
-        /// <summary>
-        /// Video Media Subtype for the video format. For definitions see tt:VideoEncodingMimeNames and IANA
-        /// Media Types.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string Encoding
-        {
-            get { return this.encodingField; }
-            set { this.encodingField = value; }
-        }
-
-        /// <summary>
-        /// Range of the quality values. A high value means higher quality.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public FloatRange QualityRange
-        {
-            get { return this.qualityRangeField; }
-            set { this.qualityRangeField = value; }
-        }
-
-        /// <summary>
-        /// List of supported image sizes.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("ResolutionsAvailable", Order=2)]
-        public VideoResolution2[] ResolutionsAvailable
-        {
-            get { return this.resolutionsAvailableField; }
-            set { this.resolutionsAvailableField = value; }
-        }
-
-        /// <summary>
-        /// Supported range of encoded bitrate in kbps.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public IntRange BitrateRange
-        {
-            get { return this.bitrateRangeField; }
-            set { this.bitrateRangeField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=4)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        /// <summary>
-        /// Exactly two values, which define the Lower and Upper bounds for the supported group of Video frames
-        /// length. These values typically correspond to the I-Frame distance.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int[] GovLengthRange
-        {
-            get { return this.govLengthRangeField; }
-            set { this.govLengthRangeField = value; }
-        }
-
-        /// <summary>
-        /// Signals support for B-Frames. Upper bound for the supported anchor frame distance (must be larger
-        /// than one).
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int MaxAnchorFrameDistance
-        {
-            get { return this.maxAnchorFrameDistanceField; }
-            set { this.maxAnchorFrameDistanceField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="MaxAnchorFrameDistance"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool MaxAnchorFrameDistanceSpecified
-        {
-            get { return this.maxAnchorFrameDistanceFieldSpecified; }
-            set { this.maxAnchorFrameDistanceFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// List of supported target frame rates in fps (frames per second). The list shall be sorted with
-        /// highest values first.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public float[] FrameRatesSupported
-        {
-            get { return this.frameRatesSupportedField; }
-            set { this.frameRatesSupportedField = value; }
-        }
-
-        /// <summary>
-        /// List of supported encoder profiles as defined in tt::VideoEncodingProfiles.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string[] ProfilesSupported
-        {
-            get { return this.profilesSupportedField; }
-            set { this.profilesSupportedField = value; }
-        }
-
-        /// <summary>
-        /// Signal whether enforcing constant bitrate is supported.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool ConstantBitRateSupported
-        {
-            get { return this.constantBitRateSupportedField; }
-            set { this.constantBitRateSupportedField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="ConstantBitRateSupported"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ConstantBitRateSupportedSpecified
-        {
-            get { return this.constantBitRateSupportedFieldSpecified; }
-            set { this.constantBitRateSupportedFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// Signal whether enforcing average bitrate is supported.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool AverageBitRateSupported
-        {
-            get { return this.averageBitRateSupportedField; }
-            set { this.averageBitRateSupportedField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="AverageBitRateSupported"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool AverageBitRateSupportedSpecified
-        {
-            get { return this.averageBitRateSupportedFieldSpecified; }
-            set { this.averageBitRateSupportedFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// Indicates the support for the GuaranteedFrameRate attribute on the VideoEncoder2Configuration
-        /// element.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool GuaranteedFrameRateSupported
-        {
-            get { return this.guaranteedFrameRateSupportedField; }
-            set { this.guaranteedFrameRateSupportedField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="GuaranteedFrameRateSupported"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool GuaranteedFrameRateSupportedSpecified
-        {
-            get { return this.guaranteedFrameRateSupportedFieldSpecified; }
-            set { this.guaranteedFrameRateSupportedFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// If secure RTSP streaming is supported, this shall return the list of supported cryptographic
-        /// algorithms as defined by tt:SrtpSecurityAlgorithms.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string[] SecureStreamingProtocolAlgorithms
-        {
-            get { return this.secureStreamingProtocolAlgorithmsField; }
-            set { this.secureStreamingProtocolAlgorithmsField = value; }
-        }
-
-        /// <summary>
-        /// Indicates the support for signing according to the Media Signing Specification.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool SigningSupported
-        {
-            get { return this.signingSupportedField; }
-            set { this.signingSupportedField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="SigningSupported"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool SigningSupportedSpecified
-        {
-            get { return this.signingSupportedFieldSpecified; }
-            set { this.signingSupportedFieldSpecified = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "VideoEncoder2ConfigurationOptions"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAttributeString(null, "GovLengthRange", SharpOnvifCommon.Xml.OnvifArray.JoinList(System.Array.ConvertAll(this.govLengthRangeField, x => SharpOnvifCommon.Xml.XmlPrimitives.ToString(x))));
-            if (this.maxAnchorFrameDistanceFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "MaxAnchorFrameDistance", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxAnchorFrameDistanceField));
-            }
-            writer.WriteAttributeString(null, "FrameRatesSupported", SharpOnvifCommon.Xml.OnvifArray.JoinList(System.Array.ConvertAll(this.frameRatesSupportedField, x => SharpOnvifCommon.Xml.XmlPrimitives.ToString(x))));
-            writer.WriteAttributeString(null, "ProfilesSupported", SharpOnvifCommon.Xml.OnvifArray.JoinList(this.profilesSupportedField));
-            if (this.constantBitRateSupportedFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "ConstantBitRateSupported", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.constantBitRateSupportedField));
-            }
-            if (this.averageBitRateSupportedFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "AverageBitRateSupported", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.averageBitRateSupportedField));
-            }
-            if (this.guaranteedFrameRateSupportedFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "GuaranteedFrameRateSupported", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.guaranteedFrameRateSupportedField));
-            }
-            writer.WriteAttributeString(null, "SecureStreamingProtocolAlgorithms", SharpOnvifCommon.Xml.OnvifArray.JoinList(this.secureStreamingProtocolAlgorithmsField));
-            if (this.signingSupportedFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "SigningSupported", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.signingSupportedField));
-            }
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Encoding", this.encodingField);
-            writer.WriteElement(Ns.OnvifVer10, "QualityRange", this.qualityRangeField, Ns.OnvifVer10, "FloatRange");
-            if (this.resolutionsAvailableField != null)
-            {
-                for (int i = 0; i < this.resolutionsAvailableField.Length; i++)
-                {
-                    writer.WriteElement(Ns.OnvifVer10, "ResolutionsAvailable", this.resolutionsAvailableField[i], Ns.OnvifVer10, "VideoResolution2");
-                }
-            }
-            writer.WriteElement(Ns.OnvifVer10, "BitrateRange", this.bitrateRangeField, Ns.OnvifVer10, "IntRange");
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "GovLengthRange":
-                    this.govLengthRangeField = System.Array.ConvertAll(SharpOnvifCommon.Xml.OnvifArray.SplitList(reader.AttributeValue), x => SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(x));
-                    return true;
-                case "MaxAnchorFrameDistance":
-                    this.maxAnchorFrameDistanceField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.AttributeValue);
-                    this.maxAnchorFrameDistanceFieldSpecified = true;
-                    return true;
-                case "FrameRatesSupported":
-                    this.frameRatesSupportedField = System.Array.ConvertAll(SharpOnvifCommon.Xml.OnvifArray.SplitList(reader.AttributeValue), x => SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(x));
-                    return true;
-                case "ProfilesSupported":
-                    this.profilesSupportedField = SharpOnvifCommon.Xml.OnvifArray.SplitList(reader.AttributeValue);
-                    return true;
-                case "ConstantBitRateSupported":
-                    this.constantBitRateSupportedField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
-                    this.constantBitRateSupportedFieldSpecified = true;
-                    return true;
-                case "AverageBitRateSupported":
-                    this.averageBitRateSupportedField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
-                    this.averageBitRateSupportedFieldSpecified = true;
-                    return true;
-                case "GuaranteedFrameRateSupported":
-                    this.guaranteedFrameRateSupportedField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
-                    this.guaranteedFrameRateSupportedFieldSpecified = true;
-                    return true;
-                case "SecureStreamingProtocolAlgorithms":
-                    this.secureStreamingProtocolAlgorithmsField = SharpOnvifCommon.Xml.OnvifArray.SplitList(reader.AttributeValue);
-                    return true;
-                case "SigningSupported":
-                    this.signingSupportedField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
-                    this.signingSupportedFieldSpecified = true;
-                    return true;
-            }
-            return false;
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Encoding":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.encodingField = reader.ReadElementText();
-                    return true;
-                case "QualityRange":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.qualityRangeField = reader.ReadElementObject<FloatRange>(() => new FloatRange());
-                    return true;
-                case "ResolutionsAvailable":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.resolutionsAvailableField, reader.ReadElementObject<VideoResolution2>(() => new VideoResolution2()));
-                    return true;
-                case "BitrateRange":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.bitrateRangeField = reader.ReadElementObject<IntRange>(() => new IntRange());
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoEncoderConfiguration : ConfigurationEntity
-    {
-        private VideoEncoding encodingField;
-
-        private VideoResolution resolutionField;
-
-        private float qualityField;
-
-        private VideoRateControl rateControlField;
-
-        private Mpeg4Configuration mPEG4Field;
-
-        private H264Configuration h264Field;
-
-        private MulticastConfiguration multicastField;
-
-        private string sessionTimeoutField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        private bool guaranteedFrameRateField;
-        private bool guaranteedFrameRateFieldSpecified;
-
-        /// <summary>
-        /// Used video codec, either Jpeg, H.264 or Mpeg4
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public VideoEncoding Encoding
-        {
-            get { return this.encodingField; }
-            set { this.encodingField = value; }
-        }
-
-        /// <summary>
-        /// Configured video resolution
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public VideoResolution Resolution
-        {
-            get { return this.resolutionField; }
-            set { this.resolutionField = value; }
-        }
-
-        /// <summary>
-        /// Relative value for the video quantizers and the quality of the video. A high value within supported
-        /// quality range means higher quality
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public float Quality
-        {
-            get { return this.qualityField; }
-            set { this.qualityField = value; }
-        }
-
-        /// <summary>
-        /// Optional element to configure rate control related parameters.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public VideoRateControl RateControl
-        {
-            get { return this.rateControlField; }
-            set { this.rateControlField = value; }
-        }
-
-        /// <summary>
-        /// Optional element to configure Mpeg4 related parameters.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public Mpeg4Configuration MPEG4
-        {
-            get { return this.mPEG4Field; }
-            set { this.mPEG4Field = value; }
-        }
-
-        /// <summary>
-        /// Optional element to configure H.264 related parameters.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public H264Configuration H264
-        {
-            get { return this.h264Field; }
-            set { this.h264Field = value; }
-        }
-
-        /// <summary>
-        /// Defines the multicast settings that could be used for video streaming.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
-        public MulticastConfiguration Multicast
-        {
-            get { return this.multicastField; }
-            set { this.multicastField = value; }
-        }
-
-        /// <summary>
-        /// The rtsp session timeout for the related video stream
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=7, DataType="duration")]
-        public string SessionTimeout
-        {
-            get { return this.sessionTimeoutField; }
-            set { this.sessionTimeoutField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=8)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        /// <summary>
-        /// A value of true indicates that frame rate is a fixed value rather than an upper limit, and that the
-        /// video encoder shall prioritize frame rate over all other adaptable configuration values such as
-        /// bitrate. Default is false.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool GuaranteedFrameRate
-        {
-            get { return this.guaranteedFrameRateField; }
-            set { this.guaranteedFrameRateField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="GuaranteedFrameRate"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool GuaranteedFrameRateSpecified
-        {
-            get { return this.guaranteedFrameRateFieldSpecified; }
-            set { this.guaranteedFrameRateFieldSpecified = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "VideoEncoderConfiguration"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlAttributes(writer);
-            if (this.guaranteedFrameRateFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "GuaranteedFrameRate", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.guaranteedFrameRateField));
-            }
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlContent(writer);
-            writer.WriteElementString(Ns.OnvifVer10, "Encoding", EnumXml.ToXml(this.encodingField));
-            writer.WriteElement(Ns.OnvifVer10, "Resolution", this.resolutionField, Ns.OnvifVer10, "VideoResolution");
-            writer.WriteElementString(Ns.OnvifVer10, "Quality", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.qualityField));
-            writer.WriteElement(Ns.OnvifVer10, "RateControl", this.rateControlField, Ns.OnvifVer10, "VideoRateControl");
-            writer.WriteElement(Ns.OnvifVer10, "MPEG4", this.mPEG4Field, Ns.OnvifVer10, "Mpeg4Configuration");
-            writer.WriteElement(Ns.OnvifVer10, "H264", this.h264Field, Ns.OnvifVer10, "H264Configuration");
-            writer.WriteElement(Ns.OnvifVer10, "Multicast", this.multicastField, Ns.OnvifVer10, "MulticastConfiguration");
-            writer.WriteElementString(Ns.OnvifVer10, "SessionTimeout", this.sessionTimeoutField);
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "GuaranteedFrameRate":
-                    this.guaranteedFrameRateField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
-                    this.guaranteedFrameRateFieldSpecified = true;
-                    return true;
-            }
-            return base.ReadXmlAttribute(reader);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Encoding":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.encodingField = EnumXml.ParseVideoEncoding(reader.ReadElementText());
-                    return true;
-                case "Resolution":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.resolutionField = reader.ReadElementObject<VideoResolution>(() => new VideoResolution());
-                    return true;
-                case "Quality":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.qualityField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    return true;
-                case "RateControl":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.rateControlField = reader.ReadElementObject<VideoRateControl>(() => new VideoRateControl());
-                    return true;
-                case "MPEG4":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.mPEG4Field = reader.ReadElementObject<Mpeg4Configuration>(() => new Mpeg4Configuration());
-                    return true;
-                case "H264":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.h264Field = reader.ReadElementObject<H264Configuration>(() => new H264Configuration());
-                    return true;
-                case "Multicast":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.multicastField = reader.ReadElementObject<MulticastConfiguration>(() => new MulticastConfiguration());
-                    return true;
-                case "SessionTimeout":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.sessionTimeoutField = reader.ReadElementText();
-                    return true;
-            }
-            if (base.ReadXmlElement(reader)) return true;
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    /// <summary>
-    /// Representation of a physical video outputs.
-    /// </summary>
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoOutput : DeviceEntity
-    {
-        private Layout layoutField;
-
-        private VideoResolution resolutionField;
-
-        private float refreshRateField;
-        private bool refreshRateFieldSpecified;
-
-        private float aspectRatioField;
-        private bool aspectRatioFieldSpecified;
-
-        private VideoOutputExtension extensionField;
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public Layout Layout
-        {
-            get { return this.layoutField; }
-            set { this.layoutField = value; }
-        }
-
-        /// <summary>
-        /// Resolution of the display in Pixel.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public VideoResolution Resolution
-        {
-            get { return this.resolutionField; }
-            set { this.resolutionField = value; }
-        }
-
-        /// <summary>
-        /// Refresh rate of the display in Hertz.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public float RefreshRate
-        {
-            get { return this.refreshRateField; }
-            set { this.refreshRateField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="RefreshRate"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool RefreshRateSpecified
-        {
-            get { return this.refreshRateFieldSpecified; }
-            set { this.refreshRateFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// Aspect ratio of the display as physical extent of width divided by height.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public float AspectRatio
-        {
-            get { return this.aspectRatioField; }
-            set { this.aspectRatioField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="AspectRatio"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool AspectRatioSpecified
-        {
-            get { return this.aspectRatioFieldSpecified; }
-            set { this.aspectRatioFieldSpecified = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public VideoOutputExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "VideoOutput"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlContent(writer);
-            writer.WriteElement(Ns.OnvifVer10, "Layout", this.layoutField, Ns.OnvifVer10, "Layout");
-            writer.WriteElement(Ns.OnvifVer10, "Resolution", this.resolutionField, Ns.OnvifVer10, "VideoResolution");
-            if (this.refreshRateFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "RefreshRate", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.refreshRateField));
-            }
-            if (this.aspectRatioFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "AspectRatio", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.aspectRatioField));
-            }
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "VideoOutputExtension");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Layout":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.layoutField = reader.ReadElementObject<Layout>(() => new Layout());
-                    return true;
-                case "Resolution":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.resolutionField = reader.ReadElementObject<VideoResolution>(() => new VideoResolution());
-                    return true;
-                case "RefreshRate":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.refreshRateField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    this.refreshRateFieldSpecified = true;
-                    return true;
-                case "AspectRatio":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.aspectRatioField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    this.aspectRatioFieldSpecified = true;
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<VideoOutputExtension>(() => new VideoOutputExtension());
-                    return true;
-            }
-            if (base.ReadXmlElement(reader)) return true;
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoOutputConfiguration : ConfigurationEntity
-    {
-        private string outputTokenField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        /// <summary>
-        /// Token of the Video Output the configuration applies to
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string OutputToken
-        {
-            get { return this.outputTokenField; }
-            set { this.outputTokenField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=1)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "VideoOutputConfiguration"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlContent(writer);
-            writer.WriteElementString(Ns.OnvifVer10, "OutputToken", this.outputTokenField);
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "OutputToken":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.outputTokenField = reader.ReadElementText();
-                    return true;
-            }
-            if (base.ReadXmlElement(reader)) return true;
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoOutputExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Namespace="http://www.onvif.org/ver10/schema", Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "VideoOutputExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoRateControl : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private int frameRateLimitField;
-
-        private int encodingIntervalField;
-
-        private int bitrateLimitField;
-
-        /// <summary>
-        /// Maximum output framerate in fps. If an EncodingInterval is provided the resulting encoded framerate
-        /// will be reduced by the given factor.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public int FrameRateLimit
-        {
-            get { return this.frameRateLimitField; }
-            set { this.frameRateLimitField = value; }
-        }
-
-        /// <summary>
-        /// Interval at which images are encoded and transmitted. (A value of 1 means that every frame is
-        /// encoded, a value of 2 means that every 2nd frame is encoded ...)
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public int EncodingInterval
-        {
-            get { return this.encodingIntervalField; }
-            set { this.encodingIntervalField = value; }
-        }
-
-        /// <summary>
-        /// The maximum output bitrate in kbps.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public int BitrateLimit
-        {
-            get { return this.bitrateLimitField; }
-            set { this.bitrateLimitField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "VideoRateControl"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "FrameRateLimit", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.frameRateLimitField));
-            writer.WriteElementString(Ns.OnvifVer10, "EncodingInterval", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.encodingIntervalField));
-            writer.WriteElementString(Ns.OnvifVer10, "BitrateLimit", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.bitrateLimitField));
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "FrameRateLimit":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.frameRateLimitField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    return true;
-                case "EncodingInterval":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.encodingIntervalField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    return true;
-                case "BitrateLimit":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.bitrateLimitField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoRateControl2 : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private float frameRateLimitField;
-
-        private int bitrateLimitField;
-
-        private int averageBitRateField;
-        private bool averageBitRateFieldSpecified;
-
-        private System.Xml.XmlElement[] anyField;
-
-        private bool constantBitRateField;
-        private bool constantBitRateFieldSpecified;
-
-        /// <summary>
-        /// Desired frame rate in fps. The actual rate may be lower due to e.g. performance limitations.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public float FrameRateLimit
-        {
-            get { return this.frameRateLimitField; }
-            set { this.frameRateLimitField = value; }
-        }
-
-        /// <summary>
-        /// the maximum output bitrate in kbps
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public int BitrateLimit
-        {
-            get { return this.bitrateLimitField; }
-            set { this.bitrateLimitField = value; }
-        }
-
-        /// <summary>
-        /// The target average output bitrate in kbps. If this parameter is set to 0, AverageBitRate shall be
-        /// ignored.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public int AverageBitRate
-        {
-            get { return this.averageBitRateField; }
-            set { this.averageBitRateField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="AverageBitRate"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool AverageBitRateSpecified
-        {
-            get { return this.averageBitRateFieldSpecified; }
-            set { this.averageBitRateFieldSpecified = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=3)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        /// <summary>
-        /// Enforce constant bitrate.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool ConstantBitRate
-        {
-            get { return this.constantBitRateField; }
-            set { this.constantBitRateField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="ConstantBitRate"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ConstantBitRateSpecified
-        {
-            get { return this.constantBitRateFieldSpecified; }
-            set { this.constantBitRateFieldSpecified = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "VideoRateControl2"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            if (this.constantBitRateFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "ConstantBitRate", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.constantBitRateField));
-            }
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "FrameRateLimit", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.frameRateLimitField));
-            writer.WriteElementString(Ns.OnvifVer10, "BitrateLimit", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.bitrateLimitField));
-            if (this.averageBitRateFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "AverageBitRate", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.averageBitRateField));
-            }
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "ConstantBitRate":
-                    this.constantBitRateField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
-                    this.constantBitRateFieldSpecified = true;
-                    return true;
-            }
-            return false;
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "FrameRateLimit":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.frameRateLimitField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    return true;
-                case "BitrateLimit":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.bitrateLimitField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    return true;
-                case "AverageBitRate":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.averageBitRateField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    this.averageBitRateFieldSpecified = true;
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoResolution : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private int widthField;
-
-        private int heightField;
-
-        /// <summary>
-        /// Number of the columns of the Video image. If there is a 90-degree rotation, this represents the
-        /// number of lines of the Video image.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public int Width
-        {
-            get { return this.widthField; }
-            set { this.widthField = value; }
-        }
-
-        /// <summary>
-        /// Number of the lines of the Video image. If there is a 90-degree rotation, this represents the number
-        /// of columns of the Video image.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public int Height
-        {
-            get { return this.heightField; }
-            set { this.heightField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "VideoResolution"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Width", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.widthField));
-            writer.WriteElementString(Ns.OnvifVer10, "Height", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.heightField));
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Width":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.widthField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    return true;
-                case "Height":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.heightField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoResolution2 : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private int widthField;
-
-        private int heightField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        /// <summary>
-        /// Number of the columns of the Video image. If there is a 90-degree rotation, this represents the
-        /// number of lines of the Video image.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public int Width
-        {
-            get { return this.widthField; }
-            set { this.widthField = value; }
-        }
-
-        /// <summary>
-        /// Number of the lines of the Video image. If there is a 90-degree rotation, this represents the number
-        /// of columns of the Video image.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public int Height
-        {
-            get { return this.heightField; }
-            set { this.heightField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=2)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "VideoResolution2"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Width", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.widthField));
-            writer.WriteElementString(Ns.OnvifVer10, "Height", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.heightField));
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Width":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.widthField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    return true;
-                case "Height":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.heightField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    /// <summary>
-    /// Representation of a physical video input.
-    /// </summary>
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoSource : DeviceEntity
-    {
-        private float framerateField;
-
-        private VideoResolution resolutionField;
-
-        private ImagingSettings imagingField;
-
-        private VideoSourceExtension extensionField;
-
-        /// <summary>
-        /// Frame rate in frames per second.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public float Framerate
-        {
-            get { return this.framerateField; }
-            set { this.framerateField = value; }
-        }
-
-        /// <summary>
-        /// Horizontal and vertical resolution
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public VideoResolution Resolution
-        {
-            get { return this.resolutionField; }
-            set { this.resolutionField = value; }
-        }
-
-        /// <summary>
-        /// Optional configuration of the image sensor.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public ImagingSettings Imaging
-        {
-            get { return this.imagingField; }
-            set { this.imagingField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public VideoSourceExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "VideoSource"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlContent(writer);
-            writer.WriteElementString(Ns.OnvifVer10, "Framerate", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.framerateField));
-            writer.WriteElement(Ns.OnvifVer10, "Resolution", this.resolutionField, Ns.OnvifVer10, "VideoResolution");
-            writer.WriteElement(Ns.OnvifVer10, "Imaging", this.imagingField, Ns.OnvifVer10, "ImagingSettings");
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "VideoSourceExtension");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Framerate":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.framerateField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    return true;
-                case "Resolution":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.resolutionField = reader.ReadElementObject<VideoResolution>(() => new VideoResolution());
-                    return true;
-                case "Imaging":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.imagingField = reader.ReadElementObject<ImagingSettings>(() => new ImagingSettings());
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<VideoSourceExtension>(() => new VideoSourceExtension());
-                    return true;
-            }
-            if (base.ReadXmlElement(reader)) return true;
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoSourceConfiguration : ConfigurationEntity
-    {
-        private string sourceTokenField;
-
-        private IntRectangle boundsField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        private VideoSourceConfigurationExtension extensionField;
-
-        private string viewModeField;
-
-        /// <summary>
-        /// Reference to the physical input.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string SourceToken
-        {
-            get { return this.sourceTokenField; }
-            set { this.sourceTokenField = value; }
-        }
-
-        /// <summary>
-        /// Rectangle specifying the Video capturing area. The capturing area shall not be larger than the whole
-        /// Video source area.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public IntRectangle Bounds
-        {
-            get { return this.boundsField; }
-            set { this.boundsField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=2)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public VideoSourceConfigurationExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        /// <summary>
-        /// Readonly parameter signalling Source configuration's view mode, for devices supporting different
-        /// view modes as defined in tt:viewModes.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string ViewMode
-        {
-            get { return this.viewModeField; }
-            set { this.viewModeField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "VideoSourceConfiguration"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlAttributes(writer);
-            writer.WriteAttributeString(null, "ViewMode", this.viewModeField);
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            base.WriteXmlContent(writer);
-            writer.WriteElementString(Ns.OnvifVer10, "SourceToken", this.sourceTokenField);
-            writer.WriteElement(Ns.OnvifVer10, "Bounds", this.boundsField, Ns.OnvifVer10, "IntRectangle");
-            writer.WriteAny(this.anyField);
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "VideoSourceConfigurationExtension");
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "ViewMode":
-                    this.viewModeField = reader.AttributeValue;
-                    return true;
-            }
-            return base.ReadXmlAttribute(reader);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "SourceToken":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.sourceTokenField = reader.ReadElementText();
-                    return true;
-                case "Bounds":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.boundsField = reader.ReadElementObject<IntRectangle>(() => new IntRectangle());
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<VideoSourceConfigurationExtension>(() => new VideoSourceConfigurationExtension());
-                    return true;
-            }
-            if (base.ReadXmlElement(reader)) return true;
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoSourceConfigurationExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private Rotate rotateField;
-
-        private VideoSourceConfigurationExtension2 extensionField;
-
-        /// <summary>
-        /// Optional element to configure rotation of captured image. What resolutions a device supports shall
-        /// be unaffected by the Rotate parameters. If a device is configured with Rotate=AUTO, the device shall
-        /// take control over the Degree parameter and automatically update it so that a client can query
-        /// current rotation. The device shall automatically apply the same rotation to its pan/tilt control
-        /// direction depending on the following condition: if Reverse=AUTO in PTControlDirection or if the
-        /// device doesn't support Reverse in PTControlDirection
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public Rotate Rotate
-        {
-            get { return this.rotateField; }
-            set { this.rotateField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public VideoSourceConfigurationExtension2 Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "VideoSourceConfigurationExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElement(Ns.OnvifVer10, "Rotate", this.rotateField, Ns.OnvifVer10, "Rotate");
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "VideoSourceConfigurationExtension2");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Rotate":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.rotateField = reader.ReadElementObject<Rotate>(() => new Rotate());
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<VideoSourceConfigurationExtension2>(() => new VideoSourceConfigurationExtension2());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoSourceConfigurationExtension2 : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private LensDescription[] lensDescriptionField;
-
-        private SceneOrientation sceneOrientationField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        /// <summary>
-        /// Optional element describing the geometric lens distortion. Multiple instances for future variable
-        /// lens support.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("LensDescription", Order=0)]
-        public LensDescription[] LensDescription
-        {
-            get { return this.lensDescriptionField; }
-            set { this.lensDescriptionField = value; }
-        }
-
-        /// <summary>
-        /// Optional element describing the scene orientation in the camera's field of view.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public SceneOrientation SceneOrientation
-        {
-            get { return this.sceneOrientationField; }
-            set { this.sceneOrientationField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Namespace="http://www.onvif.org/ver10/schema", Order=2)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "VideoSourceConfigurationExtension2"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            if (this.lensDescriptionField != null)
-            {
-                for (int i = 0; i < this.lensDescriptionField.Length; i++)
-                {
-                    writer.WriteElement(Ns.OnvifVer10, "LensDescription", this.lensDescriptionField[i], Ns.OnvifVer10, "LensDescription");
-                }
-            }
-            writer.WriteElement(Ns.OnvifVer10, "SceneOrientation", this.sceneOrientationField, Ns.OnvifVer10, "SceneOrientation");
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "LensDescription":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.lensDescriptionField, reader.ReadElementObject<LensDescription>(() => new LensDescription()));
-                    return true;
-                case "SceneOrientation":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.sceneOrientationField = reader.ReadElementObject<SceneOrientation>(() => new SceneOrientation());
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoSourceConfigurationOptions : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private IntRectangleRange boundsRangeField;
-
-        private string[] videoSourceTokensAvailableField;
-
-        private VideoSourceConfigurationOptionsExtension extensionField;
-
-        private int maximumNumberOfProfilesField;
-        private bool maximumNumberOfProfilesFieldSpecified;
-
-        /// <summary>
-        /// Supported range for the capturing area. Device that does not support cropped streaming shall express
-        /// BoundsRange option as mentioned below BoundsRange-&gt;XRange and BoundsRange-&gt;YRange with same
-        /// Min/Max values HeightRange and WidthRange Min/Max values same as VideoSource Height and Width
-        /// Limits.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public IntRectangleRange BoundsRange
-        {
-            get { return this.boundsRangeField; }
-            set { this.boundsRangeField = value; }
-        }
-
-        /// <summary>
-        /// List of physical inputs.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("VideoSourceTokensAvailable", Order=1)]
-        public string[] VideoSourceTokensAvailable
-        {
-            get { return this.videoSourceTokensAvailableField; }
-            set { this.videoSourceTokensAvailableField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public VideoSourceConfigurationOptionsExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        /// <summary>
-        /// Maximum number of profiles.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int MaximumNumberOfProfiles
-        {
-            get { return this.maximumNumberOfProfilesField; }
-            set { this.maximumNumberOfProfilesField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="MaximumNumberOfProfiles"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool MaximumNumberOfProfilesSpecified
-        {
-            get { return this.maximumNumberOfProfilesFieldSpecified; }
-            set { this.maximumNumberOfProfilesFieldSpecified = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "VideoSourceConfigurationOptions"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            if (this.maximumNumberOfProfilesFieldSpecified)
-            {
-                writer.WriteAttributeString(null, "MaximumNumberOfProfiles", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maximumNumberOfProfilesField));
-            }
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElement(Ns.OnvifVer10, "BoundsRange", this.boundsRangeField, Ns.OnvifVer10, "IntRectangleRange");
-            if (this.videoSourceTokensAvailableField != null)
-            {
-                for (int i = 0; i < this.videoSourceTokensAvailableField.Length; i++)
-                {
-                    writer.WriteElementString(Ns.OnvifVer10, "VideoSourceTokensAvailable", this.videoSourceTokensAvailableField[i]);
-                }
-            }
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "VideoSourceConfigurationOptionsExtension");
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "MaximumNumberOfProfiles":
-                    this.maximumNumberOfProfilesField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.AttributeValue);
-                    this.maximumNumberOfProfilesFieldSpecified = true;
-                    return true;
-            }
-            return false;
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "BoundsRange":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.boundsRangeField = reader.ReadElementObject<IntRectangleRange>(() => new IntRectangleRange());
-                    return true;
-                case "VideoSourceTokensAvailable":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.videoSourceTokensAvailableField, reader.ReadElementText());
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<VideoSourceConfigurationOptionsExtension>(() => new VideoSourceConfigurationOptionsExtension());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoSourceConfigurationOptionsExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        private RotateOptions rotateField;
-
-        private VideoSourceConfigurationOptionsExtension2 extensionField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        /// <summary>
-        /// Options of parameters for Rotation feature.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public RotateOptions Rotate
-        {
-            get { return this.rotateField; }
-            set { this.rotateField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public VideoSourceConfigurationOptionsExtension2 Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "VideoSourceConfigurationOptionsExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-            writer.WriteElement(Ns.OnvifVer10, "Rotate", this.rotateField, Ns.OnvifVer10, "RotateOptions");
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "VideoSourceConfigurationOptionsExtension2");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Rotate":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.rotateField = reader.ReadElementObject<RotateOptions>(() => new RotateOptions());
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<VideoSourceConfigurationOptionsExtension2>(() => new VideoSourceConfigurationOptionsExtension2());
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoSourceConfigurationOptionsExtension2 : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private SceneOrientationMode[] sceneOrientationModeField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        /// <summary>
-        /// Scene orientation modes supported by the device for this configuration.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("SceneOrientationMode", Order=0)]
-        public SceneOrientationMode[] SceneOrientationMode
-        {
-            get { return this.sceneOrientationModeField; }
-            set { this.sceneOrientationModeField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Namespace="http://www.onvif.org/ver10/schema", Order=1)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "VideoSourceConfigurationOptionsExtension2"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            if (this.sceneOrientationModeField != null)
-            {
-                for (int i = 0; i < this.sceneOrientationModeField.Length; i++)
-                {
-                    writer.WriteElementString(Ns.OnvifVer10, "SceneOrientationMode", EnumXml.ToXml(this.sceneOrientationModeField[i]));
-                }
-            }
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "SceneOrientationMode":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.sceneOrientationModeField, EnumXml.ParseSceneOrientationMode(reader.ReadElementText()));
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoSourceExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        private ImagingSettings20 imagingField;
-
-        private VideoSourceExtension2 extensionField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        /// <summary>
-        /// Optional configuration of the image sensor. To be used if imaging service 2.00 is supported.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public ImagingSettings20 Imaging
-        {
-            get { return this.imagingField; }
-            set { this.imagingField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public VideoSourceExtension2 Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "VideoSourceExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-            writer.WriteElement(Ns.OnvifVer10, "Imaging", this.imagingField, Ns.OnvifVer10, "ImagingSettings20");
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "VideoSourceExtension2");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Imaging":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.imagingField = reader.ReadElementObject<ImagingSettings20>(() => new ImagingSettings20());
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<VideoSourceExtension2>(() => new VideoSourceExtension2());
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoSourceExtension2 : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Namespace="http://www.onvif.org/ver10/schema", Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "VideoSourceExtension2"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class VideoSourceMode : SharpOnvifCommon.Xml.OnvifObject
+    public partial class VideoSourceMode : SharpOnvifCommon.Xml.OnvifContract
     {
         private float maxFramerateField;
 
-        private VideoResolution maxResolutionField;
+        private SharpOnvifCommon.Onvif.VideoResolution maxResolutionField;
 
         private string[] encodingsField;
 
@@ -25281,7 +8203,7 @@ namespace SharpOnvifClient.Media2
         /// Max horizontal and vertical resolution for this video source mode.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public VideoResolution MaxResolution
+        public SharpOnvifCommon.Onvif.VideoResolution MaxResolution
         {
             get { return this.maxResolutionField; }
             set { this.maxResolutionField = value; }
@@ -25375,7 +8297,7 @@ namespace SharpOnvifClient.Media2
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "MaxFramerate", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxFramerateField));
-            writer.WriteElement(Ns.Ver20Media, "MaxResolution", this.maxResolutionField, Ns.OnvifVer10, "VideoResolution");
+            writer.WriteElement(Ns.Ver20Media, "MaxResolution", this.maxResolutionField, "http://www.onvif.org/ver10/schema", "VideoResolution");
             writer.WriteElementString(Ns.Ver20Media, "Encodings", SharpOnvifCommon.Xml.OnvifArray.JoinList(this.encodingsField));
             writer.WriteElementString(Ns.Ver20Media, "Reboot", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.rebootField));
             writer.WriteElementString(Ns.Ver20Media, "Description", this.descriptionField);
@@ -25407,7 +8329,7 @@ namespace SharpOnvifClient.Media2
                     return true;
                 case "MaxResolution":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.maxResolutionField = reader.ReadElementObject<VideoResolution>(() => new VideoResolution());
+                    this.maxResolutionField = reader.ReadElementObject<SharpOnvifCommon.Onvif.VideoResolution>(() => new SharpOnvifCommon.Onvif.VideoResolution());
                     return true;
                 case "Encodings":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
@@ -25429,7 +8351,7 @@ namespace SharpOnvifClient.Media2
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class WebRTCConfiguration : SharpOnvifCommon.Xml.OnvifObject
+    public partial class WebRTCConfiguration : SharpOnvifCommon.Xml.OnvifContract
     {
         private string signalingServerField;
 
@@ -25597,503 +8519,12 @@ namespace SharpOnvifClient.Media2
 
     }
 
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class WhiteBalance : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private WhiteBalanceMode modeField;
-
-        private float crGainField;
-
-        private float cbGainField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        /// <summary>
-        /// Auto whitebalancing mode (auto/manual).
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public WhiteBalanceMode Mode
-        {
-            get { return this.modeField; }
-            set { this.modeField = value; }
-        }
-
-        /// <summary>
-        /// Rgain (unitless).
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public float CrGain
-        {
-            get { return this.crGainField; }
-            set { this.crGainField = value; }
-        }
-
-        /// <summary>
-        /// Bgain (unitless).
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public float CbGain
-        {
-            get { return this.cbGainField; }
-            set { this.cbGainField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=3)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "WhiteBalance"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Mode", EnumXml.ToXml(this.modeField));
-            writer.WriteElementString(Ns.OnvifVer10, "CrGain", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.crGainField));
-            writer.WriteElementString(Ns.OnvifVer10, "CbGain", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.cbGainField));
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Mode":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.modeField = EnumXml.ParseWhiteBalanceMode(reader.ReadElementText());
-                    return true;
-                case "CrGain":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.crGainField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    return true;
-                case "CbGain":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.cbGainField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class WhiteBalance20 : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private WhiteBalanceMode modeField;
-
-        private float crGainField;
-        private bool crGainFieldSpecified;
-
-        private float cbGainField;
-        private bool cbGainFieldSpecified;
-
-        private WhiteBalance20Extension extensionField;
-
-        /// <summary>
-        /// 'AUTO' or 'MANUAL'
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public WhiteBalanceMode Mode
-        {
-            get { return this.modeField; }
-            set { this.modeField = value; }
-        }
-
-        /// <summary>
-        /// Rgain (unitless).
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public float CrGain
-        {
-            get { return this.crGainField; }
-            set { this.crGainField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="CrGain"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool CrGainSpecified
-        {
-            get { return this.crGainFieldSpecified; }
-            set { this.crGainFieldSpecified = value; }
-        }
-
-        /// <summary>
-        /// Bgain (unitless).
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public float CbGain
-        {
-            get { return this.cbGainField; }
-            set { this.cbGainField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="CbGain"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool CbGainSpecified
-        {
-            get { return this.cbGainFieldSpecified; }
-            set { this.cbGainFieldSpecified = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public WhiteBalance20Extension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "WhiteBalance20"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Mode", EnumXml.ToXml(this.modeField));
-            if (this.crGainFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "CrGain", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.crGainField));
-            }
-            if (this.cbGainFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "CbGain", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.cbGainField));
-            }
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "WhiteBalance20Extension");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Mode":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.modeField = EnumXml.ParseWhiteBalanceMode(reader.ReadElementText());
-                    return true;
-                case "CrGain":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.crGainField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    this.crGainFieldSpecified = true;
-                    return true;
-                case "CbGain":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.cbGainField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    this.cbGainFieldSpecified = true;
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<WhiteBalance20Extension>(() => new WhiteBalance20Extension());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class WhiteBalance20Extension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "WhiteBalance20Extension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class WideDynamicRange : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private WideDynamicMode modeField;
-
-        private float levelField;
-
-        /// <summary>
-        /// White dynamic range (on/off)
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public WideDynamicMode Mode
-        {
-            get { return this.modeField; }
-            set { this.modeField = value; }
-        }
-
-        /// <summary>
-        /// Optional level parameter (unitless)
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public float Level
-        {
-            get { return this.levelField; }
-            set { this.levelField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "WideDynamicRange"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Mode", EnumXml.ToXml(this.modeField));
-            writer.WriteElementString(Ns.OnvifVer10, "Level", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.levelField));
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Mode":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.modeField = EnumXml.ParseWideDynamicMode(reader.ReadElementText());
-                    return true;
-                case "Level":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.levelField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    /// <summary>
-    /// Type describing whether WDR mode is enabled or disabled (on/off).
-    /// </summary>
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class WideDynamicRange20 : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private WideDynamicMode modeField;
-
-        private float levelField;
-        private bool levelFieldSpecified;
-
-        /// <summary>
-        /// Wide dynamic range mode (on/off).
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public WideDynamicMode Mode
-        {
-            get { return this.modeField; }
-            set { this.modeField = value; }
-        }
-
-        /// <summary>
-        /// Optional level parameter (unit unspecified).
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public float Level
-        {
-            get { return this.levelField; }
-            set { this.levelField = value; }
-        }
-
-        /// <summary>
-        /// Whether <see cref="Level"/> was present. The value type cannot
-        /// otherwise distinguish an absent optional element from a zero one.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool LevelSpecified
-        {
-            get { return this.levelFieldSpecified; }
-            set { this.levelFieldSpecified = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "WideDynamicRange20"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Mode", EnumXml.ToXml(this.modeField));
-            if (this.levelFieldSpecified)
-            {
-                writer.WriteElementString(Ns.OnvifVer10, "Level", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.levelField));
-            }
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Mode":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.modeField = EnumXml.ParseWideDynamicMode(reader.ReadElementText());
-                    return true;
-                case "Level":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.levelField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    this.levelFieldSpecified = true;
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ZoomLimits : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private Space1DDescription rangeField;
-
-        /// <summary>
-        /// A range of zoom limit
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public Space1DDescription Range
-        {
-            get { return this.rangeField; }
-            set { this.rangeField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "ZoomLimits"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElement(Ns.OnvifVer10, "Range", this.rangeField, Ns.OnvifVer10, "Space1DDescription");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Range":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.rangeField = reader.ReadElementObject<Space1DDescription>(() => new Space1DDescription());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
     /// <summary>Constructs a contract named by an xsi:type attribute.</summary>
     internal static class XmlTypeFactory
     {
-        public static SharpOnvifCommon.Xml.OnvifObject Create(string ns, string name)
+        public static SharpOnvifCommon.Xml.OnvifContract Create(string ns, string name)
         {
-            switch (name)
-            {
-                case "AnalyticsEngine":
-                    if (ns == "http://www.onvif.org/ver10/schema") return new AnalyticsEngine();
-                    break;
-                case "AnalyticsEngineControl":
-                    if (ns == "http://www.onvif.org/ver10/schema") return new AnalyticsEngineControl();
-                    break;
-                case "AnalyticsEngineInput":
-                    if (ns == "http://www.onvif.org/ver10/schema") return new AnalyticsEngineInput();
-                    break;
-                case "AudioDecoderConfiguration":
-                    if (ns == "http://www.onvif.org/ver10/schema") return new AudioDecoderConfiguration();
-                    break;
-                case "AudioEncoder2Configuration":
-                    if (ns == "http://www.onvif.org/ver10/schema") return new AudioEncoder2Configuration();
-                    break;
-                case "AudioEncoderConfiguration":
-                    if (ns == "http://www.onvif.org/ver10/schema") return new AudioEncoderConfiguration();
-                    break;
-                case "AudioOutput":
-                    if (ns == "http://www.onvif.org/ver10/schema") return new AudioOutput();
-                    break;
-                case "AudioOutputConfiguration":
-                    if (ns == "http://www.onvif.org/ver10/schema") return new AudioOutputConfiguration();
-                    break;
-                case "AudioSource":
-                    if (ns == "http://www.onvif.org/ver10/schema") return new AudioSource();
-                    break;
-                case "AudioSourceConfiguration":
-                    if (ns == "http://www.onvif.org/ver10/schema") return new AudioSourceConfiguration();
-                    break;
-                case "ConfigurationEntity":
-                    if (ns == "http://www.onvif.org/ver10/schema") return new ConfigurationEntity();
-                    break;
-                case "DeviceEntity":
-                    if (ns == "http://www.onvif.org/ver10/schema") return new DeviceEntity();
-                    break;
-                case "DigitalInput":
-                    if (ns == "http://www.onvif.org/ver10/schema") return new DigitalInput();
-                    break;
-                case "EventFilter":
-                    if (ns == "http://www.onvif.org/ver10/schema") return new EventFilter();
-                    break;
-                case "FilterType":
-                    if (ns == "http://docs.oasis-open.org/wsn/b-2") return new FilterType();
-                    break;
-                case "MetadataConfiguration":
-                    if (ns == "http://www.onvif.org/ver10/schema") return new MetadataConfiguration();
-                    break;
-                case "MulticastAudioDecoderConfiguration":
-                    if (ns == "http://www.onvif.org/ver10/schema") return new MulticastAudioDecoderConfiguration();
-                    break;
-                case "NetworkInterface":
-                    if (ns == "http://www.onvif.org/ver10/schema") return new NetworkInterface();
-                    break;
-                case "OSDConfiguration":
-                    if (ns == "http://www.onvif.org/ver10/schema") return new OSDConfiguration();
-                    break;
-                case "PTZConfiguration":
-                    if (ns == "http://www.onvif.org/ver10/schema") return new PTZConfiguration();
-                    break;
-                case "PTZNode":
-                    if (ns == "http://www.onvif.org/ver10/schema") return new PTZNode();
-                    break;
-                case "ReceiverConfiguration":
-                    if (ns == "http://www.onvif.org/ver20/media/wsdl") return new ReceiverConfiguration();
-                    if (ns == "http://www.onvif.org/ver10/schema") return new ReceiverConfiguration1();
-                    break;
-                case "RelayOutput":
-                    if (ns == "http://www.onvif.org/ver10/schema") return new RelayOutput();
-                    break;
-                case "VideoAnalyticsConfiguration":
-                    if (ns == "http://www.onvif.org/ver10/schema") return new VideoAnalyticsConfiguration();
-                    break;
-                case "VideoEncoder2Configuration":
-                    if (ns == "http://www.onvif.org/ver10/schema") return new VideoEncoder2Configuration();
-                    break;
-                case "VideoEncoderConfiguration":
-                    if (ns == "http://www.onvif.org/ver10/schema") return new VideoEncoderConfiguration();
-                    break;
-                case "VideoOutput":
-                    if (ns == "http://www.onvif.org/ver10/schema") return new VideoOutput();
-                    break;
-                case "VideoOutputConfiguration":
-                    if (ns == "http://www.onvif.org/ver10/schema") return new VideoOutputConfiguration();
-                    break;
-                case "VideoSource":
-                    if (ns == "http://www.onvif.org/ver10/schema") return new VideoSource();
-                    break;
-                case "VideoSourceConfiguration":
-                    if (ns == "http://www.onvif.org/ver10/schema") return new VideoSourceConfiguration();
-                    break;
-            }
-            return null;
+            return SharpOnvifCommon.Onvif.XmlTypeFactory.Create(ns, name);
         }
     }
 

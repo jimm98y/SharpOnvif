@@ -31,6 +31,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SharpOnvifCommon.Onvif;
 
 namespace SharpOnvifClient
 {
@@ -345,9 +346,9 @@ namespace SharpOnvifClient
             return AbsoluteMoveAsync(
                 profileToken,
                 null,
-                new PTZ.Vector1D() { x = zoom },
+                new Vector1D() { x = zoom },
                 null,
-                new PTZ.Vector1D() { x = zoomSpeed }
+                new Vector1D() { x = zoomSpeed }
             );
         }
 
@@ -355,9 +356,9 @@ namespace SharpOnvifClient
         {
             return AbsoluteMoveAsync(
                 profileToken,
-                new PTZ.Vector2D() { x = pan, y = tilt },
+                new Vector2D() { x = pan, y = tilt },
                 null,
-                new PTZ.Vector2D() { x = panSpeed, y = tiltSpeed },
+                new Vector2D() { x = panSpeed, y = tiltSpeed },
                 null
             );
         }
@@ -366,14 +367,14 @@ namespace SharpOnvifClient
         {
             return AbsoluteMoveAsync(
                 profileToken,
-                new PTZ.Vector2D() { x = pan, y = tilt },
-                new PTZ.Vector1D() { x = zoom },
-                new PTZ.Vector2D() { x = panSpeed, y = tiltSpeed },
-                new PTZ.Vector1D() { x = zoomSpeed }
+                new Vector2D() { x = pan, y = tilt },
+                new Vector1D() { x = zoom },
+                new Vector2D() { x = panSpeed, y = tiltSpeed },
+                new Vector1D() { x = zoomSpeed }
             );
         }
 
-        private async Task AbsoluteMoveAsync(string profileToken, PTZ.Vector2D vectorPanTilt, PTZ.Vector1D vectorZoom, PTZ.Vector2D speedPanTilt, PTZ.Vector1D speedZoom)
+        private async Task AbsoluteMoveAsync(string profileToken, Vector2D vectorPanTilt, Vector1D vectorZoom, Vector2D speedPanTilt, Vector1D speedZoom)
         {
             string ptzURL = await GetServiceUriAsync(OnvifServices.PTZ).ConfigureAwait(false);
             var ptzClient = GetOrCreateClient(ptzURL, u => new PTZClient(u, _settings));
@@ -384,7 +385,7 @@ namespace SharpOnvifClient
                     PanTilt = vectorPanTilt,
                     Zoom = vectorZoom
                 },
-                new PTZ.PTZSpeed()
+                new PTZSpeed()
                 {
                     PanTilt = speedPanTilt,
                     Zoom = speedZoom
@@ -396,9 +397,9 @@ namespace SharpOnvifClient
             return RelativeMoveAsync(
                 profileToken,
                 null,
-                new PTZ.Vector1D() { x = zoom },
+                new Vector1D() { x = zoom },
                 null,
-                new PTZ.Vector1D() { x = zoomSpeed }
+                new Vector1D() { x = zoomSpeed }
             );
         }
 
@@ -406,9 +407,9 @@ namespace SharpOnvifClient
         {
             return RelativeMoveAsync(
                 profileToken,
-                new PTZ.Vector2D() { x = pan, y = tilt },
+                new Vector2D() { x = pan, y = tilt },
                 null,
-                new PTZ.Vector2D() { x = panSpeed, y = tiltSpeed },
+                new Vector2D() { x = panSpeed, y = tiltSpeed },
                 null
             );
         }
@@ -417,14 +418,14 @@ namespace SharpOnvifClient
         {
             return RelativeMoveAsync(
                 profileToken,
-                new PTZ.Vector2D() { x = pan, y = tilt },
-                new PTZ.Vector1D() { x = zoom },
-                new PTZ.Vector2D() { x = panSpeed, y = tiltSpeed },
-                new PTZ.Vector1D() { x = zoomSpeed }
+                new Vector2D() { x = pan, y = tilt },
+                new Vector1D() { x = zoom },
+                new Vector2D() { x = panSpeed, y = tiltSpeed },
+                new Vector1D() { x = zoomSpeed }
             );
         }
 
-        private async Task RelativeMoveAsync(string profileToken, PTZ.Vector2D vectorPanTilt, PTZ.Vector1D vectorZoom, PTZ.Vector2D speedPanTilt, PTZ.Vector1D speedZoom)
+        private async Task RelativeMoveAsync(string profileToken, Vector2D vectorPanTilt, Vector1D vectorZoom, Vector2D speedPanTilt, Vector1D speedZoom)
         {
             string ptzURL = await GetServiceUriAsync(OnvifServices.PTZ).ConfigureAwait(false);
             var ptzClient = GetOrCreateClient(ptzURL, u => new PTZClient(u, _settings));
@@ -435,7 +436,7 @@ namespace SharpOnvifClient
                     PanTilt = vectorPanTilt,
                     Zoom = vectorZoom
                 },
-                new PTZ.PTZSpeed()
+                new PTZSpeed()
                 {
                     PanTilt = speedPanTilt,
                     Zoom = speedZoom
@@ -447,7 +448,7 @@ namespace SharpOnvifClient
             return ContinuousMoveAsync(
                 profileToken,
                 null,
-                new PTZ.Vector1D() { x = zoomSpeed },
+                new Vector1D() { x = zoomSpeed },
                 timeout);
         }
 
@@ -455,7 +456,7 @@ namespace SharpOnvifClient
         {
             return ContinuousMoveAsync(
                 profileToken,
-                new PTZ.Vector2D() { x = panSpeed, y = tiltSpeed },
+                new Vector2D() { x = panSpeed, y = tiltSpeed },
                 null,
                 timeout);
         }
@@ -464,18 +465,18 @@ namespace SharpOnvifClient
         {
             return ContinuousMoveAsync(
                 profileToken,
-                new PTZ.Vector2D() { x = panSpeed, y = tiltSpeed },
-                new PTZ.Vector1D() { x = zoomSpeed },
+                new Vector2D() { x = panSpeed, y = tiltSpeed },
+                new Vector1D() { x = zoomSpeed },
                 timeout);
         }
 
-        private async Task ContinuousMoveAsync(string profileToken, PTZ.Vector2D speedPanTilt, PTZ.Vector1D speedZoom, string timeout = null)
+        private async Task ContinuousMoveAsync(string profileToken, Vector2D speedPanTilt, Vector1D speedZoom, string timeout = null)
         {
             string ptzURL = await GetServiceUriAsync(OnvifServices.PTZ).ConfigureAwait(false);
             var ptzClient = GetOrCreateClient(ptzURL, u => new PTZClient(u, _settings));
             await ptzClient.ContinuousMoveAsync(new ContinuousMoveRequest(
                 profileToken,
-                new PTZ.PTZSpeed()
+                new PTZSpeed()
                 {
                     PanTilt = speedPanTilt,
                     Zoom = speedZoom
@@ -498,10 +499,10 @@ namespace SharpOnvifClient
             await ptzClient.GotoPresetAsync(
                 profileToken,
                 presetToken,
-                new PTZ.PTZSpeed()
+                new PTZSpeed()
                 {
-                    PanTilt = new PTZ.Vector2D() { x = panSpeed, y = tiltSpeed },
-                    Zoom = new PTZ.Vector1D() { x = zoomSpeed }
+                    PanTilt = new Vector2D() { x = panSpeed, y = tiltSpeed },
+                    Zoom = new Vector1D() { x = zoomSpeed }
                 }).ConfigureAwait(false);
         }
 

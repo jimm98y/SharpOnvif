@@ -341,7 +341,7 @@ namespace SharpOnvifServer.Media2
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetVideoSourceConfigurationResponse SetVideoSourceConfiguration(VideoSourceConfiguration Configuration)
+        public virtual SetVideoSourceConfigurationResponse SetVideoSourceConfiguration(SharpOnvifCommon.Onvif.VideoSourceConfiguration Configuration)
         {
             throw new System.NotImplementedException();
         }
@@ -367,7 +367,7 @@ namespace SharpOnvifServer.Media2
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetVideoEncoderConfigurationResponse SetVideoEncoderConfiguration(VideoEncoder2Configuration Configuration)
+        public virtual SetVideoEncoderConfigurationResponse SetVideoEncoderConfiguration(SharpOnvifCommon.Onvif.VideoEncoder2Configuration Configuration)
         {
             throw new System.NotImplementedException();
         }
@@ -390,7 +390,7 @@ namespace SharpOnvifServer.Media2
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetAudioSourceConfigurationResponse SetAudioSourceConfiguration(AudioSourceConfiguration Configuration)
+        public virtual SetAudioSourceConfigurationResponse SetAudioSourceConfiguration(SharpOnvifCommon.Onvif.AudioSourceConfiguration Configuration)
         {
             throw new System.NotImplementedException();
         }
@@ -413,7 +413,7 @@ namespace SharpOnvifServer.Media2
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetAudioEncoderConfigurationResponse SetAudioEncoderConfiguration(AudioEncoder2Configuration Configuration)
+        public virtual SetAudioEncoderConfigurationResponse SetAudioEncoderConfiguration(SharpOnvifCommon.Onvif.AudioEncoder2Configuration Configuration)
         {
             throw new System.NotImplementedException();
         }
@@ -436,7 +436,7 @@ namespace SharpOnvifServer.Media2
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetMetadataConfigurationResponse SetMetadataConfiguration(MetadataConfiguration Configuration)
+        public virtual SetMetadataConfigurationResponse SetMetadataConfiguration(SharpOnvifCommon.Onvif.MetadataConfiguration Configuration)
         {
             throw new System.NotImplementedException();
         }
@@ -456,7 +456,7 @@ namespace SharpOnvifServer.Media2
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetAudioOutputConfigurationResponse SetAudioOutputConfiguration(AudioOutputConfiguration Configuration)
+        public virtual SetAudioOutputConfigurationResponse SetAudioOutputConfiguration(SharpOnvifCommon.Onvif.AudioOutputConfiguration Configuration)
         {
             throw new System.NotImplementedException();
         }
@@ -476,7 +476,7 @@ namespace SharpOnvifServer.Media2
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetAudioDecoderConfigurationResponse SetAudioDecoderConfiguration(AudioDecoderConfiguration Configuration)
+        public virtual SetAudioDecoderConfigurationResponse SetAudioDecoderConfiguration(SharpOnvifCommon.Onvif.AudioDecoderConfiguration Configuration)
         {
             throw new System.NotImplementedException();
         }
@@ -652,7 +652,7 @@ namespace SharpOnvifServer.Media2
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetEQPresetResponse SetEQPreset(EQPreset Configuration)
+        public virtual SetEQPresetResponse SetEQPreset(SharpOnvifCommon.Onvif.EQPreset Configuration)
         {
             throw new System.NotImplementedException();
         }
@@ -907,7 +907,7 @@ namespace SharpOnvifServer.Media2
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetOSDResponse SetOSD(OSDConfiguration OSD)
+        public virtual SetOSDResponse SetOSD(SharpOnvifCommon.Onvif.OSDConfiguration OSD)
         {
             throw new System.NotImplementedException();
         }
@@ -927,7 +927,7 @@ namespace SharpOnvifServer.Media2
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual CreateOSDResponse CreateOSD(OSDConfiguration OSD)
+        public virtual CreateOSDResponse CreateOSD(SharpOnvifCommon.Onvif.OSDConfiguration OSD)
         {
             throw new System.NotImplementedException();
         }
@@ -1301,7 +1301,7 @@ namespace SharpOnvifServer.Media2
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetMulticastAudioDecoderConfigurationResponse SetMulticastAudioDecoderConfiguration(MulticastAudioDecoderConfiguration Configuration)
+        public virtual SetMulticastAudioDecoderConfigurationResponse SetMulticastAudioDecoderConfiguration(SharpOnvifCommon.Onvif.MulticastAudioDecoderConfiguration Configuration)
         {
             throw new System.NotImplementedException();
         }
@@ -2229,7 +2229,7 @@ namespace SharpOnvifServer.Media2
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }

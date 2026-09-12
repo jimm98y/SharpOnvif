@@ -14,7 +14,6 @@ namespace SharpOnvifClient.DoorControl
     internal static class Ns
     {
         public const string Ver10Doorcontrol = "http://www.onvif.org/ver10/doorcontrol/wsdl";
-        public const string Ver10Pacs = "http://www.onvif.org/ver10/pacs";
     }
 
     /// <summary>
@@ -419,7 +418,7 @@ namespace SharpOnvifClient.DoorControl
     /// Extension for the AccessDoor command.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class AccessDoorExtension : SharpOnvifCommon.Xml.OnvifObject
+    public partial class AccessDoorExtension : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -462,7 +461,7 @@ namespace SharpOnvifClient.DoorControl
     /// supported time if the specified time is out of range.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AccessDoor", Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class AccessDoorRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class AccessDoorRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -626,7 +625,7 @@ namespace SharpOnvifClient.DoorControl
     /// supported time if the specified time is out of range.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AccessDoorResponse", Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class AccessDoorResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class AccessDoorResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public AccessDoorResponse()
         {
@@ -642,7 +641,7 @@ namespace SharpOnvifClient.DoorControl
     /// refer to section [DoorMode] for more details about Door Modes restrictions.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("BlockDoor", Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class BlockDoorRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class BlockDoorRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -692,7 +691,7 @@ namespace SharpOnvifClient.DoorControl
     /// refer to section [DoorMode] for more details about Door Modes restrictions.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("BlockDoorResponse", Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class BlockDoorResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class BlockDoorResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public BlockDoorResponse()
         {
@@ -707,7 +706,7 @@ namespace SharpOnvifClient.DoorControl
     /// InvalidArgVal as a generic fault code.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateDoor", Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class CreateDoorRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CreateDoorRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private Door doorField;
 
@@ -756,7 +755,7 @@ namespace SharpOnvifClient.DoorControl
     /// InvalidArgVal as a generic fault code.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateDoorResponse", Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class CreateDoorResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CreateDoorResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -799,54 +798,13 @@ namespace SharpOnvifClient.DoorControl
     }
 
     /// <summary>
-    /// General datastructure referenced by a token. Should be used as extension base.
-    /// </summary>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(DoorInfoBase))]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/pacs")]
-    public partial class DataEntity : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string tokenField;
-
-        /// <summary>
-        /// A service-unique identifier of the item.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string token
-        {
-            get { return this.tokenField; }
-            set { this.tokenField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "DataEntity"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Pacs; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAttributeString(null, "token", this.tokenField);
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "token":
-                    this.tokenField = reader.AttributeValue;
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    /// <summary>
     /// This operation deletes the specified door. If it is associated with one or more entities some
     /// devices may not be able to delete the door, and consequently a ReferenceInUse fault shall be
     /// generated. If no token was specified in the request, the device shall return InvalidArgs as a
     /// generic fault code.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteDoor", Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class DeleteDoorRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteDoorRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -895,7 +853,7 @@ namespace SharpOnvifClient.DoorControl
     /// generic fault code.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteDoorResponse", Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class DeleteDoorResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteDoorResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public DeleteDoorResponse()
         {
@@ -1003,7 +961,7 @@ namespace SharpOnvifClient.DoorControl
     /// operation, e.g. if hardware settings are changed. The following capabilities are available:
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class DoorCapabilities : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DoorCapabilities : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -1496,7 +1454,7 @@ namespace SharpOnvifClient.DoorControl
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class DoorExtension : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DoorExtension : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -1528,7 +1486,7 @@ namespace SharpOnvifClient.DoorControl
     /// Fault information for a Door. This can be extended with optional attributes in the future.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class DoorFault : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DoorFault : SharpOnvifCommon.Xml.OnvifContract
     {
         private string reasonField;
 
@@ -1657,7 +1615,7 @@ namespace SharpOnvifClient.DoorControl
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Door))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(DoorInfo))]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class DoorInfoBase : DataEntity
+    public partial class DoorInfoBase : SharpOnvifCommon.Xml.OnvifContract
     {
         private string nameField;
 
@@ -1689,7 +1647,6 @@ namespace SharpOnvifClient.DoorControl
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            base.WriteXmlContent(writer);
             writer.WriteElementString(Ns.Ver10Doorcontrol, "Name", this.nameField);
             writer.WriteElementString(Ns.Ver10Doorcontrol, "Description", this.descriptionField);
         }
@@ -1707,7 +1664,6 @@ namespace SharpOnvifClient.DoorControl
                     this.descriptionField = reader.ReadElementText();
                     return true;
             }
-            if (base.ReadXmlElement(reader)) return true;
             return false;
         }
 
@@ -1717,7 +1673,7 @@ namespace SharpOnvifClient.DoorControl
     /// The DoorState structure contains current aggregate runtime status of Door.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class DoorState : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DoorState : SharpOnvifCommon.Xml.OnvifContract
     {
         private DoorPhysicalState doorPhysicalStateField;
         private bool doorPhysicalStateFieldSpecified;
@@ -1942,7 +1898,7 @@ namespace SharpOnvifClient.DoorControl
     /// Tampering information for a Door.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class DoorTamper : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DoorTamper : SharpOnvifCommon.Xml.OnvifContract
     {
         private string reasonField;
 
@@ -2018,7 +1974,7 @@ namespace SharpOnvifClient.DoorControl
     /// fulfilled, a Failure fault shall be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DoubleLockDoor", Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class DoubleLockDoorRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DoubleLockDoorRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -2069,7 +2025,7 @@ namespace SharpOnvifClient.DoorControl
     /// fulfilled, a Failure fault shall be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DoubleLockDoorResponse", Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class DoubleLockDoorResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DoubleLockDoorResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public DoubleLockDoorResponse()
         {
@@ -2085,7 +2041,7 @@ namespace SharpOnvifClient.DoorControl
     /// greater than Limit parameter.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetDoorInfoList", Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class GetDoorInfoListRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetDoorInfoListRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private int limitField;
         private bool limitFieldSpecified;
@@ -2172,7 +2128,7 @@ namespace SharpOnvifClient.DoorControl
     /// greater than Limit parameter.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetDoorInfoListResponse", Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class GetDoorInfoListResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetDoorInfoListResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private string nextStartReferenceField;
 
@@ -2246,7 +2202,7 @@ namespace SharpOnvifClient.DoorControl
     /// returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetDoorInfo", Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class GetDoorInfoRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetDoorInfoRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string[] tokenField;
 
@@ -2302,7 +2258,7 @@ namespace SharpOnvifClient.DoorControl
     /// returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetDoorInfoResponse", Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class GetDoorInfoResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetDoorInfoResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private DoorInfo[] doorInfoField;
 
@@ -2358,7 +2314,7 @@ namespace SharpOnvifClient.DoorControl
     /// Limit parameter.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetDoorList", Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class GetDoorListRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetDoorListRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private int limitField;
         private bool limitFieldSpecified;
@@ -2445,7 +2401,7 @@ namespace SharpOnvifClient.DoorControl
     /// Limit parameter.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetDoorListResponse", Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class GetDoorListResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetDoorListResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private string nextStartReferenceField;
 
@@ -2517,7 +2473,7 @@ namespace SharpOnvifClient.DoorControl
     /// available from the GetDoorState command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetDoorState", Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class GetDoorStateRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetDoorStateRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -2565,7 +2521,7 @@ namespace SharpOnvifClient.DoorControl
     /// available from the GetDoorState command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetDoorStateResponse", Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class GetDoorStateResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetDoorStateResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private DoorState doorStateField;
 
@@ -2614,7 +2570,7 @@ namespace SharpOnvifClient.DoorControl
     /// greater than MaxLimit, a TooManyItems fault shall be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetDoors", Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class GetDoorsRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetDoorsRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string[] tokenField;
 
@@ -2669,7 +2625,7 @@ namespace SharpOnvifClient.DoorControl
     /// greater than MaxLimit, a TooManyItems fault shall be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetDoorsResponse", Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class GetDoorsResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetDoorsResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private Door[] doorField;
 
@@ -2722,7 +2678,7 @@ namespace SharpOnvifClient.DoorControl
     /// Door Control service shall implement this method.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilities", Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         public GetServiceCapabilitiesRequest()
         {
@@ -2735,7 +2691,7 @@ namespace SharpOnvifClient.DoorControl
     /// Door Control service shall implement this method.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilitiesResponse", Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private ServiceCapabilities capabilitiesField;
 
@@ -2786,7 +2742,7 @@ namespace SharpOnvifClient.DoorControl
     /// about Door Modes restrictions.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("LockDoor", Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class LockDoorRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class LockDoorRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -2836,7 +2792,7 @@ namespace SharpOnvifClient.DoorControl
     /// about Door Modes restrictions.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("LockDoorResponse", Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class LockDoorResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class LockDoorResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public LockDoorResponse()
         {
@@ -2855,7 +2811,7 @@ namespace SharpOnvifClient.DoorControl
     /// about Door Modes restrictions.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("LockDownDoor", Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class LockDownDoorRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class LockDownDoorRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -2908,7 +2864,7 @@ namespace SharpOnvifClient.DoorControl
     /// about Door Modes restrictions.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("LockDownDoorResponse", Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class LockDownDoorResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class LockDownDoorResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public LockDownDoorResponse()
         {
@@ -2922,7 +2878,7 @@ namespace SharpOnvifClient.DoorControl
     /// Locked. This method shall only succeed if the current DoorMode is LockedDown.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("LockDownReleaseDoor", Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class LockDownReleaseDoorRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class LockDownReleaseDoorRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -2970,7 +2926,7 @@ namespace SharpOnvifClient.DoorControl
     /// Locked. This method shall only succeed if the current DoorMode is LockedDown.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("LockDownReleaseDoorResponse", Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class LockDownReleaseDoorResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class LockDownReleaseDoorResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public LockDownReleaseDoorResponse()
         {
@@ -2988,7 +2944,7 @@ namespace SharpOnvifClient.DoorControl
     /// restrictions.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("LockOpenDoor", Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class LockOpenDoorRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class LockOpenDoorRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -3040,7 +2996,7 @@ namespace SharpOnvifClient.DoorControl
     /// restrictions.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("LockOpenDoorResponse", Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class LockOpenDoorResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class LockOpenDoorResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public LockOpenDoorResponse()
         {
@@ -3056,7 +3012,7 @@ namespace SharpOnvifClient.DoorControl
     /// DoorMode is LockedOpen.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("LockOpenReleaseDoor", Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class LockOpenReleaseDoorRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class LockOpenReleaseDoorRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -3106,7 +3062,7 @@ namespace SharpOnvifClient.DoorControl
     /// DoorMode is LockedOpen.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("LockOpenReleaseDoorResponse", Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class LockOpenReleaseDoorResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class LockOpenReleaseDoorResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public LockOpenReleaseDoorResponse()
         {
@@ -3121,7 +3077,7 @@ namespace SharpOnvifClient.DoorControl
     /// shall return InvalidArgs as a generic fault code.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ModifyDoor", Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class ModifyDoorRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ModifyDoorRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private Door doorField;
 
@@ -3170,7 +3126,7 @@ namespace SharpOnvifClient.DoorControl
     /// shall return InvalidArgs as a generic fault code.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ModifyDoorResponse", Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class ModifyDoorResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ModifyDoorResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public ModifyDoorResponse()
         {
@@ -3183,7 +3139,7 @@ namespace SharpOnvifClient.DoorControl
     /// static and does not change during device operation. The following capabilities are available:
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class ServiceCapabilities : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ServiceCapabilities : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -3348,7 +3304,7 @@ namespace SharpOnvifClient.DoorControl
     /// the request, the device shall return InvalidArgs as a generic fault code.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetDoor", Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class SetDoorRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetDoorRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private Door doorField;
 
@@ -3399,7 +3355,7 @@ namespace SharpOnvifClient.DoorControl
     /// the request, the device shall return InvalidArgs as a generic fault code.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetDoorResponse", Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class SetDoorResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetDoorResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public SetDoorResponse()
         {
@@ -3412,7 +3368,7 @@ namespace SharpOnvifClient.DoorControl
     /// etc.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class Timings : SharpOnvifCommon.Xml.OnvifObject
+    public partial class Timings : SharpOnvifCommon.Xml.OnvifContract
     {
         private string releaseTimeField;
 
@@ -3556,7 +3512,7 @@ namespace SharpOnvifClient.DoorControl
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class TimingsExtension : SharpOnvifCommon.Xml.OnvifObject
+    public partial class TimingsExtension : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -3592,7 +3548,7 @@ namespace SharpOnvifClient.DoorControl
     /// about Door Modes restrictions.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("UnlockDoor", Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class UnlockDoorRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class UnlockDoorRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -3642,7 +3598,7 @@ namespace SharpOnvifClient.DoorControl
     /// about Door Modes restrictions.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("UnlockDoorResponse", Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class UnlockDoorResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class UnlockDoorResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public UnlockDoorResponse()
         {
@@ -3653,13 +3609,10 @@ namespace SharpOnvifClient.DoorControl
     /// <summary>Constructs a contract named by an xsi:type attribute.</summary>
     internal static class XmlTypeFactory
     {
-        public static SharpOnvifCommon.Xml.OnvifObject Create(string ns, string name)
+        public static SharpOnvifCommon.Xml.OnvifContract Create(string ns, string name)
         {
             switch (name)
             {
-                case "DataEntity":
-                    if (ns == "http://www.onvif.org/ver10/pacs") return new DataEntity();
-                    break;
                 case "Door":
                     if (ns == "http://www.onvif.org/ver10/doorcontrol/wsdl") return new Door();
                     break;
@@ -3670,7 +3623,7 @@ namespace SharpOnvifClient.DoorControl
                     if (ns == "http://www.onvif.org/ver10/doorcontrol/wsdl") return new DoorInfoBase();
                     break;
             }
-            return null;
+            return SharpOnvifCommon.Onvif.XmlTypeFactory.Create(ns, name);
         }
     }
 

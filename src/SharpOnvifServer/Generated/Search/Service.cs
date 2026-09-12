@@ -127,7 +127,7 @@ namespace SharpOnvifServer.Search
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual FindRecordingsResponse FindRecordings(SearchScope Scope, int MaxMatches, string KeepAliveTime)
+        public virtual FindRecordingsResponse FindRecordings(SharpOnvifCommon.Onvif.SearchScope Scope, int MaxMatches, string KeepAliveTime)
         {
             throw new System.NotImplementedException();
         }
@@ -184,7 +184,7 @@ namespace SharpOnvifServer.Search
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual FindEventsResponse FindEvents(System.DateTime StartPoint, System.DateTime EndPoint, SearchScope Scope, EventFilter SearchFilter, bool IncludeStartState, int MaxMatches, string KeepAliveTime)
+        public virtual FindEventsResponse FindEvents(System.DateTime StartPoint, System.DateTime EndPoint, SharpOnvifCommon.Onvif.SearchScope Scope, SharpOnvifCommon.Onvif.EventFilter SearchFilter, bool IncludeStartState, int MaxMatches, string KeepAliveTime)
         {
             throw new System.NotImplementedException();
         }
@@ -238,7 +238,7 @@ namespace SharpOnvifServer.Search
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual FindPTZPositionResponse FindPTZPosition(System.DateTime StartPoint, System.DateTime EndPoint, SearchScope Scope, PTZPositionFilter SearchFilter, int MaxMatches, string KeepAliveTime)
+        public virtual FindPTZPositionResponse FindPTZPosition(System.DateTime StartPoint, System.DateTime EndPoint, SharpOnvifCommon.Onvif.SearchScope Scope, SharpOnvifCommon.Onvif.PTZPositionFilter SearchFilter, int MaxMatches, string KeepAliveTime)
         {
             throw new System.NotImplementedException();
         }
@@ -340,7 +340,7 @@ namespace SharpOnvifServer.Search
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual FindMetadataResponse FindMetadata(System.DateTime StartPoint, System.DateTime EndPoint, SearchScope Scope, MetadataFilter MetadataFilter, int MaxMatches, string KeepAliveTime)
+        public virtual FindMetadataResponse FindMetadata(System.DateTime StartPoint, System.DateTime EndPoint, SharpOnvifCommon.Onvif.SearchScope Scope, SharpOnvifCommon.Onvif.MetadataFilter MetadataFilter, int MaxMatches, string KeepAliveTime)
         {
             throw new System.NotImplementedException();
         }
@@ -760,7 +760,7 @@ namespace SharpOnvifServer.Search
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }

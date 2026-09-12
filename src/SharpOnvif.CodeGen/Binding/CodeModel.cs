@@ -47,7 +47,12 @@ internal sealed record CsTypeRef(
     /// <summary>The XSD primitive local name, for primitives. Drives parse/format selection.</summary>
     string? XsdPrimitive = null,
     /// <summary>Value for XmlElement(DataType=...), when XmlSerializer needs it to round-trip.</summary>
-    string? DataType = null)
+    string? DataType = null,
+    /// <summary>
+    /// Schema type this refers to, for a generated class. Carried here rather than looked up by
+    /// C# name, because a reference may point at the shared assembly's namespace.
+    /// </summary>
+    QName? XmlTypeName = null)
 {
     public override string ToString() => CsName;
 }
@@ -143,6 +148,17 @@ internal sealed class CsClass
 {
     public required string Name { get; init; }
 
+    /// <summary>
+    /// C# namespace the class is generated into. Types from the schemas services share are
+    /// generated once into the common assembly, so a service's class may extend one from a
+    /// different namespace and has to name it in full.
+    /// </summary>
+    public string? CsNamespace { get; init; }
+
+    /// <summary>The name to use when referring to this class from <paramref name="from"/>.</summary>
+    public string NameFrom(string from) =>
+        CsNamespace is null || CsNamespace == from ? Name : CsNamespace + "." + Name;
+
     /// <summary>Schema type name, used for xsi:type. Null for message wrappers.</summary>
     public QName? XmlName { get; init; }
 
@@ -200,6 +216,9 @@ internal sealed class CsService
 internal sealed class CsModel
 {
     public required string ServiceName { get; init; }
+
+    /// <summary>C# namespace this model is generated into.</summary>
+    public string CsNamespace { get; init; } = "";
     public List<CsEnum> Enums { get; } = [];
     public List<CsClass> Classes { get; } = [];
     public List<CsService> Services { get; } = [];

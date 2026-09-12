@@ -66,7 +66,7 @@ namespace SharpOnvifClient.Analytics
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<CreateAnalyticsModulesResponse> CreateAnalyticsModulesAsync(string ConfigurationToken, Config[] AnalyticsModule, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<CreateAnalyticsModulesResponse> CreateAnalyticsModulesAsync(string ConfigurationToken, SharpOnvifCommon.Onvif.Config[] AnalyticsModule, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Remove one or more analytics modules from a VideoAnalyticsConfiguration referenced by their names.
@@ -97,7 +97,7 @@ namespace SharpOnvifClient.Analytics
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<ModifyAnalyticsModulesResponse> ModifyAnalyticsModulesAsync(string ConfigurationToken, Config[] AnalyticsModule, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ModifyAnalyticsModulesResponse> ModifyAnalyticsModulesAsync(string ConfigurationToken, SharpOnvifCommon.Onvif.Config[] AnalyticsModule, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// This method provides a computer readable description of the metadata that the selected analytics
@@ -144,7 +144,7 @@ namespace SharpOnvifClient.Analytics
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -225,7 +225,7 @@ namespace SharpOnvifClient.Analytics
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<CreateAnalyticsModulesResponse> CreateAnalyticsModulesAsync(string ConfigurationToken, Config[] AnalyticsModule, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<CreateAnalyticsModulesResponse> CreateAnalyticsModulesAsync(string ConfigurationToken, SharpOnvifCommon.Onvif.Config[] AnalyticsModule, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return CreateAnalyticsModulesAsync(new CreateAnalyticsModulesRequest(ConfigurationToken, AnalyticsModule), cancellationToken);
         }
@@ -277,7 +277,7 @@ namespace SharpOnvifClient.Analytics
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<ModifyAnalyticsModulesResponse> ModifyAnalyticsModulesAsync(string ConfigurationToken, Config[] AnalyticsModule, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<ModifyAnalyticsModulesResponse> ModifyAnalyticsModulesAsync(string ConfigurationToken, SharpOnvifCommon.Onvif.Config[] AnalyticsModule, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return ModifyAnalyticsModulesAsync(new ModifyAnalyticsModulesRequest(ConfigurationToken, AnalyticsModule), cancellationToken);
         }
@@ -333,7 +333,7 @@ namespace SharpOnvifClient.Analytics
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<CreateRulesResponse> CreateRulesAsync(string ConfigurationToken, Config[] Rule, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<CreateRulesResponse> CreateRulesAsync(string ConfigurationToken, SharpOnvifCommon.Onvif.Config[] Rule, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Remove one or more rules from a VideoAnalyticsConfiguration.
@@ -373,7 +373,7 @@ namespace SharpOnvifClient.Analytics
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<ModifyRulesResponse> ModifyRulesAsync(string ConfigurationToken, Config[] Rule, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ModifyRulesResponse> ModifyRulesAsync(string ConfigurationToken, SharpOnvifCommon.Onvif.Config[] Rule, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     }
 
     /// <summary>
@@ -405,7 +405,7 @@ namespace SharpOnvifClient.Analytics
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -444,7 +444,7 @@ namespace SharpOnvifClient.Analytics
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<CreateRulesResponse> CreateRulesAsync(string ConfigurationToken, Config[] Rule, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<CreateRulesResponse> CreateRulesAsync(string ConfigurationToken, SharpOnvifCommon.Onvif.Config[] Rule, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return CreateRulesAsync(new CreateRulesRequest(ConfigurationToken, Rule), cancellationToken);
         }
@@ -512,7 +512,7 @@ namespace SharpOnvifClient.Analytics
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<ModifyRulesResponse> ModifyRulesAsync(string ConfigurationToken, Config[] Rule, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<ModifyRulesResponse> ModifyRulesAsync(string ConfigurationToken, SharpOnvifCommon.Onvif.Config[] Rule, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return ModifyRulesAsync(new ModifyRulesRequest(ConfigurationToken, Rule), cancellationToken);
         }

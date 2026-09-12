@@ -73,7 +73,7 @@ namespace SharpOnvifServer.Imaging
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetImagingSettingsResponse SetImagingSettings(string VideoSourceToken, ImagingSettings20 ImagingSettings, bool ForcePersistence)
+        public virtual SetImagingSettingsResponse SetImagingSettings(string VideoSourceToken, SharpOnvifCommon.Onvif.ImagingSettings20 ImagingSettings, bool ForcePersistence)
         {
             throw new System.NotImplementedException();
         }
@@ -128,7 +128,7 @@ namespace SharpOnvifServer.Imaging
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual MoveResponse Move(string VideoSourceToken, FocusMove Focus)
+        public virtual MoveResponse Move(string VideoSourceToken, SharpOnvifCommon.Onvif.FocusMove Focus)
         {
             throw new System.NotImplementedException();
         }
@@ -466,7 +466,7 @@ namespace SharpOnvifServer.Imaging
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }

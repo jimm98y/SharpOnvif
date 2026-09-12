@@ -73,13 +73,13 @@ namespace SharpOnvif.Tests
                         {
                             Namespace = "http://www.onvif.org/ver10/device/wsdl",
                             XAddr = "http://localhost" + EndpointPath,
-                            Version = new SharpOnvifServer.DeviceMgmt.OnvifVersion { Major = 2, Minor = 6 },
+                            Version = new SharpOnvifCommon.Onvif.OnvifVersion { Major = 2, Minor = 6 },
                         },
                         new SharpOnvifServer.DeviceMgmt.Service
                         {
                             Namespace = "http://www.onvif.org/ver10/media/wsdl",
                             XAddr = "http://localhost" + EndpointPath,
-                            Version = new SharpOnvifServer.DeviceMgmt.OnvifVersion { Major = 2, Minor = 6 },
+                            Version = new SharpOnvifCommon.Onvif.OnvifVersion { Major = 2, Minor = 6 },
                         },
                     },
                 };
@@ -89,13 +89,13 @@ namespace SharpOnvif.Tests
             {
                 return new SharpOnvifServer.DeviceMgmt.GetSystemDateAndTimeResponse
                 {
-                    SystemDateAndTime = new SharpOnvifServer.DeviceMgmt.SystemDateTime
+                    SystemDateAndTime = new SharpOnvifCommon.Onvif.SystemDateTime
                     {
-                        DateTimeType = SharpOnvifServer.DeviceMgmt.SetDateTimeType.Manual,
-                        UTCDateTime = new SharpOnvifServer.DeviceMgmt.DateTime
+                        DateTimeType = SharpOnvifCommon.Onvif.SetDateTimeType.Manual,
+                        UTCDateTime = new SharpOnvifCommon.Onvif.OnvifDateTime
                         {
-                            Date = new SharpOnvifServer.DeviceMgmt.Date { Year = 2026, Month = 9, Day = 12 },
-                            Time = new SharpOnvifServer.DeviceMgmt.Time { Hour = 21, Minute = 34, Second = 7 },
+                            Date = new SharpOnvifCommon.Onvif.Date { Year = 2026, Month = 9, Day = 12 },
+                            Time = new SharpOnvifCommon.Onvif.Time { Hour = 21, Minute = 34, Second = 7 },
                         },
                     },
                 };
@@ -112,17 +112,17 @@ namespace SharpOnvif.Tests
                 {
                     Profiles = new[]
                     {
-                        new SharpOnvifServer.Media.Profile
+                        new SharpOnvifCommon.Onvif.Profile
                         {
                             token = "profile0",
                             Name = "MainStream",
-                            VideoEncoderConfiguration = new SharpOnvifServer.Media.VideoEncoderConfiguration
+                            VideoEncoderConfiguration = new SharpOnvifCommon.Onvif.VideoEncoderConfiguration
                             {
                                 token = "venc0",
                                 Name = "H264",
                                 UseCount = 1,
-                                Encoding = SharpOnvifServer.Media.VideoEncoding.H264,
-                                Resolution = new SharpOnvifServer.Media.VideoResolution { Width = 1920, Height = 1080 },
+                                Encoding = SharpOnvifCommon.Onvif.VideoEncoding.H264,
+                                Resolution = new SharpOnvifCommon.Onvif.VideoResolution { Width = 1920, Height = 1080 },
                                 Quality = 4.5f,
                             },
                         },
@@ -214,7 +214,7 @@ namespace SharpOnvif.Tests
                     var time = response.SystemDateAndTime;
                     Assert.AreEqual(2026, time.UTCDateTime.Date.Year);
                     Assert.AreEqual(34, time.UTCDateTime.Time.Minute);
-                    Assert.AreEqual(SharpOnvifClient.DeviceMgmt.SetDateTimeType.Manual, time.DateTimeType);
+                    Assert.AreEqual(SharpOnvifCommon.Onvif.SetDateTimeType.Manual, time.DateTimeType);
                 }
             }
         }
@@ -240,7 +240,7 @@ namespace SharpOnvif.Tests
                 var profiles = await media.GetProfilesAsync();
                 var encoder = profiles.Profiles[0].VideoEncoderConfiguration;
 
-                Assert.AreEqual(SharpOnvifClient.Media.VideoEncoding.H264, encoder.Encoding);
+                Assert.AreEqual(SharpOnvifCommon.Onvif.VideoEncoding.H264, encoder.Encoding);
                 Assert.AreEqual(1920, encoder.Resolution.Width);
                 Assert.AreEqual(4.5f, encoder.Quality);
 

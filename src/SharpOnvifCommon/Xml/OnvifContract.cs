@@ -35,13 +35,13 @@ namespace SharpOnvifCommon.Xml
     /// The generator asserts that no Onvif element or attribute is called any of them.
     /// </para>
     /// </summary>
-    public abstract class OnvifObject
+    public abstract class OnvifContract
     {
         /// <summary>
         /// Writes this type's XML attributes. Overrides call <c>base</c> first so inherited
         /// attributes are written before the derived type's.
         /// </summary>
-        protected internal virtual void WriteXmlAttributes(OnvifXmlWriter writer)
+        protected virtual void WriteXmlAttributes(OnvifXmlWriter writer)
         {
         }
 
@@ -49,7 +49,7 @@ namespace SharpOnvifCommon.Xml
         /// Writes this type's child elements and character content, in schema sequence order.
         /// Overrides call <c>base</c> first.
         /// </summary>
-        protected internal virtual void WriteXmlContent(OnvifXmlWriter writer)
+        protected virtual void WriteXmlContent(OnvifXmlWriter writer)
         {
         }
 
@@ -58,7 +58,7 @@ namespace SharpOnvifCommon.Xml
         /// Returns false to let the caller ignore an attribute the schema does not describe,
         /// which real devices do send.
         /// </summary>
-        protected internal virtual bool ReadXmlAttribute(OnvifXmlReader reader)
+        protected virtual bool ReadXmlAttribute(OnvifXmlReader reader)
         {
             return false;
         }
@@ -71,7 +71,7 @@ namespace SharpOnvifCommon.Xml
         /// sequence or omits an optional element still deserializes.
         /// </para>
         /// </summary>
-        protected internal virtual bool ReadXmlElement(OnvifXmlReader reader)
+        protected virtual bool ReadXmlElement(OnvifXmlReader reader)
         {
             return false;
         }
@@ -81,7 +81,7 @@ namespace SharpOnvifCommon.Xml
         /// still positioned inside the element, so a value whose type is an xs:QName can resolve
         /// its prefix against the namespace scope that is about to close.
         /// </summary>
-        protected internal virtual void ReadXmlText(OnvifXmlReader reader, string text)
+        protected virtual void ReadXmlText(OnvifXmlReader reader, string text)
         {
         }
 
@@ -89,15 +89,54 @@ namespace SharpOnvifCommon.Xml
         /// Local name of this type in the schema, or null for an anonymous type. Used to decide
         /// whether a value needs an xsi:type hint, and to reconstruct it on the way back in.
         /// </summary>
-        protected internal virtual string OnvifXmlTypeName
+        protected virtual string OnvifXmlTypeName
         {
             get { return null; }
         }
 
         /// <summary>Namespace of <see cref="OnvifXmlTypeName"/>.</summary>
-        protected internal virtual string OnvifXmlTypeNamespace
+        protected virtual string OnvifXmlTypeNamespace
         {
             get { return null; }
+        }
+
+        // The reader and writer drive the members above from outside the type, which protected
+        // access alone does not allow. These invokers keep the overridable surface protected while
+        // letting the serialization layer reach it.
+
+        internal void InvokeWriteXmlAttributes(OnvifXmlWriter writer)
+        {
+            WriteXmlAttributes(writer);
+        }
+
+        internal void InvokeWriteXmlContent(OnvifXmlWriter writer)
+        {
+            WriteXmlContent(writer);
+        }
+
+        internal bool InvokeReadXmlAttribute(OnvifXmlReader reader)
+        {
+            return ReadXmlAttribute(reader);
+        }
+
+        internal bool InvokeReadXmlElement(OnvifXmlReader reader)
+        {
+            return ReadXmlElement(reader);
+        }
+
+        internal void InvokeReadXmlText(OnvifXmlReader reader, string text)
+        {
+            ReadXmlText(reader, text);
+        }
+
+        internal string InvokeOnvifXmlTypeName
+        {
+            get { return OnvifXmlTypeName; }
+        }
+
+        internal string InvokeOnvifXmlTypeNamespace
+        {
+            get { return OnvifXmlTypeNamespace; }
         }
     }
 }

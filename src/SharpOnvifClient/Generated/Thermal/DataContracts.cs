@@ -13,7 +13,6 @@ namespace SharpOnvifClient.Thermal
     /// <summary>XML namespaces used by this service's contracts.</summary>
     internal static class Ns
     {
-        public const string OnvifVer10 = "http://www.onvif.org/ver10/schema";
         public const string Ver10Thermal = "http://www.onvif.org/ver10/thermal/wsdl";
     }
 
@@ -57,7 +56,7 @@ namespace SharpOnvifClient.Thermal
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class Capabilities : SharpOnvifCommon.Xml.OnvifObject
+    public partial class Capabilities : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -133,7 +132,7 @@ namespace SharpOnvifClient.Thermal
     /// Describes a Color Palette element.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class ColorPalette : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ColorPalette : SharpOnvifCommon.Xml.OnvifContract
     {
         private string nameField;
 
@@ -226,7 +225,7 @@ namespace SharpOnvifClient.Thermal
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class Configuration : SharpOnvifCommon.Xml.OnvifObject
+    public partial class Configuration : SharpOnvifCommon.Xml.OnvifContract
     {
         private ColorPalette colorPaletteField;
 
@@ -326,7 +325,7 @@ namespace SharpOnvifClient.Thermal
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class ConfigurationOptions : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ConfigurationOptions : SharpOnvifCommon.Xml.OnvifContract
     {
         private ColorPalette[] colorPaletteField;
 
@@ -421,7 +420,7 @@ namespace SharpOnvifClient.Thermal
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class Configurations : SharpOnvifCommon.Xml.OnvifObject
+    public partial class Configurations : SharpOnvifCommon.Xml.OnvifContract
     {
         private Configuration configurationField;
 
@@ -501,7 +500,7 @@ namespace SharpOnvifClient.Thermal
     /// Type describing the Cooler settings.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class Cooler : SharpOnvifCommon.Xml.OnvifObject
+    public partial class Cooler : SharpOnvifCommon.Xml.OnvifContract
     {
         private bool enabledField;
 
@@ -587,7 +586,7 @@ namespace SharpOnvifClient.Thermal
     /// devices.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class CoolerOptions : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CoolerOptions : SharpOnvifCommon.Xml.OnvifContract
     {
         private bool enabledField;
         private bool enabledFieldSpecified;
@@ -653,64 +652,12 @@ namespace SharpOnvifClient.Thermal
     }
 
     /// <summary>
-    /// Range of values greater equal Min value and less equal Max value.
-    /// </summary>
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class FloatRange : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private float minField;
-
-        private float maxField;
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public float Min
-        {
-            get { return this.minField; }
-            set { this.minField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public float Max
-        {
-            get { return this.maxField; }
-            set { this.maxField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "FloatRange"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Min", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.minField));
-            writer.WriteElementString(Ns.OnvifVer10, "Max", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxField));
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Min":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.minField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    return true;
-                case "Max":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.maxField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    /// <summary>
     /// Gets the valid ranges for the Thermal parameters that have device specific ranges. This command is
     /// mandatory for all devices implementing the Thermal service. The command shall return all supported
     /// parameters and their ranges, such that these can be applied to the SetConfiguration command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetConfigurationOptions", Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class GetConfigurationOptionsRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetConfigurationOptionsRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string videoSourceTokenField;
 
@@ -758,7 +705,7 @@ namespace SharpOnvifClient.Thermal
     /// parameters and their ranges, such that these can be applied to the SetConfiguration command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetConfigurationOptionsResponse", Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class GetConfigurationOptionsResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetConfigurationOptionsResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private ConfigurationOptions configurationOptionsField;
 
@@ -804,7 +751,7 @@ namespace SharpOnvifClient.Thermal
     /// Gets the Thermal Configuration for the requested VideoSource.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetConfiguration", Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class GetConfigurationRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string videoSourceTokenField;
 
@@ -850,7 +797,7 @@ namespace SharpOnvifClient.Thermal
     /// Gets the Thermal Configuration for the requested VideoSource.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetConfigurationResponse", Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class GetConfigurationResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private Configuration configurationField;
 
@@ -896,7 +843,7 @@ namespace SharpOnvifClient.Thermal
     /// Gets the Thermal Configuration for all thermal VideoSources of the Device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetConfigurations", Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class GetConfigurationsRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetConfigurationsRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         public GetConfigurationsRequest()
         {
@@ -908,7 +855,7 @@ namespace SharpOnvifClient.Thermal
     /// Gets the Thermal Configuration for all thermal VideoSources of the Device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetConfigurationsResponse", Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class GetConfigurationsResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetConfigurationsResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private Configurations[] configurationsField;
 
@@ -962,7 +909,7 @@ namespace SharpOnvifClient.Thermal
     /// SetRadiometryConfiguration command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRadiometryConfigurationOptions", Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class GetRadiometryConfigurationOptionsRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetRadiometryConfigurationOptionsRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string videoSourceTokenField;
 
@@ -1010,7 +957,7 @@ namespace SharpOnvifClient.Thermal
     /// SetRadiometryConfiguration command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRadiometryConfigurationOptionsResponse", Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class GetRadiometryConfigurationOptionsResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetRadiometryConfigurationOptionsResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private RadiometryConfigurationOptions configurationOptionsField;
 
@@ -1056,7 +1003,7 @@ namespace SharpOnvifClient.Thermal
     /// Gets the Radiometry Configuration for the requested VideoSource.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRadiometryConfiguration", Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class GetRadiometryConfigurationRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetRadiometryConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string videoSourceTokenField;
 
@@ -1102,7 +1049,7 @@ namespace SharpOnvifClient.Thermal
     /// Gets the Radiometry Configuration for the requested VideoSource.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRadiometryConfigurationResponse", Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class GetRadiometryConfigurationResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetRadiometryConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private RadiometryConfiguration configurationField;
 
@@ -1148,7 +1095,7 @@ namespace SharpOnvifClient.Thermal
     /// Returns the capabilities of the thermal service. The result is returned in a typed answer.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilities", Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         public GetServiceCapabilitiesRequest()
         {
@@ -1160,7 +1107,7 @@ namespace SharpOnvifClient.Thermal
     /// Returns the capabilities of the thermal service. The result is returned in a typed answer.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilitiesResponse", Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private Capabilities capabilitiesField;
 
@@ -1206,7 +1153,7 @@ namespace SharpOnvifClient.Thermal
     /// Type describing a NUC Table element.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class NUCTable : SharpOnvifCommon.Xml.OnvifObject
+    public partial class NUCTable : SharpOnvifCommon.Xml.OnvifContract
     {
         private string nameField;
 
@@ -1347,7 +1294,7 @@ namespace SharpOnvifClient.Thermal
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class RadiometryConfiguration : SharpOnvifCommon.Xml.OnvifObject
+    public partial class RadiometryConfiguration : SharpOnvifCommon.Xml.OnvifContract
     {
         private RadiometryGlobalParameters radiometryGlobalParametersField;
 
@@ -1397,7 +1344,7 @@ namespace SharpOnvifClient.Thermal
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class RadiometryConfigurationOptions : SharpOnvifCommon.Xml.OnvifObject
+    public partial class RadiometryConfigurationOptions : SharpOnvifCommon.Xml.OnvifContract
     {
         private RadiometryGlobalParameterOptions radiometryGlobalParameterOptionsField;
 
@@ -1451,23 +1398,23 @@ namespace SharpOnvifClient.Thermal
     /// calculation.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class RadiometryGlobalParameterOptions : SharpOnvifCommon.Xml.OnvifObject
+    public partial class RadiometryGlobalParameterOptions : SharpOnvifCommon.Xml.OnvifContract
     {
-        private FloatRange reflectedAmbientTemperatureField;
+        private SharpOnvifCommon.Onvif.FloatRange reflectedAmbientTemperatureField;
 
-        private FloatRange emissivityField;
+        private SharpOnvifCommon.Onvif.FloatRange emissivityField;
 
-        private FloatRange distanceToObjectField;
+        private SharpOnvifCommon.Onvif.FloatRange distanceToObjectField;
 
-        private FloatRange relativeHumidityField;
+        private SharpOnvifCommon.Onvif.FloatRange relativeHumidityField;
 
-        private FloatRange atmosphericTemperatureField;
+        private SharpOnvifCommon.Onvif.FloatRange atmosphericTemperatureField;
 
-        private FloatRange atmosphericTransmittanceField;
+        private SharpOnvifCommon.Onvif.FloatRange atmosphericTransmittanceField;
 
-        private FloatRange extOpticsTemperatureField;
+        private SharpOnvifCommon.Onvif.FloatRange extOpticsTemperatureField;
 
-        private FloatRange extOpticsTransmittanceField;
+        private SharpOnvifCommon.Onvif.FloatRange extOpticsTransmittanceField;
 
         private System.Xml.XmlElement[] anyField;
 
@@ -1475,7 +1422,7 @@ namespace SharpOnvifClient.Thermal
         /// Valid range of temperature values, in Kelvin.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public FloatRange ReflectedAmbientTemperature
+        public SharpOnvifCommon.Onvif.FloatRange ReflectedAmbientTemperature
         {
             get { return this.reflectedAmbientTemperatureField; }
             set { this.reflectedAmbientTemperatureField = value; }
@@ -1485,7 +1432,7 @@ namespace SharpOnvifClient.Thermal
         /// Valid range of emissivity values for the objects to measure.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public FloatRange Emissivity
+        public SharpOnvifCommon.Onvif.FloatRange Emissivity
         {
             get { return this.emissivityField; }
             set { this.emissivityField = value; }
@@ -1495,7 +1442,7 @@ namespace SharpOnvifClient.Thermal
         /// Valid range of distance between camera and object for a valid temperature reading, in meters.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public FloatRange DistanceToObject
+        public SharpOnvifCommon.Onvif.FloatRange DistanceToObject
         {
             get { return this.distanceToObjectField; }
             set { this.distanceToObjectField = value; }
@@ -1505,7 +1452,7 @@ namespace SharpOnvifClient.Thermal
         /// Valid range of relative humidity values, in percentage.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public FloatRange RelativeHumidity
+        public SharpOnvifCommon.Onvif.FloatRange RelativeHumidity
         {
             get { return this.relativeHumidityField; }
             set { this.relativeHumidityField = value; }
@@ -1515,7 +1462,7 @@ namespace SharpOnvifClient.Thermal
         /// Valid range of temperature values, in Kelvin.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public FloatRange AtmosphericTemperature
+        public SharpOnvifCommon.Onvif.FloatRange AtmosphericTemperature
         {
             get { return this.atmosphericTemperatureField; }
             set { this.atmosphericTemperatureField = value; }
@@ -1525,7 +1472,7 @@ namespace SharpOnvifClient.Thermal
         /// Valid range of atmospheric transmittance values.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public FloatRange AtmosphericTransmittance
+        public SharpOnvifCommon.Onvif.FloatRange AtmosphericTransmittance
         {
             get { return this.atmosphericTransmittanceField; }
             set { this.atmosphericTransmittanceField = value; }
@@ -1535,7 +1482,7 @@ namespace SharpOnvifClient.Thermal
         /// Valid range of temperature values, in Kelvin.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=6)]
-        public FloatRange ExtOpticsTemperature
+        public SharpOnvifCommon.Onvif.FloatRange ExtOpticsTemperature
         {
             get { return this.extOpticsTemperatureField; }
             set { this.extOpticsTemperatureField = value; }
@@ -1545,7 +1492,7 @@ namespace SharpOnvifClient.Thermal
         /// Valid range of external optics transmittance.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=7)]
-        public FloatRange ExtOpticsTransmittance
+        public SharpOnvifCommon.Onvif.FloatRange ExtOpticsTransmittance
         {
             get { return this.extOpticsTransmittanceField; }
             set { this.extOpticsTransmittanceField = value; }
@@ -1564,14 +1511,14 @@ namespace SharpOnvifClient.Thermal
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            writer.WriteElement(Ns.Ver10Thermal, "ReflectedAmbientTemperature", this.reflectedAmbientTemperatureField, Ns.OnvifVer10, "FloatRange");
-            writer.WriteElement(Ns.Ver10Thermal, "Emissivity", this.emissivityField, Ns.OnvifVer10, "FloatRange");
-            writer.WriteElement(Ns.Ver10Thermal, "DistanceToObject", this.distanceToObjectField, Ns.OnvifVer10, "FloatRange");
-            writer.WriteElement(Ns.Ver10Thermal, "RelativeHumidity", this.relativeHumidityField, Ns.OnvifVer10, "FloatRange");
-            writer.WriteElement(Ns.Ver10Thermal, "AtmosphericTemperature", this.atmosphericTemperatureField, Ns.OnvifVer10, "FloatRange");
-            writer.WriteElement(Ns.Ver10Thermal, "AtmosphericTransmittance", this.atmosphericTransmittanceField, Ns.OnvifVer10, "FloatRange");
-            writer.WriteElement(Ns.Ver10Thermal, "ExtOpticsTemperature", this.extOpticsTemperatureField, Ns.OnvifVer10, "FloatRange");
-            writer.WriteElement(Ns.Ver10Thermal, "ExtOpticsTransmittance", this.extOpticsTransmittanceField, Ns.OnvifVer10, "FloatRange");
+            writer.WriteElement(Ns.Ver10Thermal, "ReflectedAmbientTemperature", this.reflectedAmbientTemperatureField, "http://www.onvif.org/ver10/schema", "FloatRange");
+            writer.WriteElement(Ns.Ver10Thermal, "Emissivity", this.emissivityField, "http://www.onvif.org/ver10/schema", "FloatRange");
+            writer.WriteElement(Ns.Ver10Thermal, "DistanceToObject", this.distanceToObjectField, "http://www.onvif.org/ver10/schema", "FloatRange");
+            writer.WriteElement(Ns.Ver10Thermal, "RelativeHumidity", this.relativeHumidityField, "http://www.onvif.org/ver10/schema", "FloatRange");
+            writer.WriteElement(Ns.Ver10Thermal, "AtmosphericTemperature", this.atmosphericTemperatureField, "http://www.onvif.org/ver10/schema", "FloatRange");
+            writer.WriteElement(Ns.Ver10Thermal, "AtmosphericTransmittance", this.atmosphericTransmittanceField, "http://www.onvif.org/ver10/schema", "FloatRange");
+            writer.WriteElement(Ns.Ver10Thermal, "ExtOpticsTemperature", this.extOpticsTemperatureField, "http://www.onvif.org/ver10/schema", "FloatRange");
+            writer.WriteElement(Ns.Ver10Thermal, "ExtOpticsTransmittance", this.extOpticsTransmittanceField, "http://www.onvif.org/ver10/schema", "FloatRange");
             writer.WriteAny(this.anyField);
         }
 
@@ -1581,35 +1528,35 @@ namespace SharpOnvifClient.Thermal
             {
                 case "ReflectedAmbientTemperature":
                     if (reader.NamespaceUri != Ns.Ver10Thermal) break;
-                    this.reflectedAmbientTemperatureField = reader.ReadElementObject<FloatRange>(() => new FloatRange());
+                    this.reflectedAmbientTemperatureField = reader.ReadElementObject<SharpOnvifCommon.Onvif.FloatRange>(() => new SharpOnvifCommon.Onvif.FloatRange());
                     return true;
                 case "Emissivity":
                     if (reader.NamespaceUri != Ns.Ver10Thermal) break;
-                    this.emissivityField = reader.ReadElementObject<FloatRange>(() => new FloatRange());
+                    this.emissivityField = reader.ReadElementObject<SharpOnvifCommon.Onvif.FloatRange>(() => new SharpOnvifCommon.Onvif.FloatRange());
                     return true;
                 case "DistanceToObject":
                     if (reader.NamespaceUri != Ns.Ver10Thermal) break;
-                    this.distanceToObjectField = reader.ReadElementObject<FloatRange>(() => new FloatRange());
+                    this.distanceToObjectField = reader.ReadElementObject<SharpOnvifCommon.Onvif.FloatRange>(() => new SharpOnvifCommon.Onvif.FloatRange());
                     return true;
                 case "RelativeHumidity":
                     if (reader.NamespaceUri != Ns.Ver10Thermal) break;
-                    this.relativeHumidityField = reader.ReadElementObject<FloatRange>(() => new FloatRange());
+                    this.relativeHumidityField = reader.ReadElementObject<SharpOnvifCommon.Onvif.FloatRange>(() => new SharpOnvifCommon.Onvif.FloatRange());
                     return true;
                 case "AtmosphericTemperature":
                     if (reader.NamespaceUri != Ns.Ver10Thermal) break;
-                    this.atmosphericTemperatureField = reader.ReadElementObject<FloatRange>(() => new FloatRange());
+                    this.atmosphericTemperatureField = reader.ReadElementObject<SharpOnvifCommon.Onvif.FloatRange>(() => new SharpOnvifCommon.Onvif.FloatRange());
                     return true;
                 case "AtmosphericTransmittance":
                     if (reader.NamespaceUri != Ns.Ver10Thermal) break;
-                    this.atmosphericTransmittanceField = reader.ReadElementObject<FloatRange>(() => new FloatRange());
+                    this.atmosphericTransmittanceField = reader.ReadElementObject<SharpOnvifCommon.Onvif.FloatRange>(() => new SharpOnvifCommon.Onvif.FloatRange());
                     return true;
                 case "ExtOpticsTemperature":
                     if (reader.NamespaceUri != Ns.Ver10Thermal) break;
-                    this.extOpticsTemperatureField = reader.ReadElementObject<FloatRange>(() => new FloatRange());
+                    this.extOpticsTemperatureField = reader.ReadElementObject<SharpOnvifCommon.Onvif.FloatRange>(() => new SharpOnvifCommon.Onvif.FloatRange());
                     return true;
                 case "ExtOpticsTransmittance":
                     if (reader.NamespaceUri != Ns.Ver10Thermal) break;
-                    this.extOpticsTransmittanceField = reader.ReadElementObject<FloatRange>(() => new FloatRange());
+                    this.extOpticsTransmittanceField = reader.ReadElementObject<SharpOnvifCommon.Onvif.FloatRange>(() => new SharpOnvifCommon.Onvif.FloatRange());
                     return true;
             }
             SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
@@ -1625,7 +1572,7 @@ namespace SharpOnvifClient.Thermal
     /// are available to obtain valid temperature values.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class RadiometryGlobalParameters : SharpOnvifCommon.Xml.OnvifObject
+    public partial class RadiometryGlobalParameters : SharpOnvifCommon.Xml.OnvifContract
     {
         private float reflectedAmbientTemperatureField;
 
@@ -1878,7 +1825,7 @@ namespace SharpOnvifClient.Thermal
     /// Sets the Thermal Configuration for the requested VideoSource.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetConfiguration", Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class SetConfigurationRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string videoSourceTokenField;
 
@@ -1942,7 +1889,7 @@ namespace SharpOnvifClient.Thermal
     /// Sets the Thermal Configuration for the requested VideoSource.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetConfigurationResponse", Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class SetConfigurationResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public SetConfigurationResponse()
         {
@@ -1954,7 +1901,7 @@ namespace SharpOnvifClient.Thermal
     /// Sets the Radiometry Configuration for the requested VideoSource.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetRadiometryConfiguration", Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class SetRadiometryConfigurationRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetRadiometryConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string videoSourceTokenField;
 
@@ -2018,7 +1965,7 @@ namespace SharpOnvifClient.Thermal
     /// Sets the Radiometry Configuration for the requested VideoSource.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetRadiometryConfigurationResponse", Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class SetRadiometryConfigurationResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetRadiometryConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public SetRadiometryConfigurationResponse()
         {
@@ -2029,9 +1976,9 @@ namespace SharpOnvifClient.Thermal
     /// <summary>Constructs a contract named by an xsi:type attribute.</summary>
     internal static class XmlTypeFactory
     {
-        public static SharpOnvifCommon.Xml.OnvifObject Create(string ns, string name)
+        public static SharpOnvifCommon.Xml.OnvifContract Create(string ns, string name)
         {
-            return null;
+            return SharpOnvifCommon.Onvif.XmlTypeFactory.Create(ns, name);
         }
     }
 

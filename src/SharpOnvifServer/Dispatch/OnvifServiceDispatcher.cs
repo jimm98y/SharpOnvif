@@ -10,7 +10,7 @@ namespace SharpOnvifServer.Dispatch
     public struct OnvifDispatchResult
     {
         /// <summary>The response contract, or null for an operation with no reply body.</summary>
-        public OnvifObject Response;
+        public OnvifContract Response;
 
         /// <summary>Namespace of the response body element.</summary>
         public string Namespace;
@@ -18,7 +18,7 @@ namespace SharpOnvifServer.Dispatch
         /// <summary>Local name of the response body element.</summary>
         public string ElementName;
 
-        public OnvifDispatchResult(OnvifObject response, string ns, string elementName)
+        public OnvifDispatchResult(OnvifContract response, string ns, string elementName)
         {
             Response = response;
             Namespace = ns;
@@ -56,6 +56,6 @@ namespace SharpOnvifServer.Dispatch
             object service, string action, XmlReader body, CancellationToken cancellationToken);
 
         /// <summary>Resolves an xsi:type in this dispatcher's assembly.</summary>
-        public abstract OnvifObject ResolveXmlType(string ns, string name);
+        public abstract OnvifContract ResolveXmlType(string ns, string name);
     }
 }

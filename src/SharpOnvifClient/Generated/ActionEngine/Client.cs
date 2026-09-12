@@ -74,7 +74,7 @@ namespace SharpOnvifClient.ActionEngine
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<ModifyActionsResponse> ModifyActionsAsync(Action[] Action, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ModifyActionsResponse> ModifyActionsAsync(OnvifAction[] Action, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// The get capabilities operation returns the Action Engine capabilities
@@ -160,7 +160,7 @@ namespace SharpOnvifClient.ActionEngine
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -256,7 +256,7 @@ namespace SharpOnvifClient.ActionEngine
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<ModifyActionsResponse> ModifyActionsAsync(Action[] Action, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<ModifyActionsResponse> ModifyActionsAsync(OnvifAction[] Action, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return ModifyActionsAsync(new ModifyActionsRequest(Action), cancellationToken);
         }

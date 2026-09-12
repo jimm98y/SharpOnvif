@@ -1126,7 +1126,7 @@ namespace SharpOnvifServer.Media
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetVideoSourceConfigurationResponse SetVideoSourceConfiguration(VideoSourceConfiguration Configuration, bool ForcePersistence)
+        public virtual SetVideoSourceConfigurationResponse SetVideoSourceConfiguration(SharpOnvifCommon.Onvif.VideoSourceConfiguration Configuration, bool ForcePersistence)
         {
             throw new System.NotImplementedException();
         }
@@ -1154,7 +1154,7 @@ namespace SharpOnvifServer.Media
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetVideoEncoderConfigurationResponse SetVideoEncoderConfiguration(VideoEncoderConfiguration Configuration, bool ForcePersistence)
+        public virtual SetVideoEncoderConfigurationResponse SetVideoEncoderConfiguration(SharpOnvifCommon.Onvif.VideoEncoderConfiguration Configuration, bool ForcePersistence)
         {
             throw new System.NotImplementedException();
         }
@@ -1178,7 +1178,7 @@ namespace SharpOnvifServer.Media
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetAudioSourceConfigurationResponse SetAudioSourceConfiguration(AudioSourceConfiguration Configuration, bool ForcePersistence)
+        public virtual SetAudioSourceConfigurationResponse SetAudioSourceConfiguration(SharpOnvifCommon.Onvif.AudioSourceConfiguration Configuration, bool ForcePersistence)
         {
             throw new System.NotImplementedException();
         }
@@ -1202,7 +1202,7 @@ namespace SharpOnvifServer.Media
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetAudioEncoderConfigurationResponse SetAudioEncoderConfiguration(AudioEncoderConfiguration Configuration, bool ForcePersistence)
+        public virtual SetAudioEncoderConfigurationResponse SetAudioEncoderConfiguration(SharpOnvifCommon.Onvif.AudioEncoderConfiguration Configuration, bool ForcePersistence)
         {
             throw new System.NotImplementedException();
         }
@@ -1227,7 +1227,7 @@ namespace SharpOnvifServer.Media
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetVideoAnalyticsConfigurationResponse SetVideoAnalyticsConfiguration(VideoAnalyticsConfiguration Configuration, bool ForcePersistence)
+        public virtual SetVideoAnalyticsConfigurationResponse SetVideoAnalyticsConfiguration(SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration Configuration, bool ForcePersistence)
         {
             throw new System.NotImplementedException();
         }
@@ -1252,7 +1252,7 @@ namespace SharpOnvifServer.Media
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetMetadataConfigurationResponse SetMetadataConfiguration(MetadataConfiguration Configuration, bool ForcePersistence)
+        public virtual SetMetadataConfigurationResponse SetMetadataConfiguration(SharpOnvifCommon.Onvif.MetadataConfiguration Configuration, bool ForcePersistence)
         {
             throw new System.NotImplementedException();
         }
@@ -1273,7 +1273,7 @@ namespace SharpOnvifServer.Media
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetAudioOutputConfigurationResponse SetAudioOutputConfiguration(AudioOutputConfiguration Configuration, bool ForcePersistence)
+        public virtual SetAudioOutputConfigurationResponse SetAudioOutputConfiguration(SharpOnvifCommon.Onvif.AudioOutputConfiguration Configuration, bool ForcePersistence)
         {
             throw new System.NotImplementedException();
         }
@@ -1294,7 +1294,7 @@ namespace SharpOnvifServer.Media
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetAudioDecoderConfigurationResponse SetAudioDecoderConfiguration(AudioDecoderConfiguration Configuration, bool ForcePersistence)
+        public virtual SetAudioDecoderConfigurationResponse SetAudioDecoderConfiguration(SharpOnvifCommon.Onvif.AudioDecoderConfiguration Configuration, bool ForcePersistence)
         {
             throw new System.NotImplementedException();
         }
@@ -1501,7 +1501,7 @@ namespace SharpOnvifServer.Media
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual GetStreamUriResponse GetStreamUri(StreamSetup StreamSetup, string ProfileToken)
+        public virtual GetStreamUriResponse GetStreamUri(SharpOnvifCommon.Onvif.StreamSetup StreamSetup, string ProfileToken)
         {
             throw new System.NotImplementedException();
         }
@@ -1725,7 +1725,7 @@ namespace SharpOnvifServer.Media
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetOSDResponse SetOSD(OSDConfiguration OSD, System.Xml.XmlElement[] Any)
+        public virtual SetOSDResponse SetOSD(SharpOnvifCommon.Onvif.OSDConfiguration OSD, System.Xml.XmlElement[] Any)
         {
             throw new System.NotImplementedException();
         }
@@ -1745,7 +1745,7 @@ namespace SharpOnvifServer.Media
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual CreateOSDResponse CreateOSD(OSDConfiguration OSD, System.Xml.XmlElement[] Any)
+        public virtual CreateOSDResponse CreateOSD(SharpOnvifCommon.Onvif.OSDConfiguration OSD, System.Xml.XmlElement[] Any)
         {
             throw new System.NotImplementedException();
         }
@@ -2993,7 +2993,7 @@ namespace SharpOnvifServer.Media
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }

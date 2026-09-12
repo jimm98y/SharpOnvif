@@ -17,7 +17,7 @@ namespace SharpOnvifCommon.Xml
     public sealed class OnvifXmlReader
     {
         private readonly XmlReader _reader;
-        private readonly Func<string, string, OnvifObject> _typeFactory;
+        private readonly Func<string, string, OnvifContract> _typeFactory;
         private XmlDocument _ownerDocument;
         private readonly IXmlLineInfo _lineInfo;
 
@@ -26,7 +26,7 @@ namespace SharpOnvifCommon.Xml
         /// Resolves an xsi:type name to an instance. Each generated assembly supplies its own,
         /// because each carries its own copy of the shared schema types.
         /// </param>
-        public OnvifXmlReader(XmlReader reader, Func<string, string, OnvifObject> typeFactory = null)
+        public OnvifXmlReader(XmlReader reader, Func<string, string, OnvifContract> typeFactory = null)
         {
             _reader = reader ?? throw new ArgumentNullException(nameof(reader));
             _typeFactory = typeFactory;
@@ -110,9 +110,9 @@ namespace SharpOnvifCommon.Xml
         /// named type is constructed instead of <paramref name="create"/>'s, which is how schema
         /// extensions come back as their real type.
         /// </summary>
-        public T ReadElementObject<T>(Func<T> create) where T : OnvifObject
+        public T ReadElementObject<T>(Func<T> create) where T : OnvifContract
         {
-            OnvifObject instance = CreateInstance(create);
+            OnvifContract instance = CreateInstance(create);
             ReadInto(instance);
             return instance as T;
         }
@@ -121,7 +121,7 @@ namespace SharpOnvifCommon.Xml
         /// Reads the attributes and children of the element the reader is positioned on into an
         /// existing instance, and leaves the reader on the node after that element.
         /// </summary>
-        public void ReadInto(OnvifObject instance)
+        public void ReadInto(OnvifContract instance)
         {
             bool empty = _reader.IsEmptyElement;
 
@@ -145,7 +145,7 @@ namespace SharpOnvifCommon.Xml
 
                     case XmlNodeType.Element:
                         long before = Position();
-                        if (instance == null || !instance.ReadXmlElement(this))
+                        if (instance == null || !instance.InvokeReadXmlElement(this))
                         {
                             _reader.Skip();
                         }
@@ -161,7 +161,7 @@ namespace SharpOnvifCommon.Xml
                     case XmlNodeType.Text:
                     case XmlNodeType.CDATA:
                     case XmlNodeType.SignificantWhitespace:
-                        if (instance != null) instance.ReadXmlText(this, _reader.Value);
+                        if (instance != null) instance.InvokeReadXmlText(this, _reader.Value);
                         _reader.Read();
                         break;
 
@@ -172,7 +172,7 @@ namespace SharpOnvifCommon.Xml
             }
         }
 
-        private OnvifObject CreateInstance<T>(Func<T> create) where T : OnvifObject
+        private OnvifContract CreateInstance<T>(Func<T> create) where T : OnvifContract
         {
             string hint = _reader.GetAttribute("type", OnvifXmlNamespaces.XmlSchemaInstance);
             if (hint != null && _typeFactory != null)
@@ -187,7 +187,7 @@ namespace SharpOnvifCommon.Xml
                 }
 
                 string ns = _reader.LookupNamespace(prefix) ?? string.Empty;
-                OnvifObject resolved = _typeFactory(ns, local);
+                OnvifContract resolved = _typeFactory(ns, local);
 
                 // Only honour the hint if it names something assignable to the declared type;
                 // a device that sends a nonsensical xsi:type should not break the whole response.
@@ -197,7 +197,7 @@ namespace SharpOnvifCommon.Xml
             return create();
         }
 
-        private void ReadAttributes(OnvifObject instance)
+        private void ReadAttributes(OnvifContract instance)
         {
             if (!_reader.HasAttributes) return;
             if (!_reader.MoveToFirstAttribute()) return;
@@ -209,7 +209,7 @@ namespace SharpOnvifCommon.Xml
                 if (_reader.Prefix == "xmlns" || _reader.LocalName == "xmlns") continue;
                 if (_reader.NamespaceURI == OnvifXmlNamespaces.XmlSchemaInstance) continue;
 
-                if (instance != null) instance.ReadXmlAttribute(this);
+                if (instance != null) instance.InvokeReadXmlAttribute(this);
             }
             while (_reader.MoveToNextAttribute());
 

@@ -88,7 +88,7 @@ namespace SharpOnvifServer.Events
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -140,7 +140,7 @@ namespace SharpOnvifServer.Events
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual CreatePullPointSubscriptionResponse CreatePullPointSubscription(FilterType Filter, string InitialTerminationTime, CreatePullPointSubscriptionSubscriptionPolicy SubscriptionPolicy, System.Xml.XmlElement[] Any)
+        public virtual CreatePullPointSubscriptionResponse CreatePullPointSubscription(SharpOnvifCommon.Onvif.FilterType Filter, string InitialTerminationTime, CreatePullPointSubscriptionSubscriptionPolicy SubscriptionPolicy, System.Xml.XmlElement[] Any)
         {
             throw new System.NotImplementedException();
         }
@@ -359,7 +359,7 @@ namespace SharpOnvifServer.Events
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -385,7 +385,7 @@ namespace SharpOnvifServer.Events
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual NotifyResponse Notify(NotificationMessageHolderType[] NotificationMessage, System.Xml.XmlElement[] Any)
+        public virtual NotifyResponse Notify(SharpOnvifCommon.Onvif.NotificationMessageHolderType[] NotificationMessage, System.Xml.XmlElement[] Any)
         {
             throw new System.NotImplementedException();
         }
@@ -443,7 +443,7 @@ namespace SharpOnvifServer.Events
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -469,7 +469,7 @@ namespace SharpOnvifServer.Events
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SubscribeResponse Subscribe(EndpointReferenceType ConsumerReference, FilterType Filter, string InitialTerminationTime, SubscribeSubscriptionPolicy SubscriptionPolicy, System.Xml.XmlElement[] Any)
+        public virtual SubscribeResponse Subscribe(SharpOnvifCommon.Onvif.EndpointReferenceType ConsumerReference, SharpOnvifCommon.Onvif.FilterType Filter, string InitialTerminationTime, SubscribeSubscriptionPolicy SubscriptionPolicy, System.Xml.XmlElement[] Any)
         {
             throw new System.NotImplementedException();
         }
@@ -486,7 +486,7 @@ namespace SharpOnvifServer.Events
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual GetCurrentMessageResponse GetCurrentMessage(TopicExpressionType Topic, System.Xml.XmlElement[] Any)
+        public virtual GetCurrentMessageResponse GetCurrentMessage(SharpOnvifCommon.Onvif.TopicExpressionType Topic, System.Xml.XmlElement[] Any)
         {
             throw new System.NotImplementedException();
         }
@@ -559,7 +559,7 @@ namespace SharpOnvifServer.Events
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -739,7 +739,7 @@ namespace SharpOnvifServer.Events
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -799,7 +799,7 @@ namespace SharpOnvifServer.Events
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual NotifyResponse Notify(NotificationMessageHolderType[] NotificationMessage, System.Xml.XmlElement[] Any)
+        public virtual NotifyResponse Notify(SharpOnvifCommon.Onvif.NotificationMessageHolderType[] NotificationMessage, System.Xml.XmlElement[] Any)
         {
             throw new System.NotImplementedException();
         }
@@ -887,7 +887,7 @@ namespace SharpOnvifServer.Events
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -1097,7 +1097,7 @@ namespace SharpOnvifServer.Events
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -1213,7 +1213,7 @@ namespace SharpOnvifServer.Events
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -1282,7 +1282,7 @@ namespace SharpOnvifServer.Events
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual CreatePullPointSubscriptionResponse CreatePullPointSubscription(FilterType Filter, string InitialTerminationTime, CreatePullPointSubscriptionSubscriptionPolicy SubscriptionPolicy, System.Xml.XmlElement[] Any)
+        public virtual CreatePullPointSubscriptionResponse CreatePullPointSubscription(SharpOnvifCommon.Onvif.FilterType Filter, string InitialTerminationTime, CreatePullPointSubscriptionSubscriptionPolicy SubscriptionPolicy, System.Xml.XmlElement[] Any)
         {
             throw new System.NotImplementedException();
         }
@@ -1385,7 +1385,7 @@ namespace SharpOnvifServer.Events
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual NotifyResponse Notify(NotificationMessageHolderType[] NotificationMessage, System.Xml.XmlElement[] Any)
+        public virtual NotifyResponse Notify(SharpOnvifCommon.Onvif.NotificationMessageHolderType[] NotificationMessage, System.Xml.XmlElement[] Any)
         {
             throw new System.NotImplementedException();
         }
@@ -1402,7 +1402,7 @@ namespace SharpOnvifServer.Events
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SubscribeResponse Subscribe(EndpointReferenceType ConsumerReference, FilterType Filter, string InitialTerminationTime, SubscribeSubscriptionPolicy SubscriptionPolicy, System.Xml.XmlElement[] Any)
+        public virtual SubscribeResponse Subscribe(SharpOnvifCommon.Onvif.EndpointReferenceType ConsumerReference, SharpOnvifCommon.Onvif.FilterType Filter, string InitialTerminationTime, SubscribeSubscriptionPolicy SubscriptionPolicy, System.Xml.XmlElement[] Any)
         {
             throw new System.NotImplementedException();
         }
@@ -1419,7 +1419,7 @@ namespace SharpOnvifServer.Events
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual GetCurrentMessageResponse GetCurrentMessage(TopicExpressionType Topic, System.Xml.XmlElement[] Any)
+        public virtual GetCurrentMessageResponse GetCurrentMessage(SharpOnvifCommon.Onvif.TopicExpressionType Topic, System.Xml.XmlElement[] Any)
         {
             throw new System.NotImplementedException();
         }
@@ -1925,7 +1925,7 @@ namespace SharpOnvifServer.Events
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }

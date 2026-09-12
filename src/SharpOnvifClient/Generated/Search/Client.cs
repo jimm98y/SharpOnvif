@@ -77,7 +77,7 @@ namespace SharpOnvifClient.Search
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<FindRecordingsResponse> FindRecordingsAsync(SearchScope Scope, int MaxMatches, string KeepAliveTime, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<FindRecordingsResponse> FindRecordingsAsync(SharpOnvifCommon.Onvif.SearchScope Scope, int MaxMatches, string KeepAliveTime, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// GetRecordingSearchResults acquires the results from a recording search session previously initiated
@@ -114,7 +114,7 @@ namespace SharpOnvifClient.Search
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<FindEventsResponse> FindEventsAsync(System.DateTime StartPoint, System.DateTime EndPoint, SearchScope Scope, EventFilter SearchFilter, bool IncludeStartState, int MaxMatches, string KeepAliveTime, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<FindEventsResponse> FindEventsAsync(System.DateTime StartPoint, System.DateTime EndPoint, SharpOnvifCommon.Onvif.SearchScope Scope, SharpOnvifCommon.Onvif.EventFilter SearchFilter, bool IncludeStartState, int MaxMatches, string KeepAliveTime, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// GetEventSearchResults acquires the results from a recording event search session previously
@@ -148,7 +148,7 @@ namespace SharpOnvifClient.Search
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<FindPTZPositionResponse> FindPTZPositionAsync(System.DateTime StartPoint, System.DateTime EndPoint, SearchScope Scope, PTZPositionFilter SearchFilter, int MaxMatches, string KeepAliveTime, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<FindPTZPositionResponse> FindPTZPositionAsync(System.DateTime StartPoint, System.DateTime EndPoint, SharpOnvifCommon.Onvif.SearchScope Scope, SharpOnvifCommon.Onvif.PTZPositionFilter SearchFilter, int MaxMatches, string KeepAliveTime, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// GetPTZPositionSearchResults acquires the results from a ptz position search session previously
@@ -210,7 +210,7 @@ namespace SharpOnvifClient.Search
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<FindMetadataResponse> FindMetadataAsync(System.DateTime StartPoint, System.DateTime EndPoint, SearchScope Scope, MetadataFilter MetadataFilter, int MaxMatches, string KeepAliveTime, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<FindMetadataResponse> FindMetadataAsync(System.DateTime StartPoint, System.DateTime EndPoint, SharpOnvifCommon.Onvif.SearchScope Scope, SharpOnvifCommon.Onvif.MetadataFilter MetadataFilter, int MaxMatches, string KeepAliveTime, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// GetMetadataSearchResults acquires the results from a recording search session previously initiated
@@ -299,7 +299,7 @@ namespace SharpOnvifClient.Search
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -398,7 +398,7 @@ namespace SharpOnvifClient.Search
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<FindRecordingsResponse> FindRecordingsAsync(SearchScope Scope, int MaxMatches, string KeepAliveTime, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<FindRecordingsResponse> FindRecordingsAsync(SharpOnvifCommon.Onvif.SearchScope Scope, int MaxMatches, string KeepAliveTime, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return FindRecordingsAsync(new FindRecordingsRequest(Scope, MaxMatches, KeepAliveTime), cancellationToken);
         }
@@ -449,7 +449,7 @@ namespace SharpOnvifClient.Search
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<FindEventsResponse> FindEventsAsync(System.DateTime StartPoint, System.DateTime EndPoint, SearchScope Scope, EventFilter SearchFilter, bool IncludeStartState, int MaxMatches, string KeepAliveTime, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<FindEventsResponse> FindEventsAsync(System.DateTime StartPoint, System.DateTime EndPoint, SharpOnvifCommon.Onvif.SearchScope Scope, SharpOnvifCommon.Onvif.EventFilter SearchFilter, bool IncludeStartState, int MaxMatches, string KeepAliveTime, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return FindEventsAsync(new FindEventsRequest(StartPoint, EndPoint, Scope, SearchFilter, IncludeStartState, MaxMatches, KeepAliveTime), cancellationToken);
         }
@@ -497,7 +497,7 @@ namespace SharpOnvifClient.Search
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<FindPTZPositionResponse> FindPTZPositionAsync(System.DateTime StartPoint, System.DateTime EndPoint, SearchScope Scope, PTZPositionFilter SearchFilter, int MaxMatches, string KeepAliveTime, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<FindPTZPositionResponse> FindPTZPositionAsync(System.DateTime StartPoint, System.DateTime EndPoint, SharpOnvifCommon.Onvif.SearchScope Scope, SharpOnvifCommon.Onvif.PTZPositionFilter SearchFilter, int MaxMatches, string KeepAliveTime, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return FindPTZPositionAsync(new FindPTZPositionRequest(StartPoint, EndPoint, Scope, SearchFilter, MaxMatches, KeepAliveTime), cancellationToken);
         }
@@ -587,7 +587,7 @@ namespace SharpOnvifClient.Search
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<FindMetadataResponse> FindMetadataAsync(System.DateTime StartPoint, System.DateTime EndPoint, SearchScope Scope, MetadataFilter MetadataFilter, int MaxMatches, string KeepAliveTime, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<FindMetadataResponse> FindMetadataAsync(System.DateTime StartPoint, System.DateTime EndPoint, SharpOnvifCommon.Onvif.SearchScope Scope, SharpOnvifCommon.Onvif.MetadataFilter MetadataFilter, int MaxMatches, string KeepAliveTime, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return FindMetadataAsync(new FindMetadataRequest(StartPoint, EndPoint, Scope, MetadataFilter, MaxMatches, KeepAliveTime), cancellationToken);
         }

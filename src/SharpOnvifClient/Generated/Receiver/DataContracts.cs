@@ -13,227 +13,16 @@ namespace SharpOnvifClient.Receiver
     /// <summary>XML namespaces used by this service's contracts.</summary>
     internal static class Ns
     {
-        public const string OnvifVer10 = "http://www.onvif.org/ver10/schema";
         public const string Ver10Receiver = "http://www.onvif.org/ver10/receiver/wsdl";
-    }
-
-    /// <summary>
-    /// Specifies a receiver connection mode.
-    /// </summary>
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public enum ReceiverMode
-    {
-        /// <summary>
-        /// The receiver connects on demand, as required by consumers of the media streams.
-        /// </summary>
-        AutoConnect,
-
-        /// <summary>
-        /// The receiver attempts to maintain a persistent connection to the configured endpoint.
-        /// </summary>
-        AlwaysConnect,
-
-        /// <summary>
-        /// The receiver does not attempt to connect.
-        /// </summary>
-        NeverConnect,
-
-        /// <summary>
-        /// This case should never happen.
-        /// </summary>
-        Unknown,
-
-    }
-
-    /// <summary>
-    /// Specifies the current connection state of the receiver.
-    /// </summary>
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public enum ReceiverState
-    {
-        /// <summary>
-        /// The receiver is not connected.
-        /// </summary>
-        NotConnected,
-
-        /// <summary>
-        /// The receiver is attempting to connect.
-        /// </summary>
-        Connecting,
-
-        /// <summary>
-        /// The receiver is connected.
-        /// </summary>
-        Connected,
-
-        /// <summary>
-        /// This case should never happen.
-        /// </summary>
-        Unknown,
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public enum StreamType
-    {
-        [System.Xml.Serialization.XmlEnumAttribute("RTP-Unicast")]
-        RTPUnicast,
-
-        [System.Xml.Serialization.XmlEnumAttribute("RTP-Multicast")]
-        RTPMulticast,
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public enum TransportProtocol
-    {
-        UDP,
-
-        /// <summary>
-        /// This value is deprecated.
-        /// </summary>
-        TCP,
-
-        RTSP,
-
-        HTTP,
-
     }
 
     /// <summary>Conversions between the generated enums and their XML lexical forms.</summary>
     internal static class EnumXml
     {
-        public static string ToXml(ReceiverMode value)
-        {
-            switch (value)
-            {
-                case ReceiverMode.AutoConnect:
-                    return "AutoConnect";
-                case ReceiverMode.AlwaysConnect:
-                    return "AlwaysConnect";
-                case ReceiverMode.NeverConnect:
-                    return "NeverConnect";
-                case ReceiverMode.Unknown:
-                    return "Unknown";
-                default:
-                    return null;
-            }
-        }
-
-        public static ReceiverMode ParseReceiverMode(string text)
-        {
-            switch (text)
-            {
-                case "AutoConnect":
-                    return ReceiverMode.AutoConnect;
-                case "AlwaysConnect":
-                    return ReceiverMode.AlwaysConnect;
-                case "NeverConnect":
-                    return ReceiverMode.NeverConnect;
-                case "Unknown":
-                    return ReceiverMode.Unknown;
-                default:
-                    return default(ReceiverMode);
-            }
-        }
-
-        public static string ToXml(ReceiverState value)
-        {
-            switch (value)
-            {
-                case ReceiverState.NotConnected:
-                    return "NotConnected";
-                case ReceiverState.Connecting:
-                    return "Connecting";
-                case ReceiverState.Connected:
-                    return "Connected";
-                case ReceiverState.Unknown:
-                    return "Unknown";
-                default:
-                    return null;
-            }
-        }
-
-        public static ReceiverState ParseReceiverState(string text)
-        {
-            switch (text)
-            {
-                case "NotConnected":
-                    return ReceiverState.NotConnected;
-                case "Connecting":
-                    return ReceiverState.Connecting;
-                case "Connected":
-                    return ReceiverState.Connected;
-                case "Unknown":
-                    return ReceiverState.Unknown;
-                default:
-                    return default(ReceiverState);
-            }
-        }
-
-        public static string ToXml(StreamType value)
-        {
-            switch (value)
-            {
-                case StreamType.RTPUnicast:
-                    return "RTP-Unicast";
-                case StreamType.RTPMulticast:
-                    return "RTP-Multicast";
-                default:
-                    return null;
-            }
-        }
-
-        public static StreamType ParseStreamType(string text)
-        {
-            switch (text)
-            {
-                case "RTP-Unicast":
-                    return StreamType.RTPUnicast;
-                case "RTP-Multicast":
-                    return StreamType.RTPMulticast;
-                default:
-                    return default(StreamType);
-            }
-        }
-
-        public static string ToXml(TransportProtocol value)
-        {
-            switch (value)
-            {
-                case TransportProtocol.UDP:
-                    return "UDP";
-                case TransportProtocol.TCP:
-                    return "TCP";
-                case TransportProtocol.RTSP:
-                    return "RTSP";
-                case TransportProtocol.HTTP:
-                    return "HTTP";
-                default:
-                    return null;
-            }
-        }
-
-        public static TransportProtocol ParseTransportProtocol(string text)
-        {
-            switch (text)
-            {
-                case "UDP":
-                    return TransportProtocol.UDP;
-                case "TCP":
-                    return TransportProtocol.TCP;
-                case "RTSP":
-                    return TransportProtocol.RTSP;
-                case "HTTP":
-                    return TransportProtocol.HTTP;
-                default:
-                    return default(TransportProtocol);
-            }
-        }
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/receiver/wsdl")]
-    public partial class Capabilities : SharpOnvifCommon.Xml.OnvifObject
+    public partial class Capabilities : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -421,11 +210,11 @@ namespace SharpOnvifClient.Receiver
     /// Configures an existing receiver. This operation is mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ConfigureReceiver", Namespace="http://www.onvif.org/ver10/receiver/wsdl")]
-    public partial class ConfigureReceiverRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ConfigureReceiverRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string receiverTokenField;
 
-        private ReceiverConfiguration configurationField;
+        private SharpOnvifCommon.Onvif.ReceiverConfiguration configurationField;
 
         /// <summary>
         /// The token of the receiver to be configured.
@@ -441,7 +230,7 @@ namespace SharpOnvifClient.Receiver
         /// The new configuration for the receiver.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public ReceiverConfiguration Configuration
+        public SharpOnvifCommon.Onvif.ReceiverConfiguration Configuration
         {
             get { return this.configurationField; }
             set { this.configurationField = value; }
@@ -451,7 +240,7 @@ namespace SharpOnvifClient.Receiver
         {
         }
 
-        public ConfigureReceiverRequest(string receiverToken, ReceiverConfiguration configuration)
+        public ConfigureReceiverRequest(string receiverToken, SharpOnvifCommon.Onvif.ReceiverConfiguration configuration)
         {
             this.receiverTokenField = receiverToken;
             this.configurationField = configuration;
@@ -460,7 +249,7 @@ namespace SharpOnvifClient.Receiver
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Receiver, "ReceiverToken", this.receiverTokenField);
-            writer.WriteElement(Ns.Ver10Receiver, "Configuration", this.configurationField, Ns.OnvifVer10, "ReceiverConfiguration");
+            writer.WriteElement(Ns.Ver10Receiver, "Configuration", this.configurationField, "http://www.onvif.org/ver10/schema", "ReceiverConfiguration");
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
@@ -473,7 +262,7 @@ namespace SharpOnvifClient.Receiver
                     return true;
                 case "Configuration":
                     if (reader.NamespaceUri != Ns.Ver10Receiver) break;
-                    this.configurationField = reader.ReadElementObject<ReceiverConfiguration>(() => new ReceiverConfiguration());
+                    this.configurationField = reader.ReadElementObject<SharpOnvifCommon.Onvif.ReceiverConfiguration>(() => new SharpOnvifCommon.Onvif.ReceiverConfiguration());
                     return true;
             }
             return false;
@@ -485,7 +274,7 @@ namespace SharpOnvifClient.Receiver
     /// Configures an existing receiver. This operation is mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ConfigureReceiverResponse", Namespace="http://www.onvif.org/ver10/receiver/wsdl")]
-    public partial class ConfigureReceiverResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ConfigureReceiverResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public ConfigureReceiverResponse()
         {
@@ -498,15 +287,15 @@ namespace SharpOnvifClient.Receiver
     /// receiver cannot be created.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateReceiver", Namespace="http://www.onvif.org/ver10/receiver/wsdl")]
-    public partial class CreateReceiverRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CreateReceiverRequest : SharpOnvifCommon.Xml.OnvifContract
     {
-        private ReceiverConfiguration configurationField;
+        private SharpOnvifCommon.Onvif.ReceiverConfiguration configurationField;
 
         /// <summary>
         /// The initial configuration for the new receiver.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public ReceiverConfiguration Configuration
+        public SharpOnvifCommon.Onvif.ReceiverConfiguration Configuration
         {
             get { return this.configurationField; }
             set { this.configurationField = value; }
@@ -516,14 +305,14 @@ namespace SharpOnvifClient.Receiver
         {
         }
 
-        public CreateReceiverRequest(ReceiverConfiguration configuration)
+        public CreateReceiverRequest(SharpOnvifCommon.Onvif.ReceiverConfiguration configuration)
         {
             this.configurationField = configuration;
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            writer.WriteElement(Ns.Ver10Receiver, "Configuration", this.configurationField, Ns.OnvifVer10, "ReceiverConfiguration");
+            writer.WriteElement(Ns.Ver10Receiver, "Configuration", this.configurationField, "http://www.onvif.org/ver10/schema", "ReceiverConfiguration");
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
@@ -532,7 +321,7 @@ namespace SharpOnvifClient.Receiver
             {
                 case "Configuration":
                     if (reader.NamespaceUri != Ns.Ver10Receiver) break;
-                    this.configurationField = reader.ReadElementObject<ReceiverConfiguration>(() => new ReceiverConfiguration());
+                    this.configurationField = reader.ReadElementObject<SharpOnvifCommon.Onvif.ReceiverConfiguration>(() => new SharpOnvifCommon.Onvif.ReceiverConfiguration());
                     return true;
             }
             return false;
@@ -545,15 +334,15 @@ namespace SharpOnvifClient.Receiver
     /// receiver cannot be created.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateReceiverResponse", Namespace="http://www.onvif.org/ver10/receiver/wsdl")]
-    public partial class CreateReceiverResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CreateReceiverResponse : SharpOnvifCommon.Xml.OnvifContract
     {
-        private Receiver receiverField;
+        private SharpOnvifCommon.Onvif.Receiver receiverField;
 
         /// <summary>
         /// The details of the receiver that was created.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public Receiver Receiver
+        public SharpOnvifCommon.Onvif.Receiver Receiver
         {
             get { return this.receiverField; }
             set { this.receiverField = value; }
@@ -563,14 +352,14 @@ namespace SharpOnvifClient.Receiver
         {
         }
 
-        public CreateReceiverResponse(Receiver receiver)
+        public CreateReceiverResponse(SharpOnvifCommon.Onvif.Receiver receiver)
         {
             this.receiverField = receiver;
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            writer.WriteElement(Ns.Ver10Receiver, "Receiver", this.receiverField, Ns.OnvifVer10, "Receiver");
+            writer.WriteElement(Ns.Ver10Receiver, "Receiver", this.receiverField, "http://www.onvif.org/ver10/schema", "Receiver");
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
@@ -579,7 +368,7 @@ namespace SharpOnvifClient.Receiver
             {
                 case "Receiver":
                     if (reader.NamespaceUri != Ns.Ver10Receiver) break;
-                    this.receiverField = reader.ReadElementObject<Receiver>(() => new Receiver());
+                    this.receiverField = reader.ReadElementObject<SharpOnvifCommon.Onvif.Receiver>(() => new SharpOnvifCommon.Onvif.Receiver());
                     return true;
             }
             return false;
@@ -592,7 +381,7 @@ namespace SharpOnvifClient.Receiver
     /// otherwise a fault shall be raised. This operation is mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteReceiver", Namespace="http://www.onvif.org/ver10/receiver/wsdl")]
-    public partial class DeleteReceiverRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteReceiverRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string receiverTokenField;
 
@@ -639,7 +428,7 @@ namespace SharpOnvifClient.Receiver
     /// otherwise a fault shall be raised. This operation is mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteReceiverResponse", Namespace="http://www.onvif.org/ver10/receiver/wsdl")]
-    public partial class DeleteReceiverResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteReceiverResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public DeleteReceiverResponse()
         {
@@ -651,7 +440,7 @@ namespace SharpOnvifClient.Receiver
     /// Retrieves the details of a specific receiver. This operation is mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetReceiver", Namespace="http://www.onvif.org/ver10/receiver/wsdl")]
-    public partial class GetReceiverRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetReceiverRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string receiverTokenField;
 
@@ -697,15 +486,15 @@ namespace SharpOnvifClient.Receiver
     /// Retrieves the details of a specific receiver. This operation is mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetReceiverResponse", Namespace="http://www.onvif.org/ver10/receiver/wsdl")]
-    public partial class GetReceiverResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetReceiverResponse : SharpOnvifCommon.Xml.OnvifContract
     {
-        private Receiver receiverField;
+        private SharpOnvifCommon.Onvif.Receiver receiverField;
 
         /// <summary>
         /// The details of the receiver.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public Receiver Receiver
+        public SharpOnvifCommon.Onvif.Receiver Receiver
         {
             get { return this.receiverField; }
             set { this.receiverField = value; }
@@ -715,14 +504,14 @@ namespace SharpOnvifClient.Receiver
         {
         }
 
-        public GetReceiverResponse(Receiver receiver)
+        public GetReceiverResponse(SharpOnvifCommon.Onvif.Receiver receiver)
         {
             this.receiverField = receiver;
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            writer.WriteElement(Ns.Ver10Receiver, "Receiver", this.receiverField, Ns.OnvifVer10, "Receiver");
+            writer.WriteElement(Ns.Ver10Receiver, "Receiver", this.receiverField, "http://www.onvif.org/ver10/schema", "Receiver");
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
@@ -731,7 +520,7 @@ namespace SharpOnvifClient.Receiver
             {
                 case "Receiver":
                     if (reader.NamespaceUri != Ns.Ver10Receiver) break;
-                    this.receiverField = reader.ReadElementObject<Receiver>(() => new Receiver());
+                    this.receiverField = reader.ReadElementObject<SharpOnvifCommon.Onvif.Receiver>(() => new SharpOnvifCommon.Onvif.Receiver());
                     return true;
             }
             return false;
@@ -744,7 +533,7 @@ namespace SharpOnvifClient.Receiver
     /// operation is mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetReceiverState", Namespace="http://www.onvif.org/ver10/receiver/wsdl")]
-    public partial class GetReceiverStateRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetReceiverStateRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string receiverTokenField;
 
@@ -791,15 +580,15 @@ namespace SharpOnvifClient.Receiver
     /// operation is mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetReceiverStateResponse", Namespace="http://www.onvif.org/ver10/receiver/wsdl")]
-    public partial class GetReceiverStateResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetReceiverStateResponse : SharpOnvifCommon.Xml.OnvifContract
     {
-        private ReceiverStateInformation receiverStateField;
+        private SharpOnvifCommon.Onvif.ReceiverStateInformation receiverStateField;
 
         /// <summary>
         /// Description of the current receiver state.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public ReceiverStateInformation ReceiverState
+        public SharpOnvifCommon.Onvif.ReceiverStateInformation ReceiverState
         {
             get { return this.receiverStateField; }
             set { this.receiverStateField = value; }
@@ -809,14 +598,14 @@ namespace SharpOnvifClient.Receiver
         {
         }
 
-        public GetReceiverStateResponse(ReceiverStateInformation receiverState)
+        public GetReceiverStateResponse(SharpOnvifCommon.Onvif.ReceiverStateInformation receiverState)
         {
             this.receiverStateField = receiverState;
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            writer.WriteElement(Ns.Ver10Receiver, "ReceiverState", this.receiverStateField, Ns.OnvifVer10, "ReceiverStateInformation");
+            writer.WriteElement(Ns.Ver10Receiver, "ReceiverState", this.receiverStateField, "http://www.onvif.org/ver10/schema", "ReceiverStateInformation");
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
@@ -825,7 +614,7 @@ namespace SharpOnvifClient.Receiver
             {
                 case "ReceiverState":
                     if (reader.NamespaceUri != Ns.Ver10Receiver) break;
-                    this.receiverStateField = reader.ReadElementObject<ReceiverStateInformation>(() => new ReceiverStateInformation());
+                    this.receiverStateField = reader.ReadElementObject<SharpOnvifCommon.Onvif.ReceiverStateInformation>(() => new SharpOnvifCommon.Onvif.ReceiverStateInformation());
                     return true;
             }
             return false;
@@ -837,7 +626,7 @@ namespace SharpOnvifClient.Receiver
     /// Lists all receivers currently present on a device. This operation is mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetReceivers", Namespace="http://www.onvif.org/ver10/receiver/wsdl")]
-    public partial class GetReceiversRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetReceiversRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         public GetReceiversRequest()
         {
@@ -849,15 +638,15 @@ namespace SharpOnvifClient.Receiver
     /// Lists all receivers currently present on a device. This operation is mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetReceiversResponse", Namespace="http://www.onvif.org/ver10/receiver/wsdl")]
-    public partial class GetReceiversResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetReceiversResponse : SharpOnvifCommon.Xml.OnvifContract
     {
-        private Receiver[] receiversField;
+        private SharpOnvifCommon.Onvif.Receiver[] receiversField;
 
         /// <summary>
         /// A list of all receivers that currently exist on the device.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute("Receivers", Order=0)]
-        public Receiver[] Receivers
+        public SharpOnvifCommon.Onvif.Receiver[] Receivers
         {
             get { return this.receiversField; }
             set { this.receiversField = value; }
@@ -867,7 +656,7 @@ namespace SharpOnvifClient.Receiver
         {
         }
 
-        public GetReceiversResponse(Receiver[] receivers)
+        public GetReceiversResponse(SharpOnvifCommon.Onvif.Receiver[] receivers)
         {
             this.receiversField = receivers;
         }
@@ -878,7 +667,7 @@ namespace SharpOnvifClient.Receiver
             {
                 for (int i = 0; i < this.receiversField.Length; i++)
                 {
-                    writer.WriteElement(Ns.Ver10Receiver, "Receivers", this.receiversField[i], Ns.OnvifVer10, "Receiver");
+                    writer.WriteElement(Ns.Ver10Receiver, "Receivers", this.receiversField[i], "http://www.onvif.org/ver10/schema", "Receiver");
                 }
             }
         }
@@ -889,7 +678,7 @@ namespace SharpOnvifClient.Receiver
             {
                 case "Receivers":
                     if (reader.NamespaceUri != Ns.Ver10Receiver) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.receiversField, reader.ReadElementObject<Receiver>(() => new Receiver()));
+                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.receiversField, reader.ReadElementObject<SharpOnvifCommon.Onvif.Receiver>(() => new SharpOnvifCommon.Onvif.Receiver()));
                     return true;
             }
             return false;
@@ -901,7 +690,7 @@ namespace SharpOnvifClient.Receiver
     /// Returns the capabilities of the receiver service. The result is returned in a typed answer.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilities", Namespace="http://www.onvif.org/ver10/receiver/wsdl")]
-    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         public GetServiceCapabilitiesRequest()
         {
@@ -913,7 +702,7 @@ namespace SharpOnvifClient.Receiver
     /// Returns the capabilities of the receiver service. The result is returned in a typed answer.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilitiesResponse", Namespace="http://www.onvif.org/ver10/receiver/wsdl")]
-    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private Capabilities capabilitiesField;
 
@@ -956,239 +745,15 @@ namespace SharpOnvifClient.Receiver
     }
 
     /// <summary>
-    /// Description of a receiver, including its token and configuration.
-    /// </summary>
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Receiver : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string tokenField;
-
-        private ReceiverConfiguration configurationField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        /// <summary>
-        /// Unique identifier of the receiver.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string Token
-        {
-            get { return this.tokenField; }
-            set { this.tokenField = value; }
-        }
-
-        /// <summary>
-        /// Describes the configuration of the receiver.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public ReceiverConfiguration Configuration
-        {
-            get { return this.configurationField; }
-            set { this.configurationField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=2)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "Receiver"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Token", this.tokenField);
-            writer.WriteElement(Ns.OnvifVer10, "Configuration", this.configurationField, Ns.OnvifVer10, "ReceiverConfiguration");
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Token":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.tokenField = reader.ReadElementText();
-                    return true;
-                case "Configuration":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.configurationField = reader.ReadElementObject<ReceiverConfiguration>(() => new ReceiverConfiguration());
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    /// <summary>
-    /// Describes the configuration of a receiver.
-    /// </summary>
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ReceiverConfiguration : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private ReceiverMode modeField;
-
-        private string mediaUriField;
-
-        private StreamSetup streamSetupField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        /// <summary>
-        /// The following connection modes are defined:
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public ReceiverMode Mode
-        {
-            get { return this.modeField; }
-            set { this.modeField = value; }
-        }
-
-        /// <summary>
-        /// Details of the URI to which the receiver should connect.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1, DataType="anyURI")]
-        public string MediaUri
-        {
-            get { return this.mediaUriField; }
-            set { this.mediaUriField = value; }
-        }
-
-        /// <summary>
-        /// Stream connection parameters.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public StreamSetup StreamSetup
-        {
-            get { return this.streamSetupField; }
-            set { this.streamSetupField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=3)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "ReceiverConfiguration"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Mode", EnumXml.ToXml(this.modeField));
-            writer.WriteElementString(Ns.OnvifVer10, "MediaUri", this.mediaUriField);
-            writer.WriteElement(Ns.OnvifVer10, "StreamSetup", this.streamSetupField, Ns.OnvifVer10, "StreamSetup");
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Mode":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.modeField = EnumXml.ParseReceiverMode(reader.ReadElementText());
-                    return true;
-                case "MediaUri":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.mediaUriField = reader.ReadElementText();
-                    return true;
-                case "StreamSetup":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.streamSetupField = reader.ReadElementObject<StreamSetup>(() => new StreamSetup());
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    /// <summary>
-    /// Contains information about a receiver's current state.
-    /// </summary>
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ReceiverStateInformation : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private ReceiverState stateField;
-
-        private bool autoCreatedField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        /// <summary>
-        /// The connection state of the receiver may have one of the following states:
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public ReceiverState State
-        {
-            get { return this.stateField; }
-            set { this.stateField = value; }
-        }
-
-        /// <summary>
-        /// Indicates whether or not the receiver was created automatically.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public bool AutoCreated
-        {
-            get { return this.autoCreatedField; }
-            set { this.autoCreatedField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=2)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "ReceiverStateInformation"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "State", EnumXml.ToXml(this.stateField));
-            writer.WriteElementString(Ns.OnvifVer10, "AutoCreated", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.autoCreatedField));
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "State":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.stateField = EnumXml.ParseReceiverState(reader.ReadElementText());
-                    return true;
-                case "AutoCreated":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.autoCreatedField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    /// <summary>
     /// Sets the mode of the receiver without affecting the rest of its configuration. This operation is
     /// mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetReceiverMode", Namespace="http://www.onvif.org/ver10/receiver/wsdl")]
-    public partial class SetReceiverModeRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetReceiverModeRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string receiverTokenField;
 
-        private ReceiverMode modeField;
+        private SharpOnvifCommon.Onvif.ReceiverMode modeField;
 
         /// <summary>
         /// The token of the receiver to be changed.
@@ -1204,7 +769,7 @@ namespace SharpOnvifClient.Receiver
         /// The new receiver mode. Options available are:
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public ReceiverMode Mode
+        public SharpOnvifCommon.Onvif.ReceiverMode Mode
         {
             get { return this.modeField; }
             set { this.modeField = value; }
@@ -1214,7 +779,7 @@ namespace SharpOnvifClient.Receiver
         {
         }
 
-        public SetReceiverModeRequest(string receiverToken, ReceiverMode mode)
+        public SetReceiverModeRequest(string receiverToken, SharpOnvifCommon.Onvif.ReceiverMode mode)
         {
             this.receiverTokenField = receiverToken;
             this.modeField = mode;
@@ -1223,7 +788,7 @@ namespace SharpOnvifClient.Receiver
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Receiver, "ReceiverToken", this.receiverTokenField);
-            writer.WriteElementString(Ns.Ver10Receiver, "Mode", EnumXml.ToXml(this.modeField));
+            writer.WriteElementString(Ns.Ver10Receiver, "Mode", SharpOnvifCommon.Onvif.EnumXml.ToXml(this.modeField));
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
@@ -1236,7 +801,7 @@ namespace SharpOnvifClient.Receiver
                     return true;
                 case "Mode":
                     if (reader.NamespaceUri != Ns.Ver10Receiver) break;
-                    this.modeField = EnumXml.ParseReceiverMode(reader.ReadElementText());
+                    this.modeField = SharpOnvifCommon.Onvif.EnumXml.ParseReceiverMode(reader.ReadElementText());
                     return true;
             }
             return false;
@@ -1249,7 +814,7 @@ namespace SharpOnvifClient.Receiver
     /// mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetReceiverModeResponse", Namespace="http://www.onvif.org/ver10/receiver/wsdl")]
-    public partial class SetReceiverModeResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetReceiverModeResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public SetReceiverModeResponse()
         {
@@ -1257,155 +822,12 @@ namespace SharpOnvifClient.Receiver
 
     }
 
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class StreamSetup : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private StreamType streamField;
-
-        private Transport transportField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        /// <summary>
-        /// Defines if a multicast or unicast stream is requested.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public StreamType Stream
-        {
-            get { return this.streamField; }
-            set { this.streamField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public Transport Transport
-        {
-            get { return this.transportField; }
-            set { this.transportField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=2)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "StreamSetup"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Stream", EnumXml.ToXml(this.streamField));
-            writer.WriteElement(Ns.OnvifVer10, "Transport", this.transportField, Ns.OnvifVer10, "Transport");
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Stream":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.streamField = EnumXml.ParseStreamType(reader.ReadElementText());
-                    return true;
-                case "Transport":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.transportField = reader.ReadElementObject<Transport>(() => new Transport());
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Transport : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private TransportProtocol protocolField;
-
-        private TransportTunnel tunnelField;
-
-        /// <summary>
-        /// Defines the network protocol for streaming, either UDP=RTP/UDP, RTSP=RTP/RTSP/TCP or
-        /// HTTP=RTP/RTSP/HTTP/TCP.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public TransportProtocol Protocol
-        {
-            get { return this.protocolField; }
-            set { this.protocolField = value; }
-        }
-
-        /// <summary>
-        /// Deprecated: optional element to describe further tunnel options.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public TransportTunnel Tunnel
-        {
-            get { return this.tunnelField; }
-            set { this.tunnelField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "Transport"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Protocol", EnumXml.ToXml(this.protocolField));
-            writer.WriteElement(Ns.OnvifVer10, "Tunnel", this.tunnelField, null, null);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Protocol":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.protocolField = EnumXml.ParseTransportProtocol(reader.ReadElementText());
-                    return true;
-                case "Tunnel":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.tunnelField = reader.ReadElementObject<TransportTunnel>(() => new TransportTunnel());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    public partial class TransportTunnel : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
     /// <summary>Constructs a contract named by an xsi:type attribute.</summary>
     internal static class XmlTypeFactory
     {
-        public static SharpOnvifCommon.Xml.OnvifObject Create(string ns, string name)
+        public static SharpOnvifCommon.Xml.OnvifContract Create(string ns, string name)
         {
-            return null;
+            return SharpOnvifCommon.Onvif.XmlTypeFactory.Create(ns, name);
         }
     }
 

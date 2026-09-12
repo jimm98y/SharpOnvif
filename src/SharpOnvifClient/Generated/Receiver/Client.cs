@@ -54,7 +54,7 @@ namespace SharpOnvifClient.Receiver
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<CreateReceiverResponse> CreateReceiverAsync(ReceiverConfiguration Configuration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<CreateReceiverResponse> CreateReceiverAsync(SharpOnvifCommon.Onvif.ReceiverConfiguration Configuration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Deletes an existing receiver. A receiver may be deleted only if it is not currently in use;
@@ -75,7 +75,7 @@ namespace SharpOnvifClient.Receiver
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<ConfigureReceiverResponse> ConfigureReceiverAsync(string ReceiverToken, ReceiverConfiguration Configuration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ConfigureReceiverResponse> ConfigureReceiverAsync(string ReceiverToken, SharpOnvifCommon.Onvif.ReceiverConfiguration Configuration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Sets the mode of the receiver without affecting the rest of its configuration. This operation is
@@ -86,7 +86,7 @@ namespace SharpOnvifClient.Receiver
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetReceiverModeResponse> SetReceiverModeAsync(string ReceiverToken, ReceiverMode Mode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetReceiverModeResponse> SetReceiverModeAsync(string ReceiverToken, SharpOnvifCommon.Onvif.ReceiverMode Mode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Determines whether the receiver is currently disconnected, connected or attempting to connect. This
@@ -129,7 +129,7 @@ namespace SharpOnvifClient.Receiver
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -198,7 +198,7 @@ namespace SharpOnvifClient.Receiver
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<CreateReceiverResponse> CreateReceiverAsync(ReceiverConfiguration Configuration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<CreateReceiverResponse> CreateReceiverAsync(SharpOnvifCommon.Onvif.ReceiverConfiguration Configuration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return CreateReceiverAsync(new CreateReceiverRequest(Configuration), cancellationToken);
         }
@@ -233,7 +233,7 @@ namespace SharpOnvifClient.Receiver
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<ConfigureReceiverResponse> ConfigureReceiverAsync(string ReceiverToken, ReceiverConfiguration Configuration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<ConfigureReceiverResponse> ConfigureReceiverAsync(string ReceiverToken, SharpOnvifCommon.Onvif.ReceiverConfiguration Configuration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return ConfigureReceiverAsync(new ConfigureReceiverRequest(ReceiverToken, Configuration), cancellationToken);
         }
@@ -251,7 +251,7 @@ namespace SharpOnvifClient.Receiver
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetReceiverModeResponse> SetReceiverModeAsync(string ReceiverToken, ReceiverMode Mode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetReceiverModeResponse> SetReceiverModeAsync(string ReceiverToken, SharpOnvifCommon.Onvif.ReceiverMode Mode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetReceiverModeAsync(new SetReceiverModeRequest(ReceiverToken, Mode), cancellationToken);
         }

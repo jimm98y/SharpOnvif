@@ -29,6 +29,7 @@ using SharpOnvifServer;
 using SharpOnvifServer.Media;
 using System.Collections.Generic;
 using System.Linq;
+using SharpOnvifCommon.Onvif;
 
 namespace OnvifService.Onvif
 {

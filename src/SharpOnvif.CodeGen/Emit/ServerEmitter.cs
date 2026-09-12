@@ -191,7 +191,7 @@ internal sealed class ServerEmitter
             EmitInvoke(writer, baseClass, operations);
             writer.Line();
 
-            writer.Line($"public override {Xml}.OnvifObject ResolveXmlType(string ns, string name)");
+            writer.Line($"public override {Xml}.OnvifContract ResolveXmlType(string ns, string name)");
             using (writer.Braces())
             {
                 writer.Line("return XmlTypeFactory.Create(ns, name);");

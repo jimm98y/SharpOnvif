@@ -25,6 +25,14 @@ internal sealed class DataContractEmitter
         _namespace = @namespace;
     }
 
+    /// <summary>
+    /// True for the shared schema model. Its helpers are called from the client and server
+    /// assemblies, so they cannot be internal the way a service's own helpers are.
+    /// </summary>
+    private bool IsShared => _namespace.StartsWith("SharpOnvifCommon", StringComparison.Ordinal);
+
+    private string HelperVisibility => IsShared ? "public" : "internal";
+
     public string Emit()
     {
         AssignNamespaceConstants();
@@ -54,7 +62,7 @@ internal sealed class DataContractEmitter
             }
 
             writer.Line();
-            XmlTypeFactoryEmitter.Emit(writer, _model);
+            XmlTypeFactoryEmitter.Emit(writer, _model, HelperVisibility, IsShared ? null : "SharpOnvifCommon.Onvif");
 
             writer.Line();
             OnvifActionsEmitter.Emit(writer, _model);
@@ -155,7 +163,7 @@ internal sealed class DataContractEmitter
     private void EmitEnumConverters(CSharpWriter writer)
     {
         writer.Line("/// <summary>Conversions between the generated enums and their XML lexical forms.</summary>");
-        writer.Line("internal static class EnumXml");
+        writer.Line($"{HelperVisibility} static class EnumXml");
         using (writer.Braces())
         {
             bool first = true;
@@ -207,7 +215,7 @@ internal sealed class DataContractEmitter
         writer.Doc(@class.Documentation);
 
         foreach (var derived in @class.DerivedClasses)
-            writer.Line($"[System.Xml.Serialization.XmlIncludeAttribute(typeof({derived.Name}))]");
+            writer.Line($"[System.Xml.Serialization.XmlIncludeAttribute(typeof({derived.NameFrom(_namespace)}))]");
 
         if (@class.XmlName is { } xmlName && xmlName.Namespace.Length > 0)
             writer.Line($"[System.Xml.Serialization.XmlTypeAttribute(Namespace=\"{xmlName.Namespace}\")]");
@@ -215,7 +223,7 @@ internal sealed class DataContractEmitter
         if (@class.WrapperElement is { } wrapper)
             writer.Line($"[System.Xml.Serialization.XmlRootAttribute(\"{wrapper.LocalName}\", Namespace=\"{wrapper.Namespace}\")]");
 
-        string baseType = @class.BaseClass?.Name ?? $"{Runtime}.OnvifObject";
+        string baseType = @class.BaseClass?.NameFrom(_namespace) ?? $"{Runtime}.OnvifContract";
         writer.Line($"public partial class {@class.Name} : {baseType}");
 
         using (writer.Braces())
@@ -543,8 +551,7 @@ internal sealed class DataContractEmitter
     /// </summary>
     private string DeclaredTypeArguments(CsTypeRef type)
     {
-        var declared = _model.Classes.FirstOrDefault(c => c.Name == type.CsName);
-        if (declared?.XmlName is not { } name) return "null, null";
+        if (type.XmlTypeName is not { } name) return "null, null";
         return $"{NsRef(name.Namespace)}, \"{name.LocalName}\"";
     }
 
@@ -807,10 +814,24 @@ internal sealed class DataContractEmitter
 
     private static string FromXmlExpression(CsMember member, string text) => ScalarFromXml(member.Type, text);
 
+    /// <summary>The EnumXml class that declares the conversions for a type, qualified if needed.</summary>
+    private static string EnumHelper(CsTypeRef type)
+    {
+        int lastDot = type.CsName.LastIndexOf('.');
+        return lastDot < 0 ? "EnumXml" : type.CsName.Substring(0, lastDot) + ".EnumXml";
+    }
+
+    /// <summary>The enum's own name, without the namespace it may be qualified with.</summary>
+    private static string SimpleName(CsTypeRef type)
+    {
+        int lastDot = type.CsName.LastIndexOf('.');
+        return lastDot < 0 ? type.CsName : type.CsName.Substring(lastDot + 1);
+    }
+
     /// <summary>Renders a CLR value as its XML lexical form.</summary>
     private static string ScalarToXml(CsTypeRef type, string value)
     {
-        if (type.Kind == TypeKind.Enum) return $"EnumXml.ToXml({value})";
+        if (type.Kind == TypeKind.Enum) return $"{EnumHelper(type)}.ToXml({value})";
         if (type.Kind == TypeKind.Object) return $"System.Convert.ToString({value}, System.Globalization.CultureInfo.InvariantCulture)";
 
         // An xs:list member is an array of scalars sharing one element.
@@ -842,7 +863,7 @@ internal sealed class DataContractEmitter
     /// <summary>Parses an XML lexical form into a CLR value.</summary>
     private static string ScalarFromXml(CsTypeRef type, string text)
     {
-        if (type.Kind == TypeKind.Enum) return $"EnumXml.Parse{type.CsName}({text})";
+        if (type.Kind == TypeKind.Enum) return $"{EnumHelper(type)}.Parse{SimpleName(type)}({text})";
         if (type.Kind == TypeKind.Object) return text;
 
         if (type.CsName.EndsWith("[]", StringComparison.Ordinal) && type.CsName != "byte[]")

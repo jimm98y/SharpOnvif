@@ -28,6 +28,7 @@ using SharpOnvifServer.PTZ;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using SharpOnvifCommon.Onvif;
 
 namespace OnvifService.Onvif
 {
@@ -56,7 +57,7 @@ namespace OnvifService.Onvif
 
         public override GetServiceCapabilitiesResponse GetServiceCapabilities()
         {
-            return new GetServiceCapabilitiesResponse(new Capabilities()
+            return new GetServiceCapabilitiesResponse(new SharpOnvifServer.PTZ.Capabilities()
             {
                 EFlip = true,
                 EFlipSpecified = true,

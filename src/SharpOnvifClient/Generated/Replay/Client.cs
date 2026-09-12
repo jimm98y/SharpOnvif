@@ -35,7 +35,7 @@ namespace SharpOnvifClient.Replay
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<GetReplayUriResponse> GetReplayUriAsync(StreamSetup StreamSetup, string RecordingToken, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<GetReplayUriResponse> GetReplayUriAsync(SharpOnvifCommon.Onvif.StreamSetup StreamSetup, string RecordingToken, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Returns the current configuration of the replay service. This operation is mandatory.
@@ -55,7 +55,7 @@ namespace SharpOnvifClient.Replay
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetReplayConfigurationResponse> SetReplayConfigurationAsync(ReplayConfiguration Configuration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetReplayConfigurationResponse> SetReplayConfigurationAsync(SharpOnvifCommon.Onvif.ReplayConfiguration Configuration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     }
 
     /// <summary>
@@ -87,7 +87,7 @@ namespace SharpOnvifClient.Replay
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -123,7 +123,7 @@ namespace SharpOnvifClient.Replay
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<GetReplayUriResponse> GetReplayUriAsync(StreamSetup StreamSetup, string RecordingToken, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<GetReplayUriResponse> GetReplayUriAsync(SharpOnvifCommon.Onvif.StreamSetup StreamSetup, string RecordingToken, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return GetReplayUriAsync(new GetReplayUriRequest(StreamSetup, RecordingToken), cancellationToken);
         }
@@ -157,7 +157,7 @@ namespace SharpOnvifClient.Replay
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetReplayConfigurationResponse> SetReplayConfigurationAsync(ReplayConfiguration Configuration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetReplayConfigurationResponse> SetReplayConfigurationAsync(SharpOnvifCommon.Onvif.ReplayConfiguration Configuration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetReplayConfigurationAsync(new SetReplayConfigurationRequest(Configuration), cancellationToken);
         }

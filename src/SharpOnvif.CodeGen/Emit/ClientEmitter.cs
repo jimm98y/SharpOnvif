@@ -97,7 +97,7 @@ internal sealed class ClientEmitter
             using (writer.Braces()) { }
             writer.Line();
 
-            writer.Line($"protected override {Xml}.OnvifObject ResolveXmlType(string ns, string name)");
+            writer.Line($"protected override {Xml}.OnvifContract ResolveXmlType(string ns, string name)");
             using (writer.Braces())
             {
                 writer.Line("return XmlTypeFactory.Create(ns, name);");

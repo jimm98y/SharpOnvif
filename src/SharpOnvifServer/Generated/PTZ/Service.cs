@@ -160,7 +160,7 @@ namespace SharpOnvifServer.PTZ
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetConfigurationResponse SetConfiguration(PTZConfiguration PTZConfiguration, bool ForcePersistence)
+        public virtual SetConfigurationResponse SetConfiguration(SharpOnvifCommon.Onvif.PTZConfiguration PTZConfiguration, bool ForcePersistence)
         {
             throw new System.NotImplementedException();
         }
@@ -296,7 +296,7 @@ namespace SharpOnvifServer.PTZ
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual GotoPresetResponse GotoPreset(string ProfileToken, string PresetToken, PTZSpeed Speed)
+        public virtual GotoPresetResponse GotoPreset(string ProfileToken, string PresetToken, SharpOnvifCommon.Onvif.PTZSpeed Speed)
         {
             throw new System.NotImplementedException();
         }
@@ -317,7 +317,7 @@ namespace SharpOnvifServer.PTZ
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual GotoHomePositionResponse GotoHomePosition(string ProfileToken, PTZSpeed Speed)
+        public virtual GotoHomePositionResponse GotoHomePosition(string ProfileToken, SharpOnvifCommon.Onvif.PTZSpeed Speed)
         {
             throw new System.NotImplementedException();
         }
@@ -361,7 +361,7 @@ namespace SharpOnvifServer.PTZ
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual ContinuousMoveResponse ContinuousMove(string ProfileToken, PTZSpeed Velocity, string Timeout)
+        public virtual ContinuousMoveResponse ContinuousMove(string ProfileToken, SharpOnvifCommon.Onvif.PTZSpeed Velocity, string Timeout)
         {
             throw new System.NotImplementedException();
         }
@@ -385,7 +385,7 @@ namespace SharpOnvifServer.PTZ
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual RelativeMoveResponse RelativeMove(string ProfileToken, PTZVector Translation, PTZSpeed Speed)
+        public virtual RelativeMoveResponse RelativeMove(string ProfileToken, SharpOnvifCommon.Onvif.PTZVector Translation, SharpOnvifCommon.Onvif.PTZSpeed Speed)
         {
             throw new System.NotImplementedException();
         }
@@ -428,7 +428,7 @@ namespace SharpOnvifServer.PTZ
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual AbsoluteMoveResponse AbsoluteMove(string ProfileToken, PTZVector Position, PTZSpeed Speed)
+        public virtual AbsoluteMoveResponse AbsoluteMove(string ProfileToken, SharpOnvifCommon.Onvif.PTZVector Position, SharpOnvifCommon.Onvif.PTZSpeed Speed)
         {
             throw new System.NotImplementedException();
         }
@@ -453,7 +453,7 @@ namespace SharpOnvifServer.PTZ
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual GeoMoveResponse GeoMove(string ProfileToken, GeoLocation Target, PTZSpeed Speed, float AreaHeight, float AreaWidth)
+        public virtual GeoMoveResponse GeoMove(string ProfileToken, SharpOnvifCommon.Onvif.GeoLocation Target, SharpOnvifCommon.Onvif.PTZSpeed Speed, float AreaHeight, float AreaWidth)
         {
             throw new System.NotImplementedException();
         }
@@ -575,7 +575,7 @@ namespace SharpOnvifServer.PTZ
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual ModifyPresetTourResponse ModifyPresetTour(string ProfileToken, PresetTour PresetTour)
+        public virtual ModifyPresetTourResponse ModifyPresetTour(string ProfileToken, SharpOnvifCommon.Onvif.PresetTour PresetTour)
         {
             throw new System.NotImplementedException();
         }
@@ -595,7 +595,7 @@ namespace SharpOnvifServer.PTZ
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual OperatePresetTourResponse OperatePresetTour(string ProfileToken, string PresetTourToken, PTZPresetTourOperation Operation)
+        public virtual OperatePresetTourResponse OperatePresetTour(string ProfileToken, string PresetTourToken, SharpOnvifCommon.Onvif.PTZPresetTourOperation Operation)
         {
             throw new System.NotImplementedException();
         }
@@ -665,7 +665,7 @@ namespace SharpOnvifServer.PTZ
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual MoveAndStartTrackingResponse MoveAndStartTracking(string ProfileToken, string PresetToken, GeoLocation GeoLocation, PTZVector TargetPosition, PTZSpeed Speed, string ObjectID, System.Xml.XmlElement[] Any)
+        public virtual MoveAndStartTrackingResponse MoveAndStartTracking(string ProfileToken, string PresetToken, SharpOnvifCommon.Onvif.GeoLocation GeoLocation, SharpOnvifCommon.Onvif.PTZVector TargetPosition, SharpOnvifCommon.Onvif.PTZSpeed Speed, string ObjectID, System.Xml.XmlElement[] Any)
         {
             throw new System.NotImplementedException();
         }
@@ -1143,7 +1143,7 @@ namespace SharpOnvifServer.PTZ
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }

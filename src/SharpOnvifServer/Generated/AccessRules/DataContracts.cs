@@ -14,7 +14,6 @@ namespace SharpOnvifServer.AccessRules
     internal static class Ns
     {
         public const string Ver10Accessrules = "http://www.onvif.org/ver10/accessrules/wsdl";
-        public const string Ver10Pacs = "http://www.onvif.org/ver10/pacs";
     }
 
     /// <summary>Conversions between the generated enums and their XML lexical forms.</summary>
@@ -29,7 +28,7 @@ namespace SharpOnvifServer.AccessRules
     /// will result in a union of the schedules.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/accessrules/wsdl")]
-    public partial class AccessPolicy : SharpOnvifCommon.Xml.OnvifObject
+    public partial class AccessPolicy : SharpOnvifCommon.Xml.OnvifContract
     {
         private string scheduleTokenField;
 
@@ -120,7 +119,7 @@ namespace SharpOnvifServer.AccessRules
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/accessrules/wsdl")]
-    public partial class AccessPolicyExtension : SharpOnvifCommon.Xml.OnvifObject
+    public partial class AccessPolicyExtension : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -215,7 +214,7 @@ namespace SharpOnvifServer.AccessRules
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/accessrules/wsdl")]
-    public partial class AccessProfileExtension : SharpOnvifCommon.Xml.OnvifObject
+    public partial class AccessProfileExtension : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -249,7 +248,7 @@ namespace SharpOnvifServer.AccessRules
     /// </summary>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(AccessProfile))]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/accessrules/wsdl")]
-    public partial class AccessProfileInfo : DataEntity
+    public partial class AccessProfileInfo : SharpOnvifCommon.Xml.OnvifContract
     {
         private string nameField;
 
@@ -281,7 +280,6 @@ namespace SharpOnvifServer.AccessRules
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            base.WriteXmlContent(writer);
             writer.WriteElementString(Ns.Ver10Accessrules, "Name", this.nameField);
             writer.WriteElementString(Ns.Ver10Accessrules, "Description", this.descriptionField);
         }
@@ -299,7 +297,6 @@ namespace SharpOnvifServer.AccessRules
                     this.descriptionField = reader.ReadElementText();
                     return true;
             }
-            if (base.ReadXmlElement(reader)) return true;
             return false;
         }
 
@@ -314,7 +311,7 @@ namespace SharpOnvifServer.AccessRules
     /// schedules.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateAccessProfile", Namespace="http://www.onvif.org/ver10/accessrules/wsdl")]
-    public partial class CreateAccessProfileRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CreateAccessProfileRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private AccessProfile accessProfileField;
 
@@ -365,7 +362,7 @@ namespace SharpOnvifServer.AccessRules
     /// schedules.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateAccessProfileResponse", Namespace="http://www.onvif.org/ver10/accessrules/wsdl")]
-    public partial class CreateAccessProfileResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CreateAccessProfileResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -408,54 +405,13 @@ namespace SharpOnvifServer.AccessRules
     }
 
     /// <summary>
-    /// General datastructure referenced by a token. Should be used as extension base.
-    /// </summary>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AccessProfileInfo))]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/pacs")]
-    public partial class DataEntity : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string tokenField;
-
-        /// <summary>
-        /// A service-unique identifier of the item.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string token
-        {
-            get { return this.tokenField; }
-            set { this.tokenField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "DataEntity"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Pacs; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAttributeString(null, "token", this.tokenField);
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "token":
-                    this.tokenField = reader.AttributeValue;
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    /// <summary>
     /// This operation will delete the specified access profile. If the access profile is deleted, all
     /// access policies associated to the access profile will also be deleted. If it is associated with one
     /// or more entities some devices may not be able to delete the access profile, and consequently a
     /// ReferenceInUse fault shall be generated.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteAccessProfile", Namespace="http://www.onvif.org/ver10/accessrules/wsdl")]
-    public partial class DeleteAccessProfileRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteAccessProfileRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -504,7 +460,7 @@ namespace SharpOnvifServer.AccessRules
     /// ReferenceInUse fault shall be generated.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteAccessProfileResponse", Namespace="http://www.onvif.org/ver10/accessrules/wsdl")]
-    public partial class DeleteAccessProfileResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteAccessProfileResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public DeleteAccessProfileResponse()
         {
@@ -519,7 +475,7 @@ namespace SharpOnvifServer.AccessRules
     /// not be greater than the Limit parameter.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAccessProfileInfoList", Namespace="http://www.onvif.org/ver10/accessrules/wsdl")]
-    public partial class GetAccessProfileInfoListRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAccessProfileInfoListRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private int limitField;
         private bool limitFieldSpecified;
@@ -605,7 +561,7 @@ namespace SharpOnvifServer.AccessRules
     /// not be greater than the Limit parameter.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAccessProfileInfoListResponse", Namespace="http://www.onvif.org/ver10/accessrules/wsdl")]
-    public partial class GetAccessProfileInfoListResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAccessProfileInfoListResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private string nextStartReferenceField;
 
@@ -678,7 +634,7 @@ namespace SharpOnvifServer.AccessRules
     /// items is greater than MaxLimit, a TooManyItems fault shall be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAccessProfileInfo", Namespace="http://www.onvif.org/ver10/accessrules/wsdl")]
-    public partial class GetAccessProfileInfoRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAccessProfileInfoRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string[] tokenField;
 
@@ -733,7 +689,7 @@ namespace SharpOnvifServer.AccessRules
     /// items is greater than MaxLimit, a TooManyItems fault shall be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAccessProfileInfoResponse", Namespace="http://www.onvif.org/ver10/accessrules/wsdl")]
-    public partial class GetAccessProfileInfoResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAccessProfileInfoResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private AccessProfileInfo[] accessProfileInfoField;
 
@@ -788,7 +744,7 @@ namespace SharpOnvifServer.AccessRules
     /// be greater than the Limit parameter.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAccessProfileList", Namespace="http://www.onvif.org/ver10/accessrules/wsdl")]
-    public partial class GetAccessProfileListRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAccessProfileListRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private int limitField;
         private bool limitFieldSpecified;
@@ -874,7 +830,7 @@ namespace SharpOnvifServer.AccessRules
     /// be greater than the Limit parameter.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAccessProfileListResponse", Namespace="http://www.onvif.org/ver10/accessrules/wsdl")]
-    public partial class GetAccessProfileListResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAccessProfileListResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private string nextStartReferenceField;
 
@@ -947,7 +903,7 @@ namespace SharpOnvifServer.AccessRules
     /// is greater than MaxLimit, a TooManyItems fault shall be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAccessProfiles", Namespace="http://www.onvif.org/ver10/accessrules/wsdl")]
-    public partial class GetAccessProfilesRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAccessProfilesRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string[] tokenField;
 
@@ -1002,7 +958,7 @@ namespace SharpOnvifServer.AccessRules
     /// is greater than MaxLimit, a TooManyItems fault shall be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAccessProfilesResponse", Namespace="http://www.onvif.org/ver10/accessrules/wsdl")]
-    public partial class GetAccessProfilesResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAccessProfilesResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private AccessProfile[] accessProfileField;
 
@@ -1054,7 +1010,7 @@ namespace SharpOnvifServer.AccessRules
     /// This operation returns the capabilities of the access rules service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilities", Namespace="http://www.onvif.org/ver10/accessrules/wsdl")]
-    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         public GetServiceCapabilitiesRequest()
         {
@@ -1066,7 +1022,7 @@ namespace SharpOnvifServer.AccessRules
     /// This operation returns the capabilities of the access rules service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilitiesResponse", Namespace="http://www.onvif.org/ver10/accessrules/wsdl")]
-    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private ServiceCapabilities capabilitiesField;
 
@@ -1118,7 +1074,7 @@ namespace SharpOnvifServer.AccessRules
     /// then a fault will be generated.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ModifyAccessProfile", Namespace="http://www.onvif.org/ver10/accessrules/wsdl")]
-    public partial class ModifyAccessProfileRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ModifyAccessProfileRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private AccessProfile accessProfileField;
 
@@ -1169,7 +1125,7 @@ namespace SharpOnvifServer.AccessRules
     /// then a fault will be generated.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ModifyAccessProfileResponse", Namespace="http://www.onvif.org/ver10/accessrules/wsdl")]
-    public partial class ModifyAccessProfileResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ModifyAccessProfileResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public ModifyAccessProfileResponse()
         {
@@ -1182,7 +1138,7 @@ namespace SharpOnvifServer.AccessRules
     /// does not change during device operation. The following capabilities are available:
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/accessrules/wsdl")]
-    public partial class ServiceCapabilities : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ServiceCapabilities : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -1330,7 +1286,7 @@ namespace SharpOnvifServer.AccessRules
     /// implement this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetAccessProfile", Namespace="http://www.onvif.org/ver10/accessrules/wsdl")]
-    public partial class SetAccessProfileRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetAccessProfileRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private AccessProfile accessProfileField;
 
@@ -1381,7 +1337,7 @@ namespace SharpOnvifServer.AccessRules
     /// implement this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetAccessProfileResponse", Namespace="http://www.onvif.org/ver10/accessrules/wsdl")]
-    public partial class SetAccessProfileResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetAccessProfileResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public SetAccessProfileResponse()
         {
@@ -1392,7 +1348,7 @@ namespace SharpOnvifServer.AccessRules
     /// <summary>Constructs a contract named by an xsi:type attribute.</summary>
     internal static class XmlTypeFactory
     {
-        public static SharpOnvifCommon.Xml.OnvifObject Create(string ns, string name)
+        public static SharpOnvifCommon.Xml.OnvifContract Create(string ns, string name)
         {
             switch (name)
             {
@@ -1402,11 +1358,8 @@ namespace SharpOnvifServer.AccessRules
                 case "AccessProfileInfo":
                     if (ns == "http://www.onvif.org/ver10/accessrules/wsdl") return new AccessProfileInfo();
                     break;
-                case "DataEntity":
-                    if (ns == "http://www.onvif.org/ver10/pacs") return new DataEntity();
-                    break;
             }
-            return null;
+            return SharpOnvifCommon.Onvif.XmlTypeFactory.Create(ns, name);
         }
     }
 

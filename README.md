@@ -167,8 +167,9 @@ var subscriptionResponse = await client.BasicSubscribeAsync(eventListener.GetOnv
 ```
 ### Using the generated clients
 Every Onvif service is in the `SharpOnvifClient` package, each under its own namespace
-(`SharpOnvifClient.DeviceMgmt`, `SharpOnvifClient.Media`, `SharpOnvifClient.PTZ`, and so on).
-Create the client with the endpoint address and, if the device requires them, credentials:
+(`SharpOnvifClient.DeviceMgmt`, `SharpOnvifClient.Media`, `SharpOnvifClient.PTZ`, and so on), with
+the shared Onvif data model in `SharpOnvifCommon.Onvif`. Create the client with the endpoint
+address and, if the device requires them, credentials:
 ```cs
 using (var deviceClient = new SharpOnvifClient.DeviceMgmt.DeviceClient(
     "http://192.168.1.10/onvif/device_service", "admin", "password"))
@@ -221,7 +222,15 @@ committed, so a normal build needs no network access and no external tooling. Se
 [doc/codegen.md](doc/codegen.md) for how to regenerate them and what the generator does.
 
 All 25 Onvif services ship in `SharpOnvifClient` and `SharpOnvifServer`, one namespace per
-service. Open `src/SharpOnvif.sln` to build everything.
+service. The Onvif data model itself - `Profile`, `VideoResolution`, `PTZVector` and the rest of
+`onvif.xsd` - lives once in `SharpOnvifCommon.Onvif` and is shared by both, so a value read by the
+client is the same CLR type a server implementation returns.
+
+Where the Onvif schema names a type after something the framework already has, the generated name
+is prefixed to keep both usable side by side without aliases - `tt:DateTime` becomes
+`OnvifDateTime`, `tt:IPAddress` becomes `OnvifIPAddress`. What goes on the wire is unchanged.
+
+Open `src/SharpOnvif.sln` to build everything.
 
 ## Credits
 Special thanks to Piotr Stapp for figuring out the SOAP security headers in NET8: https://stapp.space/using-soap-security-in-dotnet-core/.

@@ -20,6 +20,7 @@ internal sealed class WsdlParser
     private readonly Dictionary<QName, WsdlMessage> _messages = [];
     private readonly Dictionary<QName, WsdlPortType> _portTypes = [];
     private readonly Dictionary<QName, WsdlBinding> _bindings = [];
+    private readonly HashSet<string> _targetNamespaces = new(StringComparer.Ordinal);
     private string _rootDocument = "";
 
     public WsdlParser(DocumentResolver resolver, XsdParser schemaParser)
@@ -31,6 +32,12 @@ internal sealed class WsdlParser
     public IReadOnlyDictionary<QName, WsdlMessage> Messages => _messages;
     public IReadOnlyDictionary<QName, WsdlPortType> PortTypes => _portTypes;
     public IReadOnlyDictionary<QName, WsdlBinding> Bindings => _bindings;
+
+    /// <summary>
+    /// Target namespaces of every WSDL parsed here. Types declared in these namespaces belong to
+    /// the service that declares them; everything else comes from a schema services share.
+    /// </summary>
+    public IReadOnlyCollection<string> TargetNamespaces => _targetNamespaces;
 
     /// <summary>
     /// The portTypes this service exposes: those bound by a binding declared in the service's own
@@ -62,6 +69,7 @@ internal sealed class WsdlParser
             throw new SchemaException(definitions, $"Expected wsdl:definitions, found '{definitions.Name}'.");
 
         string targetNamespace = definitions.Attribute("targetNamespace")?.Value ?? "";
+        _targetNamespaces.Add(targetNamespace);
 
         foreach (var import in definitions.Elements(W + "import"))
         {

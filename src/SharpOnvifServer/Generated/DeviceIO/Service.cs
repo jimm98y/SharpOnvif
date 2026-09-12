@@ -250,7 +250,7 @@ namespace SharpOnvifServer.DeviceIO
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetVideoSourceConfigurationResponse SetVideoSourceConfiguration(VideoSourceConfiguration Configuration, bool ForcePersistence, System.Xml.XmlElement[] Any)
+        public virtual SetVideoSourceConfigurationResponse SetVideoSourceConfiguration(SharpOnvifCommon.Onvif.VideoSourceConfiguration Configuration, bool ForcePersistence, System.Xml.XmlElement[] Any)
         {
             throw new System.NotImplementedException();
         }
@@ -271,7 +271,7 @@ namespace SharpOnvifServer.DeviceIO
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetVideoOutputConfigurationResponse SetVideoOutputConfiguration(VideoOutputConfiguration Configuration, bool ForcePersistence, System.Xml.XmlElement[] Any)
+        public virtual SetVideoOutputConfigurationResponse SetVideoOutputConfiguration(SharpOnvifCommon.Onvif.VideoOutputConfiguration Configuration, bool ForcePersistence, System.Xml.XmlElement[] Any)
         {
             throw new System.NotImplementedException();
         }
@@ -292,7 +292,7 @@ namespace SharpOnvifServer.DeviceIO
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetAudioSourceConfigurationResponse SetAudioSourceConfiguration(AudioSourceConfiguration Configuration, bool ForcePersistence, System.Xml.XmlElement[] Any)
+        public virtual SetAudioSourceConfigurationResponse SetAudioSourceConfiguration(SharpOnvifCommon.Onvif.AudioSourceConfiguration Configuration, bool ForcePersistence, System.Xml.XmlElement[] Any)
         {
             throw new System.NotImplementedException();
         }
@@ -313,7 +313,7 @@ namespace SharpOnvifServer.DeviceIO
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetAudioOutputConfigurationResponse SetAudioOutputConfiguration(AudioOutputConfiguration Configuration, bool ForcePersistence, System.Xml.XmlElement[] Any)
+        public virtual SetAudioOutputConfigurationResponse SetAudioOutputConfiguration(SharpOnvifCommon.Onvif.AudioOutputConfiguration Configuration, bool ForcePersistence, System.Xml.XmlElement[] Any)
         {
             throw new System.NotImplementedException();
         }
@@ -445,7 +445,7 @@ namespace SharpOnvifServer.DeviceIO
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetRelayOutputSettingsResponse SetRelayOutputSettings(RelayOutput RelayOutput)
+        public virtual SetRelayOutputSettingsResponse SetRelayOutputSettings(SharpOnvifCommon.Onvif.RelayOutput RelayOutput)
         {
             throw new System.NotImplementedException();
         }
@@ -465,7 +465,7 @@ namespace SharpOnvifServer.DeviceIO
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetRelayOutputStateResponse SetRelayOutputState(string RelayOutputToken, RelayLogicalState LogicalState)
+        public virtual SetRelayOutputStateResponse SetRelayOutputState(string RelayOutputToken, SharpOnvifCommon.Onvif.RelayLogicalState LogicalState)
         {
             throw new System.NotImplementedException();
         }
@@ -525,7 +525,7 @@ namespace SharpOnvifServer.DeviceIO
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetDigitalInputConfigurationsResponse SetDigitalInputConfigurations(DigitalInput[] DigitalInputs)
+        public virtual SetDigitalInputConfigurationsResponse SetDigitalInputConfigurations(SharpOnvifCommon.Onvif.DigitalInput[] DigitalInputs)
         {
             throw new System.NotImplementedException();
         }
@@ -1088,7 +1088,7 @@ namespace SharpOnvifServer.DeviceIO
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }

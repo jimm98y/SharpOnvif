@@ -43,7 +43,7 @@ namespace SharpOnvifClient.Imaging
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetImagingSettingsResponse> SetImagingSettingsAsync(string VideoSourceToken, ImagingSettings20 ImagingSettings, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetImagingSettingsResponse> SetImagingSettingsAsync(string VideoSourceToken, SharpOnvifCommon.Onvif.ImagingSettings20 ImagingSettings, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// This operation gets the valid ranges for the imaging parameters that have device specific ranges.
@@ -78,7 +78,7 @@ namespace SharpOnvifClient.Imaging
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<MoveResponse> MoveAsync(string VideoSourceToken, FocusMove Focus, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<MoveResponse> MoveAsync(string VideoSourceToken, SharpOnvifCommon.Onvif.FocusMove Focus, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Imaging move operation options supported for the Video source.
@@ -180,7 +180,7 @@ namespace SharpOnvifClient.Imaging
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -231,7 +231,7 @@ namespace SharpOnvifClient.Imaging
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetImagingSettingsResponse> SetImagingSettingsAsync(string VideoSourceToken, ImagingSettings20 ImagingSettings, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetImagingSettingsResponse> SetImagingSettingsAsync(string VideoSourceToken, SharpOnvifCommon.Onvif.ImagingSettings20 ImagingSettings, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetImagingSettingsAsync(new SetImagingSettingsRequest(VideoSourceToken, ImagingSettings, ForcePersistence), cancellationToken);
         }
@@ -280,7 +280,7 @@ namespace SharpOnvifClient.Imaging
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<MoveResponse> MoveAsync(string VideoSourceToken, FocusMove Focus, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<MoveResponse> MoveAsync(string VideoSourceToken, SharpOnvifCommon.Onvif.FocusMove Focus, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return MoveAsync(new MoveRequest(VideoSourceToken, Focus), cancellationToken);
         }

@@ -124,7 +124,7 @@ namespace SharpOnvifServer.ActionEngine
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual ModifyActionsResponse ModifyActions(Action[] Action)
+        public virtual ModifyActionsResponse ModifyActions(OnvifAction[] Action)
         {
             throw new System.NotImplementedException();
         }
@@ -421,7 +421,7 @@ namespace SharpOnvifServer.ActionEngine
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }

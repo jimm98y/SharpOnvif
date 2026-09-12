@@ -13,7 +13,6 @@ namespace SharpOnvifServer.Schedule
     /// <summary>XML namespaces used by this service's contracts.</summary>
     internal static class Ns
     {
-        public const string Ver10Pacs = "http://www.onvif.org/ver10/pacs";
         public const string Ver10Schedule = "http://www.onvif.org/ver10/schedule/wsdl";
     }
 
@@ -29,7 +28,7 @@ namespace SharpOnvifServer.Schedule
     /// InvalidArgVal as generic fault code.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateSchedule", Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class CreateScheduleRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CreateScheduleRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private Schedule scheduleField;
 
@@ -78,7 +77,7 @@ namespace SharpOnvifServer.Schedule
     /// InvalidArgVal as generic fault code.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateScheduleResponse", Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class CreateScheduleResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CreateScheduleResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -127,7 +126,7 @@ namespace SharpOnvifServer.Schedule
     /// return InvalidArgVal as generic fault code.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateSpecialDayGroup", Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class CreateSpecialDayGroupRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CreateSpecialDayGroupRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private SpecialDayGroup specialDayGroupField;
 
@@ -176,7 +175,7 @@ namespace SharpOnvifServer.Schedule
     /// return InvalidArgVal as generic fault code.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateSpecialDayGroupResponse", Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class CreateSpecialDayGroupResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CreateSpecialDayGroupResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -219,54 +218,12 @@ namespace SharpOnvifServer.Schedule
     }
 
     /// <summary>
-    /// General datastructure referenced by a token. Should be used as extension base.
-    /// </summary>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(ScheduleInfo))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SpecialDayGroupInfo))]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/pacs")]
-    public partial class DataEntity : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string tokenField;
-
-        /// <summary>
-        /// A service-unique identifier of the item.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string token
-        {
-            get { return this.tokenField; }
-            set { this.tokenField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "DataEntity"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Pacs; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAttributeString(null, "token", this.tokenField);
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "token":
-                    this.tokenField = reader.AttributeValue;
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    /// <summary>
     /// This operation will delete the specified schedule. If it is associated with one or more entities
     /// some devices may not be able to delete the schedule, and consequently a ReferenceInUse fault shall
     /// be generated.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteSchedule", Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class DeleteScheduleRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteScheduleRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -314,7 +271,7 @@ namespace SharpOnvifServer.Schedule
     /// be generated.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteScheduleResponse", Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class DeleteScheduleResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteScheduleResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public DeleteScheduleResponse()
         {
@@ -328,7 +285,7 @@ namespace SharpOnvifServer.Schedule
     /// fault must be generated.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteSpecialDayGroup", Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class DeleteSpecialDayGroupRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteSpecialDayGroupRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -376,7 +333,7 @@ namespace SharpOnvifServer.Schedule
     /// fault must be generated.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteSpecialDayGroupResponse", Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class DeleteSpecialDayGroupResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteSpecialDayGroupResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public DeleteSpecialDayGroupResponse()
         {
@@ -392,7 +349,7 @@ namespace SharpOnvifServer.Schedule
     /// parameter.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetScheduleInfoList", Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class GetScheduleInfoListRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetScheduleInfoListRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private int limitField;
         private bool limitFieldSpecified;
@@ -479,7 +436,7 @@ namespace SharpOnvifServer.Schedule
     /// parameter.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetScheduleInfoListResponse", Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class GetScheduleInfoListResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetScheduleInfoListResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private string nextStartReferenceField;
 
@@ -553,7 +510,7 @@ namespace SharpOnvifServer.Schedule
     /// TooManyItems fault shall be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetScheduleInfo", Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class GetScheduleInfoRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetScheduleInfoRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string[] tokenField;
 
@@ -609,7 +566,7 @@ namespace SharpOnvifServer.Schedule
     /// TooManyItems fault shall be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetScheduleInfoResponse", Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class GetScheduleInfoResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetScheduleInfoResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private ScheduleInfo[] scheduleInfoField;
 
@@ -665,7 +622,7 @@ namespace SharpOnvifServer.Schedule
     /// parameter.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetScheduleList", Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class GetScheduleListRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetScheduleListRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private int limitField;
         private bool limitFieldSpecified;
@@ -752,7 +709,7 @@ namespace SharpOnvifServer.Schedule
     /// parameter.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetScheduleListResponse", Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class GetScheduleListResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetScheduleListResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private string nextStartReferenceField;
 
@@ -822,7 +779,7 @@ namespace SharpOnvifServer.Schedule
     /// This operation requests the ScheduleState for the schedule instance specified by the given token.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetScheduleState", Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class GetScheduleStateRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetScheduleStateRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -868,7 +825,7 @@ namespace SharpOnvifServer.Schedule
     /// This operation requests the ScheduleState for the schedule instance specified by the given token.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetScheduleStateResponse", Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class GetScheduleStateResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetScheduleStateResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private ScheduleState scheduleStateField;
 
@@ -917,7 +874,7 @@ namespace SharpOnvifServer.Schedule
     /// shall be returned
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSchedules", Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class GetSchedulesRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetSchedulesRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string[] tokenField;
 
@@ -972,7 +929,7 @@ namespace SharpOnvifServer.Schedule
     /// shall be returned
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSchedulesResponse", Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class GetSchedulesResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetSchedulesResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private Schedule[] scheduleField;
 
@@ -1024,7 +981,7 @@ namespace SharpOnvifServer.Schedule
     /// This operation returns the capabilities of the schedule service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilities", Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         public GetServiceCapabilitiesRequest()
         {
@@ -1036,7 +993,7 @@ namespace SharpOnvifServer.Schedule
     /// This operation returns the capabilities of the schedule service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilitiesResponse", Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private ServiceCapabilities capabilitiesField;
 
@@ -1086,7 +1043,7 @@ namespace SharpOnvifServer.Schedule
     /// not be greater than Limit parameter.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSpecialDayGroupInfoList", Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class GetSpecialDayGroupInfoListRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetSpecialDayGroupInfoListRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private int limitField;
         private bool limitFieldSpecified;
@@ -1172,7 +1129,7 @@ namespace SharpOnvifServer.Schedule
     /// not be greater than Limit parameter.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSpecialDayGroupInfoListResponse", Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class GetSpecialDayGroupInfoListResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetSpecialDayGroupInfoListResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private string nextStartReferenceField;
 
@@ -1245,7 +1202,7 @@ namespace SharpOnvifServer.Schedule
     /// is greater than MaxLimit, a TooManyItems fault shall be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSpecialDayGroupInfo", Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class GetSpecialDayGroupInfoRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetSpecialDayGroupInfoRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string[] tokenField;
 
@@ -1300,7 +1257,7 @@ namespace SharpOnvifServer.Schedule
     /// is greater than MaxLimit, a TooManyItems fault shall be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSpecialDayGroupInfoResponse", Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class GetSpecialDayGroupInfoResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetSpecialDayGroupInfoResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private SpecialDayGroupInfo[] specialDayGroupInfoField;
 
@@ -1356,7 +1313,7 @@ namespace SharpOnvifServer.Schedule
     /// parameter.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSpecialDayGroupList", Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class GetSpecialDayGroupListRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetSpecialDayGroupListRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private int limitField;
         private bool limitFieldSpecified;
@@ -1443,7 +1400,7 @@ namespace SharpOnvifServer.Schedule
     /// parameter.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSpecialDayGroupListResponse", Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class GetSpecialDayGroupListResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetSpecialDayGroupListResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private string nextStartReferenceField;
 
@@ -1513,7 +1470,7 @@ namespace SharpOnvifServer.Schedule
     /// This operation returns the specified special day group item matching the given token.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSpecialDayGroups", Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class GetSpecialDayGroupsRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetSpecialDayGroupsRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string[] tokenField;
 
@@ -1565,7 +1522,7 @@ namespace SharpOnvifServer.Schedule
     /// This operation returns the specified special day group item matching the given token.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSpecialDayGroupsResponse", Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class GetSpecialDayGroupsResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetSpecialDayGroupsResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private SpecialDayGroup[] specialDayGroupField;
 
@@ -1617,7 +1574,7 @@ namespace SharpOnvifServer.Schedule
     /// This operation modifies or updates the specified schedule.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ModifySchedule", Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class ModifyScheduleRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ModifyScheduleRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private Schedule scheduleField;
 
@@ -1663,7 +1620,7 @@ namespace SharpOnvifServer.Schedule
     /// This operation modifies or updates the specified schedule.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ModifyScheduleResponse", Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class ModifyScheduleResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ModifyScheduleResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public ModifyScheduleResponse()
         {
@@ -1675,7 +1632,7 @@ namespace SharpOnvifServer.Schedule
     /// This operation updates the specified special day group.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ModifySpecialDayGroup", Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class ModifySpecialDayGroupRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ModifySpecialDayGroupRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private SpecialDayGroup specialDayGroupField;
 
@@ -1721,7 +1678,7 @@ namespace SharpOnvifServer.Schedule
     /// This operation updates the specified special day group.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ModifySpecialDayGroupResponse", Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class ModifySpecialDayGroupResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ModifySpecialDayGroupResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public ModifySpecialDayGroupResponse()
         {
@@ -1817,7 +1774,7 @@ namespace SharpOnvifServer.Schedule
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class ScheduleExtension : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ScheduleExtension : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -1851,7 +1808,7 @@ namespace SharpOnvifServer.Schedule
     /// </summary>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Schedule))]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class ScheduleInfo : DataEntity
+    public partial class ScheduleInfo : SharpOnvifCommon.Xml.OnvifContract
     {
         private string nameField;
 
@@ -1883,7 +1840,6 @@ namespace SharpOnvifServer.Schedule
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            base.WriteXmlContent(writer);
             writer.WriteElementString(Ns.Ver10Schedule, "Name", this.nameField);
             writer.WriteElementString(Ns.Ver10Schedule, "Description", this.descriptionField);
         }
@@ -1901,7 +1857,6 @@ namespace SharpOnvifServer.Schedule
                     this.descriptionField = reader.ReadElementText();
                     return true;
             }
-            if (base.ReadXmlElement(reader)) return true;
             return false;
         }
 
@@ -1911,7 +1866,7 @@ namespace SharpOnvifServer.Schedule
     /// The ScheduleState contains state information for a schedule.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class ScheduleState : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ScheduleState : SharpOnvifCommon.Xml.OnvifContract
     {
         private bool activeField;
 
@@ -2002,7 +1957,7 @@ namespace SharpOnvifServer.Schedule
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class ScheduleStateExtension : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ScheduleStateExtension : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -2035,7 +1990,7 @@ namespace SharpOnvifServer.Schedule
     /// does not change during device operation. The following capabilities are available:
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class ServiceCapabilities : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ServiceCapabilities : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -2274,7 +2229,7 @@ namespace SharpOnvifServer.Schedule
     /// This operation modifies or creates the specified schedule.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetSchedule", Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class SetScheduleRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetScheduleRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private Schedule scheduleField;
 
@@ -2320,7 +2275,7 @@ namespace SharpOnvifServer.Schedule
     /// This operation modifies or creates the specified schedule.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetScheduleResponse", Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class SetScheduleResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetScheduleResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public SetScheduleResponse()
         {
@@ -2332,7 +2287,7 @@ namespace SharpOnvifServer.Schedule
     /// This operation modifies or creates the specified special day group.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetSpecialDayGroup", Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class SetSpecialDayGroupRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetSpecialDayGroupRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private SpecialDayGroup specialDayGroupField;
 
@@ -2378,7 +2333,7 @@ namespace SharpOnvifServer.Schedule
     /// This operation modifies or creates the specified special day group.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetSpecialDayGroupResponse", Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class SetSpecialDayGroupResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetSpecialDayGroupResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public SetSpecialDayGroupResponse()
         {
@@ -2448,7 +2403,7 @@ namespace SharpOnvifServer.Schedule
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class SpecialDayGroupExtension : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SpecialDayGroupExtension : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -2481,7 +2436,7 @@ namespace SharpOnvifServer.Schedule
     /// </summary>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SpecialDayGroup))]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class SpecialDayGroupInfo : DataEntity
+    public partial class SpecialDayGroupInfo : SharpOnvifCommon.Xml.OnvifContract
     {
         private string nameField;
 
@@ -2513,7 +2468,6 @@ namespace SharpOnvifServer.Schedule
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            base.WriteXmlContent(writer);
             writer.WriteElementString(Ns.Ver10Schedule, "Name", this.nameField);
             writer.WriteElementString(Ns.Ver10Schedule, "Description", this.descriptionField);
         }
@@ -2531,7 +2485,6 @@ namespace SharpOnvifServer.Schedule
                     this.descriptionField = reader.ReadElementText();
                     return true;
             }
-            if (base.ReadXmlElement(reader)) return true;
             return false;
         }
 
@@ -2541,7 +2494,7 @@ namespace SharpOnvifServer.Schedule
     /// A override schedule that defines alternate time periods for a group of special days.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class SpecialDaysSchedule : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SpecialDaysSchedule : SharpOnvifCommon.Xml.OnvifContract
     {
         private string groupTokenField;
 
@@ -2620,7 +2573,7 @@ namespace SharpOnvifServer.Schedule
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class SpecialDaysScheduleExtension : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SpecialDaysScheduleExtension : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -2655,7 +2608,7 @@ namespace SharpOnvifServer.Schedule
     /// by the device.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class TimePeriod : SharpOnvifCommon.Xml.OnvifObject
+    public partial class TimePeriod : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.DateTime fromField;
 
@@ -2742,7 +2695,7 @@ namespace SharpOnvifServer.Schedule
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class TimePeriodExtension : SharpOnvifCommon.Xml.OnvifObject
+    public partial class TimePeriodExtension : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -2773,13 +2726,10 @@ namespace SharpOnvifServer.Schedule
     /// <summary>Constructs a contract named by an xsi:type attribute.</summary>
     internal static class XmlTypeFactory
     {
-        public static SharpOnvifCommon.Xml.OnvifObject Create(string ns, string name)
+        public static SharpOnvifCommon.Xml.OnvifContract Create(string ns, string name)
         {
             switch (name)
             {
-                case "DataEntity":
-                    if (ns == "http://www.onvif.org/ver10/pacs") return new DataEntity();
-                    break;
                 case "Schedule":
                     if (ns == "http://www.onvif.org/ver10/schedule/wsdl") return new Schedule();
                     break;
@@ -2793,7 +2743,7 @@ namespace SharpOnvifServer.Schedule
                     if (ns == "http://www.onvif.org/ver10/schedule/wsdl") return new SpecialDayGroupInfo();
                     break;
             }
-            return null;
+            return SharpOnvifCommon.Onvif.XmlTypeFactory.Create(ns, name);
         }
     }
 

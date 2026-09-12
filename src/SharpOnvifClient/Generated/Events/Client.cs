@@ -52,7 +52,7 @@ namespace SharpOnvifClient.Events
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -98,7 +98,7 @@ namespace SharpOnvifClient.Events
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<CreatePullPointSubscriptionResponse> CreatePullPointSubscriptionAsync(FilterType Filter, string InitialTerminationTime, CreatePullPointSubscriptionSubscriptionPolicy SubscriptionPolicy, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<CreatePullPointSubscriptionResponse> CreatePullPointSubscriptionAsync(SharpOnvifCommon.Onvif.FilterType Filter, string InitialTerminationTime, CreatePullPointSubscriptionSubscriptionPolicy SubscriptionPolicy, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// The WS-BaseNotification specification defines a set of OPTIONAL WS-ResouceProperties. This
@@ -176,7 +176,7 @@ namespace SharpOnvifClient.Events
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -213,7 +213,7 @@ namespace SharpOnvifClient.Events
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<CreatePullPointSubscriptionResponse> CreatePullPointSubscriptionAsync(FilterType Filter, string InitialTerminationTime, CreatePullPointSubscriptionSubscriptionPolicy SubscriptionPolicy, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<CreatePullPointSubscriptionResponse> CreatePullPointSubscriptionAsync(SharpOnvifCommon.Onvif.FilterType Filter, string InitialTerminationTime, CreatePullPointSubscriptionSubscriptionPolicy SubscriptionPolicy, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return CreatePullPointSubscriptionAsync(new CreatePullPointSubscriptionRequest(Filter, InitialTerminationTime, SubscriptionPolicy, Any), cancellationToken);
         }
@@ -303,7 +303,7 @@ namespace SharpOnvifClient.Events
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task NotifyAsync(NotificationMessageHolderType[] NotificationMessage, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task NotifyAsync(SharpOnvifCommon.Onvif.NotificationMessageHolderType[] NotificationMessage, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     }
 
     /// <summary>
@@ -335,7 +335,7 @@ namespace SharpOnvifClient.Events
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -348,7 +348,7 @@ namespace SharpOnvifClient.Events
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task NotifyAsync(NotificationMessageHolderType[] NotificationMessage, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task NotifyAsync(SharpOnvifCommon.Onvif.NotificationMessageHolderType[] NotificationMessage, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return NotifyAsync(new NotifyRequest(NotificationMessage, Any), cancellationToken);
         }
@@ -364,14 +364,14 @@ namespace SharpOnvifClient.Events
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SubscribeResponse> SubscribeAsync(EndpointReferenceType ConsumerReference, FilterType Filter, string InitialTerminationTime, SubscribeSubscriptionPolicy SubscriptionPolicy, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SubscribeResponse> SubscribeAsync(SharpOnvifCommon.Onvif.EndpointReferenceType ConsumerReference, SharpOnvifCommon.Onvif.FilterType Filter, string InitialTerminationTime, SubscribeSubscriptionPolicy SubscriptionPolicy, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         System.Threading.Tasks.Task<GetCurrentMessageResponse> GetCurrentMessageAsync(GetCurrentMessageRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<GetCurrentMessageResponse> GetCurrentMessageAsync(TopicExpressionType Topic, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<GetCurrentMessageResponse> GetCurrentMessageAsync(SharpOnvifCommon.Onvif.TopicExpressionType Topic, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     }
 
     /// <summary>
@@ -403,7 +403,7 @@ namespace SharpOnvifClient.Events
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -417,7 +417,7 @@ namespace SharpOnvifClient.Events
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SubscribeResponse> SubscribeAsync(EndpointReferenceType ConsumerReference, FilterType Filter, string InitialTerminationTime, SubscribeSubscriptionPolicy SubscriptionPolicy, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SubscribeResponse> SubscribeAsync(SharpOnvifCommon.Onvif.EndpointReferenceType ConsumerReference, SharpOnvifCommon.Onvif.FilterType Filter, string InitialTerminationTime, SubscribeSubscriptionPolicy SubscriptionPolicy, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SubscribeAsync(new SubscribeRequest(ConsumerReference, Filter, InitialTerminationTime, SubscriptionPolicy, Any), cancellationToken);
         }
@@ -431,7 +431,7 @@ namespace SharpOnvifClient.Events
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<GetCurrentMessageResponse> GetCurrentMessageAsync(TopicExpressionType Topic, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<GetCurrentMessageResponse> GetCurrentMessageAsync(SharpOnvifCommon.Onvif.TopicExpressionType Topic, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return GetCurrentMessageAsync(new GetCurrentMessageRequest(Topic, Any), cancellationToken);
         }
@@ -500,7 +500,7 @@ namespace SharpOnvifClient.Events
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -586,7 +586,7 @@ namespace SharpOnvifClient.Events
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task NotifyAsync(NotificationMessageHolderType[] NotificationMessage, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task NotifyAsync(SharpOnvifCommon.Onvif.NotificationMessageHolderType[] NotificationMessage, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     }
 
     /// <summary>
@@ -618,7 +618,7 @@ namespace SharpOnvifClient.Events
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -659,7 +659,7 @@ namespace SharpOnvifClient.Events
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task NotifyAsync(NotificationMessageHolderType[] NotificationMessage, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task NotifyAsync(SharpOnvifCommon.Onvif.NotificationMessageHolderType[] NotificationMessage, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return NotifyAsync(new NotifyRequest(NotificationMessage, Any), cancellationToken);
         }
@@ -758,7 +758,7 @@ namespace SharpOnvifClient.Events
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -899,7 +899,7 @@ namespace SharpOnvifClient.Events
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }

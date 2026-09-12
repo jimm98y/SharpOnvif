@@ -59,7 +59,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetSystemDateAndTimeResponse> SetSystemDateAndTimeAsync(SetDateTimeType DateTimeType, bool DaylightSavings, TimeZone TimeZone, DateTime UTCDateTime, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetSystemDateAndTimeResponse> SetSystemDateAndTimeAsync(SharpOnvifCommon.Onvif.SetDateTimeType DateTimeType, bool DaylightSavings, SharpOnvifCommon.Onvif.OnvifTimeZone TimeZone, SharpOnvifCommon.Onvif.OnvifDateTime UTCDateTime, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// This operation gets the device system date and time. The device shall support the return of the
@@ -82,7 +82,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetSystemFactoryDefaultResponse> SetSystemFactoryDefaultAsync(FactoryDefaultType FactoryDefault, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetSystemFactoryDefaultResponse> SetSystemFactoryDefaultAsync(SharpOnvifCommon.Onvif.FactoryDefaultType FactoryDefault, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// This operation upgrades a device firmware version. After a successful upgrade the response message
@@ -95,7 +95,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<UpgradeSystemFirmwareResponse> UpgradeSystemFirmwareAsync(AttachmentData Firmware, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<UpgradeSystemFirmwareResponse> UpgradeSystemFirmwareAsync(SharpOnvifCommon.Onvif.AttachmentData Firmware, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// This operation reboots the device.
@@ -118,7 +118,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<RestoreSystemResponse> RestoreSystemAsync(BackupFile[] BackupFiles, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<RestoreSystemResponse> RestoreSystemAsync(SharpOnvifCommon.Onvif.BackupFile[] BackupFiles, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// This operation is retrieves system backup configuration file(s) from a device. The device should
@@ -142,7 +142,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<GetSystemLogResponse> GetSystemLogAsync(SystemLogType LogType, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<GetSystemLogResponse> GetSystemLogAsync(SharpOnvifCommon.Onvif.SystemLogType LogType, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// This operation gets arbitary device diagnostics information from the device.
@@ -230,7 +230,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetDiscoveryModeResponse> SetDiscoveryModeAsync(DiscoveryMode DiscoveryMode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetDiscoveryModeResponse> SetDiscoveryModeAsync(SharpOnvifCommon.Onvif.DiscoveryMode DiscoveryMode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// This operation gets the remote discovery mode of a device. See Section 7.4 for the definition of
@@ -254,7 +254,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetRemoteDiscoveryModeResponse> SetRemoteDiscoveryModeAsync(DiscoveryMode RemoteDiscoveryMode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetRemoteDiscoveryModeResponse> SetRemoteDiscoveryModeAsync(SharpOnvifCommon.Onvif.DiscoveryMode RemoteDiscoveryMode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// This operation gets the remote DP address or addresses from a device. If the device supports remote
@@ -278,7 +278,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetDPAddressesResponse> SetDPAddressesAsync(NetworkHost[] DPAddress, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetDPAddressesResponse> SetDPAddressesAsync(SharpOnvifCommon.Onvif.NetworkHost[] DPAddress, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// A client can ask for the device service endpoint reference address property that can be used to
@@ -314,7 +314,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetUserRoleResponse> SetUserRoleAsync(UserRole UserRole, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetUserRoleResponse> SetUserRoleAsync(SharpOnvifCommon.Onvif.UserRole UserRole, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// This operation deletes an editable user level in the device.
@@ -352,7 +352,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetRemoteUserResponse> SetRemoteUserAsync(RemoteUser RemoteUser, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetRemoteUserResponse> SetRemoteUserAsync(SharpOnvifCommon.Onvif.RemoteUser RemoteUser, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// This operation lists the registered users and corresponding credentials on a device. The device
@@ -379,7 +379,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<CreateUsersResponse> CreateUsersAsync(User[] User, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<CreateUsersResponse> CreateUsersAsync(SharpOnvifCommon.Onvif.User[] User, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// This operation deletes users on a device. The device shall support deletion of device users and
@@ -405,7 +405,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetUserResponse> SetUserAsync(User[] User, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetUserResponse> SetUserAsync(SharpOnvifCommon.Onvif.User[] User, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// This method allows to provide a URL where product specific WSDL and schema definitions can be
@@ -509,7 +509,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<GetCapabilitiesResponse> GetCapabilitiesAsync(CapabilityCategory[] Category, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<GetCapabilitiesResponse> GetCapabilitiesAsync(SharpOnvifCommon.Onvif.CapabilityCategory[] Category, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// This operation is used by an endpoint to get the hostname from a device. The device shall return its
@@ -565,7 +565,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetDNSResponse> SetDNSAsync(bool FromDHCP, string[] SearchDomain, IPAddress[] DNSManual, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetDNSResponse> SetDNSAsync(bool FromDHCP, string[] SearchDomain, SharpOnvifCommon.Onvif.OnvifIPAddress[] DNSManual, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// This operation gets the NTP settings from a device. If the device supports NTP, it shall be possible
@@ -590,7 +590,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetNTPResponse> SetNTPAsync(bool FromDHCP, NetworkHost[] NTPManual, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetNTPResponse> SetNTPAsync(bool FromDHCP, SharpOnvifCommon.Onvif.NetworkHost[] NTPManual, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// This operation gets the dynamic DNS settings from a device. If the device supports dynamic DNS as
@@ -614,7 +614,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetDynamicDNSResponse> SetDynamicDNSAsync(DynamicDNSType Type, string Name, string TTL, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetDynamicDNSResponse> SetDynamicDNSAsync(SharpOnvifCommon.Onvif.DynamicDNSType Type, string Name, string TTL, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// This operation gets the network interface configuration from a device. The device shall support
@@ -639,7 +639,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetNetworkInterfacesResponse> SetNetworkInterfacesAsync(string InterfaceToken, NetworkInterfaceSetConfiguration NetworkInterface, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetNetworkInterfacesResponse> SetNetworkInterfacesAsync(string InterfaceToken, SharpOnvifCommon.Onvif.NetworkInterfaceSetConfiguration NetworkInterface, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// This operation gets defined network protocols from a device. The device shall support the
@@ -661,7 +661,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetNetworkProtocolsResponse> SetNetworkProtocolsAsync(NetworkProtocol[] NetworkProtocols, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetNetworkProtocolsResponse> SetNetworkProtocolsAsync(SharpOnvifCommon.Onvif.NetworkProtocol[] NetworkProtocols, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// This operation gets the default gateway settings from a device. The device shall support the
@@ -731,7 +731,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetIPAddressFilterResponse> SetIPAddressFilterAsync(IPAddressFilter IPAddressFilter, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetIPAddressFilterResponse> SetIPAddressFilterAsync(SharpOnvifCommon.Onvif.IPAddressFilter IPAddressFilter, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// This operation adds an IP filter address to a device. If the device supports device access control
@@ -743,7 +743,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<AddIPAddressFilterResponse> AddIPAddressFilterAsync(IPAddressFilter IPAddressFilter, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<AddIPAddressFilterResponse> AddIPAddressFilterAsync(SharpOnvifCommon.Onvif.IPAddressFilter IPAddressFilter, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// This operation deletes an IP filter address from a device. If the device supports device access
@@ -755,7 +755,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<RemoveIPAddressFilterResponse> RemoveIPAddressFilterAsync(IPAddressFilter IPAddressFilter, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<RemoveIPAddressFilterResponse> RemoveIPAddressFilterAsync(SharpOnvifCommon.Onvif.IPAddressFilter IPAddressFilter, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Access to different services and sub-sets of services should be subject to access control. The
@@ -783,7 +783,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetAccessPolicyResponse> SetAccessPolicyAsync(BinaryData PolicyFile, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetAccessPolicyResponse> SetAccessPolicyAsync(SharpOnvifCommon.Onvif.BinaryData PolicyFile, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// This operation gets a list of all available relay outputs and their settings. This method has been
@@ -805,7 +805,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetRelayOutputSettingsResponse> SetRelayOutputSettingsAsync(string RelayOutputToken, RelayOutputSettings Properties, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetRelayOutputSettingsResponse> SetRelayOutputSettingsAsync(string RelayOutputToken, SharpOnvifCommon.Onvif.RelayOutputSettings Properties, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// This operation sets the state of a relay output. This method has been depricated with version 2.0.
@@ -816,7 +816,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetRelayOutputStateResponse> SetRelayOutputStateAsync(string RelayOutputToken, RelayLogicalState LogicalState, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetRelayOutputStateResponse> SetRelayOutputStateAsync(string RelayOutputToken, SharpOnvifCommon.Onvif.RelayLogicalState LogicalState, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Manage auxiliary commands supported by a device, such as controlling an Infrared (IR) lamp, a heater
@@ -1022,7 +1022,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetGeoLocationResponse> SetGeoLocationAsync(LocationEntity[] Location, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetGeoLocationResponse> SetGeoLocationAsync(SharpOnvifCommon.Onvif.LocationEntity[] Location, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// This operation deletes the given geo location entries.
@@ -1032,7 +1032,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<DeleteGeoLocationResponse> DeleteGeoLocationAsync(LocationEntity[] Location, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<DeleteGeoLocationResponse> DeleteGeoLocationAsync(SharpOnvifCommon.Onvif.LocationEntity[] Location, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// This operation sets the hashing algorithm(s) used in HTTP and RTSP Digest Authentication.
@@ -1070,7 +1070,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetCertificatesStatusResponse> SetCertificatesStatusAsync(CertificateStatus[] CertificateStatus, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetCertificatesStatusResponse> SetCertificatesStatusAsync(SharpOnvifCommon.Onvif.CertificateStatus[] CertificateStatus, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         System.Threading.Tasks.Task<DeleteCertificatesResponse> DeleteCertificatesAsync(DeleteCertificatesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
@@ -1084,14 +1084,14 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<GetPkcs10RequestResponse> GetPkcs10RequestAsync(string CertificateID, string Subject, BinaryData Attributes, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<GetPkcs10RequestResponse> GetPkcs10RequestAsync(string CertificateID, string Subject, SharpOnvifCommon.Onvif.BinaryData Attributes, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         System.Threading.Tasks.Task<LoadCertificatesResponse> LoadCertificatesAsync(LoadCertificatesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<LoadCertificatesResponse> LoadCertificatesAsync(Certificate[] NVTCertificate, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<LoadCertificatesResponse> LoadCertificatesAsync(SharpOnvifCommon.Onvif.Certificate[] NVTCertificate, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         System.Threading.Tasks.Task<GetClientCertificateModeResponse> GetClientCertificateModeAsync(GetClientCertificateModeRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
@@ -1119,7 +1119,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<LoadCertificateWithPrivateKeyResponse> LoadCertificateWithPrivateKeyAsync(CertificateWithPrivateKey[] CertificateWithPrivateKey, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<LoadCertificateWithPrivateKeyResponse> LoadCertificateWithPrivateKeyAsync(SharpOnvifCommon.Onvif.CertificateWithPrivateKey[] CertificateWithPrivateKey, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         System.Threading.Tasks.Task<GetCertificateInformationResponse> GetCertificateInformationAsync(GetCertificateInformationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
@@ -1133,21 +1133,21 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<LoadCACertificatesResponse> LoadCACertificatesAsync(Certificate[] CACertificate, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<LoadCACertificatesResponse> LoadCACertificatesAsync(SharpOnvifCommon.Onvif.Certificate[] CACertificate, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         System.Threading.Tasks.Task<CreateDot1XConfigurationResponse> CreateDot1XConfigurationAsync(CreateDot1XConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<CreateDot1XConfigurationResponse> CreateDot1XConfigurationAsync(Dot1XConfiguration Dot1XConfiguration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<CreateDot1XConfigurationResponse> CreateDot1XConfigurationAsync(SharpOnvifCommon.Onvif.Dot1XConfiguration Dot1XConfiguration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         System.Threading.Tasks.Task<SetDot1XConfigurationResponse> SetDot1XConfigurationAsync(SetDot1XConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetDot1XConfigurationResponse> SetDot1XConfigurationAsync(Dot1XConfiguration Dot1XConfiguration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetDot1XConfigurationResponse> SetDot1XConfigurationAsync(SharpOnvifCommon.Onvif.Dot1XConfiguration Dot1XConfiguration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         System.Threading.Tasks.Task<GetDot1XConfigurationResponse> GetDot1XConfigurationAsync(GetDot1XConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
@@ -1200,7 +1200,7 @@ namespace SharpOnvifClient.DeviceMgmt
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -1274,7 +1274,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetSystemDateAndTimeResponse> SetSystemDateAndTimeAsync(SetDateTimeType DateTimeType, bool DaylightSavings, TimeZone TimeZone, DateTime UTCDateTime, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetSystemDateAndTimeResponse> SetSystemDateAndTimeAsync(SharpOnvifCommon.Onvif.SetDateTimeType DateTimeType, bool DaylightSavings, SharpOnvifCommon.Onvif.OnvifTimeZone TimeZone, SharpOnvifCommon.Onvif.OnvifDateTime UTCDateTime, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetSystemDateAndTimeAsync(new SetSystemDateAndTimeRequest(DateTimeType, DaylightSavings, TimeZone, UTCDateTime), cancellationToken);
         }
@@ -1311,7 +1311,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetSystemFactoryDefaultResponse> SetSystemFactoryDefaultAsync(FactoryDefaultType FactoryDefault, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetSystemFactoryDefaultResponse> SetSystemFactoryDefaultAsync(SharpOnvifCommon.Onvif.FactoryDefaultType FactoryDefault, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetSystemFactoryDefaultAsync(new SetSystemFactoryDefaultRequest(FactoryDefault), cancellationToken);
         }
@@ -1331,7 +1331,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<UpgradeSystemFirmwareResponse> UpgradeSystemFirmwareAsync(AttachmentData Firmware, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<UpgradeSystemFirmwareResponse> UpgradeSystemFirmwareAsync(SharpOnvifCommon.Onvif.AttachmentData Firmware, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return UpgradeSystemFirmwareAsync(new UpgradeSystemFirmwareRequest(Firmware), cancellationToken);
         }
@@ -1368,7 +1368,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<RestoreSystemResponse> RestoreSystemAsync(BackupFile[] BackupFiles, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<RestoreSystemResponse> RestoreSystemAsync(SharpOnvifCommon.Onvif.BackupFile[] BackupFiles, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return RestoreSystemAsync(new RestoreSystemRequest(BackupFiles), cancellationToken);
         }
@@ -1406,7 +1406,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<GetSystemLogResponse> GetSystemLogAsync(SystemLogType LogType, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<GetSystemLogResponse> GetSystemLogAsync(SharpOnvifCommon.Onvif.SystemLogType LogType, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return GetSystemLogAsync(new GetSystemLogRequest(LogType), cancellationToken);
         }
@@ -1543,7 +1543,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetDiscoveryModeResponse> SetDiscoveryModeAsync(DiscoveryMode DiscoveryMode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetDiscoveryModeResponse> SetDiscoveryModeAsync(SharpOnvifCommon.Onvif.DiscoveryMode DiscoveryMode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetDiscoveryModeAsync(new SetDiscoveryModeRequest(DiscoveryMode), cancellationToken);
         }
@@ -1581,7 +1581,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetRemoteDiscoveryModeResponse> SetRemoteDiscoveryModeAsync(DiscoveryMode RemoteDiscoveryMode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetRemoteDiscoveryModeResponse> SetRemoteDiscoveryModeAsync(SharpOnvifCommon.Onvif.DiscoveryMode RemoteDiscoveryMode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetRemoteDiscoveryModeAsync(new SetRemoteDiscoveryModeRequest(RemoteDiscoveryMode), cancellationToken);
         }
@@ -1619,7 +1619,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetDPAddressesResponse> SetDPAddressesAsync(NetworkHost[] DPAddress, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetDPAddressesResponse> SetDPAddressesAsync(SharpOnvifCommon.Onvif.NetworkHost[] DPAddress, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetDPAddressesAsync(new SetDPAddressesRequest(DPAddress), cancellationToken);
         }
@@ -1676,7 +1676,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetUserRoleResponse> SetUserRoleAsync(UserRole UserRole, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetUserRoleResponse> SetUserRoleAsync(SharpOnvifCommon.Onvif.UserRole UserRole, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetUserRoleAsync(new SetUserRoleRequest(UserRole), cancellationToken);
         }
@@ -1735,7 +1735,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetRemoteUserResponse> SetRemoteUserAsync(RemoteUser RemoteUser, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetRemoteUserResponse> SetRemoteUserAsync(SharpOnvifCommon.Onvif.RemoteUser RemoteUser, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetRemoteUserAsync(new SetRemoteUserRequest(RemoteUser), cancellationToken);
         }
@@ -1776,7 +1776,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<CreateUsersResponse> CreateUsersAsync(User[] User, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<CreateUsersResponse> CreateUsersAsync(SharpOnvifCommon.Onvif.User[] User, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return CreateUsersAsync(new CreateUsersRequest(User), cancellationToken);
         }
@@ -1816,7 +1816,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetUserResponse> SetUserAsync(User[] User, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetUserResponse> SetUserAsync(SharpOnvifCommon.Onvif.User[] User, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetUserAsync(new SetUserRequest(User), cancellationToken);
         }
@@ -1990,7 +1990,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<GetCapabilitiesResponse> GetCapabilitiesAsync(CapabilityCategory[] Category, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<GetCapabilitiesResponse> GetCapabilitiesAsync(SharpOnvifCommon.Onvif.CapabilityCategory[] Category, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return GetCapabilitiesAsync(new GetCapabilitiesRequest(Category), cancellationToken);
         }
@@ -2081,7 +2081,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetDNSResponse> SetDNSAsync(bool FromDHCP, string[] SearchDomain, IPAddress[] DNSManual, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetDNSResponse> SetDNSAsync(bool FromDHCP, string[] SearchDomain, SharpOnvifCommon.Onvif.OnvifIPAddress[] DNSManual, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetDNSAsync(new SetDNSRequest(FromDHCP, SearchDomain, DNSManual), cancellationToken);
         }
@@ -2120,7 +2120,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetNTPResponse> SetNTPAsync(bool FromDHCP, NetworkHost[] NTPManual, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetNTPResponse> SetNTPAsync(bool FromDHCP, SharpOnvifCommon.Onvif.NetworkHost[] NTPManual, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetNTPAsync(new SetNTPRequest(FromDHCP, NTPManual), cancellationToken);
         }
@@ -2158,7 +2158,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetDynamicDNSResponse> SetDynamicDNSAsync(DynamicDNSType Type, string Name, string TTL, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetDynamicDNSResponse> SetDynamicDNSAsync(SharpOnvifCommon.Onvif.DynamicDNSType Type, string Name, string TTL, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetDynamicDNSAsync(new SetDynamicDNSRequest(Type, Name, TTL), cancellationToken);
         }
@@ -2197,7 +2197,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetNetworkInterfacesResponse> SetNetworkInterfacesAsync(string InterfaceToken, NetworkInterfaceSetConfiguration NetworkInterface, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetNetworkInterfacesResponse> SetNetworkInterfacesAsync(string InterfaceToken, SharpOnvifCommon.Onvif.NetworkInterfaceSetConfiguration NetworkInterface, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetNetworkInterfacesAsync(new SetNetworkInterfacesRequest(InterfaceToken, NetworkInterface), cancellationToken);
         }
@@ -2233,7 +2233,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetNetworkProtocolsResponse> SetNetworkProtocolsAsync(NetworkProtocol[] NetworkProtocols, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetNetworkProtocolsResponse> SetNetworkProtocolsAsync(SharpOnvifCommon.Onvif.NetworkProtocol[] NetworkProtocols, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetNetworkProtocolsAsync(new SetNetworkProtocolsRequest(NetworkProtocols), cancellationToken);
         }
@@ -2345,7 +2345,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetIPAddressFilterResponse> SetIPAddressFilterAsync(IPAddressFilter IPAddressFilter, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetIPAddressFilterResponse> SetIPAddressFilterAsync(SharpOnvifCommon.Onvif.IPAddressFilter IPAddressFilter, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetIPAddressFilterAsync(new SetIPAddressFilterRequest(IPAddressFilter), cancellationToken);
         }
@@ -2364,7 +2364,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<AddIPAddressFilterResponse> AddIPAddressFilterAsync(IPAddressFilter IPAddressFilter, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<AddIPAddressFilterResponse> AddIPAddressFilterAsync(SharpOnvifCommon.Onvif.IPAddressFilter IPAddressFilter, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return AddIPAddressFilterAsync(new AddIPAddressFilterRequest(IPAddressFilter), cancellationToken);
         }
@@ -2383,7 +2383,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<RemoveIPAddressFilterResponse> RemoveIPAddressFilterAsync(IPAddressFilter IPAddressFilter, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<RemoveIPAddressFilterResponse> RemoveIPAddressFilterAsync(SharpOnvifCommon.Onvif.IPAddressFilter IPAddressFilter, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return RemoveIPAddressFilterAsync(new RemoveIPAddressFilterRequest(IPAddressFilter), cancellationToken);
         }
@@ -2425,7 +2425,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetAccessPolicyResponse> SetAccessPolicyAsync(BinaryData PolicyFile, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetAccessPolicyResponse> SetAccessPolicyAsync(SharpOnvifCommon.Onvif.BinaryData PolicyFile, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetAccessPolicyAsync(new SetAccessPolicyRequest(PolicyFile), cancellationToken);
         }
@@ -2461,7 +2461,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetRelayOutputSettingsResponse> SetRelayOutputSettingsAsync(string RelayOutputToken, RelayOutputSettings Properties, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetRelayOutputSettingsResponse> SetRelayOutputSettingsAsync(string RelayOutputToken, SharpOnvifCommon.Onvif.RelayOutputSettings Properties, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetRelayOutputSettingsAsync(new SetRelayOutputSettingsRequest(RelayOutputToken, Properties), cancellationToken);
         }
@@ -2479,7 +2479,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetRelayOutputStateResponse> SetRelayOutputStateAsync(string RelayOutputToken, RelayLogicalState LogicalState, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetRelayOutputStateResponse> SetRelayOutputStateAsync(string RelayOutputToken, SharpOnvifCommon.Onvif.RelayLogicalState LogicalState, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetRelayOutputStateAsync(new SetRelayOutputStateRequest(RelayOutputToken, LogicalState), cancellationToken);
         }
@@ -2790,7 +2790,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetGeoLocationResponse> SetGeoLocationAsync(LocationEntity[] Location, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetGeoLocationResponse> SetGeoLocationAsync(SharpOnvifCommon.Onvif.LocationEntity[] Location, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetGeoLocationAsync(new SetGeoLocationRequest(Location), cancellationToken);
         }
@@ -2807,7 +2807,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<DeleteGeoLocationResponse> DeleteGeoLocationAsync(LocationEntity[] Location, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<DeleteGeoLocationResponse> DeleteGeoLocationAsync(SharpOnvifCommon.Onvif.LocationEntity[] Location, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return DeleteGeoLocationAsync(new DeleteGeoLocationRequest(Location), cancellationToken);
         }
@@ -2880,7 +2880,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetCertificatesStatusResponse> SetCertificatesStatusAsync(CertificateStatus[] CertificateStatus, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetCertificatesStatusResponse> SetCertificatesStatusAsync(SharpOnvifCommon.Onvif.CertificateStatus[] CertificateStatus, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetCertificatesStatusAsync(new SetCertificatesStatusRequest(CertificateStatus), cancellationToken);
         }
@@ -2908,7 +2908,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<GetPkcs10RequestResponse> GetPkcs10RequestAsync(string CertificateID, string Subject, BinaryData Attributes, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<GetPkcs10RequestResponse> GetPkcs10RequestAsync(string CertificateID, string Subject, SharpOnvifCommon.Onvif.BinaryData Attributes, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return GetPkcs10RequestAsync(new GetPkcs10RequestRequest(CertificateID, Subject, Attributes), cancellationToken);
         }
@@ -2922,7 +2922,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<LoadCertificatesResponse> LoadCertificatesAsync(Certificate[] NVTCertificate, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<LoadCertificatesResponse> LoadCertificatesAsync(SharpOnvifCommon.Onvif.Certificate[] NVTCertificate, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return LoadCertificatesAsync(new LoadCertificatesRequest(NVTCertificate), cancellationToken);
         }
@@ -2978,7 +2978,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<LoadCertificateWithPrivateKeyResponse> LoadCertificateWithPrivateKeyAsync(CertificateWithPrivateKey[] CertificateWithPrivateKey, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<LoadCertificateWithPrivateKeyResponse> LoadCertificateWithPrivateKeyAsync(SharpOnvifCommon.Onvif.CertificateWithPrivateKey[] CertificateWithPrivateKey, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return LoadCertificateWithPrivateKeyAsync(new LoadCertificateWithPrivateKeyRequest(CertificateWithPrivateKey), cancellationToken);
         }
@@ -3006,7 +3006,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<LoadCACertificatesResponse> LoadCACertificatesAsync(Certificate[] CACertificate, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<LoadCACertificatesResponse> LoadCACertificatesAsync(SharpOnvifCommon.Onvif.Certificate[] CACertificate, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return LoadCACertificatesAsync(new LoadCACertificatesRequest(CACertificate), cancellationToken);
         }
@@ -3020,7 +3020,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<CreateDot1XConfigurationResponse> CreateDot1XConfigurationAsync(Dot1XConfiguration Dot1XConfiguration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<CreateDot1XConfigurationResponse> CreateDot1XConfigurationAsync(SharpOnvifCommon.Onvif.Dot1XConfiguration Dot1XConfiguration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return CreateDot1XConfigurationAsync(new CreateDot1XConfigurationRequest(Dot1XConfiguration), cancellationToken);
         }
@@ -3034,7 +3034,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetDot1XConfigurationResponse> SetDot1XConfigurationAsync(Dot1XConfiguration Dot1XConfiguration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetDot1XConfigurationResponse> SetDot1XConfigurationAsync(SharpOnvifCommon.Onvif.Dot1XConfiguration Dot1XConfiguration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetDot1XConfigurationAsync(new SetDot1XConfigurationRequest(Dot1XConfiguration), cancellationToken);
         }

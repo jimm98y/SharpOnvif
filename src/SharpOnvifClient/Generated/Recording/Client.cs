@@ -39,7 +39,7 @@ namespace SharpOnvifClient.Recording
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<CreateRecordingResponse> CreateRecordingAsync(RecordingConfiguration RecordingConfiguration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<CreateRecordingResponse> CreateRecordingAsync(SharpOnvifCommon.Onvif.RecordingConfiguration RecordingConfiguration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// DeleteRecording shall delete a recording object. Whenever a recording is deleted, the device shall
@@ -76,7 +76,7 @@ namespace SharpOnvifClient.Recording
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetRecordingConfigurationResponse> SetRecordingConfigurationAsync(string RecordingToken, RecordingConfiguration RecordingConfiguration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetRecordingConfigurationResponse> SetRecordingConfigurationAsync(string RecordingToken, SharpOnvifCommon.Onvif.RecordingConfiguration RecordingConfiguration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// GetRecordingConfiguration shall retrieve the recording configuration for a recording.
@@ -110,7 +110,7 @@ namespace SharpOnvifClient.Recording
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<CreateTrackResponse> CreateTrackAsync(string RecordingToken, TrackConfiguration TrackConfiguration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<CreateTrackResponse> CreateTrackAsync(string RecordingToken, SharpOnvifCommon.Onvif.TrackConfiguration TrackConfiguration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// DeleteTrack shall remove a track from a recording. All the data in the track shall be deleted. This
@@ -141,7 +141,7 @@ namespace SharpOnvifClient.Recording
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetTrackConfigurationResponse> SetTrackConfigurationAsync(string RecordingToken, string TrackToken, TrackConfiguration TrackConfiguration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetTrackConfigurationResponse> SetTrackConfigurationAsync(string RecordingToken, string TrackToken, SharpOnvifCommon.Onvif.TrackConfiguration TrackConfiguration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// CreateRecordingJob shall create a new recording job. The JobConfiguration returned from
@@ -154,7 +154,7 @@ namespace SharpOnvifClient.Recording
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<CreateRecordingJobResponse> CreateRecordingJobAsync(RecordingJobConfiguration JobConfiguration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<CreateRecordingJobResponse> CreateRecordingJobAsync(SharpOnvifCommon.Onvif.RecordingJobConfiguration JobConfiguration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// DeleteRecordingJob removes a recording job. It shall also implicitly delete all the receiver objects
@@ -188,7 +188,7 @@ namespace SharpOnvifClient.Recording
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetRecordingJobConfigurationResponse> SetRecordingJobConfigurationAsync(string JobToken, RecordingJobConfiguration JobConfiguration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetRecordingJobConfigurationResponse> SetRecordingJobConfigurationAsync(string JobToken, SharpOnvifCommon.Onvif.RecordingJobConfiguration JobConfiguration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// GetRecordingJobConfiguration shall return the current configuration for a recording job.
@@ -230,7 +230,7 @@ namespace SharpOnvifClient.Recording
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<ListRecordedSegmentsResponse> ListRecordedSegmentsAsync(DateTimeRange Time, string RecordingToken, int MaxResults, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ListRecordedSegmentsResponse> ListRecordedSegmentsAsync(SharpOnvifCommon.Onvif.DateTimeRange Time, string RecordingToken, int MaxResults, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Exports the selected recorded segments (from existing recorded data) to the storage attached to the
@@ -241,7 +241,7 @@ namespace SharpOnvifClient.Recording
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<ExportRecordedSegmentsResponse> ExportRecordedSegmentsAsync(DateTimeRange Time, string RecordingToken, string Alias, string StorageToken, string Track, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ExportRecordedSegmentsResponse> ExportRecordedSegmentsAsync(SharpOnvifCommon.Onvif.DateTimeRange Time, string RecordingToken, string Alias, string StorageToken, string Track, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Stops the selected ExportRecordedSegments operation.
@@ -262,7 +262,7 @@ namespace SharpOnvifClient.Recording
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<ExportRecordedDataResponse> ExportRecordedDataAsync(System.DateTime StartPoint, System.DateTime EndPoint, SearchScope SearchScope, string FileFormat, StorageReferencePath StorageDestination, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ExportRecordedDataResponse> ExportRecordedDataAsync(System.DateTime StartPoint, System.DateTime EndPoint, SharpOnvifCommon.Onvif.SearchScope SearchScope, string FileFormat, SharpOnvifCommon.Onvif.StorageReferencePath StorageDestination, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Stops the selected ExportRecordedData operation.
@@ -324,7 +324,7 @@ namespace SharpOnvifClient.Recording
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -364,7 +364,7 @@ namespace SharpOnvifClient.Recording
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<CreateRecordingResponse> CreateRecordingAsync(RecordingConfiguration RecordingConfiguration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<CreateRecordingResponse> CreateRecordingAsync(SharpOnvifCommon.Onvif.RecordingConfiguration RecordingConfiguration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return CreateRecordingAsync(new CreateRecordingRequest(RecordingConfiguration), cancellationToken);
         }
@@ -422,7 +422,7 @@ namespace SharpOnvifClient.Recording
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetRecordingConfigurationResponse> SetRecordingConfigurationAsync(string RecordingToken, RecordingConfiguration RecordingConfiguration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetRecordingConfigurationResponse> SetRecordingConfigurationAsync(string RecordingToken, SharpOnvifCommon.Onvif.RecordingConfiguration RecordingConfiguration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetRecordingConfigurationAsync(new SetRecordingConfigurationRequest(RecordingToken, RecordingConfiguration), cancellationToken);
         }
@@ -477,7 +477,7 @@ namespace SharpOnvifClient.Recording
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<CreateTrackResponse> CreateTrackAsync(string RecordingToken, TrackConfiguration TrackConfiguration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<CreateTrackResponse> CreateTrackAsync(string RecordingToken, SharpOnvifCommon.Onvif.TrackConfiguration TrackConfiguration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return CreateTrackAsync(new CreateTrackRequest(RecordingToken, TrackConfiguration), cancellationToken);
         }
@@ -529,7 +529,7 @@ namespace SharpOnvifClient.Recording
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetTrackConfigurationResponse> SetTrackConfigurationAsync(string RecordingToken, string TrackToken, TrackConfiguration TrackConfiguration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetTrackConfigurationResponse> SetTrackConfigurationAsync(string RecordingToken, string TrackToken, SharpOnvifCommon.Onvif.TrackConfiguration TrackConfiguration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetTrackConfigurationAsync(new SetTrackConfigurationRequest(RecordingToken, TrackToken, TrackConfiguration), cancellationToken);
         }
@@ -549,7 +549,7 @@ namespace SharpOnvifClient.Recording
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<CreateRecordingJobResponse> CreateRecordingJobAsync(RecordingJobConfiguration JobConfiguration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<CreateRecordingJobResponse> CreateRecordingJobAsync(SharpOnvifCommon.Onvif.RecordingJobConfiguration JobConfiguration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return CreateRecordingJobAsync(new CreateRecordingJobRequest(JobConfiguration), cancellationToken);
         }
@@ -604,7 +604,7 @@ namespace SharpOnvifClient.Recording
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetRecordingJobConfigurationResponse> SetRecordingJobConfigurationAsync(string JobToken, RecordingJobConfiguration JobConfiguration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetRecordingJobConfigurationResponse> SetRecordingJobConfigurationAsync(string JobToken, SharpOnvifCommon.Onvif.RecordingJobConfiguration JobConfiguration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetRecordingJobConfigurationAsync(new SetRecordingJobConfigurationRequest(JobToken, JobConfiguration), cancellationToken);
         }
@@ -674,7 +674,7 @@ namespace SharpOnvifClient.Recording
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<ListRecordedSegmentsResponse> ListRecordedSegmentsAsync(DateTimeRange Time, string RecordingToken, int MaxResults, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<ListRecordedSegmentsResponse> ListRecordedSegmentsAsync(SharpOnvifCommon.Onvif.DateTimeRange Time, string RecordingToken, int MaxResults, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return ListRecordedSegmentsAsync(new ListRecordedSegmentsRequest(Time, RecordingToken, MaxResults), cancellationToken);
         }
@@ -692,7 +692,7 @@ namespace SharpOnvifClient.Recording
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<ExportRecordedSegmentsResponse> ExportRecordedSegmentsAsync(DateTimeRange Time, string RecordingToken, string Alias, string StorageToken, string Track, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<ExportRecordedSegmentsResponse> ExportRecordedSegmentsAsync(SharpOnvifCommon.Onvif.DateTimeRange Time, string RecordingToken, string Alias, string StorageToken, string Track, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return ExportRecordedSegmentsAsync(new ExportRecordedSegmentsRequest(Time, RecordingToken, Alias, StorageToken, Track, Any), cancellationToken);
         }
@@ -727,7 +727,7 @@ namespace SharpOnvifClient.Recording
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<ExportRecordedDataResponse> ExportRecordedDataAsync(System.DateTime StartPoint, System.DateTime EndPoint, SearchScope SearchScope, string FileFormat, StorageReferencePath StorageDestination, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<ExportRecordedDataResponse> ExportRecordedDataAsync(System.DateTime StartPoint, System.DateTime EndPoint, SharpOnvifCommon.Onvif.SearchScope SearchScope, string FileFormat, SharpOnvifCommon.Onvif.StorageReferencePath StorageDestination, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return ExportRecordedDataAsync(new ExportRecordedDataRequest(StartPoint, EndPoint, SearchScope, FileFormat, StorageDestination), cancellationToken);
         }

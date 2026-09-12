@@ -14,7 +14,6 @@ namespace SharpOnvifClient.AccessControl
     internal static class Ns
     {
         public const string Ver10Accesscontrol = "http://www.onvif.org/ver10/accesscontrol/wsdl";
-        public const string Ver10Pacs = "http://www.onvif.org/ver10/pacs";
     }
 
     /// <summary>
@@ -131,7 +130,7 @@ namespace SharpOnvifClient.AccessControl
     /// available:
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class AccessPointCapabilities : SharpOnvifCommon.Xml.OnvifObject
+    public partial class AccessPointCapabilities : SharpOnvifCommon.Xml.OnvifContract
     {
         private string[] supportedSecurityLevelsField;
 
@@ -440,7 +439,7 @@ namespace SharpOnvifClient.AccessControl
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class AccessPointExtension : SharpOnvifCommon.Xml.OnvifObject
+    public partial class AccessPointExtension : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -532,7 +531,7 @@ namespace SharpOnvifClient.AccessControl
     /// </summary>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(AccessPointInfo))]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class AccessPointInfoBase : DataEntity
+    public partial class AccessPointInfoBase : SharpOnvifCommon.Xml.OnvifContract
     {
         private string nameField;
 
@@ -617,7 +616,6 @@ namespace SharpOnvifClient.AccessControl
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            base.WriteXmlContent(writer);
             writer.WriteElementString(Ns.Ver10Accesscontrol, "Name", this.nameField);
             writer.WriteElementString(Ns.Ver10Accesscontrol, "Description", this.descriptionField);
             writer.WriteElementString(Ns.Ver10Accesscontrol, "AreaFrom", this.areaFromField);
@@ -655,7 +653,6 @@ namespace SharpOnvifClient.AccessControl
                     this.entityField = reader.ReadElementText();
                     return true;
             }
-            if (base.ReadXmlElement(reader)) return true;
             return false;
         }
 
@@ -666,7 +663,7 @@ namespace SharpOnvifClient.AccessControl
     /// provide the following fields for each AccessPoint instance:
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class AccessPointState : SharpOnvifCommon.Xml.OnvifObject
+    public partial class AccessPointState : SharpOnvifCommon.Xml.OnvifContract
     {
         private bool enabledField;
 
@@ -757,7 +754,7 @@ namespace SharpOnvifClient.AccessControl
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class AreaExtension : SharpOnvifCommon.Xml.OnvifObject
+    public partial class AreaExtension : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -804,7 +801,7 @@ namespace SharpOnvifClient.AccessControl
     /// </summary>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(AreaInfo))]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class AreaInfoBase : DataEntity
+    public partial class AreaInfoBase : SharpOnvifCommon.Xml.OnvifContract
     {
         private string nameField;
 
@@ -836,7 +833,6 @@ namespace SharpOnvifClient.AccessControl
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            base.WriteXmlContent(writer);
             writer.WriteElementString(Ns.Ver10Accesscontrol, "Name", this.nameField);
             writer.WriteElementString(Ns.Ver10Accesscontrol, "Description", this.descriptionField);
         }
@@ -854,7 +850,6 @@ namespace SharpOnvifClient.AccessControl
                     this.descriptionField = reader.ReadElementText();
                     return true;
             }
-            if (base.ReadXmlElement(reader)) return true;
             return false;
         }
 
@@ -867,7 +862,7 @@ namespace SharpOnvifClient.AccessControl
     /// device shall return InvalidArgVal as a generic fault code.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateAccessPoint", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class CreateAccessPointRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CreateAccessPointRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private AccessPoint accessPointField;
 
@@ -916,7 +911,7 @@ namespace SharpOnvifClient.AccessControl
     /// device shall return InvalidArgVal as a generic fault code.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateAccessPointResponse", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class CreateAccessPointResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CreateAccessPointResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -965,7 +960,7 @@ namespace SharpOnvifClient.AccessControl
     /// InvalidArgVal as a generic fault code.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateArea", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class CreateAreaRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CreateAreaRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private Area areaField;
 
@@ -1014,7 +1009,7 @@ namespace SharpOnvifClient.AccessControl
     /// InvalidArgVal as a generic fault code.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateAreaResponse", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class CreateAreaResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CreateAreaResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -1057,52 +1052,10 @@ namespace SharpOnvifClient.AccessControl
     }
 
     /// <summary>
-    /// General datastructure referenced by a token. Should be used as extension base.
-    /// </summary>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AccessPointInfoBase))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AreaInfoBase))]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/pacs")]
-    public partial class DataEntity : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string tokenField;
-
-        /// <summary>
-        /// A service-unique identifier of the item.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string token
-        {
-            get { return this.tokenField; }
-            set { this.tokenField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "DataEntity"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Pacs; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAttributeString(null, "token", this.tokenField);
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "token":
-                    this.tokenField = reader.AttributeValue;
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    /// <summary>
     /// This operation reverts the authentication behavior for an access point to its default behavior.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteAccessPointAuthenticationProfile", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class DeleteAccessPointAuthenticationProfileRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteAccessPointAuthenticationProfileRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -1148,7 +1101,7 @@ namespace SharpOnvifClient.AccessControl
     /// This operation reverts the authentication behavior for an access point to its default behavior.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteAccessPointAuthenticationProfileResponse", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class DeleteAccessPointAuthenticationProfileResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteAccessPointAuthenticationProfileResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public DeleteAccessPointAuthenticationProfileResponse()
         {
@@ -1163,7 +1116,7 @@ namespace SharpOnvifClient.AccessControl
     /// a generic fault code.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteAccessPoint", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class DeleteAccessPointRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteAccessPointRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -1212,7 +1165,7 @@ namespace SharpOnvifClient.AccessControl
     /// a generic fault code.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteAccessPointResponse", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class DeleteAccessPointResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteAccessPointResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public DeleteAccessPointResponse()
         {
@@ -1227,7 +1180,7 @@ namespace SharpOnvifClient.AccessControl
     /// generic fault code.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteArea", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class DeleteAreaRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteAreaRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -1276,7 +1229,7 @@ namespace SharpOnvifClient.AccessControl
     /// generic fault code.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteAreaResponse", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class DeleteAreaResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteAreaResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public DeleteAreaResponse()
         {
@@ -1289,7 +1242,7 @@ namespace SharpOnvifClient.AccessControl
     /// DisableAccessPoint capability for a particular access point instance shall implement this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DisableAccessPoint", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class DisableAccessPointRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DisableAccessPointRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -1336,7 +1289,7 @@ namespace SharpOnvifClient.AccessControl
     /// DisableAccessPoint capability for a particular access point instance shall implement this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DisableAccessPointResponse", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class DisableAccessPointResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DisableAccessPointResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public DisableAccessPointResponse()
         {
@@ -1349,7 +1302,7 @@ namespace SharpOnvifClient.AccessControl
     /// capability for a particular access point instance shall implement this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("EnableAccessPoint", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class EnableAccessPointRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class EnableAccessPointRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -1396,7 +1349,7 @@ namespace SharpOnvifClient.AccessControl
     /// capability for a particular access point instance shall implement this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("EnableAccessPointResponse", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class EnableAccessPointResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class EnableAccessPointResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public EnableAccessPointResponse()
         {
@@ -1410,7 +1363,7 @@ namespace SharpOnvifClient.AccessControl
     /// this method.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ExternalAuthorization", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class ExternalAuthorizationRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ExternalAuthorizationRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string accessPointTokenField;
 
@@ -1512,7 +1465,7 @@ namespace SharpOnvifClient.AccessControl
     /// this method.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ExternalAuthorizationResponse", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class ExternalAuthorizationResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ExternalAuthorizationResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public ExternalAuthorizationResponse()
         {
@@ -1533,7 +1486,7 @@ namespace SharpOnvifClient.AccessControl
     /// feedback type the device shall implement this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("Feedback", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class FeedbackRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class FeedbackRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string accessPointTokenField;
 
@@ -1665,7 +1618,7 @@ namespace SharpOnvifClient.AccessControl
     /// feedback type the device shall implement this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("FeedbackResponse", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class FeedbackResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class FeedbackResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -1706,7 +1659,7 @@ namespace SharpOnvifClient.AccessControl
     /// shall not be greater than the Limit parameter.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAccessPointInfoList", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class GetAccessPointInfoListRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAccessPointInfoListRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private int limitField;
         private bool limitFieldSpecified;
@@ -1793,7 +1746,7 @@ namespace SharpOnvifClient.AccessControl
     /// shall not be greater than the Limit parameter.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAccessPointInfoListResponse", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class GetAccessPointInfoListResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAccessPointInfoListResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private string nextStartReferenceField;
 
@@ -1866,7 +1819,7 @@ namespace SharpOnvifClient.AccessControl
     /// is greater than MaxLimit, a TooManyItems fault shall be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAccessPointInfo", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class GetAccessPointInfoRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAccessPointInfoRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string[] tokenField;
 
@@ -1921,7 +1874,7 @@ namespace SharpOnvifClient.AccessControl
     /// is greater than MaxLimit, a TooManyItems fault shall be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAccessPointInfoResponse", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class GetAccessPointInfoResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAccessPointInfoResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private AccessPointInfo[] accessPointInfoField;
 
@@ -1976,7 +1929,7 @@ namespace SharpOnvifClient.AccessControl
     /// be greater than the Limit parameter.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAccessPointList", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class GetAccessPointListRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAccessPointListRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private int limitField;
         private bool limitFieldSpecified;
@@ -2062,7 +2015,7 @@ namespace SharpOnvifClient.AccessControl
     /// be greater than the Limit parameter.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAccessPointListResponse", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class GetAccessPointListResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAccessPointListResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private string nextStartReferenceField;
 
@@ -2132,7 +2085,7 @@ namespace SharpOnvifClient.AccessControl
     /// This operation requests the AccessPointState for the access point instance specified by the token.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAccessPointState", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class GetAccessPointStateRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAccessPointStateRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -2178,7 +2131,7 @@ namespace SharpOnvifClient.AccessControl
     /// This operation requests the AccessPointState for the access point instance specified by the token.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAccessPointStateResponse", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class GetAccessPointStateResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAccessPointStateResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private AccessPointState accessPointStateField;
 
@@ -2227,7 +2180,7 @@ namespace SharpOnvifClient.AccessControl
     /// is greater than MaxLimit, a TooManyItems fault shall be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAccessPoints", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class GetAccessPointsRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAccessPointsRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string[] tokenField;
 
@@ -2282,7 +2235,7 @@ namespace SharpOnvifClient.AccessControl
     /// is greater than MaxLimit, a TooManyItems fault shall be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAccessPointsResponse", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class GetAccessPointsResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAccessPointsResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private AccessPoint[] accessPointField;
 
@@ -2337,7 +2290,7 @@ namespace SharpOnvifClient.AccessControl
     /// be greater than the Limit parameter.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAreaInfoList", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class GetAreaInfoListRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAreaInfoListRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private int limitField;
         private bool limitFieldSpecified;
@@ -2423,7 +2376,7 @@ namespace SharpOnvifClient.AccessControl
     /// be greater than the Limit parameter.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAreaInfoListResponse", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class GetAreaInfoListResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAreaInfoListResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private string nextStartReferenceField;
 
@@ -2496,7 +2449,7 @@ namespace SharpOnvifClient.AccessControl
     /// greater than MaxLimit, a TooManyItems fault shall be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAreaInfo", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class GetAreaInfoRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAreaInfoRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string[] tokenField;
 
@@ -2551,7 +2504,7 @@ namespace SharpOnvifClient.AccessControl
     /// greater than MaxLimit, a TooManyItems fault shall be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAreaInfoResponse", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class GetAreaInfoResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAreaInfoResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private AreaInfo[] areaInfoField;
 
@@ -2606,7 +2559,7 @@ namespace SharpOnvifClient.AccessControl
     /// greater than the Limit parameter.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAreaList", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class GetAreaListRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAreaListRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private int limitField;
         private bool limitFieldSpecified;
@@ -2692,7 +2645,7 @@ namespace SharpOnvifClient.AccessControl
     /// greater than the Limit parameter.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAreaListResponse", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class GetAreaListResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAreaListResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private string nextStartReferenceField;
 
@@ -2765,7 +2718,7 @@ namespace SharpOnvifClient.AccessControl
     /// greater than MaxLimit, a TooManyItems fault shall be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAreas", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class GetAreasRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAreasRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string[] tokenField;
 
@@ -2820,7 +2773,7 @@ namespace SharpOnvifClient.AccessControl
     /// greater than MaxLimit, a TooManyItems fault shall be returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAreasResponse", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class GetAreasResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetAreasResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private Area[] areaField;
 
@@ -2873,7 +2826,7 @@ namespace SharpOnvifClient.AccessControl
     /// access control service shall implement this method.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilities", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         public GetServiceCapabilitiesRequest()
         {
@@ -2886,7 +2839,7 @@ namespace SharpOnvifClient.AccessControl
     /// access control service shall implement this method.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilitiesResponse", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private ServiceCapabilities capabilitiesField;
 
@@ -2936,7 +2889,7 @@ namespace SharpOnvifClient.AccessControl
     /// in the request, the device shall return InvalidArgs as a generic fault code.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ModifyAccessPoint", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class ModifyAccessPointRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ModifyAccessPointRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private AccessPoint accessPointField;
 
@@ -2985,7 +2938,7 @@ namespace SharpOnvifClient.AccessControl
     /// in the request, the device shall return InvalidArgs as a generic fault code.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ModifyAccessPointResponse", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class ModifyAccessPointResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ModifyAccessPointResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public ModifyAccessPointResponse()
         {
@@ -3000,7 +2953,7 @@ namespace SharpOnvifClient.AccessControl
     /// shall return InvalidArgs as a generic fault code.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ModifyArea", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class ModifyAreaRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ModifyAreaRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private Area areaField;
 
@@ -3049,7 +3002,7 @@ namespace SharpOnvifClient.AccessControl
     /// shall return InvalidArgs as a generic fault code.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ModifyAreaResponse", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class ModifyAreaResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ModifyAreaResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public ModifyAreaResponse()
         {
@@ -3062,7 +3015,7 @@ namespace SharpOnvifClient.AccessControl
     /// does not change during device operation. The following capabilities are available:
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class ServiceCapabilities : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ServiceCapabilities : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -3289,7 +3242,7 @@ namespace SharpOnvifClient.AccessControl
     /// This operation defines the authentication behavior for an access point.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetAccessPointAuthenticationProfile", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class SetAccessPointAuthenticationProfileRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetAccessPointAuthenticationProfileRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string tokenField;
 
@@ -3353,7 +3306,7 @@ namespace SharpOnvifClient.AccessControl
     /// This operation defines the authentication behavior for an access point.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetAccessPointAuthenticationProfileResponse", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class SetAccessPointAuthenticationProfileResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetAccessPointAuthenticationProfileResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public SetAccessPointAuthenticationProfileResponse()
         {
@@ -3371,7 +3324,7 @@ namespace SharpOnvifClient.AccessControl
     /// InvalidArgs as a generic fault code.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetAccessPoint", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class SetAccessPointRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetAccessPointRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private AccessPoint accessPointField;
 
@@ -3423,7 +3376,7 @@ namespace SharpOnvifClient.AccessControl
     /// InvalidArgs as a generic fault code.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetAccessPointResponse", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class SetAccessPointResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetAccessPointResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public SetAccessPointResponse()
         {
@@ -3440,7 +3393,7 @@ namespace SharpOnvifClient.AccessControl
     /// specified in the request, the device shall return InvalidArgs as a generic fault code.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetArea", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class SetAreaRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetAreaRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private Area areaField;
 
@@ -3491,7 +3444,7 @@ namespace SharpOnvifClient.AccessControl
     /// specified in the request, the device shall return InvalidArgs as a generic fault code.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetAreaResponse", Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class SetAreaResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetAreaResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public SetAreaResponse()
         {
@@ -3500,7 +3453,7 @@ namespace SharpOnvifClient.AccessControl
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class SupportedSecurityLevelsExtension : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SupportedSecurityLevelsExtension : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -3531,7 +3484,7 @@ namespace SharpOnvifClient.AccessControl
     /// <summary>Constructs a contract named by an xsi:type attribute.</summary>
     internal static class XmlTypeFactory
     {
-        public static SharpOnvifCommon.Xml.OnvifObject Create(string ns, string name)
+        public static SharpOnvifCommon.Xml.OnvifContract Create(string ns, string name)
         {
             switch (name)
             {
@@ -3553,11 +3506,8 @@ namespace SharpOnvifClient.AccessControl
                 case "AreaInfoBase":
                     if (ns == "http://www.onvif.org/ver10/accesscontrol/wsdl") return new AreaInfoBase();
                     break;
-                case "DataEntity":
-                    if (ns == "http://www.onvif.org/ver10/pacs") return new DataEntity();
-                    break;
             }
-            return null;
+            return SharpOnvifCommon.Onvif.XmlTypeFactory.Create(ns, name);
         }
     }
 

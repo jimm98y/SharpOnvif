@@ -13,103 +13,16 @@ namespace SharpOnvifServer.Replay
     /// <summary>XML namespaces used by this service's contracts.</summary>
     internal static class Ns
     {
-        public const string OnvifVer10 = "http://www.onvif.org/ver10/schema";
         public const string Ver10Replay = "http://www.onvif.org/ver10/replay/wsdl";
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public enum StreamType
-    {
-        [System.Xml.Serialization.XmlEnumAttribute("RTP-Unicast")]
-        RTPUnicast,
-
-        [System.Xml.Serialization.XmlEnumAttribute("RTP-Multicast")]
-        RTPMulticast,
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public enum TransportProtocol
-    {
-        UDP,
-
-        /// <summary>
-        /// This value is deprecated.
-        /// </summary>
-        TCP,
-
-        RTSP,
-
-        HTTP,
-
     }
 
     /// <summary>Conversions between the generated enums and their XML lexical forms.</summary>
     internal static class EnumXml
     {
-        public static string ToXml(StreamType value)
-        {
-            switch (value)
-            {
-                case StreamType.RTPUnicast:
-                    return "RTP-Unicast";
-                case StreamType.RTPMulticast:
-                    return "RTP-Multicast";
-                default:
-                    return null;
-            }
-        }
-
-        public static StreamType ParseStreamType(string text)
-        {
-            switch (text)
-            {
-                case "RTP-Unicast":
-                    return StreamType.RTPUnicast;
-                case "RTP-Multicast":
-                    return StreamType.RTPMulticast;
-                default:
-                    return default(StreamType);
-            }
-        }
-
-        public static string ToXml(TransportProtocol value)
-        {
-            switch (value)
-            {
-                case TransportProtocol.UDP:
-                    return "UDP";
-                case TransportProtocol.TCP:
-                    return "TCP";
-                case TransportProtocol.RTSP:
-                    return "RTSP";
-                case TransportProtocol.HTTP:
-                    return "HTTP";
-                default:
-                    return null;
-            }
-        }
-
-        public static TransportProtocol ParseTransportProtocol(string text)
-        {
-            switch (text)
-            {
-                case "UDP":
-                    return TransportProtocol.UDP;
-                case "TCP":
-                    return TransportProtocol.TCP;
-                case "RTSP":
-                    return TransportProtocol.RTSP;
-                case "HTTP":
-                    return TransportProtocol.HTTP;
-                default:
-                    return default(TransportProtocol);
-            }
-        }
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/replay/wsdl")]
-    public partial class Capabilities : SharpOnvifCommon.Xml.OnvifObject
+    public partial class Capabilities : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -251,7 +164,7 @@ namespace SharpOnvifServer.Replay
     /// Returns the current configuration of the replay service. This operation is mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetReplayConfiguration", Namespace="http://www.onvif.org/ver10/replay/wsdl")]
-    public partial class GetReplayConfigurationRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetReplayConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         public GetReplayConfigurationRequest()
         {
@@ -263,15 +176,15 @@ namespace SharpOnvifServer.Replay
     /// Returns the current configuration of the replay service. This operation is mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetReplayConfigurationResponse", Namespace="http://www.onvif.org/ver10/replay/wsdl")]
-    public partial class GetReplayConfigurationResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetReplayConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
     {
-        private ReplayConfiguration configurationField;
+        private SharpOnvifCommon.Onvif.ReplayConfiguration configurationField;
 
         /// <summary>
         /// The current replay configuration parameters.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public ReplayConfiguration Configuration
+        public SharpOnvifCommon.Onvif.ReplayConfiguration Configuration
         {
             get { return this.configurationField; }
             set { this.configurationField = value; }
@@ -281,14 +194,14 @@ namespace SharpOnvifServer.Replay
         {
         }
 
-        public GetReplayConfigurationResponse(ReplayConfiguration configuration)
+        public GetReplayConfigurationResponse(SharpOnvifCommon.Onvif.ReplayConfiguration configuration)
         {
             this.configurationField = configuration;
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            writer.WriteElement(Ns.Ver10Replay, "Configuration", this.configurationField, Ns.OnvifVer10, "ReplayConfiguration");
+            writer.WriteElement(Ns.Ver10Replay, "Configuration", this.configurationField, "http://www.onvif.org/ver10/schema", "ReplayConfiguration");
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
@@ -297,7 +210,7 @@ namespace SharpOnvifServer.Replay
             {
                 case "Configuration":
                     if (reader.NamespaceUri != Ns.Ver10Replay) break;
-                    this.configurationField = reader.ReadElementObject<ReplayConfiguration>(() => new ReplayConfiguration());
+                    this.configurationField = reader.ReadElementObject<SharpOnvifCommon.Onvif.ReplayConfiguration>(() => new SharpOnvifCommon.Onvif.ReplayConfiguration());
                     return true;
             }
             return false;
@@ -311,9 +224,9 @@ namespace SharpOnvifServer.Replay
     /// Service shall support the GetReplayUri command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetReplayUri", Namespace="http://www.onvif.org/ver10/replay/wsdl")]
-    public partial class GetReplayUriRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetReplayUriRequest : SharpOnvifCommon.Xml.OnvifContract
     {
-        private StreamSetup streamSetupField;
+        private SharpOnvifCommon.Onvif.StreamSetup streamSetupField;
 
         private string recordingTokenField;
 
@@ -322,7 +235,7 @@ namespace SharpOnvifServer.Replay
         /// on these parameters.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public StreamSetup StreamSetup
+        public SharpOnvifCommon.Onvif.StreamSetup StreamSetup
         {
             get { return this.streamSetupField; }
             set { this.streamSetupField = value; }
@@ -342,7 +255,7 @@ namespace SharpOnvifServer.Replay
         {
         }
 
-        public GetReplayUriRequest(StreamSetup streamSetup, string recordingToken)
+        public GetReplayUriRequest(SharpOnvifCommon.Onvif.StreamSetup streamSetup, string recordingToken)
         {
             this.streamSetupField = streamSetup;
             this.recordingTokenField = recordingToken;
@@ -350,7 +263,7 @@ namespace SharpOnvifServer.Replay
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            writer.WriteElement(Ns.Ver10Replay, "StreamSetup", this.streamSetupField, Ns.OnvifVer10, "StreamSetup");
+            writer.WriteElement(Ns.Ver10Replay, "StreamSetup", this.streamSetupField, "http://www.onvif.org/ver10/schema", "StreamSetup");
             writer.WriteElementString(Ns.Ver10Replay, "RecordingToken", this.recordingTokenField);
         }
 
@@ -360,7 +273,7 @@ namespace SharpOnvifServer.Replay
             {
                 case "StreamSetup":
                     if (reader.NamespaceUri != Ns.Ver10Replay) break;
-                    this.streamSetupField = reader.ReadElementObject<StreamSetup>(() => new StreamSetup());
+                    this.streamSetupField = reader.ReadElementObject<SharpOnvifCommon.Onvif.StreamSetup>(() => new SharpOnvifCommon.Onvif.StreamSetup());
                     return true;
                 case "RecordingToken":
                     if (reader.NamespaceUri != Ns.Ver10Replay) break;
@@ -378,7 +291,7 @@ namespace SharpOnvifServer.Replay
     /// Service shall support the GetReplayUri command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetReplayUriResponse", Namespace="http://www.onvif.org/ver10/replay/wsdl")]
-    public partial class GetReplayUriResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetReplayUriResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private string uriField;
 
@@ -424,7 +337,7 @@ namespace SharpOnvifServer.Replay
     /// Returns the capabilities of the replay service. The result is returned in a typed answer.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilities", Namespace="http://www.onvif.org/ver10/replay/wsdl")]
-    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         public GetServiceCapabilitiesRequest()
         {
@@ -436,7 +349,7 @@ namespace SharpOnvifServer.Replay
     /// Returns the capabilities of the replay service. The result is returned in a typed answer.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilitiesResponse", Namespace="http://www.onvif.org/ver10/replay/wsdl")]
-    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private Capabilities capabilitiesField;
 
@@ -479,70 +392,18 @@ namespace SharpOnvifServer.Replay
     }
 
     /// <summary>
-    /// Configuration parameters for the replay service.
-    /// </summary>
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ReplayConfiguration : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string sessionTimeoutField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        /// <summary>
-        /// The RTSP session timeout.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0, DataType="duration")]
-        public string SessionTimeout
-        {
-            get { return this.sessionTimeoutField; }
-            set { this.sessionTimeoutField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=1)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "ReplayConfiguration"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "SessionTimeout", this.sessionTimeoutField);
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "SessionTimeout":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.sessionTimeoutField = reader.ReadElementText();
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    /// <summary>
     /// Changes the current configuration of the replay service. This operation is mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetReplayConfiguration", Namespace="http://www.onvif.org/ver10/replay/wsdl")]
-    public partial class SetReplayConfigurationRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetReplayConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
     {
-        private ReplayConfiguration configurationField;
+        private SharpOnvifCommon.Onvif.ReplayConfiguration configurationField;
 
         /// <summary>
         /// Description of the new replay configuration parameters.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public ReplayConfiguration Configuration
+        public SharpOnvifCommon.Onvif.ReplayConfiguration Configuration
         {
             get { return this.configurationField; }
             set { this.configurationField = value; }
@@ -552,14 +413,14 @@ namespace SharpOnvifServer.Replay
         {
         }
 
-        public SetReplayConfigurationRequest(ReplayConfiguration configuration)
+        public SetReplayConfigurationRequest(SharpOnvifCommon.Onvif.ReplayConfiguration configuration)
         {
             this.configurationField = configuration;
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            writer.WriteElement(Ns.Ver10Replay, "Configuration", this.configurationField, Ns.OnvifVer10, "ReplayConfiguration");
+            writer.WriteElement(Ns.Ver10Replay, "Configuration", this.configurationField, "http://www.onvif.org/ver10/schema", "ReplayConfiguration");
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
@@ -568,7 +429,7 @@ namespace SharpOnvifServer.Replay
             {
                 case "Configuration":
                     if (reader.NamespaceUri != Ns.Ver10Replay) break;
-                    this.configurationField = reader.ReadElementObject<ReplayConfiguration>(() => new ReplayConfiguration());
+                    this.configurationField = reader.ReadElementObject<SharpOnvifCommon.Onvif.ReplayConfiguration>(() => new SharpOnvifCommon.Onvif.ReplayConfiguration());
                     return true;
             }
             return false;
@@ -580,7 +441,7 @@ namespace SharpOnvifServer.Replay
     /// Changes the current configuration of the replay service. This operation is mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetReplayConfigurationResponse", Namespace="http://www.onvif.org/ver10/replay/wsdl")]
-    public partial class SetReplayConfigurationResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SetReplayConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public SetReplayConfigurationResponse()
         {
@@ -588,155 +449,12 @@ namespace SharpOnvifServer.Replay
 
     }
 
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class StreamSetup : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private StreamType streamField;
-
-        private Transport transportField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        /// <summary>
-        /// Defines if a multicast or unicast stream is requested.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public StreamType Stream
-        {
-            get { return this.streamField; }
-            set { this.streamField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public Transport Transport
-        {
-            get { return this.transportField; }
-            set { this.transportField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=2)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "StreamSetup"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Stream", EnumXml.ToXml(this.streamField));
-            writer.WriteElement(Ns.OnvifVer10, "Transport", this.transportField, Ns.OnvifVer10, "Transport");
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Stream":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.streamField = EnumXml.ParseStreamType(reader.ReadElementText());
-                    return true;
-                case "Transport":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.transportField = reader.ReadElementObject<Transport>(() => new Transport());
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Transport : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private TransportProtocol protocolField;
-
-        private TransportTunnel tunnelField;
-
-        /// <summary>
-        /// Defines the network protocol for streaming, either UDP=RTP/UDP, RTSP=RTP/RTSP/TCP or
-        /// HTTP=RTP/RTSP/HTTP/TCP.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public TransportProtocol Protocol
-        {
-            get { return this.protocolField; }
-            set { this.protocolField = value; }
-        }
-
-        /// <summary>
-        /// Deprecated: optional element to describe further tunnel options.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public TransportTunnel Tunnel
-        {
-            get { return this.tunnelField; }
-            set { this.tunnelField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "Transport"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.OnvifVer10, "Protocol", EnumXml.ToXml(this.protocolField));
-            writer.WriteElement(Ns.OnvifVer10, "Tunnel", this.tunnelField, null, null);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Protocol":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.protocolField = EnumXml.ParseTransportProtocol(reader.ReadElementText());
-                    return true;
-                case "Tunnel":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.tunnelField = reader.ReadElementObject<TransportTunnel>(() => new TransportTunnel());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    public partial class TransportTunnel : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
     /// <summary>Constructs a contract named by an xsi:type attribute.</summary>
     internal static class XmlTypeFactory
     {
-        public static SharpOnvifCommon.Xml.OnvifObject Create(string ns, string name)
+        public static SharpOnvifCommon.Xml.OnvifContract Create(string ns, string name)
         {
-            return null;
+            return SharpOnvifCommon.Onvif.XmlTypeFactory.Create(ns, name);
         }
     }
 

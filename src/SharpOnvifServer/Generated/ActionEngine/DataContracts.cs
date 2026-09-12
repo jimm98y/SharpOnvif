@@ -13,8 +13,6 @@ namespace SharpOnvifServer.ActionEngine
     /// <summary>XML namespaces used by this service's contracts.</summary>
     internal static class Ns
     {
-        public const string B2 = "http://docs.oasis-open.org/wsn/b-2";
-        public const string OnvifVer10 = "http://www.onvif.org/ver10/schema";
         public const string Ver10Actionengine = "http://www.onvif.org/ver10/actionengine/wsdl";
     }
 
@@ -24,94 +22,12 @@ namespace SharpOnvifServer.ActionEngine
     }
 
     /// <summary>
-    /// Action data type contains the configuration settings of one action instance and service provider
-    /// assigned unique identifier for this action configuration.
-    /// </summary>
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class Action : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private ActionConfiguration configurationField;
-
-        private System.Xml.XmlElement[] anyField;
-
-        private string tokenField;
-
-        /// <summary>
-        /// Action configuration contains action type, user given action name, and configuratin parameter
-        /// settings.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public ActionConfiguration Configuration
-        {
-            get { return this.configurationField; }
-            set { this.configurationField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=1)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        /// <summary>
-        /// Unique Action identifier that service provider assigned to the action configuration.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Token
-        {
-            get { return this.tokenField; }
-            set { this.tokenField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "Action"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Actionengine; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAttributeString(null, "Token", this.tokenField);
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteElement(Ns.Ver10Actionengine, "Configuration", this.configurationField, Ns.Ver10Actionengine, "ActionConfiguration");
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Token":
-                    this.tokenField = reader.AttributeValue;
-                    return true;
-            }
-            return false;
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Configuration":
-                    if (reader.NamespaceUri != Ns.Ver10Actionengine) break;
-                    this.configurationField = reader.ReadElementObject<ActionConfiguration>(() => new ActionConfiguration());
-                    return true;
-            }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    /// <summary>
     /// Describes the configuration parameters of an action.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class ActionConfigDescription : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ActionConfigDescription : SharpOnvifCommon.Xml.OnvifContract
     {
-        private ItemListDescription parameterDescriptionField;
+        private SharpOnvifCommon.Onvif.ItemListDescription parameterDescriptionField;
 
         private System.Xml.XmlQualifiedName nameField;
 
@@ -119,7 +35,7 @@ namespace SharpOnvifServer.ActionEngine
         /// Action configuration parameter descriptions
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public ItemListDescription ParameterDescription
+        public SharpOnvifCommon.Onvif.ItemListDescription ParameterDescription
         {
             get { return this.parameterDescriptionField; }
             set { this.parameterDescriptionField = value; }
@@ -146,7 +62,7 @@ namespace SharpOnvifServer.ActionEngine
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            writer.WriteElement(Ns.Ver10Actionengine, "ParameterDescription", this.parameterDescriptionField, Ns.OnvifVer10, "ItemListDescription");
+            writer.WriteElement(Ns.Ver10Actionengine, "ParameterDescription", this.parameterDescriptionField, "http://www.onvif.org/ver10/schema", "ItemListDescription");
         }
 
         protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
@@ -166,7 +82,7 @@ namespace SharpOnvifServer.ActionEngine
             {
                 case "ParameterDescription":
                     if (reader.NamespaceUri != Ns.Ver10Actionengine) break;
-                    this.parameterDescriptionField = reader.ReadElementObject<ItemListDescription>(() => new ItemListDescription());
+                    this.parameterDescriptionField = reader.ReadElementObject<SharpOnvifCommon.Onvif.ItemListDescription>(() => new SharpOnvifCommon.Onvif.ItemListDescription());
                     return true;
             }
             return false;
@@ -179,9 +95,9 @@ namespace SharpOnvifServer.ActionEngine
     /// parameters, service requester given action Name, and service provider supported action type value
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class ActionConfiguration : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ActionConfiguration : SharpOnvifCommon.Xml.OnvifContract
     {
-        private ItemList parametersField;
+        private SharpOnvifCommon.Onvif.ItemList parametersField;
 
         private System.Xml.XmlElement[] anyField;
 
@@ -193,7 +109,7 @@ namespace SharpOnvifServer.ActionEngine
         /// Action configuration parameter settings.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public ItemList Parameters
+        public SharpOnvifCommon.Onvif.ItemList Parameters
         {
             get { return this.parametersField; }
             set { this.parametersField = value; }
@@ -238,7 +154,7 @@ namespace SharpOnvifServer.ActionEngine
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            writer.WriteElement(Ns.Ver10Actionengine, "Parameters", this.parametersField, Ns.OnvifVer10, "ItemList");
+            writer.WriteElement(Ns.Ver10Actionengine, "Parameters", this.parametersField, "http://www.onvif.org/ver10/schema", "ItemList");
             writer.WriteAny(this.anyField);
         }
 
@@ -262,7 +178,7 @@ namespace SharpOnvifServer.ActionEngine
             {
                 case "Parameters":
                     if (reader.NamespaceUri != Ns.Ver10Actionengine) break;
-                    this.parametersField = reader.ReadElementObject<ItemList>(() => new ItemList());
+                    this.parametersField = reader.ReadElementObject<SharpOnvifCommon.Onvif.ItemList>(() => new SharpOnvifCommon.Onvif.ItemList());
                     return true;
             }
             SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
@@ -276,7 +192,7 @@ namespace SharpOnvifServer.ActionEngine
     /// number of actions in use for generic as well as specific action types
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class ActionEngineCapabilities : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ActionEngineCapabilities : SharpOnvifCommon.Xml.OnvifContract
     {
         private ActionTypeLimits[] actionCapabilitiesField;
 
@@ -378,7 +294,7 @@ namespace SharpOnvifServer.ActionEngine
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class ActionEngineCapabilitiesExtension : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ActionEngineCapabilitiesExtension : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -411,7 +327,7 @@ namespace SharpOnvifServer.ActionEngine
     /// configuration and action trigger configuration data.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class ActionTrigger : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ActionTrigger : SharpOnvifCommon.Xml.OnvifContract
     {
         private ActionTriggerConfiguration configurationField;
 
@@ -493,11 +409,11 @@ namespace SharpOnvifServer.ActionEngine
     /// Specification]), and set of actions to be triggered.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class ActionTriggerConfiguration : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ActionTriggerConfiguration : SharpOnvifCommon.Xml.OnvifContract
     {
-        private TopicExpressionType topicExpressionField;
+        private SharpOnvifCommon.Onvif.TopicExpressionType topicExpressionField;
 
-        private QueryExpressionType contentExpressionField;
+        private SharpOnvifCommon.Onvif.QueryExpressionType1 contentExpressionField;
 
         private string[] actionTokenField;
 
@@ -507,7 +423,7 @@ namespace SharpOnvifServer.ActionEngine
         /// Topic expression, for example, to trigger only for relays. Trigger based on event topic.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public TopicExpressionType TopicExpression
+        public SharpOnvifCommon.Onvif.TopicExpressionType TopicExpression
         {
             get { return this.topicExpressionField; }
             set { this.topicExpressionField = value; }
@@ -518,7 +434,7 @@ namespace SharpOnvifServer.ActionEngine
         /// content data in event.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public QueryExpressionType ContentExpression
+        public SharpOnvifCommon.Onvif.QueryExpressionType1 ContentExpression
         {
             get { return this.contentExpressionField; }
             set { this.contentExpressionField = value; }
@@ -547,8 +463,8 @@ namespace SharpOnvifServer.ActionEngine
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            writer.WriteElement(Ns.Ver10Actionengine, "TopicExpression", this.topicExpressionField, Ns.B2, "TopicExpressionType");
-            writer.WriteElement(Ns.Ver10Actionengine, "ContentExpression", this.contentExpressionField, Ns.B2, "QueryExpressionType");
+            writer.WriteElement(Ns.Ver10Actionengine, "TopicExpression", this.topicExpressionField, "http://docs.oasis-open.org/wsn/b-2", "TopicExpressionType");
+            writer.WriteElement(Ns.Ver10Actionengine, "ContentExpression", this.contentExpressionField, "http://docs.oasis-open.org/wsn/b-2", "QueryExpressionType");
             if (this.actionTokenField != null)
             {
                 for (int i = 0; i < this.actionTokenField.Length; i++)
@@ -565,11 +481,11 @@ namespace SharpOnvifServer.ActionEngine
             {
                 case "TopicExpression":
                     if (reader.NamespaceUri != Ns.Ver10Actionengine) break;
-                    this.topicExpressionField = reader.ReadElementObject<TopicExpressionType>(() => new TopicExpressionType());
+                    this.topicExpressionField = reader.ReadElementObject<SharpOnvifCommon.Onvif.TopicExpressionType>(() => new SharpOnvifCommon.Onvif.TopicExpressionType());
                     return true;
                 case "ContentExpression":
                     if (reader.NamespaceUri != Ns.Ver10Actionengine) break;
-                    this.contentExpressionField = reader.ReadElementObject<QueryExpressionType>(() => new QueryExpressionType());
+                    this.contentExpressionField = reader.ReadElementObject<SharpOnvifCommon.Onvif.QueryExpressionType1>(() => new SharpOnvifCommon.Onvif.QueryExpressionType1());
                     return true;
                 case "ActionToken":
                     if (reader.NamespaceUri != Ns.Ver10Actionengine) break;
@@ -586,7 +502,7 @@ namespace SharpOnvifServer.ActionEngine
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class ActionTriggerConfigurationExtension : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ActionTriggerConfigurationExtension : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -619,7 +535,7 @@ namespace SharpOnvifServer.ActionEngine
     /// type in the service provider
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class ActionTypeLimits : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ActionTypeLimits : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -713,7 +629,7 @@ namespace SharpOnvifServer.ActionEngine
     /// not create all of requested action triggers, the service provider responds with a fault message.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateActionTriggers", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class CreateActionTriggersRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CreateActionTriggersRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private ActionTriggerConfiguration[] actionTriggerField;
 
@@ -766,7 +682,7 @@ namespace SharpOnvifServer.ActionEngine
     /// not create all of requested action triggers, the service provider responds with a fault message.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateActionTriggersResponse", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class CreateActionTriggersResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CreateActionTriggersResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private ActionTrigger[] actionTriggerField;
 
@@ -820,7 +736,7 @@ namespace SharpOnvifServer.ActionEngine
     /// fault message.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateActions", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class CreateActionsRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CreateActionsRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private ActionConfiguration[] actionField;
 
@@ -874,15 +790,15 @@ namespace SharpOnvifServer.ActionEngine
     /// fault message.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateActionsResponse", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class CreateActionsResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class CreateActionsResponse : SharpOnvifCommon.Xml.OnvifContract
     {
-        private Action[] actionField;
+        private OnvifAction[] actionField;
 
         /// <summary>
         /// Array of configured Actions with service provider assigned unique identifiers
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute("Action", Order=0)]
-        public Action[] Action
+        public OnvifAction[] Action
         {
             get { return this.actionField; }
             set { this.actionField = value; }
@@ -892,7 +808,7 @@ namespace SharpOnvifServer.ActionEngine
         {
         }
 
-        public CreateActionsResponse(Action[] action)
+        public CreateActionsResponse(OnvifAction[] action)
         {
             this.actionField = action;
         }
@@ -914,7 +830,7 @@ namespace SharpOnvifServer.ActionEngine
             {
                 case "Action":
                     if (reader.NamespaceUri != Ns.Ver10Actionengine) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.actionField, reader.ReadElementObject<Action>(() => new Action()));
+                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.actionField, reader.ReadElementObject<OnvifAction>(() => new OnvifAction()));
                     return true;
             }
             return false;
@@ -927,7 +843,7 @@ namespace SharpOnvifServer.ActionEngine
     /// not delete all of requested action triggers, the service provider responds with a fault message.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteActionTriggers", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class DeleteActionTriggersRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteActionTriggersRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string[] tokenField;
 
@@ -980,7 +896,7 @@ namespace SharpOnvifServer.ActionEngine
     /// not delete all of requested action triggers, the service provider responds with a fault message.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteActionTriggersResponse", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class DeleteActionTriggersResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteActionTriggersResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public DeleteActionTriggersResponse()
         {
@@ -993,7 +909,7 @@ namespace SharpOnvifServer.ActionEngine
     /// can not delete all of requested actions, the service provider responds with a fault message.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteActions", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class DeleteActionsRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteActionsRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private string[] tokenField;
 
@@ -1046,7 +962,7 @@ namespace SharpOnvifServer.ActionEngine
     /// can not delete all of requested actions, the service provider responds with a fault message.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteActionsResponse", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class DeleteActionsResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class DeleteActionsResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public DeleteActionsResponse()
         {
@@ -1058,7 +974,7 @@ namespace SharpOnvifServer.ActionEngine
     /// The service provider returns existing action triggers
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetActionTriggers", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class GetActionTriggersRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetActionTriggersRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         public GetActionTriggersRequest()
         {
@@ -1070,7 +986,7 @@ namespace SharpOnvifServer.ActionEngine
     /// The service provider returns existing action triggers
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetActionTriggersResponse", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class GetActionTriggersResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetActionTriggersResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private ActionTrigger[] actionTriggerField;
 
@@ -1122,7 +1038,7 @@ namespace SharpOnvifServer.ActionEngine
     /// The service provider returns currently installed Actions.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetActions", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class GetActionsRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetActionsRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         public GetActionsRequest()
         {
@@ -1134,15 +1050,15 @@ namespace SharpOnvifServer.ActionEngine
     /// The service provider returns currently installed Actions.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetActionsResponse", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class GetActionsResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetActionsResponse : SharpOnvifCommon.Xml.OnvifContract
     {
-        private Action[] actionField;
+        private OnvifAction[] actionField;
 
         /// <summary>
         /// Array of current Action configurations
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute("Action", Order=0)]
-        public Action[] Action
+        public OnvifAction[] Action
         {
             get { return this.actionField; }
             set { this.actionField = value; }
@@ -1152,7 +1068,7 @@ namespace SharpOnvifServer.ActionEngine
         {
         }
 
-        public GetActionsResponse(Action[] action)
+        public GetActionsResponse(OnvifAction[] action)
         {
             this.actionField = action;
         }
@@ -1174,7 +1090,7 @@ namespace SharpOnvifServer.ActionEngine
             {
                 case "Action":
                     if (reader.NamespaceUri != Ns.Ver10Actionengine) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.actionField, reader.ReadElementObject<Action>(() => new Action()));
+                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.actionField, reader.ReadElementObject<OnvifAction>(() => new OnvifAction()));
                     return true;
             }
             return false;
@@ -1186,7 +1102,7 @@ namespace SharpOnvifServer.ActionEngine
     /// The get capabilities operation returns the Action Engine capabilities
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilities", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         public GetServiceCapabilitiesRequest()
         {
@@ -1198,7 +1114,7 @@ namespace SharpOnvifServer.ActionEngine
     /// The get capabilities operation returns the Action Engine capabilities
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilitiesResponse", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private ActionEngineCapabilities capabilitiesField;
 
@@ -1245,7 +1161,7 @@ namespace SharpOnvifServer.ActionEngine
     /// schema file, the ONVIF schema file shall be explicitly listed.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSupportedActions", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class GetSupportedActionsRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetSupportedActionsRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         public GetSupportedActionsRequest()
         {
@@ -1261,7 +1177,7 @@ namespace SharpOnvifServer.ActionEngine
     /// schema file, the ONVIF schema file shall be explicitly listed.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSupportedActionsResponse", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class GetSupportedActionsResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class GetSupportedActionsResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         private SupportedActions supportedActionsField;
 
@@ -1303,432 +1219,13 @@ namespace SharpOnvifServer.ActionEngine
 
     }
 
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ItemList : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private ItemListSimpleItem[] simpleItemField;
-
-        private ItemListElementItem[] elementItemField;
-
-        private ItemListExtension extensionField;
-
-        /// <summary>
-        /// Value name pair as defined by the corresponding description.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("SimpleItem", Order=0)]
-        public ItemListSimpleItem[] SimpleItem
-        {
-            get { return this.simpleItemField; }
-            set { this.simpleItemField = value; }
-        }
-
-        /// <summary>
-        /// Complex value structure.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("ElementItem", Order=1)]
-        public ItemListElementItem[] ElementItem
-        {
-            get { return this.elementItemField; }
-            set { this.elementItemField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public ItemListExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "ItemList"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            if (this.simpleItemField != null)
-            {
-                for (int i = 0; i < this.simpleItemField.Length; i++)
-                {
-                    writer.WriteElement(Ns.OnvifVer10, "SimpleItem", this.simpleItemField[i], null, null);
-                }
-            }
-            if (this.elementItemField != null)
-            {
-                for (int i = 0; i < this.elementItemField.Length; i++)
-                {
-                    writer.WriteElement(Ns.OnvifVer10, "ElementItem", this.elementItemField[i], null, null);
-                }
-            }
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "ItemListExtension");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "SimpleItem":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.simpleItemField, reader.ReadElementObject<ItemListSimpleItem>(() => new ItemListSimpleItem()));
-                    return true;
-                case "ElementItem":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.elementItemField, reader.ReadElementObject<ItemListElementItem>(() => new ItemListElementItem()));
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<ItemListExtension>(() => new ItemListExtension());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    /// <summary>
-    /// Describes a list of items. Each item in the list shall have a unique name. The list is designed as
-    /// linear structure without optional or unbounded elements. Use ElementItems only when complex
-    /// structures are inevitable.
-    /// </summary>
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ItemListDescription : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private ItemListDescriptionSimpleItemDescription[] simpleItemDescriptionField;
-
-        private ItemListDescriptionElementItemDescription[] elementItemDescriptionField;
-
-        private ItemListDescriptionExtension extensionField;
-
-        /// <summary>
-        /// Description of a simple item. The type must be of cathegory simpleType (xs:string, xs:integer,
-        /// xs:float, ...).
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("SimpleItemDescription", Order=0)]
-        public ItemListDescriptionSimpleItemDescription[] SimpleItemDescription
-        {
-            get { return this.simpleItemDescriptionField; }
-            set { this.simpleItemDescriptionField = value; }
-        }
-
-        /// <summary>
-        /// Description of a complex type. The Type must reference a defined type.
-        /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("ElementItemDescription", Order=1)]
-        public ItemListDescriptionElementItemDescription[] ElementItemDescription
-        {
-            get { return this.elementItemDescriptionField; }
-            set { this.elementItemDescriptionField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public ItemListDescriptionExtension Extension
-        {
-            get { return this.extensionField; }
-            set { this.extensionField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "ItemListDescription"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            if (this.simpleItemDescriptionField != null)
-            {
-                for (int i = 0; i < this.simpleItemDescriptionField.Length; i++)
-                {
-                    writer.WriteElement(Ns.OnvifVer10, "SimpleItemDescription", this.simpleItemDescriptionField[i], null, null);
-                }
-            }
-            if (this.elementItemDescriptionField != null)
-            {
-                for (int i = 0; i < this.elementItemDescriptionField.Length; i++)
-                {
-                    writer.WriteElement(Ns.OnvifVer10, "ElementItemDescription", this.elementItemDescriptionField[i], null, null);
-                }
-            }
-            writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "ItemListDescriptionExtension");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "SimpleItemDescription":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.simpleItemDescriptionField, reader.ReadElementObject<ItemListDescriptionSimpleItemDescription>(() => new ItemListDescriptionSimpleItemDescription()));
-                    return true;
-                case "ElementItemDescription":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.elementItemDescriptionField, reader.ReadElementObject<ItemListDescriptionElementItemDescription>(() => new ItemListDescriptionElementItemDescription()));
-                    return true;
-                case "Extension":
-                    if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementObject<ItemListDescriptionExtension>(() => new ItemListDescriptionExtension());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    public partial class ItemListDescriptionElementItemDescription : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string nameField;
-
-        private System.Xml.XmlQualifiedName typeField;
-
-        /// <summary>
-        /// Item name. Must be unique within a list.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name
-        {
-            get { return this.nameField; }
-            set { this.nameField = value; }
-        }
-
-        /// <summary>
-        /// The type of the item. The Type must reference a defined type.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public System.Xml.XmlQualifiedName Type
-        {
-            get { return this.typeField; }
-            set { this.typeField = value; }
-        }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAttributeString(null, "Name", this.nameField);
-            writer.WriteAttributeString(null, "Type", writer.QualifiedNameToString(this.typeField));
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Name":
-                    this.nameField = reader.AttributeValue;
-                    return true;
-                case "Type":
-                    this.typeField = reader.ToQualifiedName(reader.AttributeValue);
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ItemListDescriptionExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "ItemListDescriptionExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    public partial class ItemListDescriptionSimpleItemDescription : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string nameField;
-
-        private System.Xml.XmlQualifiedName typeField;
-
-        /// <summary>
-        /// Item name. Must be unique within a list.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name
-        {
-            get { return this.nameField; }
-            set { this.nameField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public System.Xml.XmlQualifiedName Type
-        {
-            get { return this.typeField; }
-            set { this.typeField = value; }
-        }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAttributeString(null, "Name", this.nameField);
-            writer.WriteAttributeString(null, "Type", writer.QualifiedNameToString(this.typeField));
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Name":
-                    this.nameField = reader.AttributeValue;
-                    return true;
-                case "Type":
-                    this.typeField = reader.ToQualifiedName(reader.AttributeValue);
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    public partial class ItemListElementItem : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        private string nameField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        /// <summary>
-        /// Item name.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name
-        {
-            get { return this.nameField; }
-            set { this.nameField = value; }
-        }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAttributeString(null, "Name", this.nameField);
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Name":
-                    this.nameField = reader.AttributeValue;
-                    return true;
-            }
-            return false;
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ItemListExtension : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "ItemListExtension"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    public partial class ItemListSimpleItem : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private string nameField;
-
-        private string valueField;
-
-        /// <summary>
-        /// Item name.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name
-        {
-            get { return this.nameField; }
-            set { this.nameField = value; }
-        }
-
-        /// <summary>
-        /// Item value. The type is defined in the corresponding description.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Value
-        {
-            get { return this.valueField; }
-            set { this.valueField = value; }
-        }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAttributeString(null, "Name", this.nameField);
-            writer.WriteAttributeString(null, "Value", this.valueField);
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Name":
-                    this.nameField = reader.AttributeValue;
-                    return true;
-                case "Value":
-                    this.valueField = reader.AttributeValue;
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
     /// <summary>
     /// Modifies existing action triggers. The modify action triggers operation is atomic. If a service
     /// provider can not modify all of requested action trigger configurations, the service provider
     /// responds with a fault message.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ModifyActionTriggers", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class ModifyActionTriggersRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ModifyActionTriggersRequest : SharpOnvifCommon.Xml.OnvifContract
     {
         private ActionTrigger[] actionTriggerField;
 
@@ -1782,7 +1279,7 @@ namespace SharpOnvifServer.ActionEngine
     /// responds with a fault message.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ModifyActionTriggersResponse", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class ModifyActionTriggersResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ModifyActionTriggersResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public ModifyActionTriggersResponse()
         {
@@ -1798,15 +1295,15 @@ namespace SharpOnvifServer.ActionEngine
     /// with modify action request.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ModifyActions", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class ModifyActionsRequest : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ModifyActionsRequest : SharpOnvifCommon.Xml.OnvifContract
     {
-        private Action[] actionField;
+        private OnvifAction[] actionField;
 
         /// <summary>
         /// Array of Action configurations to update the existing action configurations
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute("Action", Order=0)]
-        public Action[] Action
+        public OnvifAction[] Action
         {
             get { return this.actionField; }
             set { this.actionField = value; }
@@ -1816,7 +1313,7 @@ namespace SharpOnvifServer.ActionEngine
         {
         }
 
-        public ModifyActionsRequest(Action[] action)
+        public ModifyActionsRequest(OnvifAction[] action)
         {
             this.actionField = action;
         }
@@ -1838,7 +1335,7 @@ namespace SharpOnvifServer.ActionEngine
             {
                 case "Action":
                     if (reader.NamespaceUri != Ns.Ver10Actionengine) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.actionField, reader.ReadElementObject<Action>(() => new Action()));
+                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.actionField, reader.ReadElementObject<OnvifAction>(() => new OnvifAction()));
                     return true;
             }
             return false;
@@ -1854,7 +1351,7 @@ namespace SharpOnvifServer.ActionEngine
     /// with modify action request.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ModifyActionsResponse", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class ModifyActionsResponse : SharpOnvifCommon.Xml.OnvifObject
+    public partial class ModifyActionsResponse : SharpOnvifCommon.Xml.OnvifContract
     {
         public ModifyActionsResponse()
         {
@@ -1862,38 +1359,59 @@ namespace SharpOnvifServer.ActionEngine
 
     }
 
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class QueryExpressionType : SharpOnvifCommon.Xml.OnvifObject
+    /// <summary>
+    /// Action data type contains the configuration settings of one action instance and service provider
+    /// assigned unique identifier for this action configuration.
+    /// </summary>
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
+    public partial class OnvifAction : SharpOnvifCommon.Xml.OnvifContract
     {
-        private System.Xml.XmlNode[] anyField;
+        private ActionConfiguration configurationField;
 
-        private string dialectField;
+        private System.Xml.XmlElement[] anyField;
 
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlNode[] Any
+        private string tokenField;
+
+        /// <summary>
+        /// Action configuration contains action type, user given action name, and configuratin parameter
+        /// settings.
+        /// </summary>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public ActionConfiguration Configuration
+        {
+            get { return this.configurationField; }
+            set { this.configurationField = value; }
+        }
+
+        [System.Xml.Serialization.XmlAnyElementAttribute(Order=1)]
+        public System.Xml.XmlElement[] Any
         {
             get { return this.anyField; }
             set { this.anyField = value; }
         }
 
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
-        public string Dialect
+        /// <summary>
+        /// Unique Action identifier that service provider assigned to the action configuration.
+        /// </summary>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Token
         {
-            get { return this.dialectField; }
-            set { this.dialectField = value; }
+            get { return this.tokenField; }
+            set { this.tokenField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "QueryExpressionType"; } }
+        protected override string OnvifXmlTypeName { get { return "Action"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
+        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Actionengine; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
-            writer.WriteAttributeString(null, "Dialect", this.dialectField);
+            writer.WriteAttributeString(null, "Token", this.tokenField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
         {
+            writer.WriteElement(Ns.Ver10Actionengine, "Configuration", this.configurationField, Ns.Ver10Actionengine, "ActionConfiguration");
             writer.WriteAny(this.anyField);
         }
 
@@ -1901,8 +1419,8 @@ namespace SharpOnvifServer.ActionEngine
         {
             switch (reader.LocalName)
             {
-                case "Dialect":
-                    this.dialectField = reader.AttributeValue;
+                case "Token":
+                    this.tokenField = reader.AttributeValue;
                     return true;
             }
             return false;
@@ -1910,7 +1428,14 @@ namespace SharpOnvifServer.ActionEngine
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
         {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyNode());
+            switch (reader.LocalName)
+            {
+                case "Configuration":
+                    if (reader.NamespaceUri != Ns.Ver10Actionengine) break;
+                    this.configurationField = reader.ReadElementObject<ActionConfiguration>(() => new ActionConfiguration());
+                    return true;
+            }
+            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -1921,7 +1446,7 @@ namespace SharpOnvifServer.ActionEngine
     /// each action type, data structure contains the action configuration parameters.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class SupportedActions : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SupportedActions : SharpOnvifCommon.Xml.OnvifContract
     {
         private string[] actionContentSchemaLocationField;
 
@@ -2004,7 +1529,7 @@ namespace SharpOnvifServer.ActionEngine
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class SupportedActionsExtension : SharpOnvifCommon.Xml.OnvifObject
+    public partial class SupportedActionsExtension : SharpOnvifCommon.Xml.OnvifContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -2032,66 +1557,12 @@ namespace SharpOnvifServer.ActionEngine
 
     }
 
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class TopicExpressionType : SharpOnvifCommon.Xml.OnvifObject
-    {
-        private System.Xml.XmlNode[] anyField;
-
-        private string dialectField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlNode[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
-        public string Dialect
-        {
-            get { return this.dialectField; }
-            set { this.dialectField = value; }
-        }
-
-        protected override string OnvifXmlTypeName { get { return "TopicExpressionType"; } }
-
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAttributeString(null, "Dialect", this.dialectField);
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Dialect":
-                    this.dialectField = reader.AttributeValue;
-                    return true;
-            }
-            return false;
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
-        {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyNode());
-            return true;
-        }
-
-    }
-
     /// <summary>Constructs a contract named by an xsi:type attribute.</summary>
     internal static class XmlTypeFactory
     {
-        public static SharpOnvifCommon.Xml.OnvifObject Create(string ns, string name)
+        public static SharpOnvifCommon.Xml.OnvifContract Create(string ns, string name)
         {
-            return null;
+            return SharpOnvifCommon.Onvif.XmlTypeFactory.Create(ns, name);
         }
     }
 

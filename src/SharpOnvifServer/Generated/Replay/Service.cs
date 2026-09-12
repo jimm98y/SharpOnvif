@@ -55,7 +55,7 @@ namespace SharpOnvifServer.Replay
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual GetReplayUriResponse GetReplayUri(StreamSetup StreamSetup, string RecordingToken)
+        public virtual GetReplayUriResponse GetReplayUri(SharpOnvifCommon.Onvif.StreamSetup StreamSetup, string RecordingToken)
         {
             throw new System.NotImplementedException();
         }
@@ -95,7 +95,7 @@ namespace SharpOnvifServer.Replay
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetReplayConfigurationResponse SetReplayConfiguration(ReplayConfiguration Configuration)
+        public virtual SetReplayConfigurationResponse SetReplayConfiguration(SharpOnvifCommon.Onvif.ReplayConfiguration Configuration)
         {
             throw new System.NotImplementedException();
         }
@@ -198,7 +198,7 @@ namespace SharpOnvifServer.Replay
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }

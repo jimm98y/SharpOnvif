@@ -616,7 +616,7 @@ namespace SharpOnvifClient.Media
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetVideoSourceConfigurationResponse> SetVideoSourceConfigurationAsync(VideoSourceConfiguration Configuration, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetVideoSourceConfigurationResponse> SetVideoSourceConfigurationAsync(SharpOnvifCommon.Onvif.VideoSourceConfiguration Configuration, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// This operation modifies a video encoder configuration. The ForcePersistence flag indicates if the
@@ -634,7 +634,7 @@ namespace SharpOnvifClient.Media
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetVideoEncoderConfigurationResponse> SetVideoEncoderConfigurationAsync(VideoEncoderConfiguration Configuration, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetVideoEncoderConfigurationResponse> SetVideoEncoderConfigurationAsync(SharpOnvifCommon.Onvif.VideoEncoderConfiguration Configuration, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// This operation modifies an audio source configuration. The ForcePersistence flag indicates if the
@@ -648,7 +648,7 @@ namespace SharpOnvifClient.Media
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetAudioSourceConfigurationResponse> SetAudioSourceConfigurationAsync(AudioSourceConfiguration Configuration, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetAudioSourceConfigurationResponse> SetAudioSourceConfigurationAsync(SharpOnvifCommon.Onvif.AudioSourceConfiguration Configuration, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// This operation modifies an audio encoder configuration. The ForcePersistence flag indicates if the
@@ -662,7 +662,7 @@ namespace SharpOnvifClient.Media
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetAudioEncoderConfigurationResponse> SetAudioEncoderConfigurationAsync(AudioEncoderConfiguration Configuration, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetAudioEncoderConfigurationResponse> SetAudioEncoderConfigurationAsync(SharpOnvifCommon.Onvif.AudioEncoderConfiguration Configuration, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// A video analytics configuration is modified using this command. The ForcePersistence flag indicates
@@ -677,7 +677,7 @@ namespace SharpOnvifClient.Media
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetVideoAnalyticsConfigurationResponse> SetVideoAnalyticsConfigurationAsync(VideoAnalyticsConfiguration Configuration, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetVideoAnalyticsConfigurationResponse> SetVideoAnalyticsConfigurationAsync(SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration Configuration, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// This operation modifies a metadata configuration. The ForcePersistence flag indicates if the changes
@@ -692,7 +692,7 @@ namespace SharpOnvifClient.Media
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetMetadataConfigurationResponse> SetMetadataConfigurationAsync(MetadataConfiguration Configuration, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetMetadataConfigurationResponse> SetMetadataConfigurationAsync(SharpOnvifCommon.Onvif.MetadataConfiguration Configuration, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// This operation modifies an audio output configuration. The ForcePersistence flag indicates if the
@@ -703,7 +703,7 @@ namespace SharpOnvifClient.Media
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetAudioOutputConfigurationResponse> SetAudioOutputConfigurationAsync(AudioOutputConfiguration Configuration, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetAudioOutputConfigurationResponse> SetAudioOutputConfigurationAsync(SharpOnvifCommon.Onvif.AudioOutputConfiguration Configuration, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// This operation modifies an audio decoder configuration. The ForcePersistence flag indicates if the
@@ -714,7 +714,7 @@ namespace SharpOnvifClient.Media
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetAudioDecoderConfigurationResponse> SetAudioDecoderConfigurationAsync(AudioDecoderConfiguration Configuration, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetAudioDecoderConfigurationResponse> SetAudioDecoderConfigurationAsync(SharpOnvifCommon.Onvif.AudioDecoderConfiguration Configuration, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// This operation returns the available options (supported values and ranges for video source
@@ -831,7 +831,7 @@ namespace SharpOnvifClient.Media
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<GetStreamUriResponse> GetStreamUriAsync(StreamSetup StreamSetup, string ProfileToken, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<GetStreamUriResponse> GetStreamUriAsync(SharpOnvifCommon.Onvif.StreamSetup StreamSetup, string ProfileToken, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// This command starts multicast streaming using a specified media profile of a device. Streaming
@@ -955,7 +955,7 @@ namespace SharpOnvifClient.Media
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetOSDResponse> SetOSDAsync(OSDConfiguration OSD, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetOSDResponse> SetOSDAsync(SharpOnvifCommon.Onvif.OSDConfiguration OSD, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Create the OSD.
@@ -965,7 +965,7 @@ namespace SharpOnvifClient.Media
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<CreateOSDResponse> CreateOSDAsync(OSDConfiguration OSD, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<CreateOSDResponse> CreateOSDAsync(SharpOnvifCommon.Onvif.OSDConfiguration OSD, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Delete the OSD.
@@ -1007,7 +1007,7 @@ namespace SharpOnvifClient.Media
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -1967,7 +1967,7 @@ namespace SharpOnvifClient.Media
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetVideoSourceConfigurationResponse> SetVideoSourceConfigurationAsync(VideoSourceConfiguration Configuration, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetVideoSourceConfigurationResponse> SetVideoSourceConfigurationAsync(SharpOnvifCommon.Onvif.VideoSourceConfiguration Configuration, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetVideoSourceConfigurationAsync(new SetVideoSourceConfigurationRequest(Configuration, ForcePersistence), cancellationToken);
         }
@@ -1992,7 +1992,7 @@ namespace SharpOnvifClient.Media
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetVideoEncoderConfigurationResponse> SetVideoEncoderConfigurationAsync(VideoEncoderConfiguration Configuration, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetVideoEncoderConfigurationResponse> SetVideoEncoderConfigurationAsync(SharpOnvifCommon.Onvif.VideoEncoderConfiguration Configuration, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetVideoEncoderConfigurationAsync(new SetVideoEncoderConfigurationRequest(Configuration, ForcePersistence), cancellationToken);
         }
@@ -2013,7 +2013,7 @@ namespace SharpOnvifClient.Media
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetAudioSourceConfigurationResponse> SetAudioSourceConfigurationAsync(AudioSourceConfiguration Configuration, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetAudioSourceConfigurationResponse> SetAudioSourceConfigurationAsync(SharpOnvifCommon.Onvif.AudioSourceConfiguration Configuration, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetAudioSourceConfigurationAsync(new SetAudioSourceConfigurationRequest(Configuration, ForcePersistence), cancellationToken);
         }
@@ -2034,7 +2034,7 @@ namespace SharpOnvifClient.Media
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetAudioEncoderConfigurationResponse> SetAudioEncoderConfigurationAsync(AudioEncoderConfiguration Configuration, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetAudioEncoderConfigurationResponse> SetAudioEncoderConfigurationAsync(SharpOnvifCommon.Onvif.AudioEncoderConfiguration Configuration, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetAudioEncoderConfigurationAsync(new SetAudioEncoderConfigurationRequest(Configuration, ForcePersistence), cancellationToken);
         }
@@ -2056,7 +2056,7 @@ namespace SharpOnvifClient.Media
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetVideoAnalyticsConfigurationResponse> SetVideoAnalyticsConfigurationAsync(VideoAnalyticsConfiguration Configuration, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetVideoAnalyticsConfigurationResponse> SetVideoAnalyticsConfigurationAsync(SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration Configuration, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetVideoAnalyticsConfigurationAsync(new SetVideoAnalyticsConfigurationRequest(Configuration, ForcePersistence), cancellationToken);
         }
@@ -2078,7 +2078,7 @@ namespace SharpOnvifClient.Media
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetMetadataConfigurationResponse> SetMetadataConfigurationAsync(MetadataConfiguration Configuration, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetMetadataConfigurationResponse> SetMetadataConfigurationAsync(SharpOnvifCommon.Onvif.MetadataConfiguration Configuration, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetMetadataConfigurationAsync(new SetMetadataConfigurationRequest(Configuration, ForcePersistence), cancellationToken);
         }
@@ -2096,7 +2096,7 @@ namespace SharpOnvifClient.Media
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetAudioOutputConfigurationResponse> SetAudioOutputConfigurationAsync(AudioOutputConfiguration Configuration, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetAudioOutputConfigurationResponse> SetAudioOutputConfigurationAsync(SharpOnvifCommon.Onvif.AudioOutputConfiguration Configuration, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetAudioOutputConfigurationAsync(new SetAudioOutputConfigurationRequest(Configuration, ForcePersistence), cancellationToken);
         }
@@ -2114,7 +2114,7 @@ namespace SharpOnvifClient.Media
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetAudioDecoderConfigurationResponse> SetAudioDecoderConfigurationAsync(AudioDecoderConfiguration Configuration, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetAudioDecoderConfigurationResponse> SetAudioDecoderConfigurationAsync(SharpOnvifCommon.Onvif.AudioDecoderConfiguration Configuration, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetAudioDecoderConfigurationAsync(new SetAudioDecoderConfigurationRequest(Configuration, ForcePersistence), cancellationToken);
         }
@@ -2294,7 +2294,7 @@ namespace SharpOnvifClient.Media
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<GetStreamUriResponse> GetStreamUriAsync(StreamSetup StreamSetup, string ProfileToken, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<GetStreamUriResponse> GetStreamUriAsync(SharpOnvifCommon.Onvif.StreamSetup StreamSetup, string ProfileToken, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return GetStreamUriAsync(new GetStreamUriRequest(StreamSetup, ProfileToken), cancellationToken);
         }
@@ -2488,7 +2488,7 @@ namespace SharpOnvifClient.Media
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetOSDResponse> SetOSDAsync(OSDConfiguration OSD, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetOSDResponse> SetOSDAsync(SharpOnvifCommon.Onvif.OSDConfiguration OSD, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetOSDAsync(new SetOSDRequest(OSD, Any), cancellationToken);
         }
@@ -2505,7 +2505,7 @@ namespace SharpOnvifClient.Media
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<CreateOSDResponse> CreateOSDAsync(OSDConfiguration OSD, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<CreateOSDResponse> CreateOSDAsync(SharpOnvifCommon.Onvif.OSDConfiguration OSD, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return CreateOSDAsync(new CreateOSDRequest(OSD, Any), cancellationToken);
         }

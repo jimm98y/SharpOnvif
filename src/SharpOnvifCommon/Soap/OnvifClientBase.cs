@@ -79,7 +79,7 @@ namespace SharpOnvifCommon.Soap
         /// Resolves an xsi:type to an instance. Overridden by the generated client for its own
         /// assembly, because each carries its own copy of the shared schema types.
         /// </summary>
-        protected virtual OnvifObject ResolveXmlType(string ns, string name)
+        protected virtual OnvifContract ResolveXmlType(string ns, string name)
         {
             return null;
         }
@@ -96,10 +96,10 @@ namespace SharpOnvifCommon.Soap
             string action,
             string bodyNamespace,
             string bodyElement,
-            OnvifObject request,
+            OnvifContract request,
             Func<TResponse> createResponse,
             CancellationToken cancellationToken)
-            where TResponse : OnvifObject
+            where TResponse : OnvifContract
         {
             string envelope = BuildEnvelope(action, bodyNamespace, bodyElement, request);
 
@@ -123,7 +123,7 @@ namespace SharpOnvifCommon.Soap
             string action,
             string bodyNamespace,
             string bodyElement,
-            OnvifObject request,
+            OnvifContract request,
             CancellationToken cancellationToken)
         {
             string envelope = BuildEnvelope(action, bodyNamespace, bodyElement, request);
@@ -136,7 +136,7 @@ namespace SharpOnvifCommon.Soap
             }
         }
 
-        private string BuildEnvelope(string action, string bodyNamespace, string bodyElement, OnvifObject request)
+        private string BuildEnvelope(string action, string bodyNamespace, string bodyElement, OnvifContract request)
         {
             bool wsToken = _settings.Credentials != null
                 && (_settings.Authentication.Authentication & DigestAuthentication.WsUsernameToken) != 0

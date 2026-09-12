@@ -27,6 +27,7 @@ using SharpOnvifCommon;
 using SharpOnvifServer.Events;
 using System;
 using System.Xml;
+using SharpOnvifCommon.Onvif;
 
 namespace OnvifService.Onvif
 {

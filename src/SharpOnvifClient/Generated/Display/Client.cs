@@ -49,7 +49,7 @@ namespace SharpOnvifClient.Display
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetLayoutResponse> SetLayoutAsync(string VideoOutput, Layout Layout, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetLayoutResponse> SetLayoutAsync(string VideoOutput, SharpOnvifCommon.Onvif.Layout Layout, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// The Display Options contain the supported layouts (LayoutOptions) and the decoding and encoding
@@ -97,7 +97,7 @@ namespace SharpOnvifClient.Display
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetPaneConfigurationsResponse> SetPaneConfigurationsAsync(string VideoOutput, PaneConfiguration[] PaneConfiguration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetPaneConfigurationsResponse> SetPaneConfigurationsAsync(string VideoOutput, SharpOnvifCommon.Onvif.PaneConfiguration[] PaneConfiguration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// This command changes the configuration of the specified pane (tbd)
@@ -107,7 +107,7 @@ namespace SharpOnvifClient.Display
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetPaneConfigurationResponse> SetPaneConfigurationAsync(string VideoOutput, PaneConfiguration PaneConfiguration, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetPaneConfigurationResponse> SetPaneConfigurationAsync(string VideoOutput, SharpOnvifCommon.Onvif.PaneConfiguration PaneConfiguration, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Create a new pane configuration describing the streaming and coding settings for a display area.
@@ -119,7 +119,7 @@ namespace SharpOnvifClient.Display
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<CreatePaneConfigurationResponse> CreatePaneConfigurationAsync(string VideoOutput, PaneConfiguration PaneConfiguration, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<CreatePaneConfigurationResponse> CreatePaneConfigurationAsync(string VideoOutput, SharpOnvifCommon.Onvif.PaneConfiguration PaneConfiguration, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Delete a pane configuration. A service must respond with an error if the pane configuration is in
@@ -163,7 +163,7 @@ namespace SharpOnvifClient.Display
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -220,7 +220,7 @@ namespace SharpOnvifClient.Display
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetLayoutResponse> SetLayoutAsync(string VideoOutput, Layout Layout, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetLayoutResponse> SetLayoutAsync(string VideoOutput, SharpOnvifCommon.Onvif.Layout Layout, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetLayoutAsync(new SetLayoutRequest(VideoOutput, Layout, Any), cancellationToken);
         }
@@ -296,7 +296,7 @@ namespace SharpOnvifClient.Display
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetPaneConfigurationsResponse> SetPaneConfigurationsAsync(string VideoOutput, PaneConfiguration[] PaneConfiguration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetPaneConfigurationsResponse> SetPaneConfigurationsAsync(string VideoOutput, SharpOnvifCommon.Onvif.PaneConfiguration[] PaneConfiguration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetPaneConfigurationsAsync(new SetPaneConfigurationsRequest(VideoOutput, PaneConfiguration), cancellationToken);
         }
@@ -313,7 +313,7 @@ namespace SharpOnvifClient.Display
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetPaneConfigurationResponse> SetPaneConfigurationAsync(string VideoOutput, PaneConfiguration PaneConfiguration, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetPaneConfigurationResponse> SetPaneConfigurationAsync(string VideoOutput, SharpOnvifCommon.Onvif.PaneConfiguration PaneConfiguration, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetPaneConfigurationAsync(new SetPaneConfigurationRequest(VideoOutput, PaneConfiguration, Any), cancellationToken);
         }
@@ -332,7 +332,7 @@ namespace SharpOnvifClient.Display
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<CreatePaneConfigurationResponse> CreatePaneConfigurationAsync(string VideoOutput, PaneConfiguration PaneConfiguration, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<CreatePaneConfigurationResponse> CreatePaneConfigurationAsync(string VideoOutput, SharpOnvifCommon.Onvif.PaneConfiguration PaneConfiguration, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return CreatePaneConfigurationAsync(new CreatePaneConfigurationRequest(VideoOutput, PaneConfiguration, Any), cancellationToken);
         }

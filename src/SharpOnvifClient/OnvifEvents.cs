@@ -21,6 +21,7 @@
 
 using SharpOnvifClient.Events;
 using System.Linq;
+using SharpOnvifCommon.Onvif;
 
 namespace SharpOnvifClient
 {

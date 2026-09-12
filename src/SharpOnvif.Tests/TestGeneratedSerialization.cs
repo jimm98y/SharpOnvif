@@ -25,6 +25,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 using SharpOnvifCommon.Xml;
+using SharpOnvifCommon.Onvif;
 using SharpOnvifServer.DeviceMgmt;
 using SharpOnvifServer.Media;
 
@@ -46,6 +47,32 @@ namespace SharpOnvif.Tests
     {
         private const string Tds = "http://www.onvif.org/ver10/device/wsdl";
         private const string Trt = "http://www.onvif.org/ver10/media/wsdl";
+
+        [TestMethod]
+        public void SharesTheOnvifSchemaTypesBetweenClientAndServer()
+        {
+            // The Onvif schema is generated once into the common assembly rather than per
+            // service, so a Profile is one CLR type no matter which side produced it. That is
+            // what lets a value read by the client be handed to a server implementation
+            // unchanged, and it is the property the whole deduplication rests on.
+            Assert.AreSame(
+                typeof(SharpOnvifCommon.Onvif.Profile),
+                typeof(SharpOnvifCommon.Onvif.Profile));
+
+            // The types a service declares for itself stay with that service on each side.
+            Assert.AreNotSame(
+                typeof(SharpOnvifClient.DeviceMgmt.GetDeviceInformationResponse),
+                typeof(SharpOnvifServer.DeviceMgmt.GetDeviceInformationResponse));
+
+            // And a schema type is reachable from both sides as the same type.
+            var fromClient = typeof(SharpOnvifClient.Media.GetProfilesResponse)
+                .GetProperty("Profiles").PropertyType.GetElementType();
+            var fromServer = typeof(SharpOnvifServer.Media.GetProfilesResponse)
+                .GetProperty("Profiles").PropertyType.GetElementType();
+
+            Assert.AreSame(fromClient, fromServer, "both sides must name the same Profile type");
+            Assert.AreSame(typeof(SharpOnvifCommon.Onvif.Profile), fromClient);
+        }
 
         [TestMethod]
         public void WritesAFlatResponseLikeXmlSerializer()
@@ -72,7 +99,7 @@ namespace SharpOnvif.Tests
                 {
                     DateTimeType = SetDateTimeType.NTP,
                     DaylightSavings = true,
-                    UTCDateTime = new SharpOnvifServer.DeviceMgmt.DateTime
+                    UTCDateTime = new SharpOnvifCommon.Onvif.OnvifDateTime
                     {
                         Date = new Date { Year = 2026, Month = 9, Day = 12 },
                         Time = new Time { Hour = 21, Minute = 5, Second = 42 },
@@ -94,7 +121,7 @@ namespace SharpOnvif.Tests
                 UseCount = 2,
                 token = "venc0",
                 Encoding = VideoEncoding.H264,
-                Resolution = new SharpOnvifServer.Media.VideoResolution { Width = 1920, Height = 1080 },
+                Resolution = new SharpOnvifCommon.Onvif.VideoResolution { Width = 1920, Height = 1080 },
                 Quality = 4.5f,
                 SessionTimeout = "PT60S",
             };
@@ -195,7 +222,7 @@ namespace SharpOnvif.Tests
         // ------------------------------------------------------------------ helpers
 
         private static void AssertRoundTrips<T>(T value, string ns, string elementName)
-            where T : OnvifObject, new()
+            where T : OnvifContract, new()
         {
             string reflected = WriteWithXmlSerializer(value, ns, elementName);
             string generated = WriteWithGeneratedWriter(value, ns, elementName);
@@ -209,7 +236,7 @@ namespace SharpOnvif.Tests
                 "reading and writing are not inverses");
         }
 
-        private static string WriteWithGeneratedWriter(OnvifObject value, string ns, string elementName)
+        private static string WriteWithGeneratedWriter(OnvifContract value, string ns, string elementName)
         {
             var builder = new StringBuilder();
             using (XmlWriter xml = XmlWriter.Create(builder, new XmlWriterSettings { OmitXmlDeclaration = true }))
@@ -236,7 +263,7 @@ namespace SharpOnvif.Tests
             return builder.ToString();
         }
 
-        private static T ReadWithGeneratedReader<T>(string xml) where T : OnvifObject, new()
+        private static T ReadWithGeneratedReader<T>(string xml) where T : OnvifContract, new()
         {
             using (XmlReader reader = XmlReader.Create(new StringReader(xml)))
             {

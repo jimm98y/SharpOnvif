@@ -94,7 +94,7 @@ namespace SharpOnvifServer.Receiver
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual CreateReceiverResponse CreateReceiver(ReceiverConfiguration Configuration)
+        public virtual CreateReceiverResponse CreateReceiver(SharpOnvifCommon.Onvif.ReceiverConfiguration Configuration)
         {
             throw new System.NotImplementedException();
         }
@@ -135,7 +135,7 @@ namespace SharpOnvifServer.Receiver
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual ConfigureReceiverResponse ConfigureReceiver(string ReceiverToken, ReceiverConfiguration Configuration)
+        public virtual ConfigureReceiverResponse ConfigureReceiver(string ReceiverToken, SharpOnvifCommon.Onvif.ReceiverConfiguration Configuration)
         {
             throw new System.NotImplementedException();
         }
@@ -156,7 +156,7 @@ namespace SharpOnvifServer.Receiver
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetReceiverModeResponse SetReceiverMode(string ReceiverToken, ReceiverMode Mode)
+        public virtual SetReceiverModeResponse SetReceiverMode(string ReceiverToken, SharpOnvifCommon.Onvif.ReceiverMode Mode)
         {
             throw new System.NotImplementedException();
         }
@@ -340,7 +340,7 @@ namespace SharpOnvifServer.Receiver
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }

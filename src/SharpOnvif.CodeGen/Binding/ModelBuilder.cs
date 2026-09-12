@@ -16,7 +16,7 @@ namespace SharpOnvif.CodeGen.Binding;
 internal sealed class ModelBuilder
 {
     private readonly XsdSchemaSet _schema;
-    private readonly WsdlParser _wsdl;
+    private readonly IReadOnlyList<WsdlParser> _wsdls;
     private readonly string _serviceName;
 
     private readonly Dictionary<QName, CsClass> _classesByName = [];
@@ -28,20 +28,82 @@ internal sealed class ModelBuilder
     private readonly CsModel _model;
 
     private readonly bool _generateEntireSchema;
+    private readonly string _csNamespace;
+    private readonly SharedTypeIndex _shared;
 
-    public ModelBuilder(string serviceName, XsdSchemaSet schema, WsdlParser wsdl, bool generateEntireSchema = false)
+    /// <param name="csNamespace">C# namespace this model is generated into.</param>
+    /// <param name="shared">
+    /// Types already generated into the common assembly. A reference to one of these produces a
+    /// qualified reference instead of a second copy of the type.
+    /// </param>
+    public ModelBuilder(
+        string serviceName,
+        XsdSchemaSet schema,
+        WsdlParser wsdl,
+        bool generateEntireSchema = false,
+        string csNamespace = "",
+        SharedTypeIndex? shared = null)
+        : this(serviceName, schema, [wsdl], generateEntireSchema, csNamespace, shared, null, true)
+    {
+    }
+
+    /// <param name="declareFilter">
+    /// Decides which reachable types this model declares. The walk always descends through every
+    /// type, because a service's own type is how a shared one is reached; the filter only says
+    /// which of them belong here.
+    /// </param>
+    /// <param name="emitServices">False for the shared model, which has no operations of its own.</param>
+    private ModelBuilder(
+        string serviceName,
+        XsdSchemaSet schema,
+        IReadOnlyList<WsdlParser> wsdls,
+        bool generateEntireSchema,
+        string csNamespace,
+        SharedTypeIndex? shared,
+        Func<QName, bool>? declareFilter,
+        bool emitServices)
     {
         _serviceName = serviceName;
         _schema = schema;
-        _wsdl = wsdl;
+        _wsdls = wsdls;
         _generateEntireSchema = generateEntireSchema;
-        _model = new CsModel { ServiceName = serviceName };
+        _csNamespace = csNamespace;
+        _shared = shared ?? SharedTypeIndex.Empty;
+        _declareFilter = declareFilter;
+        _emitServices = emitServices;
+        _model = new CsModel { ServiceName = serviceName, CsNamespace = csNamespace };
     }
+
+    /// <summary>
+    /// Builds the model of everything the services share: the Onvif schema, and the OASIS and W3C
+    /// schemas the event service pulls in. Generated once into the common assembly.
+    /// <para>
+    /// Every type in those schemas is generated, not only the ones some operation reaches, so the
+    /// shared assembly is a complete rendering of the Onvif data model.
+    /// </para>
+    /// </summary>
+    public static CsModel BuildShared(
+        XsdSchemaSet schema,
+        IReadOnlyList<WsdlParser> wsdls,
+        ISet<string> serviceNamespaces,
+        string csNamespace)
+    {
+        return new ModelBuilder(
+            "Shared", schema, wsdls,
+            generateEntireSchema: true,
+            csNamespace: csNamespace,
+            shared: null,
+            declareFilter: name => !serviceNamespaces.Contains(name.Namespace),
+            emitServices: false).Build();
+    }
+
+    private readonly Func<QName, bool>? _declareFilter;
+    private readonly bool _emitServices;
 
     public CsModel Build()
     {
         // Reserve the names of the wrapper classes first so a schema type never steals one.
-        foreach (var portType in _wsdl.BoundPortTypes)
+        foreach (var portType in _wsdls.SelectMany(w => w.BoundPortTypes))
         {
             foreach (var operation in portType.Operations)
             {
@@ -52,12 +114,15 @@ internal sealed class ModelBuilder
             _takenTypeNames.Add(portType.Name.LocalName + "Client");
         }
 
-        var reachable = ComputeReachableTypes();
+        var reachable = ComputeReachableTypes()
+            .Where(t => t.Name is not { } name || _declareFilter is null || _declareFilter(name))
+            .ToList();
+
         foreach (var type in reachable) Declare(type);
         foreach (var type in reachable) Populate(type);
 
         LinkInheritance();
-        BuildServices();
+        if (_emitServices) BuildServices();
 
         _model.Classes.Sort((a, b) => string.CompareOrdinal(a.Name, b.Name));
         _model.Enums.Sort((a, b) => string.CompareOrdinal(a.Name, b.Name));
@@ -85,14 +150,19 @@ internal sealed class ModelBuilder
         void Enqueue(QName name)
         {
             if (PrimitiveMap.IsXsd(name)) return;
+
+            // Anything the common assembly already carries is referenced, not regenerated, and
+            // nothing it refers to needs collecting either.
+            if (_shared.Contains(name)) return;
+
             if (seen.Add(name)) queue.Enqueue(name);
         }
 
-        foreach (var portType in _wsdl.BoundPortTypes)
+        foreach (var portType in _wsdls.SelectMany(w => w.BoundPortTypes))
         {
             foreach (var operation in portType.Operations)
             {
-                foreach (var message in Messages(operation))
+                foreach (var message in Messages(operation, portType))
                 {
                     foreach (var part in message.Parts)
                     {
@@ -128,18 +198,25 @@ internal sealed class ModelBuilder
         return ordered;
     }
 
-    private IEnumerable<WsdlMessage> Messages(WsdlOperation operation)
+    private IEnumerable<WsdlMessage> Messages(WsdlOperation operation, WsdlPortType portType)
     {
         foreach (var name in new[] { operation.Input, operation.Output })
         {
-            if (name is { } message && _wsdl.Messages.TryGetValue(message, out var found))
-                yield return found;
+            if (name is { } message && FindMessage(message) is { } found) yield return found;
         }
         foreach (var fault in operation.Faults)
         {
-            if (_wsdl.Messages.TryGetValue(fault.Message, out var found))
-                yield return found;
+            if (FindMessage(fault.Message) is { } found) yield return found;
         }
+    }
+
+    private WsdlMessage? FindMessage(QName name)
+    {
+        foreach (var wsdl in _wsdls)
+        {
+            if (wsdl.Messages.TryGetValue(name, out var message)) return message;
+        }
+        return null;
     }
 
     /// <summary>Maps a base type name to the types that extend it.</summary>
@@ -213,7 +290,7 @@ internal sealed class ModelBuilder
         {
             if (!simple.IsEnumeration) return;   // Non-enum simple types collapse into their base.
 
-            string enumName = CsharpNaming.Unique(CsharpNaming.Identifier(name.LocalName), _takenTypeNames);
+            string enumName = CsharpNaming.Unique(CsharpNaming.TypeName(name.LocalName), _takenTypeNames);
             var @enum = new CsEnum
             {
                 Name = enumName,
@@ -228,10 +305,11 @@ internal sealed class ModelBuilder
         }
 
         var complex = (XsdComplexType)type;
-        string className = CsharpNaming.Unique(CsharpNaming.Identifier(name.LocalName), _takenTypeNames);
+        string className = CsharpNaming.Unique(CsharpNaming.TypeName(name.LocalName), _takenTypeNames);
         var @class = new CsClass
         {
             Name = className,
+            CsNamespace = _csNamespace,
             XmlName = name,
             Documentation = complex.Documentation,
         };
@@ -551,8 +629,10 @@ internal sealed class ModelBuilder
     {
         if (PrimitiveMap.Lookup(name) is { } primitive) return primitive;
 
+        if (_shared.TryResolve(name, out var sharedType)) return sharedType;
+
         if (_classesByName.TryGetValue(name, out var @class))
-            return new CsTypeRef(@class.Name, TypeKind.Class, false);
+            return new CsTypeRef(@class.Name, TypeKind.Class, false, XmlTypeName: @class.XmlName);
 
         if (_enumsByName.TryGetValue(name, out var @enum))
             return new CsTypeRef(@enum.Name, TypeKind.Enum, true);
@@ -612,7 +692,7 @@ internal sealed class ModelBuilder
                 // xsd.exe names an inline type after the member that declares it, prefixed by
                 // the owning type: element ErrorCode inside BaseFaultType becomes BaseFaultTypeErrorCode.
                 string name = CsharpNaming.Unique(
-                    CsharpNaming.Identifier(ownerName + typeSuffix), _takenTypeNames);
+                    CsharpNaming.TypeName(ownerName + typeSuffix), _takenTypeNames);
                 var @enum = new CsEnum
                 {
                     Name = name,
@@ -648,13 +728,14 @@ internal sealed class ModelBuilder
             return new CsTypeRef("System.Xml.XmlElement", TypeKind.XmlElement, false);
 
         if (_classesByType.TryGetValue(inline, out var declared))
-            return new CsTypeRef(declared.Name, TypeKind.Class, false);
+            return new CsTypeRef(declared.Name, TypeKind.Class, false, XmlTypeName: declared.XmlName);
 
         string className = CsharpNaming.Unique(
-            CsharpNaming.Identifier(ownerName + typeSuffix), _takenTypeNames);
+            CsharpNaming.TypeName(ownerName + typeSuffix), _takenTypeNames);
         var @class = new CsClass
         {
             Name = className,
+            CsNamespace = _csNamespace,
             XmlName = null,
             Documentation = complex.Documentation,
         };
@@ -726,7 +807,7 @@ internal sealed class ModelBuilder
 
     private void BuildServices()
     {
-        foreach (var portType in _wsdl.BoundPortTypes.OrderBy(p => p.Name.LocalName, StringComparer.Ordinal))
+        foreach (var portType in _wsdls.SelectMany(w => w.BoundPortTypes).OrderBy(p => p.Name.LocalName, StringComparer.Ordinal))
         {
             var operations = new List<CsOperation>();
 
@@ -766,7 +847,7 @@ internal sealed class ModelBuilder
         QName? bodyElement = null;
         XsdComplexType? body = null;
 
-        if (messageName is { } name && _wsdl.Messages.TryGetValue(name, out var message))
+        if (messageName is { } name && FindMessage(name) is { } message)
         {
             var part = message.Parts.FirstOrDefault();
             if (part?.Element is { } elementName && _schema.FindElement(elementName) is { } element)
@@ -793,6 +874,7 @@ internal sealed class ModelBuilder
         var @class = new CsClass
         {
             Name = className,
+            CsNamespace = _csNamespace,
             XmlName = null,
             IsMessageWrapper = true,
             WrapperElement = bodyElement,

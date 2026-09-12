@@ -140,7 +140,7 @@ namespace SharpOnvifClient.DeviceIO
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetVideoSourceConfigurationResponse> SetVideoSourceConfigurationAsync(VideoSourceConfiguration Configuration, bool ForcePersistence, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetVideoSourceConfigurationResponse> SetVideoSourceConfigurationAsync(SharpOnvifCommon.Onvif.VideoSourceConfiguration Configuration, bool ForcePersistence, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Modify a video output configuration. A device that has one or more video outputs shall support the
@@ -151,7 +151,7 @@ namespace SharpOnvifClient.DeviceIO
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetVideoOutputConfigurationResponse> SetVideoOutputConfigurationAsync(VideoOutputConfiguration Configuration, bool ForcePersistence, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetVideoOutputConfigurationResponse> SetVideoOutputConfigurationAsync(SharpOnvifCommon.Onvif.VideoOutputConfiguration Configuration, bool ForcePersistence, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Modify an audio source configuration. A device that has a one or more audio sources shall support
@@ -162,7 +162,7 @@ namespace SharpOnvifClient.DeviceIO
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetAudioSourceConfigurationResponse> SetAudioSourceConfigurationAsync(AudioSourceConfiguration Configuration, bool ForcePersistence, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetAudioSourceConfigurationResponse> SetAudioSourceConfigurationAsync(SharpOnvifCommon.Onvif.AudioSourceConfiguration Configuration, bool ForcePersistence, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Modify an audio output configuration. A device that has one ore more audio outputs shall support the
@@ -173,7 +173,7 @@ namespace SharpOnvifClient.DeviceIO
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetAudioOutputConfigurationResponse> SetAudioOutputConfigurationAsync(AudioOutputConfiguration Configuration, bool ForcePersistence, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetAudioOutputConfigurationResponse> SetAudioOutputConfigurationAsync(SharpOnvifCommon.Onvif.AudioOutputConfiguration Configuration, bool ForcePersistence, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Request the VideoSourceConfigurationOptions of a VideoSource. A device with one or more video
@@ -245,7 +245,7 @@ namespace SharpOnvifClient.DeviceIO
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetRelayOutputSettingsResponse> SetRelayOutputSettingsAsync(RelayOutput RelayOutput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetRelayOutputSettingsResponse> SetRelayOutputSettingsAsync(SharpOnvifCommon.Onvif.RelayOutput RelayOutput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Modify the relay state.
@@ -255,7 +255,7 @@ namespace SharpOnvifClient.DeviceIO
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetRelayOutputStateResponse> SetRelayOutputStateAsync(string RelayOutputToken, RelayLogicalState LogicalState, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetRelayOutputStateResponse> SetRelayOutputStateAsync(string RelayOutputToken, SharpOnvifCommon.Onvif.RelayLogicalState LogicalState, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// This operation gets a list of all available digital inputs.
@@ -285,7 +285,7 @@ namespace SharpOnvifClient.DeviceIO
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetDigitalInputConfigurationsResponse> SetDigitalInputConfigurationsAsync(DigitalInput[] DigitalInputs, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetDigitalInputConfigurationsResponse> SetDigitalInputConfigurationsAsync(SharpOnvifCommon.Onvif.DigitalInput[] DigitalInputs, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         System.Threading.Tasks.Task<GetSerialPortsResponse> GetSerialPortsAsync(GetSerialPortsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
@@ -352,7 +352,7 @@ namespace SharpOnvifClient.DeviceIO
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -556,7 +556,7 @@ namespace SharpOnvifClient.DeviceIO
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetVideoSourceConfigurationResponse> SetVideoSourceConfigurationAsync(VideoSourceConfiguration Configuration, bool ForcePersistence, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetVideoSourceConfigurationResponse> SetVideoSourceConfigurationAsync(SharpOnvifCommon.Onvif.VideoSourceConfiguration Configuration, bool ForcePersistence, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetVideoSourceConfigurationAsync(new SetVideoSourceConfigurationRequest(Configuration, ForcePersistence, Any), cancellationToken);
         }
@@ -574,7 +574,7 @@ namespace SharpOnvifClient.DeviceIO
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetVideoOutputConfigurationResponse> SetVideoOutputConfigurationAsync(VideoOutputConfiguration Configuration, bool ForcePersistence, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetVideoOutputConfigurationResponse> SetVideoOutputConfigurationAsync(SharpOnvifCommon.Onvif.VideoOutputConfiguration Configuration, bool ForcePersistence, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetVideoOutputConfigurationAsync(new SetVideoOutputConfigurationRequest(Configuration, ForcePersistence, Any), cancellationToken);
         }
@@ -592,7 +592,7 @@ namespace SharpOnvifClient.DeviceIO
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetAudioSourceConfigurationResponse> SetAudioSourceConfigurationAsync(AudioSourceConfiguration Configuration, bool ForcePersistence, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetAudioSourceConfigurationResponse> SetAudioSourceConfigurationAsync(SharpOnvifCommon.Onvif.AudioSourceConfiguration Configuration, bool ForcePersistence, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetAudioSourceConfigurationAsync(new SetAudioSourceConfigurationRequest(Configuration, ForcePersistence, Any), cancellationToken);
         }
@@ -610,7 +610,7 @@ namespace SharpOnvifClient.DeviceIO
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetAudioOutputConfigurationResponse> SetAudioOutputConfigurationAsync(AudioOutputConfiguration Configuration, bool ForcePersistence, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetAudioOutputConfigurationResponse> SetAudioOutputConfigurationAsync(SharpOnvifCommon.Onvif.AudioOutputConfiguration Configuration, bool ForcePersistence, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetAudioOutputConfigurationAsync(new SetAudioOutputConfigurationRequest(Configuration, ForcePersistence, Any), cancellationToken);
         }
@@ -724,7 +724,7 @@ namespace SharpOnvifClient.DeviceIO
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetRelayOutputSettingsResponse> SetRelayOutputSettingsAsync(RelayOutput RelayOutput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetRelayOutputSettingsResponse> SetRelayOutputSettingsAsync(SharpOnvifCommon.Onvif.RelayOutput RelayOutput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetRelayOutputSettingsAsync(new SetRelayOutputSettingsRequest(RelayOutput), cancellationToken);
         }
@@ -741,7 +741,7 @@ namespace SharpOnvifClient.DeviceIO
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetRelayOutputStateResponse> SetRelayOutputStateAsync(string RelayOutputToken, RelayLogicalState LogicalState, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetRelayOutputStateResponse> SetRelayOutputStateAsync(string RelayOutputToken, SharpOnvifCommon.Onvif.RelayLogicalState LogicalState, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetRelayOutputStateAsync(new SetRelayOutputStateRequest(RelayOutputToken, LogicalState), cancellationToken);
         }
@@ -792,7 +792,7 @@ namespace SharpOnvifClient.DeviceIO
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetDigitalInputConfigurationsResponse> SetDigitalInputConfigurationsAsync(DigitalInput[] DigitalInputs, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetDigitalInputConfigurationsResponse> SetDigitalInputConfigurationsAsync(SharpOnvifCommon.Onvif.DigitalInput[] DigitalInputs, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetDigitalInputConfigurationsAsync(new SetDigitalInputConfigurationsRequest(DigitalInputs), cancellationToken);
         }

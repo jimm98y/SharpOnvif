@@ -100,7 +100,7 @@ namespace SharpOnvifClient.PTZ
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<SetConfigurationResponse> SetConfigurationAsync(PTZConfiguration PTZConfiguration, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetConfigurationResponse> SetConfigurationAsync(SharpOnvifCommon.Onvif.PTZConfiguration PTZConfiguration, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// List supported coordinate systems including their range limitations. Therefore, the options MAY
@@ -176,7 +176,7 @@ namespace SharpOnvifClient.PTZ
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<GotoPresetResponse> GotoPresetAsync(string ProfileToken, string PresetToken, PTZSpeed Speed, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<GotoPresetResponse> GotoPresetAsync(string ProfileToken, string PresetToken, SharpOnvifCommon.Onvif.PTZSpeed Speed, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Operation to move the PTZ device to it's "home" position. The operation is supported if the
@@ -187,7 +187,7 @@ namespace SharpOnvifClient.PTZ
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<GotoHomePositionResponse> GotoHomePositionAsync(string ProfileToken, PTZSpeed Speed, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<GotoHomePositionResponse> GotoHomePositionAsync(string ProfileToken, SharpOnvifCommon.Onvif.PTZSpeed Speed, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Operation to save current position as the home position. The SetHomePosition command returns with a
@@ -211,7 +211,7 @@ namespace SharpOnvifClient.PTZ
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<ContinuousMoveResponse> ContinuousMoveAsync(string ProfileToken, PTZSpeed Velocity, string Timeout, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ContinuousMoveResponse> ContinuousMoveAsync(string ProfileToken, SharpOnvifCommon.Onvif.PTZSpeed Velocity, string Timeout, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Operation for Relative Pan/Tilt and Zoom Move. The operation is supported if the PTZNode supports at
@@ -225,7 +225,7 @@ namespace SharpOnvifClient.PTZ
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<RelativeMoveResponse> RelativeMoveAsync(string ProfileToken, PTZVector Translation, PTZSpeed Speed, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<RelativeMoveResponse> RelativeMoveAsync(string ProfileToken, SharpOnvifCommon.Onvif.PTZVector Translation, SharpOnvifCommon.Onvif.PTZSpeed Speed, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Operation to request PTZ status for the Node in the selected profile.
@@ -248,7 +248,7 @@ namespace SharpOnvifClient.PTZ
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<AbsoluteMoveResponse> AbsoluteMoveAsync(string ProfileToken, PTZVector Position, PTZSpeed Speed, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<AbsoluteMoveResponse> AbsoluteMoveAsync(string ProfileToken, SharpOnvifCommon.Onvif.PTZVector Position, SharpOnvifCommon.Onvif.PTZSpeed Speed, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Operation to move pan,tilt or zoom to point to a destination based on the geolocation of the target.
@@ -263,7 +263,7 @@ namespace SharpOnvifClient.PTZ
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<GeoMoveResponse> GeoMoveAsync(string ProfileToken, GeoLocation Target, PTZSpeed Speed, float AreaHeight, float AreaWidth, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<GeoMoveResponse> GeoMoveAsync(string ProfileToken, SharpOnvifCommon.Onvif.GeoLocation Target, SharpOnvifCommon.Onvif.PTZSpeed Speed, float AreaHeight, float AreaWidth, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Operation to stop ongoing pan, tilt and zoom movements of absolute relative and continuous type. If
@@ -325,7 +325,7 @@ namespace SharpOnvifClient.PTZ
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<ModifyPresetTourResponse> ModifyPresetTourAsync(string ProfileToken, PresetTour PresetTour, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ModifyPresetTourResponse> ModifyPresetTourAsync(string ProfileToken, SharpOnvifCommon.Onvif.PresetTour PresetTour, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Operation to perform specific operation on the preset tour in selected media profile.
@@ -335,7 +335,7 @@ namespace SharpOnvifClient.PTZ
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<OperatePresetTourResponse> OperatePresetTourAsync(string ProfileToken, string PresetTourToken, PTZPresetTourOperation Operation, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<OperatePresetTourResponse> OperatePresetTourAsync(string ProfileToken, string PresetTourToken, SharpOnvifCommon.Onvif.PTZPresetTourOperation Operation, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Operation to delete a specific preset tour from the media profile.
@@ -375,7 +375,7 @@ namespace SharpOnvifClient.PTZ
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<MoveAndStartTrackingResponse> MoveAndStartTrackingAsync(string ProfileToken, string PresetToken, GeoLocation GeoLocation, PTZVector TargetPosition, PTZSpeed Speed, string ObjectID, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<MoveAndStartTrackingResponse> MoveAndStartTrackingAsync(string ProfileToken, string PresetToken, SharpOnvifCommon.Onvif.GeoLocation GeoLocation, SharpOnvifCommon.Onvif.PTZVector TargetPosition, SharpOnvifCommon.Onvif.PTZSpeed Speed, string ObjectID, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     }
 
     /// <summary>
@@ -407,7 +407,7 @@ namespace SharpOnvifClient.PTZ
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -536,7 +536,7 @@ namespace SharpOnvifClient.PTZ
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<SetConfigurationResponse> SetConfigurationAsync(PTZConfiguration PTZConfiguration, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<SetConfigurationResponse> SetConfigurationAsync(SharpOnvifCommon.Onvif.PTZConfiguration PTZConfiguration, bool ForcePersistence, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return SetConfigurationAsync(new SetConfigurationRequest(PTZConfiguration, ForcePersistence), cancellationToken);
         }
@@ -654,7 +654,7 @@ namespace SharpOnvifClient.PTZ
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<GotoPresetResponse> GotoPresetAsync(string ProfileToken, string PresetToken, PTZSpeed Speed, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<GotoPresetResponse> GotoPresetAsync(string ProfileToken, string PresetToken, SharpOnvifCommon.Onvif.PTZSpeed Speed, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return GotoPresetAsync(new GotoPresetRequest(ProfileToken, PresetToken, Speed), cancellationToken);
         }
@@ -672,7 +672,7 @@ namespace SharpOnvifClient.PTZ
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<GotoHomePositionResponse> GotoHomePositionAsync(string ProfileToken, PTZSpeed Speed, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<GotoHomePositionResponse> GotoHomePositionAsync(string ProfileToken, SharpOnvifCommon.Onvif.PTZSpeed Speed, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return GotoHomePositionAsync(new GotoHomePositionRequest(ProfileToken, Speed), cancellationToken);
         }
@@ -710,7 +710,7 @@ namespace SharpOnvifClient.PTZ
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<ContinuousMoveResponse> ContinuousMoveAsync(string ProfileToken, PTZSpeed Velocity, string Timeout, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<ContinuousMoveResponse> ContinuousMoveAsync(string ProfileToken, SharpOnvifCommon.Onvif.PTZSpeed Velocity, string Timeout, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return ContinuousMoveAsync(new ContinuousMoveRequest(ProfileToken, Velocity, Timeout), cancellationToken);
         }
@@ -731,7 +731,7 @@ namespace SharpOnvifClient.PTZ
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<RelativeMoveResponse> RelativeMoveAsync(string ProfileToken, PTZVector Translation, PTZSpeed Speed, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<RelativeMoveResponse> RelativeMoveAsync(string ProfileToken, SharpOnvifCommon.Onvif.PTZVector Translation, SharpOnvifCommon.Onvif.PTZSpeed Speed, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return RelativeMoveAsync(new RelativeMoveRequest(ProfileToken, Translation, Speed), cancellationToken);
         }
@@ -768,7 +768,7 @@ namespace SharpOnvifClient.PTZ
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<AbsoluteMoveResponse> AbsoluteMoveAsync(string ProfileToken, PTZVector Position, PTZSpeed Speed, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<AbsoluteMoveResponse> AbsoluteMoveAsync(string ProfileToken, SharpOnvifCommon.Onvif.PTZVector Position, SharpOnvifCommon.Onvif.PTZSpeed Speed, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return AbsoluteMoveAsync(new AbsoluteMoveRequest(ProfileToken, Position, Speed), cancellationToken);
         }
@@ -790,7 +790,7 @@ namespace SharpOnvifClient.PTZ
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<GeoMoveResponse> GeoMoveAsync(string ProfileToken, GeoLocation Target, PTZSpeed Speed, float AreaHeight, float AreaWidth, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<GeoMoveResponse> GeoMoveAsync(string ProfileToken, SharpOnvifCommon.Onvif.GeoLocation Target, SharpOnvifCommon.Onvif.PTZSpeed Speed, float AreaHeight, float AreaWidth, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return GeoMoveAsync(new GeoMoveRequest(ProfileToken, Target, Speed, AreaHeight, AreaWidth), cancellationToken);
         }
@@ -894,7 +894,7 @@ namespace SharpOnvifClient.PTZ
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<ModifyPresetTourResponse> ModifyPresetTourAsync(string ProfileToken, PresetTour PresetTour, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<ModifyPresetTourResponse> ModifyPresetTourAsync(string ProfileToken, SharpOnvifCommon.Onvif.PresetTour PresetTour, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return ModifyPresetTourAsync(new ModifyPresetTourRequest(ProfileToken, PresetTour), cancellationToken);
         }
@@ -911,7 +911,7 @@ namespace SharpOnvifClient.PTZ
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<OperatePresetTourResponse> OperatePresetTourAsync(string ProfileToken, string PresetTourToken, PTZPresetTourOperation Operation, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<OperatePresetTourResponse> OperatePresetTourAsync(string ProfileToken, string PresetTourToken, SharpOnvifCommon.Onvif.PTZPresetTourOperation Operation, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return OperatePresetTourAsync(new OperatePresetTourRequest(ProfileToken, PresetTourToken, Operation), cancellationToken);
         }
@@ -972,7 +972,7 @@ namespace SharpOnvifClient.PTZ
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<MoveAndStartTrackingResponse> MoveAndStartTrackingAsync(string ProfileToken, string PresetToken, GeoLocation GeoLocation, PTZVector TargetPosition, PTZSpeed Speed, string ObjectID, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<MoveAndStartTrackingResponse> MoveAndStartTrackingAsync(string ProfileToken, string PresetToken, SharpOnvifCommon.Onvif.GeoLocation GeoLocation, SharpOnvifCommon.Onvif.PTZVector TargetPosition, SharpOnvifCommon.Onvif.PTZSpeed Speed, string ObjectID, System.Xml.XmlElement[] Any, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return MoveAndStartTrackingAsync(new MoveAndStartTrackingRequest(ProfileToken, PresetToken, GeoLocation, TargetPosition, Speed, ObjectID, Any), cancellationToken);
         }

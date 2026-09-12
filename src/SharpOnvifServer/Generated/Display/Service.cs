@@ -79,7 +79,7 @@ namespace SharpOnvifServer.Display
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetLayoutResponse SetLayout(string VideoOutput, Layout Layout, System.Xml.XmlElement[] Any)
+        public virtual SetLayoutResponse SetLayout(string VideoOutput, SharpOnvifCommon.Onvif.Layout Layout, System.Xml.XmlElement[] Any)
         {
             throw new System.NotImplementedException();
         }
@@ -167,7 +167,7 @@ namespace SharpOnvifServer.Display
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetPaneConfigurationsResponse SetPaneConfigurations(string VideoOutput, PaneConfiguration[] PaneConfiguration)
+        public virtual SetPaneConfigurationsResponse SetPaneConfigurations(string VideoOutput, SharpOnvifCommon.Onvif.PaneConfiguration[] PaneConfiguration)
         {
             throw new System.NotImplementedException();
         }
@@ -187,7 +187,7 @@ namespace SharpOnvifServer.Display
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual SetPaneConfigurationResponse SetPaneConfiguration(string VideoOutput, PaneConfiguration PaneConfiguration, System.Xml.XmlElement[] Any)
+        public virtual SetPaneConfigurationResponse SetPaneConfiguration(string VideoOutput, SharpOnvifCommon.Onvif.PaneConfiguration PaneConfiguration, System.Xml.XmlElement[] Any)
         {
             throw new System.NotImplementedException();
         }
@@ -209,7 +209,7 @@ namespace SharpOnvifServer.Display
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual CreatePaneConfigurationResponse CreatePaneConfiguration(string VideoOutput, PaneConfiguration PaneConfiguration, System.Xml.XmlElement[] Any)
+        public virtual CreatePaneConfigurationResponse CreatePaneConfiguration(string VideoOutput, SharpOnvifCommon.Onvif.PaneConfiguration PaneConfiguration, System.Xml.XmlElement[] Any)
         {
             throw new System.NotImplementedException();
         }
@@ -424,7 +424,7 @@ namespace SharpOnvifServer.Display
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }

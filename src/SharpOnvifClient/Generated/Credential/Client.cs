@@ -102,7 +102,7 @@ namespace SharpOnvifClient.Credential
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<CreateCredentialResponse> CreateCredentialAsync(Credential Credential, CredentialState State, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<CreateCredentialResponse> CreateCredentialAsync(OnvifCredential Credential, CredentialState State, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// This method is used to synchronize a credential in a client with the device.
@@ -128,7 +128,7 @@ namespace SharpOnvifClient.Credential
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        System.Threading.Tasks.Task<ModifyCredentialResponse> ModifyCredentialAsync(Credential Credential, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ModifyCredentialResponse> ModifyCredentialAsync(OnvifCredential Credential, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// This method deletes the specified credential. If it is associated with one or more entities some
@@ -375,7 +375,7 @@ namespace SharpOnvifClient.Credential
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -513,7 +513,7 @@ namespace SharpOnvifClient.Credential
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<CreateCredentialResponse> CreateCredentialAsync(Credential Credential, CredentialState State, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<CreateCredentialResponse> CreateCredentialAsync(OnvifCredential Credential, CredentialState State, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return CreateCredentialAsync(new CreateCredentialRequest(Credential, State), cancellationToken);
         }
@@ -553,7 +553,7 @@ namespace SharpOnvifClient.Credential
         /// <summary>
         /// Calls the operation with its request members as arguments, instead of building the request.
         /// </summary>
-        public System.Threading.Tasks.Task<ModifyCredentialResponse> ModifyCredentialAsync(Credential Credential, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public System.Threading.Tasks.Task<ModifyCredentialResponse> ModifyCredentialAsync(OnvifCredential Credential, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return ModifyCredentialAsync(new ModifyCredentialRequest(Credential), cancellationToken);
         }

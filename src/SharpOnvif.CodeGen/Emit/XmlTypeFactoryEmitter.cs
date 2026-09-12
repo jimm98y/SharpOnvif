@@ -11,13 +11,13 @@ namespace SharpOnvif.CodeGen.Emit;
 /// </summary>
 internal static class XmlTypeFactoryEmitter
 {
-    public static void Emit(CSharpWriter writer, CsModel model)
+    public static void Emit(CSharpWriter writer, CsModel model, string visibility, string? fallbackNamespace)
     {
         writer.Line("/// <summary>Constructs a contract named by an xsi:type attribute.</summary>");
-        writer.Line("internal static class XmlTypeFactory");
+        writer.Line($"{visibility} static class XmlTypeFactory");
         using (writer.Braces())
         {
-            writer.Line("public static SharpOnvifCommon.Xml.OnvifObject Create(string ns, string name)");
+            writer.Line("public static SharpOnvifCommon.Xml.OnvifContract Create(string ns, string name)");
             using (writer.Braces())
             {
                 // Only types that can actually be named by xsi:type are worth listing: a type
@@ -27,9 +27,13 @@ internal static class XmlTypeFactoryEmitter
                     .OrderBy(c => c.XmlName!.Value.LocalName, StringComparer.Ordinal)
                     .ToList();
 
+                string fallback = fallbackNamespace is null
+                    ? "return null;"
+                    : $"return {fallbackNamespace}.XmlTypeFactory.Create(ns, name);";
+
                 if (polymorphic.Count == 0)
                 {
-                    writer.Line("return null;");
+                    writer.Line(fallback);
                     return;
                 }
 
@@ -48,7 +52,8 @@ internal static class XmlTypeFactoryEmitter
                         writer.Outdent();
                     }
                 }
-                writer.Line("return null;");
+                // Anything this service does not know may still be one of the shared types.
+                writer.Line(fallback);
             }
         }
     }

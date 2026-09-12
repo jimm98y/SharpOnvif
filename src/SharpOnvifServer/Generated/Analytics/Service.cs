@@ -106,7 +106,7 @@ namespace SharpOnvifServer.Analytics
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual CreateAnalyticsModulesResponse CreateAnalyticsModules(string ConfigurationToken, Config[] AnalyticsModule)
+        public virtual CreateAnalyticsModulesResponse CreateAnalyticsModules(string ConfigurationToken, SharpOnvifCommon.Onvif.Config[] AnalyticsModule)
         {
             throw new System.NotImplementedException();
         }
@@ -167,7 +167,7 @@ namespace SharpOnvifServer.Analytics
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual ModifyAnalyticsModulesResponse ModifyAnalyticsModules(string ConfigurationToken, Config[] AnalyticsModule)
+        public virtual ModifyAnalyticsModulesResponse ModifyAnalyticsModules(string ConfigurationToken, SharpOnvifCommon.Onvif.Config[] AnalyticsModule)
         {
             throw new System.NotImplementedException();
         }
@@ -355,7 +355,7 @@ namespace SharpOnvifServer.Analytics
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -409,7 +409,7 @@ namespace SharpOnvifServer.Analytics
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual CreateRulesResponse CreateRules(string ConfigurationToken, Config[] Rule)
+        public virtual CreateRulesResponse CreateRules(string ConfigurationToken, SharpOnvifCommon.Onvif.Config[] Rule)
         {
             throw new System.NotImplementedException();
         }
@@ -489,7 +489,7 @@ namespace SharpOnvifServer.Analytics
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual ModifyRulesResponse ModifyRules(string ConfigurationToken, Config[] Rule)
+        public virtual ModifyRulesResponse ModifyRules(string ConfigurationToken, SharpOnvifCommon.Onvif.Config[] Rule)
         {
             throw new System.NotImplementedException();
         }
@@ -622,7 +622,7 @@ namespace SharpOnvifServer.Analytics
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -724,7 +724,7 @@ namespace SharpOnvifServer.Analytics
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual CreateAnalyticsModulesResponse CreateAnalyticsModules(string ConfigurationToken, Config[] AnalyticsModule)
+        public virtual CreateAnalyticsModulesResponse CreateAnalyticsModules(string ConfigurationToken, SharpOnvifCommon.Onvif.Config[] AnalyticsModule)
         {
             throw new System.NotImplementedException();
         }
@@ -785,7 +785,7 @@ namespace SharpOnvifServer.Analytics
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual ModifyAnalyticsModulesResponse ModifyAnalyticsModules(string ConfigurationToken, Config[] AnalyticsModule)
+        public virtual ModifyAnalyticsModulesResponse ModifyAnalyticsModules(string ConfigurationToken, SharpOnvifCommon.Onvif.Config[] AnalyticsModule)
         {
             throw new System.NotImplementedException();
         }
@@ -855,7 +855,7 @@ namespace SharpOnvifServer.Analytics
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual CreateRulesResponse CreateRules(string ConfigurationToken, Config[] Rule)
+        public virtual CreateRulesResponse CreateRules(string ConfigurationToken, SharpOnvifCommon.Onvif.Config[] Rule)
         {
             throw new System.NotImplementedException();
         }
@@ -935,7 +935,7 @@ namespace SharpOnvifServer.Analytics
         }
 
         /// <summary>Handles the operation from its request members.</summary>
-        public virtual ModifyRulesResponse ModifyRules(string ConfigurationToken, Config[] Rule)
+        public virtual ModifyRulesResponse ModifyRules(string ConfigurationToken, SharpOnvifCommon.Onvif.Config[] Rule)
         {
             throw new System.NotImplementedException();
         }
@@ -1188,7 +1188,7 @@ namespace SharpOnvifServer.Analytics
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifObject ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
