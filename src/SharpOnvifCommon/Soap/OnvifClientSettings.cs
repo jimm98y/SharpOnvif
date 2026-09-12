@@ -41,9 +41,21 @@ namespace SharpOnvifCommon.Soap
         public HttpMessageHandler Transport { get; set; }
 
         /// <summary>
-        /// An HttpClient to send through, instead of one built from the settings above. When set,
-        /// authentication headers are still applied but Timeout and Transport are ignored, and
-        /// the client is not disposed with the service client.
+        /// An HttpClient to send through, instead of one built from the settings above, for a
+        /// caller who manages their own clients. Timeout and Transport are ignored, and the
+        /// client is not disposed with the service client.
+        /// <para>
+        /// HTTP Digest cannot be arranged on a client that is already built, because answering a
+        /// challenge takes a handler in its pipeline. Supplying a client while HTTP Digest is
+        /// requested is refused rather than quietly sending unauthenticated requests: use
+        /// <see cref="Transport"/> instead, or put an <see cref="HttpDigestHandler"/> in the
+        /// client's own pipeline and leave <see cref="DigestAuthentication.HttpDigest"/> out of
+        /// <see cref="Authentication"/>.
+        /// </para>
+        /// <para>
+        /// WS-UsernameToken is unaffected: it travels in the SOAP header, which this client
+        /// writes either way.
+        /// </para>
         /// </summary>
         public HttpClient HttpClient { get; set; }
 

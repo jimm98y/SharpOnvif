@@ -34,6 +34,10 @@ namespace SharpOnvifCommon.Soap
         private string _nextNonce;
         private string _primeNonce;
         private string _primeClientNonce;
+
+        // The nonce the count belongs to, and the count itself. A nonce count states how many
+        // requests have been sent with that nonce, so it restarts whenever the nonce does.
+        private string _countedNonce;
         private int _nonceCount;
 
         public HttpDigestHandler(NetworkCredential credentials, OnvifAuthenticationSettings settings, HttpMessageHandler inner)
@@ -113,13 +117,12 @@ namespace SharpOnvifCommon.Soap
                         HttpDigestAuthentication.GetValueFromHeader(challenge, "stale", false), "true",
                         StringComparison.OrdinalIgnoreCase);
 
-                    // A new server nonce restarts the count, and the -sess algorithms derive
-                    // their secret from the first nonce/cnonce pair seen for it.
+                    // A challenge that is not merely stale starts a new session, and the -sess
+                    // algorithms derive their secret from the first nonce and cnonce seen in it.
                     if (_challenge == null || !stale || NonceOf(_challenge) != nonce)
                     {
                         _primeNonce = null;
                         _primeClientNonce = null;
-                        _nonceCount = 0;
                     }
 
                     _challenge = challenge;
@@ -152,6 +155,15 @@ namespace SharpOnvifCommon.Soap
 
                 challenge = _challenge;
                 nonce = _nextNonce ?? NonceOf(_challenge);
+
+                // The count is of requests sent with this nonce, so a nonce we have not used
+                // before starts at one - whether it came from a challenge or from a nextnonce.
+                if (!string.Equals(nonce, _countedNonce, StringComparison.Ordinal))
+                {
+                    _countedNonce = nonce;
+                    _nonceCount = 0;
+                }
+
                 nonceCount = ++_nonceCount;
                 clientNonce = HttpDigestAuthentication.GenerateClientNonce(BinarySerializationType.Hex);
 

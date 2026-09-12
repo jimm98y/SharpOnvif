@@ -42,6 +42,18 @@ namespace SharpOnvifCommon.Soap
 
             if (_settings.HttpClient != null)
             {
+                // Answering a challenge takes a handler in the pipeline, which cannot be added to
+                // a client that is already built. Refusing is the only honest option: the
+                // alternative is sending every request unauthenticated without saying so.
+                if (UsesHttpDigest(_settings))
+                {
+                    throw new InvalidOperationException(
+                        "HttpClient cannot be combined with HTTP Digest authentication, because the digest " +
+                        "handler has to sit in the client's pipeline. Set Transport instead of HttpClient, or " +
+                        "add an HttpDigestHandler to your own pipeline and clear DigestAuthentication.HttpDigest " +
+                        "from Authentication.");
+                }
+
                 _http = _settings.HttpClient;
                 _ownsHttpClient = false;
             }
@@ -58,14 +70,19 @@ namespace SharpOnvifCommon.Soap
         /// <summary>The settings the client was created with.</summary>
         protected OnvifClientSettings Settings { get { return _settings; } }
 
+        private static bool UsesHttpDigest(OnvifClientSettings settings)
+        {
+            return settings.Credentials != null
+                && settings.Authentication != null
+                && (settings.Authentication.Authentication & DigestAuthentication.HttpDigest) != 0;
+        }
+
         private static HttpClient CreateHttpClient(OnvifClientSettings settings)
         {
             HttpMessageHandler transport = settings.Transport ?? new HttpClientHandler();
 
-            bool digest = settings.Credentials != null
-                && (settings.Authentication.Authentication & DigestAuthentication.HttpDigest) != 0;
-
-            if (digest) transport = new HttpDigestHandler(settings.Credentials, settings.Authentication, transport);
+            if (UsesHttpDigest(settings))
+                transport = new HttpDigestHandler(settings.Credentials, settings.Authentication, transport);
 
             var client = new HttpClient(transport, disposeHandler: true);
             client.Timeout = settings.Timeout;

@@ -176,6 +176,37 @@ namespace SharpOnvif.Tests
         }
 
         [TestMethod]
+        public async Task RestartsTheCountWhenTheDeviceHandsOutANextNonce()
+        {
+            // A nonce count states how many requests have been sent with that nonce, so a nonce
+            // the client has not used before starts at one - whether it arrived in a challenge or
+            // in a nextnonce. Carrying the previous count over describes something untrue, and a
+            // device that checks it rejects the request.
+            var transport = new FakeTransport((request, call) =>
+            {
+                if (call == 1) return FakeTransport.Challenge(Challenge);
+
+                var response = FakeTransport.Ok();
+                if (call == 2) response.Headers.TryAddWithoutValidation("Authentication-Info", "nextnonce=\"second\"");
+                return response;
+            });
+
+            var client = CreateClient(transport, out _);
+            await PostAsync(client);   // challenge, then nc=1 on the first nonce
+            await PostAsync(client);   // first request on the nonce the device handed out
+            await PostAsync(client);   // second request on it
+
+            StringAssert.Contains(transport.Authorizations[1], "nonce=\"abc123\"");
+            StringAssert.Contains(transport.Authorizations[1], "nc=00000001");
+
+            StringAssert.Contains(transport.Authorizations[2], "nonce=\"second\"");
+            StringAssert.Contains(transport.Authorizations[2], "nc=00000001", "a new nonce starts its own count");
+
+            StringAssert.Contains(transport.Authorizations[3], "nonce=\"second\"");
+            StringAssert.Contains(transport.Authorizations[3], "nc=00000002");
+        }
+
+        [TestMethod]
         public async Task UsesTheNextNonceTheDeviceOffers()
         {
             var transport = new FakeTransport((request, call) =>

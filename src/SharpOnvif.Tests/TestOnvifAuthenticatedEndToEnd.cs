@@ -29,6 +29,7 @@ using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SharpOnvifCommon.Security;
+using SharpOnvifCommon.Soap;
 using SharpOnvifServer;
 using SharpOnvifServer.Dispatch;
 
@@ -216,6 +217,82 @@ namespace SharpOnvif.Tests
         {
             return SharpOnvifCommon.Security.HttpDigestAuthentication
                 .GetValueFromHeader(challenge, "algorithm", false) ?? "MD5";
+        }
+
+        [TestMethod]
+        public async Task ProvesItsOwnIdentityWithAuthenticationInfo()
+        {
+            // The other half of HTTP Digest: rspauth is the device's digest over its own
+            // response, and shows the client it is talking to something that knows the password.
+            // The client validates it, so a device that stops sending it leaves that unchecked.
+            using (var http = new System.Net.Http.HttpClient(
+                       new HttpDigestHandler(
+                           new System.Net.NetworkCredential(UserName, Password),
+                           new OnvifAuthenticationSettings(),
+                           new System.Net.Http.HttpClientHandler())))
+            {
+                var request = new System.Net.Http.HttpRequestMessage(System.Net.Http.HttpMethod.Post, _endpoint);
+                request.Content = new System.Net.Http.StringContent(
+                    "<?xml version=\"1.0\"?><s:Envelope xmlns:s=\"http://www.w3.org/2003/05/soap-envelope\">" +
+                    "<s:Body><GetDeviceInformation xmlns=\"http://www.onvif.org/ver10/device/wsdl\"/></s:Body></s:Envelope>");
+                request.Content.Headers.ContentType =
+                    System.Net.Http.Headers.MediaTypeHeaderValue.Parse(
+                        "application/soap+xml; charset=utf-8; action=\"http://www.onvif.org/ver10/device/wsdl/GetDeviceInformation\"");
+
+                var response = await http.SendAsync(request);
+
+                Assert.AreEqual(System.Net.HttpStatusCode.OK, response.StatusCode);
+                Assert.IsTrue(response.Headers.TryGetValues("Authentication-Info", out var values),
+                    "the device has to prove itself as well");
+                StringAssert.Contains(string.Join(", ", values), "rspauth=");
+            }
+        }
+
+        [TestMethod]
+        public async Task ValidatesTheDevicesProofOnEveryCall()
+        {
+            // The client throws when rspauth does not check out, so a clean run of several calls
+            // is the assertion that the device's half of the exchange is right.
+            using (var device = new SharpOnvifClient.DeviceMgmt.DeviceClient(_endpoint, UserName, Password))
+            {
+                for (int i = 0; i < 3; i++)
+                    Assert.AreEqual("ACME", (await device.GetDeviceInformationAsync()).Manufacturer);
+            }
+        }
+
+        [TestMethod]
+        public void RefusesToDropHttpDigestSilentlyForASuppliedHttpClient()
+        {
+            // Digest takes a handler in the pipeline, which cannot be added to a built client.
+            // Accepting the client and sending unauthenticated requests would be the worst
+            // outcome, so the combination is refused.
+            var settings = new SharpOnvifCommon.Soap.OnvifClientSettings
+            {
+                Credentials = new System.Net.NetworkCredential(UserName, Password),
+                Authentication = new OnvifAuthenticationSettings(DigestAuthentication.HttpDigest),
+                HttpClient = new System.Net.Http.HttpClient(),
+            };
+
+            var error = Assert.ThrowsExactly<InvalidOperationException>(
+                () => new SharpOnvifClient.DeviceMgmt.DeviceClient(_endpoint, settings));
+
+            StringAssert.Contains(error.Message, "Transport");
+        }
+
+        [TestMethod]
+        public void AcceptsASuppliedHttpClientWhenDigestIsNotAskedFor()
+        {
+            var settings = new SharpOnvifCommon.Soap.OnvifClientSettings
+            {
+                Credentials = new System.Net.NetworkCredential(UserName, Password),
+                Authentication = new OnvifAuthenticationSettings(DigestAuthentication.WsUsernameToken),
+                HttpClient = new System.Net.Http.HttpClient(),
+            };
+
+            using (var device = new SharpOnvifClient.DeviceMgmt.DeviceClient(_endpoint, settings))
+            {
+                Assert.IsNotNull(device);
+            }
         }
 
         [TestMethod]

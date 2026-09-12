@@ -133,6 +133,12 @@ namespace SharpOnvifServer.Dispatch
 
                 context.Response.StatusCode = StatusCodes.Status200OK;
                 context.Response.ContentType = SoapEnvelope.ContentType + "; charset=utf-8";
+
+                // Proves to the client that this device knows the password as well, which is the
+                // half of HTTP Digest that authenticates the device. Written before the body,
+                // because a header cannot follow one.
+                await DigestAuthenticationInfo.AppendAsync(context, reply).ConfigureAwait(false);
+
                 await context.Response.WriteAsync(reply, Encoding.UTF8).ConfigureAwait(false);
             }
             catch (NotImplementedException)
