@@ -47,6 +47,7 @@ namespace SharpOnvif.Tests
     {
         private const string Tds = "http://www.onvif.org/ver10/device/wsdl";
         private const string Trt = "http://www.onvif.org/ver10/media/wsdl";
+        private const string Wsnt = "http://docs.oasis-open.org/wsn/b-2";
 
         [TestMethod]
         public void SharesTheOnvifSchemaTypesBetweenClientAndServer()
@@ -158,6 +159,71 @@ namespace SharpOnvif.Tests
             };
 
             AssertRoundTrips(value, Trt, "RotateOptions");
+        }
+
+        [TestMethod]
+        public void RoundTripsMixedContentAndAWrappedPayload()
+        {
+            // A notification exercises the two shapes that are easy to get wrong: wsnt:Topic is
+            // mixed content whose value is character data, and wsnt:Message is a wrapper whose
+            // only content is one arbitrary element.
+            var payload = new XmlDocument();
+            payload.LoadXml("<Message xmlns=\"http://www.onvif.org/ver10/schema\" UtcTime=\"2026-09-13T00:00:00Z\">" +
+                            "<Data><SimpleItem Name=\"IsMotion\" Value=\"true\" /></Data></Message>");
+
+            var topicText = new XmlDocument();
+
+            var notification = new NotificationMessageHolderType
+            {
+                Topic = new TopicExpressionType
+                {
+                    Dialect = "http://www.onvif.org/ver10/tev/topicExpression/ConcreteSet",
+                    Any = new XmlNode[] { topicText.CreateTextNode("tns1:RuleEngine/CellMotionDetector/Motion") },
+                },
+                Message = payload.DocumentElement,
+            };
+
+            string xml = WriteWithGeneratedWriter(notification, Wsnt, "NotificationMessage");
+
+            // The wrapper element has to be on the wire; a client looking for wsnt:Message will
+            // not find the payload without it.
+            StringAssert.Contains(xml, "<Message", "the wsnt:Message wrapper is missing");
+            StringAssert.Contains(xml, "tns1:RuleEngine/CellMotionDetector/Motion");
+
+            var parsed = ReadWithGeneratedReader<NotificationMessageHolderType>(xml);
+
+            Assert.IsNotNull(parsed.Topic, "the topic was lost");
+            Assert.IsNotNull(parsed.Topic.Any, "the topic text was dropped, which leaves callers with a null array");
+            Assert.AreEqual(1, parsed.Topic.Any.Length);
+            Assert.AreEqual("tns1:RuleEngine/CellMotionDetector/Motion", parsed.Topic.Any[0].Value);
+
+            Assert.IsNotNull(parsed.Message, "the message payload was lost");
+            StringAssert.Contains(parsed.Message.OuterXml, "IsMotion");
+        }
+
+        [TestMethod]
+        public void RecognisesAMotionNotificationItRoundTripped()
+        {
+            // What a caller actually does with a notification, and the call that failed: it reads
+            // the topic out of Topic.Any and the payload out of Message.
+            var payload = new XmlDocument();
+            payload.LoadXml("<Message xmlns=\"http://www.onvif.org/ver10/schema\">" +
+                            "<Data><SimpleItem Name=\"IsMotion\" Value=\"true\" /></Data></Message>");
+            var topicText = new XmlDocument();
+
+            var notification = new NotificationMessageHolderType
+            {
+                Topic = new TopicExpressionType
+                {
+                    Any = new XmlNode[] { topicText.CreateTextNode("tns1:RuleEngine/CellMotionDetector/Motion") },
+                },
+                Message = payload.DocumentElement,
+            };
+
+            string xml = WriteWithGeneratedWriter(notification, Wsnt, "NotificationMessage");
+            var parsed = ReadWithGeneratedReader<NotificationMessageHolderType>(xml);
+
+            Assert.AreEqual(true, SharpOnvifClient.OnvifEvents.IsMotionDetected(parsed));
         }
 
         [TestMethod]

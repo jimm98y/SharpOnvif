@@ -6415,7 +6415,12 @@ namespace SharpOnvifServer.DeviceMgmt
         {
             writer.WriteElementString(Ns.Ver10Device, "Namespace", this.namespaceField);
             writer.WriteElementString(Ns.Ver10Device, "XAddr", this.xAddrField);
-            writer.WriteAnyElement(this.capabilitiesField);
+            if (this.capabilitiesField != null)
+            {
+                writer.WriteStartElement(Ns.Ver10Device, "Capabilities");
+                writer.WriteAnyElement(this.capabilitiesField);
+                writer.WriteEndElement();
+            }
             writer.WriteElement(Ns.Ver10Device, "Version", this.versionField, "http://www.onvif.org/ver10/schema", "OnvifVersion");
             writer.WriteAny(this.anyField);
         }
@@ -6434,7 +6439,7 @@ namespace SharpOnvifServer.DeviceMgmt
                     return true;
                 case "Capabilities":
                     if (reader.NamespaceUri != Ns.Ver10Device) break;
-                    this.capabilitiesField = reader.ReadAnyElement();
+                    this.capabilitiesField = reader.ReadWrappedElement();
                     return true;
                 case "Version":
                     if (reader.NamespaceUri != Ns.Ver10Device) break;

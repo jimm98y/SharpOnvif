@@ -101,6 +101,14 @@ internal sealed class CsMember
     public string? WildcardNamespace { get; init; }
 
     /// <summary>
+    /// True when this wildcard also receives the character data interleaved with its elements.
+    /// A mixed-content type keeps both in one member, which is why its element type widens from
+    /// XmlElement to XmlNode - the topic of a notification is character data, and dropping it
+    /// leaves the member empty.
+    /// </summary>
+    public bool CapturesText { get; init; }
+
+    /// <summary>
     /// Name of the repeated child element, when the member's schema type is a wrapper whose only
     /// content is one repeating element. Such a wrapper contributes nothing of its own, so the
     /// member becomes a plain array and the wrapper survives only as the enclosing element:

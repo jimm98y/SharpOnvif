@@ -303,6 +303,7 @@ internal sealed class DataContractEmitter
                 break;
 
             case MemberKind.AnyElement:
+                if (member.CapturesText) writer.Line("[System.Xml.Serialization.XmlTextAttribute()]");
                 string wildcardNs = member.WildcardNamespace is { } wns ? $"Namespace=\"{wns}\", " : "";
                 writer.Line($"[System.Xml.Serialization.XmlAnyElementAttribute({wildcardNs}Order={member.Order})]");
                 break;
@@ -530,9 +531,15 @@ internal sealed class DataContractEmitter
 
         if (member.Type.Kind is TypeKind.XmlElement or TypeKind.XmlNode)
         {
-            // The member holds the element itself, so writing it back verbatim reproduces both
-            // the wrapper tag and whatever the device put inside it.
-            writer.Line($"writer.WriteAnyElement({value});");
+            // The member holds the payload of a wrapper whose only content is one xs:any, so the
+            // wrapper element is written here and the payload verbatim inside it.
+            writer.Line($"if ({value} != null)");
+            using (writer.Braces())
+            {
+                writer.Line($"writer.WriteStartElement({ns}, {name});");
+                writer.Line($"writer.WriteAnyElement({value});");
+                writer.Line("writer.WriteEndElement();");
+            }
             return;
         }
 
@@ -717,8 +724,7 @@ internal sealed class DataContractEmitter
         string value = member.Type.Kind switch
         {
             TypeKind.Class => $"reader.ReadElementObject<{member.Type.CsName}>(() => new {member.Type.CsName}())",
-            TypeKind.XmlElement => "reader.ReadAnyElement()",
-            TypeKind.XmlNode => "reader.ReadAnyNode()",
+            TypeKind.XmlElement or TypeKind.XmlNode => "reader.ReadWrappedElement()",
             _ => member.Type.XsdPrimitive == "QName"
                 ? "reader.ReadElementQualifiedName()"
                 : FromXmlExpression(member, "reader.ReadElementText()"),
@@ -795,15 +801,26 @@ internal sealed class DataContractEmitter
     private void EmitReadText(CSharpWriter writer, CsClass @class, bool hasBase)
     {
         var text = @class.Members.FirstOrDefault(m => m.Kind == MemberKind.Text);
-        if (text is null) return;
+        var mixedWildcard = @class.Members.FirstOrDefault(m => m.Kind == MemberKind.AnyElement && m.CapturesText);
+
+        if (text is null && mixedWildcard is null) return;
 
         writer.Line($"protected override void ReadXmlText({Runtime}.OnvifXmlReader reader, string text)");
         using (writer.Braces())
         {
-            if (text.IsArray)
+            if (mixedWildcard is not null)
+            {
+                // The character data belongs in the wildcard, interleaved with its elements.
+                writer.Line($"{Runtime}.OnvifArray.Append(ref this.{mixedWildcard.FieldName}, reader.CreateTextNode(text));");
+            }
+            else if (text!.IsArray)
+            {
                 writer.Line($"{Runtime}.OnvifArray.Append(ref this.{text.FieldName}, text);");
+            }
             else
+            {
                 writer.Line($"this.{text.FieldName} = {ScalarFromXml(text.Type, "text")};");
+            }
         }
         writer.Line();
     }

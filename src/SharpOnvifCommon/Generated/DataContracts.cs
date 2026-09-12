@@ -10721,7 +10721,12 @@ namespace SharpOnvifCommon.Onvif
                     writer.WriteElement(Ns.Bf2, "Description", this.descriptionField[i], null, null);
                 }
             }
-            writer.WriteAnyElement(this.faultCauseField);
+            if (this.faultCauseField != null)
+            {
+                writer.WriteStartElement(Ns.Bf2, "FaultCause");
+                writer.WriteAnyElement(this.faultCauseField);
+                writer.WriteEndElement();
+            }
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
@@ -10746,7 +10751,7 @@ namespace SharpOnvifCommon.Onvif
                     return true;
                 case "FaultCause":
                     if (reader.NamespaceUri != Ns.Bf2) break;
-                    this.faultCauseField = reader.ReadAnyElement();
+                    this.faultCauseField = reader.ReadWrappedElement();
                     return true;
             }
             SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
@@ -15268,6 +15273,7 @@ namespace SharpOnvifCommon.Onvif
     {
         private System.Xml.XmlNode[] anyField;
 
+        [System.Xml.Serialization.XmlTextAttribute()]
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlNode[] Any
         {
@@ -15288,6 +15294,11 @@ namespace SharpOnvifCommon.Onvif
         {
             SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyNode());
             return true;
+        }
+
+        protected override void ReadXmlText(SharpOnvifCommon.Xml.OnvifXmlReader reader, string text)
+        {
+            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.CreateTextNode(text));
         }
 
     }
@@ -33212,7 +33223,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.B2, "SubscriptionReference", this.subscriptionReferenceField, Ns.i08Addressing, "EndpointReferenceType");
             writer.WriteElement(Ns.B2, "Topic", this.topicField, Ns.B2, "TopicExpressionType");
             writer.WriteElement(Ns.B2, "ProducerReference", this.producerReferenceField, Ns.i08Addressing, "EndpointReferenceType");
-            writer.WriteAnyElement(this.messageField);
+            if (this.messageField != null)
+            {
+                writer.WriteStartElement(Ns.B2, "Message");
+                writer.WriteAnyElement(this.messageField);
+                writer.WriteEndElement();
+            }
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
@@ -33233,7 +33249,7 @@ namespace SharpOnvifCommon.Onvif
                     return true;
                 case "Message":
                     if (reader.NamespaceUri != Ns.B2) break;
-                    this.messageField = reader.ReadAnyElement();
+                    this.messageField = reader.ReadWrappedElement();
                     return true;
             }
             return false;
@@ -40340,6 +40356,7 @@ namespace SharpOnvifCommon.Onvif
 
         private string dialectField;
 
+        [System.Xml.Serialization.XmlTextAttribute()]
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlNode[] Any
         {
@@ -40385,6 +40402,11 @@ namespace SharpOnvifCommon.Onvif
             return true;
         }
 
+        protected override void ReadXmlText(SharpOnvifCommon.Xml.OnvifXmlReader reader, string text)
+        {
+            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.CreateTextNode(text));
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
@@ -40394,6 +40416,7 @@ namespace SharpOnvifCommon.Onvif
 
         private string dialectField;
 
+        [System.Xml.Serialization.XmlTextAttribute()]
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlNode[] Any
         {
@@ -40437,6 +40460,11 @@ namespace SharpOnvifCommon.Onvif
         {
             SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyNode());
             return true;
+        }
+
+        protected override void ReadXmlText(SharpOnvifCommon.Xml.OnvifXmlReader reader, string text)
+        {
+            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.CreateTextNode(text));
         }
 
     }
@@ -47558,6 +47586,7 @@ namespace SharpOnvifCommon.Onvif
 
         private string dialectField;
 
+        [System.Xml.Serialization.XmlTextAttribute()]
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlNode[] Any
         {
@@ -47601,6 +47630,11 @@ namespace SharpOnvifCommon.Onvif
         {
             SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyNode());
             return true;
+        }
+
+        protected override void ReadXmlText(SharpOnvifCommon.Xml.OnvifXmlReader reader, string text)
+        {
+            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.CreateTextNode(text));
         }
 
     }

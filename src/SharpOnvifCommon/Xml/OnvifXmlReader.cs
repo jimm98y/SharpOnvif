@@ -295,6 +295,62 @@ namespace SharpOnvifCommon.Xml
             }
         }
 
+        /// <summary>
+        /// Reads an element whose content is a single arbitrary element and returns that element.
+        /// <para>
+        /// A schema wrapper that holds nothing but one xs:any carries no information of its own,
+        /// so the generated member holds the payload. wsnt:NotificationMessageHolderType/Message
+        /// is the one that matters: the wrapper is fixed by the schema and the payload is the
+        /// event.
+        /// </para>
+        /// </summary>
+        public XmlElement ReadWrappedElement()
+        {
+            if (_reader.IsEmptyElement)
+            {
+                _reader.Read();
+                return null;
+            }
+
+            int wrapperDepth = _reader.Depth;
+            XmlElement payload = null;
+            _reader.Read();
+
+            while (!_reader.EOF)
+            {
+                if (_reader.NodeType == XmlNodeType.EndElement && _reader.Depth == wrapperDepth)
+                {
+                    _reader.Read();
+                    return payload;
+                }
+
+                if (_reader.NodeType == XmlNodeType.Element && payload == null)
+                {
+                    payload = ReadAnyElement();
+                }
+                else if (_reader.NodeType == XmlNodeType.Element)
+                {
+                    _reader.Skip();
+                }
+                else
+                {
+                    _reader.Read();
+                }
+            }
+
+            return payload;
+        }
+
+        /// <summary>
+        /// Makes a text node belonging to the same document as the elements captured alongside it,
+        /// for the character data of a mixed-content type.
+        /// </summary>
+        public XmlNode CreateTextNode(string text)
+        {
+            if (_ownerDocument == null) _ownerDocument = new XmlDocument();
+            return _ownerDocument.CreateTextNode(text);
+        }
+
         /// <summary>Captures the current node verbatim, including character data in mixed content.</summary>
         public XmlNode ReadAnyNode()
         {

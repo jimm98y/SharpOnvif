@@ -449,6 +449,7 @@ internal sealed class ModelBuilder
                         : new CsTypeRef("System.Xml.XmlElement", TypeKind.XmlElement, false),
                     Kind = MemberKind.AnyElement,
                     IsArray = true,
+                    CapturesText = declaring.IsMixed,
                     WildcardNamespace = any.ResolvedNamespace is "##any" or "##other" or null
                         ? null
                         : any.ResolvedNamespace,
