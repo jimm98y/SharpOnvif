@@ -159,42 +159,23 @@ namespace SharpOnvifServer
         /// <summary>
         /// Use Onvif events.
         /// </summary>
+        /// <remarks>
+        /// Kept so that existing startup code keeps compiling. It no longer does anything:
+        /// <see cref="Dispatch.OnvifRoutingExtensions.MapOnvifService{TService}"/> accepts the
+        /// subscription form of an address as a route of its own, which is what this used to
+        /// arrange by rewriting the request path.
+        /// <para>
+        /// The rewrite could not survive the move off CoreWCF. Endpoint routing runs ahead of
+        /// application middleware, so by the time this ran the endpoint had already been chosen
+        /// and a subscription address matched nothing.
+        /// </para>
+        /// </remarks>
         /// <param name="app"><see cref="WebApplication"/>.</param>
         /// <param name="subscriptionManagerAddress">Onvif Subscription Manager address.</param>
         /// <returns><see cref="WebApplication"/>.</returns>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="subscriptionManagerAddress"/> is null.</exception>
+        [Obsolete("No longer required. MapOnvifService routes subscription addresses itself; this call can be removed.")]
         public static WebApplication UseOnvifEvents(this WebApplication app, string subscriptionManagerAddress)
         {
-            if (subscriptionManagerAddress == null)
-                throw new ArgumentNullException(nameof(subscriptionManagerAddress));
-
-            if (!subscriptionManagerAddress.EndsWith("/"))
-                subscriptionManagerAddress = subscriptionManagerAddress + "/";
-
-            app.Use(async (context, next) =>
-            {
-                // A subscription manager is logically one instance per subscription, which does not
-                //  fit a routing table. EventsImpl creates a SubscriptionManagerImpl per Subscribe
-                //  call, registers it with IEventSubscriptionManager, and returns its ID inside the
-                //  SubscriptionReferenceUri as "/onvif/Events/Subscription/<subscriptionID>/". No
-                //  endpoint is mapped at that address, so this middleware strips the ID, stores it
-                //  in HttpContext.Items, and lets the request route to the single registered
-                //  subscription manager, which uses the ID to find the real one and forward to it.
-                if (context.Request.Path.HasValue && context.Request.Path.Value.Contains(subscriptionManagerAddress))
-                {
-                    int subscriptionLength = context.Request.Path.Value.IndexOf(subscriptionManagerAddress) + subscriptionManagerAddress.Length;
-                    string subscription = context.Request.Path.Value.Substring(subscriptionLength).Trim('/');
-                    int subscriptionID = 0;
-                    if (int.TryParse(subscription, out subscriptionID))
-                    {
-                        context.Items[OnvifEvents.ONVIF_SUBSCRIPTION_ID] = subscriptionID;
-                        context.Request.Path = new Microsoft.AspNetCore.Http.PathString(context.Request.Path.Value.Substring(0, subscriptionLength));
-                    }
-                }
-
-                await next(context).ConfigureAwait(false);
-            });
-
             return app;
         }
 

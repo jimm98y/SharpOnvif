@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 using System.Xml;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SharpOnvifCommon.Xml;
+using SharpOnvifServer.Events;
 using SharpOnvifServer.Security;
 
 namespace SharpOnvifServer.Dispatch
@@ -28,6 +30,13 @@ namespace SharpOnvifServer.Dispatch
         }
 
         public string Path { get; private set; }
+
+        /// <summary>
+        /// Route value carrying the trailing segment of a subscription manager address. Onvif
+        /// hands a client a reference like <c>/onvif/Events/PullPointSubscription/3/</c>, and the
+        /// segment identifies which subscription the request belongs to.
+        /// </summary>
+        internal const string SubscriptionRouteValue = "onvifSubscriptionId";
 
         private sealed class Registration
         {
@@ -59,6 +68,8 @@ namespace SharpOnvifServer.Dispatch
 
             // Implementations read this to build the absolute URIs Onvif responses carry.
             OnvifOperationContext.Set(context);
+
+            CaptureSubscriptionId(context);
 
             try
             {
@@ -147,6 +158,20 @@ namespace SharpOnvifServer.Dispatch
                 await WriteFaultAsync(context, "Receiver", "Action", error.Message,
                     OnvifErrors.Namespace, System.Net.HttpStatusCode.InternalServerError).ConfigureAwait(false);
             }
+        }
+
+        /// <summary>
+        /// Publishes the subscription segment of the address, when the request came in on the
+        /// subscription form of the route, so an implementation can tell which subscription a
+        /// request belongs to.
+        /// </summary>
+        private static void CaptureSubscriptionId(HttpContext context)
+        {
+            object raw = context.GetRouteValue(SubscriptionRouteValue);
+            if (raw == null) return;
+
+            if (int.TryParse(raw.ToString().Trim('/'), out int subscriptionId))
+                context.Items[OnvifEvents.ONVIF_SUBSCRIPTION_ID] = subscriptionId;
         }
 
         /// <summary>

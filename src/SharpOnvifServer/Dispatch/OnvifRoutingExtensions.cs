@@ -21,6 +21,13 @@ namespace SharpOnvifServer.Dispatch
         /// SOAP action decides which one handles each request. The implementation type must be
         /// registered in the service collection.
         /// </para>
+        /// <para>
+        /// A trailing segment is accepted as well, so that an address like
+        /// <c>/onvif/Events/PullPointSubscription/3/</c> reaches the service mapped at
+        /// <c>/onvif/Events/PullPointSubscription</c>. Onvif addresses a subscription manager that
+        /// way, and the segment is published to the implementation as
+        /// <see cref="Events.OnvifEvents.ONVIF_SUBSCRIPTION_ID"/>.
+        /// </para>
         /// </summary>
         /// <typeparam name="TService">
         /// The implementation, deriving from a generated service base such as
@@ -57,6 +64,11 @@ namespace SharpOnvifServer.Dispatch
             var endpoint = new OnvifEndpoint(path);
             endpoint.Add(dispatcher, typeof(TService));
             byPath[path] = endpoint;
+
+            // The subscription form is a route of its own rather than a path rewrite, because
+            // routing runs ahead of application middleware and would have already chosen an
+            // endpoint by the time a rewrite could take effect.
+            routes.MapPost(path.TrimEnd('/') + "/{" + OnvifEndpoint.SubscriptionRouteValue + "}", endpoint.HandleAsync);
 
             return routes.MapPost(path, endpoint.HandleAsync);
         }

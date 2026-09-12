@@ -58,9 +58,6 @@ const string URI_EVENTS_SERVICE = "/onvif/events_service";
 const string URI_EVENTS_SUBSCRIPTION = "/onvif/Events/Subscription";
 const string URI_EVENTS_PULLPOINT_SUBSCRIPTION = "/onvif/Events/PullPointSubscription";
 
-app.UseOnvifEvents(URI_EVENTS_SUBSCRIPTION)
-   .UseOnvifEvents(URI_EVENTS_PULLPOINT_SUBSCRIPTION);
-
 // Every service is published on the one address a real device uses. Requests are routed by
 // their SOAP action, so several services can share a URL - which is how Onvif devices behave,
 // and something the CoreWCF bindings this replaces could not express.
@@ -68,8 +65,9 @@ app.MapOnvifService<OnvifService.Onvif.DeviceImpl>(URI_DEVICE_SERVICE);
 app.MapOnvifService<OnvifService.Onvif.MediaImpl>(URI_DEVICE_SERVICE);
 app.MapOnvifService<OnvifService.Onvif.PTZImpl>(URI_DEVICE_SERVICE);
 
-// Events keep their own address because the subscription manager middleware rewrites paths
-// underneath it.
+// The subscription managers keep their own addresses: Onvif hands a client a reference like
+// /onvif/Events/PullPointSubscription/3/, and MapOnvifService routes that trailing segment
+// through to the implementation.
 app.MapOnvifService<OnvifService.Onvif.EventsImpl>(URI_EVENTS_SERVICE);
 app.MapOnvifService<OnvifService.Onvif.RouterSubscriptionManagerImpl>(URI_EVENTS_SUBSCRIPTION);
 app.MapOnvifService<OnvifService.Onvif.RouterPullPointSubscriptionManagerImpl>(URI_EVENTS_PULLPOINT_SUBSCRIPTION);

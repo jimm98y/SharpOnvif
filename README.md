@@ -95,6 +95,14 @@ app.MapOnvifService<DeviceImpl>("/onvif/device_service");
 app.MapOnvifService<MediaImpl>("/onvif/device_service");
 app.MapOnvifService<PTZImpl>("/onvif/device_service");
 ```
+The operation is found from the `action` parameter of the Content-Type header, a `wsa:Action` SOAP
+header, or the body element, whichever the client sends - Onvif Device Manager uses the second form
+for event subscriptions.
+
+An address with a trailing segment reaches the same service, which is how Onvif addresses a
+subscription manager: a request to `/onvif/Events/PullPointSubscription/3/` reaches the service
+mapped at `/onvif/Events/PullPointSubscription`, with the segment available to the implementation
+as `HttpContext.Items[OnvifEvents.ONVIF_SUBSCRIPTION_ID]`.
 Your Onvif service should now be discoverable on the network and you should be able to use Onvif Device Manager or similar tool to call your endpoint.
 See `Onvif.Server` sample project for a complete example.
 ## SharpOnvifClient
