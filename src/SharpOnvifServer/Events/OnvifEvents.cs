@@ -62,9 +62,37 @@ namespace SharpOnvifServer.Events
         </wsnt:NotificationMessage>
         */
 
+        /// <summary>The topic dialect Onvif uses for a concrete topic path.</summary>
+        public const string TopicDialectConcreteSet = "http://www.onvif.org/ver10/tev/topicExpression/ConcreteSet";
+
+        /// <summary>
+        /// Builds the Topic and Message elements of a notification as raw XML.
+        /// </summary>
         public static XmlElement[] CreateNotificationMessage(NotificationMessage message, string propertyOperation = "Changed")
         {
             return new XmlElement[] { CreateTopicNode(message), CreateMessageNode(message, propertyOperation) };
+        }
+
+        /// <summary>
+        /// The content of a wsnt:Topic element: the topic path written against the prefix the
+        /// message names. The prefix is declared on the SOAP envelope.
+        /// </summary>
+        public static XmlNode[] CreateTopicContent(NotificationMessage message)
+        {
+            XmlDocument dom = new XmlDocument();
+            return new XmlNode[] { dom.CreateTextNode($"{message.TopicNamespacePrefix}:{message.Topic}") };
+        }
+
+        /// <summary>
+        /// The content of a wsnt:Message element: the tt:Message carrying the event's source and
+        /// data items.
+        /// </summary>
+        public static XmlElement CreateMessageElement(NotificationMessage message, string propertyOperation = "Changed")
+        {
+            XmlElement wrapper = CreateMessageNode(message, propertyOperation);
+
+            // CreateMessageNode builds the wsnt:Message wrapper; its single child is the payload.
+            return wrapper.FirstChild as XmlElement;
         }
 
         private static XmlElement CreateTopicNode(NotificationMessage message)

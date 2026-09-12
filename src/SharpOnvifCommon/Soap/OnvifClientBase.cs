@@ -1,0 +1,231 @@
+using System;
+using System.IO;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Xml;
+using SharpOnvifCommon.Security;
+using SharpOnvifCommon.Xml;
+
+namespace SharpOnvifCommon.Soap
+{
+    /// <summary>
+    /// Base class of the generated service clients. Sends a document/literal SOAP 1.2 request over
+    /// <see cref="HttpClient"/> and reads the body of the reply.
+    /// <para>
+    /// One client owns one endpoint and one connection's worth of authentication state, so reuse
+    /// it: the HTTP Digest challenge is negotiated once and then reused for every later call.
+    /// </para>
+    /// </summary>
+    public abstract class OnvifClientBase : IDisposable
+    {
+        private readonly HttpClient _http;
+        private readonly bool _ownsHttpClient;
+        private readonly OnvifClientSettings _settings;
+        private bool _disposed;
+
+        protected OnvifClientBase(string endpointUri, OnvifClientSettings settings)
+        {
+            if (string.IsNullOrWhiteSpace(endpointUri))
+                throw new ArgumentNullException(nameof(endpointUri));
+
+            if (!endpointUri.StartsWith("http://", StringComparison.OrdinalIgnoreCase)
+                && !endpointUri.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
+            {
+                throw new ArgumentException("The Onvif endpoint must be an http:// or https:// URI.", nameof(endpointUri));
+            }
+
+            EndpointUri = endpointUri;
+            _settings = settings ?? new OnvifClientSettings();
+
+            if (_settings.HttpClient != null)
+            {
+                _http = _settings.HttpClient;
+                _ownsHttpClient = false;
+            }
+            else
+            {
+                _http = CreateHttpClient(_settings);
+                _ownsHttpClient = true;
+            }
+        }
+
+        /// <summary>The device endpoint this client sends to.</summary>
+        public string EndpointUri { get; private set; }
+
+        /// <summary>The settings the client was created with.</summary>
+        protected OnvifClientSettings Settings { get { return _settings; } }
+
+        private static HttpClient CreateHttpClient(OnvifClientSettings settings)
+        {
+            HttpMessageHandler transport = settings.Transport ?? new HttpClientHandler();
+
+            bool digest = settings.Credentials != null
+                && (settings.Authentication.Authentication & DigestAuthentication.HttpDigest) != 0;
+
+            if (digest) transport = new HttpDigestHandler(settings.Credentials, settings.Authentication, transport);
+
+            var client = new HttpClient(transport, disposeHandler: true);
+            client.Timeout = settings.Timeout;
+            if (settings.MaxResponseContentBytes > 0)
+                client.MaxResponseContentBufferSize = settings.MaxResponseContentBytes;
+
+            return client;
+        }
+
+        /// <summary>
+        /// Resolves an xsi:type to an instance. Overridden by the generated client for its own
+        /// assembly, because each carries its own copy of the shared schema types.
+        /// </summary>
+        protected virtual OnvifObject ResolveXmlType(string ns, string name)
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// Sends an operation and reads its reply into <typeparamref name="TResponse"/>.
+        /// </summary>
+        /// <param name="action">SOAP action, sent in the Content-Type and as a wsa:Action header.</param>
+        /// <param name="bodyNamespace">Namespace of the request's body element.</param>
+        /// <param name="bodyElement">Local name of the request's body element.</param>
+        /// <param name="request">The request wrapper, whose members become the body's children.</param>
+        /// <param name="createResponse">Creates the response wrapper to read into.</param>
+        protected async Task<TResponse> InvokeAsync<TResponse>(
+            string action,
+            string bodyNamespace,
+            string bodyElement,
+            OnvifObject request,
+            Func<TResponse> createResponse,
+            CancellationToken cancellationToken)
+            where TResponse : OnvifObject
+        {
+            string envelope = BuildEnvelope(action, bodyNamespace, bodyElement, request);
+
+            using (HttpResponseMessage response = await SendAsync(action, envelope, cancellationToken).ConfigureAwait(false))
+            using (Stream stream = await ReadContentAsync(response).ConfigureAwait(false))
+            using (XmlReader xml = SoapEnvelope.CreateReader(stream))
+            {
+                // A fault is raised from here as an OnvifFaultException, including for the 500
+                // status code devices use to carry one.
+                if (!SoapEnvelope.MoveToBody(xml)) return createResponse();
+
+                TResponse result = createResponse();
+                var reader = new OnvifXmlReader(xml, ResolveXmlType);
+                reader.ReadInto(result);
+                return result;
+            }
+        }
+
+        /// <summary>Sends an operation whose reply carries nothing worth reading.</summary>
+        protected async Task InvokeAsync(
+            string action,
+            string bodyNamespace,
+            string bodyElement,
+            OnvifObject request,
+            CancellationToken cancellationToken)
+        {
+            string envelope = BuildEnvelope(action, bodyNamespace, bodyElement, request);
+
+            using (HttpResponseMessage response = await SendAsync(action, envelope, cancellationToken).ConfigureAwait(false))
+            using (Stream stream = await ReadContentAsync(response).ConfigureAwait(false))
+            using (XmlReader xml = SoapEnvelope.CreateReader(stream))
+            {
+                SoapEnvelope.MoveToBody(xml);
+            }
+        }
+
+        private string BuildEnvelope(string action, string bodyNamespace, string bodyElement, OnvifObject request)
+        {
+            bool wsToken = _settings.Credentials != null
+                && (_settings.Authentication.Authentication & DigestAuthentication.WsUsernameToken) != 0
+                && !_settings.Authentication.IsPreAuth(action);
+
+            Action<OnvifXmlWriter> headers = null;
+            if (wsToken)
+            {
+                headers = writer => WsUsernameToken.Write(
+                    writer,
+                    _settings.Credentials.UserName,
+                    _settings.Credentials.Password,
+                    _settings.Authentication.UtcNowOffset);
+            }
+
+            return SoapEnvelope.Write(headers, writer =>
+            {
+                writer.WriteStartElement(bodyNamespace, bodyElement);
+                writer.WriteContent(request);
+                writer.WriteEndElement();
+            });
+        }
+
+        private async Task<HttpResponseMessage> SendAsync(string action, string envelope, CancellationToken cancellationToken)
+        {
+            var message = new HttpRequestMessage(HttpMethod.Post, EndpointUri);
+            message.Content = new StringContent(envelope, new UTF8Encoding(false));
+
+            // Onvif carries the action as a Content-Type parameter on application/soap+xml.
+            var contentType = new MediaTypeHeaderValue(SoapEnvelope.ContentType);
+            contentType.CharSet = "utf-8";
+            contentType.Parameters.Add(new NameValueHeaderValue("action", "\"" + action + "\""));
+            message.Content.Headers.ContentType = contentType;
+
+            if (_settings.DisableExpect100Continue) message.Headers.ExpectContinue = false;
+
+            HttpResponseMessage response = await _http.SendAsync(message, cancellationToken).ConfigureAwait(false);
+
+            // A fault comes back as a SOAP envelope with a non-success status: the Onvif core
+            // specification uses 400 for a sender fault and 500 for a receiver one. Whenever the
+            // body is SOAP, parse it so the caller gets the fault code rather than a bare status.
+            if (!response.IsSuccessStatusCode && !IsSoap(response))
+            {
+                string body = response.Content == null
+                    ? string.Empty
+                    : await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+                response.Dispose();
+                throw new OnvifFaultException(
+                    "The device returned HTTP " + (int)response.StatusCode + " " + response.ReasonPhrase +
+                    (body.Length == 0 ? "." : ": " + Truncate(body, 512)));
+            }
+
+            return response;
+        }
+
+        /// <summary>True when the response body is a SOAP envelope worth parsing.</summary>
+        private static bool IsSoap(HttpResponseMessage response)
+        {
+            var contentType = response.Content == null ? null : response.Content.Headers.ContentType;
+            if (contentType == null) return false;
+
+            return contentType.MediaType.IndexOf("soap+xml", StringComparison.OrdinalIgnoreCase) >= 0
+                || contentType.MediaType.IndexOf("text/xml", StringComparison.OrdinalIgnoreCase) >= 0;
+        }
+
+        private static async Task<Stream> ReadContentAsync(HttpResponseMessage response)
+        {
+            if (response.Content == null) return new MemoryStream();
+            return await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+        }
+
+        private static string Truncate(string text, int max)
+        {
+            return text.Length <= max ? text : text.Substring(0, max) + "...";
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (_disposed) return;
+            _disposed = true;
+
+            if (disposing && _ownsHttpClient) _http.Dispose();
+        }
+    }
+}

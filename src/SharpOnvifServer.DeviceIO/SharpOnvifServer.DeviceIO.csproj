@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFrameworks>net8.0;net10.0</TargetFrameworks>
@@ -7,21 +7,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<FrameworkReference Include="Microsoft.AspNetCore.App" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<DotNetCliToolReference Include="Microsoft.XmlSerializer.Generator" Version="$(Microsoft_XmlSerializer_Generator)" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="Microsoft.XmlSerializer.Generator" Version="$(Microsoft_XmlSerializer_Generator)" />
-		<PackageReference Include="CoreWCF.Http" Version="1.9.1" />
-		<PackageReference Include="CoreWCF.Primitives" Version="1.9.1" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<ProjectReference Include="..\SharpOnvifServer.DeviceMgmt\SharpOnvifServer.DeviceMgmt.csproj" />
 		<ProjectReference Include="..\SharpOnvifServer\SharpOnvifServer.csproj" />
 	</ItemGroup>
 

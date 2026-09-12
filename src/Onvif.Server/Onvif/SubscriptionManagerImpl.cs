@@ -37,7 +37,7 @@ namespace OnvifService.Onvif
     /// <summary>
     /// Onvif Event Subscription Manager.
     /// </summary>
-    public class SubscriptionManagerImpl : SubscriptionManager, PullPointSubscription, IEventSubscription
+    public class SubscriptionManagerImpl : EventsBase, IEventSubscription
     {
         private readonly ILogger<SubscriptionManagerImpl> _logger;
         private readonly IHttpClientFactory _httpClientFactory;
@@ -83,7 +83,7 @@ namespace OnvifService.Onvif
             }
         }
 
-        public PullMessagesResponse PullMessages(PullMessagesRequest request)
+        public override PullMessagesResponse PullMessages(PullMessagesRequest request)
         {
             if (!string.IsNullOrEmpty(_notificationEndpoint))
                 throw new InvalidOperationException($"{nameof(SubscriptionManagerImpl)}: {nameof(PullMessages)} is not supported on Basic event subscription!");
@@ -113,33 +113,33 @@ namespace OnvifService.Onvif
                 TerminationTime = expiration,
                 NotificationMessage = content.Select(msg => new NotificationMessageHolderType()
                 {
-                    Any = OnvifEvents.CreateNotificationMessage(msg) 
+                    Topic = new TopicExpressionType()
+                    {
+                        Dialect = OnvifEvents.TopicDialectConcreteSet,
+                        Any = OnvifEvents.CreateTopicContent(msg)
+                    },
+                    Message = OnvifEvents.CreateMessageElement(msg)
                 }).ToArray()
             };
         }
 
-        public RenewResponse1 Renew(RenewRequest request)
+        public override RenewResponse Renew(RenewRequest request)
         {
             DateTime now = DateTime.UtcNow;
-            DateTime expiration = OnvifHelpers.FromAbsoluteOrRelativeDateTimeUTC(now, request.Renew.TerminationTime, now.AddMinutes(1));
+            DateTime expiration = OnvifHelpers.FromAbsoluteOrRelativeDateTimeUTC(now, request.TerminationTime, now.AddMinutes(1));
             ExtendExpiration(expiration);
 
-            return new RenewResponse1()
+            return new RenewResponse()
             {
-                RenewResponse = new RenewResponse()
-                {
-                    CurrentTime = DateTime.UtcNow,
-                    TerminationTime = expiration
-                }
+                CurrentTime = DateTime.UtcNow,
+                CurrentTimeSpecified = true,
+                TerminationTime = expiration
             };
         }
 
-        public UnsubscribeResponse1 Unsubscribe(UnsubscribeRequest request)
+        public override UnsubscribeResponse Unsubscribe(UnsubscribeRequest request)
         {
-            return new UnsubscribeResponse1()
-            {
-                UnsubscribeResponse = new UnsubscribeResponse()
-            };
+            return new UnsubscribeResponse();
         }
 
         private void ExtendExpiration(DateTime expiration)
@@ -159,7 +159,12 @@ namespace OnvifService.Onvif
             {
                 var msg = new NotificationMessageHolderType()
                 {
-                    Any = OnvifEvents.CreateNotificationMessage(message)
+                    Topic = new TopicExpressionType()
+                    {
+                        Dialect = OnvifEvents.TopicDialectConcreteSet,
+                        Any = OnvifEvents.CreateTopicContent(message)
+                    },
+                    Message = OnvifEvents.CreateMessageElement(message)
                 };
 
                 serializer.Serialize(writer, msg);
@@ -188,15 +193,16 @@ namespace OnvifService.Onvif
             }
         }
 
-        public SeekResponse Seek(SeekRequest request)
+        public override SeekResponse Seek(SeekRequest request)
         {
             _logger.LogError($"{nameof(Seek)} is currently not supported");
             return new SeekResponse();
         }
 
-        public void SetSynchronizationPoint()
+        public override SetSynchronizationPointResponse SetSynchronizationPoint()
         {
             _logger.LogError($"{nameof(SetSynchronizationPoint)} is currently not supported");
+            return new SetSynchronizationPointResponse();
         }
     }
 }

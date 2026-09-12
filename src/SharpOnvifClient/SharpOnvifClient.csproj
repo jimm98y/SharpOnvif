@@ -15,8 +15,6 @@
 
 	<ItemGroup Condition=" $(TargetFramework.StartsWith('net4')) ">
 		<Reference Include="System.Net.Http" />
-		<Reference Include="System.ServiceModel" />
-		<PackageReference Include="System.Reflection.DispatchProxy" Version="4.8.2" />
 	</ItemGroup>
 
 </Project>

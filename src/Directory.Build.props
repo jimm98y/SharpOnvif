@@ -29,7 +29,4 @@
 		<PackageOutputPath>$(ProjectDir)..\..\nugets</PackageOutputPath>
 	</PropertyGroup>
 
-	<PropertyGroup>
-		<Microsoft_XmlSerializer_Generator>10.0.12</Microsoft_XmlSerializer_Generator>
-	</PropertyGroup>
 </Project>

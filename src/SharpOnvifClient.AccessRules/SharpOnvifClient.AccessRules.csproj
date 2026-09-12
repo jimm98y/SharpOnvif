@@ -1,39 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFrameworks>net481;net8.0;net10.0</TargetFrameworks>
-		<SGenProxyTypes>false</SGenProxyTypes>
-		<SGenVerbose>false</SGenVerbose>
-		<SGenReferences>$([System.Text.RegularExpressions.Regex]::Replace(@(ReferencePath), `(?'pre'[\\/])ref(?'post'[\\/](netstandard|netcoreapp|net)\d+(\.\d+)*[\\/])`, `${pre}lib${post}`))</SGenReferences>
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\SharpOnvifClient.AccessControl\SharpOnvifClient.AccessControl.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<DotNetCliToolReference Include="Microsoft.XmlSerializer.Generator" Version="$(Microsoft_XmlSerializer_Generator)" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="Microsoft.XmlSerializer.Generator" Version="$(Microsoft_XmlSerializer_Generator)" />
-	</ItemGroup>
-
-	<ItemGroup Condition=" $(TargetFramework.StartsWith('net4')) ">
-		<Reference Include="System.ServiceModel" />
-		<PackageReference Include="System.Memory" Version="4.6.3" />
-	</ItemGroup>
-
-	<ItemGroup Condition=" $(TargetFramework.StartsWith('net10.')) ">
-		<PackageReference Include="System.ServiceModel.Primitives" Version="10.0.652802" />
-		<PackageReference Include="System.ServiceModel.Http" Version="10.0.652802" />
-		<PackageReference Include="System.Security.Cryptography.Xml" Version="10.0.12" />
-	</ItemGroup>
-
-	<ItemGroup Condition=" $(TargetFramework.StartsWith('net8.')) ">
-		<PackageReference Include="System.ServiceModel.Primitives" Version="8.1.2" />
-		<PackageReference Include="System.ServiceModel.Http" Version="8.1.2" />
-		<PackageReference Include="System.Security.Cryptography.Xml" Version="8.0.4" />
+		<ProjectReference Include="..\SharpOnvifCommon\SharpOnvifCommon.csproj" />
 	</ItemGroup>
 
 </Project>

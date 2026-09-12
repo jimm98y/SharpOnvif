@@ -2,16 +2,15 @@
 A C# implementation of the Onvif interface - client as well as the server. All profiles are supported.
 
 ## SharpOnvifServer
-Onvif server provides NET8 and NET10 CoreWCF bindings generated using svcutil.exe. It makes it easy to implement only parts of the Onvif specification needed for your project.
+Onvif server provides NET8 and NET10 bindings generated from the Onvif WSDLs by
+`SharpOnvif.CodeGen`, hosted on ASP.NET Core. It makes it easy to implement only parts of the
+Onvif specification needed for your project.
 
 [![NuGet version](https://img.shields.io/nuget/v/SharpOnvifServer.svg?style=flat-square)](https://www.nuget.org/packages/SharpOnvifServer)
 
-Start with creating a new CoreWCF service:
+Start with a normal ASP.NET Core application:
 ```cs
 var builder = WebApplication.CreateBuilder();
-builder.Services.AddServiceModelServices();
-builder.Services.AddServiceModelMetadata();
-builder.Services.AddSingleton<IServiceBehavior, UseRequestHeadersForMetadataAddressBehavior>();
 ```
 Add Digest authentication for Onvif:
 ```cs
@@ -73,6 +72,8 @@ public class DeviceImpl : DeviceBase
     }
 }
 ```
+Each operation appears three times on the generated base, each layer defaulting to the next, so you can override whichever suits: an async form taking the request, a synchronous form taking the request, and a synchronous form taking the request's members as arguments. Anything you do not override is reported to the client as the `ter:ActionNotSupported` fault.
+
 Add it as a singleton:
 ```cs
 builder.Services.AddSingleton<DeviceImpl>();
@@ -83,29 +84,21 @@ var app = builder.Build();
 app.UseAuthentication();
 app.UseAuthorization();
 ```
-And make sure to call `app.UseOnvif()` to handle SOAP requests with action in the SOAP message instead of the Content-Type header:
+Finally map the service onto a URL and run:
 ```cs
-app.UseOnvif();
-```
-Add the CoreWCF service endpoint:
-```cs
-((IApplicationBuilder)app).UseServiceModel(serviceBuilder =>
-{
-    var serviceMetadataBehavior = app.Services.GetRequiredService<ServiceMetadataBehavior>();
-    serviceMetadataBehavior.HttpGetEnabled = true;
-
-    serviceBuilder.AddService<DeviceImpl>();
-    serviceBuilder.AddServiceEndpoint<DeviceImpl, SharpOnvifServer.DeviceMgmt.Device>(OnvifBindingFactory.CreateBinding(), "/onvif/device_service");
-});
-```
-Finally call `app.Run()`:
-```cs
+app.MapOnvifService<DeviceImpl>("/onvif/device_service");
 app.Run();
+```
+Several services can share one URL, which is what real devices do - requests are routed by their SOAP action:
+```cs
+app.MapOnvifService<DeviceImpl>("/onvif/device_service");
+app.MapOnvifService<MediaImpl>("/onvif/device_service");
+app.MapOnvifService<PTZImpl>("/onvif/device_service");
 ```
 Your Onvif service should now be discoverable on the network and you should be able to use Onvif Device Manager or similar tool to call your endpoint.
 See `Onvif.Server` sample project for a complete example.
 ## SharpOnvifClient
-Onvif client provides NET Framework 4.8.1, NET8.0 and NET10.0 WCF bindings generated using `dotnet-svcutil`. `SimpleOnvifClient` wraps common API calls to get basic information from the camera and includes both Pull Point as well as Basic event subscriptions. 
+Onvif client provides NET Framework 4.8.1, NET8.0 and NET10.0 bindings generated from the Onvif WSDLs by `SharpOnvif.CodeGen`, over `HttpClient`. `SimpleOnvifClient` wraps common API calls to get basic information from the camera and includes both Pull Point as well as Basic event subscriptions. 
 
 [![NuGet version](https://img.shields.io/nuget/v/SharpOnvifClient.svg?style=flat-square)](https://www.nuget.org/packages/SharpOnvifClient)
 
@@ -172,32 +165,45 @@ eventListener.Start((int cameraID, string ev) =>
 
 var subscriptionResponse = await client.BasicSubscribeAsync(eventListener.GetOnvifEventListenerUri(CAMERA1));
 ```
-### Using the generated WCF clients
-First add a reference to the DLL that implements the clients (e.g. `SharpOnvifClient.DeviceMgmt`). Add the using:
+### Using the generated clients
+First add a reference to the DLL that implements the clients (e.g. `SharpOnvifClient.DeviceMgmt`).
+Create the client with the endpoint address and, if the device requires them, credentials:
 ```cs
-using SharpOnvifClient;
-```
-Create the Onvif client and set the authentication behavior using `SetOnvifAuthentication` extension method from `SharpOnvifClient.OnvifAuthenticationExtensions` before you use it:
-```cs
-DigestAuthenticationSchemeOptions authentication = new DigestAuthenticationSchemeOptions();
-System.Net.NetworkCredential credentials = new System.Net.NetworkCredential(userName, password);
-System.ServiceModel.Description.IEndpointBehavior legacyAuth = new WsUsernameTokenBehavior(credentials);
-DisableExpect100ContinueBehavior disableExpect100Continue = new DisableExpect100ContinueBehavior();
-string uri = "http://192.168.1.10/onvif/device_service";
-
 using (var deviceClient = new SharpOnvifClient.DeviceMgmt.DeviceClient(
-    OnvifBindingFactory.CreateBinding(uri),
-    new System.ServiceModel.EndpointAddress(uri)))
+    "http://192.168.1.10/onvif/device_service", "admin", "password"))
 {
-    SharpOnvifClient.Behaviors.DisableExpect100ContinueBehaviorExtensions.SetDisableExpect100Continue(deviceClient, disableExpect100Continue);
-    var proxyClient = OnvifAuthenticationExtensions.SetOnvifAuthentication(deviceClient, credentials, authentication, legacyAuth);
-
-    // use the proxyClient
+    var deviceInfo = await deviceClient.GetDeviceInformationAsync(new GetDeviceInformationRequest());
 }
 ```
-Call any method on the client, e.g.:
+Both Onvif digest schemes are offered by default. For full control over authentication and transport, pass `OnvifClientSettings`:
 ```cs
-var deviceInfo = await proxyClient.GetDeviceInformationAsync(new GetDeviceInformationRequest()).ConfigureAwait(false);
+var settings = new SharpOnvifCommon.Soap.OnvifClientSettings
+{
+    Credentials = new System.Net.NetworkCredential("admin", "password"),
+    Authentication = new SharpOnvifCommon.Security.OnvifAuthenticationSettings(
+        SharpOnvifCommon.Security.DigestAuthentication.HttpDigest),
+    Timeout = TimeSpan.FromSeconds(30),
+};
+
+using (var deviceClient = new SharpOnvifClient.DeviceMgmt.DeviceClient(uri, settings))
+{
+    var deviceInfo = await deviceClient.GetDeviceInformationAsync(new GetDeviceInformationRequest());
+}
+```
+Every operation also has an overload that takes the request's members directly, so you rarely need to build the request yourself:
+```cs
+var services = await deviceClient.GetServicesAsync(includeCapability: false);
+```
+A device that answers with a SOAP fault raises `SharpOnvifCommon.Xml.OnvifFaultException`, which carries the Onvif error subcode:
+```cs
+try
+{
+    await deviceClient.GetHostnameAsync();
+}
+catch (OnvifFaultException fault) when (fault.Fault?.Subcode == "ActionNotSupported")
+{
+    // the device does not implement this operation
+}
 ```
 See `Onvif.Client` sample project for a complete example.
 ## Digest authentication
@@ -206,6 +212,12 @@ Onvif supports two types of Digest authentication. Legacy [WS-UsernameToken](htt
 ## Testing
 Only the DeviceMgmt, Media and Events were tested with Hikvision cameras. 
 Server implementation was tested using Onvif Device Manager.
+
+## Generated bindings
+The service bindings are generated by `src/SharpOnvif.CodeGen`, a WSDL and XML Schema compiler in
+this repository, from the specification documents mirrored in `wsdl/`. Generated sources are
+committed, so a normal build needs no network access and no external tooling. See
+[doc/codegen.md](doc/codegen.md) for how to regenerate them and what the generator does.
 
 ## Credits
 Special thanks to Piotr Stapp for figuring out the SOAP security headers in NET8: https://stapp.space/using-soap-security-in-dotnet-core/.

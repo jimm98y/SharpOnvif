@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
 // SOFTWARE.
 
-using CoreWCF;
+using SharpOnvifServer.Dispatch;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -47,14 +47,14 @@ namespace OnvifService.Onvif
 
         #region NotificationProducer
 
-        public override SubscribeResponse1 Subscribe(SubscribeRequest request)
+        public override SubscribeResponse Subscribe(SubscribeRequest request)
         {
-            Uri endpointUri = OperationContext.Current.IncomingMessageProperties.Via;
+            Uri endpointUri = OnvifOperationContext.RequestUri;
 
-            string notificationEndpoint = request.Subscribe.ConsumerReference.Address.Value;
+            string notificationEndpoint = request.ConsumerReference.Address.Value;
 
             DateTime now = DateTime.UtcNow;
-            DateTime termination = OnvifHelpers.FromAbsoluteOrRelativeDateTimeUTC(now, request.Subscribe.InitialTerminationTime, now.AddMinutes(1));
+            DateTime termination = OnvifHelpers.FromAbsoluteOrRelativeDateTimeUTC(now, request.InitialTerminationTime, now.AddMinutes(1));
 
             // Basic uses the notification endpoint from the request
             var subscription = ActivatorUtilities.CreateInstance<SubscriptionManagerImpl>(_serviceProvider, termination, termination.Subtract(now), notificationEndpoint);
@@ -63,18 +63,20 @@ namespace OnvifService.Onvif
 
             _logger.LogDebug($"{nameof(EventsImpl)}: Subscribed Basic {subscriptionID} on {subscriptionReferenceUri}");
 
-            return new SubscribeResponse1(new SubscribeResponse()
+            return new SubscribeResponse()
             {
-                 SubscriptionReference = new EndpointReferenceType()
-                 {
-                     Address = new AttributedURIType()
-                     {
-                         Value = subscriptionReferenceUri
-                     }
-                 },
-                 CurrentTime = now,
-                 TerminationTime = termination
-            });
+                SubscriptionReference = new EndpointReferenceType()
+                {
+                    Address = new AttributedURIType()
+                    {
+                        Value = subscriptionReferenceUri
+                    }
+                },
+                CurrentTime = now,
+                CurrentTimeSpecified = true,
+                TerminationTime = termination,
+                TerminationTimeSpecified = true
+            };
         }
 
         #endregion // NotificationProducer
@@ -83,7 +85,7 @@ namespace OnvifService.Onvif
 
         public override CreatePullPointSubscriptionResponse CreatePullPointSubscription(CreatePullPointSubscriptionRequest request)
         {
-            Uri endpointUri = OperationContext.Current.IncomingMessageProperties.Via;
+            Uri endpointUri = OnvifOperationContext.RequestUri;
 
             DateTime now = DateTime.UtcNow;
             DateTime termination = OnvifHelpers.FromAbsoluteOrRelativeDateTimeUTC(now, request.InitialTerminationTime, now.AddMinutes(1));

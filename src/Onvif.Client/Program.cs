@@ -22,6 +22,7 @@
 using SharpOnvifClient;
 using SharpOnvifClient.Events;
 using SharpOnvifClient.Security;
+using SharpOnvifCommon.Security;
 using SharpOnvifCommon;
 using System;
 using System.Collections.Generic;
@@ -158,12 +159,12 @@ public static class Program
                 Console.WriteLine($"Tamper detected: {OnvifEvents.IsTamperDetected(ev)}");
         });
 
-        SubscribeResponse1 subscriptionResponse = await client.BasicSubscribeAsync(eventListener.GetOnvifEventListenerUri());
+        SubscribeResponse subscriptionResponse = await client.BasicSubscribeAsync(eventListener.GetOnvifEventListenerUri());
 
         while (true)
         {
             await Task.Delay(1000 * 60);
-            var result = await client.BasicSubscriptionRenewAsync(subscriptionResponse.SubscribeResponse.SubscriptionReference.Address.Value);
+            var result = await client.BasicSubscriptionRenewAsync(subscriptionResponse.SubscriptionReference.Address.Value);
         }
     }
 

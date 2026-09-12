@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
 // SOFTWARE.
 
-using CoreWCF;
+using SharpOnvifServer.Dispatch;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.Extensions.Logging;
 using SharpOnvifCommon;
@@ -54,10 +54,9 @@ namespace OnvifService.Onvif
             this._logger = logger;
         }
 
-        [return: MessageParameter(Name = "Capabilities")]
-        public override Capabilities GetServiceCapabilities()
+        public override GetServiceCapabilitiesResponse GetServiceCapabilities()
         {
-            return new Capabilities()
+            return new GetServiceCapabilitiesResponse(new Capabilities()
             {
                 EFlip = true,
                 EFlipSpecified = true,
@@ -69,13 +68,12 @@ namespace OnvifService.Onvif
                 MoveStatusSpecified = true,
                 StatusPosition = true,
                 StatusPositionSpecified = true,
-            };
+            });
         }
 
-        [return: MessageParameter(Name = "PTZStatus")]
-        public override PTZStatus GetStatus(string ProfileToken)
+        public override GetStatusResponse GetStatus(string ProfileToken)
         {
-            return new PTZStatus()
+            return new GetStatusResponse(new PTZStatus()
             {
                 MoveStatus = new PTZMoveStatus()
                 {
@@ -95,10 +93,10 @@ namespace OnvifService.Onvif
                     }
                 },
                 UtcTime = DateTime.UtcNow
-            };
+            });
         }
 
-        public override void AbsoluteMove(string ProfileToken, PTZVector Position, PTZSpeed Speed)
+        public override AbsoluteMoveResponse AbsoluteMove(string ProfileToken, PTZVector Position, PTZSpeed Speed)
         {
             if(Position != null)
             {
@@ -115,9 +113,10 @@ namespace OnvifService.Onvif
                     _logger.LogInformation($"PTZ: AbsoluteMove: zoom: {Position.Zoom.x}");
                 }
             }
+            return new AbsoluteMoveResponse();
         }
 
-        public override void RelativeMove(string ProfileToken, PTZVector Translation, PTZSpeed Speed)
+        public override RelativeMoveResponse RelativeMove(string ProfileToken, PTZVector Translation, PTZSpeed Speed)
         {
             if (Translation != null)
             {
@@ -134,11 +133,13 @@ namespace OnvifService.Onvif
                     _logger.LogInformation($"PTZ: RelativeMove: zoomDelta: {Translation.Zoom.x}");
                 }
             }
+            return new RelativeMoveResponse();
         }
 
-        public override void Stop(string ProfileToken, bool PanTilt, bool Zoom)
+        public override StopResponse Stop(string ProfileToken, bool PanTilt, bool Zoom)
         {
             _logger.LogInformation($"PTZ: Stop");
+            return new StopResponse();
         }
 
         public override ContinuousMoveResponse ContinuousMove(ContinuousMoveRequest request)
@@ -168,7 +169,6 @@ namespace OnvifService.Onvif
             return new SetPresetResponse(token);
         }
 
-        [return: MessageParameter(Name = "Preset")]
         public override GetPresetsResponse GetPresets(GetPresetsRequest request)
         {
             return new GetPresetsResponse()
@@ -177,7 +177,7 @@ namespace OnvifService.Onvif
             };
         }
 
-        public override void GotoPreset(string ProfileToken, string PresetToken, PTZSpeed Speed)
+        public override GotoPresetResponse GotoPreset(string ProfileToken, string PresetToken, PTZSpeed Speed)
         {
             if(Presets.TryGetValue(PresetToken, out var preset))
             {
@@ -191,9 +191,9 @@ namespace OnvifService.Onvif
             {
                 _logger.LogInformation($"PTZ: GoToPreset: unknown");
             }
+            return new GotoPresetResponse();
         }
 
-        [return: MessageParameter(Name = "PTZNode")]
         public override GetNodesResponse GetNodes(GetNodesRequest request)
         {
             return new GetNodesResponse()
@@ -205,20 +205,21 @@ namespace OnvifService.Onvif
             };
         }
 
-        [return: MessageParameter(Name = "PTZNode")]
-        public override PTZNode GetNode(string NodeToken)
+        public override GetNodeResponse GetNode(string NodeToken)
         {
-            return GetMyNode();
+            return new GetNodeResponse(GetMyNode());
         }
 
-        public override void GotoHomePosition(string ProfileToken, PTZSpeed Speed)
+        public override GotoHomePositionResponse GotoHomePosition(string ProfileToken, PTZSpeed Speed)
         {
             _logger.LogInformation("PTZ: GoToHomePosition");
+            return new GotoHomePositionResponse();
         }
 
-        public override void SetHomePosition(string ProfileToken)
+        public override SetHomePositionResponse SetHomePosition(string ProfileToken)
         {
             _logger.LogInformation("PTZ: SetHomePosition");
+            return new SetHomePositionResponse();
         }
 
         private static PTZNode GetMyNode()
@@ -300,7 +301,6 @@ namespace OnvifService.Onvif
             };
         }
 
-        [return: MessageParameter(Name = "PTZConfiguration")]
         public override GetConfigurationsResponse GetConfigurations(GetConfigurationsRequest request)
         {
             return new GetConfigurationsResponse()
@@ -309,7 +309,6 @@ namespace OnvifService.Onvif
             };
         }
 
-        [return: MessageParameter(Name = "PTZConfiguration")]
         public override GetCompatibleConfigurationsResponse GetCompatibleConfigurations(GetCompatibleConfigurationsRequest request)
         {
             return new GetCompatibleConfigurationsResponse()

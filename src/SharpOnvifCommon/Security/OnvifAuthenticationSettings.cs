@@ -1,0 +1,95 @@
+using System;
+using System.Collections.Generic;
+
+namespace SharpOnvifCommon.Security
+{
+    /// <summary>
+    /// The authentication schemes Onvif defines. They are flags because a device may accept
+    /// either, and SharpOnvif offers both by default so it works against the widest range of
+    /// hardware without being told which to use.
+    /// </summary>
+    [Flags]
+    public enum DigestAuthentication
+    {
+        None = 0,
+
+        /// <summary>WS-UsernameToken, carried in the SOAP security header.</summary>
+        WsUsernameToken = 1,
+
+        /// <summary>HTTP Digest, negotiated through a 401 challenge.</summary>
+        HttpDigest = 2,
+    }
+
+    /// <summary>
+    /// How a client authenticates to a device. Shared by the simple client and the generated
+    /// service clients.
+    /// </summary>
+    public class OnvifAuthenticationSettings
+    {
+        public DigestAuthentication Authentication { get; set; } =
+            DigestAuthentication.WsUsernameToken | DigestAuthentication.HttpDigest;
+
+        /// <summary>
+        /// Hashing algorithms, in the order they are offered. Accepted values are "MD5",
+        /// "MD5-sess", "SHA-256", "SHA-256-sess", "SHA-512-256", and "SHA-512-256-sess".
+        /// <para>
+        /// RFC 7616 asks for server-preference order, but the Onvif core specification lists MD5
+        /// first and some tools fail to connect when anything else leads, so MD5 stays first.
+        /// </para>
+        /// </summary>
+        public List<string> HttpDigestAlgorithms { get; set; } = new List<string>
+        {
+            "MD5", "MD5-sess", "SHA-256", "SHA-256-sess", "SHA-512-256", "SHA-512-256-sess",
+        };
+
+        /// <summary>Offered quality of protection levels: "auth" and "auth-int".</summary>
+        public List<string> HttpDigestQop { get; set; } = new List<string> { "auth", "auth-int" };
+
+        /// <summary>Whether username hashing is offered.</summary>
+        public bool HttpDigestUserHash { get; set; } = true;
+
+        /// <summary>
+        /// Actions the Onvif core specification places in the PRE_AUTH category, which a device
+        /// must answer without credentials.
+        /// <para>
+        /// Some devices do demand authentication for these anyway. Removing an action from this
+        /// list makes the client authenticate it like any other.
+        /// </para>
+        /// </summary>
+        public List<string> PreAuthActions { get; set; } = new List<string>
+        {
+            "http://www.onvif.org/ver10/device/wsdl/GetWsdlUrl",
+            "http://www.onvif.org/ver10/device/wsdl/GetServices",
+            "http://www.onvif.org/ver10/device/wsdl/GetServiceCapabilities",
+            "http://www.onvif.org/ver10/device/wsdl/GetCapabilities",
+            "http://www.onvif.org/ver10/device/wsdl/GetHostname",
+            "http://www.onvif.org/ver10/device/wsdl/GetSystemDateAndTime",
+            "http://www.onvif.org/ver10/device/wsdl/GetEndpointReference",
+        };
+
+        /// <summary>
+        /// Offset added to the local clock when stamping WS-UsernameToken timestamps.
+        /// <para>
+        /// Devices reject a token whose Created time drifts too far from their own clock. When a
+        /// camera's clock is wrong and cannot be corrected, setting the observed difference here
+        /// makes authentication succeed anyway.
+        /// </para>
+        /// </summary>
+        public TimeSpan UtcNowOffset { get; set; } = TimeSpan.Zero;
+
+        public OnvifAuthenticationSettings()
+        {
+        }
+
+        public OnvifAuthenticationSettings(DigestAuthentication authentication)
+        {
+            Authentication = authentication;
+        }
+
+        /// <summary>True when the given SOAP action may be sent without credentials.</summary>
+        public bool IsPreAuth(string action)
+        {
+            return PreAuthActions != null && action != null && PreAuthActions.Contains(action);
+        }
+    }
+}

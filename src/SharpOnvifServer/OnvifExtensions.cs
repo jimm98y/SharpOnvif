@@ -19,7 +19,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
 // SOFTWARE.
 
-using CoreWCF.Description;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
@@ -28,38 +27,68 @@ using SharpOnvifServer.Discovery;
 using SharpOnvifServer.Events;
 using SharpOnvifServer.Security;
 using System;
-using System.Buffers;
 using System.Collections.Generic;
-using System.IO.Pipelines;
 using System.Linq;
-using System.Text;
-using System.Xml.Linq;
 
 namespace SharpOnvifServer
 {
     public static class OnvifExtensions
     {
         /// <summary>
+        /// Adds the Onvif Digest authentication handler with its default options.
+        /// </summary>
+        /// <param name="services"><see cref="IServiceCollection"/></param>
+        public static IServiceCollection AddOnvifDigestAuthentication(this IServiceCollection services)
+        {
+            // The overloads take no optional arguments, so that calling this with none is not
+            // ambiguous between the options object and the configuration callback.
+            return services.AddOnvifDigestAuthentication((Action<DigestAuthenticationSchemeOptions>)null);
+        }
+
+        /// <summary>
         /// Add Digest authentication handler.
         /// </summary>
         /// <param name="services"><see cref="IServiceCollection"/></param>
         /// <param name="options">Digest authentication options.</param>
-        public static IServiceCollection AddOnvifDigestAuthentication(this IServiceCollection services, DigestAuthenticationSchemeOptions options = null)
+        public static IServiceCollection AddOnvifDigestAuthentication(this IServiceCollection services, DigestAuthenticationSchemeOptions options)
         {
             return services.AddOnvifDigestAuthentication((digestOptions) =>
             {
                 if (options != null)
                 {
                     digestOptions.Authentication = options.Authentication;
-                    digestOptions.HttpDigestQop = options.HttpDigestQop;
+                    digestOptions.HttpDigestQop = Distinct(options.HttpDigestQop);
                     digestOptions.HttpDigestRealm = options.HttpDigestRealm;
                     digestOptions.HttpDigestUserHash = options.HttpDigestUserHash;
-                    digestOptions.HttpDigestAlgorithms = options.HttpDigestAlgorithms;
+                    digestOptions.HttpDigestAlgorithms = Distinct(options.HttpDigestAlgorithms);
                     digestOptions.HttpDigestNonceLifetimeMilliseconds = options.HttpDigestNonceLifetimeMilliseconds;
-                    digestOptions.PreAuthActions = options.PreAuthActions;
+                    digestOptions.PreAuthActions = Distinct(options.PreAuthActions);
                     digestOptions.WsUsernameTokenMaxTimeDeltaInMilliseconds = options.WsUsernameTokenMaxTimeDeltaInMilliseconds;
                 }
             });
+        }
+
+        /// <summary>
+        /// Removes repeated entries while keeping the order, which for the algorithm list is the
+        /// order they are offered in.
+        /// <para>
+        /// Binding configuration onto these options appends to the defaults rather than replacing
+        /// them, so an appsettings.json that restates the defaults would otherwise make the device
+        /// advertise every algorithm twice.
+        /// </para>
+        /// </summary>
+        private static List<string> Distinct(List<string> values)
+        {
+            if (values == null) return null;
+
+            var seen = new HashSet<string>(StringComparer.Ordinal);
+            var result = new List<string>(values.Count);
+            foreach (string value in values)
+            {
+                if (seen.Add(value)) result.Add(value);
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -67,18 +96,15 @@ namespace SharpOnvifServer
         /// </summary>
         /// <param name="services"><see cref="IServiceCollection"/></param>
         /// <param name="options">Digest authentication options callback.</param>
-        public static IServiceCollection AddOnvifDigestAuthentication(this IServiceCollection services, Action<DigestAuthenticationSchemeOptions> options = null)
+        public static IServiceCollection AddOnvifDigestAuthentication(this IServiceCollection services, Action<DigestAuthenticationSchemeOptions> options)
         {
-            const string SCHEME_DIGEST = "Digest";
+            string scheme = OnvifAuthenticationDefaults.AuthenticationScheme;
 
-            // all endpoints must have [DisableMustUnderstandValidation] for this to work
             services.AddHttpContextAccessor()
-                    .AddSingleton<IServiceBehavior, HttpDigestBehavior>()
-                    .AddAuthentication(SCHEME_DIGEST)
-                    .AddScheme<DigestAuthenticationSchemeOptions, DigestAuthenticationHandler>(SCHEME_DIGEST, options);
+                    .AddAuthentication(scheme)
+                    .AddScheme<DigestAuthenticationSchemeOptions, DigestAuthenticationHandler>(scheme, options);
 
-            // CoreWCF cannot have a contract with some endpoints anonymous and some requiring the authentication
-            services.AddAuthorization(); // this means we require Digest on all endpoints => Unauthenticated users will have to default to "Anonymous" user account
+            services.AddAuthorization();
 
             return services;
         }
@@ -93,13 +119,13 @@ namespace SharpOnvifServer
             {
                 // if not specified, fill in the defaults
                 options = new OnvifDiscoveryOptions();
-                options.Scopes = new System.Collections.Generic.List<string>() {
+                options.Scopes = new List<string>() {
                   "onvif://www.onvif.org/type/video_encoder",
                   "onvif://www.onvif.org/Profile/Streaming",
                   "onvif://www.onvif.org/Profile/G",
                   "onvif://www.onvif.org/Profile/T"
                 };
-                options.Types = new System.Collections.Generic.List<OnvifType>()
+                options.Types = new List<OnvifType>()
                 {
                     new OnvifType("http://www.onvif.org/ver10/network/wsdl", "NetworkVideoTransmitter"),
                     new OnvifType("http://www.onvif.org/ver10/device/wsdl", "Device")
@@ -115,38 +141,18 @@ namespace SharpOnvifServer
         /// <summary>
         /// Use Onvif.
         /// </summary>
+        /// <remarks>
+        /// Kept so that existing startup code keeps compiling. It no longer does anything: the
+        /// Onvif endpoint resolves an operation from the Content-Type action parameter, a
+        /// wsa:Action SOAP header, or the body element itself, so a client that omits the action
+        /// from the Content-Type header - as Onvif Device Manager does when subscribing to events
+        /// - is handled without rewriting the request.
+        /// </remarks>
         /// <param name="app"><see cref="WebApplication"/>.</param>
         /// <returns><see cref="WebApplication"/>.</returns>
+        [Obsolete("No longer required. The Onvif endpoint resolves the action itself; this call can be removed.")]
         public static WebApplication UseOnvif(this WebApplication app)
         {
-            app.Use(async (context, next) =>
-            {
-                // Onvif Device Manager sends an empty action in the Content-Type header for Event subscription
-                //  and instead puts the action inside the Soap Header. CoreWCF expects it in the Content-Type header,
-                //  so we have to move it there.
-                if (context.Request.ContentType != null && !context.Request.ContentType.Contains("action="))
-                {
-                    ReadResult requestBodyInBytes = await context.Request.BodyReader.ReadAsync().ConfigureAwait(false);
-                    string body = Encoding.UTF8.GetString(requestBodyInBytes.Buffer.ToArray());
-                    context.Request.BodyReader.AdvanceTo(requestBodyInBytes.Buffer.Start, requestBodyInBytes.Buffer.End);
-
-                    XNamespace ns = "http://www.w3.org/2003/05/soap-envelope";
-                    var soapEnvelope = XDocument.Parse(body);
-                    var headers = soapEnvelope.Descendants(ns + "Header").ToList();
-
-                    foreach (var header in headers)
-                    {
-                        var actionElement = header.Descendants().FirstOrDefault(x => x.Name.LocalName == "Action");
-                        if (actionElement != null)
-                        {
-                            context.Request.ContentType = $"{context.Request.ContentType}; action=\"{actionElement.Value}\"";
-                        }
-                    }
-                }
-
-                await next(context).ConfigureAwait(false);
-            });
-
             return app;
         }
 
@@ -156,27 +162,25 @@ namespace SharpOnvifServer
         /// <param name="app"><see cref="WebApplication"/>.</param>
         /// <param name="subscriptionManagerAddress">Onvif Subscription Manager address.</param>
         /// <returns><see cref="WebApplication"/>.</returns>
-        /// <exception cref="ArgumentNullException">Thrown when <see cref="subscriptionManagerAddress"> is null.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="subscriptionManagerAddress"/> is null.</exception>
         public static WebApplication UseOnvifEvents(this WebApplication app, string subscriptionManagerAddress)
         {
             if (subscriptionManagerAddress == null)
                 throw new ArgumentNullException(nameof(subscriptionManagerAddress));
 
-            if (!subscriptionManagerAddress.EndsWith('/'))
-                subscriptionManagerAddress = subscriptionManagerAddress + '/';
+            if (!subscriptionManagerAddress.EndsWith("/"))
+                subscriptionManagerAddress = subscriptionManagerAddress + "/";
 
             app.Use(async (context, next) =>
             {
-                // SubscriptionManager should be instantiated per subscription, which is not supported by CoreWCF. The way it works now is:
-                //  In EventsImpl Subscribe we create a new SubscriptionManagerImpl and we register it in IEventSubscriptionManager singleton. We get back 
-                //   subscription ID, which we return in the SubscriptionReferenceUri as "/onvif/Events/Subscription/<subscriptionID>/". When the client 
-                //   calls us again with this ID, we have no service registered for such endpoint, so we use this ASP.NET middleware to strip the 
-                //   subscription ID from the request and we route it to the global RouterSubscriptionManagerImpl. We also store the subscription ID 
-                //   in the HttpContext so that the RouterSubscriptionManagerImpl can retrieve it. It uses the subscription ID to resolve the registered 
-                //   SubscriptionManagerImpl and it forwards all the requests.
-                // Note: It would have been easier to use a parameter, e.g. /onvif/Events/Subscription?Idx=<subscriptionID>. However, it seems like SOAP has some 
-                //  strict requirements and one of them is to have parameters in a request body and/or headers. 
-                if (context.Request.Path != null && context.Request.Path.HasValue && context.Request.Path.Value.Contains(subscriptionManagerAddress))
+                // A subscription manager is logically one instance per subscription, which does not
+                //  fit a routing table. EventsImpl creates a SubscriptionManagerImpl per Subscribe
+                //  call, registers it with IEventSubscriptionManager, and returns its ID inside the
+                //  SubscriptionReferenceUri as "/onvif/Events/Subscription/<subscriptionID>/". No
+                //  endpoint is mapped at that address, so this middleware strips the ID, stores it
+                //  in HttpContext.Items, and lets the request route to the single registered
+                //  subscription manager, which uses the ID to find the real one and forward to it.
+                if (context.Request.Path.HasValue && context.Request.Path.Value.Contains(subscriptionManagerAddress))
                 {
                     int subscriptionLength = context.Request.Path.Value.IndexOf(subscriptionManagerAddress) + subscriptionManagerAddress.Length;
                     string subscription = context.Request.Path.Value.Substring(subscriptionLength).Trim('/');

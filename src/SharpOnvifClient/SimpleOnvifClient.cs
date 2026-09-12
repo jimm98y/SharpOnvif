@@ -19,19 +19,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
 // SOFTWARE.
 
-using SharpOnvifClient.Behaviors;
 using SharpOnvifClient.DeviceMgmt;
 using SharpOnvifClient.Events;
-using SharpOnvifClient.Formatter;
 using SharpOnvifClient.Media;
 using SharpOnvifClient.PTZ;
 using SharpOnvifClient.Security;
 using SharpOnvifCommon;
+using SharpOnvifCommon.Security;
+using SharpOnvifCommon.Soap;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.ServiceModel;
-using System.ServiceModel.Description;
 using System.Threading.Tasks;
 
 namespace SharpOnvifClient
@@ -51,9 +49,12 @@ namespace SharpOnvifClient
         protected readonly Dictionary<string, object> _clients = new Dictionary<string, object>();
         protected readonly System.Net.NetworkCredential _credentials;
         protected readonly DigestAuthenticationSchemeOptions _authentication;
-        protected readonly IEndpointBehavior _legacyAuth;
-        protected readonly IEndpointBehavior _disableExpect100ContinueBehavior;
-        private readonly IEndpointBehavior _onvifMessageFormatter;
+
+        /// <summary>
+        /// Shared by every service client this instance creates, so the HTTP Digest challenge is
+        /// negotiated once per endpoint rather than once per call.
+        /// </summary>
+        protected readonly OnvifClientSettings _settings;
 
         /// <summary>
         /// Creates an instance of <see cref="SimpleOnvifClient"/>.
@@ -98,55 +99,50 @@ namespace SharpOnvifClient
                     throw new ArgumentNullException("User name or password must not be empty!");
 
                 _credentials = new System.Net.NetworkCredential(userName, password);
-
-                if (this._authentication.Authentication.HasFlag(DigestAuthentication.WsUsernameToken))
-                {
-                    _legacyAuth = new WsUsernameTokenBehavior(_credentials);
-                }
             }
 
-            if (disableExpect100Continue)
+            _settings = new OnvifClientSettings
             {
-                _disableExpect100ContinueBehavior = new DisableExpect100ContinueBehavior();
-            }
-
-            _onvifMessageFormatter = new OnvifMessageFormatterBehavior();
+                Credentials = _credentials,
+                Authentication = this._authentication,
+                DisableExpect100Continue = disableExpect100Continue,
+            };
 
             _onvifUri = onvifUri;
         }
 
+        /// <summary>
+        /// Compensates for a camera whose clock is wrong.
+        /// <para>
+        /// A device rejects a WS-UsernameToken whose Created time drifts too far from its own
+        /// clock. Setting the observed difference here makes authentication succeed without
+        /// changing the camera.
+        /// </para>
+        /// </summary>
         public void SetCameraUtcNowOffset(TimeSpan utcNowOffset)
         {
-            if (_authentication.Authentication.HasFlag(DigestAuthentication.WsUsernameToken))
-            {
-                ((IHasUtcOffset)_legacyAuth).UtcNowOffset = utcNowOffset;
-            }
-            else
-            {
+            if (!_authentication.Authentication.HasFlag(DigestAuthentication.WsUsernameToken))
                 throw new NotSupportedException("Time offset is only supported for WsUsernameToken authentication");
-            }
+
+            _authentication.UtcNowOffset = utcNowOffset;
         }
 
-        protected TChannel GetOrCreateClient<TChannel>(string uri, Func<string, TChannel> creator) where TChannel : class
+        /// <summary>
+        /// Returns the client for a service endpoint, creating it on first use. Clients are pooled
+        /// because each holds the authentication state negotiated with its endpoint.
+        /// </summary>
+        protected TClient GetOrCreateClient<TClient>(string uri, Func<string, TClient> creator) where TClient : class
         {
-            string key = $"{typeof(TChannel)}|{uri}";
+            string key = $"{typeof(TClient)}|{uri}";
             lock (_syncRoot)
             {
-                if (_clients.ContainsKey(key))
-                {
-                    return (TChannel)_clients[key];
-                }
-                else
-                {
-                    var client = creator(uri);
+                object existing;
+                if (_clients.TryGetValue(key, out existing))
+                    return (TClient)existing;
 
-                    OnvifMessageFormatterBehaviorExtensions.SetMessageFormatter(client, _onvifMessageFormatter);
-                    DisableExpect100ContinueBehaviorExtensions.SetDisableExpect100Continue(client, _disableExpect100ContinueBehavior);
-
-                    client = OnvifAuthenticationExtensions.SetOnvifAuthentication(client, _credentials, _authentication, _legacyAuth);
-                    _clients.Add(key, client);
-                    return client;
-                }
+                TClient client = creator(uri);
+                _clients.Add(key, client);
+                return client;
             }
         }
 
@@ -154,56 +150,37 @@ namespace SharpOnvifClient
 
         public async Task<GetDeviceInformationResponse> GetDeviceInformationAsync()
         {
-            var deviceClient = GetOrCreateClient<Device>(_onvifUri, (u) => new DeviceClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(u)));
+            var deviceClient = GetOrCreateClient(_onvifUri, u => new DeviceClient(u, _settings));
             var deviceInfo = await deviceClient.GetDeviceInformationAsync(new GetDeviceInformationRequest()).ConfigureAwait(false);
             return deviceInfo;
         }
 
+        /// <summary>
+        /// Lists the services the device supports.
+        /// </summary>
+        /// <remarks>
+        /// The Onvif core specification puts GetServices in the PRE_AUTH category, so the client
+        /// sends no WS-UsernameToken for it. Some cameras, Vivotek among them, demand
+        /// authentication anyway; removing the action from
+        /// <see cref="SharpOnvifCommon.Security.OnvifAuthenticationSettings.PreAuthActions"/>
+        /// makes the client authenticate it like any other call.
+        /// </remarks>
         public virtual async Task<GetServicesResponse> GetServicesAsync(bool includeCapability = false)
         {
-            // PRE_AUTH action http://www.onvif.org/ver10/device/wsdl/GetServices
-            if(_authentication.PreAuthActions == null || _authentication.PreAuthActions.Contains("http://www.onvif.org/ver10/device/wsdl/GetServices"))
-            { 
-                using (var deviceClient = new DeviceClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(_onvifUri)))
-                {
-                    deviceClient.SetMessageFormatter(_onvifMessageFormatter);
-                    deviceClient.SetDisableExpect100Continue(_disableExpect100ContinueBehavior);
-
-                    var services = await deviceClient.GetServicesAsync(includeCapability).ConfigureAwait(false);
-                    return services;
-                }
-            }
-            else
-            {
-                // According to the Onvif Core specification, GetServices is in the PRE_AUTH category and should not require authentication.
-                // However, some cameras (Vivotec) do not follow this specification and require authentication for GetServices. This method
-                //  allows to get services with authentication if needed.
-                var deviceClient = GetOrCreateClient<Device>(_onvifUri, (u) => new DeviceClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(u)));
-                var services = await deviceClient.GetServicesAsync(new GetServicesRequest(includeCapability)).ConfigureAwait(false);
-                return services;
-            }
+            var deviceClient = GetOrCreateClient(_onvifUri, u => new DeviceClient(u, _settings));
+            var services = await deviceClient.GetServicesAsync(new GetServicesRequest(includeCapability)).ConfigureAwait(false);
+            return services;
         }
 
+        /// <summary>
+        /// Reads the device's clock. Also a PRE_AUTH action, and useful for discovering the
+        /// offset that <see cref="SetCameraUtcNowOffset"/> needs when a camera's clock is wrong.
+        /// </summary>
         public async Task<SystemDateTime> GetSystemDateAndTimeAsync()
         {
-            // PRE_AUTH action http://www.onvif.org/ver10/device/wsdl/GetSystemDateAndTime
-            if (_authentication.PreAuthActions == null || _authentication.PreAuthActions.Contains("http://www.onvif.org/ver10/device/wsdl/GetSystemDateAndTime"))
-            {
-                using (var deviceClient = new DeviceClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(_onvifUri)))
-                {
-                    deviceClient.SetMessageFormatter(_onvifMessageFormatter);
-                    deviceClient.SetDisableExpect100Continue(_disableExpect100ContinueBehavior);
-
-                    var cameraTime = await deviceClient.GetSystemDateAndTimeAsync().ConfigureAwait(false);
-                    return cameraTime;
-                }
-            }
-            else
-            {
-                var deviceClient = GetOrCreateClient<Device>(_onvifUri, (u) => new DeviceClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(u)));
-                var services = await deviceClient.GetSystemDateAndTimeAsync().ConfigureAwait(false);
-                return services;
-            }
+            var deviceClient = GetOrCreateClient(_onvifUri, u => new DeviceClient(u, _settings));
+            var cameraTime = await deviceClient.GetSystemDateAndTimeAsync().ConfigureAwait(false);
+            return cameraTime.SystemDateAndTime;
         }
 
         public async Task<System.DateTime> GetSystemDateAndTimeUtcAsync()
@@ -228,7 +205,7 @@ namespace SharpOnvifClient
         public async Task<GetProfilesResponse> GetProfilesAsync()
         {
             string mediaUri = await GetServiceUriAsync(OnvifServices.MEDIA).ConfigureAwait(false);
-            var mediaClient = GetOrCreateClient<Media.Media>(mediaUri, (u) => new MediaClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(u)));
+            var mediaClient = GetOrCreateClient(mediaUri, u => new MediaClient(u, _settings));
             var profiles = await mediaClient.GetProfilesAsync(new GetProfilesRequest()).ConfigureAwait(false);
             return profiles;
         }
@@ -236,17 +213,17 @@ namespace SharpOnvifClient
         public async Task<MediaUri> GetStreamUriAsync(string profileToken, TransportProtocol protocol = TransportProtocol.RTSP)
         {
             string mediaUri = await GetServiceUriAsync(OnvifServices.MEDIA).ConfigureAwait(false);
-            var mediaClient = GetOrCreateClient<Media.Media>(mediaUri, (u) => new MediaClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(u)));
-            var streamUri = await mediaClient.GetStreamUriAsync(new StreamSetup() { Transport = new Transport() {  Protocol = protocol } }, profileToken).ConfigureAwait(false);
-            return streamUri;
+            var mediaClient = GetOrCreateClient(mediaUri, u => new MediaClient(u, _settings));
+            var streamUri = await mediaClient.GetStreamUriAsync(new StreamSetup() { Transport = new Transport() { Protocol = protocol } }, profileToken).ConfigureAwait(false);
+            return streamUri.MediaUri;
         }
 
         public async Task<MediaUri> GetSnapshotUriAsync(string profileToken)
         {
             string mediaUri = await GetServiceUriAsync(OnvifServices.MEDIA).ConfigureAwait(false);
-            var mediaClient = GetOrCreateClient<Media.Media>(mediaUri, (u) => new MediaClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(u)));
+            var mediaClient = GetOrCreateClient(mediaUri, u => new MediaClient(u, _settings));
             var streamUri = await mediaClient.GetSnapshotUriAsync(profileToken).ConfigureAwait(false);
-            return streamUri;
+            return streamUri.MediaUri;
         }
 
         #endregion // Media
@@ -256,7 +233,7 @@ namespace SharpOnvifClient
         public async Task<Media2.GetProfilesResponse> GetProfiles2Async()
         {
             string mediaUri = await GetServiceUriAsync(OnvifServices.MEDIA2).ConfigureAwait(false);
-            var mediaClient = GetOrCreateClient<Media2.Media2>(mediaUri, (u) => new Media2.Media2Client(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(u)));
+            var mediaClient = GetOrCreateClient(mediaUri, u => new Media2.Media2Client(u, _settings));
             var profiles = await mediaClient.GetProfilesAsync(new Media2.GetProfilesRequest()).ConfigureAwait(false);
             return profiles;
         }
@@ -264,7 +241,7 @@ namespace SharpOnvifClient
         public async Task<Media2.GetStreamUriResponse> GetStreamUri2Async(string profileToken, string protocol)
         {
             string mediaUri = await GetServiceUriAsync(OnvifServices.MEDIA2).ConfigureAwait(false);
-            var mediaClient = GetOrCreateClient<Media2.Media2>(mediaUri, (u) => new Media2.Media2Client(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(u)));
+            var mediaClient = GetOrCreateClient(mediaUri, u => new Media2.Media2Client(u, _settings));
             var streamUri = await mediaClient.GetStreamUriAsync(new Media2.GetStreamUriRequest(protocol, profileToken)).ConfigureAwait(false);
             return streamUri;
         }
@@ -272,7 +249,7 @@ namespace SharpOnvifClient
         public async Task<Media2.GetSnapshotUriResponse> GetSnapshotUri2Async(string profileToken)
         {
             string mediaUri = await GetServiceUriAsync(OnvifServices.MEDIA2).ConfigureAwait(false);
-            var mediaClient = GetOrCreateClient<Media2.Media2>(mediaUri, (u) => new Media2.Media2Client(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(u)));
+            var mediaClient = GetOrCreateClient(mediaUri, u => new Media2.Media2Client(u, _settings));
             var streamUri = await mediaClient.GetSnapshotUriAsync(new Media2.GetSnapshotUriRequest(profileToken)).ConfigureAwait(false);
             return streamUri;
         }
@@ -284,7 +261,7 @@ namespace SharpOnvifClient
         public async Task<CreatePullPointSubscriptionResponse> PullPointSubscribeAsync(int initialTerminationTimeInSeconds = 60)
         {
             string eventUri = await GetServiceUriAsync(OnvifServices.EVENTS);
-            var eventPortTypeClient = GetOrCreateClient<EventPortType>(eventUri, (u) => new EventPortTypeClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(u)));
+            var eventPortTypeClient = GetOrCreateClient(eventUri, u => new EventPortTypeClient(u, _settings));
             var subscribeResponse = await eventPortTypeClient.CreatePullPointSubscriptionAsync(
                 new CreatePullPointSubscriptionRequest()
                 {
@@ -295,7 +272,7 @@ namespace SharpOnvifClient
 
         public async Task<PullMessagesResponse> PullPointPullMessagesAsync(string subscriptionReferenceAddress, int timeoutInSeconds = 60, int maxMessages = 100)
         {
-            var pullPointClient = GetOrCreateClient<PullPointSubscription>(subscriptionReferenceAddress, (u) => new PullPointSubscriptionClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(u)));
+            var pullPointClient = GetOrCreateClient(subscriptionReferenceAddress, u => new PullPointSubscriptionClient(u, _settings));
             var messages = await pullPointClient.PullMessagesAsync(
                 new PullMessagesRequest(
                     OnvifHelpers.GetTimeoutInSeconds(timeoutInSeconds),
@@ -304,10 +281,10 @@ namespace SharpOnvifClient
             return messages;
         }
 
-        public async Task<UnsubscribeResponse1> PullPointUnsubscribeAsync(string subscriptionReferenceAddress)
+        public async Task<UnsubscribeResponse> PullPointUnsubscribeAsync(string subscriptionReferenceAddress)
         {
-            var pullPointClient = GetOrCreateClient<PullPointSubscription>(subscriptionReferenceAddress, (u) => new PullPointSubscriptionClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(u)));
-            var unsubscribeResponse = await pullPointClient.UnsubscribeAsync(new UnsubscribeRequest(new Unsubscribe())).ConfigureAwait(false);
+            var pullPointClient = GetOrCreateClient(subscriptionReferenceAddress, u => new PullPointSubscriptionClient(u, _settings));
+            var unsubscribeResponse = await pullPointClient.UnsubscribeAsync(new UnsubscribeRequest()).ConfigureAwait(false);
             return unsubscribeResponse;
         }
 
@@ -315,12 +292,12 @@ namespace SharpOnvifClient
 
         #region Basic subscription
 
-        public async Task<SubscribeResponse1> BasicSubscribeAsync(string onvifEventListenerUri, int timeoutInSeconds = 60)
+        public async Task<SubscribeResponse> BasicSubscribeAsync(string onvifEventListenerUri, int timeoutInSeconds = 60)
         {
             // Basic events need an exception in Windows Firewall + VS must run as Admin
             string eventUri = await GetServiceUriAsync(OnvifServices.EVENTS);
-            var notificationProducerClient = GetOrCreateClient<NotificationProducer>(eventUri, (u) => new NotificationProducerClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(u)));
-            var subscriptionResult = await notificationProducerClient.SubscribeAsync(new SubscribeRequest(new Subscribe()
+            var notificationProducerClient = GetOrCreateClient(eventUri, u => new NotificationProducerClient(u, _settings));
+            var subscriptionResult = await notificationProducerClient.SubscribeAsync(new SubscribeRequest()
             {
                 InitialTerminationTime = OnvifHelpers.GetTimeoutInSeconds(timeoutInSeconds),
                 ConsumerReference = new EndpointReferenceType()
@@ -330,24 +307,24 @@ namespace SharpOnvifClient
                         Value = onvifEventListenerUri
                     }
                 }
-            })).ConfigureAwait(false);
+            }).ConfigureAwait(false);
             return subscriptionResult;
         }
 
-        public async Task<RenewResponse1> BasicSubscriptionRenewAsync(string subscriptionReferenceAddress, int timeoutInSeconds = 60)
+        public async Task<RenewResponse> BasicSubscriptionRenewAsync(string subscriptionReferenceAddress, int timeoutInSeconds = 60)
         {
-            var subscriptionManagerClient = GetOrCreateClient<SubscriptionManager>(subscriptionReferenceAddress, (u) => new SubscriptionManagerClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(u)));
-            var renewResult = await subscriptionManagerClient.RenewAsync(new RenewRequest(new Renew()
+            var subscriptionManagerClient = GetOrCreateClient(subscriptionReferenceAddress, u => new SubscriptionManagerClient(u, _settings));
+            var renewResult = await subscriptionManagerClient.RenewAsync(new RenewRequest()
             {
                 TerminationTime = OnvifHelpers.GetTimeoutInSeconds(timeoutInSeconds),
-            })).ConfigureAwait(false);
+            }).ConfigureAwait(false);
             return renewResult;
         }
 
-        public async Task<UnsubscribeResponse1> BasicSubscriptionUnsubscribeAsync(string subscriptionReferenceAddress)
+        public async Task<UnsubscribeResponse> BasicSubscriptionUnsubscribeAsync(string subscriptionReferenceAddress)
         {
-            var subscriptionManagerClient = GetOrCreateClient<SubscriptionManager>(subscriptionReferenceAddress, (u) => new SubscriptionManagerClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(u)));
-            var unsubscribeResult = await subscriptionManagerClient.UnsubscribeAsync(new UnsubscribeRequest(new Unsubscribe())).ConfigureAwait(false);
+            var subscriptionManagerClient = GetOrCreateClient(subscriptionReferenceAddress, u => new SubscriptionManagerClient(u, _settings));
+            var unsubscribeResult = await subscriptionManagerClient.UnsubscribeAsync(new UnsubscribeRequest()).ConfigureAwait(false);
             return unsubscribeResult;
         }
 
@@ -358,9 +335,9 @@ namespace SharpOnvifClient
         public async Task<PTZStatus> GetStatusAsync(string profileToken)
         {
             string ptzURL = await GetServiceUriAsync(OnvifServices.PTZ).ConfigureAwait(false);
-            var ptzClient = GetOrCreateClient<PTZ.PTZ>(ptzURL, (u) => new PTZClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(u)));
+            var ptzClient = GetOrCreateClient(ptzURL, u => new PTZClient(u, _settings));
             var status = await ptzClient.GetStatusAsync(profileToken).ConfigureAwait(false);
-            return status;
+            return status.PTZStatus;
         }
 
         public Task AbsoluteMoveAsync(string profileToken, float zoom, float zoomSpeed)
@@ -399,7 +376,7 @@ namespace SharpOnvifClient
         private async Task AbsoluteMoveAsync(string profileToken, PTZ.Vector2D vectorPanTilt, PTZ.Vector1D vectorZoom, PTZ.Vector2D speedPanTilt, PTZ.Vector1D speedZoom)
         {
             string ptzURL = await GetServiceUriAsync(OnvifServices.PTZ).ConfigureAwait(false);
-            var ptzClient = GetOrCreateClient<PTZ.PTZ>(ptzURL, (u) => new PTZClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(u)));
+            var ptzClient = GetOrCreateClient(ptzURL, u => new PTZClient(u, _settings));
             await ptzClient.AbsoluteMoveAsync(
                 profileToken,
                 new PTZVector()
@@ -450,7 +427,7 @@ namespace SharpOnvifClient
         private async Task RelativeMoveAsync(string profileToken, PTZ.Vector2D vectorPanTilt, PTZ.Vector1D vectorZoom, PTZ.Vector2D speedPanTilt, PTZ.Vector1D speedZoom)
         {
             string ptzURL = await GetServiceUriAsync(OnvifServices.PTZ).ConfigureAwait(false);
-            var ptzClient = GetOrCreateClient<PTZ.PTZ>(ptzURL, (u) => new PTZClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(u)));
+            var ptzClient = GetOrCreateClient(ptzURL, u => new PTZClient(u, _settings));
             await ptzClient.RelativeMoveAsync(
                 profileToken,
                 new PTZVector()
@@ -495,7 +472,7 @@ namespace SharpOnvifClient
         private async Task ContinuousMoveAsync(string profileToken, PTZ.Vector2D speedPanTilt, PTZ.Vector1D speedZoom, string timeout = null)
         {
             string ptzURL = await GetServiceUriAsync(OnvifServices.PTZ).ConfigureAwait(false);
-            var ptzClient = GetOrCreateClient<PTZ.PTZ>(ptzURL, (u) => new PTZClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(u)));
+            var ptzClient = GetOrCreateClient(ptzURL, u => new PTZClient(u, _settings));
             await ptzClient.ContinuousMoveAsync(new ContinuousMoveRequest(
                 profileToken,
                 new PTZ.PTZSpeed()
@@ -509,7 +486,7 @@ namespace SharpOnvifClient
         public async Task<GetPresetsResponse> GetPresetsAsync(string profileToken)
         {
             string ptzURL = await GetServiceUriAsync(OnvifServices.PTZ).ConfigureAwait(false);
-            var ptzClient = GetOrCreateClient<PTZ.PTZ>(ptzURL, (u) => new PTZClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(u)));
+            var ptzClient = GetOrCreateClient(ptzURL, u => new PTZClient(u, _settings));
             var presets = await ptzClient.GetPresetsAsync(new GetPresetsRequest(profileToken)).ConfigureAwait(false);
             return presets;
         }
@@ -517,7 +494,7 @@ namespace SharpOnvifClient
         public async Task GoToPresetAsync(string profileToken, string presetToken, float panSpeed, float tiltSpeed, float zoomSpeed)
         {
             string ptzURL = await GetServiceUriAsync(OnvifServices.PTZ).ConfigureAwait(false);
-            var ptzClient = GetOrCreateClient<PTZ.PTZ>(ptzURL, (u) => new PTZClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(u)));
+            var ptzClient = GetOrCreateClient(ptzURL, u => new PTZClient(u, _settings));
             await ptzClient.GotoPresetAsync(
                 profileToken,
                 presetToken,
@@ -531,7 +508,7 @@ namespace SharpOnvifClient
         public async Task<string> SetPresetAsync(string profileToken, string presetName)
         {
             string ptzURL = await GetServiceUriAsync(OnvifServices.PTZ).ConfigureAwait(false);
-            var ptzClient = GetOrCreateClient<PTZ.PTZ>(ptzURL, (u) => new PTZClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(u)));
+            var ptzClient = GetOrCreateClient(ptzURL, u => new PTZClient(u, _settings));
             var result = await ptzClient.SetPresetAsync(new SetPresetRequest(profileToken, presetName, null)).ConfigureAwait(false);
             return result.PresetToken;
         }
@@ -539,21 +516,21 @@ namespace SharpOnvifClient
         public async Task RemovePresetAsync(string profileToken, string presetToken)
         {
             string ptzURL = await GetServiceUriAsync(OnvifServices.PTZ).ConfigureAwait(false);
-            var ptzClient = GetOrCreateClient<PTZ.PTZ>(ptzURL, (u) => new PTZClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(u)));
+            var ptzClient = GetOrCreateClient(ptzURL, u => new PTZClient(u, _settings));
             await ptzClient.RemovePresetAsync(profileToken, presetToken).ConfigureAwait(false);
         }
 
         public async Task StopAsync(string profileToken, bool panTilt = true, bool zoom = true)
         {
             string ptzURL = await GetServiceUriAsync(OnvifServices.PTZ).ConfigureAwait(false);
-            var ptzClient = GetOrCreateClient<PTZ.PTZ>(ptzURL, (u) => new PTZClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(u)));
+            var ptzClient = GetOrCreateClient(ptzURL, u => new PTZClient(u, _settings));
             await ptzClient.StopAsync(profileToken, panTilt, zoom).ConfigureAwait(false);
         }
 
         public async Task<GetConfigurationsResponse> GetConfigurationsAsync()
         {
             string ptzURL = await GetServiceUriAsync(OnvifServices.PTZ).ConfigureAwait(false);
-            var ptzClient = GetOrCreateClient<PTZ.PTZ>(ptzURL, (u) => new PTZClient(OnvifBindingFactory.CreateBinding(_onvifUri), new EndpointAddress(u)));
+            var ptzClient = GetOrCreateClient(ptzURL, u => new PTZClient(u, _settings));
             var configurations = await ptzClient.GetConfigurationsAsync(new GetConfigurationsRequest()).ConfigureAwait(false);
             return configurations;
         }
