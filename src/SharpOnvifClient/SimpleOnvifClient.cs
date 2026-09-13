@@ -91,11 +91,10 @@ namespace SharpOnvifClient
             if(!onvifUri.StartsWith("http://", StringComparison.OrdinalIgnoreCase) && !onvifUri.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
                 throw new ArgumentException("Onvif URI must start with http:// or https://");
 
-            // Taken as a copy, and read once: changing what was passed in afterwards does not
-            // change what this client is doing with it.
-            this._authentication = authentication == null
-                ? new OnvifAuthenticationSettings()
-                : new OnvifAuthenticationSettings(new OnvifAuthenticationOptions(authentication.Options));
+            // Used as it was given, not copied. Copying would hand back a plain
+            // OnvifAuthenticationSettings, quietly discarding whatever a caller derived from it -
+            // and a generated client does not copy this either, so the two agree.
+            this._authentication = authentication ?? new OnvifAuthenticationSettings();
 
             if (this._authentication.Options.Authentication != DigestAuthentication.None)
             {

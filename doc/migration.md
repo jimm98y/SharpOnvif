@@ -105,10 +105,10 @@ what a client had to remember between a challenge and the request answering it -
 the headers, the session nonce - for a WCF behaviour to drive. `HttpDigestHandler` keeps the same
 state itself now, as a handler in the client's own pipeline, so there is nothing left to hand it.
 
-`SimpleOnvifClient` keeps every method signature and all but one constructor: the one taking
-authentication takes an `OnvifAuthenticationSettings` where it took a
-`DigestAuthenticationSchemeOptions`, which section 5 covers. Its other edits are the response
-renames in section 3 and the `using` in section 2.
+`SimpleOnvifClient` keeps every constructor and method signature. The one taking authentication is
+declared in terms of `OnvifAuthenticationSettings` now, which
+`DigestAuthenticationSchemeOptions` derives from, so what you pass it is what you passed it. Its
+only edits are the response renames in section 3 and the `using` in section 2.
 
 ### Exceptions
 
@@ -267,21 +267,19 @@ algorithms, which qualities of protection, which operations need no credentials.
 extension method on the options, so it reads as it always did wherever `SharpOnvifCommon.Security`
 is in scope, and `Offers` joined it for asking whether a scheme is in play.
 
-`SimpleOnvifClient` is told the same way. Its own
-`SharpOnvifClient.Security.DigestAuthenticationSchemeOptions` is gone: it described exactly what
-`OnvifAuthenticationSettings` already describes, so a caller now passes that.
+`SimpleOnvifClient` is told the same way, and is told it in the same words as before:
+`SharpOnvifClient.Security.DigestAuthenticationSchemeOptions` is an `OnvifAuthenticationSettings`
+under the name client code already writes, so the call is unchanged.
 
 ```cs
-- new SimpleOnvifClient(uri, "admin", "password",
--     new DigestAuthenticationSchemeOptions(DigestAuthentication.HttpDigest))
-+ new SimpleOnvifClient(uri, "admin", "password",
-+     new OnvifAuthenticationSettings(DigestAuthentication.HttpDigest))
+new SimpleOnvifClient(uri, "admin", "password",
+    new DigestAuthenticationSchemeOptions(DigestAuthentication.HttpDigest))
 ```
 
-Saying more than which schemes means saying it in the options:
+Saying more than which schemes means saying it in the options, which either name takes:
 
 ```cs
-new OnvifAuthenticationSettings(
+new DigestAuthenticationSchemeOptions(
     new OnvifAuthenticationOptions(DigestAuthentication.HttpDigest) { HttpDigestUserHash = false })
 ```
 
@@ -346,8 +344,9 @@ instances must agree on one.
 `SharpOnvifServer.Events.IEventSource` and the `IServer.GetHttpEndpoint` helpers keep their shapes:
 nothing you already set on them has moved or changed meaning. The server's
 `DigestAuthenticationSchemeOptions` keeps its name and everything the device owns; what the two
-sides agree on moved onto `Onvif`, as above. The client had a different type of the same name, and
-that one is gone - see above.
+sides agree on moved onto `Onvif`, as above. The client's type of that name is still in
+`SharpOnvifClient.Security` and still what `SimpleOnvifClient` takes; what it carries moved onto
+the settings it now derives from, as above.
 
 ## 6. Behaviour that changed without a signature changing
 

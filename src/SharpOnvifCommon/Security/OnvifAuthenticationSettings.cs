@@ -35,8 +35,11 @@ namespace SharpOnvifCommon.Security
     /// knows. What it does is here; what it was told to do is <see cref="Options"/>, which
     /// describes a negotiation rather than performing one and is the same object a device is
     /// configured with.
+    /// <para>
+    /// Not sealed: SharpOnvifClient derives the name its callers already write from it.
+    /// </para>
     /// </remarks>
-    public sealed class OnvifAuthenticationSettings : IClientAuthentication
+    public class OnvifAuthenticationSettings : IClientAuthentication
     {
         /// <summary>What this authenticates with: the schemes, algorithms and the rest.</summary>
         public OnvifAuthenticationOptions Options { get; private set; }
