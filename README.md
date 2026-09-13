@@ -267,6 +267,17 @@ Where the Onvif schema names a type after something the framework already has, t
 is prefixed to keep both usable side by side without aliases - `tt:DateTime` becomes
 `OnvifDateTime`, `tt:IPAddress` becomes `OnvifIPAddress`. What goes on the wire is unchanged.
 
+`tt:VideoEncoding` is generated wider than the schema: onvif.xsd still enumerates only JPEG, MPEG4
+and H264, so the generated enum also carries `H265`, `AV1`, `H266` and `AV2`. The extra values are
+configured for the generator in `ServiceCatalog`, not edited into its output, so regenerating keeps
+them and the conversions to and from their XML form stay in step. Any schema enumeration can be
+widened the same way from the command line:
+
+```
+dotnet run --project src/WsdlGenerator -- --wsdl ./bank.wsdl --namespace Example.Banking \
+    --out ./Generated --enum-value "{http://www.onvif.org/ver10/schema}VideoEncoding=AV1"
+```
+
 Open `src/SharpOnvif.sln` to build everything.
 
 ## Credits

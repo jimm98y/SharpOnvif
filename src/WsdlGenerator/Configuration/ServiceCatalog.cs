@@ -1,3 +1,6 @@
+using WsdlGenerator.Xml;
+using WsdlGenerator.Xsd;
+
 namespace WsdlGenerator.Configuration;
 
 /// <summary>
@@ -32,7 +35,30 @@ internal static class ServiceCatalog
                 "SharpOnvifServer", Path.Combine(outputRoot, "SharpOnvifServer", "Generated"),
                 Client: false, Server: true),
         ],
+        EnumerationExtensions = VideoEncodings,
     };
+
+    /// <summary>
+    /// onvif.xsd still enumerates tt:VideoEncoding as JPEG, MPEG4 and H264, and a generated enum
+    /// with no name for a codec cannot report one. Cameras have been answering H265 for years,
+    /// AV1 is following it, and H266 and AV2 are the generation after that. ONVIF's own newer
+    /// tt:VideoEncodingMimeNames already lists H265.
+    /// <para>
+    /// The order matters as much as the membership: these are appended, so the number behind each
+    /// existing name stays what it was and a value persisted by an older build still reads back as
+    /// the codec it named.
+    /// </para>
+    /// </summary>
+    private static readonly IReadOnlyList<EnumerationExtension> VideoEncodings =
+    [
+        new(Schema("VideoEncoding"), "H265", "H.265 / HEVC. Sent by devices; not listed by onvif.xsd."),
+        new(Schema("VideoEncoding"), "AV1", "AV1. Sent by devices; not listed by onvif.xsd."),
+        new(Schema("VideoEncoding"), "H266", "H.266 / VVC. Sent by devices; not listed by onvif.xsd."),
+        new(Schema("VideoEncoding"), "AV2", "AV2. Sent by devices; not listed by onvif.xsd."),
+    ];
+
+    /// <summary>A name in the shared Onvif schema, the one onvif.xsd declares.</summary>
+    private static QName Schema(string localName) => new("http://www.onvif.org/ver10/schema", localName);
 
     /// <summary>
     /// Every ONVIF service SharpOnvif ships bindings for. The WSDL URLs match wsdl/sources.txt

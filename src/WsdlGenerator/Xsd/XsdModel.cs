@@ -33,8 +33,14 @@ internal sealed class XsdSimpleType : XsdType
     /// <summary>The restriction base, or null when this restricts an anonymous type.</summary>
     public QName? BaseType { get; init; }
 
+    private readonly List<XsdEnumValue> _enumerations = [];
+
     /// <summary>Non-empty when the restriction enumerates its legal values, which becomes a C# enum.</summary>
-    public IReadOnlyList<XsdEnumValue> Enumerations { get; init; } = [];
+    public IReadOnlyList<XsdEnumValue> Enumerations
+    {
+        get => _enumerations;
+        init => _enumerations.AddRange(value);
+    }
 
     /// <summary>Item type for <see cref="SimpleTypeVariety.List"/>, which maps to a C# array.</summary>
     public QName? ItemType { get; init; }
@@ -42,7 +48,13 @@ internal sealed class XsdSimpleType : XsdType
     /// <summary>Member types for <see cref="SimpleTypeVariety.Union"/>.</summary>
     public IReadOnlyList<QName> MemberTypes { get; init; } = [];
 
-    public bool IsEnumeration => Enumerations.Count > 0;
+    public bool IsEnumeration => _enumerations.Count > 0;
+
+    /// <summary>
+    /// Appends a value the schema does not list. See <see cref="EnumerationExtension"/> for why a
+    /// generated enum sometimes has to be wider than the schema it came from.
+    /// </summary>
+    public void Extend(XsdEnumValue value) => _enumerations.Add(value);
 }
 
 internal sealed record XsdEnumValue(string Value, string? Documentation);

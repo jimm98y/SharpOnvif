@@ -1721,6 +1721,26 @@ namespace SharpOnvifCommon.Onvif
 
         H264,
 
+        /// <summary>
+        /// H.265 / HEVC. Sent by devices; not listed by onvif.xsd.
+        /// </summary>
+        H265,
+
+        /// <summary>
+        /// AV1. Sent by devices; not listed by onvif.xsd.
+        /// </summary>
+        AV1,
+
+        /// <summary>
+        /// H.266 / VVC. Sent by devices; not listed by onvif.xsd.
+        /// </summary>
+        H266,
+
+        /// <summary>
+        /// AV2. Sent by devices; not listed by onvif.xsd.
+        /// </summary>
+        AV2,
+
     }
 
     /// <summary>
@@ -5727,6 +5747,14 @@ namespace SharpOnvifCommon.Onvif
                     return "MPEG4";
                 case VideoEncoding.H264:
                     return "H264";
+                case VideoEncoding.H265:
+                    return "H265";
+                case VideoEncoding.AV1:
+                    return "AV1";
+                case VideoEncoding.H266:
+                    return "H266";
+                case VideoEncoding.AV2:
+                    return "AV2";
                 default:
                     return null;
             }
@@ -5742,6 +5770,14 @@ namespace SharpOnvifCommon.Onvif
                     return VideoEncoding.MPEG4;
                 case "H264":
                     return VideoEncoding.H264;
+                case "H265":
+                    return VideoEncoding.H265;
+                case "AV1":
+                    return VideoEncoding.AV1;
+                case "H266":
+                    return VideoEncoding.H266;
+                case "AV2":
+                    return VideoEncoding.AV2;
                 default:
                     return default(VideoEncoding);
             }

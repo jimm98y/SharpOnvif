@@ -1,3 +1,5 @@
+using WsdlGenerator.Xsd;
+
 namespace WsdlGenerator.Configuration;
 
 /// <summary>
@@ -27,4 +29,10 @@ internal sealed record GeneratorOptions
 
     /// <summary>Where the per-service code goes.</summary>
     public required IReadOnlyList<GenerationTarget> Targets { get; init; }
+
+    /// <summary>
+    /// Values to add to schema enumerations that the schema does not list, for the case where the
+    /// published schema trails what devices actually send.
+    /// </summary>
+    public IReadOnlyList<EnumerationExtension> EnumerationExtensions { get; init; } = [];
 }

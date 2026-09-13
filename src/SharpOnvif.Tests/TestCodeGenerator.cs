@@ -163,6 +163,106 @@ namespace SharpOnvif.Tests
         }
 
         [TestMethod]
+        public void AddsAValueTheSchemaDoesNotEnumerate()
+        {
+            // A published schema trails what implementations send. The value is configured for the
+            // generator rather than edited into its output, so regenerating keeps it - and keeps
+            // the conversions generated beside the enum in step with it.
+            string output = NewOutputDirectory();
+            try
+            {
+                var options = CommandLine.Parse(
+                    ["--wsdl", Fixture, "--namespace", "Example.Banking", "--out", output,
+                     "--enum-value", "{urn:example:money}Currency=GBP"]);
+
+                new CodeGenerator(options!).Run();
+
+                string shared = File.ReadAllText(Path.Combine(output, "Schema", "DataContracts.cs"));
+
+                StringAssert.Contains(shared, "GBP,", "the enum has to be able to name the value");
+                StringAssert.Contains(shared, "case Currency.GBP:", "writing it has to produce its XML form");
+                StringAssert.Contains(shared, "return Currency.GBP;", "reading that form back has to produce it");
+            }
+            finally
+            {
+                Directory.Delete(output, recursive: true);
+            }
+        }
+
+        [TestMethod]
+        public void LeavesAValueTheSchemaAlreadyEnumeratesAlone()
+        {
+            // A schema that catches up makes the configured value redundant, not wrong.
+            string output = NewOutputDirectory();
+            try
+            {
+                var options = CommandLine.Parse(
+                    ["--wsdl", Fixture, "--namespace", "Example.Banking", "--out", output,
+                     "--enum-value", "{urn:example:money}Currency=EUR"]);
+
+                new CodeGenerator(options!).Run();
+
+                string shared = File.ReadAllText(Path.Combine(output, "Schema", "DataContracts.cs"));
+
+                Assert.AreEqual(1, Occurrences(shared, "case Currency.EUR:"),
+                    "the value the schema now carries must not be added a second time");
+            }
+            finally
+            {
+                Directory.Delete(output, recursive: true);
+            }
+        }
+
+        [TestMethod]
+        public void RefusesToAddAValueToSomethingThatIsNotAnEnumeration()
+        {
+            string output = NewOutputDirectory();
+            try
+            {
+                var notAnEnumeration = CommandLine.Parse(
+                    ["--wsdl", Fixture, "--namespace", "Example.Banking", "--out", output,
+                     "--enum-value", "{urn:example:money}Money=GBP"]);
+
+                Assert.ThrowsExactly<SchemaException>(() => new CodeGenerator(notAnEnumeration!).Run());
+
+                var noSuchType = CommandLine.Parse(
+                    ["--wsdl", Fixture, "--namespace", "Example.Banking", "--out", output,
+                     "--enum-value", "{urn:example:money}Nonexistent=GBP"]);
+
+                Assert.ThrowsExactly<SchemaException>(() => new CodeGenerator(noSuchType!).Run(),
+                    "a typo in the type name must not pass silently");
+            }
+            finally
+            {
+                Directory.Delete(output, recursive: true);
+            }
+        }
+
+        [DataRow("Currency=GBP", DisplayName = "no namespace braces")]
+        [DataRow("{urn:example:money}Currency", DisplayName = "no value")]
+        [DataRow("{urn:example:money}Currency=", DisplayName = "empty value")]
+        [DataRow("{urn:example:money=GBP", DisplayName = "unclosed namespace")]
+        [DataRow("{urn:example:money}=GBP", DisplayName = "no local name")]
+        [TestMethod]
+        public void RejectsAnEnumValueItCannotRead(string argument)
+        {
+            Assert.ThrowsExactly<SchemaException>(() => CommandLine.Parse(
+                ["--wsdl", Fixture, "--namespace", "Example", "--out", "out", "--enum-value", argument]));
+        }
+
+        private static int Occurrences(string text, string value)
+        {
+            int count = 0;
+            for (int i = text.IndexOf(value, StringComparison.Ordinal); i >= 0;
+                 i = text.IndexOf(value, i + value.Length, StringComparison.Ordinal))
+            {
+                count++;
+            }
+
+            return count;
+        }
+
+        [TestMethod]
         public void RejectsArgumentsItCannotActOn()
         {
             Assert.ThrowsExactly<SchemaException>(

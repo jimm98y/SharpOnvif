@@ -285,6 +285,35 @@ namespace SharpOnvif.Tests
             Assert.AreEqual("M", parsed.Model, "reading has to continue past an unknown element");
         }
 
+        [DataRow(VideoEncoding.H265, "H265", DisplayName = "H.265")]
+        [DataRow(VideoEncoding.AV1, "AV1", DisplayName = "AV1")]
+        [DataRow(VideoEncoding.H266, "H266", DisplayName = "H.266")]
+        [DataRow(VideoEncoding.AV2, "AV2", DisplayName = "AV2")]
+        [DataRow(VideoEncoding.H264, "H264", DisplayName = "H.264, which the schema does list")]
+        [TestMethod]
+        public void CarriesTheCodecsDevicesSendButOnvifDoesNotEnumerate(VideoEncoding encoding, string onTheWire)
+        {
+            // onvif.xsd enumerates tt:VideoEncoding as JPEG, MPEG4 and H264 only. Cameras answer
+            // H265, AV1, H266 and AV2 all the same, so the generator is configured to widen the
+            // enum - see ServiceCatalog. The point of the configuration is that regenerating keeps
+            // it, which a value edited into the generated file would not survive.
+            var configuration = new VideoEncoderConfiguration
+            {
+                Name = "main",
+                UseCount = 1,
+                Encoding = encoding,
+                Resolution = new VideoResolution { Width = 3840, Height = 2160 },
+                Quality = 5,
+                RateControl = new VideoRateControl { FrameRateLimit = 30, EncodingInterval = 1, BitrateLimit = 8192 },
+                SessionTimeout = "PT60S",
+            };
+
+            string xml = WriteWithGeneratedWriter(configuration, Trt, "Configuration");
+            StringAssert.Contains(xml, ">" + onTheWire + "<", "the codec has to reach the wire under its Onvif name");
+
+            AssertRoundTrips(configuration, Trt, "Configuration");
+        }
+
         // ------------------------------------------------------------------ helpers
 
         private static void AssertRoundTrips<T>(T value, string ns, string elementName)

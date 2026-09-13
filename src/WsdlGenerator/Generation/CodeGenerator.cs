@@ -45,6 +45,10 @@ internal sealed class CodeGenerator
             parsed.Add((definition, wsdl));
         }
 
+        // Before anything is modelled, so that an added value reaches the enum and the conversions
+        // generated beside it alike.
+        SchemaExtensions.Apply(schema, _options.EnumerationExtensions);
+
         var serviceNamespaces = parsed
             .SelectMany(s => s.Wsdl.TargetNamespaces)
             .ToHashSet(StringComparer.Ordinal);

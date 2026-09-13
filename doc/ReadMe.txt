@@ -16,4 +16,8 @@ The generator is not specific to Onvif. To generate from any document/literal SO
 
 Run it with --help for the full set of options.
 
+A schema that trails what devices actually send can be widened with --enum-value, which adds a
+value to an enumeration the schema does not list. That is how tt:VideoEncoding comes out with
+H265, AV1, H266 and AV2 in it; see EnumerationExtensions in ServiceCatalog.
+
 See doc/codegen.md for what the generator does and why.

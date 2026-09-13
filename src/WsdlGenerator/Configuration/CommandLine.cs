@@ -1,4 +1,5 @@
 using WsdlGenerator.Xml;
+using WsdlGenerator.Xsd;
 
 namespace WsdlGenerator.Configuration;
 
@@ -29,6 +30,10 @@ internal static class CommandLine
           --server                 Generate services only.
           --mirror <dir>           Resolve every document from this directory rather than from
                                    disk and the network, using the layout wsdl/fetch.sh writes.
+          --enum-value <t>=<v>     Add a value to a schema enumeration that the schema does not
+                                   list, for when a published schema trails what implementations
+                                   actually send. The type is written {namespace}LocalName, so
+                                   --enum-value "{http://example.com/s}Codec=AV1". Repeat for more.
           --help                   Show this.
 
         Generated code depends on the SharpOnvifCommon runtime, and the server side additionally
@@ -48,6 +53,7 @@ internal static class CommandLine
         string? sharedNamespace = null;
         string? sharedOutput = null;
         string? mirror = null;
+        var enumValues = new List<EnumerationExtension>();
         bool client = false;
         bool server = false;
 
@@ -61,6 +67,7 @@ internal static class CommandLine
                 case "--shared-namespace": sharedNamespace = Value(arguments, ref i); break;
                 case "--shared-out": sharedOutput = Value(arguments, ref i); break;
                 case "--mirror": mirror = Value(arguments, ref i); break;
+                case "--enum-value": enumValues.Add(ToEnumerationExtension(Value(arguments, ref i))); break;
                 case "--client": client = true; break;
                 case "--server": server = true; break;
                 default:
@@ -85,7 +92,36 @@ internal static class CommandLine
             SharedNamespace = sharedNamespace ?? rootNamespace + ".Schema",
             SharedDirectory = sharedOutput is null ? Path.Combine(root, "Schema") : Path.GetFullPath(sharedOutput),
             Targets = [new GenerationTarget(rootNamespace, root, client, server)],
+            EnumerationExtensions = enumValues,
         };
+    }
+
+    /// <summary>
+    /// Reads an <c>--enum-value</c> value: a type in <c>{namespace}LocalName</c> form - the same
+    /// form <see cref="QName.ToString"/> writes - then '=', then the value to add.
+    /// </summary>
+    private static EnumerationExtension ToEnumerationExtension(string argument)
+    {
+        int separator = argument.IndexOf('=');
+        if (separator <= 0 || separator == argument.Length - 1)
+            throw new SchemaException($"--enum-value wants <type>=<value>, not '{argument}'.");
+
+        string type = argument.Substring(0, separator).Trim();
+        string value = argument.Substring(separator + 1).Trim();
+
+        if (!type.StartsWith('{'))
+            throw new SchemaException(
+                $"--enum-value names the type as {{namespace}}LocalName, not '{type}'. A type in no namespace is written {{}}LocalName.");
+
+        int close = type.IndexOf('}');
+        if (close < 0)
+            throw new SchemaException($"--enum-value type '{type}' has no closing brace.");
+
+        string localName = type.Substring(close + 1);
+        if (localName.Length == 0)
+            throw new SchemaException($"--enum-value type '{type}' names a namespace but no type.");
+
+        return new EnumerationExtension(new QName(type.Substring(1, close - 1), localName), value);
     }
 
     private static string Value(IReadOnlyList<string> arguments, ref int index)
