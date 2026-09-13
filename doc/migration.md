@@ -325,6 +325,17 @@ Nothing in your code changes as long as you hand the camera whatever
 yourself, or persisted one across runs, it will no longer be accepted: ask the listener for it.
 Setting `PathToken` to null restores the old bare address.
 
+### A device that does not answer raises an Onvif exception
+
+A client call used to let the HTTP stack's own exceptions through: a dropped connection as an
+`HttpIOException` inside an `HttpRequestException`, a timeout as a `TaskCanceledException`. Neither
+says anything about Onvif, and an application that did not catch all of them crashed when the
+device was stopped. Both are now `SharpOnvifCommon.Soap.OnvifTransportException`, with the original
+exception as `InnerException` and `TimedOut` telling the two apart.
+
+If you catch `HttpRequestException` around an Onvif call, catch `OnvifTransportException` instead.
+A cancellation you requested is unchanged - it still arrives as an `OperationCanceledException`.
+
 ### Behaviour that changed without the signature changing
 
 These compile as they did and behave differently, because they were wrong:

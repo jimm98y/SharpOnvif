@@ -1,0 +1,64 @@
+// SharpOnvif
+// Copyright (C) 2026 Lukas Volf
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+using System;
+
+namespace SharpOnvifCommon.Soap
+{
+    /// <summary>
+    /// The request never got an answer: the device could not be reached, dropped the connection,
+    /// or did not reply in time.
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// A device is a thing on a network that reboots, loses power and falls off the air, and an
+    /// application talking to one has to expect it - a pull point subscription in particular spends
+    /// nearly all of its time waiting on a request that a device going away will cut short. This is
+    /// raised for all of those, so that handling them is one catch clause rather than a guess at
+    /// which exception the HTTP stack happened to raise: a dropped connection arrives as an
+    /// HttpIOException inside an HttpRequestException, a timeout arrives as a
+    /// TaskCanceledException, and neither says anything about Onvif.
+    /// </para>
+    /// <para>
+    /// It is distinct from <see cref="Xml.OnvifFaultException"/>, which means the device answered
+    /// and said no. <see cref="Exception.InnerException"/> carries what actually happened.
+    /// </para>
+    /// <para>
+    /// A cancellation the caller asked for is not this: that still arrives as an
+    /// <see cref="OperationCanceledException"/>.
+    /// </para>
+    /// </remarks>
+    public class OnvifTransportException : Exception
+    {
+        public OnvifTransportException(string message) : base(message)
+        { }
+
+        public OnvifTransportException(string message, Exception innerException)
+            : base(message, innerException)
+        { }
+
+        /// <summary>
+        /// True when the device did not answer in time, rather than refusing the connection or
+        /// dropping it.
+        /// </summary>
+        public bool TimedOut { get; internal set; }
+    }
+}

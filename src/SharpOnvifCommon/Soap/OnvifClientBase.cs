@@ -190,7 +190,30 @@ namespace SharpOnvifCommon.Soap
 
             if (_settings.DisableExpect100Continue) message.Headers.ExpectContinue = false;
 
-            HttpResponseMessage response = await _http.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            HttpResponseMessage response;
+            try
+            {
+                response = await _http.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            }
+            catch (HttpRequestException ex)
+            {
+                // The device could not be reached, or dropped the connection - which is what
+                // stopping a device does to a client waiting on a pull. Raised as one Onvif
+                // exception so that an application does not have to know which of the HTTP
+                // stack's exceptions means "the camera went away".
+                throw new OnvifTransportException(
+                    "The Onvif request to " + EndpointUri + " did not reach the device: " + ex.Message, ex);
+            }
+            catch (OperationCanceledException ex) when (!cancellationToken.IsCancellationRequested)
+            {
+                // Not the caller's cancellation - the client's own timeout. It arrives as a
+                // TaskCanceledException, which says nothing about what went wrong.
+                throw new OnvifTransportException(
+                    "The Onvif request to " + EndpointUri + " timed out after " + _settings.Timeout + ".", ex)
+                {
+                    TimedOut = true,
+                };
+            }
 
             // A fault comes back as a SOAP envelope with a non-success status: the Onvif core
             // specification uses 400 for a sender fault and 500 for a receiver one. Whenever the

@@ -276,6 +276,33 @@ Every operation also has an overload that takes the request's members directly, 
 ```cs
 var services = await deviceClient.GetServicesAsync(includeCapability: false);
 ```
+A device that cannot be reached, drops the connection, or does not answer in time raises
+`SharpOnvifCommon.Soap.OnvifTransportException`. A device is a thing that reboots and loses power,
+and a pull point spends nearly all its time waiting on a request that any of those cuts short, so
+a loop that polls one has to expect it:
+```cs
+while (true)
+{
+    var subscription = await client.PullPointSubscribeAsync(60);
+    try
+    {
+        while (true)
+        {
+            var messages = await client.PullPointPullMessagesAsync(
+                subscription.SubscriptionReference.Address.Value);
+            // handle the notifications
+        }
+    }
+    catch (OnvifTransportException)
+    {
+        // the device went away; it has forgotten the subscription, so make a new one
+    }
+}
+```
+`TimedOut` tells a device that ran late from one that was not there at all, and `InnerException`
+carries what the HTTP stack actually said. A cancellation you asked for is not this - that still
+arrives as an `OperationCanceledException`.
+
 A device that answers with a SOAP fault raises `SharpOnvifCommon.Xml.OnvifFaultException`, which carries the Onvif error subcode:
 ```cs
 try

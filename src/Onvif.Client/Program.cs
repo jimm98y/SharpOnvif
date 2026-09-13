@@ -32,6 +32,9 @@ using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 using SharpOnvifCommon.Onvif;
+using SharpOnvifCommon.Soap;
+using SharpOnvifCommon.Xml;
+using SharpOnvifClient.Events;
 
 public static class Program
 {
@@ -132,20 +135,55 @@ public static class Program
 
     static async Task PullPointEventSubscription(SimpleOnvifClient client)
     {
-        // The device decides what it grants; asking for a second gets a subscription that is
-        // gone before the first pull returns.
-        var subscription = await client.PullPointSubscribeAsync(60);
+        // A pull point spends nearly all of its time waiting on a request, so a device that
+        // reboots, loses power or is simply stopped cuts that request short. That is normal, and a
+        // subscription does not survive it: the device has forgotten it, so a new one is made.
         while (true)
         {
-            var messages = await client.PullPointPullMessagesAsync(subscription.SubscriptionReference.Address.Value);
-
-            foreach (var ev in messages.NotificationMessage)
+            // The device decides what it grants; asking for a second gets a subscription that is
+            // gone before the first pull returns.
+            CreatePullPointSubscriptionResponse subscription;
+            try
             {
-                if (OnvifEvents.IsMotionDetected(ev) != null)
-                    Console.WriteLine($"Motion detected: {OnvifEvents.IsMotionDetected(ev)}");
-                else if (OnvifEvents.IsTamperDetected(ev) != null)
-                    Console.WriteLine($"Tamper detected: {OnvifEvents.IsTamperDetected(ev)}");
+                subscription = await client.PullPointSubscribeAsync(60);
             }
+            catch (OnvifTransportException ex)
+            {
+                Console.WriteLine($"Cannot reach the device: {ex.Message}");
+                await Task.Delay(TimeSpan.FromSeconds(5));
+                continue;
+            }
+
+            string address = subscription.SubscriptionReference.Address.Value;
+            Console.WriteLine($"Subscribed: {address}");
+
+            try
+            {
+                while (true)
+                {
+                    var messages = await client.PullPointPullMessagesAsync(address);
+
+                    foreach (var ev in messages.NotificationMessage ?? Array.Empty<NotificationMessageHolderType>())
+                    {
+                        if (OnvifEvents.IsMotionDetected(ev) != null)
+                            Console.WriteLine($"Motion detected: {OnvifEvents.IsMotionDetected(ev)}");
+                        else if (OnvifEvents.IsTamperDetected(ev) != null)
+                            Console.WriteLine($"Tamper detected: {OnvifEvents.IsTamperDetected(ev)}");
+                    }
+                }
+            }
+            catch (OnvifTransportException ex)
+            {
+                Console.WriteLine($"Lost the device, subscribing again: {ex.Message}");
+            }
+            catch (OnvifFaultException ex)
+            {
+                // The device answered and said no - the subscription expired while we were away,
+                // say. A new one is the answer to that too.
+                Console.WriteLine($"The device refused the pull, subscribing again: {ex.Message}");
+            }
+
+            await Task.Delay(TimeSpan.FromSeconds(5));
         }
     }
 
@@ -167,7 +205,17 @@ public static class Program
         while (true)
         {
             await Task.Delay(1000 * 60);
-            var result = await client.BasicSubscriptionRenewAsync(subscriptionResponse.SubscriptionReference.Address.Value);
+
+            try
+            {
+                await client.BasicSubscriptionRenewAsync(subscriptionResponse.SubscriptionReference.Address.Value);
+            }
+            catch (Exception ex) when (ex is OnvifTransportException || ex is OnvifFaultException)
+            {
+                // The device went away, or forgot the subscription while we were not looking.
+                Console.WriteLine($"Renewing failed, subscribing again: {ex.Message}");
+                subscriptionResponse = await client.BasicSubscribeAsync(eventListener.GetOnvifEventListenerUri());
+            }
         }
     }
 
