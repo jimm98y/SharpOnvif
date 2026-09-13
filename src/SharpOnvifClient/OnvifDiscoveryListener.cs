@@ -21,13 +21,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using SharpOnvifCommon;
 
 namespace SharpOnvifClient
 {
@@ -82,6 +82,13 @@ namespace SharpOnvifClient
 
         /// <summary>Raised when a device announces that it is leaving.</summary>
         public event EventHandler<OnvifAnnouncementEventArgs> DeviceLeft;
+
+        /// <summary>
+        /// Raised when the listener could not do something - open a socket on an interface, read
+        /// what arrived, or run a handler. Listening carries on: one interface that cannot carry
+        /// multicast is ordinary, and is not a reason to stop hearing the others.
+        /// </summary>
+        public event EventHandler<OnvifDiscoveryFailureEventArgs> Failed;
 
         /// <summary>
         /// Starts listening on every interface that can carry multicast, IPv4 and IPv6 alike.
@@ -192,7 +199,8 @@ namespace SharpOnvifClient
             {
                 // One interface that cannot carry this - a VM bridge with no IPv6, say - is not a
                 // reason to listen on none of the others.
-                Debug.WriteLine($"Cannot listen for Onvif announcements on {nic.Address}: {ex.Message}");
+                OnvifDiscoveryFailure.Raise(Failed, this, OnvifDiscoveryOperation.Listen,
+                    nic.Address.ToString(), ex);
                 client?.Dispose();
                 return;
             }
@@ -225,7 +233,8 @@ namespace SharpOnvifClient
                     catch (Exception ex)
                     {
                         // One bad datagram is not a reason to stop listening to the network.
-                        Debug.WriteLine($"Onvif announcement on {nic.Address} could not be read: {ex.Message}");
+                        OnvifDiscoveryFailure.Raise(Failed, this, OnvifDiscoveryOperation.Receive,
+                            nic.Address.ToString(), ex);
                     }
                 }
             });
@@ -282,7 +291,7 @@ namespace SharpOnvifClient
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"An Onvif announcement handler threw: {ex.Message}");
+                OnvifDiscoveryFailure.Raise(Failed, this, OnvifDiscoveryOperation.Handler, null, ex);
             }
         }
 
@@ -342,7 +351,7 @@ namespace SharpOnvifClient
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"An Onvif announcement listener did not stop cleanly: {ex.Message}");
+                Log.Warning("An Onvif announcement listener did not stop cleanly.", ex);
             }
 
             foreach (UdpClient client in clients)
@@ -353,7 +362,7 @@ namespace SharpOnvifClient
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine($"An Onvif announcement socket did not close: {ex.Message}");
+                    Log.Warning("An Onvif announcement socket did not close.", ex);
                 }
             }
 

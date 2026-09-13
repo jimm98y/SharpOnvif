@@ -391,6 +391,16 @@ These compile as they did and behave differently, because they were wrong:
   stack overflow cannot be caught. Both are far above anything Onvif describes, and both are
   settable if your device really does send more.
 
+### Diagnostics that used to go nowhere
+
+Failures inside the client were written with `Debug.WriteLine`, which a release build removes. They
+now go through `SharpOnvifCommon.Log`, whose default logger writes to the console and is switched
+off - so the default behaviour is as quiet as before, and there is now a way to hear it. Implement
+`IOnvifLogger` to route it into your own logging.
+
+Discovery also raises `OnvifDiscoveryClient.Failed` and `OnvifDiscoveryListener.Failed` for
+failures on a single interface, which it carries on past.
+
 ## 7. New in 0.10.0
 
 Worth knowing about once you are building again:

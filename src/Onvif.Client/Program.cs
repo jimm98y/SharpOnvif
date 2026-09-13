@@ -54,6 +54,19 @@ public static class Program
         Console.CancelKeyPress += (_, e) => { e.Cancel = true; stopping.Cancel(); };
         Stopping = stopping.Token;
 
+        // Everything the library could not do, said out loud. Discovery works on every interface
+        // at once and carries on when one of them fails, so without this a Probe that never left
+        // the machine looks exactly like a network with no cameras on it.
+        SharpOnvifCommon.Log.Logger = new SharpOnvifCommon.DefaultOnvifLogger
+        {
+            IsLoggingEnabled = true,
+            IsInfoEnabled = false,
+            IsDebugEnabled = false,
+            IsTraceEnabled = false,
+        };
+
+        OnvifDiscoveryClient.Failed += (_, e) => Console.WriteLine($"  ! {e}");
+
         static bool IsOnThisMachine(OnvifDiscoveryResult candidate) =>
             candidate.Addresses != null &&
             candidate.Addresses.Any(address => address.Contains("127.0.0.1") || address.Contains("[::1]"));

@@ -21,7 +21,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -31,6 +30,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.XPath;
+
+using SharpOnvifCommon;
 
 namespace SharpOnvifClient
 {
@@ -45,6 +46,14 @@ namespace SharpOnvifClient
         public static string OnvifDiscoveryAddressIPV6 = "ff02::c";
 
         private static readonly SemaphoreSlim _discoverySlim = new SemaphoreSlim(1);
+
+        /// <summary>
+        /// Raised when discovery could not do something on one interface. Discovery carries on -
+        /// an interface that cannot carry multicast is ordinary - which is what makes these worth
+        /// hearing: a Probe that never left the machine looks exactly like a network with nothing
+        /// on it.
+        /// </summary>
+        public static event EventHandler<OnvifDiscoveryFailureEventArgs> Failed;
 
         /// <summary>How often <see cref="WaitForDeviceAsync"/> probes while it waits.</summary>
         public static TimeSpan WaitForDeviceProbeInterval { get; set; } = TimeSpan.FromSeconds(10);
@@ -106,7 +115,7 @@ namespace SharpOnvifClient
                     {
                         // A probe that fails - no route, an interface going down - is not the end
                         // of the wait. The next one may work, and the Hello may arrive anyway.
-                        Debug.WriteLine($"Probing for an Onvif device failed: {ex.Message}");
+                        OnvifDiscoveryFailure.Raise(Failed, null, OnvifDiscoveryOperation.Probe, null, ex);
                     }
 
                     if (found.Task.IsCompleted) break;
@@ -132,7 +141,7 @@ namespace SharpOnvifClient
             catch (Exception ex)
             {
                 // The caller's predicate, on data from the network.
-                Debug.WriteLine($"An Onvif device filter threw: {ex.Message}");
+                OnvifDiscoveryFailure.Raise(Failed, null, OnvifDiscoveryOperation.Handler, null, ex);
                 return false;
             }
         }
@@ -225,7 +234,19 @@ namespace SharpOnvifClient
                 }
             }
 
-            await Task.WhenAll(discoveryTasks);
+            // Not Task.WhenAll: one interface throwing must not lose the devices the others
+            // found, and must not vanish either.
+            foreach (var task in discoveryTasks)
+            {
+                try
+                {
+                    await task;
+                }
+                catch (Exception ex)
+                {
+                    OnvifDiscoveryFailure.Raise(Failed, null, OnvifDiscoveryOperation.Probe, null, ex);
+                }
+            }
 
             return discoveryTasks.Where(x => x.IsCompleted && !x.IsFaulted && !x.IsCanceled).SelectMany(x => x.Result).GroupBy(r => r.Addresses.FirstOrDefault()).Select(g => g.First()).ToList();
         }
@@ -316,9 +337,14 @@ namespace SharpOnvifClient
                             if (!cts.IsCancellationRequested)
                                 client.BeginReceive(ReceiveCallback, null);
                         }
-                        catch
+                        catch (Exception ex)
                         {
-                            // ignore exceptions on shutdown
+                            // The socket closing is how this ends, and is not worth reporting.
+                            if (!cts.IsCancellationRequested)
+                            {
+                                OnvifDiscoveryFailure.Raise(
+                                    Failed, null, OnvifDiscoveryOperation.Receive, ipAddress, ex);
+                            }
                         }
                     }
 
@@ -330,9 +356,12 @@ namespace SharpOnvifClient
                     {
                         await client.SendAsync(message, message.Length, multicastEndpoint);
                     }
-                    catch(System.Net.Sockets.SocketException ex)
+                    catch (System.Net.Sockets.SocketException ex)
                     {
-                        Debug.WriteLine($"Discovery on {ipAddress} failed with an exception: {ex.Message}");
+                        // Sending the Probe is the whole of discovery on this interface. Losing it
+                        // silently is how an IPv6 Probe that could not leave the machine went
+                        // unnoticed for as long as it did.
+                        OnvifDiscoveryFailure.Raise(Failed, null, OnvifDiscoveryOperation.Probe, ipAddress, ex);
                     }
 
                     await Task.Delay(multicastTimeout, cts.Token);
@@ -443,7 +472,7 @@ namespace SharpOnvifClient
                     }
                     catch(Exception ex)
                     {
-                        Debug.WriteLine($"{nameof(OnvifDiscoveryClient)}.{nameof(ParseDiscoveryResponse)} failed to parse scopes:\r\n{ex.Message}\r\nContinuing...");
+                        Log.Warning("A device's discovery scopes could not be read; the rest of it is still usable.", ex);
                     }
                 }
 

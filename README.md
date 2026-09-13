@@ -362,6 +362,27 @@ builder.Services.AddOnvifDigestAuthentication(options =>
 `INonceReplayStore` has one method - it spends a nonce at a nonce count and says whether that count
 had been seen before. `MemoryNonceReplayStore`, the default, holds the record in this process.
 
+### Logging
+The client and the shared code report what they could not do through
+`SharpOnvifCommon.Log`. The default logger writes to the console and is switched off, so a library
+that is working stays quiet:
+```cs
+Log.Logger = new DefaultOnvifLogger { IsLoggingEnabled = true, IsDebugEnabled = false };
+```
+Implement `IOnvifLogger` to send it into your own logging instead, or use
+`NullOnvifLogger.Instance` to silence it. There is no dependency on any logging package, which is
+what keeps these assemblies free of dependencies altogether. The server does not use this - it is
+given an `ILogger` by the host and logs to that.
+
+Discovery additionally raises `OnvifDiscoveryClient.Failed` and `OnvifDiscoveryListener.Failed`,
+because it works on every interface at once and carries on when one of them fails. Worth
+subscribing to: a Probe that never left the machine looks exactly like a network with no cameras
+on it.
+```cs
+OnvifDiscoveryClient.Failed += (_, e) => Console.WriteLine(e);
+// Onvif discovery could not Probe on 127.0.0.1: Can't assign requested address
+```
+
 ### No dependencies
 `SharpOnvifClient`, `SharpOnvifServer` and `SharpOnvifCommon` reference no NuGet packages on any of
 their target frameworks. The one that remained, `System.Runtime.Caching`, was used for a single

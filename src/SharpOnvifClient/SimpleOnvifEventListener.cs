@@ -21,13 +21,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
+using SharpOnvifCommon;
 using SharpOnvifCommon.Security;
 
 namespace SharpOnvifClient
@@ -137,7 +137,7 @@ namespace SharpOnvifClient
                     {
                         // Closing the listener is how this loop ends.
                         if (_disposedValue) return;
-                        Debug.WriteLine(ex.Message);
+                        Log.Warning("Could not accept an Onvif notification.", ex);
                         continue;
                     }
 
@@ -149,7 +149,7 @@ namespace SharpOnvifClient
                         }
                         catch (Exception ex)
                         {
-                            Debug.WriteLine(ex.Message);
+                            Log.Warning("An Onvif notification could not be handled.", ex);
                             resp.StatusCode = (int)HttpStatusCode.OK;
                         }
                     }

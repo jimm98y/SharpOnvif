@@ -20,7 +20,6 @@
 // SOFTWARE.
 
 using System;
-using System.Diagnostics;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -211,8 +210,7 @@ namespace SharpOnvifCommon.Security
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine("Nonce is not valid base64 string");
-                    Debug.WriteLine(ex.Message);
+                    Log.Debug("Nonce is not valid base64 string", ex);
                     return ERROR_NONCE_FORMAT;
                 }
             }
@@ -224,8 +222,7 @@ namespace SharpOnvifCommon.Security
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine("Nonce is not valid hexadecimal string");
-                    Debug.WriteLine(ex.Message);
+                    Log.Debug("Nonce is not valid hexadecimal string", ex);
                     return ERROR_NONCE_FORMAT;
                 }
             }
@@ -252,13 +249,13 @@ namespace SharpOnvifCommon.Security
             DateTimeOffset nonceDateTime = DateTimeOffset.FromUnixTimeMilliseconds(timestampNonce);
             if (currentTimestamp.CompareTo(nonceDateTime) < 0)
             {
-                Debug.WriteLine("Nonce is from the future");
+                Log.Debug("Nonce is from the future");
                 return ERROR_NONCE_FUTURE;
             }
 
             if (currentTimestamp.Subtract(nonceDateTime).TotalMilliseconds >= lifetimeMilliseconds)
             {
-                Debug.WriteLine("Nonce is expired");
+                Log.Debug("Nonce is expired");
                 return ERROR_NONCE_EXPIRED;
             }
 
@@ -267,7 +264,7 @@ namespace SharpOnvifCommon.Security
             string generatedNonce = GenerateServerNonce(nonceAlgorithm, nonceType, nonceDateTime, etag, salt);
             if(string.Compare(generatedNonce, nonce) != 0)
             {
-                Debug.WriteLine("Nonce is invalid");
+                Log.Debug("Nonce is invalid");
                 return ERROR_NONCE_INVALID;
             }
 
@@ -897,8 +894,7 @@ namespace SharpOnvifCommon.Security
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine("Opaque is not valid base64 string");
-                    Debug.WriteLine(ex.Message);
+                    Log.Debug("Opaque is not valid base64 string", ex);
                     return ERROR_NONCE_FORMAT;
                 }
             }
@@ -910,8 +906,7 @@ namespace SharpOnvifCommon.Security
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine("Opaque is not valid hexadecimal string");
-                    Debug.WriteLine(ex.Message);
+                    Log.Debug("Opaque is not valid hexadecimal string", ex);
                     return ERROR_NONCE_FORMAT;
                 }
             }
