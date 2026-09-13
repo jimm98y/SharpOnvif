@@ -63,22 +63,15 @@ namespace SharpOnvif.Tests
         }
 
         [TestMethod]
-        public void KeepsIPv6LinkLocalForWhoeverCanUseIt()
+        public void LeavesOutEveryLinkLocalAddress()
         {
-            // The two halves want different things from the same list. A probe cannot be sent from
-            // a link-local address, so the client skips those; the listener joins by index and can
-            // use an adapter that has nothing else - so the list carries them and the caller
-            // decides.
+            // Neither half of discovery has any use for one: nothing answers a probe sent from a
+            // link-local address, and an adapter carrying nothing else has no usable network on
+            // it. A machine whose only IPv6 is link-local does no IPv6 discovery at all.
             foreach (OnvifDiscoveryInterface nic in OnvifDiscoveryInterface.Enumerate())
             {
-                if (nic.Address.AddressFamily != AddressFamily.InterNetworkV6) continue;
-                if (!nic.Address.IsIPv6LinkLocal) continue;
-
-                Assert.IsTrue(nic.Index > 0, "a link-local entry is only useful with its index");
-                return;
+                Assert.IsFalse(nic.Address.IsIPv6LinkLocal, $"{nic.Address} is link-local");
             }
-
-            Assert.Inconclusive("this machine has no link-local IPv6 to check");
         }
 
         [TestMethod]

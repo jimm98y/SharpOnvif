@@ -210,12 +210,6 @@ namespace SharpOnvifClient
 
             foreach (OnvifDiscoveryInterface nic in OnvifDiscoveryInterface.Enumerate())
             {
-                // A probe is sent from the address, and a link-local IPv6 address has no route to
-                // send one on. The listener takes the same interfaces and keeps these, because it
-                // joins by index rather than binding to the address.
-                if (nic.Address.AddressFamily == AddressFamily.InterNetworkV6 && nic.Address.IsIPv6LinkLocal)
-                    continue;
-
                 discoveryTasks.Add(DiscoverAllAsync(
                     nic.Address.ToString(), onDeviceDiscovered, multicastTimeout, multicastPort, deviceType));
             }

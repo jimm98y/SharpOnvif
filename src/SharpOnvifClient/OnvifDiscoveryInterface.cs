@@ -61,10 +61,10 @@ namespace SharpOnvifClient
         /// through the real adapters anyway.
         /// </para>
         /// <para>
-        /// Every qualifying address is returned, IPv6 link-local included, and what to do with
-        /// one is the caller's: a probe cannot be sent from a link-local address, but an adapter
-        /// that has only link-local IPv6 can still be listened on, because listening needs the
-        /// index rather than the address.
+        /// Link-local addresses are left out on both sides: 169.254 for IPv4, fe80:: for IPv6.
+        /// Nothing answers a probe sent from one, and an adapter that has no other address is an
+        /// adapter with no usable network on it. A machine whose only IPv6 is link-local
+        /// therefore does no IPv6 discovery, in either direction.
         /// </para>
         /// </remarks>
         public static IEnumerable<OnvifDiscoveryInterface> Enumerate()
@@ -119,6 +119,9 @@ namespace SharpOnvifClient
                     }
                     else if (unicast.Address.AddressFamily == AddressFamily.InterNetworkV6)
                     {
+                        if (unicast.Address.IsIPv6LinkLocal)
+                            continue; // nothing answers there
+
                         if (index <= 0)
                             continue; // no index, so no group to join and no route to send on
 
