@@ -267,8 +267,9 @@ Where the Onvif schema names a type after something the framework already has, t
 is prefixed to keep both usable side by side without aliases - `tt:DateTime` becomes
 `OnvifDateTime`, `tt:IPAddress` becomes `OnvifIPAddress`. What goes on the wire is unchanged.
 
-`tt:VideoEncoding` is generated wider than the schema: onvif.xsd still enumerates only JPEG, MPEG4
-and H264, so the generated enum also carries `H265`, `AV1`, `H266` and `AV2`. The extra values are
+Two enumerations are generated wider than the schema. onvif.xsd still enumerates `tt:VideoEncoding`
+as only JPEG, MPEG4 and H264, so the generated enum also carries `H265`, `AV1`, `H266` and `AV2`;
+`tt:AudioEncoding` likewise gains `OPUS` beside G711, G726 and AAC. The extra values are
 configured for the generator in `ServiceCatalog`, not edited into its output, so regenerating keeps
 them and the conversions to and from their XML form stay in step. Any schema enumeration can be
 widened the same way from the command line:

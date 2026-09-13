@@ -35,7 +35,7 @@ internal static class ServiceCatalog
                 "SharpOnvifServer", Path.Combine(outputRoot, "SharpOnvifServer", "Generated"),
                 Client: false, Server: true),
         ],
-        EnumerationExtensions = VideoEncodings,
+        EnumerationExtensions = [.. VideoEncodings, .. AudioEncodings],
     };
 
     /// <summary>
@@ -55,6 +55,18 @@ internal static class ServiceCatalog
         new(Schema("VideoEncoding"), "AV1", "AV1. Sent by devices; not listed by onvif.xsd."),
         new(Schema("VideoEncoding"), "H266", "H.266 / VVC. Sent by devices; not listed by onvif.xsd."),
         new(Schema("VideoEncoding"), "AV2", "AV2. Sent by devices; not listed by onvif.xsd."),
+    ];
+
+    /// <summary>
+    /// onvif.xsd enumerates tt:AudioEncoding as G711, G726 and AAC, all of them older than the
+    /// codec anything streaming audio today would reach for. Opus is spelled to match the
+    /// enumeration it joins, which is the only convention onvif.xsd offers here - tt:AudioEncoding
+    /// is not the IANA media subtype list, and the one that is, tt:AudioEncodingMimeNames, is not
+    /// the type of any generated property.
+    /// </summary>
+    private static readonly IReadOnlyList<EnumerationExtension> AudioEncodings =
+    [
+        new(Schema("AudioEncoding"), "OPUS", "Opus. Not listed by onvif.xsd."),
     ];
 
     /// <summary>A name in the shared Onvif schema, the one onvif.xsd declares.</summary>

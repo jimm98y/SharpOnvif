@@ -18,6 +18,7 @@ Run it with --help for the full set of options.
 
 A schema that trails what devices actually send can be widened with --enum-value, which adds a
 value to an enumeration the schema does not list. That is how tt:VideoEncoding comes out with
-H265, AV1, H266 and AV2 in it; see EnumerationExtensions in ServiceCatalog.
+H265, AV1, H266 and AV2 in it, and tt:AudioEncoding with OPUS; see EnumerationExtensions
+in ServiceCatalog.
 
 See doc/codegen.md for what the generator does and why.

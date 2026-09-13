@@ -314,6 +314,30 @@ namespace SharpOnvif.Tests
             AssertRoundTrips(configuration, Trt, "Configuration");
         }
 
+        [DataRow(AudioEncoding.OPUS, "OPUS", DisplayName = "Opus")]
+        [DataRow(AudioEncoding.G711, "G711", DisplayName = "G.711, which the schema does list")]
+        [TestMethod]
+        public void CarriesTheAudioCodecsOnvifDoesNotEnumerate(AudioEncoding encoding, string onTheWire)
+        {
+            // onvif.xsd enumerates tt:AudioEncoding as G711, G726 and AAC, all older than what
+            // anything streaming audio today would reach for. Widened the same way as the video
+            // side - see ServiceCatalog.
+            var configuration = new AudioEncoderConfiguration
+            {
+                Name = "audio",
+                UseCount = 1,
+                Encoding = encoding,
+                Bitrate = 64,
+                SampleRate = 48,
+                SessionTimeout = "PT60S",
+            };
+
+            string xml = WriteWithGeneratedWriter(configuration, Trt, "Configuration");
+            StringAssert.Contains(xml, ">" + onTheWire + "<", "the codec has to reach the wire under its Onvif name");
+
+            AssertRoundTrips(configuration, Trt, "Configuration");
+        }
+
         // ------------------------------------------------------------------ helpers
 
         private static void AssertRoundTrips<T>(T value, string ns, string elementName)

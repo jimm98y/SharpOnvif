@@ -79,6 +79,11 @@ namespace SharpOnvifCommon.Onvif
 
         AAC,
 
+        /// <summary>
+        /// Opus. Not listed by onvif.xsd.
+        /// </summary>
+        OPUS,
+
     }
 
     /// <summary>
@@ -2005,6 +2010,8 @@ namespace SharpOnvifCommon.Onvif
                     return "G726";
                 case AudioEncoding.AAC:
                     return "AAC";
+                case AudioEncoding.OPUS:
+                    return "OPUS";
                 default:
                     return null;
             }
@@ -2020,6 +2027,8 @@ namespace SharpOnvifCommon.Onvif
                     return AudioEncoding.G726;
                 case "AAC":
                     return AudioEncoding.AAC;
+                case "OPUS":
+                    return AudioEncoding.OPUS;
                 default:
                     return default(AudioEncoding);
             }
