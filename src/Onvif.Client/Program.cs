@@ -21,7 +21,6 @@
 
 using SharpOnvifClient;
 using SharpOnvifClient.Events;
-using SharpOnvifClient.Security;
 using SharpOnvifCommon.Security;
 using SharpOnvifCommon;
 using System;
@@ -101,7 +100,7 @@ public static class Program
         using (var client = new SimpleOnvifClient(device.Addresses.First(x => x.Contains("127.0.0.1") || x.Contains("[::1]")),
             "admin", 
             "password", 
-            new DigestAuthenticationSchemeOptions(authentication),
+            new OnvifAuthenticationSettings(authentication),
             true))
         {
             var services = await client.GetServicesAsync(true);

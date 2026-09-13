@@ -23,7 +23,6 @@ using SharpOnvifClient.DeviceMgmt;
 using SharpOnvifClient.Events;
 using SharpOnvifClient.Media;
 using SharpOnvifClient.PTZ;
-using SharpOnvifClient.Security;
 using SharpOnvifCommon;
 using SharpOnvifCommon.Security;
 using SharpOnvifCommon.Soap;
@@ -49,7 +48,7 @@ namespace SharpOnvifClient
         protected object _syncRoot = new object();
         protected readonly Dictionary<string, object> _clients = new Dictionary<string, object>();
         protected readonly System.Net.NetworkCredential _credentials;
-        protected readonly DigestAuthenticationSchemeOptions _authentication;
+        protected readonly OnvifAuthenticationSettings _authentication;
 
         /// <summary>
         /// Shared by every service client this instance creates, so the HTTP Digest challenge is
@@ -62,7 +61,7 @@ namespace SharpOnvifClient
         /// </summary>
         /// <param name="onvifUri">Onvif URI.</param>
         /// <param name="disableExpect100Continue">Disables the default Expect: 100-continue HTTP header.</param>
-        public SimpleOnvifClient(string onvifUri, bool disableExpect100Continue = true) : this(onvifUri, null, null, new DigestAuthenticationSchemeOptions(DigestAuthentication.None), disableExpect100Continue)
+        public SimpleOnvifClient(string onvifUri, bool disableExpect100Continue = true) : this(onvifUri, null, null, new OnvifAuthenticationSettings(DigestAuthentication.None), disableExpect100Continue)
         { }
 
         /// <summary>
@@ -72,7 +71,7 @@ namespace SharpOnvifClient
         /// <param name="userName">User name.</param>
         /// <param name="password">Password.</param>
         /// <param name="disableExpect100Continue">Disables the default Expect: 100-continue HTTP header.</param>
-        public SimpleOnvifClient(string onvifUri, string userName, string password, bool disableExpect100Continue = true) : this(onvifUri, userName, password, new DigestAuthenticationSchemeOptions(DigestAuthentication.WsUsernameToken | DigestAuthentication.HttpDigest), disableExpect100Continue)
+        public SimpleOnvifClient(string onvifUri, string userName, string password, bool disableExpect100Continue = true) : this(onvifUri, userName, password, new OnvifAuthenticationSettings(DigestAuthentication.WsUsernameToken | DigestAuthentication.HttpDigest), disableExpect100Continue)
         { }
 
         /// <summary>
@@ -81,10 +80,10 @@ namespace SharpOnvifClient
         /// <param name="onvifUri">Onvif URI.</param>
         /// <param name="userName">User name.</param>
         /// <param name="password">Password.</param>
-        /// <param name="authentication">Type of the authentication to use: <see cref="DigestAuthentication"/>.</param>
+        /// <param name="authentication">How to authenticate, or null to send no credentials.</param>
         /// <param name="disableExpect100Continue">Disables the default Expect: 100-continue HTTP header.</param>
         /// <exception cref="ArgumentNullException">Thrown when onvifUri is empty.</exception>
-        public SimpleOnvifClient(string onvifUri, string userName, string password, DigestAuthenticationSchemeOptions authentication, bool disableExpect100Continue = true)
+        public SimpleOnvifClient(string onvifUri, string userName, string password, OnvifAuthenticationSettings authentication, bool disableExpect100Continue = true)
         {
             if (string.IsNullOrWhiteSpace(onvifUri))
                 throw new ArgumentNullException(nameof(onvifUri));
@@ -92,14 +91,13 @@ namespace SharpOnvifClient
             if(!onvifUri.StartsWith("http://", StringComparison.OrdinalIgnoreCase) && !onvifUri.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
                 throw new ArgumentException("Onvif URI must start with http:// or https://");
 
-            // Taken as a copy, and read once. Half of it used to be shared with the caller by
-            // reference and half copied by value, so changing the options afterwards changed the
-            // schemes in flight but not the clock offset - a difference nobody would predict.
+            // Taken as a copy, and read once: changing what was passed in afterwards does not
+            // change what this client is doing with it.
             this._authentication = authentication == null
-                ? new DigestAuthenticationSchemeOptions()
-                : new DigestAuthenticationSchemeOptions(authentication);
+                ? new OnvifAuthenticationSettings()
+                : new OnvifAuthenticationSettings(new OnvifAuthenticationOptions(authentication.Options));
 
-            if (this._authentication.Onvif.Authentication != DigestAuthentication.None)
+            if (this._authentication.Options.Authentication != DigestAuthentication.None)
             {
                 if (string.IsNullOrWhiteSpace(userName) || string.IsNullOrWhiteSpace(password))
                     throw new ArgumentNullException("User name or password must not be empty!");
@@ -110,8 +108,7 @@ namespace SharpOnvifClient
             _settings = new OnvifClientSettings
             {
                 Credentials = _credentials,
-                Authentication = new OnvifAuthenticationSettings(this._authentication.Onvif),
-                UtcNowOffset = this._authentication.UtcNowOffset,
+                Authentication = this._authentication,
                 DisableExpect100Continue = disableExpect100Continue,
             };
 
@@ -128,11 +125,9 @@ namespace SharpOnvifClient
         /// </summary>
         public void SetCameraUtcNowOffset(TimeSpan utcNowOffset)
         {
-            if (!_authentication.Onvif.Offers(DigestAuthentication.WsUsernameToken))
+            if (!_authentication.Options.Offers(DigestAuthentication.WsUsernameToken))
                 throw new NotSupportedException("Time offset is only supported for WsUsernameToken authentication");
 
-            // Both, so that the options a caller can still read say what the client is doing.
-            _authentication.UtcNowOffset = utcNowOffset;
             _settings.UtcNowOffset = utcNowOffset;
         }
 
