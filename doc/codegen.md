@@ -55,6 +55,47 @@ does not **run** against nothing. A client with no `IXmlWriter` behind it cannot
 Generating for a service of your own means bringing a runtime implementation - `SharpOnvifCommon`
 is one, at about thirteen hundred lines of `Xml/` - or writing one.
 
+### Implementing it
+
+Onvif's implementations are in `SharpOnvifCommon`: `OnvifXmlReader`, `OnvifXmlWriter`,
+`SoapEnvelope` and `SoapMessageCodec`, `OnvifClientSettings`, `OnvifAuthenticationSettings`, and
+the loggers. Be clear-eyed about the split between them. `IXmlReader`, `IXmlWriter` and
+`IMessageCodec` are the work - about thirteen hundred lines of `Xml/` between them - and unless
+your service is not SOAP 1.2 at all, porting those is a better use of a day than writing them.
+`IClientSettings` is the small end, and the whole of it:
+
+```cs
+internal sealed class BankSettings : IClientSettings
+{
+    public IMessageCodec Codec { get { return new BankCodec(); } }   // yours: the envelope
+    public NetworkCredential Credentials { get { return null; } }
+    public ILog Logger { get { return null; } }
+    public IClientAuthentication Authentication { get { return null; } }   // sends no credentials
+    public TimeSpan UtcNowOffset { get { return TimeSpan.Zero; } }
+    public TimeSpan Timeout { get { return TimeSpan.FromSeconds(30); } }
+    public bool DisableExpect100Continue { get { return true; } }
+    public long MaxResponseContentBytes { get { return 16L * 1024 * 1024; } }
+    public HttpMessageHandler Transport { get { return null; } }
+    public HttpClient HttpClient { get { return null; } }
+    public IEnumerable<XmlNamespaceDeclaration> EnvelopePrologue { get { return null; } }
+}
+```
+
+A null `Authentication` sends no credentials and a null `Logger` reports nowhere, so a service
+wanting neither needs nothing further. A null `Codec` is refused: there is nothing a client could
+fall back to, having no idea what an envelope looks like. `--settings BankSettings` then gives the
+generated clients their convenience constructors back.
+
+`TestGeneratedCodeCompilesAlone` compiles that class, so it is an example that is known to still
+work rather than one that used to.
+
+One constraint is easy to trip over. The reader and writer drive hooks on `OnvifContract` that are
+`internal` to the assembly the runtime is emitted into, so an implementation of `IXmlReader` or
+`IXmlWriter` has to live in **that** assembly. The generated contracts do not: they derive from
+`OnvifContract` and can be anywhere, which is how `SharpOnvifClient` and `SharpOnvifServer` each
+carry their own while the runtime and its implementation sit in `SharpOnvifCommon`. Point
+`--runtime-out` at the project that will implement it.
+
 The embedded source is ordinary C# and stays compilable in an editor: it is written in a namespace
 called `__RUNTIME__`, which the generator replaces.
 

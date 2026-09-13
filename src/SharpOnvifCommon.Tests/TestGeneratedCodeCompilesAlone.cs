@@ -59,7 +59,8 @@ namespace SharpOnvif.Tests
             try
             {
                 var options = CommandLine.Parse(
-                    ["--wsdl", Fixture, "--namespace", "Example.Banking", "--out", output, "--client"]);
+                    ["--wsdl", Fixture, "--namespace", "Example.Banking", "--out", output, "--client",
+                     "--settings", "Example.Banking.BankSettings"]);
 
                 new CodeGenerator(options!).Run();
 
@@ -68,6 +69,11 @@ namespace SharpOnvif.Tests
                     .ToList();
 
                 Assert.IsTrue(trees.Count > 5, "the run produced almost nothing to compile");
+
+                // And the caller's side of the bargain, which is the example in doc/codegen.md:
+                // the interfaces have to be implementable by somebody who has only what was
+                // written for them.
+                trees.Add(CSharpSyntaxTree.ParseText(Settings, path: "BankSettings.cs"));
 
                 var compilation = CSharpCompilation.Create(
                     "Standalone",
@@ -89,6 +95,64 @@ namespace SharpOnvif.Tests
                 Directory.Delete(output, recursive: true);
             }
         }
+
+        /// <summary>
+        /// What a caller writes to make a generated client run: the smallest thing that meets
+        /// <c>IClientSettings</c>. Kept in step with the one doc/codegen.md shows, because a
+        /// worked example nobody compiles is a worked example that stops working.
+        /// </summary>
+        private const string Settings = """
+            using System;
+            using System.Collections.Generic;
+            using System.Net;
+            using System.Net.Http;
+            using Example.Banking.Runtime;
+            using Example.Banking.Runtime.Soap;
+            using Example.Banking.Runtime.Xml;
+
+            namespace Example.Banking
+            {
+                internal sealed class BankSettings : IClientSettings
+                {
+                    public IMessageCodec Codec { get { return new BankCodec(); } }
+                    // A real one writes and reads the envelope; the shape is what is checked here.
+                    public NetworkCredential Credentials { get { return null; } }
+                    public ILog Logger { get { return null; } }
+                    public IClientAuthentication Authentication { get { return null; } }
+                    public TimeSpan UtcNowOffset { get { return TimeSpan.Zero; } }
+                    public TimeSpan Timeout { get { return TimeSpan.FromSeconds(30); } }
+                    public bool DisableExpect100Continue { get { return true; } }
+                    public long MaxResponseContentBytes { get { return 16L * 1024 * 1024; } }
+                    public HttpMessageHandler Transport { get { return null; } }
+                    public HttpClient HttpClient { get { return null; } }
+                    public IEnumerable<XmlNamespaceDeclaration> EnvelopePrologue { get { return null; } }
+
+                    public BankSettings() { }
+
+                    public BankSettings(string userName, string password) { }
+                }
+
+                internal sealed class BankCodec : IMessageCodec
+                {
+                    public string ContentType { get { return "application/soap+xml"; } }
+
+                    public string WriteEnvelope(
+                        IEnumerable<XmlNamespaceDeclaration> prologue,
+                        Action<IXmlWriter> writeHeaders,
+                        Action<IXmlWriter> writeBody)
+                    {
+                        throw new NotImplementedException();
+                    }
+
+                    public bool ReadEnvelopeBody(
+                        System.IO.Stream stream, OnvifContract into,
+                        Func<string, string, OnvifContract> resolveXmlType)
+                    {
+                        throw new NotImplementedException();
+                    }
+                }
+            }
+            """;
 
         /// <summary>
         /// The framework this test runs on, with everything of ours removed - which is what makes
