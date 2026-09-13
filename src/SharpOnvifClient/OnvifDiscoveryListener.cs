@@ -127,7 +127,10 @@ namespace SharpOnvifClient
                 // A device on this machine is already bound to the discovery port, and both of
                 // them are entitled to hear what arrives.
                 client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
-                client.Client.Bind(new IPEndPoint(nicAddress, OnvifDiscoveryClient.ONVIF_DISCOVERY_PORT));
+                // Bound to every address, joined on one interface below. A socket bound to an
+                // interface's own address is not given multicast looped back from this machine,
+                // so a device running beside this one would never be heard.
+                client.Client.Bind(new IPEndPoint(IPAddress.Any, OnvifDiscoveryClient.ONVIF_DISCOVERY_PORT));
                 client.JoinMulticastGroup(
                     IPAddress.Parse(OnvifDiscoveryClient.OnvifDiscoveryAddressIPV4), nicAddress);
             }

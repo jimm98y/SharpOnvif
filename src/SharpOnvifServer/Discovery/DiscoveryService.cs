@@ -242,8 +242,15 @@ namespace SharpOnvifServer.Discovery
 
                 udpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
 
-                // because of the multicast, we cannot use IPAddress.Any - it would have joined the multicast group only on the default NIC on multihomed system
-                udpClient.Client.Bind(new IPEndPoint(IPAddress.Parse(nicIPAddress), ONVIF_DISCOVERY_PORT));
+                // Bound to every address, joined on one interface. Which interface the socket
+                // listens on is decided by the join below, not by the bind - and a socket bound to
+                // one interface's address is not given multicast that was looped back from this
+                // same machine, only multicast that arrived from the wire. That is what made a
+                // device invisible to a client running beside it: the Probe never arrived, and
+                // neither did the Hello.
+                udpClient.Client.Bind(new IPEndPoint(
+                    nicAddress.AddressFamily == AddressFamily.InterNetworkV6 ? IPAddress.IPv6Any : IPAddress.Any,
+                    ONVIF_DISCOVERY_PORT));
 
                 if (nicAddress.AddressFamily == AddressFamily.InterNetworkV6)
                 {

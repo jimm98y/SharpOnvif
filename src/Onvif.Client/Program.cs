@@ -44,11 +44,15 @@ public static class Program
         await MainAsync(args);
     }
 
+    /// <summary>Cancelled by Ctrl-C, so that waiting for a device can be given up on.</summary>
+    static CancellationToken Stopping = CancellationToken.None;
+
     static async Task MainAsync(string[] args)
     {
         // Ctrl-C stops waiting, rather than killing the process where it stands.
         using var stopping = new CancellationTokenSource();
         Console.CancelKeyPress += (_, e) => { e.Cancel = true; stopping.Cancel(); };
+        Stopping = stopping.Token;
 
         static bool IsOnThisMachine(OnvifDiscoveryResult candidate) =>
             candidate.Addresses != null &&
@@ -166,10 +170,17 @@ public static class Program
             {
                 subscription = await client.PullPointSubscribeAsync(60);
             }
-            catch (OnvifTransportException ex)
+            catch (Exception ex) when (ex is OnvifTransportException || ex is OnvifFaultException)
             {
-                Console.WriteLine($"Cannot reach the device: {ex.Message}");
-                await Task.Delay(TimeSpan.FromSeconds(5));
+                // Could not get a subscription at all. Either nothing answered, or something
+                // answered that is not our device - when a device releases its port, whatever
+                // takes it over answers too, and on a Mac that is AirPlay replying 403.
+                //
+                // Retrying on a timer would be a busy loop against a machine that may be switched
+                // off for hours, so wait to be told it is back. The wait keeps probing as well, so
+                // a device that returns quietly is still found.
+                Console.WriteLine($"Cannot subscribe: {ex.Message}");
+                if (!await WaitForDevice(client.OnvifUri, Stopping)) return;
                 continue;
             }
 
@@ -193,17 +204,55 @@ public static class Program
             }
             catch (OnvifTransportException ex)
             {
-                Console.WriteLine($"Lost the device, subscribing again: {ex.Message}");
+                Console.WriteLine($"Lost the device: {ex.Message}");
+                if (!await WaitForDevice(client.OnvifUri, Stopping)) return;
             }
             catch (OnvifFaultException ex)
             {
-                // The device answered and said no - the subscription expired while we were away,
-                // say. A new one is the answer to that too.
+                // The device answered and said no - the subscription expired while nobody was
+                // pulling, say. It is still there, so a new subscription is the answer, and if
+                // that fails too the loop above waits rather than asking again straight away.
                 Console.WriteLine($"The device refused the pull, subscribing again: {ex.Message}");
             }
-
-            await Task.Delay(TimeSpan.FromSeconds(5));
         }
+    }
+
+    /// <summary>
+    /// Waits until the device is back on the network, by listening for the Hello it sends when it
+    /// joins. Returns false when the application was asked to stop instead.
+    /// </summary>
+    /// <remarks>
+    /// A device that has gone may be gone for hours. Retrying on a timer spends that time asking a
+    /// machine that is switched off; waiting for its announcement costs nothing and reconnects the
+    /// moment it comes back. WaitForDeviceAsync keeps probing as well, so a device that returns
+    /// without being heard is still found.
+    /// </remarks>
+    static async Task<bool> WaitForDevice(string onvifUri, CancellationToken cancellationToken)
+    {
+        Console.WriteLine("Waiting for the device to announce itself...");
+
+        try
+        {
+            var device = await OnvifDiscoveryClient.WaitForDeviceAsync(
+                candidate => candidate.Addresses.Any(address => SameDevice(address, onvifUri)),
+                cancellationToken);
+
+            Console.WriteLine($"The device is back: {device.Addresses.FirstOrDefault()}");
+            return true;
+        }
+        catch (OperationCanceledException)
+        {
+            Console.WriteLine("Gave up waiting.");
+            return false;
+        }
+    }
+
+    /// <summary>Whether an announced address belongs to the device this client is talking to.</summary>
+    static bool SameDevice(string announced, string onvifUri)
+    {
+        return Uri.TryCreate(announced, UriKind.Absolute, out var a)
+            && Uri.TryCreate(onvifUri, UriKind.Absolute, out var b)
+            && string.Equals(a.Host, b.Host, StringComparison.OrdinalIgnoreCase);
     }
 
     static async Task BasicEventSubscription(SimpleOnvifClient client)
