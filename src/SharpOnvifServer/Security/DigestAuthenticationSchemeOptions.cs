@@ -1,4 +1,4 @@
-﻿// SharpOnvif
+// SharpOnvif
 // Copyright (C) 2026 Lukas Volf
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -20,6 +20,7 @@
 // SOFTWARE.
 
 using Microsoft.AspNetCore.Authentication;
+using SharpOnvifCommon.Security;
 using System;
 using System.Collections.Generic;
 
@@ -102,6 +103,19 @@ namespace SharpOnvifServer.Security
         /// How long the server nonce is valid in milliseconds. Defaults to 30 seconds.
         /// </summary>
         public double HttpDigestNonceLifetimeMilliseconds { get; set; } = 30000;
+
+        /// <summary>
+        /// Where spent nonces are remembered, so that a captured request cannot be replayed. Left
+        /// null, <see cref="HttpDigestAuthentication.NonceReplayStore"/> is used, which holds them
+        /// in this process only.
+        /// </summary>
+        /// <remarks>
+        /// A device or a single server instance needs nothing here. More than one instance behind
+        /// one address does: set a store every instance can read, and give them all the same nonce
+        /// private key with <see cref="HttpDigestAuthentication.SetNoncePrivateKey(byte[])"/>.
+        /// Otherwise a request one instance refuses as a replay is accepted by the next.
+        /// </remarks>
+        public INonceReplayStore HttpDigestNonceReplayStore { get; set; }
 
         /// <summary>
         /// When true, forces the client to use the nonce from the last response. 

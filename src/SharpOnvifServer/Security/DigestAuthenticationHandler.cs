@@ -1,4 +1,4 @@
-﻿// SharpOnvif
+// SharpOnvif
 // Copyright (C) 2026 Lukas Volf
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -271,7 +271,7 @@ namespace SharpOnvifServer.Security
 
             if (user != null)
             {
-                int nonceValidationResult = HttpDigestAuthentication.ValidateServerNonce(
+                int nonceValidationResult = await HttpDigestAuthentication.ValidateServerNonceAsync(
                     NONCE_HASH_ALGORITHM,
                     PREFERRED_SERIALIZATION,
                     webToken.Nonce,
@@ -280,7 +280,9 @@ namespace SharpOnvifServer.Security
                     null, 
                     NONCE_SALT_LENGTH,
                     Options.HttpDigestNonceLifetimeMilliseconds,
-                    true);
+                    true,
+                    Options.HttpDigestNonceReplayStore,
+                    Context.RequestAborted).ConfigureAwait(false);
                 if (nonceValidationResult == 0)
                 {
                     string digest;

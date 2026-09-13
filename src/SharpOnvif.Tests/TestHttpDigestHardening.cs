@@ -20,6 +20,8 @@
 // SOFTWARE.
 
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 using SharpOnvifCommon.Security;
 
 namespace SharpOnvif.Tests
@@ -40,15 +42,15 @@ namespace SharpOnvif.Tests
                 Algorithm, BinarySerializationType.Hex, when, null,
                 HttpDigestAuthentication.CreateNonceSessionSalt(SaltLength));
 
-        private static int Validate(string nonce, int nc, DateTimeOffset when) =>
-            HttpDigestAuthentication.ValidateServerNonce(
-                Algorithm, BinarySerializationType.Hex, nonce, nc, when, null, SaltLength, 30000, true);
+        private static Task<int> Validate(string nonce, int nc, DateTimeOffset when, INonceReplayStore store = null) =>
+            HttpDigestAuthentication.ValidateServerNonceAsync(
+                Algorithm, BinarySerializationType.Hex, nonce, nc, when, null, SaltLength, 30000, true, store);
 
         [DataRow(1, DisplayName = "first request of a session")]
         [DataRow(5, DisplayName = "after the client retried a lost request")]
         [DataRow(42, DisplayName = "well into a session")]
         [TestMethod]
-        public void RefusesARequestReplayedWithTheSameNonceCount(int nonceCount)
+        public async Task RefusesARequestReplayedWithTheSameNonceCount(int nonceCount)
         {
             // Whatever count a request arrives with, sending that same request again has to be
             // refused. Recording the first use as 1 rather than the count presented left every
@@ -56,21 +58,21 @@ namespace SharpOnvif.Tests
             var now = DateTimeOffset.UtcNow;
             string nonce = FreshNonce(now);
 
-            Assert.AreEqual(0, Validate(nonce, nonceCount, now), "the first request has to be accepted");
-            Assert.AreEqual(HttpDigestAuthentication.ERROR_NONCE_REUSE, Validate(nonce, nonceCount, now),
+            Assert.AreEqual(0, await Validate(nonce, nonceCount, now), "the first request has to be accepted");
+            Assert.AreEqual(HttpDigestAuthentication.ERROR_NONCE_REUSE, await Validate(nonce, nonceCount, now),
                 "the identical request has to be refused the second time");
         }
 
         [TestMethod]
-        public void RefusesACountThatDoesNotAdvance()
+        public async Task RefusesACountThatDoesNotAdvance()
         {
             var now = DateTimeOffset.UtcNow;
             string nonce = FreshNonce(now);
 
-            Assert.AreEqual(0, Validate(nonce, 7, now));
-            Assert.AreEqual(HttpDigestAuthentication.ERROR_NONCE_REUSE, Validate(nonce, 3, now),
+            Assert.AreEqual(0, await Validate(nonce, 7, now));
+            Assert.AreEqual(HttpDigestAuthentication.ERROR_NONCE_REUSE, await Validate(nonce, 3, now),
                 "a count below the one already seen is a replay");
-            Assert.AreEqual(0, Validate(nonce, 8, now), "the session continues from where it was");
+            Assert.AreEqual(0, await Validate(nonce, 8, now), "the session continues from where it was");
         }
 
         [DataRow("Digest realm=\"r\", cnonce=\"CLIENT\", nonce=\"SERVER\"", DisplayName = "cnonce first")]

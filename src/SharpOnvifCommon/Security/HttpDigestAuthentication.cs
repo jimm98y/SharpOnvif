@@ -1,4 +1,4 @@
-﻿// SharpOnvif
+// SharpOnvif
 // Copyright (C) 2026 Lukas Volf
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,6 +26,8 @@ using System.Runtime.Caching;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace SharpOnvifCommon.Security
 {
@@ -46,14 +48,63 @@ namespace SharpOnvifCommon.Security
         public const int ERROR_NONCE_INVALID = -6;
         public const int ERROR_NONCE_REUSE = -7;
 
-        public static byte[] NoncePrivateKey = GenerateRandom(32);
+        // The key that makes a server nonce unforgeable. It never leaves this class: handing it
+        // out, or letting anything in the process overwrite it, is enough to mint nonces the
+        // server will accept as its own.
+        private static byte[] _noncePrivateKey = GenerateRandom(32);
 
-        private static MemoryCache _nonceCache = new MemoryCache("nonce");
-        private static object _nonceCacheSyncRoot = new object();
+        private static INonceReplayStore _nonceReplayStore = new MemoryNonceReplayStore();
 
+        /// <summary>
+        /// Where spent nonces are remembered, process-wide. Defaults to
+        /// <see cref="MemoryNonceReplayStore"/>, which holds them in this process only - see the
+        /// remarks on <see cref="INonceReplayStore"/> for when that is not enough.
+        /// </summary>
+        public static INonceReplayStore NonceReplayStore
+        {
+            get { return _nonceReplayStore; }
+            set
+            {
+                if (value == null)
+                    throw new ArgumentNullException(nameof(value));
+
+                _nonceReplayStore = value;
+            }
+        }
+
+        /// <summary>
+        /// Replaces the nonce private key with a fresh random one, invalidating every nonce issued
+        /// so far. Clients holding one are challenged again.
+        /// </summary>
         public static void RegenerateNoncePrivateKey(int length = 32)
         {
-            NoncePrivateKey = GenerateRandom(length);
+            if (length <= 0)
+                throw new ArgumentOutOfRangeException(nameof(length));
+
+            _noncePrivateKey = GenerateRandom(length);
+        }
+
+        /// <summary>
+        /// Sets the nonce private key explicitly.
+        /// </summary>
+        /// <remarks>
+        /// Only a deployment running several instances behind one address needs this: a nonce is
+        /// validated by recomputing it, so an instance can only validate nonces minted with the key
+        /// it holds. Give every instance the same key - from a secret store, not from the
+        /// configuration file - and pair it with a shared <see cref="INonceReplayStore"/>, or
+        /// replay protection is still per instance.
+        /// </remarks>
+        public static void SetNoncePrivateKey(byte[] privateKey)
+        {
+            if (privateKey == null)
+                throw new ArgumentNullException(nameof(privateKey));
+            if (privateKey.Length == 0)
+                throw new ArgumentException("The nonce private key must not be empty.", nameof(privateKey));
+
+            // Copy it: the caller is free to clear its own buffer afterwards, and should.
+            byte[] copy = new byte[privateKey.Length];
+            Buffer.BlockCopy(privateKey, 0, copy, 0, privateKey.Length);
+            _noncePrivateKey = copy;
         }
 
         public static byte[] CreateNonceSessionSalt(int length = 12)
@@ -90,7 +141,7 @@ namespace SharpOnvifCommon.Security
                     BytesToString(nonceType,
                         timestampBytes
                         .Concat(salt ?? new byte[0])
-                        .Concat(Hash(nonceAlgorithm, hash, EncodingGetBytes($"{timestamp}:{ToHex(salt)}{ToHex(etag)}:{ToHex(NoncePrivateKey)}")))
+                        .Concat(Hash(nonceAlgorithm, hash, EncodingGetBytes($"{timestamp}:{ToHex(salt)}{ToHex(etag)}:{ToHex(_noncePrivateKey)}")))
                         .ToArray()
                     );
             }
@@ -102,10 +153,15 @@ namespace SharpOnvifCommon.Security
         }
 
         /// <remarks>
-        /// When nonce replay protection is used, this method shall be called only once. 
-        /// Calling it for the second time will trigger replay protection and fail the validation.
+        /// When nonce replay protection is used, this method shall be called only once for a given
+        /// request. Calling it a second time will trigger replay protection and fail the validation.
         /// </remarks>
-        public static int ValidateServerNonce(
+        /// <param name="replayStore">
+        /// Where spent nonces are remembered. <see cref="NonceReplayStore"/> is used when this is
+        /// null. Replay protection only holds across the instances that share one store - see the
+        /// remarks on <see cref="INonceReplayStore"/>.
+        /// </param>
+        public static async Task<int> ValidateServerNonceAsync(
             string nonceAlgorithm, 
             BinarySerializationType nonceType,
             string nonce, 
@@ -114,7 +170,9 @@ namespace SharpOnvifCommon.Security
             byte[] etag = null,
             int saltLength = 0,
             double lifetimeMilliseconds = 30000, // 30 seconds is the default lifetime of the nonce
-            bool useNonceReplayProtection = true) // nonce replay protection is stateful
+            bool useNonceReplayProtection = true, // nonce replay protection is stateful
+            INonceReplayStore replayStore = null,
+            CancellationToken cancellationToken = default(CancellationToken))
         {
             if (string.IsNullOrEmpty(nonce))
             {
@@ -216,38 +274,15 @@ namespace SharpOnvifCommon.Security
 
             if (useNonceReplayProtection)
             {
-                // Check for nonce re-use and add nonce to the cache for the entire duration of the nonce validity.
-                // This operation is done last after all other checks were successful.
-                lock (_nonceCacheSyncRoot)
+                // Spend the nonce. This is done last, after every other check has passed, so that
+                // a nonce is not consumed by a request that was going to be refused anyway.
+                INonceReplayStore store = replayStore ?? _nonceReplayStore;
+                DateTimeOffset expiresAt = new DateTimeOffset(DateTime.UtcNow.AddMilliseconds(lifetimeMilliseconds));
+
+                bool fresh = await store.TryUseNonceAsync(nonce, nc, expiresAt, cancellationToken).ConfigureAwait(false);
+                if (!fresh)
                 {
-                    var cachedNonceCount = _nonceCache.Get(nonce, null);
-                    if (cachedNonceCount == null)
-                    {
-                        // Record the count that was actually presented, not 1. Recording 1 leaves
-                        // every count below the one seen still acceptable, so a captured request
-                        // whose count is higher - which is what a client sends after retrying a
-                        // lost request - could be replayed once.
-                        CacheItemPolicy cip = new CacheItemPolicy()
-                        {
-                            AbsoluteExpiration = new DateTimeOffset(DateTime.UtcNow.AddMilliseconds(lifetimeMilliseconds))
-                        };
-                        _nonceCache.Set(nonce, nc, cip);
-                    }
-                    else
-                    {
-                        if (nc <= ((int)cachedNonceCount))
-                        {
-                            return ERROR_NONCE_REUSE;
-                        }
-                        else
-                        {
-                            CacheItemPolicy cip = new CacheItemPolicy()
-                            {
-                                AbsoluteExpiration = new DateTimeOffset(DateTime.UtcNow.AddMilliseconds(lifetimeMilliseconds))
-                            };
-                            _nonceCache.Set(nonce, nc, cip);
-                        }
-                    }
+                    return ERROR_NONCE_REUSE;
                 }
             }
 
@@ -521,12 +556,11 @@ namespace SharpOnvifCommon.Security
                 }
                 else if (string.Compare(qop, "auth-int", true) == 0)
                 {
-                    if (entityBody == null)
-                    {
-                        throw new ArgumentNullException(nameof(entityBody));
-                    }
-
-                    string entityBodyHash = ToHex(Hash(algorithm, hash, entityBody));
+                    // A request or a response without a body has an empty entity body, not a
+                    // missing one: RFC 7616 hashes it all the same. A GET, or a 200 with no
+                    // content, is answered under auth-int like anything else - and the peer, which
+                    // sees an empty body rather than no body, has to arrive at the same digest.
+                    string entityBodyHash = ToHex(Hash(algorithm, hash, entityBody ?? new byte[0]));
                     HA2 = ToHex(Hash(algorithm, hash, EncodingGetBytes($"{method}:{uri}:{entityBodyHash}")));
                 }
                 else

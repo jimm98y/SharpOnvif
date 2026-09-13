@@ -20,8 +20,11 @@
 // SOFTWARE.
 
 using System;
+using System.Collections.Concurrent;
+using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using SharpOnvifCommon.Security;
 using SharpOnvifCommon.Soap;
@@ -225,6 +228,132 @@ namespace SharpOnvif.Tests
             StringAssert.Contains(transport.Authorizations[1], "nonce=\"abc123\"");
             StringAssert.Contains(transport.Authorizations[2], "nonce=\"xyz789\"",
                 "a device that hands out a nextnonce expects the next request to use it");
+        }
+
+        [TestMethod]
+        [Timeout(30000)]
+        public void ReadsTheBodyAnAuthIntResponseIsSignedOverWithoutBlockingTheCaller()
+        {
+            // Verifying the device's rspauth under qop=auth-int means reading the response body,
+            // and reading it is asynchronous. Waiting on that read from inside SendAsync holds the
+            // thread that started the request; where that thread is the one the read needs in
+            // order to finish - a request started from a message pump, a UI thread, a single
+            // threaded scheduler - nothing ever completes.
+            using (var pump = new Pump())
+            {
+                const string Body = "<ok/>";
+
+                var transport = new FakeTransport((request, call) =>
+                {
+                    // Only auth-int is offered, so that is what the client has to send.
+                    if (call == 1) return FakeTransport.Challenge(
+                        "realm=\"" + Realm + "\", qop=\"auth-int\", nonce=\"abc123\", opaque=\"00000000\", stale=FALSE");
+
+                    var response = new HttpResponseMessage(HttpStatusCode.OK)
+                    {
+                        // A body that arrives only once the caller has gone back to its pump.
+                        Content = new DeferredContent(Body, pump),
+                    };
+                    response.Headers.TryAddWithoutValidation(
+                        "Authentication-Info", MutualAuth(request, Body));
+                    return response;
+                });
+
+                var client = CreateClient(transport, out _);
+
+                var request = new HttpRequestMessage(HttpMethod.Get, "http://192.168.1.10/onvif/device_service");
+                var returned = new ManualResetEventSlim();
+                Task<HttpResponseMessage> send = null;
+
+                pump.Post(() =>
+                {
+                    send = client.SendAsync(request);
+                    returned.Set();
+                });
+
+                Assert.IsTrue(returned.Wait(TimeSpan.FromSeconds(10)),
+                    "SendAsync blocked the thread it was called on, which is the thread its own body read needs");
+                Assert.IsTrue(send.Wait(TimeSpan.FromSeconds(10)), "the request never completed");
+                Assert.AreEqual(HttpStatusCode.OK, send.Result.StatusCode);
+            }
+        }
+
+        /// <summary>
+        /// The Authentication-Info a device sends back under auth-int, proving it knows the
+        /// password: the same digest with an empty method, over the response body.
+        /// </summary>
+        private static string MutualAuth(HttpRequestMessage request, string body)
+        {
+            string authorization = string.Join(", ", request.Headers.GetValues("Authorization"));
+            string nonce = HttpDigestAuthentication.GetValueFromHeader(authorization, "nonce", true);
+            string cnonce = HttpDigestAuthentication.GetValueFromHeader(authorization, "cnonce", true);
+            string nc = HttpDigestAuthentication.GetValueFromHeader(authorization, "nc", false);
+            string uri = HttpDigestAuthentication.GetValueFromHeader(authorization, "uri", true);
+
+            string rspauth = HttpDigestAuthentication.CreateWebDigestRFC7616(
+                "", "admin", Realm, "password", false, nonce, "", uri,
+                HttpDigestAuthentication.ConvertNCToInt(nc), cnonce, "auth-int",
+                System.Text.Encoding.UTF8.GetBytes(body), nonce, cnonce);
+
+            return "rspauth=\"" + rspauth + "\", cnonce=\"" + cnonce + "\", nc=" + nc + ", qop=auth-int";
+        }
+
+        /// <summary>
+        /// A single thread running work items one at a time, the way a message pump or a UI thread
+        /// does. Work posted while the thread is busy waits for it to come back.
+        /// </summary>
+        private sealed class Pump : IDisposable
+        {
+            private readonly BlockingCollection<Action> _work = new BlockingCollection<Action>();
+
+            public Pump()
+            {
+                var thread = new Thread(Run) { IsBackground = true, Name = "test pump" };
+                thread.Start();
+            }
+
+            private void Run()
+            {
+                foreach (Action work in _work.GetConsumingEnumerable()) work();
+            }
+
+            public void Post(Action work)
+            {
+                _work.Add(work);
+            }
+
+            public void Dispose()
+            {
+                _work.CompleteAdding();
+            }
+        }
+
+        /// <summary>Content that is produced by the pump, so reading it needs the pump thread.</summary>
+        private sealed class DeferredContent : HttpContent
+        {
+            private readonly byte[] _body;
+            private readonly Pump _pump;
+
+            public DeferredContent(string body, Pump pump)
+            {
+                _body = System.Text.Encoding.UTF8.GetBytes(body);
+                _pump = pump;
+            }
+
+            protected override async Task SerializeToStreamAsync(Stream stream, TransportContext context)
+            {
+                var released = new TaskCompletionSource<bool>();
+                _pump.Post(() => released.SetResult(true));
+
+                await released.Task.ConfigureAwait(false);
+                await stream.WriteAsync(_body, 0, _body.Length).ConfigureAwait(false);
+            }
+
+            protected override bool TryComputeLength(out long length)
+            {
+                length = _body.Length;
+                return true;
+            }
         }
     }
 }

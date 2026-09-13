@@ -1,4 +1,4 @@
-﻿// SharpOnvif
+// SharpOnvif
 // Copyright (C) 2026 Lukas Volf
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -62,6 +62,7 @@ namespace SharpOnvifServer
                     digestOptions.HttpDigestUserHash = options.HttpDigestUserHash;
                     digestOptions.HttpDigestAlgorithms = Distinct(options.HttpDigestAlgorithms);
                     digestOptions.HttpDigestNonceLifetimeMilliseconds = options.HttpDigestNonceLifetimeMilliseconds;
+                    digestOptions.HttpDigestNonceReplayStore = options.HttpDigestNonceReplayStore;
                     digestOptions.PreAuthActions = Distinct(options.PreAuthActions);
                     digestOptions.WsUsernameTokenMaxTimeDeltaInMilliseconds = options.WsUsernameTokenMaxTimeDeltaInMilliseconds;
                 }

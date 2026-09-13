@@ -219,6 +219,28 @@ See `Onvif.Client` sample project for a complete example.
 ## Digest authentication
 Onvif supports two types of Digest authentication. Legacy [WS-UsernameToken](https://docs.oasis-open.org/wss/v1.1/wss-v1.1-spec-pr-UsernameTokenProfile-01.htm) authentication carried inside the SOAP headers and HTTP Digest authentication as defined in [RFC 7616](https://www.rfc-editor.org/rfc/rfc7616). Both types of authentication are now supported on both the client and the server.
 
+### Running more than one instance
+HTTP Digest keeps two pieces of state on the server, and both are per process by default: the
+private key a server nonce is minted and validated with, and the record of which nonces have been
+spent, which is what refuses a replayed request. A device, or a single server instance, needs
+nothing here.
+
+Behind a load balancer it is not enough. A nonce is validated by recomputing it, so an instance can
+only validate nonces minted with the key it holds, and an instance keeping the spent-nonce record
+in its own memory accepts a captured request its neighbour has already refused. Give every instance
+the same key, from a secret store, and a replay store all of them can read:
+
+```cs
+HttpDigestAuthentication.SetNoncePrivateKey(keyFromYourSecretStore);
+
+builder.Services.AddOnvifDigestAuthentication(options =>
+{
+    options.HttpDigestNonceReplayStore = new MyDistributedNonceReplayStore();
+});
+```
+`INonceReplayStore` has one method - it spends a nonce at a nonce count and says whether that count
+had been seen before. `MemoryNonceReplayStore`, the default, holds the record in this process.
+
 ## Testing
 Only the DeviceMgmt, Media and Events were tested with Hikvision cameras. 
 Server implementation was tested using Onvif Device Manager.

@@ -61,7 +61,8 @@ namespace SharpOnvifCommon.Soap
 
             if (response.StatusCode != HttpStatusCode.Unauthorized)
             {
-                if (authorization != null) ValidateAuthenticationInfo(response, authorization, RequestUri(request), body);
+                if (authorization != null)
+                    await ValidateAuthenticationInfoAsync(response, authorization, RequestUri(request)).ConfigureAwait(false);
                 return response;
             }
 
@@ -78,7 +79,7 @@ namespace SharpOnvifCommon.Soap
             HttpResponseMessage retried = await base.SendAsync(retry, cancellationToken).ConfigureAwait(false);
             if (retryAuthorization != null && retried.StatusCode != HttpStatusCode.Unauthorized)
             {
-                ValidateAuthenticationInfo(retried, retryAuthorization, RequestUri(retry), body);
+                await ValidateAuthenticationInfoAsync(retried, retryAuthorization, RequestUri(retry)).ConfigureAwait(false);
             }
 
             return retried;
@@ -226,7 +227,7 @@ namespace SharpOnvifCommon.Soap
         /// Verifies the server's rspauth when it sends one, which proves it knows the password
         /// too, and adopts any nextnonce it offers for the following request.
         /// </summary>
-        private void ValidateAuthenticationInfo(HttpResponseMessage response, string authorization, string uri, byte[] requestBody)
+        private async Task ValidateAuthenticationInfoAsync(HttpResponseMessage response, string authorization, string uri)
         {
             if (!response.Headers.TryGetValues("Authentication-Info", out var values)) return;
 
@@ -277,7 +278,7 @@ namespace SharpOnvifCommon.Soap
             {
                 entity = response.Content == null
                     ? null
-                    : response.Content.ReadAsByteArrayAsync().GetAwaiter().GetResult();
+                    : await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
             }
 
             string expected = HttpDigestAuthentication.CreateWebDigestRFC7616(
@@ -285,7 +286,7 @@ namespace SharpOnvifCommon.Soap
                 nonce, "", uri, HttpDigestAuthentication.ConvertNCToInt(sentNc), sentCnonce, sentQop,
                 entity, primeNonce, primeClientNonce);
 
-            if (expected != rspauth)
+            if (!HttpDigestAuthentication.FixedTimeEquals(expected, rspauth))
                 throw new AuthenticationException("The device's rspauth did not validate.");
 
             if (!string.IsNullOrEmpty(nextNonce)) lock (_sync) { _nextNonce = nextNonce; }
