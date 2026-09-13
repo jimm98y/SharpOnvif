@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.31903.59
+# Visual Studio Version 18
+VisualStudioVersion = 18.10.12201.205 stable
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpOnvifCommon", "SharpOnvifCommon\SharpOnvifCommon.csproj", "{E9F5C071-0F51-4DF6-AE8F-DB7DE27952F8}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpOnvifClient", "SharpOnvifClient\SharpOnvifClient.csproj", "{847A671C-C1EC-48F1-B5D5-0766B71F7C9F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpOnvifServer", "SharpOnvifServer\SharpOnvifServer.csproj", "{2891CD9D-B6B7-4E4D-B711-D580EAA500FA}"
 EndProject
@@ -45,18 +43,6 @@ Global
 		{E9F5C071-0F51-4DF6-AE8F-DB7DE27952F8}.Release|x64.Build.0 = Release|Any CPU
 		{E9F5C071-0F51-4DF6-AE8F-DB7DE27952F8}.Release|x86.ActiveCfg = Release|Any CPU
 		{E9F5C071-0F51-4DF6-AE8F-DB7DE27952F8}.Release|x86.Build.0 = Release|Any CPU
-		{847A671C-C1EC-48F1-B5D5-0766B71F7C9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{847A671C-C1EC-48F1-B5D5-0766B71F7C9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{847A671C-C1EC-48F1-B5D5-0766B71F7C9F}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{847A671C-C1EC-48F1-B5D5-0766B71F7C9F}.Debug|x64.Build.0 = Debug|Any CPU
-		{847A671C-C1EC-48F1-B5D5-0766B71F7C9F}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{847A671C-C1EC-48F1-B5D5-0766B71F7C9F}.Debug|x86.Build.0 = Debug|Any CPU
-		{847A671C-C1EC-48F1-B5D5-0766B71F7C9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{847A671C-C1EC-48F1-B5D5-0766B71F7C9F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{847A671C-C1EC-48F1-B5D5-0766B71F7C9F}.Release|x64.ActiveCfg = Release|Any CPU
-		{847A671C-C1EC-48F1-B5D5-0766B71F7C9F}.Release|x64.Build.0 = Release|Any CPU
-		{847A671C-C1EC-48F1-B5D5-0766B71F7C9F}.Release|x86.ActiveCfg = Release|Any CPU
-		{847A671C-C1EC-48F1-B5D5-0766B71F7C9F}.Release|x86.Build.0 = Release|Any CPU
 		{2891CD9D-B6B7-4E4D-B711-D580EAA500FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2891CD9D-B6B7-4E4D-B711-D580EAA500FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2891CD9D-B6B7-4E4D-B711-D580EAA500FA}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -123,8 +109,11 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{9735B663-28FE-477D-B6FA-65247FBE0A91} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
-		{145490B7-B60E-4F5D-8ADA-19F9B675E8FE} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
+		{145490B7-B60E-4F5D-8ADA-19F9B675E8FE} = {30DC08FC-3E98-6757-484C-7F83F687C538}
 		{EDC71558-BB32-4C40-92E7-6C907C16290A} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
 		{8AEDA37E-B7E4-4447-8131-F36A4F4E97CA} = {5D20AA90-6969-D8BD-9DCD-8634F4692FDA}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C4284995-B798-43CD-9B7F-1FD3EFE6B142}
 	EndGlobalSection
 EndGlobal
