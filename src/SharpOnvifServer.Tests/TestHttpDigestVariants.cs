@@ -253,6 +253,135 @@ namespace SharpOnvif.Tests
         }
 
         [TestMethod]
+        public async Task AuthenticatesWhenTheDeviceTookTheOlderSchemeAway()
+        {
+            // What a client is by default: it knows both schemes and lets the device choose. A
+            // device that has switched WS-UsernameToken off still has to let it in on digest -
+            // and the token it carries anyway, for a scheme the device no longer takes, must not
+            // be what gets it refused.
+            await using var device = await AuthenticatedDevice.StartAsync(options =>
+                options.Onvif.Authentication = DigestAuthentication.HttpDigest);
+
+            using var client = new DeviceClient(device.Endpoint, new OnvifClientSettings
+            {
+                Credentials = new System.Net.NetworkCredential(
+                    AuthenticatedDevice.UserName, AuthenticatedDevice.Password),
+            });
+
+            var info = await client.GetDeviceInformationAsync();
+
+            Assert.AreEqual(AuthenticatedDevice.Manufacturer, info.Manufacturer);
+        }
+
+        [TestMethod]
+        public async Task StillChecksTheTokenWhenTheDeviceTakesBoth()
+        {
+            // The other side of ignoring a token nobody asked for: where the device does take the
+            // older scheme, credentials presented both ways both have to hold up. Here the digest
+            // is good and the token is stale, and that is still a refusal.
+            await using var device = await AuthenticatedDevice.StartAsync(options =>
+            {
+                options.Onvif.Authentication =
+                    DigestAuthentication.HttpDigest | DigestAuthentication.WsUsernameToken;
+                options.WsUsernameTokenMaxTimeDeltaInMilliseconds = 2000;
+            });
+
+            using var client = new DeviceClient(device.Endpoint, new OnvifClientSettings
+            {
+                Credentials = new System.Net.NetworkCredential(
+                    AuthenticatedDevice.UserName, AuthenticatedDevice.Password),
+                UtcNowOffset = TimeSpan.FromMinutes(-10),
+            });
+
+            await Assert.ThrowsExactlyAsync<SoapFaultException>(() => client.GetDeviceInformationAsync(),
+                "a token that does not hold up must not be waved through because the digest did");
+        }
+
+        /// <summary>
+        /// A request carrying credentials both ways: a digest of the right shape but the wrong
+        /// answer, and a UsernameToken that is genuinely valid.
+        /// </summary>
+        /// <remarks>
+        /// Built by hand because a real client never gets into this state on purpose - on a device
+        /// that takes both, its first request authenticates on the token alone and it is never
+        /// challenged. That is exactly why the case needs pinning: nothing else reaches it.
+        /// </remarks>
+        private static async Task<System.Net.HttpStatusCode> PostBothAsync(
+            AuthenticatedDevice device, string digestResponse)
+        {
+            using var http = new System.Net.Http.HttpClient();
+
+            string challenge = await ChallengeFor(device);
+            string nonce = Value(challenge, "nonce");
+            string realm = Value(challenge, "realm");
+            string opaque = Value(challenge, "opaque");
+
+            string created = DateTime.UtcNow.ToString(
+                "yyyy-MM-ddTHH:mm:ss.fffZ", System.Globalization.CultureInfo.InvariantCulture);
+            string tokenNonce = SharpOnvifCommon.Security.WsDigestAuthentication.CalculateNonce();
+            string tokenDigest = SharpOnvifCommon.Security.WsDigestAuthentication.CreateSoapDigest(
+                tokenNonce, created, AuthenticatedDevice.Password);
+
+            const string Wsse =
+                "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd";
+            const string Wsu =
+                "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd";
+
+            var content = new System.Net.Http.StringContent(
+                "<?xml version=\"1.0\"?>" +
+                "<s:Envelope xmlns:s=\"http://www.w3.org/2003/05/soap-envelope\">" +
+                $"<s:Header><wsse:Security xmlns:wsse=\"{Wsse}\" xmlns:wsu=\"{Wsu}\">" +
+                "<wsse:UsernameToken>" +
+                $"<wsse:Username>{AuthenticatedDevice.UserName}</wsse:Username>" +
+                $"<wsse:Password Type=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordDigest\">{tokenDigest}</wsse:Password>" +
+                $"<wsse:Nonce>{tokenNonce}</wsse:Nonce>" +
+                $"<wsu:Created>{created}</wsu:Created>" +
+                "</wsse:UsernameToken></wsse:Security></s:Header>" +
+                "<s:Body><GetDeviceInformation xmlns=\"http://www.onvif.org/ver10/device/wsdl\"/></s:Body>" +
+                "</s:Envelope>");
+            content.Headers.ContentType =
+                System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/soap+xml; charset=utf-8");
+
+            var request = new System.Net.Http.HttpRequestMessage(System.Net.Http.HttpMethod.Post, device.Endpoint)
+            {
+                Content = content,
+            };
+
+            string path = new Uri(device.Endpoint).AbsolutePath;
+            request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue(
+                "Digest",
+                $"username=\"{AuthenticatedDevice.UserName}\", realm=\"{realm}\", nonce=\"{nonce}\", " +
+                $"uri=\"{path}\", response=\"{digestResponse}\", qop=auth, nc=00000001, cnonce=\"0a4f113b\"" +
+                (opaque == null ? "" : $", opaque=\"{opaque}\""));
+
+            using var response = await http.SendAsync(request);
+            return response.StatusCode;
+        }
+
+        private static string Value(string challenge, string name)
+        {
+            var match = System.Text.RegularExpressions.Regex.Match(challenge, name + "=\"([^\"]*)\"");
+            return match.Success ? match.Groups[1].Value : null;
+        }
+
+        [TestMethod]
+        public async Task RefusesAGoodTokenWhenTheDigestBesideItIsWrong()
+        {
+            // Onvif has the digest checked first, and a client presenting credentials both ways
+            // has to be right both ways. A wrong digest used to fall past its own check and be
+            // excused by the token further down the request, which made the digest optional for
+            // anybody who could produce a token.
+            await using var device = await AuthenticatedDevice.StartAsync(options =>
+                options.Onvif.Authentication =
+                    DigestAuthentication.HttpDigest | DigestAuthentication.WsUsernameToken);
+
+            Assert.AreEqual(
+                System.Net.HttpStatusCode.Unauthorized,
+                await PostBothAsync(device, new string('0', 32)),
+                "a digest that does not hold up must refuse the request, token or no token");
+        }
+
+        [TestMethod]
         public async Task RefusesADigestWhenTheDeviceOnlyTakesTheOlderScheme()
         {
             await using var device = await AuthenticatedDevice.StartAsync(options =>

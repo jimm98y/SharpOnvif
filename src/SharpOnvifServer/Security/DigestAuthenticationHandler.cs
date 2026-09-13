@@ -112,16 +112,24 @@ namespace SharpOnvifServer.Security
                         int authenticateWebDigestResult = await AuthenticateWebDigestAsync(Options.HttpDigestRealm, Request.Method, webToken, body).ConfigureAwait(false);
                         if (authenticateWebDigestResult == 0)
                         {
-                            // now in case the request also contains WsUsernameToken, we must verify it
-                            SoapDigestAuth token = await GetSecurityHeaderFromSoapEnvelopeAsync(Request).ConfigureAwait(false);
+                            // A request that authenticated one way may carry credentials the other
+                            // way too, and then the two have to agree: digest as one user while
+                            // the header claims another is not something to let through.
+                            //
+                            // Only when this device takes the older scheme, though. A client that
+                            // knows both sends the token whether or not the device wants it,
+                            // having no way to find out but to be refused - so on a device that
+                            // has switched it off the token is not a credential at all, nothing
+                            // here reads it, and the identity comes from the digest that just
+                            // succeeded. Failing the request for carrying it locks out every
+                            // client that has not been told which schemes this device kept.
+                            SoapDigestAuth token =
+                                Options.Onvif.Authentication.HasFlag(DigestAuthentication.WsUsernameToken)
+                                    ? await GetSecurityHeaderFromSoapEnvelopeAsync(Request).ConfigureAwait(false)
+                                    : null;
+
                             if (token != null)
                             {
-                                if(!Options.Onvif.Authentication.HasFlag(DigestAuthentication.WsUsernameToken))
-                                {
-                                    // WsUsernameToken is explicitly disallowed, fail
-                                    return AuthenticateResult.Fail($"HTTP Digest authentication succeeded, but WsUsernameToken authentication is not allowed.");
-                                }
-
                                 try
                                 {
                                     if (await AuthenticateSoapDigestAsync(token.UserName, token.Password, token.Nonce, token.Created).ConfigureAwait(false) == 0)
@@ -159,6 +167,15 @@ namespace SharpOnvifServer.Security
                             // using the Fail(, properties) parameter does not work, the information is lost in ASP.NET
                             Context.Items[CONTEXT_AUTHENTICATE_WEB_DIGEST_RESULT] = authenticateWebDigestResult;
                             return AuthenticateResult.Fail("HTTP Digest nonce has expired.");
+                        }
+                        else
+                        {
+                            // A digest that does not hold up is a refusal, not something to fall
+                            // past. Credentials presented both ways have to be right both ways,
+                            // and the specification has the digest checked first - so a bad
+                            // digest must not be excused by a good token further down the
+                            // request.
+                            return AuthenticateResult.Fail("HTTP Digest authentication failed.");
                         }
                     }
                     catch (Exception ex)

@@ -352,6 +352,13 @@ only validate nonces minted with the key it holds, and an instance keeping the s
 in its own memory accepts a captured request its neighbour has already refused. Give every instance
 the same key, from a secret store, and a replay store all of them can read:
 
+A device that accepts only one of the two schemes still hears from clients that know both: a
+client sends its UsernameToken whether or not this device wants it, having no way to find out
+except by being refused. A token for a scheme the device has switched off is therefore ignored
+rather than treated as an error - it is not a credential here, and the identity comes from the
+digest. Where the device does accept both and a request carries both, both have to hold up, the
+digest first, and they have to name the same user.
+
 ```cs
 HttpDigestAuthentication.SetNoncePrivateKey(keyFromYourSecretStore);
 
