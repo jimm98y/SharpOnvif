@@ -1,6 +1,10 @@
 # SharpOnvif
 A C# implementation of the Onvif interface - client as well as the server. All profiles are supported.
 
+> **Upgrading from 0.9.x?** 0.10.0 replaces WCF and CoreWCF with `HttpClient` and ASP.NET Core, and
+> merges the 50 per-service packages into two. Nothing changed on the wire. See
+> [doc/migration.md](doc/migration.md).
+
 ## SharpOnvifServer
 Onvif server provides NET8 and NET10 bindings generated from the Onvif WSDLs by
 `WsdlGenerator`, hosted on ASP.NET Core. It makes it easy to implement only parts of the
