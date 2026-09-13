@@ -316,29 +316,16 @@ namespace SharpOnvif.Tests
             string realm = Value(challenge, "realm");
             string opaque = Value(challenge, "opaque");
 
-            string created = DateTime.UtcNow.ToString(
-                "yyyy-MM-ddTHH:mm:ss.fffZ", System.Globalization.CultureInfo.InvariantCulture);
-            string tokenNonce = SharpOnvifCommon.Security.WsDigestAuthentication.CalculateNonce();
-            string tokenDigest = SharpOnvifCommon.Security.WsDigestAuthentication.CreateSoapDigest(
-                tokenNonce, created, AuthenticatedDevice.Password);
-
-            const string Wsse =
-                "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd";
-            const string Wsu =
-                "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd";
-
+            // The token is written by the same code a real client writes it with, rather than
+            // spelled out here: a hand-copied one would be this test's idea of the format instead
+            // of the library's, and would go on passing after the real one drifted away from it.
             var content = new System.Net.Http.StringContent(
-                "<?xml version=\"1.0\"?>" +
-                "<s:Envelope xmlns:s=\"http://www.w3.org/2003/05/soap-envelope\">" +
-                $"<s:Header><wsse:Security xmlns:wsse=\"{Wsse}\" xmlns:wsu=\"{Wsu}\">" +
-                "<wsse:UsernameToken>" +
-                $"<wsse:Username>{AuthenticatedDevice.UserName}</wsse:Username>" +
-                $"<wsse:Password Type=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordDigest\">{tokenDigest}</wsse:Password>" +
-                $"<wsse:Nonce>{tokenNonce}</wsse:Nonce>" +
-                $"<wsu:Created>{created}</wsu:Created>" +
-                "</wsse:UsernameToken></wsse:Security></s:Header>" +
-                "<s:Body><GetDeviceInformation xmlns=\"http://www.onvif.org/ver10/device/wsdl\"/></s:Body>" +
-                "</s:Envelope>");
+                SharpOnvifCommon.Xml.SoapEnvelope.Write(
+                    SharpOnvifCommon.Xml.OnvifXmlNamespaces.EnvelopePrologue,
+                    header => SharpOnvifCommon.Soap.WsUsernameToken.Write(
+                        header, AuthenticatedDevice.UserName, AuthenticatedDevice.Password, TimeSpan.Zero),
+                    body => body.WriteEmptyElement(
+                        "http://www.onvif.org/ver10/device/wsdl", "GetDeviceInformation")));
             content.Headers.ContentType =
                 System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/soap+xml; charset=utf-8");
 

@@ -64,7 +64,7 @@ namespace SharpOnvifServer.Security
         {
             // Doing nothing quietly would hide a caller's mistake, and there is no request to
             // answer without one.
-            if (context == null) throw new ArgumentNullException(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
 
             // The digest this request was admitted on, taken from where the check left it rather
             // than read out of the request again.
