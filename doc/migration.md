@@ -110,6 +110,14 @@ declared in terms of `OnvifAuthenticationSettings` now, which
 `DigestAuthenticationSchemeOptions` derives from, so what you pass it is what you passed it. Its
 only edits are the response renames in section 3 and the `using` in section 2.
 
+One thing changed for anyone who derived from it: the protected `_authentication` field is gone,
+because `_settings.Authentication` is the same object. Read it there.
+
+```cs
+- _authentication
++ _settings.Authentication     // an IClientAuthentication; cast for the Onvif one's Options
+```
+
 ### Exceptions
 
 | Situation | 0.9.x | 0.10.0 |

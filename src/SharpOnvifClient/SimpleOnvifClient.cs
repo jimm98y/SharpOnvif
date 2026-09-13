@@ -48,7 +48,6 @@ namespace SharpOnvifClient
         protected object _syncRoot = new object();
         protected readonly Dictionary<string, object> _clients = new Dictionary<string, object>();
         protected readonly System.Net.NetworkCredential _credentials;
-        protected readonly OnvifAuthenticationSettings _authentication;
 
         /// <summary>
         /// Shared by every service client this instance creates, so the HTTP Digest challenge is
@@ -94,9 +93,9 @@ namespace SharpOnvifClient
             // Used as it was given, not copied. Copying would hand back a plain
             // OnvifAuthenticationSettings, quietly discarding whatever a caller derived from it -
             // and a generated client does not copy this either, so the two agree.
-            this._authentication = authentication ?? new OnvifAuthenticationSettings();
+            authentication = authentication ?? new OnvifAuthenticationSettings();
 
-            if (this._authentication.Options.Authentication != DigestAuthentication.None)
+            if (authentication.Options.Authentication != DigestAuthentication.None)
             {
                 if (string.IsNullOrWhiteSpace(userName) || string.IsNullOrWhiteSpace(password))
                     throw new ArgumentNullException("User name or password must not be empty!");
@@ -107,7 +106,7 @@ namespace SharpOnvifClient
             _settings = new OnvifClientSettings
             {
                 Credentials = _credentials,
-                Authentication = this._authentication,
+                Authentication = authentication,
                 DisableExpect100Continue = disableExpect100Continue,
             };
 
@@ -124,7 +123,11 @@ namespace SharpOnvifClient
         /// </summary>
         public void SetCameraUtcNowOffset(TimeSpan utcNowOffset)
         {
-            if (!_authentication.Options.Offers(DigestAuthentication.WsUsernameToken))
+            // Only Onvif's own authentication stamps a time, and only the older scheme carries
+            // one; anything else has nothing for an offset to correct.
+            OnvifAuthenticationSettings onvif = _settings.Authentication as OnvifAuthenticationSettings;
+
+            if (onvif == null || !onvif.Options.Offers(DigestAuthentication.WsUsernameToken))
                 throw new NotSupportedException("Time offset is only supported for WsUsernameToken authentication");
 
             _settings.UtcNowOffset = utcNowOffset;

@@ -23,6 +23,7 @@ using System;
 using System.Threading.Tasks;
 using SharpOnvifClient;
 using SharpOnvifCommon.Security;
+using SharpOnvifCommon.Soap;
 using SharpOnvifCommon.Xml;
 using DeviceOptions = SharpOnvifServer.Security.DigestAuthenticationSchemeOptions;
 
@@ -147,7 +148,7 @@ namespace SharpOnvif.Tests
             {
             }
 
-            public OnvifAuthenticationSettings Authentication { get { return _authentication; } }
+            public IClientAuthentication Authentication { get { return _settings.Authentication; } }
         }
     }
 }
