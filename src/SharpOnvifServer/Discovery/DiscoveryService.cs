@@ -82,6 +82,8 @@ namespace SharpOnvifServer.Discovery
         public static string OnvifDiscoveryAddressIPV4 = "239.255.255.250";
         public static string OnvifDiscoveryAddressIPV6 = "ff02::c"; 
 
+        // Written as interfaces come up, read when the host shuts down.
+        private readonly object _syncRoot = new object();
         private List<UdpClient> _udpClients = new List<UdpClient>();
 
         // The multicast group each socket joined, which is where an announcement goes out.
@@ -233,7 +235,10 @@ namespace SharpOnvifServer.Discovery
             {
                 // to kill a process owning a port: Get-Process -Id (Get-NetUDPEndpoint -LocalPort 3702).OwningProcess
                 var udpClient = new UdpClient(nicAddress.AddressFamily);
-                _udpClients.Add(udpClient);
+                lock (_syncRoot)
+                {
+                    _udpClients.Add(udpClient);
+                }
 
                 udpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
 
@@ -274,16 +279,23 @@ namespace SharpOnvifServer.Discovery
                         nicIPAddress));
                 }
 
-                var listenerTask = Task.Run(() =>
+                // The token is taken once: the loop must not touch _cts after shutdown has
+                // disposed it.
+                CancellationToken token = _cts.Token;
+
+                var listenerTask = Task.Run(async () =>
                 {
-                    while (!_cts.IsCancellationRequested)
+                    while (!token.IsCancellationRequested)
                     {
                         try
                         {
-                            var remoteEndpoint = new IPEndPoint(IPAddress.Any, 0);
-                            var recvResult = udpClient.Receive(ref remoteEndpoint);
+                            // Awaited, not blocked on. A thread sitting in a synchronous Receive
+                            // is not woken by closing the socket - on Unix it stays in recvfrom -
+                            // so shutdown waited for a task that was never going to finish and the
+                            // process had to be killed.
+                            UdpReceiveResult received = await udpClient.ReceiveAsync(token).ConfigureAwait(false);
 
-                            string message = Encoding.UTF8.GetString(recvResult);
+                            string message = Encoding.UTF8.GetString(received.Buffer);
                             // Anyone on the network can send this datagram, so it is rendered as
                             // printable text: unescaped, its newlines would read as further log
                             // entries.
@@ -297,28 +309,29 @@ namespace SharpOnvifServer.Discovery
                                 // answering, so that a network of them does not reply to one Probe
                                 // in a single burst the client then has to absorb.
                                 int delay = NextProbeDelayMilliseconds();
-                                if (delay > 0 && !_cts.IsCancellationRequested)
-                                    _cts.Token.WaitHandle.WaitOne(delay);
-
-                                if (_cts.IsCancellationRequested) continue;
+                                if (delay > 0) await Task.Delay(delay, token).ConfigureAwait(false);
 
                                 string reply = CreateDiscoveryResponse(_options, _listeningUris.ToArray(), parsedMessage.MessageUuid);
                                 var replyBytes = Encoding.UTF8.GetBytes(reply);
-                                int sentBytes = udpClient.Client.SendTo(replyBytes, remoteEndpoint);
+                                await udpClient.Client
+                                    .SendToAsync(replyBytes, SocketFlags.None, received.RemoteEndPoint, token)
+                                    .ConfigureAwait(false);
                                 _logger.LogDebug(
                                     $"Sent Discovery response on {nicIPAddress}: {UntrustedText.Printable(reply, MaxLoggedDatagramLength)}");
                             }
                         }
-                        catch(SocketException socketEx)
+                        catch (OperationCanceledException)
                         {
-                            if (socketEx.Message.Contains("WSACancelBlockingCall"))
-                            {
-                                _logger.LogInformation($"Discovery request on {nicIPAddress} was cancelled.");
-                            }
-                            else
-                            {
-                                _logger.LogError($"Failed to process Discovery request on {nicIPAddress}: {socketEx.Message}");
-                            }
+                            // Shutting down, which is the only way out of this loop.
+                            return;
+                        }
+                        catch (ObjectDisposedException)
+                        {
+                            return;
+                        }
+                        catch (SocketException socketEx)
+                        {
+                            _logger.LogError($"Failed to process Discovery request on {nicIPAddress}: {socketEx.Message}");
                         }
                         catch (Exception ex)
                         {
@@ -327,7 +340,10 @@ namespace SharpOnvifServer.Discovery
                     }
                 });
 
-                _listenerTasks.Add(listenerTask);
+                lock (_syncRoot)
+                {
+                    _listenerTasks.Add(listenerTask);
+                }
             }
             catch (Exception ex)
             {
@@ -594,6 +610,12 @@ namespace SharpOnvifServer.Discovery
             }
         }
 
+        /// <summary>
+        /// How long shutdown waits for the listeners to stop before closing their sockets anyway.
+        /// A host that cannot shut down has to be killed, and a killed host leaks its sockets.
+        /// </summary>
+        private static readonly TimeSpan ShutdownTimeout = TimeSpan.FromSeconds(5);
+
         public async Task StopAsync(CancellationToken cancellationToken)
         {
             // Before anything is torn down: a Bye needs the sockets it goes out on, and tells
@@ -605,21 +627,44 @@ namespace SharpOnvifServer.Discovery
                 _announcers.Clear();
             }
 
-            await _cts.CancelAsync();
-            _cts.Dispose();
+            await _cts.CancelAsync().ConfigureAwait(false);
 
-            if (_udpClients.Count > 0)
+            Task[] listeners;
+            lock (_syncRoot)
             {
-                foreach (var udpClient in _udpClients)
-                {
-                    udpClient.Dispose();
-                }
+                listeners = _listenerTasks.ToArray();
+                _listenerTasks.Clear();
+            }
 
+            // Bounded: a listener that will not stop must not keep the process alive, because a
+            // process that will not exit is one that has to be killed with its sockets still open.
+            Task stopped = Task.WhenAll(listeners);
+            if (await Task.WhenAny(stopped, Task.Delay(ShutdownTimeout)).ConfigureAwait(false) != stopped)
+            {
+                _logger.LogWarning("DiscoveryService listeners did not stop within {Timeout}", ShutdownTimeout);
+            }
+
+            List<UdpClient> clients;
+            lock (_syncRoot)
+            {
+                clients = _udpClients.ToList();
                 _udpClients.Clear();
             }
 
-            await Task.WhenAll(_listenerTasks);
-            _listenerTasks.Clear();
+            foreach (var udpClient in clients)
+            {
+                try
+                {
+                    udpClient.Dispose();
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError($"Failed to close a Discovery socket: {ex.Message}");
+                }
+            }
+
+            // Last: the loops read its token, and disposing it before they stop throws inside them.
+            _cts.Dispose();
         }
     }
 }
