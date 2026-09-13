@@ -21,6 +21,8 @@
 
 using System.Linq;
 using SharpOnvifCommon;
+using SharpOnvifCommon.Security;
+using SharpOnvifCommon.Soap;
 using SharpOnvifCommon.Xml;
 
 namespace SharpOnvif.Tests
@@ -74,16 +76,37 @@ namespace SharpOnvif.Tests
         }
 
         [TestMethod]
-        public void KnowsWhichActionsNeedNoCredentials()
+        public void AuthenticatesTheWayOnvifDoesUnlessItIsToldOtherwise()
         {
-            // The other half of what the runtime is generated with. A client sends these
-            // unauthenticated, so losing them makes it authenticate calls a device answers
-            // without credentials - which some devices reject.
-            CollectionAssert.Contains(
-                RuntimeDefaults.PreAuthActions,
-                "http://www.onvif.org/ver10/device/wsdl/GetSystemDateAndTime");
+            // The other half of what the runtime is generated with. The generated client knows
+            // only IClientAuthentication; which implementation it starts with is named when the
+            // runtime is, and for this build that is Onvif's - both schemes, and the PRE_AUTH
+            // actions a device answers without credentials.
+            IClientAuthentication authentication = RuntimeDefaults.CreateAuthentication();
 
-            Assert.AreEqual(7, RuntimeDefaults.PreAuthActions.Length, "the PRE_AUTH category");
+            var onvif = authentication as OnvifAuthenticationSettings;
+            Assert.IsNotNull(onvif, "a client built here has to authenticate the way Onvif does");
+
+            Assert.AreEqual(
+                DigestAuthentication.WsUsernameToken | DigestAuthentication.HttpDigest,
+                onvif.Authentication);
+
+            CollectionAssert.Contains(
+                onvif.PreAuthActions, "http://www.onvif.org/ver10/device/wsdl/GetSystemDateAndTime");
+            Assert.AreEqual(7, onvif.PreAuthActions.Count, "the PRE_AUTH category");
+        }
+
+        [TestMethod]
+        public void GivesEachClientItsOwnAuthenticationToChange()
+        {
+            // Narrowing one client's schemes must not narrow every client's, which is what a
+            // shared instance would do.
+            var first = (OnvifAuthenticationSettings)RuntimeDefaults.CreateAuthentication();
+            first.Authentication = DigestAuthentication.None;
+
+            var second = (OnvifAuthenticationSettings)RuntimeDefaults.CreateAuthentication();
+
+            Assert.AreNotEqual(DigestAuthentication.None, second.Authentication);
         }
     }
 }

@@ -364,7 +364,7 @@ builder.Services.AddOnvifDigestAuthentication(options =>
 had been seen before. `MemoryNonceReplayStore`, the default, holds the record in this process.
 
 ### Logging
-The client reports what it could not do through an `IOnvifLogger` it is given. The logger belongs
+The client reports what it could not do through an `ILog` it is given. The logger belongs
 to the object, not to the process, so an application watching several cameras can tell which one
 is complaining - or send one of them nowhere:
 ```cs
@@ -375,10 +375,11 @@ var listener = new SimpleOnvifEventListener(host) { Logger = logger };
 var discovery = new OnvifDiscoveryClient(logger);
 ```
 `OnvifClientSettings.Logger` does the same for a service client built directly. Given none, an
-object reports nowhere. Implement `IOnvifLogger` to send it into your own logging, or use
+object reports nowhere. Implement `ILog` to send it into your own logging, or use
 `NullOnvifLogger.Instance` to be explicit about silence. There is no dependency on any logging
 package, which is what keeps these assemblies free of dependencies altogether. The server does not
-use this - it is given an `ILogger` by the host and logs to that.
+use this - it is given an `ILogger` by the host and logs to that, and the two names are kept apart
+deliberately so that one does not shadow the other where both are in scope.
 
 Discovery additionally raises `Failed`, on `OnvifDiscoveryClient` and on `OnvifDiscoveryListener`,
 because it works on every interface at once and carries on when one of them fails. Worth

@@ -166,7 +166,7 @@ namespace SharpOnvifClient
         /// before the first call: the service clients underneath are made on first use and take
         /// the logger they are given then.
         /// </remarks>
-        public IOnvifLogger Logger
+        public ILog Logger
         {
             get { return _settings.Logger; }
             set { _settings.Logger = value; }

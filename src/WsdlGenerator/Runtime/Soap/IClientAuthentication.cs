@@ -1,0 +1,67 @@
+// SharpOnvif
+// Copyright (C) 2026 Lukas Volf
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+using System;
+using System.Net.Http;
+using __RUNTIME__.Xml;
+
+namespace __RUNTIME__.Soap
+{
+    /// <summary>
+    /// How a client proves who it is.
+    /// </summary>
+    /// <remarks>
+    /// A service can be authenticated at either level or both: in the transport, by answering a
+    /// challenge, or in the message, by writing credentials into the SOAP header. This says what
+    /// the client has to do at each, and nothing about how any particular scheme works.
+    /// <para>
+    /// Only the contract is generated. What implements it is not - HTTP Digest and the
+    /// WS-Security UsernameToken are what Onvif asks for, not what WSDL asks for, and a service
+    /// that authenticates some other way is authenticated by some other implementation of this.
+    /// A client given none sends no credentials at all.
+    /// </para>
+    /// </remarks>
+    public interface IClientAuthentication
+    {
+        /// <summary>
+        /// Whether authenticating needs a handler of the client's own in the pipeline.
+        /// </summary>
+        /// <remarks>
+        /// A caller who supplies a built <see cref="HttpClient"/> cannot be given one, so the
+        /// client refuses rather than quietly sending unauthenticated requests.
+        /// </remarks>
+        bool RequiresOwnTransport(OnvifClientSettings settings);
+
+        /// <summary>
+        /// Wraps the transport in whatever answers a challenge, or returns it untouched when
+        /// nothing has to be answered.
+        /// </summary>
+        HttpMessageHandler CreateTransport(HttpMessageHandler inner, OnvifClientSettings settings);
+
+        /// <summary>
+        /// Returns what writes the credentials into the SOAP header for this action, or null when
+        /// the action carries none - which is how a message goes out with no header element at all
+        /// rather than an empty one.
+        /// </summary>
+        /// <param name="action">The SOAP action being sent, which may be one that needs no credentials.</param>
+        Action<OnvifXmlWriter> CreateSecurityHeader(string action, OnvifClientSettings settings);
+    }
+}

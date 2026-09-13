@@ -19,27 +19,28 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
 // SOFTWARE.
 
-namespace __RUNTIME__
+namespace SharpOnvifCommon
 {
     /// <summary>
-    /// Where the library says what it could not do.
+    /// An <see cref="ILog"/> that discards everything, for a host that has its own
+    /// logging and does not want the library writing anywhere of its own accord.
     /// </summary>
-    /// <remarks>
-    /// The levels are asked before they are written, so that composing a message a nobody will
-    /// read costs nothing - a device that answers badly can do so on every request.
-    /// </remarks>
-    public interface IOnvifLogger
+    public sealed class NullOnvifLogger : ILog
     {
-        void LogError(string error);
-        void LogWarning(string warning);
-        void LogInfo(string info);
-        void LogDebug(string debug);
-        void LogTrace(string trace);
+        public static readonly NullOnvifLogger Instance = new NullOnvifLogger();
 
-        bool IsErrorEnabled { get; set; }
-        bool IsWarningEnabled { get; set; }
-        bool IsInfoEnabled { get; set; }
-        bool IsDebugEnabled { get; set; }
-        bool IsTraceEnabled { get; set; }
+        private NullOnvifLogger() { }
+
+        public void LogError(string error) { }
+        public void LogWarning(string warning) { }
+        public void LogInfo(string info) { }
+        public void LogDebug(string debug) { }
+        public void LogTrace(string trace) { }
+
+        public bool IsErrorEnabled { get { return false; } set { } }
+        public bool IsWarningEnabled { get { return false; } set { } }
+        public bool IsInfoEnabled { get { return false; } set { } }
+        public bool IsDebugEnabled { get { return false; } set { } }
+        public bool IsTraceEnabled { get { return false; } set { } }
     }
 }

@@ -27,7 +27,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace __RUNTIME__.Security
+namespace SharpOnvifCommon.Security
 {
     public enum BinarySerializationType
     {
@@ -171,7 +171,7 @@ namespace __RUNTIME__.Security
             bool useNonceReplayProtection = true, // nonce replay protection is stateful
             INonceReplayStore replayStore = null,
             CancellationToken cancellationToken = default(CancellationToken),
-            IOnvifLogger logger = null)
+            ILog logger = null)
         {
             if (string.IsNullOrEmpty(nonce))
             {
@@ -857,7 +857,7 @@ namespace __RUNTIME__.Security
             return BytesToString(opaqueType, opaque);
         }
 
-        public static int ValidateOpaque(BinarySerializationType opaqueType, string opaque, IOnvifLogger logger = null)
+        public static int ValidateOpaque(BinarySerializationType opaqueType, string opaque, ILog logger = null)
         {
             if (string.IsNullOrEmpty(opaque))
                 return ERROR_NONCE_EMPTY;

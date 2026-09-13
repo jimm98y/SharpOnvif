@@ -14,8 +14,9 @@ namespace WsdlGenerator.Emit;
 /// verbatim except for the namespace, which the run chooses.
 ///
 /// Two things the runtime cannot know about itself come from the run instead, and are emitted
-/// into RuntimeDefaults: the prefixes to declare on every envelope, and the actions a device
-/// answers without credentials. That is what keeps the embedded source free of Onvif.
+/// into RuntimeDefaults: the prefixes to declare on every envelope, and what a client
+/// authenticates with. That is what keeps the embedded source free of Onvif - and of any other
+/// service's idea of how to prove who is calling.
 /// </summary>
 internal sealed class RuntimeEmitter
 {
@@ -90,8 +91,8 @@ internal sealed class RuntimeEmitter
     }
 
     /// <summary>
-    /// Writes what the runtime was generated for: the envelope prologue and the pre-authenticated
-    /// actions, plus a constant for each declared namespace that was given a name.
+    /// Writes what the runtime was generated for: the envelope prologue, what a client
+    /// authenticates with, and a constant for each declared namespace that was given a name.
     /// </summary>
     private string EmitDefaults()
     {
@@ -100,6 +101,7 @@ internal sealed class RuntimeEmitter
         var writer = new CSharpWriter();
         writer.Lines(GeneratedFile.RuntimeHeader);
         writer.Line();
+        writer.Line($"using {@namespace}.Soap;");
         writer.Line($"using {@namespace}.Xml;");
         writer.Line();
         writer.Line($"namespace {@namespace}");
@@ -127,12 +129,22 @@ internal sealed class RuntimeEmitter
                 }
 
                 writer.Line();
-                writer.Doc("Actions a device answers without credentials.");
-                writer.Line("public static readonly string[] PreAuthActions = new string[]");
-                using (writer.Braces(semicolon: true))
+                writer.Doc(
+                    "How a client proves who it is unless it is told otherwise. The contract is " +
+                    "generated; what meets it is named when the runtime is, and is null when " +
+                    "nothing was named.");
+                writer.Line("public static IClientAuthentication CreateAuthentication()");
+                using (writer.Braces())
                 {
-                    foreach (string action in _options.PreAuthActions)
-                        writer.Line($"{Quote(action)},");
+                    if (_options.AuthenticationType is { } authentication)
+                    {
+                        writer.Line($"return new {authentication}();");
+                    }
+                    else
+                    {
+                        writer.Line("// Nothing was named, so a client sends no credentials until it is given something.");
+                        writer.Line("return null;");
+                    }
                 }
             }
         }

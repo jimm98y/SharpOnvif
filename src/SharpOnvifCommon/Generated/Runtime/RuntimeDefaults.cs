@@ -7,6 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using SharpOnvifCommon.Soap;
 using SharpOnvifCommon.Xml;
 
 namespace SharpOnvifCommon
@@ -27,18 +28,13 @@ namespace SharpOnvifCommon
         };
 
         /// <summary>
-        /// Actions a device answers without credentials.
+        /// How a client proves who it is unless it is told otherwise. The contract is generated; what meets it
+        /// is named when the runtime is, and is null when nothing was named.
         /// </summary>
-        public static readonly string[] PreAuthActions = new string[]
+        public static IClientAuthentication CreateAuthentication()
         {
-            "http://www.onvif.org/ver10/device/wsdl/GetWsdlUrl",
-            "http://www.onvif.org/ver10/device/wsdl/GetServices",
-            "http://www.onvif.org/ver10/device/wsdl/GetServiceCapabilities",
-            "http://www.onvif.org/ver10/device/wsdl/GetCapabilities",
-            "http://www.onvif.org/ver10/device/wsdl/GetHostname",
-            "http://www.onvif.org/ver10/device/wsdl/GetSystemDateAndTime",
-            "http://www.onvif.org/ver10/device/wsdl/GetEndpointReference",
-        };
+            return new SharpOnvifCommon.Security.OnvifAuthenticationSettings();
+        }
     }
 }
 

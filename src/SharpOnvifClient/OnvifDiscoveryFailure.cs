@@ -84,7 +84,7 @@ namespace SharpOnvifClient
         public static void Raise(
             EventHandler<OnvifDiscoveryFailureEventArgs> handler,
             object sender,
-            IOnvifLogger logger,
+            ILog logger,
             OnvifDiscoveryOperation operation,
             string networkInterface,
             Exception error)

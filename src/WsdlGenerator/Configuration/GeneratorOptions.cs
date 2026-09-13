@@ -63,10 +63,16 @@ internal sealed record GeneratorOptions
     public IReadOnlyList<EnvelopeDeclaration> EnvelopePrologue { get; init; } = [];
 
     /// <summary>
-    /// Actions a device answers without credentials, which a client therefore sends unauthenticated.
-    /// Onvif calls these PRE_AUTH.
+    /// Type a client authenticates with unless it is told otherwise: the name of something that
+    /// implements the generated <c>IClientAuthentication</c> and can be constructed without
+    /// arguments. Null leaves a generated client sending no credentials.
     /// </summary>
-    public IReadOnlyList<string> PreAuthActions { get; init; } = [];
+    /// <remarks>
+    /// Naming it rather than generating it is the point: how a service authenticates is the
+    /// service's business, not WSDL's, so the contract is generated and the implementation is
+    /// whatever the library that owns the runtime provides.
+    /// </remarks>
+    public string? AuthenticationType { get; init; }
 
     /// <summary>
     /// Values to add to schema enumerations that the schema does not list, for the case where the

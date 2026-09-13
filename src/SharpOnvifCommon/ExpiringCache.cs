@@ -22,7 +22,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace __RUNTIME__
+namespace SharpOnvifCommon
 {
     /// <summary>
     /// A keyed store whose entries stop existing at a moment fixed when they are written.

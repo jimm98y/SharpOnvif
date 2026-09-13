@@ -1,7 +1,6 @@
 using System;
 using System.Net;
 using System.Net.Http;
-using __RUNTIME__.Security;
 
 namespace __RUNTIME__.Soap
 {
@@ -18,7 +17,7 @@ namespace __RUNTIME__.Soap
         /// Per client rather than per process, so that two clients in one application can report
         /// to different places, or one of them to nowhere at all.
         /// </remarks>
-        public IOnvifLogger Logger { get; set; }
+        public ILog Logger { get; set; }
 
         /// <summary>
         /// How far the device's clock is ahead of this machine's, for a device whose clock is
@@ -36,8 +35,15 @@ namespace __RUNTIME__.Soap
         /// </remarks>
         public TimeSpan UtcNowOffset { get; set; } = TimeSpan.Zero;
 
-        /// <summary>Which authentication schemes to use, and how.</summary>
-        public OnvifAuthenticationSettings Authentication { get; set; } = new OnvifAuthenticationSettings();
+        /// <summary>
+        /// How the client proves who it is, or null to send no credentials at all.
+        /// </summary>
+        /// <remarks>
+        /// It starts as whatever this runtime was generated with, which for Onvif is the pair of
+        /// schemes the specification defines. What implements it is not generated: see
+        /// <see cref="IClientAuthentication"/>.
+        /// </remarks>
+        public IClientAuthentication Authentication { get; set; } = RuntimeDefaults.CreateAuthentication();
 
         public TimeSpan Timeout { get; set; } = TimeSpan.FromSeconds(60);
 
@@ -70,16 +76,15 @@ namespace __RUNTIME__.Soap
         /// caller who manages their own clients. Timeout and Transport are ignored, and the
         /// client is not disposed with the service client.
         /// <para>
-        /// HTTP Digest cannot be arranged on a client that is already built, because answering a
-        /// challenge takes a handler in its pipeline. Supplying a client while HTTP Digest is
-        /// requested is refused rather than quietly sending unauthenticated requests: use
-        /// <see cref="Transport"/> instead, or put an <see cref="HttpDigestHandler"/> in the
-        /// client's own pipeline and leave <see cref="DigestAuthentication.HttpDigest"/> out of
-        /// <see cref="Authentication"/>.
+        /// A scheme that answers a challenge cannot be arranged on a client that is already built,
+        /// because answering takes a handler in its pipeline. Supplying a client while such a
+        /// scheme is asked for is refused rather than quietly sending unauthenticated requests:
+        /// use <see cref="Transport"/> instead, or put that handler in the client's own pipeline
+        /// and leave the scheme out of <see cref="Authentication"/>.
         /// </para>
         /// <para>
-        /// WS-UsernameToken is unaffected: it travels in the SOAP header, which this client
-        /// writes either way.
+        /// A scheme that writes into the SOAP header is unaffected: that header is written by this
+        /// client either way.
         /// </para>
         /// </summary>
         public HttpClient HttpClient { get; set; }
@@ -90,10 +95,11 @@ namespace __RUNTIME__.Soap
 
         public OnvifClientSettings(string userName, string password)
         {
+            // No name is not a name to authenticate under. Authentication is left as it is rather
+            // than cleared, because it is what decides that credentials are missing and nothing
+            // should be sent - which is not the same as refusing to authenticate at all.
             if (!string.IsNullOrEmpty(userName))
                 Credentials = new NetworkCredential(userName, password);
-            else
-                Authentication = new OnvifAuthenticationSettings(DigestAuthentication.None);
         }
     }
 }

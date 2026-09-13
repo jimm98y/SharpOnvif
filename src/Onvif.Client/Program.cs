@@ -49,7 +49,7 @@ public static class Program
     static CancellationToken Stopping = CancellationToken.None;
 
     /// <summary>The logger this sample gives to everything it makes.</summary>
-    static IOnvifLogger Logger = null;
+    static ILog Logger = null;
 
     /// <summary>One discovery client, reporting through the same logger as the rest.</summary>
     static OnvifDiscoveryClient Discovery = null;

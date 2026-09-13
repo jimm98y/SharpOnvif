@@ -38,7 +38,7 @@ namespace SharpOnvif.Tests
     [TestClass]
     public sealed class TestLogging
     {
-        private sealed class Recorder : IOnvifLogger
+        private sealed class Recorder : ILog
         {
             public readonly List<string> Lines = new List<string>();
 
@@ -99,7 +99,7 @@ namespace SharpOnvif.Tests
         public void ReportsNowhereWhenThereIsNoLogger()
         {
             // The default everywhere: an object that was given no logger must not need one.
-            IOnvifLogger none = null;
+            ILog none = null;
 
             none.Error("an error");
             none.Warning("a warning");
@@ -165,7 +165,7 @@ namespace SharpOnvif.Tests
         [TestMethod]
         public void CanBeTurnedOffAltogether()
         {
-            IOnvifLogger nowhere = NullOnvifLogger.Instance;
+            ILog nowhere = NullOnvifLogger.Instance;
 
             Assert.IsFalse(nowhere.IsErrorEnabled);
             nowhere.Error("this goes nowhere");

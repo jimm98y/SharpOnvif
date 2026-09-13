@@ -14,7 +14,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
-using SharpOnvifCommon.Security;
 using SharpOnvifCommon.Xml;
 
 namespace SharpOnvifCommon.Soap
@@ -24,7 +23,7 @@ namespace SharpOnvifCommon.Soap
     /// <see cref="HttpClient"/> and reads the body of the reply.
     /// <para>
     /// One client owns one endpoint and one connection's worth of authentication state, so reuse
-    /// it: the HTTP Digest challenge is negotiated once and then reused for every later call.
+    /// it: a challenge is answered once and the answer reused for every later call.
     /// </para>
     /// </summary>
     public abstract class OnvifClientBase : IDisposable
@@ -53,13 +52,13 @@ namespace SharpOnvifCommon.Soap
                 // Answering a challenge takes a handler in the pipeline, which cannot be added to
                 // a client that is already built. Refusing is the only honest option: the
                 // alternative is sending every request unauthenticated without saying so.
-                if (UsesHttpDigest(_settings))
+                if (_settings.Authentication != null && _settings.Authentication.RequiresOwnTransport(_settings))
                 {
                     throw new InvalidOperationException(
-                        "HttpClient cannot be combined with HTTP Digest authentication, because the digest " +
-                        "handler has to sit in the client's pipeline. Set Transport instead of HttpClient, or " +
-                        "add an HttpDigestHandler to your own pipeline and clear DigestAuthentication.HttpDigest " +
-                        "from Authentication.");
+                        "HttpClient cannot be combined with an authentication scheme that answers a challenge, " +
+                        "because the handler that answers it has to sit in the client's pipeline. Set Transport " +
+                        "instead of HttpClient, or put that handler in your own pipeline and leave the scheme out " +
+                        "of Authentication.");
                 }
 
                 _http = _settings.HttpClient;
@@ -79,21 +78,14 @@ namespace SharpOnvifCommon.Soap
         protected OnvifClientSettings Settings { get { return _settings; } }
 
         /// <summary>Where this client reports what it could not do, or null for nowhere.</summary>
-        protected IOnvifLogger Logger { get { return _settings.Logger; } }
-
-        private static bool UsesHttpDigest(OnvifClientSettings settings)
-        {
-            return settings.Credentials != null
-                && settings.Authentication != null
-                && (settings.Authentication.Authentication & DigestAuthentication.HttpDigest) != 0;
-        }
+        protected ILog Logger { get { return _settings.Logger; } }
 
         private static HttpClient CreateHttpClient(OnvifClientSettings settings)
         {
             HttpMessageHandler transport = settings.Transport ?? new HttpClientHandler();
 
-            if (UsesHttpDigest(settings))
-                transport = new HttpDigestHandler(settings.Credentials, settings.Authentication, transport);
+            if (settings.Authentication != null)
+                transport = settings.Authentication.CreateTransport(transport, settings) ?? transport;
 
             var client = new HttpClient(transport, disposeHandler: true);
             client.Timeout = settings.Timeout;
@@ -166,19 +158,11 @@ namespace SharpOnvifCommon.Soap
 
         private string BuildEnvelope(string action, string bodyNamespace, string bodyElement, OnvifContract request)
         {
-            bool wsToken = _settings.Credentials != null
-                && (_settings.Authentication.Authentication & DigestAuthentication.WsUsernameToken) != 0
-                && !_settings.Authentication.IsPreAuth(action);
-
-            Action<OnvifXmlWriter> headers = null;
-            if (wsToken)
-            {
-                headers = writer => WsUsernameToken.Write(
-                    writer,
-                    _settings.Credentials.UserName,
-                    _settings.Credentials.Password,
-                    _settings.UtcNowOffset);
-            }
+            // Null when this action carries no credentials, which is what leaves the message with
+            // no header element rather than an empty one.
+            Action<OnvifXmlWriter> headers = _settings.Authentication == null
+                ? null
+                : _settings.Authentication.CreateSecurityHeader(action, _settings);
 
             return SoapEnvelope.Write(headers, writer =>
             {

@@ -21,7 +21,7 @@
 
 using System;
 
-namespace __RUNTIME__
+namespace SharpOnvifCommon
 {
     /// <summary>
     /// Reporting to a logger that may not be there, and may not want the level.
@@ -33,27 +33,27 @@ namespace __RUNTIME__
     /// </remarks>
     public static class OnvifLoggerExtensions
     {
-        public static void Error(this IOnvifLogger logger, string message, Exception error = null)
+        public static void Error(this ILog logger, string message, Exception error = null)
         {
             if (logger != null && logger.IsErrorEnabled) logger.LogError(Compose(message, error));
         }
 
-        public static void Warning(this IOnvifLogger logger, string message, Exception error = null)
+        public static void Warning(this ILog logger, string message, Exception error = null)
         {
             if (logger != null && logger.IsWarningEnabled) logger.LogWarning(Compose(message, error));
         }
 
-        public static void Info(this IOnvifLogger logger, string message, Exception error = null)
+        public static void Info(this ILog logger, string message, Exception error = null)
         {
             if (logger != null && logger.IsInfoEnabled) logger.LogInfo(Compose(message, error));
         }
 
-        public static void Debug(this IOnvifLogger logger, string message, Exception error = null)
+        public static void Debug(this ILog logger, string message, Exception error = null)
         {
             if (logger != null && logger.IsDebugEnabled) logger.LogDebug(Compose(message, error));
         }
 
-        public static void Trace(this IOnvifLogger logger, string message, Exception error = null)
+        public static void Trace(this ILog logger, string message, Exception error = null)
         {
             if (logger != null && logger.IsTraceEnabled) logger.LogTrace(Compose(message, error));
         }

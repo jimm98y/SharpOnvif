@@ -6,7 +6,7 @@ SharpOnvif no longer uses WCF, CoreWCF, or `svcutil`. The Onvif service bindings
 Output goes to four places:
 
 ```
-src/SharpOnvifCommon/Generated/Runtime/**/*.cs               namespace SharpOnvifCommon(.Xml|.Soap|.Security)
+src/SharpOnvifCommon/Generated/Runtime/**/*.cs               namespace SharpOnvifCommon(.Soap|.Xml)
 src/SharpOnvifCommon/Generated/DataContracts.cs              namespace SharpOnvifCommon.Onvif
 src/SharpOnvifClient/Generated/<Service>/DataContracts.cs    namespace SharpOnvifClient.<Service>
 src/SharpOnvifClient/Generated/<Service>/Client.cs
@@ -19,16 +19,33 @@ only the types its own WSDL declares, plus its operations.
 
 ## The runtime
 
-The generated code is compiled against a runtime: the client base class it derives from, the SOAP
-envelope, the XML reader and writer, and the authentication that goes with them. That runtime is
-generated too, from source embedded in the generator under `src/WsdlGenerator/Runtime/`, into the
-namespace and directory a run chooses.
+The generated code is compiled against a runtime, and that runtime is generated too, from source
+embedded in the generator under `src/WsdlGenerator/Runtime/`, into the namespace and directory a
+run chooses. It is written rather than referenced so that a generated client depends on nothing
+but itself: generate from somebody else's WSDL and the output compiles in a project with no
+references at all.
 
-It is written rather than referenced so that a generated client depends on nothing but itself. A
-client generated from somebody else's WSDL compiles in a project with no references at all - not
-to SharpOnvifCommon, not to anything. This repository points the runtime back at
-`SharpOnvifCommon`, which is where it has always lived, so nothing changes for anyone using
-SharpOnvif as a library.
+What is in it is deliberately narrow - the base class a client derives from, the plumbing the
+generated contracts drive directly, and the interfaces the base class talks through:
+
+```
+ILog                      where a client says what it could not do
+Soap/IClientAuthentication  how a client proves who it is
+Soap/OnvifClientBase      the base class, which knows only those two
+Soap/OnvifClientSettings  what it was built with
+Soap/OnvifTransportException
+Xml/*                     the contract base, reader, writer, envelope, fault, conversions
+```
+
+Everything behind those interfaces is not generated. HTTP Digest, the WS-Security UsernameToken,
+the nonce replay store and the loggers are Onvif's answers, not WSDL's, and they are ordinary
+hand-written source in `SharpOnvifCommon` - `Security/`, `Soap/` and `Logging/`. A service that
+authenticates some other way is served by another implementation of the same interface; a client
+given none sends no credentials.
+
+The XML layer stays generated because the generated contracts call it directly, line by line.
+Moving it would put `SharpOnvifCommon` back into every generated file, which is the thing this is
+arranged to avoid.
 
 The embedded source is ordinary C# and stays compilable in an editor: it is written in a namespace
 called `__RUNTIME__`, which the generator replaces. Two things it cannot know about itself come
@@ -37,11 +54,13 @@ from the run instead, and are emitted beside it as `RuntimeDefaults`:
 | | |
 | --- | --- |
 | `--envelope-prefix <p=ns>` | Prefixes declared on the envelope element of every message, whether or not the body uses them. Onvif declares `tt` and `tns1`, because devices and tools expect to see them and because an event topic is written as `tns1:Path`. |
-| `--pre-auth <action>` | Actions a device answers without credentials, so a client does not authenticate them. Onvif calls these PRE_AUTH. |
+| `--authentication <type>` | What a client authenticates with unless it is told otherwise - something implementing `IClientAuthentication` with a parameterless constructor. This repository names `SharpOnvifCommon.Security.OnvifAuthenticationSettings`. Named nothing, a client sends no credentials. |
 
 That is what keeps the embedded source free of Onvif. Change the runtime by editing
 `src/WsdlGenerator/Runtime/` and regenerating - editing the emitted copy loses the change on the
-next run.
+next run. The generator writes files but never deletes them, so a file that stops being emitted
+has to be removed by hand; `TestCodeGenerator` compares the committed runtime against what a run
+would write, and fails when one is left behind.
 
 ## Running the generator
 
@@ -87,7 +106,7 @@ they share their common schemas the same way the Onvif services do.
 | `--runtime-out <dir>` | Directory for the runtime. Defaults to `<dir>/Runtime`. |
 | `--no-runtime` | Do not write the runtime; compile against the one `--runtime-namespace` names. |
 | `--envelope-prefix <p=ns>` | Declare a prefix on every envelope. Repeatable. |
-| `--pre-auth <action>` | An action the device answers without credentials. Repeatable. |
+| `--authentication <type>` | What a client authenticates with unless told otherwise. |
 | `--client` / `--server` | Generate one side only. Both by default. |
 | `--mirror <dir>` | Resolve every document from a local mirror rather than from disk and the network. |
 

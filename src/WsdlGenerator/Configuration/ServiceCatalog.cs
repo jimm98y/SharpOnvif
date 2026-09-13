@@ -29,7 +29,7 @@ internal static class ServiceCatalog
         Runtime = new RuntimeTarget(
             "SharpOnvifCommon", Path.Combine(outputRoot, "SharpOnvifCommon", "Generated", "Runtime")),
         EnvelopePrologue = EnvelopePrefixes,
-        PreAuthActions = PreAuth,
+        AuthenticationType = "SharpOnvifCommon.Security.OnvifAuthenticationSettings",
         Targets =
         [
             new GenerationTarget(
@@ -55,21 +55,6 @@ internal static class ServiceCatalog
     [
         new("tt", "http://www.onvif.org/ver10/schema", "OnvifSchema"),
         new("tns1", "http://www.onvif.org/ver10/topics", "OnvifTopics"),
-    ];
-
-    /// <summary>
-    /// The actions the Onvif core specification places in the PRE_AUTH category, which a device
-    /// must answer without credentials.
-    /// </summary>
-    private static readonly IReadOnlyList<string> PreAuth =
-    [
-        "http://www.onvif.org/ver10/device/wsdl/GetWsdlUrl",
-        "http://www.onvif.org/ver10/device/wsdl/GetServices",
-        "http://www.onvif.org/ver10/device/wsdl/GetServiceCapabilities",
-        "http://www.onvif.org/ver10/device/wsdl/GetCapabilities",
-        "http://www.onvif.org/ver10/device/wsdl/GetHostname",
-        "http://www.onvif.org/ver10/device/wsdl/GetSystemDateAndTime",
-        "http://www.onvif.org/ver10/device/wsdl/GetEndpointReference",
     ];
 
     /// <summary>

@@ -30,25 +30,30 @@
 namespace SharpOnvifCommon
 {
     /// <summary>
-    /// An <see cref="IOnvifLogger"/> that discards everything, for a host that has its own
-    /// logging and does not want the library writing anywhere of its own accord.
+    /// Where the generated code says what it could not do.
     /// </summary>
-    public sealed class NullOnvifLogger : IOnvifLogger
+    /// <remarks>
+    /// The levels are asked before they are written, so that composing a message nobody will read
+    /// costs nothing - a device that answers badly can do so on every request.
+    /// <para>
+    /// Only the contract is generated. Somewhere to send it to is not: a caller implements this,
+    /// or is given one of the loggers the library it came with happens to carry. The runtime
+    /// writes nowhere of its own accord, and a null logger is the normal case rather than an
+    /// error.
+    /// </para>
+    /// </remarks>
+    public interface ILog
     {
-        public static readonly NullOnvifLogger Instance = new NullOnvifLogger();
+        void LogError(string error);
+        void LogWarning(string warning);
+        void LogInfo(string info);
+        void LogDebug(string debug);
+        void LogTrace(string trace);
 
-        private NullOnvifLogger() { }
-
-        public void LogError(string error) { }
-        public void LogWarning(string warning) { }
-        public void LogInfo(string info) { }
-        public void LogDebug(string debug) { }
-        public void LogTrace(string trace) { }
-
-        public bool IsErrorEnabled { get { return false; } set { } }
-        public bool IsWarningEnabled { get { return false; } set { } }
-        public bool IsInfoEnabled { get { return false; } set { } }
-        public bool IsDebugEnabled { get { return false; } set { } }
-        public bool IsTraceEnabled { get { return false; } set { } }
+        bool IsErrorEnabled { get; set; }
+        bool IsWarningEnabled { get; set; }
+        bool IsInfoEnabled { get; set; }
+        bool IsDebugEnabled { get; set; }
+        bool IsTraceEnabled { get; set; }
     }
 }

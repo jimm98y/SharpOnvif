@@ -66,7 +66,7 @@ namespace SharpOnvifClient
         /// <summary>
         /// Where this client reports what it could not do. Null - the default - reports nowhere.
         /// </summary>
-        public IOnvifLogger Logger { get; set; }
+        public ILog Logger { get; set; }
 
         /// <summary>How often <see cref="WaitForDeviceAsync"/> probes while it waits.</summary>
         public TimeSpan WaitForDeviceProbeInterval { get; set; } = TimeSpan.FromSeconds(10);
@@ -74,7 +74,7 @@ namespace SharpOnvifClient
         public OnvifDiscoveryClient()
         { }
 
-        public OnvifDiscoveryClient(IOnvifLogger logger)
+        public OnvifDiscoveryClient(ILog logger)
         {
             Logger = logger;
         }
@@ -444,7 +444,7 @@ namespace SharpOnvifClient
             return 0;
         }
 
-        internal static OnvifDiscoveryResult ParseDiscoveryResponse(string response, IOnvifLogger logger = null)
+        internal static OnvifDiscoveryResult ParseDiscoveryResponse(string response, ILog logger = null)
         {
             using (var textReader = new StringReader(response))
             {

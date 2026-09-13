@@ -94,7 +94,7 @@ namespace SharpOnvifClient
         /// Where this listener reports what it could not do. Null - the default - reports nowhere.
         /// Per listener, so two of them in one application can report to different places.
         /// </summary>
-        public IOnvifLogger Logger { get; set; }
+        public ILog Logger { get; set; }
 
         /// <summary>
         /// Starts listening on every interface that can carry multicast, IPv4 and IPv6 alike.

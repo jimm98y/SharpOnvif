@@ -103,7 +103,7 @@ namespace SharpOnvifClient
         /// <summary>
         /// Where this listener reports what it could not do. Null - the default - reports nowhere.
         /// </summary>
-        public IOnvifLogger Logger { get; set; }
+        public ILog Logger { get; set; }
 
         /// <summary>
         /// Addresses a notification may be delivered from. Empty - the default - accepts delivery

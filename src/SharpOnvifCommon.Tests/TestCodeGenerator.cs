@@ -257,23 +257,46 @@ namespace SharpOnvif.Tests
         [TestMethod]
         public void CarriesWhatTheRuntimeCannotKnowAboutItself()
         {
-            // The envelope prefixes and the unauthenticated actions are the two things that are
-            // not the same for every schema, so they are given to the run rather than written into
-            // the runtime's source - which is what keeps that source free of Onvif.
+            // The envelope prefixes and what a client authenticates with are the two things that
+            // are not the same for every service, so they are given to the run rather than written
+            // into the runtime's source - which is what keeps that source free of Onvif.
             string output = NewOutputDirectory();
             try
             {
                 var options = CommandLine.Parse(
                     ["--wsdl", Fixture, "--namespace", "Example.Banking", "--out", output,
                      "--envelope-prefix", "m=urn:example:money",
-                     "--pre-auth", "urn:example:bank/GetBalance"]);
+                     "--authentication", "Example.Banking.BankCards"]);
 
                 new CodeGenerator(options!).Run();
 
                 string defaults = File.ReadAllText(Path.Combine(output, "Runtime", "RuntimeDefaults.cs"));
 
                 StringAssert.Contains(defaults, "new XmlNamespaceDeclaration(\"m\", \"urn:example:money\")");
-                StringAssert.Contains(defaults, "\"urn:example:bank/GetBalance\"");
+                StringAssert.Contains(defaults, "return new Example.Banking.BankCards();");
+            }
+            finally
+            {
+                Directory.Delete(output, recursive: true);
+            }
+        }
+
+        [TestMethod]
+        public void SendsNoCredentialsWhenNothingSaysHowTo()
+        {
+            // Authenticating is the service's business, not WSDL's. A run that names no
+            // implementation gets a client that sends nothing rather than one that cannot be built.
+            string output = NewOutputDirectory();
+            try
+            {
+                var options = CommandLine.Parse(
+                    ["--wsdl", Fixture, "--namespace", "Example.Banking", "--out", output]);
+
+                new CodeGenerator(options!).Run();
+
+                string defaults = File.ReadAllText(Path.Combine(output, "Runtime", "RuntimeDefaults.cs"));
+
+                StringAssert.Contains(defaults, "return null;");
             }
             finally
             {
