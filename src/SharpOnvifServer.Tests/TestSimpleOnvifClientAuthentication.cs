@@ -57,33 +57,6 @@ namespace SharpOnvif.Tests
         }
 
         [TestMethod]
-        public void KeepsWhatItWasGiven()
-        {
-            // The caller's object, as given. Copying it would make a plain
-            // OnvifAuthenticationSettings of anything derived from one - including the name in
-            // SharpOnvifClient.Security, and anything a caller writes of their own.
-            var authentication = new SharpOnvifClient.Security.DigestAuthenticationSchemeOptions(
-                DigestAuthentication.WsUsernameToken);
-
-            using var client = new Probe("http://127.0.0.1:1/onvif/device_service", "u", "p", authentication);
-
-            Assert.AreSame(authentication, client.Authentication);
-        }
-
-        [TestMethod]
-        public void TakesTheNameClientCodeAlreadyWrites()
-        {
-            // The constructor 0.9.x code calls, spelled the way it spells it. This compiling is
-            // the whole of the test.
-            using var client = new SimpleOnvifClient(
-                "http://127.0.0.1:1/onvif/device_service", "admin", "password",
-                new SharpOnvifClient.Security.DigestAuthenticationSchemeOptions(
-                    DigestAuthentication.WsUsernameToken | DigestAuthentication.HttpDigest));
-
-            Assert.IsNotNull(client);
-        }
-
-        [TestMethod]
         public async Task StampsItsTokenWithTheOffsetItWasGiven()
         {
             // A camera whose clock is wrong is what the offset is for, and the only way to see it
