@@ -83,7 +83,7 @@ namespace SharpOnvifServer.AppMgmt
     /// Starts an application.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("Activate", Namespace="http://www.onvif.org/ver10/appmgmt/wsdl")]
-    public partial class ActivateRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ActivateRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string appIDField;
 
@@ -128,7 +128,7 @@ namespace SharpOnvifServer.AppMgmt
     /// Starts an application.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ActivateResponse", Namespace="http://www.onvif.org/ver10/appmgmt/wsdl")]
-    public partial class ActivateResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ActivateResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public ActivateResponse()
         {
@@ -137,7 +137,7 @@ namespace SharpOnvifServer.AppMgmt
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/appmgmt/wsdl")]
-    public partial class AppInfo : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AppInfo : SharpOnvifCommon.Xml.XmlContract
     {
         private string appIDField;
 
@@ -318,9 +318,9 @@ namespace SharpOnvifServer.AppMgmt
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AppInfo"; } }
+        protected override string XmlTypeName { get { return "AppInfo"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Appmgmt; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Appmgmt; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -413,7 +413,7 @@ namespace SharpOnvifServer.AppMgmt
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/appmgmt/wsdl")]
-    public partial class Capabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Capabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -486,9 +486,9 @@ namespace SharpOnvifServer.AppMgmt
             set { this.eventTopicPrefixField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Capabilities"; } }
+        protected override string XmlTypeName { get { return "Capabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Appmgmt; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Appmgmt; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -539,7 +539,7 @@ namespace SharpOnvifServer.AppMgmt
     /// Stops an application.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("Deactivate", Namespace="http://www.onvif.org/ver10/appmgmt/wsdl")]
-    public partial class DeactivateRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeactivateRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string appIDField;
 
@@ -584,7 +584,7 @@ namespace SharpOnvifServer.AppMgmt
     /// Stops an application.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeactivateResponse", Namespace="http://www.onvif.org/ver10/appmgmt/wsdl")]
-    public partial class DeactivateResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeactivateResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public DeactivateResponse()
         {
@@ -597,7 +597,7 @@ namespace SharpOnvifServer.AppMgmt
     /// application ID is provided the device shall report the information for all installed applications.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAppsInfo", Namespace="http://www.onvif.org/ver10/appmgmt/wsdl")]
-    public partial class GetAppsInfoRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAppsInfoRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string appIDField;
 
@@ -643,7 +643,7 @@ namespace SharpOnvifServer.AppMgmt
     /// application ID is provided the device shall report the information for all installed applications.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAppsInfoResponse", Namespace="http://www.onvif.org/ver10/appmgmt/wsdl")]
-    public partial class GetAppsInfoResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAppsInfoResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private AppInfo[] infoField;
 
@@ -691,7 +691,7 @@ namespace SharpOnvifServer.AppMgmt
     /// Get the unique device id to which the licenses are issued.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetDeviceId", Namespace="http://www.onvif.org/ver10/appmgmt/wsdl")]
-    public partial class GetDeviceIdRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetDeviceIdRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetDeviceIdRequest()
         {
@@ -703,7 +703,7 @@ namespace SharpOnvifServer.AppMgmt
     /// Get the unique device id to which the licenses are issued.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetDeviceIdResponse", Namespace="http://www.onvif.org/ver10/appmgmt/wsdl")]
-    public partial class GetDeviceIdResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetDeviceIdResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string deviceIdField;
 
@@ -745,7 +745,7 @@ namespace SharpOnvifServer.AppMgmt
     /// List installed apps on the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetInstalledApps", Namespace="http://www.onvif.org/ver10/appmgmt/wsdl")]
-    public partial class GetInstalledAppsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetInstalledAppsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetInstalledAppsRequest()
         {
@@ -757,7 +757,7 @@ namespace SharpOnvifServer.AppMgmt
     /// List installed apps on the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetInstalledAppsResponse", Namespace="http://www.onvif.org/ver10/appmgmt/wsdl")]
-    public partial class GetInstalledAppsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetInstalledAppsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private GetInstalledAppsResponseApp[] appField;
 
@@ -804,7 +804,7 @@ namespace SharpOnvifServer.AppMgmt
 
     }
 
-    public partial class GetInstalledAppsResponseApp : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetInstalledAppsResponseApp : SharpOnvifCommon.Xml.XmlContract
     {
         private string nameField;
 
@@ -861,7 +861,7 @@ namespace SharpOnvifServer.AppMgmt
     /// Returns the capabilities of the uplink service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilities", Namespace="http://www.onvif.org/ver10/appmgmt/wsdl")]
-    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetServiceCapabilitiesRequest()
         {
@@ -873,7 +873,7 @@ namespace SharpOnvifServer.AppMgmt
     /// Returns the capabilities of the uplink service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilitiesResponse", Namespace="http://www.onvif.org/ver10/appmgmt/wsdl")]
-    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private Capabilities capabilitiesField;
 
@@ -919,7 +919,7 @@ namespace SharpOnvifServer.AppMgmt
     /// shall be provided.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("InstallLicense", Namespace="http://www.onvif.org/ver10/appmgmt/wsdl")]
-    public partial class InstallLicenseRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class InstallLicenseRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string appIDField;
 
@@ -982,7 +982,7 @@ namespace SharpOnvifServer.AppMgmt
     /// shall be provided.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("InstallLicenseResponse", Namespace="http://www.onvif.org/ver10/appmgmt/wsdl")]
-    public partial class InstallLicenseResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class InstallLicenseResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public InstallLicenseResponse()
         {
@@ -991,7 +991,7 @@ namespace SharpOnvifServer.AppMgmt
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/appmgmt/wsdl")]
-    public partial class LicenseInfo : SharpOnvifCommon.Xml.OnvifContract
+    public partial class LicenseInfo : SharpOnvifCommon.Xml.XmlContract
     {
         private string nameField;
 
@@ -1062,9 +1062,9 @@ namespace SharpOnvifServer.AppMgmt
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "LicenseInfo"; } }
+        protected override string XmlTypeName { get { return "LicenseInfo"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Appmgmt; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Appmgmt; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -1108,7 +1108,7 @@ namespace SharpOnvifServer.AppMgmt
     /// UninstallCompletion event.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("Uninstall", Namespace="http://www.onvif.org/ver10/appmgmt/wsdl")]
-    public partial class UninstallRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class UninstallRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string appIDField;
 
@@ -1155,7 +1155,7 @@ namespace SharpOnvifServer.AppMgmt
     /// UninstallCompletion event.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("UninstallResponse", Namespace="http://www.onvif.org/ver10/appmgmt/wsdl")]
-    public partial class UninstallResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class UninstallResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public UninstallResponse()
         {
@@ -1166,14 +1166,14 @@ namespace SharpOnvifServer.AppMgmt
     /// <summary>Constructs a contract named by an xsi:type attribute.</summary>
     internal static class XmlTypeFactory
     {
-        public static SharpOnvifCommon.Xml.OnvifContract Create(string ns, string name)
+        public static SharpOnvifCommon.Xml.XmlContract Create(string ns, string name)
         {
             return SharpOnvifCommon.Onvif.XmlTypeFactory.Create(ns, name);
         }
     }
 
     /// <summary>SOAP action URIs for this service's operations.</summary>
-    public static class OnvifActions
+    public static class SoapActions
     {
         public const string Uninstall = "http://www.onvif.org/ver10/appmgmt/wsdl/Uninstall";
         public const string GetInstalledApps = "http://www.onvif.org/ver10/appmgmt/wsdl/GetInstalledApps";

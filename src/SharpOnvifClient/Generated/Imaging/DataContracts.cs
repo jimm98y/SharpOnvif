@@ -22,7 +22,7 @@ namespace SharpOnvifClient.Imaging
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/imaging/wsdl")]
-    public partial class Capabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Capabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -106,9 +106,9 @@ namespace SharpOnvifClient.Imaging
             set { this.adaptablePresetFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Capabilities"; } }
+        protected override string XmlTypeName { get { return "Capabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver20Imaging; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver20Imaging; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -165,7 +165,7 @@ namespace SharpOnvifClient.Imaging
     /// GetCurrentPreset shall return 0 if Imaging Presets are not supported by the Video Source.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCurrentPreset", Namespace="http://www.onvif.org/ver20/imaging/wsdl")]
-    public partial class GetCurrentPresetRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCurrentPresetRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string videoSourceTokenField;
 
@@ -213,7 +213,7 @@ namespace SharpOnvifClient.Imaging
     /// GetCurrentPreset shall return 0 if Imaging Presets are not supported by the Video Source.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCurrentPresetResponse", Namespace="http://www.onvif.org/ver20/imaging/wsdl")]
-    public partial class GetCurrentPresetResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCurrentPresetResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private ImagingPreset presetField;
 
@@ -259,7 +259,7 @@ namespace SharpOnvifClient.Imaging
     /// Get the ImagingConfiguration for the requested VideoSource.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetImagingSettings", Namespace="http://www.onvif.org/ver20/imaging/wsdl")]
-    public partial class GetImagingSettingsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetImagingSettingsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string videoSourceTokenField;
 
@@ -305,7 +305,7 @@ namespace SharpOnvifClient.Imaging
     /// Get the ImagingConfiguration for the requested VideoSource.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetImagingSettingsResponse", Namespace="http://www.onvif.org/ver20/imaging/wsdl")]
-    public partial class GetImagingSettingsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetImagingSettingsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.ImagingSettings20 imagingSettingsField;
 
@@ -351,7 +351,7 @@ namespace SharpOnvifClient.Imaging
     /// Imaging move operation options supported for the Video source.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetMoveOptions", Namespace="http://www.onvif.org/ver20/imaging/wsdl")]
-    public partial class GetMoveOptionsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetMoveOptionsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string videoSourceTokenField;
 
@@ -397,7 +397,7 @@ namespace SharpOnvifClient.Imaging
     /// Imaging move operation options supported for the Video source.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetMoveOptionsResponse", Namespace="http://www.onvif.org/ver20/imaging/wsdl")]
-    public partial class GetMoveOptionsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetMoveOptionsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.MoveOptions20 moveOptionsField;
 
@@ -447,7 +447,7 @@ namespace SharpOnvifClient.Imaging
     /// single option or identical Min and Max values is provided.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetOptions", Namespace="http://www.onvif.org/ver20/imaging/wsdl")]
-    public partial class GetOptionsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetOptionsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string videoSourceTokenField;
 
@@ -497,7 +497,7 @@ namespace SharpOnvifClient.Imaging
     /// single option or identical Min and Max values is provided.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetOptionsResponse", Namespace="http://www.onvif.org/ver20/imaging/wsdl")]
-    public partial class GetOptionsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetOptionsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.ImagingOptions20 imagingOptionsField;
 
@@ -543,7 +543,7 @@ namespace SharpOnvifClient.Imaging
     /// Via this command the list of available Imaging Presets can be requested.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetPresets", Namespace="http://www.onvif.org/ver20/imaging/wsdl")]
-    public partial class GetPresetsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetPresetsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string videoSourceTokenField;
 
@@ -589,7 +589,7 @@ namespace SharpOnvifClient.Imaging
     /// Via this command the list of available Imaging Presets can be requested.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetPresetsResponse", Namespace="http://www.onvif.org/ver20/imaging/wsdl")]
-    public partial class GetPresetsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetPresetsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private ImagingPreset[] presetField;
 
@@ -641,7 +641,7 @@ namespace SharpOnvifClient.Imaging
     /// Returns the capabilities of the imaging service. The result is returned in a typed answer.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilities", Namespace="http://www.onvif.org/ver20/imaging/wsdl")]
-    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetServiceCapabilitiesRequest()
         {
@@ -653,7 +653,7 @@ namespace SharpOnvifClient.Imaging
     /// Returns the capabilities of the imaging service. The result is returned in a typed answer.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilitiesResponse", Namespace="http://www.onvif.org/ver20/imaging/wsdl")]
-    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private Capabilities capabilitiesField;
 
@@ -700,7 +700,7 @@ namespace SharpOnvifClient.Imaging
     /// command is available if the support for the Move operation is signalled via GetMoveOptions.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetStatus", Namespace="http://www.onvif.org/ver20/imaging/wsdl")]
-    public partial class GetStatusRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetStatusRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string videoSourceTokenField;
 
@@ -747,7 +747,7 @@ namespace SharpOnvifClient.Imaging
     /// command is available if the support for the Move operation is signalled via GetMoveOptions.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetStatusResponse", Namespace="http://www.onvif.org/ver20/imaging/wsdl")]
-    public partial class GetStatusResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetStatusResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.ImagingStatus20 statusField;
 
@@ -793,7 +793,7 @@ namespace SharpOnvifClient.Imaging
     /// Type describing the Imaging Preset settings.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/imaging/wsdl")]
-    public partial class ImagingPreset : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ImagingPreset : SharpOnvifCommon.Xml.XmlContract
     {
         private string nameField;
 
@@ -832,9 +832,9 @@ namespace SharpOnvifClient.Imaging
             set { this.typeField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ImagingPreset"; } }
+        protected override string XmlTypeName { get { return "ImagingPreset"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver20Imaging; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver20Imaging; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -890,7 +890,7 @@ namespace SharpOnvifClient.Imaging
     /// negative direction.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("Move", Namespace="http://www.onvif.org/ver20/imaging/wsdl")]
-    public partial class MoveRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class MoveRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string videoSourceTokenField;
 
@@ -965,7 +965,7 @@ namespace SharpOnvifClient.Imaging
     /// negative direction.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("MoveResponse", Namespace="http://www.onvif.org/ver20/imaging/wsdl")]
-    public partial class MoveResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class MoveResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public MoveResponse()
         {
@@ -982,7 +982,7 @@ namespace SharpOnvifClient.Imaging
     /// specified Imaging Preset.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetCurrentPreset", Namespace="http://www.onvif.org/ver20/imaging/wsdl")]
-    public partial class SetCurrentPresetRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetCurrentPresetRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string videoSourceTokenField;
 
@@ -1051,7 +1051,7 @@ namespace SharpOnvifClient.Imaging
     /// specified Imaging Preset.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetCurrentPresetResponse", Namespace="http://www.onvif.org/ver20/imaging/wsdl")]
-    public partial class SetCurrentPresetResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetCurrentPresetResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetCurrentPresetResponse()
         {
@@ -1063,7 +1063,7 @@ namespace SharpOnvifClient.Imaging
     /// Set the ImagingConfiguration for the requested VideoSource.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetImagingSettings", Namespace="http://www.onvif.org/ver20/imaging/wsdl")]
-    public partial class SetImagingSettingsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetImagingSettingsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string videoSourceTokenField;
 
@@ -1153,7 +1153,7 @@ namespace SharpOnvifClient.Imaging
     /// Set the ImagingConfiguration for the requested VideoSource.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetImagingSettingsResponse", Namespace="http://www.onvif.org/ver20/imaging/wsdl")]
-    public partial class SetImagingSettingsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetImagingSettingsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetImagingSettingsResponse()
         {
@@ -1167,7 +1167,7 @@ namespace SharpOnvifClient.Imaging
     /// affect ongoing autofocus operation.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("Stop", Namespace="http://www.onvif.org/ver20/imaging/wsdl")]
-    public partial class StopRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class StopRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string videoSourceTokenField;
 
@@ -1215,7 +1215,7 @@ namespace SharpOnvifClient.Imaging
     /// affect ongoing autofocus operation.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("StopResponse", Namespace="http://www.onvif.org/ver20/imaging/wsdl")]
-    public partial class StopResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class StopResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public StopResponse()
         {
@@ -1226,14 +1226,14 @@ namespace SharpOnvifClient.Imaging
     /// <summary>Constructs a contract named by an xsi:type attribute.</summary>
     internal static class XmlTypeFactory
     {
-        public static SharpOnvifCommon.Xml.OnvifContract Create(string ns, string name)
+        public static SharpOnvifCommon.Xml.XmlContract Create(string ns, string name)
         {
             return SharpOnvifCommon.Onvif.XmlTypeFactory.Create(ns, name);
         }
     }
 
     /// <summary>SOAP action URIs for this service's operations.</summary>
-    public static class OnvifActions
+    public static class SoapActions
     {
         public const string GetServiceCapabilities = "http://www.onvif.org/ver20/imaging/wsdl/GetServiceCapabilities";
         public const string GetImagingSettings = "http://www.onvif.org/ver20/imaging/wsdl/GetImagingSettings";

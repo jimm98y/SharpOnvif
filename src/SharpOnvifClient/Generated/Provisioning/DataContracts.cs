@@ -262,7 +262,7 @@ namespace SharpOnvifClient.Provisioning
     /// The capabilities of Provisioning Service on the device.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/provisioning/wsdl")]
-    public partial class Capabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Capabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private string defaultTimeoutField;
 
@@ -297,9 +297,9 @@ namespace SharpOnvifClient.Provisioning
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Capabilities"; } }
+        protected override string XmlTypeName { get { return "Capabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Provisioning; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Provisioning; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -337,7 +337,7 @@ namespace SharpOnvifClient.Provisioning
     /// Moves device on the focus axis.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("FocusMove", Namespace="http://www.onvif.org/ver10/provisioning/wsdl")]
-    public partial class FocusMoveRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FocusMoveRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string videoSourceField;
 
@@ -419,7 +419,7 @@ namespace SharpOnvifClient.Provisioning
     /// Moves device on the focus axis.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("FocusMoveResponse", Namespace="http://www.onvif.org/ver10/provisioning/wsdl")]
-    public partial class FocusMoveResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FocusMoveResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public FocusMoveResponse()
         {
@@ -431,7 +431,7 @@ namespace SharpOnvifClient.Provisioning
     /// Returns the capabilities of the provisioning service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilities", Namespace="http://www.onvif.org/ver10/provisioning/wsdl")]
-    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetServiceCapabilitiesRequest()
         {
@@ -443,7 +443,7 @@ namespace SharpOnvifClient.Provisioning
     /// Returns the capabilities of the provisioning service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilitiesResponse", Namespace="http://www.onvif.org/ver10/provisioning/wsdl")]
-    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private Capabilities capabilitiesField;
 
@@ -489,7 +489,7 @@ namespace SharpOnvifClient.Provisioning
     /// Returns the lifetime move counts.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetUsage", Namespace="http://www.onvif.org/ver10/provisioning/wsdl")]
-    public partial class GetUsageRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetUsageRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string videoSourceField;
 
@@ -535,7 +535,7 @@ namespace SharpOnvifClient.Provisioning
     /// Returns the lifetime move counts.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetUsageResponse", Namespace="http://www.onvif.org/ver10/provisioning/wsdl")]
-    public partial class GetUsageResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetUsageResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private Usage usageField;
 
@@ -581,7 +581,7 @@ namespace SharpOnvifClient.Provisioning
     /// Moves device on the pan axis.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("PanMove", Namespace="http://www.onvif.org/ver10/provisioning/wsdl")]
-    public partial class PanMoveRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PanMoveRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string videoSourceField;
 
@@ -663,7 +663,7 @@ namespace SharpOnvifClient.Provisioning
     /// Moves device on the pan axis.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("PanMoveResponse", Namespace="http://www.onvif.org/ver10/provisioning/wsdl")]
-    public partial class PanMoveResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PanMoveResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public PanMoveResponse()
         {
@@ -675,7 +675,7 @@ namespace SharpOnvifClient.Provisioning
     /// Moves device on the roll axis.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RollMove", Namespace="http://www.onvif.org/ver10/provisioning/wsdl")]
-    public partial class RollMoveRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RollMoveRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string videoSourceField;
 
@@ -757,7 +757,7 @@ namespace SharpOnvifClient.Provisioning
     /// Moves device on the roll axis.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RollMoveResponse", Namespace="http://www.onvif.org/ver10/provisioning/wsdl")]
-    public partial class RollMoveResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RollMoveResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public RollMoveResponse()
         {
@@ -769,7 +769,7 @@ namespace SharpOnvifClient.Provisioning
     /// The provisioning capabilities of a video source on the device.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/provisioning/wsdl")]
-    public partial class SourceCapabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SourceCapabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -905,9 +905,9 @@ namespace SharpOnvifClient.Provisioning
             set { this.autoFocusFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SourceCapabilities"; } }
+        protected override string XmlTypeName { get { return "SourceCapabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Provisioning; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Provisioning; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -978,7 +978,7 @@ namespace SharpOnvifClient.Provisioning
     /// Stops device motion on all axes.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("Stop", Namespace="http://www.onvif.org/ver10/provisioning/wsdl")]
-    public partial class StopRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class StopRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string videoSourceField;
 
@@ -1024,7 +1024,7 @@ namespace SharpOnvifClient.Provisioning
     /// Stops device motion on all axes.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("StopResponse", Namespace="http://www.onvif.org/ver10/provisioning/wsdl")]
-    public partial class StopResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class StopResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public StopResponse()
         {
@@ -1036,7 +1036,7 @@ namespace SharpOnvifClient.Provisioning
     /// Moves device on the tilt axis.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("TiltMove", Namespace="http://www.onvif.org/ver10/provisioning/wsdl")]
-    public partial class TiltMoveRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class TiltMoveRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string videoSourceField;
 
@@ -1118,7 +1118,7 @@ namespace SharpOnvifClient.Provisioning
     /// Moves device on the tilt axis.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("TiltMoveResponse", Namespace="http://www.onvif.org/ver10/provisioning/wsdl")]
-    public partial class TiltMoveResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class TiltMoveResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public TiltMoveResponse()
         {
@@ -1130,7 +1130,7 @@ namespace SharpOnvifClient.Provisioning
     /// The quantity of movement events that have occured over the lifetime of the device.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/provisioning/wsdl")]
-    public partial class Usage : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Usage : SharpOnvifCommon.Xml.XmlContract
     {
         private string panField;
 
@@ -1201,9 +1201,9 @@ namespace SharpOnvifClient.Provisioning
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Usage"; } }
+        protected override string XmlTypeName { get { return "Usage"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Provisioning; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Provisioning; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -1250,7 +1250,7 @@ namespace SharpOnvifClient.Provisioning
     /// Moves device on the zoom axis.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ZoomMove", Namespace="http://www.onvif.org/ver10/provisioning/wsdl")]
-    public partial class ZoomMoveRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ZoomMoveRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string videoSourceField;
 
@@ -1332,7 +1332,7 @@ namespace SharpOnvifClient.Provisioning
     /// Moves device on the zoom axis.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ZoomMoveResponse", Namespace="http://www.onvif.org/ver10/provisioning/wsdl")]
-    public partial class ZoomMoveResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ZoomMoveResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public ZoomMoveResponse()
         {
@@ -1343,14 +1343,14 @@ namespace SharpOnvifClient.Provisioning
     /// <summary>Constructs a contract named by an xsi:type attribute.</summary>
     internal static class XmlTypeFactory
     {
-        public static SharpOnvifCommon.Xml.OnvifContract Create(string ns, string name)
+        public static SharpOnvifCommon.Xml.XmlContract Create(string ns, string name)
         {
             return SharpOnvifCommon.Onvif.XmlTypeFactory.Create(ns, name);
         }
     }
 
     /// <summary>SOAP action URIs for this service's operations.</summary>
-    public static class OnvifActions
+    public static class SoapActions
     {
         public const string GetServiceCapabilities = "http://www.onvif.org/ver10/provisioning/wsdl/GetServiceCapabilities";
         public const string PanMove = "http://www.onvif.org/ver10/provisioning/wsdl/PanMove";

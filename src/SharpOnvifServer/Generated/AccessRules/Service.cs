@@ -16,7 +16,7 @@ namespace SharpOnvifServer.AccessRules
     public abstract class AccessRulesPortBase
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new AccessRulesPortDispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new AccessRulesPortDispatcher();
 
         /// <summary>
         /// This operation returns the capabilities of the access rules service.
@@ -230,7 +230,7 @@ namespace SharpOnvifServer.AccessRules
     }
 
     /// <summary>Routes SOAP actions to <see cref="AccessRulesPortBase"/>.</summary>
-    internal sealed class AccessRulesPortDispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class AccessRulesPortDispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(AccessRulesPortBase); } }
 
@@ -238,15 +238,15 @@ namespace SharpOnvifServer.AccessRules
         {
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
-                case OnvifActions.GetAccessProfileInfo:
-                case OnvifActions.GetAccessProfileInfoList:
-                case OnvifActions.GetAccessProfiles:
-                case OnvifActions.GetAccessProfileList:
-                case OnvifActions.CreateAccessProfile:
-                case OnvifActions.ModifyAccessProfile:
-                case OnvifActions.SetAccessProfile:
-                case OnvifActions.DeleteAccessProfile:
+                case SoapActions.GetServiceCapabilities:
+                case SoapActions.GetAccessProfileInfo:
+                case SoapActions.GetAccessProfileInfoList:
+                case SoapActions.GetAccessProfiles:
+                case SoapActions.GetAccessProfileList:
+                case SoapActions.CreateAccessProfile:
+                case SoapActions.ModifyAccessProfile:
+                case SoapActions.SetAccessProfile:
+                case SoapActions.DeleteAccessProfile:
                     return true;
                 default:
                     return false;
@@ -260,63 +260,63 @@ namespace SharpOnvifServer.AccessRules
                 case "GetServiceCapabilities":
                     if (ns == "http://www.onvif.org/ver10/accessrules/wsdl")
                     {
-                        action = OnvifActions.GetServiceCapabilities;
+                        action = SoapActions.GetServiceCapabilities;
                         return true;
                     }
                     break;
                 case "GetAccessProfileInfo":
                     if (ns == "http://www.onvif.org/ver10/accessrules/wsdl")
                     {
-                        action = OnvifActions.GetAccessProfileInfo;
+                        action = SoapActions.GetAccessProfileInfo;
                         return true;
                     }
                     break;
                 case "GetAccessProfileInfoList":
                     if (ns == "http://www.onvif.org/ver10/accessrules/wsdl")
                     {
-                        action = OnvifActions.GetAccessProfileInfoList;
+                        action = SoapActions.GetAccessProfileInfoList;
                         return true;
                     }
                     break;
                 case "GetAccessProfiles":
                     if (ns == "http://www.onvif.org/ver10/accessrules/wsdl")
                     {
-                        action = OnvifActions.GetAccessProfiles;
+                        action = SoapActions.GetAccessProfiles;
                         return true;
                     }
                     break;
                 case "GetAccessProfileList":
                     if (ns == "http://www.onvif.org/ver10/accessrules/wsdl")
                     {
-                        action = OnvifActions.GetAccessProfileList;
+                        action = SoapActions.GetAccessProfileList;
                         return true;
                     }
                     break;
                 case "CreateAccessProfile":
                     if (ns == "http://www.onvif.org/ver10/accessrules/wsdl")
                     {
-                        action = OnvifActions.CreateAccessProfile;
+                        action = SoapActions.CreateAccessProfile;
                         return true;
                     }
                     break;
                 case "ModifyAccessProfile":
                     if (ns == "http://www.onvif.org/ver10/accessrules/wsdl")
                     {
-                        action = OnvifActions.ModifyAccessProfile;
+                        action = SoapActions.ModifyAccessProfile;
                         return true;
                     }
                     break;
                 case "SetAccessProfile":
                     if (ns == "http://www.onvif.org/ver10/accessrules/wsdl")
                     {
-                        action = OnvifActions.SetAccessProfile;
+                        action = SoapActions.SetAccessProfile;
                         return true;
                     }
                     break;
                 case "DeleteAccessProfile":
                     if (ns == "http://www.onvif.org/ver10/accessrules/wsdl")
                     {
-                        action = OnvifActions.DeleteAccessProfile;
+                        action = SoapActions.DeleteAccessProfile;
                         return true;
                     }
                     break;
@@ -325,7 +325,7 @@ namespace SharpOnvifServer.AccessRules
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             AccessRulesPortBase target = (AccessRulesPortBase)service;
@@ -333,75 +333,75 @@ namespace SharpOnvifServer.AccessRules
 
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
+                case SoapActions.GetServiceCapabilities:
                 {
                     var request = new GetServiceCapabilitiesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetServiceCapabilitiesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/accessrules/wsdl", "GetServiceCapabilitiesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/accessrules/wsdl", "GetServiceCapabilitiesResponse");
                 }
-                case OnvifActions.GetAccessProfileInfo:
+                case SoapActions.GetAccessProfileInfo:
                 {
                     var request = new GetAccessProfileInfoRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAccessProfileInfoAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/accessrules/wsdl", "GetAccessProfileInfoResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/accessrules/wsdl", "GetAccessProfileInfoResponse");
                 }
-                case OnvifActions.GetAccessProfileInfoList:
+                case SoapActions.GetAccessProfileInfoList:
                 {
                     var request = new GetAccessProfileInfoListRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAccessProfileInfoListAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/accessrules/wsdl", "GetAccessProfileInfoListResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/accessrules/wsdl", "GetAccessProfileInfoListResponse");
                 }
-                case OnvifActions.GetAccessProfiles:
+                case SoapActions.GetAccessProfiles:
                 {
                     var request = new GetAccessProfilesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAccessProfilesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/accessrules/wsdl", "GetAccessProfilesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/accessrules/wsdl", "GetAccessProfilesResponse");
                 }
-                case OnvifActions.GetAccessProfileList:
+                case SoapActions.GetAccessProfileList:
                 {
                     var request = new GetAccessProfileListRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAccessProfileListAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/accessrules/wsdl", "GetAccessProfileListResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/accessrules/wsdl", "GetAccessProfileListResponse");
                 }
-                case OnvifActions.CreateAccessProfile:
+                case SoapActions.CreateAccessProfile:
                 {
                     var request = new CreateAccessProfileRequest();
                     reader.ReadInto(request);
                     var response = await target.CreateAccessProfileAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/accessrules/wsdl", "CreateAccessProfileResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/accessrules/wsdl", "CreateAccessProfileResponse");
                 }
-                case OnvifActions.ModifyAccessProfile:
+                case SoapActions.ModifyAccessProfile:
                 {
                     var request = new ModifyAccessProfileRequest();
                     reader.ReadInto(request);
                     var response = await target.ModifyAccessProfileAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/accessrules/wsdl", "ModifyAccessProfileResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/accessrules/wsdl", "ModifyAccessProfileResponse");
                 }
-                case OnvifActions.SetAccessProfile:
+                case SoapActions.SetAccessProfile:
                 {
                     var request = new SetAccessProfileRequest();
                     reader.ReadInto(request);
                     var response = await target.SetAccessProfileAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/accessrules/wsdl", "SetAccessProfileResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/accessrules/wsdl", "SetAccessProfileResponse");
                 }
-                case OnvifActions.DeleteAccessProfile:
+                case SoapActions.DeleteAccessProfile:
                 {
                     var request = new DeleteAccessProfileRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteAccessProfileAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/accessrules/wsdl", "DeleteAccessProfileResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/accessrules/wsdl", "DeleteAccessProfileResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }

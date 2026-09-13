@@ -5,7 +5,7 @@ namespace WsdlGenerator.Binding;
 /// <summary>
 /// The types generated once into the common assembly, looked up by their schema name.
 ///
-/// The Onvif services share a large body of schema - onvif.xsd above all, plus the OASIS and W3C
+/// Services of one family share a large body of schema - their own common one, plus the OASIS and W3C
 /// schemas the event service pulls in. Generating those per service produced the same few hundred
 /// types twenty-five times over. They are generated once instead, and a service that refers to one
 /// gets a reference into the shared namespace.

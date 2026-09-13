@@ -11,7 +11,7 @@
 namespace SharpOnvifClient.Receiver
 {
     /// <summary>
-    /// The ReceiverPort Onvif service.
+    /// The ReceiverPort service.
     /// </summary>
     public interface ReceiverPort
     {
@@ -129,7 +129,7 @@ namespace SharpOnvifClient.Receiver
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -139,7 +139,7 @@ namespace SharpOnvifClient.Receiver
         /// </summary>
         public System.Threading.Tasks.Task<GetServiceCapabilitiesResponse> GetServiceCapabilitiesAsync(GetServiceCapabilitiesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetServiceCapabilities, "http://www.onvif.org/ver10/receiver/wsdl", "GetServiceCapabilities", request,
+            return InvokeAsync(SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver10/receiver/wsdl", "GetServiceCapabilities", request,
                 () => new GetServiceCapabilitiesResponse(), cancellationToken);
         }
 
@@ -156,7 +156,7 @@ namespace SharpOnvifClient.Receiver
         /// </summary>
         public System.Threading.Tasks.Task<GetReceiversResponse> GetReceiversAsync(GetReceiversRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetReceivers, "http://www.onvif.org/ver10/receiver/wsdl", "GetReceivers", request,
+            return InvokeAsync(SoapActions.GetReceivers, "http://www.onvif.org/ver10/receiver/wsdl", "GetReceivers", request,
                 () => new GetReceiversResponse(), cancellationToken);
         }
 
@@ -173,7 +173,7 @@ namespace SharpOnvifClient.Receiver
         /// </summary>
         public System.Threading.Tasks.Task<GetReceiverResponse> GetReceiverAsync(GetReceiverRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetReceiver, "http://www.onvif.org/ver10/receiver/wsdl", "GetReceiver", request,
+            return InvokeAsync(SoapActions.GetReceiver, "http://www.onvif.org/ver10/receiver/wsdl", "GetReceiver", request,
                 () => new GetReceiverResponse(), cancellationToken);
         }
 
@@ -191,7 +191,7 @@ namespace SharpOnvifClient.Receiver
         /// </summary>
         public System.Threading.Tasks.Task<CreateReceiverResponse> CreateReceiverAsync(CreateReceiverRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.CreateReceiver, "http://www.onvif.org/ver10/receiver/wsdl", "CreateReceiver", request,
+            return InvokeAsync(SoapActions.CreateReceiver, "http://www.onvif.org/ver10/receiver/wsdl", "CreateReceiver", request,
                 () => new CreateReceiverResponse(), cancellationToken);
         }
 
@@ -209,7 +209,7 @@ namespace SharpOnvifClient.Receiver
         /// </summary>
         public System.Threading.Tasks.Task<DeleteReceiverResponse> DeleteReceiverAsync(DeleteReceiverRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeleteReceiver, "http://www.onvif.org/ver10/receiver/wsdl", "DeleteReceiver", request,
+            return InvokeAsync(SoapActions.DeleteReceiver, "http://www.onvif.org/ver10/receiver/wsdl", "DeleteReceiver", request,
                 () => new DeleteReceiverResponse(), cancellationToken);
         }
 
@@ -226,7 +226,7 @@ namespace SharpOnvifClient.Receiver
         /// </summary>
         public System.Threading.Tasks.Task<ConfigureReceiverResponse> ConfigureReceiverAsync(ConfigureReceiverRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.ConfigureReceiver, "http://www.onvif.org/ver10/receiver/wsdl", "ConfigureReceiver", request,
+            return InvokeAsync(SoapActions.ConfigureReceiver, "http://www.onvif.org/ver10/receiver/wsdl", "ConfigureReceiver", request,
                 () => new ConfigureReceiverResponse(), cancellationToken);
         }
 
@@ -244,7 +244,7 @@ namespace SharpOnvifClient.Receiver
         /// </summary>
         public System.Threading.Tasks.Task<SetReceiverModeResponse> SetReceiverModeAsync(SetReceiverModeRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetReceiverMode, "http://www.onvif.org/ver10/receiver/wsdl", "SetReceiverMode", request,
+            return InvokeAsync(SoapActions.SetReceiverMode, "http://www.onvif.org/ver10/receiver/wsdl", "SetReceiverMode", request,
                 () => new SetReceiverModeResponse(), cancellationToken);
         }
 
@@ -262,7 +262,7 @@ namespace SharpOnvifClient.Receiver
         /// </summary>
         public System.Threading.Tasks.Task<GetReceiverStateResponse> GetReceiverStateAsync(GetReceiverStateRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetReceiverState, "http://www.onvif.org/ver10/receiver/wsdl", "GetReceiverState", request,
+            return InvokeAsync(SoapActions.GetReceiverState, "http://www.onvif.org/ver10/receiver/wsdl", "GetReceiverState", request,
                 () => new GetReceiverStateResponse(), cancellationToken);
         }
 

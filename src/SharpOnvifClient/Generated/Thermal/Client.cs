@@ -11,7 +11,7 @@
 namespace SharpOnvifClient.Thermal
 {
     /// <summary>
-    /// The ThermalPort Onvif service.
+    /// The ThermalPort service.
     /// </summary>
     public interface ThermalPort
     {
@@ -129,7 +129,7 @@ namespace SharpOnvifClient.Thermal
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -139,7 +139,7 @@ namespace SharpOnvifClient.Thermal
         /// </summary>
         public System.Threading.Tasks.Task<GetServiceCapabilitiesResponse> GetServiceCapabilitiesAsync(GetServiceCapabilitiesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetServiceCapabilities, "http://www.onvif.org/ver10/thermal/wsdl", "GetServiceCapabilities", request,
+            return InvokeAsync(SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver10/thermal/wsdl", "GetServiceCapabilities", request,
                 () => new GetServiceCapabilitiesResponse(), cancellationToken);
         }
 
@@ -158,7 +158,7 @@ namespace SharpOnvifClient.Thermal
         /// </summary>
         public System.Threading.Tasks.Task<GetConfigurationOptionsResponse> GetConfigurationOptionsAsync(GetConfigurationOptionsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetConfigurationOptions, "http://www.onvif.org/ver10/thermal/wsdl", "GetConfigurationOptions", request,
+            return InvokeAsync(SoapActions.GetConfigurationOptions, "http://www.onvif.org/ver10/thermal/wsdl", "GetConfigurationOptions", request,
                 () => new GetConfigurationOptionsResponse(), cancellationToken);
         }
 
@@ -175,7 +175,7 @@ namespace SharpOnvifClient.Thermal
         /// </summary>
         public System.Threading.Tasks.Task<GetConfigurationResponse> GetConfigurationAsync(GetConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetConfiguration, "http://www.onvif.org/ver10/thermal/wsdl", "GetConfiguration", request,
+            return InvokeAsync(SoapActions.GetConfiguration, "http://www.onvif.org/ver10/thermal/wsdl", "GetConfiguration", request,
                 () => new GetConfigurationResponse(), cancellationToken);
         }
 
@@ -192,7 +192,7 @@ namespace SharpOnvifClient.Thermal
         /// </summary>
         public System.Threading.Tasks.Task<GetConfigurationsResponse> GetConfigurationsAsync(GetConfigurationsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetConfigurations, "http://www.onvif.org/ver10/thermal/wsdl", "GetConfigurations", request,
+            return InvokeAsync(SoapActions.GetConfigurations, "http://www.onvif.org/ver10/thermal/wsdl", "GetConfigurations", request,
                 () => new GetConfigurationsResponse(), cancellationToken);
         }
 
@@ -209,7 +209,7 @@ namespace SharpOnvifClient.Thermal
         /// </summary>
         public System.Threading.Tasks.Task<SetConfigurationResponse> SetConfigurationAsync(SetConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetConfiguration, "http://www.onvif.org/ver10/thermal/wsdl", "SetConfiguration", request,
+            return InvokeAsync(SoapActions.SetConfiguration, "http://www.onvif.org/ver10/thermal/wsdl", "SetConfiguration", request,
                 () => new SetConfigurationResponse(), cancellationToken);
         }
 
@@ -228,7 +228,7 @@ namespace SharpOnvifClient.Thermal
         /// </summary>
         public System.Threading.Tasks.Task<GetRadiometryConfigurationOptionsResponse> GetRadiometryConfigurationOptionsAsync(GetRadiometryConfigurationOptionsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetRadiometryConfigurationOptions, "http://www.onvif.org/ver10/thermal/wsdl", "GetRadiometryConfigurationOptions", request,
+            return InvokeAsync(SoapActions.GetRadiometryConfigurationOptions, "http://www.onvif.org/ver10/thermal/wsdl", "GetRadiometryConfigurationOptions", request,
                 () => new GetRadiometryConfigurationOptionsResponse(), cancellationToken);
         }
 
@@ -245,7 +245,7 @@ namespace SharpOnvifClient.Thermal
         /// </summary>
         public System.Threading.Tasks.Task<GetRadiometryConfigurationResponse> GetRadiometryConfigurationAsync(GetRadiometryConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetRadiometryConfiguration, "http://www.onvif.org/ver10/thermal/wsdl", "GetRadiometryConfiguration", request,
+            return InvokeAsync(SoapActions.GetRadiometryConfiguration, "http://www.onvif.org/ver10/thermal/wsdl", "GetRadiometryConfiguration", request,
                 () => new GetRadiometryConfigurationResponse(), cancellationToken);
         }
 
@@ -262,7 +262,7 @@ namespace SharpOnvifClient.Thermal
         /// </summary>
         public System.Threading.Tasks.Task<SetRadiometryConfigurationResponse> SetRadiometryConfigurationAsync(SetRadiometryConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetRadiometryConfiguration, "http://www.onvif.org/ver10/thermal/wsdl", "SetRadiometryConfiguration", request,
+            return InvokeAsync(SoapActions.SetRadiometryConfiguration, "http://www.onvif.org/ver10/thermal/wsdl", "SetRadiometryConfiguration", request,
                 () => new SetRadiometryConfigurationResponse(), cancellationToken);
         }
 

@@ -9,7 +9,7 @@ namespace WsdlGenerator.Binding;
 /// Turns one service's parsed schema and WSDL into the C# model the emitters render.
 ///
 /// Only types reachable from the service's operations are generated, matching svcutil: the shared
-/// onvif.xsd declares far more than any one service uses, and generating all of it would bloat
+/// A shared schema declares far more than any one service uses, and generating all of it would bloat
 /// every assembly. Reachability also pulls in derived types of anything reachable, because a
 /// response may name one through xsi:type.
 /// </summary>
@@ -41,8 +41,10 @@ internal sealed class ModelBuilder
         XsdSchemaSet schema,
         WsdlParser wsdl,
         string csNamespace = "",
-        SharedTypeIndex? shared = null)
-        : this(serviceName, schema, [wsdl], generateEntireSchema: false, csNamespace, shared, null, true)
+        SharedTypeIndex? shared = null,
+        string? typeNamePrefix = null)
+        : this(serviceName, schema, [wsdl], generateEntireSchema: false, csNamespace, shared, null, true,
+               typeNamePrefix)
     {
     }
 
@@ -60,8 +62,10 @@ internal sealed class ModelBuilder
         string csNamespace,
         SharedTypeIndex? shared,
         Func<QName, bool>? declareFilter,
-        bool emitServices)
+        bool emitServices,
+        string? typeNamePrefix = null)
     {
+        _typeNamePrefix = typeNamePrefix;
         _serviceName = serviceName;
         _schema = schema;
         _wsdls = wsdls;
@@ -74,18 +78,19 @@ internal sealed class ModelBuilder
     }
 
     /// <summary>
-    /// Builds the model of everything the services share: the Onvif schema, and the OASIS and W3C
+    /// Builds the model of everything the services share: their common schema, and the OASIS and W3C
     /// schemas the event service pulls in. Generated once into the common assembly.
     /// <para>
     /// Every type in those schemas is generated, not only the ones some operation reaches, so the
-    /// shared assembly is a complete rendering of the Onvif data model.
+    /// shared assembly is a complete rendering of the shared data model.
     /// </para>
     /// </summary>
     public static CsModel BuildShared(
         XsdSchemaSet schema,
         IReadOnlyList<WsdlParser> wsdls,
         ISet<string> serviceNamespaces,
-        string csNamespace)
+        string csNamespace,
+        string? typeNamePrefix = null)
     {
         return new ModelBuilder(
             "Shared", schema, wsdls,
@@ -93,8 +98,12 @@ internal sealed class ModelBuilder
             csNamespace: csNamespace,
             shared: null,
             declareFilter: name => !serviceNamespaces.Contains(name.Namespace),
-            emitServices: false).Build();
+            emitServices: false,
+            typeNamePrefix: typeNamePrefix).Build();
     }
+
+    /// <summary>What a type whose name collides with a framework one is prefixed with.</summary>
+    private readonly string? _typeNamePrefix;
 
     private readonly Func<QName, bool>? _declareFilter;
     private readonly bool _emitServices;
@@ -289,7 +298,7 @@ internal sealed class ModelBuilder
         {
             if (!simple.IsEnumeration) return;   // Non-enum simple types collapse into their base.
 
-            string enumName = CsharpNaming.Unique(CsharpNaming.TypeName(name.LocalName), _takenTypeNames);
+            string enumName = CsharpNaming.Unique(CsharpNaming.TypeName(name.LocalName, _typeNamePrefix), _takenTypeNames);
             var @enum = new CsEnum
             {
                 Name = enumName,
@@ -304,7 +313,7 @@ internal sealed class ModelBuilder
         }
 
         var complex = (XsdComplexType)type;
-        string className = CsharpNaming.Unique(CsharpNaming.TypeName(name.LocalName), _takenTypeNames);
+        string className = CsharpNaming.Unique(CsharpNaming.TypeName(name.LocalName, _typeNamePrefix), _takenTypeNames);
         var @class = new CsClass
         {
             Name = className,
@@ -692,7 +701,7 @@ internal sealed class ModelBuilder
                 // xsd.exe names an inline type after the member that declares it, prefixed by
                 // the owning type: element ErrorCode inside BaseFaultType becomes BaseFaultTypeErrorCode.
                 string name = CsharpNaming.Unique(
-                    CsharpNaming.TypeName(ownerName + typeSuffix), _takenTypeNames);
+                    CsharpNaming.TypeName(ownerName + typeSuffix, _typeNamePrefix), _takenTypeNames);
                 var @enum = new CsEnum
                 {
                     Name = name,
@@ -731,7 +740,7 @@ internal sealed class ModelBuilder
             return new CsTypeRef(declared.Name, TypeKind.Class, false, XmlTypeName: declared.XmlName);
 
         string className = CsharpNaming.Unique(
-            CsharpNaming.TypeName(ownerName + typeSuffix), _takenTypeNames);
+            CsharpNaming.TypeName(ownerName + typeSuffix, _typeNamePrefix), _takenTypeNames);
         var @class = new CsClass
         {
             Name = className,

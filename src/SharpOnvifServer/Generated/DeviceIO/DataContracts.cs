@@ -146,7 +146,7 @@ namespace SharpOnvifServer.DeviceIO
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class Capabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Capabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -349,9 +349,9 @@ namespace SharpOnvifServer.DeviceIO
             set { this.digitalInputOptionsFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Capabilities"; } }
+        protected override string XmlTypeName { get { return "Capabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10DeviceIO; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10DeviceIO; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -443,7 +443,7 @@ namespace SharpOnvifServer.DeviceIO
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class DigitalInputConfigurationOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DigitalInputConfigurationOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.DigitalIdleState[] idleStateField;
 
@@ -466,9 +466,9 @@ namespace SharpOnvifServer.DeviceIO
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "DigitalInputConfigurationOptions"; } }
+        protected override string XmlTypeName { get { return "DigitalInputConfigurationOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10DeviceIO; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10DeviceIO; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -498,11 +498,11 @@ namespace SharpOnvifServer.DeviceIO
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class Get : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Get : SharpOnvifCommon.Xml.XmlContract
     {
-        protected override string OnvifXmlTypeName { get { return "Get"; } }
+        protected override string XmlTypeName { get { return "Get"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10DeviceIO; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10DeviceIO; } }
 
     }
 
@@ -511,7 +511,7 @@ namespace SharpOnvifServer.DeviceIO
     /// AudioOutputs shall support this command.This method is deprecated.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioOutputConfigurationOptions", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class GetAudioOutputConfigurationOptionsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioOutputConfigurationOptionsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string audioOutputTokenField;
 
@@ -570,7 +570,7 @@ namespace SharpOnvifServer.DeviceIO
     /// AudioOutputs shall support this command.This method is deprecated.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioOutputConfigurationOptionsResponse", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class GetAudioOutputConfigurationOptionsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioOutputConfigurationOptionsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.AudioOutputConfigurationOptions audioOutputOptionsField;
 
@@ -630,7 +630,7 @@ namespace SharpOnvifServer.DeviceIO
     /// method is deprecated.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioOutputConfiguration", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class GetAudioOutputConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioOutputConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string audioOutputTokenField;
 
@@ -690,7 +690,7 @@ namespace SharpOnvifServer.DeviceIO
     /// method is deprecated.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioOutputConfigurationResponse", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class GetAudioOutputConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioOutputConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.AudioOutputConfiguration audioOutputConfigurationField;
 
@@ -749,7 +749,7 @@ namespace SharpOnvifServer.DeviceIO
     /// shall support listing of available audio outputs through the GetAudioOutputs command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioOutputs", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class GetAudioOutputsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioOutputsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetAudioOutputsRequest()
         {
@@ -762,7 +762,7 @@ namespace SharpOnvifServer.DeviceIO
     /// shall support listing of available audio outputs through the GetAudioOutputs command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioOutputsResponse", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class GetAudioOutputsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioOutputsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] tokenField;
 
@@ -815,7 +815,7 @@ namespace SharpOnvifServer.DeviceIO
     /// AudioSources shall support this command.This method is deprecated.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioSourceConfigurationOptions", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class GetAudioSourceConfigurationOptionsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioSourceConfigurationOptionsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string audioSourceTokenField;
 
@@ -874,7 +874,7 @@ namespace SharpOnvifServer.DeviceIO
     /// AudioSources shall support this command.This method is deprecated.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioSourceConfigurationOptionsResponse", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class GetAudioSourceConfigurationOptionsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioSourceConfigurationOptionsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.AudioSourceConfigurationOptions audioSourceOptionsField;
 
@@ -933,7 +933,7 @@ namespace SharpOnvifServer.DeviceIO
     /// GetAudioSourceConfiguration command.This method is deprecated.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioSourceConfiguration", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class GetAudioSourceConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioSourceConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string audioSourceTokenField;
 
@@ -992,7 +992,7 @@ namespace SharpOnvifServer.DeviceIO
     /// GetAudioSourceConfiguration command.This method is deprecated.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioSourceConfigurationResponse", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class GetAudioSourceConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioSourceConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.AudioSourceConfiguration audioSourceConfigurationField;
 
@@ -1051,7 +1051,7 @@ namespace SharpOnvifServer.DeviceIO
     /// support the listing of available audio inputs through the GetAudioSources command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioSources", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class GetAudioSourcesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioSourcesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetAudioSourcesRequest()
         {
@@ -1064,7 +1064,7 @@ namespace SharpOnvifServer.DeviceIO
     /// support the listing of available audio inputs through the GetAudioSources command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioSourcesResponse", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class GetAudioSourcesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioSourcesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] tokenField;
 
@@ -1116,7 +1116,7 @@ namespace SharpOnvifServer.DeviceIO
     /// This operation lists what configuration is available for digital inputs.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetDigitalInputConfigurationOptions", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class GetDigitalInputConfigurationOptionsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetDigitalInputConfigurationOptionsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string tokenField;
 
@@ -1159,7 +1159,7 @@ namespace SharpOnvifServer.DeviceIO
     /// This operation lists what configuration is available for digital inputs.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetDigitalInputConfigurationOptionsResponse", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class GetDigitalInputConfigurationOptionsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetDigitalInputConfigurationOptionsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private DigitalInputConfigurationOptions digitalInputOptionsField;
 
@@ -1202,7 +1202,7 @@ namespace SharpOnvifServer.DeviceIO
     /// This operation gets a list of all available digital inputs.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetDigitalInputs", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class GetDigitalInputsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetDigitalInputsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetDigitalInputsRequest()
         {
@@ -1214,7 +1214,7 @@ namespace SharpOnvifServer.DeviceIO
     /// This operation gets a list of all available digital inputs.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetDigitalInputsResponse", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class GetDigitalInputsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetDigitalInputsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.DigitalInput[] digitalInputsField;
 
@@ -1270,7 +1270,7 @@ namespace SharpOnvifServer.DeviceIO
     /// &lt;tmd:Discrete&gt;True&lt;/tmd:Discrete&gt; &lt;/tmd:RelayOutputOptions&gt;
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRelayOutputOptions", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class GetRelayOutputOptionsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetRelayOutputOptionsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string relayOutputTokenField;
 
@@ -1323,7 +1323,7 @@ namespace SharpOnvifServer.DeviceIO
     /// &lt;tmd:Discrete&gt;True&lt;/tmd:Discrete&gt; &lt;/tmd:RelayOutputOptions&gt;
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRelayOutputOptionsResponse", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class GetRelayOutputOptionsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetRelayOutputOptionsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private RelayOutputOptions[] relayOutputOptionsField;
 
@@ -1375,7 +1375,7 @@ namespace SharpOnvifServer.DeviceIO
     /// This operation gets a list of all available relay outputs and their settings.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRelayOutputs", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetRelayOutputsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetRelayOutputsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetRelayOutputsRequest()
         {
@@ -1387,7 +1387,7 @@ namespace SharpOnvifServer.DeviceIO
     /// This operation gets a list of all available relay outputs and their settings.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRelayOutputsResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetRelayOutputsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetRelayOutputsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.RelayOutput[] relayOutputsField;
 
@@ -1433,7 +1433,7 @@ namespace SharpOnvifServer.DeviceIO
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class GetResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] tokenField;
 
@@ -1447,9 +1447,9 @@ namespace SharpOnvifServer.DeviceIO
             set { this.tokenField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "GetResponse"; } }
+        protected override string XmlTypeName { get { return "GetResponse"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10DeviceIO; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10DeviceIO; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -1477,7 +1477,7 @@ namespace SharpOnvifServer.DeviceIO
     }
 
     [System.Xml.Serialization.XmlRootAttribute("GetSerialPortConfigurationOptions", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class GetSerialPortConfigurationOptionsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetSerialPortConfigurationOptionsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string serialPortTokenField;
 
@@ -1517,7 +1517,7 @@ namespace SharpOnvifServer.DeviceIO
     }
 
     [System.Xml.Serialization.XmlRootAttribute("GetSerialPortConfigurationOptionsResponse", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class GetSerialPortConfigurationOptionsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetSerialPortConfigurationOptionsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SerialPortConfigurationOptions serialPortOptionsField;
 
@@ -1557,7 +1557,7 @@ namespace SharpOnvifServer.DeviceIO
     }
 
     [System.Xml.Serialization.XmlRootAttribute("GetSerialPortConfiguration", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class GetSerialPortConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetSerialPortConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string serialPortTokenField;
 
@@ -1597,7 +1597,7 @@ namespace SharpOnvifServer.DeviceIO
     }
 
     [System.Xml.Serialization.XmlRootAttribute("GetSerialPortConfigurationResponse", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class GetSerialPortConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetSerialPortConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SerialPortConfiguration serialPortConfigurationField;
 
@@ -1637,7 +1637,7 @@ namespace SharpOnvifServer.DeviceIO
     }
 
     [System.Xml.Serialization.XmlRootAttribute("GetSerialPorts", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class GetSerialPortsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetSerialPortsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetSerialPortsRequest()
         {
@@ -1646,7 +1646,7 @@ namespace SharpOnvifServer.DeviceIO
     }
 
     [System.Xml.Serialization.XmlRootAttribute("GetSerialPortsResponse", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class GetSerialPortsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetSerialPortsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SerialPort[] serialPortField;
 
@@ -1695,7 +1695,7 @@ namespace SharpOnvifServer.DeviceIO
     /// Returns the capabilities of the device IO service. The result is returned in a typed answer.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilities", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetServiceCapabilitiesRequest()
         {
@@ -1707,7 +1707,7 @@ namespace SharpOnvifServer.DeviceIO
     /// Returns the capabilities of the device IO service. The result is returned in a typed answer.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilitiesResponse", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private Capabilities capabilitiesField;
 
@@ -1754,7 +1754,7 @@ namespace SharpOnvifServer.DeviceIO
     /// outputs shall support the retrieval of VideoOutputConfigurationOptions through this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoOutputConfigurationOptions", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class GetVideoOutputConfigurationOptionsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetVideoOutputConfigurationOptionsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string videoOutputTokenField;
 
@@ -1813,7 +1813,7 @@ namespace SharpOnvifServer.DeviceIO
     /// outputs shall support the retrieval of VideoOutputConfigurationOptions through this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoOutputConfigurationOptionsResponse", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class GetVideoOutputConfigurationOptionsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetVideoOutputConfigurationOptionsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.VideoOutputConfigurationOptions videoOutputConfigurationOptionsField;
 
@@ -1869,7 +1869,7 @@ namespace SharpOnvifServer.DeviceIO
     /// the retrieval of the VideoOutputConfiguration through this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoOutputConfiguration", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class GetVideoOutputConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetVideoOutputConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string videoOutputTokenField;
 
@@ -1928,7 +1928,7 @@ namespace SharpOnvifServer.DeviceIO
     /// the retrieval of the VideoOutputConfiguration through this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoOutputConfigurationResponse", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class GetVideoOutputConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetVideoOutputConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.VideoOutputConfiguration videoOutputConfigurationField;
 
@@ -1987,7 +1987,7 @@ namespace SharpOnvifServer.DeviceIO
     /// shall support listing of available video outputs through the GetVideoOutputs command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoOutputs", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class GetVideoOutputsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetVideoOutputsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetVideoOutputsRequest()
         {
@@ -2000,7 +2000,7 @@ namespace SharpOnvifServer.DeviceIO
     /// shall support listing of available video outputs through the GetVideoOutputs command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoOutputsResponse", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class GetVideoOutputsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetVideoOutputsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.VideoOutput[] videoOutputsField;
 
@@ -2053,7 +2053,7 @@ namespace SharpOnvifServer.DeviceIO
     /// sources shall support this command.This method is deprecated.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoSourceConfigurationOptions", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class GetVideoSourceConfigurationOptionsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetVideoSourceConfigurationOptionsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string videoSourceTokenField;
 
@@ -2112,7 +2112,7 @@ namespace SharpOnvifServer.DeviceIO
     /// sources shall support this command.This method is deprecated.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoSourceConfigurationOptionsResponse", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class GetVideoSourceConfigurationOptionsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetVideoSourceConfigurationOptionsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.VideoSourceConfigurationOptions videoSourceConfigurationOptionsField;
 
@@ -2168,7 +2168,7 @@ namespace SharpOnvifServer.DeviceIO
     /// support the GetVideoSourceConfigurations command.This method is deprecated.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoSourceConfiguration", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class GetVideoSourceConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetVideoSourceConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string videoSourceTokenField;
 
@@ -2227,7 +2227,7 @@ namespace SharpOnvifServer.DeviceIO
     /// support the GetVideoSourceConfigurations command.This method is deprecated.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoSourceConfigurationResponse", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class GetVideoSourceConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetVideoSourceConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.VideoSourceConfiguration videoSourceConfigurationField;
 
@@ -2286,7 +2286,7 @@ namespace SharpOnvifServer.DeviceIO
     /// support the listing of available video sources through the GetVideoSources command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoSources", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class GetVideoSourcesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetVideoSourcesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetVideoSourcesRequest()
         {
@@ -2299,7 +2299,7 @@ namespace SharpOnvifServer.DeviceIO
     /// support the listing of available video sources through the GetVideoSources command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoSourcesResponse", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class GetVideoSourcesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetVideoSourcesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] tokenField;
 
@@ -2351,7 +2351,7 @@ namespace SharpOnvifServer.DeviceIO
     /// The list of configurable parity for the data error detection.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class ParityBitList : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ParityBitList : SharpOnvifCommon.Xml.XmlContract
     {
         private ParityBit[] itemsField;
 
@@ -2362,9 +2362,9 @@ namespace SharpOnvifServer.DeviceIO
             set { this.itemsField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ParityBitList"; } }
+        protected override string XmlTypeName { get { return "ParityBitList"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10DeviceIO; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10DeviceIO; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -2392,7 +2392,7 @@ namespace SharpOnvifServer.DeviceIO
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class RelayOutputOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RelayOutputOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.RelayMode[] modeField;
 
@@ -2464,9 +2464,9 @@ namespace SharpOnvifServer.DeviceIO
             set { this.tokenField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RelayOutputOptions"; } }
+        protected override string XmlTypeName { get { return "RelayOutputOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10DeviceIO; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10DeviceIO; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -2529,7 +2529,7 @@ namespace SharpOnvifServer.DeviceIO
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class RelayOutputOptionsExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RelayOutputOptionsExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -2540,9 +2540,9 @@ namespace SharpOnvifServer.DeviceIO
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RelayOutputOptionsExtension"; } }
+        protected override string XmlTypeName { get { return "RelayOutputOptionsExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10DeviceIO; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10DeviceIO; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -2558,7 +2558,7 @@ namespace SharpOnvifServer.DeviceIO
     }
 
     [System.Xml.Serialization.XmlRootAttribute("SendReceiveSerialCommand", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class SendReceiveSerialCommandRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SendReceiveSerialCommandRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string tokenField;
 
@@ -2678,7 +2678,7 @@ namespace SharpOnvifServer.DeviceIO
     }
 
     [System.Xml.Serialization.XmlRootAttribute("SendReceiveSerialCommandResponse", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class SendReceiveSerialCommandResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SendReceiveSerialCommandResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SerialData serialDataField;
 
@@ -2721,7 +2721,7 @@ namespace SharpOnvifServer.DeviceIO
     /// The serial port data.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class SerialData : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SerialData : SharpOnvifCommon.Xml.XmlContract
     {
         private object itemField;
 
@@ -2733,9 +2733,9 @@ namespace SharpOnvifServer.DeviceIO
             set { this.itemField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SerialData"; } }
+        protected override string XmlTypeName { get { return "SerialData"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10DeviceIO; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10DeviceIO; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -2771,7 +2771,7 @@ namespace SharpOnvifServer.DeviceIO
     /// Lists all available serial ports of a device
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class SerialPort : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SerialPort : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -2782,9 +2782,9 @@ namespace SharpOnvifServer.DeviceIO
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SerialPort"; } }
+        protected override string XmlTypeName { get { return "SerialPort"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10DeviceIO; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10DeviceIO; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -2803,7 +2803,7 @@ namespace SharpOnvifServer.DeviceIO
     /// The parameters for configuring the serial port.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class SerialPortConfiguration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SerialPortConfiguration : SharpOnvifCommon.Xml.XmlContract
     {
         private int baudRateField;
 
@@ -2880,9 +2880,9 @@ namespace SharpOnvifServer.DeviceIO
             set { this.typeField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SerialPortConfiguration"; } }
+        protected override string XmlTypeName { get { return "SerialPortConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10DeviceIO; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10DeviceIO; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -2944,7 +2944,7 @@ namespace SharpOnvifServer.DeviceIO
     /// The configuration options that relates to serial port.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class SerialPortConfigurationOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SerialPortConfigurationOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private int[] baudRateListField;
 
@@ -3016,9 +3016,9 @@ namespace SharpOnvifServer.DeviceIO
             set { this.tokenField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SerialPortConfigurationOptions"; } }
+        protected override string XmlTypeName { get { return "SerialPortConfigurationOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10DeviceIO; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10DeviceIO; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -3125,7 +3125,7 @@ namespace SharpOnvifServer.DeviceIO
     /// setting of the AudioOutputConfiguration through this command.This method is deprecated.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetAudioOutputConfiguration", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class SetAudioOutputConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetAudioOutputConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.AudioOutputConfiguration configurationField;
 
@@ -3200,7 +3200,7 @@ namespace SharpOnvifServer.DeviceIO
     /// setting of the AudioOutputConfiguration through this command.This method is deprecated.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetAudioOutputConfigurationResponse", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class SetAudioOutputConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetAudioOutputConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -3238,7 +3238,7 @@ namespace SharpOnvifServer.DeviceIO
     /// the setting of the AudioSourceConfiguration through this command.This method is deprecated.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetAudioSourceConfiguration", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class SetAudioSourceConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetAudioSourceConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.AudioSourceConfiguration configurationField;
 
@@ -3313,7 +3313,7 @@ namespace SharpOnvifServer.DeviceIO
     /// the setting of the AudioSourceConfiguration through this command.This method is deprecated.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetAudioSourceConfigurationResponse", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class SetAudioSourceConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetAudioSourceConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -3350,7 +3350,7 @@ namespace SharpOnvifServer.DeviceIO
     /// Modify a digital input configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetDigitalInputConfigurations", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class SetDigitalInputConfigurationsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetDigitalInputConfigurationsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.DigitalInput[] digitalInputsField;
 
@@ -3399,7 +3399,7 @@ namespace SharpOnvifServer.DeviceIO
     /// Modify a digital input configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetDigitalInputConfigurationsResponse", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class SetDigitalInputConfigurationsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetDigitalInputConfigurationsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetDigitalInputConfigurationsResponse()
         {
@@ -3419,7 +3419,7 @@ namespace SharpOnvifServer.DeviceIO
     /// ‘active’ through the same command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetRelayOutputSettings", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class SetRelayOutputSettingsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetRelayOutputSettingsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.RelayOutput relayOutputField;
 
@@ -3470,7 +3470,7 @@ namespace SharpOnvifServer.DeviceIO
     /// ‘active’ through the same command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetRelayOutputSettingsResponse", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class SetRelayOutputSettingsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetRelayOutputSettingsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetRelayOutputSettingsResponse()
         {
@@ -3482,7 +3482,7 @@ namespace SharpOnvifServer.DeviceIO
     /// Modify the relay state.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetRelayOutputState", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetRelayOutputStateRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetRelayOutputStateRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string relayOutputTokenField;
 
@@ -3540,7 +3540,7 @@ namespace SharpOnvifServer.DeviceIO
     /// Modify the relay state.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetRelayOutputStateResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetRelayOutputStateResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetRelayOutputStateResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetRelayOutputStateResponse()
         {
@@ -3549,7 +3549,7 @@ namespace SharpOnvifServer.DeviceIO
     }
 
     [System.Xml.Serialization.XmlRootAttribute("SetSerialPortConfiguration", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class SetSerialPortConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetSerialPortConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SerialPortConfiguration serialPortConfigurationField;
 
@@ -3604,7 +3604,7 @@ namespace SharpOnvifServer.DeviceIO
     }
 
     [System.Xml.Serialization.XmlRootAttribute("SetSerialPortConfigurationResponse", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class SetSerialPortConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetSerialPortConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetSerialPortConfigurationResponse()
         {
@@ -3617,7 +3617,7 @@ namespace SharpOnvifServer.DeviceIO
     /// setting of its video output configuration through this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetVideoOutputConfiguration", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class SetVideoOutputConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetVideoOutputConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.VideoOutputConfiguration configurationField;
 
@@ -3692,7 +3692,7 @@ namespace SharpOnvifServer.DeviceIO
     /// setting of its video output configuration through this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetVideoOutputConfigurationResponse", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class SetVideoOutputConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetVideoOutputConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -3730,7 +3730,7 @@ namespace SharpOnvifServer.DeviceIO
     /// setting of the VideoSourceConfiguration through this command.This method is deprecated.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetVideoSourceConfiguration", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class SetVideoSourceConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetVideoSourceConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.VideoSourceConfiguration configurationField;
 
@@ -3805,7 +3805,7 @@ namespace SharpOnvifServer.DeviceIO
     /// setting of the VideoSourceConfiguration through this command.This method is deprecated.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetVideoSourceConfigurationResponse", Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class SetVideoSourceConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetVideoSourceConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -3841,14 +3841,14 @@ namespace SharpOnvifServer.DeviceIO
     /// <summary>Constructs a contract named by an xsi:type attribute.</summary>
     internal static class XmlTypeFactory
     {
-        public static SharpOnvifCommon.Xml.OnvifContract Create(string ns, string name)
+        public static SharpOnvifCommon.Xml.XmlContract Create(string ns, string name)
         {
             return SharpOnvifCommon.Onvif.XmlTypeFactory.Create(ns, name);
         }
     }
 
     /// <summary>SOAP action URIs for this service's operations.</summary>
-    public static class OnvifActions
+    public static class SoapActions
     {
         public const string GetServiceCapabilities = "http://www.onvif.org/ver10/deviceio/wsdl/GetServiceCapabilities";
         public const string GetRelayOutputOptions = "http://www.onvif.org/ver10/deviceio/wsdl/GetRelayOutputOptions";

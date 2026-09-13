@@ -11,7 +11,7 @@
 namespace SharpOnvifClient.DeviceIO
 {
     /// <summary>
-    /// The DeviceIOPort Onvif service.
+    /// The DeviceIOPort service.
     /// </summary>
     public interface DeviceIOPort
     {
@@ -352,7 +352,7 @@ namespace SharpOnvifClient.DeviceIO
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -362,7 +362,7 @@ namespace SharpOnvifClient.DeviceIO
         /// </summary>
         public System.Threading.Tasks.Task<GetServiceCapabilitiesResponse> GetServiceCapabilitiesAsync(GetServiceCapabilitiesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetServiceCapabilities, "http://www.onvif.org/ver10/deviceIO/wsdl", "GetServiceCapabilities", request,
+            return InvokeAsync(SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver10/deviceIO/wsdl", "GetServiceCapabilities", request,
                 () => new GetServiceCapabilitiesResponse(), cancellationToken);
         }
 
@@ -386,7 +386,7 @@ namespace SharpOnvifClient.DeviceIO
         /// </summary>
         public System.Threading.Tasks.Task<GetRelayOutputOptionsResponse> GetRelayOutputOptionsAsync(GetRelayOutputOptionsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetRelayOutputOptions, "http://www.onvif.org/ver10/deviceIO/wsdl", "GetRelayOutputOptions", request,
+            return InvokeAsync(SoapActions.GetRelayOutputOptions, "http://www.onvif.org/ver10/deviceIO/wsdl", "GetRelayOutputOptions", request,
                 () => new GetRelayOutputOptionsResponse(), cancellationToken);
         }
 
@@ -404,7 +404,7 @@ namespace SharpOnvifClient.DeviceIO
         /// </summary>
         public System.Threading.Tasks.Task<GetAudioSourcesResponse> GetAudioSourcesAsync(GetAudioSourcesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetAudioSources, "http://www.onvif.org/ver10/deviceIO/wsdl", "GetAudioSources", request,
+            return InvokeAsync(SoapActions.GetAudioSources, "http://www.onvif.org/ver10/deviceIO/wsdl", "GetAudioSources", request,
                 () => new GetAudioSourcesResponse(), cancellationToken);
         }
 
@@ -422,7 +422,7 @@ namespace SharpOnvifClient.DeviceIO
         /// </summary>
         public System.Threading.Tasks.Task<GetAudioOutputsResponse> GetAudioOutputsAsync(GetAudioOutputsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetAudioOutputs, "http://www.onvif.org/ver10/deviceIO/wsdl", "GetAudioOutputs", request,
+            return InvokeAsync(SoapActions.GetAudioOutputs, "http://www.onvif.org/ver10/deviceIO/wsdl", "GetAudioOutputs", request,
                 () => new GetAudioOutputsResponse(), cancellationToken);
         }
 
@@ -440,7 +440,7 @@ namespace SharpOnvifClient.DeviceIO
         /// </summary>
         public System.Threading.Tasks.Task<GetVideoSourcesResponse> GetVideoSourcesAsync(GetVideoSourcesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetVideoSources, "http://www.onvif.org/ver10/deviceIO/wsdl", "GetVideoSources", request,
+            return InvokeAsync(SoapActions.GetVideoSources, "http://www.onvif.org/ver10/deviceIO/wsdl", "GetVideoSources", request,
                 () => new GetVideoSourcesResponse(), cancellationToken);
         }
 
@@ -458,7 +458,7 @@ namespace SharpOnvifClient.DeviceIO
         /// </summary>
         public System.Threading.Tasks.Task<GetVideoOutputsResponse> GetVideoOutputsAsync(GetVideoOutputsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetVideoOutputs, "http://www.onvif.org/ver10/deviceIO/wsdl", "GetVideoOutputs", request,
+            return InvokeAsync(SoapActions.GetVideoOutputs, "http://www.onvif.org/ver10/deviceIO/wsdl", "GetVideoOutputs", request,
                 () => new GetVideoOutputsResponse(), cancellationToken);
         }
 
@@ -476,7 +476,7 @@ namespace SharpOnvifClient.DeviceIO
         /// </summary>
         public System.Threading.Tasks.Task<GetVideoSourceConfigurationResponse> GetVideoSourceConfigurationAsync(GetVideoSourceConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetVideoSourceConfiguration, "http://www.onvif.org/ver10/deviceIO/wsdl", "GetVideoSourceConfiguration", request,
+            return InvokeAsync(SoapActions.GetVideoSourceConfiguration, "http://www.onvif.org/ver10/deviceIO/wsdl", "GetVideoSourceConfiguration", request,
                 () => new GetVideoSourceConfigurationResponse(), cancellationToken);
         }
 
@@ -494,7 +494,7 @@ namespace SharpOnvifClient.DeviceIO
         /// </summary>
         public System.Threading.Tasks.Task<GetVideoOutputConfigurationResponse> GetVideoOutputConfigurationAsync(GetVideoOutputConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetVideoOutputConfiguration, "http://www.onvif.org/ver10/deviceIO/wsdl", "GetVideoOutputConfiguration", request,
+            return InvokeAsync(SoapActions.GetVideoOutputConfiguration, "http://www.onvif.org/ver10/deviceIO/wsdl", "GetVideoOutputConfiguration", request,
                 () => new GetVideoOutputConfigurationResponse(), cancellationToken);
         }
 
@@ -512,7 +512,7 @@ namespace SharpOnvifClient.DeviceIO
         /// </summary>
         public System.Threading.Tasks.Task<GetAudioSourceConfigurationResponse> GetAudioSourceConfigurationAsync(GetAudioSourceConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetAudioSourceConfiguration, "http://www.onvif.org/ver10/deviceIO/wsdl", "GetAudioSourceConfiguration", request,
+            return InvokeAsync(SoapActions.GetAudioSourceConfiguration, "http://www.onvif.org/ver10/deviceIO/wsdl", "GetAudioSourceConfiguration", request,
                 () => new GetAudioSourceConfigurationResponse(), cancellationToken);
         }
 
@@ -531,7 +531,7 @@ namespace SharpOnvifClient.DeviceIO
         /// </summary>
         public System.Threading.Tasks.Task<GetAudioOutputConfigurationResponse> GetAudioOutputConfigurationAsync(GetAudioOutputConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetAudioOutputConfiguration, "http://www.onvif.org/ver10/deviceIO/wsdl", "GetAudioOutputConfiguration", request,
+            return InvokeAsync(SoapActions.GetAudioOutputConfiguration, "http://www.onvif.org/ver10/deviceIO/wsdl", "GetAudioOutputConfiguration", request,
                 () => new GetAudioOutputConfigurationResponse(), cancellationToken);
         }
 
@@ -549,7 +549,7 @@ namespace SharpOnvifClient.DeviceIO
         /// </summary>
         public System.Threading.Tasks.Task<SetVideoSourceConfigurationResponse> SetVideoSourceConfigurationAsync(SetVideoSourceConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetVideoSourceConfiguration, "http://www.onvif.org/ver10/deviceIO/wsdl", "SetVideoSourceConfiguration", request,
+            return InvokeAsync(SoapActions.SetVideoSourceConfiguration, "http://www.onvif.org/ver10/deviceIO/wsdl", "SetVideoSourceConfiguration", request,
                 () => new SetVideoSourceConfigurationResponse(), cancellationToken);
         }
 
@@ -567,7 +567,7 @@ namespace SharpOnvifClient.DeviceIO
         /// </summary>
         public System.Threading.Tasks.Task<SetVideoOutputConfigurationResponse> SetVideoOutputConfigurationAsync(SetVideoOutputConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetVideoOutputConfiguration, "http://www.onvif.org/ver10/deviceIO/wsdl", "SetVideoOutputConfiguration", request,
+            return InvokeAsync(SoapActions.SetVideoOutputConfiguration, "http://www.onvif.org/ver10/deviceIO/wsdl", "SetVideoOutputConfiguration", request,
                 () => new SetVideoOutputConfigurationResponse(), cancellationToken);
         }
 
@@ -585,7 +585,7 @@ namespace SharpOnvifClient.DeviceIO
         /// </summary>
         public System.Threading.Tasks.Task<SetAudioSourceConfigurationResponse> SetAudioSourceConfigurationAsync(SetAudioSourceConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetAudioSourceConfiguration, "http://www.onvif.org/ver10/deviceIO/wsdl", "SetAudioSourceConfiguration", request,
+            return InvokeAsync(SoapActions.SetAudioSourceConfiguration, "http://www.onvif.org/ver10/deviceIO/wsdl", "SetAudioSourceConfiguration", request,
                 () => new SetAudioSourceConfigurationResponse(), cancellationToken);
         }
 
@@ -603,7 +603,7 @@ namespace SharpOnvifClient.DeviceIO
         /// </summary>
         public System.Threading.Tasks.Task<SetAudioOutputConfigurationResponse> SetAudioOutputConfigurationAsync(SetAudioOutputConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetAudioOutputConfiguration, "http://www.onvif.org/ver10/deviceIO/wsdl", "SetAudioOutputConfiguration", request,
+            return InvokeAsync(SoapActions.SetAudioOutputConfiguration, "http://www.onvif.org/ver10/deviceIO/wsdl", "SetAudioOutputConfiguration", request,
                 () => new SetAudioOutputConfigurationResponse(), cancellationToken);
         }
 
@@ -621,7 +621,7 @@ namespace SharpOnvifClient.DeviceIO
         /// </summary>
         public System.Threading.Tasks.Task<GetVideoSourceConfigurationOptionsResponse> GetVideoSourceConfigurationOptionsAsync(GetVideoSourceConfigurationOptionsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetVideoSourceConfigurationOptions, "http://www.onvif.org/ver10/deviceIO/wsdl", "GetVideoSourceConfigurationOptions", request,
+            return InvokeAsync(SoapActions.GetVideoSourceConfigurationOptions, "http://www.onvif.org/ver10/deviceIO/wsdl", "GetVideoSourceConfigurationOptions", request,
                 () => new GetVideoSourceConfigurationOptionsResponse(), cancellationToken);
         }
 
@@ -639,7 +639,7 @@ namespace SharpOnvifClient.DeviceIO
         /// </summary>
         public System.Threading.Tasks.Task<GetVideoOutputConfigurationOptionsResponse> GetVideoOutputConfigurationOptionsAsync(GetVideoOutputConfigurationOptionsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetVideoOutputConfigurationOptions, "http://www.onvif.org/ver10/deviceIO/wsdl", "GetVideoOutputConfigurationOptions", request,
+            return InvokeAsync(SoapActions.GetVideoOutputConfigurationOptions, "http://www.onvif.org/ver10/deviceIO/wsdl", "GetVideoOutputConfigurationOptions", request,
                 () => new GetVideoOutputConfigurationOptionsResponse(), cancellationToken);
         }
 
@@ -657,7 +657,7 @@ namespace SharpOnvifClient.DeviceIO
         /// </summary>
         public System.Threading.Tasks.Task<GetAudioSourceConfigurationOptionsResponse> GetAudioSourceConfigurationOptionsAsync(GetAudioSourceConfigurationOptionsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetAudioSourceConfigurationOptions, "http://www.onvif.org/ver10/deviceIO/wsdl", "GetAudioSourceConfigurationOptions", request,
+            return InvokeAsync(SoapActions.GetAudioSourceConfigurationOptions, "http://www.onvif.org/ver10/deviceIO/wsdl", "GetAudioSourceConfigurationOptions", request,
                 () => new GetAudioSourceConfigurationOptionsResponse(), cancellationToken);
         }
 
@@ -675,7 +675,7 @@ namespace SharpOnvifClient.DeviceIO
         /// </summary>
         public System.Threading.Tasks.Task<GetAudioOutputConfigurationOptionsResponse> GetAudioOutputConfigurationOptionsAsync(GetAudioOutputConfigurationOptionsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetAudioOutputConfigurationOptions, "http://www.onvif.org/ver10/deviceIO/wsdl", "GetAudioOutputConfigurationOptions", request,
+            return InvokeAsync(SoapActions.GetAudioOutputConfigurationOptions, "http://www.onvif.org/ver10/deviceIO/wsdl", "GetAudioOutputConfigurationOptions", request,
                 () => new GetAudioOutputConfigurationOptionsResponse(), cancellationToken);
         }
 
@@ -692,7 +692,7 @@ namespace SharpOnvifClient.DeviceIO
         /// </summary>
         public System.Threading.Tasks.Task<GetRelayOutputsResponse> GetRelayOutputsAsync(GetRelayOutputsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetRelayOutputs, "http://www.onvif.org/ver10/device/wsdl", "GetRelayOutputs", request,
+            return InvokeAsync(SoapActions.GetRelayOutputs, "http://www.onvif.org/ver10/device/wsdl", "GetRelayOutputs", request,
                 () => new GetRelayOutputsResponse(), cancellationToken);
         }
 
@@ -717,7 +717,7 @@ namespace SharpOnvifClient.DeviceIO
         /// </summary>
         public System.Threading.Tasks.Task<SetRelayOutputSettingsResponse> SetRelayOutputSettingsAsync(SetRelayOutputSettingsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetRelayOutputSettings, "http://www.onvif.org/ver10/deviceIO/wsdl", "SetRelayOutputSettings", request,
+            return InvokeAsync(SoapActions.SetRelayOutputSettings, "http://www.onvif.org/ver10/deviceIO/wsdl", "SetRelayOutputSettings", request,
                 () => new SetRelayOutputSettingsResponse(), cancellationToken);
         }
 
@@ -734,7 +734,7 @@ namespace SharpOnvifClient.DeviceIO
         /// </summary>
         public System.Threading.Tasks.Task<SetRelayOutputStateResponse> SetRelayOutputStateAsync(SetRelayOutputStateRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetRelayOutputState, "http://www.onvif.org/ver10/device/wsdl", "SetRelayOutputState", request,
+            return InvokeAsync(SoapActions.SetRelayOutputState, "http://www.onvif.org/ver10/device/wsdl", "SetRelayOutputState", request,
                 () => new SetRelayOutputStateResponse(), cancellationToken);
         }
 
@@ -751,7 +751,7 @@ namespace SharpOnvifClient.DeviceIO
         /// </summary>
         public System.Threading.Tasks.Task<GetDigitalInputsResponse> GetDigitalInputsAsync(GetDigitalInputsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetDigitalInputs, "http://www.onvif.org/ver10/deviceIO/wsdl", "GetDigitalInputs", request,
+            return InvokeAsync(SoapActions.GetDigitalInputs, "http://www.onvif.org/ver10/deviceIO/wsdl", "GetDigitalInputs", request,
                 () => new GetDigitalInputsResponse(), cancellationToken);
         }
 
@@ -768,7 +768,7 @@ namespace SharpOnvifClient.DeviceIO
         /// </summary>
         public System.Threading.Tasks.Task<GetDigitalInputConfigurationOptionsResponse> GetDigitalInputConfigurationOptionsAsync(GetDigitalInputConfigurationOptionsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetDigitalInputConfigurationOptions, "http://www.onvif.org/ver10/deviceIO/wsdl", "GetDigitalInputConfigurationOptions", request,
+            return InvokeAsync(SoapActions.GetDigitalInputConfigurationOptions, "http://www.onvif.org/ver10/deviceIO/wsdl", "GetDigitalInputConfigurationOptions", request,
                 () => new GetDigitalInputConfigurationOptionsResponse(), cancellationToken);
         }
 
@@ -785,7 +785,7 @@ namespace SharpOnvifClient.DeviceIO
         /// </summary>
         public System.Threading.Tasks.Task<SetDigitalInputConfigurationsResponse> SetDigitalInputConfigurationsAsync(SetDigitalInputConfigurationsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetDigitalInputConfigurations, "http://www.onvif.org/ver10/deviceIO/wsdl", "SetDigitalInputConfigurations", request,
+            return InvokeAsync(SoapActions.SetDigitalInputConfigurations, "http://www.onvif.org/ver10/deviceIO/wsdl", "SetDigitalInputConfigurations", request,
                 () => new SetDigitalInputConfigurationsResponse(), cancellationToken);
         }
 
@@ -799,7 +799,7 @@ namespace SharpOnvifClient.DeviceIO
 
         public System.Threading.Tasks.Task<GetSerialPortsResponse> GetSerialPortsAsync(GetSerialPortsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetSerialPorts, "http://www.onvif.org/ver10/deviceIO/wsdl", "GetSerialPorts", request,
+            return InvokeAsync(SoapActions.GetSerialPorts, "http://www.onvif.org/ver10/deviceIO/wsdl", "GetSerialPorts", request,
                 () => new GetSerialPortsResponse(), cancellationToken);
         }
 
@@ -813,7 +813,7 @@ namespace SharpOnvifClient.DeviceIO
 
         public System.Threading.Tasks.Task<GetSerialPortConfigurationResponse> GetSerialPortConfigurationAsync(GetSerialPortConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetSerialPortConfiguration, "http://www.onvif.org/ver10/deviceIO/wsdl", "GetSerialPortConfiguration", request,
+            return InvokeAsync(SoapActions.GetSerialPortConfiguration, "http://www.onvif.org/ver10/deviceIO/wsdl", "GetSerialPortConfiguration", request,
                 () => new GetSerialPortConfigurationResponse(), cancellationToken);
         }
 
@@ -827,7 +827,7 @@ namespace SharpOnvifClient.DeviceIO
 
         public System.Threading.Tasks.Task<SetSerialPortConfigurationResponse> SetSerialPortConfigurationAsync(SetSerialPortConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetSerialPortConfiguration, "http://www.onvif.org/ver10/deviceIO/wsdl", "SetSerialPortConfiguration", request,
+            return InvokeAsync(SoapActions.SetSerialPortConfiguration, "http://www.onvif.org/ver10/deviceIO/wsdl", "SetSerialPortConfiguration", request,
                 () => new SetSerialPortConfigurationResponse(), cancellationToken);
         }
 
@@ -841,7 +841,7 @@ namespace SharpOnvifClient.DeviceIO
 
         public System.Threading.Tasks.Task<GetSerialPortConfigurationOptionsResponse> GetSerialPortConfigurationOptionsAsync(GetSerialPortConfigurationOptionsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetSerialPortConfigurationOptions, "http://www.onvif.org/ver10/deviceIO/wsdl", "GetSerialPortConfigurationOptions", request,
+            return InvokeAsync(SoapActions.GetSerialPortConfigurationOptions, "http://www.onvif.org/ver10/deviceIO/wsdl", "GetSerialPortConfigurationOptions", request,
                 () => new GetSerialPortConfigurationOptionsResponse(), cancellationToken);
         }
 
@@ -855,7 +855,7 @@ namespace SharpOnvifClient.DeviceIO
 
         public System.Threading.Tasks.Task<SendReceiveSerialCommandResponse> SendReceiveSerialCommandAsync(SendReceiveSerialCommandRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SendReceiveSerialCommand, "http://www.onvif.org/ver10/deviceIO/wsdl", "SendReceiveSerialCommand", request,
+            return InvokeAsync(SoapActions.SendReceiveSerialCommand, "http://www.onvif.org/ver10/deviceIO/wsdl", "SendReceiveSerialCommand", request,
                 () => new SendReceiveSerialCommandResponse(), cancellationToken);
         }
 

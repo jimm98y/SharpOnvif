@@ -22,7 +22,7 @@ namespace SharpOnvifClient.Replay
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/replay/wsdl")]
-    public partial class Capabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Capabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -107,9 +107,9 @@ namespace SharpOnvifClient.Replay
             set { this.rTSPWebSocketUriField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Capabilities"; } }
+        protected override string XmlTypeName { get { return "Capabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Replay; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Replay; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -164,7 +164,7 @@ namespace SharpOnvifClient.Replay
     /// Returns the current configuration of the replay service. This operation is mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetReplayConfiguration", Namespace="http://www.onvif.org/ver10/replay/wsdl")]
-    public partial class GetReplayConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetReplayConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetReplayConfigurationRequest()
         {
@@ -176,7 +176,7 @@ namespace SharpOnvifClient.Replay
     /// Returns the current configuration of the replay service. This operation is mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetReplayConfigurationResponse", Namespace="http://www.onvif.org/ver10/replay/wsdl")]
-    public partial class GetReplayConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetReplayConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.ReplayConfiguration configurationField;
 
@@ -224,7 +224,7 @@ namespace SharpOnvifClient.Replay
     /// Service shall support the GetReplayUri command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetReplayUri", Namespace="http://www.onvif.org/ver10/replay/wsdl")]
-    public partial class GetReplayUriRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetReplayUriRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.StreamSetup streamSetupField;
 
@@ -291,7 +291,7 @@ namespace SharpOnvifClient.Replay
     /// Service shall support the GetReplayUri command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetReplayUriResponse", Namespace="http://www.onvif.org/ver10/replay/wsdl")]
-    public partial class GetReplayUriResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetReplayUriResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string uriField;
 
@@ -337,7 +337,7 @@ namespace SharpOnvifClient.Replay
     /// Returns the capabilities of the replay service. The result is returned in a typed answer.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilities", Namespace="http://www.onvif.org/ver10/replay/wsdl")]
-    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetServiceCapabilitiesRequest()
         {
@@ -349,7 +349,7 @@ namespace SharpOnvifClient.Replay
     /// Returns the capabilities of the replay service. The result is returned in a typed answer.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilitiesResponse", Namespace="http://www.onvif.org/ver10/replay/wsdl")]
-    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private Capabilities capabilitiesField;
 
@@ -395,7 +395,7 @@ namespace SharpOnvifClient.Replay
     /// Changes the current configuration of the replay service. This operation is mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetReplayConfiguration", Namespace="http://www.onvif.org/ver10/replay/wsdl")]
-    public partial class SetReplayConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetReplayConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.ReplayConfiguration configurationField;
 
@@ -441,7 +441,7 @@ namespace SharpOnvifClient.Replay
     /// Changes the current configuration of the replay service. This operation is mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetReplayConfigurationResponse", Namespace="http://www.onvif.org/ver10/replay/wsdl")]
-    public partial class SetReplayConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetReplayConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetReplayConfigurationResponse()
         {
@@ -452,14 +452,14 @@ namespace SharpOnvifClient.Replay
     /// <summary>Constructs a contract named by an xsi:type attribute.</summary>
     internal static class XmlTypeFactory
     {
-        public static SharpOnvifCommon.Xml.OnvifContract Create(string ns, string name)
+        public static SharpOnvifCommon.Xml.XmlContract Create(string ns, string name)
         {
             return SharpOnvifCommon.Onvif.XmlTypeFactory.Create(ns, name);
         }
     }
 
     /// <summary>SOAP action URIs for this service's operations.</summary>
-    public static class OnvifActions
+    public static class SoapActions
     {
         public const string GetServiceCapabilities = "http://www.onvif.org/ver10/replay/wsdl/GetServiceCapabilities";
         public const string GetReplayUri = "http://www.onvif.org/ver10/replay/wsdl/GetReplayUri";

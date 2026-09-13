@@ -16,7 +16,7 @@ namespace SharpOnvifServer.Media2
     public abstract class Media2Base
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new Media2Dispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new Media2Dispatcher();
 
         /// <summary>
         /// Returns the capabilities of the media service. The result is returned in a typed answer.
@@ -1308,7 +1308,7 @@ namespace SharpOnvifServer.Media2
     }
 
     /// <summary>Routes SOAP actions to <see cref="Media2Base"/>.</summary>
-    internal sealed class Media2Dispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class Media2Dispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(Media2Base); } }
 
@@ -1316,65 +1316,65 @@ namespace SharpOnvifServer.Media2
         {
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
-                case OnvifActions.CreateProfile:
-                case OnvifActions.GetProfiles:
-                case OnvifActions.AddConfiguration:
-                case OnvifActions.RemoveConfiguration:
-                case OnvifActions.DeleteProfile:
-                case OnvifActions.GetVideoSourceConfigurations:
-                case OnvifActions.GetVideoEncoderConfigurations:
-                case OnvifActions.GetAudioSourceConfigurations:
-                case OnvifActions.GetAudioEncoderConfigurations:
-                case OnvifActions.GetAnalyticsConfigurations:
-                case OnvifActions.GetMetadataConfigurations:
-                case OnvifActions.GetAudioOutputConfigurations:
-                case OnvifActions.GetAudioDecoderConfigurations:
-                case OnvifActions.SetVideoSourceConfiguration:
-                case OnvifActions.SetVideoEncoderConfiguration:
-                case OnvifActions.SetAudioSourceConfiguration:
-                case OnvifActions.SetAudioEncoderConfiguration:
-                case OnvifActions.SetMetadataConfiguration:
-                case OnvifActions.SetAudioOutputConfiguration:
-                case OnvifActions.SetAudioDecoderConfiguration:
-                case OnvifActions.GetVideoSourceConfigurationOptions:
-                case OnvifActions.GetVideoEncoderConfigurationOptions:
-                case OnvifActions.GetAudioSourceConfigurationOptions:
-                case OnvifActions.GetAudioEncoderConfigurationOptions:
-                case OnvifActions.GetMetadataConfigurationOptions:
-                case OnvifActions.GetAudioOutputConfigurationOptions:
-                case OnvifActions.GetAudioDecoderConfigurationOptions:
-                case OnvifActions.SetEQPreset:
-                case OnvifActions.GetVideoEncoderInstances:
-                case OnvifActions.GetStreamUri:
-                case OnvifActions.StartMulticastStreaming:
-                case OnvifActions.StopMulticastStreaming:
-                case OnvifActions.SetSynchronizationPoint:
-                case OnvifActions.GetSnapshotUri:
-                case OnvifActions.GetVideoSourceModes:
-                case OnvifActions.SetVideoSourceMode:
-                case OnvifActions.GetOSDs:
-                case OnvifActions.GetOSDOptions:
-                case OnvifActions.SetOSD:
-                case OnvifActions.CreateOSD:
-                case OnvifActions.DeleteOSD:
-                case OnvifActions.GetMasks:
-                case OnvifActions.GetMaskOptions:
-                case OnvifActions.SetMask:
-                case OnvifActions.CreateMask:
-                case OnvifActions.DeleteMask:
-                case OnvifActions.GetWebRTCConfigurations:
-                case OnvifActions.SetWebRTCConfigurations:
-                case OnvifActions.GetAudioClips:
-                case OnvifActions.AddAudioClip:
-                case OnvifActions.AddTTSAudioClip:
-                case OnvifActions.SetAudioClip:
-                case OnvifActions.DeleteAudioClip:
-                case OnvifActions.PlayAudioClip:
-                case OnvifActions.GetPlayingAudioClips:
-                case OnvifActions.GetMulticastAudioDecoderConfigurations:
-                case OnvifActions.GetMulticastAudioDecoderConfigurationOptions:
-                case OnvifActions.SetMulticastAudioDecoderConfiguration:
+                case SoapActions.GetServiceCapabilities:
+                case SoapActions.CreateProfile:
+                case SoapActions.GetProfiles:
+                case SoapActions.AddConfiguration:
+                case SoapActions.RemoveConfiguration:
+                case SoapActions.DeleteProfile:
+                case SoapActions.GetVideoSourceConfigurations:
+                case SoapActions.GetVideoEncoderConfigurations:
+                case SoapActions.GetAudioSourceConfigurations:
+                case SoapActions.GetAudioEncoderConfigurations:
+                case SoapActions.GetAnalyticsConfigurations:
+                case SoapActions.GetMetadataConfigurations:
+                case SoapActions.GetAudioOutputConfigurations:
+                case SoapActions.GetAudioDecoderConfigurations:
+                case SoapActions.SetVideoSourceConfiguration:
+                case SoapActions.SetVideoEncoderConfiguration:
+                case SoapActions.SetAudioSourceConfiguration:
+                case SoapActions.SetAudioEncoderConfiguration:
+                case SoapActions.SetMetadataConfiguration:
+                case SoapActions.SetAudioOutputConfiguration:
+                case SoapActions.SetAudioDecoderConfiguration:
+                case SoapActions.GetVideoSourceConfigurationOptions:
+                case SoapActions.GetVideoEncoderConfigurationOptions:
+                case SoapActions.GetAudioSourceConfigurationOptions:
+                case SoapActions.GetAudioEncoderConfigurationOptions:
+                case SoapActions.GetMetadataConfigurationOptions:
+                case SoapActions.GetAudioOutputConfigurationOptions:
+                case SoapActions.GetAudioDecoderConfigurationOptions:
+                case SoapActions.SetEQPreset:
+                case SoapActions.GetVideoEncoderInstances:
+                case SoapActions.GetStreamUri:
+                case SoapActions.StartMulticastStreaming:
+                case SoapActions.StopMulticastStreaming:
+                case SoapActions.SetSynchronizationPoint:
+                case SoapActions.GetSnapshotUri:
+                case SoapActions.GetVideoSourceModes:
+                case SoapActions.SetVideoSourceMode:
+                case SoapActions.GetOSDs:
+                case SoapActions.GetOSDOptions:
+                case SoapActions.SetOSD:
+                case SoapActions.CreateOSD:
+                case SoapActions.DeleteOSD:
+                case SoapActions.GetMasks:
+                case SoapActions.GetMaskOptions:
+                case SoapActions.SetMask:
+                case SoapActions.CreateMask:
+                case SoapActions.DeleteMask:
+                case SoapActions.GetWebRTCConfigurations:
+                case SoapActions.SetWebRTCConfigurations:
+                case SoapActions.GetAudioClips:
+                case SoapActions.AddAudioClip:
+                case SoapActions.AddTTSAudioClip:
+                case SoapActions.SetAudioClip:
+                case SoapActions.DeleteAudioClip:
+                case SoapActions.PlayAudioClip:
+                case SoapActions.GetPlayingAudioClips:
+                case SoapActions.GetMulticastAudioDecoderConfigurations:
+                case SoapActions.GetMulticastAudioDecoderConfigurationOptions:
+                case SoapActions.SetMulticastAudioDecoderConfiguration:
                     return true;
                 default:
                     return false;
@@ -1388,413 +1388,413 @@ namespace SharpOnvifServer.Media2
                 case "GetServiceCapabilities":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.GetServiceCapabilities;
+                        action = SoapActions.GetServiceCapabilities;
                         return true;
                     }
                     break;
                 case "CreateProfile":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.CreateProfile;
+                        action = SoapActions.CreateProfile;
                         return true;
                     }
                     break;
                 case "GetProfiles":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.GetProfiles;
+                        action = SoapActions.GetProfiles;
                         return true;
                     }
                     break;
                 case "AddConfiguration":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.AddConfiguration;
+                        action = SoapActions.AddConfiguration;
                         return true;
                     }
                     break;
                 case "RemoveConfiguration":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.RemoveConfiguration;
+                        action = SoapActions.RemoveConfiguration;
                         return true;
                     }
                     break;
                 case "DeleteProfile":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.DeleteProfile;
+                        action = SoapActions.DeleteProfile;
                         return true;
                     }
                     break;
                 case "GetVideoSourceConfigurations":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.GetVideoSourceConfigurations;
+                        action = SoapActions.GetVideoSourceConfigurations;
                         return true;
                     }
                     break;
                 case "GetVideoEncoderConfigurations":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.GetVideoEncoderConfigurations;
+                        action = SoapActions.GetVideoEncoderConfigurations;
                         return true;
                     }
                     break;
                 case "GetAudioSourceConfigurations":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.GetAudioSourceConfigurations;
+                        action = SoapActions.GetAudioSourceConfigurations;
                         return true;
                     }
                     break;
                 case "GetAudioEncoderConfigurations":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.GetAudioEncoderConfigurations;
+                        action = SoapActions.GetAudioEncoderConfigurations;
                         return true;
                     }
                     break;
                 case "GetAnalyticsConfigurations":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.GetAnalyticsConfigurations;
+                        action = SoapActions.GetAnalyticsConfigurations;
                         return true;
                     }
                     break;
                 case "GetMetadataConfigurations":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.GetMetadataConfigurations;
+                        action = SoapActions.GetMetadataConfigurations;
                         return true;
                     }
                     break;
                 case "GetAudioOutputConfigurations":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.GetAudioOutputConfigurations;
+                        action = SoapActions.GetAudioOutputConfigurations;
                         return true;
                     }
                     break;
                 case "GetAudioDecoderConfigurations":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.GetAudioDecoderConfigurations;
+                        action = SoapActions.GetAudioDecoderConfigurations;
                         return true;
                     }
                     break;
                 case "SetVideoSourceConfiguration":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.SetVideoSourceConfiguration;
+                        action = SoapActions.SetVideoSourceConfiguration;
                         return true;
                     }
                     break;
                 case "SetVideoEncoderConfiguration":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.SetVideoEncoderConfiguration;
+                        action = SoapActions.SetVideoEncoderConfiguration;
                         return true;
                     }
                     break;
                 case "SetAudioSourceConfiguration":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.SetAudioSourceConfiguration;
+                        action = SoapActions.SetAudioSourceConfiguration;
                         return true;
                     }
                     break;
                 case "SetAudioEncoderConfiguration":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.SetAudioEncoderConfiguration;
+                        action = SoapActions.SetAudioEncoderConfiguration;
                         return true;
                     }
                     break;
                 case "SetMetadataConfiguration":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.SetMetadataConfiguration;
+                        action = SoapActions.SetMetadataConfiguration;
                         return true;
                     }
                     break;
                 case "SetAudioOutputConfiguration":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.SetAudioOutputConfiguration;
+                        action = SoapActions.SetAudioOutputConfiguration;
                         return true;
                     }
                     break;
                 case "SetAudioDecoderConfiguration":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.SetAudioDecoderConfiguration;
+                        action = SoapActions.SetAudioDecoderConfiguration;
                         return true;
                     }
                     break;
                 case "GetVideoSourceConfigurationOptions":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.GetVideoSourceConfigurationOptions;
+                        action = SoapActions.GetVideoSourceConfigurationOptions;
                         return true;
                     }
                     break;
                 case "GetVideoEncoderConfigurationOptions":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.GetVideoEncoderConfigurationOptions;
+                        action = SoapActions.GetVideoEncoderConfigurationOptions;
                         return true;
                     }
                     break;
                 case "GetAudioSourceConfigurationOptions":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.GetAudioSourceConfigurationOptions;
+                        action = SoapActions.GetAudioSourceConfigurationOptions;
                         return true;
                     }
                     break;
                 case "GetAudioEncoderConfigurationOptions":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.GetAudioEncoderConfigurationOptions;
+                        action = SoapActions.GetAudioEncoderConfigurationOptions;
                         return true;
                     }
                     break;
                 case "GetMetadataConfigurationOptions":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.GetMetadataConfigurationOptions;
+                        action = SoapActions.GetMetadataConfigurationOptions;
                         return true;
                     }
                     break;
                 case "GetAudioOutputConfigurationOptions":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.GetAudioOutputConfigurationOptions;
+                        action = SoapActions.GetAudioOutputConfigurationOptions;
                         return true;
                     }
                     break;
                 case "GetAudioDecoderConfigurationOptions":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.GetAudioDecoderConfigurationOptions;
+                        action = SoapActions.GetAudioDecoderConfigurationOptions;
                         return true;
                     }
                     break;
                 case "SetEQPresetConfiguration":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.SetEQPreset;
+                        action = SoapActions.SetEQPreset;
                         return true;
                     }
                     break;
                 case "GetVideoEncoderInstances":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.GetVideoEncoderInstances;
+                        action = SoapActions.GetVideoEncoderInstances;
                         return true;
                     }
                     break;
                 case "GetStreamUri":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.GetStreamUri;
+                        action = SoapActions.GetStreamUri;
                         return true;
                     }
                     break;
                 case "StartMulticastStreaming":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.StartMulticastStreaming;
+                        action = SoapActions.StartMulticastStreaming;
                         return true;
                     }
                     break;
                 case "StopMulticastStreaming":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.StopMulticastStreaming;
+                        action = SoapActions.StopMulticastStreaming;
                         return true;
                     }
                     break;
                 case "SetSynchronizationPoint":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.SetSynchronizationPoint;
+                        action = SoapActions.SetSynchronizationPoint;
                         return true;
                     }
                     break;
                 case "GetSnapshotUri":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.GetSnapshotUri;
+                        action = SoapActions.GetSnapshotUri;
                         return true;
                     }
                     break;
                 case "GetVideoSourceModes":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.GetVideoSourceModes;
+                        action = SoapActions.GetVideoSourceModes;
                         return true;
                     }
                     break;
                 case "SetVideoSourceMode":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.SetVideoSourceMode;
+                        action = SoapActions.SetVideoSourceMode;
                         return true;
                     }
                     break;
                 case "GetOSDs":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.GetOSDs;
+                        action = SoapActions.GetOSDs;
                         return true;
                     }
                     break;
                 case "GetOSDOptions":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.GetOSDOptions;
+                        action = SoapActions.GetOSDOptions;
                         return true;
                     }
                     break;
                 case "SetOSD":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.SetOSD;
+                        action = SoapActions.SetOSD;
                         return true;
                     }
                     break;
                 case "CreateOSD":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.CreateOSD;
+                        action = SoapActions.CreateOSD;
                         return true;
                     }
                     break;
                 case "DeleteOSD":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.DeleteOSD;
+                        action = SoapActions.DeleteOSD;
                         return true;
                     }
                     break;
                 case "GetMasks":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.GetMasks;
+                        action = SoapActions.GetMasks;
                         return true;
                     }
                     break;
                 case "GetMaskOptions":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.GetMaskOptions;
+                        action = SoapActions.GetMaskOptions;
                         return true;
                     }
                     break;
                 case "SetMask":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.SetMask;
+                        action = SoapActions.SetMask;
                         return true;
                     }
                     break;
                 case "CreateMask":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.CreateMask;
+                        action = SoapActions.CreateMask;
                         return true;
                     }
                     break;
                 case "DeleteMask":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.DeleteMask;
+                        action = SoapActions.DeleteMask;
                         return true;
                     }
                     break;
                 case "GetWebRTCConfigurations":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.GetWebRTCConfigurations;
+                        action = SoapActions.GetWebRTCConfigurations;
                         return true;
                     }
                     break;
                 case "SetWebRTCConfigurations":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.SetWebRTCConfigurations;
+                        action = SoapActions.SetWebRTCConfigurations;
                         return true;
                     }
                     break;
                 case "GetAudioClips":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.GetAudioClips;
+                        action = SoapActions.GetAudioClips;
                         return true;
                     }
                     break;
                 case "AddAudioClip":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.AddAudioClip;
+                        action = SoapActions.AddAudioClip;
                         return true;
                     }
                     break;
                 case "AddTTSAudioClip":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.AddTTSAudioClip;
+                        action = SoapActions.AddTTSAudioClip;
                         return true;
                     }
                     break;
                 case "SetAudioClip":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.SetAudioClip;
+                        action = SoapActions.SetAudioClip;
                         return true;
                     }
                     break;
                 case "DeleteAudioClip":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.DeleteAudioClip;
+                        action = SoapActions.DeleteAudioClip;
                         return true;
                     }
                     break;
                 case "PlayAudioClip":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.PlayAudioClip;
+                        action = SoapActions.PlayAudioClip;
                         return true;
                     }
                     break;
                 case "GetPlayingAudioClips":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.GetPlayingAudioClips;
+                        action = SoapActions.GetPlayingAudioClips;
                         return true;
                     }
                     break;
                 case "GetMulticastAudioDecoderConfigurations":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.GetMulticastAudioDecoderConfigurations;
+                        action = SoapActions.GetMulticastAudioDecoderConfigurations;
                         return true;
                     }
                     break;
                 case "GetMulticastAudioDecoderConfigurationOptions":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.GetMulticastAudioDecoderConfigurationOptions;
+                        action = SoapActions.GetMulticastAudioDecoderConfigurationOptions;
                         return true;
                     }
                     break;
                 case "SetMulticastAudioDecoderConfiguration":
                     if (ns == "http://www.onvif.org/ver20/media/wsdl")
                     {
-                        action = OnvifActions.SetMulticastAudioDecoderConfiguration;
+                        action = SoapActions.SetMulticastAudioDecoderConfiguration;
                         return true;
                     }
                     break;
@@ -1803,7 +1803,7 @@ namespace SharpOnvifServer.Media2
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             Media2Base target = (Media2Base)service;
@@ -1811,425 +1811,425 @@ namespace SharpOnvifServer.Media2
 
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
+                case SoapActions.GetServiceCapabilities:
                 {
                     var request = new GetServiceCapabilitiesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetServiceCapabilitiesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetServiceCapabilitiesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetServiceCapabilitiesResponse");
                 }
-                case OnvifActions.CreateProfile:
+                case SoapActions.CreateProfile:
                 {
                     var request = new CreateProfileRequest();
                     reader.ReadInto(request);
                     var response = await target.CreateProfileAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "CreateProfileResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "CreateProfileResponse");
                 }
-                case OnvifActions.GetProfiles:
+                case SoapActions.GetProfiles:
                 {
                     var request = new GetProfilesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetProfilesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetProfilesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetProfilesResponse");
                 }
-                case OnvifActions.AddConfiguration:
+                case SoapActions.AddConfiguration:
                 {
                     var request = new AddConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.AddConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "AddConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "AddConfigurationResponse");
                 }
-                case OnvifActions.RemoveConfiguration:
+                case SoapActions.RemoveConfiguration:
                 {
                     var request = new RemoveConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.RemoveConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "RemoveConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "RemoveConfigurationResponse");
                 }
-                case OnvifActions.DeleteProfile:
+                case SoapActions.DeleteProfile:
                 {
                     var request = new DeleteProfileRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteProfileAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "DeleteProfileResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "DeleteProfileResponse");
                 }
-                case OnvifActions.GetVideoSourceConfigurations:
+                case SoapActions.GetVideoSourceConfigurations:
                 {
                     var request = new GetVideoSourceConfigurationsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetVideoSourceConfigurationsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetVideoSourceConfigurationsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetVideoSourceConfigurationsResponse");
                 }
-                case OnvifActions.GetVideoEncoderConfigurations:
+                case SoapActions.GetVideoEncoderConfigurations:
                 {
                     var request = new GetVideoEncoderConfigurationsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetVideoEncoderConfigurationsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetVideoEncoderConfigurationsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetVideoEncoderConfigurationsResponse");
                 }
-                case OnvifActions.GetAudioSourceConfigurations:
+                case SoapActions.GetAudioSourceConfigurations:
                 {
                     var request = new GetAudioSourceConfigurationsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAudioSourceConfigurationsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetAudioSourceConfigurationsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetAudioSourceConfigurationsResponse");
                 }
-                case OnvifActions.GetAudioEncoderConfigurations:
+                case SoapActions.GetAudioEncoderConfigurations:
                 {
                     var request = new GetAudioEncoderConfigurationsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAudioEncoderConfigurationsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetAudioEncoderConfigurationsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetAudioEncoderConfigurationsResponse");
                 }
-                case OnvifActions.GetAnalyticsConfigurations:
+                case SoapActions.GetAnalyticsConfigurations:
                 {
                     var request = new GetAnalyticsConfigurationsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAnalyticsConfigurationsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetAnalyticsConfigurationsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetAnalyticsConfigurationsResponse");
                 }
-                case OnvifActions.GetMetadataConfigurations:
+                case SoapActions.GetMetadataConfigurations:
                 {
                     var request = new GetMetadataConfigurationsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetMetadataConfigurationsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetMetadataConfigurationsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetMetadataConfigurationsResponse");
                 }
-                case OnvifActions.GetAudioOutputConfigurations:
+                case SoapActions.GetAudioOutputConfigurations:
                 {
                     var request = new GetAudioOutputConfigurationsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAudioOutputConfigurationsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetAudioOutputConfigurationsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetAudioOutputConfigurationsResponse");
                 }
-                case OnvifActions.GetAudioDecoderConfigurations:
+                case SoapActions.GetAudioDecoderConfigurations:
                 {
                     var request = new GetAudioDecoderConfigurationsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAudioDecoderConfigurationsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetAudioDecoderConfigurationsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetAudioDecoderConfigurationsResponse");
                 }
-                case OnvifActions.SetVideoSourceConfiguration:
+                case SoapActions.SetVideoSourceConfiguration:
                 {
                     var request = new SetVideoSourceConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.SetVideoSourceConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "SetVideoSourceConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "SetVideoSourceConfigurationResponse");
                 }
-                case OnvifActions.SetVideoEncoderConfiguration:
+                case SoapActions.SetVideoEncoderConfiguration:
                 {
                     var request = new SetVideoEncoderConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.SetVideoEncoderConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "SetVideoEncoderConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "SetVideoEncoderConfigurationResponse");
                 }
-                case OnvifActions.SetAudioSourceConfiguration:
+                case SoapActions.SetAudioSourceConfiguration:
                 {
                     var request = new SetAudioSourceConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.SetAudioSourceConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "SetAudioSourceConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "SetAudioSourceConfigurationResponse");
                 }
-                case OnvifActions.SetAudioEncoderConfiguration:
+                case SoapActions.SetAudioEncoderConfiguration:
                 {
                     var request = new SetAudioEncoderConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.SetAudioEncoderConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "SetAudioEncoderConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "SetAudioEncoderConfigurationResponse");
                 }
-                case OnvifActions.SetMetadataConfiguration:
+                case SoapActions.SetMetadataConfiguration:
                 {
                     var request = new SetMetadataConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.SetMetadataConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "SetMetadataConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "SetMetadataConfigurationResponse");
                 }
-                case OnvifActions.SetAudioOutputConfiguration:
+                case SoapActions.SetAudioOutputConfiguration:
                 {
                     var request = new SetAudioOutputConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.SetAudioOutputConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "SetAudioOutputConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "SetAudioOutputConfigurationResponse");
                 }
-                case OnvifActions.SetAudioDecoderConfiguration:
+                case SoapActions.SetAudioDecoderConfiguration:
                 {
                     var request = new SetAudioDecoderConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.SetAudioDecoderConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "SetAudioDecoderConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "SetAudioDecoderConfigurationResponse");
                 }
-                case OnvifActions.GetVideoSourceConfigurationOptions:
+                case SoapActions.GetVideoSourceConfigurationOptions:
                 {
                     var request = new GetVideoSourceConfigurationOptionsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetVideoSourceConfigurationOptionsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetVideoSourceConfigurationOptionsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetVideoSourceConfigurationOptionsResponse");
                 }
-                case OnvifActions.GetVideoEncoderConfigurationOptions:
+                case SoapActions.GetVideoEncoderConfigurationOptions:
                 {
                     var request = new GetVideoEncoderConfigurationOptionsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetVideoEncoderConfigurationOptionsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetVideoEncoderConfigurationOptionsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetVideoEncoderConfigurationOptionsResponse");
                 }
-                case OnvifActions.GetAudioSourceConfigurationOptions:
+                case SoapActions.GetAudioSourceConfigurationOptions:
                 {
                     var request = new GetAudioSourceConfigurationOptionsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAudioSourceConfigurationOptionsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetAudioSourceConfigurationOptionsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetAudioSourceConfigurationOptionsResponse");
                 }
-                case OnvifActions.GetAudioEncoderConfigurationOptions:
+                case SoapActions.GetAudioEncoderConfigurationOptions:
                 {
                     var request = new GetAudioEncoderConfigurationOptionsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAudioEncoderConfigurationOptionsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetAudioEncoderConfigurationOptionsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetAudioEncoderConfigurationOptionsResponse");
                 }
-                case OnvifActions.GetMetadataConfigurationOptions:
+                case SoapActions.GetMetadataConfigurationOptions:
                 {
                     var request = new GetMetadataConfigurationOptionsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetMetadataConfigurationOptionsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetMetadataConfigurationOptionsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetMetadataConfigurationOptionsResponse");
                 }
-                case OnvifActions.GetAudioOutputConfigurationOptions:
+                case SoapActions.GetAudioOutputConfigurationOptions:
                 {
                     var request = new GetAudioOutputConfigurationOptionsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAudioOutputConfigurationOptionsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetAudioOutputConfigurationOptionsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetAudioOutputConfigurationOptionsResponse");
                 }
-                case OnvifActions.GetAudioDecoderConfigurationOptions:
+                case SoapActions.GetAudioDecoderConfigurationOptions:
                 {
                     var request = new GetAudioDecoderConfigurationOptionsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAudioDecoderConfigurationOptionsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetAudioDecoderConfigurationOptionsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetAudioDecoderConfigurationOptionsResponse");
                 }
-                case OnvifActions.SetEQPreset:
+                case SoapActions.SetEQPreset:
                 {
                     var request = new SetEQPresetRequest();
                     reader.ReadInto(request);
                     var response = await target.SetEQPresetAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "SetEQPresetConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "SetEQPresetConfigurationResponse");
                 }
-                case OnvifActions.GetVideoEncoderInstances:
+                case SoapActions.GetVideoEncoderInstances:
                 {
                     var request = new GetVideoEncoderInstancesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetVideoEncoderInstancesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetVideoEncoderInstancesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetVideoEncoderInstancesResponse");
                 }
-                case OnvifActions.GetStreamUri:
+                case SoapActions.GetStreamUri:
                 {
                     var request = new GetStreamUriRequest();
                     reader.ReadInto(request);
                     var response = await target.GetStreamUriAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetStreamUriResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetStreamUriResponse");
                 }
-                case OnvifActions.StartMulticastStreaming:
+                case SoapActions.StartMulticastStreaming:
                 {
                     var request = new StartMulticastStreamingRequest();
                     reader.ReadInto(request);
                     var response = await target.StartMulticastStreamingAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "StartMulticastStreamingResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "StartMulticastStreamingResponse");
                 }
-                case OnvifActions.StopMulticastStreaming:
+                case SoapActions.StopMulticastStreaming:
                 {
                     var request = new StopMulticastStreamingRequest();
                     reader.ReadInto(request);
                     var response = await target.StopMulticastStreamingAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "StopMulticastStreamingResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "StopMulticastStreamingResponse");
                 }
-                case OnvifActions.SetSynchronizationPoint:
+                case SoapActions.SetSynchronizationPoint:
                 {
                     var request = new SetSynchronizationPointRequest();
                     reader.ReadInto(request);
                     var response = await target.SetSynchronizationPointAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "SetSynchronizationPointResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "SetSynchronizationPointResponse");
                 }
-                case OnvifActions.GetSnapshotUri:
+                case SoapActions.GetSnapshotUri:
                 {
                     var request = new GetSnapshotUriRequest();
                     reader.ReadInto(request);
                     var response = await target.GetSnapshotUriAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetSnapshotUriResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetSnapshotUriResponse");
                 }
-                case OnvifActions.GetVideoSourceModes:
+                case SoapActions.GetVideoSourceModes:
                 {
                     var request = new GetVideoSourceModesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetVideoSourceModesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetVideoSourceModesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetVideoSourceModesResponse");
                 }
-                case OnvifActions.SetVideoSourceMode:
+                case SoapActions.SetVideoSourceMode:
                 {
                     var request = new SetVideoSourceModeRequest();
                     reader.ReadInto(request);
                     var response = await target.SetVideoSourceModeAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "SetVideoSourceModeResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "SetVideoSourceModeResponse");
                 }
-                case OnvifActions.GetOSDs:
+                case SoapActions.GetOSDs:
                 {
                     var request = new GetOSDsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetOSDsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetOSDsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetOSDsResponse");
                 }
-                case OnvifActions.GetOSDOptions:
+                case SoapActions.GetOSDOptions:
                 {
                     var request = new GetOSDOptionsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetOSDOptionsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetOSDOptionsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetOSDOptionsResponse");
                 }
-                case OnvifActions.SetOSD:
+                case SoapActions.SetOSD:
                 {
                     var request = new SetOSDRequest();
                     reader.ReadInto(request);
                     var response = await target.SetOSDAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "SetOSDResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "SetOSDResponse");
                 }
-                case OnvifActions.CreateOSD:
+                case SoapActions.CreateOSD:
                 {
                     var request = new CreateOSDRequest();
                     reader.ReadInto(request);
                     var response = await target.CreateOSDAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "CreateOSDResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "CreateOSDResponse");
                 }
-                case OnvifActions.DeleteOSD:
+                case SoapActions.DeleteOSD:
                 {
                     var request = new DeleteOSDRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteOSDAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "DeleteOSDResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "DeleteOSDResponse");
                 }
-                case OnvifActions.GetMasks:
+                case SoapActions.GetMasks:
                 {
                     var request = new GetMasksRequest();
                     reader.ReadInto(request);
                     var response = await target.GetMasksAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetMasksResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetMasksResponse");
                 }
-                case OnvifActions.GetMaskOptions:
+                case SoapActions.GetMaskOptions:
                 {
                     var request = new GetMaskOptionsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetMaskOptionsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetMaskOptionsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetMaskOptionsResponse");
                 }
-                case OnvifActions.SetMask:
+                case SoapActions.SetMask:
                 {
                     var request = new SetMaskRequest();
                     reader.ReadInto(request);
                     var response = await target.SetMaskAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "SetMaskResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "SetMaskResponse");
                 }
-                case OnvifActions.CreateMask:
+                case SoapActions.CreateMask:
                 {
                     var request = new CreateMaskRequest();
                     reader.ReadInto(request);
                     var response = await target.CreateMaskAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "CreateMaskResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "CreateMaskResponse");
                 }
-                case OnvifActions.DeleteMask:
+                case SoapActions.DeleteMask:
                 {
                     var request = new DeleteMaskRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteMaskAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "DeleteMaskResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "DeleteMaskResponse");
                 }
-                case OnvifActions.GetWebRTCConfigurations:
+                case SoapActions.GetWebRTCConfigurations:
                 {
                     var request = new GetWebRTCConfigurationsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetWebRTCConfigurationsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetWebRTCConfigurationsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetWebRTCConfigurationsResponse");
                 }
-                case OnvifActions.SetWebRTCConfigurations:
+                case SoapActions.SetWebRTCConfigurations:
                 {
                     var request = new SetWebRTCConfigurationsRequest();
                     reader.ReadInto(request);
                     var response = await target.SetWebRTCConfigurationsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "SetWebRTCConfigurationsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "SetWebRTCConfigurationsResponse");
                 }
-                case OnvifActions.GetAudioClips:
+                case SoapActions.GetAudioClips:
                 {
                     var request = new GetAudioClipsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAudioClipsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetAudioClipsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetAudioClipsResponse");
                 }
-                case OnvifActions.AddAudioClip:
+                case SoapActions.AddAudioClip:
                 {
                     var request = new AddAudioClipRequest();
                     reader.ReadInto(request);
                     var response = await target.AddAudioClipAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "AddAudioClipResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "AddAudioClipResponse");
                 }
-                case OnvifActions.AddTTSAudioClip:
+                case SoapActions.AddTTSAudioClip:
                 {
                     var request = new AddTTSAudioClipRequest();
                     reader.ReadInto(request);
                     var response = await target.AddTTSAudioClipAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "AddTTSAudioClipResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "AddTTSAudioClipResponse");
                 }
-                case OnvifActions.SetAudioClip:
+                case SoapActions.SetAudioClip:
                 {
                     var request = new SetAudioClipRequest();
                     reader.ReadInto(request);
                     var response = await target.SetAudioClipAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "SetAudioClipResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "SetAudioClipResponse");
                 }
-                case OnvifActions.DeleteAudioClip:
+                case SoapActions.DeleteAudioClip:
                 {
                     var request = new DeleteAudioClipRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteAudioClipAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "DeleteAudioClipResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "DeleteAudioClipResponse");
                 }
-                case OnvifActions.PlayAudioClip:
+                case SoapActions.PlayAudioClip:
                 {
                     var request = new PlayAudioClipRequest();
                     reader.ReadInto(request);
                     var response = await target.PlayAudioClipAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "PlayAudioClipResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "PlayAudioClipResponse");
                 }
-                case OnvifActions.GetPlayingAudioClips:
+                case SoapActions.GetPlayingAudioClips:
                 {
                     var request = new GetPlayingAudioClipsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetPlayingAudioClipsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetPlayingAudioClipsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetPlayingAudioClipsResponse");
                 }
-                case OnvifActions.GetMulticastAudioDecoderConfigurations:
+                case SoapActions.GetMulticastAudioDecoderConfigurations:
                 {
                     var request = new GetMulticastAudioDecoderConfigurationsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetMulticastAudioDecoderConfigurationsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetMulticastAudioDecoderConfigurationsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetMulticastAudioDecoderConfigurationsResponse");
                 }
-                case OnvifActions.GetMulticastAudioDecoderConfigurationOptions:
+                case SoapActions.GetMulticastAudioDecoderConfigurationOptions:
                 {
                     var request = new GetMulticastAudioDecoderConfigurationOptionsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetMulticastAudioDecoderConfigurationOptionsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetMulticastAudioDecoderConfigurationOptionsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "GetMulticastAudioDecoderConfigurationOptionsResponse");
                 }
-                case OnvifActions.SetMulticastAudioDecoderConfiguration:
+                case SoapActions.SetMulticastAudioDecoderConfiguration:
                 {
                     var request = new SetMulticastAudioDecoderConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.SetMulticastAudioDecoderConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "SetMulticastAudioDecoderConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/media/wsdl", "SetMulticastAudioDecoderConfigurationResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }

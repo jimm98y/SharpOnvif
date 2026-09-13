@@ -16,7 +16,7 @@ namespace SharpOnvifServer.DoorControl
     public abstract class DoorControlPortBase
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new DoorControlPortDispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new DoorControlPortDispatcher();
 
         /// <summary>
         /// This operation returns the capabilities of the service. An ONVIF compliant device which provides the
@@ -479,7 +479,7 @@ namespace SharpOnvifServer.DoorControl
     }
 
     /// <summary>Routes SOAP actions to <see cref="DoorControlPortBase"/>.</summary>
-    internal sealed class DoorControlPortDispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class DoorControlPortDispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(DoorControlPortBase); } }
 
@@ -487,25 +487,25 @@ namespace SharpOnvifServer.DoorControl
         {
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
-                case OnvifActions.GetDoorInfoList:
-                case OnvifActions.GetDoorInfo:
-                case OnvifActions.GetDoorList:
-                case OnvifActions.GetDoors:
-                case OnvifActions.CreateDoor:
-                case OnvifActions.SetDoor:
-                case OnvifActions.ModifyDoor:
-                case OnvifActions.DeleteDoor:
-                case OnvifActions.GetDoorState:
-                case OnvifActions.AccessDoor:
-                case OnvifActions.LockDoor:
-                case OnvifActions.UnlockDoor:
-                case OnvifActions.BlockDoor:
-                case OnvifActions.LockDownDoor:
-                case OnvifActions.LockDownReleaseDoor:
-                case OnvifActions.LockOpenDoor:
-                case OnvifActions.LockOpenReleaseDoor:
-                case OnvifActions.DoubleLockDoor:
+                case SoapActions.GetServiceCapabilities:
+                case SoapActions.GetDoorInfoList:
+                case SoapActions.GetDoorInfo:
+                case SoapActions.GetDoorList:
+                case SoapActions.GetDoors:
+                case SoapActions.CreateDoor:
+                case SoapActions.SetDoor:
+                case SoapActions.ModifyDoor:
+                case SoapActions.DeleteDoor:
+                case SoapActions.GetDoorState:
+                case SoapActions.AccessDoor:
+                case SoapActions.LockDoor:
+                case SoapActions.UnlockDoor:
+                case SoapActions.BlockDoor:
+                case SoapActions.LockDownDoor:
+                case SoapActions.LockDownReleaseDoor:
+                case SoapActions.LockOpenDoor:
+                case SoapActions.LockOpenReleaseDoor:
+                case SoapActions.DoubleLockDoor:
                     return true;
                 default:
                     return false;
@@ -519,133 +519,133 @@ namespace SharpOnvifServer.DoorControl
                 case "GetServiceCapabilities":
                     if (ns == "http://www.onvif.org/ver10/doorcontrol/wsdl")
                     {
-                        action = OnvifActions.GetServiceCapabilities;
+                        action = SoapActions.GetServiceCapabilities;
                         return true;
                     }
                     break;
                 case "GetDoorInfoList":
                     if (ns == "http://www.onvif.org/ver10/doorcontrol/wsdl")
                     {
-                        action = OnvifActions.GetDoorInfoList;
+                        action = SoapActions.GetDoorInfoList;
                         return true;
                     }
                     break;
                 case "GetDoorInfo":
                     if (ns == "http://www.onvif.org/ver10/doorcontrol/wsdl")
                     {
-                        action = OnvifActions.GetDoorInfo;
+                        action = SoapActions.GetDoorInfo;
                         return true;
                     }
                     break;
                 case "GetDoorList":
                     if (ns == "http://www.onvif.org/ver10/doorcontrol/wsdl")
                     {
-                        action = OnvifActions.GetDoorList;
+                        action = SoapActions.GetDoorList;
                         return true;
                     }
                     break;
                 case "GetDoors":
                     if (ns == "http://www.onvif.org/ver10/doorcontrol/wsdl")
                     {
-                        action = OnvifActions.GetDoors;
+                        action = SoapActions.GetDoors;
                         return true;
                     }
                     break;
                 case "CreateDoor":
                     if (ns == "http://www.onvif.org/ver10/doorcontrol/wsdl")
                     {
-                        action = OnvifActions.CreateDoor;
+                        action = SoapActions.CreateDoor;
                         return true;
                     }
                     break;
                 case "SetDoor":
                     if (ns == "http://www.onvif.org/ver10/doorcontrol/wsdl")
                     {
-                        action = OnvifActions.SetDoor;
+                        action = SoapActions.SetDoor;
                         return true;
                     }
                     break;
                 case "ModifyDoor":
                     if (ns == "http://www.onvif.org/ver10/doorcontrol/wsdl")
                     {
-                        action = OnvifActions.ModifyDoor;
+                        action = SoapActions.ModifyDoor;
                         return true;
                     }
                     break;
                 case "DeleteDoor":
                     if (ns == "http://www.onvif.org/ver10/doorcontrol/wsdl")
                     {
-                        action = OnvifActions.DeleteDoor;
+                        action = SoapActions.DeleteDoor;
                         return true;
                     }
                     break;
                 case "GetDoorState":
                     if (ns == "http://www.onvif.org/ver10/doorcontrol/wsdl")
                     {
-                        action = OnvifActions.GetDoorState;
+                        action = SoapActions.GetDoorState;
                         return true;
                     }
                     break;
                 case "AccessDoor":
                     if (ns == "http://www.onvif.org/ver10/doorcontrol/wsdl")
                     {
-                        action = OnvifActions.AccessDoor;
+                        action = SoapActions.AccessDoor;
                         return true;
                     }
                     break;
                 case "LockDoor":
                     if (ns == "http://www.onvif.org/ver10/doorcontrol/wsdl")
                     {
-                        action = OnvifActions.LockDoor;
+                        action = SoapActions.LockDoor;
                         return true;
                     }
                     break;
                 case "UnlockDoor":
                     if (ns == "http://www.onvif.org/ver10/doorcontrol/wsdl")
                     {
-                        action = OnvifActions.UnlockDoor;
+                        action = SoapActions.UnlockDoor;
                         return true;
                     }
                     break;
                 case "BlockDoor":
                     if (ns == "http://www.onvif.org/ver10/doorcontrol/wsdl")
                     {
-                        action = OnvifActions.BlockDoor;
+                        action = SoapActions.BlockDoor;
                         return true;
                     }
                     break;
                 case "LockDownDoor":
                     if (ns == "http://www.onvif.org/ver10/doorcontrol/wsdl")
                     {
-                        action = OnvifActions.LockDownDoor;
+                        action = SoapActions.LockDownDoor;
                         return true;
                     }
                     break;
                 case "LockDownReleaseDoor":
                     if (ns == "http://www.onvif.org/ver10/doorcontrol/wsdl")
                     {
-                        action = OnvifActions.LockDownReleaseDoor;
+                        action = SoapActions.LockDownReleaseDoor;
                         return true;
                     }
                     break;
                 case "LockOpenDoor":
                     if (ns == "http://www.onvif.org/ver10/doorcontrol/wsdl")
                     {
-                        action = OnvifActions.LockOpenDoor;
+                        action = SoapActions.LockOpenDoor;
                         return true;
                     }
                     break;
                 case "LockOpenReleaseDoor":
                     if (ns == "http://www.onvif.org/ver10/doorcontrol/wsdl")
                     {
-                        action = OnvifActions.LockOpenReleaseDoor;
+                        action = SoapActions.LockOpenReleaseDoor;
                         return true;
                     }
                     break;
                 case "DoubleLockDoor":
                     if (ns == "http://www.onvif.org/ver10/doorcontrol/wsdl")
                     {
-                        action = OnvifActions.DoubleLockDoor;
+                        action = SoapActions.DoubleLockDoor;
                         return true;
                     }
                     break;
@@ -654,7 +654,7 @@ namespace SharpOnvifServer.DoorControl
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             DoorControlPortBase target = (DoorControlPortBase)service;
@@ -662,145 +662,145 @@ namespace SharpOnvifServer.DoorControl
 
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
+                case SoapActions.GetServiceCapabilities:
                 {
                     var request = new GetServiceCapabilitiesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetServiceCapabilitiesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/doorcontrol/wsdl", "GetServiceCapabilitiesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/doorcontrol/wsdl", "GetServiceCapabilitiesResponse");
                 }
-                case OnvifActions.GetDoorInfoList:
+                case SoapActions.GetDoorInfoList:
                 {
                     var request = new GetDoorInfoListRequest();
                     reader.ReadInto(request);
                     var response = await target.GetDoorInfoListAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/doorcontrol/wsdl", "GetDoorInfoListResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/doorcontrol/wsdl", "GetDoorInfoListResponse");
                 }
-                case OnvifActions.GetDoorInfo:
+                case SoapActions.GetDoorInfo:
                 {
                     var request = new GetDoorInfoRequest();
                     reader.ReadInto(request);
                     var response = await target.GetDoorInfoAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/doorcontrol/wsdl", "GetDoorInfoResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/doorcontrol/wsdl", "GetDoorInfoResponse");
                 }
-                case OnvifActions.GetDoorList:
+                case SoapActions.GetDoorList:
                 {
                     var request = new GetDoorListRequest();
                     reader.ReadInto(request);
                     var response = await target.GetDoorListAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/doorcontrol/wsdl", "GetDoorListResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/doorcontrol/wsdl", "GetDoorListResponse");
                 }
-                case OnvifActions.GetDoors:
+                case SoapActions.GetDoors:
                 {
                     var request = new GetDoorsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetDoorsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/doorcontrol/wsdl", "GetDoorsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/doorcontrol/wsdl", "GetDoorsResponse");
                 }
-                case OnvifActions.CreateDoor:
+                case SoapActions.CreateDoor:
                 {
                     var request = new CreateDoorRequest();
                     reader.ReadInto(request);
                     var response = await target.CreateDoorAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/doorcontrol/wsdl", "CreateDoorResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/doorcontrol/wsdl", "CreateDoorResponse");
                 }
-                case OnvifActions.SetDoor:
+                case SoapActions.SetDoor:
                 {
                     var request = new SetDoorRequest();
                     reader.ReadInto(request);
                     var response = await target.SetDoorAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/doorcontrol/wsdl", "SetDoorResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/doorcontrol/wsdl", "SetDoorResponse");
                 }
-                case OnvifActions.ModifyDoor:
+                case SoapActions.ModifyDoor:
                 {
                     var request = new ModifyDoorRequest();
                     reader.ReadInto(request);
                     var response = await target.ModifyDoorAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/doorcontrol/wsdl", "ModifyDoorResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/doorcontrol/wsdl", "ModifyDoorResponse");
                 }
-                case OnvifActions.DeleteDoor:
+                case SoapActions.DeleteDoor:
                 {
                     var request = new DeleteDoorRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteDoorAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/doorcontrol/wsdl", "DeleteDoorResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/doorcontrol/wsdl", "DeleteDoorResponse");
                 }
-                case OnvifActions.GetDoorState:
+                case SoapActions.GetDoorState:
                 {
                     var request = new GetDoorStateRequest();
                     reader.ReadInto(request);
                     var response = await target.GetDoorStateAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/doorcontrol/wsdl", "GetDoorStateResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/doorcontrol/wsdl", "GetDoorStateResponse");
                 }
-                case OnvifActions.AccessDoor:
+                case SoapActions.AccessDoor:
                 {
                     var request = new AccessDoorRequest();
                     reader.ReadInto(request);
                     var response = await target.AccessDoorAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/doorcontrol/wsdl", "AccessDoorResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/doorcontrol/wsdl", "AccessDoorResponse");
                 }
-                case OnvifActions.LockDoor:
+                case SoapActions.LockDoor:
                 {
                     var request = new LockDoorRequest();
                     reader.ReadInto(request);
                     var response = await target.LockDoorAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/doorcontrol/wsdl", "LockDoorResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/doorcontrol/wsdl", "LockDoorResponse");
                 }
-                case OnvifActions.UnlockDoor:
+                case SoapActions.UnlockDoor:
                 {
                     var request = new UnlockDoorRequest();
                     reader.ReadInto(request);
                     var response = await target.UnlockDoorAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/doorcontrol/wsdl", "UnlockDoorResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/doorcontrol/wsdl", "UnlockDoorResponse");
                 }
-                case OnvifActions.BlockDoor:
+                case SoapActions.BlockDoor:
                 {
                     var request = new BlockDoorRequest();
                     reader.ReadInto(request);
                     var response = await target.BlockDoorAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/doorcontrol/wsdl", "BlockDoorResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/doorcontrol/wsdl", "BlockDoorResponse");
                 }
-                case OnvifActions.LockDownDoor:
+                case SoapActions.LockDownDoor:
                 {
                     var request = new LockDownDoorRequest();
                     reader.ReadInto(request);
                     var response = await target.LockDownDoorAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/doorcontrol/wsdl", "LockDownDoorResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/doorcontrol/wsdl", "LockDownDoorResponse");
                 }
-                case OnvifActions.LockDownReleaseDoor:
+                case SoapActions.LockDownReleaseDoor:
                 {
                     var request = new LockDownReleaseDoorRequest();
                     reader.ReadInto(request);
                     var response = await target.LockDownReleaseDoorAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/doorcontrol/wsdl", "LockDownReleaseDoorResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/doorcontrol/wsdl", "LockDownReleaseDoorResponse");
                 }
-                case OnvifActions.LockOpenDoor:
+                case SoapActions.LockOpenDoor:
                 {
                     var request = new LockOpenDoorRequest();
                     reader.ReadInto(request);
                     var response = await target.LockOpenDoorAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/doorcontrol/wsdl", "LockOpenDoorResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/doorcontrol/wsdl", "LockOpenDoorResponse");
                 }
-                case OnvifActions.LockOpenReleaseDoor:
+                case SoapActions.LockOpenReleaseDoor:
                 {
                     var request = new LockOpenReleaseDoorRequest();
                     reader.ReadInto(request);
                     var response = await target.LockOpenReleaseDoorAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/doorcontrol/wsdl", "LockOpenReleaseDoorResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/doorcontrol/wsdl", "LockOpenReleaseDoorResponse");
                 }
-                case OnvifActions.DoubleLockDoor:
+                case SoapActions.DoubleLockDoor:
                 {
                     var request = new DoubleLockDoorRequest();
                     reader.ReadInto(request);
                     var response = await target.DoubleLockDoorAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/doorcontrol/wsdl", "DoubleLockDoorResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/doorcontrol/wsdl", "DoubleLockDoorResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }

@@ -16,7 +16,7 @@ namespace SharpOnvifServer.Receiver
     public abstract class ReceiverPortBase
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new ReceiverPortDispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new ReceiverPortDispatcher();
 
         /// <summary>
         /// Returns the capabilities of the receiver service. The result is returned in a typed answer.
@@ -184,7 +184,7 @@ namespace SharpOnvifServer.Receiver
     }
 
     /// <summary>Routes SOAP actions to <see cref="ReceiverPortBase"/>.</summary>
-    internal sealed class ReceiverPortDispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class ReceiverPortDispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(ReceiverPortBase); } }
 
@@ -192,14 +192,14 @@ namespace SharpOnvifServer.Receiver
         {
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
-                case OnvifActions.GetReceivers:
-                case OnvifActions.GetReceiver:
-                case OnvifActions.CreateReceiver:
-                case OnvifActions.DeleteReceiver:
-                case OnvifActions.ConfigureReceiver:
-                case OnvifActions.SetReceiverMode:
-                case OnvifActions.GetReceiverState:
+                case SoapActions.GetServiceCapabilities:
+                case SoapActions.GetReceivers:
+                case SoapActions.GetReceiver:
+                case SoapActions.CreateReceiver:
+                case SoapActions.DeleteReceiver:
+                case SoapActions.ConfigureReceiver:
+                case SoapActions.SetReceiverMode:
+                case SoapActions.GetReceiverState:
                     return true;
                 default:
                     return false;
@@ -213,56 +213,56 @@ namespace SharpOnvifServer.Receiver
                 case "GetServiceCapabilities":
                     if (ns == "http://www.onvif.org/ver10/receiver/wsdl")
                     {
-                        action = OnvifActions.GetServiceCapabilities;
+                        action = SoapActions.GetServiceCapabilities;
                         return true;
                     }
                     break;
                 case "GetReceivers":
                     if (ns == "http://www.onvif.org/ver10/receiver/wsdl")
                     {
-                        action = OnvifActions.GetReceivers;
+                        action = SoapActions.GetReceivers;
                         return true;
                     }
                     break;
                 case "GetReceiver":
                     if (ns == "http://www.onvif.org/ver10/receiver/wsdl")
                     {
-                        action = OnvifActions.GetReceiver;
+                        action = SoapActions.GetReceiver;
                         return true;
                     }
                     break;
                 case "CreateReceiver":
                     if (ns == "http://www.onvif.org/ver10/receiver/wsdl")
                     {
-                        action = OnvifActions.CreateReceiver;
+                        action = SoapActions.CreateReceiver;
                         return true;
                     }
                     break;
                 case "DeleteReceiver":
                     if (ns == "http://www.onvif.org/ver10/receiver/wsdl")
                     {
-                        action = OnvifActions.DeleteReceiver;
+                        action = SoapActions.DeleteReceiver;
                         return true;
                     }
                     break;
                 case "ConfigureReceiver":
                     if (ns == "http://www.onvif.org/ver10/receiver/wsdl")
                     {
-                        action = OnvifActions.ConfigureReceiver;
+                        action = SoapActions.ConfigureReceiver;
                         return true;
                     }
                     break;
                 case "SetReceiverMode":
                     if (ns == "http://www.onvif.org/ver10/receiver/wsdl")
                     {
-                        action = OnvifActions.SetReceiverMode;
+                        action = SoapActions.SetReceiverMode;
                         return true;
                     }
                     break;
                 case "GetReceiverState":
                     if (ns == "http://www.onvif.org/ver10/receiver/wsdl")
                     {
-                        action = OnvifActions.GetReceiverState;
+                        action = SoapActions.GetReceiverState;
                         return true;
                     }
                     break;
@@ -271,7 +271,7 @@ namespace SharpOnvifServer.Receiver
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             ReceiverPortBase target = (ReceiverPortBase)service;
@@ -279,68 +279,68 @@ namespace SharpOnvifServer.Receiver
 
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
+                case SoapActions.GetServiceCapabilities:
                 {
                     var request = new GetServiceCapabilitiesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetServiceCapabilitiesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/receiver/wsdl", "GetServiceCapabilitiesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/receiver/wsdl", "GetServiceCapabilitiesResponse");
                 }
-                case OnvifActions.GetReceivers:
+                case SoapActions.GetReceivers:
                 {
                     var request = new GetReceiversRequest();
                     reader.ReadInto(request);
                     var response = await target.GetReceiversAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/receiver/wsdl", "GetReceiversResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/receiver/wsdl", "GetReceiversResponse");
                 }
-                case OnvifActions.GetReceiver:
+                case SoapActions.GetReceiver:
                 {
                     var request = new GetReceiverRequest();
                     reader.ReadInto(request);
                     var response = await target.GetReceiverAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/receiver/wsdl", "GetReceiverResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/receiver/wsdl", "GetReceiverResponse");
                 }
-                case OnvifActions.CreateReceiver:
+                case SoapActions.CreateReceiver:
                 {
                     var request = new CreateReceiverRequest();
                     reader.ReadInto(request);
                     var response = await target.CreateReceiverAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/receiver/wsdl", "CreateReceiverResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/receiver/wsdl", "CreateReceiverResponse");
                 }
-                case OnvifActions.DeleteReceiver:
+                case SoapActions.DeleteReceiver:
                 {
                     var request = new DeleteReceiverRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteReceiverAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/receiver/wsdl", "DeleteReceiverResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/receiver/wsdl", "DeleteReceiverResponse");
                 }
-                case OnvifActions.ConfigureReceiver:
+                case SoapActions.ConfigureReceiver:
                 {
                     var request = new ConfigureReceiverRequest();
                     reader.ReadInto(request);
                     var response = await target.ConfigureReceiverAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/receiver/wsdl", "ConfigureReceiverResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/receiver/wsdl", "ConfigureReceiverResponse");
                 }
-                case OnvifActions.SetReceiverMode:
+                case SoapActions.SetReceiverMode:
                 {
                     var request = new SetReceiverModeRequest();
                     reader.ReadInto(request);
                     var response = await target.SetReceiverModeAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/receiver/wsdl", "SetReceiverModeResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/receiver/wsdl", "SetReceiverModeResponse");
                 }
-                case OnvifActions.GetReceiverState:
+                case SoapActions.GetReceiverState:
                 {
                     var request = new GetReceiverStateRequest();
                     reader.ReadInto(request);
                     var response = await target.GetReceiverStateAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/receiver/wsdl", "GetReceiverStateResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/receiver/wsdl", "GetReceiverStateResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }

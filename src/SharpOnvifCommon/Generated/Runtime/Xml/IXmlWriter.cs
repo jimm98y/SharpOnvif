@@ -63,10 +63,10 @@ namespace SharpOnvifCommon.Xml
         /// Writes an element holding a contract, naming its type with xsi:type when the value is
         /// of a type derived from the declared one.
         /// </summary>
-        void WriteElement(string ns, string name, OnvifContract value, string declaredTypeNamespace, string declaredTypeName);
+        void WriteElement(string ns, string name, XmlContract value, string declaredTypeNamespace, string declaredTypeName);
 
         /// <summary>Writes a contract's attributes and children into the element already open.</summary>
-        void WriteContent(OnvifContract value);
+        void WriteContent(XmlContract value);
 
         void WriteNil(string ns, string name);
 

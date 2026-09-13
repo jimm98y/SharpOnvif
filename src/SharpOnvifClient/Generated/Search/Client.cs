@@ -11,7 +11,7 @@
 namespace SharpOnvifClient.Search
 {
     /// <summary>
-    /// The SearchPort Onvif service.
+    /// The SearchPort service.
     /// </summary>
     public interface SearchPort
     {
@@ -299,7 +299,7 @@ namespace SharpOnvifClient.Search
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -309,7 +309,7 @@ namespace SharpOnvifClient.Search
         /// </summary>
         public System.Threading.Tasks.Task<GetServiceCapabilitiesResponse> GetServiceCapabilitiesAsync(GetServiceCapabilitiesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetServiceCapabilities, "http://www.onvif.org/ver10/search/wsdl", "GetServiceCapabilities", request,
+            return InvokeAsync(SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver10/search/wsdl", "GetServiceCapabilities", request,
                 () => new GetServiceCapabilitiesResponse(), cancellationToken);
         }
 
@@ -327,7 +327,7 @@ namespace SharpOnvifClient.Search
         /// </summary>
         public System.Threading.Tasks.Task<GetRecordingSummaryResponse> GetRecordingSummaryAsync(GetRecordingSummaryRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetRecordingSummary, "http://www.onvif.org/ver10/search/wsdl", "GetRecordingSummary", request,
+            return InvokeAsync(SoapActions.GetRecordingSummary, "http://www.onvif.org/ver10/search/wsdl", "GetRecordingSummary", request,
                 () => new GetRecordingSummaryResponse(), cancellationToken);
         }
 
@@ -345,7 +345,7 @@ namespace SharpOnvifClient.Search
         /// </summary>
         public System.Threading.Tasks.Task<GetRecordingInformationResponse> GetRecordingInformationAsync(GetRecordingInformationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetRecordingInformation, "http://www.onvif.org/ver10/search/wsdl", "GetRecordingInformation", request,
+            return InvokeAsync(SoapActions.GetRecordingInformation, "http://www.onvif.org/ver10/search/wsdl", "GetRecordingInformation", request,
                 () => new GetRecordingInformationResponse(), cancellationToken);
         }
 
@@ -366,7 +366,7 @@ namespace SharpOnvifClient.Search
         /// </summary>
         public System.Threading.Tasks.Task<GetMediaAttributesResponse> GetMediaAttributesAsync(GetMediaAttributesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetMediaAttributes, "http://www.onvif.org/ver10/search/wsdl", "GetMediaAttributes", request,
+            return InvokeAsync(SoapActions.GetMediaAttributes, "http://www.onvif.org/ver10/search/wsdl", "GetMediaAttributes", request,
                 () => new GetMediaAttributesResponse(), cancellationToken);
         }
 
@@ -391,7 +391,7 @@ namespace SharpOnvifClient.Search
         /// </summary>
         public System.Threading.Tasks.Task<FindRecordingsResponse> FindRecordingsAsync(FindRecordingsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.FindRecordings, "http://www.onvif.org/ver10/search/wsdl", "FindRecordings", request,
+            return InvokeAsync(SoapActions.FindRecordings, "http://www.onvif.org/ver10/search/wsdl", "FindRecordings", request,
                 () => new FindRecordingsResponse(), cancellationToken);
         }
 
@@ -416,7 +416,7 @@ namespace SharpOnvifClient.Search
         /// </summary>
         public System.Threading.Tasks.Task<GetRecordingSearchResultsResponse> GetRecordingSearchResultsAsync(GetRecordingSearchResultsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetRecordingSearchResults, "http://www.onvif.org/ver10/search/wsdl", "GetRecordingSearchResults", request,
+            return InvokeAsync(SoapActions.GetRecordingSearchResults, "http://www.onvif.org/ver10/search/wsdl", "GetRecordingSearchResults", request,
                 () => new GetRecordingSearchResultsResponse(), cancellationToken);
         }
 
@@ -442,7 +442,7 @@ namespace SharpOnvifClient.Search
         /// </summary>
         public System.Threading.Tasks.Task<FindEventsResponse> FindEventsAsync(FindEventsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.FindEvents, "http://www.onvif.org/ver10/search/wsdl", "FindEvents", request,
+            return InvokeAsync(SoapActions.FindEvents, "http://www.onvif.org/ver10/search/wsdl", "FindEvents", request,
                 () => new FindEventsResponse(), cancellationToken);
         }
 
@@ -465,7 +465,7 @@ namespace SharpOnvifClient.Search
         /// </summary>
         public System.Threading.Tasks.Task<GetEventSearchResultsResponse> GetEventSearchResultsAsync(GetEventSearchResultsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetEventSearchResults, "http://www.onvif.org/ver10/search/wsdl", "GetEventSearchResults", request,
+            return InvokeAsync(SoapActions.GetEventSearchResults, "http://www.onvif.org/ver10/search/wsdl", "GetEventSearchResults", request,
                 () => new GetEventSearchResultsResponse(), cancellationToken);
         }
 
@@ -490,7 +490,7 @@ namespace SharpOnvifClient.Search
         /// </summary>
         public System.Threading.Tasks.Task<FindPTZPositionResponse> FindPTZPositionAsync(FindPTZPositionRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.FindPTZPosition, "http://www.onvif.org/ver10/search/wsdl", "FindPTZPosition", request,
+            return InvokeAsync(SoapActions.FindPTZPosition, "http://www.onvif.org/ver10/search/wsdl", "FindPTZPosition", request,
                 () => new FindPTZPositionResponse(), cancellationToken);
         }
 
@@ -514,7 +514,7 @@ namespace SharpOnvifClient.Search
         /// </summary>
         public System.Threading.Tasks.Task<GetPTZPositionSearchResultsResponse> GetPTZPositionSearchResultsAsync(GetPTZPositionSearchResultsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetPTZPositionSearchResults, "http://www.onvif.org/ver10/search/wsdl", "GetPTZPositionSearchResults", request,
+            return InvokeAsync(SoapActions.GetPTZPositionSearchResults, "http://www.onvif.org/ver10/search/wsdl", "GetPTZPositionSearchResults", request,
                 () => new GetPTZPositionSearchResultsResponse(), cancellationToken);
         }
 
@@ -532,7 +532,7 @@ namespace SharpOnvifClient.Search
         /// </summary>
         public System.Threading.Tasks.Task<GetSearchStateResponse> GetSearchStateAsync(GetSearchStateRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetSearchState, "http://www.onvif.org/ver10/search/wsdl", "GetSearchState", request,
+            return InvokeAsync(SoapActions.GetSearchState, "http://www.onvif.org/ver10/search/wsdl", "GetSearchState", request,
                 () => new GetSearchStateResponse(), cancellationToken);
         }
 
@@ -555,7 +555,7 @@ namespace SharpOnvifClient.Search
         /// </summary>
         public System.Threading.Tasks.Task<EndSearchResponse> EndSearchAsync(EndSearchRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.EndSearch, "http://www.onvif.org/ver10/search/wsdl", "EndSearch", request,
+            return InvokeAsync(SoapActions.EndSearch, "http://www.onvif.org/ver10/search/wsdl", "EndSearch", request,
                 () => new EndSearchResponse(), cancellationToken);
         }
 
@@ -580,7 +580,7 @@ namespace SharpOnvifClient.Search
         /// </summary>
         public System.Threading.Tasks.Task<FindMetadataResponse> FindMetadataAsync(FindMetadataRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.FindMetadata, "http://www.onvif.org/ver10/search/wsdl", "FindMetadata", request,
+            return InvokeAsync(SoapActions.FindMetadata, "http://www.onvif.org/ver10/search/wsdl", "FindMetadata", request,
                 () => new FindMetadataResponse(), cancellationToken);
         }
 
@@ -604,7 +604,7 @@ namespace SharpOnvifClient.Search
         /// </summary>
         public System.Threading.Tasks.Task<GetMetadataSearchResultsResponse> GetMetadataSearchResultsAsync(GetMetadataSearchResultsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetMetadataSearchResults, "http://www.onvif.org/ver10/search/wsdl", "GetMetadataSearchResults", request,
+            return InvokeAsync(SoapActions.GetMetadataSearchResults, "http://www.onvif.org/ver10/search/wsdl", "GetMetadataSearchResults", request,
                 () => new GetMetadataSearchResultsResponse(), cancellationToken);
         }
 
@@ -621,7 +621,7 @@ namespace SharpOnvifClient.Search
         /// </summary>
         public System.Threading.Tasks.Task<SearchImageByNLResponse> SearchImageByNLAsync(SearchImageByNLRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SearchImageByNL, "http://www.onvif.org/ver10/search/wsdl", "SearchImageByNLRequest", request,
+            return InvokeAsync(SoapActions.SearchImageByNL, "http://www.onvif.org/ver10/search/wsdl", "SearchImageByNLRequest", request,
                 () => new SearchImageByNLResponse(), cancellationToken);
         }
 
@@ -638,7 +638,7 @@ namespace SharpOnvifClient.Search
         /// </summary>
         public System.Threading.Tasks.Task<GetNLSearchResultsResponse> GetNLSearchResultsAsync(GetNLSearchResultsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetNLSearchResults, "http://www.onvif.org/ver10/search/wsdl", "GetNLSearchResultsRequest", request,
+            return InvokeAsync(SoapActions.GetNLSearchResults, "http://www.onvif.org/ver10/search/wsdl", "GetNLSearchResultsRequest", request,
                 () => new GetNLSearchResultsResponse(), cancellationToken);
         }
 
@@ -655,7 +655,7 @@ namespace SharpOnvifClient.Search
         /// </summary>
         public System.Threading.Tasks.Task<SearchImageByImageResponse> SearchImageByImageAsync(SearchImageByImageRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SearchImageByImage, "http://www.onvif.org/ver10/search/wsdl", "SearchImageByImageRequest", request,
+            return InvokeAsync(SoapActions.SearchImageByImage, "http://www.onvif.org/ver10/search/wsdl", "SearchImageByImageRequest", request,
                 () => new SearchImageByImageResponse(), cancellationToken);
         }
 
@@ -672,7 +672,7 @@ namespace SharpOnvifClient.Search
         /// </summary>
         public System.Threading.Tasks.Task<GetImageSearchResultsResponse> GetImageSearchResultsAsync(GetImageSearchResultsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetImageSearchResults, "http://www.onvif.org/ver10/search/wsdl", "GetImageSearchResultsRequest", request,
+            return InvokeAsync(SoapActions.GetImageSearchResults, "http://www.onvif.org/ver10/search/wsdl", "GetImageSearchResultsRequest", request,
                 () => new GetImageSearchResultsResponse(), cancellationToken);
         }
 

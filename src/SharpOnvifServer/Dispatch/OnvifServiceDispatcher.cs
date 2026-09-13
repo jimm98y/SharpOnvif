@@ -7,10 +7,10 @@ using SharpOnvifCommon.Xml;
 namespace SharpOnvifServer.Dispatch
 {
     /// <summary>What an operation produced, and the element its body should be written as.</summary>
-    public struct OnvifDispatchResult
+    public struct DispatchResult
     {
         /// <summary>The response contract, or null for an operation with no reply body.</summary>
-        public OnvifContract Response;
+        public XmlContract Response;
 
         /// <summary>Namespace of the response body element.</summary>
         public string Namespace;
@@ -18,7 +18,7 @@ namespace SharpOnvifServer.Dispatch
         /// <summary>Local name of the response body element.</summary>
         public string ElementName;
 
-        public OnvifDispatchResult(OnvifContract response, string ns, string elementName)
+        public DispatchResult(XmlContract response, string ns, string elementName)
         {
             Response = response;
             Namespace = ns;
@@ -34,7 +34,7 @@ namespace SharpOnvifServer.Dispatch
     /// sample had to spread Onvif across /onvif/device_service, /onvif/media_service and so on.
     /// </para>
     /// </summary>
-    public abstract class OnvifServiceDispatcher
+    public abstract class ServiceDispatcher
     {
         /// <summary>The generated base class this dispatcher invokes.</summary>
         public abstract Type ServiceType { get; }
@@ -52,11 +52,11 @@ namespace SharpOnvifServer.Dispatch
         /// Reads the request body and invokes the operation. The reader is positioned on the body
         /// element.
         /// </summary>
-        public abstract Task<OnvifDispatchResult> InvokeAsync(
+        public abstract Task<DispatchResult> InvokeAsync(
             object service, string action, XmlReader body, CancellationToken cancellationToken);
 
         /// <summary>Resolves an xsi:type in this dispatcher's assembly.</summary>
-        public abstract OnvifContract ResolveXmlType(string ns, string name);
+        public abstract XmlContract ResolveXmlType(string ns, string name);
 
         /// <summary>
         /// Reads a request body with this service's own view of the shared schema types.

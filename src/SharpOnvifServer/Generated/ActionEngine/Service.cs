@@ -16,7 +16,7 @@ namespace SharpOnvifServer.ActionEngine
     public abstract class ActionEnginePortBase
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new ActionEnginePortDispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new ActionEnginePortDispatcher();
 
         /// <summary>
         /// The service provider returns the supported action types. The response returns a list of Action
@@ -235,7 +235,7 @@ namespace SharpOnvifServer.ActionEngine
     }
 
     /// <summary>Routes SOAP actions to <see cref="ActionEnginePortBase"/>.</summary>
-    internal sealed class ActionEnginePortDispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class ActionEnginePortDispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(ActionEnginePortBase); } }
 
@@ -243,16 +243,16 @@ namespace SharpOnvifServer.ActionEngine
         {
             switch (action)
             {
-                case OnvifActions.GetSupportedActions:
-                case OnvifActions.GetActions:
-                case OnvifActions.CreateActions:
-                case OnvifActions.DeleteActions:
-                case OnvifActions.ModifyActions:
-                case OnvifActions.GetServiceCapabilities:
-                case OnvifActions.GetActionTriggers:
-                case OnvifActions.CreateActionTriggers:
-                case OnvifActions.DeleteActionTriggers:
-                case OnvifActions.ModifyActionTriggers:
+                case SoapActions.GetSupportedActions:
+                case SoapActions.GetActions:
+                case SoapActions.CreateActions:
+                case SoapActions.DeleteActions:
+                case SoapActions.ModifyActions:
+                case SoapActions.GetServiceCapabilities:
+                case SoapActions.GetActionTriggers:
+                case SoapActions.CreateActionTriggers:
+                case SoapActions.DeleteActionTriggers:
+                case SoapActions.ModifyActionTriggers:
                     return true;
                 default:
                     return false;
@@ -266,70 +266,70 @@ namespace SharpOnvifServer.ActionEngine
                 case "GetSupportedActions":
                     if (ns == "http://www.onvif.org/ver10/actionengine/wsdl")
                     {
-                        action = OnvifActions.GetSupportedActions;
+                        action = SoapActions.GetSupportedActions;
                         return true;
                     }
                     break;
                 case "GetActions":
                     if (ns == "http://www.onvif.org/ver10/actionengine/wsdl")
                     {
-                        action = OnvifActions.GetActions;
+                        action = SoapActions.GetActions;
                         return true;
                     }
                     break;
                 case "CreateActions":
                     if (ns == "http://www.onvif.org/ver10/actionengine/wsdl")
                     {
-                        action = OnvifActions.CreateActions;
+                        action = SoapActions.CreateActions;
                         return true;
                     }
                     break;
                 case "DeleteActions":
                     if (ns == "http://www.onvif.org/ver10/actionengine/wsdl")
                     {
-                        action = OnvifActions.DeleteActions;
+                        action = SoapActions.DeleteActions;
                         return true;
                     }
                     break;
                 case "ModifyActions":
                     if (ns == "http://www.onvif.org/ver10/actionengine/wsdl")
                     {
-                        action = OnvifActions.ModifyActions;
+                        action = SoapActions.ModifyActions;
                         return true;
                     }
                     break;
                 case "GetServiceCapabilities":
                     if (ns == "http://www.onvif.org/ver10/actionengine/wsdl")
                     {
-                        action = OnvifActions.GetServiceCapabilities;
+                        action = SoapActions.GetServiceCapabilities;
                         return true;
                     }
                     break;
                 case "GetActionTriggers":
                     if (ns == "http://www.onvif.org/ver10/actionengine/wsdl")
                     {
-                        action = OnvifActions.GetActionTriggers;
+                        action = SoapActions.GetActionTriggers;
                         return true;
                     }
                     break;
                 case "CreateActionTriggers":
                     if (ns == "http://www.onvif.org/ver10/actionengine/wsdl")
                     {
-                        action = OnvifActions.CreateActionTriggers;
+                        action = SoapActions.CreateActionTriggers;
                         return true;
                     }
                     break;
                 case "DeleteActionTriggers":
                     if (ns == "http://www.onvif.org/ver10/actionengine/wsdl")
                     {
-                        action = OnvifActions.DeleteActionTriggers;
+                        action = SoapActions.DeleteActionTriggers;
                         return true;
                     }
                     break;
                 case "ModifyActionTriggers":
                     if (ns == "http://www.onvif.org/ver10/actionengine/wsdl")
                     {
-                        action = OnvifActions.ModifyActionTriggers;
+                        action = SoapActions.ModifyActionTriggers;
                         return true;
                     }
                     break;
@@ -338,7 +338,7 @@ namespace SharpOnvifServer.ActionEngine
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             ActionEnginePortBase target = (ActionEnginePortBase)service;
@@ -346,82 +346,82 @@ namespace SharpOnvifServer.ActionEngine
 
             switch (action)
             {
-                case OnvifActions.GetSupportedActions:
+                case SoapActions.GetSupportedActions:
                 {
                     var request = new GetSupportedActionsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetSupportedActionsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/actionengine/wsdl", "GetSupportedActionsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/actionengine/wsdl", "GetSupportedActionsResponse");
                 }
-                case OnvifActions.GetActions:
+                case SoapActions.GetActions:
                 {
                     var request = new GetActionsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetActionsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/actionengine/wsdl", "GetActionsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/actionengine/wsdl", "GetActionsResponse");
                 }
-                case OnvifActions.CreateActions:
+                case SoapActions.CreateActions:
                 {
                     var request = new CreateActionsRequest();
                     reader.ReadInto(request);
                     var response = await target.CreateActionsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/actionengine/wsdl", "CreateActionsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/actionengine/wsdl", "CreateActionsResponse");
                 }
-                case OnvifActions.DeleteActions:
+                case SoapActions.DeleteActions:
                 {
                     var request = new DeleteActionsRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteActionsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/actionengine/wsdl", "DeleteActionsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/actionengine/wsdl", "DeleteActionsResponse");
                 }
-                case OnvifActions.ModifyActions:
+                case SoapActions.ModifyActions:
                 {
                     var request = new ModifyActionsRequest();
                     reader.ReadInto(request);
                     var response = await target.ModifyActionsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/actionengine/wsdl", "ModifyActionsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/actionengine/wsdl", "ModifyActionsResponse");
                 }
-                case OnvifActions.GetServiceCapabilities:
+                case SoapActions.GetServiceCapabilities:
                 {
                     var request = new GetServiceCapabilitiesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetServiceCapabilitiesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/actionengine/wsdl", "GetServiceCapabilitiesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/actionengine/wsdl", "GetServiceCapabilitiesResponse");
                 }
-                case OnvifActions.GetActionTriggers:
+                case SoapActions.GetActionTriggers:
                 {
                     var request = new GetActionTriggersRequest();
                     reader.ReadInto(request);
                     var response = await target.GetActionTriggersAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/actionengine/wsdl", "GetActionTriggersResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/actionengine/wsdl", "GetActionTriggersResponse");
                 }
-                case OnvifActions.CreateActionTriggers:
+                case SoapActions.CreateActionTriggers:
                 {
                     var request = new CreateActionTriggersRequest();
                     reader.ReadInto(request);
                     var response = await target.CreateActionTriggersAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/actionengine/wsdl", "CreateActionTriggersResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/actionengine/wsdl", "CreateActionTriggersResponse");
                 }
-                case OnvifActions.DeleteActionTriggers:
+                case SoapActions.DeleteActionTriggers:
                 {
                     var request = new DeleteActionTriggersRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteActionTriggersAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/actionengine/wsdl", "DeleteActionTriggersResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/actionengine/wsdl", "DeleteActionTriggersResponse");
                 }
-                case OnvifActions.ModifyActionTriggers:
+                case SoapActions.ModifyActionTriggers:
                 {
                     var request = new ModifyActionTriggersRequest();
                     reader.ReadInto(request);
                     var response = await target.ModifyActionTriggersAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/actionengine/wsdl", "ModifyActionTriggersResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/actionengine/wsdl", "ModifyActionTriggersResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }

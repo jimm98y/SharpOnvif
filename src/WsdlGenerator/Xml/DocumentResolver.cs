@@ -101,7 +101,7 @@ internal sealed class DocumentResolver
     /// Turns a reference into the identity of the document it names. A bare path becomes a file
     /// URI, so documents from disk and from the web compose the same way.
     /// <para>
-    /// A mirror holds one copy per host and path, so there the scheme is dropped: the Onvif
+    /// A mirror holds one copy per host and path, so there the scheme is dropped: the
     /// schemas are reached as http from some documents and https from others, and parsing the
     /// same schema twice would make every type in it conflict with itself.
     /// </para>

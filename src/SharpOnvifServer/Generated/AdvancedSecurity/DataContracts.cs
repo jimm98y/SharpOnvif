@@ -34,7 +34,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// certification path validation policy to the TLS server.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddCertPathValidationPolicyAssignment", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class AddCertPathValidationPolicyAssignmentRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AddCertPathValidationPolicyAssignmentRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string certPathValidationPolicyIDField;
 
@@ -89,7 +89,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// certification path validation policy to the TLS server.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddCertPathValidationPolicyAssignmentResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class AddCertPathValidationPolicyAssignmentResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AddCertPathValidationPolicyAssignmentResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public AddCertPathValidationPolicyAssignmentResponse()
         {
@@ -120,7 +120,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddDot1XConfiguration", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class AddDot1XConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AddDot1XConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private Dot1XConfiguration dot1XConfigurationField;
 
@@ -185,7 +185,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddDot1XConfigurationResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class AddDot1XConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AddDot1XConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string dot1XIDField;
 
@@ -238,7 +238,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// capability is true.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddMediaSigningCertificateAssignment", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class AddMediaSigningCertificateAssignmentRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AddMediaSigningCertificateAssignmentRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string certificationPathIDField;
 
@@ -288,7 +288,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// capability is true.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddMediaSigningCertificateAssignmentResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class AddMediaSigningCertificateAssignmentResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AddMediaSigningCertificateAssignmentResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public AddMediaSigningCertificateAssignmentResponse()
         {
@@ -320,7 +320,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// shall not be assigned to the TLS server.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddServerCertificateAssignment", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class AddServerCertificateAssignmentRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AddServerCertificateAssignmentRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string certificationPathIDField;
 
@@ -383,7 +383,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// shall not be assigned to the TLS server.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddServerCertificateAssignmentResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class AddServerCertificateAssignmentResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AddServerCertificateAssignmentResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public AddServerCertificateAssignmentResponse()
         {
@@ -395,7 +395,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// An identifier of an algorithm.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class AlgorithmIdentifier : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AlgorithmIdentifier : SharpOnvifCommon.Xml.XmlContract
     {
         private string algorithmField;
 
@@ -430,9 +430,9 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.anyParametersField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AlgorithmIdentifier"; } }
+        protected override string XmlTypeName { get { return "AlgorithmIdentifier"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -463,7 +463,7 @@ namespace SharpOnvifServer.AdvancedSecurity
 
     }
 
-    public partial class AlgorithmIdentifierAnyParameters : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AlgorithmIdentifierAnyParameters : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -488,7 +488,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class AuthorizationServerConfiguration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AuthorizationServerConfiguration : SharpOnvifCommon.Xml.XmlContract
     {
         private AuthorizationServerConfigurationData dataField;
 
@@ -508,9 +508,9 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AuthorizationServerConfiguration"; } }
+        protected override string XmlTypeName { get { return "AuthorizationServerConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -534,7 +534,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class AuthorizationServerConfigurationCapabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AuthorizationServerConfigurationCapabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private int maxConfigurationsField;
         private bool maxConfigurationsFieldSpecified;
@@ -585,9 +585,9 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.clientAuthenticationMethodsSupportedField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AuthorizationServerConfigurationCapabilities"; } }
+        protected override string XmlTypeName { get { return "AuthorizationServerConfigurationCapabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -620,7 +620,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class AuthorizationServerConfigurationData : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AuthorizationServerConfigurationData : SharpOnvifCommon.Xml.XmlContract
     {
         private string serverUriField;
 
@@ -741,9 +741,9 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.clientAuthField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AuthorizationServerConfigurationData"; } }
+        protected override string XmlTypeName { get { return "AuthorizationServerConfigurationData"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -820,7 +820,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// A CSR attribute as specified in RFC 2986.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class BasicRequestAttribute : SharpOnvifCommon.Xml.OnvifContract
+    public partial class BasicRequestAttribute : SharpOnvifCommon.Xml.XmlContract
     {
         private string oIDField;
 
@@ -855,9 +855,9 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "BasicRequestAttribute"; } }
+        protected override string XmlTypeName { get { return "BasicRequestAttribute"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -886,7 +886,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class CRL : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CRL : SharpOnvifCommon.Xml.XmlContract
     {
         private string cRLIDField;
 
@@ -924,9 +924,9 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "CRL"; } }
+        protected override string XmlTypeName { get { return "CRL"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -963,7 +963,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// A CSR attribute as specified in PKCS#10.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class CSRAttribute : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CSRAttribute : SharpOnvifCommon.Xml.XmlContract
     {
         private object itemField;
 
@@ -976,9 +976,9 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.itemField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "CSRAttribute"; } }
+        protected override string XmlTypeName { get { return "CSRAttribute"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -1018,7 +1018,7 @@ namespace SharpOnvifServer.AdvancedSecurity
 
     }
 
-    public partial class CSRAttributeAnyAttribute : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CSRAttributeAnyAttribute : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -1046,7 +1046,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// The capabilities of a Security Configuration Service implementation on a device.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class Capabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Capabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private KeystoreCapabilities keystoreCapabilitiesField;
 
@@ -1117,9 +1117,9 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Capabilities"; } }
+        protected override string XmlTypeName { get { return "Capabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -1163,7 +1163,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class CertPathValidationParameters : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CertPathValidationParameters : SharpOnvifCommon.Xml.XmlContract
     {
         private bool requireTLSWWWClientAuthExtendedKeyUsageField;
         private bool requireTLSWWWClientAuthExtendedKeyUsageFieldSpecified;
@@ -1223,9 +1223,9 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.anyParametersField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "CertPathValidationParameters"; } }
+        protected override string XmlTypeName { get { return "CertPathValidationParameters"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -1264,7 +1264,7 @@ namespace SharpOnvifServer.AdvancedSecurity
 
     }
 
-    public partial class CertPathValidationParametersAnyParameters : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CertPathValidationParametersAnyParameters : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -1289,7 +1289,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class CertPathValidationPolicy : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CertPathValidationPolicy : SharpOnvifCommon.Xml.XmlContract
     {
         private string certPathValidationPolicyIDField;
 
@@ -1336,9 +1336,9 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.anyParametersField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "CertPathValidationPolicy"; } }
+        protected override string XmlTypeName { get { return "CertPathValidationPolicy"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -1385,7 +1385,7 @@ namespace SharpOnvifServer.AdvancedSecurity
 
     }
 
-    public partial class CertPathValidationPolicyAnyParameters : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CertPathValidationPolicyAnyParameters : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -1413,7 +1413,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// A sequence of certificate IDs.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class CertificateIDs : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CertificateIDs : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] certificateIDField;
 
@@ -1427,9 +1427,9 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.certificateIDField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "CertificateIDs"; } }
+        protected override string XmlTypeName { get { return "CertificateIDs"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -1460,7 +1460,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// An X.509 certification path as defined in RFC 5280.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class CertificationPath : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CertificationPath : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] certificateIDField;
 
@@ -1495,9 +1495,9 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.anyElementField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "CertificationPath"; } }
+        protected override string XmlTypeName { get { return "CertificationPath"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -1534,7 +1534,7 @@ namespace SharpOnvifServer.AdvancedSecurity
 
     }
 
-    public partial class CertificationPathAnyElement : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CertificationPathAnyElement : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -1563,7 +1563,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// created in the device and shall be persistent (remain after reboot).
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateAuthorizationServerConfiguration", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class CreateAuthorizationServerConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateAuthorizationServerConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private AuthorizationServerConfigurationData configurationField;
 
@@ -1607,7 +1607,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// created in the device and shall be persistent (remain after reboot).
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateAuthorizationServerConfigurationResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class CreateAuthorizationServerConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateAuthorizationServerConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string tokenField;
 
@@ -1646,7 +1646,7 @@ namespace SharpOnvifServer.AdvancedSecurity
 
     }
 
-    public partial class CreateCertPathValidationPolicyAnyParameters : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateCertPathValidationPolicyAnyParameters : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -1686,7 +1686,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// create a certification path validation policy.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateCertPathValidationPolicy", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class CreateCertPathValidationPolicyRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateCertPathValidationPolicyRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string aliasField;
 
@@ -1801,7 +1801,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// create a certification path validation policy.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateCertPathValidationPolicyResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class CreateCertPathValidationPolicyResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateCertPathValidationPolicyResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string certPathValidationPolicyIDField;
 
@@ -1857,7 +1857,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// produced and no certification path shall be created.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateCertificationPath", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class CreateCertificationPathRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateCertificationPathRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private CertificateIDs certificateIDsField;
 
@@ -1933,7 +1933,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// produced and no certification path shall be created.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateCertificationPathResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class CreateCertificationPathResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateCertificationPathResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string certificationPathIDField;
 
@@ -1991,7 +1991,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// the ok status. If the key generation fails, the device shall assign the key the corrupt status.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateECCKeyPair", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class CreateECCKeyPairRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateECCKeyPairRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string ellipticCurveField;
 
@@ -2068,7 +2068,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// the ok status. If the key generation fails, the device shall assign the key the corrupt status.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateECCKeyPairResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class CreateECCKeyPairResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateECCKeyPairResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string keyIDField;
 
@@ -2143,7 +2143,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// and no CSR shall be generated.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreatePKCS10CSR", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class CreatePKCS10CSRRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreatePKCS10CSRRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private DistinguishedName subjectField;
 
@@ -2260,7 +2260,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// and no CSR shall be generated.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreatePKCS10CSRResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class CreatePKCS10CSRResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreatePKCS10CSRResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private byte[] pKCS10CSRField;
 
@@ -2319,7 +2319,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// device shall assign the key the corrupt status.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateRSAKeyPair", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class CreateRSAKeyPairRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateRSAKeyPairRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string keyLengthField;
 
@@ -2396,7 +2396,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// device shall assign the key the corrupt status.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateRSAKeyPairResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class CreateRSAKeyPairResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateRSAKeyPairResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string keyIDField;
 
@@ -2477,7 +2477,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// certificates reached fault shall be produced and no certificate shall be generated.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateSelfSignedCertificate", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class CreateSelfSignedCertificateRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateSelfSignedCertificateRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string x509VersionField;
 
@@ -2708,7 +2708,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// certificates reached fault shall be produced and no certificate shall be generated.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateSelfSignedCertificateResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class CreateSelfSignedCertificateResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateSelfSignedCertificateResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string certificateIDField;
 
@@ -2751,7 +2751,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class CustomClaim : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CustomClaim : SharpOnvifCommon.Xml.XmlContract
     {
         private string nameField;
 
@@ -2786,9 +2786,9 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "CustomClaim"; } }
+        protected override string XmlTypeName { get { return "CustomClaim"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -2820,7 +2820,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// A distinguished name attribute type and value pair.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class DNAttributeTypeAndValue : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DNAttributeTypeAndValue : SharpOnvifCommon.Xml.XmlContract
     {
         private string typeField;
 
@@ -2855,9 +2855,9 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "DNAttributeTypeAndValue"; } }
+        protected override string XmlTypeName { get { return "DNAttributeTypeAndValue"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -2890,7 +2890,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// always be persistent.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteAuthorizationServerConfiguration", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class DeleteAuthorizationServerConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteAuthorizationServerConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string tokenField;
 
@@ -2934,7 +2934,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// always be persistent.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteAuthorizationServerConfigurationResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class DeleteAuthorizationServerConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteAuthorizationServerConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public DeleteAuthorizationServerConfigurationResponse()
         {
@@ -2950,7 +2950,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// been successfully deleted, a device may assign its former ID to other CRLs.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteCRL", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class DeleteCRLRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteCRLRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string crlIDField;
 
@@ -3000,7 +3000,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// been successfully deleted, a device may assign its former ID to other CRLs.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteCRLResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class DeleteCRLResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteCRLResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public DeleteCRLResponse()
         {
@@ -3019,7 +3019,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// certification path validation policies.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteCertPathValidationPolicy", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class DeleteCertPathValidationPolicyRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteCertPathValidationPolicyRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string certPathValidationPolicyIDField;
 
@@ -3072,7 +3072,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// certification path validation policies.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteCertPathValidationPolicyResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class DeleteCertPathValidationPolicyResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteCertPathValidationPolicyResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public DeleteCertPathValidationPolicyResponse()
         {
@@ -3091,7 +3091,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// has been successfully deleted, the device may assign its former ID to other certificates.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteCertificate", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class DeleteCertificateRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteCertificateRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string certificateIDField;
 
@@ -3144,7 +3144,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// has been successfully deleted, the device may assign its former ID to other certificates.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteCertificateResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class DeleteCertificateResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteCertificateResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public DeleteCertificateResponse()
         {
@@ -3164,7 +3164,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// the device may assign its former ID to other certification paths.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteCertificationPath", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class DeleteCertificationPathRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteCertificationPathRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string certificationPathIDField;
 
@@ -3218,7 +3218,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// the device may assign its former ID to other certification paths.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteCertificationPathResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class DeleteCertificationPathResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteCertificationPathResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public DeleteCertificationPathResponse()
         {
@@ -3236,7 +3236,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// capability shall support this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteDot1XConfiguration", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class DeleteDot1XConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteDot1XConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string dot1XIDField;
 
@@ -3288,7 +3288,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// capability shall support this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteDot1XConfigurationResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class DeleteDot1XConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteDot1XConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public DeleteDot1XConfigurationResponse()
         {
@@ -3307,7 +3307,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// assign its former ID to other keys.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteKey", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class DeleteKeyRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteKeyRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string keyIDField;
 
@@ -3360,7 +3360,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// assign its former ID to other keys.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteKeyResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class DeleteKeyResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteKeyResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public DeleteKeyResponse()
         {
@@ -3384,7 +3384,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// MaximumNumberOfDot1XConfigurations capability shall support this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteNetworkInterfaceDot1XConfiguration", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class DeleteNetworkInterfaceDot1XConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteNetworkInterfaceDot1XConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string tokenField;
 
@@ -3445,7 +3445,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// MaximumNumberOfDot1XConfigurations capability shall support this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteNetworkInterfaceDot1XConfigurationResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class DeleteNetworkInterfaceDot1XConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteNetworkInterfaceDot1XConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private bool rebootNeededField;
 
@@ -3491,7 +3491,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// This operation deletes a passphrase from the keystore of the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeletePassphrase", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class DeletePassphraseRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeletePassphraseRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string passphraseIDField;
 
@@ -3537,7 +3537,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// This operation deletes a passphrase from the keystore of the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeletePassphraseResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class DeletePassphraseResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeletePassphraseResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public DeletePassphraseResponse()
         {
@@ -3546,7 +3546,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class DistinguishedName : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DistinguishedName : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] countryField;
 
@@ -3753,9 +3753,9 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.anyAttributeField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "DistinguishedName"; } }
+        protected override string XmlTypeName { get { return "DistinguishedName"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -3952,7 +3952,7 @@ namespace SharpOnvifServer.AdvancedSecurity
 
     }
 
-    public partial class DistinguishedNameAnyAttribute : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DistinguishedNameAnyAttribute : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] domainComponentField;
 
@@ -4006,7 +4006,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// The capabilities of the 802.1X implementation on a device.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class Dot1XCapabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Dot1XCapabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -4041,9 +4041,9 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.dot1XMethodsField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Dot1XCapabilities"; } }
+        protected override string XmlTypeName { get { return "Dot1XCapabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -4079,7 +4079,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class Dot1XConfiguration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Dot1XConfiguration : SharpOnvifCommon.Xml.XmlContract
     {
         private string dot1XIDField;
 
@@ -4126,9 +4126,9 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Dot1XConfiguration"; } }
+        protected override string XmlTypeName { get { return "Dot1XConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -4165,7 +4165,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// The configuration parameters required for a particular authentication method.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class Dot1XStage : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Dot1XStage : SharpOnvifCommon.Xml.XmlContract
     {
         private string identityField;
 
@@ -4252,9 +4252,9 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.certPathValidationPolicyIDField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Dot1XStage"; } }
+        protected override string XmlTypeName { get { return "Dot1XStage"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -4316,7 +4316,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class Dot1XStageExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Dot1XStageExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -4327,9 +4327,9 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Dot1XStageExtension"; } }
+        protected override string XmlTypeName { get { return "Dot1XStageExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -4350,7 +4350,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAllCRLs", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetAllCRLsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAllCRLsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetAllCRLsRequest()
         {
@@ -4364,7 +4364,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAllCRLsResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetAllCRLsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAllCRLsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private CRL[] crlField;
 
@@ -4418,7 +4418,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// list is returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAllCertPathValidationPolicies", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetAllCertPathValidationPoliciesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAllCertPathValidationPoliciesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetAllCertPathValidationPoliciesRequest()
         {
@@ -4432,7 +4432,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// list is returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAllCertPathValidationPoliciesResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetAllCertPathValidationPoliciesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAllCertPathValidationPoliciesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private CertPathValidationPolicy[] certPathValidationPolicyField;
 
@@ -4486,7 +4486,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// If no certificate is stored in the device’s keystore, an empty list is returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAllCertificates", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetAllCertificatesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAllCertificatesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetAllCertificatesRequest()
         {
@@ -4500,7 +4500,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// If no certificate is stored in the device’s keystore, an empty list is returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAllCertificatesResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetAllCertificatesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAllCertificatesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private X509Certificate[] certificateField;
 
@@ -4554,7 +4554,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// device. If no certification path is stored on the device, an empty list is returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAllCertificationPaths", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetAllCertificationPathsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAllCertificationPathsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetAllCertificationPathsRequest()
         {
@@ -4568,7 +4568,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// device. If no certification path is stored on the device, an empty list is returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAllCertificationPathsResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetAllCertificationPathsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAllCertificationPathsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] certificationPathIDField;
 
@@ -4624,7 +4624,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// capability shall support this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAllDot1XConfigurations", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetAllDot1XConfigurationsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAllDot1XConfigurationsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetAllDot1XConfigurationsRequest()
         {
@@ -4640,7 +4640,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// capability shall support this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAllDot1XConfigurationsResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetAllDot1XConfigurationsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAllDot1XConfigurationsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private Dot1XConfiguration[] configurationField;
 
@@ -4694,7 +4694,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// key is stored on the device, an empty list is returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAllKeys", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetAllKeysRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAllKeysRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetAllKeysRequest()
         {
@@ -4708,7 +4708,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// key is stored on the device, an empty list is returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAllKeysResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetAllKeysResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAllKeysResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private KeyAttribute[] keyAttributeField;
 
@@ -4762,7 +4762,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// the device. If no passphrase is stored on the device, the device shall return an empty list.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAllPassphrases", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetAllPassphrasesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAllPassphrasesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetAllPassphrasesRequest()
         {
@@ -4776,7 +4776,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// the device. If no passphrase is stored on the device, the device shall return an empty list.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAllPassphrasesResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetAllPassphrasesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAllPassphrasesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private PassphraseAttribute[] passphraseAttributeField;
 
@@ -4829,7 +4829,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// the TLS server on the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAssignedCertPathValidationPolicies", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetAssignedCertPathValidationPoliciesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAssignedCertPathValidationPoliciesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetAssignedCertPathValidationPoliciesRequest()
         {
@@ -4842,7 +4842,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// the TLS server on the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAssignedCertPathValidationPoliciesResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetAssignedCertPathValidationPoliciesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAssignedCertPathValidationPoliciesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] certPathValidationPolicyIDField;
 
@@ -4898,7 +4898,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// MediaSigningSupported capability is true.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAssignedMediaSigningCertificates", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetAssignedMediaSigningCertificatesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAssignedMediaSigningCertificatesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetAssignedMediaSigningCertificatesRequest()
         {
@@ -4914,7 +4914,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// MediaSigningSupported capability is true.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAssignedMediaSigningCertificatesResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetAssignedMediaSigningCertificatesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAssignedMediaSigningCertificatesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] certificationPathIDField;
 
@@ -4972,7 +4972,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// to the TLS server, an empty list is returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAssignedServerCertificates", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetAssignedServerCertificatesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAssignedServerCertificatesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetAssignedServerCertificatesRequest()
         {
@@ -4987,7 +4987,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// to the TLS server, an empty list is returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAssignedServerCertificatesResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetAssignedServerCertificatesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAssignedServerCertificatesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] certificationPathIDField;
 
@@ -5039,7 +5039,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// This operation lists all existing authorization server configurations for the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAuthorizationServerConfigurations", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetAuthorizationServerConfigurationsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAuthorizationServerConfigurationsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string tokenField;
 
@@ -5082,7 +5082,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// This operation lists all existing authorization server configurations for the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAuthorizationServerConfigurationsResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetAuthorizationServerConfigurationsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAuthorizationServerConfigurationsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private AuthorizationServerConfiguration[] configurationField;
 
@@ -5133,7 +5133,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// requested CRLID, the device shall produce a CRLID fault.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCRL", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetCRLRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCRLRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string crlIDField;
 
@@ -5181,7 +5181,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// requested CRLID, the device shall produce a CRLID fault.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCRLResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetCRLResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCRLResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private CRL crlField;
 
@@ -5230,7 +5230,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// path validation policy ID, the device shall produce a CertPathValidationPolicyID fault.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCertPathValidationPolicy", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetCertPathValidationPolicyRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCertPathValidationPolicyRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string certPathValidationPolicyIDField;
 
@@ -5279,7 +5279,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// path validation policy ID, the device shall produce a CertPathValidationPolicyID fault.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCertPathValidationPolicyResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetCertPathValidationPolicyResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCertPathValidationPolicyResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private CertPathValidationPolicy certPathValidationPolicyField;
 
@@ -5328,7 +5328,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// return the private key that is associated to the public key in the certificate.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCertificate", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetCertificateRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCertificateRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string certificateIDField;
 
@@ -5377,7 +5377,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// return the private key that is associated to the public key in the certificate.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCertificateResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetCertificateResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCertificateResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private X509Certificate certificateField;
 
@@ -5425,7 +5425,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// requested ID in the keystore, an InvalidArgVal fault is produced.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCertificationPath", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetCertificationPathRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCertificationPathRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string certificationPathIDField;
 
@@ -5473,7 +5473,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// requested ID in the keystore, an InvalidArgVal fault is produced.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCertificationPathResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetCertificationPathResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCertificationPathResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private CertificationPath certificationPathField;
 
@@ -5519,7 +5519,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// This operation returns whether TLS client authentication is active.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetClientAuthenticationRequired", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetClientAuthenticationRequiredRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetClientAuthenticationRequiredRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetClientAuthenticationRequiredRequest()
         {
@@ -5531,7 +5531,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// This operation returns whether TLS client authentication is active.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetClientAuthenticationRequiredResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetClientAuthenticationRequiredResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetClientAuthenticationRequiredResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private bool clientAuthenticationRequiredField;
 
@@ -5574,7 +5574,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// This operation returns whether the Common Name Mapping to User is enabled.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCnMapsToUser", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetCnMapsToUserRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCnMapsToUserRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetCnMapsToUserRequest()
         {
@@ -5586,7 +5586,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// This operation returns whether the Common Name Mapping to User is enabled.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCnMapsToUserResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetCnMapsToUserResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCnMapsToUserResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private bool cnMapsToUserField;
 
@@ -5632,7 +5632,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// MaximumNumberOfDot1XConfigurations capability shall support this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetDot1XConfiguration", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetDot1XConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetDot1XConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string dot1XIDField;
 
@@ -5681,7 +5681,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// MaximumNumberOfDot1XConfigurations capability shall support this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetDot1XConfigurationResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetDot1XConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetDot1XConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private Dot1XConfiguration dot1XConfigurationField;
 
@@ -5727,7 +5727,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// This operation retrieves the version(s) of TLS which are currently enabled on the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetEnabledTLSVersions", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetEnabledTLSVersionsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetEnabledTLSVersionsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetEnabledTLSVersionsRequest()
         {
@@ -5739,7 +5739,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// This operation retrieves the version(s) of TLS which are currently enabled on the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetEnabledTLSVersionsResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetEnabledTLSVersionsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetEnabledTLSVersionsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] versionsField;
 
@@ -5785,7 +5785,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// This operation returns the parameters of the JWT authorization used by the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetJWTConfiguration", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetJWTConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetJWTConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetJWTConfigurationRequest()
         {
@@ -5797,7 +5797,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// This operation returns the parameters of the JWT authorization used by the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetJWTConfigurationResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetJWTConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetJWTConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private JWTConfiguration configurationField;
 
@@ -5842,7 +5842,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// status of the key is returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetKeyStatus", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetKeyStatusRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetKeyStatusRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string keyIDField;
 
@@ -5890,7 +5890,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// status of the key is returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetKeyStatusResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetKeyStatusResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetKeyStatusResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string keyStatusField;
 
@@ -5944,7 +5944,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// capability shall support this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetNetworkInterfaceDot1XConfiguration", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetNetworkInterfaceDot1XConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetNetworkInterfaceDot1XConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string tokenField;
 
@@ -6001,7 +6001,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// capability shall support this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetNetworkInterfaceDot1XConfigurationResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetNetworkInterfaceDot1XConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetNetworkInterfaceDot1XConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string dot1XIDField;
 
@@ -6051,7 +6051,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// key, and false otherwise.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetPrivateKeyStatus", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetPrivateKeyStatusRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetPrivateKeyStatusRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string keyIDField;
 
@@ -6101,7 +6101,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// key, and false otherwise.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetPrivateKeyStatusResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetPrivateKeyStatusResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetPrivateKeyStatusResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private bool hasPrivateKeyField;
 
@@ -6148,7 +6148,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// answer.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilities", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetServiceCapabilitiesRequest()
         {
@@ -6161,7 +6161,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// answer.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilitiesResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private Capabilities capabilitiesField;
 
@@ -6204,7 +6204,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class JWTConfiguration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class JWTConfiguration : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] audiencesField;
 
@@ -6281,9 +6281,9 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "JWTConfiguration"; } }
+        protected override string XmlTypeName { get { return "JWTConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -6348,7 +6348,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// The attributes of a key in the keystore.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class KeyAttribute : SharpOnvifCommon.Xml.OnvifContract
+    public partial class KeyAttribute : SharpOnvifCommon.Xml.XmlContract
     {
         private string keyIDField;
 
@@ -6477,9 +6477,9 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "KeyAttribute"; } }
+        protected override string XmlTypeName { get { return "KeyAttribute"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -6544,7 +6544,7 @@ namespace SharpOnvifServer.AdvancedSecurity
 
     }
 
-    public partial class KeyAttributeExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class KeyAttributeExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -6572,7 +6572,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// The capabilities of a keystore implementation on a device.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class KeystoreCapabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class KeystoreCapabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private AlgorithmIdentifier[] signatureAlgorithmsField;
 
@@ -7059,9 +7059,9 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.noPrivateKeySharingFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "KeystoreCapabilities"; } }
+        protected override string XmlTypeName { get { return "KeystoreCapabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -7257,7 +7257,7 @@ namespace SharpOnvifServer.AdvancedSecurity
 
     }
 
-    public partial class KeystoreCapabilitiesAnyElement : SharpOnvifCommon.Xml.OnvifContract
+    public partial class KeystoreCapabilitiesAnyElement : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -7285,7 +7285,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// The capabilities for signing media on a device.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class MediaSigningCapabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class MediaSigningCapabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private bool mediaSigningSupportedField;
         private bool mediaSigningSupportedFieldSpecified;
@@ -7336,9 +7336,9 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.userMediaSigningKeySupportedFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "MediaSigningCapabilities"; } }
+        protected override string XmlTypeName { get { return "MediaSigningCapabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -7374,7 +7374,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// A multi-valued RDN
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class MultiValuedRDN : SharpOnvifCommon.Xml.OnvifContract
+    public partial class MultiValuedRDN : SharpOnvifCommon.Xml.XmlContract
     {
         private DNAttributeTypeAndValue[] attributeField;
 
@@ -7388,9 +7388,9 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.attributeField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "MultiValuedRDN"; } }
+        protected override string XmlTypeName { get { return "MultiValuedRDN"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -7418,7 +7418,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class PassphraseAttribute : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PassphraseAttribute : SharpOnvifCommon.Xml.XmlContract
     {
         private string passphraseIDField;
 
@@ -7453,9 +7453,9 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PassphraseAttribute"; } }
+        protected override string XmlTypeName { get { return "PassphraseAttribute"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -7490,7 +7490,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// CertPathValidationPolicy fault.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RemoveCertPathValidationPolicyAssignment", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class RemoveCertPathValidationPolicyAssignmentRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RemoveCertPathValidationPolicyAssignmentRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string certPathValidationPolicyIDField;
 
@@ -7539,7 +7539,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// CertPathValidationPolicy fault.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RemoveCertPathValidationPolicyAssignmentResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class RemoveCertPathValidationPolicyAssignmentResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RemoveCertPathValidationPolicyAssignmentResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public RemoveCertPathValidationPolicyAssignmentResponse()
         {
@@ -7555,7 +7555,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// command if the UserMediaSigningKeySupported capability is true.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RemoveMediaSigningCertificateAssignment", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class RemoveMediaSigningCertificateAssignmentRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RemoveMediaSigningCertificateAssignmentRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string certificationPathIDField;
 
@@ -7602,7 +7602,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// command if the UserMediaSigningKeySupported capability is true.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RemoveMediaSigningCertificateAssignmentResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class RemoveMediaSigningCertificateAssignmentResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RemoveMediaSigningCertificateAssignmentResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public RemoveMediaSigningCertificateAssignmentResponse()
         {
@@ -7617,7 +7617,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// produced.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RemoveServerCertificateAssignment", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class RemoveServerCertificateAssignmentRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RemoveServerCertificateAssignmentRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string certificationPathIDField;
 
@@ -7663,7 +7663,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// produced.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RemoveServerCertificateAssignmentResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class RemoveServerCertificateAssignmentResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RemoveServerCertificateAssignmentResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public RemoveServerCertificateAssignmentResponse()
         {
@@ -7683,7 +7683,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// path validation policy to the TLS server.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ReplaceCertPathValidationPolicyAssignment", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class ReplaceCertPathValidationPolicyAssignmentRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ReplaceCertPathValidationPolicyAssignmentRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string oldCertPathValidationPolicyIDField;
 
@@ -7755,7 +7755,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// path validation policy to the TLS server.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ReplaceCertPathValidationPolicyAssignmentResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class ReplaceCertPathValidationPolicyAssignmentResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ReplaceCertPathValidationPolicyAssignmentResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public ReplaceCertPathValidationPolicyAssignmentResponse()
         {
@@ -7788,7 +7788,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// the certification path is not associated to the TLS server.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ReplaceServerCertificateAssignment", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class ReplaceServerCertificateAssignmentRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ReplaceServerCertificateAssignmentRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string oldCertificationPathIDField;
 
@@ -7867,7 +7867,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// the certification path is not associated to the TLS server.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ReplaceServerCertificateAssignmentResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class ReplaceServerCertificateAssignmentResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ReplaceServerCertificateAssignmentResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public ReplaceServerCertificateAssignmentResponse()
         {
@@ -7879,7 +7879,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// This operation modifies an existing authorization server configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetAuthorizationServerConfiguration", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class SetAuthorizationServerConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetAuthorizationServerConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private AuthorizationServerConfiguration configurationField;
 
@@ -7922,7 +7922,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// This operation modifies an existing authorization server configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetAuthorizationServerConfigurationResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class SetAuthorizationServerConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetAuthorizationServerConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetAuthorizationServerConfigurationResponse()
         {
@@ -7934,7 +7934,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// This operation allows to modify an existing certification path validation policy.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetCertPathValidationPolicy", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class SetCertPathValidationPolicyRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetCertPathValidationPolicyRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string certPathValidationPolicyIDField;
 
@@ -7999,7 +7999,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// This operation allows to modify an existing certification path validation policy.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetCertPathValidationPolicyResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class SetCertPathValidationPolicyResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetCertPathValidationPolicyResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetCertPathValidationPolicyResponse()
         {
@@ -8011,7 +8011,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// This operation allows to modify a certification path.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetCertificationPath", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class SetCertificationPathRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetCertificationPathRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string certificationPathIDField;
 
@@ -8075,7 +8075,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// This operation allows to modify a certification path.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetCertificationPathResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class SetCertificationPathResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetCertificationPathResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetCertificationPathResponse()
         {
@@ -8093,7 +8093,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// ONVIF Device Management Service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetClientAuthenticationRequired", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class SetClientAuthenticationRequiredRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetClientAuthenticationRequiredRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private bool clientAuthenticationRequiredField;
 
@@ -8142,7 +8142,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// ONVIF Device Management Service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetClientAuthenticationRequiredResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class SetClientAuthenticationRequiredResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetClientAuthenticationRequiredResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetClientAuthenticationRequiredResponse()
         {
@@ -8156,7 +8156,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// parameter clientAuthenticationRequired is set to true.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetCnMapsToUser", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class SetCnMapsToUserRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetCnMapsToUserRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private bool cnMapsToUserField;
 
@@ -8201,7 +8201,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// parameter clientAuthenticationRequired is set to true.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetCnMapsToUserResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class SetCnMapsToUserResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetCnMapsToUserResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetCnMapsToUserResponse()
         {
@@ -8226,7 +8226,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// operation. See AddServerCertificateAssignment and RemoveServerCertificateAssignment.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetEnabledTLSVersions", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class SetEnabledTLSVersionsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetEnabledTLSVersionsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] versionsField;
 
@@ -8285,7 +8285,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// operation. See AddServerCertificateAssignment and RemoveServerCertificateAssignment.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetEnabledTLSVersionsResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class SetEnabledTLSVersionsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetEnabledTLSVersionsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetEnabledTLSVersionsResponse()
         {
@@ -8297,7 +8297,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// This operation sets the parameters of the JWT authorization used by the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetJWTConfiguration", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class SetJWTConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetJWTConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private JWTConfiguration configurationField;
 
@@ -8340,7 +8340,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// This operation sets the parameters of the JWT authorization used by the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetJWTConfigurationResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class SetJWTConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetJWTConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetJWTConfigurationResponse()
         {
@@ -8366,7 +8366,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetNetworkInterfaceDot1XConfiguration", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class SetNetworkInterfaceDot1XConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetNetworkInterfaceDot1XConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string tokenField;
 
@@ -8447,7 +8447,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetNetworkInterfaceDot1XConfigurationResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class SetNetworkInterfaceDot1XConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetNetworkInterfaceDot1XConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private bool rebootNeededField;
 
@@ -8493,7 +8493,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// The capabilities of a TLS server implementation on a device.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class TLSServerCapabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class TLSServerCapabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -8615,9 +8615,9 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.maximumNumberOfTLSCertificationPathValidationPoliciesField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "TLSServerCapabilities"; } }
+        protected override string XmlTypeName { get { return "TLSServerCapabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -8681,7 +8681,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class TrustAnchor : SharpOnvifCommon.Xml.OnvifContract
+    public partial class TrustAnchor : SharpOnvifCommon.Xml.XmlContract
     {
         private string certificateIDField;
 
@@ -8704,9 +8704,9 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "TrustAnchor"; } }
+        protected override string XmlTypeName { get { return "TrustAnchor"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -8729,7 +8729,7 @@ namespace SharpOnvifServer.AdvancedSecurity
 
     }
 
-    public partial class UploadCRLAnyParameters : SharpOnvifCommon.Xml.OnvifContract
+    public partial class UploadCRLAnyParameters : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -8763,7 +8763,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// UnsupportedSignatureAlgorithm fault and shall not store the supplied CRL.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("UploadCRL", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class UploadCRLRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class UploadCRLRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private byte[] crlField;
 
@@ -8848,7 +8848,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// UnsupportedSignatureAlgorithm fault and shall not store the supplied CRL.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("UploadCRLResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class UploadCRLResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class UploadCRLResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string crlIDField;
 
@@ -8928,7 +8928,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// device shall not generate a key pair and no certificate shall be stored.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("UploadCertificate", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class UploadCertificateRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class UploadCertificateRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private byte[] certificateField;
 
@@ -9080,7 +9080,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// device shall not generate a key pair and no certificate shall be stored.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("UploadCertificateResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class UploadCertificateResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class UploadCertificateResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string certificateIDField;
 
@@ -9163,7 +9163,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// supplied EncryptionPassphraseID when processing the KeyBag.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("UploadCertificateWithPrivateKeyInPKCS12", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class UploadCertificateWithPrivateKeyInPKCS12Request : SharpOnvifCommon.Xml.OnvifContract
+    public partial class UploadCertificateWithPrivateKeyInPKCS12Request : SharpOnvifCommon.Xml.XmlContract
     {
         private byte[] certWithPrivateKeyField;
 
@@ -9354,7 +9354,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// supplied EncryptionPassphraseID when processing the KeyBag.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("UploadCertificateWithPrivateKeyInPKCS12Response", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class UploadCertificateWithPrivateKeyInPKCS12Response : SharpOnvifCommon.Xml.OnvifContract
+    public partial class UploadCertificateWithPrivateKeyInPKCS12Response : SharpOnvifCommon.Xml.XmlContract
     {
         private string certificationPathIDField;
 
@@ -9425,7 +9425,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// key.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("UploadKeyPairInPKCS8", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class UploadKeyPairInPKCS8Request : SharpOnvifCommon.Xml.OnvifContract
+    public partial class UploadKeyPairInPKCS8Request : SharpOnvifCommon.Xml.XmlContract
     {
         private byte[] keyPairField;
 
@@ -9532,7 +9532,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// key.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("UploadKeyPairInPKCS8Response", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class UploadKeyPairInPKCS8Response : SharpOnvifCommon.Xml.OnvifContract
+    public partial class UploadKeyPairInPKCS8Response : SharpOnvifCommon.Xml.XmlContract
     {
         private string keyIDField;
 
@@ -9578,7 +9578,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// This operation uploads a passphrase to the keystore of the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("UploadPassphrase", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class UploadPassphraseRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class UploadPassphraseRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string passphraseField;
 
@@ -9642,7 +9642,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// This operation uploads a passphrase to the keystore of the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("UploadPassphraseResponse", Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class UploadPassphraseResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class UploadPassphraseResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string passphraseIDField;
 
@@ -9688,7 +9688,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// An X.509 cerficiate as specified in RFC 5280.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class X509Certificate : SharpOnvifCommon.Xml.OnvifContract
+    public partial class X509Certificate : SharpOnvifCommon.Xml.XmlContract
     {
         private string certificateIDField;
 
@@ -9771,9 +9771,9 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "X509Certificate"; } }
+        protected override string XmlTypeName { get { return "X509Certificate"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -9824,7 +9824,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// An X.509v3 extension field as specified in RFC 5280
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class X509v3Extension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class X509v3Extension : SharpOnvifCommon.Xml.XmlContract
     {
         private string extnOIDField;
 
@@ -9871,9 +9871,9 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "X509v3Extension"; } }
+        protected override string XmlTypeName { get { return "X509v3Extension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -9909,14 +9909,14 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// <summary>Constructs a contract named by an xsi:type attribute.</summary>
     internal static class XmlTypeFactory
     {
-        public static SharpOnvifCommon.Xml.OnvifContract Create(string ns, string name)
+        public static SharpOnvifCommon.Xml.XmlContract Create(string ns, string name)
         {
             return SharpOnvifCommon.Onvif.XmlTypeFactory.Create(ns, name);
         }
     }
 
     /// <summary>SOAP action URIs for this service's operations.</summary>
-    public static class OnvifActions
+    public static class SoapActions
     {
         public const string GetServiceCapabilities = "http://www.onvif.org/ver10/advancedsecurity/wsdl/GetServiceCapabilities";
         public const string GetAuthorizationServerConfigurations = "http://www.onvif.org/ver10/advancedsecurity/wsdl/GetAuthorizationServerConfigurations";

@@ -57,10 +57,10 @@ namespace __RUNTIME__.Xml
         XmlQualifiedName ReadElementQualifiedName();
 
         /// <summary>Reads the current element into a new contract of the given kind.</summary>
-        T ReadElementObject<T>(Func<T> create) where T : OnvifContract;
+        T ReadElementObject<T>(Func<T> create) where T : XmlContract;
 
         /// <summary>Reads the attributes and children of the current element into a contract.</summary>
-        void ReadInto(OnvifContract instance);
+        void ReadInto(XmlContract instance);
 
         /// <summary>Whether the current element says xsi:nil.</summary>
         bool IsNil();

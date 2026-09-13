@@ -11,7 +11,7 @@
 namespace SharpOnvifClient.Events
 {
     /// <summary>
-    /// The CreatePullPoint Onvif service.
+    /// The CreatePullPoint service.
     /// </summary>
     public interface CreatePullPoint
     {
@@ -52,14 +52,14 @@ namespace SharpOnvifClient.Events
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
 
         public System.Threading.Tasks.Task<CreatePullPointResponse> CreatePullPointAsync(CreatePullPointRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.CreatePullPoint, "http://docs.oasis-open.org/wsn/b-2", "CreatePullPoint", request,
+            return InvokeAsync(SoapActions.CreatePullPoint, "http://docs.oasis-open.org/wsn/b-2", "CreatePullPoint", request,
                 () => new CreatePullPointResponse(), cancellationToken);
         }
 
@@ -73,7 +73,7 @@ namespace SharpOnvifClient.Events
     }
 
     /// <summary>
-    /// The EventPortType Onvif service.
+    /// The EventPortType service.
     /// </summary>
     public interface EventPortType
     {
@@ -176,7 +176,7 @@ namespace SharpOnvifClient.Events
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -186,7 +186,7 @@ namespace SharpOnvifClient.Events
         /// </summary>
         public System.Threading.Tasks.Task<GetServiceCapabilitiesResponse> GetServiceCapabilitiesAsync(GetServiceCapabilitiesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetServiceCapabilities, "http://www.onvif.org/ver10/events/wsdl", "GetServiceCapabilities", request,
+            return InvokeAsync(SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver10/events/wsdl", "GetServiceCapabilities", request,
                 () => new GetServiceCapabilitiesResponse(), cancellationToken);
         }
 
@@ -206,7 +206,7 @@ namespace SharpOnvifClient.Events
         /// </summary>
         public System.Threading.Tasks.Task<CreatePullPointSubscriptionResponse> CreatePullPointSubscriptionAsync(CreatePullPointSubscriptionRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.CreatePullPointSubscription, "http://www.onvif.org/ver10/events/wsdl", "CreatePullPointSubscription", request,
+            return InvokeAsync(SoapActions.CreatePullPointSubscription, "http://www.onvif.org/ver10/events/wsdl", "CreatePullPointSubscription", request,
                 () => new CreatePullPointSubscriptionResponse(), cancellationToken);
         }
 
@@ -226,7 +226,7 @@ namespace SharpOnvifClient.Events
         /// </summary>
         public System.Threading.Tasks.Task<GetEventPropertiesResponse> GetEventPropertiesAsync(GetEventPropertiesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetEventProperties, "http://www.onvif.org/ver10/events/wsdl", "GetEventProperties", request,
+            return InvokeAsync(SoapActions.GetEventProperties, "http://www.onvif.org/ver10/events/wsdl", "GetEventProperties", request,
                 () => new GetEventPropertiesResponse(), cancellationToken);
         }
 
@@ -245,7 +245,7 @@ namespace SharpOnvifClient.Events
         /// </summary>
         public System.Threading.Tasks.Task<AddEventBrokerResponse> AddEventBrokerAsync(AddEventBrokerRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.AddEventBroker, "http://www.onvif.org/ver10/events/wsdl", "AddEventBroker", request,
+            return InvokeAsync(SoapActions.AddEventBroker, "http://www.onvif.org/ver10/events/wsdl", "AddEventBroker", request,
                 () => new AddEventBrokerResponse(), cancellationToken);
         }
 
@@ -263,7 +263,7 @@ namespace SharpOnvifClient.Events
         /// </summary>
         public System.Threading.Tasks.Task<DeleteEventBrokerResponse> DeleteEventBrokerAsync(DeleteEventBrokerRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeleteEventBroker, "http://www.onvif.org/ver10/events/wsdl", "DeleteEventBroker", request,
+            return InvokeAsync(SoapActions.DeleteEventBroker, "http://www.onvif.org/ver10/events/wsdl", "DeleteEventBroker", request,
                 () => new DeleteEventBrokerResponse(), cancellationToken);
         }
 
@@ -280,7 +280,7 @@ namespace SharpOnvifClient.Events
         /// </summary>
         public System.Threading.Tasks.Task<GetEventBrokersResponse> GetEventBrokersAsync(GetEventBrokersRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetEventBrokers, "http://www.onvif.org/ver10/events/wsdl", "GetEventBrokers", request,
+            return InvokeAsync(SoapActions.GetEventBrokers, "http://www.onvif.org/ver10/events/wsdl", "GetEventBrokers", request,
                 () => new GetEventBrokersResponse(), cancellationToken);
         }
 
@@ -294,7 +294,7 @@ namespace SharpOnvifClient.Events
     }
 
     /// <summary>
-    /// The NotificationConsumer Onvif service.
+    /// The NotificationConsumer service.
     /// </summary>
     public interface NotificationConsumer
     {
@@ -335,14 +335,14 @@ namespace SharpOnvifClient.Events
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
 
         public System.Threading.Tasks.Task NotifyAsync(NotifyRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.Notify, "http://docs.oasis-open.org/wsn/b-2", "Notify", request, cancellationToken);
+            return InvokeAsync(SoapActions.Notify, "http://docs.oasis-open.org/wsn/b-2", "Notify", request, cancellationToken);
         }
 
         /// <summary>
@@ -355,7 +355,7 @@ namespace SharpOnvifClient.Events
     }
 
     /// <summary>
-    /// The NotificationProducer Onvif service.
+    /// The NotificationProducer service.
     /// </summary>
     public interface NotificationProducer
     {
@@ -403,14 +403,14 @@ namespace SharpOnvifClient.Events
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
 
         public System.Threading.Tasks.Task<SubscribeResponse> SubscribeAsync(SubscribeRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.Subscribe, "http://docs.oasis-open.org/wsn/b-2", "Subscribe", request,
+            return InvokeAsync(SoapActions.Subscribe, "http://docs.oasis-open.org/wsn/b-2", "Subscribe", request,
                 () => new SubscribeResponse(), cancellationToken);
         }
 
@@ -424,7 +424,7 @@ namespace SharpOnvifClient.Events
 
         public System.Threading.Tasks.Task<GetCurrentMessageResponse> GetCurrentMessageAsync(GetCurrentMessageRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetCurrentMessage, "http://docs.oasis-open.org/wsn/b-2", "GetCurrentMessage", request,
+            return InvokeAsync(SoapActions.GetCurrentMessage, "http://docs.oasis-open.org/wsn/b-2", "GetCurrentMessage", request,
                 () => new GetCurrentMessageResponse(), cancellationToken);
         }
 
@@ -438,7 +438,7 @@ namespace SharpOnvifClient.Events
     }
 
     /// <summary>
-    /// The PausableSubscriptionManager Onvif service.
+    /// The PausableSubscriptionManager service.
     /// </summary>
     public interface PausableSubscriptionManager
     {
@@ -500,14 +500,14 @@ namespace SharpOnvifClient.Events
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
 
         public System.Threading.Tasks.Task<RenewResponse> RenewAsync(RenewRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.Renew, "http://docs.oasis-open.org/wsn/b-2", "Renew", request,
+            return InvokeAsync(SoapActions.Renew, "http://docs.oasis-open.org/wsn/b-2", "Renew", request,
                 () => new RenewResponse(), cancellationToken);
         }
 
@@ -521,7 +521,7 @@ namespace SharpOnvifClient.Events
 
         public System.Threading.Tasks.Task<UnsubscribeResponse> UnsubscribeAsync(UnsubscribeRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.Unsubscribe, "http://docs.oasis-open.org/wsn/b-2", "Unsubscribe", request,
+            return InvokeAsync(SoapActions.Unsubscribe, "http://docs.oasis-open.org/wsn/b-2", "Unsubscribe", request,
                 () => new UnsubscribeResponse(), cancellationToken);
         }
 
@@ -535,7 +535,7 @@ namespace SharpOnvifClient.Events
 
         public System.Threading.Tasks.Task<PauseSubscriptionResponse> PauseSubscriptionAsync(PauseSubscriptionRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.PauseSubscription, "http://docs.oasis-open.org/wsn/b-2", "PauseSubscription", request,
+            return InvokeAsync(SoapActions.PauseSubscription, "http://docs.oasis-open.org/wsn/b-2", "PauseSubscription", request,
                 () => new PauseSubscriptionResponse(), cancellationToken);
         }
 
@@ -549,7 +549,7 @@ namespace SharpOnvifClient.Events
 
         public System.Threading.Tasks.Task<ResumeSubscriptionResponse> ResumeSubscriptionAsync(ResumeSubscriptionRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.ResumeSubscription, "http://docs.oasis-open.org/wsn/b-2", "ResumeSubscription", request,
+            return InvokeAsync(SoapActions.ResumeSubscription, "http://docs.oasis-open.org/wsn/b-2", "ResumeSubscription", request,
                 () => new ResumeSubscriptionResponse(), cancellationToken);
         }
 
@@ -563,7 +563,7 @@ namespace SharpOnvifClient.Events
     }
 
     /// <summary>
-    /// The PullPoint Onvif service.
+    /// The PullPoint service.
     /// </summary>
     public interface PullPoint
     {
@@ -618,14 +618,14 @@ namespace SharpOnvifClient.Events
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
 
         public System.Threading.Tasks.Task<GetMessagesResponse> GetMessagesAsync(GetMessagesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetMessages, "http://docs.oasis-open.org/wsn/b-2", "GetMessages", request,
+            return InvokeAsync(SoapActions.GetMessages, "http://docs.oasis-open.org/wsn/b-2", "GetMessages", request,
                 () => new GetMessagesResponse(), cancellationToken);
         }
 
@@ -639,7 +639,7 @@ namespace SharpOnvifClient.Events
 
         public System.Threading.Tasks.Task<DestroyPullPointResponse> DestroyPullPointAsync(DestroyPullPointRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DestroyPullPoint, "http://docs.oasis-open.org/wsn/b-2", "DestroyPullPoint", request,
+            return InvokeAsync(SoapActions.DestroyPullPoint, "http://docs.oasis-open.org/wsn/b-2", "DestroyPullPoint", request,
                 () => new DestroyPullPointResponse(), cancellationToken);
         }
 
@@ -653,7 +653,7 @@ namespace SharpOnvifClient.Events
 
         public System.Threading.Tasks.Task NotifyAsync(NotifyRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.Notify, "http://docs.oasis-open.org/wsn/b-2", "Notify", request, cancellationToken);
+            return InvokeAsync(SoapActions.Notify, "http://docs.oasis-open.org/wsn/b-2", "Notify", request, cancellationToken);
         }
 
         /// <summary>
@@ -666,7 +666,7 @@ namespace SharpOnvifClient.Events
     }
 
     /// <summary>
-    /// The PullPointSubscription Onvif service.
+    /// The PullPointSubscription service.
     /// </summary>
     public interface PullPointSubscription
     {
@@ -758,7 +758,7 @@ namespace SharpOnvifClient.Events
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -773,7 +773,7 @@ namespace SharpOnvifClient.Events
         /// </summary>
         public System.Threading.Tasks.Task<PullMessagesResponse> PullMessagesAsync(PullMessagesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.PullMessages, "http://www.onvif.org/ver10/events/wsdl", "PullMessages", request,
+            return InvokeAsync(SoapActions.PullMessages, "http://www.onvif.org/ver10/events/wsdl", "PullMessages", request,
                 () => new PullMessagesResponse(), cancellationToken);
         }
 
@@ -794,7 +794,7 @@ namespace SharpOnvifClient.Events
         /// </summary>
         public System.Threading.Tasks.Task<SeekResponse> SeekAsync(SeekRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.Seek, "http://www.onvif.org/ver10/events/wsdl", "Seek", request,
+            return InvokeAsync(SoapActions.Seek, "http://www.onvif.org/ver10/events/wsdl", "Seek", request,
                 () => new SeekResponse(), cancellationToken);
         }
 
@@ -818,7 +818,7 @@ namespace SharpOnvifClient.Events
         /// </summary>
         public System.Threading.Tasks.Task<SetSynchronizationPointResponse> SetSynchronizationPointAsync(SetSynchronizationPointRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetSynchronizationPoint, "http://www.onvif.org/ver10/events/wsdl", "SetSynchronizationPoint", request,
+            return InvokeAsync(SoapActions.SetSynchronizationPoint, "http://www.onvif.org/ver10/events/wsdl", "SetSynchronizationPoint", request,
                 () => new SetSynchronizationPointResponse(), cancellationToken);
         }
 
@@ -837,7 +837,7 @@ namespace SharpOnvifClient.Events
         /// </summary>
         public System.Threading.Tasks.Task<UnsubscribeResponse> UnsubscribeAsync(UnsubscribeRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.Unsubscribe, "http://docs.oasis-open.org/wsn/b-2", "Unsubscribe", request,
+            return InvokeAsync(SoapActions.Unsubscribe, "http://docs.oasis-open.org/wsn/b-2", "Unsubscribe", request,
                 () => new UnsubscribeResponse(), cancellationToken);
         }
 
@@ -851,7 +851,7 @@ namespace SharpOnvifClient.Events
     }
 
     /// <summary>
-    /// The SubscriptionManager Onvif service.
+    /// The SubscriptionManager service.
     /// </summary>
     public interface SubscriptionManager
     {
@@ -899,14 +899,14 @@ namespace SharpOnvifClient.Events
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
 
         public System.Threading.Tasks.Task<RenewResponse> RenewAsync(RenewRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.Renew, "http://docs.oasis-open.org/wsn/b-2", "Renew", request,
+            return InvokeAsync(SoapActions.Renew, "http://docs.oasis-open.org/wsn/b-2", "Renew", request,
                 () => new RenewResponse(), cancellationToken);
         }
 
@@ -920,7 +920,7 @@ namespace SharpOnvifClient.Events
 
         public System.Threading.Tasks.Task<UnsubscribeResponse> UnsubscribeAsync(UnsubscribeRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.Unsubscribe, "http://docs.oasis-open.org/wsn/b-2", "Unsubscribe", request,
+            return InvokeAsync(SoapActions.Unsubscribe, "http://docs.oasis-open.org/wsn/b-2", "Unsubscribe", request,
                 () => new UnsubscribeResponse(), cancellationToken);
         }
 

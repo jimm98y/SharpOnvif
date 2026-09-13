@@ -16,7 +16,7 @@ namespace SharpOnvifServer.AppMgmt
     public abstract class AppManagementBase
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new AppManagementDispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new AppManagementDispatcher();
 
         /// <summary>
         /// Removes an app from a device. This method shall return immedeiately and not wait until the
@@ -184,7 +184,7 @@ namespace SharpOnvifServer.AppMgmt
     }
 
     /// <summary>Routes SOAP actions to <see cref="AppManagementBase"/>.</summary>
-    internal sealed class AppManagementDispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class AppManagementDispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(AppManagementBase); } }
 
@@ -192,14 +192,14 @@ namespace SharpOnvifServer.AppMgmt
         {
             switch (action)
             {
-                case OnvifActions.Uninstall:
-                case OnvifActions.GetInstalledApps:
-                case OnvifActions.GetAppsInfo:
-                case OnvifActions.Activate:
-                case OnvifActions.Deactivate:
-                case OnvifActions.GetServiceCapabilities:
-                case OnvifActions.InstallLicense:
-                case OnvifActions.GetDeviceId:
+                case SoapActions.Uninstall:
+                case SoapActions.GetInstalledApps:
+                case SoapActions.GetAppsInfo:
+                case SoapActions.Activate:
+                case SoapActions.Deactivate:
+                case SoapActions.GetServiceCapabilities:
+                case SoapActions.InstallLicense:
+                case SoapActions.GetDeviceId:
                     return true;
                 default:
                     return false;
@@ -213,56 +213,56 @@ namespace SharpOnvifServer.AppMgmt
                 case "Uninstall":
                     if (ns == "http://www.onvif.org/ver10/appmgmt/wsdl")
                     {
-                        action = OnvifActions.Uninstall;
+                        action = SoapActions.Uninstall;
                         return true;
                     }
                     break;
                 case "GetInstalledApps":
                     if (ns == "http://www.onvif.org/ver10/appmgmt/wsdl")
                     {
-                        action = OnvifActions.GetInstalledApps;
+                        action = SoapActions.GetInstalledApps;
                         return true;
                     }
                     break;
                 case "GetAppsInfo":
                     if (ns == "http://www.onvif.org/ver10/appmgmt/wsdl")
                     {
-                        action = OnvifActions.GetAppsInfo;
+                        action = SoapActions.GetAppsInfo;
                         return true;
                     }
                     break;
                 case "Activate":
                     if (ns == "http://www.onvif.org/ver10/appmgmt/wsdl")
                     {
-                        action = OnvifActions.Activate;
+                        action = SoapActions.Activate;
                         return true;
                     }
                     break;
                 case "Deactivate":
                     if (ns == "http://www.onvif.org/ver10/appmgmt/wsdl")
                     {
-                        action = OnvifActions.Deactivate;
+                        action = SoapActions.Deactivate;
                         return true;
                     }
                     break;
                 case "GetServiceCapabilities":
                     if (ns == "http://www.onvif.org/ver10/appmgmt/wsdl")
                     {
-                        action = OnvifActions.GetServiceCapabilities;
+                        action = SoapActions.GetServiceCapabilities;
                         return true;
                     }
                     break;
                 case "InstallLicense":
                     if (ns == "http://www.onvif.org/ver10/appmgmt/wsdl")
                     {
-                        action = OnvifActions.InstallLicense;
+                        action = SoapActions.InstallLicense;
                         return true;
                     }
                     break;
                 case "GetDeviceId":
                     if (ns == "http://www.onvif.org/ver10/appmgmt/wsdl")
                     {
-                        action = OnvifActions.GetDeviceId;
+                        action = SoapActions.GetDeviceId;
                         return true;
                     }
                     break;
@@ -271,7 +271,7 @@ namespace SharpOnvifServer.AppMgmt
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             AppManagementBase target = (AppManagementBase)service;
@@ -279,68 +279,68 @@ namespace SharpOnvifServer.AppMgmt
 
             switch (action)
             {
-                case OnvifActions.Uninstall:
+                case SoapActions.Uninstall:
                 {
                     var request = new UninstallRequest();
                     reader.ReadInto(request);
                     var response = await target.UninstallAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/appmgmt/wsdl", "UninstallResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/appmgmt/wsdl", "UninstallResponse");
                 }
-                case OnvifActions.GetInstalledApps:
+                case SoapActions.GetInstalledApps:
                 {
                     var request = new GetInstalledAppsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetInstalledAppsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/appmgmt/wsdl", "GetInstalledAppsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/appmgmt/wsdl", "GetInstalledAppsResponse");
                 }
-                case OnvifActions.GetAppsInfo:
+                case SoapActions.GetAppsInfo:
                 {
                     var request = new GetAppsInfoRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAppsInfoAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/appmgmt/wsdl", "GetAppsInfoResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/appmgmt/wsdl", "GetAppsInfoResponse");
                 }
-                case OnvifActions.Activate:
+                case SoapActions.Activate:
                 {
                     var request = new ActivateRequest();
                     reader.ReadInto(request);
                     var response = await target.ActivateAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/appmgmt/wsdl", "ActivateResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/appmgmt/wsdl", "ActivateResponse");
                 }
-                case OnvifActions.Deactivate:
+                case SoapActions.Deactivate:
                 {
                     var request = new DeactivateRequest();
                     reader.ReadInto(request);
                     var response = await target.DeactivateAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/appmgmt/wsdl", "DeactivateResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/appmgmt/wsdl", "DeactivateResponse");
                 }
-                case OnvifActions.GetServiceCapabilities:
+                case SoapActions.GetServiceCapabilities:
                 {
                     var request = new GetServiceCapabilitiesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetServiceCapabilitiesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/appmgmt/wsdl", "GetServiceCapabilitiesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/appmgmt/wsdl", "GetServiceCapabilitiesResponse");
                 }
-                case OnvifActions.InstallLicense:
+                case SoapActions.InstallLicense:
                 {
                     var request = new InstallLicenseRequest();
                     reader.ReadInto(request);
                     var response = await target.InstallLicenseAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/appmgmt/wsdl", "InstallLicenseResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/appmgmt/wsdl", "InstallLicenseResponse");
                 }
-                case OnvifActions.GetDeviceId:
+                case SoapActions.GetDeviceId:
                 {
                     var request = new GetDeviceIdRequest();
                     reader.ReadInto(request);
                     var response = await target.GetDeviceIdAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/appmgmt/wsdl", "GetDeviceIdResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/appmgmt/wsdl", "GetDeviceIdResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }

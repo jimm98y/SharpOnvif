@@ -11,7 +11,7 @@
 namespace SharpOnvifClient.Imaging
 {
     /// <summary>
-    /// The ImagingPort Onvif service.
+    /// The ImagingPort service.
     /// </summary>
     public interface ImagingPort
     {
@@ -180,7 +180,7 @@ namespace SharpOnvifClient.Imaging
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -190,7 +190,7 @@ namespace SharpOnvifClient.Imaging
         /// </summary>
         public System.Threading.Tasks.Task<GetServiceCapabilitiesResponse> GetServiceCapabilitiesAsync(GetServiceCapabilitiesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetServiceCapabilities, "http://www.onvif.org/ver20/imaging/wsdl", "GetServiceCapabilities", request,
+            return InvokeAsync(SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver20/imaging/wsdl", "GetServiceCapabilities", request,
                 () => new GetServiceCapabilitiesResponse(), cancellationToken);
         }
 
@@ -207,7 +207,7 @@ namespace SharpOnvifClient.Imaging
         /// </summary>
         public System.Threading.Tasks.Task<GetImagingSettingsResponse> GetImagingSettingsAsync(GetImagingSettingsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetImagingSettings, "http://www.onvif.org/ver20/imaging/wsdl", "GetImagingSettings", request,
+            return InvokeAsync(SoapActions.GetImagingSettings, "http://www.onvif.org/ver20/imaging/wsdl", "GetImagingSettings", request,
                 () => new GetImagingSettingsResponse(), cancellationToken);
         }
 
@@ -224,7 +224,7 @@ namespace SharpOnvifClient.Imaging
         /// </summary>
         public System.Threading.Tasks.Task<SetImagingSettingsResponse> SetImagingSettingsAsync(SetImagingSettingsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetImagingSettings, "http://www.onvif.org/ver20/imaging/wsdl", "SetImagingSettings", request,
+            return InvokeAsync(SoapActions.SetImagingSettings, "http://www.onvif.org/ver20/imaging/wsdl", "SetImagingSettings", request,
                 () => new SetImagingSettingsResponse(), cancellationToken);
         }
 
@@ -245,7 +245,7 @@ namespace SharpOnvifClient.Imaging
         /// </summary>
         public System.Threading.Tasks.Task<GetOptionsResponse> GetOptionsAsync(GetOptionsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetOptions, "http://www.onvif.org/ver20/imaging/wsdl", "GetOptions", request,
+            return InvokeAsync(SoapActions.GetOptions, "http://www.onvif.org/ver20/imaging/wsdl", "GetOptions", request,
                 () => new GetOptionsResponse(), cancellationToken);
         }
 
@@ -273,7 +273,7 @@ namespace SharpOnvifClient.Imaging
         /// </summary>
         public System.Threading.Tasks.Task<MoveResponse> MoveAsync(MoveRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.Move, "http://www.onvif.org/ver20/imaging/wsdl", "Move", request,
+            return InvokeAsync(SoapActions.Move, "http://www.onvif.org/ver20/imaging/wsdl", "Move", request,
                 () => new MoveResponse(), cancellationToken);
         }
 
@@ -290,7 +290,7 @@ namespace SharpOnvifClient.Imaging
         /// </summary>
         public System.Threading.Tasks.Task<GetMoveOptionsResponse> GetMoveOptionsAsync(GetMoveOptionsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetMoveOptions, "http://www.onvif.org/ver20/imaging/wsdl", "GetMoveOptions", request,
+            return InvokeAsync(SoapActions.GetMoveOptions, "http://www.onvif.org/ver20/imaging/wsdl", "GetMoveOptions", request,
                 () => new GetMoveOptionsResponse(), cancellationToken);
         }
 
@@ -309,7 +309,7 @@ namespace SharpOnvifClient.Imaging
         /// </summary>
         public System.Threading.Tasks.Task<StopResponse> StopAsync(StopRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.Stop, "http://www.onvif.org/ver20/imaging/wsdl", "Stop", request,
+            return InvokeAsync(SoapActions.Stop, "http://www.onvif.org/ver20/imaging/wsdl", "Stop", request,
                 () => new StopResponse(), cancellationToken);
         }
 
@@ -327,7 +327,7 @@ namespace SharpOnvifClient.Imaging
         /// </summary>
         public System.Threading.Tasks.Task<GetStatusResponse> GetStatusAsync(GetStatusRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetStatus, "http://www.onvif.org/ver20/imaging/wsdl", "GetStatus", request,
+            return InvokeAsync(SoapActions.GetStatus, "http://www.onvif.org/ver20/imaging/wsdl", "GetStatus", request,
                 () => new GetStatusResponse(), cancellationToken);
         }
 
@@ -344,7 +344,7 @@ namespace SharpOnvifClient.Imaging
         /// </summary>
         public System.Threading.Tasks.Task<GetPresetsResponse> GetPresetsAsync(GetPresetsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetPresets, "http://www.onvif.org/ver20/imaging/wsdl", "GetPresets", request,
+            return InvokeAsync(SoapActions.GetPresets, "http://www.onvif.org/ver20/imaging/wsdl", "GetPresets", request,
                 () => new GetPresetsResponse(), cancellationToken);
         }
 
@@ -363,7 +363,7 @@ namespace SharpOnvifClient.Imaging
         /// </summary>
         public System.Threading.Tasks.Task<GetCurrentPresetResponse> GetCurrentPresetAsync(GetCurrentPresetRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetCurrentPreset, "http://www.onvif.org/ver20/imaging/wsdl", "GetCurrentPreset", request,
+            return InvokeAsync(SoapActions.GetCurrentPreset, "http://www.onvif.org/ver20/imaging/wsdl", "GetCurrentPreset", request,
                 () => new GetCurrentPresetResponse(), cancellationToken);
         }
 
@@ -385,7 +385,7 @@ namespace SharpOnvifClient.Imaging
         /// </summary>
         public System.Threading.Tasks.Task<SetCurrentPresetResponse> SetCurrentPresetAsync(SetCurrentPresetRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetCurrentPreset, "http://www.onvif.org/ver20/imaging/wsdl", "SetCurrentPreset", request,
+            return InvokeAsync(SoapActions.SetCurrentPreset, "http://www.onvif.org/ver20/imaging/wsdl", "SetCurrentPreset", request,
                 () => new SetCurrentPresetResponse(), cancellationToken);
         }
 

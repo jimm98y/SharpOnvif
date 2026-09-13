@@ -11,7 +11,7 @@
 namespace SharpOnvifClient.AccessControl
 {
     /// <summary>
-    /// The PACSPort Onvif service.
+    /// The PACSPort service.
     /// </summary>
     public interface PACSPort
     {
@@ -353,7 +353,7 @@ namespace SharpOnvifClient.AccessControl
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -364,7 +364,7 @@ namespace SharpOnvifClient.AccessControl
         /// </summary>
         public System.Threading.Tasks.Task<GetServiceCapabilitiesResponse> GetServiceCapabilitiesAsync(GetServiceCapabilitiesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetServiceCapabilities, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetServiceCapabilities", request,
+            return InvokeAsync(SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetServiceCapabilities", request,
                 () => new GetServiceCapabilitiesResponse(), cancellationToken);
         }
 
@@ -384,7 +384,7 @@ namespace SharpOnvifClient.AccessControl
         /// </summary>
         public System.Threading.Tasks.Task<GetAccessPointInfoResponse> GetAccessPointInfoAsync(GetAccessPointInfoRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetAccessPointInfo, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAccessPointInfo", request,
+            return InvokeAsync(SoapActions.GetAccessPointInfo, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAccessPointInfo", request,
                 () => new GetAccessPointInfoResponse(), cancellationToken);
         }
 
@@ -405,7 +405,7 @@ namespace SharpOnvifClient.AccessControl
         /// </summary>
         public System.Threading.Tasks.Task<GetAccessPointInfoListResponse> GetAccessPointInfoListAsync(GetAccessPointInfoListRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetAccessPointInfoList, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAccessPointInfoList", request,
+            return InvokeAsync(SoapActions.GetAccessPointInfoList, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAccessPointInfoList", request,
                 () => new GetAccessPointInfoListResponse(), cancellationToken);
         }
 
@@ -425,7 +425,7 @@ namespace SharpOnvifClient.AccessControl
         /// </summary>
         public System.Threading.Tasks.Task<GetAccessPointsResponse> GetAccessPointsAsync(GetAccessPointsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetAccessPoints, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAccessPoints", request,
+            return InvokeAsync(SoapActions.GetAccessPoints, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAccessPoints", request,
                 () => new GetAccessPointsResponse(), cancellationToken);
         }
 
@@ -445,7 +445,7 @@ namespace SharpOnvifClient.AccessControl
         /// </summary>
         public System.Threading.Tasks.Task<GetAccessPointListResponse> GetAccessPointListAsync(GetAccessPointListRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetAccessPointList, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAccessPointList", request,
+            return InvokeAsync(SoapActions.GetAccessPointList, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAccessPointList", request,
                 () => new GetAccessPointListResponse(), cancellationToken);
         }
 
@@ -465,7 +465,7 @@ namespace SharpOnvifClient.AccessControl
         /// </summary>
         public System.Threading.Tasks.Task<CreateAccessPointResponse> CreateAccessPointAsync(CreateAccessPointRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.CreateAccessPoint, "http://www.onvif.org/ver10/accesscontrol/wsdl", "CreateAccessPoint", request,
+            return InvokeAsync(SoapActions.CreateAccessPoint, "http://www.onvif.org/ver10/accesscontrol/wsdl", "CreateAccessPoint", request,
                 () => new CreateAccessPointResponse(), cancellationToken);
         }
 
@@ -488,7 +488,7 @@ namespace SharpOnvifClient.AccessControl
         /// </summary>
         public System.Threading.Tasks.Task<SetAccessPointResponse> SetAccessPointAsync(SetAccessPointRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetAccessPoint, "http://www.onvif.org/ver10/accesscontrol/wsdl", "SetAccessPoint", request,
+            return InvokeAsync(SoapActions.SetAccessPoint, "http://www.onvif.org/ver10/accesscontrol/wsdl", "SetAccessPoint", request,
                 () => new SetAccessPointResponse(), cancellationToken);
         }
 
@@ -508,7 +508,7 @@ namespace SharpOnvifClient.AccessControl
         /// </summary>
         public System.Threading.Tasks.Task<ModifyAccessPointResponse> ModifyAccessPointAsync(ModifyAccessPointRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.ModifyAccessPoint, "http://www.onvif.org/ver10/accesscontrol/wsdl", "ModifyAccessPoint", request,
+            return InvokeAsync(SoapActions.ModifyAccessPoint, "http://www.onvif.org/ver10/accesscontrol/wsdl", "ModifyAccessPoint", request,
                 () => new ModifyAccessPointResponse(), cancellationToken);
         }
 
@@ -528,7 +528,7 @@ namespace SharpOnvifClient.AccessControl
         /// </summary>
         public System.Threading.Tasks.Task<DeleteAccessPointResponse> DeleteAccessPointAsync(DeleteAccessPointRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeleteAccessPoint, "http://www.onvif.org/ver10/accesscontrol/wsdl", "DeleteAccessPoint", request,
+            return InvokeAsync(SoapActions.DeleteAccessPoint, "http://www.onvif.org/ver10/accesscontrol/wsdl", "DeleteAccessPoint", request,
                 () => new DeleteAccessPointResponse(), cancellationToken);
         }
 
@@ -545,7 +545,7 @@ namespace SharpOnvifClient.AccessControl
         /// </summary>
         public System.Threading.Tasks.Task<SetAccessPointAuthenticationProfileResponse> SetAccessPointAuthenticationProfileAsync(SetAccessPointAuthenticationProfileRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetAccessPointAuthenticationProfile, "http://www.onvif.org/ver10/accesscontrol/wsdl", "SetAccessPointAuthenticationProfile", request,
+            return InvokeAsync(SoapActions.SetAccessPointAuthenticationProfile, "http://www.onvif.org/ver10/accesscontrol/wsdl", "SetAccessPointAuthenticationProfile", request,
                 () => new SetAccessPointAuthenticationProfileResponse(), cancellationToken);
         }
 
@@ -562,7 +562,7 @@ namespace SharpOnvifClient.AccessControl
         /// </summary>
         public System.Threading.Tasks.Task<DeleteAccessPointAuthenticationProfileResponse> DeleteAccessPointAuthenticationProfileAsync(DeleteAccessPointAuthenticationProfileRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeleteAccessPointAuthenticationProfile, "http://www.onvif.org/ver10/accesscontrol/wsdl", "DeleteAccessPointAuthenticationProfile", request,
+            return InvokeAsync(SoapActions.DeleteAccessPointAuthenticationProfile, "http://www.onvif.org/ver10/accesscontrol/wsdl", "DeleteAccessPointAuthenticationProfile", request,
                 () => new DeleteAccessPointAuthenticationProfileResponse(), cancellationToken);
         }
 
@@ -582,7 +582,7 @@ namespace SharpOnvifClient.AccessControl
         /// </summary>
         public System.Threading.Tasks.Task<GetAreaInfoResponse> GetAreaInfoAsync(GetAreaInfoRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetAreaInfo, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAreaInfo", request,
+            return InvokeAsync(SoapActions.GetAreaInfo, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAreaInfo", request,
                 () => new GetAreaInfoResponse(), cancellationToken);
         }
 
@@ -602,7 +602,7 @@ namespace SharpOnvifClient.AccessControl
         /// </summary>
         public System.Threading.Tasks.Task<GetAreaInfoListResponse> GetAreaInfoListAsync(GetAreaInfoListRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetAreaInfoList, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAreaInfoList", request,
+            return InvokeAsync(SoapActions.GetAreaInfoList, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAreaInfoList", request,
                 () => new GetAreaInfoListResponse(), cancellationToken);
         }
 
@@ -622,7 +622,7 @@ namespace SharpOnvifClient.AccessControl
         /// </summary>
         public System.Threading.Tasks.Task<GetAreasResponse> GetAreasAsync(GetAreasRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetAreas, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAreas", request,
+            return InvokeAsync(SoapActions.GetAreas, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAreas", request,
                 () => new GetAreasResponse(), cancellationToken);
         }
 
@@ -642,7 +642,7 @@ namespace SharpOnvifClient.AccessControl
         /// </summary>
         public System.Threading.Tasks.Task<GetAreaListResponse> GetAreaListAsync(GetAreaListRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetAreaList, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAreaList", request,
+            return InvokeAsync(SoapActions.GetAreaList, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAreaList", request,
                 () => new GetAreaListResponse(), cancellationToken);
         }
 
@@ -662,7 +662,7 @@ namespace SharpOnvifClient.AccessControl
         /// </summary>
         public System.Threading.Tasks.Task<CreateAreaResponse> CreateAreaAsync(CreateAreaRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.CreateArea, "http://www.onvif.org/ver10/accesscontrol/wsdl", "CreateArea", request,
+            return InvokeAsync(SoapActions.CreateArea, "http://www.onvif.org/ver10/accesscontrol/wsdl", "CreateArea", request,
                 () => new CreateAreaResponse(), cancellationToken);
         }
 
@@ -684,7 +684,7 @@ namespace SharpOnvifClient.AccessControl
         /// </summary>
         public System.Threading.Tasks.Task<SetAreaResponse> SetAreaAsync(SetAreaRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetArea, "http://www.onvif.org/ver10/accesscontrol/wsdl", "SetArea", request,
+            return InvokeAsync(SoapActions.SetArea, "http://www.onvif.org/ver10/accesscontrol/wsdl", "SetArea", request,
                 () => new SetAreaResponse(), cancellationToken);
         }
 
@@ -704,7 +704,7 @@ namespace SharpOnvifClient.AccessControl
         /// </summary>
         public System.Threading.Tasks.Task<ModifyAreaResponse> ModifyAreaAsync(ModifyAreaRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.ModifyArea, "http://www.onvif.org/ver10/accesscontrol/wsdl", "ModifyArea", request,
+            return InvokeAsync(SoapActions.ModifyArea, "http://www.onvif.org/ver10/accesscontrol/wsdl", "ModifyArea", request,
                 () => new ModifyAreaResponse(), cancellationToken);
         }
 
@@ -724,7 +724,7 @@ namespace SharpOnvifClient.AccessControl
         /// </summary>
         public System.Threading.Tasks.Task<DeleteAreaResponse> DeleteAreaAsync(DeleteAreaRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeleteArea, "http://www.onvif.org/ver10/accesscontrol/wsdl", "DeleteArea", request,
+            return InvokeAsync(SoapActions.DeleteArea, "http://www.onvif.org/ver10/accesscontrol/wsdl", "DeleteArea", request,
                 () => new DeleteAreaResponse(), cancellationToken);
         }
 
@@ -741,7 +741,7 @@ namespace SharpOnvifClient.AccessControl
         /// </summary>
         public System.Threading.Tasks.Task<GetAccessPointStateResponse> GetAccessPointStateAsync(GetAccessPointStateRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetAccessPointState, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAccessPointState", request,
+            return InvokeAsync(SoapActions.GetAccessPointState, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAccessPointState", request,
                 () => new GetAccessPointStateResponse(), cancellationToken);
         }
 
@@ -759,7 +759,7 @@ namespace SharpOnvifClient.AccessControl
         /// </summary>
         public System.Threading.Tasks.Task<EnableAccessPointResponse> EnableAccessPointAsync(EnableAccessPointRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.EnableAccessPoint, "http://www.onvif.org/ver10/accesscontrol/wsdl", "EnableAccessPoint", request,
+            return InvokeAsync(SoapActions.EnableAccessPoint, "http://www.onvif.org/ver10/accesscontrol/wsdl", "EnableAccessPoint", request,
                 () => new EnableAccessPointResponse(), cancellationToken);
         }
 
@@ -777,7 +777,7 @@ namespace SharpOnvifClient.AccessControl
         /// </summary>
         public System.Threading.Tasks.Task<DisableAccessPointResponse> DisableAccessPointAsync(DisableAccessPointRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DisableAccessPoint, "http://www.onvif.org/ver10/accesscontrol/wsdl", "DisableAccessPoint", request,
+            return InvokeAsync(SoapActions.DisableAccessPoint, "http://www.onvif.org/ver10/accesscontrol/wsdl", "DisableAccessPoint", request,
                 () => new DisableAccessPointResponse(), cancellationToken);
         }
 
@@ -796,7 +796,7 @@ namespace SharpOnvifClient.AccessControl
         /// </summary>
         public System.Threading.Tasks.Task<ExternalAuthorizationResponse> ExternalAuthorizationAsync(ExternalAuthorizationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.ExternalAuthorization, "http://www.onvif.org/ver10/accesscontrol/wsdl", "ExternalAuthorization", request,
+            return InvokeAsync(SoapActions.ExternalAuthorization, "http://www.onvif.org/ver10/accesscontrol/wsdl", "ExternalAuthorization", request,
                 () => new ExternalAuthorizationResponse(), cancellationToken);
         }
 
@@ -822,7 +822,7 @@ namespace SharpOnvifClient.AccessControl
         /// </summary>
         public System.Threading.Tasks.Task<FeedbackResponse> FeedbackAsync(FeedbackRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.Feedback, "http://www.onvif.org/ver10/accesscontrol/wsdl", "Feedback", request,
+            return InvokeAsync(SoapActions.Feedback, "http://www.onvif.org/ver10/accesscontrol/wsdl", "Feedback", request,
                 () => new FeedbackResponse(), cancellationToken);
         }
 

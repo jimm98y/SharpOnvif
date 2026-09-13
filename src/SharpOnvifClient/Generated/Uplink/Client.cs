@@ -11,7 +11,7 @@
 namespace SharpOnvifClient.Uplink
 {
     /// <summary>
-    /// The UplinkPort Onvif service.
+    /// The UplinkPort service.
     /// </summary>
     public interface UplinkPort
     {
@@ -88,7 +88,7 @@ namespace SharpOnvifClient.Uplink
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -98,7 +98,7 @@ namespace SharpOnvifClient.Uplink
         /// </summary>
         public System.Threading.Tasks.Task<GetServiceCapabilitiesResponse> GetServiceCapabilitiesAsync(GetServiceCapabilitiesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetServiceCapabilities, "http://www.onvif.org/ver10/uplink/wsdl", "GetServiceCapabilities", request,
+            return InvokeAsync(SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver10/uplink/wsdl", "GetServiceCapabilities", request,
                 () => new GetServiceCapabilitiesResponse(), cancellationToken);
         }
 
@@ -116,7 +116,7 @@ namespace SharpOnvifClient.Uplink
         /// </summary>
         public System.Threading.Tasks.Task<GetUplinksResponse> GetUplinksAsync(GetUplinksRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetUplinks, "http://www.onvif.org/ver10/uplink/wsdl", "GetUplinks", request,
+            return InvokeAsync(SoapActions.GetUplinks, "http://www.onvif.org/ver10/uplink/wsdl", "GetUplinks", request,
                 () => new GetUplinksResponse(), cancellationToken);
         }
 
@@ -135,7 +135,7 @@ namespace SharpOnvifClient.Uplink
         /// </summary>
         public System.Threading.Tasks.Task<SetUplinkResponse> SetUplinkAsync(SetUplinkRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetUplink, "http://www.onvif.org/ver10/uplink/wsdl", "SetUplink", request,
+            return InvokeAsync(SoapActions.SetUplink, "http://www.onvif.org/ver10/uplink/wsdl", "SetUplink", request,
                 () => new SetUplinkResponse(), cancellationToken);
         }
 
@@ -152,7 +152,7 @@ namespace SharpOnvifClient.Uplink
         /// </summary>
         public System.Threading.Tasks.Task<DeleteUplinkResponse> DeleteUplinkAsync(DeleteUplinkRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeleteUplink, "http://www.onvif.org/ver10/uplink/wsdl", "DeleteUplink", request,
+            return InvokeAsync(SoapActions.DeleteUplink, "http://www.onvif.org/ver10/uplink/wsdl", "DeleteUplink", request,
                 () => new DeleteUplinkResponse(), cancellationToken);
         }
 

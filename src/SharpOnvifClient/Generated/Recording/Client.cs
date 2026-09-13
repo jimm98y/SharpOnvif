@@ -11,7 +11,7 @@
 namespace SharpOnvifClient.Recording
 {
     /// <summary>
-    /// The RecordingPort Onvif service.
+    /// The RecordingPort service.
     /// </summary>
     public interface RecordingPort
     {
@@ -324,7 +324,7 @@ namespace SharpOnvifClient.Recording
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -334,7 +334,7 @@ namespace SharpOnvifClient.Recording
         /// </summary>
         public System.Threading.Tasks.Task<GetServiceCapabilitiesResponse> GetServiceCapabilitiesAsync(GetServiceCapabilitiesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetServiceCapabilities, "http://www.onvif.org/ver10/recording/wsdl", "GetServiceCapabilities", request,
+            return InvokeAsync(SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver10/recording/wsdl", "GetServiceCapabilities", request,
                 () => new GetServiceCapabilitiesResponse(), cancellationToken);
         }
 
@@ -357,7 +357,7 @@ namespace SharpOnvifClient.Recording
         /// </summary>
         public System.Threading.Tasks.Task<CreateRecordingResponse> CreateRecordingAsync(CreateRecordingRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.CreateRecording, "http://www.onvif.org/ver10/recording/wsdl", "CreateRecording", request,
+            return InvokeAsync(SoapActions.CreateRecording, "http://www.onvif.org/ver10/recording/wsdl", "CreateRecording", request,
                 () => new CreateRecordingResponse(), cancellationToken);
         }
 
@@ -380,7 +380,7 @@ namespace SharpOnvifClient.Recording
         /// </summary>
         public System.Threading.Tasks.Task<DeleteRecordingResponse> DeleteRecordingAsync(DeleteRecordingRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeleteRecording, "http://www.onvif.org/ver10/recording/wsdl", "DeleteRecording", request,
+            return InvokeAsync(SoapActions.DeleteRecording, "http://www.onvif.org/ver10/recording/wsdl", "DeleteRecording", request,
                 () => new DeleteRecordingResponse(), cancellationToken);
         }
 
@@ -398,7 +398,7 @@ namespace SharpOnvifClient.Recording
         /// </summary>
         public System.Threading.Tasks.Task<GetRecordingsResponse> GetRecordingsAsync(GetRecordingsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetRecordings, "http://www.onvif.org/ver10/recording/wsdl", "GetRecordings", request,
+            return InvokeAsync(SoapActions.GetRecordings, "http://www.onvif.org/ver10/recording/wsdl", "GetRecordings", request,
                 () => new GetRecordingsResponse(), cancellationToken);
         }
 
@@ -415,7 +415,7 @@ namespace SharpOnvifClient.Recording
         /// </summary>
         public System.Threading.Tasks.Task<SetRecordingConfigurationResponse> SetRecordingConfigurationAsync(SetRecordingConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetRecordingConfiguration, "http://www.onvif.org/ver10/recording/wsdl", "SetRecordingConfiguration", request,
+            return InvokeAsync(SoapActions.SetRecordingConfiguration, "http://www.onvif.org/ver10/recording/wsdl", "SetRecordingConfiguration", request,
                 () => new SetRecordingConfigurationResponse(), cancellationToken);
         }
 
@@ -432,7 +432,7 @@ namespace SharpOnvifClient.Recording
         /// </summary>
         public System.Threading.Tasks.Task<GetRecordingConfigurationResponse> GetRecordingConfigurationAsync(GetRecordingConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetRecordingConfiguration, "http://www.onvif.org/ver10/recording/wsdl", "GetRecordingConfiguration", request,
+            return InvokeAsync(SoapActions.GetRecordingConfiguration, "http://www.onvif.org/ver10/recording/wsdl", "GetRecordingConfiguration", request,
                 () => new GetRecordingConfigurationResponse(), cancellationToken);
         }
 
@@ -451,7 +451,7 @@ namespace SharpOnvifClient.Recording
         /// </summary>
         public System.Threading.Tasks.Task<GetRecordingOptionsResponse> GetRecordingOptionsAsync(GetRecordingOptionsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetRecordingOptions, "http://www.onvif.org/ver10/recording/wsdl", "GetRecordingOptions", request,
+            return InvokeAsync(SoapActions.GetRecordingOptions, "http://www.onvif.org/ver10/recording/wsdl", "GetRecordingOptions", request,
                 () => new GetRecordingOptionsResponse(), cancellationToken);
         }
 
@@ -470,7 +470,7 @@ namespace SharpOnvifClient.Recording
         /// </summary>
         public System.Threading.Tasks.Task<CreateTrackResponse> CreateTrackAsync(CreateTrackRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.CreateTrack, "http://www.onvif.org/ver10/recording/wsdl", "CreateTrack", request,
+            return InvokeAsync(SoapActions.CreateTrack, "http://www.onvif.org/ver10/recording/wsdl", "CreateTrack", request,
                 () => new CreateTrackResponse(), cancellationToken);
         }
 
@@ -488,7 +488,7 @@ namespace SharpOnvifClient.Recording
         /// </summary>
         public System.Threading.Tasks.Task<DeleteTrackResponse> DeleteTrackAsync(DeleteTrackRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeleteTrack, "http://www.onvif.org/ver10/recording/wsdl", "DeleteTrack", request,
+            return InvokeAsync(SoapActions.DeleteTrack, "http://www.onvif.org/ver10/recording/wsdl", "DeleteTrack", request,
                 () => new DeleteTrackResponse(), cancellationToken);
         }
 
@@ -505,7 +505,7 @@ namespace SharpOnvifClient.Recording
         /// </summary>
         public System.Threading.Tasks.Task<GetTrackConfigurationResponse> GetTrackConfigurationAsync(GetTrackConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetTrackConfiguration, "http://www.onvif.org/ver10/recording/wsdl", "GetTrackConfiguration", request,
+            return InvokeAsync(SoapActions.GetTrackConfiguration, "http://www.onvif.org/ver10/recording/wsdl", "GetTrackConfiguration", request,
                 () => new GetTrackConfigurationResponse(), cancellationToken);
         }
 
@@ -522,7 +522,7 @@ namespace SharpOnvifClient.Recording
         /// </summary>
         public System.Threading.Tasks.Task<SetTrackConfigurationResponse> SetTrackConfigurationAsync(SetTrackConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetTrackConfiguration, "http://www.onvif.org/ver10/recording/wsdl", "SetTrackConfiguration", request,
+            return InvokeAsync(SoapActions.SetTrackConfiguration, "http://www.onvif.org/ver10/recording/wsdl", "SetTrackConfiguration", request,
                 () => new SetTrackConfigurationResponse(), cancellationToken);
         }
 
@@ -542,7 +542,7 @@ namespace SharpOnvifClient.Recording
         /// </summary>
         public System.Threading.Tasks.Task<CreateRecordingJobResponse> CreateRecordingJobAsync(CreateRecordingJobRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.CreateRecordingJob, "http://www.onvif.org/ver10/recording/wsdl", "CreateRecordingJob", request,
+            return InvokeAsync(SoapActions.CreateRecordingJob, "http://www.onvif.org/ver10/recording/wsdl", "CreateRecordingJob", request,
                 () => new CreateRecordingJobResponse(), cancellationToken);
         }
 
@@ -561,7 +561,7 @@ namespace SharpOnvifClient.Recording
         /// </summary>
         public System.Threading.Tasks.Task<DeleteRecordingJobResponse> DeleteRecordingJobAsync(DeleteRecordingJobRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeleteRecordingJob, "http://www.onvif.org/ver10/recording/wsdl", "DeleteRecordingJob", request,
+            return InvokeAsync(SoapActions.DeleteRecordingJob, "http://www.onvif.org/ver10/recording/wsdl", "DeleteRecordingJob", request,
                 () => new DeleteRecordingJobResponse(), cancellationToken);
         }
 
@@ -578,7 +578,7 @@ namespace SharpOnvifClient.Recording
         /// </summary>
         public System.Threading.Tasks.Task<GetRecordingJobsResponse> GetRecordingJobsAsync(GetRecordingJobsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetRecordingJobs, "http://www.onvif.org/ver10/recording/wsdl", "GetRecordingJobs", request,
+            return InvokeAsync(SoapActions.GetRecordingJobs, "http://www.onvif.org/ver10/recording/wsdl", "GetRecordingJobs", request,
                 () => new GetRecordingJobsResponse(), cancellationToken);
         }
 
@@ -597,7 +597,7 @@ namespace SharpOnvifClient.Recording
         /// </summary>
         public System.Threading.Tasks.Task<SetRecordingJobConfigurationResponse> SetRecordingJobConfigurationAsync(SetRecordingJobConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetRecordingJobConfiguration, "http://www.onvif.org/ver10/recording/wsdl", "SetRecordingJobConfiguration", request,
+            return InvokeAsync(SoapActions.SetRecordingJobConfiguration, "http://www.onvif.org/ver10/recording/wsdl", "SetRecordingJobConfiguration", request,
                 () => new SetRecordingJobConfigurationResponse(), cancellationToken);
         }
 
@@ -614,7 +614,7 @@ namespace SharpOnvifClient.Recording
         /// </summary>
         public System.Threading.Tasks.Task<GetRecordingJobConfigurationResponse> GetRecordingJobConfigurationAsync(GetRecordingJobConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetRecordingJobConfiguration, "http://www.onvif.org/ver10/recording/wsdl", "GetRecordingJobConfiguration", request,
+            return InvokeAsync(SoapActions.GetRecordingJobConfiguration, "http://www.onvif.org/ver10/recording/wsdl", "GetRecordingJobConfiguration", request,
                 () => new GetRecordingJobConfigurationResponse(), cancellationToken);
         }
 
@@ -632,7 +632,7 @@ namespace SharpOnvifClient.Recording
         /// </summary>
         public System.Threading.Tasks.Task<SetRecordingJobModeResponse> SetRecordingJobModeAsync(SetRecordingJobModeRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetRecordingJobMode, "http://www.onvif.org/ver10/recording/wsdl", "SetRecordingJobMode", request,
+            return InvokeAsync(SoapActions.SetRecordingJobMode, "http://www.onvif.org/ver10/recording/wsdl", "SetRecordingJobMode", request,
                 () => new SetRecordingJobModeResponse(), cancellationToken);
         }
 
@@ -650,7 +650,7 @@ namespace SharpOnvifClient.Recording
         /// </summary>
         public System.Threading.Tasks.Task<GetRecordingJobStateResponse> GetRecordingJobStateAsync(GetRecordingJobStateRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetRecordingJobState, "http://www.onvif.org/ver10/recording/wsdl", "GetRecordingJobState", request,
+            return InvokeAsync(SoapActions.GetRecordingJobState, "http://www.onvif.org/ver10/recording/wsdl", "GetRecordingJobState", request,
                 () => new GetRecordingJobStateResponse(), cancellationToken);
         }
 
@@ -667,7 +667,7 @@ namespace SharpOnvifClient.Recording
         /// </summary>
         public System.Threading.Tasks.Task<ListRecordedSegmentsResponse> ListRecordedSegmentsAsync(ListRecordedSegmentsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.ListRecordedSegments, "http://www.onvif.org/ver10/recording/wsdl", "ListRecordedSegments", request,
+            return InvokeAsync(SoapActions.ListRecordedSegments, "http://www.onvif.org/ver10/recording/wsdl", "ListRecordedSegments", request,
                 () => new ListRecordedSegmentsResponse(), cancellationToken);
         }
 
@@ -685,7 +685,7 @@ namespace SharpOnvifClient.Recording
         /// </summary>
         public System.Threading.Tasks.Task<ExportRecordedSegmentsResponse> ExportRecordedSegmentsAsync(ExportRecordedSegmentsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.ExportRecordedSegments, "http://www.onvif.org/ver10/recording/wsdl", "ExportRecordedSegments", request,
+            return InvokeAsync(SoapActions.ExportRecordedSegments, "http://www.onvif.org/ver10/recording/wsdl", "ExportRecordedSegments", request,
                 () => new ExportRecordedSegmentsResponse(), cancellationToken);
         }
 
@@ -702,7 +702,7 @@ namespace SharpOnvifClient.Recording
         /// </summary>
         public System.Threading.Tasks.Task<StopExportRecordedSegmentsResponse> StopExportRecordedSegmentsAsync(StopExportRecordedSegmentsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.StopExportRecordedSegments, "http://www.onvif.org/ver10/recording/wsdl", "StopExportRecordedSegments", request,
+            return InvokeAsync(SoapActions.StopExportRecordedSegments, "http://www.onvif.org/ver10/recording/wsdl", "StopExportRecordedSegments", request,
                 () => new StopExportRecordedSegmentsResponse(), cancellationToken);
         }
 
@@ -720,7 +720,7 @@ namespace SharpOnvifClient.Recording
         /// </summary>
         public System.Threading.Tasks.Task<ExportRecordedDataResponse> ExportRecordedDataAsync(ExportRecordedDataRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.ExportRecordedData, "http://www.onvif.org/ver10/recording/wsdl", "ExportRecordedData", request,
+            return InvokeAsync(SoapActions.ExportRecordedData, "http://www.onvif.org/ver10/recording/wsdl", "ExportRecordedData", request,
                 () => new ExportRecordedDataResponse(), cancellationToken);
         }
 
@@ -737,7 +737,7 @@ namespace SharpOnvifClient.Recording
         /// </summary>
         public System.Threading.Tasks.Task<StopExportRecordedDataResponse> StopExportRecordedDataAsync(StopExportRecordedDataRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.StopExportRecordedData, "http://www.onvif.org/ver10/recording/wsdl", "StopExportRecordedData", request,
+            return InvokeAsync(SoapActions.StopExportRecordedData, "http://www.onvif.org/ver10/recording/wsdl", "StopExportRecordedData", request,
                 () => new StopExportRecordedDataResponse(), cancellationToken);
         }
 
@@ -754,7 +754,7 @@ namespace SharpOnvifClient.Recording
         /// </summary>
         public System.Threading.Tasks.Task<GetExportRecordedDataStateResponse> GetExportRecordedDataStateAsync(GetExportRecordedDataStateRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetExportRecordedDataState, "http://www.onvif.org/ver10/recording/wsdl", "GetExportRecordedDataState", request,
+            return InvokeAsync(SoapActions.GetExportRecordedDataState, "http://www.onvif.org/ver10/recording/wsdl", "GetExportRecordedDataState", request,
                 () => new GetExportRecordedDataStateResponse(), cancellationToken);
         }
 
@@ -771,7 +771,7 @@ namespace SharpOnvifClient.Recording
         /// </summary>
         public System.Threading.Tasks.Task<OverrideSegmentDurationResponse> OverrideSegmentDurationAsync(OverrideSegmentDurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.OverrideSegmentDuration, "http://www.onvif.org/ver10/recording/wsdl", "OverrideSegmentDuration", request,
+            return InvokeAsync(SoapActions.OverrideSegmentDuration, "http://www.onvif.org/ver10/recording/wsdl", "OverrideSegmentDuration", request,
                 () => new OverrideSegmentDurationResponse(), cancellationToken);
         }
 

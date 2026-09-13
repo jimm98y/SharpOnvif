@@ -56,7 +56,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -67,7 +67,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<GetServiceCapabilitiesResponse> GetServiceCapabilitiesAsync(GetServiceCapabilitiesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetServiceCapabilities, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetServiceCapabilities", request,
+            return InvokeAsync(SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetServiceCapabilities", request,
                 () => new GetServiceCapabilitiesResponse(), cancellationToken);
         }
 
@@ -157,7 +157,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -167,7 +167,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<GetAuthorizationServerConfigurationsResponse> GetAuthorizationServerConfigurationsAsync(GetAuthorizationServerConfigurationsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetAuthorizationServerConfigurations, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAuthorizationServerConfigurations", request,
+            return InvokeAsync(SoapActions.GetAuthorizationServerConfigurations, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAuthorizationServerConfigurations", request,
                 () => new GetAuthorizationServerConfigurationsResponse(), cancellationToken);
         }
 
@@ -185,7 +185,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<CreateAuthorizationServerConfigurationResponse> CreateAuthorizationServerConfigurationAsync(CreateAuthorizationServerConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.CreateAuthorizationServerConfiguration, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateAuthorizationServerConfiguration", request,
+            return InvokeAsync(SoapActions.CreateAuthorizationServerConfiguration, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateAuthorizationServerConfiguration", request,
                 () => new CreateAuthorizationServerConfigurationResponse(), cancellationToken);
         }
 
@@ -202,7 +202,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<SetAuthorizationServerConfigurationResponse> SetAuthorizationServerConfigurationAsync(SetAuthorizationServerConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetAuthorizationServerConfiguration, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetAuthorizationServerConfiguration", request,
+            return InvokeAsync(SoapActions.SetAuthorizationServerConfiguration, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetAuthorizationServerConfiguration", request,
                 () => new SetAuthorizationServerConfigurationResponse(), cancellationToken);
         }
 
@@ -220,7 +220,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<DeleteAuthorizationServerConfigurationResponse> DeleteAuthorizationServerConfigurationAsync(DeleteAuthorizationServerConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeleteAuthorizationServerConfiguration, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteAuthorizationServerConfiguration", request,
+            return InvokeAsync(SoapActions.DeleteAuthorizationServerConfiguration, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteAuthorizationServerConfiguration", request,
                 () => new DeleteAuthorizationServerConfigurationResponse(), cancellationToken);
         }
 
@@ -404,7 +404,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -433,7 +433,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<AddDot1XConfigurationResponse> AddDot1XConfigurationAsync(AddDot1XConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.AddDot1XConfiguration, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "AddDot1XConfiguration", request,
+            return InvokeAsync(SoapActions.AddDot1XConfiguration, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "AddDot1XConfiguration", request,
                 () => new AddDot1XConfigurationResponse(), cancellationToken);
         }
 
@@ -454,7 +454,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<GetAllDot1XConfigurationsResponse> GetAllDot1XConfigurationsAsync(GetAllDot1XConfigurationsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetAllDot1XConfigurations, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllDot1XConfigurations", request,
+            return InvokeAsync(SoapActions.GetAllDot1XConfigurations, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllDot1XConfigurations", request,
                 () => new GetAllDot1XConfigurationsResponse(), cancellationToken);
         }
 
@@ -474,7 +474,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<GetDot1XConfigurationResponse> GetDot1XConfigurationAsync(GetDot1XConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetDot1XConfiguration, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetDot1XConfiguration", request,
+            return InvokeAsync(SoapActions.GetDot1XConfiguration, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetDot1XConfiguration", request,
                 () => new GetDot1XConfigurationResponse(), cancellationToken);
         }
 
@@ -497,7 +497,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<DeleteDot1XConfigurationResponse> DeleteDot1XConfigurationAsync(DeleteDot1XConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeleteDot1XConfiguration, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteDot1XConfiguration", request,
+            return InvokeAsync(SoapActions.DeleteDot1XConfiguration, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteDot1XConfiguration", request,
                 () => new DeleteDot1XConfigurationResponse(), cancellationToken);
         }
 
@@ -528,7 +528,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<SetNetworkInterfaceDot1XConfigurationResponse> SetNetworkInterfaceDot1XConfigurationAsync(SetNetworkInterfaceDot1XConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetNetworkInterfaceDot1XConfiguration, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetNetworkInterfaceDot1XConfiguration", request,
+            return InvokeAsync(SoapActions.SetNetworkInterfaceDot1XConfiguration, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetNetworkInterfaceDot1XConfiguration", request,
                 () => new SetNetworkInterfaceDot1XConfigurationResponse(), cancellationToken);
         }
 
@@ -553,7 +553,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<GetNetworkInterfaceDot1XConfigurationResponse> GetNetworkInterfaceDot1XConfigurationAsync(GetNetworkInterfaceDot1XConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetNetworkInterfaceDot1XConfiguration, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetNetworkInterfaceDot1XConfiguration", request,
+            return InvokeAsync(SoapActions.GetNetworkInterfaceDot1XConfiguration, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetNetworkInterfaceDot1XConfiguration", request,
                 () => new GetNetworkInterfaceDot1XConfigurationResponse(), cancellationToken);
         }
 
@@ -582,7 +582,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<DeleteNetworkInterfaceDot1XConfigurationResponse> DeleteNetworkInterfaceDot1XConfigurationAsync(DeleteNetworkInterfaceDot1XConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeleteNetworkInterfaceDot1XConfiguration, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteNetworkInterfaceDot1XConfiguration", request,
+            return InvokeAsync(SoapActions.DeleteNetworkInterfaceDot1XConfiguration, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteNetworkInterfaceDot1XConfiguration", request,
                 () => new DeleteNetworkInterfaceDot1XConfigurationResponse(), cancellationToken);
         }
 
@@ -650,7 +650,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -660,7 +660,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<GetJWTConfigurationResponse> GetJWTConfigurationAsync(GetJWTConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetJWTConfiguration, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetJWTConfiguration", request,
+            return InvokeAsync(SoapActions.GetJWTConfiguration, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetJWTConfiguration", request,
                 () => new GetJWTConfigurationResponse(), cancellationToken);
         }
 
@@ -677,7 +677,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<SetJWTConfigurationResponse> SetJWTConfigurationAsync(SetJWTConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetJWTConfiguration, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetJWTConfiguration", request,
+            return InvokeAsync(SoapActions.SetJWTConfiguration, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetJWTConfiguration", request,
                 () => new SetJWTConfigurationResponse(), cancellationToken);
         }
 
@@ -1237,7 +1237,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -1260,7 +1260,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<CreateRSAKeyPairResponse> CreateRSAKeyPairAsync(CreateRSAKeyPairRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.CreateRSAKeyPair, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateRSAKeyPair", request,
+            return InvokeAsync(SoapActions.CreateRSAKeyPair, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateRSAKeyPair", request,
                 () => new CreateRSAKeyPairResponse(), cancellationToken);
         }
 
@@ -1289,7 +1289,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<CreateECCKeyPairResponse> CreateECCKeyPairAsync(CreateECCKeyPairRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.CreateECCKeyPair, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateECCKeyPair", request,
+            return InvokeAsync(SoapActions.CreateECCKeyPair, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateECCKeyPair", request,
                 () => new CreateECCKeyPairResponse(), cancellationToken);
         }
 
@@ -1313,7 +1313,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<UploadKeyPairInPKCS8Response> UploadKeyPairInPKCS8Async(UploadKeyPairInPKCS8Request request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.UploadKeyPairInPKCS8, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "UploadKeyPairInPKCS8", request,
+            return InvokeAsync(SoapActions.UploadKeyPairInPKCS8, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "UploadKeyPairInPKCS8", request,
                 () => new UploadKeyPairInPKCS8Response(), cancellationToken);
         }
 
@@ -1349,7 +1349,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<UploadCertificateWithPrivateKeyInPKCS12Response> UploadCertificateWithPrivateKeyInPKCS12Async(UploadCertificateWithPrivateKeyInPKCS12Request request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.UploadCertificateWithPrivateKeyInPKCS12, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "UploadCertificateWithPrivateKeyInPKCS12", request,
+            return InvokeAsync(SoapActions.UploadCertificateWithPrivateKeyInPKCS12, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "UploadCertificateWithPrivateKeyInPKCS12", request,
                 () => new UploadCertificateWithPrivateKeyInPKCS12Response(), cancellationToken);
         }
 
@@ -1368,7 +1368,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<GetKeyStatusResponse> GetKeyStatusAsync(GetKeyStatusRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetKeyStatus, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetKeyStatus", request,
+            return InvokeAsync(SoapActions.GetKeyStatus, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetKeyStatus", request,
                 () => new GetKeyStatusResponse(), cancellationToken);
         }
 
@@ -1389,7 +1389,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<GetPrivateKeyStatusResponse> GetPrivateKeyStatusAsync(GetPrivateKeyStatusRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetPrivateKeyStatus, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetPrivateKeyStatus", request,
+            return InvokeAsync(SoapActions.GetPrivateKeyStatus, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetPrivateKeyStatus", request,
                 () => new GetPrivateKeyStatusResponse(), cancellationToken);
         }
 
@@ -1408,7 +1408,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<GetAllKeysResponse> GetAllKeysAsync(GetAllKeysRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetAllKeys, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllKeys", request,
+            return InvokeAsync(SoapActions.GetAllKeys, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllKeys", request,
                 () => new GetAllKeysResponse(), cancellationToken);
         }
 
@@ -1432,7 +1432,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<DeleteKeyResponse> DeleteKeyAsync(DeleteKeyRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeleteKey, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteKey", request,
+            return InvokeAsync(SoapActions.DeleteKey, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteKey", request,
                 () => new DeleteKeyResponse(), cancellationToken);
         }
 
@@ -1460,7 +1460,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<CreatePKCS10CSRResponse> CreatePKCS10CSRAsync(CreatePKCS10CSRRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.CreatePKCS10CSR, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreatePKCS10CSR", request,
+            return InvokeAsync(SoapActions.CreatePKCS10CSR, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreatePKCS10CSR", request,
                 () => new CreatePKCS10CSRResponse(), cancellationToken);
         }
 
@@ -1494,7 +1494,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<CreateSelfSignedCertificateResponse> CreateSelfSignedCertificateAsync(CreateSelfSignedCertificateRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.CreateSelfSignedCertificate, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateSelfSignedCertificate", request,
+            return InvokeAsync(SoapActions.CreateSelfSignedCertificate, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateSelfSignedCertificate", request,
                 () => new CreateSelfSignedCertificateResponse(), cancellationToken);
         }
 
@@ -1545,7 +1545,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<UploadCertificateResponse> UploadCertificateAsync(UploadCertificateRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.UploadCertificate, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "UploadCertificate", request,
+            return InvokeAsync(SoapActions.UploadCertificate, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "UploadCertificate", request,
                 () => new UploadCertificateResponse(), cancellationToken);
         }
 
@@ -1565,7 +1565,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<GetCertificateResponse> GetCertificateAsync(GetCertificateRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetCertificate, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetCertificate", request,
+            return InvokeAsync(SoapActions.GetCertificate, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetCertificate", request,
                 () => new GetCertificateResponse(), cancellationToken);
         }
 
@@ -1584,7 +1584,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<GetAllCertificatesResponse> GetAllCertificatesAsync(GetAllCertificatesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetAllCertificates, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllCertificates", request,
+            return InvokeAsync(SoapActions.GetAllCertificates, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllCertificates", request,
                 () => new GetAllCertificatesResponse(), cancellationToken);
         }
 
@@ -1608,7 +1608,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<DeleteCertificateResponse> DeleteCertificateAsync(DeleteCertificateRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeleteCertificate, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteCertificate", request,
+            return InvokeAsync(SoapActions.DeleteCertificate, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteCertificate", request,
                 () => new DeleteCertificateResponse(), cancellationToken);
         }
 
@@ -1635,7 +1635,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<CreateCertificationPathResponse> CreateCertificationPathAsync(CreateCertificationPathRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.CreateCertificationPath, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateCertificationPath", request,
+            return InvokeAsync(SoapActions.CreateCertificationPath, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateCertificationPath", request,
                 () => new CreateCertificationPathResponse(), cancellationToken);
         }
 
@@ -1654,7 +1654,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<GetCertificationPathResponse> GetCertificationPathAsync(GetCertificationPathRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetCertificationPath, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetCertificationPath", request,
+            return InvokeAsync(SoapActions.GetCertificationPath, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetCertificationPath", request,
                 () => new GetCertificationPathResponse(), cancellationToken);
         }
 
@@ -1673,7 +1673,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<GetAllCertificationPathsResponse> GetAllCertificationPathsAsync(GetAllCertificationPathsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetAllCertificationPaths, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllCertificationPaths", request,
+            return InvokeAsync(SoapActions.GetAllCertificationPaths, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllCertificationPaths", request,
                 () => new GetAllCertificationPathsResponse(), cancellationToken);
         }
 
@@ -1690,7 +1690,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<SetCertificationPathResponse> SetCertificationPathAsync(SetCertificationPathRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetCertificationPath, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetCertificationPath", request,
+            return InvokeAsync(SoapActions.SetCertificationPath, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetCertificationPath", request,
                 () => new SetCertificationPathResponse(), cancellationToken);
         }
 
@@ -1715,7 +1715,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<DeleteCertificationPathResponse> DeleteCertificationPathAsync(DeleteCertificationPathRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeleteCertificationPath, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteCertificationPath", request,
+            return InvokeAsync(SoapActions.DeleteCertificationPath, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteCertificationPath", request,
                 () => new DeleteCertificationPathResponse(), cancellationToken);
         }
 
@@ -1732,7 +1732,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<UploadPassphraseResponse> UploadPassphraseAsync(UploadPassphraseRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.UploadPassphrase, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "UploadPassphrase", request,
+            return InvokeAsync(SoapActions.UploadPassphrase, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "UploadPassphrase", request,
                 () => new UploadPassphraseResponse(), cancellationToken);
         }
 
@@ -1751,7 +1751,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<GetAllPassphrasesResponse> GetAllPassphrasesAsync(GetAllPassphrasesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetAllPassphrases, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllPassphrases", request,
+            return InvokeAsync(SoapActions.GetAllPassphrases, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllPassphrases", request,
                 () => new GetAllPassphrasesResponse(), cancellationToken);
         }
 
@@ -1768,7 +1768,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<DeletePassphraseResponse> DeletePassphraseAsync(DeletePassphraseRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeletePassphrase, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeletePassphrase", request,
+            return InvokeAsync(SoapActions.DeletePassphrase, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeletePassphrase", request,
                 () => new DeletePassphraseResponse(), cancellationToken);
         }
 
@@ -1791,7 +1791,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<UploadCRLResponse> UploadCRLAsync(UploadCRLRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.UploadCRL, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "UploadCRL", request,
+            return InvokeAsync(SoapActions.UploadCRL, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "UploadCRL", request,
                 () => new UploadCRLResponse(), cancellationToken);
         }
 
@@ -1810,7 +1810,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<GetCRLResponse> GetCRLAsync(GetCRLRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetCRL, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetCRL", request,
+            return InvokeAsync(SoapActions.GetCRL, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetCRL", request,
                 () => new GetCRLResponse(), cancellationToken);
         }
 
@@ -1829,7 +1829,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<GetAllCRLsResponse> GetAllCRLsAsync(GetAllCRLsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetAllCRLs, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllCRLs", request,
+            return InvokeAsync(SoapActions.GetAllCRLs, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllCRLs", request,
                 () => new GetAllCRLsResponse(), cancellationToken);
         }
 
@@ -1850,7 +1850,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<DeleteCRLResponse> DeleteCRLAsync(DeleteCRLRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeleteCRL, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteCRL", request,
+            return InvokeAsync(SoapActions.DeleteCRL, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteCRL", request,
                 () => new DeleteCRLResponse(), cancellationToken);
         }
 
@@ -1879,7 +1879,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<CreateCertPathValidationPolicyResponse> CreateCertPathValidationPolicyAsync(CreateCertPathValidationPolicyRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.CreateCertPathValidationPolicy, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateCertPathValidationPolicy", request,
+            return InvokeAsync(SoapActions.CreateCertPathValidationPolicy, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateCertPathValidationPolicy", request,
                 () => new CreateCertPathValidationPolicyResponse(), cancellationToken);
         }
 
@@ -1899,7 +1899,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<GetCertPathValidationPolicyResponse> GetCertPathValidationPolicyAsync(GetCertPathValidationPolicyRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetCertPathValidationPolicy, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetCertPathValidationPolicy", request,
+            return InvokeAsync(SoapActions.GetCertPathValidationPolicy, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetCertPathValidationPolicy", request,
                 () => new GetCertPathValidationPolicyResponse(), cancellationToken);
         }
 
@@ -1918,7 +1918,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<GetAllCertPathValidationPoliciesResponse> GetAllCertPathValidationPoliciesAsync(GetAllCertPathValidationPoliciesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetAllCertPathValidationPolicies, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllCertPathValidationPolicies", request,
+            return InvokeAsync(SoapActions.GetAllCertPathValidationPolicies, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllCertPathValidationPolicies", request,
                 () => new GetAllCertPathValidationPoliciesResponse(), cancellationToken);
         }
 
@@ -1935,7 +1935,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<SetCertPathValidationPolicyResponse> SetCertPathValidationPolicyAsync(SetCertPathValidationPolicyRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetCertPathValidationPolicy, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetCertPathValidationPolicy", request,
+            return InvokeAsync(SoapActions.SetCertPathValidationPolicy, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetCertPathValidationPolicy", request,
                 () => new SetCertPathValidationPolicyResponse(), cancellationToken);
         }
 
@@ -1959,7 +1959,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<DeleteCertPathValidationPolicyResponse> DeleteCertPathValidationPolicyAsync(DeleteCertPathValidationPolicyRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeleteCertPathValidationPolicy, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteCertPathValidationPolicy", request,
+            return InvokeAsync(SoapActions.DeleteCertPathValidationPolicy, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteCertPathValidationPolicy", request,
                 () => new DeleteCertPathValidationPolicyResponse(), cancellationToken);
         }
 
@@ -2052,7 +2052,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -2069,7 +2069,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<AddMediaSigningCertificateAssignmentResponse> AddMediaSigningCertificateAssignmentAsync(AddMediaSigningCertificateAssignmentRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.AddMediaSigningCertificateAssignment, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "AddMediaSigningCertificateAssignment", request,
+            return InvokeAsync(SoapActions.AddMediaSigningCertificateAssignment, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "AddMediaSigningCertificateAssignment", request,
                 () => new AddMediaSigningCertificateAssignmentResponse(), cancellationToken);
         }
 
@@ -2090,7 +2090,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<RemoveMediaSigningCertificateAssignmentResponse> RemoveMediaSigningCertificateAssignmentAsync(RemoveMediaSigningCertificateAssignmentRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.RemoveMediaSigningCertificateAssignment, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "RemoveMediaSigningCertificateAssignment", request,
+            return InvokeAsync(SoapActions.RemoveMediaSigningCertificateAssignment, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "RemoveMediaSigningCertificateAssignment", request,
                 () => new RemoveMediaSigningCertificateAssignmentResponse(), cancellationToken);
         }
 
@@ -2111,7 +2111,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<GetAssignedMediaSigningCertificatesResponse> GetAssignedMediaSigningCertificatesAsync(GetAssignedMediaSigningCertificatesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetAssignedMediaSigningCertificates, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAssignedMediaSigningCertificates", request,
+            return InvokeAsync(SoapActions.GetAssignedMediaSigningCertificates, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAssignedMediaSigningCertificates", request,
                 () => new GetAssignedMediaSigningCertificatesResponse(), cancellationToken);
         }
 
@@ -2388,7 +2388,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -2418,7 +2418,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<AddServerCertificateAssignmentResponse> AddServerCertificateAssignmentAsync(AddServerCertificateAssignmentRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.AddServerCertificateAssignment, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "AddServerCertificateAssignment", request,
+            return InvokeAsync(SoapActions.AddServerCertificateAssignment, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "AddServerCertificateAssignment", request,
                 () => new AddServerCertificateAssignmentResponse(), cancellationToken);
         }
 
@@ -2438,7 +2438,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<RemoveServerCertificateAssignmentResponse> RemoveServerCertificateAssignmentAsync(RemoveServerCertificateAssignmentRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.RemoveServerCertificateAssignment, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "RemoveServerCertificateAssignment", request,
+            return InvokeAsync(SoapActions.RemoveServerCertificateAssignment, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "RemoveServerCertificateAssignment", request,
                 () => new RemoveServerCertificateAssignmentResponse(), cancellationToken);
         }
 
@@ -2476,7 +2476,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<ReplaceServerCertificateAssignmentResponse> ReplaceServerCertificateAssignmentAsync(ReplaceServerCertificateAssignmentRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.ReplaceServerCertificateAssignment, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "ReplaceServerCertificateAssignment", request,
+            return InvokeAsync(SoapActions.ReplaceServerCertificateAssignment, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "ReplaceServerCertificateAssignment", request,
                 () => new ReplaceServerCertificateAssignmentResponse(), cancellationToken);
         }
 
@@ -2506,7 +2506,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<SetEnabledTLSVersionsResponse> SetEnabledTLSVersionsAsync(SetEnabledTLSVersionsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetEnabledTLSVersions, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetEnabledTLSVersions", request,
+            return InvokeAsync(SoapActions.SetEnabledTLSVersions, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetEnabledTLSVersions", request,
                 () => new SetEnabledTLSVersionsResponse(), cancellationToken);
         }
 
@@ -2523,7 +2523,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<GetEnabledTLSVersionsResponse> GetEnabledTLSVersionsAsync(GetEnabledTLSVersionsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetEnabledTLSVersions, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetEnabledTLSVersions", request,
+            return InvokeAsync(SoapActions.GetEnabledTLSVersions, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetEnabledTLSVersions", request,
                 () => new GetEnabledTLSVersionsResponse(), cancellationToken);
         }
 
@@ -2543,7 +2543,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<GetAssignedServerCertificatesResponse> GetAssignedServerCertificatesAsync(GetAssignedServerCertificatesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetAssignedServerCertificates, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAssignedServerCertificates", request,
+            return InvokeAsync(SoapActions.GetAssignedServerCertificates, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAssignedServerCertificates", request,
                 () => new GetAssignedServerCertificatesResponse(), cancellationToken);
         }
 
@@ -2566,7 +2566,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<SetClientAuthenticationRequiredResponse> SetClientAuthenticationRequiredAsync(SetClientAuthenticationRequiredRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetClientAuthenticationRequired, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetClientAuthenticationRequired", request,
+            return InvokeAsync(SoapActions.SetClientAuthenticationRequired, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetClientAuthenticationRequired", request,
                 () => new SetClientAuthenticationRequiredResponse(), cancellationToken);
         }
 
@@ -2583,7 +2583,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<GetClientAuthenticationRequiredResponse> GetClientAuthenticationRequiredAsync(GetClientAuthenticationRequiredRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetClientAuthenticationRequired, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetClientAuthenticationRequired", request,
+            return InvokeAsync(SoapActions.GetClientAuthenticationRequired, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetClientAuthenticationRequired", request,
                 () => new GetClientAuthenticationRequiredResponse(), cancellationToken);
         }
 
@@ -2602,7 +2602,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<SetCnMapsToUserResponse> SetCnMapsToUserAsync(SetCnMapsToUserRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetCnMapsToUser, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetCnMapsToUser", request,
+            return InvokeAsync(SoapActions.SetCnMapsToUser, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetCnMapsToUser", request,
                 () => new SetCnMapsToUserResponse(), cancellationToken);
         }
 
@@ -2619,7 +2619,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<GetCnMapsToUserResponse> GetCnMapsToUserAsync(GetCnMapsToUserRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetCnMapsToUser, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetCnMapsToUser", request,
+            return InvokeAsync(SoapActions.GetCnMapsToUser, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetCnMapsToUser", request,
                 () => new GetCnMapsToUserResponse(), cancellationToken);
         }
 
@@ -2645,7 +2645,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<AddCertPathValidationPolicyAssignmentResponse> AddCertPathValidationPolicyAssignmentAsync(AddCertPathValidationPolicyAssignmentRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.AddCertPathValidationPolicyAssignment, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "AddCertPathValidationPolicyAssignment", request,
+            return InvokeAsync(SoapActions.AddCertPathValidationPolicyAssignment, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "AddCertPathValidationPolicyAssignment", request,
                 () => new AddCertPathValidationPolicyAssignmentResponse(), cancellationToken);
         }
 
@@ -2665,7 +2665,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<RemoveCertPathValidationPolicyAssignmentResponse> RemoveCertPathValidationPolicyAssignmentAsync(RemoveCertPathValidationPolicyAssignmentRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.RemoveCertPathValidationPolicyAssignment, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "RemoveCertPathValidationPolicyAssignment", request,
+            return InvokeAsync(SoapActions.RemoveCertPathValidationPolicyAssignment, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "RemoveCertPathValidationPolicyAssignment", request,
                 () => new RemoveCertPathValidationPolicyAssignmentResponse(), cancellationToken);
         }
 
@@ -2690,7 +2690,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<ReplaceCertPathValidationPolicyAssignmentResponse> ReplaceCertPathValidationPolicyAssignmentAsync(ReplaceCertPathValidationPolicyAssignmentRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.ReplaceCertPathValidationPolicyAssignment, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "ReplaceCertPathValidationPolicyAssignment", request,
+            return InvokeAsync(SoapActions.ReplaceCertPathValidationPolicyAssignment, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "ReplaceCertPathValidationPolicyAssignment", request,
                 () => new ReplaceCertPathValidationPolicyAssignmentResponse(), cancellationToken);
         }
 
@@ -2708,7 +2708,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// </summary>
         public System.Threading.Tasks.Task<GetAssignedCertPathValidationPoliciesResponse> GetAssignedCertPathValidationPoliciesAsync(GetAssignedCertPathValidationPoliciesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetAssignedCertPathValidationPolicies, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAssignedCertPathValidationPolicies", request,
+            return InvokeAsync(SoapActions.GetAssignedCertPathValidationPolicies, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAssignedCertPathValidationPolicies", request,
                 () => new GetAssignedCertPathValidationPoliciesResponse(), cancellationToken);
         }
 

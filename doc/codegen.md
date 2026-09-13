@@ -117,8 +117,32 @@ would write, and fails when one is left behind.
 dotnet run --project src/WsdlGenerator
 ```
 
-With no arguments it reads the offline schema mirror in `wsdl/` and rewrites this repository's
-generated sources in place.
+With no arguments it reads `onvif.codegen.json` at the root of this repository and rewrites the
+generated sources in place. **Everything specific to Onvif is in that file** - the twenty-five
+services and their WSDL addresses, the namespaces each side is generated into, the schema values
+to add, the type-name prefix, and the settings and dispatch the generated code names. The
+generator itself knows none of it, and a test fails if a mention creeps back in.
+
+```json
+{
+  "mirror": "wsdl",
+  "typeNamePrefix": "Onvif",
+  "shared":  { "namespace": "SharpOnvifCommon.Onvif", "out": "src/SharpOnvifCommon/Generated" },
+  "runtime": { "namespace": "SharpOnvifCommon",       "out": "src/SharpOnvifCommon/Generated/Runtime" },
+  "settings": "SharpOnvifCommon.Soap.OnvifClientSettings",
+  "dispatch": "SharpOnvifServer.Dispatch",
+  "targets": [
+    { "namespace": "SharpOnvifClient", "out": "src/SharpOnvifClient/Generated", "client": true },
+    { "namespace": "SharpOnvifServer", "out": "src/SharpOnvifServer/Generated", "server": true }
+  ],
+  "services":          [ { "name": "DeviceMgmt", "wsdl": "https://www.onvif.org/ver10/device/wsdl/devicemgmt.wsdl" } ],
+  "enumerationValues": [ { "type": "{http://www.onvif.org/ver10/schema}VideoEncoding", "value": "H265" } ]
+}
+```
+
+Paths in it are relative to the file. Run another one with `--config <file>`: a set of services,
+the namespaces they go into and the values to add do not fit on a command line, and describing
+them there keeps them out of the compiler.
 Generated files are committed, so a normal build never runs the generator and never needs
 network access. Review the diff whenever you regenerate.
 
@@ -154,6 +178,7 @@ they share their common schemas the same way the Onvif services do.
 | `--runtime-namespace <ns>` | Namespace of the runtime. Defaults to `<ns>.Runtime`. |
 | `--runtime-out <dir>` | Directory for the runtime. Defaults to `<dir>/Runtime`. |
 | `--no-runtime` | Do not write the runtime; compile against the one `--runtime-namespace` names. |
+| `--config <file>` | Read the whole run from a file, as this repository does. |
 | `--settings <type>` | What a client builds its settings from when handed none. |
 | `--dispatch <ns>` | Namespace a generated service is routed by. Defaults to `SharpOnvifServer.Dispatch`. |
 | `--client` / `--server` | Generate one side only. Both by default. |

@@ -11,7 +11,7 @@
 namespace SharpOnvifClient.Schedule
 {
     /// <summary>
-    /// The SchedulePort Onvif service.
+    /// The SchedulePort service.
     /// </summary>
     public interface SchedulePort
     {
@@ -260,7 +260,7 @@ namespace SharpOnvifClient.Schedule
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -270,7 +270,7 @@ namespace SharpOnvifClient.Schedule
         /// </summary>
         public System.Threading.Tasks.Task<GetServiceCapabilitiesResponse> GetServiceCapabilitiesAsync(GetServiceCapabilitiesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetServiceCapabilities, "http://www.onvif.org/ver10/schedule/wsdl", "GetServiceCapabilities", request,
+            return InvokeAsync(SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver10/schedule/wsdl", "GetServiceCapabilities", request,
                 () => new GetServiceCapabilitiesResponse(), cancellationToken);
         }
 
@@ -287,7 +287,7 @@ namespace SharpOnvifClient.Schedule
         /// </summary>
         public System.Threading.Tasks.Task<GetScheduleStateResponse> GetScheduleStateAsync(GetScheduleStateRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetScheduleState, "http://www.onvif.org/ver10/schedule/wsdl", "GetScheduleState", request,
+            return InvokeAsync(SoapActions.GetScheduleState, "http://www.onvif.org/ver10/schedule/wsdl", "GetScheduleState", request,
                 () => new GetScheduleStateResponse(), cancellationToken);
         }
 
@@ -308,7 +308,7 @@ namespace SharpOnvifClient.Schedule
         /// </summary>
         public System.Threading.Tasks.Task<GetScheduleInfoResponse> GetScheduleInfoAsync(GetScheduleInfoRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetScheduleInfo, "http://www.onvif.org/ver10/schedule/wsdl", "GetScheduleInfo", request,
+            return InvokeAsync(SoapActions.GetScheduleInfo, "http://www.onvif.org/ver10/schedule/wsdl", "GetScheduleInfo", request,
                 () => new GetScheduleInfoResponse(), cancellationToken);
         }
 
@@ -329,7 +329,7 @@ namespace SharpOnvifClient.Schedule
         /// </summary>
         public System.Threading.Tasks.Task<GetScheduleInfoListResponse> GetScheduleInfoListAsync(GetScheduleInfoListRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetScheduleInfoList, "http://www.onvif.org/ver10/schedule/wsdl", "GetScheduleInfoList", request,
+            return InvokeAsync(SoapActions.GetScheduleInfoList, "http://www.onvif.org/ver10/schedule/wsdl", "GetScheduleInfoList", request,
                 () => new GetScheduleInfoListResponse(), cancellationToken);
         }
 
@@ -349,7 +349,7 @@ namespace SharpOnvifClient.Schedule
         /// </summary>
         public System.Threading.Tasks.Task<GetSchedulesResponse> GetSchedulesAsync(GetSchedulesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetSchedules, "http://www.onvif.org/ver10/schedule/wsdl", "GetSchedules", request,
+            return InvokeAsync(SoapActions.GetSchedules, "http://www.onvif.org/ver10/schedule/wsdl", "GetSchedules", request,
                 () => new GetSchedulesResponse(), cancellationToken);
         }
 
@@ -370,7 +370,7 @@ namespace SharpOnvifClient.Schedule
         /// </summary>
         public System.Threading.Tasks.Task<GetScheduleListResponse> GetScheduleListAsync(GetScheduleListRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetScheduleList, "http://www.onvif.org/ver10/schedule/wsdl", "GetScheduleList", request,
+            return InvokeAsync(SoapActions.GetScheduleList, "http://www.onvif.org/ver10/schedule/wsdl", "GetScheduleList", request,
                 () => new GetScheduleListResponse(), cancellationToken);
         }
 
@@ -390,7 +390,7 @@ namespace SharpOnvifClient.Schedule
         /// </summary>
         public System.Threading.Tasks.Task<CreateScheduleResponse> CreateScheduleAsync(CreateScheduleRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.CreateSchedule, "http://www.onvif.org/ver10/schedule/wsdl", "CreateSchedule", request,
+            return InvokeAsync(SoapActions.CreateSchedule, "http://www.onvif.org/ver10/schedule/wsdl", "CreateSchedule", request,
                 () => new CreateScheduleResponse(), cancellationToken);
         }
 
@@ -407,7 +407,7 @@ namespace SharpOnvifClient.Schedule
         /// </summary>
         public System.Threading.Tasks.Task<SetScheduleResponse> SetScheduleAsync(SetScheduleRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetSchedule, "http://www.onvif.org/ver10/schedule/wsdl", "SetSchedule", request,
+            return InvokeAsync(SoapActions.SetSchedule, "http://www.onvif.org/ver10/schedule/wsdl", "SetSchedule", request,
                 () => new SetScheduleResponse(), cancellationToken);
         }
 
@@ -424,7 +424,7 @@ namespace SharpOnvifClient.Schedule
         /// </summary>
         public System.Threading.Tasks.Task<ModifyScheduleResponse> ModifyScheduleAsync(ModifyScheduleRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.ModifySchedule, "http://www.onvif.org/ver10/schedule/wsdl", "ModifySchedule", request,
+            return InvokeAsync(SoapActions.ModifySchedule, "http://www.onvif.org/ver10/schedule/wsdl", "ModifySchedule", request,
                 () => new ModifyScheduleResponse(), cancellationToken);
         }
 
@@ -443,7 +443,7 @@ namespace SharpOnvifClient.Schedule
         /// </summary>
         public System.Threading.Tasks.Task<DeleteScheduleResponse> DeleteScheduleAsync(DeleteScheduleRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeleteSchedule, "http://www.onvif.org/ver10/schedule/wsdl", "DeleteSchedule", request,
+            return InvokeAsync(SoapActions.DeleteSchedule, "http://www.onvif.org/ver10/schedule/wsdl", "DeleteSchedule", request,
                 () => new DeleteScheduleResponse(), cancellationToken);
         }
 
@@ -463,7 +463,7 @@ namespace SharpOnvifClient.Schedule
         /// </summary>
         public System.Threading.Tasks.Task<GetSpecialDayGroupInfoResponse> GetSpecialDayGroupInfoAsync(GetSpecialDayGroupInfoRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetSpecialDayGroupInfo, "http://www.onvif.org/ver10/schedule/wsdl", "GetSpecialDayGroupInfo", request,
+            return InvokeAsync(SoapActions.GetSpecialDayGroupInfo, "http://www.onvif.org/ver10/schedule/wsdl", "GetSpecialDayGroupInfo", request,
                 () => new GetSpecialDayGroupInfoResponse(), cancellationToken);
         }
 
@@ -483,7 +483,7 @@ namespace SharpOnvifClient.Schedule
         /// </summary>
         public System.Threading.Tasks.Task<GetSpecialDayGroupInfoListResponse> GetSpecialDayGroupInfoListAsync(GetSpecialDayGroupInfoListRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetSpecialDayGroupInfoList, "http://www.onvif.org/ver10/schedule/wsdl", "GetSpecialDayGroupInfoList", request,
+            return InvokeAsync(SoapActions.GetSpecialDayGroupInfoList, "http://www.onvif.org/ver10/schedule/wsdl", "GetSpecialDayGroupInfoList", request,
                 () => new GetSpecialDayGroupInfoListResponse(), cancellationToken);
         }
 
@@ -500,7 +500,7 @@ namespace SharpOnvifClient.Schedule
         /// </summary>
         public System.Threading.Tasks.Task<GetSpecialDayGroupsResponse> GetSpecialDayGroupsAsync(GetSpecialDayGroupsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetSpecialDayGroups, "http://www.onvif.org/ver10/schedule/wsdl", "GetSpecialDayGroups", request,
+            return InvokeAsync(SoapActions.GetSpecialDayGroups, "http://www.onvif.org/ver10/schedule/wsdl", "GetSpecialDayGroups", request,
                 () => new GetSpecialDayGroupsResponse(), cancellationToken);
         }
 
@@ -521,7 +521,7 @@ namespace SharpOnvifClient.Schedule
         /// </summary>
         public System.Threading.Tasks.Task<GetSpecialDayGroupListResponse> GetSpecialDayGroupListAsync(GetSpecialDayGroupListRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetSpecialDayGroupList, "http://www.onvif.org/ver10/schedule/wsdl", "GetSpecialDayGroupList", request,
+            return InvokeAsync(SoapActions.GetSpecialDayGroupList, "http://www.onvif.org/ver10/schedule/wsdl", "GetSpecialDayGroupList", request,
                 () => new GetSpecialDayGroupListResponse(), cancellationToken);
         }
 
@@ -541,7 +541,7 @@ namespace SharpOnvifClient.Schedule
         /// </summary>
         public System.Threading.Tasks.Task<CreateSpecialDayGroupResponse> CreateSpecialDayGroupAsync(CreateSpecialDayGroupRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.CreateSpecialDayGroup, "http://www.onvif.org/ver10/schedule/wsdl", "CreateSpecialDayGroup", request,
+            return InvokeAsync(SoapActions.CreateSpecialDayGroup, "http://www.onvif.org/ver10/schedule/wsdl", "CreateSpecialDayGroup", request,
                 () => new CreateSpecialDayGroupResponse(), cancellationToken);
         }
 
@@ -558,7 +558,7 @@ namespace SharpOnvifClient.Schedule
         /// </summary>
         public System.Threading.Tasks.Task<SetSpecialDayGroupResponse> SetSpecialDayGroupAsync(SetSpecialDayGroupRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetSpecialDayGroup, "http://www.onvif.org/ver10/schedule/wsdl", "SetSpecialDayGroup", request,
+            return InvokeAsync(SoapActions.SetSpecialDayGroup, "http://www.onvif.org/ver10/schedule/wsdl", "SetSpecialDayGroup", request,
                 () => new SetSpecialDayGroupResponse(), cancellationToken);
         }
 
@@ -575,7 +575,7 @@ namespace SharpOnvifClient.Schedule
         /// </summary>
         public System.Threading.Tasks.Task<ModifySpecialDayGroupResponse> ModifySpecialDayGroupAsync(ModifySpecialDayGroupRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.ModifySpecialDayGroup, "http://www.onvif.org/ver10/schedule/wsdl", "ModifySpecialDayGroup", request,
+            return InvokeAsync(SoapActions.ModifySpecialDayGroup, "http://www.onvif.org/ver10/schedule/wsdl", "ModifySpecialDayGroup", request,
                 () => new ModifySpecialDayGroupResponse(), cancellationToken);
         }
 
@@ -594,7 +594,7 @@ namespace SharpOnvifClient.Schedule
         /// </summary>
         public System.Threading.Tasks.Task<DeleteSpecialDayGroupResponse> DeleteSpecialDayGroupAsync(DeleteSpecialDayGroupRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeleteSpecialDayGroup, "http://www.onvif.org/ver10/schedule/wsdl", "DeleteSpecialDayGroup", request,
+            return InvokeAsync(SoapActions.DeleteSpecialDayGroup, "http://www.onvif.org/ver10/schedule/wsdl", "DeleteSpecialDayGroup", request,
                 () => new DeleteSpecialDayGroupResponse(), cancellationToken);
         }
 

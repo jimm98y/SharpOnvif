@@ -28,7 +28,7 @@ namespace SharpOnvifClient.PTZ
     /// speed set by the PTZConfiguration will be used.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AbsoluteMove", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class AbsoluteMoveRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AbsoluteMoveRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -113,7 +113,7 @@ namespace SharpOnvifClient.PTZ
     /// speed set by the PTZConfiguration will be used.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AbsoluteMoveResponse", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class AbsoluteMoveResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AbsoluteMoveResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public AbsoluteMoveResponse()
         {
@@ -122,7 +122,7 @@ namespace SharpOnvifClient.PTZ
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class Capabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Capabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -266,9 +266,9 @@ namespace SharpOnvifClient.PTZ
             set { this.moveAndTrackField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Capabilities"; } }
+        protected override string XmlTypeName { get { return "Capabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver20Ptz; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver20Ptz; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -345,7 +345,7 @@ namespace SharpOnvifClient.PTZ
     /// default space set by the PTZConfiguration will be used.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ContinuousMove", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class ContinuousMoveRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ContinuousMoveRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -429,7 +429,7 @@ namespace SharpOnvifClient.PTZ
     /// default space set by the PTZConfiguration will be used.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ContinuousMoveResponse", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class ContinuousMoveResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ContinuousMoveResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public ContinuousMoveResponse()
         {
@@ -441,7 +441,7 @@ namespace SharpOnvifClient.PTZ
     /// Operation to create a preset tour for the selected media profile.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreatePresetTour", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class CreatePresetTourRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreatePresetTourRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -484,7 +484,7 @@ namespace SharpOnvifClient.PTZ
     /// Operation to create a preset tour for the selected media profile.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreatePresetTourResponse", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class CreatePresetTourResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreatePresetTourResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string presetTourTokenField;
 
@@ -532,7 +532,7 @@ namespace SharpOnvifClient.PTZ
     /// the device to automatically determine the best zoom level to show the target.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GeoMove", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class GeoMoveRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GeoMoveRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -689,7 +689,7 @@ namespace SharpOnvifClient.PTZ
     /// the device to automatically determine the best zoom level to show the target.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GeoMoveResponse", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class GeoMoveResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GeoMoveResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public GeoMoveResponse()
         {
@@ -705,7 +705,7 @@ namespace SharpOnvifClient.PTZ
     /// this operation shall not fail on adding them to the referenced media profile.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCompatibleConfigurations", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class GetCompatibleConfigurationsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCompatibleConfigurationsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -755,7 +755,7 @@ namespace SharpOnvifClient.PTZ
     /// this operation shall not fail on adding them to the referenced media profile.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCompatibleConfigurationsResponse", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class GetCompatibleConfigurationsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCompatibleConfigurationsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.PTZConfiguration[] pTZConfigurationField;
 
@@ -813,7 +813,7 @@ namespace SharpOnvifClient.PTZ
     /// Node.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetConfigurationOptions", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class GetConfigurationOptionsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetConfigurationOptionsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string configurationTokenField;
 
@@ -864,7 +864,7 @@ namespace SharpOnvifClient.PTZ
     /// Node.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetConfigurationOptionsResponse", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class GetConfigurationOptionsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetConfigurationOptionsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.PTZConfigurationOptions pTZConfigurationOptionsField;
 
@@ -922,7 +922,7 @@ namespace SharpOnvifClient.PTZ
     /// Zoom Limits have to be interpreted accordingly.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetConfiguration", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class GetConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string pTZConfigurationTokenField;
 
@@ -980,7 +980,7 @@ namespace SharpOnvifClient.PTZ
     /// Zoom Limits have to be interpreted accordingly.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetConfigurationResponse", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class GetConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.PTZConfiguration pTZConfigurationField;
 
@@ -1038,7 +1038,7 @@ namespace SharpOnvifClient.PTZ
     /// be interpreted accordingly.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetConfigurations", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class GetConfigurationsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetConfigurationsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetConfigurationsRequest()
         {
@@ -1062,7 +1062,7 @@ namespace SharpOnvifClient.PTZ
     /// be interpreted accordingly.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetConfigurationsResponse", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class GetConfigurationsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetConfigurationsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.PTZConfiguration[] pTZConfigurationField;
 
@@ -1114,7 +1114,7 @@ namespace SharpOnvifClient.PTZ
     /// Get a specific PTZ Node identified by a reference token or a name.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetNode", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class GetNodeRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetNodeRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string nodeTokenField;
 
@@ -1160,7 +1160,7 @@ namespace SharpOnvifClient.PTZ
     /// Get a specific PTZ Node identified by a reference token or a name.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetNodeResponse", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class GetNodeResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetNodeResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.PTZNode pTZNodeField;
 
@@ -1209,7 +1209,7 @@ namespace SharpOnvifClient.PTZ
     /// capabilities. The PTZ Node is referenced either by its name or by its reference token.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetNodes", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class GetNodesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetNodesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetNodesRequest()
         {
@@ -1224,7 +1224,7 @@ namespace SharpOnvifClient.PTZ
     /// capabilities. The PTZ Node is referenced either by its name or by its reference token.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetNodesResponse", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class GetNodesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetNodesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.PTZNode[] pTZNodeField;
 
@@ -1276,7 +1276,7 @@ namespace SharpOnvifClient.PTZ
     /// Operation to request available options to configure PTZ preset tour.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetPresetTourOptions", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class GetPresetTourOptionsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetPresetTourOptionsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -1334,7 +1334,7 @@ namespace SharpOnvifClient.PTZ
     /// Operation to request available options to configure PTZ preset tour.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetPresetTourOptionsResponse", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class GetPresetTourOptionsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetPresetTourOptionsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.PTZPresetTourOptions optionsField;
 
@@ -1377,7 +1377,7 @@ namespace SharpOnvifClient.PTZ
     /// Operation to request a specific PTZ preset tour in the selected media profile.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetPresetTour", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class GetPresetTourRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetPresetTourRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -1435,7 +1435,7 @@ namespace SharpOnvifClient.PTZ
     /// Operation to request a specific PTZ preset tour in the selected media profile.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetPresetTourResponse", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class GetPresetTourResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetPresetTourResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.PresetTour presetTourField;
 
@@ -1478,7 +1478,7 @@ namespace SharpOnvifClient.PTZ
     /// Operation to request PTZ preset tours in the selected media profiles.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetPresetTours", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class GetPresetToursRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetPresetToursRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -1521,7 +1521,7 @@ namespace SharpOnvifClient.PTZ
     /// Operation to request PTZ preset tours in the selected media profiles.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetPresetToursResponse", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class GetPresetToursResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetPresetToursResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.PresetTour[] presetTourField;
 
@@ -1571,7 +1571,7 @@ namespace SharpOnvifClient.PTZ
     /// supported if there is support for at least on PTZ preset by the PTZNode.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetPresets", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class GetPresetsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetPresetsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -1618,7 +1618,7 @@ namespace SharpOnvifClient.PTZ
     /// supported if there is support for at least on PTZ preset by the PTZNode.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetPresetsResponse", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class GetPresetsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetPresetsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.PTZPreset[] presetField;
 
@@ -1670,7 +1670,7 @@ namespace SharpOnvifClient.PTZ
     /// Returns the capabilities of the PTZ service. The result is returned in a typed answer.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilities", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetServiceCapabilitiesRequest()
         {
@@ -1682,7 +1682,7 @@ namespace SharpOnvifClient.PTZ
     /// Returns the capabilities of the PTZ service. The result is returned in a typed answer.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilitiesResponse", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private Capabilities capabilitiesField;
 
@@ -1728,7 +1728,7 @@ namespace SharpOnvifClient.PTZ
     /// Operation to request PTZ status for the Node in the selected profile.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetStatus", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class GetStatusRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetStatusRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -1774,7 +1774,7 @@ namespace SharpOnvifClient.PTZ
     /// Operation to request PTZ status for the Node in the selected profile.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetStatusResponse", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class GetStatusResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetStatusResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.PTZStatus pTZStatusField;
 
@@ -1821,7 +1821,7 @@ namespace SharpOnvifClient.PTZ
     /// HomeSupported element in the PTZNode is true.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GotoHomePosition", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class GotoHomePositionRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GotoHomePositionRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -1887,7 +1887,7 @@ namespace SharpOnvifClient.PTZ
     /// HomeSupported element in the PTZNode is true.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GotoHomePositionResponse", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class GotoHomePositionResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GotoHomePositionResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public GotoHomePositionResponse()
         {
@@ -1900,7 +1900,7 @@ namespace SharpOnvifClient.PTZ
     /// supported if there is support for at least on PTZ preset by the PTZNode.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GotoPreset", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class GotoPresetRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GotoPresetRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -1984,7 +1984,7 @@ namespace SharpOnvifClient.PTZ
     /// supported if there is support for at least on PTZ preset by the PTZNode.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GotoPresetResponse", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class GotoPresetResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GotoPresetResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public GotoPresetResponse()
         {
@@ -1996,7 +1996,7 @@ namespace SharpOnvifClient.PTZ
     /// Operation to modify a preset tour for the selected media profile.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ModifyPresetTour", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class ModifyPresetTourRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ModifyPresetTourRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -2054,7 +2054,7 @@ namespace SharpOnvifClient.PTZ
     /// Operation to modify a preset tour for the selected media profile.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ModifyPresetTourResponse", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class ModifyPresetTourResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ModifyPresetTourResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public ModifyPresetTourResponse()
         {
@@ -2072,7 +2072,7 @@ namespace SharpOnvifClient.PTZ
     /// if the requested absolute position is not reachable.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("MoveAndStartTracking", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class MoveAndStartTrackingRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class MoveAndStartTrackingRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -2226,7 +2226,7 @@ namespace SharpOnvifClient.PTZ
     /// if the requested absolute position is not reachable.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("MoveAndStartTrackingResponse", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class MoveAndStartTrackingResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class MoveAndStartTrackingResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public MoveAndStartTrackingResponse()
         {
@@ -2238,7 +2238,7 @@ namespace SharpOnvifClient.PTZ
     /// Operation to perform specific operation on the preset tour in selected media profile.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("OperatePresetTour", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class OperatePresetTourRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class OperatePresetTourRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -2311,7 +2311,7 @@ namespace SharpOnvifClient.PTZ
     /// Operation to perform specific operation on the preset tour in selected media profile.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("OperatePresetTourResponse", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class OperatePresetTourResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class OperatePresetTourResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public OperatePresetTourResponse()
         {
@@ -2327,7 +2327,7 @@ namespace SharpOnvifClient.PTZ
     /// PTZConfiguration will be used.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RelativeMove", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class RelativeMoveRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RelativeMoveRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -2413,7 +2413,7 @@ namespace SharpOnvifClient.PTZ
     /// PTZConfiguration will be used.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RelativeMoveResponse", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class RelativeMoveResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RelativeMoveResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public RelativeMoveResponse()
         {
@@ -2426,7 +2426,7 @@ namespace SharpOnvifClient.PTZ
     /// the PresetPosition capability exists for teh Node in the selected profile.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RemovePreset", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class RemovePresetRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RemovePresetRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -2491,7 +2491,7 @@ namespace SharpOnvifClient.PTZ
     /// the PresetPosition capability exists for teh Node in the selected profile.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RemovePresetResponse", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class RemovePresetResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RemovePresetResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public RemovePresetResponse()
         {
@@ -2503,7 +2503,7 @@ namespace SharpOnvifClient.PTZ
     /// Operation to delete a specific preset tour from the media profile.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RemovePresetTour", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class RemovePresetTourRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RemovePresetTourRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -2561,7 +2561,7 @@ namespace SharpOnvifClient.PTZ
     /// Operation to delete a specific preset tour from the media profile.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RemovePresetTourResponse", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class RemovePresetTourResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RemovePresetTourResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public RemovePresetTourResponse()
         {
@@ -2574,7 +2574,7 @@ namespace SharpOnvifClient.PTZ
     /// profile. The operation is supported if the AuxiliarySupported element of the PTZNode is true
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SendAuxiliaryCommand", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class SendAuxiliaryCommandRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SendAuxiliaryCommandRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -2639,7 +2639,7 @@ namespace SharpOnvifClient.PTZ
     /// profile. The operation is supported if the AuxiliarySupported element of the PTZNode is true
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SendAuxiliaryCommandResponse", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class SendAuxiliaryCommandResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SendAuxiliaryCommandResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string auxiliaryResponseField;
 
@@ -2685,7 +2685,7 @@ namespace SharpOnvifClient.PTZ
     /// Set/update a existing PTZConfiguration on the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetConfiguration", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class SetConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.PTZConfiguration pTZConfigurationField;
 
@@ -2747,7 +2747,7 @@ namespace SharpOnvifClient.PTZ
     /// Set/update a existing PTZConfiguration on the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetConfigurationResponse", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class SetConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetConfigurationResponse()
         {
@@ -2761,7 +2761,7 @@ namespace SharpOnvifClient.PTZ
     /// successful, it is possible to recall the Home Position with the GotoHomePosition command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetHomePosition", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class SetHomePositionRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetHomePositionRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -2809,7 +2809,7 @@ namespace SharpOnvifClient.PTZ
     /// successful, it is possible to recall the Home Position with the GotoHomePosition command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetHomePositionResponse", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class SetHomePositionResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetHomePositionResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetHomePositionResponse()
         {
@@ -2828,7 +2828,7 @@ namespace SharpOnvifClient.PTZ
     /// the PTZ Preset which then should be recalled in the GotoPreset operation.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetPreset", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class SetPresetRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetPresetRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -2917,7 +2917,7 @@ namespace SharpOnvifClient.PTZ
     /// the PTZ Preset which then should be recalled in the GotoPreset operation.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetPresetResponse", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class SetPresetResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetPresetResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string presetTokenField;
 
@@ -2965,7 +2965,7 @@ namespace SharpOnvifClient.PTZ
     /// movements.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("Stop", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class StopRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class StopRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -3085,7 +3085,7 @@ namespace SharpOnvifClient.PTZ
     /// movements.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("StopResponse", Namespace="http://www.onvif.org/ver20/ptz/wsdl")]
-    public partial class StopResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class StopResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public StopResponse()
         {
@@ -3096,14 +3096,14 @@ namespace SharpOnvifClient.PTZ
     /// <summary>Constructs a contract named by an xsi:type attribute.</summary>
     internal static class XmlTypeFactory
     {
-        public static SharpOnvifCommon.Xml.OnvifContract Create(string ns, string name)
+        public static SharpOnvifCommon.Xml.XmlContract Create(string ns, string name)
         {
             return SharpOnvifCommon.Onvif.XmlTypeFactory.Create(ns, name);
         }
     }
 
     /// <summary>SOAP action URIs for this service's operations.</summary>
-    public static class OnvifActions
+    public static class SoapActions
     {
         public const string GetServiceCapabilities = "http://www.onvif.org/ver20/ptz/wsdl/GetServiceCapabilities";
         public const string GetNodes = "http://www.onvif.org/ver20/ptz/wsdl/GetNodes";

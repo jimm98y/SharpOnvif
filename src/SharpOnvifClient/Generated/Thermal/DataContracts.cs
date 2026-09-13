@@ -56,7 +56,7 @@ namespace SharpOnvifClient.Thermal
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class Capabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Capabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -91,9 +91,9 @@ namespace SharpOnvifClient.Thermal
             set { this.radiometryFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Capabilities"; } }
+        protected override string XmlTypeName { get { return "Capabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Thermal; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Thermal; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -132,7 +132,7 @@ namespace SharpOnvifClient.Thermal
     /// Describes a Color Palette element.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class ColorPalette : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ColorPalette : SharpOnvifCommon.Xml.XmlContract
     {
         private string nameField;
 
@@ -179,9 +179,9 @@ namespace SharpOnvifClient.Thermal
             set { this.typeField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ColorPalette"; } }
+        protected override string XmlTypeName { get { return "ColorPalette"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Thermal; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Thermal; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -225,7 +225,7 @@ namespace SharpOnvifClient.Thermal
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class Configuration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Configuration : SharpOnvifCommon.Xml.XmlContract
     {
         private ColorPalette colorPaletteField;
 
@@ -284,9 +284,9 @@ namespace SharpOnvifClient.Thermal
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Configuration"; } }
+        protected override string XmlTypeName { get { return "Configuration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Thermal; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Thermal; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -325,7 +325,7 @@ namespace SharpOnvifClient.Thermal
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class ConfigurationOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ConfigurationOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private ColorPalette[] colorPaletteField;
 
@@ -372,9 +372,9 @@ namespace SharpOnvifClient.Thermal
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ConfigurationOptions"; } }
+        protected override string XmlTypeName { get { return "ConfigurationOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Thermal; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Thermal; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -420,7 +420,7 @@ namespace SharpOnvifClient.Thermal
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class Configurations : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Configurations : SharpOnvifCommon.Xml.XmlContract
     {
         private Configuration configurationField;
 
@@ -455,9 +455,9 @@ namespace SharpOnvifClient.Thermal
             set { this.tokenField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Configurations"; } }
+        protected override string XmlTypeName { get { return "Configurations"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Thermal; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Thermal; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -500,7 +500,7 @@ namespace SharpOnvifClient.Thermal
     /// Type describing the Cooler settings.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class Cooler : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Cooler : SharpOnvifCommon.Xml.XmlContract
     {
         private bool enabledField;
 
@@ -547,9 +547,9 @@ namespace SharpOnvifClient.Thermal
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Cooler"; } }
+        protected override string XmlTypeName { get { return "Cooler"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Thermal; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Thermal; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -586,7 +586,7 @@ namespace SharpOnvifClient.Thermal
     /// devices.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class CoolerOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CoolerOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private bool enabledField;
         private bool enabledFieldSpecified;
@@ -622,9 +622,9 @@ namespace SharpOnvifClient.Thermal
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "CoolerOptions"; } }
+        protected override string XmlTypeName { get { return "CoolerOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Thermal; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Thermal; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -657,7 +657,7 @@ namespace SharpOnvifClient.Thermal
     /// parameters and their ranges, such that these can be applied to the SetConfiguration command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetConfigurationOptions", Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class GetConfigurationOptionsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetConfigurationOptionsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string videoSourceTokenField;
 
@@ -705,7 +705,7 @@ namespace SharpOnvifClient.Thermal
     /// parameters and their ranges, such that these can be applied to the SetConfiguration command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetConfigurationOptionsResponse", Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class GetConfigurationOptionsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetConfigurationOptionsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private ConfigurationOptions configurationOptionsField;
 
@@ -751,7 +751,7 @@ namespace SharpOnvifClient.Thermal
     /// Gets the Thermal Configuration for the requested VideoSource.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetConfiguration", Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class GetConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string videoSourceTokenField;
 
@@ -797,7 +797,7 @@ namespace SharpOnvifClient.Thermal
     /// Gets the Thermal Configuration for the requested VideoSource.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetConfigurationResponse", Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class GetConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private Configuration configurationField;
 
@@ -843,7 +843,7 @@ namespace SharpOnvifClient.Thermal
     /// Gets the Thermal Configuration for all thermal VideoSources of the Device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetConfigurations", Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class GetConfigurationsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetConfigurationsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetConfigurationsRequest()
         {
@@ -855,7 +855,7 @@ namespace SharpOnvifClient.Thermal
     /// Gets the Thermal Configuration for all thermal VideoSources of the Device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetConfigurationsResponse", Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class GetConfigurationsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetConfigurationsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private Configurations[] configurationsField;
 
@@ -909,7 +909,7 @@ namespace SharpOnvifClient.Thermal
     /// SetRadiometryConfiguration command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRadiometryConfigurationOptions", Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class GetRadiometryConfigurationOptionsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetRadiometryConfigurationOptionsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string videoSourceTokenField;
 
@@ -957,7 +957,7 @@ namespace SharpOnvifClient.Thermal
     /// SetRadiometryConfiguration command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRadiometryConfigurationOptionsResponse", Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class GetRadiometryConfigurationOptionsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetRadiometryConfigurationOptionsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private RadiometryConfigurationOptions configurationOptionsField;
 
@@ -1003,7 +1003,7 @@ namespace SharpOnvifClient.Thermal
     /// Gets the Radiometry Configuration for the requested VideoSource.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRadiometryConfiguration", Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class GetRadiometryConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetRadiometryConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string videoSourceTokenField;
 
@@ -1049,7 +1049,7 @@ namespace SharpOnvifClient.Thermal
     /// Gets the Radiometry Configuration for the requested VideoSource.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRadiometryConfigurationResponse", Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class GetRadiometryConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetRadiometryConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private RadiometryConfiguration configurationField;
 
@@ -1095,7 +1095,7 @@ namespace SharpOnvifClient.Thermal
     /// Returns the capabilities of the thermal service. The result is returned in a typed answer.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilities", Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetServiceCapabilitiesRequest()
         {
@@ -1107,7 +1107,7 @@ namespace SharpOnvifClient.Thermal
     /// Returns the capabilities of the thermal service. The result is returned in a typed answer.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilitiesResponse", Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private Capabilities capabilitiesField;
 
@@ -1153,7 +1153,7 @@ namespace SharpOnvifClient.Thermal
     /// Type describing a NUC Table element.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class NUCTable : SharpOnvifCommon.Xml.OnvifContract
+    public partial class NUCTable : SharpOnvifCommon.Xml.XmlContract
     {
         private string nameField;
 
@@ -1236,9 +1236,9 @@ namespace SharpOnvifClient.Thermal
             set { this.highTemperatureFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "NUCTable"; } }
+        protected override string XmlTypeName { get { return "NUCTable"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Thermal; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Thermal; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -1294,7 +1294,7 @@ namespace SharpOnvifClient.Thermal
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class RadiometryConfiguration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RadiometryConfiguration : SharpOnvifCommon.Xml.XmlContract
     {
         private RadiometryGlobalParameters radiometryGlobalParametersField;
 
@@ -1318,9 +1318,9 @@ namespace SharpOnvifClient.Thermal
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RadiometryConfiguration"; } }
+        protected override string XmlTypeName { get { return "RadiometryConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Thermal; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Thermal; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -1344,7 +1344,7 @@ namespace SharpOnvifClient.Thermal
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class RadiometryConfigurationOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RadiometryConfigurationOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private RadiometryGlobalParameterOptions radiometryGlobalParameterOptionsField;
 
@@ -1368,9 +1368,9 @@ namespace SharpOnvifClient.Thermal
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RadiometryConfigurationOptions"; } }
+        protected override string XmlTypeName { get { return "RadiometryConfigurationOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Thermal; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Thermal; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -1398,7 +1398,7 @@ namespace SharpOnvifClient.Thermal
     /// calculation.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class RadiometryGlobalParameterOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RadiometryGlobalParameterOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.FloatRange reflectedAmbientTemperatureField;
 
@@ -1505,9 +1505,9 @@ namespace SharpOnvifClient.Thermal
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RadiometryGlobalParameterOptions"; } }
+        protected override string XmlTypeName { get { return "RadiometryGlobalParameterOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Thermal; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Thermal; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -1572,7 +1572,7 @@ namespace SharpOnvifClient.Thermal
     /// are available to obtain valid temperature values.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class RadiometryGlobalParameters : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RadiometryGlobalParameters : SharpOnvifCommon.Xml.XmlContract
     {
         private float reflectedAmbientTemperatureField;
 
@@ -1741,9 +1741,9 @@ namespace SharpOnvifClient.Thermal
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RadiometryGlobalParameters"; } }
+        protected override string XmlTypeName { get { return "RadiometryGlobalParameters"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Thermal; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Thermal; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -1825,7 +1825,7 @@ namespace SharpOnvifClient.Thermal
     /// Sets the Thermal Configuration for the requested VideoSource.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetConfiguration", Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class SetConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string videoSourceTokenField;
 
@@ -1889,7 +1889,7 @@ namespace SharpOnvifClient.Thermal
     /// Sets the Thermal Configuration for the requested VideoSource.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetConfigurationResponse", Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class SetConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetConfigurationResponse()
         {
@@ -1901,7 +1901,7 @@ namespace SharpOnvifClient.Thermal
     /// Sets the Radiometry Configuration for the requested VideoSource.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetRadiometryConfiguration", Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class SetRadiometryConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetRadiometryConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string videoSourceTokenField;
 
@@ -1965,7 +1965,7 @@ namespace SharpOnvifClient.Thermal
     /// Sets the Radiometry Configuration for the requested VideoSource.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetRadiometryConfigurationResponse", Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
-    public partial class SetRadiometryConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetRadiometryConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetRadiometryConfigurationResponse()
         {
@@ -1976,14 +1976,14 @@ namespace SharpOnvifClient.Thermal
     /// <summary>Constructs a contract named by an xsi:type attribute.</summary>
     internal static class XmlTypeFactory
     {
-        public static SharpOnvifCommon.Xml.OnvifContract Create(string ns, string name)
+        public static SharpOnvifCommon.Xml.XmlContract Create(string ns, string name)
         {
             return SharpOnvifCommon.Onvif.XmlTypeFactory.Create(ns, name);
         }
     }
 
     /// <summary>SOAP action URIs for this service's operations.</summary>
-    public static class OnvifActions
+    public static class SoapActions
     {
         public const string GetServiceCapabilities = "http://www.onvif.org/ver10/thermal/wsdl/GetServiceCapabilities";
         public const string GetConfigurationOptions = "http://www.onvif.org/ver10/thermal/wsdl/GetConfigurationOptions";

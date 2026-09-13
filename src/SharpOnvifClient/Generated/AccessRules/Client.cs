@@ -11,7 +11,7 @@
 namespace SharpOnvifClient.AccessRules
 {
     /// <summary>
-    /// The AccessRulesPort Onvif service.
+    /// The AccessRulesPort service.
     /// </summary>
     public interface AccessRulesPort
     {
@@ -165,7 +165,7 @@ namespace SharpOnvifClient.AccessRules
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -175,7 +175,7 @@ namespace SharpOnvifClient.AccessRules
         /// </summary>
         public System.Threading.Tasks.Task<GetServiceCapabilitiesResponse> GetServiceCapabilitiesAsync(GetServiceCapabilitiesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetServiceCapabilities, "http://www.onvif.org/ver10/accessrules/wsdl", "GetServiceCapabilities", request,
+            return InvokeAsync(SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver10/accessrules/wsdl", "GetServiceCapabilities", request,
                 () => new GetServiceCapabilitiesResponse(), cancellationToken);
         }
 
@@ -195,7 +195,7 @@ namespace SharpOnvifClient.AccessRules
         /// </summary>
         public System.Threading.Tasks.Task<GetAccessProfileInfoResponse> GetAccessProfileInfoAsync(GetAccessProfileInfoRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetAccessProfileInfo, "http://www.onvif.org/ver10/accessrules/wsdl", "GetAccessProfileInfo", request,
+            return InvokeAsync(SoapActions.GetAccessProfileInfo, "http://www.onvif.org/ver10/accessrules/wsdl", "GetAccessProfileInfo", request,
                 () => new GetAccessProfileInfoResponse(), cancellationToken);
         }
 
@@ -215,7 +215,7 @@ namespace SharpOnvifClient.AccessRules
         /// </summary>
         public System.Threading.Tasks.Task<GetAccessProfileInfoListResponse> GetAccessProfileInfoListAsync(GetAccessProfileInfoListRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetAccessProfileInfoList, "http://www.onvif.org/ver10/accessrules/wsdl", "GetAccessProfileInfoList", request,
+            return InvokeAsync(SoapActions.GetAccessProfileInfoList, "http://www.onvif.org/ver10/accessrules/wsdl", "GetAccessProfileInfoList", request,
                 () => new GetAccessProfileInfoListResponse(), cancellationToken);
         }
 
@@ -235,7 +235,7 @@ namespace SharpOnvifClient.AccessRules
         /// </summary>
         public System.Threading.Tasks.Task<GetAccessProfilesResponse> GetAccessProfilesAsync(GetAccessProfilesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetAccessProfiles, "http://www.onvif.org/ver10/accessrules/wsdl", "GetAccessProfiles", request,
+            return InvokeAsync(SoapActions.GetAccessProfiles, "http://www.onvif.org/ver10/accessrules/wsdl", "GetAccessProfiles", request,
                 () => new GetAccessProfilesResponse(), cancellationToken);
         }
 
@@ -255,7 +255,7 @@ namespace SharpOnvifClient.AccessRules
         /// </summary>
         public System.Threading.Tasks.Task<GetAccessProfileListResponse> GetAccessProfileListAsync(GetAccessProfileListRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetAccessProfileList, "http://www.onvif.org/ver10/accessrules/wsdl", "GetAccessProfileList", request,
+            return InvokeAsync(SoapActions.GetAccessProfileList, "http://www.onvif.org/ver10/accessrules/wsdl", "GetAccessProfileList", request,
                 () => new GetAccessProfileListResponse(), cancellationToken);
         }
 
@@ -277,7 +277,7 @@ namespace SharpOnvifClient.AccessRules
         /// </summary>
         public System.Threading.Tasks.Task<CreateAccessProfileResponse> CreateAccessProfileAsync(CreateAccessProfileRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.CreateAccessProfile, "http://www.onvif.org/ver10/accessrules/wsdl", "CreateAccessProfile", request,
+            return InvokeAsync(SoapActions.CreateAccessProfile, "http://www.onvif.org/ver10/accessrules/wsdl", "CreateAccessProfile", request,
                 () => new CreateAccessProfileResponse(), cancellationToken);
         }
 
@@ -299,7 +299,7 @@ namespace SharpOnvifClient.AccessRules
         /// </summary>
         public System.Threading.Tasks.Task<ModifyAccessProfileResponse> ModifyAccessProfileAsync(ModifyAccessProfileRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.ModifyAccessProfile, "http://www.onvif.org/ver10/accessrules/wsdl", "ModifyAccessProfile", request,
+            return InvokeAsync(SoapActions.ModifyAccessProfile, "http://www.onvif.org/ver10/accessrules/wsdl", "ModifyAccessProfile", request,
                 () => new ModifyAccessProfileResponse(), cancellationToken);
         }
 
@@ -321,7 +321,7 @@ namespace SharpOnvifClient.AccessRules
         /// </summary>
         public System.Threading.Tasks.Task<SetAccessProfileResponse> SetAccessProfileAsync(SetAccessProfileRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetAccessProfile, "http://www.onvif.org/ver10/accessrules/wsdl", "SetAccessProfile", request,
+            return InvokeAsync(SoapActions.SetAccessProfile, "http://www.onvif.org/ver10/accessrules/wsdl", "SetAccessProfile", request,
                 () => new SetAccessProfileResponse(), cancellationToken);
         }
 
@@ -341,7 +341,7 @@ namespace SharpOnvifClient.AccessRules
         /// </summary>
         public System.Threading.Tasks.Task<DeleteAccessProfileResponse> DeleteAccessProfileAsync(DeleteAccessProfileRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeleteAccessProfile, "http://www.onvif.org/ver10/accessrules/wsdl", "DeleteAccessProfile", request,
+            return InvokeAsync(SoapActions.DeleteAccessProfile, "http://www.onvif.org/ver10/accessrules/wsdl", "DeleteAccessProfile", request,
                 () => new DeleteAccessProfileResponse(), cancellationToken);
         }
 

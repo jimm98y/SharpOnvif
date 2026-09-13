@@ -11,7 +11,7 @@
 namespace SharpOnvifClient.Replay
 {
     /// <summary>
-    /// The ReplayPort Onvif service.
+    /// The ReplayPort service.
     /// </summary>
     public interface ReplayPort
     {
@@ -87,7 +87,7 @@ namespace SharpOnvifClient.Replay
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -97,7 +97,7 @@ namespace SharpOnvifClient.Replay
         /// </summary>
         public System.Threading.Tasks.Task<GetServiceCapabilitiesResponse> GetServiceCapabilitiesAsync(GetServiceCapabilitiesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetServiceCapabilities, "http://www.onvif.org/ver10/replay/wsdl", "GetServiceCapabilities", request,
+            return InvokeAsync(SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver10/replay/wsdl", "GetServiceCapabilities", request,
                 () => new GetServiceCapabilitiesResponse(), cancellationToken);
         }
 
@@ -116,7 +116,7 @@ namespace SharpOnvifClient.Replay
         /// </summary>
         public System.Threading.Tasks.Task<GetReplayUriResponse> GetReplayUriAsync(GetReplayUriRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetReplayUri, "http://www.onvif.org/ver10/replay/wsdl", "GetReplayUri", request,
+            return InvokeAsync(SoapActions.GetReplayUri, "http://www.onvif.org/ver10/replay/wsdl", "GetReplayUri", request,
                 () => new GetReplayUriResponse(), cancellationToken);
         }
 
@@ -133,7 +133,7 @@ namespace SharpOnvifClient.Replay
         /// </summary>
         public System.Threading.Tasks.Task<GetReplayConfigurationResponse> GetReplayConfigurationAsync(GetReplayConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetReplayConfiguration, "http://www.onvif.org/ver10/replay/wsdl", "GetReplayConfiguration", request,
+            return InvokeAsync(SoapActions.GetReplayConfiguration, "http://www.onvif.org/ver10/replay/wsdl", "GetReplayConfiguration", request,
                 () => new GetReplayConfigurationResponse(), cancellationToken);
         }
 
@@ -150,7 +150,7 @@ namespace SharpOnvifClient.Replay
         /// </summary>
         public System.Threading.Tasks.Task<SetReplayConfigurationResponse> SetReplayConfigurationAsync(SetReplayConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetReplayConfiguration, "http://www.onvif.org/ver10/replay/wsdl", "SetReplayConfiguration", request,
+            return InvokeAsync(SoapActions.SetReplayConfiguration, "http://www.onvif.org/ver10/replay/wsdl", "SetReplayConfiguration", request,
                 () => new SetReplayConfigurationResponse(), cancellationToken);
         }
 

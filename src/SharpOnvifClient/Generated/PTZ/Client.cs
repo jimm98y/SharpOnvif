@@ -11,7 +11,7 @@
 namespace SharpOnvifClient.PTZ
 {
     /// <summary>
-    /// The PTZ Onvif service.
+    /// The PTZ service.
     /// </summary>
     public interface PTZ
     {
@@ -407,7 +407,7 @@ namespace SharpOnvifClient.PTZ
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -417,7 +417,7 @@ namespace SharpOnvifClient.PTZ
         /// </summary>
         public System.Threading.Tasks.Task<GetServiceCapabilitiesResponse> GetServiceCapabilitiesAsync(GetServiceCapabilitiesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetServiceCapabilities, "http://www.onvif.org/ver20/ptz/wsdl", "GetServiceCapabilities", request,
+            return InvokeAsync(SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver20/ptz/wsdl", "GetServiceCapabilities", request,
                 () => new GetServiceCapabilitiesResponse(), cancellationToken);
         }
 
@@ -437,7 +437,7 @@ namespace SharpOnvifClient.PTZ
         /// </summary>
         public System.Threading.Tasks.Task<GetNodesResponse> GetNodesAsync(GetNodesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetNodes, "http://www.onvif.org/ver20/ptz/wsdl", "GetNodes", request,
+            return InvokeAsync(SoapActions.GetNodes, "http://www.onvif.org/ver20/ptz/wsdl", "GetNodes", request,
                 () => new GetNodesResponse(), cancellationToken);
         }
 
@@ -454,7 +454,7 @@ namespace SharpOnvifClient.PTZ
         /// </summary>
         public System.Threading.Tasks.Task<GetNodeResponse> GetNodeAsync(GetNodeRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetNode, "http://www.onvif.org/ver20/ptz/wsdl", "GetNode", request,
+            return InvokeAsync(SoapActions.GetNode, "http://www.onvif.org/ver20/ptz/wsdl", "GetNode", request,
                 () => new GetNodeResponse(), cancellationToken);
         }
 
@@ -483,7 +483,7 @@ namespace SharpOnvifClient.PTZ
         /// </summary>
         public System.Threading.Tasks.Task<GetConfigurationResponse> GetConfigurationAsync(GetConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetConfiguration, "http://www.onvif.org/ver20/ptz/wsdl", "GetConfiguration", request,
+            return InvokeAsync(SoapActions.GetConfiguration, "http://www.onvif.org/ver20/ptz/wsdl", "GetConfiguration", request,
                 () => new GetConfigurationResponse(), cancellationToken);
         }
 
@@ -512,7 +512,7 @@ namespace SharpOnvifClient.PTZ
         /// </summary>
         public System.Threading.Tasks.Task<GetConfigurationsResponse> GetConfigurationsAsync(GetConfigurationsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetConfigurations, "http://www.onvif.org/ver20/ptz/wsdl", "GetConfigurations", request,
+            return InvokeAsync(SoapActions.GetConfigurations, "http://www.onvif.org/ver20/ptz/wsdl", "GetConfigurations", request,
                 () => new GetConfigurationsResponse(), cancellationToken);
         }
 
@@ -529,7 +529,7 @@ namespace SharpOnvifClient.PTZ
         /// </summary>
         public System.Threading.Tasks.Task<SetConfigurationResponse> SetConfigurationAsync(SetConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetConfiguration, "http://www.onvif.org/ver20/ptz/wsdl", "SetConfiguration", request,
+            return InvokeAsync(SoapActions.SetConfiguration, "http://www.onvif.org/ver20/ptz/wsdl", "SetConfiguration", request,
                 () => new SetConfigurationResponse(), cancellationToken);
         }
 
@@ -551,7 +551,7 @@ namespace SharpOnvifClient.PTZ
         /// </summary>
         public System.Threading.Tasks.Task<GetConfigurationOptionsResponse> GetConfigurationOptionsAsync(GetConfigurationOptionsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetConfigurationOptions, "http://www.onvif.org/ver20/ptz/wsdl", "GetConfigurationOptions", request,
+            return InvokeAsync(SoapActions.GetConfigurationOptions, "http://www.onvif.org/ver20/ptz/wsdl", "GetConfigurationOptions", request,
                 () => new GetConfigurationOptionsResponse(), cancellationToken);
         }
 
@@ -569,7 +569,7 @@ namespace SharpOnvifClient.PTZ
         /// </summary>
         public System.Threading.Tasks.Task<SendAuxiliaryCommandResponse> SendAuxiliaryCommandAsync(SendAuxiliaryCommandRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SendAuxiliaryCommand, "http://www.onvif.org/ver20/ptz/wsdl", "SendAuxiliaryCommand", request,
+            return InvokeAsync(SoapActions.SendAuxiliaryCommand, "http://www.onvif.org/ver20/ptz/wsdl", "SendAuxiliaryCommand", request,
                 () => new SendAuxiliaryCommandResponse(), cancellationToken);
         }
 
@@ -587,7 +587,7 @@ namespace SharpOnvifClient.PTZ
         /// </summary>
         public System.Threading.Tasks.Task<GetPresetsResponse> GetPresetsAsync(GetPresetsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetPresets, "http://www.onvif.org/ver20/ptz/wsdl", "GetPresets", request,
+            return InvokeAsync(SoapActions.GetPresets, "http://www.onvif.org/ver20/ptz/wsdl", "GetPresets", request,
                 () => new GetPresetsResponse(), cancellationToken);
         }
 
@@ -611,7 +611,7 @@ namespace SharpOnvifClient.PTZ
         /// </summary>
         public System.Threading.Tasks.Task<SetPresetResponse> SetPresetAsync(SetPresetRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetPreset, "http://www.onvif.org/ver20/ptz/wsdl", "SetPreset", request,
+            return InvokeAsync(SoapActions.SetPreset, "http://www.onvif.org/ver20/ptz/wsdl", "SetPreset", request,
                 () => new SetPresetResponse(), cancellationToken);
         }
 
@@ -629,7 +629,7 @@ namespace SharpOnvifClient.PTZ
         /// </summary>
         public System.Threading.Tasks.Task<RemovePresetResponse> RemovePresetAsync(RemovePresetRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.RemovePreset, "http://www.onvif.org/ver20/ptz/wsdl", "RemovePreset", request,
+            return InvokeAsync(SoapActions.RemovePreset, "http://www.onvif.org/ver20/ptz/wsdl", "RemovePreset", request,
                 () => new RemovePresetResponse(), cancellationToken);
         }
 
@@ -647,7 +647,7 @@ namespace SharpOnvifClient.PTZ
         /// </summary>
         public System.Threading.Tasks.Task<GotoPresetResponse> GotoPresetAsync(GotoPresetRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GotoPreset, "http://www.onvif.org/ver20/ptz/wsdl", "GotoPreset", request,
+            return InvokeAsync(SoapActions.GotoPreset, "http://www.onvif.org/ver20/ptz/wsdl", "GotoPreset", request,
                 () => new GotoPresetResponse(), cancellationToken);
         }
 
@@ -665,7 +665,7 @@ namespace SharpOnvifClient.PTZ
         /// </summary>
         public System.Threading.Tasks.Task<GotoHomePositionResponse> GotoHomePositionAsync(GotoHomePositionRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GotoHomePosition, "http://www.onvif.org/ver20/ptz/wsdl", "GotoHomePosition", request,
+            return InvokeAsync(SoapActions.GotoHomePosition, "http://www.onvif.org/ver20/ptz/wsdl", "GotoHomePosition", request,
                 () => new GotoHomePositionResponse(), cancellationToken);
         }
 
@@ -684,7 +684,7 @@ namespace SharpOnvifClient.PTZ
         /// </summary>
         public System.Threading.Tasks.Task<SetHomePositionResponse> SetHomePositionAsync(SetHomePositionRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetHomePosition, "http://www.onvif.org/ver20/ptz/wsdl", "SetHomePosition", request,
+            return InvokeAsync(SoapActions.SetHomePosition, "http://www.onvif.org/ver20/ptz/wsdl", "SetHomePosition", request,
                 () => new SetHomePositionResponse(), cancellationToken);
         }
 
@@ -703,7 +703,7 @@ namespace SharpOnvifClient.PTZ
         /// </summary>
         public System.Threading.Tasks.Task<ContinuousMoveResponse> ContinuousMoveAsync(ContinuousMoveRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.ContinuousMove, "http://www.onvif.org/ver20/ptz/wsdl", "ContinuousMove", request,
+            return InvokeAsync(SoapActions.ContinuousMove, "http://www.onvif.org/ver20/ptz/wsdl", "ContinuousMove", request,
                 () => new ContinuousMoveResponse(), cancellationToken);
         }
 
@@ -724,7 +724,7 @@ namespace SharpOnvifClient.PTZ
         /// </summary>
         public System.Threading.Tasks.Task<RelativeMoveResponse> RelativeMoveAsync(RelativeMoveRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.RelativeMove, "http://www.onvif.org/ver20/ptz/wsdl", "RelativeMove", request,
+            return InvokeAsync(SoapActions.RelativeMove, "http://www.onvif.org/ver20/ptz/wsdl", "RelativeMove", request,
                 () => new RelativeMoveResponse(), cancellationToken);
         }
 
@@ -741,7 +741,7 @@ namespace SharpOnvifClient.PTZ
         /// </summary>
         public System.Threading.Tasks.Task<GetStatusResponse> GetStatusAsync(GetStatusRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetStatus, "http://www.onvif.org/ver20/ptz/wsdl", "GetStatus", request,
+            return InvokeAsync(SoapActions.GetStatus, "http://www.onvif.org/ver20/ptz/wsdl", "GetStatus", request,
                 () => new GetStatusResponse(), cancellationToken);
         }
 
@@ -761,7 +761,7 @@ namespace SharpOnvifClient.PTZ
         /// </summary>
         public System.Threading.Tasks.Task<AbsoluteMoveResponse> AbsoluteMoveAsync(AbsoluteMoveRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.AbsoluteMove, "http://www.onvif.org/ver20/ptz/wsdl", "AbsoluteMove", request,
+            return InvokeAsync(SoapActions.AbsoluteMove, "http://www.onvif.org/ver20/ptz/wsdl", "AbsoluteMove", request,
                 () => new AbsoluteMoveResponse(), cancellationToken);
         }
 
@@ -783,7 +783,7 @@ namespace SharpOnvifClient.PTZ
         /// </summary>
         public System.Threading.Tasks.Task<GeoMoveResponse> GeoMoveAsync(GeoMoveRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GeoMove, "http://www.onvif.org/ver20/ptz/wsdl", "GeoMove", request,
+            return InvokeAsync(SoapActions.GeoMove, "http://www.onvif.org/ver20/ptz/wsdl", "GeoMove", request,
                 () => new GeoMoveResponse(), cancellationToken);
         }
 
@@ -802,7 +802,7 @@ namespace SharpOnvifClient.PTZ
         /// </summary>
         public System.Threading.Tasks.Task<StopResponse> StopAsync(StopRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.Stop, "http://www.onvif.org/ver20/ptz/wsdl", "Stop", request,
+            return InvokeAsync(SoapActions.Stop, "http://www.onvif.org/ver20/ptz/wsdl", "Stop", request,
                 () => new StopResponse(), cancellationToken);
         }
 
@@ -819,7 +819,7 @@ namespace SharpOnvifClient.PTZ
         /// </summary>
         public System.Threading.Tasks.Task<GetPresetToursResponse> GetPresetToursAsync(GetPresetToursRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetPresetTours, "http://www.onvif.org/ver20/ptz/wsdl", "GetPresetTours", request,
+            return InvokeAsync(SoapActions.GetPresetTours, "http://www.onvif.org/ver20/ptz/wsdl", "GetPresetTours", request,
                 () => new GetPresetToursResponse(), cancellationToken);
         }
 
@@ -836,7 +836,7 @@ namespace SharpOnvifClient.PTZ
         /// </summary>
         public System.Threading.Tasks.Task<GetPresetTourResponse> GetPresetTourAsync(GetPresetTourRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetPresetTour, "http://www.onvif.org/ver20/ptz/wsdl", "GetPresetTour", request,
+            return InvokeAsync(SoapActions.GetPresetTour, "http://www.onvif.org/ver20/ptz/wsdl", "GetPresetTour", request,
                 () => new GetPresetTourResponse(), cancellationToken);
         }
 
@@ -853,7 +853,7 @@ namespace SharpOnvifClient.PTZ
         /// </summary>
         public System.Threading.Tasks.Task<GetPresetTourOptionsResponse> GetPresetTourOptionsAsync(GetPresetTourOptionsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetPresetTourOptions, "http://www.onvif.org/ver20/ptz/wsdl", "GetPresetTourOptions", request,
+            return InvokeAsync(SoapActions.GetPresetTourOptions, "http://www.onvif.org/ver20/ptz/wsdl", "GetPresetTourOptions", request,
                 () => new GetPresetTourOptionsResponse(), cancellationToken);
         }
 
@@ -870,7 +870,7 @@ namespace SharpOnvifClient.PTZ
         /// </summary>
         public System.Threading.Tasks.Task<CreatePresetTourResponse> CreatePresetTourAsync(CreatePresetTourRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.CreatePresetTour, "http://www.onvif.org/ver20/ptz/wsdl", "CreatePresetTour", request,
+            return InvokeAsync(SoapActions.CreatePresetTour, "http://www.onvif.org/ver20/ptz/wsdl", "CreatePresetTour", request,
                 () => new CreatePresetTourResponse(), cancellationToken);
         }
 
@@ -887,7 +887,7 @@ namespace SharpOnvifClient.PTZ
         /// </summary>
         public System.Threading.Tasks.Task<ModifyPresetTourResponse> ModifyPresetTourAsync(ModifyPresetTourRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.ModifyPresetTour, "http://www.onvif.org/ver20/ptz/wsdl", "ModifyPresetTour", request,
+            return InvokeAsync(SoapActions.ModifyPresetTour, "http://www.onvif.org/ver20/ptz/wsdl", "ModifyPresetTour", request,
                 () => new ModifyPresetTourResponse(), cancellationToken);
         }
 
@@ -904,7 +904,7 @@ namespace SharpOnvifClient.PTZ
         /// </summary>
         public System.Threading.Tasks.Task<OperatePresetTourResponse> OperatePresetTourAsync(OperatePresetTourRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.OperatePresetTour, "http://www.onvif.org/ver20/ptz/wsdl", "OperatePresetTour", request,
+            return InvokeAsync(SoapActions.OperatePresetTour, "http://www.onvif.org/ver20/ptz/wsdl", "OperatePresetTour", request,
                 () => new OperatePresetTourResponse(), cancellationToken);
         }
 
@@ -921,7 +921,7 @@ namespace SharpOnvifClient.PTZ
         /// </summary>
         public System.Threading.Tasks.Task<RemovePresetTourResponse> RemovePresetTourAsync(RemovePresetTourRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.RemovePresetTour, "http://www.onvif.org/ver20/ptz/wsdl", "RemovePresetTour", request,
+            return InvokeAsync(SoapActions.RemovePresetTour, "http://www.onvif.org/ver20/ptz/wsdl", "RemovePresetTour", request,
                 () => new RemovePresetTourResponse(), cancellationToken);
         }
 
@@ -942,7 +942,7 @@ namespace SharpOnvifClient.PTZ
         /// </summary>
         public System.Threading.Tasks.Task<GetCompatibleConfigurationsResponse> GetCompatibleConfigurationsAsync(GetCompatibleConfigurationsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetCompatibleConfigurations, "http://www.onvif.org/ver20/ptz/wsdl", "GetCompatibleConfigurations", request,
+            return InvokeAsync(SoapActions.GetCompatibleConfigurations, "http://www.onvif.org/ver20/ptz/wsdl", "GetCompatibleConfigurations", request,
                 () => new GetCompatibleConfigurationsResponse(), cancellationToken);
         }
 
@@ -965,7 +965,7 @@ namespace SharpOnvifClient.PTZ
         /// </summary>
         public System.Threading.Tasks.Task<MoveAndStartTrackingResponse> MoveAndStartTrackingAsync(MoveAndStartTrackingRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.MoveAndStartTracking, "http://www.onvif.org/ver20/ptz/wsdl", "MoveAndStartTracking", request,
+            return InvokeAsync(SoapActions.MoveAndStartTracking, "http://www.onvif.org/ver20/ptz/wsdl", "MoveAndStartTracking", request,
                 () => new MoveAndStartTrackingResponse(), cancellationToken);
         }
 

@@ -63,7 +63,7 @@ internal sealed class ClientEmitter
 
     private void EmitInterface(CSharpWriter writer, CsService service)
     {
-        writer.Doc(service.Documentation ?? $"The {service.Name} Onvif service.");
+        writer.Doc(service.Documentation ?? $"The {service.Name} service.");
         writer.Line($"public interface {CsharpNaming.Escape(service.Name)}");
         using (writer.Braces())
         {
@@ -113,7 +113,7 @@ internal sealed class ClientEmitter
             using (writer.Braces()) { }
             writer.Line();
 
-            writer.Line($"protected override {Xml}.OnvifContract ResolveXmlType(string ns, string name)");
+            writer.Line($"protected override {Xml}.XmlContract ResolveXmlType(string ns, string name)");
             using (writer.Braces())
             {
                 writer.Line("return XmlTypeFactory.Create(ns, name);");
@@ -141,7 +141,7 @@ internal sealed class ClientEmitter
         writer.Line("public " + Signature(operation, wrapped: true));
         using (writer.Braces())
         {
-            string action = $"OnvifActions.{CsharpNaming.Escape(operation.Name)}";
+            string action = $"SoapActions.{CsharpNaming.Escape(operation.Name)}";
 
             if (operation.IsOneWay)
             {

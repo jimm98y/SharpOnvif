@@ -16,7 +16,7 @@ namespace SharpOnvifServer.DeviceMgmt
     public abstract class DeviceBase
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new DeviceDispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new DeviceDispatcher();
 
         /// <summary>
         /// Returns information about services on the device.
@@ -2205,7 +2205,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     /// <summary>Routes SOAP actions to <see cref="DeviceBase"/>.</summary>
-    internal sealed class DeviceDispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class DeviceDispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(DeviceBase); } }
 
@@ -2213,109 +2213,109 @@ namespace SharpOnvifServer.DeviceMgmt
         {
             switch (action)
             {
-                case OnvifActions.GetServices:
-                case OnvifActions.GetServiceCapabilities:
-                case OnvifActions.GetDeviceInformation:
-                case OnvifActions.SetSystemDateAndTime:
-                case OnvifActions.GetSystemDateAndTime:
-                case OnvifActions.SetSystemFactoryDefault:
-                case OnvifActions.UpgradeSystemFirmware:
-                case OnvifActions.SystemReboot:
-                case OnvifActions.RestoreSystem:
-                case OnvifActions.GetSystemBackup:
-                case OnvifActions.GetSystemLog:
-                case OnvifActions.GetSystemSupportInformation:
-                case OnvifActions.GetScopes:
-                case OnvifActions.SetScopes:
-                case OnvifActions.AddScopes:
-                case OnvifActions.RemoveScopes:
-                case OnvifActions.GetDiscoveryMode:
-                case OnvifActions.SetDiscoveryMode:
-                case OnvifActions.GetRemoteDiscoveryMode:
-                case OnvifActions.SetRemoteDiscoveryMode:
-                case OnvifActions.GetDPAddresses:
-                case OnvifActions.SetDPAddresses:
-                case OnvifActions.GetEndpointReference:
-                case OnvifActions.GetUserRoles:
-                case OnvifActions.SetUserRole:
-                case OnvifActions.DeleteUserRole:
-                case OnvifActions.GetRemoteUser:
-                case OnvifActions.SetRemoteUser:
-                case OnvifActions.GetUsers:
-                case OnvifActions.CreateUsers:
-                case OnvifActions.DeleteUsers:
-                case OnvifActions.SetUser:
-                case OnvifActions.GetWsdlUrl:
-                case OnvifActions.GetPasswordComplexityOptions:
-                case OnvifActions.GetPasswordComplexityConfiguration:
-                case OnvifActions.SetPasswordComplexityConfiguration:
-                case OnvifActions.GetPasswordHistoryConfiguration:
-                case OnvifActions.SetPasswordHistoryConfiguration:
-                case OnvifActions.GetAuthFailureWarningOptions:
-                case OnvifActions.GetAuthFailureWarningConfiguration:
-                case OnvifActions.SetAuthFailureWarningConfiguration:
-                case OnvifActions.GetCapabilities:
-                case OnvifActions.GetHostname:
-                case OnvifActions.SetHostname:
-                case OnvifActions.SetHostnameFromDHCP:
-                case OnvifActions.GetDNS:
-                case OnvifActions.SetDNS:
-                case OnvifActions.GetNTP:
-                case OnvifActions.SetNTP:
-                case OnvifActions.GetDynamicDNS:
-                case OnvifActions.SetDynamicDNS:
-                case OnvifActions.GetNetworkInterfaces:
-                case OnvifActions.SetNetworkInterfaces:
-                case OnvifActions.GetNetworkProtocols:
-                case OnvifActions.SetNetworkProtocols:
-                case OnvifActions.GetNetworkDefaultGateway:
-                case OnvifActions.SetNetworkDefaultGateway:
-                case OnvifActions.GetZeroConfiguration:
-                case OnvifActions.SetZeroConfiguration:
-                case OnvifActions.GetIPAddressFilter:
-                case OnvifActions.SetIPAddressFilter:
-                case OnvifActions.AddIPAddressFilter:
-                case OnvifActions.RemoveIPAddressFilter:
-                case OnvifActions.GetAccessPolicy:
-                case OnvifActions.SetAccessPolicy:
-                case OnvifActions.GetRelayOutputs:
-                case OnvifActions.SetRelayOutputSettings:
-                case OnvifActions.SetRelayOutputState:
-                case OnvifActions.SendAuxiliaryCommand:
-                case OnvifActions.GetDot11Capabilities:
-                case OnvifActions.GetDot11Status:
-                case OnvifActions.ScanAvailableDot11Networks:
-                case OnvifActions.GetSystemUris:
-                case OnvifActions.StartFirmwareUpgrade:
-                case OnvifActions.UpgradeFirmware:
-                case OnvifActions.StartSystemRestore:
-                case OnvifActions.GetStorageConfigurations:
-                case OnvifActions.CreateStorageConfiguration:
-                case OnvifActions.GetStorageConfiguration:
-                case OnvifActions.SetStorageConfiguration:
-                case OnvifActions.DeleteStorageConfiguration:
-                case OnvifActions.GetGeoLocation:
-                case OnvifActions.SetGeoLocation:
-                case OnvifActions.DeleteGeoLocation:
-                case OnvifActions.SetHashingAlgorithm:
-                case OnvifActions.CreateCertificate:
-                case OnvifActions.GetCertificates:
-                case OnvifActions.GetCertificatesStatus:
-                case OnvifActions.SetCertificatesStatus:
-                case OnvifActions.DeleteCertificates:
-                case OnvifActions.GetPkcs10Request:
-                case OnvifActions.LoadCertificates:
-                case OnvifActions.GetClientCertificateMode:
-                case OnvifActions.SetClientCertificateMode:
-                case OnvifActions.GetCACertificates:
-                case OnvifActions.LoadCertificateWithPrivateKey:
-                case OnvifActions.GetCertificateInformation:
-                case OnvifActions.LoadCACertificates:
-                case OnvifActions.CreateDot1XConfiguration:
-                case OnvifActions.SetDot1XConfiguration:
-                case OnvifActions.GetDot1XConfiguration:
-                case OnvifActions.GetDot1XConfigurations:
-                case OnvifActions.DeleteDot1XConfiguration:
+                case SoapActions.GetServices:
+                case SoapActions.GetServiceCapabilities:
+                case SoapActions.GetDeviceInformation:
+                case SoapActions.SetSystemDateAndTime:
+                case SoapActions.GetSystemDateAndTime:
+                case SoapActions.SetSystemFactoryDefault:
+                case SoapActions.UpgradeSystemFirmware:
+                case SoapActions.SystemReboot:
+                case SoapActions.RestoreSystem:
+                case SoapActions.GetSystemBackup:
+                case SoapActions.GetSystemLog:
+                case SoapActions.GetSystemSupportInformation:
+                case SoapActions.GetScopes:
+                case SoapActions.SetScopes:
+                case SoapActions.AddScopes:
+                case SoapActions.RemoveScopes:
+                case SoapActions.GetDiscoveryMode:
+                case SoapActions.SetDiscoveryMode:
+                case SoapActions.GetRemoteDiscoveryMode:
+                case SoapActions.SetRemoteDiscoveryMode:
+                case SoapActions.GetDPAddresses:
+                case SoapActions.SetDPAddresses:
+                case SoapActions.GetEndpointReference:
+                case SoapActions.GetUserRoles:
+                case SoapActions.SetUserRole:
+                case SoapActions.DeleteUserRole:
+                case SoapActions.GetRemoteUser:
+                case SoapActions.SetRemoteUser:
+                case SoapActions.GetUsers:
+                case SoapActions.CreateUsers:
+                case SoapActions.DeleteUsers:
+                case SoapActions.SetUser:
+                case SoapActions.GetWsdlUrl:
+                case SoapActions.GetPasswordComplexityOptions:
+                case SoapActions.GetPasswordComplexityConfiguration:
+                case SoapActions.SetPasswordComplexityConfiguration:
+                case SoapActions.GetPasswordHistoryConfiguration:
+                case SoapActions.SetPasswordHistoryConfiguration:
+                case SoapActions.GetAuthFailureWarningOptions:
+                case SoapActions.GetAuthFailureWarningConfiguration:
+                case SoapActions.SetAuthFailureWarningConfiguration:
+                case SoapActions.GetCapabilities:
+                case SoapActions.GetHostname:
+                case SoapActions.SetHostname:
+                case SoapActions.SetHostnameFromDHCP:
+                case SoapActions.GetDNS:
+                case SoapActions.SetDNS:
+                case SoapActions.GetNTP:
+                case SoapActions.SetNTP:
+                case SoapActions.GetDynamicDNS:
+                case SoapActions.SetDynamicDNS:
+                case SoapActions.GetNetworkInterfaces:
+                case SoapActions.SetNetworkInterfaces:
+                case SoapActions.GetNetworkProtocols:
+                case SoapActions.SetNetworkProtocols:
+                case SoapActions.GetNetworkDefaultGateway:
+                case SoapActions.SetNetworkDefaultGateway:
+                case SoapActions.GetZeroConfiguration:
+                case SoapActions.SetZeroConfiguration:
+                case SoapActions.GetIPAddressFilter:
+                case SoapActions.SetIPAddressFilter:
+                case SoapActions.AddIPAddressFilter:
+                case SoapActions.RemoveIPAddressFilter:
+                case SoapActions.GetAccessPolicy:
+                case SoapActions.SetAccessPolicy:
+                case SoapActions.GetRelayOutputs:
+                case SoapActions.SetRelayOutputSettings:
+                case SoapActions.SetRelayOutputState:
+                case SoapActions.SendAuxiliaryCommand:
+                case SoapActions.GetDot11Capabilities:
+                case SoapActions.GetDot11Status:
+                case SoapActions.ScanAvailableDot11Networks:
+                case SoapActions.GetSystemUris:
+                case SoapActions.StartFirmwareUpgrade:
+                case SoapActions.UpgradeFirmware:
+                case SoapActions.StartSystemRestore:
+                case SoapActions.GetStorageConfigurations:
+                case SoapActions.CreateStorageConfiguration:
+                case SoapActions.GetStorageConfiguration:
+                case SoapActions.SetStorageConfiguration:
+                case SoapActions.DeleteStorageConfiguration:
+                case SoapActions.GetGeoLocation:
+                case SoapActions.SetGeoLocation:
+                case SoapActions.DeleteGeoLocation:
+                case SoapActions.SetHashingAlgorithm:
+                case SoapActions.CreateCertificate:
+                case SoapActions.GetCertificates:
+                case SoapActions.GetCertificatesStatus:
+                case SoapActions.SetCertificatesStatus:
+                case SoapActions.DeleteCertificates:
+                case SoapActions.GetPkcs10Request:
+                case SoapActions.LoadCertificates:
+                case SoapActions.GetClientCertificateMode:
+                case SoapActions.SetClientCertificateMode:
+                case SoapActions.GetCACertificates:
+                case SoapActions.LoadCertificateWithPrivateKey:
+                case SoapActions.GetCertificateInformation:
+                case SoapActions.LoadCACertificates:
+                case SoapActions.CreateDot1XConfiguration:
+                case SoapActions.SetDot1XConfiguration:
+                case SoapActions.GetDot1XConfiguration:
+                case SoapActions.GetDot1XConfigurations:
+                case SoapActions.DeleteDot1XConfiguration:
                     return true;
                 default:
                     return false;
@@ -2329,721 +2329,721 @@ namespace SharpOnvifServer.DeviceMgmt
                 case "GetServices":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetServices;
+                        action = SoapActions.GetServices;
                         return true;
                     }
                     break;
                 case "GetServiceCapabilities":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetServiceCapabilities;
+                        action = SoapActions.GetServiceCapabilities;
                         return true;
                     }
                     break;
                 case "GetDeviceInformation":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetDeviceInformation;
+                        action = SoapActions.GetDeviceInformation;
                         return true;
                     }
                     break;
                 case "SetSystemDateAndTime":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.SetSystemDateAndTime;
+                        action = SoapActions.SetSystemDateAndTime;
                         return true;
                     }
                     break;
                 case "GetSystemDateAndTime":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetSystemDateAndTime;
+                        action = SoapActions.GetSystemDateAndTime;
                         return true;
                     }
                     break;
                 case "SetSystemFactoryDefault":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.SetSystemFactoryDefault;
+                        action = SoapActions.SetSystemFactoryDefault;
                         return true;
                     }
                     break;
                 case "UpgradeSystemFirmware":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.UpgradeSystemFirmware;
+                        action = SoapActions.UpgradeSystemFirmware;
                         return true;
                     }
                     break;
                 case "SystemReboot":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.SystemReboot;
+                        action = SoapActions.SystemReboot;
                         return true;
                     }
                     break;
                 case "RestoreSystem":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.RestoreSystem;
+                        action = SoapActions.RestoreSystem;
                         return true;
                     }
                     break;
                 case "GetSystemBackup":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetSystemBackup;
+                        action = SoapActions.GetSystemBackup;
                         return true;
                     }
                     break;
                 case "GetSystemLog":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetSystemLog;
+                        action = SoapActions.GetSystemLog;
                         return true;
                     }
                     break;
                 case "GetSystemSupportInformation":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetSystemSupportInformation;
+                        action = SoapActions.GetSystemSupportInformation;
                         return true;
                     }
                     break;
                 case "GetScopes":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetScopes;
+                        action = SoapActions.GetScopes;
                         return true;
                     }
                     break;
                 case "SetScopes":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.SetScopes;
+                        action = SoapActions.SetScopes;
                         return true;
                     }
                     break;
                 case "AddScopes":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.AddScopes;
+                        action = SoapActions.AddScopes;
                         return true;
                     }
                     break;
                 case "RemoveScopes":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.RemoveScopes;
+                        action = SoapActions.RemoveScopes;
                         return true;
                     }
                     break;
                 case "GetDiscoveryMode":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetDiscoveryMode;
+                        action = SoapActions.GetDiscoveryMode;
                         return true;
                     }
                     break;
                 case "SetDiscoveryMode":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.SetDiscoveryMode;
+                        action = SoapActions.SetDiscoveryMode;
                         return true;
                     }
                     break;
                 case "GetRemoteDiscoveryMode":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetRemoteDiscoveryMode;
+                        action = SoapActions.GetRemoteDiscoveryMode;
                         return true;
                     }
                     break;
                 case "SetRemoteDiscoveryMode":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.SetRemoteDiscoveryMode;
+                        action = SoapActions.SetRemoteDiscoveryMode;
                         return true;
                     }
                     break;
                 case "GetDPAddresses":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetDPAddresses;
+                        action = SoapActions.GetDPAddresses;
                         return true;
                     }
                     break;
                 case "SetDPAddresses":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.SetDPAddresses;
+                        action = SoapActions.SetDPAddresses;
                         return true;
                     }
                     break;
                 case "GetEndpointReference":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetEndpointReference;
+                        action = SoapActions.GetEndpointReference;
                         return true;
                     }
                     break;
                 case "GetUserRoles":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetUserRoles;
+                        action = SoapActions.GetUserRoles;
                         return true;
                     }
                     break;
                 case "SetUserRole":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.SetUserRole;
+                        action = SoapActions.SetUserRole;
                         return true;
                     }
                     break;
                 case "DeleteUserRole":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.DeleteUserRole;
+                        action = SoapActions.DeleteUserRole;
                         return true;
                     }
                     break;
                 case "GetRemoteUser":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetRemoteUser;
+                        action = SoapActions.GetRemoteUser;
                         return true;
                     }
                     break;
                 case "SetRemoteUser":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.SetRemoteUser;
+                        action = SoapActions.SetRemoteUser;
                         return true;
                     }
                     break;
                 case "GetUsers":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetUsers;
+                        action = SoapActions.GetUsers;
                         return true;
                     }
                     break;
                 case "CreateUsers":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.CreateUsers;
+                        action = SoapActions.CreateUsers;
                         return true;
                     }
                     break;
                 case "DeleteUsers":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.DeleteUsers;
+                        action = SoapActions.DeleteUsers;
                         return true;
                     }
                     break;
                 case "SetUser":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.SetUser;
+                        action = SoapActions.SetUser;
                         return true;
                     }
                     break;
                 case "GetWsdlUrl":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetWsdlUrl;
+                        action = SoapActions.GetWsdlUrl;
                         return true;
                     }
                     break;
                 case "GetPasswordComplexityOptions":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetPasswordComplexityOptions;
+                        action = SoapActions.GetPasswordComplexityOptions;
                         return true;
                     }
                     break;
                 case "GetPasswordComplexityConfiguration":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetPasswordComplexityConfiguration;
+                        action = SoapActions.GetPasswordComplexityConfiguration;
                         return true;
                     }
                     break;
                 case "SetPasswordComplexityConfiguration":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.SetPasswordComplexityConfiguration;
+                        action = SoapActions.SetPasswordComplexityConfiguration;
                         return true;
                     }
                     break;
                 case "GetPasswordHistoryConfiguration":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetPasswordHistoryConfiguration;
+                        action = SoapActions.GetPasswordHistoryConfiguration;
                         return true;
                     }
                     break;
                 case "SetPasswordHistoryConfiguration":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.SetPasswordHistoryConfiguration;
+                        action = SoapActions.SetPasswordHistoryConfiguration;
                         return true;
                     }
                     break;
                 case "GetAuthFailureWarningOptions":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetAuthFailureWarningOptions;
+                        action = SoapActions.GetAuthFailureWarningOptions;
                         return true;
                     }
                     break;
                 case "GetAuthFailureWarningConfiguration":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetAuthFailureWarningConfiguration;
+                        action = SoapActions.GetAuthFailureWarningConfiguration;
                         return true;
                     }
                     break;
                 case "SetAuthFailureWarningConfiguration":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.SetAuthFailureWarningConfiguration;
+                        action = SoapActions.SetAuthFailureWarningConfiguration;
                         return true;
                     }
                     break;
                 case "GetCapabilities":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetCapabilities;
+                        action = SoapActions.GetCapabilities;
                         return true;
                     }
                     break;
                 case "GetHostname":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetHostname;
+                        action = SoapActions.GetHostname;
                         return true;
                     }
                     break;
                 case "SetHostname":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.SetHostname;
+                        action = SoapActions.SetHostname;
                         return true;
                     }
                     break;
                 case "SetHostnameFromDHCP":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.SetHostnameFromDHCP;
+                        action = SoapActions.SetHostnameFromDHCP;
                         return true;
                     }
                     break;
                 case "GetDNS":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetDNS;
+                        action = SoapActions.GetDNS;
                         return true;
                     }
                     break;
                 case "SetDNS":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.SetDNS;
+                        action = SoapActions.SetDNS;
                         return true;
                     }
                     break;
                 case "GetNTP":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetNTP;
+                        action = SoapActions.GetNTP;
                         return true;
                     }
                     break;
                 case "SetNTP":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.SetNTP;
+                        action = SoapActions.SetNTP;
                         return true;
                     }
                     break;
                 case "GetDynamicDNS":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetDynamicDNS;
+                        action = SoapActions.GetDynamicDNS;
                         return true;
                     }
                     break;
                 case "SetDynamicDNS":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.SetDynamicDNS;
+                        action = SoapActions.SetDynamicDNS;
                         return true;
                     }
                     break;
                 case "GetNetworkInterfaces":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetNetworkInterfaces;
+                        action = SoapActions.GetNetworkInterfaces;
                         return true;
                     }
                     break;
                 case "SetNetworkInterfaces":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.SetNetworkInterfaces;
+                        action = SoapActions.SetNetworkInterfaces;
                         return true;
                     }
                     break;
                 case "GetNetworkProtocols":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetNetworkProtocols;
+                        action = SoapActions.GetNetworkProtocols;
                         return true;
                     }
                     break;
                 case "SetNetworkProtocols":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.SetNetworkProtocols;
+                        action = SoapActions.SetNetworkProtocols;
                         return true;
                     }
                     break;
                 case "GetNetworkDefaultGateway":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetNetworkDefaultGateway;
+                        action = SoapActions.GetNetworkDefaultGateway;
                         return true;
                     }
                     break;
                 case "SetNetworkDefaultGateway":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.SetNetworkDefaultGateway;
+                        action = SoapActions.SetNetworkDefaultGateway;
                         return true;
                     }
                     break;
                 case "GetZeroConfiguration":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetZeroConfiguration;
+                        action = SoapActions.GetZeroConfiguration;
                         return true;
                     }
                     break;
                 case "SetZeroConfiguration":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.SetZeroConfiguration;
+                        action = SoapActions.SetZeroConfiguration;
                         return true;
                     }
                     break;
                 case "GetIPAddressFilter":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetIPAddressFilter;
+                        action = SoapActions.GetIPAddressFilter;
                         return true;
                     }
                     break;
                 case "SetIPAddressFilter":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.SetIPAddressFilter;
+                        action = SoapActions.SetIPAddressFilter;
                         return true;
                     }
                     break;
                 case "AddIPAddressFilter":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.AddIPAddressFilter;
+                        action = SoapActions.AddIPAddressFilter;
                         return true;
                     }
                     break;
                 case "RemoveIPAddressFilter":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.RemoveIPAddressFilter;
+                        action = SoapActions.RemoveIPAddressFilter;
                         return true;
                     }
                     break;
                 case "GetAccessPolicy":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetAccessPolicy;
+                        action = SoapActions.GetAccessPolicy;
                         return true;
                     }
                     break;
                 case "SetAccessPolicy":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.SetAccessPolicy;
+                        action = SoapActions.SetAccessPolicy;
                         return true;
                     }
                     break;
                 case "GetRelayOutputs":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetRelayOutputs;
+                        action = SoapActions.GetRelayOutputs;
                         return true;
                     }
                     break;
                 case "SetRelayOutputSettings":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.SetRelayOutputSettings;
+                        action = SoapActions.SetRelayOutputSettings;
                         return true;
                     }
                     break;
                 case "SetRelayOutputState":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.SetRelayOutputState;
+                        action = SoapActions.SetRelayOutputState;
                         return true;
                     }
                     break;
                 case "SendAuxiliaryCommand":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.SendAuxiliaryCommand;
+                        action = SoapActions.SendAuxiliaryCommand;
                         return true;
                     }
                     break;
                 case "GetDot11Capabilities":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetDot11Capabilities;
+                        action = SoapActions.GetDot11Capabilities;
                         return true;
                     }
                     break;
                 case "GetDot11Status":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetDot11Status;
+                        action = SoapActions.GetDot11Status;
                         return true;
                     }
                     break;
                 case "ScanAvailableDot11Networks":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.ScanAvailableDot11Networks;
+                        action = SoapActions.ScanAvailableDot11Networks;
                         return true;
                     }
                     break;
                 case "GetSystemUris":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetSystemUris;
+                        action = SoapActions.GetSystemUris;
                         return true;
                     }
                     break;
                 case "StartFirmwareUpgrade":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.StartFirmwareUpgrade;
+                        action = SoapActions.StartFirmwareUpgrade;
                         return true;
                     }
                     break;
                 case "UpgradeFirmware":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.UpgradeFirmware;
+                        action = SoapActions.UpgradeFirmware;
                         return true;
                     }
                     break;
                 case "StartSystemRestore":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.StartSystemRestore;
+                        action = SoapActions.StartSystemRestore;
                         return true;
                     }
                     break;
                 case "GetStorageConfigurations":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetStorageConfigurations;
+                        action = SoapActions.GetStorageConfigurations;
                         return true;
                     }
                     break;
                 case "CreateStorageConfiguration":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.CreateStorageConfiguration;
+                        action = SoapActions.CreateStorageConfiguration;
                         return true;
                     }
                     break;
                 case "GetStorageConfiguration":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetStorageConfiguration;
+                        action = SoapActions.GetStorageConfiguration;
                         return true;
                     }
                     break;
                 case "SetStorageConfiguration":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.SetStorageConfiguration;
+                        action = SoapActions.SetStorageConfiguration;
                         return true;
                     }
                     break;
                 case "DeleteStorageConfiguration":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.DeleteStorageConfiguration;
+                        action = SoapActions.DeleteStorageConfiguration;
                         return true;
                     }
                     break;
                 case "GetGeoLocation":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetGeoLocation;
+                        action = SoapActions.GetGeoLocation;
                         return true;
                     }
                     break;
                 case "SetGeoLocation":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.SetGeoLocation;
+                        action = SoapActions.SetGeoLocation;
                         return true;
                     }
                     break;
                 case "DeleteGeoLocation":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.DeleteGeoLocation;
+                        action = SoapActions.DeleteGeoLocation;
                         return true;
                     }
                     break;
                 case "SetHashingAlgorithm":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.SetHashingAlgorithm;
+                        action = SoapActions.SetHashingAlgorithm;
                         return true;
                     }
                     break;
                 case "CreateCertificate":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.CreateCertificate;
+                        action = SoapActions.CreateCertificate;
                         return true;
                     }
                     break;
                 case "GetCertificates":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetCertificates;
+                        action = SoapActions.GetCertificates;
                         return true;
                     }
                     break;
                 case "GetCertificatesStatus":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetCertificatesStatus;
+                        action = SoapActions.GetCertificatesStatus;
                         return true;
                     }
                     break;
                 case "SetCertificatesStatus":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.SetCertificatesStatus;
+                        action = SoapActions.SetCertificatesStatus;
                         return true;
                     }
                     break;
                 case "DeleteCertificates":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.DeleteCertificates;
+                        action = SoapActions.DeleteCertificates;
                         return true;
                     }
                     break;
                 case "GetPkcs10Request":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetPkcs10Request;
+                        action = SoapActions.GetPkcs10Request;
                         return true;
                     }
                     break;
                 case "LoadCertificates":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.LoadCertificates;
+                        action = SoapActions.LoadCertificates;
                         return true;
                     }
                     break;
                 case "GetClientCertificateMode":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetClientCertificateMode;
+                        action = SoapActions.GetClientCertificateMode;
                         return true;
                     }
                     break;
                 case "SetClientCertificateMode":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.SetClientCertificateMode;
+                        action = SoapActions.SetClientCertificateMode;
                         return true;
                     }
                     break;
                 case "GetCACertificates":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetCACertificates;
+                        action = SoapActions.GetCACertificates;
                         return true;
                     }
                     break;
                 case "LoadCertificateWithPrivateKey":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.LoadCertificateWithPrivateKey;
+                        action = SoapActions.LoadCertificateWithPrivateKey;
                         return true;
                     }
                     break;
                 case "GetCertificateInformation":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetCertificateInformation;
+                        action = SoapActions.GetCertificateInformation;
                         return true;
                     }
                     break;
                 case "LoadCACertificates":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.LoadCACertificates;
+                        action = SoapActions.LoadCACertificates;
                         return true;
                     }
                     break;
                 case "CreateDot1XConfiguration":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.CreateDot1XConfiguration;
+                        action = SoapActions.CreateDot1XConfiguration;
                         return true;
                     }
                     break;
                 case "SetDot1XConfiguration":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.SetDot1XConfiguration;
+                        action = SoapActions.SetDot1XConfiguration;
                         return true;
                     }
                     break;
                 case "GetDot1XConfiguration":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetDot1XConfiguration;
+                        action = SoapActions.GetDot1XConfiguration;
                         return true;
                     }
                     break;
                 case "GetDot1XConfigurations":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.GetDot1XConfigurations;
+                        action = SoapActions.GetDot1XConfigurations;
                         return true;
                     }
                     break;
                 case "DeleteDot1XConfiguration":
                     if (ns == "http://www.onvif.org/ver10/device/wsdl")
                     {
-                        action = OnvifActions.DeleteDot1XConfiguration;
+                        action = SoapActions.DeleteDot1XConfiguration;
                         return true;
                     }
                     break;
@@ -3052,7 +3052,7 @@ namespace SharpOnvifServer.DeviceMgmt
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             DeviceBase target = (DeviceBase)service;
@@ -3060,733 +3060,733 @@ namespace SharpOnvifServer.DeviceMgmt
 
             switch (action)
             {
-                case OnvifActions.GetServices:
+                case SoapActions.GetServices:
                 {
                     var request = new GetServicesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetServicesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetServicesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetServicesResponse");
                 }
-                case OnvifActions.GetServiceCapabilities:
+                case SoapActions.GetServiceCapabilities:
                 {
                     var request = new GetServiceCapabilitiesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetServiceCapabilitiesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetServiceCapabilitiesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetServiceCapabilitiesResponse");
                 }
-                case OnvifActions.GetDeviceInformation:
+                case SoapActions.GetDeviceInformation:
                 {
                     var request = new GetDeviceInformationRequest();
                     reader.ReadInto(request);
                     var response = await target.GetDeviceInformationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetDeviceInformationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetDeviceInformationResponse");
                 }
-                case OnvifActions.SetSystemDateAndTime:
+                case SoapActions.SetSystemDateAndTime:
                 {
                     var request = new SetSystemDateAndTimeRequest();
                     reader.ReadInto(request);
                     var response = await target.SetSystemDateAndTimeAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetSystemDateAndTimeResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetSystemDateAndTimeResponse");
                 }
-                case OnvifActions.GetSystemDateAndTime:
+                case SoapActions.GetSystemDateAndTime:
                 {
                     var request = new GetSystemDateAndTimeRequest();
                     reader.ReadInto(request);
                     var response = await target.GetSystemDateAndTimeAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetSystemDateAndTimeResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetSystemDateAndTimeResponse");
                 }
-                case OnvifActions.SetSystemFactoryDefault:
+                case SoapActions.SetSystemFactoryDefault:
                 {
                     var request = new SetSystemFactoryDefaultRequest();
                     reader.ReadInto(request);
                     var response = await target.SetSystemFactoryDefaultAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetSystemFactoryDefaultResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetSystemFactoryDefaultResponse");
                 }
-                case OnvifActions.UpgradeSystemFirmware:
+                case SoapActions.UpgradeSystemFirmware:
                 {
                     var request = new UpgradeSystemFirmwareRequest();
                     reader.ReadInto(request);
                     var response = await target.UpgradeSystemFirmwareAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "UpgradeSystemFirmwareResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "UpgradeSystemFirmwareResponse");
                 }
-                case OnvifActions.SystemReboot:
+                case SoapActions.SystemReboot:
                 {
                     var request = new SystemRebootRequest();
                     reader.ReadInto(request);
                     var response = await target.SystemRebootAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SystemRebootResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SystemRebootResponse");
                 }
-                case OnvifActions.RestoreSystem:
+                case SoapActions.RestoreSystem:
                 {
                     var request = new RestoreSystemRequest();
                     reader.ReadInto(request);
                     var response = await target.RestoreSystemAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "RestoreSystemResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "RestoreSystemResponse");
                 }
-                case OnvifActions.GetSystemBackup:
+                case SoapActions.GetSystemBackup:
                 {
                     var request = new GetSystemBackupRequest();
                     reader.ReadInto(request);
                     var response = await target.GetSystemBackupAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetSystemBackupResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetSystemBackupResponse");
                 }
-                case OnvifActions.GetSystemLog:
+                case SoapActions.GetSystemLog:
                 {
                     var request = new GetSystemLogRequest();
                     reader.ReadInto(request);
                     var response = await target.GetSystemLogAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetSystemLogResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetSystemLogResponse");
                 }
-                case OnvifActions.GetSystemSupportInformation:
+                case SoapActions.GetSystemSupportInformation:
                 {
                     var request = new GetSystemSupportInformationRequest();
                     reader.ReadInto(request);
                     var response = await target.GetSystemSupportInformationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetSystemSupportInformationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetSystemSupportInformationResponse");
                 }
-                case OnvifActions.GetScopes:
+                case SoapActions.GetScopes:
                 {
                     var request = new GetScopesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetScopesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetScopesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetScopesResponse");
                 }
-                case OnvifActions.SetScopes:
+                case SoapActions.SetScopes:
                 {
                     var request = new SetScopesRequest();
                     reader.ReadInto(request);
                     var response = await target.SetScopesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetScopesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetScopesResponse");
                 }
-                case OnvifActions.AddScopes:
+                case SoapActions.AddScopes:
                 {
                     var request = new AddScopesRequest();
                     reader.ReadInto(request);
                     var response = await target.AddScopesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "AddScopesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "AddScopesResponse");
                 }
-                case OnvifActions.RemoveScopes:
+                case SoapActions.RemoveScopes:
                 {
                     var request = new RemoveScopesRequest();
                     reader.ReadInto(request);
                     var response = await target.RemoveScopesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "RemoveScopesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "RemoveScopesResponse");
                 }
-                case OnvifActions.GetDiscoveryMode:
+                case SoapActions.GetDiscoveryMode:
                 {
                     var request = new GetDiscoveryModeRequest();
                     reader.ReadInto(request);
                     var response = await target.GetDiscoveryModeAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetDiscoveryModeResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetDiscoveryModeResponse");
                 }
-                case OnvifActions.SetDiscoveryMode:
+                case SoapActions.SetDiscoveryMode:
                 {
                     var request = new SetDiscoveryModeRequest();
                     reader.ReadInto(request);
                     var response = await target.SetDiscoveryModeAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetDiscoveryModeResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetDiscoveryModeResponse");
                 }
-                case OnvifActions.GetRemoteDiscoveryMode:
+                case SoapActions.GetRemoteDiscoveryMode:
                 {
                     var request = new GetRemoteDiscoveryModeRequest();
                     reader.ReadInto(request);
                     var response = await target.GetRemoteDiscoveryModeAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetRemoteDiscoveryModeResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetRemoteDiscoveryModeResponse");
                 }
-                case OnvifActions.SetRemoteDiscoveryMode:
+                case SoapActions.SetRemoteDiscoveryMode:
                 {
                     var request = new SetRemoteDiscoveryModeRequest();
                     reader.ReadInto(request);
                     var response = await target.SetRemoteDiscoveryModeAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetRemoteDiscoveryModeResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetRemoteDiscoveryModeResponse");
                 }
-                case OnvifActions.GetDPAddresses:
+                case SoapActions.GetDPAddresses:
                 {
                     var request = new GetDPAddressesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetDPAddressesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetDPAddressesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetDPAddressesResponse");
                 }
-                case OnvifActions.SetDPAddresses:
+                case SoapActions.SetDPAddresses:
                 {
                     var request = new SetDPAddressesRequest();
                     reader.ReadInto(request);
                     var response = await target.SetDPAddressesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetDPAddressesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetDPAddressesResponse");
                 }
-                case OnvifActions.GetEndpointReference:
+                case SoapActions.GetEndpointReference:
                 {
                     var request = new GetEndpointReferenceRequest();
                     reader.ReadInto(request);
                     var response = await target.GetEndpointReferenceAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetEndpointReferenceResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetEndpointReferenceResponse");
                 }
-                case OnvifActions.GetUserRoles:
+                case SoapActions.GetUserRoles:
                 {
                     var request = new GetUserRolesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetUserRolesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetUserRolesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetUserRolesResponse");
                 }
-                case OnvifActions.SetUserRole:
+                case SoapActions.SetUserRole:
                 {
                     var request = new SetUserRoleRequest();
                     reader.ReadInto(request);
                     var response = await target.SetUserRoleAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetUserRoleResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetUserRoleResponse");
                 }
-                case OnvifActions.DeleteUserRole:
+                case SoapActions.DeleteUserRole:
                 {
                     var request = new DeleteUserRoleRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteUserRoleAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "DeleteUserRoleResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "DeleteUserRoleResponse");
                 }
-                case OnvifActions.GetRemoteUser:
+                case SoapActions.GetRemoteUser:
                 {
                     var request = new GetRemoteUserRequest();
                     reader.ReadInto(request);
                     var response = await target.GetRemoteUserAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetRemoteUserResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetRemoteUserResponse");
                 }
-                case OnvifActions.SetRemoteUser:
+                case SoapActions.SetRemoteUser:
                 {
                     var request = new SetRemoteUserRequest();
                     reader.ReadInto(request);
                     var response = await target.SetRemoteUserAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetRemoteUserResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetRemoteUserResponse");
                 }
-                case OnvifActions.GetUsers:
+                case SoapActions.GetUsers:
                 {
                     var request = new GetUsersRequest();
                     reader.ReadInto(request);
                     var response = await target.GetUsersAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetUsersResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetUsersResponse");
                 }
-                case OnvifActions.CreateUsers:
+                case SoapActions.CreateUsers:
                 {
                     var request = new CreateUsersRequest();
                     reader.ReadInto(request);
                     var response = await target.CreateUsersAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "CreateUsersResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "CreateUsersResponse");
                 }
-                case OnvifActions.DeleteUsers:
+                case SoapActions.DeleteUsers:
                 {
                     var request = new DeleteUsersRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteUsersAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "DeleteUsersResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "DeleteUsersResponse");
                 }
-                case OnvifActions.SetUser:
+                case SoapActions.SetUser:
                 {
                     var request = new SetUserRequest();
                     reader.ReadInto(request);
                     var response = await target.SetUserAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetUserResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetUserResponse");
                 }
-                case OnvifActions.GetWsdlUrl:
+                case SoapActions.GetWsdlUrl:
                 {
                     var request = new GetWsdlUrlRequest();
                     reader.ReadInto(request);
                     var response = await target.GetWsdlUrlAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetWsdlUrlResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetWsdlUrlResponse");
                 }
-                case OnvifActions.GetPasswordComplexityOptions:
+                case SoapActions.GetPasswordComplexityOptions:
                 {
                     var request = new GetPasswordComplexityOptionsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetPasswordComplexityOptionsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetPasswordComplexityOptionsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetPasswordComplexityOptionsResponse");
                 }
-                case OnvifActions.GetPasswordComplexityConfiguration:
+                case SoapActions.GetPasswordComplexityConfiguration:
                 {
                     var request = new GetPasswordComplexityConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.GetPasswordComplexityConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetPasswordComplexityConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetPasswordComplexityConfigurationResponse");
                 }
-                case OnvifActions.SetPasswordComplexityConfiguration:
+                case SoapActions.SetPasswordComplexityConfiguration:
                 {
                     var request = new SetPasswordComplexityConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.SetPasswordComplexityConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetPasswordComplexityConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetPasswordComplexityConfigurationResponse");
                 }
-                case OnvifActions.GetPasswordHistoryConfiguration:
+                case SoapActions.GetPasswordHistoryConfiguration:
                 {
                     var request = new GetPasswordHistoryConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.GetPasswordHistoryConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetPasswordHistoryConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetPasswordHistoryConfigurationResponse");
                 }
-                case OnvifActions.SetPasswordHistoryConfiguration:
+                case SoapActions.SetPasswordHistoryConfiguration:
                 {
                     var request = new SetPasswordHistoryConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.SetPasswordHistoryConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetPasswordHistoryConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetPasswordHistoryConfigurationResponse");
                 }
-                case OnvifActions.GetAuthFailureWarningOptions:
+                case SoapActions.GetAuthFailureWarningOptions:
                 {
                     var request = new GetAuthFailureWarningOptionsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAuthFailureWarningOptionsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetAuthFailureWarningOptionsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetAuthFailureWarningOptionsResponse");
                 }
-                case OnvifActions.GetAuthFailureWarningConfiguration:
+                case SoapActions.GetAuthFailureWarningConfiguration:
                 {
                     var request = new GetAuthFailureWarningConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAuthFailureWarningConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetAuthFailureWarningConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetAuthFailureWarningConfigurationResponse");
                 }
-                case OnvifActions.SetAuthFailureWarningConfiguration:
+                case SoapActions.SetAuthFailureWarningConfiguration:
                 {
                     var request = new SetAuthFailureWarningConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.SetAuthFailureWarningConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetAuthFailureWarningConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetAuthFailureWarningConfigurationResponse");
                 }
-                case OnvifActions.GetCapabilities:
+                case SoapActions.GetCapabilities:
                 {
                     var request = new GetCapabilitiesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetCapabilitiesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetCapabilitiesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetCapabilitiesResponse");
                 }
-                case OnvifActions.GetHostname:
+                case SoapActions.GetHostname:
                 {
                     var request = new GetHostnameRequest();
                     reader.ReadInto(request);
                     var response = await target.GetHostnameAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetHostnameResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetHostnameResponse");
                 }
-                case OnvifActions.SetHostname:
+                case SoapActions.SetHostname:
                 {
                     var request = new SetHostnameRequest();
                     reader.ReadInto(request);
                     var response = await target.SetHostnameAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetHostnameResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetHostnameResponse");
                 }
-                case OnvifActions.SetHostnameFromDHCP:
+                case SoapActions.SetHostnameFromDHCP:
                 {
                     var request = new SetHostnameFromDHCPRequest();
                     reader.ReadInto(request);
                     var response = await target.SetHostnameFromDHCPAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetHostnameFromDHCPResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetHostnameFromDHCPResponse");
                 }
-                case OnvifActions.GetDNS:
+                case SoapActions.GetDNS:
                 {
                     var request = new GetDNSRequest();
                     reader.ReadInto(request);
                     var response = await target.GetDNSAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetDNSResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetDNSResponse");
                 }
-                case OnvifActions.SetDNS:
+                case SoapActions.SetDNS:
                 {
                     var request = new SetDNSRequest();
                     reader.ReadInto(request);
                     var response = await target.SetDNSAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetDNSResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetDNSResponse");
                 }
-                case OnvifActions.GetNTP:
+                case SoapActions.GetNTP:
                 {
                     var request = new GetNTPRequest();
                     reader.ReadInto(request);
                     var response = await target.GetNTPAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetNTPResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetNTPResponse");
                 }
-                case OnvifActions.SetNTP:
+                case SoapActions.SetNTP:
                 {
                     var request = new SetNTPRequest();
                     reader.ReadInto(request);
                     var response = await target.SetNTPAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetNTPResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetNTPResponse");
                 }
-                case OnvifActions.GetDynamicDNS:
+                case SoapActions.GetDynamicDNS:
                 {
                     var request = new GetDynamicDNSRequest();
                     reader.ReadInto(request);
                     var response = await target.GetDynamicDNSAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetDynamicDNSResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetDynamicDNSResponse");
                 }
-                case OnvifActions.SetDynamicDNS:
+                case SoapActions.SetDynamicDNS:
                 {
                     var request = new SetDynamicDNSRequest();
                     reader.ReadInto(request);
                     var response = await target.SetDynamicDNSAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetDynamicDNSResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetDynamicDNSResponse");
                 }
-                case OnvifActions.GetNetworkInterfaces:
+                case SoapActions.GetNetworkInterfaces:
                 {
                     var request = new GetNetworkInterfacesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetNetworkInterfacesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetNetworkInterfacesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetNetworkInterfacesResponse");
                 }
-                case OnvifActions.SetNetworkInterfaces:
+                case SoapActions.SetNetworkInterfaces:
                 {
                     var request = new SetNetworkInterfacesRequest();
                     reader.ReadInto(request);
                     var response = await target.SetNetworkInterfacesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetNetworkInterfacesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetNetworkInterfacesResponse");
                 }
-                case OnvifActions.GetNetworkProtocols:
+                case SoapActions.GetNetworkProtocols:
                 {
                     var request = new GetNetworkProtocolsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetNetworkProtocolsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetNetworkProtocolsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetNetworkProtocolsResponse");
                 }
-                case OnvifActions.SetNetworkProtocols:
+                case SoapActions.SetNetworkProtocols:
                 {
                     var request = new SetNetworkProtocolsRequest();
                     reader.ReadInto(request);
                     var response = await target.SetNetworkProtocolsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetNetworkProtocolsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetNetworkProtocolsResponse");
                 }
-                case OnvifActions.GetNetworkDefaultGateway:
+                case SoapActions.GetNetworkDefaultGateway:
                 {
                     var request = new GetNetworkDefaultGatewayRequest();
                     reader.ReadInto(request);
                     var response = await target.GetNetworkDefaultGatewayAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetNetworkDefaultGatewayResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetNetworkDefaultGatewayResponse");
                 }
-                case OnvifActions.SetNetworkDefaultGateway:
+                case SoapActions.SetNetworkDefaultGateway:
                 {
                     var request = new SetNetworkDefaultGatewayRequest();
                     reader.ReadInto(request);
                     var response = await target.SetNetworkDefaultGatewayAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetNetworkDefaultGatewayResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetNetworkDefaultGatewayResponse");
                 }
-                case OnvifActions.GetZeroConfiguration:
+                case SoapActions.GetZeroConfiguration:
                 {
                     var request = new GetZeroConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.GetZeroConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetZeroConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetZeroConfigurationResponse");
                 }
-                case OnvifActions.SetZeroConfiguration:
+                case SoapActions.SetZeroConfiguration:
                 {
                     var request = new SetZeroConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.SetZeroConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetZeroConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetZeroConfigurationResponse");
                 }
-                case OnvifActions.GetIPAddressFilter:
+                case SoapActions.GetIPAddressFilter:
                 {
                     var request = new GetIPAddressFilterRequest();
                     reader.ReadInto(request);
                     var response = await target.GetIPAddressFilterAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetIPAddressFilterResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetIPAddressFilterResponse");
                 }
-                case OnvifActions.SetIPAddressFilter:
+                case SoapActions.SetIPAddressFilter:
                 {
                     var request = new SetIPAddressFilterRequest();
                     reader.ReadInto(request);
                     var response = await target.SetIPAddressFilterAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetIPAddressFilterResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetIPAddressFilterResponse");
                 }
-                case OnvifActions.AddIPAddressFilter:
+                case SoapActions.AddIPAddressFilter:
                 {
                     var request = new AddIPAddressFilterRequest();
                     reader.ReadInto(request);
                     var response = await target.AddIPAddressFilterAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "AddIPAddressFilterResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "AddIPAddressFilterResponse");
                 }
-                case OnvifActions.RemoveIPAddressFilter:
+                case SoapActions.RemoveIPAddressFilter:
                 {
                     var request = new RemoveIPAddressFilterRequest();
                     reader.ReadInto(request);
                     var response = await target.RemoveIPAddressFilterAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "RemoveIPAddressFilterResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "RemoveIPAddressFilterResponse");
                 }
-                case OnvifActions.GetAccessPolicy:
+                case SoapActions.GetAccessPolicy:
                 {
                     var request = new GetAccessPolicyRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAccessPolicyAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetAccessPolicyResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetAccessPolicyResponse");
                 }
-                case OnvifActions.SetAccessPolicy:
+                case SoapActions.SetAccessPolicy:
                 {
                     var request = new SetAccessPolicyRequest();
                     reader.ReadInto(request);
                     var response = await target.SetAccessPolicyAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetAccessPolicyResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetAccessPolicyResponse");
                 }
-                case OnvifActions.GetRelayOutputs:
+                case SoapActions.GetRelayOutputs:
                 {
                     var request = new GetRelayOutputsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetRelayOutputsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetRelayOutputsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetRelayOutputsResponse");
                 }
-                case OnvifActions.SetRelayOutputSettings:
+                case SoapActions.SetRelayOutputSettings:
                 {
                     var request = new SetRelayOutputSettingsRequest();
                     reader.ReadInto(request);
                     var response = await target.SetRelayOutputSettingsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetRelayOutputSettingsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetRelayOutputSettingsResponse");
                 }
-                case OnvifActions.SetRelayOutputState:
+                case SoapActions.SetRelayOutputState:
                 {
                     var request = new SetRelayOutputStateRequest();
                     reader.ReadInto(request);
                     var response = await target.SetRelayOutputStateAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetRelayOutputStateResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetRelayOutputStateResponse");
                 }
-                case OnvifActions.SendAuxiliaryCommand:
+                case SoapActions.SendAuxiliaryCommand:
                 {
                     var request = new SendAuxiliaryCommandRequest();
                     reader.ReadInto(request);
                     var response = await target.SendAuxiliaryCommandAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SendAuxiliaryCommandResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SendAuxiliaryCommandResponse");
                 }
-                case OnvifActions.GetDot11Capabilities:
+                case SoapActions.GetDot11Capabilities:
                 {
                     var request = new GetDot11CapabilitiesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetDot11CapabilitiesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetDot11CapabilitiesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetDot11CapabilitiesResponse");
                 }
-                case OnvifActions.GetDot11Status:
+                case SoapActions.GetDot11Status:
                 {
                     var request = new GetDot11StatusRequest();
                     reader.ReadInto(request);
                     var response = await target.GetDot11StatusAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetDot11StatusResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetDot11StatusResponse");
                 }
-                case OnvifActions.ScanAvailableDot11Networks:
+                case SoapActions.ScanAvailableDot11Networks:
                 {
                     var request = new ScanAvailableDot11NetworksRequest();
                     reader.ReadInto(request);
                     var response = await target.ScanAvailableDot11NetworksAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "ScanAvailableDot11NetworksResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "ScanAvailableDot11NetworksResponse");
                 }
-                case OnvifActions.GetSystemUris:
+                case SoapActions.GetSystemUris:
                 {
                     var request = new GetSystemUrisRequest();
                     reader.ReadInto(request);
                     var response = await target.GetSystemUrisAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetSystemUrisResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetSystemUrisResponse");
                 }
-                case OnvifActions.StartFirmwareUpgrade:
+                case SoapActions.StartFirmwareUpgrade:
                 {
                     var request = new StartFirmwareUpgradeRequest();
                     reader.ReadInto(request);
                     var response = await target.StartFirmwareUpgradeAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "StartFirmwareUpgradeResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "StartFirmwareUpgradeResponse");
                 }
-                case OnvifActions.UpgradeFirmware:
+                case SoapActions.UpgradeFirmware:
                 {
                     var request = new UpgradeFirmwareRequest();
                     reader.ReadInto(request);
                     var response = await target.UpgradeFirmwareAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "UpgradeFirmwareResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "UpgradeFirmwareResponse");
                 }
-                case OnvifActions.StartSystemRestore:
+                case SoapActions.StartSystemRestore:
                 {
                     var request = new StartSystemRestoreRequest();
                     reader.ReadInto(request);
                     var response = await target.StartSystemRestoreAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "StartSystemRestoreResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "StartSystemRestoreResponse");
                 }
-                case OnvifActions.GetStorageConfigurations:
+                case SoapActions.GetStorageConfigurations:
                 {
                     var request = new GetStorageConfigurationsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetStorageConfigurationsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetStorageConfigurationsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetStorageConfigurationsResponse");
                 }
-                case OnvifActions.CreateStorageConfiguration:
+                case SoapActions.CreateStorageConfiguration:
                 {
                     var request = new CreateStorageConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.CreateStorageConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "CreateStorageConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "CreateStorageConfigurationResponse");
                 }
-                case OnvifActions.GetStorageConfiguration:
+                case SoapActions.GetStorageConfiguration:
                 {
                     var request = new GetStorageConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.GetStorageConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetStorageConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetStorageConfigurationResponse");
                 }
-                case OnvifActions.SetStorageConfiguration:
+                case SoapActions.SetStorageConfiguration:
                 {
                     var request = new SetStorageConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.SetStorageConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetStorageConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetStorageConfigurationResponse");
                 }
-                case OnvifActions.DeleteStorageConfiguration:
+                case SoapActions.DeleteStorageConfiguration:
                 {
                     var request = new DeleteStorageConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteStorageConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "DeleteStorageConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "DeleteStorageConfigurationResponse");
                 }
-                case OnvifActions.GetGeoLocation:
+                case SoapActions.GetGeoLocation:
                 {
                     var request = new GetGeoLocationRequest();
                     reader.ReadInto(request);
                     var response = await target.GetGeoLocationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetGeoLocationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetGeoLocationResponse");
                 }
-                case OnvifActions.SetGeoLocation:
+                case SoapActions.SetGeoLocation:
                 {
                     var request = new SetGeoLocationRequest();
                     reader.ReadInto(request);
                     var response = await target.SetGeoLocationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetGeoLocationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetGeoLocationResponse");
                 }
-                case OnvifActions.DeleteGeoLocation:
+                case SoapActions.DeleteGeoLocation:
                 {
                     var request = new DeleteGeoLocationRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteGeoLocationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "DeleteGeoLocationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "DeleteGeoLocationResponse");
                 }
-                case OnvifActions.SetHashingAlgorithm:
+                case SoapActions.SetHashingAlgorithm:
                 {
                     var request = new SetHashingAlgorithmRequest();
                     reader.ReadInto(request);
                     var response = await target.SetHashingAlgorithmAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetHashingAlgorithmResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetHashingAlgorithmResponse");
                 }
-                case OnvifActions.CreateCertificate:
+                case SoapActions.CreateCertificate:
                 {
                     var request = new CreateCertificateRequest();
                     reader.ReadInto(request);
                     var response = await target.CreateCertificateAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "CreateCertificateResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "CreateCertificateResponse");
                 }
-                case OnvifActions.GetCertificates:
+                case SoapActions.GetCertificates:
                 {
                     var request = new GetCertificatesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetCertificatesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetCertificatesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetCertificatesResponse");
                 }
-                case OnvifActions.GetCertificatesStatus:
+                case SoapActions.GetCertificatesStatus:
                 {
                     var request = new GetCertificatesStatusRequest();
                     reader.ReadInto(request);
                     var response = await target.GetCertificatesStatusAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetCertificatesStatusResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetCertificatesStatusResponse");
                 }
-                case OnvifActions.SetCertificatesStatus:
+                case SoapActions.SetCertificatesStatus:
                 {
                     var request = new SetCertificatesStatusRequest();
                     reader.ReadInto(request);
                     var response = await target.SetCertificatesStatusAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetCertificatesStatusResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetCertificatesStatusResponse");
                 }
-                case OnvifActions.DeleteCertificates:
+                case SoapActions.DeleteCertificates:
                 {
                     var request = new DeleteCertificatesRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteCertificatesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "DeleteCertificatesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "DeleteCertificatesResponse");
                 }
-                case OnvifActions.GetPkcs10Request:
+                case SoapActions.GetPkcs10Request:
                 {
                     var request = new GetPkcs10RequestRequest();
                     reader.ReadInto(request);
                     var response = await target.GetPkcs10RequestAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetPkcs10RequestResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetPkcs10RequestResponse");
                 }
-                case OnvifActions.LoadCertificates:
+                case SoapActions.LoadCertificates:
                 {
                     var request = new LoadCertificatesRequest();
                     reader.ReadInto(request);
                     var response = await target.LoadCertificatesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "LoadCertificatesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "LoadCertificatesResponse");
                 }
-                case OnvifActions.GetClientCertificateMode:
+                case SoapActions.GetClientCertificateMode:
                 {
                     var request = new GetClientCertificateModeRequest();
                     reader.ReadInto(request);
                     var response = await target.GetClientCertificateModeAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetClientCertificateModeResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetClientCertificateModeResponse");
                 }
-                case OnvifActions.SetClientCertificateMode:
+                case SoapActions.SetClientCertificateMode:
                 {
                     var request = new SetClientCertificateModeRequest();
                     reader.ReadInto(request);
                     var response = await target.SetClientCertificateModeAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetClientCertificateModeResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetClientCertificateModeResponse");
                 }
-                case OnvifActions.GetCACertificates:
+                case SoapActions.GetCACertificates:
                 {
                     var request = new GetCACertificatesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetCACertificatesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetCACertificatesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetCACertificatesResponse");
                 }
-                case OnvifActions.LoadCertificateWithPrivateKey:
+                case SoapActions.LoadCertificateWithPrivateKey:
                 {
                     var request = new LoadCertificateWithPrivateKeyRequest();
                     reader.ReadInto(request);
                     var response = await target.LoadCertificateWithPrivateKeyAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "LoadCertificateWithPrivateKeyResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "LoadCertificateWithPrivateKeyResponse");
                 }
-                case OnvifActions.GetCertificateInformation:
+                case SoapActions.GetCertificateInformation:
                 {
                     var request = new GetCertificateInformationRequest();
                     reader.ReadInto(request);
                     var response = await target.GetCertificateInformationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetCertificateInformationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetCertificateInformationResponse");
                 }
-                case OnvifActions.LoadCACertificates:
+                case SoapActions.LoadCACertificates:
                 {
                     var request = new LoadCACertificatesRequest();
                     reader.ReadInto(request);
                     var response = await target.LoadCACertificatesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "LoadCACertificatesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "LoadCACertificatesResponse");
                 }
-                case OnvifActions.CreateDot1XConfiguration:
+                case SoapActions.CreateDot1XConfiguration:
                 {
                     var request = new CreateDot1XConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.CreateDot1XConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "CreateDot1XConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "CreateDot1XConfigurationResponse");
                 }
-                case OnvifActions.SetDot1XConfiguration:
+                case SoapActions.SetDot1XConfiguration:
                 {
                     var request = new SetDot1XConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.SetDot1XConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetDot1XConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "SetDot1XConfigurationResponse");
                 }
-                case OnvifActions.GetDot1XConfiguration:
+                case SoapActions.GetDot1XConfiguration:
                 {
                     var request = new GetDot1XConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.GetDot1XConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetDot1XConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetDot1XConfigurationResponse");
                 }
-                case OnvifActions.GetDot1XConfigurations:
+                case SoapActions.GetDot1XConfigurations:
                 {
                     var request = new GetDot1XConfigurationsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetDot1XConfigurationsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetDot1XConfigurationsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "GetDot1XConfigurationsResponse");
                 }
-                case OnvifActions.DeleteDot1XConfiguration:
+                case SoapActions.DeleteDot1XConfiguration:
                 {
                     var request = new DeleteDot1XConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteDot1XConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "DeleteDot1XConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/device/wsdl", "DeleteDot1XConfigurationResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }

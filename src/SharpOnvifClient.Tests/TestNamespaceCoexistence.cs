@@ -112,11 +112,11 @@ namespace SharpOnvif.Tests
             AssertSerialisesAs(new OnvifNetworkInterface(), "NetworkInterface");
         }
 
-        private static void AssertSerialisesAs(OnvifContract contract, string expected)
+        private static void AssertSerialisesAs(XmlContract contract, string expected)
         {
             // The type name is what an xsi:type attribute would carry.
             string actual = contract.GetType()
-                .GetProperty("OnvifXmlTypeName", System.Reflection.BindingFlags.NonPublic
+                .GetProperty("XmlTypeName", System.Reflection.BindingFlags.NonPublic
                                                  | System.Reflection.BindingFlags.Instance)
                 .GetValue(contract) as string;
 

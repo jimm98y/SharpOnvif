@@ -42,7 +42,7 @@ namespace SharpOnvifCommon.Soap
             if (!endpointUri.StartsWith("http://", StringComparison.OrdinalIgnoreCase)
                 && !endpointUri.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
             {
-                throw new ArgumentException("The Onvif endpoint must be an http:// or https:// URI.", nameof(endpointUri));
+                throw new ArgumentException("The endpoint must be an http:// or https:// URI.", nameof(endpointUri));
             }
 
             if (settings == null) throw new ArgumentNullException(nameof(settings));
@@ -106,7 +106,7 @@ namespace SharpOnvifCommon.Soap
         /// Resolves an xsi:type to an instance. Overridden by the generated client for its own
         /// assembly, because each carries its own copy of the shared schema types.
         /// </summary>
-        protected virtual OnvifContract ResolveXmlType(string ns, string name)
+        protected virtual XmlContract ResolveXmlType(string ns, string name)
         {
             return null;
         }
@@ -123,10 +123,10 @@ namespace SharpOnvifCommon.Soap
             string action,
             string bodyNamespace,
             string bodyElement,
-            OnvifContract request,
+            XmlContract request,
             Func<TResponse> createResponse,
             CancellationToken cancellationToken)
-            where TResponse : OnvifContract
+            where TResponse : XmlContract
         {
             string envelope = BuildEnvelope(action, bodyNamespace, bodyElement, request);
 
@@ -147,7 +147,7 @@ namespace SharpOnvifCommon.Soap
             string action,
             string bodyNamespace,
             string bodyElement,
-            OnvifContract request,
+            XmlContract request,
             CancellationToken cancellationToken)
         {
             string envelope = BuildEnvelope(action, bodyNamespace, bodyElement, request);
@@ -161,7 +161,7 @@ namespace SharpOnvifCommon.Soap
             }
         }
 
-        private string BuildEnvelope(string action, string bodyNamespace, string bodyElement, OnvifContract request)
+        private string BuildEnvelope(string action, string bodyNamespace, string bodyElement, XmlContract request)
         {
             // Null when this action carries no credentials, which is what leaves the message with
             // no header element rather than an empty one.
@@ -182,7 +182,7 @@ namespace SharpOnvifCommon.Soap
             var message = new HttpRequestMessage(HttpMethod.Post, EndpointUri);
             message.Content = new StringContent(envelope, new UTF8Encoding(false));
 
-            // Onvif carries the action as a Content-Type parameter on application/soap+xml.
+            // The action travels as a Content-Type parameter on application/soap+xml.
             var contentType = new MediaTypeHeaderValue(_codec.ContentType);
             contentType.CharSet = "utf-8";
             contentType.Parameters.Add(new NameValueHeaderValue("action", "\"" + action + "\""));
@@ -198,25 +198,25 @@ namespace SharpOnvifCommon.Soap
             catch (HttpRequestException ex)
             {
                 // The device could not be reached, or dropped the connection - which is what
-                // stopping a device does to a client waiting on a pull. Raised as one Onvif
+                // stopping a service does to a client waiting on a long call. Raised as one
                 // exception so that an application does not have to know which of the HTTP
                 // stack's exceptions means "the camera went away".
                 throw new SoapTransportException(
-                    "The Onvif request to " + EndpointUri + " did not reach the device: " + ex.Message, ex);
+                    "The request to " + EndpointUri + " did not reach the service: " + ex.Message, ex);
             }
             catch (OperationCanceledException ex) when (!cancellationToken.IsCancellationRequested)
             {
                 // Not the caller's cancellation - the client's own timeout. It arrives as a
                 // TaskCanceledException, which says nothing about what went wrong.
                 throw new SoapTransportException(
-                    "The Onvif request to " + EndpointUri + " timed out after " + _settings.Timeout + ".", ex)
+                    "The request to " + EndpointUri + " timed out after " + _settings.Timeout + ".", ex)
                 {
                     TimedOut = true,
                 };
             }
 
-            // A fault comes back as a SOAP envelope with a non-success status: the Onvif core
-            // specification uses 400 for a sender fault and 500 for a receiver one. Whenever the
+            // A fault comes back as a SOAP envelope with a non-success status: 400 for a
+            // sender fault and 500 for a receiver one, by convention. Whenever the
             // body is SOAP, parse it so the caller gets the fault code rather than a bare status.
             if (!response.IsSuccessStatusCode && !IsSoap(response))
             {

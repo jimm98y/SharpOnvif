@@ -11,7 +11,7 @@
 namespace SharpOnvifClient.DoorControl
 {
     /// <summary>
-    /// The DoorControlPort Onvif service.
+    /// The DoorControlPort service.
     /// </summary>
     public interface DoorControlPort
     {
@@ -314,7 +314,7 @@ namespace SharpOnvifClient.DoorControl
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -325,7 +325,7 @@ namespace SharpOnvifClient.DoorControl
         /// </summary>
         public System.Threading.Tasks.Task<GetServiceCapabilitiesResponse> GetServiceCapabilitiesAsync(GetServiceCapabilitiesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetServiceCapabilities, "http://www.onvif.org/ver10/doorcontrol/wsdl", "GetServiceCapabilities", request,
+            return InvokeAsync(SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver10/doorcontrol/wsdl", "GetServiceCapabilities", request,
                 () => new GetServiceCapabilitiesResponse(), cancellationToken);
         }
 
@@ -346,7 +346,7 @@ namespace SharpOnvifClient.DoorControl
         /// </summary>
         public System.Threading.Tasks.Task<GetDoorInfoListResponse> GetDoorInfoListAsync(GetDoorInfoListRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetDoorInfoList, "http://www.onvif.org/ver10/doorcontrol/wsdl", "GetDoorInfoList", request,
+            return InvokeAsync(SoapActions.GetDoorInfoList, "http://www.onvif.org/ver10/doorcontrol/wsdl", "GetDoorInfoList", request,
                 () => new GetDoorInfoListResponse(), cancellationToken);
         }
 
@@ -367,7 +367,7 @@ namespace SharpOnvifClient.DoorControl
         /// </summary>
         public System.Threading.Tasks.Task<GetDoorInfoResponse> GetDoorInfoAsync(GetDoorInfoRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetDoorInfo, "http://www.onvif.org/ver10/doorcontrol/wsdl", "GetDoorInfo", request,
+            return InvokeAsync(SoapActions.GetDoorInfo, "http://www.onvif.org/ver10/doorcontrol/wsdl", "GetDoorInfo", request,
                 () => new GetDoorInfoResponse(), cancellationToken);
         }
 
@@ -388,7 +388,7 @@ namespace SharpOnvifClient.DoorControl
         /// </summary>
         public System.Threading.Tasks.Task<GetDoorListResponse> GetDoorListAsync(GetDoorListRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetDoorList, "http://www.onvif.org/ver10/doorcontrol/wsdl", "GetDoorList", request,
+            return InvokeAsync(SoapActions.GetDoorList, "http://www.onvif.org/ver10/doorcontrol/wsdl", "GetDoorList", request,
                 () => new GetDoorListResponse(), cancellationToken);
         }
 
@@ -408,7 +408,7 @@ namespace SharpOnvifClient.DoorControl
         /// </summary>
         public System.Threading.Tasks.Task<GetDoorsResponse> GetDoorsAsync(GetDoorsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetDoors, "http://www.onvif.org/ver10/doorcontrol/wsdl", "GetDoors", request,
+            return InvokeAsync(SoapActions.GetDoors, "http://www.onvif.org/ver10/doorcontrol/wsdl", "GetDoors", request,
                 () => new GetDoorsResponse(), cancellationToken);
         }
 
@@ -428,7 +428,7 @@ namespace SharpOnvifClient.DoorControl
         /// </summary>
         public System.Threading.Tasks.Task<CreateDoorResponse> CreateDoorAsync(CreateDoorRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.CreateDoor, "http://www.onvif.org/ver10/doorcontrol/wsdl", "CreateDoor", request,
+            return InvokeAsync(SoapActions.CreateDoor, "http://www.onvif.org/ver10/doorcontrol/wsdl", "CreateDoor", request,
                 () => new CreateDoorResponse(), cancellationToken);
         }
 
@@ -450,7 +450,7 @@ namespace SharpOnvifClient.DoorControl
         /// </summary>
         public System.Threading.Tasks.Task<SetDoorResponse> SetDoorAsync(SetDoorRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetDoor, "http://www.onvif.org/ver10/doorcontrol/wsdl", "SetDoor", request,
+            return InvokeAsync(SoapActions.SetDoor, "http://www.onvif.org/ver10/doorcontrol/wsdl", "SetDoor", request,
                 () => new SetDoorResponse(), cancellationToken);
         }
 
@@ -470,7 +470,7 @@ namespace SharpOnvifClient.DoorControl
         /// </summary>
         public System.Threading.Tasks.Task<ModifyDoorResponse> ModifyDoorAsync(ModifyDoorRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.ModifyDoor, "http://www.onvif.org/ver10/doorcontrol/wsdl", "ModifyDoor", request,
+            return InvokeAsync(SoapActions.ModifyDoor, "http://www.onvif.org/ver10/doorcontrol/wsdl", "ModifyDoor", request,
                 () => new ModifyDoorResponse(), cancellationToken);
         }
 
@@ -490,7 +490,7 @@ namespace SharpOnvifClient.DoorControl
         /// </summary>
         public System.Threading.Tasks.Task<DeleteDoorResponse> DeleteDoorAsync(DeleteDoorRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeleteDoor, "http://www.onvif.org/ver10/doorcontrol/wsdl", "DeleteDoor", request,
+            return InvokeAsync(SoapActions.DeleteDoor, "http://www.onvif.org/ver10/doorcontrol/wsdl", "DeleteDoor", request,
                 () => new DeleteDoorResponse(), cancellationToken);
         }
 
@@ -509,7 +509,7 @@ namespace SharpOnvifClient.DoorControl
         /// </summary>
         public System.Threading.Tasks.Task<GetDoorStateResponse> GetDoorStateAsync(GetDoorStateRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetDoorState, "http://www.onvif.org/ver10/doorcontrol/wsdl", "GetDoorState", request,
+            return InvokeAsync(SoapActions.GetDoorState, "http://www.onvif.org/ver10/doorcontrol/wsdl", "GetDoorState", request,
                 () => new GetDoorStateResponse(), cancellationToken);
         }
 
@@ -537,7 +537,7 @@ namespace SharpOnvifClient.DoorControl
         /// </summary>
         public System.Threading.Tasks.Task<AccessDoorResponse> AccessDoorAsync(AccessDoorRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.AccessDoor, "http://www.onvif.org/ver10/doorcontrol/wsdl", "AccessDoor", request,
+            return InvokeAsync(SoapActions.AccessDoor, "http://www.onvif.org/ver10/doorcontrol/wsdl", "AccessDoor", request,
                 () => new AccessDoorResponse(), cancellationToken);
         }
 
@@ -558,7 +558,7 @@ namespace SharpOnvifClient.DoorControl
         /// </summary>
         public System.Threading.Tasks.Task<LockDoorResponse> LockDoorAsync(LockDoorRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.LockDoor, "http://www.onvif.org/ver10/doorcontrol/wsdl", "LockDoor", request,
+            return InvokeAsync(SoapActions.LockDoor, "http://www.onvif.org/ver10/doorcontrol/wsdl", "LockDoor", request,
                 () => new LockDoorResponse(), cancellationToken);
         }
 
@@ -579,7 +579,7 @@ namespace SharpOnvifClient.DoorControl
         /// </summary>
         public System.Threading.Tasks.Task<UnlockDoorResponse> UnlockDoorAsync(UnlockDoorRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.UnlockDoor, "http://www.onvif.org/ver10/doorcontrol/wsdl", "UnlockDoor", request,
+            return InvokeAsync(SoapActions.UnlockDoor, "http://www.onvif.org/ver10/doorcontrol/wsdl", "UnlockDoor", request,
                 () => new UnlockDoorResponse(), cancellationToken);
         }
 
@@ -600,7 +600,7 @@ namespace SharpOnvifClient.DoorControl
         /// </summary>
         public System.Threading.Tasks.Task<BlockDoorResponse> BlockDoorAsync(BlockDoorRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.BlockDoor, "http://www.onvif.org/ver10/doorcontrol/wsdl", "BlockDoor", request,
+            return InvokeAsync(SoapActions.BlockDoor, "http://www.onvif.org/ver10/doorcontrol/wsdl", "BlockDoor", request,
                 () => new BlockDoorResponse(), cancellationToken);
         }
 
@@ -624,7 +624,7 @@ namespace SharpOnvifClient.DoorControl
         /// </summary>
         public System.Threading.Tasks.Task<LockDownDoorResponse> LockDownDoorAsync(LockDownDoorRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.LockDownDoor, "http://www.onvif.org/ver10/doorcontrol/wsdl", "LockDownDoor", request,
+            return InvokeAsync(SoapActions.LockDownDoor, "http://www.onvif.org/ver10/doorcontrol/wsdl", "LockDownDoor", request,
                 () => new LockDownDoorResponse(), cancellationToken);
         }
 
@@ -643,7 +643,7 @@ namespace SharpOnvifClient.DoorControl
         /// </summary>
         public System.Threading.Tasks.Task<LockDownReleaseDoorResponse> LockDownReleaseDoorAsync(LockDownReleaseDoorRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.LockDownReleaseDoor, "http://www.onvif.org/ver10/doorcontrol/wsdl", "LockDownReleaseDoor", request,
+            return InvokeAsync(SoapActions.LockDownReleaseDoor, "http://www.onvif.org/ver10/doorcontrol/wsdl", "LockDownReleaseDoor", request,
                 () => new LockDownReleaseDoorResponse(), cancellationToken);
         }
 
@@ -666,7 +666,7 @@ namespace SharpOnvifClient.DoorControl
         /// </summary>
         public System.Threading.Tasks.Task<LockOpenDoorResponse> LockOpenDoorAsync(LockOpenDoorRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.LockOpenDoor, "http://www.onvif.org/ver10/doorcontrol/wsdl", "LockOpenDoor", request,
+            return InvokeAsync(SoapActions.LockOpenDoor, "http://www.onvif.org/ver10/doorcontrol/wsdl", "LockOpenDoor", request,
                 () => new LockOpenDoorResponse(), cancellationToken);
         }
 
@@ -687,7 +687,7 @@ namespace SharpOnvifClient.DoorControl
         /// </summary>
         public System.Threading.Tasks.Task<LockOpenReleaseDoorResponse> LockOpenReleaseDoorAsync(LockOpenReleaseDoorRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.LockOpenReleaseDoor, "http://www.onvif.org/ver10/doorcontrol/wsdl", "LockOpenReleaseDoor", request,
+            return InvokeAsync(SoapActions.LockOpenReleaseDoor, "http://www.onvif.org/ver10/doorcontrol/wsdl", "LockOpenReleaseDoor", request,
                 () => new LockOpenReleaseDoorResponse(), cancellationToken);
         }
 
@@ -709,7 +709,7 @@ namespace SharpOnvifClient.DoorControl
         /// </summary>
         public System.Threading.Tasks.Task<DoubleLockDoorResponse> DoubleLockDoorAsync(DoubleLockDoorRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DoubleLockDoor, "http://www.onvif.org/ver10/doorcontrol/wsdl", "DoubleLockDoor", request,
+            return InvokeAsync(SoapActions.DoubleLockDoor, "http://www.onvif.org/ver10/doorcontrol/wsdl", "DoubleLockDoor", request,
                 () => new DoubleLockDoorResponse(), cancellationToken);
         }
 

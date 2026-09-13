@@ -25,7 +25,7 @@ namespace SharpOnvifServer.ActionEngine
     /// Describes the configuration parameters of an action.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class ActionConfigDescription : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ActionConfigDescription : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.ItemListDescription parameterDescriptionField;
 
@@ -51,9 +51,9 @@ namespace SharpOnvifServer.ActionEngine
             set { this.nameField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ActionConfigDescription"; } }
+        protected override string XmlTypeName { get { return "ActionConfigDescription"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Actionengine; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Actionengine; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -95,7 +95,7 @@ namespace SharpOnvifServer.ActionEngine
     /// parameters, service requester given action Name, and service provider supported action type value
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class ActionConfiguration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ActionConfiguration : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.ItemList parametersField;
 
@@ -142,9 +142,9 @@ namespace SharpOnvifServer.ActionEngine
             set { this.typeField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ActionConfiguration"; } }
+        protected override string XmlTypeName { get { return "ActionConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Actionengine; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Actionengine; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -192,7 +192,7 @@ namespace SharpOnvifServer.ActionEngine
     /// number of actions in use for generic as well as specific action types
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class ActionEngineCapabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ActionEngineCapabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private ActionTypeLimits[] actionCapabilitiesField;
 
@@ -239,9 +239,9 @@ namespace SharpOnvifServer.ActionEngine
             set { this.maximumActionsField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ActionEngineCapabilities"; } }
+        protected override string XmlTypeName { get { return "ActionEngineCapabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Actionengine; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Actionengine; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -294,7 +294,7 @@ namespace SharpOnvifServer.ActionEngine
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class ActionEngineCapabilitiesExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ActionEngineCapabilitiesExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -305,9 +305,9 @@ namespace SharpOnvifServer.ActionEngine
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ActionEngineCapabilitiesExtension"; } }
+        protected override string XmlTypeName { get { return "ActionEngineCapabilitiesExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Actionengine; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Actionengine; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -327,7 +327,7 @@ namespace SharpOnvifServer.ActionEngine
     /// configuration and action trigger configuration data.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class ActionTrigger : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ActionTrigger : SharpOnvifCommon.Xml.XmlContract
     {
         private ActionTriggerConfiguration configurationField;
 
@@ -362,9 +362,9 @@ namespace SharpOnvifServer.ActionEngine
             set { this.tokenField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ActionTrigger"; } }
+        protected override string XmlTypeName { get { return "ActionTrigger"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Actionengine; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Actionengine; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -409,7 +409,7 @@ namespace SharpOnvifServer.ActionEngine
     /// Specification]), and set of actions to be triggered.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class ActionTriggerConfiguration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ActionTriggerConfiguration : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.TopicExpressionType topicExpressionField;
 
@@ -457,9 +457,9 @@ namespace SharpOnvifServer.ActionEngine
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ActionTriggerConfiguration"; } }
+        protected override string XmlTypeName { get { return "ActionTriggerConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Actionengine; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Actionengine; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -502,7 +502,7 @@ namespace SharpOnvifServer.ActionEngine
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class ActionTriggerConfigurationExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ActionTriggerConfigurationExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -513,9 +513,9 @@ namespace SharpOnvifServer.ActionEngine
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ActionTriggerConfigurationExtension"; } }
+        protected override string XmlTypeName { get { return "ActionTriggerConfigurationExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Actionengine; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Actionengine; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -535,7 +535,7 @@ namespace SharpOnvifServer.ActionEngine
     /// type in the service provider
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class ActionTypeLimits : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ActionTypeLimits : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -583,9 +583,9 @@ namespace SharpOnvifServer.ActionEngine
             set { this.inUseField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ActionTypeLimits"; } }
+        protected override string XmlTypeName { get { return "ActionTypeLimits"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Actionengine; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Actionengine; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -629,7 +629,7 @@ namespace SharpOnvifServer.ActionEngine
     /// not create all of requested action triggers, the service provider responds with a fault message.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateActionTriggers", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class CreateActionTriggersRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateActionTriggersRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private ActionTriggerConfiguration[] actionTriggerField;
 
@@ -682,7 +682,7 @@ namespace SharpOnvifServer.ActionEngine
     /// not create all of requested action triggers, the service provider responds with a fault message.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateActionTriggersResponse", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class CreateActionTriggersResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateActionTriggersResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private ActionTrigger[] actionTriggerField;
 
@@ -736,7 +736,7 @@ namespace SharpOnvifServer.ActionEngine
     /// fault message.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateActions", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class CreateActionsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateActionsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private ActionConfiguration[] actionField;
 
@@ -790,7 +790,7 @@ namespace SharpOnvifServer.ActionEngine
     /// fault message.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateActionsResponse", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class CreateActionsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateActionsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private OnvifAction[] actionField;
 
@@ -843,7 +843,7 @@ namespace SharpOnvifServer.ActionEngine
     /// not delete all of requested action triggers, the service provider responds with a fault message.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteActionTriggers", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class DeleteActionTriggersRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteActionTriggersRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] tokenField;
 
@@ -896,7 +896,7 @@ namespace SharpOnvifServer.ActionEngine
     /// not delete all of requested action triggers, the service provider responds with a fault message.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteActionTriggersResponse", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class DeleteActionTriggersResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteActionTriggersResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public DeleteActionTriggersResponse()
         {
@@ -909,7 +909,7 @@ namespace SharpOnvifServer.ActionEngine
     /// can not delete all of requested actions, the service provider responds with a fault message.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteActions", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class DeleteActionsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteActionsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] tokenField;
 
@@ -962,7 +962,7 @@ namespace SharpOnvifServer.ActionEngine
     /// can not delete all of requested actions, the service provider responds with a fault message.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteActionsResponse", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class DeleteActionsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteActionsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public DeleteActionsResponse()
         {
@@ -974,7 +974,7 @@ namespace SharpOnvifServer.ActionEngine
     /// The service provider returns existing action triggers
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetActionTriggers", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class GetActionTriggersRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetActionTriggersRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetActionTriggersRequest()
         {
@@ -986,7 +986,7 @@ namespace SharpOnvifServer.ActionEngine
     /// The service provider returns existing action triggers
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetActionTriggersResponse", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class GetActionTriggersResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetActionTriggersResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private ActionTrigger[] actionTriggerField;
 
@@ -1038,7 +1038,7 @@ namespace SharpOnvifServer.ActionEngine
     /// The service provider returns currently installed Actions.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetActions", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class GetActionsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetActionsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetActionsRequest()
         {
@@ -1050,7 +1050,7 @@ namespace SharpOnvifServer.ActionEngine
     /// The service provider returns currently installed Actions.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetActionsResponse", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class GetActionsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetActionsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private OnvifAction[] actionField;
 
@@ -1102,7 +1102,7 @@ namespace SharpOnvifServer.ActionEngine
     /// The get capabilities operation returns the Action Engine capabilities
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilities", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetServiceCapabilitiesRequest()
         {
@@ -1114,7 +1114,7 @@ namespace SharpOnvifServer.ActionEngine
     /// The get capabilities operation returns the Action Engine capabilities
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilitiesResponse", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private ActionEngineCapabilities capabilitiesField;
 
@@ -1161,7 +1161,7 @@ namespace SharpOnvifServer.ActionEngine
     /// schema file, the ONVIF schema file shall be explicitly listed.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSupportedActions", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class GetSupportedActionsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetSupportedActionsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetSupportedActionsRequest()
         {
@@ -1177,7 +1177,7 @@ namespace SharpOnvifServer.ActionEngine
     /// schema file, the ONVIF schema file shall be explicitly listed.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSupportedActionsResponse", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class GetSupportedActionsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetSupportedActionsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SupportedActions supportedActionsField;
 
@@ -1225,7 +1225,7 @@ namespace SharpOnvifServer.ActionEngine
     /// responds with a fault message.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ModifyActionTriggers", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class ModifyActionTriggersRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ModifyActionTriggersRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private ActionTrigger[] actionTriggerField;
 
@@ -1279,7 +1279,7 @@ namespace SharpOnvifServer.ActionEngine
     /// responds with a fault message.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ModifyActionTriggersResponse", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class ModifyActionTriggersResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ModifyActionTriggersResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public ModifyActionTriggersResponse()
         {
@@ -1295,7 +1295,7 @@ namespace SharpOnvifServer.ActionEngine
     /// with modify action request.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ModifyActions", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class ModifyActionsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ModifyActionsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private OnvifAction[] actionField;
 
@@ -1351,7 +1351,7 @@ namespace SharpOnvifServer.ActionEngine
     /// with modify action request.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ModifyActionsResponse", Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class ModifyActionsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ModifyActionsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public ModifyActionsResponse()
         {
@@ -1364,7 +1364,7 @@ namespace SharpOnvifServer.ActionEngine
     /// assigned unique identifier for this action configuration.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class OnvifAction : SharpOnvifCommon.Xml.OnvifContract
+    public partial class OnvifAction : SharpOnvifCommon.Xml.XmlContract
     {
         private ActionConfiguration configurationField;
 
@@ -1400,9 +1400,9 @@ namespace SharpOnvifServer.ActionEngine
             set { this.tokenField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Action"; } }
+        protected override string XmlTypeName { get { return "Action"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Actionengine; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Actionengine; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -1446,7 +1446,7 @@ namespace SharpOnvifServer.ActionEngine
     /// each action type, data structure contains the action configuration parameters.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class SupportedActions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SupportedActions : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] actionContentSchemaLocationField;
 
@@ -1483,9 +1483,9 @@ namespace SharpOnvifServer.ActionEngine
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SupportedActions"; } }
+        protected override string XmlTypeName { get { return "SupportedActions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Actionengine; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Actionengine; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -1529,7 +1529,7 @@ namespace SharpOnvifServer.ActionEngine
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
-    public partial class SupportedActionsExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SupportedActionsExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -1540,9 +1540,9 @@ namespace SharpOnvifServer.ActionEngine
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SupportedActionsExtension"; } }
+        protected override string XmlTypeName { get { return "SupportedActionsExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Actionengine; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Actionengine; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -1560,14 +1560,14 @@ namespace SharpOnvifServer.ActionEngine
     /// <summary>Constructs a contract named by an xsi:type attribute.</summary>
     internal static class XmlTypeFactory
     {
-        public static SharpOnvifCommon.Xml.OnvifContract Create(string ns, string name)
+        public static SharpOnvifCommon.Xml.XmlContract Create(string ns, string name)
         {
             return SharpOnvifCommon.Onvif.XmlTypeFactory.Create(ns, name);
         }
     }
 
     /// <summary>SOAP action URIs for this service's operations.</summary>
-    public static class OnvifActions
+    public static class SoapActions
     {
         public const string GetSupportedActions = "http://www.onvif.org/ver10/actionengine/wsdl/GetSupportedActions";
         public const string GetActions = "http://www.onvif.org/ver10/actionengine/wsdl/GetActions";

@@ -11,7 +11,7 @@
 namespace SharpOnvifClient.Display
 {
     /// <summary>
-    /// The DisplayPort Onvif service.
+    /// The DisplayPort service.
     /// </summary>
     public interface DisplayPort
     {
@@ -163,7 +163,7 @@ namespace SharpOnvifClient.Display
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -173,7 +173,7 @@ namespace SharpOnvifClient.Display
         /// </summary>
         public System.Threading.Tasks.Task<GetServiceCapabilitiesResponse> GetServiceCapabilitiesAsync(GetServiceCapabilitiesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetServiceCapabilities, "http://www.onvif.org/ver10/display/wsdl", "GetServiceCapabilities", request,
+            return InvokeAsync(SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver10/display/wsdl", "GetServiceCapabilities", request,
                 () => new GetServiceCapabilitiesResponse(), cancellationToken);
         }
 
@@ -192,7 +192,7 @@ namespace SharpOnvifClient.Display
         /// </summary>
         public System.Threading.Tasks.Task<GetLayoutResponse> GetLayoutAsync(GetLayoutRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetLayout, "http://www.onvif.org/ver10/display/wsdl", "GetLayout", request,
+            return InvokeAsync(SoapActions.GetLayout, "http://www.onvif.org/ver10/display/wsdl", "GetLayout", request,
                 () => new GetLayoutResponse(), cancellationToken);
         }
 
@@ -213,7 +213,7 @@ namespace SharpOnvifClient.Display
         /// </summary>
         public System.Threading.Tasks.Task<SetLayoutResponse> SetLayoutAsync(SetLayoutRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetLayout, "http://www.onvif.org/ver10/display/wsdl", "SetLayout", request,
+            return InvokeAsync(SoapActions.SetLayout, "http://www.onvif.org/ver10/display/wsdl", "SetLayout", request,
                 () => new SetLayoutResponse(), cancellationToken);
         }
 
@@ -232,7 +232,7 @@ namespace SharpOnvifClient.Display
         /// </summary>
         public System.Threading.Tasks.Task<GetDisplayOptionsResponse> GetDisplayOptionsAsync(GetDisplayOptionsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetDisplayOptions, "http://www.onvif.org/ver10/display/wsdl", "GetDisplayOptions", request,
+            return InvokeAsync(SoapActions.GetDisplayOptions, "http://www.onvif.org/ver10/display/wsdl", "GetDisplayOptions", request,
                 () => new GetDisplayOptionsResponse(), cancellationToken);
         }
 
@@ -253,7 +253,7 @@ namespace SharpOnvifClient.Display
         /// </summary>
         public System.Threading.Tasks.Task<GetPaneConfigurationsResponse> GetPaneConfigurationsAsync(GetPaneConfigurationsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetPaneConfigurations, "http://www.onvif.org/ver10/display/wsdl", "GetPaneConfigurations", request,
+            return InvokeAsync(SoapActions.GetPaneConfigurations, "http://www.onvif.org/ver10/display/wsdl", "GetPaneConfigurations", request,
                 () => new GetPaneConfigurationsResponse(), cancellationToken);
         }
 
@@ -270,7 +270,7 @@ namespace SharpOnvifClient.Display
         /// </summary>
         public System.Threading.Tasks.Task<GetPaneConfigurationResponse> GetPaneConfigurationAsync(GetPaneConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetPaneConfiguration, "http://www.onvif.org/ver10/display/wsdl", "GetPaneConfiguration", request,
+            return InvokeAsync(SoapActions.GetPaneConfiguration, "http://www.onvif.org/ver10/display/wsdl", "GetPaneConfiguration", request,
                 () => new GetPaneConfigurationResponse(), cancellationToken);
         }
 
@@ -289,7 +289,7 @@ namespace SharpOnvifClient.Display
         /// </summary>
         public System.Threading.Tasks.Task<SetPaneConfigurationsResponse> SetPaneConfigurationsAsync(SetPaneConfigurationsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetPaneConfigurations, "http://www.onvif.org/ver10/display/wsdl", "SetPaneConfigurations", request,
+            return InvokeAsync(SoapActions.SetPaneConfigurations, "http://www.onvif.org/ver10/display/wsdl", "SetPaneConfigurations", request,
                 () => new SetPaneConfigurationsResponse(), cancellationToken);
         }
 
@@ -306,7 +306,7 @@ namespace SharpOnvifClient.Display
         /// </summary>
         public System.Threading.Tasks.Task<SetPaneConfigurationResponse> SetPaneConfigurationAsync(SetPaneConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetPaneConfiguration, "http://www.onvif.org/ver10/display/wsdl", "SetPaneConfiguration", request,
+            return InvokeAsync(SoapActions.SetPaneConfiguration, "http://www.onvif.org/ver10/display/wsdl", "SetPaneConfiguration", request,
                 () => new SetPaneConfigurationResponse(), cancellationToken);
         }
 
@@ -325,7 +325,7 @@ namespace SharpOnvifClient.Display
         /// </summary>
         public System.Threading.Tasks.Task<CreatePaneConfigurationResponse> CreatePaneConfigurationAsync(CreatePaneConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.CreatePaneConfiguration, "http://www.onvif.org/ver10/display/wsdl", "CreatePaneConfiguration", request,
+            return InvokeAsync(SoapActions.CreatePaneConfiguration, "http://www.onvif.org/ver10/display/wsdl", "CreatePaneConfiguration", request,
                 () => new CreatePaneConfigurationResponse(), cancellationToken);
         }
 
@@ -344,7 +344,7 @@ namespace SharpOnvifClient.Display
         /// </summary>
         public System.Threading.Tasks.Task<DeletePaneConfigurationResponse> DeletePaneConfigurationAsync(DeletePaneConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeletePaneConfiguration, "http://www.onvif.org/ver10/display/wsdl", "DeletePaneConfiguration", request,
+            return InvokeAsync(SoapActions.DeletePaneConfiguration, "http://www.onvif.org/ver10/display/wsdl", "DeletePaneConfiguration", request,
                 () => new DeletePaneConfigurationResponse(), cancellationToken);
         }
 

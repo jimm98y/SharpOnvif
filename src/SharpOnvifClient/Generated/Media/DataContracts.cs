@@ -26,7 +26,7 @@ namespace SharpOnvifClient.Media
     /// exists in the media profile, it shall be replaced. The change shall be persistent.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddAudioDecoderConfiguration", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class AddAudioDecoderConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AddAudioDecoderConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -91,7 +91,7 @@ namespace SharpOnvifClient.Media
     /// exists in the media profile, it shall be replaced. The change shall be persistent.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddAudioDecoderConfigurationResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class AddAudioDecoderConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AddAudioDecoderConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public AddAudioDecoderConfigurationResponse()
         {
@@ -106,7 +106,7 @@ namespace SharpOnvifClient.Media
     /// AudioSourceConfiguration and shall support streaming audio data of such a profile.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddAudioEncoderConfiguration", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class AddAudioEncoderConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AddAudioEncoderConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -173,7 +173,7 @@ namespace SharpOnvifClient.Media
     /// AudioSourceConfiguration and shall support streaming audio data of such a profile.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddAudioEncoderConfigurationResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class AddAudioEncoderConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AddAudioEncoderConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public AddAudioEncoderConfigurationResponse()
         {
@@ -186,7 +186,7 @@ namespace SharpOnvifClient.Media
     /// exists in the media profile, it will be replaced. The change shall be persistent.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddAudioOutputConfiguration", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class AddAudioOutputConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AddAudioOutputConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -251,7 +251,7 @@ namespace SharpOnvifClient.Media
     /// exists in the media profile, it will be replaced. The change shall be persistent.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddAudioOutputConfigurationResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class AddAudioOutputConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AddAudioOutputConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public AddAudioOutputConfigurationResponse()
         {
@@ -264,7 +264,7 @@ namespace SharpOnvifClient.Media
     /// exists in the media profile, it will be replaced. The change shall be persistent.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddAudioSourceConfiguration", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class AddAudioSourceConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AddAudioSourceConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -329,7 +329,7 @@ namespace SharpOnvifClient.Media
     /// exists in the media profile, it will be replaced. The change shall be persistent.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddAudioSourceConfigurationResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class AddAudioSourceConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AddAudioSourceConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public AddAudioSourceConfigurationResponse()
         {
@@ -344,7 +344,7 @@ namespace SharpOnvifClient.Media
     /// can consist of events, PTZ status, and/or video analytics data.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddMetadataConfiguration", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class AddMetadataConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AddMetadataConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -411,7 +411,7 @@ namespace SharpOnvifClient.Media
     /// can consist of events, PTZ status, and/or video analytics data.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddMetadataConfigurationResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class AddMetadataConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AddMetadataConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public AddMetadataConfigurationResponse()
         {
@@ -426,7 +426,7 @@ namespace SharpOnvifClient.Media
     /// metadata), and that the media profile can be used for controlling PTZ movement.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddPTZConfiguration", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class AddPTZConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AddPTZConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -493,7 +493,7 @@ namespace SharpOnvifClient.Media
     /// metadata), and that the media profile can be used for controlling PTZ movement.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddPTZConfigurationResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class AddPTZConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AddPTZConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public AddPTZConfigurationResponse()
         {
@@ -512,7 +512,7 @@ namespace SharpOnvifClient.Media
     /// configuration before a video source configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddVideoAnalyticsConfiguration", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class AddVideoAnalyticsConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AddVideoAnalyticsConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -583,7 +583,7 @@ namespace SharpOnvifClient.Media
     /// configuration before a video source configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddVideoAnalyticsConfigurationResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class AddVideoAnalyticsConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AddVideoAnalyticsConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public AddVideoAnalyticsConfigurationResponse()
         {
@@ -598,7 +598,7 @@ namespace SharpOnvifClient.Media
     /// VideoSourceConfiguration and shall support streaming video data of such a profile.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddVideoEncoderConfiguration", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class AddVideoEncoderConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AddVideoEncoderConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -665,7 +665,7 @@ namespace SharpOnvifClient.Media
     /// VideoSourceConfiguration and shall support streaming video data of such a profile.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddVideoEncoderConfigurationResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class AddVideoEncoderConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AddVideoEncoderConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public AddVideoEncoderConfigurationResponse()
         {
@@ -678,7 +678,7 @@ namespace SharpOnvifClient.Media
     /// exists in the media profile, it will be replaced. The change shall be persistent.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddVideoSourceConfiguration", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class AddVideoSourceConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AddVideoSourceConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -743,7 +743,7 @@ namespace SharpOnvifClient.Media
     /// exists in the media profile, it will be replaced. The change shall be persistent.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddVideoSourceConfigurationResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class AddVideoSourceConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AddVideoSourceConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public AddVideoSourceConfigurationResponse()
         {
@@ -752,7 +752,7 @@ namespace SharpOnvifClient.Media
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class Capabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Capabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private ProfileCapabilities profileCapabilitiesField;
 
@@ -931,9 +931,9 @@ namespace SharpOnvifClient.Media
             set { this.eXICompressionFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Capabilities"; } }
+        protected override string XmlTypeName { get { return "Capabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Media; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Media; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -1025,7 +1025,7 @@ namespace SharpOnvifClient.Media
     /// Create the OSD.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateOSD", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class CreateOSDRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateOSDRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.OSDConfiguration oSDField;
 
@@ -1083,7 +1083,7 @@ namespace SharpOnvifClient.Media
     /// Create the OSD.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateOSDResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class CreateOSDResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateOSDResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string oSDTokenField;
 
@@ -1143,7 +1143,7 @@ namespace SharpOnvifClient.Media
     /// shall set the "fixed" attribute to false in the returned Profile.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateProfile", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class CreateProfileRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateProfileRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string nameField;
 
@@ -1210,7 +1210,7 @@ namespace SharpOnvifClient.Media
     /// shall set the "fixed" attribute to false in the returned Profile.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateProfileResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class CreateProfileResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateProfileResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.Profile profileField;
 
@@ -1256,7 +1256,7 @@ namespace SharpOnvifClient.Media
     /// Delete the OSD.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteOSD", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class DeleteOSDRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteOSDRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string oSDTokenField;
 
@@ -1314,7 +1314,7 @@ namespace SharpOnvifClient.Media
     /// Delete the OSD.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteOSDResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class DeleteOSDResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteOSDResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -1352,7 +1352,7 @@ namespace SharpOnvifClient.Media
     /// only possible for non-fixed profiles
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteProfile", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class DeleteProfileRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteProfileRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -1399,7 +1399,7 @@ namespace SharpOnvifClient.Media
     /// only possible for non-fixed profiles
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteProfileResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class DeleteProfileResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteProfileResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public DeleteProfileResponse()
         {
@@ -1411,7 +1411,7 @@ namespace SharpOnvifClient.Media
     /// This command list the audio decoding capabilities for a given profile and configuration of a device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioDecoderConfigurationOptions", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetAudioDecoderConfigurationOptionsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioDecoderConfigurationOptionsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string configurationTokenField;
 
@@ -1477,7 +1477,7 @@ namespace SharpOnvifClient.Media
     /// This command list the audio decoding capabilities for a given profile and configuration of a device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioDecoderConfigurationOptionsResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetAudioDecoderConfigurationOptionsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioDecoderConfigurationOptionsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.AudioDecoderConfigurationOptions optionsField;
 
@@ -1527,7 +1527,7 @@ namespace SharpOnvifClient.Media
     /// through the GetAudioDecoderConfiguration command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioDecoderConfiguration", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetAudioDecoderConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioDecoderConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string configurationTokenField;
 
@@ -1574,7 +1574,7 @@ namespace SharpOnvifClient.Media
     /// through the GetAudioDecoderConfiguration command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioDecoderConfigurationResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetAudioDecoderConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioDecoderConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.AudioDecoderConfiguration configurationField;
 
@@ -1621,7 +1621,7 @@ namespace SharpOnvifClient.Media
     /// anything apriori about the audio decoder configurations in order to use this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioDecoderConfigurations", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetAudioDecoderConfigurationsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioDecoderConfigurationsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetAudioDecoderConfigurationsRequest()
         {
@@ -1634,7 +1634,7 @@ namespace SharpOnvifClient.Media
     /// anything apriori about the audio decoder configurations in order to use this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioDecoderConfigurationsResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetAudioDecoderConfigurationsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioDecoderConfigurationsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.AudioDecoderConfiguration[] configurationsField;
 
@@ -1687,7 +1687,7 @@ namespace SharpOnvifClient.Media
     /// configuration parameters) when the audio encoder parameters are reconfigured.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioEncoderConfigurationOptions", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetAudioEncoderConfigurationOptionsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioEncoderConfigurationOptionsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string configurationTokenField;
 
@@ -1754,7 +1754,7 @@ namespace SharpOnvifClient.Media
     /// configuration parameters) when the audio encoder parameters are reconfigured.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioEncoderConfigurationOptionsResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetAudioEncoderConfigurationOptionsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioEncoderConfigurationOptionsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.AudioEncoderConfigurationOptions optionsField;
 
@@ -1804,7 +1804,7 @@ namespace SharpOnvifClient.Media
     /// configuration token is known.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioEncoderConfiguration", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetAudioEncoderConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioEncoderConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string configurationTokenField;
 
@@ -1851,7 +1851,7 @@ namespace SharpOnvifClient.Media
     /// configuration token is known.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioEncoderConfigurationResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetAudioEncoderConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioEncoderConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.AudioEncoderConfiguration configurationField;
 
@@ -1898,7 +1898,7 @@ namespace SharpOnvifClient.Media
     /// anything apriori about the audio encoder configurations in order to use the command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioEncoderConfigurations", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetAudioEncoderConfigurationsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioEncoderConfigurationsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetAudioEncoderConfigurationsRequest()
         {
@@ -1911,7 +1911,7 @@ namespace SharpOnvifClient.Media
     /// anything apriori about the audio encoder configurations in order to use the command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioEncoderConfigurationsResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetAudioEncoderConfigurationsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioEncoderConfigurationsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.AudioEncoderConfiguration[] configurationsField;
 
@@ -1964,7 +1964,7 @@ namespace SharpOnvifClient.Media
     /// configuration parameters) for configuring an audio output.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioOutputConfigurationOptions", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetAudioOutputConfigurationOptionsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioOutputConfigurationOptionsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string configurationTokenField;
 
@@ -2031,7 +2031,7 @@ namespace SharpOnvifClient.Media
     /// configuration parameters) for configuring an audio output.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioOutputConfigurationOptionsResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetAudioOutputConfigurationOptionsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioOutputConfigurationOptionsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.AudioOutputConfigurationOptions optionsField;
 
@@ -2081,7 +2081,7 @@ namespace SharpOnvifClient.Media
     /// through the GetAudioOutputConfiguration command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioOutputConfiguration", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetAudioOutputConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioOutputConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string configurationTokenField;
 
@@ -2128,7 +2128,7 @@ namespace SharpOnvifClient.Media
     /// through the GetAudioOutputConfiguration command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioOutputConfigurationResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetAudioOutputConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioOutputConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.AudioOutputConfiguration configurationField;
 
@@ -2175,7 +2175,7 @@ namespace SharpOnvifClient.Media
     /// anything apriori about the audio configurations to use this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioOutputConfigurations", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetAudioOutputConfigurationsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioOutputConfigurationsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetAudioOutputConfigurationsRequest()
         {
@@ -2188,7 +2188,7 @@ namespace SharpOnvifClient.Media
     /// anything apriori about the audio configurations to use this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioOutputConfigurationsResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetAudioOutputConfigurationsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioOutputConfigurationsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.AudioOutputConfiguration[] configurationsField;
 
@@ -2240,7 +2240,7 @@ namespace SharpOnvifClient.Media
     /// This command lists all available physical audio outputs of the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioOutputs", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetAudioOutputsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioOutputsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetAudioOutputsRequest()
         {
@@ -2252,7 +2252,7 @@ namespace SharpOnvifClient.Media
     /// This command lists all available physical audio outputs of the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioOutputsResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetAudioOutputsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioOutputsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.AudioOutput[] audioOutputsField;
 
@@ -2307,7 +2307,7 @@ namespace SharpOnvifClient.Media
     /// profile is specified, the options shall be compatible with that media profile.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioSourceConfigurationOptions", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetAudioSourceConfigurationOptionsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioSourceConfigurationOptionsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string configurationTokenField;
 
@@ -2376,7 +2376,7 @@ namespace SharpOnvifClient.Media
     /// profile is specified, the options shall be compatible with that media profile.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioSourceConfigurationOptionsResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetAudioSourceConfigurationOptionsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioSourceConfigurationOptionsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.AudioSourceConfigurationOptions optionsField;
 
@@ -2426,7 +2426,7 @@ namespace SharpOnvifClient.Media
     /// configuration token is already known. An
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioSourceConfiguration", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetAudioSourceConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioSourceConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string configurationTokenField;
 
@@ -2473,7 +2473,7 @@ namespace SharpOnvifClient.Media
     /// configuration token is already known. An
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioSourceConfigurationResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetAudioSourceConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioSourceConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.AudioSourceConfiguration configurationField;
 
@@ -2521,7 +2521,7 @@ namespace SharpOnvifClient.Media
     /// source configurations in order to use the command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioSourceConfigurations", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetAudioSourceConfigurationsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioSourceConfigurationsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetAudioSourceConfigurationsRequest()
         {
@@ -2535,7 +2535,7 @@ namespace SharpOnvifClient.Media
     /// source configurations in order to use the command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioSourceConfigurationsResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetAudioSourceConfigurationsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioSourceConfigurationsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.AudioSourceConfiguration[] configurationsField;
 
@@ -2587,7 +2587,7 @@ namespace SharpOnvifClient.Media
     /// This command lists all available physical audio inputs of the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioSources", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetAudioSourcesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioSourcesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetAudioSourcesRequest()
         {
@@ -2599,7 +2599,7 @@ namespace SharpOnvifClient.Media
     /// This command lists all available physical audio inputs of the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAudioSourcesResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetAudioSourcesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAudioSourcesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.AudioSource[] audioSourcesField;
 
@@ -2653,7 +2653,7 @@ namespace SharpOnvifClient.Media
     /// AddAudioDecoderConfiguration command on the media profile.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCompatibleAudioDecoderConfigurations", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetCompatibleAudioDecoderConfigurationsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCompatibleAudioDecoderConfigurationsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -2701,7 +2701,7 @@ namespace SharpOnvifClient.Media
     /// AddAudioDecoderConfiguration command on the media profile.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCompatibleAudioDecoderConfigurationsResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetCompatibleAudioDecoderConfigurationsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCompatibleAudioDecoderConfigurationsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.AudioDecoderConfiguration[] configurationsField;
 
@@ -2757,7 +2757,7 @@ namespace SharpOnvifClient.Media
     /// capabilities, configurations and settings in the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCompatibleAudioEncoderConfigurations", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetCompatibleAudioEncoderConfigurationsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCompatibleAudioEncoderConfigurationsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -2806,7 +2806,7 @@ namespace SharpOnvifClient.Media
     /// capabilities, configurations and settings in the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCompatibleAudioEncoderConfigurationsResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetCompatibleAudioEncoderConfigurationsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCompatibleAudioEncoderConfigurationsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.AudioEncoderConfiguration[] configurationsField;
 
@@ -2861,7 +2861,7 @@ namespace SharpOnvifClient.Media
     /// AddAudioOutputConfiguration command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCompatibleAudioOutputConfigurations", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetCompatibleAudioOutputConfigurationsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCompatibleAudioOutputConfigurationsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -2909,7 +2909,7 @@ namespace SharpOnvifClient.Media
     /// AddAudioOutputConfiguration command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCompatibleAudioOutputConfigurationsResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetCompatibleAudioOutputConfigurationsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCompatibleAudioOutputConfigurationsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.AudioOutputConfiguration[] configurationsField;
 
@@ -2964,7 +2964,7 @@ namespace SharpOnvifClient.Media
     /// capabilities, configurations and settings in the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCompatibleAudioSourceConfigurations", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetCompatibleAudioSourceConfigurationsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCompatibleAudioSourceConfigurationsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -3013,7 +3013,7 @@ namespace SharpOnvifClient.Media
     /// capabilities, configurations and settings in the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCompatibleAudioSourceConfigurationsResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetCompatibleAudioSourceConfigurationsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCompatibleAudioSourceConfigurationsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.AudioSourceConfiguration[] configurationsField;
 
@@ -3068,7 +3068,7 @@ namespace SharpOnvifClient.Media
     /// capabilities, configurations and settings in the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCompatibleMetadataConfigurations", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetCompatibleMetadataConfigurationsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCompatibleMetadataConfigurationsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -3117,7 +3117,7 @@ namespace SharpOnvifClient.Media
     /// capabilities, configurations and settings in the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCompatibleMetadataConfigurationsResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetCompatibleMetadataConfigurationsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCompatibleMetadataConfigurationsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.MetadataConfiguration[] configurationsField;
 
@@ -3172,7 +3172,7 @@ namespace SharpOnvifClient.Media
     /// capabilities, configurations and settings in the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCompatibleVideoAnalyticsConfigurations", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetCompatibleVideoAnalyticsConfigurationsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCompatibleVideoAnalyticsConfigurationsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -3221,7 +3221,7 @@ namespace SharpOnvifClient.Media
     /// capabilities, configurations and settings in the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCompatibleVideoAnalyticsConfigurationsResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetCompatibleVideoAnalyticsConfigurationsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCompatibleVideoAnalyticsConfigurationsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration[] configurationsField;
 
@@ -3277,7 +3277,7 @@ namespace SharpOnvifClient.Media
     /// capabilities, configurations and settings in the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCompatibleVideoEncoderConfigurations", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetCompatibleVideoEncoderConfigurationsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCompatibleVideoEncoderConfigurationsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -3326,7 +3326,7 @@ namespace SharpOnvifClient.Media
     /// capabilities, configurations and settings in the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCompatibleVideoEncoderConfigurationsResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetCompatibleVideoEncoderConfigurationsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCompatibleVideoEncoderConfigurationsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.VideoEncoderConfiguration[] configurationsField;
 
@@ -3382,7 +3382,7 @@ namespace SharpOnvifClient.Media
     /// capabilities, configurations and settings in the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCompatibleVideoSourceConfigurations", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetCompatibleVideoSourceConfigurationsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCompatibleVideoSourceConfigurationsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -3431,7 +3431,7 @@ namespace SharpOnvifClient.Media
     /// capabilities, configurations and settings in the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCompatibleVideoSourceConfigurationsResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetCompatibleVideoSourceConfigurationsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCompatibleVideoSourceConfigurationsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.VideoSourceConfiguration[] configurationsField;
 
@@ -3484,7 +3484,7 @@ namespace SharpOnvifClient.Media
     /// guaranteed video encoder instances (applications) per Video Source Configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetGuaranteedNumberOfVideoEncoderInstances", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetGuaranteedNumberOfVideoEncoderInstancesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetGuaranteedNumberOfVideoEncoderInstancesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string configurationTokenField;
 
@@ -3531,7 +3531,7 @@ namespace SharpOnvifClient.Media
     /// guaranteed video encoder instances (applications) per Video Source Configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetGuaranteedNumberOfVideoEncoderInstancesResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetGuaranteedNumberOfVideoEncoderInstancesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetGuaranteedNumberOfVideoEncoderInstancesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private int totalNumberField;
 
@@ -3687,7 +3687,7 @@ namespace SharpOnvifClient.Media
     /// parameters) for changing the metadata configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetMetadataConfigurationOptions", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetMetadataConfigurationOptionsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetMetadataConfigurationOptionsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string configurationTokenField;
 
@@ -3754,7 +3754,7 @@ namespace SharpOnvifClient.Media
     /// parameters) for changing the metadata configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetMetadataConfigurationOptionsResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetMetadataConfigurationOptionsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetMetadataConfigurationOptionsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.MetadataConfigurationOptions optionsField;
 
@@ -3804,7 +3804,7 @@ namespace SharpOnvifClient.Media
     /// known.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetMetadataConfiguration", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetMetadataConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetMetadataConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string configurationTokenField;
 
@@ -3851,7 +3851,7 @@ namespace SharpOnvifClient.Media
     /// known.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetMetadataConfigurationResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetMetadataConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetMetadataConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.MetadataConfiguration configurationField;
 
@@ -3898,7 +3898,7 @@ namespace SharpOnvifClient.Media
     /// about the metadata in order to use the command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetMetadataConfigurations", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetMetadataConfigurationsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetMetadataConfigurationsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetMetadataConfigurationsRequest()
         {
@@ -3911,7 +3911,7 @@ namespace SharpOnvifClient.Media
     /// about the metadata in order to use the command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetMetadataConfigurationsResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetMetadataConfigurationsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetMetadataConfigurationsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.MetadataConfiguration[] configurationsField;
 
@@ -3963,7 +3963,7 @@ namespace SharpOnvifClient.Media
     /// Get the OSD Options.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetOSDOptions", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetOSDOptionsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetOSDOptionsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string configurationTokenField;
 
@@ -4022,7 +4022,7 @@ namespace SharpOnvifClient.Media
     /// Get the OSD Options.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetOSDOptionsResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetOSDOptionsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetOSDOptionsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.OSDConfigurationOptions oSDOptionsField;
 
@@ -4077,7 +4077,7 @@ namespace SharpOnvifClient.Media
     /// Get the OSD.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetOSD", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetOSDRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetOSDRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string oSDTokenField;
 
@@ -4135,7 +4135,7 @@ namespace SharpOnvifClient.Media
     /// Get the OSD.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetOSDResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetOSDResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetOSDResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.OSDConfiguration oSDField;
 
@@ -4193,7 +4193,7 @@ namespace SharpOnvifClient.Media
     /// Get the OSDs.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetOSDs", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetOSDsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetOSDsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string configurationTokenField;
 
@@ -4240,7 +4240,7 @@ namespace SharpOnvifClient.Media
     /// Get the OSDs.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetOSDsResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetOSDsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetOSDsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.OSDConfiguration[] oSDsField;
 
@@ -4292,7 +4292,7 @@ namespace SharpOnvifClient.Media
     /// If the profile token is already known, a profile can be fetched through the GetProfile command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetProfile", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetProfileRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetProfileRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -4338,7 +4338,7 @@ namespace SharpOnvifClient.Media
     /// If the profile token is already known, a profile can be fetched through the GetProfile command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetProfileResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetProfileResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetProfileResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.Profile profileField;
 
@@ -4387,7 +4387,7 @@ namespace SharpOnvifClient.Media
     /// order to use the command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetProfiles", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetProfilesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetProfilesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetProfilesRequest()
         {
@@ -4402,7 +4402,7 @@ namespace SharpOnvifClient.Media
     /// order to use the command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetProfilesResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetProfilesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetProfilesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.Profile[] profilesField;
 
@@ -4454,7 +4454,7 @@ namespace SharpOnvifClient.Media
     /// Returns the capabilities of the media service. The result is returned in a typed answer.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilities", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetServiceCapabilitiesRequest()
         {
@@ -4466,7 +4466,7 @@ namespace SharpOnvifClient.Media
     /// Returns the capabilities of the media service. The result is returned in a typed answer.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilitiesResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private Capabilities capabilitiesField;
 
@@ -4519,7 +4519,7 @@ namespace SharpOnvifClient.Media
     /// GetSnapshotUri.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSnapshotUri", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetSnapshotUriRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetSnapshotUriRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -4573,7 +4573,7 @@ namespace SharpOnvifClient.Media
     /// GetSnapshotUri.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSnapshotUriResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetSnapshotUriResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetSnapshotUriResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.MediaUri mediaUriField;
 
@@ -4626,7 +4626,7 @@ namespace SharpOnvifClient.Media
     /// generate Uris longer than 128 octets.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetStreamUri", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetStreamUriRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetStreamUriRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.StreamSetup streamSetupField;
 
@@ -4701,7 +4701,7 @@ namespace SharpOnvifClient.Media
     /// generate Uris longer than 128 octets.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetStreamUriResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetStreamUriResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetStreamUriResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.MediaUri mediaUriField;
 
@@ -4745,7 +4745,7 @@ namespace SharpOnvifClient.Media
     /// analytics token is known.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoAnalyticsConfiguration", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetVideoAnalyticsConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetVideoAnalyticsConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string configurationTokenField;
 
@@ -4792,7 +4792,7 @@ namespace SharpOnvifClient.Media
     /// analytics token is known.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoAnalyticsConfigurationResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetVideoAnalyticsConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetVideoAnalyticsConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration configurationField;
 
@@ -4840,7 +4840,7 @@ namespace SharpOnvifClient.Media
     /// analytics in order to use the command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoAnalyticsConfigurations", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetVideoAnalyticsConfigurationsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetVideoAnalyticsConfigurationsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetVideoAnalyticsConfigurationsRequest()
         {
@@ -4854,7 +4854,7 @@ namespace SharpOnvifClient.Media
     /// analytics in order to use the command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoAnalyticsConfigurationsResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetVideoAnalyticsConfigurationsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetVideoAnalyticsConfigurationsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration[] configurationsField;
 
@@ -4913,7 +4913,7 @@ namespace SharpOnvifClient.Media
     /// media profile. If no tokens are specified, the options shall be considered generic for the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoEncoderConfigurationOptions", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetVideoEncoderConfigurationOptionsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetVideoEncoderConfigurationOptionsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string configurationTokenField;
 
@@ -4986,7 +4986,7 @@ namespace SharpOnvifClient.Media
     /// media profile. If no tokens are specified, the options shall be considered generic for the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoEncoderConfigurationOptionsResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetVideoEncoderConfigurationOptionsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetVideoEncoderConfigurationOptionsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.VideoEncoderConfigurationOptions optionsField;
 
@@ -5030,7 +5030,7 @@ namespace SharpOnvifClient.Media
     /// through the GetVideoEncoderConfiguration command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoEncoderConfiguration", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetVideoEncoderConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetVideoEncoderConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string configurationTokenField;
 
@@ -5077,7 +5077,7 @@ namespace SharpOnvifClient.Media
     /// through the GetVideoEncoderConfiguration command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoEncoderConfigurationResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetVideoEncoderConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetVideoEncoderConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.VideoEncoderConfiguration configurationField;
 
@@ -5125,7 +5125,7 @@ namespace SharpOnvifClient.Media
     /// the video encoder configurations in order to use the command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoEncoderConfigurations", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetVideoEncoderConfigurationsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetVideoEncoderConfigurationsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetVideoEncoderConfigurationsRequest()
         {
@@ -5139,7 +5139,7 @@ namespace SharpOnvifClient.Media
     /// the video encoder configurations in order to use the command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoEncoderConfigurationsResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetVideoEncoderConfigurationsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetVideoEncoderConfigurationsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.VideoEncoderConfiguration[] configurationsField;
 
@@ -5194,7 +5194,7 @@ namespace SharpOnvifClient.Media
     /// profile is specified, the options shall be compatible with that media profile.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoSourceConfigurationOptions", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetVideoSourceConfigurationOptionsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetVideoSourceConfigurationOptionsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string configurationTokenField;
 
@@ -5263,7 +5263,7 @@ namespace SharpOnvifClient.Media
     /// profile is specified, the options shall be compatible with that media profile.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoSourceConfigurationOptionsResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetVideoSourceConfigurationOptionsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetVideoSourceConfigurationOptionsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.VideoSourceConfigurationOptions optionsField;
 
@@ -5313,7 +5313,7 @@ namespace SharpOnvifClient.Media
     /// fetched through the GetVideoSourceConfiguration command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoSourceConfiguration", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetVideoSourceConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetVideoSourceConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string configurationTokenField;
 
@@ -5360,7 +5360,7 @@ namespace SharpOnvifClient.Media
     /// fetched through the GetVideoSourceConfiguration command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoSourceConfigurationResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetVideoSourceConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetVideoSourceConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.VideoSourceConfiguration configurationField;
 
@@ -5407,7 +5407,7 @@ namespace SharpOnvifClient.Media
     /// anything about the video source configurations in order to use the command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoSourceConfigurations", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetVideoSourceConfigurationsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetVideoSourceConfigurationsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetVideoSourceConfigurationsRequest()
         {
@@ -5420,7 +5420,7 @@ namespace SharpOnvifClient.Media
     /// anything about the video source configurations in order to use the command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoSourceConfigurationsResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetVideoSourceConfigurationsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetVideoSourceConfigurationsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.VideoSourceConfiguration[] configurationsField;
 
@@ -5474,7 +5474,7 @@ namespace SharpOnvifClient.Media
     /// command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoSourceModes", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetVideoSourceModesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetVideoSourceModesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string videoSourceTokenField;
 
@@ -5522,7 +5522,7 @@ namespace SharpOnvifClient.Media
     /// command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoSourceModesResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetVideoSourceModesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetVideoSourceModesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private VideoSourceMode[] videoSourceModesField;
 
@@ -5574,7 +5574,7 @@ namespace SharpOnvifClient.Media
     /// This command lists all available physical video inputs of the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoSources", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetVideoSourcesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetVideoSourcesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetVideoSourcesRequest()
         {
@@ -5586,7 +5586,7 @@ namespace SharpOnvifClient.Media
     /// This command lists all available physical video inputs of the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetVideoSourcesResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class GetVideoSourcesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetVideoSourcesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.VideoSource[] videoSourcesField;
 
@@ -5635,7 +5635,7 @@ namespace SharpOnvifClient.Media
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class ProfileCapabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ProfileCapabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -5670,9 +5670,9 @@ namespace SharpOnvifClient.Media
             set { this.maximumNumberOfProfilesFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ProfileCapabilities"; } }
+        protected override string XmlTypeName { get { return "ProfileCapabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Media; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Media; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -5713,7 +5713,7 @@ namespace SharpOnvifClient.Media
     /// shall be persistent.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RemoveAudioDecoderConfiguration", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class RemoveAudioDecoderConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RemoveAudioDecoderConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -5762,7 +5762,7 @@ namespace SharpOnvifClient.Media
     /// shall be persistent.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RemoveAudioDecoderConfigurationResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class RemoveAudioDecoderConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RemoveAudioDecoderConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public RemoveAudioDecoderConfigurationResponse()
         {
@@ -5776,7 +5776,7 @@ namespace SharpOnvifClient.Media
     /// shall be persistent.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RemoveAudioEncoderConfiguration", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class RemoveAudioEncoderConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RemoveAudioEncoderConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -5824,7 +5824,7 @@ namespace SharpOnvifClient.Media
     /// shall be persistent.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RemoveAudioEncoderConfigurationResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class RemoveAudioEncoderConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RemoveAudioEncoderConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public RemoveAudioEncoderConfigurationResponse()
         {
@@ -5838,7 +5838,7 @@ namespace SharpOnvifClient.Media
     /// be persistent.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RemoveAudioOutputConfiguration", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class RemoveAudioOutputConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RemoveAudioOutputConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -5886,7 +5886,7 @@ namespace SharpOnvifClient.Media
     /// be persistent.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RemoveAudioOutputConfigurationResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class RemoveAudioOutputConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RemoveAudioOutputConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public RemoveAudioOutputConfigurationResponse()
         {
@@ -5901,7 +5901,7 @@ namespace SharpOnvifClient.Media
     /// AudioEncoderConfiguration from the media profile.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RemoveAudioSourceConfiguration", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class RemoveAudioSourceConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RemoveAudioSourceConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -5950,7 +5950,7 @@ namespace SharpOnvifClient.Media
     /// AudioEncoderConfiguration from the media profile.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RemoveAudioSourceConfigurationResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class RemoveAudioSourceConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RemoveAudioSourceConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public RemoveAudioSourceConfigurationResponse()
         {
@@ -5964,7 +5964,7 @@ namespace SharpOnvifClient.Media
     /// persistent.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RemoveMetadataConfiguration", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class RemoveMetadataConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RemoveMetadataConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -6012,7 +6012,7 @@ namespace SharpOnvifClient.Media
     /// persistent.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RemoveMetadataConfigurationResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class RemoveMetadataConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RemoveMetadataConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public RemoveMetadataConfigurationResponse()
         {
@@ -6025,7 +6025,7 @@ namespace SharpOnvifClient.Media
     /// not contain a PTZConfiguration, the operation has no effect. The removal shall be persistent.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RemovePTZConfiguration", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class RemovePTZConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RemovePTZConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -6072,7 +6072,7 @@ namespace SharpOnvifClient.Media
     /// not contain a PTZConfiguration, the operation has no effect. The removal shall be persistent.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RemovePTZConfigurationResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class RemovePTZConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RemovePTZConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public RemovePTZConfigurationResponse()
         {
@@ -6086,7 +6086,7 @@ namespace SharpOnvifClient.Media
     /// shall be persistent.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RemoveVideoAnalyticsConfiguration", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class RemoveVideoAnalyticsConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RemoveVideoAnalyticsConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -6135,7 +6135,7 @@ namespace SharpOnvifClient.Media
     /// shall be persistent.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RemoveVideoAnalyticsConfigurationResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class RemoveVideoAnalyticsConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RemoveVideoAnalyticsConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public RemoveVideoAnalyticsConfigurationResponse()
         {
@@ -6149,7 +6149,7 @@ namespace SharpOnvifClient.Media
     /// be persistent.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RemoveVideoEncoderConfiguration", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class RemoveVideoEncoderConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RemoveVideoEncoderConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -6197,7 +6197,7 @@ namespace SharpOnvifClient.Media
     /// be persistent.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RemoveVideoEncoderConfigurationResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class RemoveVideoEncoderConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RemoveVideoEncoderConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public RemoveVideoEncoderConfigurationResponse()
         {
@@ -6212,7 +6212,7 @@ namespace SharpOnvifClient.Media
     /// VideoEncoderConfiguration from the media profile.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RemoveVideoSourceConfiguration", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class RemoveVideoSourceConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RemoveVideoSourceConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -6261,7 +6261,7 @@ namespace SharpOnvifClient.Media
     /// VideoEncoderConfiguration from the media profile.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RemoveVideoSourceConfigurationResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class RemoveVideoSourceConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RemoveVideoSourceConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public RemoveVideoSourceConfigurationResponse()
         {
@@ -6274,7 +6274,7 @@ namespace SharpOnvifClient.Media
     /// changes shall remain after reboot of the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetAudioDecoderConfiguration", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class SetAudioDecoderConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetAudioDecoderConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.AudioDecoderConfiguration configurationField;
 
@@ -6339,7 +6339,7 @@ namespace SharpOnvifClient.Media
     /// changes shall remain after reboot of the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetAudioDecoderConfigurationResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class SetAudioDecoderConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetAudioDecoderConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetAudioDecoderConfigurationResponse()
         {
@@ -6355,7 +6355,7 @@ namespace SharpOnvifClient.Media
     /// changing a running stream are out of scope for this specification.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetAudioEncoderConfiguration", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class SetAudioEncoderConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetAudioEncoderConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.AudioEncoderConfiguration configurationField;
 
@@ -6423,7 +6423,7 @@ namespace SharpOnvifClient.Media
     /// changing a running stream are out of scope for this specification.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetAudioEncoderConfigurationResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class SetAudioEncoderConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetAudioEncoderConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetAudioEncoderConfigurationResponse()
         {
@@ -6436,7 +6436,7 @@ namespace SharpOnvifClient.Media
     /// changes shall remain after reboot of the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetAudioOutputConfiguration", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class SetAudioOutputConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetAudioOutputConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.AudioOutputConfiguration configurationField;
 
@@ -6501,7 +6501,7 @@ namespace SharpOnvifClient.Media
     /// changes shall remain after reboot of the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetAudioOutputConfigurationResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class SetAudioOutputConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetAudioOutputConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetAudioOutputConfigurationResponse()
         {
@@ -6517,7 +6517,7 @@ namespace SharpOnvifClient.Media
     /// changing a running stream are out of scope for this specification.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetAudioSourceConfiguration", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class SetAudioSourceConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetAudioSourceConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.AudioSourceConfiguration configurationField;
 
@@ -6585,7 +6585,7 @@ namespace SharpOnvifClient.Media
     /// changing a running stream are out of scope for this specification.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetAudioSourceConfigurationResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class SetAudioSourceConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetAudioSourceConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetAudioSourceConfigurationResponse()
         {
@@ -6602,7 +6602,7 @@ namespace SharpOnvifClient.Media
     /// this specification.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetMetadataConfiguration", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class SetMetadataConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetMetadataConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.MetadataConfiguration configurationField;
 
@@ -6671,7 +6671,7 @@ namespace SharpOnvifClient.Media
     /// this specification.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetMetadataConfigurationResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class SetMetadataConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetMetadataConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetMetadataConfigurationResponse()
         {
@@ -6683,7 +6683,7 @@ namespace SharpOnvifClient.Media
     /// Set the OSD
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetOSD", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class SetOSDRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetOSDRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.OSDConfiguration oSDField;
 
@@ -6741,7 +6741,7 @@ namespace SharpOnvifClient.Media
     /// Set the OSD
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetOSDResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class SetOSDResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetOSDResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -6787,7 +6787,7 @@ namespace SharpOnvifClient.Media
     /// stream.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetSynchronizationPoint", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class SetSynchronizationPointRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetSynchronizationPointRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -6842,7 +6842,7 @@ namespace SharpOnvifClient.Media
     /// stream.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetSynchronizationPointResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class SetSynchronizationPointResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetSynchronizationPointResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetSynchronizationPointResponse()
         {
@@ -6859,7 +6859,7 @@ namespace SharpOnvifClient.Media
     /// token.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetVideoAnalyticsConfiguration", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class SetVideoAnalyticsConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetVideoAnalyticsConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration configurationField;
 
@@ -6928,7 +6928,7 @@ namespace SharpOnvifClient.Media
     /// token.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetVideoAnalyticsConfigurationResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class SetVideoAnalyticsConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetVideoAnalyticsConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetVideoAnalyticsConfigurationResponse()
         {
@@ -6948,7 +6948,7 @@ namespace SharpOnvifClient.Media
     /// via RTSP.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetVideoEncoderConfiguration", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class SetVideoEncoderConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetVideoEncoderConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.VideoEncoderConfiguration configurationField;
 
@@ -7020,7 +7020,7 @@ namespace SharpOnvifClient.Media
     /// via RTSP.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetVideoEncoderConfigurationResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class SetVideoEncoderConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetVideoEncoderConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetVideoEncoderConfigurationResponse()
         {
@@ -7036,7 +7036,7 @@ namespace SharpOnvifClient.Media
     /// changing a running stream are out of scope for this specification.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetVideoSourceConfiguration", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class SetVideoSourceConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetVideoSourceConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.VideoSourceConfiguration configurationField;
 
@@ -7104,7 +7104,7 @@ namespace SharpOnvifClient.Media
     /// changing a running stream are out of scope for this specification.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetVideoSourceConfigurationResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class SetVideoSourceConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetVideoSourceConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetVideoSourceConfigurationResponse()
         {
@@ -7118,7 +7118,7 @@ namespace SharpOnvifClient.Media
     /// command. The behavior after changing the mode is not defined in this specification.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetVideoSourceMode", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class SetVideoSourceModeRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetVideoSourceModeRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string videoSourceTokenField;
 
@@ -7184,7 +7184,7 @@ namespace SharpOnvifClient.Media
     /// command. The behavior after changing the mode is not defined in this specification.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetVideoSourceModeResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class SetVideoSourceModeResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetVideoSourceModeResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private bool rebootField;
 
@@ -7235,7 +7235,7 @@ namespace SharpOnvifClient.Media
     /// MetadataConfiguration respectively.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("StartMulticastStreaming", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class StartMulticastStreamingRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class StartMulticastStreamingRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -7285,7 +7285,7 @@ namespace SharpOnvifClient.Media
     /// MetadataConfiguration respectively.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("StartMulticastStreamingResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class StartMulticastStreamingResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class StartMulticastStreamingResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public StartMulticastStreamingResponse()
         {
@@ -7297,7 +7297,7 @@ namespace SharpOnvifClient.Media
     /// This command stop multicast streaming using a specified media profile of a device
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("StopMulticastStreaming", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class StopMulticastStreamingRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class StopMulticastStreamingRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string profileTokenField;
 
@@ -7343,7 +7343,7 @@ namespace SharpOnvifClient.Media
     /// This command stop multicast streaming using a specified media profile of a device
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("StopMulticastStreamingResponse", Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class StopMulticastStreamingResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class StopMulticastStreamingResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public StopMulticastStreamingResponse()
         {
@@ -7352,7 +7352,7 @@ namespace SharpOnvifClient.Media
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class StreamingCapabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class StreamingCapabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -7483,9 +7483,9 @@ namespace SharpOnvifClient.Media
             set { this.noRTSPStreamingFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "StreamingCapabilities"; } }
+        protected override string XmlTypeName { get { return "StreamingCapabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Media; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Media; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -7553,7 +7553,7 @@ namespace SharpOnvifClient.Media
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class VideoSourceMode : SharpOnvifCommon.Xml.OnvifContract
+    public partial class VideoSourceMode : SharpOnvifCommon.Xml.XmlContract
     {
         private float maxFramerateField;
 
@@ -7664,9 +7664,9 @@ namespace SharpOnvifClient.Media
             set { this.enabledFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "VideoSourceMode"; } }
+        protected override string XmlTypeName { get { return "VideoSourceMode"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Media; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Media; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -7737,7 +7737,7 @@ namespace SharpOnvifClient.Media
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/media/wsdl")]
-    public partial class VideoSourceModeExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class VideoSourceModeExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -7748,9 +7748,9 @@ namespace SharpOnvifClient.Media
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "VideoSourceModeExtension"; } }
+        protected override string XmlTypeName { get { return "VideoSourceModeExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Media; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Media; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -7768,14 +7768,14 @@ namespace SharpOnvifClient.Media
     /// <summary>Constructs a contract named by an xsi:type attribute.</summary>
     internal static class XmlTypeFactory
     {
-        public static SharpOnvifCommon.Xml.OnvifContract Create(string ns, string name)
+        public static SharpOnvifCommon.Xml.XmlContract Create(string ns, string name)
         {
             return SharpOnvifCommon.Onvif.XmlTypeFactory.Create(ns, name);
         }
     }
 
     /// <summary>SOAP action URIs for this service's operations.</summary>
-    public static class OnvifActions
+    public static class SoapActions
     {
         public const string GetServiceCapabilities = "http://www.onvif.org/ver10/media/wsdl/GetServiceCapabilities";
         public const string GetVideoSources = "http://www.onvif.org/ver10/media/wsdlGetVideoSources/";

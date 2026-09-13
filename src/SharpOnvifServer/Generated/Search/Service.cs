@@ -16,7 +16,7 @@ namespace SharpOnvifServer.Search
     public abstract class SearchPortBase
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new SearchPortDispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new SearchPortDispatcher();
 
         /// <summary>
         /// Returns the capabilities of the search service. The result is returned in a typed answer.
@@ -454,7 +454,7 @@ namespace SharpOnvifServer.Search
     }
 
     /// <summary>Routes SOAP actions to <see cref="SearchPortBase"/>.</summary>
-    internal sealed class SearchPortDispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class SearchPortDispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(SearchPortBase); } }
 
@@ -462,24 +462,24 @@ namespace SharpOnvifServer.Search
         {
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
-                case OnvifActions.GetRecordingSummary:
-                case OnvifActions.GetRecordingInformation:
-                case OnvifActions.GetMediaAttributes:
-                case OnvifActions.FindRecordings:
-                case OnvifActions.GetRecordingSearchResults:
-                case OnvifActions.FindEvents:
-                case OnvifActions.GetEventSearchResults:
-                case OnvifActions.FindPTZPosition:
-                case OnvifActions.GetPTZPositionSearchResults:
-                case OnvifActions.GetSearchState:
-                case OnvifActions.EndSearch:
-                case OnvifActions.FindMetadata:
-                case OnvifActions.GetMetadataSearchResults:
-                case OnvifActions.SearchImageByNL:
-                case OnvifActions.GetNLSearchResults:
-                case OnvifActions.SearchImageByImage:
-                case OnvifActions.GetImageSearchResults:
+                case SoapActions.GetServiceCapabilities:
+                case SoapActions.GetRecordingSummary:
+                case SoapActions.GetRecordingInformation:
+                case SoapActions.GetMediaAttributes:
+                case SoapActions.FindRecordings:
+                case SoapActions.GetRecordingSearchResults:
+                case SoapActions.FindEvents:
+                case SoapActions.GetEventSearchResults:
+                case SoapActions.FindPTZPosition:
+                case SoapActions.GetPTZPositionSearchResults:
+                case SoapActions.GetSearchState:
+                case SoapActions.EndSearch:
+                case SoapActions.FindMetadata:
+                case SoapActions.GetMetadataSearchResults:
+                case SoapActions.SearchImageByNL:
+                case SoapActions.GetNLSearchResults:
+                case SoapActions.SearchImageByImage:
+                case SoapActions.GetImageSearchResults:
                     return true;
                 default:
                     return false;
@@ -493,126 +493,126 @@ namespace SharpOnvifServer.Search
                 case "GetServiceCapabilities":
                     if (ns == "http://www.onvif.org/ver10/search/wsdl")
                     {
-                        action = OnvifActions.GetServiceCapabilities;
+                        action = SoapActions.GetServiceCapabilities;
                         return true;
                     }
                     break;
                 case "GetRecordingSummary":
                     if (ns == "http://www.onvif.org/ver10/search/wsdl")
                     {
-                        action = OnvifActions.GetRecordingSummary;
+                        action = SoapActions.GetRecordingSummary;
                         return true;
                     }
                     break;
                 case "GetRecordingInformation":
                     if (ns == "http://www.onvif.org/ver10/search/wsdl")
                     {
-                        action = OnvifActions.GetRecordingInformation;
+                        action = SoapActions.GetRecordingInformation;
                         return true;
                     }
                     break;
                 case "GetMediaAttributes":
                     if (ns == "http://www.onvif.org/ver10/search/wsdl")
                     {
-                        action = OnvifActions.GetMediaAttributes;
+                        action = SoapActions.GetMediaAttributes;
                         return true;
                     }
                     break;
                 case "FindRecordings":
                     if (ns == "http://www.onvif.org/ver10/search/wsdl")
                     {
-                        action = OnvifActions.FindRecordings;
+                        action = SoapActions.FindRecordings;
                         return true;
                     }
                     break;
                 case "GetRecordingSearchResults":
                     if (ns == "http://www.onvif.org/ver10/search/wsdl")
                     {
-                        action = OnvifActions.GetRecordingSearchResults;
+                        action = SoapActions.GetRecordingSearchResults;
                         return true;
                     }
                     break;
                 case "FindEvents":
                     if (ns == "http://www.onvif.org/ver10/search/wsdl")
                     {
-                        action = OnvifActions.FindEvents;
+                        action = SoapActions.FindEvents;
                         return true;
                     }
                     break;
                 case "GetEventSearchResults":
                     if (ns == "http://www.onvif.org/ver10/search/wsdl")
                     {
-                        action = OnvifActions.GetEventSearchResults;
+                        action = SoapActions.GetEventSearchResults;
                         return true;
                     }
                     break;
                 case "FindPTZPosition":
                     if (ns == "http://www.onvif.org/ver10/search/wsdl")
                     {
-                        action = OnvifActions.FindPTZPosition;
+                        action = SoapActions.FindPTZPosition;
                         return true;
                     }
                     break;
                 case "GetPTZPositionSearchResults":
                     if (ns == "http://www.onvif.org/ver10/search/wsdl")
                     {
-                        action = OnvifActions.GetPTZPositionSearchResults;
+                        action = SoapActions.GetPTZPositionSearchResults;
                         return true;
                     }
                     break;
                 case "GetSearchState":
                     if (ns == "http://www.onvif.org/ver10/search/wsdl")
                     {
-                        action = OnvifActions.GetSearchState;
+                        action = SoapActions.GetSearchState;
                         return true;
                     }
                     break;
                 case "EndSearch":
                     if (ns == "http://www.onvif.org/ver10/search/wsdl")
                     {
-                        action = OnvifActions.EndSearch;
+                        action = SoapActions.EndSearch;
                         return true;
                     }
                     break;
                 case "FindMetadata":
                     if (ns == "http://www.onvif.org/ver10/search/wsdl")
                     {
-                        action = OnvifActions.FindMetadata;
+                        action = SoapActions.FindMetadata;
                         return true;
                     }
                     break;
                 case "GetMetadataSearchResults":
                     if (ns == "http://www.onvif.org/ver10/search/wsdl")
                     {
-                        action = OnvifActions.GetMetadataSearchResults;
+                        action = SoapActions.GetMetadataSearchResults;
                         return true;
                     }
                     break;
                 case "SearchImageByNLRequest":
                     if (ns == "http://www.onvif.org/ver10/search/wsdl")
                     {
-                        action = OnvifActions.SearchImageByNL;
+                        action = SoapActions.SearchImageByNL;
                         return true;
                     }
                     break;
                 case "GetNLSearchResultsRequest":
                     if (ns == "http://www.onvif.org/ver10/search/wsdl")
                     {
-                        action = OnvifActions.GetNLSearchResults;
+                        action = SoapActions.GetNLSearchResults;
                         return true;
                     }
                     break;
                 case "SearchImageByImageRequest":
                     if (ns == "http://www.onvif.org/ver10/search/wsdl")
                     {
-                        action = OnvifActions.SearchImageByImage;
+                        action = SoapActions.SearchImageByImage;
                         return true;
                     }
                     break;
                 case "GetImageSearchResultsRequest":
                     if (ns == "http://www.onvif.org/ver10/search/wsdl")
                     {
-                        action = OnvifActions.GetImageSearchResults;
+                        action = SoapActions.GetImageSearchResults;
                         return true;
                     }
                     break;
@@ -621,7 +621,7 @@ namespace SharpOnvifServer.Search
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             SearchPortBase target = (SearchPortBase)service;
@@ -629,138 +629,138 @@ namespace SharpOnvifServer.Search
 
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
+                case SoapActions.GetServiceCapabilities:
                 {
                     var request = new GetServiceCapabilitiesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetServiceCapabilitiesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/search/wsdl", "GetServiceCapabilitiesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/search/wsdl", "GetServiceCapabilitiesResponse");
                 }
-                case OnvifActions.GetRecordingSummary:
+                case SoapActions.GetRecordingSummary:
                 {
                     var request = new GetRecordingSummaryRequest();
                     reader.ReadInto(request);
                     var response = await target.GetRecordingSummaryAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/search/wsdl", "GetRecordingSummaryResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/search/wsdl", "GetRecordingSummaryResponse");
                 }
-                case OnvifActions.GetRecordingInformation:
+                case SoapActions.GetRecordingInformation:
                 {
                     var request = new GetRecordingInformationRequest();
                     reader.ReadInto(request);
                     var response = await target.GetRecordingInformationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/search/wsdl", "GetRecordingInformationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/search/wsdl", "GetRecordingInformationResponse");
                 }
-                case OnvifActions.GetMediaAttributes:
+                case SoapActions.GetMediaAttributes:
                 {
                     var request = new GetMediaAttributesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetMediaAttributesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/search/wsdl", "GetMediaAttributesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/search/wsdl", "GetMediaAttributesResponse");
                 }
-                case OnvifActions.FindRecordings:
+                case SoapActions.FindRecordings:
                 {
                     var request = new FindRecordingsRequest();
                     reader.ReadInto(request);
                     var response = await target.FindRecordingsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/search/wsdl", "FindRecordingsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/search/wsdl", "FindRecordingsResponse");
                 }
-                case OnvifActions.GetRecordingSearchResults:
+                case SoapActions.GetRecordingSearchResults:
                 {
                     var request = new GetRecordingSearchResultsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetRecordingSearchResultsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/search/wsdl", "GetRecordingSearchResultsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/search/wsdl", "GetRecordingSearchResultsResponse");
                 }
-                case OnvifActions.FindEvents:
+                case SoapActions.FindEvents:
                 {
                     var request = new FindEventsRequest();
                     reader.ReadInto(request);
                     var response = await target.FindEventsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/search/wsdl", "FindEventsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/search/wsdl", "FindEventsResponse");
                 }
-                case OnvifActions.GetEventSearchResults:
+                case SoapActions.GetEventSearchResults:
                 {
                     var request = new GetEventSearchResultsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetEventSearchResultsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/search/wsdl", "GetEventSearchResultsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/search/wsdl", "GetEventSearchResultsResponse");
                 }
-                case OnvifActions.FindPTZPosition:
+                case SoapActions.FindPTZPosition:
                 {
                     var request = new FindPTZPositionRequest();
                     reader.ReadInto(request);
                     var response = await target.FindPTZPositionAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/search/wsdl", "FindPTZPositionResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/search/wsdl", "FindPTZPositionResponse");
                 }
-                case OnvifActions.GetPTZPositionSearchResults:
+                case SoapActions.GetPTZPositionSearchResults:
                 {
                     var request = new GetPTZPositionSearchResultsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetPTZPositionSearchResultsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/search/wsdl", "GetPTZPositionSearchResultsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/search/wsdl", "GetPTZPositionSearchResultsResponse");
                 }
-                case OnvifActions.GetSearchState:
+                case SoapActions.GetSearchState:
                 {
                     var request = new GetSearchStateRequest();
                     reader.ReadInto(request);
                     var response = await target.GetSearchStateAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/search/wsdl", "GetSearchStateResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/search/wsdl", "GetSearchStateResponse");
                 }
-                case OnvifActions.EndSearch:
+                case SoapActions.EndSearch:
                 {
                     var request = new EndSearchRequest();
                     reader.ReadInto(request);
                     var response = await target.EndSearchAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/search/wsdl", "EndSearchResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/search/wsdl", "EndSearchResponse");
                 }
-                case OnvifActions.FindMetadata:
+                case SoapActions.FindMetadata:
                 {
                     var request = new FindMetadataRequest();
                     reader.ReadInto(request);
                     var response = await target.FindMetadataAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/search/wsdl", "FindMetadataResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/search/wsdl", "FindMetadataResponse");
                 }
-                case OnvifActions.GetMetadataSearchResults:
+                case SoapActions.GetMetadataSearchResults:
                 {
                     var request = new GetMetadataSearchResultsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetMetadataSearchResultsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/search/wsdl", "GetMetadataSearchResultsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/search/wsdl", "GetMetadataSearchResultsResponse");
                 }
-                case OnvifActions.SearchImageByNL:
+                case SoapActions.SearchImageByNL:
                 {
                     var request = new SearchImageByNLRequest();
                     reader.ReadInto(request);
                     var response = await target.SearchImageByNLAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/search/wsdl", "SearchImageByNLResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/search/wsdl", "SearchImageByNLResponse");
                 }
-                case OnvifActions.GetNLSearchResults:
+                case SoapActions.GetNLSearchResults:
                 {
                     var request = new GetNLSearchResultsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetNLSearchResultsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/search/wsdl", "GetNLSearchResultsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/search/wsdl", "GetNLSearchResultsResponse");
                 }
-                case OnvifActions.SearchImageByImage:
+                case SoapActions.SearchImageByImage:
                 {
                     var request = new SearchImageByImageRequest();
                     reader.ReadInto(request);
                     var response = await target.SearchImageByImageAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/search/wsdl", "SearchImageByImageResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/search/wsdl", "SearchImageByImageResponse");
                 }
-                case OnvifActions.GetImageSearchResults:
+                case SoapActions.GetImageSearchResults:
                 {
                     var request = new GetImageSearchResultsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetImageSearchResultsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/search/wsdl", "GetImageSearchResultsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/search/wsdl", "GetImageSearchResultsResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }

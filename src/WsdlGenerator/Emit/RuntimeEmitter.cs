@@ -15,7 +15,7 @@ namespace WsdlGenerator.Emit;
 /// Nothing about any particular service is emitted with it. What a client authenticates with,
 /// what it declares on its envelopes, how long it waits - all of that reaches the runtime through
 /// the interfaces it declares, from whatever implements them. That is what keeps the embedded
-/// source free of Onvif, and of every other service's conventions.
+/// source free of any particular service's conventions.
 /// </summary>
 internal sealed class RuntimeEmitter
 {

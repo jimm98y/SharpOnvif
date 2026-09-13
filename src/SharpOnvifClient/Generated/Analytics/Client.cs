@@ -11,7 +11,7 @@
 namespace SharpOnvifClient.Analytics
 {
     /// <summary>
-    /// The AnalyticsEnginePort Onvif service.
+    /// The AnalyticsEnginePort service.
     /// </summary>
     public interface AnalyticsEnginePort
     {
@@ -144,7 +144,7 @@ namespace SharpOnvifClient.Analytics
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -154,7 +154,7 @@ namespace SharpOnvifClient.Analytics
         /// </summary>
         public System.Threading.Tasks.Task<GetServiceCapabilitiesResponse> GetServiceCapabilitiesAsync(GetServiceCapabilitiesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetServiceCapabilities, "http://www.onvif.org/ver20/analytics/wsdl", "GetServiceCapabilities", request,
+            return InvokeAsync(SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver20/analytics/wsdl", "GetServiceCapabilities", request,
                 () => new GetServiceCapabilitiesResponse(), cancellationToken);
         }
 
@@ -171,7 +171,7 @@ namespace SharpOnvifClient.Analytics
         /// </summary>
         public System.Threading.Tasks.Task<GetSupportedAnalyticsModulesResponse> GetSupportedAnalyticsModulesAsync(GetSupportedAnalyticsModulesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetSupportedAnalyticsModules, "http://www.onvif.org/ver20/analytics/wsdl", "GetSupportedAnalyticsModules", request,
+            return InvokeAsync(SoapActions.GetSupportedAnalyticsModules, "http://www.onvif.org/ver20/analytics/wsdl", "GetSupportedAnalyticsModules", request,
                 () => new GetSupportedAnalyticsModulesResponse(), cancellationToken);
         }
 
@@ -188,7 +188,7 @@ namespace SharpOnvifClient.Analytics
         /// </summary>
         public System.Threading.Tasks.Task<GetAnalyticsModuleOptionsResponse> GetAnalyticsModuleOptionsAsync(GetAnalyticsModuleOptionsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetAnalyticsModuleOptions, "http://www.onvif.org/ver20/analytics/wsdl", "GetAnalyticsModuleOptions", request,
+            return InvokeAsync(SoapActions.GetAnalyticsModuleOptions, "http://www.onvif.org/ver20/analytics/wsdl", "GetAnalyticsModuleOptions", request,
                 () => new GetAnalyticsModuleOptionsResponse(), cancellationToken);
         }
 
@@ -218,7 +218,7 @@ namespace SharpOnvifClient.Analytics
         /// </summary>
         public System.Threading.Tasks.Task<CreateAnalyticsModulesResponse> CreateAnalyticsModulesAsync(CreateAnalyticsModulesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.CreateAnalyticsModules, "http://www.onvif.org/ver20/analytics/wsdl", "CreateAnalyticsModules", request,
+            return InvokeAsync(SoapActions.CreateAnalyticsModules, "http://www.onvif.org/ver20/analytics/wsdl", "CreateAnalyticsModules", request,
                 () => new CreateAnalyticsModulesResponse(), cancellationToken);
         }
 
@@ -235,7 +235,7 @@ namespace SharpOnvifClient.Analytics
         /// </summary>
         public System.Threading.Tasks.Task<DeleteAnalyticsModulesResponse> DeleteAnalyticsModulesAsync(DeleteAnalyticsModulesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeleteAnalyticsModules, "http://www.onvif.org/ver20/analytics/wsdl", "DeleteAnalyticsModules", request,
+            return InvokeAsync(SoapActions.DeleteAnalyticsModules, "http://www.onvif.org/ver20/analytics/wsdl", "DeleteAnalyticsModules", request,
                 () => new DeleteAnalyticsModulesResponse(), cancellationToken);
         }
 
@@ -252,7 +252,7 @@ namespace SharpOnvifClient.Analytics
         /// </summary>
         public System.Threading.Tasks.Task<GetAnalyticsModulesResponse> GetAnalyticsModulesAsync(GetAnalyticsModulesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetAnalyticsModules, "http://www.onvif.org/ver20/analytics/wsdl", "GetAnalyticsModules", request,
+            return InvokeAsync(SoapActions.GetAnalyticsModules, "http://www.onvif.org/ver20/analytics/wsdl", "GetAnalyticsModules", request,
                 () => new GetAnalyticsModulesResponse(), cancellationToken);
         }
 
@@ -270,7 +270,7 @@ namespace SharpOnvifClient.Analytics
         /// </summary>
         public System.Threading.Tasks.Task<ModifyAnalyticsModulesResponse> ModifyAnalyticsModulesAsync(ModifyAnalyticsModulesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.ModifyAnalyticsModules, "http://www.onvif.org/ver20/analytics/wsdl", "ModifyAnalyticsModules", request,
+            return InvokeAsync(SoapActions.ModifyAnalyticsModules, "http://www.onvif.org/ver20/analytics/wsdl", "ModifyAnalyticsModules", request,
                 () => new ModifyAnalyticsModulesResponse(), cancellationToken);
         }
 
@@ -292,7 +292,7 @@ namespace SharpOnvifClient.Analytics
         /// </summary>
         public System.Threading.Tasks.Task<GetSupportedMetadataResponse> GetSupportedMetadataAsync(GetSupportedMetadataRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetSupportedMetadata, "http://www.onvif.org/ver20/analytics/wsdl", "GetSupportedMetadata", request,
+            return InvokeAsync(SoapActions.GetSupportedMetadata, "http://www.onvif.org/ver20/analytics/wsdl", "GetSupportedMetadata", request,
                 () => new GetSupportedMetadataResponse(), cancellationToken);
         }
 
@@ -306,7 +306,7 @@ namespace SharpOnvifClient.Analytics
     }
 
     /// <summary>
-    /// The RuleEnginePort Onvif service.
+    /// The RuleEnginePort service.
     /// </summary>
     public interface RuleEnginePort
     {
@@ -405,7 +405,7 @@ namespace SharpOnvifClient.Analytics
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -415,7 +415,7 @@ namespace SharpOnvifClient.Analytics
         /// </summary>
         public System.Threading.Tasks.Task<GetSupportedRulesResponse> GetSupportedRulesAsync(GetSupportedRulesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetSupportedRules, "http://www.onvif.org/ver20/analytics/wsdl", "GetSupportedRules", request,
+            return InvokeAsync(SoapActions.GetSupportedRules, "http://www.onvif.org/ver20/analytics/wsdl", "GetSupportedRules", request,
                 () => new GetSupportedRulesResponse(), cancellationToken);
         }
 
@@ -437,7 +437,7 @@ namespace SharpOnvifClient.Analytics
         /// </summary>
         public System.Threading.Tasks.Task<CreateRulesResponse> CreateRulesAsync(CreateRulesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.CreateRules, "http://www.onvif.org/ver20/analytics/wsdl", "CreateRules", request,
+            return InvokeAsync(SoapActions.CreateRules, "http://www.onvif.org/ver20/analytics/wsdl", "CreateRules", request,
                 () => new CreateRulesResponse(), cancellationToken);
         }
 
@@ -454,7 +454,7 @@ namespace SharpOnvifClient.Analytics
         /// </summary>
         public System.Threading.Tasks.Task<DeleteRulesResponse> DeleteRulesAsync(DeleteRulesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeleteRules, "http://www.onvif.org/ver20/analytics/wsdl", "DeleteRules", request,
+            return InvokeAsync(SoapActions.DeleteRules, "http://www.onvif.org/ver20/analytics/wsdl", "DeleteRules", request,
                 () => new DeleteRulesResponse(), cancellationToken);
         }
 
@@ -471,7 +471,7 @@ namespace SharpOnvifClient.Analytics
         /// </summary>
         public System.Threading.Tasks.Task<GetRulesResponse> GetRulesAsync(GetRulesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetRules, "http://www.onvif.org/ver20/analytics/wsdl", "GetRules", request,
+            return InvokeAsync(SoapActions.GetRules, "http://www.onvif.org/ver20/analytics/wsdl", "GetRules", request,
                 () => new GetRulesResponse(), cancellationToken);
         }
 
@@ -488,7 +488,7 @@ namespace SharpOnvifClient.Analytics
         /// </summary>
         public System.Threading.Tasks.Task<GetRuleOptionsResponse> GetRuleOptionsAsync(GetRuleOptionsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetRuleOptions, "http://www.onvif.org/ver20/analytics/wsdl", "GetRuleOptions", request,
+            return InvokeAsync(SoapActions.GetRuleOptions, "http://www.onvif.org/ver20/analytics/wsdl", "GetRuleOptions", request,
                 () => new GetRuleOptionsResponse(), cancellationToken);
         }
 
@@ -505,7 +505,7 @@ namespace SharpOnvifClient.Analytics
         /// </summary>
         public System.Threading.Tasks.Task<ModifyRulesResponse> ModifyRulesAsync(ModifyRulesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.ModifyRules, "http://www.onvif.org/ver20/analytics/wsdl", "ModifyRules", request,
+            return InvokeAsync(SoapActions.ModifyRules, "http://www.onvif.org/ver20/analytics/wsdl", "ModifyRules", request,
                 () => new ModifyRulesResponse(), cancellationToken);
         }
 

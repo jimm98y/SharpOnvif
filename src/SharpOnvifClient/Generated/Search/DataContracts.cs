@@ -22,7 +22,7 @@ namespace SharpOnvifClient.Search
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/search/wsdl")]
-    public partial class Capabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Capabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -126,9 +126,9 @@ namespace SharpOnvifClient.Search
             set { this.imageSearchFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Capabilities"; } }
+        protected override string XmlTypeName { get { return "Capabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Search; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Search; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -197,7 +197,7 @@ namespace SharpOnvifClient.Search
     /// mandatory to support for a device implementing the recording search service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("EndSearch", Namespace="http://www.onvif.org/ver10/search/wsdl")]
-    public partial class EndSearchRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class EndSearchRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string searchTokenField;
 
@@ -249,7 +249,7 @@ namespace SharpOnvifClient.Search
     /// mandatory to support for a device implementing the recording search service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("EndSearchResponse", Namespace="http://www.onvif.org/ver10/search/wsdl")]
-    public partial class EndSearchResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class EndSearchResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private System.DateTime endpointField;
 
@@ -305,7 +305,7 @@ namespace SharpOnvifClient.Search
     /// service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("FindEvents", Namespace="http://www.onvif.org/ver10/search/wsdl")]
-    public partial class FindEventsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FindEventsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private System.DateTime startPointField;
 
@@ -501,7 +501,7 @@ namespace SharpOnvifClient.Search
     /// service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("FindEventsResponse", Namespace="http://www.onvif.org/ver10/search/wsdl")]
-    public partial class FindEventsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FindEventsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string searchTokenField;
 
@@ -555,7 +555,7 @@ namespace SharpOnvifClient.Search
     /// SearchCapabilities structure return by the GetCapabilities command in the Device service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("FindMetadata", Namespace="http://www.onvif.org/ver10/search/wsdl")]
-    public partial class FindMetadataRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FindMetadataRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private System.DateTime startPointField;
 
@@ -730,7 +730,7 @@ namespace SharpOnvifClient.Search
     /// SearchCapabilities structure return by the GetCapabilities command in the Device service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("FindMetadataResponse", Namespace="http://www.onvif.org/ver10/search/wsdl")]
-    public partial class FindMetadataResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FindMetadataResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string searchTokenField;
 
@@ -784,7 +784,7 @@ namespace SharpOnvifClient.Search
     /// recording on the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("FindPTZPosition", Namespace="http://www.onvif.org/ver10/search/wsdl")]
-    public partial class FindPTZPositionRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FindPTZPositionRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private System.DateTime startPointField;
 
@@ -959,7 +959,7 @@ namespace SharpOnvifClient.Search
     /// recording on the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("FindPTZPositionResponse", Namespace="http://www.onvif.org/ver10/search/wsdl")]
-    public partial class FindPTZPositionResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FindPTZPositionResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string searchTokenField;
 
@@ -1013,7 +1013,7 @@ namespace SharpOnvifClient.Search
     /// mandatory to support for a device implementing the recording search service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("FindRecordings", Namespace="http://www.onvif.org/ver10/search/wsdl")]
-    public partial class FindRecordingsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FindRecordingsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.SearchScope scopeField;
 
@@ -1122,7 +1122,7 @@ namespace SharpOnvifClient.Search
     /// mandatory to support for a device implementing the recording search service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("FindRecordingsResponse", Namespace="http://www.onvif.org/ver10/search/wsdl")]
-    public partial class FindRecordingsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FindRecordingsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string searchTokenField;
 
@@ -1171,7 +1171,7 @@ namespace SharpOnvifClient.Search
     /// operation is mandatory to support for a device implementing the recording search service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetEventSearchResults", Namespace="http://www.onvif.org/ver10/search/wsdl")]
-    public partial class GetEventSearchResultsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetEventSearchResultsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string searchTokenField;
 
@@ -1312,7 +1312,7 @@ namespace SharpOnvifClient.Search
     /// operation is mandatory to support for a device implementing the recording search service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetEventSearchResultsResponse", Namespace="http://www.onvif.org/ver10/search/wsdl")]
-    public partial class GetEventSearchResultsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetEventSearchResultsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.FindEventResultList resultListField;
 
@@ -1355,7 +1355,7 @@ namespace SharpOnvifClient.Search
     /// Gets results from an image-based search session.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetImageSearchResultsRequest", Namespace="http://www.onvif.org/ver10/search/wsdl")]
-    public partial class GetImageSearchResultsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetImageSearchResultsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string searchTokenField;
 
@@ -1490,7 +1490,7 @@ namespace SharpOnvifClient.Search
     /// Gets results from an image-based search session.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetImageSearchResultsResponse", Namespace="http://www.onvif.org/ver10/search/wsdl")]
-    public partial class GetImageSearchResultsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetImageSearchResultsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.FindObjectImageResultList resultListField;
 
@@ -1537,7 +1537,7 @@ namespace SharpOnvifClient.Search
     /// This operation is mandatory to support for a device implementing the recording search service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetMediaAttributes", Namespace="http://www.onvif.org/ver10/search/wsdl")]
-    public partial class GetMediaAttributesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetMediaAttributesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] recordingTokensField;
 
@@ -1605,7 +1605,7 @@ namespace SharpOnvifClient.Search
     /// This operation is mandatory to support for a device implementing the recording search service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetMediaAttributesResponse", Namespace="http://www.onvif.org/ver10/search/wsdl")]
-    public partial class GetMediaAttributesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetMediaAttributesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.MediaAttributes[] mediaAttributesField;
 
@@ -1661,7 +1661,7 @@ namespace SharpOnvifClient.Search
     /// structure return by the GetCapabilities command in the Device service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetMetadataSearchResults", Namespace="http://www.onvif.org/ver10/search/wsdl")]
-    public partial class GetMetadataSearchResultsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetMetadataSearchResultsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string searchTokenField;
 
@@ -1803,7 +1803,7 @@ namespace SharpOnvifClient.Search
     /// structure return by the GetCapabilities command in the Device service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetMetadataSearchResultsResponse", Namespace="http://www.onvif.org/ver10/search/wsdl")]
-    public partial class GetMetadataSearchResultsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetMetadataSearchResultsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.FindMetadataResultList resultListField;
 
@@ -1846,7 +1846,7 @@ namespace SharpOnvifClient.Search
     /// Gets results from a natural language search session.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetNLSearchResultsRequest", Namespace="http://www.onvif.org/ver10/search/wsdl")]
-    public partial class GetNLSearchResultsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetNLSearchResultsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string searchTokenField;
 
@@ -1981,7 +1981,7 @@ namespace SharpOnvifClient.Search
     /// Gets results from a natural language search session.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetNLSearchResultsResponse", Namespace="http://www.onvif.org/ver10/search/wsdl")]
-    public partial class GetNLSearchResultsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetNLSearchResultsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.FindNLSearchResultList resultListField;
 
@@ -2031,7 +2031,7 @@ namespace SharpOnvifClient.Search
     /// recording on the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetPTZPositionSearchResults", Namespace="http://www.onvif.org/ver10/search/wsdl")]
-    public partial class GetPTZPositionSearchResultsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetPTZPositionSearchResultsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string searchTokenField;
 
@@ -2173,7 +2173,7 @@ namespace SharpOnvifClient.Search
     /// recording on the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetPTZPositionSearchResultsResponse", Namespace="http://www.onvif.org/ver10/search/wsdl")]
-    public partial class GetPTZPositionSearchResultsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetPTZPositionSearchResultsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.FindPTZPositionResultList resultListField;
 
@@ -2217,7 +2217,7 @@ namespace SharpOnvifClient.Search
     /// mandatory to support for a device implementing the recording search service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRecordingInformation", Namespace="http://www.onvif.org/ver10/search/wsdl")]
-    public partial class GetRecordingInformationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetRecordingInformationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string recordingTokenField;
 
@@ -2261,7 +2261,7 @@ namespace SharpOnvifClient.Search
     /// mandatory to support for a device implementing the recording search service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRecordingInformationResponse", Namespace="http://www.onvif.org/ver10/search/wsdl")]
-    public partial class GetRecordingInformationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetRecordingInformationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.RecordingInformation recordingInformationField;
 
@@ -2312,7 +2312,7 @@ namespace SharpOnvifClient.Search
     /// implementing the recording search service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRecordingSearchResults", Namespace="http://www.onvif.org/ver10/search/wsdl")]
-    public partial class GetRecordingSearchResultsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetRecordingSearchResultsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string searchTokenField;
 
@@ -2455,7 +2455,7 @@ namespace SharpOnvifClient.Search
     /// implementing the recording search service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRecordingSearchResultsResponse", Namespace="http://www.onvif.org/ver10/search/wsdl")]
-    public partial class GetRecordingSearchResultsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetRecordingSearchResultsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.FindRecordingResultList resultListField;
 
@@ -2499,7 +2499,7 @@ namespace SharpOnvifClient.Search
     /// mandatory to support for a device implementing the recording search service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRecordingSummary", Namespace="http://www.onvif.org/ver10/search/wsdl")]
-    public partial class GetRecordingSummaryRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetRecordingSummaryRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetRecordingSummaryRequest()
         {
@@ -2512,7 +2512,7 @@ namespace SharpOnvifClient.Search
     /// mandatory to support for a device implementing the recording search service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRecordingSummaryResponse", Namespace="http://www.onvif.org/ver10/search/wsdl")]
-    public partial class GetRecordingSummaryResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetRecordingSummaryResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.RecordingSummary summaryField;
 
@@ -2556,7 +2556,7 @@ namespace SharpOnvifClient.Search
     /// .
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSearchState", Namespace="http://www.onvif.org/ver10/search/wsdl")]
-    public partial class GetSearchStateRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetSearchStateRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string searchTokenField;
 
@@ -2603,7 +2603,7 @@ namespace SharpOnvifClient.Search
     /// .
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSearchStateResponse", Namespace="http://www.onvif.org/ver10/search/wsdl")]
-    public partial class GetSearchStateResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetSearchStateResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.SearchState stateField;
 
@@ -2646,7 +2646,7 @@ namespace SharpOnvifClient.Search
     /// Returns the capabilities of the search service. The result is returned in a typed answer.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilities", Namespace="http://www.onvif.org/ver10/search/wsdl")]
-    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetServiceCapabilitiesRequest()
         {
@@ -2658,7 +2658,7 @@ namespace SharpOnvifClient.Search
     /// Returns the capabilities of the search service. The result is returned in a typed answer.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilitiesResponse", Namespace="http://www.onvif.org/ver10/search/wsdl")]
-    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private Capabilities capabilitiesField;
 
@@ -2704,7 +2704,7 @@ namespace SharpOnvifClient.Search
     /// Starts an image-based search session and specifies the search parameters.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SearchImageByImageRequest", Namespace="http://www.onvif.org/ver10/search/wsdl")]
-    public partial class SearchImageByImageRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SearchImageByImageRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private System.DateTime startPointField;
 
@@ -2898,7 +2898,7 @@ namespace SharpOnvifClient.Search
     /// Starts an image-based search session and specifies the search parameters.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SearchImageByImageResponse", Namespace="http://www.onvif.org/ver10/search/wsdl")]
-    public partial class SearchImageByImageResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SearchImageByImageResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string searchTokenField;
 
@@ -2944,7 +2944,7 @@ namespace SharpOnvifClient.Search
     /// Starts a natural language search session and specifies the search parameters.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SearchImageByNLRequest", Namespace="http://www.onvif.org/ver10/search/wsdl")]
-    public partial class SearchImageByNLRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SearchImageByNLRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private System.DateTime startPointField;
 
@@ -3152,7 +3152,7 @@ namespace SharpOnvifClient.Search
     /// Starts a natural language search session and specifies the search parameters.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SearchImageByNLResponse", Namespace="http://www.onvif.org/ver10/search/wsdl")]
-    public partial class SearchImageByNLResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SearchImageByNLResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string searchTokenField;
 
@@ -3197,14 +3197,14 @@ namespace SharpOnvifClient.Search
     /// <summary>Constructs a contract named by an xsi:type attribute.</summary>
     internal static class XmlTypeFactory
     {
-        public static SharpOnvifCommon.Xml.OnvifContract Create(string ns, string name)
+        public static SharpOnvifCommon.Xml.XmlContract Create(string ns, string name)
         {
             return SharpOnvifCommon.Onvif.XmlTypeFactory.Create(ns, name);
         }
     }
 
     /// <summary>SOAP action URIs for this service's operations.</summary>
-    public static class OnvifActions
+    public static class SoapActions
     {
         public const string GetServiceCapabilities = "http://www.onvif.org/ver10/search/wsdl/GetServiceCapabilities";
         public const string GetRecordingSummary = "http://www.onvif.org/ver10/search/wsdl/GetRecordingSummary";

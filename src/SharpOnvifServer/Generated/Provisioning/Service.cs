@@ -16,7 +16,7 @@ namespace SharpOnvifServer.Provisioning
     public abstract class ProvisioningServiceBase
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new ProvisioningServiceDispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new ProvisioningServiceDispatcher();
 
         /// <summary>
         /// Returns the capabilities of the provisioning service.
@@ -180,7 +180,7 @@ namespace SharpOnvifServer.Provisioning
     }
 
     /// <summary>Routes SOAP actions to <see cref="ProvisioningServiceBase"/>.</summary>
-    internal sealed class ProvisioningServiceDispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class ProvisioningServiceDispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(ProvisioningServiceBase); } }
 
@@ -188,14 +188,14 @@ namespace SharpOnvifServer.Provisioning
         {
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
-                case OnvifActions.PanMove:
-                case OnvifActions.TiltMove:
-                case OnvifActions.ZoomMove:
-                case OnvifActions.RollMove:
-                case OnvifActions.FocusMove:
-                case OnvifActions.Stop:
-                case OnvifActions.GetUsage:
+                case SoapActions.GetServiceCapabilities:
+                case SoapActions.PanMove:
+                case SoapActions.TiltMove:
+                case SoapActions.ZoomMove:
+                case SoapActions.RollMove:
+                case SoapActions.FocusMove:
+                case SoapActions.Stop:
+                case SoapActions.GetUsage:
                     return true;
                 default:
                     return false;
@@ -209,56 +209,56 @@ namespace SharpOnvifServer.Provisioning
                 case "GetServiceCapabilities":
                     if (ns == "http://www.onvif.org/ver10/provisioning/wsdl")
                     {
-                        action = OnvifActions.GetServiceCapabilities;
+                        action = SoapActions.GetServiceCapabilities;
                         return true;
                     }
                     break;
                 case "PanMove":
                     if (ns == "http://www.onvif.org/ver10/provisioning/wsdl")
                     {
-                        action = OnvifActions.PanMove;
+                        action = SoapActions.PanMove;
                         return true;
                     }
                     break;
                 case "TiltMove":
                     if (ns == "http://www.onvif.org/ver10/provisioning/wsdl")
                     {
-                        action = OnvifActions.TiltMove;
+                        action = SoapActions.TiltMove;
                         return true;
                     }
                     break;
                 case "ZoomMove":
                     if (ns == "http://www.onvif.org/ver10/provisioning/wsdl")
                     {
-                        action = OnvifActions.ZoomMove;
+                        action = SoapActions.ZoomMove;
                         return true;
                     }
                     break;
                 case "RollMove":
                     if (ns == "http://www.onvif.org/ver10/provisioning/wsdl")
                     {
-                        action = OnvifActions.RollMove;
+                        action = SoapActions.RollMove;
                         return true;
                     }
                     break;
                 case "FocusMove":
                     if (ns == "http://www.onvif.org/ver10/provisioning/wsdl")
                     {
-                        action = OnvifActions.FocusMove;
+                        action = SoapActions.FocusMove;
                         return true;
                     }
                     break;
                 case "Stop":
                     if (ns == "http://www.onvif.org/ver10/provisioning/wsdl")
                     {
-                        action = OnvifActions.Stop;
+                        action = SoapActions.Stop;
                         return true;
                     }
                     break;
                 case "GetUsage":
                     if (ns == "http://www.onvif.org/ver10/provisioning/wsdl")
                     {
-                        action = OnvifActions.GetUsage;
+                        action = SoapActions.GetUsage;
                         return true;
                     }
                     break;
@@ -267,7 +267,7 @@ namespace SharpOnvifServer.Provisioning
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             ProvisioningServiceBase target = (ProvisioningServiceBase)service;
@@ -275,68 +275,68 @@ namespace SharpOnvifServer.Provisioning
 
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
+                case SoapActions.GetServiceCapabilities:
                 {
                     var request = new GetServiceCapabilitiesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetServiceCapabilitiesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/provisioning/wsdl", "GetServiceCapabilitiesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/provisioning/wsdl", "GetServiceCapabilitiesResponse");
                 }
-                case OnvifActions.PanMove:
+                case SoapActions.PanMove:
                 {
                     var request = new PanMoveRequest();
                     reader.ReadInto(request);
                     var response = await target.PanMoveAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/provisioning/wsdl", "PanMoveResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/provisioning/wsdl", "PanMoveResponse");
                 }
-                case OnvifActions.TiltMove:
+                case SoapActions.TiltMove:
                 {
                     var request = new TiltMoveRequest();
                     reader.ReadInto(request);
                     var response = await target.TiltMoveAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/provisioning/wsdl", "TiltMoveResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/provisioning/wsdl", "TiltMoveResponse");
                 }
-                case OnvifActions.ZoomMove:
+                case SoapActions.ZoomMove:
                 {
                     var request = new ZoomMoveRequest();
                     reader.ReadInto(request);
                     var response = await target.ZoomMoveAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/provisioning/wsdl", "ZoomMoveResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/provisioning/wsdl", "ZoomMoveResponse");
                 }
-                case OnvifActions.RollMove:
+                case SoapActions.RollMove:
                 {
                     var request = new RollMoveRequest();
                     reader.ReadInto(request);
                     var response = await target.RollMoveAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/provisioning/wsdl", "RollMoveResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/provisioning/wsdl", "RollMoveResponse");
                 }
-                case OnvifActions.FocusMove:
+                case SoapActions.FocusMove:
                 {
                     var request = new FocusMoveRequest();
                     reader.ReadInto(request);
                     var response = await target.FocusMoveAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/provisioning/wsdl", "FocusMoveResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/provisioning/wsdl", "FocusMoveResponse");
                 }
-                case OnvifActions.Stop:
+                case SoapActions.Stop:
                 {
                     var request = new StopRequest();
                     reader.ReadInto(request);
                     var response = await target.StopAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/provisioning/wsdl", "StopResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/provisioning/wsdl", "StopResponse");
                 }
-                case OnvifActions.GetUsage:
+                case SoapActions.GetUsage:
                 {
                     var request = new GetUsageRequest();
                     reader.ReadInto(request);
                     var response = await target.GetUsageAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/provisioning/wsdl", "GetUsageResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/provisioning/wsdl", "GetUsageResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }

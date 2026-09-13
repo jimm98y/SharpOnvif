@@ -16,7 +16,7 @@ namespace SharpOnvifServer.AuthenticationBehavior
     public abstract class AuthenticationBehaviorPortBase
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new AuthenticationBehaviorPortDispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new AuthenticationBehaviorPortDispatcher();
 
         /// <summary>
         /// This operation returns the capabilities of the authentication behavior service.
@@ -411,7 +411,7 @@ namespace SharpOnvifServer.AuthenticationBehavior
     }
 
     /// <summary>Routes SOAP actions to <see cref="AuthenticationBehaviorPortBase"/>.</summary>
-    internal sealed class AuthenticationBehaviorPortDispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class AuthenticationBehaviorPortDispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(AuthenticationBehaviorPortBase); } }
 
@@ -419,23 +419,23 @@ namespace SharpOnvifServer.AuthenticationBehavior
         {
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
-                case OnvifActions.GetAuthenticationProfileInfo:
-                case OnvifActions.GetAuthenticationProfileInfoList:
-                case OnvifActions.GetAuthenticationProfiles:
-                case OnvifActions.GetAuthenticationProfileList:
-                case OnvifActions.CreateAuthenticationProfile:
-                case OnvifActions.SetAuthenticationProfile:
-                case OnvifActions.ModifyAuthenticationProfile:
-                case OnvifActions.DeleteAuthenticationProfile:
-                case OnvifActions.GetSecurityLevelInfo:
-                case OnvifActions.GetSecurityLevelInfoList:
-                case OnvifActions.GetSecurityLevels:
-                case OnvifActions.GetSecurityLevelList:
-                case OnvifActions.CreateSecurityLevel:
-                case OnvifActions.SetSecurityLevel:
-                case OnvifActions.ModifySecurityLevel:
-                case OnvifActions.DeleteSecurityLevel:
+                case SoapActions.GetServiceCapabilities:
+                case SoapActions.GetAuthenticationProfileInfo:
+                case SoapActions.GetAuthenticationProfileInfoList:
+                case SoapActions.GetAuthenticationProfiles:
+                case SoapActions.GetAuthenticationProfileList:
+                case SoapActions.CreateAuthenticationProfile:
+                case SoapActions.SetAuthenticationProfile:
+                case SoapActions.ModifyAuthenticationProfile:
+                case SoapActions.DeleteAuthenticationProfile:
+                case SoapActions.GetSecurityLevelInfo:
+                case SoapActions.GetSecurityLevelInfoList:
+                case SoapActions.GetSecurityLevels:
+                case SoapActions.GetSecurityLevelList:
+                case SoapActions.CreateSecurityLevel:
+                case SoapActions.SetSecurityLevel:
+                case SoapActions.ModifySecurityLevel:
+                case SoapActions.DeleteSecurityLevel:
                     return true;
                 default:
                     return false;
@@ -449,119 +449,119 @@ namespace SharpOnvifServer.AuthenticationBehavior
                 case "GetServiceCapabilities":
                     if (ns == "http://www.onvif.org/ver10/authenticationbehavior/wsdl")
                     {
-                        action = OnvifActions.GetServiceCapabilities;
+                        action = SoapActions.GetServiceCapabilities;
                         return true;
                     }
                     break;
                 case "GetAuthenticationProfileInfo":
                     if (ns == "http://www.onvif.org/ver10/authenticationbehavior/wsdl")
                     {
-                        action = OnvifActions.GetAuthenticationProfileInfo;
+                        action = SoapActions.GetAuthenticationProfileInfo;
                         return true;
                     }
                     break;
                 case "GetAuthenticationProfileInfoList":
                     if (ns == "http://www.onvif.org/ver10/authenticationbehavior/wsdl")
                     {
-                        action = OnvifActions.GetAuthenticationProfileInfoList;
+                        action = SoapActions.GetAuthenticationProfileInfoList;
                         return true;
                     }
                     break;
                 case "GetAuthenticationProfiles":
                     if (ns == "http://www.onvif.org/ver10/authenticationbehavior/wsdl")
                     {
-                        action = OnvifActions.GetAuthenticationProfiles;
+                        action = SoapActions.GetAuthenticationProfiles;
                         return true;
                     }
                     break;
                 case "GetAuthenticationProfileList":
                     if (ns == "http://www.onvif.org/ver10/authenticationbehavior/wsdl")
                     {
-                        action = OnvifActions.GetAuthenticationProfileList;
+                        action = SoapActions.GetAuthenticationProfileList;
                         return true;
                     }
                     break;
                 case "CreateAuthenticationProfile":
                     if (ns == "http://www.onvif.org/ver10/authenticationbehavior/wsdl")
                     {
-                        action = OnvifActions.CreateAuthenticationProfile;
+                        action = SoapActions.CreateAuthenticationProfile;
                         return true;
                     }
                     break;
                 case "SetAuthenticationProfile":
                     if (ns == "http://www.onvif.org/ver10/authenticationbehavior/wsdl")
                     {
-                        action = OnvifActions.SetAuthenticationProfile;
+                        action = SoapActions.SetAuthenticationProfile;
                         return true;
                     }
                     break;
                 case "ModifyAuthenticationProfile":
                     if (ns == "http://www.onvif.org/ver10/authenticationbehavior/wsdl")
                     {
-                        action = OnvifActions.ModifyAuthenticationProfile;
+                        action = SoapActions.ModifyAuthenticationProfile;
                         return true;
                     }
                     break;
                 case "DeleteAuthenticationProfile":
                     if (ns == "http://www.onvif.org/ver10/authenticationbehavior/wsdl")
                     {
-                        action = OnvifActions.DeleteAuthenticationProfile;
+                        action = SoapActions.DeleteAuthenticationProfile;
                         return true;
                     }
                     break;
                 case "GetSecurityLevelInfo":
                     if (ns == "http://www.onvif.org/ver10/authenticationbehavior/wsdl")
                     {
-                        action = OnvifActions.GetSecurityLevelInfo;
+                        action = SoapActions.GetSecurityLevelInfo;
                         return true;
                     }
                     break;
                 case "GetSecurityLevelInfoList":
                     if (ns == "http://www.onvif.org/ver10/authenticationbehavior/wsdl")
                     {
-                        action = OnvifActions.GetSecurityLevelInfoList;
+                        action = SoapActions.GetSecurityLevelInfoList;
                         return true;
                     }
                     break;
                 case "GetSecurityLevels":
                     if (ns == "http://www.onvif.org/ver10/authenticationbehavior/wsdl")
                     {
-                        action = OnvifActions.GetSecurityLevels;
+                        action = SoapActions.GetSecurityLevels;
                         return true;
                     }
                     break;
                 case "GetSecurityLevelList":
                     if (ns == "http://www.onvif.org/ver10/authenticationbehavior/wsdl")
                     {
-                        action = OnvifActions.GetSecurityLevelList;
+                        action = SoapActions.GetSecurityLevelList;
                         return true;
                     }
                     break;
                 case "CreateSecurityLevel":
                     if (ns == "http://www.onvif.org/ver10/authenticationbehavior/wsdl")
                     {
-                        action = OnvifActions.CreateSecurityLevel;
+                        action = SoapActions.CreateSecurityLevel;
                         return true;
                     }
                     break;
                 case "SetSecurityLevel":
                     if (ns == "http://www.onvif.org/ver10/authenticationbehavior/wsdl")
                     {
-                        action = OnvifActions.SetSecurityLevel;
+                        action = SoapActions.SetSecurityLevel;
                         return true;
                     }
                     break;
                 case "ModifySecurityLevel":
                     if (ns == "http://www.onvif.org/ver10/authenticationbehavior/wsdl")
                     {
-                        action = OnvifActions.ModifySecurityLevel;
+                        action = SoapActions.ModifySecurityLevel;
                         return true;
                     }
                     break;
                 case "DeleteSecurityLevel":
                     if (ns == "http://www.onvif.org/ver10/authenticationbehavior/wsdl")
                     {
-                        action = OnvifActions.DeleteSecurityLevel;
+                        action = SoapActions.DeleteSecurityLevel;
                         return true;
                     }
                     break;
@@ -570,7 +570,7 @@ namespace SharpOnvifServer.AuthenticationBehavior
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             AuthenticationBehaviorPortBase target = (AuthenticationBehaviorPortBase)service;
@@ -578,131 +578,131 @@ namespace SharpOnvifServer.AuthenticationBehavior
 
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
+                case SoapActions.GetServiceCapabilities:
                 {
                     var request = new GetServiceCapabilitiesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetServiceCapabilitiesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetServiceCapabilitiesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetServiceCapabilitiesResponse");
                 }
-                case OnvifActions.GetAuthenticationProfileInfo:
+                case SoapActions.GetAuthenticationProfileInfo:
                 {
                     var request = new GetAuthenticationProfileInfoRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAuthenticationProfileInfoAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetAuthenticationProfileInfoResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetAuthenticationProfileInfoResponse");
                 }
-                case OnvifActions.GetAuthenticationProfileInfoList:
+                case SoapActions.GetAuthenticationProfileInfoList:
                 {
                     var request = new GetAuthenticationProfileInfoListRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAuthenticationProfileInfoListAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetAuthenticationProfileInfoListResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetAuthenticationProfileInfoListResponse");
                 }
-                case OnvifActions.GetAuthenticationProfiles:
+                case SoapActions.GetAuthenticationProfiles:
                 {
                     var request = new GetAuthenticationProfilesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAuthenticationProfilesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetAuthenticationProfilesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetAuthenticationProfilesResponse");
                 }
-                case OnvifActions.GetAuthenticationProfileList:
+                case SoapActions.GetAuthenticationProfileList:
                 {
                     var request = new GetAuthenticationProfileListRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAuthenticationProfileListAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetAuthenticationProfileListResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetAuthenticationProfileListResponse");
                 }
-                case OnvifActions.CreateAuthenticationProfile:
+                case SoapActions.CreateAuthenticationProfile:
                 {
                     var request = new CreateAuthenticationProfileRequest();
                     reader.ReadInto(request);
                     var response = await target.CreateAuthenticationProfileAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "CreateAuthenticationProfileResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "CreateAuthenticationProfileResponse");
                 }
-                case OnvifActions.SetAuthenticationProfile:
+                case SoapActions.SetAuthenticationProfile:
                 {
                     var request = new SetAuthenticationProfileRequest();
                     reader.ReadInto(request);
                     var response = await target.SetAuthenticationProfileAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "SetAuthenticationProfileResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "SetAuthenticationProfileResponse");
                 }
-                case OnvifActions.ModifyAuthenticationProfile:
+                case SoapActions.ModifyAuthenticationProfile:
                 {
                     var request = new ModifyAuthenticationProfileRequest();
                     reader.ReadInto(request);
                     var response = await target.ModifyAuthenticationProfileAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "ModifyAuthenticationProfileResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "ModifyAuthenticationProfileResponse");
                 }
-                case OnvifActions.DeleteAuthenticationProfile:
+                case SoapActions.DeleteAuthenticationProfile:
                 {
                     var request = new DeleteAuthenticationProfileRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteAuthenticationProfileAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "DeleteAuthenticationProfileResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "DeleteAuthenticationProfileResponse");
                 }
-                case OnvifActions.GetSecurityLevelInfo:
+                case SoapActions.GetSecurityLevelInfo:
                 {
                     var request = new GetSecurityLevelInfoRequest();
                     reader.ReadInto(request);
                     var response = await target.GetSecurityLevelInfoAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetSecurityLevelInfoResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetSecurityLevelInfoResponse");
                 }
-                case OnvifActions.GetSecurityLevelInfoList:
+                case SoapActions.GetSecurityLevelInfoList:
                 {
                     var request = new GetSecurityLevelInfoListRequest();
                     reader.ReadInto(request);
                     var response = await target.GetSecurityLevelInfoListAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetSecurityLevelInfoListResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetSecurityLevelInfoListResponse");
                 }
-                case OnvifActions.GetSecurityLevels:
+                case SoapActions.GetSecurityLevels:
                 {
                     var request = new GetSecurityLevelsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetSecurityLevelsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetSecurityLevelsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetSecurityLevelsResponse");
                 }
-                case OnvifActions.GetSecurityLevelList:
+                case SoapActions.GetSecurityLevelList:
                 {
                     var request = new GetSecurityLevelListRequest();
                     reader.ReadInto(request);
                     var response = await target.GetSecurityLevelListAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetSecurityLevelListResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetSecurityLevelListResponse");
                 }
-                case OnvifActions.CreateSecurityLevel:
+                case SoapActions.CreateSecurityLevel:
                 {
                     var request = new CreateSecurityLevelRequest();
                     reader.ReadInto(request);
                     var response = await target.CreateSecurityLevelAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "CreateSecurityLevelResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "CreateSecurityLevelResponse");
                 }
-                case OnvifActions.SetSecurityLevel:
+                case SoapActions.SetSecurityLevel:
                 {
                     var request = new SetSecurityLevelRequest();
                     reader.ReadInto(request);
                     var response = await target.SetSecurityLevelAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "SetSecurityLevelResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "SetSecurityLevelResponse");
                 }
-                case OnvifActions.ModifySecurityLevel:
+                case SoapActions.ModifySecurityLevel:
                 {
                     var request = new ModifySecurityLevelRequest();
                     reader.ReadInto(request);
                     var response = await target.ModifySecurityLevelAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "ModifySecurityLevelResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "ModifySecurityLevelResponse");
                 }
-                case OnvifActions.DeleteSecurityLevel:
+                case SoapActions.DeleteSecurityLevel:
                 {
                     var request = new DeleteSecurityLevelRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteSecurityLevelAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "DeleteSecurityLevelResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "DeleteSecurityLevelResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }

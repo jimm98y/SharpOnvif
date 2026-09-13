@@ -16,7 +16,7 @@ namespace SharpOnvifServer.Uplink
     public abstract class UplinkPortBase
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new UplinkPortDispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new UplinkPortDispatcher();
 
         /// <summary>
         /// Returns the capabilities of the uplink service.
@@ -103,7 +103,7 @@ namespace SharpOnvifServer.Uplink
     }
 
     /// <summary>Routes SOAP actions to <see cref="UplinkPortBase"/>.</summary>
-    internal sealed class UplinkPortDispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class UplinkPortDispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(UplinkPortBase); } }
 
@@ -111,10 +111,10 @@ namespace SharpOnvifServer.Uplink
         {
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
-                case OnvifActions.GetUplinks:
-                case OnvifActions.SetUplink:
-                case OnvifActions.DeleteUplink:
+                case SoapActions.GetServiceCapabilities:
+                case SoapActions.GetUplinks:
+                case SoapActions.SetUplink:
+                case SoapActions.DeleteUplink:
                     return true;
                 default:
                     return false;
@@ -128,28 +128,28 @@ namespace SharpOnvifServer.Uplink
                 case "GetServiceCapabilities":
                     if (ns == "http://www.onvif.org/ver10/uplink/wsdl")
                     {
-                        action = OnvifActions.GetServiceCapabilities;
+                        action = SoapActions.GetServiceCapabilities;
                         return true;
                     }
                     break;
                 case "GetUplinks":
                     if (ns == "http://www.onvif.org/ver10/uplink/wsdl")
                     {
-                        action = OnvifActions.GetUplinks;
+                        action = SoapActions.GetUplinks;
                         return true;
                     }
                     break;
                 case "SetUplink":
                     if (ns == "http://www.onvif.org/ver10/uplink/wsdl")
                     {
-                        action = OnvifActions.SetUplink;
+                        action = SoapActions.SetUplink;
                         return true;
                     }
                     break;
                 case "DeleteUplink":
                     if (ns == "http://www.onvif.org/ver10/uplink/wsdl")
                     {
-                        action = OnvifActions.DeleteUplink;
+                        action = SoapActions.DeleteUplink;
                         return true;
                     }
                     break;
@@ -158,7 +158,7 @@ namespace SharpOnvifServer.Uplink
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             UplinkPortBase target = (UplinkPortBase)service;
@@ -166,40 +166,40 @@ namespace SharpOnvifServer.Uplink
 
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
+                case SoapActions.GetServiceCapabilities:
                 {
                     var request = new GetServiceCapabilitiesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetServiceCapabilitiesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/uplink/wsdl", "GetServiceCapabilitiesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/uplink/wsdl", "GetServiceCapabilitiesResponse");
                 }
-                case OnvifActions.GetUplinks:
+                case SoapActions.GetUplinks:
                 {
                     var request = new GetUplinksRequest();
                     reader.ReadInto(request);
                     var response = await target.GetUplinksAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/uplink/wsdl", "GetUplinksResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/uplink/wsdl", "GetUplinksResponse");
                 }
-                case OnvifActions.SetUplink:
+                case SoapActions.SetUplink:
                 {
                     var request = new SetUplinkRequest();
                     reader.ReadInto(request);
                     var response = await target.SetUplinkAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/uplink/wsdl", "SetUplinkResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/uplink/wsdl", "SetUplinkResponse");
                 }
-                case OnvifActions.DeleteUplink:
+                case SoapActions.DeleteUplink:
                 {
                     var request = new DeleteUplinkRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteUplinkAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/uplink/wsdl", "DeleteUplinkResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/uplink/wsdl", "DeleteUplinkResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }

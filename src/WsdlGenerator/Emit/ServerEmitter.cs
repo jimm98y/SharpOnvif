@@ -100,7 +100,7 @@ internal sealed class ServerEmitter
         using (writer.Braces())
         {
             writer.Line("/// <summary>Routes SOAP actions to this service's operations.</summary>");
-            writer.Line($"public static {Dispatch}.OnvifServiceDispatcher OnvifDispatcher {{ get; }} = " +
+            writer.Line($"public static {Dispatch}.ServiceDispatcher Dispatcher {{ get; }} = " +
                         $"new {className.Substring(0, className.Length - "Base".Length)}Dispatcher();");
 
             foreach (var operation in operations)
@@ -173,7 +173,7 @@ internal sealed class ServerEmitter
         CSharpWriter writer, string baseClass, string dispatcherName, IReadOnlyList<CsOperation> operations)
     {
         writer.Line($"/// <summary>Routes SOAP actions to <see cref=\"{baseClass}\"/>.</summary>");
-        writer.Line($"internal sealed class {dispatcherName} : {Dispatch}.OnvifServiceDispatcher");
+        writer.Line($"internal sealed class {dispatcherName} : {Dispatch}.ServiceDispatcher");
 
         using (writer.Braces())
         {
@@ -187,7 +187,7 @@ internal sealed class ServerEmitter
                 using (writer.Braces())
                 {
                     foreach (var operation in operations)
-                        writer.Line($"case OnvifActions.{CsharpNaming.Escape(operation.Name)}:");
+                        writer.Line($"case SoapActions.{CsharpNaming.Escape(operation.Name)}:");
                     writer.Line("    return true;");
                     writer.Line("default:");
                     writer.Line("    return false;");
@@ -201,7 +201,7 @@ internal sealed class ServerEmitter
             EmitInvoke(writer, baseClass, operations);
             writer.Line();
 
-            writer.Line($"public override {Xml}.OnvifContract ResolveXmlType(string ns, string name)");
+            writer.Line($"public override {Xml}.XmlContract ResolveXmlType(string ns, string name)");
             using (writer.Braces())
             {
                 writer.Line("return XmlTypeFactory.Create(ns, name);");
@@ -229,7 +229,7 @@ internal sealed class ServerEmitter
                         writer.Line($"if (ns == \"{element.Namespace}\")");
                         using (writer.Braces())
                         {
-                            writer.Line($"action = OnvifActions.{CsharpNaming.Escape(operation.Name)};");
+                            writer.Line($"action = SoapActions.{CsharpNaming.Escape(operation.Name)};");
                             writer.Line("return true;");
                         }
                     }
@@ -244,7 +244,7 @@ internal sealed class ServerEmitter
 
     private void EmitInvoke(CSharpWriter writer, string baseClass, IReadOnlyList<CsOperation> operations)
     {
-        writer.Line($"public override async {Task}<{Dispatch}.OnvifDispatchResult> InvokeAsync(");
+        writer.Line($"public override async {Task}<{Dispatch}.DispatchResult> InvokeAsync(");
         writer.Line($"    object service, string action, System.Xml.XmlReader body, {Token} cancellationToken)");
 
         using (writer.Braces())
@@ -257,7 +257,7 @@ internal sealed class ServerEmitter
             {
                 foreach (var operation in operations)
                 {
-                    writer.Line($"case OnvifActions.{CsharpNaming.Escape(operation.Name)}:");
+                    writer.Line($"case SoapActions.{CsharpNaming.Escape(operation.Name)}:");
                     using (writer.Braces())
                     {
                         writer.Line($"var request = new {operation.Request.Name}();");
@@ -267,7 +267,7 @@ internal sealed class ServerEmitter
                         var element = operation.Response.WrapperElement;
                         string ns = element is { } e ? $"\"{e.Namespace}\"" : "null";
                         string localName = element is { } el ? $"\"{el.LocalName}\"" : $"\"{operation.Name}Response\"";
-                        writer.Line($"return new {Dispatch}.OnvifDispatchResult(response, {ns}, {localName});");
+                        writer.Line($"return new {Dispatch}.DispatchResult(response, {ns}, {localName});");
                     }
                 }
             }

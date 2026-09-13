@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace __RUNTIME__.Xml
 {
-    /// <summary>A SOAP 1.2 fault, as Onvif devices report errors.</summary>
+    /// <summary>A SOAP 1.2 fault: how a service reports an error.</summary>
     public sealed class SoapFault
     {
         /// <summary>Top-level code, normally "Sender" or "Receiver".</summary>
         public string Code { get; set; }
 
         /// <summary>
-        /// Nested subcodes, outermost first. Onvif puts its error taxonomy here, for example
-        /// ter:NotAuthorized or ter:InvalidArgVal / ter:NoProfile.
+        /// Nested subcodes, outermost first. A service puts its own error taxonomy here, for
+        /// example ter:NotAuthorized or ter:InvalidArgVal / ter:NoProfile.
         /// </summary>
         public IList<string> Subcodes { get; private set; }
 
@@ -48,7 +48,7 @@ namespace __RUNTIME__.Xml
         }
     }
 
-    /// <summary>Thrown when an Onvif device answers with a SOAP fault.</summary>
+    /// <summary>Thrown when a service answers with a SOAP fault.</summary>
     public class SoapFaultException : Exception
     {
         public SoapFaultException(string message) : base(message)

@@ -35,7 +35,7 @@ namespace __RUNTIME__.Soap
     /// raised for all of those, so that handling them is one catch clause rather than a guess at
     /// which exception the HTTP stack happened to raise: a dropped connection arrives as an
     /// HttpIOException inside an HttpRequestException, a timeout arrives as a
-    /// TaskCanceledException, and neither says anything about Onvif.
+    /// TaskCanceledException, and neither says which call failed.
     /// </para>
     /// <para>
     /// It is distinct from <see cref="Xml.SoapFaultException"/>, which means the device answered

@@ -145,8 +145,8 @@ namespace SharpOnvif.Tests
                     }
 
                     public bool ReadEnvelopeBody(
-                        System.IO.Stream stream, OnvifContract into,
-                        Func<string, string, OnvifContract> resolveXmlType)
+                        System.IO.Stream stream, XmlContract into,
+                        Func<string, string, XmlContract> resolveXmlType)
                     {
                         throw new NotImplementedException();
                     }

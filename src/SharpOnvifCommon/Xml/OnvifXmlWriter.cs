@@ -56,7 +56,7 @@ namespace SharpOnvifCommon.Xml
         /// Writes a nested data contract, emitting xsi:type when the runtime type is a schema
         /// extension of the declared one so the reader can reconstruct it.
         /// </summary>
-        public void WriteElement(string ns, string name, OnvifContract value, string declaredTypeNamespace, string declaredTypeName)
+        public void WriteElement(string ns, string name, XmlContract value, string declaredTypeNamespace, string declaredTypeName)
         {
             if (value == null) return;
 
@@ -68,26 +68,26 @@ namespace SharpOnvifCommon.Xml
         }
 
         /// <summary>Writes the body of a contract into an element the caller has already started.</summary>
-        public void WriteContent(OnvifContract value)
+        public void WriteContent(XmlContract value)
         {
             if (value == null) return;
             value.InvokeWriteXmlAttributes(this);
             value.InvokeWriteXmlContent(this);
         }
 
-        private void WriteTypeHint(OnvifContract value, string declaredTypeNamespace, string declaredTypeName)
+        private void WriteTypeHint(XmlContract value, string declaredTypeNamespace, string declaredTypeName)
         {
-            string actualName = value.InvokeOnvifXmlTypeName;
+            string actualName = value.InvokeXmlTypeName;
             if (actualName == null || declaredTypeName == null) return;
-            if (actualName == declaredTypeName && value.InvokeOnvifXmlTypeNamespace == declaredTypeNamespace) return;
+            if (actualName == declaredTypeName && value.InvokeXmlTypeNamespace == declaredTypeNamespace) return;
 
             // The prefix has to be declared on this element: the reader resolves xsi:type as a
             // QName against the element's own namespace scope.
-            string prefix = _writer.LookupPrefix(value.InvokeOnvifXmlTypeNamespace);
+            string prefix = _writer.LookupPrefix(value.InvokeXmlTypeNamespace);
             if (string.IsNullOrEmpty(prefix))
             {
                 prefix = "t";
-                _writer.WriteAttributeString("xmlns", prefix, OnvifXmlNamespaces.Xmlns, value.InvokeOnvifXmlTypeNamespace);
+                _writer.WriteAttributeString("xmlns", prefix, OnvifXmlNamespaces.Xmlns, value.InvokeXmlTypeNamespace);
             }
 
             _writer.WriteAttributeString("type", OnvifXmlNamespaces.XmlSchemaInstance, prefix + ":" + actualName);

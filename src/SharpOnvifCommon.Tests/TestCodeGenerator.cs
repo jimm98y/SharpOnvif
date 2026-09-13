@@ -56,7 +56,8 @@ namespace SharpOnvif.Tests
             try
             {
                 var options = CommandLine.Parse(
-                    ["--wsdl", Fixture, "--namespace", "Example.Banking", "--out", output]);
+                    ["--wsdl", Fixture, "--namespace", "Example.Banking", "--out", output,
+                     "--dispatch", "Example.Banking.Dispatch"]);
 
                 Assert.IsNotNull(options);
                 var result = new CodeGenerator(options).Run();
@@ -104,7 +105,8 @@ namespace SharpOnvif.Tests
             try
             {
                 var options = CommandLine.Parse(
-                    ["--wsdl", Fixture, "--namespace", "Example.Banking", "--out", output]);
+                    ["--wsdl", Fixture, "--namespace", "Example.Banking", "--out", output,
+                     "--dispatch", "Example.Banking.Dispatch"]);
 
                 int first = new CodeGenerator(options!).Run().FilesWritten;
                 int second = new CodeGenerator(options!).Run().FilesWritten;
@@ -151,7 +153,8 @@ namespace SharpOnvif.Tests
             try
             {
                 var options = CommandLine.Parse(
-                    ["--wsdl", Fixture, "--namespace", "Example.Banking", "--out", output]);
+                    ["--wsdl", Fixture, "--namespace", "Example.Banking", "--out", output,
+                     "--dispatch", "Example.Banking.Dispatch"]);
 
                 new CodeGenerator(options!).Run();
 
@@ -168,7 +171,7 @@ namespace SharpOnvif.Tests
                     Path.Combine("Soap", "IMessageCodec.cs"),
                     Path.Combine("Xml", "IXmlReader.cs"),
                     Path.Combine("Xml", "IXmlWriter.cs"),
-                    Path.Combine("Xml", "OnvifContract.cs"),
+                    Path.Combine("Xml", "XmlContract.cs"),
                 })
                 {
                     Assert.IsTrue(File.Exists(Path.Combine(runtime, contract)), contract);
@@ -198,7 +201,7 @@ namespace SharpOnvif.Tests
 
                 string client = File.ReadAllText(Path.Combine(output, "Bank", "Client.cs"));
                 StringAssert.Contains(client, "Example.Banking.Runtime.Soap.SoapClientBase");
-                StringAssert.Contains(client, "Example.Banking.Runtime.Xml.OnvifContract");
+                StringAssert.Contains(client, "Example.Banking.Runtime.Xml.XmlContract");
 
                 string @base = File.ReadAllText(Path.Combine(runtime, "Soap", "SoapClientBase.cs"));
                 StringAssert.Contains(@base, "namespace Example.Banking.Runtime.Soap");
@@ -218,7 +221,8 @@ namespace SharpOnvif.Tests
             {
                 var options = CommandLine.Parse(
                     ["--wsdl", Fixture, "--namespace", "Example.Banking", "--out", output,
-                     "--runtime-namespace", "Example.Soap", "--runtime-out", elsewhere]);
+                     "--runtime-namespace", "Example.Soap", "--runtime-out", elsewhere,
+                     "--dispatch", "Example.Banking.Dispatch"]);
 
                 new CodeGenerator(options!).Run();
 
@@ -248,7 +252,8 @@ namespace SharpOnvif.Tests
             {
                 var options = CommandLine.Parse(
                     ["--wsdl", Fixture, "--namespace", "Example.Banking", "--out", output,
-                     "--runtime-namespace", "Example.Shared.Soap", "--no-runtime"]);
+                     "--runtime-namespace", "Example.Shared.Soap", "--no-runtime",
+                     "--dispatch", "Example.Banking.Dispatch"]);
 
                 new CodeGenerator(options!).Run();
 
@@ -268,7 +273,8 @@ namespace SharpOnvif.Tests
         {
             Assert.ThrowsExactly<SchemaException>(() => CommandLine.Parse(
                 ["--wsdl", Fixture, "--namespace", "Example", "--out", "out",
-                 "--no-runtime", "--runtime-out", "somewhere"]));
+                 "--no-runtime", "--runtime-out", "somewhere",
+                     "--dispatch", "Example.Banking.Dispatch"]));
         }
 
         [TestMethod]
@@ -282,7 +288,8 @@ namespace SharpOnvif.Tests
             {
                 var options = CommandLine.Parse(
                     ["--wsdl", Fixture, "--namespace", "Example.Banking", "--out", output,
-                     "--settings", "Example.Banking.BankSettings"]);
+                     "--settings", "Example.Banking.BankSettings",
+                     "--dispatch", "Example.Banking.Dispatch"]);
 
                 new CodeGenerator(options!).Run();
 
@@ -306,7 +313,8 @@ namespace SharpOnvif.Tests
             try
             {
                 var options = CommandLine.Parse(
-                    ["--wsdl", Fixture, "--namespace", "Example.Banking", "--out", output]);
+                    ["--wsdl", Fixture, "--namespace", "Example.Banking", "--out", output,
+                     "--dispatch", "Example.Banking.Dispatch"]);
 
                 new CodeGenerator(options!).Run();
 
@@ -330,7 +338,8 @@ namespace SharpOnvif.Tests
         {
             Assert.ThrowsExactly<SchemaException>(() => CommandLine.Parse(
                 ["--wsdl", Fixture, "--namespace", "Example", "--out", "out",
-                 "--envelope-prefix", argument]));
+                 "--envelope-prefix", argument,
+                     "--dispatch", "Example.Banking.Dispatch"]));
         }
 
         [TestMethod]
@@ -346,7 +355,7 @@ namespace SharpOnvif.Tests
             string output = NewOutputDirectory();
             try
             {
-                var options = ServiceCatalog.OnvifOptions(repository, Path.Combine(repository, "src"));
+                var options = ConfigurationFile.Load(Path.Combine(repository, "onvif.codegen.json"));
                 new RuntimeEmitter(options.Runtime.Namespace).Emit(output);
 
                 var emitted = Directory.GetFiles(output, "*.cs", SearchOption.AllDirectories)
@@ -379,7 +388,7 @@ namespace SharpOnvif.Tests
         /// <summary>
         /// Walks up to the repository, which is where the schema mirror and the projects live.
         /// </summary>
-        private static string RepositoryRoot()
+        internal static string RepositoryRoot()
         {
             var directory = new DirectoryInfo(AppContext.BaseDirectory);
             while (directory is not null)
@@ -406,7 +415,8 @@ namespace SharpOnvif.Tests
         public void NamesAServiceFromTheArgumentWhenGiven()
         {
             var options = CommandLine.Parse(
-                ["--wsdl", "Accounts=" + Fixture, "--namespace", "Example", "--out", "out"]);
+                ["--wsdl", "Accounts=" + Fixture, "--namespace", "Example", "--out", "out",
+                     "--dispatch", "Example.Banking.Dispatch"]);
 
             Assert.AreEqual("Accounts", options!.Services.Single().Name);
         }
@@ -414,7 +424,8 @@ namespace SharpOnvif.Tests
         [TestMethod]
         public void DefaultsTheSharedNamespaceUnderTheRoot()
         {
-            var options = CommandLine.Parse(["--wsdl", Fixture, "--namespace", "Example", "--out", "out"]);
+            var options = CommandLine.Parse(["--wsdl", Fixture, "--namespace", "Example", "--out", "out",
+                     "--dispatch", "Example.Banking.Dispatch"]);
 
             Assert.AreEqual("Example.Schema", options!.SharedNamespace);
         }
@@ -430,7 +441,8 @@ namespace SharpOnvif.Tests
             {
                 var options = CommandLine.Parse(
                     ["--wsdl", Fixture, "--namespace", "Example.Banking", "--out", output,
-                     "--enum-value", "{urn:example:money}Currency=GBP"]);
+                     "--enum-value", "{urn:example:money}Currency=GBP",
+                     "--dispatch", "Example.Banking.Dispatch"]);
 
                 new CodeGenerator(options!).Run();
 
@@ -455,7 +467,8 @@ namespace SharpOnvif.Tests
             {
                 var options = CommandLine.Parse(
                     ["--wsdl", Fixture, "--namespace", "Example.Banking", "--out", output,
-                     "--enum-value", "{urn:example:money}Currency=EUR"]);
+                     "--enum-value", "{urn:example:money}Currency=EUR",
+                     "--dispatch", "Example.Banking.Dispatch"]);
 
                 new CodeGenerator(options!).Run();
 
@@ -478,13 +491,15 @@ namespace SharpOnvif.Tests
             {
                 var notAnEnumeration = CommandLine.Parse(
                     ["--wsdl", Fixture, "--namespace", "Example.Banking", "--out", output,
-                     "--enum-value", "{urn:example:money}Money=GBP"]);
+                     "--enum-value", "{urn:example:money}Money=GBP",
+                     "--dispatch", "Example.Banking.Dispatch"]);
 
                 Assert.ThrowsExactly<SchemaException>(() => new CodeGenerator(notAnEnumeration!).Run());
 
                 var noSuchType = CommandLine.Parse(
                     ["--wsdl", Fixture, "--namespace", "Example.Banking", "--out", output,
-                     "--enum-value", "{urn:example:money}Nonexistent=GBP"]);
+                     "--enum-value", "{urn:example:money}Nonexistent=GBP",
+                     "--dispatch", "Example.Banking.Dispatch"]);
 
                 Assert.ThrowsExactly<SchemaException>(() => new CodeGenerator(noSuchType!).Run(),
                     "a typo in the type name must not pass silently");
@@ -504,7 +519,8 @@ namespace SharpOnvif.Tests
         public void RejectsAnEnumValueItCannotRead(string argument)
         {
             Assert.ThrowsExactly<SchemaException>(() => CommandLine.Parse(
-                ["--wsdl", Fixture, "--namespace", "Example", "--out", "out", "--enum-value", argument]));
+                ["--wsdl", Fixture, "--namespace", "Example", "--out", "out", "--enum-value", argument,
+                     "--dispatch", "Example.Banking.Dispatch"]));
         }
 
         private static int Occurrences(string text, string value)
@@ -523,14 +539,17 @@ namespace SharpOnvif.Tests
         public void RejectsArgumentsItCannotActOn()
         {
             Assert.ThrowsExactly<SchemaException>(
-                () => CommandLine.Parse(["--wsdl", Fixture]),
+                () => CommandLine.Parse(["--wsdl", Fixture,
+                     "--dispatch", "Example.Banking.Dispatch"]),
                 "a namespace and an output directory are both required");
 
             Assert.ThrowsExactly<SchemaException>(
-                () => CommandLine.Parse(["--nonsense"]));
+                () => CommandLine.Parse(["--nonsense",
+                     "--dispatch", "Example.Banking.Dispatch"]));
 
             Assert.ThrowsExactly<SchemaException>(
-                () => CommandLine.Parse(["--wsdl"]),
+                () => CommandLine.Parse(["--wsdl",
+                     "--dispatch", "Example.Banking.Dispatch"]),
                 "an option that takes a value has to be given one");
         }
     }

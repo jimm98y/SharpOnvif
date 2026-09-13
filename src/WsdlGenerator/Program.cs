@@ -4,8 +4,10 @@ using WsdlGenerator.Xml;
 
 // Generates C# clients and services from WSDL. Run with --help for the options.
 //
-// With no arguments it regenerates this repository's own Onvif bindings from the mirror in wsdl/.
-// See doc/codegen.md.
+// With no arguments it reads onvif.codegen.json from the root of this repository. Everything
+// specific to the services being generated lives there, not here. See doc/codegen.md.
+
+const string ConfigurationName = "onvif.codegen.json";
 
 string[] arguments = args;
 
@@ -17,7 +19,7 @@ if (arguments.Contains("--help") || arguments.Contains("-h"))
 
 try
 {
-    GeneratorOptions options = CommandLine.Parse(arguments) ?? OnvifDefaults();
+    GeneratorOptions options = CommandLine.Parse(arguments) ?? ConfigurationFile.Load(RepositoryConfiguration());
     Report(new CodeGenerator(options).Run(), options);
     return 0;
 }
@@ -27,11 +29,8 @@ catch (SchemaException error)
     return 1;
 }
 
-static GeneratorOptions OnvifDefaults()
-{
-    string root = FindRepositoryRoot();
-    return ServiceCatalog.OnvifOptions(root, Path.Combine(root, "src"));
-}
+/// <summary>This repository's own run, which is a configuration file like any other.</summary>
+static string RepositoryConfiguration() => Path.Combine(FindRepositoryRoot(), ConfigurationName);
 
 static void Report(GenerationResult result, GeneratorOptions options)
 {

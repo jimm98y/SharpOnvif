@@ -30,7 +30,7 @@
 namespace SharpOnvifCommon.Xml
 {
     /// <summary>
-    /// Base class of every generated Onvif data contract.
+    /// Base class of every generated data contract.
     /// <para>
     /// Serialization is compiled into the generated types themselves rather than discovered by
     /// reflection, and these members are the hooks the reader and writer drive. A type that
@@ -40,10 +40,10 @@ namespace SharpOnvifCommon.Xml
     /// </para>
     /// <para>
     /// The members are deliberately named so they cannot collide with a schema-derived property.
-    /// The generator asserts that no Onvif element or attribute is called any of them.
+    /// The generator asserts that no element or attribute in the schema is called any of them.
     /// </para>
     /// </summary>
-    public abstract class OnvifContract
+    public abstract class XmlContract
     {
         /// <summary>
         /// Writes this type's XML attributes. Overrides call <c>base</c> first so inherited
@@ -97,13 +97,13 @@ namespace SharpOnvifCommon.Xml
         /// Local name of this type in the schema, or null for an anonymous type. Used to decide
         /// whether a value needs an xsi:type hint, and to reconstruct it on the way back in.
         /// </summary>
-        protected virtual string OnvifXmlTypeName
+        protected virtual string XmlTypeName
         {
             get { return null; }
         }
 
-        /// <summary>Namespace of <see cref="OnvifXmlTypeName"/>.</summary>
-        protected virtual string OnvifXmlTypeNamespace
+        /// <summary>Namespace of <see cref="XmlTypeName"/>.</summary>
+        protected virtual string XmlTypeNamespace
         {
             get { return null; }
         }
@@ -137,14 +137,14 @@ namespace SharpOnvifCommon.Xml
             ReadXmlText(reader, text);
         }
 
-        internal string InvokeOnvifXmlTypeName
+        internal string InvokeXmlTypeName
         {
-            get { return OnvifXmlTypeName; }
+            get { return XmlTypeName; }
         }
 
-        internal string InvokeOnvifXmlTypeNamespace
+        internal string InvokeXmlTypeNamespace
         {
-            get { return OnvifXmlTypeNamespace; }
+            get { return XmlTypeNamespace; }
         }
     }
 }

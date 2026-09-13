@@ -16,7 +16,7 @@ namespace SharpOnvifServer.Thermal
     public abstract class ThermalPortBase
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new ThermalPortDispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new ThermalPortDispatcher();
 
         /// <summary>
         /// Returns the capabilities of the thermal service. The result is returned in a typed answer.
@@ -184,7 +184,7 @@ namespace SharpOnvifServer.Thermal
     }
 
     /// <summary>Routes SOAP actions to <see cref="ThermalPortBase"/>.</summary>
-    internal sealed class ThermalPortDispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class ThermalPortDispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(ThermalPortBase); } }
 
@@ -192,14 +192,14 @@ namespace SharpOnvifServer.Thermal
         {
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
-                case OnvifActions.GetConfigurationOptions:
-                case OnvifActions.GetConfiguration:
-                case OnvifActions.GetConfigurations:
-                case OnvifActions.SetConfiguration:
-                case OnvifActions.GetRadiometryConfigurationOptions:
-                case OnvifActions.GetRadiometryConfiguration:
-                case OnvifActions.SetRadiometryConfiguration:
+                case SoapActions.GetServiceCapabilities:
+                case SoapActions.GetConfigurationOptions:
+                case SoapActions.GetConfiguration:
+                case SoapActions.GetConfigurations:
+                case SoapActions.SetConfiguration:
+                case SoapActions.GetRadiometryConfigurationOptions:
+                case SoapActions.GetRadiometryConfiguration:
+                case SoapActions.SetRadiometryConfiguration:
                     return true;
                 default:
                     return false;
@@ -213,56 +213,56 @@ namespace SharpOnvifServer.Thermal
                 case "GetServiceCapabilities":
                     if (ns == "http://www.onvif.org/ver10/thermal/wsdl")
                     {
-                        action = OnvifActions.GetServiceCapabilities;
+                        action = SoapActions.GetServiceCapabilities;
                         return true;
                     }
                     break;
                 case "GetConfigurationOptions":
                     if (ns == "http://www.onvif.org/ver10/thermal/wsdl")
                     {
-                        action = OnvifActions.GetConfigurationOptions;
+                        action = SoapActions.GetConfigurationOptions;
                         return true;
                     }
                     break;
                 case "GetConfiguration":
                     if (ns == "http://www.onvif.org/ver10/thermal/wsdl")
                     {
-                        action = OnvifActions.GetConfiguration;
+                        action = SoapActions.GetConfiguration;
                         return true;
                     }
                     break;
                 case "GetConfigurations":
                     if (ns == "http://www.onvif.org/ver10/thermal/wsdl")
                     {
-                        action = OnvifActions.GetConfigurations;
+                        action = SoapActions.GetConfigurations;
                         return true;
                     }
                     break;
                 case "SetConfiguration":
                     if (ns == "http://www.onvif.org/ver10/thermal/wsdl")
                     {
-                        action = OnvifActions.SetConfiguration;
+                        action = SoapActions.SetConfiguration;
                         return true;
                     }
                     break;
                 case "GetRadiometryConfigurationOptions":
                     if (ns == "http://www.onvif.org/ver10/thermal/wsdl")
                     {
-                        action = OnvifActions.GetRadiometryConfigurationOptions;
+                        action = SoapActions.GetRadiometryConfigurationOptions;
                         return true;
                     }
                     break;
                 case "GetRadiometryConfiguration":
                     if (ns == "http://www.onvif.org/ver10/thermal/wsdl")
                     {
-                        action = OnvifActions.GetRadiometryConfiguration;
+                        action = SoapActions.GetRadiometryConfiguration;
                         return true;
                     }
                     break;
                 case "SetRadiometryConfiguration":
                     if (ns == "http://www.onvif.org/ver10/thermal/wsdl")
                     {
-                        action = OnvifActions.SetRadiometryConfiguration;
+                        action = SoapActions.SetRadiometryConfiguration;
                         return true;
                     }
                     break;
@@ -271,7 +271,7 @@ namespace SharpOnvifServer.Thermal
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             ThermalPortBase target = (ThermalPortBase)service;
@@ -279,68 +279,68 @@ namespace SharpOnvifServer.Thermal
 
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
+                case SoapActions.GetServiceCapabilities:
                 {
                     var request = new GetServiceCapabilitiesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetServiceCapabilitiesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/thermal/wsdl", "GetServiceCapabilitiesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/thermal/wsdl", "GetServiceCapabilitiesResponse");
                 }
-                case OnvifActions.GetConfigurationOptions:
+                case SoapActions.GetConfigurationOptions:
                 {
                     var request = new GetConfigurationOptionsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetConfigurationOptionsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/thermal/wsdl", "GetConfigurationOptionsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/thermal/wsdl", "GetConfigurationOptionsResponse");
                 }
-                case OnvifActions.GetConfiguration:
+                case SoapActions.GetConfiguration:
                 {
                     var request = new GetConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.GetConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/thermal/wsdl", "GetConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/thermal/wsdl", "GetConfigurationResponse");
                 }
-                case OnvifActions.GetConfigurations:
+                case SoapActions.GetConfigurations:
                 {
                     var request = new GetConfigurationsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetConfigurationsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/thermal/wsdl", "GetConfigurationsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/thermal/wsdl", "GetConfigurationsResponse");
                 }
-                case OnvifActions.SetConfiguration:
+                case SoapActions.SetConfiguration:
                 {
                     var request = new SetConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.SetConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/thermal/wsdl", "SetConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/thermal/wsdl", "SetConfigurationResponse");
                 }
-                case OnvifActions.GetRadiometryConfigurationOptions:
+                case SoapActions.GetRadiometryConfigurationOptions:
                 {
                     var request = new GetRadiometryConfigurationOptionsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetRadiometryConfigurationOptionsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/thermal/wsdl", "GetRadiometryConfigurationOptionsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/thermal/wsdl", "GetRadiometryConfigurationOptionsResponse");
                 }
-                case OnvifActions.GetRadiometryConfiguration:
+                case SoapActions.GetRadiometryConfiguration:
                 {
                     var request = new GetRadiometryConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.GetRadiometryConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/thermal/wsdl", "GetRadiometryConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/thermal/wsdl", "GetRadiometryConfigurationResponse");
                 }
-                case OnvifActions.SetRadiometryConfiguration:
+                case SoapActions.SetRadiometryConfiguration:
                 {
                     var request = new SetRadiometryConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.SetRadiometryConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/thermal/wsdl", "SetRadiometryConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/thermal/wsdl", "SetRadiometryConfigurationResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }

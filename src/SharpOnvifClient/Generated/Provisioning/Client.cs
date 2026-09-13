@@ -125,7 +125,7 @@ namespace SharpOnvifClient.Provisioning
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -135,7 +135,7 @@ namespace SharpOnvifClient.Provisioning
         /// </summary>
         public System.Threading.Tasks.Task<GetServiceCapabilitiesResponse> GetServiceCapabilitiesAsync(GetServiceCapabilitiesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetServiceCapabilities, "http://www.onvif.org/ver10/provisioning/wsdl", "GetServiceCapabilities", request,
+            return InvokeAsync(SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver10/provisioning/wsdl", "GetServiceCapabilities", request,
                 () => new GetServiceCapabilitiesResponse(), cancellationToken);
         }
 
@@ -152,7 +152,7 @@ namespace SharpOnvifClient.Provisioning
         /// </summary>
         public System.Threading.Tasks.Task<PanMoveResponse> PanMoveAsync(PanMoveRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.PanMove, "http://www.onvif.org/ver10/provisioning/wsdl", "PanMove", request,
+            return InvokeAsync(SoapActions.PanMove, "http://www.onvif.org/ver10/provisioning/wsdl", "PanMove", request,
                 () => new PanMoveResponse(), cancellationToken);
         }
 
@@ -169,7 +169,7 @@ namespace SharpOnvifClient.Provisioning
         /// </summary>
         public System.Threading.Tasks.Task<TiltMoveResponse> TiltMoveAsync(TiltMoveRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.TiltMove, "http://www.onvif.org/ver10/provisioning/wsdl", "TiltMove", request,
+            return InvokeAsync(SoapActions.TiltMove, "http://www.onvif.org/ver10/provisioning/wsdl", "TiltMove", request,
                 () => new TiltMoveResponse(), cancellationToken);
         }
 
@@ -186,7 +186,7 @@ namespace SharpOnvifClient.Provisioning
         /// </summary>
         public System.Threading.Tasks.Task<ZoomMoveResponse> ZoomMoveAsync(ZoomMoveRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.ZoomMove, "http://www.onvif.org/ver10/provisioning/wsdl", "ZoomMove", request,
+            return InvokeAsync(SoapActions.ZoomMove, "http://www.onvif.org/ver10/provisioning/wsdl", "ZoomMove", request,
                 () => new ZoomMoveResponse(), cancellationToken);
         }
 
@@ -203,7 +203,7 @@ namespace SharpOnvifClient.Provisioning
         /// </summary>
         public System.Threading.Tasks.Task<RollMoveResponse> RollMoveAsync(RollMoveRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.RollMove, "http://www.onvif.org/ver10/provisioning/wsdl", "RollMove", request,
+            return InvokeAsync(SoapActions.RollMove, "http://www.onvif.org/ver10/provisioning/wsdl", "RollMove", request,
                 () => new RollMoveResponse(), cancellationToken);
         }
 
@@ -220,7 +220,7 @@ namespace SharpOnvifClient.Provisioning
         /// </summary>
         public System.Threading.Tasks.Task<FocusMoveResponse> FocusMoveAsync(FocusMoveRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.FocusMove, "http://www.onvif.org/ver10/provisioning/wsdl", "FocusMove", request,
+            return InvokeAsync(SoapActions.FocusMove, "http://www.onvif.org/ver10/provisioning/wsdl", "FocusMove", request,
                 () => new FocusMoveResponse(), cancellationToken);
         }
 
@@ -237,7 +237,7 @@ namespace SharpOnvifClient.Provisioning
         /// </summary>
         public System.Threading.Tasks.Task<StopResponse> StopAsync(StopRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.Stop, "http://www.onvif.org/ver10/provisioning/wsdl", "Stop", request,
+            return InvokeAsync(SoapActions.Stop, "http://www.onvif.org/ver10/provisioning/wsdl", "Stop", request,
                 () => new StopResponse(), cancellationToken);
         }
 
@@ -254,7 +254,7 @@ namespace SharpOnvifClient.Provisioning
         /// </summary>
         public System.Threading.Tasks.Task<GetUsageResponse> GetUsageAsync(GetUsageRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetUsage, "http://www.onvif.org/ver10/provisioning/wsdl", "GetUsage", request,
+            return InvokeAsync(SoapActions.GetUsage, "http://www.onvif.org/ver10/provisioning/wsdl", "GetUsage", request,
                 () => new GetUsageResponse(), cancellationToken);
         }
 

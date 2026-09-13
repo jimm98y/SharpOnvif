@@ -47,12 +47,12 @@ namespace SharpOnvifServer.Dispatch
 
         private sealed class Registration
         {
-            public OnvifServiceDispatcher Dispatcher;
+            public ServiceDispatcher Dispatcher;
             public Type ImplementationType;
         }
 
         /// <summary>Adds a service implementation to this endpoint.</summary>
-        public OnvifEndpoint Add(OnvifServiceDispatcher dispatcher, Type implementationType)
+        public OnvifEndpoint Add(ServiceDispatcher dispatcher, Type implementationType)
         {
             _services.Add(new Registration { Dispatcher = dispatcher, ImplementationType = implementationType });
             return this;
@@ -126,7 +126,7 @@ namespace SharpOnvifServer.Dispatch
                         " is registered. Add it to the service collection before mapping the endpoint.");
                 }
 
-                OnvifDispatchResult result;
+                DispatchResult result;
                 using (XmlReader xml = SoapEnvelope.CreateReader(new StringReader(envelope)))
                 {
                     if (!SoapEnvelope.MoveToBody(xml))

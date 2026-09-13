@@ -16,7 +16,7 @@ namespace SharpOnvifServer.PTZ
     public abstract class PTZBase
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new PTZDispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new PTZDispatcher();
 
         /// <summary>
         /// Returns the capabilities of the PTZ service. The result is returned in a typed answer.
@@ -672,7 +672,7 @@ namespace SharpOnvifServer.PTZ
     }
 
     /// <summary>Routes SOAP actions to <see cref="PTZBase"/>.</summary>
-    internal sealed class PTZDispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class PTZDispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(PTZBase); } }
 
@@ -680,35 +680,35 @@ namespace SharpOnvifServer.PTZ
         {
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
-                case OnvifActions.GetNodes:
-                case OnvifActions.GetNode:
-                case OnvifActions.GetConfiguration:
-                case OnvifActions.GetConfigurations:
-                case OnvifActions.SetConfiguration:
-                case OnvifActions.GetConfigurationOptions:
-                case OnvifActions.SendAuxiliaryCommand:
-                case OnvifActions.GetPresets:
-                case OnvifActions.SetPreset:
-                case OnvifActions.RemovePreset:
-                case OnvifActions.GotoPreset:
-                case OnvifActions.GotoHomePosition:
-                case OnvifActions.SetHomePosition:
-                case OnvifActions.ContinuousMove:
-                case OnvifActions.RelativeMove:
-                case OnvifActions.GetStatus:
-                case OnvifActions.AbsoluteMove:
-                case OnvifActions.GeoMove:
-                case OnvifActions.Stop:
-                case OnvifActions.GetPresetTours:
-                case OnvifActions.GetPresetTour:
-                case OnvifActions.GetPresetTourOptions:
-                case OnvifActions.CreatePresetTour:
-                case OnvifActions.ModifyPresetTour:
-                case OnvifActions.OperatePresetTour:
-                case OnvifActions.RemovePresetTour:
-                case OnvifActions.GetCompatibleConfigurations:
-                case OnvifActions.MoveAndStartTracking:
+                case SoapActions.GetServiceCapabilities:
+                case SoapActions.GetNodes:
+                case SoapActions.GetNode:
+                case SoapActions.GetConfiguration:
+                case SoapActions.GetConfigurations:
+                case SoapActions.SetConfiguration:
+                case SoapActions.GetConfigurationOptions:
+                case SoapActions.SendAuxiliaryCommand:
+                case SoapActions.GetPresets:
+                case SoapActions.SetPreset:
+                case SoapActions.RemovePreset:
+                case SoapActions.GotoPreset:
+                case SoapActions.GotoHomePosition:
+                case SoapActions.SetHomePosition:
+                case SoapActions.ContinuousMove:
+                case SoapActions.RelativeMove:
+                case SoapActions.GetStatus:
+                case SoapActions.AbsoluteMove:
+                case SoapActions.GeoMove:
+                case SoapActions.Stop:
+                case SoapActions.GetPresetTours:
+                case SoapActions.GetPresetTour:
+                case SoapActions.GetPresetTourOptions:
+                case SoapActions.CreatePresetTour:
+                case SoapActions.ModifyPresetTour:
+                case SoapActions.OperatePresetTour:
+                case SoapActions.RemovePresetTour:
+                case SoapActions.GetCompatibleConfigurations:
+                case SoapActions.MoveAndStartTracking:
                     return true;
                 default:
                     return false;
@@ -722,203 +722,203 @@ namespace SharpOnvifServer.PTZ
                 case "GetServiceCapabilities":
                     if (ns == "http://www.onvif.org/ver20/ptz/wsdl")
                     {
-                        action = OnvifActions.GetServiceCapabilities;
+                        action = SoapActions.GetServiceCapabilities;
                         return true;
                     }
                     break;
                 case "GetNodes":
                     if (ns == "http://www.onvif.org/ver20/ptz/wsdl")
                     {
-                        action = OnvifActions.GetNodes;
+                        action = SoapActions.GetNodes;
                         return true;
                     }
                     break;
                 case "GetNode":
                     if (ns == "http://www.onvif.org/ver20/ptz/wsdl")
                     {
-                        action = OnvifActions.GetNode;
+                        action = SoapActions.GetNode;
                         return true;
                     }
                     break;
                 case "GetConfiguration":
                     if (ns == "http://www.onvif.org/ver20/ptz/wsdl")
                     {
-                        action = OnvifActions.GetConfiguration;
+                        action = SoapActions.GetConfiguration;
                         return true;
                     }
                     break;
                 case "GetConfigurations":
                     if (ns == "http://www.onvif.org/ver20/ptz/wsdl")
                     {
-                        action = OnvifActions.GetConfigurations;
+                        action = SoapActions.GetConfigurations;
                         return true;
                     }
                     break;
                 case "SetConfiguration":
                     if (ns == "http://www.onvif.org/ver20/ptz/wsdl")
                     {
-                        action = OnvifActions.SetConfiguration;
+                        action = SoapActions.SetConfiguration;
                         return true;
                     }
                     break;
                 case "GetConfigurationOptions":
                     if (ns == "http://www.onvif.org/ver20/ptz/wsdl")
                     {
-                        action = OnvifActions.GetConfigurationOptions;
+                        action = SoapActions.GetConfigurationOptions;
                         return true;
                     }
                     break;
                 case "SendAuxiliaryCommand":
                     if (ns == "http://www.onvif.org/ver20/ptz/wsdl")
                     {
-                        action = OnvifActions.SendAuxiliaryCommand;
+                        action = SoapActions.SendAuxiliaryCommand;
                         return true;
                     }
                     break;
                 case "GetPresets":
                     if (ns == "http://www.onvif.org/ver20/ptz/wsdl")
                     {
-                        action = OnvifActions.GetPresets;
+                        action = SoapActions.GetPresets;
                         return true;
                     }
                     break;
                 case "SetPreset":
                     if (ns == "http://www.onvif.org/ver20/ptz/wsdl")
                     {
-                        action = OnvifActions.SetPreset;
+                        action = SoapActions.SetPreset;
                         return true;
                     }
                     break;
                 case "RemovePreset":
                     if (ns == "http://www.onvif.org/ver20/ptz/wsdl")
                     {
-                        action = OnvifActions.RemovePreset;
+                        action = SoapActions.RemovePreset;
                         return true;
                     }
                     break;
                 case "GotoPreset":
                     if (ns == "http://www.onvif.org/ver20/ptz/wsdl")
                     {
-                        action = OnvifActions.GotoPreset;
+                        action = SoapActions.GotoPreset;
                         return true;
                     }
                     break;
                 case "GotoHomePosition":
                     if (ns == "http://www.onvif.org/ver20/ptz/wsdl")
                     {
-                        action = OnvifActions.GotoHomePosition;
+                        action = SoapActions.GotoHomePosition;
                         return true;
                     }
                     break;
                 case "SetHomePosition":
                     if (ns == "http://www.onvif.org/ver20/ptz/wsdl")
                     {
-                        action = OnvifActions.SetHomePosition;
+                        action = SoapActions.SetHomePosition;
                         return true;
                     }
                     break;
                 case "ContinuousMove":
                     if (ns == "http://www.onvif.org/ver20/ptz/wsdl")
                     {
-                        action = OnvifActions.ContinuousMove;
+                        action = SoapActions.ContinuousMove;
                         return true;
                     }
                     break;
                 case "RelativeMove":
                     if (ns == "http://www.onvif.org/ver20/ptz/wsdl")
                     {
-                        action = OnvifActions.RelativeMove;
+                        action = SoapActions.RelativeMove;
                         return true;
                     }
                     break;
                 case "GetStatus":
                     if (ns == "http://www.onvif.org/ver20/ptz/wsdl")
                     {
-                        action = OnvifActions.GetStatus;
+                        action = SoapActions.GetStatus;
                         return true;
                     }
                     break;
                 case "AbsoluteMove":
                     if (ns == "http://www.onvif.org/ver20/ptz/wsdl")
                     {
-                        action = OnvifActions.AbsoluteMove;
+                        action = SoapActions.AbsoluteMove;
                         return true;
                     }
                     break;
                 case "GeoMove":
                     if (ns == "http://www.onvif.org/ver20/ptz/wsdl")
                     {
-                        action = OnvifActions.GeoMove;
+                        action = SoapActions.GeoMove;
                         return true;
                     }
                     break;
                 case "Stop":
                     if (ns == "http://www.onvif.org/ver20/ptz/wsdl")
                     {
-                        action = OnvifActions.Stop;
+                        action = SoapActions.Stop;
                         return true;
                     }
                     break;
                 case "GetPresetTours":
                     if (ns == "http://www.onvif.org/ver20/ptz/wsdl")
                     {
-                        action = OnvifActions.GetPresetTours;
+                        action = SoapActions.GetPresetTours;
                         return true;
                     }
                     break;
                 case "GetPresetTour":
                     if (ns == "http://www.onvif.org/ver20/ptz/wsdl")
                     {
-                        action = OnvifActions.GetPresetTour;
+                        action = SoapActions.GetPresetTour;
                         return true;
                     }
                     break;
                 case "GetPresetTourOptions":
                     if (ns == "http://www.onvif.org/ver20/ptz/wsdl")
                     {
-                        action = OnvifActions.GetPresetTourOptions;
+                        action = SoapActions.GetPresetTourOptions;
                         return true;
                     }
                     break;
                 case "CreatePresetTour":
                     if (ns == "http://www.onvif.org/ver20/ptz/wsdl")
                     {
-                        action = OnvifActions.CreatePresetTour;
+                        action = SoapActions.CreatePresetTour;
                         return true;
                     }
                     break;
                 case "ModifyPresetTour":
                     if (ns == "http://www.onvif.org/ver20/ptz/wsdl")
                     {
-                        action = OnvifActions.ModifyPresetTour;
+                        action = SoapActions.ModifyPresetTour;
                         return true;
                     }
                     break;
                 case "OperatePresetTour":
                     if (ns == "http://www.onvif.org/ver20/ptz/wsdl")
                     {
-                        action = OnvifActions.OperatePresetTour;
+                        action = SoapActions.OperatePresetTour;
                         return true;
                     }
                     break;
                 case "RemovePresetTour":
                     if (ns == "http://www.onvif.org/ver20/ptz/wsdl")
                     {
-                        action = OnvifActions.RemovePresetTour;
+                        action = SoapActions.RemovePresetTour;
                         return true;
                     }
                     break;
                 case "GetCompatibleConfigurations":
                     if (ns == "http://www.onvif.org/ver20/ptz/wsdl")
                     {
-                        action = OnvifActions.GetCompatibleConfigurations;
+                        action = SoapActions.GetCompatibleConfigurations;
                         return true;
                     }
                     break;
                 case "MoveAndStartTracking":
                     if (ns == "http://www.onvif.org/ver20/ptz/wsdl")
                     {
-                        action = OnvifActions.MoveAndStartTracking;
+                        action = SoapActions.MoveAndStartTracking;
                         return true;
                     }
                     break;
@@ -927,7 +927,7 @@ namespace SharpOnvifServer.PTZ
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             PTZBase target = (PTZBase)service;
@@ -935,215 +935,215 @@ namespace SharpOnvifServer.PTZ
 
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
+                case SoapActions.GetServiceCapabilities:
                 {
                     var request = new GetServiceCapabilitiesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetServiceCapabilitiesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "GetServiceCapabilitiesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "GetServiceCapabilitiesResponse");
                 }
-                case OnvifActions.GetNodes:
+                case SoapActions.GetNodes:
                 {
                     var request = new GetNodesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetNodesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "GetNodesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "GetNodesResponse");
                 }
-                case OnvifActions.GetNode:
+                case SoapActions.GetNode:
                 {
                     var request = new GetNodeRequest();
                     reader.ReadInto(request);
                     var response = await target.GetNodeAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "GetNodeResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "GetNodeResponse");
                 }
-                case OnvifActions.GetConfiguration:
+                case SoapActions.GetConfiguration:
                 {
                     var request = new GetConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.GetConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "GetConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "GetConfigurationResponse");
                 }
-                case OnvifActions.GetConfigurations:
+                case SoapActions.GetConfigurations:
                 {
                     var request = new GetConfigurationsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetConfigurationsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "GetConfigurationsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "GetConfigurationsResponse");
                 }
-                case OnvifActions.SetConfiguration:
+                case SoapActions.SetConfiguration:
                 {
                     var request = new SetConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.SetConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "SetConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "SetConfigurationResponse");
                 }
-                case OnvifActions.GetConfigurationOptions:
+                case SoapActions.GetConfigurationOptions:
                 {
                     var request = new GetConfigurationOptionsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetConfigurationOptionsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "GetConfigurationOptionsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "GetConfigurationOptionsResponse");
                 }
-                case OnvifActions.SendAuxiliaryCommand:
+                case SoapActions.SendAuxiliaryCommand:
                 {
                     var request = new SendAuxiliaryCommandRequest();
                     reader.ReadInto(request);
                     var response = await target.SendAuxiliaryCommandAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "SendAuxiliaryCommandResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "SendAuxiliaryCommandResponse");
                 }
-                case OnvifActions.GetPresets:
+                case SoapActions.GetPresets:
                 {
                     var request = new GetPresetsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetPresetsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "GetPresetsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "GetPresetsResponse");
                 }
-                case OnvifActions.SetPreset:
+                case SoapActions.SetPreset:
                 {
                     var request = new SetPresetRequest();
                     reader.ReadInto(request);
                     var response = await target.SetPresetAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "SetPresetResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "SetPresetResponse");
                 }
-                case OnvifActions.RemovePreset:
+                case SoapActions.RemovePreset:
                 {
                     var request = new RemovePresetRequest();
                     reader.ReadInto(request);
                     var response = await target.RemovePresetAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "RemovePresetResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "RemovePresetResponse");
                 }
-                case OnvifActions.GotoPreset:
+                case SoapActions.GotoPreset:
                 {
                     var request = new GotoPresetRequest();
                     reader.ReadInto(request);
                     var response = await target.GotoPresetAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "GotoPresetResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "GotoPresetResponse");
                 }
-                case OnvifActions.GotoHomePosition:
+                case SoapActions.GotoHomePosition:
                 {
                     var request = new GotoHomePositionRequest();
                     reader.ReadInto(request);
                     var response = await target.GotoHomePositionAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "GotoHomePositionResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "GotoHomePositionResponse");
                 }
-                case OnvifActions.SetHomePosition:
+                case SoapActions.SetHomePosition:
                 {
                     var request = new SetHomePositionRequest();
                     reader.ReadInto(request);
                     var response = await target.SetHomePositionAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "SetHomePositionResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "SetHomePositionResponse");
                 }
-                case OnvifActions.ContinuousMove:
+                case SoapActions.ContinuousMove:
                 {
                     var request = new ContinuousMoveRequest();
                     reader.ReadInto(request);
                     var response = await target.ContinuousMoveAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "ContinuousMoveResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "ContinuousMoveResponse");
                 }
-                case OnvifActions.RelativeMove:
+                case SoapActions.RelativeMove:
                 {
                     var request = new RelativeMoveRequest();
                     reader.ReadInto(request);
                     var response = await target.RelativeMoveAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "RelativeMoveResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "RelativeMoveResponse");
                 }
-                case OnvifActions.GetStatus:
+                case SoapActions.GetStatus:
                 {
                     var request = new GetStatusRequest();
                     reader.ReadInto(request);
                     var response = await target.GetStatusAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "GetStatusResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "GetStatusResponse");
                 }
-                case OnvifActions.AbsoluteMove:
+                case SoapActions.AbsoluteMove:
                 {
                     var request = new AbsoluteMoveRequest();
                     reader.ReadInto(request);
                     var response = await target.AbsoluteMoveAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "AbsoluteMoveResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "AbsoluteMoveResponse");
                 }
-                case OnvifActions.GeoMove:
+                case SoapActions.GeoMove:
                 {
                     var request = new GeoMoveRequest();
                     reader.ReadInto(request);
                     var response = await target.GeoMoveAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "GeoMoveResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "GeoMoveResponse");
                 }
-                case OnvifActions.Stop:
+                case SoapActions.Stop:
                 {
                     var request = new StopRequest();
                     reader.ReadInto(request);
                     var response = await target.StopAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "StopResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "StopResponse");
                 }
-                case OnvifActions.GetPresetTours:
+                case SoapActions.GetPresetTours:
                 {
                     var request = new GetPresetToursRequest();
                     reader.ReadInto(request);
                     var response = await target.GetPresetToursAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "GetPresetToursResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "GetPresetToursResponse");
                 }
-                case OnvifActions.GetPresetTour:
+                case SoapActions.GetPresetTour:
                 {
                     var request = new GetPresetTourRequest();
                     reader.ReadInto(request);
                     var response = await target.GetPresetTourAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "GetPresetTourResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "GetPresetTourResponse");
                 }
-                case OnvifActions.GetPresetTourOptions:
+                case SoapActions.GetPresetTourOptions:
                 {
                     var request = new GetPresetTourOptionsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetPresetTourOptionsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "GetPresetTourOptionsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "GetPresetTourOptionsResponse");
                 }
-                case OnvifActions.CreatePresetTour:
+                case SoapActions.CreatePresetTour:
                 {
                     var request = new CreatePresetTourRequest();
                     reader.ReadInto(request);
                     var response = await target.CreatePresetTourAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "CreatePresetTourResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "CreatePresetTourResponse");
                 }
-                case OnvifActions.ModifyPresetTour:
+                case SoapActions.ModifyPresetTour:
                 {
                     var request = new ModifyPresetTourRequest();
                     reader.ReadInto(request);
                     var response = await target.ModifyPresetTourAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "ModifyPresetTourResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "ModifyPresetTourResponse");
                 }
-                case OnvifActions.OperatePresetTour:
+                case SoapActions.OperatePresetTour:
                 {
                     var request = new OperatePresetTourRequest();
                     reader.ReadInto(request);
                     var response = await target.OperatePresetTourAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "OperatePresetTourResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "OperatePresetTourResponse");
                 }
-                case OnvifActions.RemovePresetTour:
+                case SoapActions.RemovePresetTour:
                 {
                     var request = new RemovePresetTourRequest();
                     reader.ReadInto(request);
                     var response = await target.RemovePresetTourAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "RemovePresetTourResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "RemovePresetTourResponse");
                 }
-                case OnvifActions.GetCompatibleConfigurations:
+                case SoapActions.GetCompatibleConfigurations:
                 {
                     var request = new GetCompatibleConfigurationsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetCompatibleConfigurationsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "GetCompatibleConfigurationsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "GetCompatibleConfigurationsResponse");
                 }
-                case OnvifActions.MoveAndStartTracking:
+                case SoapActions.MoveAndStartTracking:
                 {
                     var request = new MoveAndStartTrackingRequest();
                     reader.ReadInto(request);
                     var response = await target.MoveAndStartTrackingAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "MoveAndStartTrackingResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/ptz/wsdl", "MoveAndStartTrackingResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }

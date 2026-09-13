@@ -11,7 +11,7 @@
 namespace SharpOnvifClient.ActionEngine
 {
     /// <summary>
-    /// The ActionEnginePort Onvif service.
+    /// The ActionEnginePort service.
     /// </summary>
     public interface ActionEnginePort
     {
@@ -160,7 +160,7 @@ namespace SharpOnvifClient.ActionEngine
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -174,7 +174,7 @@ namespace SharpOnvifClient.ActionEngine
         /// </summary>
         public System.Threading.Tasks.Task<GetSupportedActionsResponse> GetSupportedActionsAsync(GetSupportedActionsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetSupportedActions, "http://www.onvif.org/ver10/actionengine/wsdl", "GetSupportedActions", request,
+            return InvokeAsync(SoapActions.GetSupportedActions, "http://www.onvif.org/ver10/actionengine/wsdl", "GetSupportedActions", request,
                 () => new GetSupportedActionsResponse(), cancellationToken);
         }
 
@@ -191,7 +191,7 @@ namespace SharpOnvifClient.ActionEngine
         /// </summary>
         public System.Threading.Tasks.Task<GetActionsResponse> GetActionsAsync(GetActionsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetActions, "http://www.onvif.org/ver10/actionengine/wsdl", "GetActions", request,
+            return InvokeAsync(SoapActions.GetActions, "http://www.onvif.org/ver10/actionengine/wsdl", "GetActions", request,
                 () => new GetActionsResponse(), cancellationToken);
         }
 
@@ -210,7 +210,7 @@ namespace SharpOnvifClient.ActionEngine
         /// </summary>
         public System.Threading.Tasks.Task<CreateActionsResponse> CreateActionsAsync(CreateActionsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.CreateActions, "http://www.onvif.org/ver10/actionengine/wsdl", "CreateActions", request,
+            return InvokeAsync(SoapActions.CreateActions, "http://www.onvif.org/ver10/actionengine/wsdl", "CreateActions", request,
                 () => new CreateActionsResponse(), cancellationToken);
         }
 
@@ -228,7 +228,7 @@ namespace SharpOnvifClient.ActionEngine
         /// </summary>
         public System.Threading.Tasks.Task<DeleteActionsResponse> DeleteActionsAsync(DeleteActionsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeleteActions, "http://www.onvif.org/ver10/actionengine/wsdl", "DeleteActions", request,
+            return InvokeAsync(SoapActions.DeleteActions, "http://www.onvif.org/ver10/actionengine/wsdl", "DeleteActions", request,
                 () => new DeleteActionsResponse(), cancellationToken);
         }
 
@@ -249,7 +249,7 @@ namespace SharpOnvifClient.ActionEngine
         /// </summary>
         public System.Threading.Tasks.Task<ModifyActionsResponse> ModifyActionsAsync(ModifyActionsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.ModifyActions, "http://www.onvif.org/ver10/actionengine/wsdl", "ModifyActions", request,
+            return InvokeAsync(SoapActions.ModifyActions, "http://www.onvif.org/ver10/actionengine/wsdl", "ModifyActions", request,
                 () => new ModifyActionsResponse(), cancellationToken);
         }
 
@@ -266,7 +266,7 @@ namespace SharpOnvifClient.ActionEngine
         /// </summary>
         public System.Threading.Tasks.Task<GetServiceCapabilitiesResponse> GetServiceCapabilitiesAsync(GetServiceCapabilitiesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetServiceCapabilities, "http://www.onvif.org/ver10/actionengine/wsdl", "GetServiceCapabilities", request,
+            return InvokeAsync(SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver10/actionengine/wsdl", "GetServiceCapabilities", request,
                 () => new GetServiceCapabilitiesResponse(), cancellationToken);
         }
 
@@ -283,7 +283,7 @@ namespace SharpOnvifClient.ActionEngine
         /// </summary>
         public System.Threading.Tasks.Task<GetActionTriggersResponse> GetActionTriggersAsync(GetActionTriggersRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetActionTriggers, "http://www.onvif.org/ver10/actionengine/wsdl", "GetActionTriggers", request,
+            return InvokeAsync(SoapActions.GetActionTriggers, "http://www.onvif.org/ver10/actionengine/wsdl", "GetActionTriggers", request,
                 () => new GetActionTriggersResponse(), cancellationToken);
         }
 
@@ -301,7 +301,7 @@ namespace SharpOnvifClient.ActionEngine
         /// </summary>
         public System.Threading.Tasks.Task<CreateActionTriggersResponse> CreateActionTriggersAsync(CreateActionTriggersRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.CreateActionTriggers, "http://www.onvif.org/ver10/actionengine/wsdl", "CreateActionTriggers", request,
+            return InvokeAsync(SoapActions.CreateActionTriggers, "http://www.onvif.org/ver10/actionengine/wsdl", "CreateActionTriggers", request,
                 () => new CreateActionTriggersResponse(), cancellationToken);
         }
 
@@ -319,7 +319,7 @@ namespace SharpOnvifClient.ActionEngine
         /// </summary>
         public System.Threading.Tasks.Task<DeleteActionTriggersResponse> DeleteActionTriggersAsync(DeleteActionTriggersRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeleteActionTriggers, "http://www.onvif.org/ver10/actionengine/wsdl", "DeleteActionTriggers", request,
+            return InvokeAsync(SoapActions.DeleteActionTriggers, "http://www.onvif.org/ver10/actionengine/wsdl", "DeleteActionTriggers", request,
                 () => new DeleteActionTriggersResponse(), cancellationToken);
         }
 
@@ -338,7 +338,7 @@ namespace SharpOnvifClient.ActionEngine
         /// </summary>
         public System.Threading.Tasks.Task<ModifyActionTriggersResponse> ModifyActionTriggersAsync(ModifyActionTriggersRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.ModifyActionTriggers, "http://www.onvif.org/ver10/actionengine/wsdl", "ModifyActionTriggers", request,
+            return InvokeAsync(SoapActions.ModifyActionTriggers, "http://www.onvif.org/ver10/actionengine/wsdl", "ModifyActionTriggers", request,
                 () => new ModifyActionTriggersResponse(), cancellationToken);
         }
 

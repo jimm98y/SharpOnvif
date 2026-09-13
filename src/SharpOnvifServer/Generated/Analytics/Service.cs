@@ -16,7 +16,7 @@ namespace SharpOnvifServer.Analytics
     public abstract class AnalyticsEnginePortBase
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new AnalyticsEnginePortDispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new AnalyticsEnginePortDispatcher();
 
         /// <summary>
         /// Returns the capabilities of the analytics service. The result is returned in a typed answer.
@@ -199,7 +199,7 @@ namespace SharpOnvifServer.Analytics
     }
 
     /// <summary>Routes SOAP actions to <see cref="AnalyticsEnginePortBase"/>.</summary>
-    internal sealed class AnalyticsEnginePortDispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class AnalyticsEnginePortDispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(AnalyticsEnginePortBase); } }
 
@@ -207,14 +207,14 @@ namespace SharpOnvifServer.Analytics
         {
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
-                case OnvifActions.GetSupportedAnalyticsModules:
-                case OnvifActions.GetAnalyticsModuleOptions:
-                case OnvifActions.CreateAnalyticsModules:
-                case OnvifActions.DeleteAnalyticsModules:
-                case OnvifActions.GetAnalyticsModules:
-                case OnvifActions.ModifyAnalyticsModules:
-                case OnvifActions.GetSupportedMetadata:
+                case SoapActions.GetServiceCapabilities:
+                case SoapActions.GetSupportedAnalyticsModules:
+                case SoapActions.GetAnalyticsModuleOptions:
+                case SoapActions.CreateAnalyticsModules:
+                case SoapActions.DeleteAnalyticsModules:
+                case SoapActions.GetAnalyticsModules:
+                case SoapActions.ModifyAnalyticsModules:
+                case SoapActions.GetSupportedMetadata:
                     return true;
                 default:
                     return false;
@@ -228,56 +228,56 @@ namespace SharpOnvifServer.Analytics
                 case "GetServiceCapabilities":
                     if (ns == "http://www.onvif.org/ver20/analytics/wsdl")
                     {
-                        action = OnvifActions.GetServiceCapabilities;
+                        action = SoapActions.GetServiceCapabilities;
                         return true;
                     }
                     break;
                 case "GetSupportedAnalyticsModules":
                     if (ns == "http://www.onvif.org/ver20/analytics/wsdl")
                     {
-                        action = OnvifActions.GetSupportedAnalyticsModules;
+                        action = SoapActions.GetSupportedAnalyticsModules;
                         return true;
                     }
                     break;
                 case "GetAnalyticsModuleOptions":
                     if (ns == "http://www.onvif.org/ver20/analytics/wsdl")
                     {
-                        action = OnvifActions.GetAnalyticsModuleOptions;
+                        action = SoapActions.GetAnalyticsModuleOptions;
                         return true;
                     }
                     break;
                 case "CreateAnalyticsModules":
                     if (ns == "http://www.onvif.org/ver20/analytics/wsdl")
                     {
-                        action = OnvifActions.CreateAnalyticsModules;
+                        action = SoapActions.CreateAnalyticsModules;
                         return true;
                     }
                     break;
                 case "DeleteAnalyticsModules":
                     if (ns == "http://www.onvif.org/ver20/analytics/wsdl")
                     {
-                        action = OnvifActions.DeleteAnalyticsModules;
+                        action = SoapActions.DeleteAnalyticsModules;
                         return true;
                     }
                     break;
                 case "GetAnalyticsModules":
                     if (ns == "http://www.onvif.org/ver20/analytics/wsdl")
                     {
-                        action = OnvifActions.GetAnalyticsModules;
+                        action = SoapActions.GetAnalyticsModules;
                         return true;
                     }
                     break;
                 case "ModifyAnalyticsModules":
                     if (ns == "http://www.onvif.org/ver20/analytics/wsdl")
                     {
-                        action = OnvifActions.ModifyAnalyticsModules;
+                        action = SoapActions.ModifyAnalyticsModules;
                         return true;
                     }
                     break;
                 case "GetSupportedMetadata":
                     if (ns == "http://www.onvif.org/ver20/analytics/wsdl")
                     {
-                        action = OnvifActions.GetSupportedMetadata;
+                        action = SoapActions.GetSupportedMetadata;
                         return true;
                     }
                     break;
@@ -286,7 +286,7 @@ namespace SharpOnvifServer.Analytics
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             AnalyticsEnginePortBase target = (AnalyticsEnginePortBase)service;
@@ -294,68 +294,68 @@ namespace SharpOnvifServer.Analytics
 
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
+                case SoapActions.GetServiceCapabilities:
                 {
                     var request = new GetServiceCapabilitiesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetServiceCapabilitiesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "GetServiceCapabilitiesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "GetServiceCapabilitiesResponse");
                 }
-                case OnvifActions.GetSupportedAnalyticsModules:
+                case SoapActions.GetSupportedAnalyticsModules:
                 {
                     var request = new GetSupportedAnalyticsModulesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetSupportedAnalyticsModulesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "GetSupportedAnalyticsModulesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "GetSupportedAnalyticsModulesResponse");
                 }
-                case OnvifActions.GetAnalyticsModuleOptions:
+                case SoapActions.GetAnalyticsModuleOptions:
                 {
                     var request = new GetAnalyticsModuleOptionsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAnalyticsModuleOptionsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "GetAnalyticsModuleOptionsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "GetAnalyticsModuleOptionsResponse");
                 }
-                case OnvifActions.CreateAnalyticsModules:
+                case SoapActions.CreateAnalyticsModules:
                 {
                     var request = new CreateAnalyticsModulesRequest();
                     reader.ReadInto(request);
                     var response = await target.CreateAnalyticsModulesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "CreateAnalyticsModulesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "CreateAnalyticsModulesResponse");
                 }
-                case OnvifActions.DeleteAnalyticsModules:
+                case SoapActions.DeleteAnalyticsModules:
                 {
                     var request = new DeleteAnalyticsModulesRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteAnalyticsModulesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "DeleteAnalyticsModulesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "DeleteAnalyticsModulesResponse");
                 }
-                case OnvifActions.GetAnalyticsModules:
+                case SoapActions.GetAnalyticsModules:
                 {
                     var request = new GetAnalyticsModulesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAnalyticsModulesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "GetAnalyticsModulesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "GetAnalyticsModulesResponse");
                 }
-                case OnvifActions.ModifyAnalyticsModules:
+                case SoapActions.ModifyAnalyticsModules:
                 {
                     var request = new ModifyAnalyticsModulesRequest();
                     reader.ReadInto(request);
                     var response = await target.ModifyAnalyticsModulesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "ModifyAnalyticsModulesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "ModifyAnalyticsModulesResponse");
                 }
-                case OnvifActions.GetSupportedMetadata:
+                case SoapActions.GetSupportedMetadata:
                 {
                     var request = new GetSupportedMetadataRequest();
                     reader.ReadInto(request);
                     var response = await target.GetSupportedMetadataAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "GetSupportedMetadataResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "GetSupportedMetadataResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -367,7 +367,7 @@ namespace SharpOnvifServer.Analytics
     public abstract class RuleEnginePortBase
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new RuleEnginePortDispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new RuleEnginePortDispatcher();
 
         /// <summary>
         /// List all rules that are supported by the given VideoAnalyticsConfiguration.
@@ -496,7 +496,7 @@ namespace SharpOnvifServer.Analytics
     }
 
     /// <summary>Routes SOAP actions to <see cref="RuleEnginePortBase"/>.</summary>
-    internal sealed class RuleEnginePortDispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class RuleEnginePortDispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(RuleEnginePortBase); } }
 
@@ -504,12 +504,12 @@ namespace SharpOnvifServer.Analytics
         {
             switch (action)
             {
-                case OnvifActions.GetSupportedRules:
-                case OnvifActions.CreateRules:
-                case OnvifActions.DeleteRules:
-                case OnvifActions.GetRules:
-                case OnvifActions.GetRuleOptions:
-                case OnvifActions.ModifyRules:
+                case SoapActions.GetSupportedRules:
+                case SoapActions.CreateRules:
+                case SoapActions.DeleteRules:
+                case SoapActions.GetRules:
+                case SoapActions.GetRuleOptions:
+                case SoapActions.ModifyRules:
                     return true;
                 default:
                     return false;
@@ -523,42 +523,42 @@ namespace SharpOnvifServer.Analytics
                 case "GetSupportedRules":
                     if (ns == "http://www.onvif.org/ver20/analytics/wsdl")
                     {
-                        action = OnvifActions.GetSupportedRules;
+                        action = SoapActions.GetSupportedRules;
                         return true;
                     }
                     break;
                 case "CreateRules":
                     if (ns == "http://www.onvif.org/ver20/analytics/wsdl")
                     {
-                        action = OnvifActions.CreateRules;
+                        action = SoapActions.CreateRules;
                         return true;
                     }
                     break;
                 case "DeleteRules":
                     if (ns == "http://www.onvif.org/ver20/analytics/wsdl")
                     {
-                        action = OnvifActions.DeleteRules;
+                        action = SoapActions.DeleteRules;
                         return true;
                     }
                     break;
                 case "GetRules":
                     if (ns == "http://www.onvif.org/ver20/analytics/wsdl")
                     {
-                        action = OnvifActions.GetRules;
+                        action = SoapActions.GetRules;
                         return true;
                     }
                     break;
                 case "GetRuleOptions":
                     if (ns == "http://www.onvif.org/ver20/analytics/wsdl")
                     {
-                        action = OnvifActions.GetRuleOptions;
+                        action = SoapActions.GetRuleOptions;
                         return true;
                     }
                     break;
                 case "ModifyRules":
                     if (ns == "http://www.onvif.org/ver20/analytics/wsdl")
                     {
-                        action = OnvifActions.ModifyRules;
+                        action = SoapActions.ModifyRules;
                         return true;
                     }
                     break;
@@ -567,7 +567,7 @@ namespace SharpOnvifServer.Analytics
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             RuleEnginePortBase target = (RuleEnginePortBase)service;
@@ -575,54 +575,54 @@ namespace SharpOnvifServer.Analytics
 
             switch (action)
             {
-                case OnvifActions.GetSupportedRules:
+                case SoapActions.GetSupportedRules:
                 {
                     var request = new GetSupportedRulesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetSupportedRulesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "GetSupportedRulesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "GetSupportedRulesResponse");
                 }
-                case OnvifActions.CreateRules:
+                case SoapActions.CreateRules:
                 {
                     var request = new CreateRulesRequest();
                     reader.ReadInto(request);
                     var response = await target.CreateRulesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "CreateRulesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "CreateRulesResponse");
                 }
-                case OnvifActions.DeleteRules:
+                case SoapActions.DeleteRules:
                 {
                     var request = new DeleteRulesRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteRulesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "DeleteRulesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "DeleteRulesResponse");
                 }
-                case OnvifActions.GetRules:
+                case SoapActions.GetRules:
                 {
                     var request = new GetRulesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetRulesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "GetRulesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "GetRulesResponse");
                 }
-                case OnvifActions.GetRuleOptions:
+                case SoapActions.GetRuleOptions:
                 {
                     var request = new GetRuleOptionsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetRuleOptionsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "GetRuleOptionsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "GetRuleOptionsResponse");
                 }
-                case OnvifActions.ModifyRules:
+                case SoapActions.ModifyRules:
                 {
                     var request = new ModifyRulesRequest();
                     reader.ReadInto(request);
                     var response = await target.ModifyRulesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "ModifyRulesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "ModifyRulesResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -634,7 +634,7 @@ namespace SharpOnvifServer.Analytics
     public abstract class AnalyticsBase
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new AnalyticsDispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new AnalyticsDispatcher();
 
         /// <summary>
         /// Returns the capabilities of the analytics service. The result is returned in a typed answer.
@@ -942,7 +942,7 @@ namespace SharpOnvifServer.Analytics
     }
 
     /// <summary>Routes SOAP actions to <see cref="AnalyticsBase"/>.</summary>
-    internal sealed class AnalyticsDispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class AnalyticsDispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(AnalyticsBase); } }
 
@@ -950,20 +950,20 @@ namespace SharpOnvifServer.Analytics
         {
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
-                case OnvifActions.GetSupportedAnalyticsModules:
-                case OnvifActions.GetAnalyticsModuleOptions:
-                case OnvifActions.CreateAnalyticsModules:
-                case OnvifActions.DeleteAnalyticsModules:
-                case OnvifActions.GetAnalyticsModules:
-                case OnvifActions.ModifyAnalyticsModules:
-                case OnvifActions.GetSupportedMetadata:
-                case OnvifActions.GetSupportedRules:
-                case OnvifActions.CreateRules:
-                case OnvifActions.DeleteRules:
-                case OnvifActions.GetRules:
-                case OnvifActions.GetRuleOptions:
-                case OnvifActions.ModifyRules:
+                case SoapActions.GetServiceCapabilities:
+                case SoapActions.GetSupportedAnalyticsModules:
+                case SoapActions.GetAnalyticsModuleOptions:
+                case SoapActions.CreateAnalyticsModules:
+                case SoapActions.DeleteAnalyticsModules:
+                case SoapActions.GetAnalyticsModules:
+                case SoapActions.ModifyAnalyticsModules:
+                case SoapActions.GetSupportedMetadata:
+                case SoapActions.GetSupportedRules:
+                case SoapActions.CreateRules:
+                case SoapActions.DeleteRules:
+                case SoapActions.GetRules:
+                case SoapActions.GetRuleOptions:
+                case SoapActions.ModifyRules:
                     return true;
                 default:
                     return false;
@@ -977,98 +977,98 @@ namespace SharpOnvifServer.Analytics
                 case "GetServiceCapabilities":
                     if (ns == "http://www.onvif.org/ver20/analytics/wsdl")
                     {
-                        action = OnvifActions.GetServiceCapabilities;
+                        action = SoapActions.GetServiceCapabilities;
                         return true;
                     }
                     break;
                 case "GetSupportedAnalyticsModules":
                     if (ns == "http://www.onvif.org/ver20/analytics/wsdl")
                     {
-                        action = OnvifActions.GetSupportedAnalyticsModules;
+                        action = SoapActions.GetSupportedAnalyticsModules;
                         return true;
                     }
                     break;
                 case "GetAnalyticsModuleOptions":
                     if (ns == "http://www.onvif.org/ver20/analytics/wsdl")
                     {
-                        action = OnvifActions.GetAnalyticsModuleOptions;
+                        action = SoapActions.GetAnalyticsModuleOptions;
                         return true;
                     }
                     break;
                 case "CreateAnalyticsModules":
                     if (ns == "http://www.onvif.org/ver20/analytics/wsdl")
                     {
-                        action = OnvifActions.CreateAnalyticsModules;
+                        action = SoapActions.CreateAnalyticsModules;
                         return true;
                     }
                     break;
                 case "DeleteAnalyticsModules":
                     if (ns == "http://www.onvif.org/ver20/analytics/wsdl")
                     {
-                        action = OnvifActions.DeleteAnalyticsModules;
+                        action = SoapActions.DeleteAnalyticsModules;
                         return true;
                     }
                     break;
                 case "GetAnalyticsModules":
                     if (ns == "http://www.onvif.org/ver20/analytics/wsdl")
                     {
-                        action = OnvifActions.GetAnalyticsModules;
+                        action = SoapActions.GetAnalyticsModules;
                         return true;
                     }
                     break;
                 case "ModifyAnalyticsModules":
                     if (ns == "http://www.onvif.org/ver20/analytics/wsdl")
                     {
-                        action = OnvifActions.ModifyAnalyticsModules;
+                        action = SoapActions.ModifyAnalyticsModules;
                         return true;
                     }
                     break;
                 case "GetSupportedMetadata":
                     if (ns == "http://www.onvif.org/ver20/analytics/wsdl")
                     {
-                        action = OnvifActions.GetSupportedMetadata;
+                        action = SoapActions.GetSupportedMetadata;
                         return true;
                     }
                     break;
                 case "GetSupportedRules":
                     if (ns == "http://www.onvif.org/ver20/analytics/wsdl")
                     {
-                        action = OnvifActions.GetSupportedRules;
+                        action = SoapActions.GetSupportedRules;
                         return true;
                     }
                     break;
                 case "CreateRules":
                     if (ns == "http://www.onvif.org/ver20/analytics/wsdl")
                     {
-                        action = OnvifActions.CreateRules;
+                        action = SoapActions.CreateRules;
                         return true;
                     }
                     break;
                 case "DeleteRules":
                     if (ns == "http://www.onvif.org/ver20/analytics/wsdl")
                     {
-                        action = OnvifActions.DeleteRules;
+                        action = SoapActions.DeleteRules;
                         return true;
                     }
                     break;
                 case "GetRules":
                     if (ns == "http://www.onvif.org/ver20/analytics/wsdl")
                     {
-                        action = OnvifActions.GetRules;
+                        action = SoapActions.GetRules;
                         return true;
                     }
                     break;
                 case "GetRuleOptions":
                     if (ns == "http://www.onvif.org/ver20/analytics/wsdl")
                     {
-                        action = OnvifActions.GetRuleOptions;
+                        action = SoapActions.GetRuleOptions;
                         return true;
                     }
                     break;
                 case "ModifyRules":
                     if (ns == "http://www.onvif.org/ver20/analytics/wsdl")
                     {
-                        action = OnvifActions.ModifyRules;
+                        action = SoapActions.ModifyRules;
                         return true;
                     }
                     break;
@@ -1077,7 +1077,7 @@ namespace SharpOnvifServer.Analytics
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             AnalyticsBase target = (AnalyticsBase)service;
@@ -1085,110 +1085,110 @@ namespace SharpOnvifServer.Analytics
 
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
+                case SoapActions.GetServiceCapabilities:
                 {
                     var request = new GetServiceCapabilitiesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetServiceCapabilitiesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "GetServiceCapabilitiesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "GetServiceCapabilitiesResponse");
                 }
-                case OnvifActions.GetSupportedAnalyticsModules:
+                case SoapActions.GetSupportedAnalyticsModules:
                 {
                     var request = new GetSupportedAnalyticsModulesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetSupportedAnalyticsModulesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "GetSupportedAnalyticsModulesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "GetSupportedAnalyticsModulesResponse");
                 }
-                case OnvifActions.GetAnalyticsModuleOptions:
+                case SoapActions.GetAnalyticsModuleOptions:
                 {
                     var request = new GetAnalyticsModuleOptionsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAnalyticsModuleOptionsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "GetAnalyticsModuleOptionsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "GetAnalyticsModuleOptionsResponse");
                 }
-                case OnvifActions.CreateAnalyticsModules:
+                case SoapActions.CreateAnalyticsModules:
                 {
                     var request = new CreateAnalyticsModulesRequest();
                     reader.ReadInto(request);
                     var response = await target.CreateAnalyticsModulesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "CreateAnalyticsModulesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "CreateAnalyticsModulesResponse");
                 }
-                case OnvifActions.DeleteAnalyticsModules:
+                case SoapActions.DeleteAnalyticsModules:
                 {
                     var request = new DeleteAnalyticsModulesRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteAnalyticsModulesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "DeleteAnalyticsModulesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "DeleteAnalyticsModulesResponse");
                 }
-                case OnvifActions.GetAnalyticsModules:
+                case SoapActions.GetAnalyticsModules:
                 {
                     var request = new GetAnalyticsModulesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAnalyticsModulesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "GetAnalyticsModulesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "GetAnalyticsModulesResponse");
                 }
-                case OnvifActions.ModifyAnalyticsModules:
+                case SoapActions.ModifyAnalyticsModules:
                 {
                     var request = new ModifyAnalyticsModulesRequest();
                     reader.ReadInto(request);
                     var response = await target.ModifyAnalyticsModulesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "ModifyAnalyticsModulesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "ModifyAnalyticsModulesResponse");
                 }
-                case OnvifActions.GetSupportedMetadata:
+                case SoapActions.GetSupportedMetadata:
                 {
                     var request = new GetSupportedMetadataRequest();
                     reader.ReadInto(request);
                     var response = await target.GetSupportedMetadataAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "GetSupportedMetadataResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "GetSupportedMetadataResponse");
                 }
-                case OnvifActions.GetSupportedRules:
+                case SoapActions.GetSupportedRules:
                 {
                     var request = new GetSupportedRulesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetSupportedRulesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "GetSupportedRulesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "GetSupportedRulesResponse");
                 }
-                case OnvifActions.CreateRules:
+                case SoapActions.CreateRules:
                 {
                     var request = new CreateRulesRequest();
                     reader.ReadInto(request);
                     var response = await target.CreateRulesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "CreateRulesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "CreateRulesResponse");
                 }
-                case OnvifActions.DeleteRules:
+                case SoapActions.DeleteRules:
                 {
                     var request = new DeleteRulesRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteRulesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "DeleteRulesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "DeleteRulesResponse");
                 }
-                case OnvifActions.GetRules:
+                case SoapActions.GetRules:
                 {
                     var request = new GetRulesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetRulesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "GetRulesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "GetRulesResponse");
                 }
-                case OnvifActions.GetRuleOptions:
+                case SoapActions.GetRuleOptions:
                 {
                     var request = new GetRuleOptionsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetRuleOptionsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "GetRuleOptionsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "GetRuleOptionsResponse");
                 }
-                case OnvifActions.ModifyRules:
+                case SoapActions.ModifyRules:
                 {
                     var request = new ModifyRulesRequest();
                     reader.ReadInto(request);
                     var response = await target.ModifyRulesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "ModifyRulesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/analytics/wsdl", "ModifyRulesResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }

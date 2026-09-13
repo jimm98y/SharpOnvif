@@ -55,7 +55,8 @@ internal sealed class CodeGenerator
             .ToHashSet(StringComparer.Ordinal);
 
         var sharedModel = ModelBuilder.BuildShared(
-            schema, parsed.Select(s => s.Wsdl).ToList(), serviceNamespaces, _options.SharedNamespace);
+            schema, parsed.Select(s => s.Wsdl).ToList(), serviceNamespaces, _options.SharedNamespace,
+            _options.TypeNamePrefix);
         var sharedTypes = SharedTypeIndex.From(sharedModel);
 
         // The runtime first, because everything else is compiled against it.
@@ -95,6 +96,23 @@ internal sealed class CodeGenerator
             written, operations, sharedModel.Classes.Count + sharedModel.Enums.Count, runtimeFiles, services);
     }
 
+    /// <summary>
+    /// The namespace a generated service is routed by. There is no default worth having: a
+    /// service that names the wrong dispatch does not compile, and one that names none cannot be
+    /// generated at all.
+    /// </summary>
+    private string Dispatch()
+    {
+        if (string.IsNullOrEmpty(_options.DispatchNamespace))
+        {
+            throw new SchemaException(
+                "Generating a service needs the namespace it is routed by: --dispatch, or " +
+                "\"dispatch\" in the configuration. Generate with --client for a client alone.");
+        }
+
+        return _options.DispatchNamespace;
+    }
+
     private int EmitShared(CsModel model)
     {
         var file = new GeneratedFile(
@@ -117,7 +135,8 @@ internal sealed class CodeGenerator
         string @namespace = target.Namespace + "." + definition.Name;
         string directory = Path.Combine(target.Directory, definition.Name);
 
-        var model = new ModelBuilder(definition.Name, schema, wsdl, @namespace, sharedTypes).Build();
+        var model = new ModelBuilder(
+            definition.Name, schema, wsdl, @namespace, sharedTypes, _options.TypeNamePrefix).Build();
         summary ??= model;
 
         var contracts = new GeneratedFile(
@@ -129,7 +148,7 @@ internal sealed class CodeGenerator
 
         var api = server
             ? new GeneratedFile(
-                Path.Combine(directory, "Service.cs"), new ServerEmitter(model, @namespace, runtime, _options.DispatchNamespace).Emit())
+                Path.Combine(directory, "Service.cs"), new ServerEmitter(model, @namespace, runtime, Dispatch()).Emit())
             : new GeneratedFile(
                 Path.Combine(directory, "Client.cs"), new ClientEmitter(model, @namespace, runtime, _options.SettingsType).Emit());
 

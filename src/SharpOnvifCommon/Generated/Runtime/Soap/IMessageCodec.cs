@@ -40,8 +40,8 @@ namespace SharpOnvifCommon.Soap
     /// </summary>
     /// <remarks>
     /// The client knows that a call is a body written into an envelope and a reply read out of
-    /// one. It does not know what an envelope looks like - SOAP 1.2 is one answer, and the one
-    /// Onvif takes, but it is an answer rather than the question.
+    /// one. It does not know what an envelope looks like - SOAP 1.2 is one answer, but it is an
+    /// answer rather than the question.
     /// </remarks>
     public interface IMessageCodec
     {
@@ -71,6 +71,6 @@ namespace SharpOnvifCommon.Soap
         /// it - which is what an operation whose reply says nothing still has to do.
         /// </param>
         /// <param name="resolveXmlType">Resolves an xsi:type to an instance, and may be null.</param>
-        bool ReadEnvelopeBody(Stream stream, OnvifContract into, Func<string, string, OnvifContract> resolveXmlType);
+        bool ReadEnvelopeBody(Stream stream, XmlContract into, Func<string, string, XmlContract> resolveXmlType);
     }
 }

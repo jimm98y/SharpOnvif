@@ -29,7 +29,7 @@ namespace SharpOnvifServer.Events
     /// already exists with the same Address, the existing configuration shall be modified.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddEventBroker", Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class AddEventBrokerRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AddEventBrokerRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private EventBrokerConfig eventBrokerField;
 
@@ -74,7 +74,7 @@ namespace SharpOnvifServer.Events
     /// already exists with the same Address, the existing configuration shall be modified.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddEventBrokerResponse", Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class AddEventBrokerResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AddEventBrokerResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public AddEventBrokerResponse()
         {
@@ -83,7 +83,7 @@ namespace SharpOnvifServer.Events
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class Capabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Capabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -275,9 +275,9 @@ namespace SharpOnvifServer.Events
             set { this.metadataOverMQTTFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Capabilities"; } }
+        protected override string XmlTypeName { get { return "Capabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Events; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Events; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -365,7 +365,7 @@ namespace SharpOnvifServer.Events
     }
 
     [System.Xml.Serialization.XmlRootAttribute("CreatePullPoint", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class CreatePullPointRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreatePullPointRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -399,7 +399,7 @@ namespace SharpOnvifServer.Events
     }
 
     [System.Xml.Serialization.XmlRootAttribute("CreatePullPointResponse", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class CreatePullPointResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreatePullPointResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.EndpointReferenceType pullPointField;
 
@@ -457,7 +457,7 @@ namespace SharpOnvifServer.Events
     /// client. This method is mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreatePullPointSubscription", Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class CreatePullPointSubscriptionRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreatePullPointSubscriptionRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.FilterType filterField;
 
@@ -559,7 +559,7 @@ namespace SharpOnvifServer.Events
     /// client. This method is mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreatePullPointSubscriptionResponse", Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class CreatePullPointSubscriptionResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreatePullPointSubscriptionResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.EndpointReferenceType subscriptionReferenceField;
 
@@ -648,7 +648,7 @@ namespace SharpOnvifServer.Events
 
     }
 
-    public partial class CreatePullPointSubscriptionSubscriptionPolicy : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreatePullPointSubscriptionSubscriptionPolicy : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -677,7 +677,7 @@ namespace SharpOnvifServer.Events
     /// device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteEventBroker", Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class DeleteEventBrokerRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteEventBrokerRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string addressField;
 
@@ -721,7 +721,7 @@ namespace SharpOnvifServer.Events
     /// device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteEventBrokerResponse", Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class DeleteEventBrokerResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteEventBrokerResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public DeleteEventBrokerResponse()
         {
@@ -730,7 +730,7 @@ namespace SharpOnvifServer.Events
     }
 
     [System.Xml.Serialization.XmlRootAttribute("DestroyPullPoint", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class DestroyPullPointRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DestroyPullPointRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -764,7 +764,7 @@ namespace SharpOnvifServer.Events
     }
 
     [System.Xml.Serialization.XmlRootAttribute("DestroyPullPointResponse", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class DestroyPullPointResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DestroyPullPointResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -798,7 +798,7 @@ namespace SharpOnvifServer.Events
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class EventBrokerConfig : SharpOnvifCommon.Xml.OnvifContract
+    public partial class EventBrokerConfig : SharpOnvifCommon.Xml.XmlContract
     {
         private string addressField;
 
@@ -948,9 +948,9 @@ namespace SharpOnvifServer.Events
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "EventBrokerConfig"; } }
+        protected override string XmlTypeName { get { return "EventBrokerConfig"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Events; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Events; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -1023,7 +1023,7 @@ namespace SharpOnvifServer.Events
     }
 
     [System.Xml.Serialization.XmlRootAttribute("GetCurrentMessage", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class GetCurrentMessageRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCurrentMessageRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.TopicExpressionType topicField;
 
@@ -1075,7 +1075,7 @@ namespace SharpOnvifServer.Events
     }
 
     [System.Xml.Serialization.XmlRootAttribute("GetCurrentMessageResponse", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class GetCurrentMessageResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCurrentMessageResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -1112,7 +1112,7 @@ namespace SharpOnvifServer.Events
     /// The GetEventBrokers command lets a client retrieve event broker configurations from the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetEventBrokers", Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class GetEventBrokersRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetEventBrokersRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string addressField;
 
@@ -1155,7 +1155,7 @@ namespace SharpOnvifServer.Events
     /// The GetEventBrokers command lets a client retrieve event broker configurations from the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetEventBrokersResponse", Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class GetEventBrokersResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetEventBrokersResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private EventBrokerConfig[] eventBrokerField;
 
@@ -1207,7 +1207,7 @@ namespace SharpOnvifServer.Events
     /// information about the FilterDialects, Schema files and topics supported by the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetEventProperties", Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class GetEventPropertiesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetEventPropertiesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetEventPropertiesRequest()
         {
@@ -1222,7 +1222,7 @@ namespace SharpOnvifServer.Events
     /// information about the FilterDialects, Schema files and topics supported by the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetEventPropertiesResponse", Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class GetEventPropertiesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetEventPropertiesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] topicNamespaceLocationField;
 
@@ -1414,7 +1414,7 @@ namespace SharpOnvifServer.Events
     }
 
     [System.Xml.Serialization.XmlRootAttribute("GetMessages", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class GetMessagesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetMessagesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string maximumNumberField;
 
@@ -1466,7 +1466,7 @@ namespace SharpOnvifServer.Events
     }
 
     [System.Xml.Serialization.XmlRootAttribute("GetMessagesResponse", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class GetMessagesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetMessagesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.NotificationMessageHolderType[] notificationMessageField;
 
@@ -1527,7 +1527,7 @@ namespace SharpOnvifServer.Events
     /// Returns the capabilities of the event service. The result is returned in a typed answer.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilities", Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetServiceCapabilitiesRequest()
         {
@@ -1539,7 +1539,7 @@ namespace SharpOnvifServer.Events
     /// Returns the capabilities of the event service. The result is returned in a typed answer.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilitiesResponse", Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private Capabilities capabilitiesField;
 
@@ -1582,7 +1582,7 @@ namespace SharpOnvifServer.Events
     }
 
     [System.Xml.Serialization.XmlRootAttribute("Notify", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class NotifyRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class NotifyRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.NotificationMessageHolderType[] notificationMessageField;
 
@@ -1639,7 +1639,7 @@ namespace SharpOnvifServer.Events
 
     }
 
-    public partial class NotifyResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class NotifyResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public NotifyResponse()
         {
@@ -1648,7 +1648,7 @@ namespace SharpOnvifServer.Events
     }
 
     [System.Xml.Serialization.XmlRootAttribute("PauseSubscription", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class PauseSubscriptionRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PauseSubscriptionRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -1682,7 +1682,7 @@ namespace SharpOnvifServer.Events
     }
 
     [System.Xml.Serialization.XmlRootAttribute("PauseSubscriptionResponse", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class PauseSubscriptionResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PauseSubscriptionResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -1724,7 +1724,7 @@ namespace SharpOnvifServer.Events
     /// requested it shall return these without generating a fault.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("PullMessages", Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class PullMessagesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PullMessagesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string timeoutField;
 
@@ -1806,7 +1806,7 @@ namespace SharpOnvifServer.Events
     /// requested it shall return these without generating a fault.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("PullMessagesResponse", Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class PullMessagesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PullMessagesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private System.DateTime currentTimeField;
 
@@ -1888,7 +1888,7 @@ namespace SharpOnvifServer.Events
     }
 
     [System.Xml.Serialization.XmlRootAttribute("Renew", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class RenewRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RenewRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string terminationTimeField;
 
@@ -1945,7 +1945,7 @@ namespace SharpOnvifServer.Events
     }
 
     [System.Xml.Serialization.XmlRootAttribute("RenewResponse", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class RenewResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RenewResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private System.DateTime terminationTimeField;
 
@@ -2034,7 +2034,7 @@ namespace SharpOnvifServer.Events
     }
 
     [System.Xml.Serialization.XmlRootAttribute("ResumeSubscription", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class ResumeSubscriptionRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ResumeSubscriptionRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -2068,7 +2068,7 @@ namespace SharpOnvifServer.Events
     }
 
     [System.Xml.Serialization.XmlRootAttribute("ResumeSubscriptionResponse", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class ResumeSubscriptionResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ResumeSubscriptionResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -2109,7 +2109,7 @@ namespace SharpOnvifServer.Events
     /// attribute on a NotificationMessage.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("Seek", Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class SeekRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SeekRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private System.DateTime utcTimeField;
 
@@ -2206,7 +2206,7 @@ namespace SharpOnvifServer.Events
     /// attribute on a NotificationMessage.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SeekResponse", Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class SeekResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SeekResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SeekResponse()
         {
@@ -2225,7 +2225,7 @@ namespace SharpOnvifServer.Events
     /// mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetSynchronizationPoint", Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class SetSynchronizationPointRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetSynchronizationPointRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public SetSynchronizationPointRequest()
         {
@@ -2244,7 +2244,7 @@ namespace SharpOnvifServer.Events
     /// mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetSynchronizationPointResponse", Namespace="http://www.onvif.org/ver10/events/wsdl")]
-    public partial class SetSynchronizationPointResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetSynchronizationPointResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetSynchronizationPointResponse()
         {
@@ -2253,7 +2253,7 @@ namespace SharpOnvifServer.Events
     }
 
     [System.Xml.Serialization.XmlRootAttribute("Subscribe", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class SubscribeRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SubscribeRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.EndpointReferenceType consumerReferenceField;
 
@@ -2355,7 +2355,7 @@ namespace SharpOnvifServer.Events
     }
 
     [System.Xml.Serialization.XmlRootAttribute("SubscribeResponse", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class SubscribeResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SubscribeResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.EndpointReferenceType subscriptionReferenceField;
 
@@ -2475,7 +2475,7 @@ namespace SharpOnvifServer.Events
 
     }
 
-    public partial class SubscribeSubscriptionPolicy : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SubscribeSubscriptionPolicy : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -2500,7 +2500,7 @@ namespace SharpOnvifServer.Events
     }
 
     [System.Xml.Serialization.XmlRootAttribute("Unsubscribe", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class UnsubscribeRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class UnsubscribeRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -2534,7 +2534,7 @@ namespace SharpOnvifServer.Events
     }
 
     [System.Xml.Serialization.XmlRootAttribute("UnsubscribeResponse", Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class UnsubscribeResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class UnsubscribeResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -2570,14 +2570,14 @@ namespace SharpOnvifServer.Events
     /// <summary>Constructs a contract named by an xsi:type attribute.</summary>
     internal static class XmlTypeFactory
     {
-        public static SharpOnvifCommon.Xml.OnvifContract Create(string ns, string name)
+        public static SharpOnvifCommon.Xml.XmlContract Create(string ns, string name)
         {
             return SharpOnvifCommon.Onvif.XmlTypeFactory.Create(ns, name);
         }
     }
 
     /// <summary>SOAP action URIs for this service's operations.</summary>
-    public static class OnvifActions
+    public static class SoapActions
     {
         public const string CreatePullPoint = "http://docs.oasis-open.org/wsn/bw-2/CreatePullPoint/CreatePullPointRequest";
         public const string GetServiceCapabilities = "http://www.onvif.org/ver10/events/wsdl/EventPortType/GetServiceCapabilitiesRequest";

@@ -22,7 +22,7 @@ namespace SharpOnvifClient.Analytics
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/analytics/wsdl")]
-    public partial class Capabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Capabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -191,9 +191,9 @@ namespace SharpOnvifClient.Analytics
             set { this.imageSendingTypeField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Capabilities"; } }
+        protected override string XmlTypeName { get { return "Capabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver20Analytics; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver20Analytics; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -273,7 +273,7 @@ namespace SharpOnvifClient.Analytics
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/analytics/wsdl")]
-    public partial class ConfigOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ConfigOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -383,9 +383,9 @@ namespace SharpOnvifClient.Analytics
             set { this.maxOccursFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ConfigOptions"; } }
+        protected override string XmlTypeName { get { return "ConfigOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver20Analytics; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver20Analytics; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -461,7 +461,7 @@ namespace SharpOnvifClient.Analytics
     /// different profiles are activated at the same time.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateAnalyticsModules", Namespace="http://www.onvif.org/ver20/analytics/wsdl")]
-    public partial class CreateAnalyticsModulesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateAnalyticsModulesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string configurationTokenField;
 
@@ -541,7 +541,7 @@ namespace SharpOnvifClient.Analytics
     /// different profiles are activated at the same time.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateAnalyticsModulesResponse", Namespace="http://www.onvif.org/ver20/analytics/wsdl")]
-    public partial class CreateAnalyticsModulesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateAnalyticsModulesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public CreateAnalyticsModulesResponse()
         {
@@ -558,7 +558,7 @@ namespace SharpOnvifClient.Analytics
     /// predefined configurations via the media service function GetCompatibleVideoAnalyticsConfigurations.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateRules", Namespace="http://www.onvif.org/ver20/analytics/wsdl")]
-    public partial class CreateRulesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateRulesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string configurationTokenField;
 
@@ -630,7 +630,7 @@ namespace SharpOnvifClient.Analytics
     /// predefined configurations via the media service function GetCompatibleVideoAnalyticsConfigurations.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateRulesResponse", Namespace="http://www.onvif.org/ver20/analytics/wsdl")]
-    public partial class CreateRulesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateRulesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public CreateRulesResponse()
         {
@@ -642,7 +642,7 @@ namespace SharpOnvifClient.Analytics
     /// Remove one or more analytics modules from a VideoAnalyticsConfiguration referenced by their names.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteAnalyticsModules", Namespace="http://www.onvif.org/ver20/analytics/wsdl")]
-    public partial class DeleteAnalyticsModulesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteAnalyticsModulesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string configurationTokenField;
 
@@ -712,7 +712,7 @@ namespace SharpOnvifClient.Analytics
     /// Remove one or more analytics modules from a VideoAnalyticsConfiguration referenced by their names.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteAnalyticsModulesResponse", Namespace="http://www.onvif.org/ver20/analytics/wsdl")]
-    public partial class DeleteAnalyticsModulesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteAnalyticsModulesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public DeleteAnalyticsModulesResponse()
         {
@@ -724,7 +724,7 @@ namespace SharpOnvifClient.Analytics
     /// Remove one or more rules from a VideoAnalyticsConfiguration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteRules", Namespace="http://www.onvif.org/ver20/analytics/wsdl")]
-    public partial class DeleteRulesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteRulesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string configurationTokenField;
 
@@ -794,7 +794,7 @@ namespace SharpOnvifClient.Analytics
     /// Remove one or more rules from a VideoAnalyticsConfiguration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteRulesResponse", Namespace="http://www.onvif.org/ver20/analytics/wsdl")]
-    public partial class DeleteRulesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteRulesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public DeleteRulesResponse()
         {
@@ -806,7 +806,7 @@ namespace SharpOnvifClient.Analytics
     /// Return the options for the supported analytics modules that specify an Option attribute.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAnalyticsModuleOptions", Namespace="http://www.onvif.org/ver20/analytics/wsdl")]
-    public partial class GetAnalyticsModuleOptionsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAnalyticsModuleOptionsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlQualifiedName typeField;
 
@@ -870,7 +870,7 @@ namespace SharpOnvifClient.Analytics
     /// Return the options for the supported analytics modules that specify an Option attribute.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAnalyticsModuleOptionsResponse", Namespace="http://www.onvif.org/ver20/analytics/wsdl")]
-    public partial class GetAnalyticsModuleOptionsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAnalyticsModuleOptionsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private ConfigOptions[] optionsField;
 
@@ -923,7 +923,7 @@ namespace SharpOnvifClient.Analytics
     /// List the currently assigned set of analytics modules of a VideoAnalyticsConfiguration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAnalyticsModules", Namespace="http://www.onvif.org/ver20/analytics/wsdl")]
-    public partial class GetAnalyticsModulesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAnalyticsModulesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string configurationTokenField;
 
@@ -969,7 +969,7 @@ namespace SharpOnvifClient.Analytics
     /// List the currently assigned set of analytics modules of a VideoAnalyticsConfiguration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAnalyticsModulesResponse", Namespace="http://www.onvif.org/ver20/analytics/wsdl")]
-    public partial class GetAnalyticsModulesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAnalyticsModulesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.Config[] analyticsModuleField;
 
@@ -1018,7 +1018,7 @@ namespace SharpOnvifClient.Analytics
     /// Return the options for the supported rules that specify an Option attribute.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRuleOptions", Namespace="http://www.onvif.org/ver20/analytics/wsdl")]
-    public partial class GetRuleOptionsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetRuleOptionsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlQualifiedName ruleTypeField;
 
@@ -1082,7 +1082,7 @@ namespace SharpOnvifClient.Analytics
     /// Return the options for the supported rules that specify an Option attribute.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRuleOptionsResponse", Namespace="http://www.onvif.org/ver20/analytics/wsdl")]
-    public partial class GetRuleOptionsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetRuleOptionsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private ConfigOptions[] ruleOptionsField;
 
@@ -1135,7 +1135,7 @@ namespace SharpOnvifClient.Analytics
     /// List the currently assigned set of rules of a VideoAnalyticsConfiguration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRules", Namespace="http://www.onvif.org/ver20/analytics/wsdl")]
-    public partial class GetRulesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetRulesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string configurationTokenField;
 
@@ -1181,7 +1181,7 @@ namespace SharpOnvifClient.Analytics
     /// List the currently assigned set of rules of a VideoAnalyticsConfiguration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRulesResponse", Namespace="http://www.onvif.org/ver20/analytics/wsdl")]
-    public partial class GetRulesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetRulesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.Config[] ruleField;
 
@@ -1230,7 +1230,7 @@ namespace SharpOnvifClient.Analytics
     /// Returns the capabilities of the analytics service. The result is returned in a typed answer.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilities", Namespace="http://www.onvif.org/ver20/analytics/wsdl")]
-    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetServiceCapabilitiesRequest()
         {
@@ -1242,7 +1242,7 @@ namespace SharpOnvifClient.Analytics
     /// Returns the capabilities of the analytics service. The result is returned in a typed answer.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilitiesResponse", Namespace="http://www.onvif.org/ver20/analytics/wsdl")]
-    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private Capabilities capabilitiesField;
 
@@ -1288,7 +1288,7 @@ namespace SharpOnvifClient.Analytics
     /// List all analytics modules that are supported by the given VideoAnalyticsConfiguration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSupportedAnalyticsModules", Namespace="http://www.onvif.org/ver20/analytics/wsdl")]
-    public partial class GetSupportedAnalyticsModulesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetSupportedAnalyticsModulesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string configurationTokenField;
 
@@ -1334,7 +1334,7 @@ namespace SharpOnvifClient.Analytics
     /// List all analytics modules that are supported by the given VideoAnalyticsConfiguration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSupportedAnalyticsModulesResponse", Namespace="http://www.onvif.org/ver20/analytics/wsdl")]
-    public partial class GetSupportedAnalyticsModulesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetSupportedAnalyticsModulesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.SupportedAnalyticsModules supportedAnalyticsModulesField;
 
@@ -1382,7 +1382,7 @@ namespace SharpOnvifClient.Analytics
     /// enumerations.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSupportedMetadata", Namespace="http://www.onvif.org/ver20/analytics/wsdl")]
-    public partial class GetSupportedMetadataRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetSupportedMetadataRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlQualifiedName typeField;
 
@@ -1433,7 +1433,7 @@ namespace SharpOnvifClient.Analytics
     /// enumerations.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSupportedMetadataResponse", Namespace="http://www.onvif.org/ver20/analytics/wsdl")]
-    public partial class GetSupportedMetadataResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetSupportedMetadataResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private MetadataInfo[] analyticsModuleField;
 
@@ -1482,7 +1482,7 @@ namespace SharpOnvifClient.Analytics
     /// List all rules that are supported by the given VideoAnalyticsConfiguration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSupportedRules", Namespace="http://www.onvif.org/ver20/analytics/wsdl")]
-    public partial class GetSupportedRulesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetSupportedRulesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string configurationTokenField;
 
@@ -1529,7 +1529,7 @@ namespace SharpOnvifClient.Analytics
     /// List all rules that are supported by the given VideoAnalyticsConfiguration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSupportedRulesResponse", Namespace="http://www.onvif.org/ver20/analytics/wsdl")]
-    public partial class GetSupportedRulesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetSupportedRulesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.SupportedRules supportedRulesField;
 
@@ -1569,7 +1569,7 @@ namespace SharpOnvifClient.Analytics
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/analytics/wsdl")]
-    public partial class MetadataInfo : SharpOnvifCommon.Xml.OnvifContract
+    public partial class MetadataInfo : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.Frame sampleFrameField;
 
@@ -1604,9 +1604,9 @@ namespace SharpOnvifClient.Analytics
             set { this.typeField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "MetadataInfo"; } }
+        protected override string XmlTypeName { get { return "MetadataInfo"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver20Analytics; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver20Analytics; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -1650,7 +1650,7 @@ namespace SharpOnvifClient.Analytics
     /// are referenced by their names. It is allowed to pass only a subset to be modified.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ModifyAnalyticsModules", Namespace="http://www.onvif.org/ver20/analytics/wsdl")]
-    public partial class ModifyAnalyticsModulesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ModifyAnalyticsModulesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string configurationTokenField;
 
@@ -1718,7 +1718,7 @@ namespace SharpOnvifClient.Analytics
     /// are referenced by their names. It is allowed to pass only a subset to be modified.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ModifyAnalyticsModulesResponse", Namespace="http://www.onvif.org/ver20/analytics/wsdl")]
-    public partial class ModifyAnalyticsModulesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ModifyAnalyticsModulesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public ModifyAnalyticsModulesResponse()
         {
@@ -1730,7 +1730,7 @@ namespace SharpOnvifClient.Analytics
     /// Modify one or more rules of a VideoAnalyticsConfiguration. The rules are referenced by their names.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ModifyRules", Namespace="http://www.onvif.org/ver20/analytics/wsdl")]
-    public partial class ModifyRulesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ModifyRulesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string configurationTokenField;
 
@@ -1797,7 +1797,7 @@ namespace SharpOnvifClient.Analytics
     /// Modify one or more rules of a VideoAnalyticsConfiguration. The rules are referenced by their names.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ModifyRulesResponse", Namespace="http://www.onvif.org/ver20/analytics/wsdl")]
-    public partial class ModifyRulesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ModifyRulesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public ModifyRulesResponse()
         {
@@ -1808,14 +1808,14 @@ namespace SharpOnvifClient.Analytics
     /// <summary>Constructs a contract named by an xsi:type attribute.</summary>
     internal static class XmlTypeFactory
     {
-        public static SharpOnvifCommon.Xml.OnvifContract Create(string ns, string name)
+        public static SharpOnvifCommon.Xml.XmlContract Create(string ns, string name)
         {
             return SharpOnvifCommon.Onvif.XmlTypeFactory.Create(ns, name);
         }
     }
 
     /// <summary>SOAP action URIs for this service's operations.</summary>
-    public static class OnvifActions
+    public static class SoapActions
     {
         public const string GetServiceCapabilities = "http://www.onvif.org/ver20/analytics/wsdl/GetServiceCapabilities";
         public const string GetSupportedAnalyticsModules = "http://www.onvif.org/ver20/analytics/wsdl/GetSupportedAnalyticsModules";

@@ -16,7 +16,7 @@ namespace SharpOnvifServer.Imaging
     public abstract class ImagingPortBase
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new ImagingPortDispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new ImagingPortDispatcher();
 
         /// <summary>
         /// Returns the capabilities of the imaging service. The result is returned in a typed answer.
@@ -265,7 +265,7 @@ namespace SharpOnvifServer.Imaging
     }
 
     /// <summary>Routes SOAP actions to <see cref="ImagingPortBase"/>.</summary>
-    internal sealed class ImagingPortDispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class ImagingPortDispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(ImagingPortBase); } }
 
@@ -273,17 +273,17 @@ namespace SharpOnvifServer.Imaging
         {
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
-                case OnvifActions.GetImagingSettings:
-                case OnvifActions.SetImagingSettings:
-                case OnvifActions.GetOptions:
-                case OnvifActions.Move:
-                case OnvifActions.GetMoveOptions:
-                case OnvifActions.Stop:
-                case OnvifActions.GetStatus:
-                case OnvifActions.GetPresets:
-                case OnvifActions.GetCurrentPreset:
-                case OnvifActions.SetCurrentPreset:
+                case SoapActions.GetServiceCapabilities:
+                case SoapActions.GetImagingSettings:
+                case SoapActions.SetImagingSettings:
+                case SoapActions.GetOptions:
+                case SoapActions.Move:
+                case SoapActions.GetMoveOptions:
+                case SoapActions.Stop:
+                case SoapActions.GetStatus:
+                case SoapActions.GetPresets:
+                case SoapActions.GetCurrentPreset:
+                case SoapActions.SetCurrentPreset:
                     return true;
                 default:
                     return false;
@@ -297,77 +297,77 @@ namespace SharpOnvifServer.Imaging
                 case "GetServiceCapabilities":
                     if (ns == "http://www.onvif.org/ver20/imaging/wsdl")
                     {
-                        action = OnvifActions.GetServiceCapabilities;
+                        action = SoapActions.GetServiceCapabilities;
                         return true;
                     }
                     break;
                 case "GetImagingSettings":
                     if (ns == "http://www.onvif.org/ver20/imaging/wsdl")
                     {
-                        action = OnvifActions.GetImagingSettings;
+                        action = SoapActions.GetImagingSettings;
                         return true;
                     }
                     break;
                 case "SetImagingSettings":
                     if (ns == "http://www.onvif.org/ver20/imaging/wsdl")
                     {
-                        action = OnvifActions.SetImagingSettings;
+                        action = SoapActions.SetImagingSettings;
                         return true;
                     }
                     break;
                 case "GetOptions":
                     if (ns == "http://www.onvif.org/ver20/imaging/wsdl")
                     {
-                        action = OnvifActions.GetOptions;
+                        action = SoapActions.GetOptions;
                         return true;
                     }
                     break;
                 case "Move":
                     if (ns == "http://www.onvif.org/ver20/imaging/wsdl")
                     {
-                        action = OnvifActions.Move;
+                        action = SoapActions.Move;
                         return true;
                     }
                     break;
                 case "GetMoveOptions":
                     if (ns == "http://www.onvif.org/ver20/imaging/wsdl")
                     {
-                        action = OnvifActions.GetMoveOptions;
+                        action = SoapActions.GetMoveOptions;
                         return true;
                     }
                     break;
                 case "Stop":
                     if (ns == "http://www.onvif.org/ver20/imaging/wsdl")
                     {
-                        action = OnvifActions.Stop;
+                        action = SoapActions.Stop;
                         return true;
                     }
                     break;
                 case "GetStatus":
                     if (ns == "http://www.onvif.org/ver20/imaging/wsdl")
                     {
-                        action = OnvifActions.GetStatus;
+                        action = SoapActions.GetStatus;
                         return true;
                     }
                     break;
                 case "GetPresets":
                     if (ns == "http://www.onvif.org/ver20/imaging/wsdl")
                     {
-                        action = OnvifActions.GetPresets;
+                        action = SoapActions.GetPresets;
                         return true;
                     }
                     break;
                 case "GetCurrentPreset":
                     if (ns == "http://www.onvif.org/ver20/imaging/wsdl")
                     {
-                        action = OnvifActions.GetCurrentPreset;
+                        action = SoapActions.GetCurrentPreset;
                         return true;
                     }
                     break;
                 case "SetCurrentPreset":
                     if (ns == "http://www.onvif.org/ver20/imaging/wsdl")
                     {
-                        action = OnvifActions.SetCurrentPreset;
+                        action = SoapActions.SetCurrentPreset;
                         return true;
                     }
                     break;
@@ -376,7 +376,7 @@ namespace SharpOnvifServer.Imaging
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             ImagingPortBase target = (ImagingPortBase)service;
@@ -384,89 +384,89 @@ namespace SharpOnvifServer.Imaging
 
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
+                case SoapActions.GetServiceCapabilities:
                 {
                     var request = new GetServiceCapabilitiesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetServiceCapabilitiesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/imaging/wsdl", "GetServiceCapabilitiesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/imaging/wsdl", "GetServiceCapabilitiesResponse");
                 }
-                case OnvifActions.GetImagingSettings:
+                case SoapActions.GetImagingSettings:
                 {
                     var request = new GetImagingSettingsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetImagingSettingsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/imaging/wsdl", "GetImagingSettingsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/imaging/wsdl", "GetImagingSettingsResponse");
                 }
-                case OnvifActions.SetImagingSettings:
+                case SoapActions.SetImagingSettings:
                 {
                     var request = new SetImagingSettingsRequest();
                     reader.ReadInto(request);
                     var response = await target.SetImagingSettingsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/imaging/wsdl", "SetImagingSettingsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/imaging/wsdl", "SetImagingSettingsResponse");
                 }
-                case OnvifActions.GetOptions:
+                case SoapActions.GetOptions:
                 {
                     var request = new GetOptionsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetOptionsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/imaging/wsdl", "GetOptionsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/imaging/wsdl", "GetOptionsResponse");
                 }
-                case OnvifActions.Move:
+                case SoapActions.Move:
                 {
                     var request = new MoveRequest();
                     reader.ReadInto(request);
                     var response = await target.MoveAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/imaging/wsdl", "MoveResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/imaging/wsdl", "MoveResponse");
                 }
-                case OnvifActions.GetMoveOptions:
+                case SoapActions.GetMoveOptions:
                 {
                     var request = new GetMoveOptionsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetMoveOptionsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/imaging/wsdl", "GetMoveOptionsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/imaging/wsdl", "GetMoveOptionsResponse");
                 }
-                case OnvifActions.Stop:
+                case SoapActions.Stop:
                 {
                     var request = new StopRequest();
                     reader.ReadInto(request);
                     var response = await target.StopAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/imaging/wsdl", "StopResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/imaging/wsdl", "StopResponse");
                 }
-                case OnvifActions.GetStatus:
+                case SoapActions.GetStatus:
                 {
                     var request = new GetStatusRequest();
                     reader.ReadInto(request);
                     var response = await target.GetStatusAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/imaging/wsdl", "GetStatusResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/imaging/wsdl", "GetStatusResponse");
                 }
-                case OnvifActions.GetPresets:
+                case SoapActions.GetPresets:
                 {
                     var request = new GetPresetsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetPresetsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/imaging/wsdl", "GetPresetsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/imaging/wsdl", "GetPresetsResponse");
                 }
-                case OnvifActions.GetCurrentPreset:
+                case SoapActions.GetCurrentPreset:
                 {
                     var request = new GetCurrentPresetRequest();
                     reader.ReadInto(request);
                     var response = await target.GetCurrentPresetAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/imaging/wsdl", "GetCurrentPresetResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/imaging/wsdl", "GetCurrentPresetResponse");
                 }
-                case OnvifActions.SetCurrentPreset:
+                case SoapActions.SetCurrentPreset:
                 {
                     var request = new SetCurrentPresetRequest();
                     reader.ReadInto(request);
                     var response = await target.SetCurrentPresetAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver20/imaging/wsdl", "SetCurrentPresetResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver20/imaging/wsdl", "SetCurrentPresetResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }

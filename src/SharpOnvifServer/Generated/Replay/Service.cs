@@ -16,7 +16,7 @@ namespace SharpOnvifServer.Replay
     public abstract class ReplayPortBase
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new ReplayPortDispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new ReplayPortDispatcher();
 
         /// <summary>
         /// Returns the capabilities of the replay service. The result is returned in a typed answer.
@@ -102,7 +102,7 @@ namespace SharpOnvifServer.Replay
     }
 
     /// <summary>Routes SOAP actions to <see cref="ReplayPortBase"/>.</summary>
-    internal sealed class ReplayPortDispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class ReplayPortDispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(ReplayPortBase); } }
 
@@ -110,10 +110,10 @@ namespace SharpOnvifServer.Replay
         {
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
-                case OnvifActions.GetReplayUri:
-                case OnvifActions.GetReplayConfiguration:
-                case OnvifActions.SetReplayConfiguration:
+                case SoapActions.GetServiceCapabilities:
+                case SoapActions.GetReplayUri:
+                case SoapActions.GetReplayConfiguration:
+                case SoapActions.SetReplayConfiguration:
                     return true;
                 default:
                     return false;
@@ -127,28 +127,28 @@ namespace SharpOnvifServer.Replay
                 case "GetServiceCapabilities":
                     if (ns == "http://www.onvif.org/ver10/replay/wsdl")
                     {
-                        action = OnvifActions.GetServiceCapabilities;
+                        action = SoapActions.GetServiceCapabilities;
                         return true;
                     }
                     break;
                 case "GetReplayUri":
                     if (ns == "http://www.onvif.org/ver10/replay/wsdl")
                     {
-                        action = OnvifActions.GetReplayUri;
+                        action = SoapActions.GetReplayUri;
                         return true;
                     }
                     break;
                 case "GetReplayConfiguration":
                     if (ns == "http://www.onvif.org/ver10/replay/wsdl")
                     {
-                        action = OnvifActions.GetReplayConfiguration;
+                        action = SoapActions.GetReplayConfiguration;
                         return true;
                     }
                     break;
                 case "SetReplayConfiguration":
                     if (ns == "http://www.onvif.org/ver10/replay/wsdl")
                     {
-                        action = OnvifActions.SetReplayConfiguration;
+                        action = SoapActions.SetReplayConfiguration;
                         return true;
                     }
                     break;
@@ -157,7 +157,7 @@ namespace SharpOnvifServer.Replay
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             ReplayPortBase target = (ReplayPortBase)service;
@@ -165,40 +165,40 @@ namespace SharpOnvifServer.Replay
 
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
+                case SoapActions.GetServiceCapabilities:
                 {
                     var request = new GetServiceCapabilitiesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetServiceCapabilitiesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/replay/wsdl", "GetServiceCapabilitiesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/replay/wsdl", "GetServiceCapabilitiesResponse");
                 }
-                case OnvifActions.GetReplayUri:
+                case SoapActions.GetReplayUri:
                 {
                     var request = new GetReplayUriRequest();
                     reader.ReadInto(request);
                     var response = await target.GetReplayUriAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/replay/wsdl", "GetReplayUriResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/replay/wsdl", "GetReplayUriResponse");
                 }
-                case OnvifActions.GetReplayConfiguration:
+                case SoapActions.GetReplayConfiguration:
                 {
                     var request = new GetReplayConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.GetReplayConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/replay/wsdl", "GetReplayConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/replay/wsdl", "GetReplayConfigurationResponse");
                 }
-                case OnvifActions.SetReplayConfiguration:
+                case SoapActions.SetReplayConfiguration:
                 {
                     var request = new SetReplayConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.SetReplayConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/replay/wsdl", "SetReplayConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/replay/wsdl", "SetReplayConfigurationResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }

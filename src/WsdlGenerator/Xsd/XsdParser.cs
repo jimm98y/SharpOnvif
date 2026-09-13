@@ -4,7 +4,7 @@ using WsdlGenerator.Xml;
 namespace WsdlGenerator.Xsd;
 
 /// <summary>
-/// Parses the subset of XML Schema that the ONVIF specifications actually use. Constructs that
+/// Parses the subset of XML Schema that service specifications actually use. Constructs that
 /// never appear in any mirrored document (substitution groups, xs:group, xs:all, complex content
 /// restriction, redefine) are rejected loudly rather than ignored, so a future specification
 /// revision that starts using them fails the build instead of silently producing wrong code.
@@ -27,7 +27,7 @@ internal sealed class XsdParser
     /// <summary>
     /// Parses an xs:schema element and everything it imports or includes. <paramref name="documentUrl"/>
     /// is the absolute URL the element came from, used to resolve relative schemaLocation values and
-    /// to avoid parsing a shared schema such as onvif.xsd once per referencing service.
+    /// to avoid parsing a widely shared schema once per referencing service.
     /// </summary>
     public void ParseSchema(XElement schema, string documentUrl)
     {
@@ -74,7 +74,7 @@ internal sealed class XsdParser
             {
                 throw new SchemaException(child,
                     $"xs:{child.Name.LocalName} is not modelled by this generator, and no mirrored " +
-                    "ONVIF schema used it when the generator was written. Add support before regenerating.");
+                    "schemas it was written for did not use it. Add support before regenerating.");
             }
             else
             {
@@ -145,7 +145,7 @@ internal sealed class XsdParser
             ?? throw new SchemaException(element, "xs:element must have either name or ref.");
 
         // Only globally declared elements are namespace-qualified unless the schema sets
-        // elementFormDefault="qualified", which every ONVIF schema does.
+        // elementFormDefault="qualified", which service schemas generally do.
         var name = new QName(isGlobal || IsElementFormQualified(element) ? targetNamespace : "", local);
 
         var typeAttribute = element.Attribute("type")?.Value;
@@ -198,7 +198,7 @@ internal sealed class XsdParser
             ?? throw new SchemaException(attribute, "xs:attribute must have either name or ref.");
 
         // Attributes are unqualified unless attributeFormDefault says otherwise, which no
-        // ONVIF schema sets, so locally declared attributes carry no namespace.
+        // the schema sets this was written for, so locally declared attributes carry no namespace.
         var schema = attribute.AncestorsAndSelf(Xs + "schema").FirstOrDefault();
         bool qualified = schema?.Attribute("attributeFormDefault")?.Value == "qualified";
         bool isGlobal = attribute.Parent?.Name == Xs + "schema";

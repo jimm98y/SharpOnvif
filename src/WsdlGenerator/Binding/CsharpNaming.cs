@@ -26,7 +26,7 @@ internal static class CsharpNaming
     /// which is what xsd.exe does: the element "TLS1.0" becomes TLS10, not TLS1_0. The original
     /// name is preserved on the wire and in the emitted XmlElement attribute.
     /// <para>
-    /// Casing is left alone, because ONVIF member names are part of the public surface.
+    /// Casing is left alone, because a schema's member names are part of the public surface.
     /// </para>
     /// </summary>
     public static string Identifier(string name)
@@ -51,20 +51,20 @@ internal static class CsharpNaming
     /// Drawn from the net10.0 reference assemblies for the namespaces a consumer typically has
     /// imported: the implicit usings of a modern project (System, System.Collections.Generic,
     /// System.IO, System.Linq, System.Net.Http, System.Threading, System.Threading.Tasks) plus
-    /// the networking, text and XML namespaces this domain pulls in. With implicit usings on,
-    /// System is always in scope, so a contract called DateTime would be ambiguous in any file
-    /// that also imports the Onvif namespace.
+    /// the networking, text and XML namespaces a service of this kind pulls in. With implicit
+    /// usings on, System is always in scope, so a contract called DateTime would be ambiguous in
+    /// any file that also imports the generated namespace.
     /// </para>
     /// <para>
     /// The list is deliberately wider than the names that collide today, so that a future
     /// specification revision introducing, say, a Stream or a Task type does not reintroduce the
-    /// problem. A name in this list is prefixed with "Onvif"; the XML name is untouched, so the
+    /// problem. A name in this list is given the run's prefix; the XML name is untouched, so the
     /// wire format does not move.
     /// </para>
     /// </summary>
     private static readonly HashSet<string> FrameworkTypeNames = new(StringComparer.Ordinal)
     {
-        // Colliding with the Onvif schema today.
+        // Colliding with the schemas this was written for.
         "Action", "Attribute", "DateTime", "IPAddress", "NetworkInterface", "Object", "Scope",
         "TimeZone",
 
@@ -92,10 +92,18 @@ internal static class CsharpNaming
     /// Gives a generated type a name that will not be ambiguous with a framework type a consumer
     /// has in scope. Only the C# name changes; the schema name it serialises as does not.
     /// </summary>
-    public static string TypeName(string localName)
+    /// <param name="prefix">
+    /// What to put in front of such a name, or null to leave it and the collision alone. It is a
+    /// run's choice because it is a convention for one family of schemas, and one that is
+    /// expensive to change afterwards: it appears in every caller's source.
+    /// </param>
+    public static string TypeName(string localName, string? prefix)
     {
         string identifier = Identifier(localName);
-        return FrameworkTypeNames.Contains(identifier) ? "Onvif" + identifier : identifier;
+
+        return prefix is { Length: > 0 } && FrameworkTypeNames.Contains(identifier)
+            ? prefix + identifier
+            : identifier;
     }
 
     /// <summary>Escapes a C# keyword so it can still be used as an identifier.</summary>

@@ -11,7 +11,7 @@
 namespace SharpOnvifClient.AuthenticationBehavior
 {
     /// <summary>
-    /// The AuthenticationBehaviorPort Onvif service.
+    /// The AuthenticationBehaviorPort service.
     /// </summary>
     public interface AuthenticationBehaviorPort
     {
@@ -266,7 +266,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -276,7 +276,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
         /// </summary>
         public System.Threading.Tasks.Task<GetServiceCapabilitiesResponse> GetServiceCapabilitiesAsync(GetServiceCapabilitiesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetServiceCapabilities, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetServiceCapabilities", request,
+            return InvokeAsync(SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetServiceCapabilities", request,
                 () => new GetServiceCapabilitiesResponse(), cancellationToken);
         }
 
@@ -295,7 +295,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
         /// </summary>
         public System.Threading.Tasks.Task<GetAuthenticationProfileInfoResponse> GetAuthenticationProfileInfoAsync(GetAuthenticationProfileInfoRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetAuthenticationProfileInfo, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetAuthenticationProfileInfo", request,
+            return InvokeAsync(SoapActions.GetAuthenticationProfileInfo, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetAuthenticationProfileInfo", request,
                 () => new GetAuthenticationProfileInfoResponse(), cancellationToken);
         }
 
@@ -316,7 +316,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
         /// </summary>
         public System.Threading.Tasks.Task<GetAuthenticationProfileInfoListResponse> GetAuthenticationProfileInfoListAsync(GetAuthenticationProfileInfoListRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetAuthenticationProfileInfoList, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetAuthenticationProfileInfoList", request,
+            return InvokeAsync(SoapActions.GetAuthenticationProfileInfoList, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetAuthenticationProfileInfoList", request,
                 () => new GetAuthenticationProfileInfoListResponse(), cancellationToken);
         }
 
@@ -335,7 +335,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
         /// </summary>
         public System.Threading.Tasks.Task<GetAuthenticationProfilesResponse> GetAuthenticationProfilesAsync(GetAuthenticationProfilesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetAuthenticationProfiles, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetAuthenticationProfiles", request,
+            return InvokeAsync(SoapActions.GetAuthenticationProfiles, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetAuthenticationProfiles", request,
                 () => new GetAuthenticationProfilesResponse(), cancellationToken);
         }
 
@@ -356,7 +356,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
         /// </summary>
         public System.Threading.Tasks.Task<GetAuthenticationProfileListResponse> GetAuthenticationProfileListAsync(GetAuthenticationProfileListRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetAuthenticationProfileList, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetAuthenticationProfileList", request,
+            return InvokeAsync(SoapActions.GetAuthenticationProfileList, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetAuthenticationProfileList", request,
                 () => new GetAuthenticationProfileListResponse(), cancellationToken);
         }
 
@@ -376,7 +376,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
         /// </summary>
         public System.Threading.Tasks.Task<CreateAuthenticationProfileResponse> CreateAuthenticationProfileAsync(CreateAuthenticationProfileRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.CreateAuthenticationProfile, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "CreateAuthenticationProfile", request,
+            return InvokeAsync(SoapActions.CreateAuthenticationProfile, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "CreateAuthenticationProfile", request,
                 () => new CreateAuthenticationProfileResponse(), cancellationToken);
         }
 
@@ -398,7 +398,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
         /// </summary>
         public System.Threading.Tasks.Task<SetAuthenticationProfileResponse> SetAuthenticationProfileAsync(SetAuthenticationProfileRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetAuthenticationProfile, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "SetAuthenticationProfile", request,
+            return InvokeAsync(SoapActions.SetAuthenticationProfile, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "SetAuthenticationProfile", request,
                 () => new SetAuthenticationProfileResponse(), cancellationToken);
         }
 
@@ -418,7 +418,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
         /// </summary>
         public System.Threading.Tasks.Task<ModifyAuthenticationProfileResponse> ModifyAuthenticationProfileAsync(ModifyAuthenticationProfileRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.ModifyAuthenticationProfile, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "ModifyAuthenticationProfile", request,
+            return InvokeAsync(SoapActions.ModifyAuthenticationProfile, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "ModifyAuthenticationProfile", request,
                 () => new ModifyAuthenticationProfileResponse(), cancellationToken);
         }
 
@@ -438,7 +438,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
         /// </summary>
         public System.Threading.Tasks.Task<DeleteAuthenticationProfileResponse> DeleteAuthenticationProfileAsync(DeleteAuthenticationProfileRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeleteAuthenticationProfile, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "DeleteAuthenticationProfile", request,
+            return InvokeAsync(SoapActions.DeleteAuthenticationProfile, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "DeleteAuthenticationProfile", request,
                 () => new DeleteAuthenticationProfileResponse(), cancellationToken);
         }
 
@@ -457,7 +457,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
         /// </summary>
         public System.Threading.Tasks.Task<GetSecurityLevelInfoResponse> GetSecurityLevelInfoAsync(GetSecurityLevelInfoRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetSecurityLevelInfo, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetSecurityLevelInfo", request,
+            return InvokeAsync(SoapActions.GetSecurityLevelInfo, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetSecurityLevelInfo", request,
                 () => new GetSecurityLevelInfoResponse(), cancellationToken);
         }
 
@@ -478,7 +478,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
         /// </summary>
         public System.Threading.Tasks.Task<GetSecurityLevelInfoListResponse> GetSecurityLevelInfoListAsync(GetSecurityLevelInfoListRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetSecurityLevelInfoList, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetSecurityLevelInfoList", request,
+            return InvokeAsync(SoapActions.GetSecurityLevelInfoList, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetSecurityLevelInfoList", request,
                 () => new GetSecurityLevelInfoListResponse(), cancellationToken);
         }
 
@@ -497,7 +497,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
         /// </summary>
         public System.Threading.Tasks.Task<GetSecurityLevelsResponse> GetSecurityLevelsAsync(GetSecurityLevelsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetSecurityLevels, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetSecurityLevels", request,
+            return InvokeAsync(SoapActions.GetSecurityLevels, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetSecurityLevels", request,
                 () => new GetSecurityLevelsResponse(), cancellationToken);
         }
 
@@ -518,7 +518,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
         /// </summary>
         public System.Threading.Tasks.Task<GetSecurityLevelListResponse> GetSecurityLevelListAsync(GetSecurityLevelListRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetSecurityLevelList, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetSecurityLevelList", request,
+            return InvokeAsync(SoapActions.GetSecurityLevelList, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetSecurityLevelList", request,
                 () => new GetSecurityLevelListResponse(), cancellationToken);
         }
 
@@ -538,7 +538,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
         /// </summary>
         public System.Threading.Tasks.Task<CreateSecurityLevelResponse> CreateSecurityLevelAsync(CreateSecurityLevelRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.CreateSecurityLevel, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "CreateSecurityLevel", request,
+            return InvokeAsync(SoapActions.CreateSecurityLevel, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "CreateSecurityLevel", request,
                 () => new CreateSecurityLevelResponse(), cancellationToken);
         }
 
@@ -560,7 +560,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
         /// </summary>
         public System.Threading.Tasks.Task<SetSecurityLevelResponse> SetSecurityLevelAsync(SetSecurityLevelRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetSecurityLevel, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "SetSecurityLevel", request,
+            return InvokeAsync(SoapActions.SetSecurityLevel, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "SetSecurityLevel", request,
                 () => new SetSecurityLevelResponse(), cancellationToken);
         }
 
@@ -579,7 +579,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
         /// </summary>
         public System.Threading.Tasks.Task<ModifySecurityLevelResponse> ModifySecurityLevelAsync(ModifySecurityLevelRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.ModifySecurityLevel, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "ModifySecurityLevel", request,
+            return InvokeAsync(SoapActions.ModifySecurityLevel, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "ModifySecurityLevel", request,
                 () => new ModifySecurityLevelResponse(), cancellationToken);
         }
 
@@ -599,7 +599,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
         /// </summary>
         public System.Threading.Tasks.Task<DeleteSecurityLevelResponse> DeleteSecurityLevelAsync(DeleteSecurityLevelRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeleteSecurityLevel, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "DeleteSecurityLevel", request,
+            return InvokeAsync(SoapActions.DeleteSecurityLevel, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "DeleteSecurityLevel", request,
                 () => new DeleteSecurityLevelResponse(), cancellationToken);
         }
 

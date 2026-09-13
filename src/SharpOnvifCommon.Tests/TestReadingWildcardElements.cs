@@ -42,7 +42,7 @@ namespace SharpOnvif.Tests
     {
         private const string Tt = "http://www.onvif.org/ver10/schema";
 
-        private static T Read<T>(string xml) where T : OnvifContract, new()
+        private static T Read<T>(string xml) where T : XmlContract, new()
         {
             using (XmlReader reader = XmlReader.Create(new StringReader(xml)))
             {

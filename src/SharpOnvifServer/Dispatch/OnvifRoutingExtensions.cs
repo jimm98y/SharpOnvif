@@ -40,7 +40,7 @@ namespace SharpOnvifServer.Dispatch
             if (routes == null) throw new ArgumentNullException(nameof(routes));
             if (string.IsNullOrWhiteSpace(path)) throw new ArgumentNullException(nameof(path));
 
-            OnvifServiceDispatcher dispatcher = OnvifDispatcherRegistry.For(typeof(TService));
+            ServiceDispatcher dispatcher = OnvifDispatcherRegistry.For(typeof(TService));
             if (dispatcher == null)
             {
                 throw new InvalidOperationException(

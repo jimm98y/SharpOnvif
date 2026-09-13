@@ -6,7 +6,7 @@ namespace WsdlGenerator.Xsd;
 /// A value added to a schema enumeration that the schema itself does not list.
 /// </summary>
 /// <remarks>
-/// Published schemas trail the devices that implement them. ONVIF's <c>tt:VideoEncoding</c> still
+/// Published schemas trail the implementations that follow them: an enumeration of codecs still
 /// enumerates JPEG, MPEG4 and H264, while cameras have been answering H265 and AV1 for years, and
 /// a generated enum that cannot name a value cannot carry it. Adding the value here rather than to
 /// the generated file means regenerating keeps it, and keeps the conversions to and from its XML

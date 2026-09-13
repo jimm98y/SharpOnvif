@@ -6078,7 +6078,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AACDecOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AACDecOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private int[] bitrateField;
 
@@ -6115,9 +6115,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AACDecOptions"; } }
+        protected override string XmlTypeName { get { return "AACDecOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -6170,7 +6170,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AbsoluteFocus : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AbsoluteFocus : SharpOnvifCommon.Xml.XmlContract
     {
         private float positionField;
 
@@ -6208,9 +6208,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.speedFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AbsoluteFocus"; } }
+        protected override string XmlTypeName { get { return "AbsoluteFocus"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -6241,7 +6241,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AbsoluteFocusOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AbsoluteFocusOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private FloatRange positionField;
 
@@ -6267,9 +6267,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.speedField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AbsoluteFocusOptions"; } }
+        protected override string XmlTypeName { get { return "AbsoluteFocusOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -6296,7 +6296,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/analytics/humanface")]
-    public partial class Accessory : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Accessory : SharpOnvifCommon.Xml.XmlContract
     {
         private AccessoryDescription opticalsField;
 
@@ -6403,9 +6403,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Accessory"; } }
+        protected override string XmlTypeName { get { return "Accessory"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.AnalyticsHumanface; } }
+        protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanface; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -6464,7 +6464,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/analytics/humanface")]
-    public partial class AccessoryDescription : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AccessoryDescription : SharpOnvifCommon.Xml.XmlContract
     {
         private bool wearField;
         private bool wearFieldSpecified;
@@ -6524,9 +6524,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AccessoryDescription"; } }
+        protected override string XmlTypeName { get { return "AccessoryDescription"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.AnalyticsHumanface; } }
+        protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanface; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -6570,7 +6570,7 @@ namespace SharpOnvifCommon.Onvif
     /// for future or additional action definitions.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ActionEngineEventPayload : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ActionEngineEventPayload : SharpOnvifCommon.Xml.XmlContract
     {
         private Envelope requestInfoField;
 
@@ -6617,9 +6617,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ActionEngineEventPayload"; } }
+        protected override string XmlTypeName { get { return "ActionEngineEventPayload"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -6656,7 +6656,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ActionEngineEventPayloadExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ActionEngineEventPayloadExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -6667,9 +6667,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ActionEngineEventPayloadExtension"; } }
+        protected override string XmlTypeName { get { return "ActionEngineEventPayloadExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -6685,7 +6685,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ActiveConnection : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ActiveConnection : SharpOnvifCommon.Xml.XmlContract
     {
         private float currentBitrateField;
 
@@ -6714,9 +6714,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ActiveConnection"; } }
+        protected override string XmlTypeName { get { return "ActiveConnection"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -6745,7 +6745,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/analytics/humanface")]
-    public partial class AdditionalFeatures : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AdditionalFeatures : SharpOnvifCommon.Xml.XmlContract
     {
         private bool scarField;
         private bool scarFieldSpecified;
@@ -6840,9 +6840,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AdditionalFeatures"; } }
+        protected override string XmlTypeName { get { return "AdditionalFeatures"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.AnalyticsHumanface; } }
+        protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanface; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -6893,7 +6893,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AnalyticsCapabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AnalyticsCapabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private string xAddrField;
 
@@ -6940,9 +6940,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AnalyticsCapabilities"; } }
+        protected override string XmlTypeName { get { return "AnalyticsCapabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -6976,7 +6976,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AnalyticsDeviceCapabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AnalyticsDeviceCapabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private string xAddrField;
 
@@ -7020,9 +7020,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AnalyticsDeviceCapabilities"; } }
+        protected override string XmlTypeName { get { return "AnalyticsDeviceCapabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -7058,7 +7058,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AnalyticsDeviceEngineConfiguration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AnalyticsDeviceEngineConfiguration : SharpOnvifCommon.Xml.XmlContract
     {
         private EngineConfiguration[] engineConfigurationField;
 
@@ -7078,9 +7078,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AnalyticsDeviceEngineConfiguration"; } }
+        protected override string XmlTypeName { get { return "AnalyticsDeviceEngineConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -7113,7 +7113,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AnalyticsDeviceEngineConfigurationExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AnalyticsDeviceEngineConfigurationExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -7124,9 +7124,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AnalyticsDeviceEngineConfigurationExtension"; } }
+        protected override string XmlTypeName { get { return "AnalyticsDeviceEngineConfigurationExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -7142,7 +7142,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AnalyticsDeviceExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AnalyticsDeviceExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -7153,9 +7153,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AnalyticsDeviceExtension"; } }
+        protected override string XmlTypeName { get { return "AnalyticsDeviceExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -7191,9 +7191,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AnalyticsEngine"; } }
+        protected override string XmlTypeName { get { return "AnalyticsEngine"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -7219,7 +7219,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AnalyticsEngineConfiguration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AnalyticsEngineConfiguration : SharpOnvifCommon.Xml.XmlContract
     {
         private Config[] analyticsModuleField;
 
@@ -7239,9 +7239,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AnalyticsEngineConfiguration"; } }
+        protected override string XmlTypeName { get { return "AnalyticsEngineConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -7274,7 +7274,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AnalyticsEngineConfigurationExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AnalyticsEngineConfigurationExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -7285,9 +7285,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AnalyticsEngineConfigurationExtension"; } }
+        protected override string XmlTypeName { get { return "AnalyticsEngineConfigurationExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -7390,9 +7390,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AnalyticsEngineControl"; } }
+        protected override string XmlTypeName { get { return "AnalyticsEngineControl"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -7498,9 +7498,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AnalyticsEngineInput"; } }
+        protected override string XmlTypeName { get { return "AnalyticsEngineInput"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -7536,7 +7536,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AnalyticsEngineInputInfo : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AnalyticsEngineInputInfo : SharpOnvifCommon.Xml.XmlContract
     {
         private Config inputInfoField;
 
@@ -7556,9 +7556,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AnalyticsEngineInputInfo"; } }
+        protected override string XmlTypeName { get { return "AnalyticsEngineInputInfo"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -7585,7 +7585,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AnalyticsEngineInputInfoExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AnalyticsEngineInputInfoExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -7596,9 +7596,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AnalyticsEngineInputInfoExtension"; } }
+        protected override string XmlTypeName { get { return "AnalyticsEngineInputInfoExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -7614,7 +7614,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AnalyticsState : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AnalyticsState : SharpOnvifCommon.Xml.XmlContract
     {
         private string errorField;
 
@@ -7643,9 +7643,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AnalyticsState"; } }
+        protected override string XmlTypeName { get { return "AnalyticsState"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -7674,7 +7674,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AnalyticsStateInformation : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AnalyticsStateInformation : SharpOnvifCommon.Xml.XmlContract
     {
         private string analyticsEngineControlTokenField;
 
@@ -7706,9 +7706,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AnalyticsStateInformation"; } }
+        protected override string XmlTypeName { get { return "AnalyticsStateInformation"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -7737,7 +7737,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AnyHolder : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AnyHolder : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -7748,9 +7748,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AnyHolder"; } }
+        protected override string XmlTypeName { get { return "AnyHolder"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -7766,7 +7766,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Appearance : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Appearance : SharpOnvifCommon.Xml.XmlContract
     {
         private Transformation transformationField;
 
@@ -7912,9 +7912,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Appearance"; } }
+        protected override string XmlTypeName { get { return "Appearance"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -8020,7 +8020,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AppearanceExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AppearanceExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -8031,9 +8031,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AppearanceExtension"; } }
+        protected override string XmlTypeName { get { return "AppearanceExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -8049,7 +8049,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ArrayOfFileProgress : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ArrayOfFileProgress : SharpOnvifCommon.Xml.XmlContract
     {
         private FileProgress[] fileProgressField;
 
@@ -8072,9 +8072,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ArrayOfFileProgress"; } }
+        protected override string XmlTypeName { get { return "ArrayOfFileProgress"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -8107,7 +8107,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ArrayOfFileProgressExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ArrayOfFileProgressExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -8118,9 +8118,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ArrayOfFileProgressExtension"; } }
+        protected override string XmlTypeName { get { return "ArrayOfFileProgressExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -8136,7 +8136,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AspectRatioTransformation : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AspectRatioTransformation : SharpOnvifCommon.Xml.XmlContract
     {
         private Vector translateField;
 
@@ -8174,9 +8174,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.ratioField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AspectRatioTransformation"; } }
+        protected override string XmlTypeName { get { return "AspectRatioTransformation"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -8221,7 +8221,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AsymmetricEncryption : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AsymmetricEncryption : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] certificateIDField;
 
@@ -8270,9 +8270,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AsymmetricEncryption"; } }
+        protected override string XmlTypeName { get { return "AsymmetricEncryption"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -8312,7 +8312,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AttachmentData : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AttachmentData : SharpOnvifCommon.Xml.XmlContract
     {
         private Include includeField;
 
@@ -8332,9 +8332,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.contentTypeField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AttachmentData"; } }
+        protected override string XmlTypeName { get { return "AttachmentData"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -8373,7 +8373,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2005/08/addressing")]
-    public partial class AttributedAnyType : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AttributedAnyType : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -8384,9 +8384,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AttributedAnyType"; } }
+        protected override string XmlTypeName { get { return "AttributedAnyType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.i08Addressing; } }
+        protected override string XmlTypeNamespace { get { return Ns.i08Addressing; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -8402,7 +8402,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2005/08/addressing")]
-    public partial class AttributedQNameType : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AttributedQNameType : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlQualifiedName valueField;
 
@@ -8413,9 +8413,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.valueField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AttributedQNameType"; } }
+        protected override string XmlTypeName { get { return "AttributedQNameType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.i08Addressing; } }
+        protected override string XmlTypeNamespace { get { return Ns.i08Addressing; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -8430,7 +8430,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2005/08/addressing")]
-    public partial class AttributedURIType : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AttributedURIType : SharpOnvifCommon.Xml.XmlContract
     {
         private string valueField;
 
@@ -8441,9 +8441,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.valueField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AttributedURIType"; } }
+        protected override string XmlTypeName { get { return "AttributedURIType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.i08Addressing; } }
+        protected override string XmlTypeNamespace { get { return Ns.i08Addressing; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -8458,7 +8458,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2005/08/addressing")]
-    public partial class AttributedUnsignedLongType : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AttributedUnsignedLongType : SharpOnvifCommon.Xml.XmlContract
     {
         private ulong valueField;
 
@@ -8469,9 +8469,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.valueField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AttributedUnsignedLongType"; } }
+        protected override string XmlTypeName { get { return "AttributedUnsignedLongType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.i08Addressing; } }
+        protected override string XmlTypeNamespace { get { return Ns.i08Addressing; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -8486,7 +8486,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AudioAnalyticsStream : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AudioAnalyticsStream : SharpOnvifCommon.Xml.XmlContract
     {
         private AudioDescriptor[] audioDescriptorField;
 
@@ -8515,9 +8515,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AudioAnalyticsStream"; } }
+        protected override string XmlTypeName { get { return "AudioAnalyticsStream"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -8552,7 +8552,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AudioAnalyticsStreamExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AudioAnalyticsStreamExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -8563,9 +8563,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AudioAnalyticsStreamExtension"; } }
+        protected override string XmlTypeName { get { return "AudioAnalyticsStreamExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -8581,7 +8581,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AudioAttributes : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AudioAttributes : SharpOnvifCommon.Xml.XmlContract
     {
         private int bitrateField;
         private bool bitrateFieldSpecified;
@@ -8641,9 +8641,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AudioAttributes"; } }
+        protected override string XmlTypeName { get { return "AudioAttributes"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -8681,7 +8681,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AudioClassCandidate : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AudioClassCandidate : SharpOnvifCommon.Xml.XmlContract
     {
         private AudioClassType typeField;
 
@@ -8717,9 +8717,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AudioClassCandidate"; } }
+        protected override string XmlTypeName { get { return "AudioClassCandidate"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -8748,7 +8748,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AudioClassDescriptor : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AudioClassDescriptor : SharpOnvifCommon.Xml.XmlContract
     {
         private AudioClassCandidate[] classCandidateField;
 
@@ -8771,9 +8771,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AudioClassDescriptor"; } }
+        protected override string XmlTypeName { get { return "AudioClassDescriptor"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -8806,7 +8806,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AudioClassDescriptorExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AudioClassDescriptorExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -8817,9 +8817,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AudioClassDescriptorExtension"; } }
+        protected override string XmlTypeName { get { return "AudioClassDescriptorExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -8835,7 +8835,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AudioDecoder2Options : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AudioDecoder2Options : SharpOnvifCommon.Xml.XmlContract
     {
         private string encodingField;
 
@@ -8910,9 +8910,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AudioDecoder2Options"; } }
+        protected override string XmlTypeName { get { return "AudioDecoder2Options"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -8994,9 +8994,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AudioDecoderConfiguration"; } }
+        protected override string XmlTypeName { get { return "AudioDecoderConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -9014,7 +9014,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AudioDecoderConfigurationOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AudioDecoderConfigurationOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private AACDecOptions aACDecOptionsField;
 
@@ -9064,9 +9064,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AudioDecoderConfigurationOptions"; } }
+        protected override string XmlTypeName { get { return "AudioDecoderConfigurationOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -9103,7 +9103,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AudioDecoderConfigurationOptionsExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AudioDecoderConfigurationOptionsExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -9114,9 +9114,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AudioDecoderConfigurationOptionsExtension"; } }
+        protected override string XmlTypeName { get { return "AudioDecoderConfigurationOptionsExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -9132,7 +9132,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AudioDescriptor : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AudioDescriptor : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -9152,9 +9152,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.utcTimeField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AudioDescriptor"; } }
+        protected override string XmlTypeName { get { return "AudioDescriptor"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -9258,9 +9258,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.secureStreamingProtocolAlgorithmField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AudioEncoder2Configuration"; } }
+        protected override string XmlTypeName { get { return "AudioEncoder2Configuration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -9318,7 +9318,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AudioEncoder2ConfigurationOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AudioEncoder2ConfigurationOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private string encodingField;
 
@@ -9381,9 +9381,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.secureStreamingProtocolAlgorithmsField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AudioEncoder2ConfigurationOptions"; } }
+        protected override string XmlTypeName { get { return "AudioEncoder2ConfigurationOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -9528,9 +9528,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AudioEncoderConfiguration"; } }
+        protected override string XmlTypeName { get { return "AudioEncoderConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -9576,7 +9576,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AudioEncoderConfigurationOption : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AudioEncoderConfigurationOption : SharpOnvifCommon.Xml.XmlContract
     {
         private AudioEncoding encodingField;
 
@@ -9625,9 +9625,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AudioEncoderConfigurationOption"; } }
+        protected override string XmlTypeName { get { return "AudioEncoderConfigurationOption"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -9685,7 +9685,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AudioEncoderConfigurationOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AudioEncoderConfigurationOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private AudioEncoderConfigurationOption[] optionsField;
 
@@ -9699,9 +9699,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.optionsField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AudioEncoderConfigurationOptions"; } }
+        protected override string XmlTypeName { get { return "AudioEncoderConfigurationOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -9743,9 +9743,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AudioOutput"; } }
+        protected override string XmlTypeName { get { return "AudioOutput"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -9821,9 +9821,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AudioOutputConfiguration"; } }
+        protected override string XmlTypeName { get { return "AudioOutputConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -9859,7 +9859,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AudioOutputConfigurationOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AudioOutputConfigurationOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] outputTokensAvailableField;
 
@@ -9952,9 +9952,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AudioOutputConfigurationOptions"; } }
+        protected override string XmlTypeName { get { return "AudioOutputConfigurationOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -10046,9 +10046,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AudioSource"; } }
+        protected override string XmlTypeName { get { return "AudioSource"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -10097,9 +10097,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AudioSourceConfiguration"; } }
+        protected override string XmlTypeName { get { return "AudioSourceConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -10125,7 +10125,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AudioSourceConfigurationOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AudioSourceConfigurationOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] inputTokensAvailableField;
 
@@ -10148,9 +10148,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AudioSourceConfigurationOptions"; } }
+        protected override string XmlTypeName { get { return "AudioSourceConfigurationOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -10183,7 +10183,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class AudioSourceOptionsExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AudioSourceOptionsExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -10194,9 +10194,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AudioSourceOptionsExtension"; } }
+        protected override string XmlTypeName { get { return "AudioSourceOptionsExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -10212,7 +10212,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class BacklightCompensation : SharpOnvifCommon.Xml.OnvifContract
+    public partial class BacklightCompensation : SharpOnvifCommon.Xml.XmlContract
     {
         private BacklightCompensationMode modeField;
 
@@ -10238,9 +10238,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.levelField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "BacklightCompensation"; } }
+        protected override string XmlTypeName { get { return "BacklightCompensation"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -10270,7 +10270,7 @@ namespace SharpOnvifCommon.Onvif
     /// Type describing whether BLC mode is enabled or disabled (on/off).
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class BacklightCompensation20 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class BacklightCompensation20 : SharpOnvifCommon.Xml.XmlContract
     {
         private BacklightCompensationMode modeField;
 
@@ -10308,9 +10308,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.levelFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "BacklightCompensation20"; } }
+        protected override string XmlTypeName { get { return "BacklightCompensation20"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -10341,7 +10341,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class BacklightCompensationOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class BacklightCompensationOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private WideDynamicMode[] modeField;
 
@@ -10361,9 +10361,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.levelField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "BacklightCompensationOptions"; } }
+        protected override string XmlTypeName { get { return "BacklightCompensationOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -10396,7 +10396,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class BacklightCompensationOptions20 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class BacklightCompensationOptions20 : SharpOnvifCommon.Xml.XmlContract
     {
         private BacklightCompensationMode[] modeField;
 
@@ -10422,9 +10422,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.levelField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "BacklightCompensationOptions20"; } }
+        protected override string XmlTypeName { get { return "BacklightCompensationOptions20"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -10457,7 +10457,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class BackupFile : SharpOnvifCommon.Xml.OnvifContract
+    public partial class BackupFile : SharpOnvifCommon.Xml.XmlContract
     {
         private string nameField;
 
@@ -10477,9 +10477,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.dataField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "BackupFile"; } }
+        protected override string XmlTypeName { get { return "BackupFile"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -10506,7 +10506,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/analytics/humanbody")]
-    public partial class Bag : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Bag : SharpOnvifCommon.Xml.XmlContract
     {
         private string categoryField;
 
@@ -10541,9 +10541,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Bag"; } }
+        protected override string XmlTypeName { get { return "Bag"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
+        protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -10572,7 +10572,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class BarcodeInfo : SharpOnvifCommon.Xml.OnvifContract
+    public partial class BarcodeInfo : SharpOnvifCommon.Xml.XmlContract
     {
         private StringLikelihood dataField;
 
@@ -10631,9 +10631,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "BarcodeInfo"; } }
+        protected override string XmlTypeName { get { return "BarcodeInfo"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -10693,7 +10693,7 @@ namespace SharpOnvifCommon.Onvif
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(UnrecognizedPolicyRequestFaultType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(UnsupportedPolicyRequestFaultType))]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsrf/bf-2")]
-    public partial class BaseFaultType : SharpOnvifCommon.Xml.OnvifContract
+    public partial class BaseFaultType : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -10749,9 +10749,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.faultCauseField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "BaseFaultType"; } }
+        protected override string XmlTypeName { get { return "BaseFaultType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Bf2; } }
+        protected override string XmlTypeNamespace { get { return Ns.Bf2; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -10805,7 +10805,7 @@ namespace SharpOnvifCommon.Onvif
 
     }
 
-    public partial class BaseFaultTypeDescription : SharpOnvifCommon.Xml.OnvifContract
+    public partial class BaseFaultTypeDescription : SharpOnvifCommon.Xml.XmlContract
     {
         private string valueField;
 
@@ -10863,7 +10863,7 @@ namespace SharpOnvifCommon.Onvif
 
     }
 
-    public partial class BaseFaultTypeErrorCode : SharpOnvifCommon.Xml.OnvifContract
+    public partial class BaseFaultTypeErrorCode : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] textField;
 
@@ -10918,7 +10918,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/analytics/humanbody")]
-    public partial class Behaviour : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Behaviour : SharpOnvifCommon.Xml.XmlContract
     {
         private string smokingField;
 
@@ -10965,9 +10965,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Behaviour"; } }
+        protected override string XmlTypeName { get { return "Behaviour"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
+        protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -11001,7 +11001,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Behaviour1 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Behaviour1 : SharpOnvifCommon.Xml.XmlContract
     {
         private Behaviour1Removed removedField;
 
@@ -11074,9 +11074,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Behaviour"; } }
+        protected override string XmlTypeName { get { return "Behaviour"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -11123,7 +11123,7 @@ namespace SharpOnvifCommon.Onvif
 
     }
 
-    public partial class Behaviour1Idle : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Behaviour1Idle : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -11147,7 +11147,7 @@ namespace SharpOnvifCommon.Onvif
 
     }
 
-    public partial class Behaviour1Removed : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Behaviour1Removed : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -11172,7 +11172,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class BehaviourExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class BehaviourExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -11183,9 +11183,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "BehaviourExtension"; } }
+        protected override string XmlTypeName { get { return "BehaviourExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -11201,7 +11201,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/analytics/humanbody")]
-    public partial class Belonging : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Belonging : SharpOnvifCommon.Xml.XmlContract
     {
         private Bag bagField;
 
@@ -11308,9 +11308,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Belonging"; } }
+        protected override string XmlTypeName { get { return "Belonging"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
+        protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -11367,7 +11367,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/analytics/humanbody")]
-    public partial class Belongings : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Belongings : SharpOnvifCommon.Xml.XmlContract
     {
         private Bag[] bagField;
 
@@ -11426,9 +11426,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Belongings"; } }
+        protected override string XmlTypeName { get { return "Belongings"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
+        protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -11479,7 +11479,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class BinaryData : SharpOnvifCommon.Xml.OnvifContract
+    public partial class BinaryData : SharpOnvifCommon.Xml.XmlContract
     {
         private byte[] dataField;
 
@@ -11502,9 +11502,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.contentTypeField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "BinaryData"; } }
+        protected override string XmlTypeName { get { return "BinaryData"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -11543,7 +11543,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2003/05/soap-envelope")]
-    public partial class Body : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Body : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -11554,9 +11554,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Body"; } }
+        protected override string XmlTypeName { get { return "Body"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.SoapEnvelope; } }
+        protected override string XmlTypeNamespace { get { return Ns.SoapEnvelope; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -11572,7 +11572,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/analytics/humanbody")]
-    public partial class BodyMetric : SharpOnvifCommon.Xml.OnvifContract
+    public partial class BodyMetric : SharpOnvifCommon.Xml.XmlContract
     {
         private int heightField;
         private bool heightFieldSpecified;
@@ -11619,9 +11619,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "BodyMetric"; } }
+        protected override string XmlTypeName { get { return "BodyMetric"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
+        protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -11654,7 +11654,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/analytics/humanbody")]
-    public partial class Bottoms : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Bottoms : SharpOnvifCommon.Xml.XmlContract
     {
         private string categoryField;
 
@@ -11713,9 +11713,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Bottoms"; } }
+        protected override string XmlTypeName { get { return "Bottoms"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
+        protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -11754,7 +11754,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/analytics/humanbody")]
-    public partial class Box : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Box : SharpOnvifCommon.Xml.XmlContract
     {
         private ColorDescriptor colorField;
 
@@ -11801,9 +11801,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Box"; } }
+        protected override string XmlTypeName { get { return "Box"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
+        protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -11836,7 +11836,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Capabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Capabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private AnalyticsCapabilities analyticsField;
 
@@ -11919,9 +11919,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Capabilities"; } }
+        protected override string XmlTypeName { get { return "Capabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -11973,7 +11973,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class CapabilitiesExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CapabilitiesExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -12056,9 +12056,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionsField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "CapabilitiesExtension"; } }
+        protected override string XmlTypeName { get { return "CapabilitiesExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -12117,7 +12117,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class CapabilitiesExtension2 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CapabilitiesExtension2 : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -12128,9 +12128,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "CapabilitiesExtension2"; } }
+        protected override string XmlTypeName { get { return "CapabilitiesExtension2"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -12146,7 +12146,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/analytics/humanbody")]
-    public partial class Cart : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Cart : SharpOnvifCommon.Xml.XmlContract
     {
         private string categoryField;
 
@@ -12181,9 +12181,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Cart"; } }
+        protected override string XmlTypeName { get { return "Cart"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
+        protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -12212,7 +12212,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class CellLayout : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CellLayout : SharpOnvifCommon.Xml.XmlContract
     {
         private Transformation transformationField;
 
@@ -12260,9 +12260,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.rowsField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "CellLayout"; } }
+        protected override string XmlTypeName { get { return "CellLayout"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -12306,7 +12306,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Certificate : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Certificate : SharpOnvifCommon.Xml.XmlContract
     {
         private string certificateIDField;
 
@@ -12332,9 +12332,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.certificate1Field = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Certificate"; } }
+        protected override string XmlTypeName { get { return "Certificate"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -12361,7 +12361,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class CertificateGenerationParameters : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CertificateGenerationParameters : SharpOnvifCommon.Xml.XmlContract
     {
         private string certificateIDField;
 
@@ -12408,9 +12408,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "CertificateGenerationParameters"; } }
+        protected override string XmlTypeName { get { return "CertificateGenerationParameters"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -12452,7 +12452,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class CertificateGenerationParametersExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CertificateGenerationParametersExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -12463,9 +12463,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "CertificateGenerationParametersExtension"; } }
+        protected override string XmlTypeName { get { return "CertificateGenerationParametersExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -12481,7 +12481,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class CertificateInformation : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CertificateInformation : SharpOnvifCommon.Xml.XmlContract
     {
         private string certificateIDField;
 
@@ -12598,9 +12598,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "CertificateInformation"; } }
+        protected override string XmlTypeName { get { return "CertificateInformation"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -12676,7 +12676,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class CertificateInformationExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CertificateInformationExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -12687,9 +12687,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "CertificateInformationExtension"; } }
+        protected override string XmlTypeName { get { return "CertificateInformationExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -12705,7 +12705,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class CertificateStatus : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CertificateStatus : SharpOnvifCommon.Xml.XmlContract
     {
         private string certificateIDField;
 
@@ -12740,9 +12740,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "CertificateStatus"; } }
+        protected override string XmlTypeName { get { return "CertificateStatus"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -12771,7 +12771,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class CertificateUsage : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CertificateUsage : SharpOnvifCommon.Xml.XmlContract
     {
         private string valueField;
 
@@ -12791,9 +12791,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.criticalField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "CertificateUsage"; } }
+        protected override string XmlTypeName { get { return "CertificateUsage"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -12824,7 +12824,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class CertificateWithPrivateKey : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CertificateWithPrivateKey : SharpOnvifCommon.Xml.XmlContract
     {
         private string certificateIDField;
 
@@ -12862,9 +12862,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "CertificateWithPrivateKey"; } }
+        protected override string XmlTypeName { get { return "CertificateWithPrivateKey"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -12898,7 +12898,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ClassCandidate : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ClassCandidate : SharpOnvifCommon.Xml.XmlContract
     {
         private ClassType typeField;
 
@@ -12927,9 +12927,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ClassCandidate"; } }
+        protected override string XmlTypeName { get { return "ClassCandidate"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -12958,7 +12958,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ClassDescriptor : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ClassDescriptor : SharpOnvifCommon.Xml.XmlContract
     {
         private ClassCandidate[] classCandidateField;
 
@@ -13000,9 +13000,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ClassDescriptor"; } }
+        protected override string XmlTypeName { get { return "ClassDescriptor"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -13048,7 +13048,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ClassDescriptorExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ClassDescriptorExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -13068,9 +13068,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.otherTypesField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ClassDescriptorExtension"; } }
+        protected override string XmlTypeName { get { return "ClassDescriptorExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -13100,7 +13100,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/analytics/humanbody")]
-    public partial class Clothing : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Clothing : SharpOnvifCommon.Xml.XmlContract
     {
         private Scarf scarfField;
 
@@ -13171,9 +13171,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Clothing"; } }
+        protected override string XmlTypeName { get { return "Clothing"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
+        protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -13220,7 +13220,7 @@ namespace SharpOnvifCommon.Onvif
     /// This type contains the Audio and Video coding capabilities of a display service.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class CodingCapabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CodingCapabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private AudioEncoderConfigurationOptions audioEncodingCapabilitiesField;
 
@@ -13269,9 +13269,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "CodingCapabilities"; } }
+        protected override string XmlTypeName { get { return "CodingCapabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -13305,7 +13305,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Color : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Color : SharpOnvifCommon.Xml.XmlContract
     {
         private float xField;
 
@@ -13375,9 +13375,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.likelihoodFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Color"; } }
+        protected override string XmlTypeName { get { return "Color"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -13418,7 +13418,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ColorCovariance : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ColorCovariance : SharpOnvifCommon.Xml.XmlContract
     {
         private float xXField;
 
@@ -13522,9 +13522,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.colorspaceField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ColorCovariance"; } }
+        protected override string XmlTypeName { get { return "ColorCovariance"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -13581,7 +13581,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ColorDescriptor : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ColorDescriptor : SharpOnvifCommon.Xml.XmlContract
     {
         private ColorDescriptorColorCluster[] colorClusterField;
 
@@ -13610,9 +13610,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ColorDescriptor"; } }
+        protected override string XmlTypeName { get { return "ColorDescriptor"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -13646,7 +13646,7 @@ namespace SharpOnvifCommon.Onvif
 
     }
 
-    public partial class ColorDescriptorColorCluster : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ColorDescriptorColorCluster : SharpOnvifCommon.Xml.XmlContract
     {
         private Color colorField;
 
@@ -13735,7 +13735,7 @@ namespace SharpOnvifCommon.Onvif
     /// Describe the colors supported. Either list each color or define the range of color values.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ColorOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ColorOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private object[] itemsField;
 
@@ -13747,9 +13747,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.itemsField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ColorOptions"; } }
+        protected override string XmlTypeName { get { return "ColorOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -13788,7 +13788,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ColorspaceRange : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ColorspaceRange : SharpOnvifCommon.Xml.XmlContract
     {
         private FloatRange xField;
 
@@ -13829,9 +13829,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.colorspaceField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ColorspaceRange"; } }
+        protected override string XmlTypeName { get { return "ColorspaceRange"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -13868,7 +13868,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Config : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Config : SharpOnvifCommon.Xml.XmlContract
     {
         private ItemList parametersField;
 
@@ -13908,9 +13908,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.typeField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Config"; } }
+        protected override string XmlTypeName { get { return "Config"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -13952,7 +13952,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ConfigDescription : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ConfigDescription : SharpOnvifCommon.Xml.XmlContract
     {
         private ItemListDescription parametersField;
 
@@ -14043,9 +14043,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.maxInstancesField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ConfigDescription"; } }
+        protected override string XmlTypeName { get { return "ConfigDescription"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -14111,7 +14111,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ConfigDescriptionExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ConfigDescriptionExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -14122,9 +14122,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ConfigDescriptionExtension"; } }
+        protected override string XmlTypeName { get { return "ConfigDescriptionExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -14195,7 +14195,7 @@ namespace SharpOnvifCommon.Onvif
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(VideoOutputConfiguration))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(VideoSourceConfiguration))]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ConfigurationEntity : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ConfigurationEntity : SharpOnvifCommon.Xml.XmlContract
     {
         private string nameField;
 
@@ -14234,9 +14234,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.tokenField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ConfigurationEntity"; } }
+        protected override string XmlTypeName { get { return "ConfigurationEntity"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -14279,7 +14279,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ContinuousFocus : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ContinuousFocus : SharpOnvifCommon.Xml.XmlContract
     {
         private float speedField;
 
@@ -14293,9 +14293,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.speedField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ContinuousFocus"; } }
+        protected override string XmlTypeName { get { return "ContinuousFocus"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -14317,7 +14317,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ContinuousFocusOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ContinuousFocusOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private FloatRange speedField;
 
@@ -14331,9 +14331,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.speedField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ContinuousFocusOptions"; } }
+        protected override string XmlTypeName { get { return "ContinuousFocusOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -14355,7 +14355,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class DNSInformation : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DNSInformation : SharpOnvifCommon.Xml.XmlContract
     {
         private bool fromDHCPField;
 
@@ -14414,9 +14414,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "DNSInformation"; } }
+        protected override string XmlTypeName { get { return "DNSInformation"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -14476,7 +14476,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class DNSInformationExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DNSInformationExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -14487,9 +14487,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "DNSInformationExtension"; } }
+        protected override string XmlTypeName { get { return "DNSInformationExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -14508,7 +14508,7 @@ namespace SharpOnvifCommon.Onvif
     /// General datastructure referenced by a token. Should be used as extension base.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/pacs")]
-    public partial class DataEntity : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DataEntity : SharpOnvifCommon.Xml.XmlContract
     {
         private string tokenField;
 
@@ -14522,9 +14522,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.tokenField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "DataEntity"; } }
+        protected override string XmlTypeName { get { return "DataEntity"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Pacs; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Pacs; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -14545,7 +14545,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Date : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Date : SharpOnvifCommon.Xml.XmlContract
     {
         private int yearField;
 
@@ -14580,9 +14580,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.dayField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Date"; } }
+        protected override string XmlTypeName { get { return "Date"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -14614,7 +14614,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class DateTimeRange : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DateTimeRange : SharpOnvifCommon.Xml.XmlContract
     {
         private System.DateTime fromField;
 
@@ -14643,9 +14643,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "DateTimeRange"; } }
+        protected override string XmlTypeName { get { return "DateTimeRange"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -14674,7 +14674,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Defogging : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Defogging : SharpOnvifCommon.Xml.XmlContract
     {
         private string modeField;
 
@@ -14722,9 +14722,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Defogging"; } }
+        protected override string XmlTypeName { get { return "Defogging"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -14760,7 +14760,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class DefoggingExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DefoggingExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -14771,9 +14771,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "DefoggingExtension"; } }
+        protected override string XmlTypeName { get { return "DefoggingExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -14789,7 +14789,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class DefoggingOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DefoggingOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] modeField;
 
@@ -14824,9 +14824,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "DefoggingOptions"; } }
+        protected override string XmlTypeName { get { return "DefoggingOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -14861,7 +14861,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class DeviceCapabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeviceCapabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private string xAddrField;
 
@@ -14932,9 +14932,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "DeviceCapabilities"; } }
+        protected override string XmlTypeName { get { return "DeviceCapabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -14981,7 +14981,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class DeviceCapabilitiesExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeviceCapabilitiesExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -14992,9 +14992,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "DeviceCapabilitiesExtension"; } }
+        protected override string XmlTypeName { get { return "DeviceCapabilitiesExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -15022,7 +15022,7 @@ namespace SharpOnvifCommon.Onvif
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(VideoOutput))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(VideoSource))]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class DeviceEntity : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeviceEntity : SharpOnvifCommon.Xml.XmlContract
     {
         private string tokenField;
 
@@ -15036,9 +15036,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.tokenField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "DeviceEntity"; } }
+        protected override string XmlTypeName { get { return "DeviceEntity"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -15059,7 +15059,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class DeviceIOCapabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeviceIOCapabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private string xAddrField;
 
@@ -15124,9 +15124,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "DeviceIOCapabilities"; } }
+        protected override string XmlTypeName { get { return "DeviceIOCapabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -15210,9 +15210,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.idleStateFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "DigitalInput"; } }
+        protected override string XmlTypeName { get { return "DigitalInput"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -15251,7 +15251,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class DisplayCapabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DisplayCapabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private string xAddrField;
 
@@ -15283,9 +15283,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "DisplayCapabilities"; } }
+        protected override string XmlTypeName { get { return "DisplayCapabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -15314,7 +15314,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/t-1")]
-    public partial class Documentation : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Documentation : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlNode[] anyField;
 
@@ -15326,9 +15326,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Documentation"; } }
+        protected override string XmlTypeName { get { return "Documentation"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.T1; } }
+        protected override string XmlTypeNamespace { get { return Ns.T1; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -15349,7 +15349,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Dot11AvailableNetworks : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Dot11AvailableNetworks : SharpOnvifCommon.Xml.XmlContract
     {
         private byte[] sSIDField;
 
@@ -15429,9 +15429,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Dot11AvailableNetworks"; } }
+        protected override string XmlTypeName { get { return "Dot11AvailableNetworks"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -15505,7 +15505,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Dot11AvailableNetworksExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Dot11AvailableNetworksExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -15516,9 +15516,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Dot11AvailableNetworksExtension"; } }
+        protected override string XmlTypeName { get { return "Dot11AvailableNetworksExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -15534,7 +15534,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Dot11Capabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Dot11Capabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private bool tKIPField;
 
@@ -15590,9 +15590,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Dot11Capabilities"; } }
+        protected override string XmlTypeName { get { return "Dot11Capabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -15636,7 +15636,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Dot11Configuration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Dot11Configuration : SharpOnvifCommon.Xml.XmlContract
     {
         private byte[] sSIDField;
 
@@ -15692,9 +15692,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Dot11Configuration"; } }
+        protected override string XmlTypeName { get { return "Dot11Configuration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -15738,7 +15738,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Dot11PSKSet : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Dot11PSKSet : SharpOnvifCommon.Xml.XmlContract
     {
         private byte[] keyField;
 
@@ -15778,9 +15778,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Dot11PSKSet"; } }
+        protected override string XmlTypeName { get { return "Dot11PSKSet"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -15812,7 +15812,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Dot11PSKSetExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Dot11PSKSetExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -15823,9 +15823,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Dot11PSKSetExtension"; } }
+        protected override string XmlTypeName { get { return "Dot11PSKSetExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -15841,7 +15841,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Dot11SecurityConfiguration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Dot11SecurityConfiguration : SharpOnvifCommon.Xml.XmlContract
     {
         private Dot11SecurityMode modeField;
 
@@ -15900,9 +15900,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Dot11SecurityConfiguration"; } }
+        protected override string XmlTypeName { get { return "Dot11SecurityConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -15948,7 +15948,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Dot11SecurityConfigurationExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Dot11SecurityConfigurationExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -15959,9 +15959,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Dot11SecurityConfigurationExtension"; } }
+        protected override string XmlTypeName { get { return "Dot11SecurityConfigurationExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -15977,7 +15977,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Dot11Status : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Dot11Status : SharpOnvifCommon.Xml.XmlContract
     {
         private byte[] sSIDField;
 
@@ -16078,9 +16078,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Dot11Status"; } }
+        protected override string XmlTypeName { get { return "Dot11Status"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -16141,7 +16141,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Dot1XConfiguration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Dot1XConfiguration : SharpOnvifCommon.Xml.XmlContract
     {
         private string dot1XConfigurationTokenField;
 
@@ -16209,9 +16209,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Dot1XConfiguration"; } }
+        protected override string XmlTypeName { get { return "Dot1XConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -16269,7 +16269,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Dot1XConfigurationExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Dot1XConfigurationExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -16280,9 +16280,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Dot1XConfigurationExtension"; } }
+        protected override string XmlTypeName { get { return "Dot1XConfigurationExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -16298,7 +16298,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Dot3Configuration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Dot3Configuration : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -16309,9 +16309,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Dot3Configuration"; } }
+        protected override string XmlTypeName { get { return "Dot3Configuration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -16330,7 +16330,7 @@ namespace SharpOnvifCommon.Onvif
     /// Range of duration greater equal Min duration and less equal Max duration.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class DurationRange : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DurationRange : SharpOnvifCommon.Xml.XmlContract
     {
         private string minField;
 
@@ -16350,9 +16350,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.maxField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "DurationRange"; } }
+        protected override string XmlTypeName { get { return "DurationRange"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -16379,7 +16379,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class DynamicDNSInformation : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DynamicDNSInformation : SharpOnvifCommon.Xml.XmlContract
     {
         private DynamicDNSType typeField;
 
@@ -16426,9 +16426,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "DynamicDNSInformation"; } }
+        protected override string XmlTypeName { get { return "DynamicDNSInformation"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -16465,7 +16465,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class DynamicDNSInformationExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DynamicDNSInformationExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -16476,9 +16476,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "DynamicDNSInformationExtension"; } }
+        protected override string XmlTypeName { get { return "DynamicDNSInformationExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -16494,7 +16494,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class EAPMethodConfiguration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class EAPMethodConfiguration : SharpOnvifCommon.Xml.XmlContract
     {
         private TLSConfiguration tLSConfigurationField;
 
@@ -16530,9 +16530,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "EAPMethodConfiguration"; } }
+        protected override string XmlTypeName { get { return "EAPMethodConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -16564,7 +16564,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class EFlip : SharpOnvifCommon.Xml.OnvifContract
+    public partial class EFlip : SharpOnvifCommon.Xml.XmlContract
     {
         private EFlipMode modeField;
 
@@ -16587,9 +16587,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "EFlip"; } }
+        protected override string XmlTypeName { get { return "EFlip"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -16613,7 +16613,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class EFlipOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class EFlipOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private EFlipMode[] modeField;
 
@@ -16636,9 +16636,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "EFlipOptions"; } }
+        protected override string XmlTypeName { get { return "EFlipOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -16671,7 +16671,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class EFlipOptionsExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class EFlipOptionsExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -16682,9 +16682,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "EFlipOptionsExtension"; } }
+        protected override string XmlTypeName { get { return "EFlipOptionsExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -16700,7 +16700,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class EQPreset : SharpOnvifCommon.Xml.OnvifContract
+    public partial class EQPreset : SharpOnvifCommon.Xml.XmlContract
     {
         private string tokenField;
 
@@ -16787,9 +16787,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "EQPreset"; } }
+        protected override string XmlTypeName { get { return "EQPreset"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -16844,7 +16844,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class EapMethodExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class EapMethodExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -16855,9 +16855,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "EapMethodExtension"; } }
+        protected override string XmlTypeName { get { return "EapMethodExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -16873,7 +16873,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2005/08/addressing")]
-    public partial class EndpointReferenceType : SharpOnvifCommon.Xml.OnvifContract
+    public partial class EndpointReferenceType : SharpOnvifCommon.Xml.XmlContract
     {
         private AttributedURIType addressField;
 
@@ -16911,9 +16911,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "EndpointReferenceType"; } }
+        protected override string XmlTypeName { get { return "EndpointReferenceType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.i08Addressing; } }
+        protected override string XmlTypeNamespace { get { return Ns.i08Addressing; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -16947,7 +16947,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class EngineConfiguration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class EngineConfiguration : SharpOnvifCommon.Xml.XmlContract
     {
         private VideoAnalyticsConfiguration videoAnalyticsConfigurationField;
 
@@ -16976,9 +16976,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "EngineConfiguration"; } }
+        protected override string XmlTypeName { get { return "EngineConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -17007,7 +17007,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2003/05/soap-envelope")]
-    public partial class Envelope : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Envelope : SharpOnvifCommon.Xml.XmlContract
     {
         private Header headerField;
 
@@ -17027,9 +17027,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.bodyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Envelope"; } }
+        protected override string XmlTypeName { get { return "Envelope"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.SoapEnvelope; } }
+        protected override string XmlTypeNamespace { get { return Ns.SoapEnvelope; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -17056,7 +17056,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class EventCapabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class EventCapabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private string xAddrField;
 
@@ -17115,9 +17115,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "EventCapabilities"; } }
+        protected override string XmlTypeName { get { return "EventCapabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -17158,14 +17158,14 @@ namespace SharpOnvifCommon.Onvif
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
     public partial class EventFilter : FilterType
     {
-        protected override string OnvifXmlTypeName { get { return "EventFilter"; } }
+        protected override string XmlTypeName { get { return "EventFilter"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class EventStream : SharpOnvifCommon.Xml.OnvifContract
+    public partial class EventStream : SharpOnvifCommon.Xml.XmlContract
     {
         private object[] itemsField;
 
@@ -17189,9 +17189,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.itemsElementNameField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "EventStream"; } }
+        protected override string XmlTypeName { get { return "EventStream"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -17238,7 +17238,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class EventStreamExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class EventStreamExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -17249,9 +17249,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "EventStreamExtension"; } }
+        protected override string XmlTypeName { get { return "EventStreamExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -17270,7 +17270,7 @@ namespace SharpOnvifCommon.Onvif
     /// Subscription handling in the same way as base notification subscription.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class EventSubscription : SharpOnvifCommon.Xml.OnvifContract
+    public partial class EventSubscription : SharpOnvifCommon.Xml.XmlContract
     {
         private FilterType filterField;
 
@@ -17299,9 +17299,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "EventSubscription"; } }
+        protected override string XmlTypeName { get { return "EventSubscription"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -17329,7 +17329,7 @@ namespace SharpOnvifCommon.Onvif
 
     }
 
-    public partial class EventSubscriptionSubscriptionPolicy : SharpOnvifCommon.Xml.OnvifContract
+    public partial class EventSubscriptionSubscriptionPolicy : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -17354,7 +17354,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Exposure : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Exposure : SharpOnvifCommon.Xml.XmlContract
     {
         private ExposureMode modeField;
 
@@ -17501,9 +17501,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.irisField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Exposure"; } }
+        protected override string XmlTypeName { get { return "Exposure"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -17583,7 +17583,7 @@ namespace SharpOnvifCommon.Onvif
     /// Type describing the exposure settings.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Exposure20 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Exposure20 : SharpOnvifCommon.Xml.XmlContract
     {
         private ExposureMode modeField;
 
@@ -17853,9 +17853,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.irisFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Exposure20"; } }
+        protected override string XmlTypeName { get { return "Exposure20"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -17972,7 +17972,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ExposureOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ExposureOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private ExposureMode[] modeField;
 
@@ -18073,9 +18073,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.irisField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ExposureOptions"; } }
+        protected override string XmlTypeName { get { return "ExposureOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -18159,7 +18159,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ExposureOptions20 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ExposureOptions20 : SharpOnvifCommon.Xml.XmlContract
     {
         private ExposureMode[] modeField;
 
@@ -18294,9 +18294,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.irisField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ExposureOptions20"; } }
+        protected override string XmlTypeName { get { return "ExposureOptions20"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -18383,7 +18383,7 @@ namespace SharpOnvifCommon.Onvif
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(TopicSetType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(TopicType))]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/t-1")]
-    public partial class ExtensibleDocumented : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ExtensibleDocumented : SharpOnvifCommon.Xml.XmlContract
     {
         private Documentation documentationField;
 
@@ -18394,9 +18394,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.documentationField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ExtensibleDocumented"; } }
+        protected override string XmlTypeName { get { return "ExtensibleDocumented"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.T1; } }
+        protected override string XmlTypeNamespace { get { return Ns.T1; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -18418,7 +18418,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/analytics/humanface")]
-    public partial class Eye : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Eye : SharpOnvifCommon.Xml.XmlContract
     {
         private string shapeField;
 
@@ -18465,9 +18465,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Eye"; } }
+        protected override string XmlTypeName { get { return "Eye"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.AnalyticsHumanface; } }
+        protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanface; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -18501,7 +18501,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/analytics/humanface")]
-    public partial class Eyebrow : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Eyebrow : SharpOnvifCommon.Xml.XmlContract
     {
         private string widthField;
 
@@ -18550,9 +18550,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Eyebrow"; } }
+        protected override string XmlTypeName { get { return "Eyebrow"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.AnalyticsHumanface; } }
+        protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanface; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -18586,7 +18586,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/analytics/humanface")]
-    public partial class FacialHair : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FacialHair : SharpOnvifCommon.Xml.XmlContract
     {
         private bool mustacheField;
         private bool mustacheFieldSpecified;
@@ -18669,9 +18669,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "FacialHair"; } }
+        protected override string XmlTypeName { get { return "FacialHair"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.AnalyticsHumanface; } }
+        protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanface; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -18720,7 +18720,7 @@ namespace SharpOnvifCommon.Onvif
     /// Fault reporting structure
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2003/05/soap-envelope")]
-    public partial class Fault : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Fault : SharpOnvifCommon.Xml.XmlContract
     {
         private faultcode codeField;
 
@@ -18768,9 +18768,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.detailField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Fault"; } }
+        protected override string XmlTypeName { get { return "Fault"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.SoapEnvelope; } }
+        protected override string XmlTypeNamespace { get { return Ns.SoapEnvelope; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -18824,7 +18824,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class FieldOfView : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FieldOfView : SharpOnvifCommon.Xml.XmlContract
     {
         private float hfovField;
 
@@ -18850,9 +18850,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.vfovField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "FieldOfView"; } }
+        protected override string XmlTypeName { get { return "FieldOfView"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -18877,7 +18877,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class FileProgress : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FileProgress : SharpOnvifCommon.Xml.XmlContract
     {
         private string fileNameField;
 
@@ -18912,9 +18912,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "FileProgress"; } }
+        protected override string XmlTypeName { get { return "FileProgress"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -18944,7 +18944,7 @@ namespace SharpOnvifCommon.Onvif
 
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(EventFilter))]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class FilterType : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FilterType : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -18955,9 +18955,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "FilterType"; } }
+        protected override string XmlTypeName { get { return "FilterType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
+        protected override string XmlTypeNamespace { get { return Ns.B2; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -18973,7 +18973,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class FindEventResult : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FindEventResult : SharpOnvifCommon.Xml.XmlContract
     {
         private string recordingTokenField;
 
@@ -19047,9 +19047,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "FindEventResult"; } }
+        protected override string XmlTypeName { get { return "FindEventResult"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -19093,7 +19093,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class FindEventResultList : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FindEventResultList : SharpOnvifCommon.Xml.XmlContract
     {
         private SearchState searchStateField;
 
@@ -19120,9 +19120,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.resultField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "FindEventResultList"; } }
+        protected override string XmlTypeName { get { return "FindEventResultList"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -19155,7 +19155,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class FindMetadataResult : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FindMetadataResult : SharpOnvifCommon.Xml.XmlContract
     {
         private string recordingTokenField;
 
@@ -19202,9 +19202,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "FindMetadataResult"; } }
+        protected override string XmlTypeName { get { return "FindMetadataResult"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -19238,7 +19238,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class FindMetadataResultList : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FindMetadataResultList : SharpOnvifCommon.Xml.XmlContract
     {
         private SearchState searchStateField;
 
@@ -19265,9 +19265,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.resultField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "FindMetadataResultList"; } }
+        protected override string XmlTypeName { get { return "FindMetadataResultList"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -19300,7 +19300,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class FindNLSearchResult : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FindNLSearchResult : SharpOnvifCommon.Xml.XmlContract
     {
         private string objectUUIDField;
 
@@ -19366,9 +19366,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.recordingTokenField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "FindNLSearchResult"; } }
+        protected override string XmlTypeName { get { return "FindNLSearchResult"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -19410,7 +19410,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class FindNLSearchResultList : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FindNLSearchResultList : SharpOnvifCommon.Xml.XmlContract
     {
         private SearchState searchStateField;
 
@@ -19437,9 +19437,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.resultField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "FindNLSearchResultList"; } }
+        protected override string XmlTypeName { get { return "FindNLSearchResultList"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -19472,7 +19472,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class FindObjectImageResult : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FindObjectImageResult : SharpOnvifCommon.Xml.XmlContract
     {
         private string objectUUIDField;
 
@@ -19538,9 +19538,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.recordingTokenField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "FindObjectImageResult"; } }
+        protected override string XmlTypeName { get { return "FindObjectImageResult"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -19582,7 +19582,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class FindObjectImageResultList : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FindObjectImageResultList : SharpOnvifCommon.Xml.XmlContract
     {
         private SearchState searchStateField;
 
@@ -19609,9 +19609,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.resultField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "FindObjectImageResultList"; } }
+        protected override string XmlTypeName { get { return "FindObjectImageResultList"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -19644,7 +19644,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class FindPTZPositionResult : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FindPTZPositionResult : SharpOnvifCommon.Xml.XmlContract
     {
         private string recordingTokenField;
 
@@ -19703,9 +19703,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "FindPTZPositionResult"; } }
+        protected override string XmlTypeName { get { return "FindPTZPositionResult"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -19744,7 +19744,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class FindPTZPositionResultList : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FindPTZPositionResultList : SharpOnvifCommon.Xml.XmlContract
     {
         private SearchState searchStateField;
 
@@ -19771,9 +19771,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.resultField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "FindPTZPositionResultList"; } }
+        protected override string XmlTypeName { get { return "FindPTZPositionResultList"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -19806,7 +19806,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class FindRecordingResultList : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FindRecordingResultList : SharpOnvifCommon.Xml.XmlContract
     {
         private SearchState searchStateField;
 
@@ -19833,9 +19833,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.recordingInformationField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "FindRecordingResultList"; } }
+        protected override string XmlTypeName { get { return "FindRecordingResultList"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -19868,7 +19868,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class FloatItems : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FloatItems : SharpOnvifCommon.Xml.XmlContract
     {
         private float[] itemsField;
 
@@ -19879,9 +19879,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.itemsField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "FloatItems"; } }
+        protected override string XmlTypeName { get { return "FloatItems"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -19912,7 +19912,7 @@ namespace SharpOnvifCommon.Onvif
     /// Range of values greater equal Min value and less equal Max value.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class FloatRange : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FloatRange : SharpOnvifCommon.Xml.XmlContract
     {
         private float minField;
 
@@ -19932,9 +19932,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.maxField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "FloatRange"; } }
+        protected override string XmlTypeName { get { return "FloatRange"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -19961,7 +19961,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class FocusConfiguration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FocusConfiguration : SharpOnvifCommon.Xml.XmlContract
     {
         private AutoFocusMode autoFocusModeField;
 
@@ -20014,9 +20014,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "FocusConfiguration"; } }
+        protected override string XmlTypeName { get { return "FocusConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -20055,7 +20055,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class FocusConfiguration20 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FocusConfiguration20 : SharpOnvifCommon.Xml.XmlContract
     {
         private AutoFocusMode autoFocusModeField;
 
@@ -20161,9 +20161,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.aFModeField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "FocusConfiguration20"; } }
+        protected override string XmlTypeName { get { return "FocusConfiguration20"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -20233,7 +20233,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class FocusConfiguration20Extension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FocusConfiguration20Extension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -20244,9 +20244,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "FocusConfiguration20Extension"; } }
+        protected override string XmlTypeName { get { return "FocusConfiguration20Extension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -20262,7 +20262,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class FocusMove : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FocusMove : SharpOnvifCommon.Xml.XmlContract
     {
         private AbsoluteFocus absoluteField;
 
@@ -20300,9 +20300,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.continuousField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "FocusMove"; } }
+        protected override string XmlTypeName { get { return "FocusMove"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -20334,7 +20334,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class FocusOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FocusOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private AutoFocusMode[] autoFocusModesField;
 
@@ -20372,9 +20372,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.farLimitField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "FocusOptions"; } }
+        protected override string XmlTypeName { get { return "FocusOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -20417,7 +20417,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class FocusOptions20 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FocusOptions20 : SharpOnvifCommon.Xml.XmlContract
     {
         private AutoFocusMode[] autoFocusModesField;
 
@@ -20477,9 +20477,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "FocusOptions20"; } }
+        protected override string XmlTypeName { get { return "FocusOptions20"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -20527,7 +20527,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class FocusOptions20Extension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FocusOptions20Extension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -20550,9 +20550,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.aFModesField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "FocusOptions20Extension"; } }
+        protected override string XmlTypeName { get { return "FocusOptions20Extension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -20576,7 +20576,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class FocusStatus : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FocusStatus : SharpOnvifCommon.Xml.XmlContract
     {
         private float positionField;
 
@@ -20623,9 +20623,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "FocusStatus"; } }
+        protected override string XmlTypeName { get { return "FocusStatus"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -20659,7 +20659,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class FocusStatus20 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FocusStatus20 : SharpOnvifCommon.Xml.XmlContract
     {
         private float positionField;
 
@@ -20706,9 +20706,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "FocusStatus20"; } }
+        protected override string XmlTypeName { get { return "FocusStatus20"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -20745,7 +20745,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class FocusStatus20Extension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FocusStatus20Extension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -20756,9 +20756,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "FocusStatus20Extension"; } }
+        protected override string XmlTypeName { get { return "FocusStatus20Extension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -20774,7 +20774,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Frame : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Frame : SharpOnvifCommon.Xml.XmlContract
     {
         private PTZStatus pTZStatusField;
 
@@ -20891,9 +20891,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.sourceField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Frame"; } }
+        protected override string XmlTypeName { get { return "Frame"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -20988,7 +20988,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class FrameExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FrameExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -21017,9 +21017,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "FrameExtension"; } }
+        protected override string XmlTypeName { get { return "FrameExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -21048,7 +21048,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class FrameExtension2 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FrameExtension2 : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -21059,9 +21059,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "FrameExtension2"; } }
+        protected override string XmlTypeName { get { return "FrameExtension2"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -21077,7 +21077,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class FrequencyDecibelPair : SharpOnvifCommon.Xml.OnvifContract
+    public partial class FrequencyDecibelPair : SharpOnvifCommon.Xml.XmlContract
     {
         private int centerFrequencyField;
 
@@ -21113,9 +21113,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "FrequencyDecibelPair"; } }
+        protected override string XmlTypeName { get { return "FrequencyDecibelPair"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -21144,7 +21144,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class G711DecOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class G711DecOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private int[] bitrateField;
 
@@ -21181,9 +21181,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "G711DecOptions"; } }
+        protected override string XmlTypeName { get { return "G711DecOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -21236,7 +21236,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class G726DecOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class G726DecOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private int[] bitrateField;
 
@@ -21273,9 +21273,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "G726DecOptions"; } }
+        protected override string XmlTypeName { get { return "G726DecOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -21328,7 +21328,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class GenericEapPwdConfigurationExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GenericEapPwdConfigurationExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -21339,9 +21339,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "GenericEapPwdConfigurationExtension"; } }
+        protected override string XmlTypeName { get { return "GenericEapPwdConfigurationExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -21357,7 +21357,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class GeoLocation : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GeoLocation : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -21440,9 +21440,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.elevationFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "GeoLocation"; } }
+        protected override string XmlTypeName { get { return "GeoLocation"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -21494,7 +21494,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class GeoOrientation : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GeoOrientation : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -21577,9 +21577,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.yawFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "GeoOrientation"; } }
+        protected override string XmlTypeName { get { return "GeoOrientation"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -21631,7 +21631,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class GetRecordingJobsResponseItem : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetRecordingJobsResponseItem : SharpOnvifCommon.Xml.XmlContract
     {
         private string jobTokenField;
 
@@ -21660,9 +21660,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "GetRecordingJobsResponseItem"; } }
+        protected override string XmlTypeName { get { return "GetRecordingJobsResponseItem"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -21691,7 +21691,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class GetRecordingsResponseItem : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetRecordingsResponseItem : SharpOnvifCommon.Xml.XmlContract
     {
         private string recordingTokenField;
 
@@ -21738,9 +21738,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "GetRecordingsResponseItem"; } }
+        protected override string XmlTypeName { get { return "GetRecordingsResponseItem"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -21774,7 +21774,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class GetTracksResponseItem : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetTracksResponseItem : SharpOnvifCommon.Xml.XmlContract
     {
         private string trackTokenField;
 
@@ -21809,9 +21809,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "GetTracksResponseItem"; } }
+        protected override string XmlTypeName { get { return "GetTracksResponseItem"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -21840,7 +21840,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class GetTracksResponseList : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetTracksResponseList : SharpOnvifCommon.Xml.XmlContract
     {
         private GetTracksResponseItem[] trackField;
 
@@ -21854,9 +21854,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.trackField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "GetTracksResponseList"; } }
+        protected override string XmlTypeName { get { return "GetTracksResponseList"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -21884,7 +21884,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/analytics/humanbody")]
-    public partial class Gloves : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Gloves : SharpOnvifCommon.Xml.XmlContract
     {
         private ColorDescriptor colorField;
 
@@ -21931,9 +21931,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Gloves"; } }
+        protected override string XmlTypeName { get { return "Gloves"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
+        protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -21966,7 +21966,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class H264Configuration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class H264Configuration : SharpOnvifCommon.Xml.XmlContract
     {
         private int govLengthField;
 
@@ -21995,9 +21995,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.h264ProfileField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "H264Configuration"; } }
+        protected override string XmlTypeName { get { return "H264Configuration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -22024,7 +22024,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class H264DecOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class H264DecOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private VideoResolution[] resolutionsAvailableField;
 
@@ -22083,9 +22083,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "H264DecOptions"; } }
+        protected override string XmlTypeName { get { return "H264DecOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -22137,7 +22137,7 @@ namespace SharpOnvifCommon.Onvif
 
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(H264Options2))]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class H264Options : SharpOnvifCommon.Xml.OnvifContract
+    public partial class H264Options : SharpOnvifCommon.Xml.XmlContract
     {
         private VideoResolution[] resolutionsAvailableField;
 
@@ -22200,9 +22200,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.h264ProfilesSupportedField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "H264Options"; } }
+        protected override string XmlTypeName { get { return "H264Options"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -22279,9 +22279,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "H264Options2"; } }
+        protected override string XmlTypeName { get { return "H264Options2"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -22307,7 +22307,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/analytics/humanface")]
-    public partial class Hair : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Hair : SharpOnvifCommon.Xml.XmlContract
     {
         private string lengthField;
 
@@ -22371,9 +22371,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.bangsFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Hair"; } }
+        protected override string XmlTypeName { get { return "Hair"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.AnalyticsHumanface; } }
+        protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanface; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -22417,7 +22417,7 @@ namespace SharpOnvifCommon.Onvif
     /// Elements replacing the wildcard MUST be namespace qualified, but can be in the targetNamespace
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2003/05/soap-envelope")]
-    public partial class Header : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Header : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -22428,9 +22428,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Header"; } }
+        protected override string XmlTypeName { get { return "Header"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.SoapEnvelope; } }
+        protected override string XmlTypeNamespace { get { return Ns.SoapEnvelope; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -22446,7 +22446,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class HostnameInformation : SharpOnvifCommon.Xml.OnvifContract
+    public partial class HostnameInformation : SharpOnvifCommon.Xml.XmlContract
     {
         private bool fromDHCPField;
 
@@ -22481,9 +22481,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "HostnameInformation"; } }
+        protected override string XmlTypeName { get { return "HostnameInformation"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -22515,7 +22515,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class HostnameInformationExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class HostnameInformationExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -22526,9 +22526,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "HostnameInformationExtension"; } }
+        protected override string XmlTypeName { get { return "HostnameInformationExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -22544,7 +22544,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/analytics/humanbody")]
-    public partial class HumanBody : SharpOnvifCommon.Xml.OnvifContract
+    public partial class HumanBody : SharpOnvifCommon.Xml.XmlContract
     {
         private BodyMetric bodyMetricField;
 
@@ -22615,9 +22615,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "HumanBody"; } }
+        protected override string XmlTypeName { get { return "HumanBody"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
+        protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -22661,7 +22661,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/analytics/humanface")]
-    public partial class HumanFace : SharpOnvifCommon.Xml.OnvifContract
+    public partial class HumanFace : SharpOnvifCommon.Xml.XmlContract
     {
         private IntRange ageField;
 
@@ -22888,9 +22888,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "HumanFace"; } }
+        protected override string XmlTypeName { get { return "HumanFace"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.AnalyticsHumanface; } }
+        protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanface; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -22998,7 +22998,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class IOCapabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class IOCapabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private int inputConnectorsField;
         private bool inputConnectorsFieldSpecified;
@@ -23057,9 +23057,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "IOCapabilities"; } }
+        protected override string XmlTypeName { get { return "IOCapabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -23099,7 +23099,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class IOCapabilitiesExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class IOCapabilitiesExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -23149,9 +23149,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "IOCapabilitiesExtension"; } }
+        protected override string XmlTypeName { get { return "IOCapabilitiesExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -23195,7 +23195,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class IOCapabilitiesExtension2 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class IOCapabilitiesExtension2 : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -23206,9 +23206,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "IOCapabilitiesExtension2"; } }
+        protected override string XmlTypeName { get { return "IOCapabilitiesExtension2"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -23224,7 +23224,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class IPAddressFilter : SharpOnvifCommon.Xml.OnvifContract
+    public partial class IPAddressFilter : SharpOnvifCommon.Xml.XmlContract
     {
         private IPAddressFilterType typeField;
 
@@ -23262,9 +23262,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "IPAddressFilter"; } }
+        protected override string XmlTypeName { get { return "IPAddressFilter"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -23313,7 +23313,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class IPAddressFilterExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class IPAddressFilterExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -23324,9 +23324,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "IPAddressFilterExtension"; } }
+        protected override string XmlTypeName { get { return "IPAddressFilterExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -23342,7 +23342,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class IPv4Configuration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class IPv4Configuration : SharpOnvifCommon.Xml.XmlContract
     {
         private PrefixedIPv4Address[] manualField;
 
@@ -23401,9 +23401,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "IPv4Configuration"; } }
+        protected override string XmlTypeName { get { return "IPv4Configuration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -23448,7 +23448,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class IPv4NetworkInterface : SharpOnvifCommon.Xml.OnvifContract
+    public partial class IPv4NetworkInterface : SharpOnvifCommon.Xml.XmlContract
     {
         private bool enabledField;
 
@@ -23474,9 +23474,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.configField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "IPv4NetworkInterface"; } }
+        protected override string XmlTypeName { get { return "IPv4NetworkInterface"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -23503,7 +23503,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class IPv4NetworkInterfaceSetConfiguration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class IPv4NetworkInterfaceSetConfiguration : SharpOnvifCommon.Xml.XmlContract
     {
         private bool enabledField;
         private bool enabledFieldSpecified;
@@ -23565,9 +23565,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.dHCPFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "IPv4NetworkInterfaceSetConfiguration"; } }
+        protected override string XmlTypeName { get { return "IPv4NetworkInterfaceSetConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -23613,7 +23613,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class IPv6Configuration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class IPv6Configuration : SharpOnvifCommon.Xml.XmlContract
     {
         private bool acceptRouterAdvertField;
         private bool acceptRouterAdvertFieldSpecified;
@@ -23708,9 +23708,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "IPv6Configuration"; } }
+        protected override string XmlTypeName { get { return "IPv6Configuration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -23790,7 +23790,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class IPv6ConfigurationExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class IPv6ConfigurationExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -23801,9 +23801,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "IPv6ConfigurationExtension"; } }
+        protected override string XmlTypeName { get { return "IPv6ConfigurationExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -23819,7 +23819,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class IPv6NetworkInterface : SharpOnvifCommon.Xml.OnvifContract
+    public partial class IPv6NetworkInterface : SharpOnvifCommon.Xml.XmlContract
     {
         private bool enabledField;
 
@@ -23845,9 +23845,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.configField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "IPv6NetworkInterface"; } }
+        protected override string XmlTypeName { get { return "IPv6NetworkInterface"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -23874,7 +23874,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class IPv6NetworkInterfaceSetConfiguration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class IPv6NetworkInterfaceSetConfiguration : SharpOnvifCommon.Xml.XmlContract
     {
         private bool enabledField;
         private bool enabledFieldSpecified;
@@ -23960,9 +23960,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.dHCPFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "IPv6NetworkInterfaceSetConfiguration"; } }
+        protected override string XmlTypeName { get { return "IPv6NetworkInterfaceSetConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -24017,7 +24017,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ImageStabilization : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ImageStabilization : SharpOnvifCommon.Xml.XmlContract
     {
         private ImageStabilizationMode modeField;
 
@@ -24064,9 +24064,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ImageStabilization"; } }
+        protected override string XmlTypeName { get { return "ImageStabilization"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -24102,7 +24102,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ImageStabilizationExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ImageStabilizationExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -24113,9 +24113,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ImageStabilizationExtension"; } }
+        protected override string XmlTypeName { get { return "ImageStabilizationExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -24131,7 +24131,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ImageStabilizationOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ImageStabilizationOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private ImageStabilizationMode[] modeField;
 
@@ -24166,9 +24166,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ImageStabilizationOptions"; } }
+        protected override string XmlTypeName { get { return "ImageStabilizationOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -24206,7 +24206,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ImageStabilizationOptionsExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ImageStabilizationOptionsExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -24217,9 +24217,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ImageStabilizationOptionsExtension"; } }
+        protected override string XmlTypeName { get { return "ImageStabilizationOptionsExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -24235,7 +24235,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ImagingCapabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ImagingCapabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private string xAddrField;
 
@@ -24249,9 +24249,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.xAddrField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ImagingCapabilities"; } }
+        protected override string XmlTypeName { get { return "ImagingCapabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -24273,7 +24273,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ImagingOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ImagingOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private BacklightCompensationOptions backlightCompensationField;
 
@@ -24374,9 +24374,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ImagingOptions"; } }
+        protected override string XmlTypeName { get { return "ImagingOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -24451,7 +24451,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ImagingOptions20 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ImagingOptions20 : SharpOnvifCommon.Xml.XmlContract
     {
         private BacklightCompensationOptions20 backlightCompensationField;
 
@@ -24582,9 +24582,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ImagingOptions20"; } }
+        protected override string XmlTypeName { get { return "ImagingOptions20"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -24662,7 +24662,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ImagingOptions20Extension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ImagingOptions20Extension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -24694,9 +24694,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ImagingOptions20Extension"; } }
+        protected override string XmlTypeName { get { return "ImagingOptions20Extension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -24725,7 +24725,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ImagingOptions20Extension2 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ImagingOptions20Extension2 : SharpOnvifCommon.Xml.XmlContract
     {
         private IrCutFilterAutoAdjustmentOptions irCutFilterAutoAdjustmentField;
 
@@ -24748,9 +24748,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ImagingOptions20Extension2"; } }
+        protected override string XmlTypeName { get { return "ImagingOptions20Extension2"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -24777,7 +24777,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ImagingOptions20Extension3 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ImagingOptions20Extension3 : SharpOnvifCommon.Xml.XmlContract
     {
         private ToneCompensationOptions toneCompensationOptionsField;
 
@@ -24824,9 +24824,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ImagingOptions20Extension3"; } }
+        protected override string XmlTypeName { get { return "ImagingOptions20Extension3"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -24863,7 +24863,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ImagingOptions20Extension4 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ImagingOptions20Extension4 : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -24874,9 +24874,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ImagingOptions20Extension4"; } }
+        protected override string XmlTypeName { get { return "ImagingOptions20Extension4"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -24892,7 +24892,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ImagingSettings : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ImagingSettings : SharpOnvifCommon.Xml.XmlContract
     {
         private BacklightCompensation backlightCompensationField;
 
@@ -25083,9 +25083,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ImagingSettings"; } }
+        protected override string XmlTypeName { get { return "ImagingSettings"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -25181,7 +25181,7 @@ namespace SharpOnvifCommon.Onvif
     /// obtained via the GetOptions command.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ImagingSettings20 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ImagingSettings20 : SharpOnvifCommon.Xml.XmlContract
     {
         private BacklightCompensation20 backlightCompensationField;
 
@@ -25372,9 +25372,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ImagingSettings20"; } }
+        protected override string XmlTypeName { get { return "ImagingSettings20"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -25466,7 +25466,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ImagingSettingsExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ImagingSettingsExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -25477,9 +25477,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ImagingSettingsExtension"; } }
+        protected override string XmlTypeName { get { return "ImagingSettingsExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -25495,7 +25495,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ImagingSettingsExtension20 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ImagingSettingsExtension20 : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -25527,9 +25527,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ImagingSettingsExtension20"; } }
+        protected override string XmlTypeName { get { return "ImagingSettingsExtension20"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -25558,7 +25558,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ImagingSettingsExtension202 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ImagingSettingsExtension202 : SharpOnvifCommon.Xml.XmlContract
     {
         private IrCutFilterAutoAdjustment[] irCutFilterAutoAdjustmentField;
 
@@ -25581,9 +25581,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ImagingSettingsExtension202"; } }
+        protected override string XmlTypeName { get { return "ImagingSettingsExtension202"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -25616,7 +25616,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ImagingSettingsExtension203 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ImagingSettingsExtension203 : SharpOnvifCommon.Xml.XmlContract
     {
         private ToneCompensation toneCompensationField;
 
@@ -25663,9 +25663,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ImagingSettingsExtension203"; } }
+        protected override string XmlTypeName { get { return "ImagingSettingsExtension203"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -25702,7 +25702,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ImagingSettingsExtension204 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ImagingSettingsExtension204 : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -25713,9 +25713,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ImagingSettingsExtension204"; } }
+        protected override string XmlTypeName { get { return "ImagingSettingsExtension204"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -25731,7 +25731,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ImagingStatus : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ImagingStatus : SharpOnvifCommon.Xml.XmlContract
     {
         private FocusStatus focusStatusField;
 
@@ -25751,9 +25751,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ImagingStatus"; } }
+        protected override string XmlTypeName { get { return "ImagingStatus"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -25777,7 +25777,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ImagingStatus20 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ImagingStatus20 : SharpOnvifCommon.Xml.XmlContract
     {
         private FocusStatus20 focusStatus20Field;
 
@@ -25800,9 +25800,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ImagingStatus20"; } }
+        protected override string XmlTypeName { get { return "ImagingStatus20"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -25829,7 +25829,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ImagingStatus20Extension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ImagingStatus20Extension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -25840,9 +25840,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ImagingStatus20Extension"; } }
+        protected override string XmlTypeName { get { return "ImagingStatus20Extension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -25858,7 +25858,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2004/08/xop/include")]
-    public partial class Include : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Include : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -25878,9 +25878,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.hrefField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Include"; } }
+        protected override string XmlTypeName { get { return "Include"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.XopInclude; } }
+        protected override string XmlTypeNamespace { get { return Ns.XopInclude; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -25915,7 +25915,7 @@ namespace SharpOnvifCommon.Onvif
     /// List of values.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class IntItems : SharpOnvifCommon.Xml.OnvifContract
+    public partial class IntItems : SharpOnvifCommon.Xml.XmlContract
     {
         private int[] itemsField;
 
@@ -25926,9 +25926,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.itemsField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "IntItems"; } }
+        protected override string XmlTypeName { get { return "IntItems"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -25959,7 +25959,7 @@ namespace SharpOnvifCommon.Onvif
     /// Range of values greater equal Min value and less equal Max value.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class IntRange : SharpOnvifCommon.Xml.OnvifContract
+    public partial class IntRange : SharpOnvifCommon.Xml.XmlContract
     {
         private int minField;
 
@@ -25979,9 +25979,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.maxField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "IntRange"; } }
+        protected override string XmlTypeName { get { return "IntRange"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -26011,7 +26011,7 @@ namespace SharpOnvifCommon.Onvif
     /// Rectangle defined by lower left corner position and size. Units are pixel.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class IntRectangle : SharpOnvifCommon.Xml.OnvifContract
+    public partial class IntRectangle : SharpOnvifCommon.Xml.XmlContract
     {
         private int xField;
 
@@ -26049,9 +26049,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.heightField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "IntRectangle"; } }
+        protected override string XmlTypeName { get { return "IntRectangle"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -26088,7 +26088,7 @@ namespace SharpOnvifCommon.Onvif
     /// are pixel.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class IntRectangleRange : SharpOnvifCommon.Xml.OnvifContract
+    public partial class IntRectangleRange : SharpOnvifCommon.Xml.XmlContract
     {
         private IntRange xRangeField;
 
@@ -26138,9 +26138,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.heightRangeField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "IntRectangleRange"; } }
+        protected override string XmlTypeName { get { return "IntRectangleRange"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -26188,9 +26188,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.unknownFilterField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "InvalidFilterFaultType"; } }
+        protected override string XmlTypeName { get { return "InvalidFilterFaultType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
+        protected override string XmlTypeNamespace { get { return Ns.B2; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -26222,32 +26222,32 @@ namespace SharpOnvifCommon.Onvif
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
     public partial class InvalidMessageContentExpressionFaultType : BaseFaultType
     {
-        protected override string OnvifXmlTypeName { get { return "InvalidMessageContentExpressionFaultType"; } }
+        protected override string XmlTypeName { get { return "InvalidMessageContentExpressionFaultType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
+        protected override string XmlTypeNamespace { get { return Ns.B2; } }
 
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
     public partial class InvalidProducerPropertiesExpressionFaultType : BaseFaultType
     {
-        protected override string OnvifXmlTypeName { get { return "InvalidProducerPropertiesExpressionFaultType"; } }
+        protected override string XmlTypeName { get { return "InvalidProducerPropertiesExpressionFaultType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
+        protected override string XmlTypeNamespace { get { return Ns.B2; } }
 
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
     public partial class InvalidTopicExpressionFaultType : BaseFaultType
     {
-        protected override string OnvifXmlTypeName { get { return "InvalidTopicExpressionFaultType"; } }
+        protected override string XmlTypeName { get { return "InvalidTopicExpressionFaultType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
+        protected override string XmlTypeNamespace { get { return Ns.B2; } }
 
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class IrCutFilterAutoAdjustment : SharpOnvifCommon.Xml.OnvifContract
+    public partial class IrCutFilterAutoAdjustment : SharpOnvifCommon.Xml.XmlContract
     {
         private string boundaryTypeField;
 
@@ -26308,9 +26308,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "IrCutFilterAutoAdjustment"; } }
+        protected override string XmlTypeName { get { return "IrCutFilterAutoAdjustment"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -26351,7 +26351,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class IrCutFilterAutoAdjustmentExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class IrCutFilterAutoAdjustmentExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -26362,9 +26362,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "IrCutFilterAutoAdjustmentExtension"; } }
+        protected override string XmlTypeName { get { return "IrCutFilterAutoAdjustmentExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -26380,7 +26380,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class IrCutFilterAutoAdjustmentOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class IrCutFilterAutoAdjustmentOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] boundaryTypeField;
 
@@ -26440,9 +26440,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "IrCutFilterAutoAdjustmentOptions"; } }
+        protected override string XmlTypeName { get { return "IrCutFilterAutoAdjustmentOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -26489,7 +26489,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class IrCutFilterAutoAdjustmentOptionsExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class IrCutFilterAutoAdjustmentOptionsExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -26500,9 +26500,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "IrCutFilterAutoAdjustmentOptionsExtension"; } }
+        protected override string XmlTypeName { get { return "IrCutFilterAutoAdjustmentOptionsExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -26518,7 +26518,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ItemList : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ItemList : SharpOnvifCommon.Xml.XmlContract
     {
         private ItemListSimpleItem[] simpleItemField;
 
@@ -26553,9 +26553,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ItemList"; } }
+        protected override string XmlTypeName { get { return "ItemList"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -26604,7 +26604,7 @@ namespace SharpOnvifCommon.Onvif
     /// structures are inevitable.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ItemListDescription : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ItemListDescription : SharpOnvifCommon.Xml.XmlContract
     {
         private ItemListDescriptionSimpleItemDescription[] simpleItemDescriptionField;
 
@@ -26640,9 +26640,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ItemListDescription"; } }
+        protected override string XmlTypeName { get { return "ItemListDescription"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -26685,7 +26685,7 @@ namespace SharpOnvifCommon.Onvif
 
     }
 
-    public partial class ItemListDescriptionElementItemDescription : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ItemListDescriptionElementItemDescription : SharpOnvifCommon.Xml.XmlContract
     {
         private string nameField;
 
@@ -26734,7 +26734,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ItemListDescriptionExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ItemListDescriptionExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -26745,9 +26745,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ItemListDescriptionExtension"; } }
+        protected override string XmlTypeName { get { return "ItemListDescriptionExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -26762,7 +26762,7 @@ namespace SharpOnvifCommon.Onvif
 
     }
 
-    public partial class ItemListDescriptionSimpleItemDescription : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ItemListDescriptionSimpleItemDescription : SharpOnvifCommon.Xml.XmlContract
     {
         private string nameField;
 
@@ -26807,7 +26807,7 @@ namespace SharpOnvifCommon.Onvif
 
     }
 
-    public partial class ItemListElementItem : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ItemListElementItem : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -26860,7 +26860,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ItemListExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ItemListExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -26871,9 +26871,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ItemListExtension"; } }
+        protected override string XmlTypeName { get { return "ItemListExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -26888,7 +26888,7 @@ namespace SharpOnvifCommon.Onvif
 
     }
 
-    public partial class ItemListSimpleItem : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ItemListSimpleItem : SharpOnvifCommon.Xml.XmlContract
     {
         private string nameField;
 
@@ -26937,7 +26937,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class JpegDecOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class JpegDecOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private VideoResolution[] resolutionsAvailableField;
 
@@ -26984,9 +26984,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "JpegDecOptions"; } }
+        protected override string XmlTypeName { get { return "JpegDecOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -27027,7 +27027,7 @@ namespace SharpOnvifCommon.Onvif
 
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(JpegOptions2))]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class JpegOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class JpegOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private VideoResolution[] resolutionsAvailableField;
 
@@ -27066,9 +27066,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.encodingIntervalRangeField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "JpegOptions"; } }
+        protected override string XmlTypeName { get { return "JpegOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -27129,9 +27129,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "JpegOptions2"; } }
+        protected override string XmlTypeName { get { return "JpegOptions2"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -27157,7 +27157,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class LabelInfo : SharpOnvifCommon.Xml.OnvifContract
+    public partial class LabelInfo : SharpOnvifCommon.Xml.XmlContract
     {
         private string authorityField;
 
@@ -27207,9 +27207,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.likelihoodFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "LabelInfo"; } }
+        protected override string XmlTypeName { get { return "LabelInfo"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -27261,7 +27261,7 @@ namespace SharpOnvifCommon.Onvif
     /// A layout describes a set of Video windows that are displayed simultaniously on a display.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Layout : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Layout : SharpOnvifCommon.Xml.XmlContract
     {
         private PaneLayout[] paneLayoutField;
 
@@ -27284,9 +27284,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Layout"; } }
+        protected override string XmlTypeName { get { return "Layout"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -27319,7 +27319,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class LayoutExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class LayoutExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -27330,9 +27330,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "LayoutExtension"; } }
+        protected override string XmlTypeName { get { return "LayoutExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -27351,7 +27351,7 @@ namespace SharpOnvifCommon.Onvif
     /// The options supported for a display layout.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class LayoutOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class LayoutOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private PaneLayoutOptions[] paneLayoutOptionsField;
 
@@ -27374,9 +27374,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "LayoutOptions"; } }
+        protected override string XmlTypeName { get { return "LayoutOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -27409,7 +27409,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class LayoutOptionsExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class LayoutOptionsExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -27420,9 +27420,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "LayoutOptionsExtension"; } }
+        protected override string XmlTypeName { get { return "LayoutOptionsExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -27438,7 +27438,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class LensDescription : SharpOnvifCommon.Xml.OnvifContract
+    public partial class LensDescription : SharpOnvifCommon.Xml.XmlContract
     {
         private LensOffset offsetField;
 
@@ -27512,9 +27512,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.focalLengthFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "LensDescription"; } }
+        protected override string XmlTypeName { get { return "LensDescription"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -27574,7 +27574,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class LensOffset : SharpOnvifCommon.Xml.OnvifContract
+    public partial class LensOffset : SharpOnvifCommon.Xml.XmlContract
     {
         private float xField;
         private bool xFieldSpecified;
@@ -27624,9 +27624,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.yFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "LensOffset"; } }
+        protected override string XmlTypeName { get { return "LensOffset"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -27659,7 +27659,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class LensProjection : SharpOnvifCommon.Xml.OnvifContract
+    public partial class LensProjection : SharpOnvifCommon.Xml.XmlContract
     {
         private float angleField;
 
@@ -27718,9 +27718,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "LensProjection"; } }
+        protected override string XmlTypeName { get { return "LensProjection"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -27758,7 +27758,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class LicensePlateInfo : SharpOnvifCommon.Xml.OnvifContract
+    public partial class LicensePlateInfo : SharpOnvifCommon.Xml.XmlContract
     {
         private StringLikelihood plateNumberField;
 
@@ -27817,9 +27817,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "LicensePlateInfo"; } }
+        protected override string XmlTypeName { get { return "LicensePlateInfo"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -27858,7 +27858,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class LocalLocation : SharpOnvifCommon.Xml.OnvifContract
+    public partial class LocalLocation : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -27941,9 +27941,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.zFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "LocalLocation"; } }
+        protected override string XmlTypeName { get { return "LocalLocation"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -27995,7 +27995,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class LocalOrientation : SharpOnvifCommon.Xml.OnvifContract
+    public partial class LocalOrientation : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -28078,9 +28078,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.rollFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "LocalOrientation"; } }
+        protected override string XmlTypeName { get { return "LocalOrientation"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -28132,7 +28132,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class LocationEntity : SharpOnvifCommon.Xml.OnvifContract
+    public partial class LocationEntity : SharpOnvifCommon.Xml.XmlContract
     {
         private GeoLocation geoLocationField;
 
@@ -28266,9 +28266,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.autoGeoFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "LocationEntity"; } }
+        protected override string XmlTypeName { get { return "LocationEntity"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -28345,7 +28345,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class MaximumNumberOfOSDs : SharpOnvifCommon.Xml.OnvifContract
+    public partial class MaximumNumberOfOSDs : SharpOnvifCommon.Xml.XmlContract
     {
         private int totalField;
 
@@ -28461,9 +28461,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.dateAndTimeFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "MaximumNumberOfOSDs"; } }
+        protected override string XmlTypeName { get { return "MaximumNumberOfOSDs"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -28527,7 +28527,7 @@ namespace SharpOnvifCommon.Onvif
     /// A set of media attributes valid for a recording at a point in time or for a time interval.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class MediaAttributes : SharpOnvifCommon.Xml.OnvifContract
+    public partial class MediaAttributes : SharpOnvifCommon.Xml.XmlContract
     {
         private string recordingTokenField;
 
@@ -28587,9 +28587,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "MediaAttributes"; } }
+        protected override string XmlTypeName { get { return "MediaAttributes"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -28634,7 +28634,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class MediaCapabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class MediaCapabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private string xAddrField;
 
@@ -28678,9 +28678,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "MediaCapabilities"; } }
+        protected override string XmlTypeName { get { return "MediaCapabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -28714,7 +28714,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class MediaCapabilitiesExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class MediaCapabilitiesExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private ProfileCapabilities profileCapabilitiesField;
 
@@ -28734,9 +28734,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "MediaCapabilitiesExtension"; } }
+        protected override string XmlTypeName { get { return "MediaCapabilitiesExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -28760,7 +28760,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class MediaUri : SharpOnvifCommon.Xml.OnvifContract
+    public partial class MediaUri : SharpOnvifCommon.Xml.XmlContract
     {
         private string uriField;
 
@@ -28821,9 +28821,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "MediaUri"; } }
+        protected override string XmlTypeName { get { return "MediaUri"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -28862,7 +28862,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Merge : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Merge : SharpOnvifCommon.Xml.XmlContract
     {
         private ObjectId[] fromField;
 
@@ -28882,9 +28882,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.toField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Merge"; } }
+        protected override string XmlTypeName { get { return "Merge"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -28918,7 +28918,7 @@ namespace SharpOnvifCommon.Onvif
 
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(ConfigDescriptionMessages))]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class MessageDescription : SharpOnvifCommon.Xml.OnvifContract
+    public partial class MessageDescription : SharpOnvifCommon.Xml.XmlContract
     {
         private ItemListDescription sourceField;
 
@@ -28995,9 +28995,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.isPropertyFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "MessageDescription"; } }
+        protected override string XmlTypeName { get { return "MessageDescription"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -29054,7 +29054,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class MessageDescriptionExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class MessageDescriptionExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -29065,9 +29065,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "MessageDescriptionExtension"; } }
+        protected override string XmlTypeName { get { return "MessageDescriptionExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -29083,7 +29083,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class MessageExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class MessageExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -29094,9 +29094,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "MessageExtension"; } }
+        protected override string XmlTypeName { get { return "MessageExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -29112,7 +29112,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class MetadataAttributes : SharpOnvifCommon.Xml.OnvifContract
+    public partial class MetadataAttributes : SharpOnvifCommon.Xml.XmlContract
     {
         private bool canContainPTZField;
 
@@ -29172,9 +29172,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.ptzSpacesField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "MetadataAttributes"; } }
+        protected override string XmlTypeName { get { return "MetadataAttributes"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -29425,9 +29425,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.secureStreamingProtocolAlgorithmField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "MetadataConfiguration"; } }
+        protected override string XmlTypeName { get { return "MetadataConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -29529,7 +29529,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class MetadataConfigurationExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class MetadataConfigurationExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -29540,9 +29540,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "MetadataConfigurationExtension"; } }
+        protected override string XmlTypeName { get { return "MetadataConfigurationExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -29558,7 +29558,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class MetadataConfigurationOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class MetadataConfigurationOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private PTZStatusFilterOptions pTZStatusFilterOptionsField;
 
@@ -29661,9 +29661,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.secureStreamingProtocolAlgorithmsField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "MetadataConfigurationOptions"; } }
+        protected override string XmlTypeName { get { return "MetadataConfigurationOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -29729,7 +29729,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class MetadataConfigurationOptionsExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class MetadataConfigurationOptionsExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] compressionTypeField;
 
@@ -29753,9 +29753,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "MetadataConfigurationOptionsExtension"; } }
+        protected override string XmlTypeName { get { return "MetadataConfigurationOptionsExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -29788,7 +29788,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class MetadataConfigurationOptionsExtension2 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class MetadataConfigurationOptionsExtension2 : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -29799,9 +29799,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "MetadataConfigurationOptionsExtension2"; } }
+        protected override string XmlTypeName { get { return "MetadataConfigurationOptionsExtension2"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -29817,7 +29817,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class MetadataFilter : SharpOnvifCommon.Xml.OnvifContract
+    public partial class MetadataFilter : SharpOnvifCommon.Xml.XmlContract
     {
         private string metadataStreamFilterField;
 
@@ -29837,9 +29837,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "MetadataFilter"; } }
+        protected override string XmlTypeName { get { return "MetadataFilter"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -29863,7 +29863,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class MetadataInput : SharpOnvifCommon.Xml.OnvifContract
+    public partial class MetadataInput : SharpOnvifCommon.Xml.XmlContract
     {
         private Config[] metadataConfigField;
 
@@ -29883,9 +29883,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "MetadataInput"; } }
+        protected override string XmlTypeName { get { return "MetadataInput"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -29918,7 +29918,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class MetadataInputExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class MetadataInputExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -29929,9 +29929,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "MetadataInputExtension"; } }
+        protected override string XmlTypeName { get { return "MetadataInputExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -29947,7 +29947,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class MetadataStream : SharpOnvifCommon.Xml.OnvifContract
+    public partial class MetadataStream : SharpOnvifCommon.Xml.XmlContract
     {
         private object[] itemsField;
 
@@ -29974,9 +29974,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.itemsElementNameField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "MetadataStream"; } }
+        protected override string XmlTypeName { get { return "MetadataStream"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -30050,7 +30050,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class MetadataStreamExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class MetadataStreamExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -30079,9 +30079,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "MetadataStreamExtension"; } }
+        protected override string XmlTypeName { get { return "MetadataStreamExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -30110,7 +30110,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class MetadataStreamExtension2 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class MetadataStreamExtension2 : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -30121,9 +30121,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "MetadataStreamExtension2"; } }
+        protected override string XmlTypeName { get { return "MetadataStreamExtension2"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -30139,7 +30139,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2005/08/addressing")]
-    public partial class MetadataType : SharpOnvifCommon.Xml.OnvifContract
+    public partial class MetadataType : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -30150,9 +30150,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "MetadataType"; } }
+        protected override string XmlTypeName { get { return "MetadataType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.i08Addressing; } }
+        protected override string XmlTypeNamespace { get { return Ns.i08Addressing; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -30168,7 +30168,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class MotionExpression : SharpOnvifCommon.Xml.OnvifContract
+    public partial class MotionExpression : SharpOnvifCommon.Xml.XmlContract
     {
         private string expressionField;
 
@@ -30201,9 +30201,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.typeField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "MotionExpression"; } }
+        protected override string XmlTypeName { get { return "MotionExpression"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -30243,7 +30243,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class MotionExpressionConfiguration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class MotionExpressionConfiguration : SharpOnvifCommon.Xml.XmlContract
     {
         private MotionExpression motionExpressionField;
 
@@ -30266,9 +30266,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "MotionExpressionConfiguration"; } }
+        protected override string XmlTypeName { get { return "MotionExpressionConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -30292,7 +30292,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class MotionInCells : SharpOnvifCommon.Xml.OnvifContract
+    public partial class MotionInCells : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -30342,9 +30342,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.cellsField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "MotionInCells"; } }
+        protected override string XmlTypeName { get { return "MotionInCells"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -30384,7 +30384,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class MoveOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class MoveOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private AbsoluteFocusOptions absoluteField;
 
@@ -30413,9 +30413,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.continuousField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "MoveOptions"; } }
+        protected override string XmlTypeName { get { return "MoveOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -30447,7 +30447,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class MoveOptions20 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class MoveOptions20 : SharpOnvifCommon.Xml.XmlContract
     {
         private AbsoluteFocusOptions absoluteField;
 
@@ -30485,9 +30485,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.continuousField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "MoveOptions20"; } }
+        protected override string XmlTypeName { get { return "MoveOptions20"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -30519,7 +30519,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Mpeg4Configuration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Mpeg4Configuration : SharpOnvifCommon.Xml.XmlContract
     {
         private int govLengthField;
 
@@ -30547,9 +30547,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.mpeg4ProfileField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Mpeg4Configuration"; } }
+        protected override string XmlTypeName { get { return "Mpeg4Configuration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -30576,7 +30576,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Mpeg4DecOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Mpeg4DecOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private VideoResolution[] resolutionsAvailableField;
 
@@ -30635,9 +30635,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Mpeg4DecOptions"; } }
+        protected override string XmlTypeName { get { return "Mpeg4DecOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -30689,7 +30689,7 @@ namespace SharpOnvifCommon.Onvif
 
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Mpeg4Options2))]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Mpeg4Options : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Mpeg4Options : SharpOnvifCommon.Xml.XmlContract
     {
         private VideoResolution[] resolutionsAvailableField;
 
@@ -30752,9 +30752,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.mpeg4ProfilesSupportedField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Mpeg4Options"; } }
+        protected override string XmlTypeName { get { return "Mpeg4Options"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -30831,9 +30831,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Mpeg4Options2"; } }
+        protected override string XmlTypeName { get { return "Mpeg4Options2"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -31000,9 +31000,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "MulticastAudioDecoderConfiguration"; } }
+        protected override string XmlTypeName { get { return "MulticastAudioDecoderConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -31079,7 +31079,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class MulticastAudioDecoderConfigurationOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class MulticastAudioDecoderConfigurationOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private AudioDecoder2Options encodingOptionsField;
 
@@ -31142,9 +31142,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.secureStreamingProtocolAlgorithmsField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "MulticastAudioDecoderConfigurationOptions"; } }
+        protected override string XmlTypeName { get { return "MulticastAudioDecoderConfigurationOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -31194,7 +31194,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class MulticastConfiguration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class MulticastConfiguration : SharpOnvifCommon.Xml.XmlContract
     {
         private OnvifIPAddress addressField;
 
@@ -31258,9 +31258,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "MulticastConfiguration"; } }
+        protected override string XmlTypeName { get { return "MulticastConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -31299,7 +31299,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class MulticastReceiverConfiguration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class MulticastReceiverConfiguration : SharpOnvifCommon.Xml.XmlContract
     {
         private OnvifIPAddress addressField;
 
@@ -31376,9 +31376,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "MulticastReceiverConfiguration"; } }
+        protected override string XmlTypeName { get { return "MulticastReceiverConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -31430,14 +31430,14 @@ namespace SharpOnvifCommon.Onvif
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
     public partial class MultipleTopicsSpecifiedFaultType : BaseFaultType
     {
-        protected override string OnvifXmlTypeName { get { return "MultipleTopicsSpecifiedFaultType"; } }
+        protected override string XmlTypeName { get { return "MultipleTopicsSpecifiedFaultType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
+        protected override string XmlTypeNamespace { get { return Ns.B2; } }
 
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class NTPInformation : SharpOnvifCommon.Xml.OnvifContract
+    public partial class NTPInformation : SharpOnvifCommon.Xml.XmlContract
     {
         private bool fromDHCPField;
 
@@ -31484,9 +31484,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "NTPInformation"; } }
+        protected override string XmlTypeName { get { return "NTPInformation"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -31535,7 +31535,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class NTPInformationExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class NTPInformationExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -31546,9 +31546,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "NTPInformationExtension"; } }
+        protected override string XmlTypeName { get { return "NTPInformationExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -31564,7 +31564,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class NetworkCapabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class NetworkCapabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private bool iPFilterField;
         private bool iPFilterFieldSpecified;
@@ -31671,9 +31671,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "NetworkCapabilities"; } }
+        protected override string XmlTypeName { get { return "NetworkCapabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -31731,7 +31731,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class NetworkCapabilitiesExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class NetworkCapabilitiesExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -31772,9 +31772,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "NetworkCapabilitiesExtension"; } }
+        protected override string XmlTypeName { get { return "NetworkCapabilitiesExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -31807,7 +31807,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class NetworkCapabilitiesExtension2 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class NetworkCapabilitiesExtension2 : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -31818,9 +31818,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "NetworkCapabilitiesExtension2"; } }
+        protected override string XmlTypeName { get { return "NetworkCapabilitiesExtension2"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -31836,7 +31836,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class NetworkGateway : SharpOnvifCommon.Xml.OnvifContract
+    public partial class NetworkGateway : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] iPv4AddressField;
 
@@ -31862,9 +31862,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.iPv6AddressField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "NetworkGateway"; } }
+        protected override string XmlTypeName { get { return "NetworkGateway"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -31903,7 +31903,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class NetworkHost : SharpOnvifCommon.Xml.OnvifContract
+    public partial class NetworkHost : SharpOnvifCommon.Xml.XmlContract
     {
         private NetworkHostType typeField;
 
@@ -31962,9 +31962,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "NetworkHost"; } }
+        protected override string XmlTypeName { get { return "NetworkHost"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -32006,7 +32006,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class NetworkHostExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class NetworkHostExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -32017,9 +32017,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "NetworkHostExtension"; } }
+        protected override string XmlTypeName { get { return "NetworkHostExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -32035,7 +32035,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class NetworkInterfaceConnectionSetting : SharpOnvifCommon.Xml.OnvifContract
+    public partial class NetworkInterfaceConnectionSetting : SharpOnvifCommon.Xml.XmlContract
     {
         private bool autoNegotiationField;
 
@@ -32073,9 +32073,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.duplexField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "NetworkInterfaceConnectionSetting"; } }
+        protected override string XmlTypeName { get { return "NetworkInterfaceConnectionSetting"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -32107,7 +32107,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class NetworkInterfaceExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class NetworkInterfaceExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -32157,9 +32157,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "NetworkInterfaceExtension"; } }
+        protected override string XmlTypeName { get { return "NetworkInterfaceExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -32210,7 +32210,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class NetworkInterfaceExtension2 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class NetworkInterfaceExtension2 : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -32221,9 +32221,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "NetworkInterfaceExtension2"; } }
+        protected override string XmlTypeName { get { return "NetworkInterfaceExtension2"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -32239,7 +32239,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class NetworkInterfaceInfo : SharpOnvifCommon.Xml.OnvifContract
+    public partial class NetworkInterfaceInfo : SharpOnvifCommon.Xml.XmlContract
     {
         private string nameField;
 
@@ -32289,9 +32289,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.mTUFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "NetworkInterfaceInfo"; } }
+        protected override string XmlTypeName { get { return "NetworkInterfaceInfo"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -32327,7 +32327,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class NetworkInterfaceLink : SharpOnvifCommon.Xml.OnvifContract
+    public partial class NetworkInterfaceLink : SharpOnvifCommon.Xml.XmlContract
     {
         private NetworkInterfaceConnectionSetting adminSettingsField;
 
@@ -32365,9 +32365,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.interfaceTypeField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "NetworkInterfaceLink"; } }
+        protected override string XmlTypeName { get { return "NetworkInterfaceLink"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -32399,7 +32399,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class NetworkInterfaceSetConfiguration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class NetworkInterfaceSetConfiguration : SharpOnvifCommon.Xml.XmlContract
     {
         private bool enabledField;
         private bool enabledFieldSpecified;
@@ -32494,9 +32494,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "NetworkInterfaceSetConfiguration"; } }
+        protected override string XmlTypeName { get { return "NetworkInterfaceSetConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -32551,7 +32551,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class NetworkInterfaceSetConfigurationExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class NetworkInterfaceSetConfigurationExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -32589,9 +32589,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "NetworkInterfaceSetConfigurationExtension"; } }
+        protected override string XmlTypeName { get { return "NetworkInterfaceSetConfigurationExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -32637,7 +32637,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class NetworkInterfaceSetConfigurationExtension2 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class NetworkInterfaceSetConfigurationExtension2 : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -32648,9 +32648,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "NetworkInterfaceSetConfigurationExtension2"; } }
+        protected override string XmlTypeName { get { return "NetworkInterfaceSetConfigurationExtension2"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -32666,7 +32666,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class NetworkProtocol : SharpOnvifCommon.Xml.OnvifContract
+    public partial class NetworkProtocol : SharpOnvifCommon.Xml.XmlContract
     {
         private NetworkProtocolType nameField;
 
@@ -32713,9 +32713,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "NetworkProtocol"; } }
+        protected override string XmlTypeName { get { return "NetworkProtocol"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -32758,7 +32758,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class NetworkProtocolExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class NetworkProtocolExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -32769,9 +32769,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "NetworkProtocolExtension"; } }
+        protected override string XmlTypeName { get { return "NetworkProtocolExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -32787,7 +32787,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class NetworkZeroConfiguration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class NetworkZeroConfiguration : SharpOnvifCommon.Xml.XmlContract
     {
         private string interfaceTokenField;
 
@@ -32834,9 +32834,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "NetworkZeroConfiguration"; } }
+        protected override string XmlTypeName { get { return "NetworkZeroConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -32879,7 +32879,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class NetworkZeroConfigurationExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class NetworkZeroConfigurationExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -32911,9 +32911,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "NetworkZeroConfigurationExtension"; } }
+        protected override string XmlTypeName { get { return "NetworkZeroConfigurationExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -32948,7 +32948,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class NetworkZeroConfigurationExtension2 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class NetworkZeroConfigurationExtension2 : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -32959,9 +32959,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "NetworkZeroConfigurationExtension2"; } }
+        protected override string XmlTypeName { get { return "NetworkZeroConfigurationExtension2"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -32979,14 +32979,14 @@ namespace SharpOnvifCommon.Onvif
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
     public partial class NoCurrentMessageOnTopicFaultType : BaseFaultType
     {
-        protected override string OnvifXmlTypeName { get { return "NoCurrentMessageOnTopicFaultType"; } }
+        protected override string XmlTypeName { get { return "NoCurrentMessageOnTopicFaultType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
+        protected override string XmlTypeNamespace { get { return Ns.B2; } }
 
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class NoiseReduction : SharpOnvifCommon.Xml.OnvifContract
+    public partial class NoiseReduction : SharpOnvifCommon.Xml.XmlContract
     {
         private float levelField;
 
@@ -33010,9 +33010,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "NoiseReduction"; } }
+        protected override string XmlTypeName { get { return "NoiseReduction"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -33036,7 +33036,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class NoiseReductionOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class NoiseReductionOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private bool levelField;
 
@@ -33059,9 +33059,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "NoiseReductionOptions"; } }
+        protected override string XmlTypeName { get { return "NoiseReductionOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -33085,7 +33085,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/analytics/humanface")]
-    public partial class Nose : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Nose : SharpOnvifCommon.Xml.XmlContract
     {
         private string lengthField;
 
@@ -33146,9 +33146,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Nose"; } }
+        protected override string XmlTypeName { get { return "Nose"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.AnalyticsHumanface; } }
+        protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanface; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -33187,7 +33187,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2003/05/soap-envelope")]
-    public partial class NotUnderstoodType : SharpOnvifCommon.Xml.OnvifContract
+    public partial class NotUnderstoodType : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlQualifiedName qnameField;
 
@@ -33198,9 +33198,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.qnameField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "NotUnderstoodType"; } }
+        protected override string XmlTypeName { get { return "NotUnderstoodType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.SoapEnvelope; } }
+        protected override string XmlTypeNamespace { get { return Ns.SoapEnvelope; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -33221,7 +33221,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class NotificationMessageHolderType : SharpOnvifCommon.Xml.OnvifContract
+    public partial class NotificationMessageHolderType : SharpOnvifCommon.Xml.XmlContract
     {
         private EndpointReferenceType subscriptionReferenceField;
 
@@ -33259,9 +33259,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.messageField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "NotificationMessageHolderType"; } }
+        protected override string XmlTypeName { get { return "NotificationMessageHolderType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
+        protected override string XmlTypeNamespace { get { return Ns.B2; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -33305,9 +33305,9 @@ namespace SharpOnvifCommon.Onvif
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
     public partial class NotifyMessageNotSupportedFaultType : BaseFaultType
     {
-        protected override string OnvifXmlTypeName { get { return "NotifyMessageNotSupportedFaultType"; } }
+        protected override string XmlTypeName { get { return "NotifyMessageNotSupportedFaultType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
+        protected override string XmlTypeNamespace { get { return Ns.B2; } }
 
     }
 
@@ -33316,7 +33316,7 @@ namespace SharpOnvifCommon.Onvif
     /// minimum value means non-transparent and the maximum value maens fully transparent.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OSDColor : SharpOnvifCommon.Xml.OnvifContract
+    public partial class OSDColor : SharpOnvifCommon.Xml.XmlContract
     {
         private Color colorField;
 
@@ -33348,9 +33348,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.transparentFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "OSDColor"; } }
+        protected override string XmlTypeName { get { return "OSDColor"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -33395,7 +33395,7 @@ namespace SharpOnvifCommon.Onvif
     /// Describe the option of the color and its transparency.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OSDColorOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class OSDColorOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private ColorOptions colorField;
 
@@ -33430,9 +33430,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "OSDColorOptions"; } }
+        protected override string XmlTypeName { get { return "OSDColorOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -33464,7 +33464,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OSDColorOptionsExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class OSDColorOptionsExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -33475,9 +33475,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "OSDColorOptionsExtension"; } }
+        protected override string XmlTypeName { get { return "OSDColorOptionsExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -33564,9 +33564,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "OSDConfiguration"; } }
+        protected override string XmlTypeName { get { return "OSDConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -33615,7 +33615,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OSDConfigurationExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class OSDConfigurationExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -33626,9 +33626,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "OSDConfigurationExtension"; } }
+        protected override string XmlTypeName { get { return "OSDConfigurationExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -33644,7 +33644,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OSDConfigurationOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class OSDConfigurationOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private MaximumNumberOfOSDs maximumNumberOfOSDsField;
 
@@ -33723,9 +33723,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "OSDConfigurationOptions"; } }
+        protected override string XmlTypeName { get { return "OSDConfigurationOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -33784,7 +33784,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OSDConfigurationOptionsExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class OSDConfigurationOptionsExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -33795,9 +33795,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "OSDConfigurationOptionsExtension"; } }
+        protected override string XmlTypeName { get { return "OSDConfigurationOptionsExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -33813,7 +33813,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OSDImgConfiguration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class OSDImgConfiguration : SharpOnvifCommon.Xml.XmlContract
     {
         private string imgPathField;
 
@@ -33836,9 +33836,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "OSDImgConfiguration"; } }
+        protected override string XmlTypeName { get { return "OSDImgConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -33865,7 +33865,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OSDImgConfigurationExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class OSDImgConfigurationExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -33876,9 +33876,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "OSDImgConfigurationExtension"; } }
+        protected override string XmlTypeName { get { return "OSDImgConfigurationExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -33894,7 +33894,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OSDImgOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class OSDImgOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] imagePathField;
 
@@ -34001,9 +34001,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.maxHeightFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "OSDImgOptions"; } }
+        protected override string XmlTypeName { get { return "OSDImgOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -34076,7 +34076,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OSDImgOptionsExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class OSDImgOptionsExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -34087,9 +34087,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "OSDImgOptionsExtension"; } }
+        protected override string XmlTypeName { get { return "OSDImgOptionsExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -34105,7 +34105,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OSDPosConfiguration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class OSDPosConfiguration : SharpOnvifCommon.Xml.XmlContract
     {
         private string typeField;
 
@@ -34137,9 +34137,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "OSDPosConfiguration"; } }
+        protected override string XmlTypeName { get { return "OSDPosConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -34171,7 +34171,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OSDPosConfigurationExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class OSDPosConfigurationExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -34182,9 +34182,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "OSDPosConfigurationExtension"; } }
+        protected override string XmlTypeName { get { return "OSDPosConfigurationExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -34200,7 +34200,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OSDReference : SharpOnvifCommon.Xml.OnvifContract
+    public partial class OSDReference : SharpOnvifCommon.Xml.XmlContract
     {
         private string valueField;
 
@@ -34211,9 +34211,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.valueField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "OSDReference"; } }
+        protected override string XmlTypeName { get { return "OSDReference"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -34228,7 +34228,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OSDTextConfiguration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class OSDTextConfiguration : SharpOnvifCommon.Xml.XmlContract
     {
         private string typeField;
 
@@ -34371,9 +34371,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.isPersistentTextFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "OSDTextConfiguration"; } }
+        protected override string XmlTypeName { get { return "OSDTextConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -34454,7 +34454,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OSDTextConfigurationExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class OSDTextConfigurationExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -34465,9 +34465,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "OSDTextConfigurationExtension"; } }
+        protected override string XmlTypeName { get { return "OSDTextConfigurationExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -34483,7 +34483,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OSDTextOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class OSDTextOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] typeField;
 
@@ -34567,9 +34567,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "OSDTextOptions"; } }
+        protected override string XmlTypeName { get { return "OSDTextOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -34639,7 +34639,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OSDTextOptionsExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class OSDTextOptionsExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -34650,9 +34650,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "OSDTextOptionsExtension"; } }
+        protected override string XmlTypeName { get { return "OSDTextOptionsExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -34668,7 +34668,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ObjectExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ObjectExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -34679,9 +34679,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ObjectExtension"; } }
+        protected override string XmlTypeName { get { return "ObjectExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -34698,7 +34698,7 @@ namespace SharpOnvifCommon.Onvif
 
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(OnvifObject))]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ObjectId : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ObjectId : SharpOnvifCommon.Xml.XmlContract
     {
         private string objectId1Field;
 
@@ -34721,9 +34721,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.uUIDField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ObjectId"; } }
+        protected override string XmlTypeName { get { return "ObjectId"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -34763,9 +34763,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.captureTimeField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ObjectState"; } }
+        protected override string XmlTypeName { get { return "ObjectState"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -34791,7 +34791,7 @@ namespace SharpOnvifCommon.Onvif
     /// time.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ObjectTrack : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ObjectTrack : SharpOnvifCommon.Xml.XmlContract
     {
         private ObjectState[] objectStateField;
 
@@ -34802,9 +34802,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.objectStateField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ObjectTrack"; } }
+        protected override string XmlTypeName { get { return "ObjectTrack"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -34832,7 +34832,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ObjectTree : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ObjectTree : SharpOnvifCommon.Xml.XmlContract
     {
         private Rename[] renameField;
 
@@ -34888,9 +34888,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ObjectTree"; } }
+        protected override string XmlTypeName { get { return "ObjectTree"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -34958,7 +34958,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ObjectTreeExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ObjectTreeExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -34969,9 +34969,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ObjectTreeExtension"; } }
+        protected override string XmlTypeName { get { return "ObjectTreeExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -34990,7 +34990,7 @@ namespace SharpOnvifCommon.Onvif
     /// Attributes contains a Name and an optional Value and type.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/pacs")]
-    public partial class OnvifAttribute : SharpOnvifCommon.Xml.OnvifContract
+    public partial class OnvifAttribute : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -35025,9 +35025,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.valueField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Attribute"; } }
+        protected override string XmlTypeName { get { return "Attribute"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Pacs; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Pacs; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -35063,7 +35063,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OnvifDateTime : SharpOnvifCommon.Xml.OnvifContract
+    public partial class OnvifDateTime : SharpOnvifCommon.Xml.XmlContract
     {
         private Time timeField;
 
@@ -35083,9 +35083,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.dateField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "DateTime"; } }
+        protected override string XmlTypeName { get { return "DateTime"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -35112,7 +35112,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OnvifIPAddress : SharpOnvifCommon.Xml.OnvifContract
+    public partial class OnvifIPAddress : SharpOnvifCommon.Xml.XmlContract
     {
         private IPType typeField;
 
@@ -35150,9 +35150,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.iPv6AddressField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "IPAddress"; } }
+        protected override string XmlTypeName { get { return "IPAddress"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -35255,9 +35255,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "NetworkInterface"; } }
+        protected override string XmlTypeName { get { return "NetworkInterface"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -35369,9 +35369,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.parentUUIDField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Object"; } }
+        protected override string XmlTypeName { get { return "Object"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -35428,7 +35428,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OnvifScope : SharpOnvifCommon.Xml.OnvifContract
+    public partial class OnvifScope : SharpOnvifCommon.Xml.XmlContract
     {
         private ScopeDefinition scopeDefField;
 
@@ -35454,9 +35454,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.scopeItemField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Scope"; } }
+        protected override string XmlTypeName { get { return "Scope"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -35493,7 +35493,7 @@ namespace SharpOnvifCommon.Onvif
     /// October. /3, = the local time when the switch occurs = 3 a.m. in this case
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OnvifTimeZone : SharpOnvifCommon.Xml.OnvifContract
+    public partial class OnvifTimeZone : SharpOnvifCommon.Xml.XmlContract
     {
         private string tZField;
 
@@ -35507,9 +35507,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.tZField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "TimeZone"; } }
+        protected override string XmlTypeName { get { return "TimeZone"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -35531,7 +35531,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OnvifVersion : SharpOnvifCommon.Xml.OnvifContract
+    public partial class OnvifVersion : SharpOnvifCommon.Xml.XmlContract
     {
         private int majorField;
 
@@ -35559,9 +35559,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.minorField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "OnvifVersion"; } }
+        protected override string XmlTypeName { get { return "OnvifVersion"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -35588,7 +35588,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class OtherType : SharpOnvifCommon.Xml.OnvifContract
+    public partial class OtherType : SharpOnvifCommon.Xml.XmlContract
     {
         private string typeField;
 
@@ -35624,9 +35624,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "OtherType"; } }
+        protected override string XmlTypeName { get { return "OtherType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -35655,7 +35655,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTControlDirection : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTControlDirection : SharpOnvifCommon.Xml.XmlContract
     {
         private EFlip eFlipField;
 
@@ -35690,9 +35690,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTControlDirection"; } }
+        protected override string XmlTypeName { get { return "PTControlDirection"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -35724,7 +35724,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTControlDirectionExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTControlDirectionExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -35735,9 +35735,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTControlDirectionExtension"; } }
+        protected override string XmlTypeName { get { return "PTControlDirectionExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -35753,7 +35753,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTControlDirectionOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTControlDirectionOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private EFlipOptions eFlipField;
 
@@ -35788,9 +35788,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTControlDirectionOptions"; } }
+        protected override string XmlTypeName { get { return "PTControlDirectionOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -35822,7 +35822,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTControlDirectionOptionsExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTControlDirectionOptionsExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -35833,9 +35833,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTControlDirectionOptionsExtension"; } }
+        protected override string XmlTypeName { get { return "PTControlDirectionOptionsExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -35851,7 +35851,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZCapabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTZCapabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private string xAddrField;
 
@@ -35874,9 +35874,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTZCapabilities"; } }
+        protected override string XmlTypeName { get { return "PTZCapabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -36129,9 +36129,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.presetTourRampFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTZConfiguration"; } }
+        protected override string XmlTypeName { get { return "PTZConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -36247,7 +36247,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZConfigurationExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTZConfigurationExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -36279,9 +36279,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTZConfigurationExtension"; } }
+        protected override string XmlTypeName { get { return "PTZConfigurationExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -36310,7 +36310,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZConfigurationExtension2 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTZConfigurationExtension2 : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -36321,9 +36321,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTZConfigurationExtension2"; } }
+        protected override string XmlTypeName { get { return "PTZConfigurationExtension2"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -36339,7 +36339,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZConfigurationOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTZConfigurationOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private PTZSpaces spacesField;
 
@@ -36408,9 +36408,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.pTZRampsField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTZConfigurationOptions"; } }
+        protected override string XmlTypeName { get { return "PTZConfigurationOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -36465,7 +36465,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZConfigurationOptions2 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTZConfigurationOptions2 : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -36476,9 +36476,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTZConfigurationOptions2"; } }
+        protected override string XmlTypeName { get { return "PTZConfigurationOptions2"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -36494,7 +36494,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZFilter : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTZFilter : SharpOnvifCommon.Xml.XmlContract
     {
         private bool statusField;
 
@@ -36544,9 +36544,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.fieldOfViewFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTZFilter"; } }
+        protected override string XmlTypeName { get { return "PTZFilter"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -36582,7 +36582,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZMoveStatus : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTZMoveStatus : SharpOnvifCommon.Xml.XmlContract
     {
         private MoveStatus panTiltField;
         private bool panTiltFieldSpecified;
@@ -36626,9 +36626,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.zoomFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTZMoveStatus"; } }
+        protected override string XmlTypeName { get { return "PTZMoveStatus"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -36786,9 +36786,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.geoMoveFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTZNode"; } }
+        protected override string XmlTypeName { get { return "PTZNode"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -36872,7 +36872,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZNodeExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTZNodeExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -36904,9 +36904,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTZNodeExtension"; } }
+        protected override string XmlTypeName { get { return "PTZNodeExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -36935,7 +36935,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZNodeExtension2 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTZNodeExtension2 : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -36946,9 +36946,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTZNodeExtension2"; } }
+        protected override string XmlTypeName { get { return "PTZNodeExtension2"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -36964,7 +36964,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZPositionFilter : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTZPositionFilter : SharpOnvifCommon.Xml.XmlContract
     {
         private PTZVector minPositionField;
 
@@ -37011,9 +37011,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTZPositionFilter"; } }
+        protected override string XmlTypeName { get { return "PTZPositionFilter"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -37047,7 +37047,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZPreset : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTZPreset : SharpOnvifCommon.Xml.XmlContract
     {
         private string nameField;
 
@@ -37082,9 +37082,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.tokenField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTZPreset"; } }
+        protected override string XmlTypeName { get { return "PTZPreset"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -37127,7 +37127,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZPresetTourExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTZPresetTourExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -37138,9 +37138,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTZPresetTourExtension"; } }
+        protected override string XmlTypeName { get { return "PTZPresetTourExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -37156,7 +37156,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZPresetTourOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTZPresetTourOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private bool autoStartField;
 
@@ -37203,9 +37203,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTZPresetTourOptions"; } }
+        protected override string XmlTypeName { get { return "PTZPresetTourOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -37239,7 +37239,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZPresetTourPresetDetail : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTZPresetTourPresetDetail : SharpOnvifCommon.Xml.XmlContract
     {
         private object itemField;
 
@@ -37262,9 +37262,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTZPresetTourPresetDetail"; } }
+        protected override string XmlTypeName { get { return "PTZPresetTourPresetDetail"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -37315,7 +37315,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZPresetTourPresetDetailOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTZPresetTourPresetDetailOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] presetTokenField;
 
@@ -37386,9 +37386,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTZPresetTourPresetDetailOptions"; } }
+        protected override string XmlTypeName { get { return "PTZPresetTourPresetDetailOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -37440,7 +37440,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZPresetTourPresetDetailOptionsExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTZPresetTourPresetDetailOptionsExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -37451,9 +37451,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTZPresetTourPresetDetailOptionsExtension"; } }
+        protected override string XmlTypeName { get { return "PTZPresetTourPresetDetailOptionsExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -37469,7 +37469,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZPresetTourSpot : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTZPresetTourSpot : SharpOnvifCommon.Xml.XmlContract
     {
         private PTZPresetTourPresetDetail presetDetailField;
 
@@ -37516,9 +37516,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTZPresetTourSpot"; } }
+        protected override string XmlTypeName { get { return "PTZPresetTourSpot"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -37555,7 +37555,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZPresetTourSpotExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTZPresetTourSpotExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -37566,9 +37566,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTZPresetTourSpotExtension"; } }
+        protected override string XmlTypeName { get { return "PTZPresetTourSpotExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -37584,7 +37584,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZPresetTourSpotOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTZPresetTourSpotOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private PTZPresetTourPresetDetailOptions presetDetailField;
 
@@ -37619,9 +37619,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTZPresetTourSpotOptions"; } }
+        protected override string XmlTypeName { get { return "PTZPresetTourSpotOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -37650,7 +37650,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZPresetTourStartingCondition : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTZPresetTourStartingCondition : SharpOnvifCommon.Xml.XmlContract
     {
         private int recurringTimeField;
         private bool recurringTimeFieldSpecified;
@@ -37747,9 +37747,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.randomPresetOrderFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTZPresetTourStartingCondition"; } }
+        protected override string XmlTypeName { get { return "PTZPresetTourStartingCondition"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -37814,7 +37814,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZPresetTourStartingConditionExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTZPresetTourStartingConditionExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -37825,9 +37825,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTZPresetTourStartingConditionExtension"; } }
+        protected override string XmlTypeName { get { return "PTZPresetTourStartingConditionExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -37843,7 +37843,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZPresetTourStartingConditionOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTZPresetTourStartingConditionOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private IntRange recurringTimeField;
 
@@ -37890,9 +37890,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTZPresetTourStartingConditionOptions"; } }
+        protected override string XmlTypeName { get { return "PTZPresetTourStartingConditionOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -37935,7 +37935,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZPresetTourStartingConditionOptionsExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTZPresetTourStartingConditionOptionsExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -37946,9 +37946,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTZPresetTourStartingConditionOptionsExtension"; } }
+        protected override string XmlTypeName { get { return "PTZPresetTourStartingConditionOptionsExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -37964,7 +37964,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZPresetTourStatus : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTZPresetTourStatus : SharpOnvifCommon.Xml.XmlContract
     {
         private PTZPresetTourState stateField;
 
@@ -37999,9 +37999,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTZPresetTourStatus"; } }
+        protected override string XmlTypeName { get { return "PTZPresetTourStatus"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -38033,7 +38033,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZPresetTourStatusExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTZPresetTourStatusExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -38044,9 +38044,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTZPresetTourStatusExtension"; } }
+        protected override string XmlTypeName { get { return "PTZPresetTourStatusExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -38062,7 +38062,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZPresetTourSupported : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTZPresetTourSupported : SharpOnvifCommon.Xml.XmlContract
     {
         private int maximumNumberOfPresetToursField;
 
@@ -38098,9 +38098,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTZPresetTourSupported"; } }
+        protected override string XmlTypeName { get { return "PTZPresetTourSupported"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -38138,7 +38138,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZPresetTourSupportedExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTZPresetTourSupportedExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -38149,9 +38149,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTZPresetTourSupportedExtension"; } }
+        protected override string XmlTypeName { get { return "PTZPresetTourSupportedExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -38167,7 +38167,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZPresetTourTypeExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTZPresetTourTypeExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -38178,9 +38178,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTZPresetTourTypeExtension"; } }
+        protected override string XmlTypeName { get { return "PTZPresetTourTypeExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -38196,7 +38196,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZSpaces : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTZSpaces : SharpOnvifCommon.Xml.XmlContract
     {
         private Space2DDescription[] absolutePanTiltPositionSpaceField;
 
@@ -38330,9 +38330,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTZSpaces"; } }
+        protected override string XmlTypeName { get { return "PTZSpaces"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -38442,7 +38442,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZSpacesExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTZSpacesExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -38453,9 +38453,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTZSpacesExtension"; } }
+        protected override string XmlTypeName { get { return "PTZSpacesExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -38471,7 +38471,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZSpeed : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTZSpeed : SharpOnvifCommon.Xml.XmlContract
     {
         private Vector2D panTiltField;
 
@@ -38498,9 +38498,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.zoomField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTZSpeed"; } }
+        protected override string XmlTypeName { get { return "PTZSpeed"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -38527,7 +38527,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZStatus : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTZStatus : SharpOnvifCommon.Xml.XmlContract
     {
         private PTZVector positionField;
 
@@ -38600,9 +38600,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTZStatus"; } }
+        protected override string XmlTypeName { get { return "PTZStatus"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -38646,7 +38646,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZStatusFilterOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTZStatusFilterOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private bool panTiltStatusSupportedField;
 
@@ -38762,9 +38762,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.fieldOfViewSupportedFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTZStatusFilterOptions"; } }
+        protected override string XmlTypeName { get { return "PTZStatusFilterOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -38825,7 +38825,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZStatusFilterOptionsExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTZStatusFilterOptionsExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -38836,9 +38836,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTZStatusFilterOptionsExtension"; } }
+        protected override string XmlTypeName { get { return "PTZStatusFilterOptionsExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -38854,7 +38854,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZStream : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTZStream : SharpOnvifCommon.Xml.XmlContract
     {
         private object[] itemsField;
 
@@ -38878,9 +38878,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.itemsElementNameField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTZStream"; } }
+        protected override string XmlTypeName { get { return "PTZStream"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -38927,7 +38927,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZStreamExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTZStreamExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -38938,9 +38938,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTZStreamExtension"; } }
+        protected override string XmlTypeName { get { return "PTZStreamExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -38956,7 +38956,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PTZVector : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PTZVector : SharpOnvifCommon.Xml.XmlContract
     {
         private Vector2D panTiltField;
 
@@ -38982,9 +38982,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.zoomField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PTZVector"; } }
+        protected override string XmlTypeName { get { return "PTZVector"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -39011,7 +39011,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PanTiltLimits : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PanTiltLimits : SharpOnvifCommon.Xml.XmlContract
     {
         private Space2DDescription rangeField;
 
@@ -39025,9 +39025,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.rangeField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PanTiltLimits"; } }
+        protected override string XmlTypeName { get { return "PanTiltLimits"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -39052,7 +39052,7 @@ namespace SharpOnvifCommon.Onvif
     /// Configuration of the streaming and coding settings of a Video window.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PaneConfiguration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PaneConfiguration : SharpOnvifCommon.Xml.XmlContract
     {
         private string paneNameField;
 
@@ -39143,9 +39143,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PaneConfiguration"; } }
+        protected override string XmlTypeName { get { return "PaneConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -39198,7 +39198,7 @@ namespace SharpOnvifCommon.Onvif
     /// the screen.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PaneLayout : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PaneLayout : SharpOnvifCommon.Xml.XmlContract
     {
         private string paneField;
 
@@ -39234,9 +39234,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PaneLayout"; } }
+        protected override string XmlTypeName { get { return "PaneLayout"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -39268,7 +39268,7 @@ namespace SharpOnvifCommon.Onvif
     /// Description of a pane layout describing a complete display layout.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PaneLayoutOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PaneLayoutOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private Rectangle[] areaField;
 
@@ -39291,9 +39291,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PaneLayoutOptions"; } }
+        protected override string XmlTypeName { get { return "PaneLayoutOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -39326,7 +39326,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PaneOptionExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PaneOptionExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -39337,9 +39337,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PaneOptionExtension"; } }
+        protected override string XmlTypeName { get { return "PaneOptionExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -39357,14 +39357,14 @@ namespace SharpOnvifCommon.Onvif
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
     public partial class PauseFailedFaultType : BaseFaultType
     {
-        protected override string OnvifXmlTypeName { get { return "PauseFailedFaultType"; } }
+        protected override string XmlTypeName { get { return "PauseFailedFaultType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
+        protected override string XmlTypeNamespace { get { return Ns.B2; } }
 
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Polygon : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Polygon : SharpOnvifCommon.Xml.XmlContract
     {
         private Vector[] pointField;
 
@@ -39375,9 +39375,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.pointField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Polygon"; } }
+        protected override string XmlTypeName { get { return "Polygon"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -39405,7 +39405,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PolygonOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PolygonOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private bool rectangleOnlyField;
         private bool rectangleOnlyFieldSpecified;
@@ -39455,9 +39455,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PolygonOptions"; } }
+        protected override string XmlTypeName { get { return "PolygonOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -39490,7 +39490,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Polyline : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Polyline : SharpOnvifCommon.Xml.XmlContract
     {
         private Vector[] pointField;
 
@@ -39501,9 +39501,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.pointField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Polyline"; } }
+        protected override string XmlTypeName { get { return "Polyline"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -39531,7 +39531,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/analytics/humanface")]
-    public partial class PoseAngle : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PoseAngle : SharpOnvifCommon.Xml.XmlContract
     {
         private GeoOrientation poseAnglesField;
 
@@ -39566,9 +39566,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PoseAngle"; } }
+        protected override string XmlTypeName { get { return "PoseAngle"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.AnalyticsHumanface; } }
+        protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanface; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -39597,7 +39597,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PrefixedIPv4Address : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PrefixedIPv4Address : SharpOnvifCommon.Xml.XmlContract
     {
         private string addressField;
 
@@ -39623,9 +39623,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.prefixLengthField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PrefixedIPv4Address"; } }
+        protected override string XmlTypeName { get { return "PrefixedIPv4Address"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -39652,7 +39652,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PrefixedIPv6Address : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PrefixedIPv6Address : SharpOnvifCommon.Xml.XmlContract
     {
         private string addressField;
 
@@ -39678,9 +39678,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.prefixLengthField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PrefixedIPv6Address"; } }
+        protected override string XmlTypeName { get { return "PrefixedIPv6Address"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -39707,7 +39707,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class PresetTour : SharpOnvifCommon.Xml.OnvifContract
+    public partial class PresetTour : SharpOnvifCommon.Xml.XmlContract
     {
         private string nameField;
 
@@ -39790,9 +39790,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.tokenField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "PresetTour"; } }
+        protected override string XmlTypeName { get { return "PresetTour"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -39861,7 +39861,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2005/08/addressing")]
-    public partial class ProblemActionType : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ProblemActionType : SharpOnvifCommon.Xml.XmlContract
     {
         private AttributedURIType actionField;
 
@@ -39881,9 +39881,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.soapActionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ProblemActionType"; } }
+        protected override string XmlTypeName { get { return "ProblemActionType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.i08Addressing; } }
+        protected override string XmlTypeNamespace { get { return Ns.i08Addressing; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -39919,7 +39919,7 @@ namespace SharpOnvifCommon.Onvif
     /// encoding resources.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Profile : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Profile : SharpOnvifCommon.Xml.XmlContract
     {
         private string nameField;
 
@@ -40065,9 +40065,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.fixedFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Profile"; } }
+        protected override string XmlTypeName { get { return "Profile"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -40153,7 +40153,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ProfileCapabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ProfileCapabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private int maximumNumberOfProfilesField;
 
@@ -40176,9 +40176,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ProfileCapabilities"; } }
+        protected override string XmlTypeName { get { return "ProfileCapabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -40202,7 +40202,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ProfileExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ProfileExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -40246,9 +40246,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ProfileExtension"; } }
+        protected override string XmlTypeName { get { return "ProfileExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -40282,7 +40282,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ProfileExtension2 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ProfileExtension2 : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -40293,9 +40293,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ProfileExtension2"; } }
+        protected override string XmlTypeName { get { return "ProfileExtension2"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -40311,7 +40311,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ProfileStatus : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ProfileStatus : SharpOnvifCommon.Xml.XmlContract
     {
         private ActiveConnection[] activeConnectionsField;
 
@@ -40331,9 +40331,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ProfileStatus"; } }
+        protected override string XmlTypeName { get { return "ProfileStatus"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -40366,7 +40366,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ProfileStatusExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ProfileStatusExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -40377,9 +40377,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ProfileStatusExtension"; } }
+        protected override string XmlTypeName { get { return "ProfileStatusExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -40395,7 +40395,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/t-1")]
-    public partial class QueryExpressionType : SharpOnvifCommon.Xml.OnvifContract
+    public partial class QueryExpressionType : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlNode[] anyField;
 
@@ -40416,9 +40416,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.dialectField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "QueryExpressionType"; } }
+        protected override string XmlTypeName { get { return "QueryExpressionType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.T1; } }
+        protected override string XmlTypeNamespace { get { return Ns.T1; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -40455,7 +40455,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class QueryExpressionType1 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class QueryExpressionType1 : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlNode[] anyField;
 
@@ -40476,9 +40476,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.dialectField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "QueryExpressionType"; } }
+        protected override string XmlTypeName { get { return "QueryExpressionType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
+        protected override string XmlTypeNamespace { get { return Ns.B2; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -40515,7 +40515,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class RealTimeStreamingCapabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RealTimeStreamingCapabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private bool rTPMulticastField;
         private bool rTPMulticastFieldSpecified;
@@ -40598,9 +40598,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RealTimeStreamingCapabilities"; } }
+        protected override string XmlTypeName { get { return "RealTimeStreamingCapabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -40649,7 +40649,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class RealTimeStreamingCapabilitiesExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RealTimeStreamingCapabilitiesExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -40660,9 +40660,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RealTimeStreamingCapabilitiesExtension"; } }
+        protected override string XmlTypeName { get { return "RealTimeStreamingCapabilitiesExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -40681,7 +40681,7 @@ namespace SharpOnvifCommon.Onvif
     /// Description of a receiver, including its token and configuration.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Receiver : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Receiver : SharpOnvifCommon.Xml.XmlContract
     {
         private string tokenField;
 
@@ -40716,9 +40716,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Receiver"; } }
+        protected override string XmlTypeName { get { return "Receiver"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -40747,7 +40747,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ReceiverCapabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ReceiverCapabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private string xAddrField;
 
@@ -40830,9 +40830,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ReceiverCapabilities"; } }
+        protected override string XmlTypeName { get { return "ReceiverCapabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -40884,7 +40884,7 @@ namespace SharpOnvifCommon.Onvif
     /// Describes the configuration of a receiver.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ReceiverConfiguration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ReceiverConfiguration : SharpOnvifCommon.Xml.XmlContract
     {
         private ReceiverMode modeField;
 
@@ -40931,9 +40931,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ReceiverConfiguration"; } }
+        protected override string XmlTypeName { get { return "ReceiverConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -40970,7 +40970,7 @@ namespace SharpOnvifCommon.Onvif
     /// Contains information about a receiver's current state.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ReceiverStateInformation : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ReceiverStateInformation : SharpOnvifCommon.Xml.XmlContract
     {
         private ReceiverState stateField;
 
@@ -41005,9 +41005,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ReceiverStateInformation"; } }
+        protected override string XmlTypeName { get { return "ReceiverStateInformation"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -41036,7 +41036,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class RecordingCapabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RecordingCapabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private string xAddrField;
 
@@ -41101,9 +41101,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RecordingCapabilities"; } }
+        protected override string XmlTypeName { get { return "RecordingCapabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -41152,7 +41152,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class RecordingConfiguration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RecordingConfiguration : SharpOnvifCommon.Xml.XmlContract
     {
         private RecordingSourceInformation sourceField;
 
@@ -41216,9 +41216,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RecordingConfiguration"; } }
+        protected override string XmlTypeName { get { return "RecordingConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -41257,7 +41257,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class RecordingEncryption : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RecordingEncryption : SharpOnvifCommon.Xml.XmlContract
     {
         private string kIDField;
 
@@ -41330,9 +41330,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.modeField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RecordingEncryption"; } }
+        protected override string XmlTypeName { get { return "RecordingEncryption"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -41393,7 +41393,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class RecordingEventFilter : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RecordingEventFilter : SharpOnvifCommon.Xml.XmlContract
     {
         private RecordingEventFilterFilter[] filterField;
 
@@ -41437,9 +41437,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RecordingEventFilter"; } }
+        protected override string XmlTypeName { get { return "RecordingEventFilter"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -41478,7 +41478,7 @@ namespace SharpOnvifCommon.Onvif
 
     }
 
-    public partial class RecordingEventFilterFilter : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RecordingEventFilterFilter : SharpOnvifCommon.Xml.XmlContract
     {
         private string topicField;
 
@@ -41540,7 +41540,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class RecordingInformation : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RecordingInformation : SharpOnvifCommon.Xml.XmlContract
     {
         private string recordingTokenField;
 
@@ -41648,9 +41648,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RecordingInformation"; } }
+        protected override string XmlTypeName { get { return "RecordingInformation"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -41718,7 +41718,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class RecordingJobConfiguration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RecordingJobConfiguration : SharpOnvifCommon.Xml.XmlContract
     {
         private string recordingTokenField;
 
@@ -41817,9 +41817,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.scheduleTokenField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RecordingJobConfiguration"; } }
+        protected override string XmlTypeName { get { return "RecordingJobConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -41890,7 +41890,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class RecordingJobConfigurationExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RecordingJobConfigurationExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -41901,9 +41901,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RecordingJobConfigurationExtension"; } }
+        protected override string XmlTypeName { get { return "RecordingJobConfigurationExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -41919,7 +41919,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class RecordingJobSource : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RecordingJobSource : SharpOnvifCommon.Xml.XmlContract
     {
         private SourceReference sourceTokenField;
 
@@ -41987,9 +41987,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RecordingJobSource"; } }
+        protected override string XmlTypeName { get { return "RecordingJobSource"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -42036,7 +42036,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class RecordingJobSourceExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RecordingJobSourceExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -42047,9 +42047,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RecordingJobSourceExtension"; } }
+        protected override string XmlTypeName { get { return "RecordingJobSourceExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -42065,7 +42065,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class RecordingJobStateInformation : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RecordingJobStateInformation : SharpOnvifCommon.Xml.XmlContract
     {
         private string recordingTokenField;
 
@@ -42112,9 +42112,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RecordingJobStateInformation"; } }
+        protected override string XmlTypeName { get { return "RecordingJobStateInformation"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -42157,7 +42157,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class RecordingJobStateInformationExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RecordingJobStateInformationExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -42168,9 +42168,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RecordingJobStateInformationExtension"; } }
+        protected override string XmlTypeName { get { return "RecordingJobStateInformationExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -42186,7 +42186,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class RecordingJobStateSource : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RecordingJobStateSource : SharpOnvifCommon.Xml.XmlContract
     {
         private SourceReference sourceTokenField;
 
@@ -42233,9 +42233,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RecordingJobStateSource"; } }
+        protected override string XmlTypeName { get { return "RecordingJobStateSource"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -42269,7 +42269,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class RecordingJobStateTrack : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RecordingJobStateTrack : SharpOnvifCommon.Xml.XmlContract
     {
         private string sourceTagField;
 
@@ -42331,9 +42331,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RecordingJobStateTrack"; } }
+        protected override string XmlTypeName { get { return "RecordingJobStateTrack"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -42372,7 +42372,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class RecordingJobStateTracks : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RecordingJobStateTracks : SharpOnvifCommon.Xml.XmlContract
     {
         private RecordingJobStateTrack[] trackField;
 
@@ -42383,9 +42383,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.trackField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RecordingJobStateTracks"; } }
+        protected override string XmlTypeName { get { return "RecordingJobStateTracks"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -42413,7 +42413,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class RecordingJobTrack : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RecordingJobTrack : SharpOnvifCommon.Xml.XmlContract
     {
         private string sourceTagField;
 
@@ -42449,9 +42449,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RecordingJobTrack"; } }
+        protected override string XmlTypeName { get { return "RecordingJobTrack"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -42484,7 +42484,7 @@ namespace SharpOnvifCommon.Onvif
     /// recordings based on information in this structure.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class RecordingSourceInformation : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RecordingSourceInformation : SharpOnvifCommon.Xml.XmlContract
     {
         private string sourceIdField;
 
@@ -42571,9 +42571,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RecordingSourceInformation"; } }
+        protected override string XmlTypeName { get { return "RecordingSourceInformation"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -42622,7 +42622,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class RecordingSummary : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RecordingSummary : SharpOnvifCommon.Xml.XmlContract
     {
         private System.DateTime dataFromField;
 
@@ -42669,9 +42669,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RecordingSummary"; } }
+        protected override string XmlTypeName { get { return "RecordingSummary"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -42705,7 +42705,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class RecordingTargetConfiguration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RecordingTargetConfiguration : SharpOnvifCommon.Xml.XmlContract
     {
         private string storageField;
 
@@ -42829,9 +42829,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RecordingTargetConfiguration"; } }
+        protected override string XmlTypeName { get { return "RecordingTargetConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -42900,7 +42900,7 @@ namespace SharpOnvifCommon.Onvif
 
     }
 
-    public partial class RecordingTargetConfigurationSegmentDurationOverride : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RecordingTargetConfigurationSegmentDurationOverride : SharpOnvifCommon.Xml.XmlContract
     {
         private string durationField;
 
@@ -42951,7 +42951,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Rectangle : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Rectangle : SharpOnvifCommon.Xml.XmlContract
     {
         private float bottomField;
 
@@ -42989,9 +42989,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.leftField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Rectangle"; } }
+        protected override string XmlTypeName { get { return "Rectangle"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -43024,7 +43024,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2005/08/addressing")]
-    public partial class ReferenceParametersType : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ReferenceParametersType : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -43035,9 +43035,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ReferenceParametersType"; } }
+        protected override string XmlTypeName { get { return "ReferenceParametersType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.i08Addressing; } }
+        protected override string XmlTypeNamespace { get { return Ns.i08Addressing; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -43053,7 +43053,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2005/08/addressing")]
-    public partial class RelatesToType : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RelatesToType : SharpOnvifCommon.Xml.XmlContract
     {
         private string valueField;
 
@@ -43073,9 +43073,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.relationshipTypeField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RelatesToType"; } }
+        protected override string XmlTypeName { get { return "RelatesToType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.i08Addressing; } }
+        protected override string XmlTypeNamespace { get { return Ns.i08Addressing; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -43106,7 +43106,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class RelativeFocus : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RelativeFocus : SharpOnvifCommon.Xml.XmlContract
     {
         private float distanceField;
 
@@ -43144,9 +43144,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.speedFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RelativeFocus"; } }
+        protected override string XmlTypeName { get { return "RelativeFocus"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -43177,7 +43177,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class RelativeFocusOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RelativeFocusOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private FloatRange distanceField;
 
@@ -43203,9 +43203,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.speedField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RelativeFocusOptions"; } }
+        protected override string XmlTypeName { get { return "RelativeFocusOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -43232,7 +43232,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class RelativeFocusOptions20 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RelativeFocusOptions20 : SharpOnvifCommon.Xml.XmlContract
     {
         private FloatRange distanceField;
 
@@ -43258,9 +43258,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.speedField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RelativeFocusOptions20"; } }
+        protected override string XmlTypeName { get { return "RelativeFocusOptions20"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -43307,9 +43307,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RelayOutput"; } }
+        protected override string XmlTypeName { get { return "RelayOutput"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -43335,7 +43335,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class RelayOutputSettings : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RelayOutputSettings : SharpOnvifCommon.Xml.XmlContract
     {
         private RelayMode modeField;
 
@@ -43379,9 +43379,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.idleStateField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RelayOutputSettings"; } }
+        protected override string XmlTypeName { get { return "RelayOutputSettings"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -43413,7 +43413,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class RemoteUser : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RemoteUser : SharpOnvifCommon.Xml.XmlContract
     {
         private string usernameField;
 
@@ -43451,9 +43451,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RemoteUser"; } }
+        protected override string XmlTypeName { get { return "RemoteUser"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -43487,7 +43487,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Rename : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Rename : SharpOnvifCommon.Xml.XmlContract
     {
         private ObjectId fromField;
 
@@ -43507,9 +43507,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.toField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Rename"; } }
+        protected override string XmlTypeName { get { return "Rename"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -43536,7 +43536,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ReplayCapabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ReplayCapabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private string xAddrField;
 
@@ -43559,9 +43559,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ReplayCapabilities"; } }
+        protected override string XmlTypeName { get { return "ReplayCapabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -43588,7 +43588,7 @@ namespace SharpOnvifCommon.Onvif
     /// Configuration parameters for the replay service.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ReplayConfiguration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ReplayConfiguration : SharpOnvifCommon.Xml.XmlContract
     {
         private string sessionTimeoutField;
 
@@ -43611,9 +43611,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ReplayConfiguration"; } }
+        protected override string XmlTypeName { get { return "ReplayConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -43639,32 +43639,32 @@ namespace SharpOnvifCommon.Onvif
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsrf/r-2")]
     public partial class ResourceUnavailableFaultType : BaseFaultType
     {
-        protected override string OnvifXmlTypeName { get { return "ResourceUnavailableFaultType"; } }
+        protected override string XmlTypeName { get { return "ResourceUnavailableFaultType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.R2; } }
+        protected override string XmlTypeNamespace { get { return Ns.R2; } }
 
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsrf/r-2")]
     public partial class ResourceUnknownFaultType : BaseFaultType
     {
-        protected override string OnvifXmlTypeName { get { return "ResourceUnknownFaultType"; } }
+        protected override string XmlTypeName { get { return "ResourceUnknownFaultType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.R2; } }
+        protected override string XmlTypeNamespace { get { return Ns.R2; } }
 
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
     public partial class ResumeFailedFaultType : BaseFaultType
     {
-        protected override string OnvifXmlTypeName { get { return "ResumeFailedFaultType"; } }
+        protected override string XmlTypeName { get { return "ResumeFailedFaultType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
+        protected override string XmlTypeNamespace { get { return Ns.B2; } }
 
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Reverse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Reverse : SharpOnvifCommon.Xml.XmlContract
     {
         private ReverseMode modeField;
 
@@ -43687,9 +43687,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Reverse"; } }
+        protected override string XmlTypeName { get { return "Reverse"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -43713,7 +43713,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ReverseOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ReverseOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private ReverseMode[] modeField;
 
@@ -43736,9 +43736,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ReverseOptions"; } }
+        protected override string XmlTypeName { get { return "ReverseOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -43771,7 +43771,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ReverseOptionsExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ReverseOptionsExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -43782,9 +43782,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ReverseOptionsExtension"; } }
+        protected override string XmlTypeName { get { return "ReverseOptionsExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -43800,7 +43800,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Rotate : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Rotate : SharpOnvifCommon.Xml.XmlContract
     {
         private RotateMode modeField;
 
@@ -43875,9 +43875,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.mirrorFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Rotate"; } }
+        protected override string XmlTypeName { get { return "Rotate"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -43933,7 +43933,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class RotateExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RotateExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -43944,9 +43944,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RotateExtension"; } }
+        protected override string XmlTypeName { get { return "RotateExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -43962,7 +43962,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class RotateOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RotateOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private RotateMode[] modeField;
 
@@ -44047,9 +44047,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.mirrorFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RotateOptions"; } }
+        protected override string XmlTypeName { get { return "RotateOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -44127,7 +44127,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class RotateOptionsExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RotateOptionsExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -44138,9 +44138,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RotateOptionsExtension"; } }
+        protected override string XmlTypeName { get { return "RotateOptionsExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -44156,7 +44156,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class RuleEngineConfiguration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RuleEngineConfiguration : SharpOnvifCommon.Xml.XmlContract
     {
         private Config[] ruleField;
 
@@ -44176,9 +44176,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RuleEngineConfiguration"; } }
+        protected override string XmlTypeName { get { return "RuleEngineConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -44211,7 +44211,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class RuleEngineConfigurationExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RuleEngineConfigurationExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -44222,9 +44222,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RuleEngineConfigurationExtension"; } }
+        protected override string XmlTypeName { get { return "RuleEngineConfigurationExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -44240,7 +44240,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class SRTPPreShared : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SRTPPreShared : SharpOnvifCommon.Xml.XmlContract
     {
         private string sRTPPSKField;
 
@@ -44292,9 +44292,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.secureStreamingProtocolAlgorithmField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SRTPPreShared"; } }
+        protected override string XmlTypeName { get { return "SRTPPreShared"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -44339,7 +44339,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/analytics/humanbody")]
-    public partial class Scarf : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Scarf : SharpOnvifCommon.Xml.XmlContract
     {
         private ColorDescriptor colorField;
 
@@ -44386,9 +44386,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Scarf"; } }
+        protected override string XmlTypeName { get { return "Scarf"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
+        protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -44421,7 +44421,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class SceneOrientation : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SceneOrientation : SharpOnvifCommon.Xml.XmlContract
     {
         private SceneOrientationMode modeField;
 
@@ -44449,9 +44449,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.orientationField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SceneOrientation"; } }
+        protected override string XmlTypeName { get { return "SceneOrientation"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -44478,7 +44478,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class SearchCapabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SearchCapabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private string xAddrField;
 
@@ -44555,9 +44555,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SearchCapabilities"; } }
+        protected override string XmlTypeName { get { return "SearchCapabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -44607,7 +44607,7 @@ namespace SharpOnvifCommon.Onvif
     /// A structure for defining a limited scope when searching in recorded data.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class SearchScope : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SearchScope : SharpOnvifCommon.Xml.XmlContract
     {
         private SourceReference[] includedSourcesField;
 
@@ -44660,9 +44660,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SearchScope"; } }
+        protected override string XmlTypeName { get { return "SearchScope"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -44711,7 +44711,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class SearchScopeExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SearchScopeExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -44722,9 +44722,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SearchScopeExtension"; } }
+        protected override string XmlTypeName { get { return "SearchScopeExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -44740,7 +44740,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class SecurityCapabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SecurityCapabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private bool tLS11Field;
 
@@ -44856,9 +44856,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SecurityCapabilities"; } }
+        protected override string XmlTypeName { get { return "SecurityCapabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -44922,7 +44922,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class SecurityCapabilitiesExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SecurityCapabilitiesExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private bool tLS10Field;
 
@@ -44942,9 +44942,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SecurityCapabilitiesExtension"; } }
+        protected override string XmlTypeName { get { return "SecurityCapabilitiesExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -44971,7 +44971,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class SecurityCapabilitiesExtension2 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SecurityCapabilitiesExtension2 : SharpOnvifCommon.Xml.XmlContract
     {
         private bool dot1XField;
 
@@ -45012,9 +45012,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SecurityCapabilitiesExtension2"; } }
+        protected override string XmlTypeName { get { return "SecurityCapabilitiesExtension2"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -45054,7 +45054,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class SensorData : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SensorData : SharpOnvifCommon.Xml.XmlContract
     {
         private string typeField;
 
@@ -45101,9 +45101,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.sensorIDField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SensorData"; } }
+        protected override string XmlTypeName { get { return "SensorData"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -45159,7 +45159,7 @@ namespace SharpOnvifCommon.Onvif
     /// element and specify filter criteria (SensorID list, Type list, etc.).
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class SensorDataFilter : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SensorDataFilter : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] sensorIDField;
 
@@ -45196,9 +45196,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SensorDataFilter"; } }
+        protected override string XmlTypeName { get { return "SensorDataFilter"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -45239,7 +45239,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class SensorDataFilterOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SensorDataFilterOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private bool sensorIDFilterSupportedField;
 
@@ -45274,9 +45274,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SensorDataFilterOptions"; } }
+        protected override string XmlTypeName { get { return "SensorDataFilterOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -45305,7 +45305,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ShapeDescriptor : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ShapeDescriptor : SharpOnvifCommon.Xml.XmlContract
     {
         private Rectangle boundingBoxField;
 
@@ -45352,9 +45352,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ShapeDescriptor"; } }
+        protected override string XmlTypeName { get { return "ShapeDescriptor"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -45399,7 +45399,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ShapeDescriptorExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ShapeDescriptorExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -45410,9 +45410,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ShapeDescriptorExtension"; } }
+        protected override string XmlTypeName { get { return "ShapeDescriptorExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -45428,7 +45428,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/analytics/humanbody")]
-    public partial class Shoes : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Shoes : SharpOnvifCommon.Xml.XmlContract
     {
         private string categoryField;
 
@@ -45463,9 +45463,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Shoes"; } }
+        protected override string XmlTypeName { get { return "Shoes"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
+        protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -45494,7 +45494,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class SourceIdentification : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SourceIdentification : SharpOnvifCommon.Xml.XmlContract
     {
         private string nameField;
 
@@ -45523,9 +45523,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SourceIdentification"; } }
+        protected override string XmlTypeName { get { return "SourceIdentification"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -45563,7 +45563,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class SourceIdentificationExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SourceIdentificationExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -45574,9 +45574,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SourceIdentificationExtension"; } }
+        protected override string XmlTypeName { get { return "SourceIdentificationExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -45592,7 +45592,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class SourceReference : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SourceReference : SharpOnvifCommon.Xml.XmlContract
     {
         private string tokenField;
 
@@ -45621,9 +45621,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.typeField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SourceReference"; } }
+        protected override string XmlTypeName { get { return "SourceReference"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -45663,7 +45663,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Space1DDescription : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Space1DDescription : SharpOnvifCommon.Xml.XmlContract
     {
         private string uRIField;
 
@@ -45689,9 +45689,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.xRangeField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Space1DDescription"; } }
+        protected override string XmlTypeName { get { return "Space1DDescription"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -45718,7 +45718,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Space2DDescription : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Space2DDescription : SharpOnvifCommon.Xml.XmlContract
     {
         private string uRIField;
 
@@ -45756,9 +45756,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.yRangeField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Space2DDescription"; } }
+        protected override string XmlTypeName { get { return "Space2DDescription"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -45790,7 +45790,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class SphericalCoordinate : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SphericalCoordinate : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -45873,9 +45873,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.azimuthAngleFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SphericalCoordinate"; } }
+        protected override string XmlTypeName { get { return "SphericalCoordinate"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -45927,7 +45927,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Split : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Split : SharpOnvifCommon.Xml.XmlContract
     {
         private ObjectId fromField;
 
@@ -45947,9 +45947,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.toField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Split"; } }
+        protected override string XmlTypeName { get { return "Split"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -45982,7 +45982,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class StorageReferencePath : SharpOnvifCommon.Xml.OnvifContract
+    public partial class StorageReferencePath : SharpOnvifCommon.Xml.XmlContract
     {
         private string storageTokenField;
 
@@ -46017,9 +46017,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "StorageReferencePath"; } }
+        protected override string XmlTypeName { get { return "StorageReferencePath"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -46051,7 +46051,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class StorageReferencePathExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class StorageReferencePathExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -46062,9 +46062,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "StorageReferencePathExtension"; } }
+        protected override string XmlTypeName { get { return "StorageReferencePathExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -46080,7 +46080,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class StreamSetup : SharpOnvifCommon.Xml.OnvifContract
+    public partial class StreamSetup : SharpOnvifCommon.Xml.XmlContract
     {
         private StreamType streamField;
 
@@ -46112,9 +46112,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "StreamSetup"; } }
+        protected override string XmlTypeName { get { return "StreamSetup"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -46143,7 +46143,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class StringLikelihood : SharpOnvifCommon.Xml.OnvifContract
+    public partial class StringLikelihood : SharpOnvifCommon.Xml.XmlContract
     {
         private string valueField;
 
@@ -46175,9 +46175,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.likelihoodFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "StringLikelihood"; } }
+        protected override string XmlTypeName { get { return "StringLikelihood"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -46214,14 +46214,14 @@ namespace SharpOnvifCommon.Onvif
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
     public partial class SubscribeCreationFailedFaultType : BaseFaultType
     {
-        protected override string OnvifXmlTypeName { get { return "SubscribeCreationFailedFaultType"; } }
+        protected override string XmlTypeName { get { return "SubscribeCreationFailedFaultType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
+        protected override string XmlTypeNamespace { get { return Ns.B2; } }
 
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class SubscriptionPolicyType : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SubscriptionPolicyType : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -46232,9 +46232,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SubscriptionPolicyType"; } }
+        protected override string XmlTypeName { get { return "SubscriptionPolicyType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
+        protected override string XmlTypeNamespace { get { return Ns.B2; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -46250,7 +46250,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class SupportInformation : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SupportInformation : SharpOnvifCommon.Xml.XmlContract
     {
         private AttachmentData binaryField;
 
@@ -46276,9 +46276,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.stringField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SupportInformation"; } }
+        protected override string XmlTypeName { get { return "SupportInformation"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -46305,7 +46305,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class SupportedAnalyticsModules : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SupportedAnalyticsModules : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] analyticsModuleContentSchemaLocationField;
 
@@ -46364,9 +46364,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.limitFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SupportedAnalyticsModules"; } }
+        protected override string XmlTypeName { get { return "SupportedAnalyticsModules"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -46430,7 +46430,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class SupportedAnalyticsModulesExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SupportedAnalyticsModulesExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -46441,9 +46441,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SupportedAnalyticsModulesExtension"; } }
+        protected override string XmlTypeName { get { return "SupportedAnalyticsModulesExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -46459,7 +46459,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2003/05/soap-envelope")]
-    public partial class SupportedEnvType : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SupportedEnvType : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlQualifiedName qnameField;
 
@@ -46470,9 +46470,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.qnameField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SupportedEnvType"; } }
+        protected override string XmlTypeName { get { return "SupportedEnvType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.SoapEnvelope; } }
+        protected override string XmlTypeNamespace { get { return Ns.SoapEnvelope; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -46493,7 +46493,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class SupportedRules : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SupportedRules : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] ruleContentSchemaLocationField;
 
@@ -46552,9 +46552,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.limitFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SupportedRules"; } }
+        protected override string XmlTypeName { get { return "SupportedRules"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -46618,7 +46618,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class SupportedRulesExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SupportedRulesExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -46629,9 +46629,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SupportedRulesExtension"; } }
+        protected override string XmlTypeName { get { return "SupportedRulesExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -46647,7 +46647,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class SystemCapabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SystemCapabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private bool discoveryResolveField;
 
@@ -46742,9 +46742,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SystemCapabilities"; } }
+        protected override string XmlTypeName { get { return "SystemCapabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -46807,7 +46807,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class SystemCapabilitiesExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SystemCapabilitiesExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -46911,9 +46911,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SystemCapabilitiesExtension"; } }
+        protected override string XmlTypeName { get { return "SystemCapabilitiesExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -46973,7 +46973,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class SystemCapabilitiesExtension2 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SystemCapabilitiesExtension2 : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -46984,9 +46984,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SystemCapabilitiesExtension2"; } }
+        protected override string XmlTypeName { get { return "SystemCapabilitiesExtension2"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -47005,7 +47005,7 @@ namespace SharpOnvifCommon.Onvif
     /// General date time inforamtion returned by the GetSystemDateTime method.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class SystemDateTime : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SystemDateTime : SharpOnvifCommon.Xml.XmlContract
     {
         private SetDateTimeType dateTimeTypeField;
 
@@ -47076,9 +47076,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SystemDateTime"; } }
+        protected override string XmlTypeName { get { return "SystemDateTime"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -47125,7 +47125,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class SystemDateTimeExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SystemDateTimeExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -47136,9 +47136,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SystemDateTimeExtension"; } }
+        protected override string XmlTypeName { get { return "SystemDateTimeExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -47154,7 +47154,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class SystemLog : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SystemLog : SharpOnvifCommon.Xml.XmlContract
     {
         private AttachmentData binaryField;
 
@@ -47180,9 +47180,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.stringField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SystemLog"; } }
+        protected override string XmlTypeName { get { return "SystemLog"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -47209,7 +47209,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class SystemLogUri : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SystemLogUri : SharpOnvifCommon.Xml.XmlContract
     {
         private SystemLogType typeField;
 
@@ -47238,9 +47238,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SystemLogUri"; } }
+        protected override string XmlTypeName { get { return "SystemLogUri"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -47269,7 +47269,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class SystemLogUriList : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SystemLogUriList : SharpOnvifCommon.Xml.XmlContract
     {
         private SystemLogUri[] systemLogField;
 
@@ -47280,9 +47280,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.systemLogField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SystemLogUriList"; } }
+        protected override string XmlTypeName { get { return "SystemLogUriList"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -47310,7 +47310,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class TLSConfiguration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class TLSConfiguration : SharpOnvifCommon.Xml.XmlContract
     {
         private string certificateIDField;
 
@@ -47330,9 +47330,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "TLSConfiguration"; } }
+        protected override string XmlTypeName { get { return "TLSConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -47356,7 +47356,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Time : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Time : SharpOnvifCommon.Xml.XmlContract
     {
         private int hourField;
 
@@ -47394,9 +47394,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.secondField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Time"; } }
+        protected override string XmlTypeName { get { return "Time"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -47428,7 +47428,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ToneCompensation : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ToneCompensation : SharpOnvifCommon.Xml.XmlContract
     {
         private string modeField;
 
@@ -47476,9 +47476,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ToneCompensation"; } }
+        protected override string XmlTypeName { get { return "ToneCompensation"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -47514,7 +47514,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ToneCompensationExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ToneCompensationExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -47525,9 +47525,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ToneCompensationExtension"; } }
+        protected override string XmlTypeName { get { return "ToneCompensationExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -47543,7 +47543,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ToneCompensationOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ToneCompensationOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] modeField;
 
@@ -47579,9 +47579,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ToneCompensationOptions"; } }
+        protected override string XmlTypeName { get { return "ToneCompensationOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -47618,14 +47618,14 @@ namespace SharpOnvifCommon.Onvif
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
     public partial class TopicExpressionDialectUnknownFaultType : BaseFaultType
     {
-        protected override string OnvifXmlTypeName { get { return "TopicExpressionDialectUnknownFaultType"; } }
+        protected override string XmlTypeName { get { return "TopicExpressionDialectUnknownFaultType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
+        protected override string XmlTypeNamespace { get { return Ns.B2; } }
 
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
-    public partial class TopicExpressionType : SharpOnvifCommon.Xml.OnvifContract
+    public partial class TopicExpressionType : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlNode[] anyField;
 
@@ -47646,9 +47646,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.dialectField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "TopicExpressionType"; } }
+        protected override string XmlTypeName { get { return "TopicExpressionType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
+        protected override string XmlTypeNamespace { get { return Ns.B2; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -47744,9 +47744,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.finalFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "TopicNamespaceType"; } }
+        protected override string XmlTypeName { get { return "TopicNamespaceType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.T1; } }
+        protected override string XmlTypeNamespace { get { return Ns.T1; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -47839,9 +47839,9 @@ namespace SharpOnvifCommon.Onvif
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
     public partial class TopicNotSupportedFaultType : BaseFaultType
     {
-        protected override string OnvifXmlTypeName { get { return "TopicNotSupportedFaultType"; } }
+        protected override string XmlTypeName { get { return "TopicNotSupportedFaultType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
+        protected override string XmlTypeNamespace { get { return Ns.B2; } }
 
     }
 
@@ -47857,9 +47857,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "TopicSetType"; } }
+        protected override string XmlTypeName { get { return "TopicSetType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.T1; } }
+        protected override string XmlTypeNamespace { get { return Ns.T1; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -47946,9 +47946,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.finalFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "TopicType"; } }
+        protected override string XmlTypeName { get { return "TopicType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.T1; } }
+        protected override string XmlTypeNamespace { get { return Ns.T1; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -48014,7 +48014,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/analytics/humanbody")]
-    public partial class Tops : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Tops : SharpOnvifCommon.Xml.XmlContract
     {
         private string categoryField;
 
@@ -48073,9 +48073,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Tops"; } }
+        protected override string XmlTypeName { get { return "Tops"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
+        protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -48114,7 +48114,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class TrackAttributes : SharpOnvifCommon.Xml.OnvifContract
+    public partial class TrackAttributes : SharpOnvifCommon.Xml.XmlContract
     {
         private TrackInformation trackInformationField;
 
@@ -48177,9 +48177,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "TrackAttributes"; } }
+        protected override string XmlTypeName { get { return "TrackAttributes"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -48221,7 +48221,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class TrackAttributesExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class TrackAttributesExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -48232,9 +48232,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "TrackAttributesExtension"; } }
+        protected override string XmlTypeName { get { return "TrackAttributesExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -48250,7 +48250,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class TrackConfiguration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class TrackConfiguration : SharpOnvifCommon.Xml.XmlContract
     {
         private TrackType trackTypeField;
 
@@ -48286,9 +48286,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "TrackConfiguration"; } }
+        protected override string XmlTypeName { get { return "TrackConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -48317,7 +48317,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class TrackInformation : SharpOnvifCommon.Xml.OnvifContract
+    public partial class TrackInformation : SharpOnvifCommon.Xml.XmlContract
     {
         private string trackTokenField;
 
@@ -48386,9 +48386,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "TrackInformation"; } }
+        protected override string XmlTypeName { get { return "TrackInformation"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -48432,7 +48432,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Transformation : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Transformation : SharpOnvifCommon.Xml.XmlContract
     {
         private Vector translateField;
 
@@ -48461,9 +48461,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Transformation"; } }
+        protected override string XmlTypeName { get { return "Transformation"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -48495,7 +48495,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class TransformationExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class TransformationExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -48506,9 +48506,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "TransformationExtension"; } }
+        protected override string XmlTypeName { get { return "TransformationExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -48524,7 +48524,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Transport : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Transport : SharpOnvifCommon.Xml.XmlContract
     {
         private TransportProtocol protocolField;
 
@@ -48551,9 +48551,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.tunnelField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Transport"; } }
+        protected override string XmlTypeName { get { return "Transport"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -48579,7 +48579,7 @@ namespace SharpOnvifCommon.Onvif
 
     }
 
-    public partial class TransportTunnel : SharpOnvifCommon.Xml.OnvifContract
+    public partial class TransportTunnel : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -48604,7 +48604,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/analytics/humanbody")]
-    public partial class Umbrella : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Umbrella : SharpOnvifCommon.Xml.XmlContract
     {
         private ColorDescriptor colorField;
 
@@ -48651,9 +48651,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Umbrella"; } }
+        protected override string XmlTypeName { get { return "Umbrella"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
+        protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -48688,36 +48688,36 @@ namespace SharpOnvifCommon.Onvif
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
     public partial class UnableToCreatePullPointFaultType : BaseFaultType
     {
-        protected override string OnvifXmlTypeName { get { return "UnableToCreatePullPointFaultType"; } }
+        protected override string XmlTypeName { get { return "UnableToCreatePullPointFaultType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
+        protected override string XmlTypeNamespace { get { return Ns.B2; } }
 
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
     public partial class UnableToDestroyPullPointFaultType : BaseFaultType
     {
-        protected override string OnvifXmlTypeName { get { return "UnableToDestroyPullPointFaultType"; } }
+        protected override string XmlTypeName { get { return "UnableToDestroyPullPointFaultType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
+        protected override string XmlTypeNamespace { get { return Ns.B2; } }
 
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
     public partial class UnableToDestroySubscriptionFaultType : BaseFaultType
     {
-        protected override string OnvifXmlTypeName { get { return "UnableToDestroySubscriptionFaultType"; } }
+        protected override string XmlTypeName { get { return "UnableToDestroySubscriptionFaultType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
+        protected override string XmlTypeNamespace { get { return Ns.B2; } }
 
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wsn/b-2")]
     public partial class UnableToGetMessagesFaultType : BaseFaultType
     {
-        protected override string OnvifXmlTypeName { get { return "UnableToGetMessagesFaultType"; } }
+        protected override string XmlTypeName { get { return "UnableToGetMessagesFaultType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
+        protected override string XmlTypeNamespace { get { return Ns.B2; } }
 
     }
 
@@ -48754,9 +48754,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.maximumTimeFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "UnacceptableInitialTerminationTimeFaultType"; } }
+        protected override string XmlTypeName { get { return "UnacceptableInitialTerminationTimeFaultType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
+        protected override string XmlTypeNamespace { get { return Ns.B2; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -48821,9 +48821,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.maximumTimeFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "UnacceptableTerminationTimeFaultType"; } }
+        protected override string XmlTypeName { get { return "UnacceptableTerminationTimeFaultType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
+        protected override string XmlTypeNamespace { get { return Ns.B2; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -48867,9 +48867,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.unrecognizedPolicyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "UnrecognizedPolicyRequestFaultType"; } }
+        protected override string XmlTypeName { get { return "UnrecognizedPolicyRequestFaultType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
+        protected override string XmlTypeNamespace { get { return Ns.B2; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -48910,9 +48910,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.unsupportedPolicyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "UnsupportedPolicyRequestFaultType"; } }
+        protected override string XmlTypeName { get { return "UnsupportedPolicyRequestFaultType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.B2; } }
+        protected override string XmlTypeNamespace { get { return Ns.B2; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -48942,7 +48942,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2003/05/soap-envelope")]
-    public partial class UpgradeType : SharpOnvifCommon.Xml.OnvifContract
+    public partial class UpgradeType : SharpOnvifCommon.Xml.XmlContract
     {
         private SupportedEnvType[] supportedEnvelopeField;
 
@@ -48953,9 +48953,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.supportedEnvelopeField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "UpgradeType"; } }
+        protected override string XmlTypeName { get { return "UpgradeType"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.SoapEnvelope; } }
+        protected override string XmlTypeNamespace { get { return Ns.SoapEnvelope; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -48983,7 +48983,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class User : SharpOnvifCommon.Xml.OnvifContract
+    public partial class User : SharpOnvifCommon.Xml.XmlContract
     {
         private string usernameField;
 
@@ -49030,9 +49030,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "User"; } }
+        protected override string XmlTypeName { get { return "User"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -49069,7 +49069,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class UserExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class UserExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] rolesField;
 
@@ -49092,9 +49092,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "UserExtension"; } }
+        protected override string XmlTypeName { get { return "UserExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -49118,7 +49118,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class UserRole : SharpOnvifCommon.Xml.OnvifContract
+    public partial class UserRole : SharpOnvifCommon.Xml.XmlContract
     {
         private string nameField;
 
@@ -49145,9 +49145,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.functionsField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "UserRole"; } }
+        protected override string XmlTypeName { get { return "UserRole"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -49174,7 +49174,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Vector : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Vector : SharpOnvifCommon.Xml.XmlContract
     {
         private float xField;
 
@@ -49194,9 +49194,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.yField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Vector"; } }
+        protected override string XmlTypeName { get { return "Vector"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -49221,7 +49221,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Vector1D : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Vector1D : SharpOnvifCommon.Xml.XmlContract
     {
         private float xField;
 
@@ -49248,9 +49248,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.spaceField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Vector1D"; } }
+        protected override string XmlTypeName { get { return "Vector1D"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -49275,7 +49275,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class Vector2D : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Vector2D : SharpOnvifCommon.Xml.XmlContract
     {
         private float xField;
 
@@ -49311,9 +49311,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.spaceField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Vector2D"; } }
+        protected override string XmlTypeName { get { return "Vector2D"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -49342,7 +49342,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VehicleInfo : SharpOnvifCommon.Xml.OnvifContract
+    public partial class VehicleInfo : SharpOnvifCommon.Xml.XmlContract
     {
         private StringLikelihood typeField;
 
@@ -49389,9 +49389,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "VehicleInfo"; } }
+        protected override string XmlTypeName { get { return "VehicleInfo"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -49459,9 +49459,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "VideoAnalyticsConfiguration"; } }
+        protected override string XmlTypeName { get { return "VideoAnalyticsConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -49492,7 +49492,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoAnalyticsStream : SharpOnvifCommon.Xml.OnvifContract
+    public partial class VideoAnalyticsStream : SharpOnvifCommon.Xml.XmlContract
     {
         private object[] itemsField;
 
@@ -49516,9 +49516,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.itemsElementNameField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "VideoAnalyticsStream"; } }
+        protected override string XmlTypeName { get { return "VideoAnalyticsStream"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -49565,7 +49565,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoAnalyticsStreamExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class VideoAnalyticsStreamExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -49576,9 +49576,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "VideoAnalyticsStreamExtension"; } }
+        protected override string XmlTypeName { get { return "VideoAnalyticsStreamExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -49594,7 +49594,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoAttributes : SharpOnvifCommon.Xml.OnvifContract
+    public partial class VideoAttributes : SharpOnvifCommon.Xml.XmlContract
     {
         private int bitrateField;
         private bool bitrateFieldSpecified;
@@ -49678,9 +49678,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "VideoAttributes"; } }
+        protected override string XmlTypeName { get { return "VideoAttributes"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -49728,7 +49728,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoDecoderConfigurationOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class VideoDecoderConfigurationOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private JpegDecOptions jpegDecOptionsField;
 
@@ -49778,9 +49778,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "VideoDecoderConfigurationOptions"; } }
+        protected override string XmlTypeName { get { return "VideoDecoderConfigurationOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -49817,7 +49817,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoDecoderConfigurationOptionsExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class VideoDecoderConfigurationOptionsExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -49828,9 +49828,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "VideoDecoderConfigurationOptionsExtension"; } }
+        protected override string XmlTypeName { get { return "VideoDecoderConfigurationOptionsExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -50045,9 +50045,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.secureStreamingProtocolAlgorithmField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "VideoEncoder2Configuration"; } }
+        protected override string XmlTypeName { get { return "VideoEncoder2Configuration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -50146,7 +50146,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoEncoder2ConfigurationOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class VideoEncoder2ConfigurationOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private string encodingField;
 
@@ -50379,9 +50379,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.signingSupportedFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "VideoEncoder2ConfigurationOptions"; } }
+        protected override string XmlTypeName { get { return "VideoEncoder2ConfigurationOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -50628,9 +50628,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.guaranteedFrameRateFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "VideoEncoderConfiguration"; } }
+        protected override string XmlTypeName { get { return "VideoEncoderConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -50712,7 +50712,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoEncoderConfigurationOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class VideoEncoderConfigurationOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private IntRange qualityRangeField;
 
@@ -50796,9 +50796,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.guaranteedFrameRateSupportedFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "VideoEncoderConfigurationOptions"; } }
+        protected override string XmlTypeName { get { return "VideoEncoderConfigurationOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -50860,7 +50860,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoEncoderOptionsExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class VideoEncoderOptionsExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -50916,9 +50916,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "VideoEncoderOptionsExtension"; } }
+        protected override string XmlTypeName { get { return "VideoEncoderOptionsExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -50957,7 +50957,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoEncoderOptionsExtension2 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class VideoEncoderOptionsExtension2 : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -50968,9 +50968,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "VideoEncoderOptionsExtension2"; } }
+        protected override string XmlTypeName { get { return "VideoEncoderOptionsExtension2"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -51069,9 +51069,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "VideoOutput"; } }
+        protected override string XmlTypeName { get { return "VideoOutput"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -51146,9 +51146,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "VideoOutputConfiguration"; } }
+        protected override string XmlTypeName { get { return "VideoOutputConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -51174,7 +51174,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoOutputConfigurationOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class VideoOutputConfigurationOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -51185,9 +51185,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "VideoOutputConfigurationOptions"; } }
+        protected override string XmlTypeName { get { return "VideoOutputConfigurationOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -51203,7 +51203,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoOutputExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class VideoOutputExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -51214,9 +51214,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "VideoOutputExtension"; } }
+        protected override string XmlTypeName { get { return "VideoOutputExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -51232,7 +51232,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoRateControl : SharpOnvifCommon.Xml.OnvifContract
+    public partial class VideoRateControl : SharpOnvifCommon.Xml.XmlContract
     {
         private int frameRateLimitField;
 
@@ -51272,9 +51272,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.bitrateLimitField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "VideoRateControl"; } }
+        protected override string XmlTypeName { get { return "VideoRateControl"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -51306,7 +51306,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoRateControl2 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class VideoRateControl2 : SharpOnvifCommon.Xml.XmlContract
     {
         private float frameRateLimitField;
 
@@ -51390,9 +51390,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.constantBitRateFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "VideoRateControl2"; } }
+        protected override string XmlTypeName { get { return "VideoRateControl2"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -51450,7 +51450,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoResolution : SharpOnvifCommon.Xml.OnvifContract
+    public partial class VideoResolution : SharpOnvifCommon.Xml.XmlContract
     {
         private int widthField;
 
@@ -51478,9 +51478,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.heightField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "VideoResolution"; } }
+        protected override string XmlTypeName { get { return "VideoResolution"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -51507,7 +51507,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoResolution2 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class VideoResolution2 : SharpOnvifCommon.Xml.XmlContract
     {
         private int widthField;
 
@@ -51544,9 +51544,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "VideoResolution2"; } }
+        protected override string XmlTypeName { get { return "VideoResolution2"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -51625,9 +51625,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "VideoSource"; } }
+        protected override string XmlTypeName { get { return "VideoSource"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -51724,9 +51724,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.viewModeField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "VideoSourceConfiguration"; } }
+        protected override string XmlTypeName { get { return "VideoSourceConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -51779,7 +51779,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoSourceConfigurationExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class VideoSourceConfigurationExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private Rotate rotateField;
 
@@ -51807,9 +51807,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "VideoSourceConfigurationExtension"; } }
+        protected override string XmlTypeName { get { return "VideoSourceConfigurationExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -51836,7 +51836,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoSourceConfigurationExtension2 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class VideoSourceConfigurationExtension2 : SharpOnvifCommon.Xml.XmlContract
     {
         private LensDescription[] lensDescriptionField;
 
@@ -51872,9 +51872,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "VideoSourceConfigurationExtension2"; } }
+        protected override string XmlTypeName { get { return "VideoSourceConfigurationExtension2"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -51909,7 +51909,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoSourceConfigurationOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class VideoSourceConfigurationOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private IntRectangleRange boundsRangeField;
 
@@ -51971,9 +51971,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.maximumNumberOfProfilesFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "VideoSourceConfigurationOptions"; } }
+        protected override string XmlTypeName { get { return "VideoSourceConfigurationOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -52031,7 +52031,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoSourceConfigurationOptionsExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class VideoSourceConfigurationOptionsExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -52063,9 +52063,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "VideoSourceConfigurationOptionsExtension"; } }
+        protected override string XmlTypeName { get { return "VideoSourceConfigurationOptionsExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -52094,7 +52094,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoSourceConfigurationOptionsExtension2 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class VideoSourceConfigurationOptionsExtension2 : SharpOnvifCommon.Xml.XmlContract
     {
         private SceneOrientationMode[] sceneOrientationModeField;
 
@@ -52117,9 +52117,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "VideoSourceConfigurationOptionsExtension2"; } }
+        protected override string XmlTypeName { get { return "VideoSourceConfigurationOptionsExtension2"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -52149,7 +52149,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoSourceExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class VideoSourceExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -52181,9 +52181,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "VideoSourceExtension"; } }
+        protected override string XmlTypeName { get { return "VideoSourceExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -52212,7 +52212,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class VideoSourceExtension2 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class VideoSourceExtension2 : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -52223,9 +52223,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "VideoSourceExtension2"; } }
+        protected override string XmlTypeName { get { return "VideoSourceExtension2"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -52241,7 +52241,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/analytics/humanbody")]
-    public partial class Weapon : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Weapon : SharpOnvifCommon.Xml.XmlContract
     {
         private string categoryField;
 
@@ -52288,9 +52288,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Weapon"; } }
+        protected override string XmlTypeName { get { return "Weapon"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
+        protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -52324,7 +52324,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class WhiteBalance : SharpOnvifCommon.Xml.OnvifContract
+    public partial class WhiteBalance : SharpOnvifCommon.Xml.XmlContract
     {
         private WhiteBalanceMode modeField;
 
@@ -52371,9 +52371,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "WhiteBalance"; } }
+        protected override string XmlTypeName { get { return "WhiteBalance"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -52407,7 +52407,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class WhiteBalance20 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class WhiteBalance20 : SharpOnvifCommon.Xml.XmlContract
     {
         private WhiteBalanceMode modeField;
 
@@ -52478,9 +52478,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "WhiteBalance20"; } }
+        protected override string XmlTypeName { get { return "WhiteBalance20"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -52525,7 +52525,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class WhiteBalance20Extension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class WhiteBalance20Extension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -52536,9 +52536,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "WhiteBalance20Extension"; } }
+        protected override string XmlTypeName { get { return "WhiteBalance20Extension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -52554,7 +52554,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class WhiteBalanceOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class WhiteBalanceOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private WhiteBalanceMode[] modeField;
 
@@ -52583,9 +52583,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.ybGainField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "WhiteBalanceOptions"; } }
+        protected override string XmlTypeName { get { return "WhiteBalanceOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -52623,7 +52623,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class WhiteBalanceOptions20 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class WhiteBalanceOptions20 : SharpOnvifCommon.Xml.XmlContract
     {
         private WhiteBalanceMode[] modeField;
 
@@ -52664,9 +52664,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "WhiteBalanceOptions20"; } }
+        protected override string XmlTypeName { get { return "WhiteBalanceOptions20"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -52709,7 +52709,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class WhiteBalanceOptions20Extension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class WhiteBalanceOptions20Extension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -52720,9 +52720,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "WhiteBalanceOptions20Extension"; } }
+        protected override string XmlTypeName { get { return "WhiteBalanceOptions20Extension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -52738,7 +52738,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class WideDynamicRange : SharpOnvifCommon.Xml.OnvifContract
+    public partial class WideDynamicRange : SharpOnvifCommon.Xml.XmlContract
     {
         private WideDynamicMode modeField;
 
@@ -52764,9 +52764,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.levelField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "WideDynamicRange"; } }
+        protected override string XmlTypeName { get { return "WideDynamicRange"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -52796,7 +52796,7 @@ namespace SharpOnvifCommon.Onvif
     /// Type describing whether WDR mode is enabled or disabled (on/off).
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class WideDynamicRange20 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class WideDynamicRange20 : SharpOnvifCommon.Xml.XmlContract
     {
         private WideDynamicMode modeField;
 
@@ -52834,9 +52834,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.levelFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "WideDynamicRange20"; } }
+        protected override string XmlTypeName { get { return "WideDynamicRange20"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -52867,7 +52867,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class WideDynamicRangeOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class WideDynamicRangeOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private WideDynamicMode[] modeField;
 
@@ -52887,9 +52887,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.levelField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "WideDynamicRangeOptions"; } }
+        protected override string XmlTypeName { get { return "WideDynamicRangeOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -52922,7 +52922,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class WideDynamicRangeOptions20 : SharpOnvifCommon.Xml.OnvifContract
+    public partial class WideDynamicRangeOptions20 : SharpOnvifCommon.Xml.XmlContract
     {
         private WideDynamicMode[] modeField;
 
@@ -52942,9 +52942,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.levelField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "WideDynamicRangeOptions20"; } }
+        protected override string XmlTypeName { get { return "WideDynamicRangeOptions20"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -52977,7 +52977,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
-    public partial class ZoomLimits : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ZoomLimits : SharpOnvifCommon.Xml.XmlContract
     {
         private Space1DDescription rangeField;
 
@@ -52991,9 +52991,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.rangeField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ZoomLimits"; } }
+        protected override string XmlTypeName { get { return "ZoomLimits"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.OnvifVer10; } }
+        protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -53015,7 +53015,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2005/05/xmlmime")]
-    public partial class base64Binary : SharpOnvifCommon.Xml.OnvifContract
+    public partial class base64Binary : SharpOnvifCommon.Xml.XmlContract
     {
         private byte[] valueField;
 
@@ -53035,9 +53035,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.contentTypeField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "base64Binary"; } }
+        protected override string XmlTypeName { get { return "base64Binary"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.i05Xmlmime; } }
+        protected override string XmlTypeNamespace { get { return Ns.i05Xmlmime; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -53069,7 +53069,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2003/05/soap-envelope")]
-    public partial class detail : SharpOnvifCommon.Xml.OnvifContract
+    public partial class detail : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -53080,9 +53080,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "detail"; } }
+        protected override string XmlTypeName { get { return "detail"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.SoapEnvelope; } }
+        protected override string XmlTypeNamespace { get { return Ns.SoapEnvelope; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -53098,7 +53098,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2003/05/soap-envelope")]
-    public partial class faultcode : SharpOnvifCommon.Xml.OnvifContract
+    public partial class faultcode : SharpOnvifCommon.Xml.XmlContract
     {
         private faultcodeEnum valueField;
 
@@ -53118,9 +53118,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.subcodeField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "faultcode"; } }
+        protected override string XmlTypeName { get { return "faultcode"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.SoapEnvelope; } }
+        protected override string XmlTypeNamespace { get { return Ns.SoapEnvelope; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -53147,7 +53147,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2003/05/soap-envelope")]
-    public partial class faultreason : SharpOnvifCommon.Xml.OnvifContract
+    public partial class faultreason : SharpOnvifCommon.Xml.XmlContract
     {
         private reasontext[] textField;
 
@@ -53158,9 +53158,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.textField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "faultreason"; } }
+        protected override string XmlTypeName { get { return "faultreason"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.SoapEnvelope; } }
+        protected override string XmlTypeNamespace { get { return Ns.SoapEnvelope; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -53188,7 +53188,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2005/05/xmlmime")]
-    public partial class hexBinary : SharpOnvifCommon.Xml.OnvifContract
+    public partial class hexBinary : SharpOnvifCommon.Xml.XmlContract
     {
         private byte[] valueField;
 
@@ -53208,9 +53208,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.contentTypeField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "hexBinary"; } }
+        protected override string XmlTypeName { get { return "hexBinary"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.i05Xmlmime; } }
+        protected override string XmlTypeNamespace { get { return Ns.i05Xmlmime; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -53242,7 +53242,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2003/05/soap-envelope")]
-    public partial class reasontext : SharpOnvifCommon.Xml.OnvifContract
+    public partial class reasontext : SharpOnvifCommon.Xml.XmlContract
     {
         private string valueField;
 
@@ -53271,9 +53271,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.langField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "reasontext"; } }
+        protected override string XmlTypeName { get { return "reasontext"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.SoapEnvelope; } }
+        protected override string XmlTypeNamespace { get { return Ns.SoapEnvelope; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -53305,7 +53305,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2003/05/soap-envelope")]
-    public partial class subcode : SharpOnvifCommon.Xml.OnvifContract
+    public partial class subcode : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlQualifiedName valueField;
 
@@ -53325,9 +53325,9 @@ namespace SharpOnvifCommon.Onvif
             set { this.subcodeField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "subcode"; } }
+        protected override string XmlTypeName { get { return "subcode"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.SoapEnvelope; } }
+        protected override string XmlTypeNamespace { get { return Ns.SoapEnvelope; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -53356,7 +53356,7 @@ namespace SharpOnvifCommon.Onvif
     /// <summary>Constructs a contract named by an xsi:type attribute.</summary>
     public static class XmlTypeFactory
     {
-        public static SharpOnvifCommon.Xml.OnvifContract Create(string ns, string name)
+        public static SharpOnvifCommon.Xml.XmlContract Create(string ns, string name)
         {
             switch (name)
             {
@@ -53564,7 +53564,7 @@ namespace SharpOnvifCommon.Onvif
     }
 
     /// <summary>SOAP action URIs for this service's operations.</summary>
-    public static class OnvifActions
+    public static class SoapActions
     {
     }
 }

@@ -17,7 +17,7 @@ namespace SharpOnvifCommon.Xml
     public sealed class OnvifXmlReader : IXmlReader
     {
         private readonly XmlReader _reader;
-        private readonly Func<string, string, OnvifContract> _typeFactory;
+        private readonly Func<string, string, XmlContract> _typeFactory;
         private XmlDocument _ownerDocument;
         private readonly IXmlLineInfo _lineInfo;
 
@@ -32,7 +32,7 @@ namespace SharpOnvifCommon.Xml
         /// Resolves an xsi:type name to an instance. Each generated assembly supplies its own,
         /// because each carries its own copy of the shared schema types.
         /// </param>
-        public OnvifXmlReader(XmlReader reader, Func<string, string, OnvifContract> typeFactory = null)
+        public OnvifXmlReader(XmlReader reader, Func<string, string, XmlContract> typeFactory = null)
         {
             _reader = reader ?? throw new ArgumentNullException(nameof(reader));
             _typeFactory = typeFactory;
@@ -139,9 +139,9 @@ namespace SharpOnvifCommon.Xml
         /// named type is constructed instead of <paramref name="create"/>'s, which is how schema
         /// extensions come back as their real type.
         /// </summary>
-        public T ReadElementObject<T>(Func<T> create) where T : OnvifContract
+        public T ReadElementObject<T>(Func<T> create) where T : XmlContract
         {
-            OnvifContract instance = CreateInstance(create);
+            XmlContract instance = CreateInstance(create);
             ReadInto(instance);
             return instance as T;
         }
@@ -150,7 +150,7 @@ namespace SharpOnvifCommon.Xml
         /// Reads the attributes and children of the element the reader is positioned on into an
         /// existing instance, and leaves the reader on the node after that element.
         /// </summary>
-        public void ReadInto(OnvifContract instance)
+        public void ReadInto(XmlContract instance)
         {
             // Reading nested contracts recurses, so the depth of the document is the depth of the
             // call stack. A stack overflow cannot be caught, so a document nested deeply enough
@@ -215,7 +215,7 @@ namespace SharpOnvifCommon.Xml
             }
         }
 
-        private OnvifContract CreateInstance<T>(Func<T> create) where T : OnvifContract
+        private XmlContract CreateInstance<T>(Func<T> create) where T : XmlContract
         {
             string hint = _reader.GetAttribute("type", OnvifXmlNamespaces.XmlSchemaInstance);
             if (hint != null && _typeFactory != null)
@@ -230,7 +230,7 @@ namespace SharpOnvifCommon.Xml
                 }
 
                 string ns = _reader.LookupNamespace(prefix) ?? string.Empty;
-                OnvifContract resolved = _typeFactory(ns, local);
+                XmlContract resolved = _typeFactory(ns, local);
 
                 // Only honour the hint if it names something assignable to the declared type;
                 // a device that sends a nonsensical xsi:type should not break the whole response.
@@ -240,7 +240,7 @@ namespace SharpOnvifCommon.Xml
             return create();
         }
 
-        private void ReadAttributes(OnvifContract instance)
+        private void ReadAttributes(XmlContract instance)
         {
             if (!_reader.HasAttributes) return;
             if (!_reader.MoveToFirstAttribute()) return;

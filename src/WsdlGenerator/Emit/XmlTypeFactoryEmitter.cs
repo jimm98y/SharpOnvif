@@ -19,7 +19,7 @@ internal static class XmlTypeFactoryEmitter
         writer.Line($"{visibility} static class XmlTypeFactory");
         using (writer.Braces())
         {
-            writer.Line($"public static {xml}.OnvifContract Create(string ns, string name)");
+            writer.Line($"public static {xml}.XmlContract Create(string ns, string name)");
             using (writer.Braces())
             {
                 // Only types that can actually be named by xsi:type are worth listing: a type

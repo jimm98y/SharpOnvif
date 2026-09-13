@@ -79,7 +79,7 @@ internal sealed class DataContractEmitter
             XmlTypeFactoryEmitter.Emit(writer, _model, HelperVisibility, Runtime, _isShared ? null : _sharedNamespace);
 
             writer.Line();
-            OnvifActionsEmitter.Emit(writer, _model);
+            SoapActionsEmitter.Emit(writer, _model);
         }
 
         return writer.ToString();
@@ -237,7 +237,7 @@ internal sealed class DataContractEmitter
         if (@class.WrapperElement is { } wrapper)
             writer.Line($"[System.Xml.Serialization.XmlRootAttribute(\"{wrapper.LocalName}\", Namespace=\"{wrapper.Namespace}\")]");
 
-        string baseType = @class.BaseClass?.NameFrom(_namespace) ?? $"{Runtime}.OnvifContract";
+        string baseType = @class.BaseClass?.NameFrom(_namespace) ?? $"{Runtime}.XmlContract";
         writer.Line($"public partial class {@class.Name} : {baseType}");
 
         using (writer.Braces())
@@ -395,9 +395,9 @@ internal sealed class DataContractEmitter
 
         if (@class.XmlName is { } typeName)
         {
-            writer.Line($"protected override string OnvifXmlTypeName {{ get {{ return \"{typeName.LocalName}\"; }} }}");
+            writer.Line($"protected override string XmlTypeName {{ get {{ return \"{typeName.LocalName}\"; }} }}");
             writer.Line();
-            writer.Line($"protected override string OnvifXmlTypeNamespace {{ get {{ return {NsRef(typeName.Namespace)}; }} }}");
+            writer.Line($"protected override string XmlTypeNamespace {{ get {{ return {NsRef(typeName.Namespace)}; }} }}");
             writer.Line();
         }
 

@@ -22,7 +22,7 @@ namespace SharpOnvifClient.Recording
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class Capabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Capabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -473,9 +473,9 @@ namespace SharpOnvifClient.Recording
             set { this.segmentExportFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Capabilities"; } }
+        protected override string XmlTypeName { get { return "Capabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Recording; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Recording; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -653,7 +653,7 @@ namespace SharpOnvifClient.Recording
     /// be present and valid and the AutoCreateReceiver field shall be omitted.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateRecordingJob", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class CreateRecordingJobRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateRecordingJobRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.RecordingJobConfiguration jobConfigurationField;
 
@@ -702,7 +702,7 @@ namespace SharpOnvifClient.Recording
     /// be present and valid and the AutoCreateReceiver field shall be omitted.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateRecordingJobResponse", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class CreateRecordingJobResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateRecordingJobResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string jobTokenField;
 
@@ -773,7 +773,7 @@ namespace SharpOnvifClient.Recording
     /// string, by default.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateRecording", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class CreateRecordingRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateRecordingRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.RecordingConfiguration recordingConfigurationField;
 
@@ -825,7 +825,7 @@ namespace SharpOnvifClient.Recording
     /// string, by default.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateRecordingResponse", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class CreateRecordingResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateRecordingResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string recordingTokenField;
 
@@ -873,7 +873,7 @@ namespace SharpOnvifClient.Recording
     /// uniquely identify a specific track. Tracks within different recordings may have the same TrackToken.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateTrack", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class CreateTrackRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateTrackRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string recordingTokenField;
 
@@ -939,7 +939,7 @@ namespace SharpOnvifClient.Recording
     /// uniquely identify a specific track. Tracks within different recordings may have the same TrackToken.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateTrackResponse", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class CreateTrackResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateTrackResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string trackTokenField;
 
@@ -988,7 +988,7 @@ namespace SharpOnvifClient.Recording
     /// of the recording job configuration structure and are not used in any other recording job.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteRecordingJob", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class DeleteRecordingJobRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteRecordingJobRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string jobTokenField;
 
@@ -1036,7 +1036,7 @@ namespace SharpOnvifClient.Recording
     /// of the recording job configuration structure and are not used in any other recording job.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteRecordingJobResponse", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class DeleteRecordingJobResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteRecordingJobResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public DeleteRecordingJobResponse()
         {
@@ -1054,7 +1054,7 @@ namespace SharpOnvifClient.Recording
     /// capability is TRUE.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteRecording", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class DeleteRecordingRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteRecordingRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string recordingTokenField;
 
@@ -1106,7 +1106,7 @@ namespace SharpOnvifClient.Recording
     /// capability is TRUE.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteRecordingResponse", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class DeleteRecordingResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteRecordingResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public DeleteRecordingResponse()
         {
@@ -1119,7 +1119,7 @@ namespace SharpOnvifClient.Recording
     /// method is optional. It shall be available if the Recording/DynamicTracks capability is TRUE.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteTrack", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class DeleteTrackRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteTrackRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string recordingTokenField;
 
@@ -1184,7 +1184,7 @@ namespace SharpOnvifClient.Recording
     /// method is optional. It shall be available if the Recording/DynamicTracks capability is TRUE.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteTrackResponse", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class DeleteTrackResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteTrackResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public DeleteTrackResponse()
         {
@@ -1197,7 +1197,7 @@ namespace SharpOnvifClient.Recording
     /// the requested file format.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ExportRecordedData", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class ExportRecordedDataRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ExportRecordedDataRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private System.DateTime startPointField;
         private bool startPointFieldSpecified;
@@ -1350,7 +1350,7 @@ namespace SharpOnvifClient.Recording
     /// the requested file format.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ExportRecordedDataResponse", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class ExportRecordedDataResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ExportRecordedDataResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string operationTokenField;
 
@@ -1432,7 +1432,7 @@ namespace SharpOnvifClient.Recording
 
     }
 
-    public partial class ExportRecordedDataResponseExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ExportRecordedDataResponseExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -1461,7 +1461,7 @@ namespace SharpOnvifClient.Recording
     /// given recording configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ExportRecordedSegments", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class ExportRecordedSegmentsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ExportRecordedSegmentsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.DateTimeRange timeField;
 
@@ -1593,7 +1593,7 @@ namespace SharpOnvifClient.Recording
     /// given recording configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ExportRecordedSegmentsResponse", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class ExportRecordedSegmentsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ExportRecordedSegmentsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string operationTokenField;
 
@@ -1639,7 +1639,7 @@ namespace SharpOnvifClient.Recording
     /// Retrieves the status of selected ExportRecordedData operation.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetExportRecordedDataState", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class GetExportRecordedDataStateRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetExportRecordedDataStateRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string operationTokenField;
 
@@ -1685,7 +1685,7 @@ namespace SharpOnvifClient.Recording
     /// Retrieves the status of selected ExportRecordedData operation.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetExportRecordedDataStateResponse", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class GetExportRecordedDataStateResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetExportRecordedDataStateResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private float progressField;
 
@@ -1758,7 +1758,7 @@ namespace SharpOnvifClient.Recording
     /// GetRecordingConfiguration shall retrieve the recording configuration for a recording.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRecordingConfiguration", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class GetRecordingConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetRecordingConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string recordingTokenField;
 
@@ -1804,7 +1804,7 @@ namespace SharpOnvifClient.Recording
     /// GetRecordingConfiguration shall retrieve the recording configuration for a recording.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRecordingConfigurationResponse", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class GetRecordingConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetRecordingConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.RecordingConfiguration recordingConfigurationField;
 
@@ -1850,7 +1850,7 @@ namespace SharpOnvifClient.Recording
     /// GetRecordingJobConfiguration shall return the current configuration for a recording job.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRecordingJobConfiguration", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class GetRecordingJobConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetRecordingJobConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string jobTokenField;
 
@@ -1896,7 +1896,7 @@ namespace SharpOnvifClient.Recording
     /// GetRecordingJobConfiguration shall return the current configuration for a recording job.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRecordingJobConfigurationResponse", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class GetRecordingJobConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetRecordingJobConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.RecordingJobConfiguration jobConfigurationField;
 
@@ -1943,7 +1943,7 @@ namespace SharpOnvifClient.Recording
     /// state for each track of the recording job.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRecordingJobState", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class GetRecordingJobStateRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetRecordingJobStateRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string jobTokenField;
 
@@ -1990,7 +1990,7 @@ namespace SharpOnvifClient.Recording
     /// state for each track of the recording job.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRecordingJobStateResponse", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class GetRecordingJobStateResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetRecordingJobStateResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.RecordingJobStateInformation stateField;
 
@@ -2036,7 +2036,7 @@ namespace SharpOnvifClient.Recording
     /// GetRecordingJobs shall return a list of all the recording jobs in the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRecordingJobs", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class GetRecordingJobsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetRecordingJobsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetRecordingJobsRequest()
         {
@@ -2048,7 +2048,7 @@ namespace SharpOnvifClient.Recording
     /// GetRecordingJobs shall return a list of all the recording jobs in the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRecordingJobsResponse", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class GetRecordingJobsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetRecordingJobsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.GetRecordingJobsResponseItem[] jobItemField;
 
@@ -2102,7 +2102,7 @@ namespace SharpOnvifClient.Recording
     /// configured.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRecordingOptions", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class GetRecordingOptionsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetRecordingOptionsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string recordingTokenField;
 
@@ -2150,7 +2150,7 @@ namespace SharpOnvifClient.Recording
     /// configured.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRecordingOptionsResponse", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class GetRecordingOptionsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetRecordingOptionsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private RecordingOptions optionsField;
 
@@ -2197,7 +2197,7 @@ namespace SharpOnvifClient.Recording
     /// include a list of all the tracks for each recording.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRecordings", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class GetRecordingsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetRecordingsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetRecordingsRequest()
         {
@@ -2210,7 +2210,7 @@ namespace SharpOnvifClient.Recording
     /// include a list of all the tracks for each recording.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRecordingsResponse", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class GetRecordingsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetRecordingsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.GetRecordingsResponseItem[] recordingItemField;
 
@@ -2262,7 +2262,7 @@ namespace SharpOnvifClient.Recording
     /// Returns the capabilities of the recording service. The result is returned in a typed answer.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilities", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetServiceCapabilitiesRequest()
         {
@@ -2274,7 +2274,7 @@ namespace SharpOnvifClient.Recording
     /// Returns the capabilities of the recording service. The result is returned in a typed answer.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilitiesResponse", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private Capabilities capabilitiesField;
 
@@ -2320,7 +2320,7 @@ namespace SharpOnvifClient.Recording
     /// GetTrackConfiguration shall retrieve the configuration for a specific track.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetTrackConfiguration", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class GetTrackConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetTrackConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string recordingTokenField;
 
@@ -2384,7 +2384,7 @@ namespace SharpOnvifClient.Recording
     /// GetTrackConfiguration shall retrieve the configuration for a specific track.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetTrackConfigurationResponse", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class GetTrackConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetTrackConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.TrackConfiguration trackConfigurationField;
 
@@ -2427,7 +2427,7 @@ namespace SharpOnvifClient.Recording
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class JobOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class JobOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private int spareField;
         private bool spareFieldSpecified;
@@ -2466,9 +2466,9 @@ namespace SharpOnvifClient.Recording
             set { this.compatibleSourcesField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "JobOptions"; } }
+        protected override string XmlTypeName { get { return "JobOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Recording; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Recording; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -2500,7 +2500,7 @@ namespace SharpOnvifClient.Recording
     /// Lists available recorded segments related to the specified RecordingToken.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ListRecordedSegments", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class ListRecordedSegmentsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ListRecordedSegmentsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.DateTimeRange timeField;
 
@@ -2599,7 +2599,7 @@ namespace SharpOnvifClient.Recording
     /// Lists available recorded segments related to the specified RecordingToken.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ListRecordedSegmentsResponse", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class ListRecordedSegmentsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ListRecordedSegmentsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SegmentListResult resultsField;
 
@@ -2642,7 +2642,7 @@ namespace SharpOnvifClient.Recording
     /// Requests a temporary override of the target segment duration for a recording configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("OverrideSegmentDuration", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class OverrideSegmentDurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class OverrideSegmentDurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string targetSegmentDurationField;
 
@@ -2724,7 +2724,7 @@ namespace SharpOnvifClient.Recording
     /// Requests a temporary override of the target segment duration for a recording configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("OverrideSegmentDurationResponse", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class OverrideSegmentDurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class OverrideSegmentDurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public OverrideSegmentDurationResponse()
         {
@@ -2733,7 +2733,7 @@ namespace SharpOnvifClient.Recording
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class RecordingOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RecordingOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private JobOptions jobField;
 
@@ -2762,9 +2762,9 @@ namespace SharpOnvifClient.Recording
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RecordingOptions"; } }
+        protected override string XmlTypeName { get { return "RecordingOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Recording; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Recording; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -2793,7 +2793,7 @@ namespace SharpOnvifClient.Recording
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class SegmentListResult : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SegmentListResult : SharpOnvifCommon.Xml.XmlContract
     {
         private SegmentListResultSegment[] segmentField;
 
@@ -2820,9 +2820,9 @@ namespace SharpOnvifClient.Recording
             set { this.hasMoreResultsField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SegmentListResult"; } }
+        protected override string XmlTypeName { get { return "SegmentListResult"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Recording; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Recording; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -2854,7 +2854,7 @@ namespace SharpOnvifClient.Recording
 
     }
 
-    public partial class SegmentListResultSegment : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SegmentListResultSegment : SharpOnvifCommon.Xml.XmlContract
     {
         private System.DateTime startTimeField;
 
@@ -2936,7 +2936,7 @@ namespace SharpOnvifClient.Recording
     /// SetRecordingConfiguration shall change the configuration of a recording.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetRecordingConfiguration", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class SetRecordingConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetRecordingConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string recordingTokenField;
 
@@ -3000,7 +3000,7 @@ namespace SharpOnvifClient.Recording
     /// SetRecordingConfiguration shall change the configuration of a recording.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetRecordingConfigurationResponse", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class SetRecordingConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetRecordingConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetRecordingConfigurationResponse()
         {
@@ -3014,7 +3014,7 @@ namespace SharpOnvifClient.Recording
     /// automatically if they are no longer used as a result of changing the recording job configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetRecordingJobConfiguration", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class SetRecordingJobConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetRecordingJobConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string jobTokenField;
 
@@ -3080,7 +3080,7 @@ namespace SharpOnvifClient.Recording
     /// automatically if they are no longer used as a result of changing the recording job configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetRecordingJobConfigurationResponse", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class SetRecordingJobConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetRecordingJobConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.RecordingJobConfiguration jobConfigurationField;
 
@@ -3128,7 +3128,7 @@ namespace SharpOnvifClient.Recording
     /// equivalent to retrieving the recording job configuration, and writing it back with a different mode.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetRecordingJobMode", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class SetRecordingJobModeRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetRecordingJobModeRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string jobTokenField;
 
@@ -3193,7 +3193,7 @@ namespace SharpOnvifClient.Recording
     /// equivalent to retrieving the recording job configuration, and writing it back with a different mode.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetRecordingJobModeResponse", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class SetRecordingJobModeResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetRecordingJobModeResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetRecordingJobModeResponse()
         {
@@ -3205,7 +3205,7 @@ namespace SharpOnvifClient.Recording
     /// SetTrackConfiguration shall change the configuration of a track.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetTrackConfiguration", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class SetTrackConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetTrackConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string recordingTokenField;
 
@@ -3287,7 +3287,7 @@ namespace SharpOnvifClient.Recording
     /// SetTrackConfiguration shall change the configuration of a track.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetTrackConfigurationResponse", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class SetTrackConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetTrackConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetTrackConfigurationResponse()
         {
@@ -3299,7 +3299,7 @@ namespace SharpOnvifClient.Recording
     /// Stops the selected ExportRecordedData operation.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("StopExportRecordedData", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class StopExportRecordedDataRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class StopExportRecordedDataRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string operationTokenField;
 
@@ -3345,7 +3345,7 @@ namespace SharpOnvifClient.Recording
     /// Stops the selected ExportRecordedData operation.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("StopExportRecordedDataResponse", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class StopExportRecordedDataResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class StopExportRecordedDataResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private float progressField;
 
@@ -3418,7 +3418,7 @@ namespace SharpOnvifClient.Recording
     /// Stops the selected ExportRecordedSegments operation.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("StopExportRecordedSegments", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class StopExportRecordedSegmentsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class StopExportRecordedSegmentsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string operationTokenField;
 
@@ -3464,7 +3464,7 @@ namespace SharpOnvifClient.Recording
     /// Stops the selected ExportRecordedSegments operation.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("StopExportRecordedSegmentsResponse", Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class StopExportRecordedSegmentsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class StopExportRecordedSegmentsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public StopExportRecordedSegmentsResponse()
         {
@@ -3473,7 +3473,7 @@ namespace SharpOnvifClient.Recording
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/recording/wsdl")]
-    public partial class TrackOptions : SharpOnvifCommon.Xml.OnvifContract
+    public partial class TrackOptions : SharpOnvifCommon.Xml.XmlContract
     {
         private int spareTotalField;
         private bool spareTotalFieldSpecified;
@@ -3571,9 +3571,9 @@ namespace SharpOnvifClient.Recording
             set { this.spareMetadataFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "TrackOptions"; } }
+        protected override string XmlTypeName { get { return "TrackOptions"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Recording; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Recording; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -3624,14 +3624,14 @@ namespace SharpOnvifClient.Recording
     /// <summary>Constructs a contract named by an xsi:type attribute.</summary>
     internal static class XmlTypeFactory
     {
-        public static SharpOnvifCommon.Xml.OnvifContract Create(string ns, string name)
+        public static SharpOnvifCommon.Xml.XmlContract Create(string ns, string name)
         {
             return SharpOnvifCommon.Onvif.XmlTypeFactory.Create(ns, name);
         }
     }
 
     /// <summary>SOAP action URIs for this service's operations.</summary>
-    public static class OnvifActions
+    public static class SoapActions
     {
         public const string GetServiceCapabilities = "http://www.onvif.org/ver10/recording/wsdl/GetServiceCapabilities";
         public const string CreateRecording = "http://www.onvif.org/ver10/recording/wsdl/CreateRecording";

@@ -16,7 +16,7 @@ namespace SharpOnvifServer.AccessControl
     public abstract class PACSPortBase
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new PACSPortDispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new PACSPortDispatcher();
 
         /// <summary>
         /// This operation returns the capabilities of the access control service. A device which provides the
@@ -568,7 +568,7 @@ namespace SharpOnvifServer.AccessControl
     }
 
     /// <summary>Routes SOAP actions to <see cref="PACSPortBase"/>.</summary>
-    internal sealed class PACSPortDispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class PACSPortDispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(PACSPortBase); } }
 
@@ -576,30 +576,30 @@ namespace SharpOnvifServer.AccessControl
         {
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
-                case OnvifActions.GetAccessPointInfo:
-                case OnvifActions.GetAccessPointInfoList:
-                case OnvifActions.GetAccessPoints:
-                case OnvifActions.GetAccessPointList:
-                case OnvifActions.CreateAccessPoint:
-                case OnvifActions.SetAccessPoint:
-                case OnvifActions.ModifyAccessPoint:
-                case OnvifActions.DeleteAccessPoint:
-                case OnvifActions.SetAccessPointAuthenticationProfile:
-                case OnvifActions.DeleteAccessPointAuthenticationProfile:
-                case OnvifActions.GetAreaInfo:
-                case OnvifActions.GetAreaInfoList:
-                case OnvifActions.GetAreas:
-                case OnvifActions.GetAreaList:
-                case OnvifActions.CreateArea:
-                case OnvifActions.SetArea:
-                case OnvifActions.ModifyArea:
-                case OnvifActions.DeleteArea:
-                case OnvifActions.GetAccessPointState:
-                case OnvifActions.EnableAccessPoint:
-                case OnvifActions.DisableAccessPoint:
-                case OnvifActions.ExternalAuthorization:
-                case OnvifActions.Feedback:
+                case SoapActions.GetServiceCapabilities:
+                case SoapActions.GetAccessPointInfo:
+                case SoapActions.GetAccessPointInfoList:
+                case SoapActions.GetAccessPoints:
+                case SoapActions.GetAccessPointList:
+                case SoapActions.CreateAccessPoint:
+                case SoapActions.SetAccessPoint:
+                case SoapActions.ModifyAccessPoint:
+                case SoapActions.DeleteAccessPoint:
+                case SoapActions.SetAccessPointAuthenticationProfile:
+                case SoapActions.DeleteAccessPointAuthenticationProfile:
+                case SoapActions.GetAreaInfo:
+                case SoapActions.GetAreaInfoList:
+                case SoapActions.GetAreas:
+                case SoapActions.GetAreaList:
+                case SoapActions.CreateArea:
+                case SoapActions.SetArea:
+                case SoapActions.ModifyArea:
+                case SoapActions.DeleteArea:
+                case SoapActions.GetAccessPointState:
+                case SoapActions.EnableAccessPoint:
+                case SoapActions.DisableAccessPoint:
+                case SoapActions.ExternalAuthorization:
+                case SoapActions.Feedback:
                     return true;
                 default:
                     return false;
@@ -613,168 +613,168 @@ namespace SharpOnvifServer.AccessControl
                 case "GetServiceCapabilities":
                     if (ns == "http://www.onvif.org/ver10/accesscontrol/wsdl")
                     {
-                        action = OnvifActions.GetServiceCapabilities;
+                        action = SoapActions.GetServiceCapabilities;
                         return true;
                     }
                     break;
                 case "GetAccessPointInfo":
                     if (ns == "http://www.onvif.org/ver10/accesscontrol/wsdl")
                     {
-                        action = OnvifActions.GetAccessPointInfo;
+                        action = SoapActions.GetAccessPointInfo;
                         return true;
                     }
                     break;
                 case "GetAccessPointInfoList":
                     if (ns == "http://www.onvif.org/ver10/accesscontrol/wsdl")
                     {
-                        action = OnvifActions.GetAccessPointInfoList;
+                        action = SoapActions.GetAccessPointInfoList;
                         return true;
                     }
                     break;
                 case "GetAccessPoints":
                     if (ns == "http://www.onvif.org/ver10/accesscontrol/wsdl")
                     {
-                        action = OnvifActions.GetAccessPoints;
+                        action = SoapActions.GetAccessPoints;
                         return true;
                     }
                     break;
                 case "GetAccessPointList":
                     if (ns == "http://www.onvif.org/ver10/accesscontrol/wsdl")
                     {
-                        action = OnvifActions.GetAccessPointList;
+                        action = SoapActions.GetAccessPointList;
                         return true;
                     }
                     break;
                 case "CreateAccessPoint":
                     if (ns == "http://www.onvif.org/ver10/accesscontrol/wsdl")
                     {
-                        action = OnvifActions.CreateAccessPoint;
+                        action = SoapActions.CreateAccessPoint;
                         return true;
                     }
                     break;
                 case "SetAccessPoint":
                     if (ns == "http://www.onvif.org/ver10/accesscontrol/wsdl")
                     {
-                        action = OnvifActions.SetAccessPoint;
+                        action = SoapActions.SetAccessPoint;
                         return true;
                     }
                     break;
                 case "ModifyAccessPoint":
                     if (ns == "http://www.onvif.org/ver10/accesscontrol/wsdl")
                     {
-                        action = OnvifActions.ModifyAccessPoint;
+                        action = SoapActions.ModifyAccessPoint;
                         return true;
                     }
                     break;
                 case "DeleteAccessPoint":
                     if (ns == "http://www.onvif.org/ver10/accesscontrol/wsdl")
                     {
-                        action = OnvifActions.DeleteAccessPoint;
+                        action = SoapActions.DeleteAccessPoint;
                         return true;
                     }
                     break;
                 case "SetAccessPointAuthenticationProfile":
                     if (ns == "http://www.onvif.org/ver10/accesscontrol/wsdl")
                     {
-                        action = OnvifActions.SetAccessPointAuthenticationProfile;
+                        action = SoapActions.SetAccessPointAuthenticationProfile;
                         return true;
                     }
                     break;
                 case "DeleteAccessPointAuthenticationProfile":
                     if (ns == "http://www.onvif.org/ver10/accesscontrol/wsdl")
                     {
-                        action = OnvifActions.DeleteAccessPointAuthenticationProfile;
+                        action = SoapActions.DeleteAccessPointAuthenticationProfile;
                         return true;
                     }
                     break;
                 case "GetAreaInfo":
                     if (ns == "http://www.onvif.org/ver10/accesscontrol/wsdl")
                     {
-                        action = OnvifActions.GetAreaInfo;
+                        action = SoapActions.GetAreaInfo;
                         return true;
                     }
                     break;
                 case "GetAreaInfoList":
                     if (ns == "http://www.onvif.org/ver10/accesscontrol/wsdl")
                     {
-                        action = OnvifActions.GetAreaInfoList;
+                        action = SoapActions.GetAreaInfoList;
                         return true;
                     }
                     break;
                 case "GetAreas":
                     if (ns == "http://www.onvif.org/ver10/accesscontrol/wsdl")
                     {
-                        action = OnvifActions.GetAreas;
+                        action = SoapActions.GetAreas;
                         return true;
                     }
                     break;
                 case "GetAreaList":
                     if (ns == "http://www.onvif.org/ver10/accesscontrol/wsdl")
                     {
-                        action = OnvifActions.GetAreaList;
+                        action = SoapActions.GetAreaList;
                         return true;
                     }
                     break;
                 case "CreateArea":
                     if (ns == "http://www.onvif.org/ver10/accesscontrol/wsdl")
                     {
-                        action = OnvifActions.CreateArea;
+                        action = SoapActions.CreateArea;
                         return true;
                     }
                     break;
                 case "SetArea":
                     if (ns == "http://www.onvif.org/ver10/accesscontrol/wsdl")
                     {
-                        action = OnvifActions.SetArea;
+                        action = SoapActions.SetArea;
                         return true;
                     }
                     break;
                 case "ModifyArea":
                     if (ns == "http://www.onvif.org/ver10/accesscontrol/wsdl")
                     {
-                        action = OnvifActions.ModifyArea;
+                        action = SoapActions.ModifyArea;
                         return true;
                     }
                     break;
                 case "DeleteArea":
                     if (ns == "http://www.onvif.org/ver10/accesscontrol/wsdl")
                     {
-                        action = OnvifActions.DeleteArea;
+                        action = SoapActions.DeleteArea;
                         return true;
                     }
                     break;
                 case "GetAccessPointState":
                     if (ns == "http://www.onvif.org/ver10/accesscontrol/wsdl")
                     {
-                        action = OnvifActions.GetAccessPointState;
+                        action = SoapActions.GetAccessPointState;
                         return true;
                     }
                     break;
                 case "EnableAccessPoint":
                     if (ns == "http://www.onvif.org/ver10/accesscontrol/wsdl")
                     {
-                        action = OnvifActions.EnableAccessPoint;
+                        action = SoapActions.EnableAccessPoint;
                         return true;
                     }
                     break;
                 case "DisableAccessPoint":
                     if (ns == "http://www.onvif.org/ver10/accesscontrol/wsdl")
                     {
-                        action = OnvifActions.DisableAccessPoint;
+                        action = SoapActions.DisableAccessPoint;
                         return true;
                     }
                     break;
                 case "ExternalAuthorization":
                     if (ns == "http://www.onvif.org/ver10/accesscontrol/wsdl")
                     {
-                        action = OnvifActions.ExternalAuthorization;
+                        action = SoapActions.ExternalAuthorization;
                         return true;
                     }
                     break;
                 case "Feedback":
                     if (ns == "http://www.onvif.org/ver10/accesscontrol/wsdl")
                     {
-                        action = OnvifActions.Feedback;
+                        action = SoapActions.Feedback;
                         return true;
                     }
                     break;
@@ -783,7 +783,7 @@ namespace SharpOnvifServer.AccessControl
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             PACSPortBase target = (PACSPortBase)service;
@@ -791,180 +791,180 @@ namespace SharpOnvifServer.AccessControl
 
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
+                case SoapActions.GetServiceCapabilities:
                 {
                     var request = new GetServiceCapabilitiesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetServiceCapabilitiesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetServiceCapabilitiesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetServiceCapabilitiesResponse");
                 }
-                case OnvifActions.GetAccessPointInfo:
+                case SoapActions.GetAccessPointInfo:
                 {
                     var request = new GetAccessPointInfoRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAccessPointInfoAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAccessPointInfoResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAccessPointInfoResponse");
                 }
-                case OnvifActions.GetAccessPointInfoList:
+                case SoapActions.GetAccessPointInfoList:
                 {
                     var request = new GetAccessPointInfoListRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAccessPointInfoListAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAccessPointInfoListResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAccessPointInfoListResponse");
                 }
-                case OnvifActions.GetAccessPoints:
+                case SoapActions.GetAccessPoints:
                 {
                     var request = new GetAccessPointsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAccessPointsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAccessPointsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAccessPointsResponse");
                 }
-                case OnvifActions.GetAccessPointList:
+                case SoapActions.GetAccessPointList:
                 {
                     var request = new GetAccessPointListRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAccessPointListAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAccessPointListResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAccessPointListResponse");
                 }
-                case OnvifActions.CreateAccessPoint:
+                case SoapActions.CreateAccessPoint:
                 {
                     var request = new CreateAccessPointRequest();
                     reader.ReadInto(request);
                     var response = await target.CreateAccessPointAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "CreateAccessPointResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "CreateAccessPointResponse");
                 }
-                case OnvifActions.SetAccessPoint:
+                case SoapActions.SetAccessPoint:
                 {
                     var request = new SetAccessPointRequest();
                     reader.ReadInto(request);
                     var response = await target.SetAccessPointAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "SetAccessPointResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "SetAccessPointResponse");
                 }
-                case OnvifActions.ModifyAccessPoint:
+                case SoapActions.ModifyAccessPoint:
                 {
                     var request = new ModifyAccessPointRequest();
                     reader.ReadInto(request);
                     var response = await target.ModifyAccessPointAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "ModifyAccessPointResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "ModifyAccessPointResponse");
                 }
-                case OnvifActions.DeleteAccessPoint:
+                case SoapActions.DeleteAccessPoint:
                 {
                     var request = new DeleteAccessPointRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteAccessPointAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "DeleteAccessPointResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "DeleteAccessPointResponse");
                 }
-                case OnvifActions.SetAccessPointAuthenticationProfile:
+                case SoapActions.SetAccessPointAuthenticationProfile:
                 {
                     var request = new SetAccessPointAuthenticationProfileRequest();
                     reader.ReadInto(request);
                     var response = await target.SetAccessPointAuthenticationProfileAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "SetAccessPointAuthenticationProfileResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "SetAccessPointAuthenticationProfileResponse");
                 }
-                case OnvifActions.DeleteAccessPointAuthenticationProfile:
+                case SoapActions.DeleteAccessPointAuthenticationProfile:
                 {
                     var request = new DeleteAccessPointAuthenticationProfileRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteAccessPointAuthenticationProfileAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "DeleteAccessPointAuthenticationProfileResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "DeleteAccessPointAuthenticationProfileResponse");
                 }
-                case OnvifActions.GetAreaInfo:
+                case SoapActions.GetAreaInfo:
                 {
                     var request = new GetAreaInfoRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAreaInfoAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAreaInfoResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAreaInfoResponse");
                 }
-                case OnvifActions.GetAreaInfoList:
+                case SoapActions.GetAreaInfoList:
                 {
                     var request = new GetAreaInfoListRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAreaInfoListAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAreaInfoListResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAreaInfoListResponse");
                 }
-                case OnvifActions.GetAreas:
+                case SoapActions.GetAreas:
                 {
                     var request = new GetAreasRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAreasAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAreasResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAreasResponse");
                 }
-                case OnvifActions.GetAreaList:
+                case SoapActions.GetAreaList:
                 {
                     var request = new GetAreaListRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAreaListAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAreaListResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAreaListResponse");
                 }
-                case OnvifActions.CreateArea:
+                case SoapActions.CreateArea:
                 {
                     var request = new CreateAreaRequest();
                     reader.ReadInto(request);
                     var response = await target.CreateAreaAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "CreateAreaResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "CreateAreaResponse");
                 }
-                case OnvifActions.SetArea:
+                case SoapActions.SetArea:
                 {
                     var request = new SetAreaRequest();
                     reader.ReadInto(request);
                     var response = await target.SetAreaAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "SetAreaResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "SetAreaResponse");
                 }
-                case OnvifActions.ModifyArea:
+                case SoapActions.ModifyArea:
                 {
                     var request = new ModifyAreaRequest();
                     reader.ReadInto(request);
                     var response = await target.ModifyAreaAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "ModifyAreaResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "ModifyAreaResponse");
                 }
-                case OnvifActions.DeleteArea:
+                case SoapActions.DeleteArea:
                 {
                     var request = new DeleteAreaRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteAreaAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "DeleteAreaResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "DeleteAreaResponse");
                 }
-                case OnvifActions.GetAccessPointState:
+                case SoapActions.GetAccessPointState:
                 {
                     var request = new GetAccessPointStateRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAccessPointStateAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAccessPointStateResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAccessPointStateResponse");
                 }
-                case OnvifActions.EnableAccessPoint:
+                case SoapActions.EnableAccessPoint:
                 {
                     var request = new EnableAccessPointRequest();
                     reader.ReadInto(request);
                     var response = await target.EnableAccessPointAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "EnableAccessPointResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "EnableAccessPointResponse");
                 }
-                case OnvifActions.DisableAccessPoint:
+                case SoapActions.DisableAccessPoint:
                 {
                     var request = new DisableAccessPointRequest();
                     reader.ReadInto(request);
                     var response = await target.DisableAccessPointAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "DisableAccessPointResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "DisableAccessPointResponse");
                 }
-                case OnvifActions.ExternalAuthorization:
+                case SoapActions.ExternalAuthorization:
                 {
                     var request = new ExternalAuthorizationRequest();
                     reader.ReadInto(request);
                     var response = await target.ExternalAuthorizationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "ExternalAuthorizationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "ExternalAuthorizationResponse");
                 }
-                case OnvifActions.Feedback:
+                case SoapActions.Feedback:
                 {
                     var request = new FeedbackRequest();
                     reader.ReadInto(request);
                     var response = await target.FeedbackAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "FeedbackResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/accesscontrol/wsdl", "FeedbackResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }

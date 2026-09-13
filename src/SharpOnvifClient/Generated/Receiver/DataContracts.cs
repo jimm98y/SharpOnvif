@@ -22,7 +22,7 @@ namespace SharpOnvifClient.Receiver
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/receiver/wsdl")]
-    public partial class Capabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Capabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -141,9 +141,9 @@ namespace SharpOnvifClient.Receiver
             set { this.maximumRTSPURILengthFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Capabilities"; } }
+        protected override string XmlTypeName { get { return "Capabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Receiver; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Receiver; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -210,7 +210,7 @@ namespace SharpOnvifClient.Receiver
     /// Configures an existing receiver. This operation is mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ConfigureReceiver", Namespace="http://www.onvif.org/ver10/receiver/wsdl")]
-    public partial class ConfigureReceiverRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ConfigureReceiverRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string receiverTokenField;
 
@@ -274,7 +274,7 @@ namespace SharpOnvifClient.Receiver
     /// Configures an existing receiver. This operation is mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ConfigureReceiverResponse", Namespace="http://www.onvif.org/ver10/receiver/wsdl")]
-    public partial class ConfigureReceiverResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ConfigureReceiverResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public ConfigureReceiverResponse()
         {
@@ -287,7 +287,7 @@ namespace SharpOnvifClient.Receiver
     /// receiver cannot be created.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateReceiver", Namespace="http://www.onvif.org/ver10/receiver/wsdl")]
-    public partial class CreateReceiverRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateReceiverRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.ReceiverConfiguration configurationField;
 
@@ -334,7 +334,7 @@ namespace SharpOnvifClient.Receiver
     /// receiver cannot be created.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateReceiverResponse", Namespace="http://www.onvif.org/ver10/receiver/wsdl")]
-    public partial class CreateReceiverResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateReceiverResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.Receiver receiverField;
 
@@ -381,7 +381,7 @@ namespace SharpOnvifClient.Receiver
     /// otherwise a fault shall be raised. This operation is mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteReceiver", Namespace="http://www.onvif.org/ver10/receiver/wsdl")]
-    public partial class DeleteReceiverRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteReceiverRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string receiverTokenField;
 
@@ -428,7 +428,7 @@ namespace SharpOnvifClient.Receiver
     /// otherwise a fault shall be raised. This operation is mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteReceiverResponse", Namespace="http://www.onvif.org/ver10/receiver/wsdl")]
-    public partial class DeleteReceiverResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteReceiverResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public DeleteReceiverResponse()
         {
@@ -440,7 +440,7 @@ namespace SharpOnvifClient.Receiver
     /// Retrieves the details of a specific receiver. This operation is mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetReceiver", Namespace="http://www.onvif.org/ver10/receiver/wsdl")]
-    public partial class GetReceiverRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetReceiverRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string receiverTokenField;
 
@@ -486,7 +486,7 @@ namespace SharpOnvifClient.Receiver
     /// Retrieves the details of a specific receiver. This operation is mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetReceiverResponse", Namespace="http://www.onvif.org/ver10/receiver/wsdl")]
-    public partial class GetReceiverResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetReceiverResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.Receiver receiverField;
 
@@ -533,7 +533,7 @@ namespace SharpOnvifClient.Receiver
     /// operation is mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetReceiverState", Namespace="http://www.onvif.org/ver10/receiver/wsdl")]
-    public partial class GetReceiverStateRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetReceiverStateRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string receiverTokenField;
 
@@ -580,7 +580,7 @@ namespace SharpOnvifClient.Receiver
     /// operation is mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetReceiverStateResponse", Namespace="http://www.onvif.org/ver10/receiver/wsdl")]
-    public partial class GetReceiverStateResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetReceiverStateResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.ReceiverStateInformation receiverStateField;
 
@@ -626,7 +626,7 @@ namespace SharpOnvifClient.Receiver
     /// Lists all receivers currently present on a device. This operation is mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetReceivers", Namespace="http://www.onvif.org/ver10/receiver/wsdl")]
-    public partial class GetReceiversRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetReceiversRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetReceiversRequest()
         {
@@ -638,7 +638,7 @@ namespace SharpOnvifClient.Receiver
     /// Lists all receivers currently present on a device. This operation is mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetReceiversResponse", Namespace="http://www.onvif.org/ver10/receiver/wsdl")]
-    public partial class GetReceiversResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetReceiversResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.Receiver[] receiversField;
 
@@ -690,7 +690,7 @@ namespace SharpOnvifClient.Receiver
     /// Returns the capabilities of the receiver service. The result is returned in a typed answer.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilities", Namespace="http://www.onvif.org/ver10/receiver/wsdl")]
-    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetServiceCapabilitiesRequest()
         {
@@ -702,7 +702,7 @@ namespace SharpOnvifClient.Receiver
     /// Returns the capabilities of the receiver service. The result is returned in a typed answer.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilitiesResponse", Namespace="http://www.onvif.org/ver10/receiver/wsdl")]
-    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private Capabilities capabilitiesField;
 
@@ -749,7 +749,7 @@ namespace SharpOnvifClient.Receiver
     /// mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetReceiverMode", Namespace="http://www.onvif.org/ver10/receiver/wsdl")]
-    public partial class SetReceiverModeRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetReceiverModeRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string receiverTokenField;
 
@@ -814,7 +814,7 @@ namespace SharpOnvifClient.Receiver
     /// mandatory.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetReceiverModeResponse", Namespace="http://www.onvif.org/ver10/receiver/wsdl")]
-    public partial class SetReceiverModeResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetReceiverModeResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetReceiverModeResponse()
         {
@@ -825,14 +825,14 @@ namespace SharpOnvifClient.Receiver
     /// <summary>Constructs a contract named by an xsi:type attribute.</summary>
     internal static class XmlTypeFactory
     {
-        public static SharpOnvifCommon.Xml.OnvifContract Create(string ns, string name)
+        public static SharpOnvifCommon.Xml.XmlContract Create(string ns, string name)
         {
             return SharpOnvifCommon.Onvif.XmlTypeFactory.Create(ns, name);
         }
     }
 
     /// <summary>SOAP action URIs for this service's operations.</summary>
-    public static class OnvifActions
+    public static class SoapActions
     {
         public const string GetServiceCapabilities = "http://www.onvif.org/ver10/receiver/wsdl/GetServiceCapabilities";
         public const string GetReceivers = "http://www.onvif.org/ver10/receiver/wsdl/GetReceivers";

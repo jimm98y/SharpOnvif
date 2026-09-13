@@ -22,7 +22,7 @@ namespace SharpOnvifClient.Uplink
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/uplink/wsdl")]
-    public partial class Capabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Capabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -106,9 +106,9 @@ namespace SharpOnvifClient.Uplink
             set { this.streamingOverUplinkFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Capabilities"; } }
+        protected override string XmlTypeName { get { return "Capabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Uplink; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Uplink; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -160,7 +160,7 @@ namespace SharpOnvifClient.Uplink
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/uplink/wsdl")]
-    public partial class Configuration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Configuration : SharpOnvifCommon.Xml.XmlContract
     {
         private string remoteAddressField;
 
@@ -259,9 +259,9 @@ namespace SharpOnvifClient.Uplink
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Configuration"; } }
+        protected override string XmlTypeName { get { return "Configuration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Uplink; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Uplink; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -318,7 +318,7 @@ namespace SharpOnvifClient.Uplink
     /// A device supporting uplinks shall support this command to remove an uplink configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteUplink", Namespace="http://www.onvif.org/ver10/uplink/wsdl")]
-    public partial class DeleteUplinkRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteUplinkRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string remoteAddressField;
 
@@ -364,7 +364,7 @@ namespace SharpOnvifClient.Uplink
     /// A device supporting uplinks shall support this command to remove an uplink configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteUplinkResponse", Namespace="http://www.onvif.org/ver10/uplink/wsdl")]
-    public partial class DeleteUplinkResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteUplinkResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public DeleteUplinkResponse()
         {
@@ -376,7 +376,7 @@ namespace SharpOnvifClient.Uplink
     /// Returns the capabilities of the uplink service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilities", Namespace="http://www.onvif.org/ver10/uplink/wsdl")]
-    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetServiceCapabilitiesRequest()
         {
@@ -388,7 +388,7 @@ namespace SharpOnvifClient.Uplink
     /// Returns the capabilities of the uplink service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilitiesResponse", Namespace="http://www.onvif.org/ver10/uplink/wsdl")]
-    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private Capabilities capabilitiesField;
 
@@ -435,7 +435,7 @@ namespace SharpOnvifClient.Uplink
     /// configurations. The Status field shall signal whether a connection is Offline, Connecting or Online.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetUplinks", Namespace="http://www.onvif.org/ver10/uplink/wsdl")]
-    public partial class GetUplinksRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetUplinksRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetUplinksRequest()
         {
@@ -448,7 +448,7 @@ namespace SharpOnvifClient.Uplink
     /// configurations. The Status field shall signal whether a connection is Offline, Connecting or Online.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetUplinksResponse", Namespace="http://www.onvif.org/ver10/uplink/wsdl")]
-    public partial class GetUplinksResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetUplinksResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private Configuration[] configurationField;
 
@@ -502,7 +502,7 @@ namespace SharpOnvifClient.Uplink
     /// field RemoteAddress to decide whether to update an existing entry or create a new entry.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetUplink", Namespace="http://www.onvif.org/ver10/uplink/wsdl")]
-    public partial class SetUplinkRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetUplinkRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private Configuration configurationField;
 
@@ -550,7 +550,7 @@ namespace SharpOnvifClient.Uplink
     /// field RemoteAddress to decide whether to update an existing entry or create a new entry.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetUplinkResponse", Namespace="http://www.onvif.org/ver10/uplink/wsdl")]
-    public partial class SetUplinkResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetUplinkResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetUplinkResponse()
         {
@@ -561,14 +561,14 @@ namespace SharpOnvifClient.Uplink
     /// <summary>Constructs a contract named by an xsi:type attribute.</summary>
     internal static class XmlTypeFactory
     {
-        public static SharpOnvifCommon.Xml.OnvifContract Create(string ns, string name)
+        public static SharpOnvifCommon.Xml.XmlContract Create(string ns, string name)
         {
             return SharpOnvifCommon.Onvif.XmlTypeFactory.Create(ns, name);
         }
     }
 
     /// <summary>SOAP action URIs for this service's operations.</summary>
-    public static class OnvifActions
+    public static class SoapActions
     {
         public const string GetServiceCapabilities = "http://www.onvif.org/ver10/uplink/wsdl/GetServiceCapabilities";
         public const string GetUplinks = "http://www.onvif.org/ver10/uplink/wsdl/GetUplinks";

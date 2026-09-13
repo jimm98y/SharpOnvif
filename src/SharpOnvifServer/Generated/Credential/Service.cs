@@ -16,7 +16,7 @@ namespace SharpOnvifServer.Credential
     public abstract class CredentialPortBase
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new CredentialPortDispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new CredentialPortDispatcher();
 
         /// <summary>
         /// This operation returns the capabilities of the credential service.
@@ -630,7 +630,7 @@ namespace SharpOnvifServer.Credential
     }
 
     /// <summary>Routes SOAP actions to <see cref="CredentialPortBase"/>.</summary>
-    internal sealed class CredentialPortDispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class CredentialPortDispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(CredentialPortBase); } }
 
@@ -638,34 +638,34 @@ namespace SharpOnvifServer.Credential
         {
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
-                case OnvifActions.GetSupportedFormatTypes:
-                case OnvifActions.GetCredentialInfo:
-                case OnvifActions.GetCredentialInfoList:
-                case OnvifActions.GetCredentials:
-                case OnvifActions.GetCredentialList:
-                case OnvifActions.CreateCredential:
-                case OnvifActions.SetCredential:
-                case OnvifActions.ModifyCredential:
-                case OnvifActions.DeleteCredential:
-                case OnvifActions.GetCredentialState:
-                case OnvifActions.EnableCredential:
-                case OnvifActions.DisableCredential:
-                case OnvifActions.ResetAntipassbackViolation:
-                case OnvifActions.GetCredentialIdentifiers:
-                case OnvifActions.SetCredentialIdentifier:
-                case OnvifActions.DeleteCredentialIdentifier:
-                case OnvifActions.GetCredentialAccessProfiles:
-                case OnvifActions.SetCredentialAccessProfiles:
-                case OnvifActions.DeleteCredentialAccessProfiles:
-                case OnvifActions.GetWhitelist:
-                case OnvifActions.AddToWhitelist:
-                case OnvifActions.RemoveFromWhitelist:
-                case OnvifActions.DeleteWhitelist:
-                case OnvifActions.GetBlacklist:
-                case OnvifActions.AddToBlacklist:
-                case OnvifActions.RemoveFromBlacklist:
-                case OnvifActions.DeleteBlacklist:
+                case SoapActions.GetServiceCapabilities:
+                case SoapActions.GetSupportedFormatTypes:
+                case SoapActions.GetCredentialInfo:
+                case SoapActions.GetCredentialInfoList:
+                case SoapActions.GetCredentials:
+                case SoapActions.GetCredentialList:
+                case SoapActions.CreateCredential:
+                case SoapActions.SetCredential:
+                case SoapActions.ModifyCredential:
+                case SoapActions.DeleteCredential:
+                case SoapActions.GetCredentialState:
+                case SoapActions.EnableCredential:
+                case SoapActions.DisableCredential:
+                case SoapActions.ResetAntipassbackViolation:
+                case SoapActions.GetCredentialIdentifiers:
+                case SoapActions.SetCredentialIdentifier:
+                case SoapActions.DeleteCredentialIdentifier:
+                case SoapActions.GetCredentialAccessProfiles:
+                case SoapActions.SetCredentialAccessProfiles:
+                case SoapActions.DeleteCredentialAccessProfiles:
+                case SoapActions.GetWhitelist:
+                case SoapActions.AddToWhitelist:
+                case SoapActions.RemoveFromWhitelist:
+                case SoapActions.DeleteWhitelist:
+                case SoapActions.GetBlacklist:
+                case SoapActions.AddToBlacklist:
+                case SoapActions.RemoveFromBlacklist:
+                case SoapActions.DeleteBlacklist:
                     return true;
                 default:
                     return false;
@@ -679,196 +679,196 @@ namespace SharpOnvifServer.Credential
                 case "GetServiceCapabilities":
                     if (ns == "http://www.onvif.org/ver10/credential/wsdl")
                     {
-                        action = OnvifActions.GetServiceCapabilities;
+                        action = SoapActions.GetServiceCapabilities;
                         return true;
                     }
                     break;
                 case "GetSupportedFormatTypes":
                     if (ns == "http://www.onvif.org/ver10/credential/wsdl")
                     {
-                        action = OnvifActions.GetSupportedFormatTypes;
+                        action = SoapActions.GetSupportedFormatTypes;
                         return true;
                     }
                     break;
                 case "GetCredentialInfo":
                     if (ns == "http://www.onvif.org/ver10/credential/wsdl")
                     {
-                        action = OnvifActions.GetCredentialInfo;
+                        action = SoapActions.GetCredentialInfo;
                         return true;
                     }
                     break;
                 case "GetCredentialInfoList":
                     if (ns == "http://www.onvif.org/ver10/credential/wsdl")
                     {
-                        action = OnvifActions.GetCredentialInfoList;
+                        action = SoapActions.GetCredentialInfoList;
                         return true;
                     }
                     break;
                 case "GetCredentials":
                     if (ns == "http://www.onvif.org/ver10/credential/wsdl")
                     {
-                        action = OnvifActions.GetCredentials;
+                        action = SoapActions.GetCredentials;
                         return true;
                     }
                     break;
                 case "GetCredentialList":
                     if (ns == "http://www.onvif.org/ver10/credential/wsdl")
                     {
-                        action = OnvifActions.GetCredentialList;
+                        action = SoapActions.GetCredentialList;
                         return true;
                     }
                     break;
                 case "CreateCredential":
                     if (ns == "http://www.onvif.org/ver10/credential/wsdl")
                     {
-                        action = OnvifActions.CreateCredential;
+                        action = SoapActions.CreateCredential;
                         return true;
                     }
                     break;
                 case "SetCredential":
                     if (ns == "http://www.onvif.org/ver10/credential/wsdl")
                     {
-                        action = OnvifActions.SetCredential;
+                        action = SoapActions.SetCredential;
                         return true;
                     }
                     break;
                 case "ModifyCredential":
                     if (ns == "http://www.onvif.org/ver10/credential/wsdl")
                     {
-                        action = OnvifActions.ModifyCredential;
+                        action = SoapActions.ModifyCredential;
                         return true;
                     }
                     break;
                 case "DeleteCredential":
                     if (ns == "http://www.onvif.org/ver10/credential/wsdl")
                     {
-                        action = OnvifActions.DeleteCredential;
+                        action = SoapActions.DeleteCredential;
                         return true;
                     }
                     break;
                 case "GetCredentialState":
                     if (ns == "http://www.onvif.org/ver10/credential/wsdl")
                     {
-                        action = OnvifActions.GetCredentialState;
+                        action = SoapActions.GetCredentialState;
                         return true;
                     }
                     break;
                 case "EnableCredential":
                     if (ns == "http://www.onvif.org/ver10/credential/wsdl")
                     {
-                        action = OnvifActions.EnableCredential;
+                        action = SoapActions.EnableCredential;
                         return true;
                     }
                     break;
                 case "DisableCredential":
                     if (ns == "http://www.onvif.org/ver10/credential/wsdl")
                     {
-                        action = OnvifActions.DisableCredential;
+                        action = SoapActions.DisableCredential;
                         return true;
                     }
                     break;
                 case "ResetAntipassbackViolation":
                     if (ns == "http://www.onvif.org/ver10/credential/wsdl")
                     {
-                        action = OnvifActions.ResetAntipassbackViolation;
+                        action = SoapActions.ResetAntipassbackViolation;
                         return true;
                     }
                     break;
                 case "GetCredentialIdentifiers":
                     if (ns == "http://www.onvif.org/ver10/credential/wsdl")
                     {
-                        action = OnvifActions.GetCredentialIdentifiers;
+                        action = SoapActions.GetCredentialIdentifiers;
                         return true;
                     }
                     break;
                 case "SetCredentialIdentifier":
                     if (ns == "http://www.onvif.org/ver10/credential/wsdl")
                     {
-                        action = OnvifActions.SetCredentialIdentifier;
+                        action = SoapActions.SetCredentialIdentifier;
                         return true;
                     }
                     break;
                 case "DeleteCredentialIdentifier":
                     if (ns == "http://www.onvif.org/ver10/credential/wsdl")
                     {
-                        action = OnvifActions.DeleteCredentialIdentifier;
+                        action = SoapActions.DeleteCredentialIdentifier;
                         return true;
                     }
                     break;
                 case "GetCredentialAccessProfiles":
                     if (ns == "http://www.onvif.org/ver10/credential/wsdl")
                     {
-                        action = OnvifActions.GetCredentialAccessProfiles;
+                        action = SoapActions.GetCredentialAccessProfiles;
                         return true;
                     }
                     break;
                 case "SetCredentialAccessProfiles":
                     if (ns == "http://www.onvif.org/ver10/credential/wsdl")
                     {
-                        action = OnvifActions.SetCredentialAccessProfiles;
+                        action = SoapActions.SetCredentialAccessProfiles;
                         return true;
                     }
                     break;
                 case "DeleteCredentialAccessProfiles":
                     if (ns == "http://www.onvif.org/ver10/credential/wsdl")
                     {
-                        action = OnvifActions.DeleteCredentialAccessProfiles;
+                        action = SoapActions.DeleteCredentialAccessProfiles;
                         return true;
                     }
                     break;
                 case "GetWhitelist":
                     if (ns == "http://www.onvif.org/ver10/credential/wsdl")
                     {
-                        action = OnvifActions.GetWhitelist;
+                        action = SoapActions.GetWhitelist;
                         return true;
                     }
                     break;
                 case "AddToWhitelist":
                     if (ns == "http://www.onvif.org/ver10/credential/wsdl")
                     {
-                        action = OnvifActions.AddToWhitelist;
+                        action = SoapActions.AddToWhitelist;
                         return true;
                     }
                     break;
                 case "RemoveFromWhitelist":
                     if (ns == "http://www.onvif.org/ver10/credential/wsdl")
                     {
-                        action = OnvifActions.RemoveFromWhitelist;
+                        action = SoapActions.RemoveFromWhitelist;
                         return true;
                     }
                     break;
                 case "DeleteWhitelist":
                     if (ns == "http://www.onvif.org/ver10/credential/wsdl")
                     {
-                        action = OnvifActions.DeleteWhitelist;
+                        action = SoapActions.DeleteWhitelist;
                         return true;
                     }
                     break;
                 case "GetBlacklist":
                     if (ns == "http://www.onvif.org/ver10/credential/wsdl")
                     {
-                        action = OnvifActions.GetBlacklist;
+                        action = SoapActions.GetBlacklist;
                         return true;
                     }
                     break;
                 case "AddToBlacklist":
                     if (ns == "http://www.onvif.org/ver10/credential/wsdl")
                     {
-                        action = OnvifActions.AddToBlacklist;
+                        action = SoapActions.AddToBlacklist;
                         return true;
                     }
                     break;
                 case "RemoveFromBlacklist":
                     if (ns == "http://www.onvif.org/ver10/credential/wsdl")
                     {
-                        action = OnvifActions.RemoveFromBlacklist;
+                        action = SoapActions.RemoveFromBlacklist;
                         return true;
                     }
                     break;
                 case "DeleteBlacklist":
                     if (ns == "http://www.onvif.org/ver10/credential/wsdl")
                     {
-                        action = OnvifActions.DeleteBlacklist;
+                        action = SoapActions.DeleteBlacklist;
                         return true;
                     }
                     break;
@@ -877,7 +877,7 @@ namespace SharpOnvifServer.Credential
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             CredentialPortBase target = (CredentialPortBase)service;
@@ -885,208 +885,208 @@ namespace SharpOnvifServer.Credential
 
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
+                case SoapActions.GetServiceCapabilities:
                 {
                     var request = new GetServiceCapabilitiesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetServiceCapabilitiesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "GetServiceCapabilitiesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "GetServiceCapabilitiesResponse");
                 }
-                case OnvifActions.GetSupportedFormatTypes:
+                case SoapActions.GetSupportedFormatTypes:
                 {
                     var request = new GetSupportedFormatTypesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetSupportedFormatTypesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "GetSupportedFormatTypesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "GetSupportedFormatTypesResponse");
                 }
-                case OnvifActions.GetCredentialInfo:
+                case SoapActions.GetCredentialInfo:
                 {
                     var request = new GetCredentialInfoRequest();
                     reader.ReadInto(request);
                     var response = await target.GetCredentialInfoAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "GetCredentialInfoResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "GetCredentialInfoResponse");
                 }
-                case OnvifActions.GetCredentialInfoList:
+                case SoapActions.GetCredentialInfoList:
                 {
                     var request = new GetCredentialInfoListRequest();
                     reader.ReadInto(request);
                     var response = await target.GetCredentialInfoListAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "GetCredentialInfoListResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "GetCredentialInfoListResponse");
                 }
-                case OnvifActions.GetCredentials:
+                case SoapActions.GetCredentials:
                 {
                     var request = new GetCredentialsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetCredentialsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "GetCredentialsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "GetCredentialsResponse");
                 }
-                case OnvifActions.GetCredentialList:
+                case SoapActions.GetCredentialList:
                 {
                     var request = new GetCredentialListRequest();
                     reader.ReadInto(request);
                     var response = await target.GetCredentialListAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "GetCredentialListResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "GetCredentialListResponse");
                 }
-                case OnvifActions.CreateCredential:
+                case SoapActions.CreateCredential:
                 {
                     var request = new CreateCredentialRequest();
                     reader.ReadInto(request);
                     var response = await target.CreateCredentialAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "CreateCredentialResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "CreateCredentialResponse");
                 }
-                case OnvifActions.SetCredential:
+                case SoapActions.SetCredential:
                 {
                     var request = new SetCredentialRequest();
                     reader.ReadInto(request);
                     var response = await target.SetCredentialAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "SetCredentialResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "SetCredentialResponse");
                 }
-                case OnvifActions.ModifyCredential:
+                case SoapActions.ModifyCredential:
                 {
                     var request = new ModifyCredentialRequest();
                     reader.ReadInto(request);
                     var response = await target.ModifyCredentialAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "ModifyCredentialResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "ModifyCredentialResponse");
                 }
-                case OnvifActions.DeleteCredential:
+                case SoapActions.DeleteCredential:
                 {
                     var request = new DeleteCredentialRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteCredentialAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "DeleteCredentialResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "DeleteCredentialResponse");
                 }
-                case OnvifActions.GetCredentialState:
+                case SoapActions.GetCredentialState:
                 {
                     var request = new GetCredentialStateRequest();
                     reader.ReadInto(request);
                     var response = await target.GetCredentialStateAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "GetCredentialStateResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "GetCredentialStateResponse");
                 }
-                case OnvifActions.EnableCredential:
+                case SoapActions.EnableCredential:
                 {
                     var request = new EnableCredentialRequest();
                     reader.ReadInto(request);
                     var response = await target.EnableCredentialAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "EnableCredentialResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "EnableCredentialResponse");
                 }
-                case OnvifActions.DisableCredential:
+                case SoapActions.DisableCredential:
                 {
                     var request = new DisableCredentialRequest();
                     reader.ReadInto(request);
                     var response = await target.DisableCredentialAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "DisableCredentialResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "DisableCredentialResponse");
                 }
-                case OnvifActions.ResetAntipassbackViolation:
+                case SoapActions.ResetAntipassbackViolation:
                 {
                     var request = new ResetAntipassbackViolationRequest();
                     reader.ReadInto(request);
                     var response = await target.ResetAntipassbackViolationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "ResetAntipassbackViolationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "ResetAntipassbackViolationResponse");
                 }
-                case OnvifActions.GetCredentialIdentifiers:
+                case SoapActions.GetCredentialIdentifiers:
                 {
                     var request = new GetCredentialIdentifiersRequest();
                     reader.ReadInto(request);
                     var response = await target.GetCredentialIdentifiersAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "GetCredentialIdentifiersResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "GetCredentialIdentifiersResponse");
                 }
-                case OnvifActions.SetCredentialIdentifier:
+                case SoapActions.SetCredentialIdentifier:
                 {
                     var request = new SetCredentialIdentifierRequest();
                     reader.ReadInto(request);
                     var response = await target.SetCredentialIdentifierAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "SetCredentialIdentifierResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "SetCredentialIdentifierResponse");
                 }
-                case OnvifActions.DeleteCredentialIdentifier:
+                case SoapActions.DeleteCredentialIdentifier:
                 {
                     var request = new DeleteCredentialIdentifierRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteCredentialIdentifierAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "DeleteCredentialIdentifierResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "DeleteCredentialIdentifierResponse");
                 }
-                case OnvifActions.GetCredentialAccessProfiles:
+                case SoapActions.GetCredentialAccessProfiles:
                 {
                     var request = new GetCredentialAccessProfilesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetCredentialAccessProfilesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "GetCredentialAccessProfilesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "GetCredentialAccessProfilesResponse");
                 }
-                case OnvifActions.SetCredentialAccessProfiles:
+                case SoapActions.SetCredentialAccessProfiles:
                 {
                     var request = new SetCredentialAccessProfilesRequest();
                     reader.ReadInto(request);
                     var response = await target.SetCredentialAccessProfilesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "SetCredentialAccessProfilesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "SetCredentialAccessProfilesResponse");
                 }
-                case OnvifActions.DeleteCredentialAccessProfiles:
+                case SoapActions.DeleteCredentialAccessProfiles:
                 {
                     var request = new DeleteCredentialAccessProfilesRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteCredentialAccessProfilesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "DeleteCredentialAccessProfilesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "DeleteCredentialAccessProfilesResponse");
                 }
-                case OnvifActions.GetWhitelist:
+                case SoapActions.GetWhitelist:
                 {
                     var request = new GetWhitelistRequest();
                     reader.ReadInto(request);
                     var response = await target.GetWhitelistAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "GetWhitelistResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "GetWhitelistResponse");
                 }
-                case OnvifActions.AddToWhitelist:
+                case SoapActions.AddToWhitelist:
                 {
                     var request = new AddToWhitelistRequest();
                     reader.ReadInto(request);
                     var response = await target.AddToWhitelistAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "AddToWhitelistResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "AddToWhitelistResponse");
                 }
-                case OnvifActions.RemoveFromWhitelist:
+                case SoapActions.RemoveFromWhitelist:
                 {
                     var request = new RemoveFromWhitelistRequest();
                     reader.ReadInto(request);
                     var response = await target.RemoveFromWhitelistAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "RemoveFromWhitelistResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "RemoveFromWhitelistResponse");
                 }
-                case OnvifActions.DeleteWhitelist:
+                case SoapActions.DeleteWhitelist:
                 {
                     var request = new DeleteWhitelistRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteWhitelistAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "DeleteWhitelistResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "DeleteWhitelistResponse");
                 }
-                case OnvifActions.GetBlacklist:
+                case SoapActions.GetBlacklist:
                 {
                     var request = new GetBlacklistRequest();
                     reader.ReadInto(request);
                     var response = await target.GetBlacklistAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "GetBlacklistResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "GetBlacklistResponse");
                 }
-                case OnvifActions.AddToBlacklist:
+                case SoapActions.AddToBlacklist:
                 {
                     var request = new AddToBlacklistRequest();
                     reader.ReadInto(request);
                     var response = await target.AddToBlacklistAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "AddToBlacklistResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "AddToBlacklistResponse");
                 }
-                case OnvifActions.RemoveFromBlacklist:
+                case SoapActions.RemoveFromBlacklist:
                 {
                     var request = new RemoveFromBlacklistRequest();
                     reader.ReadInto(request);
                     var response = await target.RemoveFromBlacklistAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "RemoveFromBlacklistResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "RemoveFromBlacklistResponse");
                 }
-                case OnvifActions.DeleteBlacklist:
+                case SoapActions.DeleteBlacklist:
                 {
                     var request = new DeleteBlacklistRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteBlacklistAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "DeleteBlacklistResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/credential/wsdl", "DeleteBlacklistResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }

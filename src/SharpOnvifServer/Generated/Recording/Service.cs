@@ -16,7 +16,7 @@ namespace SharpOnvifServer.Recording
     public abstract class RecordingPortBase
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new RecordingPortDispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new RecordingPortDispatcher();
 
         /// <summary>
         /// Returns the capabilities of the recording service. The result is returned in a typed answer.
@@ -549,7 +549,7 @@ namespace SharpOnvifServer.Recording
     }
 
     /// <summary>Routes SOAP actions to <see cref="RecordingPortBase"/>.</summary>
-    internal sealed class RecordingPortDispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class RecordingPortDispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(RecordingPortBase); } }
 
@@ -557,31 +557,31 @@ namespace SharpOnvifServer.Recording
         {
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
-                case OnvifActions.CreateRecording:
-                case OnvifActions.DeleteRecording:
-                case OnvifActions.GetRecordings:
-                case OnvifActions.SetRecordingConfiguration:
-                case OnvifActions.GetRecordingConfiguration:
-                case OnvifActions.GetRecordingOptions:
-                case OnvifActions.CreateTrack:
-                case OnvifActions.DeleteTrack:
-                case OnvifActions.GetTrackConfiguration:
-                case OnvifActions.SetTrackConfiguration:
-                case OnvifActions.CreateRecordingJob:
-                case OnvifActions.DeleteRecordingJob:
-                case OnvifActions.GetRecordingJobs:
-                case OnvifActions.SetRecordingJobConfiguration:
-                case OnvifActions.GetRecordingJobConfiguration:
-                case OnvifActions.SetRecordingJobMode:
-                case OnvifActions.GetRecordingJobState:
-                case OnvifActions.ListRecordedSegments:
-                case OnvifActions.ExportRecordedSegments:
-                case OnvifActions.StopExportRecordedSegments:
-                case OnvifActions.ExportRecordedData:
-                case OnvifActions.StopExportRecordedData:
-                case OnvifActions.GetExportRecordedDataState:
-                case OnvifActions.OverrideSegmentDuration:
+                case SoapActions.GetServiceCapabilities:
+                case SoapActions.CreateRecording:
+                case SoapActions.DeleteRecording:
+                case SoapActions.GetRecordings:
+                case SoapActions.SetRecordingConfiguration:
+                case SoapActions.GetRecordingConfiguration:
+                case SoapActions.GetRecordingOptions:
+                case SoapActions.CreateTrack:
+                case SoapActions.DeleteTrack:
+                case SoapActions.GetTrackConfiguration:
+                case SoapActions.SetTrackConfiguration:
+                case SoapActions.CreateRecordingJob:
+                case SoapActions.DeleteRecordingJob:
+                case SoapActions.GetRecordingJobs:
+                case SoapActions.SetRecordingJobConfiguration:
+                case SoapActions.GetRecordingJobConfiguration:
+                case SoapActions.SetRecordingJobMode:
+                case SoapActions.GetRecordingJobState:
+                case SoapActions.ListRecordedSegments:
+                case SoapActions.ExportRecordedSegments:
+                case SoapActions.StopExportRecordedSegments:
+                case SoapActions.ExportRecordedData:
+                case SoapActions.StopExportRecordedData:
+                case SoapActions.GetExportRecordedDataState:
+                case SoapActions.OverrideSegmentDuration:
                     return true;
                 default:
                     return false;
@@ -595,175 +595,175 @@ namespace SharpOnvifServer.Recording
                 case "GetServiceCapabilities":
                     if (ns == "http://www.onvif.org/ver10/recording/wsdl")
                     {
-                        action = OnvifActions.GetServiceCapabilities;
+                        action = SoapActions.GetServiceCapabilities;
                         return true;
                     }
                     break;
                 case "CreateRecording":
                     if (ns == "http://www.onvif.org/ver10/recording/wsdl")
                     {
-                        action = OnvifActions.CreateRecording;
+                        action = SoapActions.CreateRecording;
                         return true;
                     }
                     break;
                 case "DeleteRecording":
                     if (ns == "http://www.onvif.org/ver10/recording/wsdl")
                     {
-                        action = OnvifActions.DeleteRecording;
+                        action = SoapActions.DeleteRecording;
                         return true;
                     }
                     break;
                 case "GetRecordings":
                     if (ns == "http://www.onvif.org/ver10/recording/wsdl")
                     {
-                        action = OnvifActions.GetRecordings;
+                        action = SoapActions.GetRecordings;
                         return true;
                     }
                     break;
                 case "SetRecordingConfiguration":
                     if (ns == "http://www.onvif.org/ver10/recording/wsdl")
                     {
-                        action = OnvifActions.SetRecordingConfiguration;
+                        action = SoapActions.SetRecordingConfiguration;
                         return true;
                     }
                     break;
                 case "GetRecordingConfiguration":
                     if (ns == "http://www.onvif.org/ver10/recording/wsdl")
                     {
-                        action = OnvifActions.GetRecordingConfiguration;
+                        action = SoapActions.GetRecordingConfiguration;
                         return true;
                     }
                     break;
                 case "GetRecordingOptions":
                     if (ns == "http://www.onvif.org/ver10/recording/wsdl")
                     {
-                        action = OnvifActions.GetRecordingOptions;
+                        action = SoapActions.GetRecordingOptions;
                         return true;
                     }
                     break;
                 case "CreateTrack":
                     if (ns == "http://www.onvif.org/ver10/recording/wsdl")
                     {
-                        action = OnvifActions.CreateTrack;
+                        action = SoapActions.CreateTrack;
                         return true;
                     }
                     break;
                 case "DeleteTrack":
                     if (ns == "http://www.onvif.org/ver10/recording/wsdl")
                     {
-                        action = OnvifActions.DeleteTrack;
+                        action = SoapActions.DeleteTrack;
                         return true;
                     }
                     break;
                 case "GetTrackConfiguration":
                     if (ns == "http://www.onvif.org/ver10/recording/wsdl")
                     {
-                        action = OnvifActions.GetTrackConfiguration;
+                        action = SoapActions.GetTrackConfiguration;
                         return true;
                     }
                     break;
                 case "SetTrackConfiguration":
                     if (ns == "http://www.onvif.org/ver10/recording/wsdl")
                     {
-                        action = OnvifActions.SetTrackConfiguration;
+                        action = SoapActions.SetTrackConfiguration;
                         return true;
                     }
                     break;
                 case "CreateRecordingJob":
                     if (ns == "http://www.onvif.org/ver10/recording/wsdl")
                     {
-                        action = OnvifActions.CreateRecordingJob;
+                        action = SoapActions.CreateRecordingJob;
                         return true;
                     }
                     break;
                 case "DeleteRecordingJob":
                     if (ns == "http://www.onvif.org/ver10/recording/wsdl")
                     {
-                        action = OnvifActions.DeleteRecordingJob;
+                        action = SoapActions.DeleteRecordingJob;
                         return true;
                     }
                     break;
                 case "GetRecordingJobs":
                     if (ns == "http://www.onvif.org/ver10/recording/wsdl")
                     {
-                        action = OnvifActions.GetRecordingJobs;
+                        action = SoapActions.GetRecordingJobs;
                         return true;
                     }
                     break;
                 case "SetRecordingJobConfiguration":
                     if (ns == "http://www.onvif.org/ver10/recording/wsdl")
                     {
-                        action = OnvifActions.SetRecordingJobConfiguration;
+                        action = SoapActions.SetRecordingJobConfiguration;
                         return true;
                     }
                     break;
                 case "GetRecordingJobConfiguration":
                     if (ns == "http://www.onvif.org/ver10/recording/wsdl")
                     {
-                        action = OnvifActions.GetRecordingJobConfiguration;
+                        action = SoapActions.GetRecordingJobConfiguration;
                         return true;
                     }
                     break;
                 case "SetRecordingJobMode":
                     if (ns == "http://www.onvif.org/ver10/recording/wsdl")
                     {
-                        action = OnvifActions.SetRecordingJobMode;
+                        action = SoapActions.SetRecordingJobMode;
                         return true;
                     }
                     break;
                 case "GetRecordingJobState":
                     if (ns == "http://www.onvif.org/ver10/recording/wsdl")
                     {
-                        action = OnvifActions.GetRecordingJobState;
+                        action = SoapActions.GetRecordingJobState;
                         return true;
                     }
                     break;
                 case "ListRecordedSegments":
                     if (ns == "http://www.onvif.org/ver10/recording/wsdl")
                     {
-                        action = OnvifActions.ListRecordedSegments;
+                        action = SoapActions.ListRecordedSegments;
                         return true;
                     }
                     break;
                 case "ExportRecordedSegments":
                     if (ns == "http://www.onvif.org/ver10/recording/wsdl")
                     {
-                        action = OnvifActions.ExportRecordedSegments;
+                        action = SoapActions.ExportRecordedSegments;
                         return true;
                     }
                     break;
                 case "StopExportRecordedSegments":
                     if (ns == "http://www.onvif.org/ver10/recording/wsdl")
                     {
-                        action = OnvifActions.StopExportRecordedSegments;
+                        action = SoapActions.StopExportRecordedSegments;
                         return true;
                     }
                     break;
                 case "ExportRecordedData":
                     if (ns == "http://www.onvif.org/ver10/recording/wsdl")
                     {
-                        action = OnvifActions.ExportRecordedData;
+                        action = SoapActions.ExportRecordedData;
                         return true;
                     }
                     break;
                 case "StopExportRecordedData":
                     if (ns == "http://www.onvif.org/ver10/recording/wsdl")
                     {
-                        action = OnvifActions.StopExportRecordedData;
+                        action = SoapActions.StopExportRecordedData;
                         return true;
                     }
                     break;
                 case "GetExportRecordedDataState":
                     if (ns == "http://www.onvif.org/ver10/recording/wsdl")
                     {
-                        action = OnvifActions.GetExportRecordedDataState;
+                        action = SoapActions.GetExportRecordedDataState;
                         return true;
                     }
                     break;
                 case "OverrideSegmentDuration":
                     if (ns == "http://www.onvif.org/ver10/recording/wsdl")
                     {
-                        action = OnvifActions.OverrideSegmentDuration;
+                        action = SoapActions.OverrideSegmentDuration;
                         return true;
                     }
                     break;
@@ -772,7 +772,7 @@ namespace SharpOnvifServer.Recording
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             RecordingPortBase target = (RecordingPortBase)service;
@@ -780,187 +780,187 @@ namespace SharpOnvifServer.Recording
 
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
+                case SoapActions.GetServiceCapabilities:
                 {
                     var request = new GetServiceCapabilitiesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetServiceCapabilitiesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "GetServiceCapabilitiesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "GetServiceCapabilitiesResponse");
                 }
-                case OnvifActions.CreateRecording:
+                case SoapActions.CreateRecording:
                 {
                     var request = new CreateRecordingRequest();
                     reader.ReadInto(request);
                     var response = await target.CreateRecordingAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "CreateRecordingResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "CreateRecordingResponse");
                 }
-                case OnvifActions.DeleteRecording:
+                case SoapActions.DeleteRecording:
                 {
                     var request = new DeleteRecordingRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteRecordingAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "DeleteRecordingResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "DeleteRecordingResponse");
                 }
-                case OnvifActions.GetRecordings:
+                case SoapActions.GetRecordings:
                 {
                     var request = new GetRecordingsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetRecordingsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "GetRecordingsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "GetRecordingsResponse");
                 }
-                case OnvifActions.SetRecordingConfiguration:
+                case SoapActions.SetRecordingConfiguration:
                 {
                     var request = new SetRecordingConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.SetRecordingConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "SetRecordingConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "SetRecordingConfigurationResponse");
                 }
-                case OnvifActions.GetRecordingConfiguration:
+                case SoapActions.GetRecordingConfiguration:
                 {
                     var request = new GetRecordingConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.GetRecordingConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "GetRecordingConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "GetRecordingConfigurationResponse");
                 }
-                case OnvifActions.GetRecordingOptions:
+                case SoapActions.GetRecordingOptions:
                 {
                     var request = new GetRecordingOptionsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetRecordingOptionsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "GetRecordingOptionsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "GetRecordingOptionsResponse");
                 }
-                case OnvifActions.CreateTrack:
+                case SoapActions.CreateTrack:
                 {
                     var request = new CreateTrackRequest();
                     reader.ReadInto(request);
                     var response = await target.CreateTrackAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "CreateTrackResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "CreateTrackResponse");
                 }
-                case OnvifActions.DeleteTrack:
+                case SoapActions.DeleteTrack:
                 {
                     var request = new DeleteTrackRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteTrackAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "DeleteTrackResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "DeleteTrackResponse");
                 }
-                case OnvifActions.GetTrackConfiguration:
+                case SoapActions.GetTrackConfiguration:
                 {
                     var request = new GetTrackConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.GetTrackConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "GetTrackConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "GetTrackConfigurationResponse");
                 }
-                case OnvifActions.SetTrackConfiguration:
+                case SoapActions.SetTrackConfiguration:
                 {
                     var request = new SetTrackConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.SetTrackConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "SetTrackConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "SetTrackConfigurationResponse");
                 }
-                case OnvifActions.CreateRecordingJob:
+                case SoapActions.CreateRecordingJob:
                 {
                     var request = new CreateRecordingJobRequest();
                     reader.ReadInto(request);
                     var response = await target.CreateRecordingJobAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "CreateRecordingJobResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "CreateRecordingJobResponse");
                 }
-                case OnvifActions.DeleteRecordingJob:
+                case SoapActions.DeleteRecordingJob:
                 {
                     var request = new DeleteRecordingJobRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteRecordingJobAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "DeleteRecordingJobResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "DeleteRecordingJobResponse");
                 }
-                case OnvifActions.GetRecordingJobs:
+                case SoapActions.GetRecordingJobs:
                 {
                     var request = new GetRecordingJobsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetRecordingJobsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "GetRecordingJobsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "GetRecordingJobsResponse");
                 }
-                case OnvifActions.SetRecordingJobConfiguration:
+                case SoapActions.SetRecordingJobConfiguration:
                 {
                     var request = new SetRecordingJobConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.SetRecordingJobConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "SetRecordingJobConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "SetRecordingJobConfigurationResponse");
                 }
-                case OnvifActions.GetRecordingJobConfiguration:
+                case SoapActions.GetRecordingJobConfiguration:
                 {
                     var request = new GetRecordingJobConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.GetRecordingJobConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "GetRecordingJobConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "GetRecordingJobConfigurationResponse");
                 }
-                case OnvifActions.SetRecordingJobMode:
+                case SoapActions.SetRecordingJobMode:
                 {
                     var request = new SetRecordingJobModeRequest();
                     reader.ReadInto(request);
                     var response = await target.SetRecordingJobModeAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "SetRecordingJobModeResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "SetRecordingJobModeResponse");
                 }
-                case OnvifActions.GetRecordingJobState:
+                case SoapActions.GetRecordingJobState:
                 {
                     var request = new GetRecordingJobStateRequest();
                     reader.ReadInto(request);
                     var response = await target.GetRecordingJobStateAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "GetRecordingJobStateResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "GetRecordingJobStateResponse");
                 }
-                case OnvifActions.ListRecordedSegments:
+                case SoapActions.ListRecordedSegments:
                 {
                     var request = new ListRecordedSegmentsRequest();
                     reader.ReadInto(request);
                     var response = await target.ListRecordedSegmentsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "ListRecordedSegmentsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "ListRecordedSegmentsResponse");
                 }
-                case OnvifActions.ExportRecordedSegments:
+                case SoapActions.ExportRecordedSegments:
                 {
                     var request = new ExportRecordedSegmentsRequest();
                     reader.ReadInto(request);
                     var response = await target.ExportRecordedSegmentsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "ExportRecordedSegmentsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "ExportRecordedSegmentsResponse");
                 }
-                case OnvifActions.StopExportRecordedSegments:
+                case SoapActions.StopExportRecordedSegments:
                 {
                     var request = new StopExportRecordedSegmentsRequest();
                     reader.ReadInto(request);
                     var response = await target.StopExportRecordedSegmentsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "StopExportRecordedSegmentsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "StopExportRecordedSegmentsResponse");
                 }
-                case OnvifActions.ExportRecordedData:
+                case SoapActions.ExportRecordedData:
                 {
                     var request = new ExportRecordedDataRequest();
                     reader.ReadInto(request);
                     var response = await target.ExportRecordedDataAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "ExportRecordedDataResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "ExportRecordedDataResponse");
                 }
-                case OnvifActions.StopExportRecordedData:
+                case SoapActions.StopExportRecordedData:
                 {
                     var request = new StopExportRecordedDataRequest();
                     reader.ReadInto(request);
                     var response = await target.StopExportRecordedDataAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "StopExportRecordedDataResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "StopExportRecordedDataResponse");
                 }
-                case OnvifActions.GetExportRecordedDataState:
+                case SoapActions.GetExportRecordedDataState:
                 {
                     var request = new GetExportRecordedDataStateRequest();
                     reader.ReadInto(request);
                     var response = await target.GetExportRecordedDataStateAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "GetExportRecordedDataStateResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "GetExportRecordedDataStateResponse");
                 }
-                case OnvifActions.OverrideSegmentDuration:
+                case SoapActions.OverrideSegmentDuration:
                 {
                     var request = new OverrideSegmentDurationRequest();
                     reader.ReadInto(request);
                     var response = await target.OverrideSegmentDurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "OverrideSegmentDurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/recording/wsdl", "OverrideSegmentDurationResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }

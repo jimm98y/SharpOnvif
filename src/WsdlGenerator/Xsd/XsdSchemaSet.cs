@@ -4,7 +4,7 @@ namespace WsdlGenerator.Xsd;
 
 /// <summary>
 /// The union of every schema reachable from the WSDLs being generated, indexed for lookup by
-/// qualified name. ONVIF services import the same shared schemas (onvif.xsd above all), so
+/// qualified name. Services of one family import the same shared schemas, so
 /// duplicate definitions of the same name are expected and are required to be identical.
 /// </summary>
 internal sealed class XsdSchemaSet

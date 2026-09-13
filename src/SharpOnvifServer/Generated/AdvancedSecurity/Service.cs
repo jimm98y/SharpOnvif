@@ -16,7 +16,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     public abstract class AdvancedSecurityServiceBase
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new AdvancedSecurityServiceDispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new AdvancedSecurityServiceDispatcher();
 
         /// <summary>
         /// Returns the capabilities of the security configuraiton service. The result is returned in a typed
@@ -41,7 +41,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     }
 
     /// <summary>Routes SOAP actions to <see cref="AdvancedSecurityServiceBase"/>.</summary>
-    internal sealed class AdvancedSecurityServiceDispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class AdvancedSecurityServiceDispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(AdvancedSecurityServiceBase); } }
 
@@ -49,7 +49,7 @@ namespace SharpOnvifServer.AdvancedSecurity
         {
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
+                case SoapActions.GetServiceCapabilities:
                     return true;
                 default:
                     return false;
@@ -63,7 +63,7 @@ namespace SharpOnvifServer.AdvancedSecurity
                 case "GetServiceCapabilities":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetServiceCapabilities;
+                        action = SoapActions.GetServiceCapabilities;
                         return true;
                     }
                     break;
@@ -72,7 +72,7 @@ namespace SharpOnvifServer.AdvancedSecurity
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             AdvancedSecurityServiceBase target = (AdvancedSecurityServiceBase)service;
@@ -80,19 +80,19 @@ namespace SharpOnvifServer.AdvancedSecurity
 
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
+                case SoapActions.GetServiceCapabilities:
                 {
                     var request = new GetServiceCapabilitiesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetServiceCapabilitiesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetServiceCapabilitiesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetServiceCapabilitiesResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -104,7 +104,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     public abstract class AuthorizationServerBase
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new AuthorizationServerDispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new AuthorizationServerDispatcher();
 
         /// <summary>
         /// This operation lists all existing authorization server configurations for the device.
@@ -190,7 +190,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     }
 
     /// <summary>Routes SOAP actions to <see cref="AuthorizationServerBase"/>.</summary>
-    internal sealed class AuthorizationServerDispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class AuthorizationServerDispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(AuthorizationServerBase); } }
 
@@ -198,10 +198,10 @@ namespace SharpOnvifServer.AdvancedSecurity
         {
             switch (action)
             {
-                case OnvifActions.GetAuthorizationServerConfigurations:
-                case OnvifActions.CreateAuthorizationServerConfiguration:
-                case OnvifActions.SetAuthorizationServerConfiguration:
-                case OnvifActions.DeleteAuthorizationServerConfiguration:
+                case SoapActions.GetAuthorizationServerConfigurations:
+                case SoapActions.CreateAuthorizationServerConfiguration:
+                case SoapActions.SetAuthorizationServerConfiguration:
+                case SoapActions.DeleteAuthorizationServerConfiguration:
                     return true;
                 default:
                     return false;
@@ -215,28 +215,28 @@ namespace SharpOnvifServer.AdvancedSecurity
                 case "GetAuthorizationServerConfigurations":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetAuthorizationServerConfigurations;
+                        action = SoapActions.GetAuthorizationServerConfigurations;
                         return true;
                     }
                     break;
                 case "CreateAuthorizationServerConfiguration":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.CreateAuthorizationServerConfiguration;
+                        action = SoapActions.CreateAuthorizationServerConfiguration;
                         return true;
                     }
                     break;
                 case "SetAuthorizationServerConfiguration":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.SetAuthorizationServerConfiguration;
+                        action = SoapActions.SetAuthorizationServerConfiguration;
                         return true;
                     }
                     break;
                 case "DeleteAuthorizationServerConfiguration":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.DeleteAuthorizationServerConfiguration;
+                        action = SoapActions.DeleteAuthorizationServerConfiguration;
                         return true;
                     }
                     break;
@@ -245,7 +245,7 @@ namespace SharpOnvifServer.AdvancedSecurity
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             AuthorizationServerBase target = (AuthorizationServerBase)service;
@@ -253,40 +253,40 @@ namespace SharpOnvifServer.AdvancedSecurity
 
             switch (action)
             {
-                case OnvifActions.GetAuthorizationServerConfigurations:
+                case SoapActions.GetAuthorizationServerConfigurations:
                 {
                     var request = new GetAuthorizationServerConfigurationsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAuthorizationServerConfigurationsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAuthorizationServerConfigurationsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAuthorizationServerConfigurationsResponse");
                 }
-                case OnvifActions.CreateAuthorizationServerConfiguration:
+                case SoapActions.CreateAuthorizationServerConfiguration:
                 {
                     var request = new CreateAuthorizationServerConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.CreateAuthorizationServerConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateAuthorizationServerConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateAuthorizationServerConfigurationResponse");
                 }
-                case OnvifActions.SetAuthorizationServerConfiguration:
+                case SoapActions.SetAuthorizationServerConfiguration:
                 {
                     var request = new SetAuthorizationServerConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.SetAuthorizationServerConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetAuthorizationServerConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetAuthorizationServerConfigurationResponse");
                 }
-                case OnvifActions.DeleteAuthorizationServerConfiguration:
+                case SoapActions.DeleteAuthorizationServerConfiguration:
                 {
                     var request = new DeleteAuthorizationServerConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteAuthorizationServerConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteAuthorizationServerConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteAuthorizationServerConfigurationResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -298,7 +298,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     public abstract class Dot1XBase
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new Dot1XDispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new Dot1XDispatcher();
 
         /// <summary>
         /// This operation adds an IEEE 802.1X configuration to the device. Configurations are uniquely
@@ -508,7 +508,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     }
 
     /// <summary>Routes SOAP actions to <see cref="Dot1XBase"/>.</summary>
-    internal sealed class Dot1XDispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class Dot1XDispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(Dot1XBase); } }
 
@@ -516,13 +516,13 @@ namespace SharpOnvifServer.AdvancedSecurity
         {
             switch (action)
             {
-                case OnvifActions.AddDot1XConfiguration:
-                case OnvifActions.GetAllDot1XConfigurations:
-                case OnvifActions.GetDot1XConfiguration:
-                case OnvifActions.DeleteDot1XConfiguration:
-                case OnvifActions.SetNetworkInterfaceDot1XConfiguration:
-                case OnvifActions.GetNetworkInterfaceDot1XConfiguration:
-                case OnvifActions.DeleteNetworkInterfaceDot1XConfiguration:
+                case SoapActions.AddDot1XConfiguration:
+                case SoapActions.GetAllDot1XConfigurations:
+                case SoapActions.GetDot1XConfiguration:
+                case SoapActions.DeleteDot1XConfiguration:
+                case SoapActions.SetNetworkInterfaceDot1XConfiguration:
+                case SoapActions.GetNetworkInterfaceDot1XConfiguration:
+                case SoapActions.DeleteNetworkInterfaceDot1XConfiguration:
                     return true;
                 default:
                     return false;
@@ -536,49 +536,49 @@ namespace SharpOnvifServer.AdvancedSecurity
                 case "AddDot1XConfiguration":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.AddDot1XConfiguration;
+                        action = SoapActions.AddDot1XConfiguration;
                         return true;
                     }
                     break;
                 case "GetAllDot1XConfigurations":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetAllDot1XConfigurations;
+                        action = SoapActions.GetAllDot1XConfigurations;
                         return true;
                     }
                     break;
                 case "GetDot1XConfiguration":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetDot1XConfiguration;
+                        action = SoapActions.GetDot1XConfiguration;
                         return true;
                     }
                     break;
                 case "DeleteDot1XConfiguration":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.DeleteDot1XConfiguration;
+                        action = SoapActions.DeleteDot1XConfiguration;
                         return true;
                     }
                     break;
                 case "SetNetworkInterfaceDot1XConfiguration":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.SetNetworkInterfaceDot1XConfiguration;
+                        action = SoapActions.SetNetworkInterfaceDot1XConfiguration;
                         return true;
                     }
                     break;
                 case "GetNetworkInterfaceDot1XConfiguration":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetNetworkInterfaceDot1XConfiguration;
+                        action = SoapActions.GetNetworkInterfaceDot1XConfiguration;
                         return true;
                     }
                     break;
                 case "DeleteNetworkInterfaceDot1XConfiguration":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.DeleteNetworkInterfaceDot1XConfiguration;
+                        action = SoapActions.DeleteNetworkInterfaceDot1XConfiguration;
                         return true;
                     }
                     break;
@@ -587,7 +587,7 @@ namespace SharpOnvifServer.AdvancedSecurity
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             Dot1XBase target = (Dot1XBase)service;
@@ -595,61 +595,61 @@ namespace SharpOnvifServer.AdvancedSecurity
 
             switch (action)
             {
-                case OnvifActions.AddDot1XConfiguration:
+                case SoapActions.AddDot1XConfiguration:
                 {
                     var request = new AddDot1XConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.AddDot1XConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "AddDot1XConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "AddDot1XConfigurationResponse");
                 }
-                case OnvifActions.GetAllDot1XConfigurations:
+                case SoapActions.GetAllDot1XConfigurations:
                 {
                     var request = new GetAllDot1XConfigurationsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAllDot1XConfigurationsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllDot1XConfigurationsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllDot1XConfigurationsResponse");
                 }
-                case OnvifActions.GetDot1XConfiguration:
+                case SoapActions.GetDot1XConfiguration:
                 {
                     var request = new GetDot1XConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.GetDot1XConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetDot1XConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetDot1XConfigurationResponse");
                 }
-                case OnvifActions.DeleteDot1XConfiguration:
+                case SoapActions.DeleteDot1XConfiguration:
                 {
                     var request = new DeleteDot1XConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteDot1XConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteDot1XConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteDot1XConfigurationResponse");
                 }
-                case OnvifActions.SetNetworkInterfaceDot1XConfiguration:
+                case SoapActions.SetNetworkInterfaceDot1XConfiguration:
                 {
                     var request = new SetNetworkInterfaceDot1XConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.SetNetworkInterfaceDot1XConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetNetworkInterfaceDot1XConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetNetworkInterfaceDot1XConfigurationResponse");
                 }
-                case OnvifActions.GetNetworkInterfaceDot1XConfiguration:
+                case SoapActions.GetNetworkInterfaceDot1XConfiguration:
                 {
                     var request = new GetNetworkInterfaceDot1XConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.GetNetworkInterfaceDot1XConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetNetworkInterfaceDot1XConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetNetworkInterfaceDot1XConfigurationResponse");
                 }
-                case OnvifActions.DeleteNetworkInterfaceDot1XConfiguration:
+                case SoapActions.DeleteNetworkInterfaceDot1XConfiguration:
                 {
                     var request = new DeleteNetworkInterfaceDot1XConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteNetworkInterfaceDot1XConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteNetworkInterfaceDot1XConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteNetworkInterfaceDot1XConfigurationResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -661,7 +661,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     public abstract class JWTBase
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new JWTDispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new JWTDispatcher();
 
         /// <summary>
         /// This operation returns the parameters of the JWT authorization used by the device.
@@ -705,7 +705,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     }
 
     /// <summary>Routes SOAP actions to <see cref="JWTBase"/>.</summary>
-    internal sealed class JWTDispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class JWTDispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(JWTBase); } }
 
@@ -713,8 +713,8 @@ namespace SharpOnvifServer.AdvancedSecurity
         {
             switch (action)
             {
-                case OnvifActions.GetJWTConfiguration:
-                case OnvifActions.SetJWTConfiguration:
+                case SoapActions.GetJWTConfiguration:
+                case SoapActions.SetJWTConfiguration:
                     return true;
                 default:
                     return false;
@@ -728,14 +728,14 @@ namespace SharpOnvifServer.AdvancedSecurity
                 case "GetJWTConfiguration":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetJWTConfiguration;
+                        action = SoapActions.GetJWTConfiguration;
                         return true;
                     }
                     break;
                 case "SetJWTConfiguration":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.SetJWTConfiguration;
+                        action = SoapActions.SetJWTConfiguration;
                         return true;
                     }
                     break;
@@ -744,7 +744,7 @@ namespace SharpOnvifServer.AdvancedSecurity
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             JWTBase target = (JWTBase)service;
@@ -752,26 +752,26 @@ namespace SharpOnvifServer.AdvancedSecurity
 
             switch (action)
             {
-                case OnvifActions.GetJWTConfiguration:
+                case SoapActions.GetJWTConfiguration:
                 {
                     var request = new GetJWTConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.GetJWTConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetJWTConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetJWTConfigurationResponse");
                 }
-                case OnvifActions.SetJWTConfiguration:
+                case SoapActions.SetJWTConfiguration:
                 {
                     var request = new SetJWTConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.SetJWTConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetJWTConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetJWTConfigurationResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -783,7 +783,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     public abstract class KeystoreBase
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new KeystoreDispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new KeystoreDispatcher();
 
         /// <summary>
         /// This operation triggers the asynchronous generation of an RSA key pair of a particular key length
@@ -1609,7 +1609,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     }
 
     /// <summary>Routes SOAP actions to <see cref="KeystoreBase"/>.</summary>
-    internal sealed class KeystoreDispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class KeystoreDispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(KeystoreBase); } }
 
@@ -1617,37 +1617,37 @@ namespace SharpOnvifServer.AdvancedSecurity
         {
             switch (action)
             {
-                case OnvifActions.CreateRSAKeyPair:
-                case OnvifActions.CreateECCKeyPair:
-                case OnvifActions.UploadKeyPairInPKCS8:
-                case OnvifActions.UploadCertificateWithPrivateKeyInPKCS12:
-                case OnvifActions.GetKeyStatus:
-                case OnvifActions.GetPrivateKeyStatus:
-                case OnvifActions.GetAllKeys:
-                case OnvifActions.DeleteKey:
-                case OnvifActions.CreatePKCS10CSR:
-                case OnvifActions.CreateSelfSignedCertificate:
-                case OnvifActions.UploadCertificate:
-                case OnvifActions.GetCertificate:
-                case OnvifActions.GetAllCertificates:
-                case OnvifActions.DeleteCertificate:
-                case OnvifActions.CreateCertificationPath:
-                case OnvifActions.GetCertificationPath:
-                case OnvifActions.GetAllCertificationPaths:
-                case OnvifActions.SetCertificationPath:
-                case OnvifActions.DeleteCertificationPath:
-                case OnvifActions.UploadPassphrase:
-                case OnvifActions.GetAllPassphrases:
-                case OnvifActions.DeletePassphrase:
-                case OnvifActions.UploadCRL:
-                case OnvifActions.GetCRL:
-                case OnvifActions.GetAllCRLs:
-                case OnvifActions.DeleteCRL:
-                case OnvifActions.CreateCertPathValidationPolicy:
-                case OnvifActions.GetCertPathValidationPolicy:
-                case OnvifActions.GetAllCertPathValidationPolicies:
-                case OnvifActions.SetCertPathValidationPolicy:
-                case OnvifActions.DeleteCertPathValidationPolicy:
+                case SoapActions.CreateRSAKeyPair:
+                case SoapActions.CreateECCKeyPair:
+                case SoapActions.UploadKeyPairInPKCS8:
+                case SoapActions.UploadCertificateWithPrivateKeyInPKCS12:
+                case SoapActions.GetKeyStatus:
+                case SoapActions.GetPrivateKeyStatus:
+                case SoapActions.GetAllKeys:
+                case SoapActions.DeleteKey:
+                case SoapActions.CreatePKCS10CSR:
+                case SoapActions.CreateSelfSignedCertificate:
+                case SoapActions.UploadCertificate:
+                case SoapActions.GetCertificate:
+                case SoapActions.GetAllCertificates:
+                case SoapActions.DeleteCertificate:
+                case SoapActions.CreateCertificationPath:
+                case SoapActions.GetCertificationPath:
+                case SoapActions.GetAllCertificationPaths:
+                case SoapActions.SetCertificationPath:
+                case SoapActions.DeleteCertificationPath:
+                case SoapActions.UploadPassphrase:
+                case SoapActions.GetAllPassphrases:
+                case SoapActions.DeletePassphrase:
+                case SoapActions.UploadCRL:
+                case SoapActions.GetCRL:
+                case SoapActions.GetAllCRLs:
+                case SoapActions.DeleteCRL:
+                case SoapActions.CreateCertPathValidationPolicy:
+                case SoapActions.GetCertPathValidationPolicy:
+                case SoapActions.GetAllCertPathValidationPolicies:
+                case SoapActions.SetCertPathValidationPolicy:
+                case SoapActions.DeleteCertPathValidationPolicy:
                     return true;
                 default:
                     return false;
@@ -1661,217 +1661,217 @@ namespace SharpOnvifServer.AdvancedSecurity
                 case "CreateRSAKeyPair":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.CreateRSAKeyPair;
+                        action = SoapActions.CreateRSAKeyPair;
                         return true;
                     }
                     break;
                 case "CreateECCKeyPair":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.CreateECCKeyPair;
+                        action = SoapActions.CreateECCKeyPair;
                         return true;
                     }
                     break;
                 case "UploadKeyPairInPKCS8":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.UploadKeyPairInPKCS8;
+                        action = SoapActions.UploadKeyPairInPKCS8;
                         return true;
                     }
                     break;
                 case "UploadCertificateWithPrivateKeyInPKCS12":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.UploadCertificateWithPrivateKeyInPKCS12;
+                        action = SoapActions.UploadCertificateWithPrivateKeyInPKCS12;
                         return true;
                     }
                     break;
                 case "GetKeyStatus":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetKeyStatus;
+                        action = SoapActions.GetKeyStatus;
                         return true;
                     }
                     break;
                 case "GetPrivateKeyStatus":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetPrivateKeyStatus;
+                        action = SoapActions.GetPrivateKeyStatus;
                         return true;
                     }
                     break;
                 case "GetAllKeys":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetAllKeys;
+                        action = SoapActions.GetAllKeys;
                         return true;
                     }
                     break;
                 case "DeleteKey":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.DeleteKey;
+                        action = SoapActions.DeleteKey;
                         return true;
                     }
                     break;
                 case "CreatePKCS10CSR":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.CreatePKCS10CSR;
+                        action = SoapActions.CreatePKCS10CSR;
                         return true;
                     }
                     break;
                 case "CreateSelfSignedCertificate":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.CreateSelfSignedCertificate;
+                        action = SoapActions.CreateSelfSignedCertificate;
                         return true;
                     }
                     break;
                 case "UploadCertificate":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.UploadCertificate;
+                        action = SoapActions.UploadCertificate;
                         return true;
                     }
                     break;
                 case "GetCertificate":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetCertificate;
+                        action = SoapActions.GetCertificate;
                         return true;
                     }
                     break;
                 case "GetAllCertificates":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetAllCertificates;
+                        action = SoapActions.GetAllCertificates;
                         return true;
                     }
                     break;
                 case "DeleteCertificate":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.DeleteCertificate;
+                        action = SoapActions.DeleteCertificate;
                         return true;
                     }
                     break;
                 case "CreateCertificationPath":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.CreateCertificationPath;
+                        action = SoapActions.CreateCertificationPath;
                         return true;
                     }
                     break;
                 case "GetCertificationPath":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetCertificationPath;
+                        action = SoapActions.GetCertificationPath;
                         return true;
                     }
                     break;
                 case "GetAllCertificationPaths":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetAllCertificationPaths;
+                        action = SoapActions.GetAllCertificationPaths;
                         return true;
                     }
                     break;
                 case "SetCertificationPath":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.SetCertificationPath;
+                        action = SoapActions.SetCertificationPath;
                         return true;
                     }
                     break;
                 case "DeleteCertificationPath":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.DeleteCertificationPath;
+                        action = SoapActions.DeleteCertificationPath;
                         return true;
                     }
                     break;
                 case "UploadPassphrase":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.UploadPassphrase;
+                        action = SoapActions.UploadPassphrase;
                         return true;
                     }
                     break;
                 case "GetAllPassphrases":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetAllPassphrases;
+                        action = SoapActions.GetAllPassphrases;
                         return true;
                     }
                     break;
                 case "DeletePassphrase":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.DeletePassphrase;
+                        action = SoapActions.DeletePassphrase;
                         return true;
                     }
                     break;
                 case "UploadCRL":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.UploadCRL;
+                        action = SoapActions.UploadCRL;
                         return true;
                     }
                     break;
                 case "GetCRL":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetCRL;
+                        action = SoapActions.GetCRL;
                         return true;
                     }
                     break;
                 case "GetAllCRLs":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetAllCRLs;
+                        action = SoapActions.GetAllCRLs;
                         return true;
                     }
                     break;
                 case "DeleteCRL":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.DeleteCRL;
+                        action = SoapActions.DeleteCRL;
                         return true;
                     }
                     break;
                 case "CreateCertPathValidationPolicy":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.CreateCertPathValidationPolicy;
+                        action = SoapActions.CreateCertPathValidationPolicy;
                         return true;
                     }
                     break;
                 case "GetCertPathValidationPolicy":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetCertPathValidationPolicy;
+                        action = SoapActions.GetCertPathValidationPolicy;
                         return true;
                     }
                     break;
                 case "GetAllCertPathValidationPolicies":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetAllCertPathValidationPolicies;
+                        action = SoapActions.GetAllCertPathValidationPolicies;
                         return true;
                     }
                     break;
                 case "SetCertPathValidationPolicy":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.SetCertPathValidationPolicy;
+                        action = SoapActions.SetCertPathValidationPolicy;
                         return true;
                     }
                     break;
                 case "DeleteCertPathValidationPolicy":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.DeleteCertPathValidationPolicy;
+                        action = SoapActions.DeleteCertPathValidationPolicy;
                         return true;
                     }
                     break;
@@ -1880,7 +1880,7 @@ namespace SharpOnvifServer.AdvancedSecurity
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             KeystoreBase target = (KeystoreBase)service;
@@ -1888,229 +1888,229 @@ namespace SharpOnvifServer.AdvancedSecurity
 
             switch (action)
             {
-                case OnvifActions.CreateRSAKeyPair:
+                case SoapActions.CreateRSAKeyPair:
                 {
                     var request = new CreateRSAKeyPairRequest();
                     reader.ReadInto(request);
                     var response = await target.CreateRSAKeyPairAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateRSAKeyPairResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateRSAKeyPairResponse");
                 }
-                case OnvifActions.CreateECCKeyPair:
+                case SoapActions.CreateECCKeyPair:
                 {
                     var request = new CreateECCKeyPairRequest();
                     reader.ReadInto(request);
                     var response = await target.CreateECCKeyPairAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateECCKeyPairResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateECCKeyPairResponse");
                 }
-                case OnvifActions.UploadKeyPairInPKCS8:
+                case SoapActions.UploadKeyPairInPKCS8:
                 {
                     var request = new UploadKeyPairInPKCS8Request();
                     reader.ReadInto(request);
                     var response = await target.UploadKeyPairInPKCS8Async(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "UploadKeyPairInPKCS8Response");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "UploadKeyPairInPKCS8Response");
                 }
-                case OnvifActions.UploadCertificateWithPrivateKeyInPKCS12:
+                case SoapActions.UploadCertificateWithPrivateKeyInPKCS12:
                 {
                     var request = new UploadCertificateWithPrivateKeyInPKCS12Request();
                     reader.ReadInto(request);
                     var response = await target.UploadCertificateWithPrivateKeyInPKCS12Async(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "UploadCertificateWithPrivateKeyInPKCS12Response");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "UploadCertificateWithPrivateKeyInPKCS12Response");
                 }
-                case OnvifActions.GetKeyStatus:
+                case SoapActions.GetKeyStatus:
                 {
                     var request = new GetKeyStatusRequest();
                     reader.ReadInto(request);
                     var response = await target.GetKeyStatusAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetKeyStatusResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetKeyStatusResponse");
                 }
-                case OnvifActions.GetPrivateKeyStatus:
+                case SoapActions.GetPrivateKeyStatus:
                 {
                     var request = new GetPrivateKeyStatusRequest();
                     reader.ReadInto(request);
                     var response = await target.GetPrivateKeyStatusAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetPrivateKeyStatusResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetPrivateKeyStatusResponse");
                 }
-                case OnvifActions.GetAllKeys:
+                case SoapActions.GetAllKeys:
                 {
                     var request = new GetAllKeysRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAllKeysAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllKeysResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllKeysResponse");
                 }
-                case OnvifActions.DeleteKey:
+                case SoapActions.DeleteKey:
                 {
                     var request = new DeleteKeyRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteKeyAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteKeyResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteKeyResponse");
                 }
-                case OnvifActions.CreatePKCS10CSR:
+                case SoapActions.CreatePKCS10CSR:
                 {
                     var request = new CreatePKCS10CSRRequest();
                     reader.ReadInto(request);
                     var response = await target.CreatePKCS10CSRAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreatePKCS10CSRResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreatePKCS10CSRResponse");
                 }
-                case OnvifActions.CreateSelfSignedCertificate:
+                case SoapActions.CreateSelfSignedCertificate:
                 {
                     var request = new CreateSelfSignedCertificateRequest();
                     reader.ReadInto(request);
                     var response = await target.CreateSelfSignedCertificateAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateSelfSignedCertificateResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateSelfSignedCertificateResponse");
                 }
-                case OnvifActions.UploadCertificate:
+                case SoapActions.UploadCertificate:
                 {
                     var request = new UploadCertificateRequest();
                     reader.ReadInto(request);
                     var response = await target.UploadCertificateAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "UploadCertificateResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "UploadCertificateResponse");
                 }
-                case OnvifActions.GetCertificate:
+                case SoapActions.GetCertificate:
                 {
                     var request = new GetCertificateRequest();
                     reader.ReadInto(request);
                     var response = await target.GetCertificateAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetCertificateResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetCertificateResponse");
                 }
-                case OnvifActions.GetAllCertificates:
+                case SoapActions.GetAllCertificates:
                 {
                     var request = new GetAllCertificatesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAllCertificatesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllCertificatesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllCertificatesResponse");
                 }
-                case OnvifActions.DeleteCertificate:
+                case SoapActions.DeleteCertificate:
                 {
                     var request = new DeleteCertificateRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteCertificateAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteCertificateResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteCertificateResponse");
                 }
-                case OnvifActions.CreateCertificationPath:
+                case SoapActions.CreateCertificationPath:
                 {
                     var request = new CreateCertificationPathRequest();
                     reader.ReadInto(request);
                     var response = await target.CreateCertificationPathAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateCertificationPathResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateCertificationPathResponse");
                 }
-                case OnvifActions.GetCertificationPath:
+                case SoapActions.GetCertificationPath:
                 {
                     var request = new GetCertificationPathRequest();
                     reader.ReadInto(request);
                     var response = await target.GetCertificationPathAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetCertificationPathResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetCertificationPathResponse");
                 }
-                case OnvifActions.GetAllCertificationPaths:
+                case SoapActions.GetAllCertificationPaths:
                 {
                     var request = new GetAllCertificationPathsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAllCertificationPathsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllCertificationPathsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllCertificationPathsResponse");
                 }
-                case OnvifActions.SetCertificationPath:
+                case SoapActions.SetCertificationPath:
                 {
                     var request = new SetCertificationPathRequest();
                     reader.ReadInto(request);
                     var response = await target.SetCertificationPathAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetCertificationPathResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetCertificationPathResponse");
                 }
-                case OnvifActions.DeleteCertificationPath:
+                case SoapActions.DeleteCertificationPath:
                 {
                     var request = new DeleteCertificationPathRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteCertificationPathAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteCertificationPathResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteCertificationPathResponse");
                 }
-                case OnvifActions.UploadPassphrase:
+                case SoapActions.UploadPassphrase:
                 {
                     var request = new UploadPassphraseRequest();
                     reader.ReadInto(request);
                     var response = await target.UploadPassphraseAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "UploadPassphraseResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "UploadPassphraseResponse");
                 }
-                case OnvifActions.GetAllPassphrases:
+                case SoapActions.GetAllPassphrases:
                 {
                     var request = new GetAllPassphrasesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAllPassphrasesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllPassphrasesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllPassphrasesResponse");
                 }
-                case OnvifActions.DeletePassphrase:
+                case SoapActions.DeletePassphrase:
                 {
                     var request = new DeletePassphraseRequest();
                     reader.ReadInto(request);
                     var response = await target.DeletePassphraseAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeletePassphraseResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeletePassphraseResponse");
                 }
-                case OnvifActions.UploadCRL:
+                case SoapActions.UploadCRL:
                 {
                     var request = new UploadCRLRequest();
                     reader.ReadInto(request);
                     var response = await target.UploadCRLAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "UploadCRLResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "UploadCRLResponse");
                 }
-                case OnvifActions.GetCRL:
+                case SoapActions.GetCRL:
                 {
                     var request = new GetCRLRequest();
                     reader.ReadInto(request);
                     var response = await target.GetCRLAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetCRLResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetCRLResponse");
                 }
-                case OnvifActions.GetAllCRLs:
+                case SoapActions.GetAllCRLs:
                 {
                     var request = new GetAllCRLsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAllCRLsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllCRLsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllCRLsResponse");
                 }
-                case OnvifActions.DeleteCRL:
+                case SoapActions.DeleteCRL:
                 {
                     var request = new DeleteCRLRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteCRLAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteCRLResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteCRLResponse");
                 }
-                case OnvifActions.CreateCertPathValidationPolicy:
+                case SoapActions.CreateCertPathValidationPolicy:
                 {
                     var request = new CreateCertPathValidationPolicyRequest();
                     reader.ReadInto(request);
                     var response = await target.CreateCertPathValidationPolicyAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateCertPathValidationPolicyResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateCertPathValidationPolicyResponse");
                 }
-                case OnvifActions.GetCertPathValidationPolicy:
+                case SoapActions.GetCertPathValidationPolicy:
                 {
                     var request = new GetCertPathValidationPolicyRequest();
                     reader.ReadInto(request);
                     var response = await target.GetCertPathValidationPolicyAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetCertPathValidationPolicyResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetCertPathValidationPolicyResponse");
                 }
-                case OnvifActions.GetAllCertPathValidationPolicies:
+                case SoapActions.GetAllCertPathValidationPolicies:
                 {
                     var request = new GetAllCertPathValidationPoliciesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAllCertPathValidationPoliciesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllCertPathValidationPoliciesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllCertPathValidationPoliciesResponse");
                 }
-                case OnvifActions.SetCertPathValidationPolicy:
+                case SoapActions.SetCertPathValidationPolicy:
                 {
                     var request = new SetCertPathValidationPolicyRequest();
                     reader.ReadInto(request);
                     var response = await target.SetCertPathValidationPolicyAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetCertPathValidationPolicyResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetCertPathValidationPolicyResponse");
                 }
-                case OnvifActions.DeleteCertPathValidationPolicy:
+                case SoapActions.DeleteCertPathValidationPolicy:
                 {
                     var request = new DeleteCertPathValidationPolicyRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteCertPathValidationPolicyAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteCertPathValidationPolicyResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteCertPathValidationPolicyResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -2122,7 +2122,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     public abstract class MediaSigningBase
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new MediaSigningDispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new MediaSigningDispatcher();
 
         /// <summary>
         /// This operation assigns certification path (certificate chain) to use for media signing, replacing
@@ -2201,7 +2201,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     }
 
     /// <summary>Routes SOAP actions to <see cref="MediaSigningBase"/>.</summary>
-    internal sealed class MediaSigningDispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class MediaSigningDispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(MediaSigningBase); } }
 
@@ -2209,9 +2209,9 @@ namespace SharpOnvifServer.AdvancedSecurity
         {
             switch (action)
             {
-                case OnvifActions.AddMediaSigningCertificateAssignment:
-                case OnvifActions.RemoveMediaSigningCertificateAssignment:
-                case OnvifActions.GetAssignedMediaSigningCertificates:
+                case SoapActions.AddMediaSigningCertificateAssignment:
+                case SoapActions.RemoveMediaSigningCertificateAssignment:
+                case SoapActions.GetAssignedMediaSigningCertificates:
                     return true;
                 default:
                     return false;
@@ -2225,21 +2225,21 @@ namespace SharpOnvifServer.AdvancedSecurity
                 case "AddMediaSigningCertificateAssignment":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.AddMediaSigningCertificateAssignment;
+                        action = SoapActions.AddMediaSigningCertificateAssignment;
                         return true;
                     }
                     break;
                 case "RemoveMediaSigningCertificateAssignment":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.RemoveMediaSigningCertificateAssignment;
+                        action = SoapActions.RemoveMediaSigningCertificateAssignment;
                         return true;
                     }
                     break;
                 case "GetAssignedMediaSigningCertificates":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetAssignedMediaSigningCertificates;
+                        action = SoapActions.GetAssignedMediaSigningCertificates;
                         return true;
                     }
                     break;
@@ -2248,7 +2248,7 @@ namespace SharpOnvifServer.AdvancedSecurity
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             MediaSigningBase target = (MediaSigningBase)service;
@@ -2256,33 +2256,33 @@ namespace SharpOnvifServer.AdvancedSecurity
 
             switch (action)
             {
-                case OnvifActions.AddMediaSigningCertificateAssignment:
+                case SoapActions.AddMediaSigningCertificateAssignment:
                 {
                     var request = new AddMediaSigningCertificateAssignmentRequest();
                     reader.ReadInto(request);
                     var response = await target.AddMediaSigningCertificateAssignmentAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "AddMediaSigningCertificateAssignmentResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "AddMediaSigningCertificateAssignmentResponse");
                 }
-                case OnvifActions.RemoveMediaSigningCertificateAssignment:
+                case SoapActions.RemoveMediaSigningCertificateAssignment:
                 {
                     var request = new RemoveMediaSigningCertificateAssignmentRequest();
                     reader.ReadInto(request);
                     var response = await target.RemoveMediaSigningCertificateAssignmentAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "RemoveMediaSigningCertificateAssignmentResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "RemoveMediaSigningCertificateAssignmentResponse");
                 }
-                case OnvifActions.GetAssignedMediaSigningCertificates:
+                case SoapActions.GetAssignedMediaSigningCertificates:
                 {
                     var request = new GetAssignedMediaSigningCertificatesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAssignedMediaSigningCertificatesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAssignedMediaSigningCertificatesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAssignedMediaSigningCertificatesResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -2294,7 +2294,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     public abstract class TLSServerBase
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new TLSServerDispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new TLSServerDispatcher();
 
         /// <summary>
         /// This operation assigns a key pair and certificate along with a certification path (certificate
@@ -2667,7 +2667,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     }
 
     /// <summary>Routes SOAP actions to <see cref="TLSServerBase"/>.</summary>
-    internal sealed class TLSServerDispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class TLSServerDispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(TLSServerBase); } }
 
@@ -2675,20 +2675,20 @@ namespace SharpOnvifServer.AdvancedSecurity
         {
             switch (action)
             {
-                case OnvifActions.AddServerCertificateAssignment:
-                case OnvifActions.RemoveServerCertificateAssignment:
-                case OnvifActions.ReplaceServerCertificateAssignment:
-                case OnvifActions.SetEnabledTLSVersions:
-                case OnvifActions.GetEnabledTLSVersions:
-                case OnvifActions.GetAssignedServerCertificates:
-                case OnvifActions.SetClientAuthenticationRequired:
-                case OnvifActions.GetClientAuthenticationRequired:
-                case OnvifActions.SetCnMapsToUser:
-                case OnvifActions.GetCnMapsToUser:
-                case OnvifActions.AddCertPathValidationPolicyAssignment:
-                case OnvifActions.RemoveCertPathValidationPolicyAssignment:
-                case OnvifActions.ReplaceCertPathValidationPolicyAssignment:
-                case OnvifActions.GetAssignedCertPathValidationPolicies:
+                case SoapActions.AddServerCertificateAssignment:
+                case SoapActions.RemoveServerCertificateAssignment:
+                case SoapActions.ReplaceServerCertificateAssignment:
+                case SoapActions.SetEnabledTLSVersions:
+                case SoapActions.GetEnabledTLSVersions:
+                case SoapActions.GetAssignedServerCertificates:
+                case SoapActions.SetClientAuthenticationRequired:
+                case SoapActions.GetClientAuthenticationRequired:
+                case SoapActions.SetCnMapsToUser:
+                case SoapActions.GetCnMapsToUser:
+                case SoapActions.AddCertPathValidationPolicyAssignment:
+                case SoapActions.RemoveCertPathValidationPolicyAssignment:
+                case SoapActions.ReplaceCertPathValidationPolicyAssignment:
+                case SoapActions.GetAssignedCertPathValidationPolicies:
                     return true;
                 default:
                     return false;
@@ -2702,98 +2702,98 @@ namespace SharpOnvifServer.AdvancedSecurity
                 case "AddServerCertificateAssignment":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.AddServerCertificateAssignment;
+                        action = SoapActions.AddServerCertificateAssignment;
                         return true;
                     }
                     break;
                 case "RemoveServerCertificateAssignment":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.RemoveServerCertificateAssignment;
+                        action = SoapActions.RemoveServerCertificateAssignment;
                         return true;
                     }
                     break;
                 case "ReplaceServerCertificateAssignment":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.ReplaceServerCertificateAssignment;
+                        action = SoapActions.ReplaceServerCertificateAssignment;
                         return true;
                     }
                     break;
                 case "SetEnabledTLSVersions":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.SetEnabledTLSVersions;
+                        action = SoapActions.SetEnabledTLSVersions;
                         return true;
                     }
                     break;
                 case "GetEnabledTLSVersions":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetEnabledTLSVersions;
+                        action = SoapActions.GetEnabledTLSVersions;
                         return true;
                     }
                     break;
                 case "GetAssignedServerCertificates":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetAssignedServerCertificates;
+                        action = SoapActions.GetAssignedServerCertificates;
                         return true;
                     }
                     break;
                 case "SetClientAuthenticationRequired":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.SetClientAuthenticationRequired;
+                        action = SoapActions.SetClientAuthenticationRequired;
                         return true;
                     }
                     break;
                 case "GetClientAuthenticationRequired":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetClientAuthenticationRequired;
+                        action = SoapActions.GetClientAuthenticationRequired;
                         return true;
                     }
                     break;
                 case "SetCnMapsToUser":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.SetCnMapsToUser;
+                        action = SoapActions.SetCnMapsToUser;
                         return true;
                     }
                     break;
                 case "GetCnMapsToUser":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetCnMapsToUser;
+                        action = SoapActions.GetCnMapsToUser;
                         return true;
                     }
                     break;
                 case "AddCertPathValidationPolicyAssignment":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.AddCertPathValidationPolicyAssignment;
+                        action = SoapActions.AddCertPathValidationPolicyAssignment;
                         return true;
                     }
                     break;
                 case "RemoveCertPathValidationPolicyAssignment":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.RemoveCertPathValidationPolicyAssignment;
+                        action = SoapActions.RemoveCertPathValidationPolicyAssignment;
                         return true;
                     }
                     break;
                 case "ReplaceCertPathValidationPolicyAssignment":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.ReplaceCertPathValidationPolicyAssignment;
+                        action = SoapActions.ReplaceCertPathValidationPolicyAssignment;
                         return true;
                     }
                     break;
                 case "GetAssignedCertPathValidationPolicies":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetAssignedCertPathValidationPolicies;
+                        action = SoapActions.GetAssignedCertPathValidationPolicies;
                         return true;
                     }
                     break;
@@ -2802,7 +2802,7 @@ namespace SharpOnvifServer.AdvancedSecurity
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             TLSServerBase target = (TLSServerBase)service;
@@ -2810,110 +2810,110 @@ namespace SharpOnvifServer.AdvancedSecurity
 
             switch (action)
             {
-                case OnvifActions.AddServerCertificateAssignment:
+                case SoapActions.AddServerCertificateAssignment:
                 {
                     var request = new AddServerCertificateAssignmentRequest();
                     reader.ReadInto(request);
                     var response = await target.AddServerCertificateAssignmentAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "AddServerCertificateAssignmentResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "AddServerCertificateAssignmentResponse");
                 }
-                case OnvifActions.RemoveServerCertificateAssignment:
+                case SoapActions.RemoveServerCertificateAssignment:
                 {
                     var request = new RemoveServerCertificateAssignmentRequest();
                     reader.ReadInto(request);
                     var response = await target.RemoveServerCertificateAssignmentAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "RemoveServerCertificateAssignmentResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "RemoveServerCertificateAssignmentResponse");
                 }
-                case OnvifActions.ReplaceServerCertificateAssignment:
+                case SoapActions.ReplaceServerCertificateAssignment:
                 {
                     var request = new ReplaceServerCertificateAssignmentRequest();
                     reader.ReadInto(request);
                     var response = await target.ReplaceServerCertificateAssignmentAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "ReplaceServerCertificateAssignmentResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "ReplaceServerCertificateAssignmentResponse");
                 }
-                case OnvifActions.SetEnabledTLSVersions:
+                case SoapActions.SetEnabledTLSVersions:
                 {
                     var request = new SetEnabledTLSVersionsRequest();
                     reader.ReadInto(request);
                     var response = await target.SetEnabledTLSVersionsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetEnabledTLSVersionsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetEnabledTLSVersionsResponse");
                 }
-                case OnvifActions.GetEnabledTLSVersions:
+                case SoapActions.GetEnabledTLSVersions:
                 {
                     var request = new GetEnabledTLSVersionsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetEnabledTLSVersionsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetEnabledTLSVersionsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetEnabledTLSVersionsResponse");
                 }
-                case OnvifActions.GetAssignedServerCertificates:
+                case SoapActions.GetAssignedServerCertificates:
                 {
                     var request = new GetAssignedServerCertificatesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAssignedServerCertificatesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAssignedServerCertificatesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAssignedServerCertificatesResponse");
                 }
-                case OnvifActions.SetClientAuthenticationRequired:
+                case SoapActions.SetClientAuthenticationRequired:
                 {
                     var request = new SetClientAuthenticationRequiredRequest();
                     reader.ReadInto(request);
                     var response = await target.SetClientAuthenticationRequiredAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetClientAuthenticationRequiredResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetClientAuthenticationRequiredResponse");
                 }
-                case OnvifActions.GetClientAuthenticationRequired:
+                case SoapActions.GetClientAuthenticationRequired:
                 {
                     var request = new GetClientAuthenticationRequiredRequest();
                     reader.ReadInto(request);
                     var response = await target.GetClientAuthenticationRequiredAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetClientAuthenticationRequiredResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetClientAuthenticationRequiredResponse");
                 }
-                case OnvifActions.SetCnMapsToUser:
+                case SoapActions.SetCnMapsToUser:
                 {
                     var request = new SetCnMapsToUserRequest();
                     reader.ReadInto(request);
                     var response = await target.SetCnMapsToUserAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetCnMapsToUserResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetCnMapsToUserResponse");
                 }
-                case OnvifActions.GetCnMapsToUser:
+                case SoapActions.GetCnMapsToUser:
                 {
                     var request = new GetCnMapsToUserRequest();
                     reader.ReadInto(request);
                     var response = await target.GetCnMapsToUserAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetCnMapsToUserResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetCnMapsToUserResponse");
                 }
-                case OnvifActions.AddCertPathValidationPolicyAssignment:
+                case SoapActions.AddCertPathValidationPolicyAssignment:
                 {
                     var request = new AddCertPathValidationPolicyAssignmentRequest();
                     reader.ReadInto(request);
                     var response = await target.AddCertPathValidationPolicyAssignmentAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "AddCertPathValidationPolicyAssignmentResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "AddCertPathValidationPolicyAssignmentResponse");
                 }
-                case OnvifActions.RemoveCertPathValidationPolicyAssignment:
+                case SoapActions.RemoveCertPathValidationPolicyAssignment:
                 {
                     var request = new RemoveCertPathValidationPolicyAssignmentRequest();
                     reader.ReadInto(request);
                     var response = await target.RemoveCertPathValidationPolicyAssignmentAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "RemoveCertPathValidationPolicyAssignmentResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "RemoveCertPathValidationPolicyAssignmentResponse");
                 }
-                case OnvifActions.ReplaceCertPathValidationPolicyAssignment:
+                case SoapActions.ReplaceCertPathValidationPolicyAssignment:
                 {
                     var request = new ReplaceCertPathValidationPolicyAssignmentRequest();
                     reader.ReadInto(request);
                     var response = await target.ReplaceCertPathValidationPolicyAssignmentAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "ReplaceCertPathValidationPolicyAssignmentResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "ReplaceCertPathValidationPolicyAssignmentResponse");
                 }
-                case OnvifActions.GetAssignedCertPathValidationPolicies:
+                case SoapActions.GetAssignedCertPathValidationPolicies:
                 {
                     var request = new GetAssignedCertPathValidationPoliciesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAssignedCertPathValidationPoliciesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAssignedCertPathValidationPoliciesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAssignedCertPathValidationPoliciesResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -2925,7 +2925,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     public abstract class AdvancedSecurityBase
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new AdvancedSecurityDispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new AdvancedSecurityDispatcher();
 
         /// <summary>
         /// Returns the capabilities of the security configuraiton service. The result is returned in a typed
@@ -4544,7 +4544,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     }
 
     /// <summary>Routes SOAP actions to <see cref="AdvancedSecurityBase"/>.</summary>
-    internal sealed class AdvancedSecurityDispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class AdvancedSecurityDispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(AdvancedSecurityBase); } }
 
@@ -4552,68 +4552,68 @@ namespace SharpOnvifServer.AdvancedSecurity
         {
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
-                case OnvifActions.GetAuthorizationServerConfigurations:
-                case OnvifActions.CreateAuthorizationServerConfiguration:
-                case OnvifActions.SetAuthorizationServerConfiguration:
-                case OnvifActions.DeleteAuthorizationServerConfiguration:
-                case OnvifActions.AddDot1XConfiguration:
-                case OnvifActions.GetAllDot1XConfigurations:
-                case OnvifActions.GetDot1XConfiguration:
-                case OnvifActions.DeleteDot1XConfiguration:
-                case OnvifActions.SetNetworkInterfaceDot1XConfiguration:
-                case OnvifActions.GetNetworkInterfaceDot1XConfiguration:
-                case OnvifActions.DeleteNetworkInterfaceDot1XConfiguration:
-                case OnvifActions.GetJWTConfiguration:
-                case OnvifActions.SetJWTConfiguration:
-                case OnvifActions.CreateRSAKeyPair:
-                case OnvifActions.CreateECCKeyPair:
-                case OnvifActions.UploadKeyPairInPKCS8:
-                case OnvifActions.UploadCertificateWithPrivateKeyInPKCS12:
-                case OnvifActions.GetKeyStatus:
-                case OnvifActions.GetPrivateKeyStatus:
-                case OnvifActions.GetAllKeys:
-                case OnvifActions.DeleteKey:
-                case OnvifActions.CreatePKCS10CSR:
-                case OnvifActions.CreateSelfSignedCertificate:
-                case OnvifActions.UploadCertificate:
-                case OnvifActions.GetCertificate:
-                case OnvifActions.GetAllCertificates:
-                case OnvifActions.DeleteCertificate:
-                case OnvifActions.CreateCertificationPath:
-                case OnvifActions.GetCertificationPath:
-                case OnvifActions.GetAllCertificationPaths:
-                case OnvifActions.SetCertificationPath:
-                case OnvifActions.DeleteCertificationPath:
-                case OnvifActions.UploadPassphrase:
-                case OnvifActions.GetAllPassphrases:
-                case OnvifActions.DeletePassphrase:
-                case OnvifActions.UploadCRL:
-                case OnvifActions.GetCRL:
-                case OnvifActions.GetAllCRLs:
-                case OnvifActions.DeleteCRL:
-                case OnvifActions.CreateCertPathValidationPolicy:
-                case OnvifActions.GetCertPathValidationPolicy:
-                case OnvifActions.GetAllCertPathValidationPolicies:
-                case OnvifActions.SetCertPathValidationPolicy:
-                case OnvifActions.DeleteCertPathValidationPolicy:
-                case OnvifActions.AddMediaSigningCertificateAssignment:
-                case OnvifActions.RemoveMediaSigningCertificateAssignment:
-                case OnvifActions.GetAssignedMediaSigningCertificates:
-                case OnvifActions.AddServerCertificateAssignment:
-                case OnvifActions.RemoveServerCertificateAssignment:
-                case OnvifActions.ReplaceServerCertificateAssignment:
-                case OnvifActions.SetEnabledTLSVersions:
-                case OnvifActions.GetEnabledTLSVersions:
-                case OnvifActions.GetAssignedServerCertificates:
-                case OnvifActions.SetClientAuthenticationRequired:
-                case OnvifActions.GetClientAuthenticationRequired:
-                case OnvifActions.SetCnMapsToUser:
-                case OnvifActions.GetCnMapsToUser:
-                case OnvifActions.AddCertPathValidationPolicyAssignment:
-                case OnvifActions.RemoveCertPathValidationPolicyAssignment:
-                case OnvifActions.ReplaceCertPathValidationPolicyAssignment:
-                case OnvifActions.GetAssignedCertPathValidationPolicies:
+                case SoapActions.GetServiceCapabilities:
+                case SoapActions.GetAuthorizationServerConfigurations:
+                case SoapActions.CreateAuthorizationServerConfiguration:
+                case SoapActions.SetAuthorizationServerConfiguration:
+                case SoapActions.DeleteAuthorizationServerConfiguration:
+                case SoapActions.AddDot1XConfiguration:
+                case SoapActions.GetAllDot1XConfigurations:
+                case SoapActions.GetDot1XConfiguration:
+                case SoapActions.DeleteDot1XConfiguration:
+                case SoapActions.SetNetworkInterfaceDot1XConfiguration:
+                case SoapActions.GetNetworkInterfaceDot1XConfiguration:
+                case SoapActions.DeleteNetworkInterfaceDot1XConfiguration:
+                case SoapActions.GetJWTConfiguration:
+                case SoapActions.SetJWTConfiguration:
+                case SoapActions.CreateRSAKeyPair:
+                case SoapActions.CreateECCKeyPair:
+                case SoapActions.UploadKeyPairInPKCS8:
+                case SoapActions.UploadCertificateWithPrivateKeyInPKCS12:
+                case SoapActions.GetKeyStatus:
+                case SoapActions.GetPrivateKeyStatus:
+                case SoapActions.GetAllKeys:
+                case SoapActions.DeleteKey:
+                case SoapActions.CreatePKCS10CSR:
+                case SoapActions.CreateSelfSignedCertificate:
+                case SoapActions.UploadCertificate:
+                case SoapActions.GetCertificate:
+                case SoapActions.GetAllCertificates:
+                case SoapActions.DeleteCertificate:
+                case SoapActions.CreateCertificationPath:
+                case SoapActions.GetCertificationPath:
+                case SoapActions.GetAllCertificationPaths:
+                case SoapActions.SetCertificationPath:
+                case SoapActions.DeleteCertificationPath:
+                case SoapActions.UploadPassphrase:
+                case SoapActions.GetAllPassphrases:
+                case SoapActions.DeletePassphrase:
+                case SoapActions.UploadCRL:
+                case SoapActions.GetCRL:
+                case SoapActions.GetAllCRLs:
+                case SoapActions.DeleteCRL:
+                case SoapActions.CreateCertPathValidationPolicy:
+                case SoapActions.GetCertPathValidationPolicy:
+                case SoapActions.GetAllCertPathValidationPolicies:
+                case SoapActions.SetCertPathValidationPolicy:
+                case SoapActions.DeleteCertPathValidationPolicy:
+                case SoapActions.AddMediaSigningCertificateAssignment:
+                case SoapActions.RemoveMediaSigningCertificateAssignment:
+                case SoapActions.GetAssignedMediaSigningCertificates:
+                case SoapActions.AddServerCertificateAssignment:
+                case SoapActions.RemoveServerCertificateAssignment:
+                case SoapActions.ReplaceServerCertificateAssignment:
+                case SoapActions.SetEnabledTLSVersions:
+                case SoapActions.GetEnabledTLSVersions:
+                case SoapActions.GetAssignedServerCertificates:
+                case SoapActions.SetClientAuthenticationRequired:
+                case SoapActions.GetClientAuthenticationRequired:
+                case SoapActions.SetCnMapsToUser:
+                case SoapActions.GetCnMapsToUser:
+                case SoapActions.AddCertPathValidationPolicyAssignment:
+                case SoapActions.RemoveCertPathValidationPolicyAssignment:
+                case SoapActions.ReplaceCertPathValidationPolicyAssignment:
+                case SoapActions.GetAssignedCertPathValidationPolicies:
                     return true;
                 default:
                     return false;
@@ -4627,434 +4627,434 @@ namespace SharpOnvifServer.AdvancedSecurity
                 case "GetServiceCapabilities":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetServiceCapabilities;
+                        action = SoapActions.GetServiceCapabilities;
                         return true;
                     }
                     break;
                 case "GetAuthorizationServerConfigurations":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetAuthorizationServerConfigurations;
+                        action = SoapActions.GetAuthorizationServerConfigurations;
                         return true;
                     }
                     break;
                 case "CreateAuthorizationServerConfiguration":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.CreateAuthorizationServerConfiguration;
+                        action = SoapActions.CreateAuthorizationServerConfiguration;
                         return true;
                     }
                     break;
                 case "SetAuthorizationServerConfiguration":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.SetAuthorizationServerConfiguration;
+                        action = SoapActions.SetAuthorizationServerConfiguration;
                         return true;
                     }
                     break;
                 case "DeleteAuthorizationServerConfiguration":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.DeleteAuthorizationServerConfiguration;
+                        action = SoapActions.DeleteAuthorizationServerConfiguration;
                         return true;
                     }
                     break;
                 case "AddDot1XConfiguration":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.AddDot1XConfiguration;
+                        action = SoapActions.AddDot1XConfiguration;
                         return true;
                     }
                     break;
                 case "GetAllDot1XConfigurations":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetAllDot1XConfigurations;
+                        action = SoapActions.GetAllDot1XConfigurations;
                         return true;
                     }
                     break;
                 case "GetDot1XConfiguration":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetDot1XConfiguration;
+                        action = SoapActions.GetDot1XConfiguration;
                         return true;
                     }
                     break;
                 case "DeleteDot1XConfiguration":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.DeleteDot1XConfiguration;
+                        action = SoapActions.DeleteDot1XConfiguration;
                         return true;
                     }
                     break;
                 case "SetNetworkInterfaceDot1XConfiguration":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.SetNetworkInterfaceDot1XConfiguration;
+                        action = SoapActions.SetNetworkInterfaceDot1XConfiguration;
                         return true;
                     }
                     break;
                 case "GetNetworkInterfaceDot1XConfiguration":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetNetworkInterfaceDot1XConfiguration;
+                        action = SoapActions.GetNetworkInterfaceDot1XConfiguration;
                         return true;
                     }
                     break;
                 case "DeleteNetworkInterfaceDot1XConfiguration":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.DeleteNetworkInterfaceDot1XConfiguration;
+                        action = SoapActions.DeleteNetworkInterfaceDot1XConfiguration;
                         return true;
                     }
                     break;
                 case "GetJWTConfiguration":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetJWTConfiguration;
+                        action = SoapActions.GetJWTConfiguration;
                         return true;
                     }
                     break;
                 case "SetJWTConfiguration":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.SetJWTConfiguration;
+                        action = SoapActions.SetJWTConfiguration;
                         return true;
                     }
                     break;
                 case "CreateRSAKeyPair":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.CreateRSAKeyPair;
+                        action = SoapActions.CreateRSAKeyPair;
                         return true;
                     }
                     break;
                 case "CreateECCKeyPair":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.CreateECCKeyPair;
+                        action = SoapActions.CreateECCKeyPair;
                         return true;
                     }
                     break;
                 case "UploadKeyPairInPKCS8":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.UploadKeyPairInPKCS8;
+                        action = SoapActions.UploadKeyPairInPKCS8;
                         return true;
                     }
                     break;
                 case "UploadCertificateWithPrivateKeyInPKCS12":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.UploadCertificateWithPrivateKeyInPKCS12;
+                        action = SoapActions.UploadCertificateWithPrivateKeyInPKCS12;
                         return true;
                     }
                     break;
                 case "GetKeyStatus":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetKeyStatus;
+                        action = SoapActions.GetKeyStatus;
                         return true;
                     }
                     break;
                 case "GetPrivateKeyStatus":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetPrivateKeyStatus;
+                        action = SoapActions.GetPrivateKeyStatus;
                         return true;
                     }
                     break;
                 case "GetAllKeys":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetAllKeys;
+                        action = SoapActions.GetAllKeys;
                         return true;
                     }
                     break;
                 case "DeleteKey":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.DeleteKey;
+                        action = SoapActions.DeleteKey;
                         return true;
                     }
                     break;
                 case "CreatePKCS10CSR":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.CreatePKCS10CSR;
+                        action = SoapActions.CreatePKCS10CSR;
                         return true;
                     }
                     break;
                 case "CreateSelfSignedCertificate":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.CreateSelfSignedCertificate;
+                        action = SoapActions.CreateSelfSignedCertificate;
                         return true;
                     }
                     break;
                 case "UploadCertificate":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.UploadCertificate;
+                        action = SoapActions.UploadCertificate;
                         return true;
                     }
                     break;
                 case "GetCertificate":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetCertificate;
+                        action = SoapActions.GetCertificate;
                         return true;
                     }
                     break;
                 case "GetAllCertificates":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetAllCertificates;
+                        action = SoapActions.GetAllCertificates;
                         return true;
                     }
                     break;
                 case "DeleteCertificate":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.DeleteCertificate;
+                        action = SoapActions.DeleteCertificate;
                         return true;
                     }
                     break;
                 case "CreateCertificationPath":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.CreateCertificationPath;
+                        action = SoapActions.CreateCertificationPath;
                         return true;
                     }
                     break;
                 case "GetCertificationPath":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetCertificationPath;
+                        action = SoapActions.GetCertificationPath;
                         return true;
                     }
                     break;
                 case "GetAllCertificationPaths":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetAllCertificationPaths;
+                        action = SoapActions.GetAllCertificationPaths;
                         return true;
                     }
                     break;
                 case "SetCertificationPath":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.SetCertificationPath;
+                        action = SoapActions.SetCertificationPath;
                         return true;
                     }
                     break;
                 case "DeleteCertificationPath":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.DeleteCertificationPath;
+                        action = SoapActions.DeleteCertificationPath;
                         return true;
                     }
                     break;
                 case "UploadPassphrase":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.UploadPassphrase;
+                        action = SoapActions.UploadPassphrase;
                         return true;
                     }
                     break;
                 case "GetAllPassphrases":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetAllPassphrases;
+                        action = SoapActions.GetAllPassphrases;
                         return true;
                     }
                     break;
                 case "DeletePassphrase":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.DeletePassphrase;
+                        action = SoapActions.DeletePassphrase;
                         return true;
                     }
                     break;
                 case "UploadCRL":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.UploadCRL;
+                        action = SoapActions.UploadCRL;
                         return true;
                     }
                     break;
                 case "GetCRL":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetCRL;
+                        action = SoapActions.GetCRL;
                         return true;
                     }
                     break;
                 case "GetAllCRLs":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetAllCRLs;
+                        action = SoapActions.GetAllCRLs;
                         return true;
                     }
                     break;
                 case "DeleteCRL":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.DeleteCRL;
+                        action = SoapActions.DeleteCRL;
                         return true;
                     }
                     break;
                 case "CreateCertPathValidationPolicy":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.CreateCertPathValidationPolicy;
+                        action = SoapActions.CreateCertPathValidationPolicy;
                         return true;
                     }
                     break;
                 case "GetCertPathValidationPolicy":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetCertPathValidationPolicy;
+                        action = SoapActions.GetCertPathValidationPolicy;
                         return true;
                     }
                     break;
                 case "GetAllCertPathValidationPolicies":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetAllCertPathValidationPolicies;
+                        action = SoapActions.GetAllCertPathValidationPolicies;
                         return true;
                     }
                     break;
                 case "SetCertPathValidationPolicy":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.SetCertPathValidationPolicy;
+                        action = SoapActions.SetCertPathValidationPolicy;
                         return true;
                     }
                     break;
                 case "DeleteCertPathValidationPolicy":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.DeleteCertPathValidationPolicy;
+                        action = SoapActions.DeleteCertPathValidationPolicy;
                         return true;
                     }
                     break;
                 case "AddMediaSigningCertificateAssignment":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.AddMediaSigningCertificateAssignment;
+                        action = SoapActions.AddMediaSigningCertificateAssignment;
                         return true;
                     }
                     break;
                 case "RemoveMediaSigningCertificateAssignment":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.RemoveMediaSigningCertificateAssignment;
+                        action = SoapActions.RemoveMediaSigningCertificateAssignment;
                         return true;
                     }
                     break;
                 case "GetAssignedMediaSigningCertificates":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetAssignedMediaSigningCertificates;
+                        action = SoapActions.GetAssignedMediaSigningCertificates;
                         return true;
                     }
                     break;
                 case "AddServerCertificateAssignment":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.AddServerCertificateAssignment;
+                        action = SoapActions.AddServerCertificateAssignment;
                         return true;
                     }
                     break;
                 case "RemoveServerCertificateAssignment":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.RemoveServerCertificateAssignment;
+                        action = SoapActions.RemoveServerCertificateAssignment;
                         return true;
                     }
                     break;
                 case "ReplaceServerCertificateAssignment":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.ReplaceServerCertificateAssignment;
+                        action = SoapActions.ReplaceServerCertificateAssignment;
                         return true;
                     }
                     break;
                 case "SetEnabledTLSVersions":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.SetEnabledTLSVersions;
+                        action = SoapActions.SetEnabledTLSVersions;
                         return true;
                     }
                     break;
                 case "GetEnabledTLSVersions":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetEnabledTLSVersions;
+                        action = SoapActions.GetEnabledTLSVersions;
                         return true;
                     }
                     break;
                 case "GetAssignedServerCertificates":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetAssignedServerCertificates;
+                        action = SoapActions.GetAssignedServerCertificates;
                         return true;
                     }
                     break;
                 case "SetClientAuthenticationRequired":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.SetClientAuthenticationRequired;
+                        action = SoapActions.SetClientAuthenticationRequired;
                         return true;
                     }
                     break;
                 case "GetClientAuthenticationRequired":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetClientAuthenticationRequired;
+                        action = SoapActions.GetClientAuthenticationRequired;
                         return true;
                     }
                     break;
                 case "SetCnMapsToUser":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.SetCnMapsToUser;
+                        action = SoapActions.SetCnMapsToUser;
                         return true;
                     }
                     break;
                 case "GetCnMapsToUser":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetCnMapsToUser;
+                        action = SoapActions.GetCnMapsToUser;
                         return true;
                     }
                     break;
                 case "AddCertPathValidationPolicyAssignment":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.AddCertPathValidationPolicyAssignment;
+                        action = SoapActions.AddCertPathValidationPolicyAssignment;
                         return true;
                     }
                     break;
                 case "RemoveCertPathValidationPolicyAssignment":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.RemoveCertPathValidationPolicyAssignment;
+                        action = SoapActions.RemoveCertPathValidationPolicyAssignment;
                         return true;
                     }
                     break;
                 case "ReplaceCertPathValidationPolicyAssignment":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.ReplaceCertPathValidationPolicyAssignment;
+                        action = SoapActions.ReplaceCertPathValidationPolicyAssignment;
                         return true;
                     }
                     break;
                 case "GetAssignedCertPathValidationPolicies":
                     if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl")
                     {
-                        action = OnvifActions.GetAssignedCertPathValidationPolicies;
+                        action = SoapActions.GetAssignedCertPathValidationPolicies;
                         return true;
                     }
                     break;
@@ -5063,7 +5063,7 @@ namespace SharpOnvifServer.AdvancedSecurity
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             AdvancedSecurityBase target = (AdvancedSecurityBase)service;
@@ -5071,446 +5071,446 @@ namespace SharpOnvifServer.AdvancedSecurity
 
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
+                case SoapActions.GetServiceCapabilities:
                 {
                     var request = new GetServiceCapabilitiesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetServiceCapabilitiesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetServiceCapabilitiesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetServiceCapabilitiesResponse");
                 }
-                case OnvifActions.GetAuthorizationServerConfigurations:
+                case SoapActions.GetAuthorizationServerConfigurations:
                 {
                     var request = new GetAuthorizationServerConfigurationsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAuthorizationServerConfigurationsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAuthorizationServerConfigurationsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAuthorizationServerConfigurationsResponse");
                 }
-                case OnvifActions.CreateAuthorizationServerConfiguration:
+                case SoapActions.CreateAuthorizationServerConfiguration:
                 {
                     var request = new CreateAuthorizationServerConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.CreateAuthorizationServerConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateAuthorizationServerConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateAuthorizationServerConfigurationResponse");
                 }
-                case OnvifActions.SetAuthorizationServerConfiguration:
+                case SoapActions.SetAuthorizationServerConfiguration:
                 {
                     var request = new SetAuthorizationServerConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.SetAuthorizationServerConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetAuthorizationServerConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetAuthorizationServerConfigurationResponse");
                 }
-                case OnvifActions.DeleteAuthorizationServerConfiguration:
+                case SoapActions.DeleteAuthorizationServerConfiguration:
                 {
                     var request = new DeleteAuthorizationServerConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteAuthorizationServerConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteAuthorizationServerConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteAuthorizationServerConfigurationResponse");
                 }
-                case OnvifActions.AddDot1XConfiguration:
+                case SoapActions.AddDot1XConfiguration:
                 {
                     var request = new AddDot1XConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.AddDot1XConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "AddDot1XConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "AddDot1XConfigurationResponse");
                 }
-                case OnvifActions.GetAllDot1XConfigurations:
+                case SoapActions.GetAllDot1XConfigurations:
                 {
                     var request = new GetAllDot1XConfigurationsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAllDot1XConfigurationsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllDot1XConfigurationsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllDot1XConfigurationsResponse");
                 }
-                case OnvifActions.GetDot1XConfiguration:
+                case SoapActions.GetDot1XConfiguration:
                 {
                     var request = new GetDot1XConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.GetDot1XConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetDot1XConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetDot1XConfigurationResponse");
                 }
-                case OnvifActions.DeleteDot1XConfiguration:
+                case SoapActions.DeleteDot1XConfiguration:
                 {
                     var request = new DeleteDot1XConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteDot1XConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteDot1XConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteDot1XConfigurationResponse");
                 }
-                case OnvifActions.SetNetworkInterfaceDot1XConfiguration:
+                case SoapActions.SetNetworkInterfaceDot1XConfiguration:
                 {
                     var request = new SetNetworkInterfaceDot1XConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.SetNetworkInterfaceDot1XConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetNetworkInterfaceDot1XConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetNetworkInterfaceDot1XConfigurationResponse");
                 }
-                case OnvifActions.GetNetworkInterfaceDot1XConfiguration:
+                case SoapActions.GetNetworkInterfaceDot1XConfiguration:
                 {
                     var request = new GetNetworkInterfaceDot1XConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.GetNetworkInterfaceDot1XConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetNetworkInterfaceDot1XConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetNetworkInterfaceDot1XConfigurationResponse");
                 }
-                case OnvifActions.DeleteNetworkInterfaceDot1XConfiguration:
+                case SoapActions.DeleteNetworkInterfaceDot1XConfiguration:
                 {
                     var request = new DeleteNetworkInterfaceDot1XConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteNetworkInterfaceDot1XConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteNetworkInterfaceDot1XConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteNetworkInterfaceDot1XConfigurationResponse");
                 }
-                case OnvifActions.GetJWTConfiguration:
+                case SoapActions.GetJWTConfiguration:
                 {
                     var request = new GetJWTConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.GetJWTConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetJWTConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetJWTConfigurationResponse");
                 }
-                case OnvifActions.SetJWTConfiguration:
+                case SoapActions.SetJWTConfiguration:
                 {
                     var request = new SetJWTConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.SetJWTConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetJWTConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetJWTConfigurationResponse");
                 }
-                case OnvifActions.CreateRSAKeyPair:
+                case SoapActions.CreateRSAKeyPair:
                 {
                     var request = new CreateRSAKeyPairRequest();
                     reader.ReadInto(request);
                     var response = await target.CreateRSAKeyPairAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateRSAKeyPairResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateRSAKeyPairResponse");
                 }
-                case OnvifActions.CreateECCKeyPair:
+                case SoapActions.CreateECCKeyPair:
                 {
                     var request = new CreateECCKeyPairRequest();
                     reader.ReadInto(request);
                     var response = await target.CreateECCKeyPairAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateECCKeyPairResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateECCKeyPairResponse");
                 }
-                case OnvifActions.UploadKeyPairInPKCS8:
+                case SoapActions.UploadKeyPairInPKCS8:
                 {
                     var request = new UploadKeyPairInPKCS8Request();
                     reader.ReadInto(request);
                     var response = await target.UploadKeyPairInPKCS8Async(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "UploadKeyPairInPKCS8Response");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "UploadKeyPairInPKCS8Response");
                 }
-                case OnvifActions.UploadCertificateWithPrivateKeyInPKCS12:
+                case SoapActions.UploadCertificateWithPrivateKeyInPKCS12:
                 {
                     var request = new UploadCertificateWithPrivateKeyInPKCS12Request();
                     reader.ReadInto(request);
                     var response = await target.UploadCertificateWithPrivateKeyInPKCS12Async(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "UploadCertificateWithPrivateKeyInPKCS12Response");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "UploadCertificateWithPrivateKeyInPKCS12Response");
                 }
-                case OnvifActions.GetKeyStatus:
+                case SoapActions.GetKeyStatus:
                 {
                     var request = new GetKeyStatusRequest();
                     reader.ReadInto(request);
                     var response = await target.GetKeyStatusAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetKeyStatusResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetKeyStatusResponse");
                 }
-                case OnvifActions.GetPrivateKeyStatus:
+                case SoapActions.GetPrivateKeyStatus:
                 {
                     var request = new GetPrivateKeyStatusRequest();
                     reader.ReadInto(request);
                     var response = await target.GetPrivateKeyStatusAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetPrivateKeyStatusResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetPrivateKeyStatusResponse");
                 }
-                case OnvifActions.GetAllKeys:
+                case SoapActions.GetAllKeys:
                 {
                     var request = new GetAllKeysRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAllKeysAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllKeysResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllKeysResponse");
                 }
-                case OnvifActions.DeleteKey:
+                case SoapActions.DeleteKey:
                 {
                     var request = new DeleteKeyRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteKeyAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteKeyResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteKeyResponse");
                 }
-                case OnvifActions.CreatePKCS10CSR:
+                case SoapActions.CreatePKCS10CSR:
                 {
                     var request = new CreatePKCS10CSRRequest();
                     reader.ReadInto(request);
                     var response = await target.CreatePKCS10CSRAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreatePKCS10CSRResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreatePKCS10CSRResponse");
                 }
-                case OnvifActions.CreateSelfSignedCertificate:
+                case SoapActions.CreateSelfSignedCertificate:
                 {
                     var request = new CreateSelfSignedCertificateRequest();
                     reader.ReadInto(request);
                     var response = await target.CreateSelfSignedCertificateAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateSelfSignedCertificateResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateSelfSignedCertificateResponse");
                 }
-                case OnvifActions.UploadCertificate:
+                case SoapActions.UploadCertificate:
                 {
                     var request = new UploadCertificateRequest();
                     reader.ReadInto(request);
                     var response = await target.UploadCertificateAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "UploadCertificateResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "UploadCertificateResponse");
                 }
-                case OnvifActions.GetCertificate:
+                case SoapActions.GetCertificate:
                 {
                     var request = new GetCertificateRequest();
                     reader.ReadInto(request);
                     var response = await target.GetCertificateAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetCertificateResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetCertificateResponse");
                 }
-                case OnvifActions.GetAllCertificates:
+                case SoapActions.GetAllCertificates:
                 {
                     var request = new GetAllCertificatesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAllCertificatesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllCertificatesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllCertificatesResponse");
                 }
-                case OnvifActions.DeleteCertificate:
+                case SoapActions.DeleteCertificate:
                 {
                     var request = new DeleteCertificateRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteCertificateAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteCertificateResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteCertificateResponse");
                 }
-                case OnvifActions.CreateCertificationPath:
+                case SoapActions.CreateCertificationPath:
                 {
                     var request = new CreateCertificationPathRequest();
                     reader.ReadInto(request);
                     var response = await target.CreateCertificationPathAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateCertificationPathResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateCertificationPathResponse");
                 }
-                case OnvifActions.GetCertificationPath:
+                case SoapActions.GetCertificationPath:
                 {
                     var request = new GetCertificationPathRequest();
                     reader.ReadInto(request);
                     var response = await target.GetCertificationPathAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetCertificationPathResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetCertificationPathResponse");
                 }
-                case OnvifActions.GetAllCertificationPaths:
+                case SoapActions.GetAllCertificationPaths:
                 {
                     var request = new GetAllCertificationPathsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAllCertificationPathsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllCertificationPathsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllCertificationPathsResponse");
                 }
-                case OnvifActions.SetCertificationPath:
+                case SoapActions.SetCertificationPath:
                 {
                     var request = new SetCertificationPathRequest();
                     reader.ReadInto(request);
                     var response = await target.SetCertificationPathAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetCertificationPathResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetCertificationPathResponse");
                 }
-                case OnvifActions.DeleteCertificationPath:
+                case SoapActions.DeleteCertificationPath:
                 {
                     var request = new DeleteCertificationPathRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteCertificationPathAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteCertificationPathResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteCertificationPathResponse");
                 }
-                case OnvifActions.UploadPassphrase:
+                case SoapActions.UploadPassphrase:
                 {
                     var request = new UploadPassphraseRequest();
                     reader.ReadInto(request);
                     var response = await target.UploadPassphraseAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "UploadPassphraseResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "UploadPassphraseResponse");
                 }
-                case OnvifActions.GetAllPassphrases:
+                case SoapActions.GetAllPassphrases:
                 {
                     var request = new GetAllPassphrasesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAllPassphrasesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllPassphrasesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllPassphrasesResponse");
                 }
-                case OnvifActions.DeletePassphrase:
+                case SoapActions.DeletePassphrase:
                 {
                     var request = new DeletePassphraseRequest();
                     reader.ReadInto(request);
                     var response = await target.DeletePassphraseAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeletePassphraseResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeletePassphraseResponse");
                 }
-                case OnvifActions.UploadCRL:
+                case SoapActions.UploadCRL:
                 {
                     var request = new UploadCRLRequest();
                     reader.ReadInto(request);
                     var response = await target.UploadCRLAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "UploadCRLResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "UploadCRLResponse");
                 }
-                case OnvifActions.GetCRL:
+                case SoapActions.GetCRL:
                 {
                     var request = new GetCRLRequest();
                     reader.ReadInto(request);
                     var response = await target.GetCRLAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetCRLResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetCRLResponse");
                 }
-                case OnvifActions.GetAllCRLs:
+                case SoapActions.GetAllCRLs:
                 {
                     var request = new GetAllCRLsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAllCRLsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllCRLsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllCRLsResponse");
                 }
-                case OnvifActions.DeleteCRL:
+                case SoapActions.DeleteCRL:
                 {
                     var request = new DeleteCRLRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteCRLAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteCRLResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteCRLResponse");
                 }
-                case OnvifActions.CreateCertPathValidationPolicy:
+                case SoapActions.CreateCertPathValidationPolicy:
                 {
                     var request = new CreateCertPathValidationPolicyRequest();
                     reader.ReadInto(request);
                     var response = await target.CreateCertPathValidationPolicyAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateCertPathValidationPolicyResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateCertPathValidationPolicyResponse");
                 }
-                case OnvifActions.GetCertPathValidationPolicy:
+                case SoapActions.GetCertPathValidationPolicy:
                 {
                     var request = new GetCertPathValidationPolicyRequest();
                     reader.ReadInto(request);
                     var response = await target.GetCertPathValidationPolicyAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetCertPathValidationPolicyResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetCertPathValidationPolicyResponse");
                 }
-                case OnvifActions.GetAllCertPathValidationPolicies:
+                case SoapActions.GetAllCertPathValidationPolicies:
                 {
                     var request = new GetAllCertPathValidationPoliciesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAllCertPathValidationPoliciesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllCertPathValidationPoliciesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllCertPathValidationPoliciesResponse");
                 }
-                case OnvifActions.SetCertPathValidationPolicy:
+                case SoapActions.SetCertPathValidationPolicy:
                 {
                     var request = new SetCertPathValidationPolicyRequest();
                     reader.ReadInto(request);
                     var response = await target.SetCertPathValidationPolicyAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetCertPathValidationPolicyResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetCertPathValidationPolicyResponse");
                 }
-                case OnvifActions.DeleteCertPathValidationPolicy:
+                case SoapActions.DeleteCertPathValidationPolicy:
                 {
                     var request = new DeleteCertPathValidationPolicyRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteCertPathValidationPolicyAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteCertPathValidationPolicyResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteCertPathValidationPolicyResponse");
                 }
-                case OnvifActions.AddMediaSigningCertificateAssignment:
+                case SoapActions.AddMediaSigningCertificateAssignment:
                 {
                     var request = new AddMediaSigningCertificateAssignmentRequest();
                     reader.ReadInto(request);
                     var response = await target.AddMediaSigningCertificateAssignmentAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "AddMediaSigningCertificateAssignmentResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "AddMediaSigningCertificateAssignmentResponse");
                 }
-                case OnvifActions.RemoveMediaSigningCertificateAssignment:
+                case SoapActions.RemoveMediaSigningCertificateAssignment:
                 {
                     var request = new RemoveMediaSigningCertificateAssignmentRequest();
                     reader.ReadInto(request);
                     var response = await target.RemoveMediaSigningCertificateAssignmentAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "RemoveMediaSigningCertificateAssignmentResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "RemoveMediaSigningCertificateAssignmentResponse");
                 }
-                case OnvifActions.GetAssignedMediaSigningCertificates:
+                case SoapActions.GetAssignedMediaSigningCertificates:
                 {
                     var request = new GetAssignedMediaSigningCertificatesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAssignedMediaSigningCertificatesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAssignedMediaSigningCertificatesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAssignedMediaSigningCertificatesResponse");
                 }
-                case OnvifActions.AddServerCertificateAssignment:
+                case SoapActions.AddServerCertificateAssignment:
                 {
                     var request = new AddServerCertificateAssignmentRequest();
                     reader.ReadInto(request);
                     var response = await target.AddServerCertificateAssignmentAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "AddServerCertificateAssignmentResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "AddServerCertificateAssignmentResponse");
                 }
-                case OnvifActions.RemoveServerCertificateAssignment:
+                case SoapActions.RemoveServerCertificateAssignment:
                 {
                     var request = new RemoveServerCertificateAssignmentRequest();
                     reader.ReadInto(request);
                     var response = await target.RemoveServerCertificateAssignmentAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "RemoveServerCertificateAssignmentResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "RemoveServerCertificateAssignmentResponse");
                 }
-                case OnvifActions.ReplaceServerCertificateAssignment:
+                case SoapActions.ReplaceServerCertificateAssignment:
                 {
                     var request = new ReplaceServerCertificateAssignmentRequest();
                     reader.ReadInto(request);
                     var response = await target.ReplaceServerCertificateAssignmentAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "ReplaceServerCertificateAssignmentResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "ReplaceServerCertificateAssignmentResponse");
                 }
-                case OnvifActions.SetEnabledTLSVersions:
+                case SoapActions.SetEnabledTLSVersions:
                 {
                     var request = new SetEnabledTLSVersionsRequest();
                     reader.ReadInto(request);
                     var response = await target.SetEnabledTLSVersionsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetEnabledTLSVersionsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetEnabledTLSVersionsResponse");
                 }
-                case OnvifActions.GetEnabledTLSVersions:
+                case SoapActions.GetEnabledTLSVersions:
                 {
                     var request = new GetEnabledTLSVersionsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetEnabledTLSVersionsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetEnabledTLSVersionsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetEnabledTLSVersionsResponse");
                 }
-                case OnvifActions.GetAssignedServerCertificates:
+                case SoapActions.GetAssignedServerCertificates:
                 {
                     var request = new GetAssignedServerCertificatesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAssignedServerCertificatesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAssignedServerCertificatesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAssignedServerCertificatesResponse");
                 }
-                case OnvifActions.SetClientAuthenticationRequired:
+                case SoapActions.SetClientAuthenticationRequired:
                 {
                     var request = new SetClientAuthenticationRequiredRequest();
                     reader.ReadInto(request);
                     var response = await target.SetClientAuthenticationRequiredAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetClientAuthenticationRequiredResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetClientAuthenticationRequiredResponse");
                 }
-                case OnvifActions.GetClientAuthenticationRequired:
+                case SoapActions.GetClientAuthenticationRequired:
                 {
                     var request = new GetClientAuthenticationRequiredRequest();
                     reader.ReadInto(request);
                     var response = await target.GetClientAuthenticationRequiredAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetClientAuthenticationRequiredResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetClientAuthenticationRequiredResponse");
                 }
-                case OnvifActions.SetCnMapsToUser:
+                case SoapActions.SetCnMapsToUser:
                 {
                     var request = new SetCnMapsToUserRequest();
                     reader.ReadInto(request);
                     var response = await target.SetCnMapsToUserAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetCnMapsToUserResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetCnMapsToUserResponse");
                 }
-                case OnvifActions.GetCnMapsToUser:
+                case SoapActions.GetCnMapsToUser:
                 {
                     var request = new GetCnMapsToUserRequest();
                     reader.ReadInto(request);
                     var response = await target.GetCnMapsToUserAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetCnMapsToUserResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetCnMapsToUserResponse");
                 }
-                case OnvifActions.AddCertPathValidationPolicyAssignment:
+                case SoapActions.AddCertPathValidationPolicyAssignment:
                 {
                     var request = new AddCertPathValidationPolicyAssignmentRequest();
                     reader.ReadInto(request);
                     var response = await target.AddCertPathValidationPolicyAssignmentAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "AddCertPathValidationPolicyAssignmentResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "AddCertPathValidationPolicyAssignmentResponse");
                 }
-                case OnvifActions.RemoveCertPathValidationPolicyAssignment:
+                case SoapActions.RemoveCertPathValidationPolicyAssignment:
                 {
                     var request = new RemoveCertPathValidationPolicyAssignmentRequest();
                     reader.ReadInto(request);
                     var response = await target.RemoveCertPathValidationPolicyAssignmentAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "RemoveCertPathValidationPolicyAssignmentResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "RemoveCertPathValidationPolicyAssignmentResponse");
                 }
-                case OnvifActions.ReplaceCertPathValidationPolicyAssignment:
+                case SoapActions.ReplaceCertPathValidationPolicyAssignment:
                 {
                     var request = new ReplaceCertPathValidationPolicyAssignmentRequest();
                     reader.ReadInto(request);
                     var response = await target.ReplaceCertPathValidationPolicyAssignmentAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "ReplaceCertPathValidationPolicyAssignmentResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "ReplaceCertPathValidationPolicyAssignmentResponse");
                 }
-                case OnvifActions.GetAssignedCertPathValidationPolicies:
+                case SoapActions.GetAssignedCertPathValidationPolicies:
                 {
                     var request = new GetAssignedCertPathValidationPoliciesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetAssignedCertPathValidationPoliciesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAssignedCertPathValidationPoliciesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAssignedCertPathValidationPoliciesResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }

@@ -6,7 +6,7 @@ namespace WsdlGenerator.Wsdl;
 
 /// <summary>
 /// Parses WSDL 1.1 documents, following wsdl:import and feeding every inline xs:schema to the
-/// schema parser. Only document/literal SOAP 1.2 bindings are accepted, which is all ONVIF uses.
+/// schema parser. Only document/literal SOAP 1.2 bindings are accepted.
 /// </summary>
 internal sealed class WsdlParser
 {
@@ -112,7 +112,7 @@ internal sealed class WsdlParser
             var output = operation.Element(W + "output");
 
             // Solicit-response and notification (output before input) would need a different
-            // client shape; ONVIF uses only request-response and one-way.
+            // client shape; request-response and one-way are what this generates.
             if (input is null && output is not null)
                 throw new SchemaException(operation, "Notification-style operations are not supported.");
 
@@ -142,7 +142,7 @@ internal sealed class WsdlParser
         var name = new QName(targetNamespace, Required(binding, "name"));
         var portType = QName.Parse(Required(binding, "type"), binding);
 
-        // Accept SOAP 1.2 and 1.1 binding namespaces; ONVIF uses 1.2 throughout, but the
+        // Accept SOAP 1.2 and 1.1 binding namespaces; 1.2 is what is generated, but the
         // element name is the same in both so the check stays on the namespace.
         var soapBinding = binding.Elements().FirstOrDefault(e =>
             e.Name.LocalName == "binding" && (e.Name.NamespaceName == Ns.WsdlSoap12 || e.Name.NamespaceName == Ns.WsdlSoap11));

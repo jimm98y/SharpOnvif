@@ -22,7 +22,7 @@ namespace SharpOnvifClient.Display
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/display/wsdl")]
-    public partial class Capabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Capabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -57,9 +57,9 @@ namespace SharpOnvifClient.Display
             set { this.fixedLayoutFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Capabilities"; } }
+        protected override string XmlTypeName { get { return "Capabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Display; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Display; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -100,7 +100,7 @@ namespace SharpOnvifClient.Display
     /// their capabilities. The content of the Token field may be ignored by the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreatePaneConfiguration", Namespace="http://www.onvif.org/ver10/display/wsdl")]
-    public partial class CreatePaneConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreatePaneConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string videoOutputField;
 
@@ -178,7 +178,7 @@ namespace SharpOnvifClient.Display
     /// their capabilities. The content of the Token field may be ignored by the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreatePaneConfigurationResponse", Namespace="http://www.onvif.org/ver10/display/wsdl")]
-    public partial class CreatePaneConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreatePaneConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string paneTokenField;
 
@@ -238,7 +238,7 @@ namespace SharpOnvifClient.Display
     /// dynamic pane creation via their capabilities.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeletePaneConfiguration", Namespace="http://www.onvif.org/ver10/display/wsdl")]
-    public partial class DeletePaneConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeletePaneConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string videoOutputField;
 
@@ -316,7 +316,7 @@ namespace SharpOnvifClient.Display
     /// dynamic pane creation via their capabilities.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeletePaneConfigurationResponse", Namespace="http://www.onvif.org/ver10/display/wsdl")]
-    public partial class DeletePaneConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeletePaneConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -355,7 +355,7 @@ namespace SharpOnvifClient.Display
     /// and Coding Capabilities, of a VideoOutput.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetDisplayOptions", Namespace="http://www.onvif.org/ver10/display/wsdl")]
-    public partial class GetDisplayOptionsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetDisplayOptionsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string videoOutputField;
 
@@ -415,7 +415,7 @@ namespace SharpOnvifClient.Display
     /// and Coding Capabilities, of a VideoOutput.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetDisplayOptionsResponse", Namespace="http://www.onvif.org/ver10/display/wsdl")]
-    public partial class GetDisplayOptionsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetDisplayOptionsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.LayoutOptions layoutOptionsField;
 
@@ -494,7 +494,7 @@ namespace SharpOnvifClient.Display
     /// consists of a list of PaneConfigurations and their associated display areas.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetLayout", Namespace="http://www.onvif.org/ver10/display/wsdl")]
-    public partial class GetLayoutRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetLayoutRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string videoOutputField;
 
@@ -554,7 +554,7 @@ namespace SharpOnvifClient.Display
     /// consists of a list of PaneConfigurations and their associated display areas.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetLayoutResponse", Namespace="http://www.onvif.org/ver10/display/wsdl")]
-    public partial class GetLayoutResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetLayoutResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.Layout layoutField;
 
@@ -612,7 +612,7 @@ namespace SharpOnvifClient.Display
     /// Retrieve the pane configuration for a pane token.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetPaneConfiguration", Namespace="http://www.onvif.org/ver10/display/wsdl")]
-    public partial class GetPaneConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetPaneConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string videoOutputField;
 
@@ -688,7 +688,7 @@ namespace SharpOnvifClient.Display
     /// Retrieve the pane configuration for a pane token.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetPaneConfigurationResponse", Namespace="http://www.onvif.org/ver10/display/wsdl")]
-    public partial class GetPaneConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetPaneConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.PaneConfiguration paneConfigurationField;
 
@@ -750,7 +750,7 @@ namespace SharpOnvifClient.Display
     /// and/or AudioSourceToken. If a Token is not set, the corresponding session will not be established.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetPaneConfigurations", Namespace="http://www.onvif.org/ver10/display/wsdl")]
-    public partial class GetPaneConfigurationsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetPaneConfigurationsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string videoOutputField;
 
@@ -812,7 +812,7 @@ namespace SharpOnvifClient.Display
     /// and/or AudioSourceToken. If a Token is not set, the corresponding session will not be established.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetPaneConfigurationsResponse", Namespace="http://www.onvif.org/ver10/display/wsdl")]
-    public partial class GetPaneConfigurationsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetPaneConfigurationsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.PaneConfiguration[] paneConfigurationField;
 
@@ -865,7 +865,7 @@ namespace SharpOnvifClient.Display
     /// Returns the capabilities of the display service. The result is returned in a typed answer.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilities", Namespace="http://www.onvif.org/ver10/display/wsdl")]
-    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetServiceCapabilitiesRequest()
         {
@@ -877,7 +877,7 @@ namespace SharpOnvifClient.Display
     /// Returns the capabilities of the display service. The result is returned in a typed answer.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilitiesResponse", Namespace="http://www.onvif.org/ver10/display/wsdl")]
-    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private Capabilities capabilitiesField;
 
@@ -927,7 +927,7 @@ namespace SharpOnvifClient.Display
     /// layout against its fixed set of layouts by accepting differences of at least one percent.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetLayout", Namespace="http://www.onvif.org/ver10/display/wsdl")]
-    public partial class SetLayoutRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetLayoutRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string videoOutputField;
 
@@ -1007,7 +1007,7 @@ namespace SharpOnvifClient.Display
     /// layout against its fixed set of layouts by accepting differences of at least one percent.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetLayoutResponse", Namespace="http://www.onvif.org/ver10/display/wsdl")]
-    public partial class SetLayoutResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetLayoutResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -1044,7 +1044,7 @@ namespace SharpOnvifClient.Display
     /// This command changes the configuration of the specified pane (tbd)
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetPaneConfiguration", Namespace="http://www.onvif.org/ver10/display/wsdl")]
-    public partial class SetPaneConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetPaneConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string videoOutputField;
 
@@ -1120,7 +1120,7 @@ namespace SharpOnvifClient.Display
     /// This command changes the configuration of the specified pane (tbd)
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetPaneConfigurationResponse", Namespace="http://www.onvif.org/ver10/display/wsdl")]
-    public partial class SetPaneConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetPaneConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -1159,7 +1159,7 @@ namespace SharpOnvifClient.Display
     /// configurations.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetPaneConfigurations", Namespace="http://www.onvif.org/ver10/display/wsdl")]
-    public partial class SetPaneConfigurationsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetPaneConfigurationsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string videoOutputField;
 
@@ -1231,7 +1231,7 @@ namespace SharpOnvifClient.Display
     /// configurations.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetPaneConfigurationsResponse", Namespace="http://www.onvif.org/ver10/display/wsdl")]
-    public partial class SetPaneConfigurationsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetPaneConfigurationsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -1267,14 +1267,14 @@ namespace SharpOnvifClient.Display
     /// <summary>Constructs a contract named by an xsi:type attribute.</summary>
     internal static class XmlTypeFactory
     {
-        public static SharpOnvifCommon.Xml.OnvifContract Create(string ns, string name)
+        public static SharpOnvifCommon.Xml.XmlContract Create(string ns, string name)
         {
             return SharpOnvifCommon.Onvif.XmlTypeFactory.Create(ns, name);
         }
     }
 
     /// <summary>SOAP action URIs for this service's operations.</summary>
-    public static class OnvifActions
+    public static class SoapActions
     {
         public const string GetServiceCapabilities = "http://www.onvif.org/ver10/display/wsdl/GetServiceCapabilities";
         public const string GetLayout = "http://www.onvif.org/ver10/display/wsdl/GetLayout";

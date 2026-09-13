@@ -16,7 +16,7 @@ namespace SharpOnvifServer.Events
     public abstract class CreatePullPointBase
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new CreatePullPointDispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new CreatePullPointDispatcher();
 
         public virtual System.Threading.Tasks.Task<CreatePullPointResponse> CreatePullPointAsync(CreatePullPointRequest request, System.Threading.CancellationToken cancellationToken)
         {
@@ -37,7 +37,7 @@ namespace SharpOnvifServer.Events
     }
 
     /// <summary>Routes SOAP actions to <see cref="CreatePullPointBase"/>.</summary>
-    internal sealed class CreatePullPointDispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class CreatePullPointDispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(CreatePullPointBase); } }
 
@@ -45,7 +45,7 @@ namespace SharpOnvifServer.Events
         {
             switch (action)
             {
-                case OnvifActions.CreatePullPoint:
+                case SoapActions.CreatePullPoint:
                     return true;
                 default:
                     return false;
@@ -59,7 +59,7 @@ namespace SharpOnvifServer.Events
                 case "CreatePullPoint":
                     if (ns == "http://docs.oasis-open.org/wsn/b-2")
                     {
-                        action = OnvifActions.CreatePullPoint;
+                        action = SoapActions.CreatePullPoint;
                         return true;
                     }
                     break;
@@ -68,7 +68,7 @@ namespace SharpOnvifServer.Events
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             CreatePullPointBase target = (CreatePullPointBase)service;
@@ -76,19 +76,19 @@ namespace SharpOnvifServer.Events
 
             switch (action)
             {
-                case OnvifActions.CreatePullPoint:
+                case SoapActions.CreatePullPoint:
                 {
                     var request = new CreatePullPointRequest();
                     reader.ReadInto(request);
                     var response = await target.CreatePullPointAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "CreatePullPointResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "CreatePullPointResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -100,7 +100,7 @@ namespace SharpOnvifServer.Events
     public abstract class EventPortTypeBase
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new EventPortTypeDispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new EventPortTypeDispatcher();
 
         /// <summary>
         /// Returns the capabilities of the event service. The result is returned in a typed answer.
@@ -233,7 +233,7 @@ namespace SharpOnvifServer.Events
     }
 
     /// <summary>Routes SOAP actions to <see cref="EventPortTypeBase"/>.</summary>
-    internal sealed class EventPortTypeDispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class EventPortTypeDispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(EventPortTypeBase); } }
 
@@ -241,12 +241,12 @@ namespace SharpOnvifServer.Events
         {
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
-                case OnvifActions.CreatePullPointSubscription:
-                case OnvifActions.GetEventProperties:
-                case OnvifActions.AddEventBroker:
-                case OnvifActions.DeleteEventBroker:
-                case OnvifActions.GetEventBrokers:
+                case SoapActions.GetServiceCapabilities:
+                case SoapActions.CreatePullPointSubscription:
+                case SoapActions.GetEventProperties:
+                case SoapActions.AddEventBroker:
+                case SoapActions.DeleteEventBroker:
+                case SoapActions.GetEventBrokers:
                     return true;
                 default:
                     return false;
@@ -260,42 +260,42 @@ namespace SharpOnvifServer.Events
                 case "GetServiceCapabilities":
                     if (ns == "http://www.onvif.org/ver10/events/wsdl")
                     {
-                        action = OnvifActions.GetServiceCapabilities;
+                        action = SoapActions.GetServiceCapabilities;
                         return true;
                     }
                     break;
                 case "CreatePullPointSubscription":
                     if (ns == "http://www.onvif.org/ver10/events/wsdl")
                     {
-                        action = OnvifActions.CreatePullPointSubscription;
+                        action = SoapActions.CreatePullPointSubscription;
                         return true;
                     }
                     break;
                 case "GetEventProperties":
                     if (ns == "http://www.onvif.org/ver10/events/wsdl")
                     {
-                        action = OnvifActions.GetEventProperties;
+                        action = SoapActions.GetEventProperties;
                         return true;
                     }
                     break;
                 case "AddEventBroker":
                     if (ns == "http://www.onvif.org/ver10/events/wsdl")
                     {
-                        action = OnvifActions.AddEventBroker;
+                        action = SoapActions.AddEventBroker;
                         return true;
                     }
                     break;
                 case "DeleteEventBroker":
                     if (ns == "http://www.onvif.org/ver10/events/wsdl")
                     {
-                        action = OnvifActions.DeleteEventBroker;
+                        action = SoapActions.DeleteEventBroker;
                         return true;
                     }
                     break;
                 case "GetEventBrokers":
                     if (ns == "http://www.onvif.org/ver10/events/wsdl")
                     {
-                        action = OnvifActions.GetEventBrokers;
+                        action = SoapActions.GetEventBrokers;
                         return true;
                     }
                     break;
@@ -304,7 +304,7 @@ namespace SharpOnvifServer.Events
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             EventPortTypeBase target = (EventPortTypeBase)service;
@@ -312,54 +312,54 @@ namespace SharpOnvifServer.Events
 
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
+                case SoapActions.GetServiceCapabilities:
                 {
                     var request = new GetServiceCapabilitiesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetServiceCapabilitiesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/events/wsdl", "GetServiceCapabilitiesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/events/wsdl", "GetServiceCapabilitiesResponse");
                 }
-                case OnvifActions.CreatePullPointSubscription:
+                case SoapActions.CreatePullPointSubscription:
                 {
                     var request = new CreatePullPointSubscriptionRequest();
                     reader.ReadInto(request);
                     var response = await target.CreatePullPointSubscriptionAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/events/wsdl", "CreatePullPointSubscriptionResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/events/wsdl", "CreatePullPointSubscriptionResponse");
                 }
-                case OnvifActions.GetEventProperties:
+                case SoapActions.GetEventProperties:
                 {
                     var request = new GetEventPropertiesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetEventPropertiesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/events/wsdl", "GetEventPropertiesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/events/wsdl", "GetEventPropertiesResponse");
                 }
-                case OnvifActions.AddEventBroker:
+                case SoapActions.AddEventBroker:
                 {
                     var request = new AddEventBrokerRequest();
                     reader.ReadInto(request);
                     var response = await target.AddEventBrokerAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/events/wsdl", "AddEventBrokerResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/events/wsdl", "AddEventBrokerResponse");
                 }
-                case OnvifActions.DeleteEventBroker:
+                case SoapActions.DeleteEventBroker:
                 {
                     var request = new DeleteEventBrokerRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteEventBrokerAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/events/wsdl", "DeleteEventBrokerResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/events/wsdl", "DeleteEventBrokerResponse");
                 }
-                case OnvifActions.GetEventBrokers:
+                case SoapActions.GetEventBrokers:
                 {
                     var request = new GetEventBrokersRequest();
                     reader.ReadInto(request);
                     var response = await target.GetEventBrokersAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/events/wsdl", "GetEventBrokersResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/events/wsdl", "GetEventBrokersResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -371,7 +371,7 @@ namespace SharpOnvifServer.Events
     public abstract class NotificationConsumerBase
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new NotificationConsumerDispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new NotificationConsumerDispatcher();
 
         public virtual System.Threading.Tasks.Task<NotifyResponse> NotifyAsync(NotifyRequest request, System.Threading.CancellationToken cancellationToken)
         {
@@ -392,7 +392,7 @@ namespace SharpOnvifServer.Events
     }
 
     /// <summary>Routes SOAP actions to <see cref="NotificationConsumerBase"/>.</summary>
-    internal sealed class NotificationConsumerDispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class NotificationConsumerDispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(NotificationConsumerBase); } }
 
@@ -400,7 +400,7 @@ namespace SharpOnvifServer.Events
         {
             switch (action)
             {
-                case OnvifActions.Notify:
+                case SoapActions.Notify:
                     return true;
                 default:
                     return false;
@@ -414,7 +414,7 @@ namespace SharpOnvifServer.Events
                 case "Notify":
                     if (ns == "http://docs.oasis-open.org/wsn/b-2")
                     {
-                        action = OnvifActions.Notify;
+                        action = SoapActions.Notify;
                         return true;
                     }
                     break;
@@ -423,7 +423,7 @@ namespace SharpOnvifServer.Events
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             NotificationConsumerBase target = (NotificationConsumerBase)service;
@@ -431,19 +431,19 @@ namespace SharpOnvifServer.Events
 
             switch (action)
             {
-                case OnvifActions.Notify:
+                case SoapActions.Notify:
                 {
                     var request = new NotifyRequest();
                     reader.ReadInto(request);
                     var response = await target.NotifyAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, null, "NotifyResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, null, "NotifyResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -455,7 +455,7 @@ namespace SharpOnvifServer.Events
     public abstract class NotificationProducerBase
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new NotificationProducerDispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new NotificationProducerDispatcher();
 
         public virtual System.Threading.Tasks.Task<SubscribeResponse> SubscribeAsync(SubscribeRequest request, System.Threading.CancellationToken cancellationToken)
         {
@@ -493,7 +493,7 @@ namespace SharpOnvifServer.Events
     }
 
     /// <summary>Routes SOAP actions to <see cref="NotificationProducerBase"/>.</summary>
-    internal sealed class NotificationProducerDispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class NotificationProducerDispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(NotificationProducerBase); } }
 
@@ -501,8 +501,8 @@ namespace SharpOnvifServer.Events
         {
             switch (action)
             {
-                case OnvifActions.Subscribe:
-                case OnvifActions.GetCurrentMessage:
+                case SoapActions.Subscribe:
+                case SoapActions.GetCurrentMessage:
                     return true;
                 default:
                     return false;
@@ -516,14 +516,14 @@ namespace SharpOnvifServer.Events
                 case "Subscribe":
                     if (ns == "http://docs.oasis-open.org/wsn/b-2")
                     {
-                        action = OnvifActions.Subscribe;
+                        action = SoapActions.Subscribe;
                         return true;
                     }
                     break;
                 case "GetCurrentMessage":
                     if (ns == "http://docs.oasis-open.org/wsn/b-2")
                     {
-                        action = OnvifActions.GetCurrentMessage;
+                        action = SoapActions.GetCurrentMessage;
                         return true;
                     }
                     break;
@@ -532,7 +532,7 @@ namespace SharpOnvifServer.Events
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             NotificationProducerBase target = (NotificationProducerBase)service;
@@ -540,26 +540,26 @@ namespace SharpOnvifServer.Events
 
             switch (action)
             {
-                case OnvifActions.Subscribe:
+                case SoapActions.Subscribe:
                 {
                     var request = new SubscribeRequest();
                     reader.ReadInto(request);
                     var response = await target.SubscribeAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "SubscribeResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "SubscribeResponse");
                 }
-                case OnvifActions.GetCurrentMessage:
+                case SoapActions.GetCurrentMessage:
                 {
                     var request = new GetCurrentMessageRequest();
                     reader.ReadInto(request);
                     var response = await target.GetCurrentMessageAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "GetCurrentMessageResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "GetCurrentMessageResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -571,7 +571,7 @@ namespace SharpOnvifServer.Events
     public abstract class PausableSubscriptionManagerBase
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new PausableSubscriptionManagerDispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new PausableSubscriptionManagerDispatcher();
 
         public virtual System.Threading.Tasks.Task<RenewResponse> RenewAsync(RenewRequest request, System.Threading.CancellationToken cancellationToken)
         {
@@ -643,7 +643,7 @@ namespace SharpOnvifServer.Events
     }
 
     /// <summary>Routes SOAP actions to <see cref="PausableSubscriptionManagerBase"/>.</summary>
-    internal sealed class PausableSubscriptionManagerDispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class PausableSubscriptionManagerDispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(PausableSubscriptionManagerBase); } }
 
@@ -651,10 +651,10 @@ namespace SharpOnvifServer.Events
         {
             switch (action)
             {
-                case OnvifActions.Renew:
-                case OnvifActions.Unsubscribe:
-                case OnvifActions.PauseSubscription:
-                case OnvifActions.ResumeSubscription:
+                case SoapActions.Renew:
+                case SoapActions.Unsubscribe:
+                case SoapActions.PauseSubscription:
+                case SoapActions.ResumeSubscription:
                     return true;
                 default:
                     return false;
@@ -668,28 +668,28 @@ namespace SharpOnvifServer.Events
                 case "Renew":
                     if (ns == "http://docs.oasis-open.org/wsn/b-2")
                     {
-                        action = OnvifActions.Renew;
+                        action = SoapActions.Renew;
                         return true;
                     }
                     break;
                 case "Unsubscribe":
                     if (ns == "http://docs.oasis-open.org/wsn/b-2")
                     {
-                        action = OnvifActions.Unsubscribe;
+                        action = SoapActions.Unsubscribe;
                         return true;
                     }
                     break;
                 case "PauseSubscription":
                     if (ns == "http://docs.oasis-open.org/wsn/b-2")
                     {
-                        action = OnvifActions.PauseSubscription;
+                        action = SoapActions.PauseSubscription;
                         return true;
                     }
                     break;
                 case "ResumeSubscription":
                     if (ns == "http://docs.oasis-open.org/wsn/b-2")
                     {
-                        action = OnvifActions.ResumeSubscription;
+                        action = SoapActions.ResumeSubscription;
                         return true;
                     }
                     break;
@@ -698,7 +698,7 @@ namespace SharpOnvifServer.Events
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             PausableSubscriptionManagerBase target = (PausableSubscriptionManagerBase)service;
@@ -706,40 +706,40 @@ namespace SharpOnvifServer.Events
 
             switch (action)
             {
-                case OnvifActions.Renew:
+                case SoapActions.Renew:
                 {
                     var request = new RenewRequest();
                     reader.ReadInto(request);
                     var response = await target.RenewAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "RenewResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "RenewResponse");
                 }
-                case OnvifActions.Unsubscribe:
+                case SoapActions.Unsubscribe:
                 {
                     var request = new UnsubscribeRequest();
                     reader.ReadInto(request);
                     var response = await target.UnsubscribeAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "UnsubscribeResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "UnsubscribeResponse");
                 }
-                case OnvifActions.PauseSubscription:
+                case SoapActions.PauseSubscription:
                 {
                     var request = new PauseSubscriptionRequest();
                     reader.ReadInto(request);
                     var response = await target.PauseSubscriptionAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "PauseSubscriptionResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "PauseSubscriptionResponse");
                 }
-                case OnvifActions.ResumeSubscription:
+                case SoapActions.ResumeSubscription:
                 {
                     var request = new ResumeSubscriptionRequest();
                     reader.ReadInto(request);
                     var response = await target.ResumeSubscriptionAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "ResumeSubscriptionResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "ResumeSubscriptionResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -751,7 +751,7 @@ namespace SharpOnvifServer.Events
     public abstract class PullPointBase
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new PullPointDispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new PullPointDispatcher();
 
         public virtual System.Threading.Tasks.Task<GetMessagesResponse> GetMessagesAsync(GetMessagesRequest request, System.Threading.CancellationToken cancellationToken)
         {
@@ -806,7 +806,7 @@ namespace SharpOnvifServer.Events
     }
 
     /// <summary>Routes SOAP actions to <see cref="PullPointBase"/>.</summary>
-    internal sealed class PullPointDispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class PullPointDispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(PullPointBase); } }
 
@@ -814,9 +814,9 @@ namespace SharpOnvifServer.Events
         {
             switch (action)
             {
-                case OnvifActions.GetMessages:
-                case OnvifActions.DestroyPullPoint:
-                case OnvifActions.Notify:
+                case SoapActions.GetMessages:
+                case SoapActions.DestroyPullPoint:
+                case SoapActions.Notify:
                     return true;
                 default:
                     return false;
@@ -830,21 +830,21 @@ namespace SharpOnvifServer.Events
                 case "GetMessages":
                     if (ns == "http://docs.oasis-open.org/wsn/b-2")
                     {
-                        action = OnvifActions.GetMessages;
+                        action = SoapActions.GetMessages;
                         return true;
                     }
                     break;
                 case "DestroyPullPoint":
                     if (ns == "http://docs.oasis-open.org/wsn/b-2")
                     {
-                        action = OnvifActions.DestroyPullPoint;
+                        action = SoapActions.DestroyPullPoint;
                         return true;
                     }
                     break;
                 case "Notify":
                     if (ns == "http://docs.oasis-open.org/wsn/b-2")
                     {
-                        action = OnvifActions.Notify;
+                        action = SoapActions.Notify;
                         return true;
                     }
                     break;
@@ -853,7 +853,7 @@ namespace SharpOnvifServer.Events
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             PullPointBase target = (PullPointBase)service;
@@ -861,33 +861,33 @@ namespace SharpOnvifServer.Events
 
             switch (action)
             {
-                case OnvifActions.GetMessages:
+                case SoapActions.GetMessages:
                 {
                     var request = new GetMessagesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetMessagesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "GetMessagesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "GetMessagesResponse");
                 }
-                case OnvifActions.DestroyPullPoint:
+                case SoapActions.DestroyPullPoint:
                 {
                     var request = new DestroyPullPointRequest();
                     reader.ReadInto(request);
                     var response = await target.DestroyPullPointAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "DestroyPullPointResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "DestroyPullPointResponse");
                 }
-                case OnvifActions.Notify:
+                case SoapActions.Notify:
                 {
                     var request = new NotifyRequest();
                     reader.ReadInto(request);
                     var response = await target.NotifyAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, null, "NotifyResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, null, "NotifyResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -899,7 +899,7 @@ namespace SharpOnvifServer.Events
     public abstract class PullPointSubscriptionBase
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new PullPointSubscriptionDispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new PullPointSubscriptionDispatcher();
 
         /// <summary>
         /// This method pulls one or more messages from a PullPoint. The device shall provide the following
@@ -1001,7 +1001,7 @@ namespace SharpOnvifServer.Events
     }
 
     /// <summary>Routes SOAP actions to <see cref="PullPointSubscriptionBase"/>.</summary>
-    internal sealed class PullPointSubscriptionDispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class PullPointSubscriptionDispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(PullPointSubscriptionBase); } }
 
@@ -1009,10 +1009,10 @@ namespace SharpOnvifServer.Events
         {
             switch (action)
             {
-                case OnvifActions.PullMessages:
-                case OnvifActions.Seek:
-                case OnvifActions.SetSynchronizationPoint:
-                case OnvifActions.Unsubscribe:
+                case SoapActions.PullMessages:
+                case SoapActions.Seek:
+                case SoapActions.SetSynchronizationPoint:
+                case SoapActions.Unsubscribe:
                     return true;
                 default:
                     return false;
@@ -1026,28 +1026,28 @@ namespace SharpOnvifServer.Events
                 case "PullMessages":
                     if (ns == "http://www.onvif.org/ver10/events/wsdl")
                     {
-                        action = OnvifActions.PullMessages;
+                        action = SoapActions.PullMessages;
                         return true;
                     }
                     break;
                 case "Seek":
                     if (ns == "http://www.onvif.org/ver10/events/wsdl")
                     {
-                        action = OnvifActions.Seek;
+                        action = SoapActions.Seek;
                         return true;
                     }
                     break;
                 case "SetSynchronizationPoint":
                     if (ns == "http://www.onvif.org/ver10/events/wsdl")
                     {
-                        action = OnvifActions.SetSynchronizationPoint;
+                        action = SoapActions.SetSynchronizationPoint;
                         return true;
                     }
                     break;
                 case "Unsubscribe":
                     if (ns == "http://docs.oasis-open.org/wsn/b-2")
                     {
-                        action = OnvifActions.Unsubscribe;
+                        action = SoapActions.Unsubscribe;
                         return true;
                     }
                     break;
@@ -1056,7 +1056,7 @@ namespace SharpOnvifServer.Events
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             PullPointSubscriptionBase target = (PullPointSubscriptionBase)service;
@@ -1064,40 +1064,40 @@ namespace SharpOnvifServer.Events
 
             switch (action)
             {
-                case OnvifActions.PullMessages:
+                case SoapActions.PullMessages:
                 {
                     var request = new PullMessagesRequest();
                     reader.ReadInto(request);
                     var response = await target.PullMessagesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/events/wsdl", "PullMessagesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/events/wsdl", "PullMessagesResponse");
                 }
-                case OnvifActions.Seek:
+                case SoapActions.Seek:
                 {
                     var request = new SeekRequest();
                     reader.ReadInto(request);
                     var response = await target.SeekAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/events/wsdl", "SeekResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/events/wsdl", "SeekResponse");
                 }
-                case OnvifActions.SetSynchronizationPoint:
+                case SoapActions.SetSynchronizationPoint:
                 {
                     var request = new SetSynchronizationPointRequest();
                     reader.ReadInto(request);
                     var response = await target.SetSynchronizationPointAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/events/wsdl", "SetSynchronizationPointResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/events/wsdl", "SetSynchronizationPointResponse");
                 }
-                case OnvifActions.Unsubscribe:
+                case SoapActions.Unsubscribe:
                 {
                     var request = new UnsubscribeRequest();
                     reader.ReadInto(request);
                     var response = await target.UnsubscribeAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "UnsubscribeResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "UnsubscribeResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -1109,7 +1109,7 @@ namespace SharpOnvifServer.Events
     public abstract class SubscriptionManagerBase
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new SubscriptionManagerDispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new SubscriptionManagerDispatcher();
 
         public virtual System.Threading.Tasks.Task<RenewResponse> RenewAsync(RenewRequest request, System.Threading.CancellationToken cancellationToken)
         {
@@ -1147,7 +1147,7 @@ namespace SharpOnvifServer.Events
     }
 
     /// <summary>Routes SOAP actions to <see cref="SubscriptionManagerBase"/>.</summary>
-    internal sealed class SubscriptionManagerDispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class SubscriptionManagerDispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(SubscriptionManagerBase); } }
 
@@ -1155,8 +1155,8 @@ namespace SharpOnvifServer.Events
         {
             switch (action)
             {
-                case OnvifActions.Renew:
-                case OnvifActions.Unsubscribe:
+                case SoapActions.Renew:
+                case SoapActions.Unsubscribe:
                     return true;
                 default:
                     return false;
@@ -1170,14 +1170,14 @@ namespace SharpOnvifServer.Events
                 case "Renew":
                     if (ns == "http://docs.oasis-open.org/wsn/b-2")
                     {
-                        action = OnvifActions.Renew;
+                        action = SoapActions.Renew;
                         return true;
                     }
                     break;
                 case "Unsubscribe":
                     if (ns == "http://docs.oasis-open.org/wsn/b-2")
                     {
-                        action = OnvifActions.Unsubscribe;
+                        action = SoapActions.Unsubscribe;
                         return true;
                     }
                     break;
@@ -1186,7 +1186,7 @@ namespace SharpOnvifServer.Events
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             SubscriptionManagerBase target = (SubscriptionManagerBase)service;
@@ -1194,26 +1194,26 @@ namespace SharpOnvifServer.Events
 
             switch (action)
             {
-                case OnvifActions.Renew:
+                case SoapActions.Renew:
                 {
                     var request = new RenewRequest();
                     reader.ReadInto(request);
                     var response = await target.RenewAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "RenewResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "RenewResponse");
                 }
-                case OnvifActions.Unsubscribe:
+                case SoapActions.Unsubscribe:
                 {
                     var request = new UnsubscribeRequest();
                     reader.ReadInto(request);
                     var response = await target.UnsubscribeAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "UnsubscribeResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "UnsubscribeResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -1225,7 +1225,7 @@ namespace SharpOnvifServer.Events
     public abstract class EventsBase
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new EventsDispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new EventsDispatcher();
 
         public virtual System.Threading.Tasks.Task<CreatePullPointResponse> CreatePullPointAsync(CreatePullPointRequest request, System.Threading.CancellationToken cancellationToken)
         {
@@ -1604,7 +1604,7 @@ namespace SharpOnvifServer.Events
     }
 
     /// <summary>Routes SOAP actions to <see cref="EventsBase"/>.</summary>
-    internal sealed class EventsDispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class EventsDispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(EventsBase); } }
 
@@ -1612,25 +1612,25 @@ namespace SharpOnvifServer.Events
         {
             switch (action)
             {
-                case OnvifActions.CreatePullPoint:
-                case OnvifActions.GetServiceCapabilities:
-                case OnvifActions.CreatePullPointSubscription:
-                case OnvifActions.GetEventProperties:
-                case OnvifActions.AddEventBroker:
-                case OnvifActions.DeleteEventBroker:
-                case OnvifActions.GetEventBrokers:
-                case OnvifActions.Notify:
-                case OnvifActions.Subscribe:
-                case OnvifActions.GetCurrentMessage:
-                case OnvifActions.Renew:
-                case OnvifActions.Unsubscribe:
-                case OnvifActions.PauseSubscription:
-                case OnvifActions.ResumeSubscription:
-                case OnvifActions.GetMessages:
-                case OnvifActions.DestroyPullPoint:
-                case OnvifActions.PullMessages:
-                case OnvifActions.Seek:
-                case OnvifActions.SetSynchronizationPoint:
+                case SoapActions.CreatePullPoint:
+                case SoapActions.GetServiceCapabilities:
+                case SoapActions.CreatePullPointSubscription:
+                case SoapActions.GetEventProperties:
+                case SoapActions.AddEventBroker:
+                case SoapActions.DeleteEventBroker:
+                case SoapActions.GetEventBrokers:
+                case SoapActions.Notify:
+                case SoapActions.Subscribe:
+                case SoapActions.GetCurrentMessage:
+                case SoapActions.Renew:
+                case SoapActions.Unsubscribe:
+                case SoapActions.PauseSubscription:
+                case SoapActions.ResumeSubscription:
+                case SoapActions.GetMessages:
+                case SoapActions.DestroyPullPoint:
+                case SoapActions.PullMessages:
+                case SoapActions.Seek:
+                case SoapActions.SetSynchronizationPoint:
                     return true;
                 default:
                     return false;
@@ -1644,133 +1644,133 @@ namespace SharpOnvifServer.Events
                 case "CreatePullPoint":
                     if (ns == "http://docs.oasis-open.org/wsn/b-2")
                     {
-                        action = OnvifActions.CreatePullPoint;
+                        action = SoapActions.CreatePullPoint;
                         return true;
                     }
                     break;
                 case "GetServiceCapabilities":
                     if (ns == "http://www.onvif.org/ver10/events/wsdl")
                     {
-                        action = OnvifActions.GetServiceCapabilities;
+                        action = SoapActions.GetServiceCapabilities;
                         return true;
                     }
                     break;
                 case "CreatePullPointSubscription":
                     if (ns == "http://www.onvif.org/ver10/events/wsdl")
                     {
-                        action = OnvifActions.CreatePullPointSubscription;
+                        action = SoapActions.CreatePullPointSubscription;
                         return true;
                     }
                     break;
                 case "GetEventProperties":
                     if (ns == "http://www.onvif.org/ver10/events/wsdl")
                     {
-                        action = OnvifActions.GetEventProperties;
+                        action = SoapActions.GetEventProperties;
                         return true;
                     }
                     break;
                 case "AddEventBroker":
                     if (ns == "http://www.onvif.org/ver10/events/wsdl")
                     {
-                        action = OnvifActions.AddEventBroker;
+                        action = SoapActions.AddEventBroker;
                         return true;
                     }
                     break;
                 case "DeleteEventBroker":
                     if (ns == "http://www.onvif.org/ver10/events/wsdl")
                     {
-                        action = OnvifActions.DeleteEventBroker;
+                        action = SoapActions.DeleteEventBroker;
                         return true;
                     }
                     break;
                 case "GetEventBrokers":
                     if (ns == "http://www.onvif.org/ver10/events/wsdl")
                     {
-                        action = OnvifActions.GetEventBrokers;
+                        action = SoapActions.GetEventBrokers;
                         return true;
                     }
                     break;
                 case "Notify":
                     if (ns == "http://docs.oasis-open.org/wsn/b-2")
                     {
-                        action = OnvifActions.Notify;
+                        action = SoapActions.Notify;
                         return true;
                     }
                     break;
                 case "Subscribe":
                     if (ns == "http://docs.oasis-open.org/wsn/b-2")
                     {
-                        action = OnvifActions.Subscribe;
+                        action = SoapActions.Subscribe;
                         return true;
                     }
                     break;
                 case "GetCurrentMessage":
                     if (ns == "http://docs.oasis-open.org/wsn/b-2")
                     {
-                        action = OnvifActions.GetCurrentMessage;
+                        action = SoapActions.GetCurrentMessage;
                         return true;
                     }
                     break;
                 case "Renew":
                     if (ns == "http://docs.oasis-open.org/wsn/b-2")
                     {
-                        action = OnvifActions.Renew;
+                        action = SoapActions.Renew;
                         return true;
                     }
                     break;
                 case "Unsubscribe":
                     if (ns == "http://docs.oasis-open.org/wsn/b-2")
                     {
-                        action = OnvifActions.Unsubscribe;
+                        action = SoapActions.Unsubscribe;
                         return true;
                     }
                     break;
                 case "PauseSubscription":
                     if (ns == "http://docs.oasis-open.org/wsn/b-2")
                     {
-                        action = OnvifActions.PauseSubscription;
+                        action = SoapActions.PauseSubscription;
                         return true;
                     }
                     break;
                 case "ResumeSubscription":
                     if (ns == "http://docs.oasis-open.org/wsn/b-2")
                     {
-                        action = OnvifActions.ResumeSubscription;
+                        action = SoapActions.ResumeSubscription;
                         return true;
                     }
                     break;
                 case "GetMessages":
                     if (ns == "http://docs.oasis-open.org/wsn/b-2")
                     {
-                        action = OnvifActions.GetMessages;
+                        action = SoapActions.GetMessages;
                         return true;
                     }
                     break;
                 case "DestroyPullPoint":
                     if (ns == "http://docs.oasis-open.org/wsn/b-2")
                     {
-                        action = OnvifActions.DestroyPullPoint;
+                        action = SoapActions.DestroyPullPoint;
                         return true;
                     }
                     break;
                 case "PullMessages":
                     if (ns == "http://www.onvif.org/ver10/events/wsdl")
                     {
-                        action = OnvifActions.PullMessages;
+                        action = SoapActions.PullMessages;
                         return true;
                     }
                     break;
                 case "Seek":
                     if (ns == "http://www.onvif.org/ver10/events/wsdl")
                     {
-                        action = OnvifActions.Seek;
+                        action = SoapActions.Seek;
                         return true;
                     }
                     break;
                 case "SetSynchronizationPoint":
                     if (ns == "http://www.onvif.org/ver10/events/wsdl")
                     {
-                        action = OnvifActions.SetSynchronizationPoint;
+                        action = SoapActions.SetSynchronizationPoint;
                         return true;
                     }
                     break;
@@ -1779,7 +1779,7 @@ namespace SharpOnvifServer.Events
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             EventsBase target = (EventsBase)service;
@@ -1787,145 +1787,145 @@ namespace SharpOnvifServer.Events
 
             switch (action)
             {
-                case OnvifActions.CreatePullPoint:
+                case SoapActions.CreatePullPoint:
                 {
                     var request = new CreatePullPointRequest();
                     reader.ReadInto(request);
                     var response = await target.CreatePullPointAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "CreatePullPointResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "CreatePullPointResponse");
                 }
-                case OnvifActions.GetServiceCapabilities:
+                case SoapActions.GetServiceCapabilities:
                 {
                     var request = new GetServiceCapabilitiesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetServiceCapabilitiesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/events/wsdl", "GetServiceCapabilitiesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/events/wsdl", "GetServiceCapabilitiesResponse");
                 }
-                case OnvifActions.CreatePullPointSubscription:
+                case SoapActions.CreatePullPointSubscription:
                 {
                     var request = new CreatePullPointSubscriptionRequest();
                     reader.ReadInto(request);
                     var response = await target.CreatePullPointSubscriptionAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/events/wsdl", "CreatePullPointSubscriptionResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/events/wsdl", "CreatePullPointSubscriptionResponse");
                 }
-                case OnvifActions.GetEventProperties:
+                case SoapActions.GetEventProperties:
                 {
                     var request = new GetEventPropertiesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetEventPropertiesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/events/wsdl", "GetEventPropertiesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/events/wsdl", "GetEventPropertiesResponse");
                 }
-                case OnvifActions.AddEventBroker:
+                case SoapActions.AddEventBroker:
                 {
                     var request = new AddEventBrokerRequest();
                     reader.ReadInto(request);
                     var response = await target.AddEventBrokerAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/events/wsdl", "AddEventBrokerResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/events/wsdl", "AddEventBrokerResponse");
                 }
-                case OnvifActions.DeleteEventBroker:
+                case SoapActions.DeleteEventBroker:
                 {
                     var request = new DeleteEventBrokerRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteEventBrokerAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/events/wsdl", "DeleteEventBrokerResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/events/wsdl", "DeleteEventBrokerResponse");
                 }
-                case OnvifActions.GetEventBrokers:
+                case SoapActions.GetEventBrokers:
                 {
                     var request = new GetEventBrokersRequest();
                     reader.ReadInto(request);
                     var response = await target.GetEventBrokersAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/events/wsdl", "GetEventBrokersResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/events/wsdl", "GetEventBrokersResponse");
                 }
-                case OnvifActions.Notify:
+                case SoapActions.Notify:
                 {
                     var request = new NotifyRequest();
                     reader.ReadInto(request);
                     var response = await target.NotifyAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, null, "NotifyResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, null, "NotifyResponse");
                 }
-                case OnvifActions.Subscribe:
+                case SoapActions.Subscribe:
                 {
                     var request = new SubscribeRequest();
                     reader.ReadInto(request);
                     var response = await target.SubscribeAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "SubscribeResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "SubscribeResponse");
                 }
-                case OnvifActions.GetCurrentMessage:
+                case SoapActions.GetCurrentMessage:
                 {
                     var request = new GetCurrentMessageRequest();
                     reader.ReadInto(request);
                     var response = await target.GetCurrentMessageAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "GetCurrentMessageResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "GetCurrentMessageResponse");
                 }
-                case OnvifActions.Renew:
+                case SoapActions.Renew:
                 {
                     var request = new RenewRequest();
                     reader.ReadInto(request);
                     var response = await target.RenewAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "RenewResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "RenewResponse");
                 }
-                case OnvifActions.Unsubscribe:
+                case SoapActions.Unsubscribe:
                 {
                     var request = new UnsubscribeRequest();
                     reader.ReadInto(request);
                     var response = await target.UnsubscribeAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "UnsubscribeResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "UnsubscribeResponse");
                 }
-                case OnvifActions.PauseSubscription:
+                case SoapActions.PauseSubscription:
                 {
                     var request = new PauseSubscriptionRequest();
                     reader.ReadInto(request);
                     var response = await target.PauseSubscriptionAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "PauseSubscriptionResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "PauseSubscriptionResponse");
                 }
-                case OnvifActions.ResumeSubscription:
+                case SoapActions.ResumeSubscription:
                 {
                     var request = new ResumeSubscriptionRequest();
                     reader.ReadInto(request);
                     var response = await target.ResumeSubscriptionAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "ResumeSubscriptionResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "ResumeSubscriptionResponse");
                 }
-                case OnvifActions.GetMessages:
+                case SoapActions.GetMessages:
                 {
                     var request = new GetMessagesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetMessagesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "GetMessagesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "GetMessagesResponse");
                 }
-                case OnvifActions.DestroyPullPoint:
+                case SoapActions.DestroyPullPoint:
                 {
                     var request = new DestroyPullPointRequest();
                     reader.ReadInto(request);
                     var response = await target.DestroyPullPointAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "DestroyPullPointResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://docs.oasis-open.org/wsn/b-2", "DestroyPullPointResponse");
                 }
-                case OnvifActions.PullMessages:
+                case SoapActions.PullMessages:
                 {
                     var request = new PullMessagesRequest();
                     reader.ReadInto(request);
                     var response = await target.PullMessagesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/events/wsdl", "PullMessagesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/events/wsdl", "PullMessagesResponse");
                 }
-                case OnvifActions.Seek:
+                case SoapActions.Seek:
                 {
                     var request = new SeekRequest();
                     reader.ReadInto(request);
                     var response = await target.SeekAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/events/wsdl", "SeekResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/events/wsdl", "SeekResponse");
                 }
-                case OnvifActions.SetSynchronizationPoint:
+                case SoapActions.SetSynchronizationPoint:
                 {
                     var request = new SetSynchronizationPointRequest();
                     reader.ReadInto(request);
                     var response = await target.SetSynchronizationPointAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/events/wsdl", "SetSynchronizationPointResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/events/wsdl", "SetSynchronizationPointResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }

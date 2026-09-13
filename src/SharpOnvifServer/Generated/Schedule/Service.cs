@@ -16,7 +16,7 @@ namespace SharpOnvifServer.Schedule
     public abstract class SchedulePortBase
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new SchedulePortDispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new SchedulePortDispatcher();
 
         /// <summary>
         /// This operation returns the capabilities of the schedule service.
@@ -415,7 +415,7 @@ namespace SharpOnvifServer.Schedule
     }
 
     /// <summary>Routes SOAP actions to <see cref="SchedulePortBase"/>.</summary>
-    internal sealed class SchedulePortDispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class SchedulePortDispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(SchedulePortBase); } }
 
@@ -423,24 +423,24 @@ namespace SharpOnvifServer.Schedule
         {
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
-                case OnvifActions.GetScheduleState:
-                case OnvifActions.GetScheduleInfo:
-                case OnvifActions.GetScheduleInfoList:
-                case OnvifActions.GetSchedules:
-                case OnvifActions.GetScheduleList:
-                case OnvifActions.CreateSchedule:
-                case OnvifActions.SetSchedule:
-                case OnvifActions.ModifySchedule:
-                case OnvifActions.DeleteSchedule:
-                case OnvifActions.GetSpecialDayGroupInfo:
-                case OnvifActions.GetSpecialDayGroupInfoList:
-                case OnvifActions.GetSpecialDayGroups:
-                case OnvifActions.GetSpecialDayGroupList:
-                case OnvifActions.CreateSpecialDayGroup:
-                case OnvifActions.SetSpecialDayGroup:
-                case OnvifActions.ModifySpecialDayGroup:
-                case OnvifActions.DeleteSpecialDayGroup:
+                case SoapActions.GetServiceCapabilities:
+                case SoapActions.GetScheduleState:
+                case SoapActions.GetScheduleInfo:
+                case SoapActions.GetScheduleInfoList:
+                case SoapActions.GetSchedules:
+                case SoapActions.GetScheduleList:
+                case SoapActions.CreateSchedule:
+                case SoapActions.SetSchedule:
+                case SoapActions.ModifySchedule:
+                case SoapActions.DeleteSchedule:
+                case SoapActions.GetSpecialDayGroupInfo:
+                case SoapActions.GetSpecialDayGroupInfoList:
+                case SoapActions.GetSpecialDayGroups:
+                case SoapActions.GetSpecialDayGroupList:
+                case SoapActions.CreateSpecialDayGroup:
+                case SoapActions.SetSpecialDayGroup:
+                case SoapActions.ModifySpecialDayGroup:
+                case SoapActions.DeleteSpecialDayGroup:
                     return true;
                 default:
                     return false;
@@ -454,126 +454,126 @@ namespace SharpOnvifServer.Schedule
                 case "GetServiceCapabilities":
                     if (ns == "http://www.onvif.org/ver10/schedule/wsdl")
                     {
-                        action = OnvifActions.GetServiceCapabilities;
+                        action = SoapActions.GetServiceCapabilities;
                         return true;
                     }
                     break;
                 case "GetScheduleState":
                     if (ns == "http://www.onvif.org/ver10/schedule/wsdl")
                     {
-                        action = OnvifActions.GetScheduleState;
+                        action = SoapActions.GetScheduleState;
                         return true;
                     }
                     break;
                 case "GetScheduleInfo":
                     if (ns == "http://www.onvif.org/ver10/schedule/wsdl")
                     {
-                        action = OnvifActions.GetScheduleInfo;
+                        action = SoapActions.GetScheduleInfo;
                         return true;
                     }
                     break;
                 case "GetScheduleInfoList":
                     if (ns == "http://www.onvif.org/ver10/schedule/wsdl")
                     {
-                        action = OnvifActions.GetScheduleInfoList;
+                        action = SoapActions.GetScheduleInfoList;
                         return true;
                     }
                     break;
                 case "GetSchedules":
                     if (ns == "http://www.onvif.org/ver10/schedule/wsdl")
                     {
-                        action = OnvifActions.GetSchedules;
+                        action = SoapActions.GetSchedules;
                         return true;
                     }
                     break;
                 case "GetScheduleList":
                     if (ns == "http://www.onvif.org/ver10/schedule/wsdl")
                     {
-                        action = OnvifActions.GetScheduleList;
+                        action = SoapActions.GetScheduleList;
                         return true;
                     }
                     break;
                 case "CreateSchedule":
                     if (ns == "http://www.onvif.org/ver10/schedule/wsdl")
                     {
-                        action = OnvifActions.CreateSchedule;
+                        action = SoapActions.CreateSchedule;
                         return true;
                     }
                     break;
                 case "SetSchedule":
                     if (ns == "http://www.onvif.org/ver10/schedule/wsdl")
                     {
-                        action = OnvifActions.SetSchedule;
+                        action = SoapActions.SetSchedule;
                         return true;
                     }
                     break;
                 case "ModifySchedule":
                     if (ns == "http://www.onvif.org/ver10/schedule/wsdl")
                     {
-                        action = OnvifActions.ModifySchedule;
+                        action = SoapActions.ModifySchedule;
                         return true;
                     }
                     break;
                 case "DeleteSchedule":
                     if (ns == "http://www.onvif.org/ver10/schedule/wsdl")
                     {
-                        action = OnvifActions.DeleteSchedule;
+                        action = SoapActions.DeleteSchedule;
                         return true;
                     }
                     break;
                 case "GetSpecialDayGroupInfo":
                     if (ns == "http://www.onvif.org/ver10/schedule/wsdl")
                     {
-                        action = OnvifActions.GetSpecialDayGroupInfo;
+                        action = SoapActions.GetSpecialDayGroupInfo;
                         return true;
                     }
                     break;
                 case "GetSpecialDayGroupInfoList":
                     if (ns == "http://www.onvif.org/ver10/schedule/wsdl")
                     {
-                        action = OnvifActions.GetSpecialDayGroupInfoList;
+                        action = SoapActions.GetSpecialDayGroupInfoList;
                         return true;
                     }
                     break;
                 case "GetSpecialDayGroups":
                     if (ns == "http://www.onvif.org/ver10/schedule/wsdl")
                     {
-                        action = OnvifActions.GetSpecialDayGroups;
+                        action = SoapActions.GetSpecialDayGroups;
                         return true;
                     }
                     break;
                 case "GetSpecialDayGroupList":
                     if (ns == "http://www.onvif.org/ver10/schedule/wsdl")
                     {
-                        action = OnvifActions.GetSpecialDayGroupList;
+                        action = SoapActions.GetSpecialDayGroupList;
                         return true;
                     }
                     break;
                 case "CreateSpecialDayGroup":
                     if (ns == "http://www.onvif.org/ver10/schedule/wsdl")
                     {
-                        action = OnvifActions.CreateSpecialDayGroup;
+                        action = SoapActions.CreateSpecialDayGroup;
                         return true;
                     }
                     break;
                 case "SetSpecialDayGroup":
                     if (ns == "http://www.onvif.org/ver10/schedule/wsdl")
                     {
-                        action = OnvifActions.SetSpecialDayGroup;
+                        action = SoapActions.SetSpecialDayGroup;
                         return true;
                     }
                     break;
                 case "ModifySpecialDayGroup":
                     if (ns == "http://www.onvif.org/ver10/schedule/wsdl")
                     {
-                        action = OnvifActions.ModifySpecialDayGroup;
+                        action = SoapActions.ModifySpecialDayGroup;
                         return true;
                     }
                     break;
                 case "DeleteSpecialDayGroup":
                     if (ns == "http://www.onvif.org/ver10/schedule/wsdl")
                     {
-                        action = OnvifActions.DeleteSpecialDayGroup;
+                        action = SoapActions.DeleteSpecialDayGroup;
                         return true;
                     }
                     break;
@@ -582,7 +582,7 @@ namespace SharpOnvifServer.Schedule
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             SchedulePortBase target = (SchedulePortBase)service;
@@ -590,138 +590,138 @@ namespace SharpOnvifServer.Schedule
 
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
+                case SoapActions.GetServiceCapabilities:
                 {
                     var request = new GetServiceCapabilitiesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetServiceCapabilitiesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/schedule/wsdl", "GetServiceCapabilitiesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/schedule/wsdl", "GetServiceCapabilitiesResponse");
                 }
-                case OnvifActions.GetScheduleState:
+                case SoapActions.GetScheduleState:
                 {
                     var request = new GetScheduleStateRequest();
                     reader.ReadInto(request);
                     var response = await target.GetScheduleStateAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/schedule/wsdl", "GetScheduleStateResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/schedule/wsdl", "GetScheduleStateResponse");
                 }
-                case OnvifActions.GetScheduleInfo:
+                case SoapActions.GetScheduleInfo:
                 {
                     var request = new GetScheduleInfoRequest();
                     reader.ReadInto(request);
                     var response = await target.GetScheduleInfoAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/schedule/wsdl", "GetScheduleInfoResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/schedule/wsdl", "GetScheduleInfoResponse");
                 }
-                case OnvifActions.GetScheduleInfoList:
+                case SoapActions.GetScheduleInfoList:
                 {
                     var request = new GetScheduleInfoListRequest();
                     reader.ReadInto(request);
                     var response = await target.GetScheduleInfoListAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/schedule/wsdl", "GetScheduleInfoListResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/schedule/wsdl", "GetScheduleInfoListResponse");
                 }
-                case OnvifActions.GetSchedules:
+                case SoapActions.GetSchedules:
                 {
                     var request = new GetSchedulesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetSchedulesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/schedule/wsdl", "GetSchedulesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/schedule/wsdl", "GetSchedulesResponse");
                 }
-                case OnvifActions.GetScheduleList:
+                case SoapActions.GetScheduleList:
                 {
                     var request = new GetScheduleListRequest();
                     reader.ReadInto(request);
                     var response = await target.GetScheduleListAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/schedule/wsdl", "GetScheduleListResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/schedule/wsdl", "GetScheduleListResponse");
                 }
-                case OnvifActions.CreateSchedule:
+                case SoapActions.CreateSchedule:
                 {
                     var request = new CreateScheduleRequest();
                     reader.ReadInto(request);
                     var response = await target.CreateScheduleAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/schedule/wsdl", "CreateScheduleResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/schedule/wsdl", "CreateScheduleResponse");
                 }
-                case OnvifActions.SetSchedule:
+                case SoapActions.SetSchedule:
                 {
                     var request = new SetScheduleRequest();
                     reader.ReadInto(request);
                     var response = await target.SetScheduleAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/schedule/wsdl", "SetScheduleResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/schedule/wsdl", "SetScheduleResponse");
                 }
-                case OnvifActions.ModifySchedule:
+                case SoapActions.ModifySchedule:
                 {
                     var request = new ModifyScheduleRequest();
                     reader.ReadInto(request);
                     var response = await target.ModifyScheduleAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/schedule/wsdl", "ModifyScheduleResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/schedule/wsdl", "ModifyScheduleResponse");
                 }
-                case OnvifActions.DeleteSchedule:
+                case SoapActions.DeleteSchedule:
                 {
                     var request = new DeleteScheduleRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteScheduleAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/schedule/wsdl", "DeleteScheduleResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/schedule/wsdl", "DeleteScheduleResponse");
                 }
-                case OnvifActions.GetSpecialDayGroupInfo:
+                case SoapActions.GetSpecialDayGroupInfo:
                 {
                     var request = new GetSpecialDayGroupInfoRequest();
                     reader.ReadInto(request);
                     var response = await target.GetSpecialDayGroupInfoAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/schedule/wsdl", "GetSpecialDayGroupInfoResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/schedule/wsdl", "GetSpecialDayGroupInfoResponse");
                 }
-                case OnvifActions.GetSpecialDayGroupInfoList:
+                case SoapActions.GetSpecialDayGroupInfoList:
                 {
                     var request = new GetSpecialDayGroupInfoListRequest();
                     reader.ReadInto(request);
                     var response = await target.GetSpecialDayGroupInfoListAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/schedule/wsdl", "GetSpecialDayGroupInfoListResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/schedule/wsdl", "GetSpecialDayGroupInfoListResponse");
                 }
-                case OnvifActions.GetSpecialDayGroups:
+                case SoapActions.GetSpecialDayGroups:
                 {
                     var request = new GetSpecialDayGroupsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetSpecialDayGroupsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/schedule/wsdl", "GetSpecialDayGroupsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/schedule/wsdl", "GetSpecialDayGroupsResponse");
                 }
-                case OnvifActions.GetSpecialDayGroupList:
+                case SoapActions.GetSpecialDayGroupList:
                 {
                     var request = new GetSpecialDayGroupListRequest();
                     reader.ReadInto(request);
                     var response = await target.GetSpecialDayGroupListAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/schedule/wsdl", "GetSpecialDayGroupListResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/schedule/wsdl", "GetSpecialDayGroupListResponse");
                 }
-                case OnvifActions.CreateSpecialDayGroup:
+                case SoapActions.CreateSpecialDayGroup:
                 {
                     var request = new CreateSpecialDayGroupRequest();
                     reader.ReadInto(request);
                     var response = await target.CreateSpecialDayGroupAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/schedule/wsdl", "CreateSpecialDayGroupResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/schedule/wsdl", "CreateSpecialDayGroupResponse");
                 }
-                case OnvifActions.SetSpecialDayGroup:
+                case SoapActions.SetSpecialDayGroup:
                 {
                     var request = new SetSpecialDayGroupRequest();
                     reader.ReadInto(request);
                     var response = await target.SetSpecialDayGroupAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/schedule/wsdl", "SetSpecialDayGroupResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/schedule/wsdl", "SetSpecialDayGroupResponse");
                 }
-                case OnvifActions.ModifySpecialDayGroup:
+                case SoapActions.ModifySpecialDayGroup:
                 {
                     var request = new ModifySpecialDayGroupRequest();
                     reader.ReadInto(request);
                     var response = await target.ModifySpecialDayGroupAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/schedule/wsdl", "ModifySpecialDayGroupResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/schedule/wsdl", "ModifySpecialDayGroupResponse");
                 }
-                case OnvifActions.DeleteSpecialDayGroup:
+                case SoapActions.DeleteSpecialDayGroup:
                 {
                     var request = new DeleteSpecialDayGroupRequest();
                     reader.ReadInto(request);
                     var response = await target.DeleteSpecialDayGroupAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/schedule/wsdl", "DeleteSpecialDayGroupResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/schedule/wsdl", "DeleteSpecialDayGroupResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }

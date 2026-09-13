@@ -27,7 +27,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// adding of IP filtering addresses through the AddIPAddressFilter command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddIPAddressFilter", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class AddIPAddressFilterRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AddIPAddressFilterRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.IPAddressFilter iPAddressFilterField;
 
@@ -72,7 +72,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// adding of IP filtering addresses through the AddIPAddressFilter command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddIPAddressFilterResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class AddIPAddressFilterResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AddIPAddressFilterResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public AddIPAddressFilterResponse()
         {
@@ -86,7 +86,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// parameters through the AddScopes command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddScopes", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class AddScopesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AddScopesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] scopeItemField;
 
@@ -141,7 +141,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// parameters through the AddScopes command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("AddScopesResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class AddScopesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AddScopesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public AddScopesResponse()
         {
@@ -150,7 +150,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlRootAttribute("CreateCertificate", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class CreateCertificateRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateCertificateRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string certificateIDField;
 
@@ -281,7 +281,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlRootAttribute("CreateCertificateResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class CreateCertificateResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateCertificateResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.Certificate nvtCertificateField;
 
@@ -324,7 +324,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlRootAttribute("CreateDot1XConfiguration", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class CreateDot1XConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateDot1XConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.Dot1XConfiguration dot1XConfigurationField;
 
@@ -364,7 +364,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlRootAttribute("CreateDot1XConfigurationResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class CreateDot1XConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateDot1XConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public CreateDot1XConfigurationResponse()
         {
@@ -377,7 +377,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// device and shall be persistent (remain after reboot).
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateStorageConfiguration", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class CreateStorageConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateStorageConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private StorageConfigurationData storageConfigurationField;
 
@@ -421,7 +421,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// device and shall be persistent (remain after reboot).
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateStorageConfigurationResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class CreateStorageConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateStorageConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string tokenField;
 
@@ -469,7 +469,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// equivalent' of length 28 bytes, as described in section 3.1.2 of the ONVIF security white paper.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateUsers", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class CreateUsersRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateUsersRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.User[] userField;
 
@@ -530,7 +530,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// equivalent' of length 28 bytes, as described in section 3.1.2 of the ONVIF security white paper.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateUsersResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class CreateUsersResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateUsersResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public CreateUsersResponse()
         {
@@ -539,7 +539,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlRootAttribute("DeleteCertificates", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class DeleteCertificatesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteCertificatesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] certificateIDField;
 
@@ -588,7 +588,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlRootAttribute("DeleteCertificatesResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class DeleteCertificatesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteCertificatesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public DeleteCertificatesResponse()
         {
@@ -597,7 +597,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlRootAttribute("DeleteDot1XConfiguration", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class DeleteDot1XConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteDot1XConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] dot1XConfigurationTokenField;
 
@@ -643,7 +643,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlRootAttribute("DeleteDot1XConfigurationResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class DeleteDot1XConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteDot1XConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public DeleteDot1XConfigurationResponse()
         {
@@ -655,7 +655,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// This operation deletes the given geo location entries.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteGeoLocation", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class DeleteGeoLocationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteGeoLocationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.LocationEntity[] locationField;
 
@@ -704,7 +704,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// This operation deletes the given geo location entries.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteGeoLocationResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class DeleteGeoLocationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteGeoLocationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public DeleteGeoLocationResponse()
         {
@@ -717,7 +717,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// persistent.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteStorageConfiguration", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class DeleteStorageConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteStorageConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string tokenField;
 
@@ -761,7 +761,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// persistent.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteStorageConfigurationResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class DeleteStorageConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteStorageConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public DeleteStorageConfigurationResponse()
         {
@@ -773,7 +773,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// This operation deletes an editable user level in the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteUserRole", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class DeleteUserRoleRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteUserRoleRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string userRoleField;
 
@@ -816,7 +816,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// This operation deletes an editable user level in the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteUserRoleResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class DeleteUserRoleResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteUserRoleResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public DeleteUserRoleResponse()
         {
@@ -831,7 +831,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// message shall be returned and no users be deleted.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteUsers", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class DeleteUsersRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteUsersRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] usernameField;
 
@@ -888,7 +888,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// message shall be returned and no users be deleted.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteUsersResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class DeleteUsersResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteUsersResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public DeleteUsersResponse()
         {
@@ -897,7 +897,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class DeviceServiceCapabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeviceServiceCapabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private NetworkCapabilities networkField;
 
@@ -947,9 +947,9 @@ namespace SharpOnvifServer.DeviceMgmt
             set { this.miscField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "DeviceServiceCapabilities"; } }
+        protected override string XmlTypeName { get { return "DeviceServiceCapabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Device; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Device; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -995,7 +995,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// based on WS-Security authentication, then the device shall support this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAccessPolicy", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetAccessPolicyRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAccessPolicyRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetAccessPolicyRequest()
         {
@@ -1013,7 +1013,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// based on WS-Security authentication, then the device shall support this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAccessPolicyResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetAccessPolicyResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAccessPolicyResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.BinaryData policyFileField;
 
@@ -1056,7 +1056,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// This method allows retrieval of the current authentication failure warning configuration settings.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAuthFailureWarningConfiguration", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetAuthFailureWarningConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAuthFailureWarningConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetAuthFailureWarningConfigurationRequest()
         {
@@ -1068,7 +1068,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// This method allows retrieval of the current authentication failure warning configuration settings.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAuthFailureWarningConfigurationResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetAuthFailureWarningConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAuthFailureWarningConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private bool enabledField;
 
@@ -1142,7 +1142,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// authentication failure warning configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAuthFailureWarningOptions", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetAuthFailureWarningOptionsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAuthFailureWarningOptionsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetAuthFailureWarningOptionsRequest()
         {
@@ -1155,7 +1155,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// authentication failure warning configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAuthFailureWarningOptionsResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetAuthFailureWarningOptionsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAuthFailureWarningOptionsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.IntRange monitorPeriodRangeField;
 
@@ -1210,7 +1210,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlRootAttribute("GetCACertificates", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetCACertificatesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCACertificatesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetCACertificatesRequest()
         {
@@ -1219,7 +1219,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlRootAttribute("GetCACertificatesResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetCACertificatesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCACertificatesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.Certificate[] cACertificateField;
 
@@ -1269,7 +1269,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// services refer to the GetServiceCapabilities methods.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCapabilities", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCapabilitiesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.CapabilityCategory[] categoryField;
 
@@ -1322,7 +1322,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// services refer to the GetServiceCapabilities methods.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetCapabilitiesResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCapabilitiesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.Capabilities capabilitiesField;
 
@@ -1365,7 +1365,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlRootAttribute("GetCertificateInformation", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetCertificateInformationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCertificateInformationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string certificateIDField;
 
@@ -1405,7 +1405,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlRootAttribute("GetCertificateInformationResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetCertificateInformationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCertificateInformationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.CertificateInformation certificateInformationField;
 
@@ -1445,7 +1445,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlRootAttribute("GetCertificates", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetCertificatesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCertificatesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetCertificatesRequest()
         {
@@ -1454,7 +1454,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlRootAttribute("GetCertificatesResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetCertificatesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCertificatesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.Certificate[] nvtCertificateField;
 
@@ -1503,7 +1503,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlRootAttribute("GetCertificatesStatus", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetCertificatesStatusRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCertificatesStatusRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetCertificatesStatusRequest()
         {
@@ -1512,7 +1512,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlRootAttribute("GetCertificatesStatusResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetCertificatesStatusResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetCertificatesStatusResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.CertificateStatus[] certificateStatusField;
 
@@ -1561,7 +1561,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlRootAttribute("GetClientCertificateMode", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetClientCertificateModeRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetClientCertificateModeRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetClientCertificateModeRequest()
         {
@@ -1570,7 +1570,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlRootAttribute("GetClientCertificateModeResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetClientCertificateModeResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetClientCertificateModeResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private bool enabledField;
 
@@ -1617,7 +1617,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// through the GetDNS command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetDNS", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetDNSRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetDNSRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetDNSRequest()
         {
@@ -1630,7 +1630,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// through the GetDNS command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetDNSResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetDNSResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetDNSResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.DNSInformation dNSInformationField;
 
@@ -1678,7 +1678,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// address(es) through the GetDPAddresses command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetDPAddresses", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetDPAddressesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetDPAddressesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetDPAddressesRequest()
         {
@@ -1692,7 +1692,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// address(es) through the GetDPAddresses command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetDPAddressesResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetDPAddressesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetDPAddressesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.NetworkHost[] dPAddressField;
 
@@ -1741,7 +1741,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// This operation gets basic device information from the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetDeviceInformation", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetDeviceInformationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetDeviceInformationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetDeviceInformationRequest()
         {
@@ -1753,7 +1753,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// This operation gets basic device information from the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetDeviceInformationResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetDeviceInformationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetDeviceInformationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string manufacturerField;
 
@@ -1873,7 +1873,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// through the GetDiscoveryMode command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetDiscoveryMode", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetDiscoveryModeRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetDiscoveryModeRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetDiscoveryModeRequest()
         {
@@ -1887,7 +1887,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// through the GetDiscoveryMode command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetDiscoveryModeResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetDiscoveryModeResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetDiscoveryModeResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.DiscoveryMode discoveryModeField;
 
@@ -1933,7 +1933,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// This operation returns the IEEE802.11 capabilities. The device shall support this operation.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetDot11Capabilities", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetDot11CapabilitiesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetDot11CapabilitiesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -1970,7 +1970,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// This operation returns the IEEE802.11 capabilities. The device shall support this operation.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetDot11CapabilitiesResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetDot11CapabilitiesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetDot11CapabilitiesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.Dot11Capabilities capabilitiesField;
 
@@ -2014,7 +2014,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetDot11Status", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetDot11StatusRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetDot11StatusRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string interfaceTokenField;
 
@@ -2058,7 +2058,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetDot11StatusResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetDot11StatusResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetDot11StatusResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.Dot11Status statusField;
 
@@ -2098,7 +2098,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlRootAttribute("GetDot1XConfiguration", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetDot1XConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetDot1XConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string dot1XConfigurationTokenField;
 
@@ -2138,7 +2138,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlRootAttribute("GetDot1XConfigurationResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetDot1XConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetDot1XConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.Dot1XConfiguration dot1XConfigurationField;
 
@@ -2178,7 +2178,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlRootAttribute("GetDot1XConfigurations", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetDot1XConfigurationsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetDot1XConfigurationsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetDot1XConfigurationsRequest()
         {
@@ -2187,7 +2187,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlRootAttribute("GetDot1XConfigurationsResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetDot1XConfigurationsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetDot1XConfigurationsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.Dot1XConfiguration[] dot1XConfigurationField;
 
@@ -2238,7 +2238,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// the GetDynamicDNS command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetDynamicDNS", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetDynamicDNSRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetDynamicDNSRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetDynamicDNSRequest()
         {
@@ -2252,7 +2252,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// the GetDynamicDNS command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetDynamicDNSResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetDynamicDNSResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetDynamicDNSResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.DynamicDNSInformation dynamicDNSInformationField;
 
@@ -2301,7 +2301,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// reference.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetEndpointReference", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetEndpointReferenceRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetEndpointReferenceRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetEndpointReferenceRequest()
         {
@@ -2316,7 +2316,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// reference.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetEndpointReferenceResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetEndpointReferenceResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetEndpointReferenceResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string gUIDField;
 
@@ -2371,7 +2371,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// This operation lists all existing geo location configurations for the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetGeoLocation", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetGeoLocationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetGeoLocationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetGeoLocationRequest()
         {
@@ -2383,7 +2383,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// This operation lists all existing geo location configurations for the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetGeoLocationResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetGeoLocationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetGeoLocationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.LocationEntity[] locationField;
 
@@ -2433,7 +2433,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// hostname configurations through the GetHostname command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetHostname", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetHostnameRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetHostnameRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetHostnameRequest()
         {
@@ -2446,7 +2446,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// hostname configurations through the GetHostname command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetHostnameResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetHostnameResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetHostnameResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.HostnameInformation hostnameInformationField;
 
@@ -2494,7 +2494,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// shall support the GetIPAddressFilter command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetIPAddressFilter", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetIPAddressFilterRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetIPAddressFilterRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetIPAddressFilterRequest()
         {
@@ -2508,7 +2508,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// shall support the GetIPAddressFilter command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetIPAddressFilterResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetIPAddressFilterResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetIPAddressFilterResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.IPAddressFilter iPAddressFilterField;
 
@@ -2552,7 +2552,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// to get the NTP server settings through the GetNTP command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetNTP", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetNTPRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetNTPRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetNTPRequest()
         {
@@ -2565,7 +2565,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// to get the NTP server settings through the GetNTP command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetNTPResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetNTPResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetNTPResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.NTPInformation nTPInformationField;
 
@@ -2612,7 +2612,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// GetNetworkDefaultGateway command returning configured default gateway address(es).
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetNetworkDefaultGateway", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetNetworkDefaultGatewayRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetNetworkDefaultGatewayRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetNetworkDefaultGatewayRequest()
         {
@@ -2625,7 +2625,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// GetNetworkDefaultGateway command returning configured default gateway address(es).
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetNetworkDefaultGatewayResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetNetworkDefaultGatewayResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetNetworkDefaultGatewayResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.NetworkGateway networkGatewayField;
 
@@ -2673,7 +2673,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// the GetNetworkInterfaces command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetNetworkInterfaces", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetNetworkInterfacesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetNetworkInterfacesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetNetworkInterfacesRequest()
         {
@@ -2687,7 +2687,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// the GetNetworkInterfaces command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetNetworkInterfacesResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetNetworkInterfacesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetNetworkInterfacesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.OnvifNetworkInterface[] networkInterfacesField;
 
@@ -2740,7 +2740,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// GetNetworkProtocols command returning configured network protocols.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetNetworkProtocols", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetNetworkProtocolsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetNetworkProtocolsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetNetworkProtocolsRequest()
         {
@@ -2753,7 +2753,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// GetNetworkProtocols command returning configured network protocols.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetNetworkProtocolsResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetNetworkProtocolsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetNetworkProtocolsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.NetworkProtocol[] networkProtocolsField;
 
@@ -2807,7 +2807,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// This method allows retrieval of the current password complexity configuration settings.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetPasswordComplexityConfiguration", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetPasswordComplexityConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetPasswordComplexityConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetPasswordComplexityConfigurationRequest()
         {
@@ -2819,7 +2819,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// This method allows retrieval of the current password complexity configuration settings.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetPasswordComplexityConfigurationResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetPasswordComplexityConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetPasswordComplexityConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private int minLenField;
         private bool minLenFieldSpecified;
@@ -3040,7 +3040,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// complexity configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetPasswordComplexityOptions", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetPasswordComplexityOptionsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetPasswordComplexityOptionsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetPasswordComplexityOptionsRequest()
         {
@@ -3053,7 +3053,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// complexity configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetPasswordComplexityOptionsResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetPasswordComplexityOptionsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetPasswordComplexityOptionsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.IntRange minLenRangeField;
 
@@ -3205,7 +3205,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// This method allows retrieval of the current password history configuration settings.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetPasswordHistoryConfiguration", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetPasswordHistoryConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetPasswordHistoryConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetPasswordHistoryConfigurationRequest()
         {
@@ -3217,7 +3217,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// This method allows retrieval of the current password history configuration settings.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetPasswordHistoryConfigurationResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetPasswordHistoryConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetPasswordHistoryConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private bool enabledField;
 
@@ -3272,7 +3272,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlRootAttribute("GetPkcs10Request", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetPkcs10RequestRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetPkcs10RequestRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string certificateIDField;
 
@@ -3351,7 +3351,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlRootAttribute("GetPkcs10RequestResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetPkcs10RequestResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetPkcs10RequestResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.BinaryData pkcs10RequestField;
 
@@ -3398,7 +3398,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// depricated with version 2.0. Refer to the DeviceIO service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRelayOutputs", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetRelayOutputsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetRelayOutputsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetRelayOutputsRequest()
         {
@@ -3411,7 +3411,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// depricated with version 2.0. Refer to the DeviceIO service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRelayOutputsResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetRelayOutputsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetRelayOutputsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.RelayOutput[] relayOutputsField;
 
@@ -3462,7 +3462,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// remote discovery mode setting through the GetRemoteDiscoveryMode command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRemoteDiscoveryMode", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetRemoteDiscoveryModeRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetRemoteDiscoveryModeRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetRemoteDiscoveryModeRequest()
         {
@@ -3476,7 +3476,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// remote discovery mode setting through the GetRemoteDiscoveryMode command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRemoteDiscoveryModeResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetRemoteDiscoveryModeResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetRemoteDiscoveryModeResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.DiscoveryMode remoteDiscoveryModeField;
 
@@ -3525,7 +3525,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// core specification.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRemoteUser", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetRemoteUserRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetRemoteUserRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetRemoteUserRequest()
         {
@@ -3540,7 +3540,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// core specification.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetRemoteUserResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetRemoteUserResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetRemoteUserResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.RemoteUser remoteUserField;
 
@@ -3589,7 +3589,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// return a non-empty scope list in the response.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetScopes", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetScopesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetScopesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetScopesRequest()
         {
@@ -3607,7 +3607,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// return a non-empty scope list in the response.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetScopesResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetScopesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetScopesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.OnvifScope[] scopesField;
 
@@ -3660,7 +3660,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// Returns the capabilities of the device service. The result is returned in a typed answer.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilities", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetServiceCapabilitiesRequest()
         {
@@ -3672,7 +3672,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// Returns the capabilities of the device service. The result is returned in a typed answer.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilitiesResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private DeviceServiceCapabilities capabilitiesField;
 
@@ -3718,7 +3718,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// Returns information about services on the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServices", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetServicesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServicesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private bool includeCapabilityField;
 
@@ -3764,7 +3764,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// Returns information about services on the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServicesResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetServicesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServicesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private Service[] serviceField;
 
@@ -3817,7 +3817,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// token.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetStorageConfiguration", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetStorageConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetStorageConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string tokenField;
 
@@ -3861,7 +3861,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// token.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetStorageConfigurationResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetStorageConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetStorageConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private StorageConfiguration storageConfigurationField;
 
@@ -3904,7 +3904,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// This operation lists all existing storage configurations for the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetStorageConfigurations", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetStorageConfigurationsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetStorageConfigurationsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetStorageConfigurationsRequest()
         {
@@ -3916,7 +3916,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// This operation lists all existing storage configurations for the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetStorageConfigurationsResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetStorageConfigurationsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetStorageConfigurationsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private StorageConfiguration[] storageConfigurationsField;
 
@@ -3968,7 +3968,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// backup configuration files is outside the scope of this standard.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSystemBackup", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetSystemBackupRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetSystemBackupRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetSystemBackupRequest()
         {
@@ -3983,7 +3983,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// backup configuration files is outside the scope of this standard.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSystemBackupResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetSystemBackupResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetSystemBackupResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.BackupFile[] backupFilesField;
 
@@ -4035,7 +4035,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// UTCDateTime information.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSystemDateAndTime", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetSystemDateAndTimeRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetSystemDateAndTimeRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetSystemDateAndTimeRequest()
         {
@@ -4050,7 +4050,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// UTCDateTime information.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSystemDateAndTimeResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetSystemDateAndTimeResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetSystemDateAndTimeResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.SystemDateTime systemDateAndTimeField;
 
@@ -4099,7 +4099,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// scope of this standard.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSystemLog", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetSystemLogRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetSystemLogRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.SystemLogType logTypeField;
 
@@ -4146,7 +4146,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// scope of this standard.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSystemLogResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetSystemLogResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetSystemLogResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.SystemLog systemLogField;
 
@@ -4192,7 +4192,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// This operation gets arbitary device diagnostics information from the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSystemSupportInformation", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetSystemSupportInformationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetSystemSupportInformationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetSystemSupportInformationRequest()
         {
@@ -4204,7 +4204,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// This operation gets arbitary device diagnostics information from the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSystemSupportInformationResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetSystemSupportInformationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetSystemSupportInformationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.SupportInformation supportInformationField;
 
@@ -4259,7 +4259,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// GetSystemUris command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSystemUris", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetSystemUrisRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetSystemUrisRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetSystemUrisRequest()
         {
@@ -4280,7 +4280,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// GetSystemUris command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSystemUrisResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetSystemUrisResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetSystemUrisResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.SystemLogUri[] systemLogUrisField;
 
@@ -4377,7 +4377,7 @@ namespace SharpOnvifServer.DeviceMgmt
 
     }
 
-    public partial class GetSystemUrisResponseExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetSystemUrisResponseExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -4406,7 +4406,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// level is passed in the request, information only about that level is returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetUserRoles", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetUserRolesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetUserRolesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string userRoleField;
 
@@ -4450,7 +4450,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// level is passed in the request, information only about that level is returned.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetUserRolesResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetUserRolesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetUserRolesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.UserRole[] userRoleField;
 
@@ -4501,7 +4501,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// the GetUsers command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetUsers", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetUsersRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetUsersRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetUsersRequest()
         {
@@ -4515,7 +4515,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// the GetUsers command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetUsersResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetUsersResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetUsersResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.User[] userField;
 
@@ -4569,7 +4569,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// retrieved. This method is deprecated.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetWsdlUrl", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetWsdlUrlRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetWsdlUrlRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetWsdlUrlRequest()
         {
@@ -4582,7 +4582,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// retrieved. This method is deprecated.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetWsdlUrlResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetWsdlUrlResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetWsdlUrlResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string wsdlUrlField;
 
@@ -4628,7 +4628,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// than one interface shall use the extension to list the additional interface settings.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetZeroConfiguration", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetZeroConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetZeroConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetZeroConfigurationRequest()
         {
@@ -4643,7 +4643,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// than one interface shall use the extension to list the additional interface settings.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetZeroConfigurationResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class GetZeroConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetZeroConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.NetworkZeroConfiguration zeroConfigurationField;
 
@@ -4686,7 +4686,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlRootAttribute("LoadCACertificates", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class LoadCACertificatesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class LoadCACertificatesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.Certificate[] cACertificateField;
 
@@ -4732,7 +4732,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlRootAttribute("LoadCACertificatesResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class LoadCACertificatesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class LoadCACertificatesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public LoadCACertificatesResponse()
         {
@@ -4741,7 +4741,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlRootAttribute("LoadCertificateWithPrivateKey", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class LoadCertificateWithPrivateKeyRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class LoadCertificateWithPrivateKeyRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.CertificateWithPrivateKey[] certificateWithPrivateKeyField;
 
@@ -4787,7 +4787,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlRootAttribute("LoadCertificateWithPrivateKeyResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class LoadCertificateWithPrivateKeyResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class LoadCertificateWithPrivateKeyResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public LoadCertificateWithPrivateKeyResponse()
         {
@@ -4796,7 +4796,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlRootAttribute("LoadCertificates", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class LoadCertificatesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class LoadCertificatesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.Certificate[] nVTCertificateField;
 
@@ -4845,7 +4845,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlRootAttribute("LoadCertificatesResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class LoadCertificatesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class LoadCertificatesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public LoadCertificatesResponse()
         {
@@ -4854,7 +4854,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class MiscCapabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class MiscCapabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] auxiliaryCommandsField;
 
@@ -4868,9 +4868,9 @@ namespace SharpOnvifServer.DeviceMgmt
             set { this.auxiliaryCommandsField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "MiscCapabilities"; } }
+        protected override string XmlTypeName { get { return "MiscCapabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Device; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Device; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -4891,7 +4891,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class NetworkCapabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class NetworkCapabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private bool iPFilterField;
         private bool iPFilterFieldSpecified;
@@ -5109,9 +5109,9 @@ namespace SharpOnvifServer.DeviceMgmt
             set { this.dHCPv6FieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "NetworkCapabilities"; } }
+        protected override string XmlTypeName { get { return "NetworkCapabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Device; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Device; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -5205,7 +5205,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// support deletion of IP filtering addresses through the RemoveIPAddressFilter command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RemoveIPAddressFilter", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class RemoveIPAddressFilterRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RemoveIPAddressFilterRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.IPAddressFilter iPAddressFilterField;
 
@@ -5250,7 +5250,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// support deletion of IP filtering addresses through the RemoveIPAddressFilter command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RemoveIPAddressFilterResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class RemoveIPAddressFilterResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RemoveIPAddressFilterResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public RemoveIPAddressFilterResponse()
         {
@@ -5264,7 +5264,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// deletion of discovery scope parameters through the RemoveScopes command. Table
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RemoveScopes", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class RemoveScopesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RemoveScopesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] scopeItemField;
 
@@ -5320,7 +5320,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// deletion of discovery scope parameters through the RemoveScopes command. Table
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RemoveScopesResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class RemoveScopesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RemoveScopesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] scopeItemField;
 
@@ -5375,7 +5375,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// command is supported, it shall accept backup files returned by the GetSystemBackup command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RestoreSystem", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class RestoreSystemRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RestoreSystemRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.BackupFile[] backupFilesField;
 
@@ -5427,7 +5427,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// command is supported, it shall accept backup files returned by the GetSystemBackup command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("RestoreSystemResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class RestoreSystemResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RestoreSystemResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public RestoreSystemResponse()
         {
@@ -5440,7 +5440,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// support this operation.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ScanAvailableDot11Networks", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class ScanAvailableDot11NetworksRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ScanAvailableDot11NetworksRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string interfaceTokenField;
 
@@ -5484,7 +5484,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// support this operation.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ScanAvailableDot11NetworksResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class ScanAvailableDot11NetworksResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ScanAvailableDot11NetworksResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.Dot11AvailableNetworks[] networksField;
 
@@ -5530,7 +5530,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SecurityCapabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SecurityCapabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private bool tLS10Field;
         private bool tLS10FieldSpecified;
@@ -6050,9 +6050,9 @@ namespace SharpOnvifServer.DeviceMgmt
             set { this.maxUserRolesFieldSpecified = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SecurityCapabilities"; } }
+        protected override string XmlTypeName { get { return "SecurityCapabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Device; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Device; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -6255,7 +6255,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// capability shall support this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SendAuxiliaryCommand", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SendAuxiliaryCommandRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SendAuxiliaryCommandRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string auxiliaryCommandField;
 
@@ -6309,7 +6309,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// capability shall support this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SendAuxiliaryCommandResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SendAuxiliaryCommandResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SendAuxiliaryCommandResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string auxiliaryCommandResponseField;
 
@@ -6349,7 +6349,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class Service : SharpOnvifCommon.Xml.OnvifContract
+    public partial class Service : SharpOnvifCommon.Xml.XmlContract
     {
         private string namespaceField;
 
@@ -6407,9 +6407,9 @@ namespace SharpOnvifServer.DeviceMgmt
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "Service"; } }
+        protected override string XmlTypeName { get { return "Service"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Device; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Device; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -6458,7 +6458,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// authentication, then the device shall support this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetAccessPolicy", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetAccessPolicyRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetAccessPolicyRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.BinaryData policyFileField;
 
@@ -6503,7 +6503,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// authentication, then the device shall support this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetAccessPolicyResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetAccessPolicyResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetAccessPolicyResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetAccessPolicyResponse()
         {
@@ -6515,7 +6515,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// This method allows setting of the authentication failure warning configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetAuthFailureWarningConfiguration", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetAuthFailureWarningConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetAuthFailureWarningConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private bool enabledField;
 
@@ -6588,7 +6588,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// This method allows setting of the authentication failure warning configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetAuthFailureWarningConfigurationResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetAuthFailureWarningConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetAuthFailureWarningConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetAuthFailureWarningConfigurationResponse()
         {
@@ -6597,7 +6597,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlRootAttribute("SetCertificatesStatus", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetCertificatesStatusRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetCertificatesStatusRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.CertificateStatus[] certificateStatusField;
 
@@ -6646,7 +6646,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlRootAttribute("SetCertificatesStatusResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetCertificatesStatusResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetCertificatesStatusResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetCertificatesStatusResponse()
         {
@@ -6655,7 +6655,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlRootAttribute("SetClientCertificateMode", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetClientCertificateModeRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetClientCertificateModeRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private bool enabledField;
 
@@ -6698,7 +6698,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlRootAttribute("SetClientCertificateModeResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetClientCertificateModeResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetClientCertificateModeResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetClientCertificateModeResponse()
         {
@@ -6711,7 +6711,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// configurations through the SetDNS command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetDNS", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetDNSRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetDNSRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private bool fromDHCPField;
 
@@ -6806,7 +6806,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// configurations through the SetDNS command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetDNSResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetDNSResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetDNSResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetDNSResponse()
         {
@@ -6820,7 +6820,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// address(es) through the SetDPAddresses command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetDPAddresses", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetDPAddressesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetDPAddressesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.NetworkHost[] dPAddressField;
 
@@ -6871,7 +6871,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// address(es) through the SetDPAddresses command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetDPAddressesResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetDPAddressesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetDPAddressesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetDPAddressesResponse()
         {
@@ -6885,7 +6885,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// setting through the SetDiscoveryMode command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetDiscoveryMode", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetDiscoveryModeRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetDiscoveryModeRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.DiscoveryMode discoveryModeField;
 
@@ -6933,7 +6933,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// setting through the SetDiscoveryMode command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetDiscoveryModeResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetDiscoveryModeResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetDiscoveryModeResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetDiscoveryModeResponse()
         {
@@ -6942,7 +6942,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlRootAttribute("SetDot1XConfiguration", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetDot1XConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetDot1XConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.Dot1XConfiguration dot1XConfigurationField;
 
@@ -6982,7 +6982,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlRootAttribute("SetDot1XConfigurationResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetDot1XConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetDot1XConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetDot1XConfigurationResponse()
         {
@@ -6996,7 +6996,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// the SetDynamicDNS command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetDynamicDNS", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetDynamicDNSRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetDynamicDNSRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.DynamicDNSType typeField;
 
@@ -7080,7 +7080,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// the SetDynamicDNS command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetDynamicDNSResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetDynamicDNSResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetDynamicDNSResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetDynamicDNSResponse()
         {
@@ -7092,7 +7092,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// This operation allows to modify one or more geo configuration entries.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetGeoLocation", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetGeoLocationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetGeoLocationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.LocationEntity[] locationField;
 
@@ -7141,7 +7141,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// This operation allows to modify one or more geo configuration entries.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetGeoLocationResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetGeoLocationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetGeoLocationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetGeoLocationResponse()
         {
@@ -7153,7 +7153,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// This operation sets the hashing algorithm(s) used in HTTP and RTSP Digest Authentication.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetHashingAlgorithm", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetHashingAlgorithmRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetHashingAlgorithmRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] algorithmField;
 
@@ -7199,7 +7199,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// This operation sets the hashing algorithm(s) used in HTTP and RTSP Digest Authentication.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetHashingAlgorithmResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetHashingAlgorithmResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetHashingAlgorithmResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetHashingAlgorithmResponse()
         {
@@ -7211,7 +7211,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// This operation controls whether the hostname is set manually or retrieved via DHCP.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetHostnameFromDHCP", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetHostnameFromDHCPRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetHostnameFromDHCPRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private bool fromDHCPField;
 
@@ -7257,7 +7257,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// This operation controls whether the hostname is set manually or retrieved via DHCP.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetHostnameFromDHCPResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetHostnameFromDHCPResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetHostnameFromDHCPResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private bool rebootNeededField;
 
@@ -7306,7 +7306,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// strings.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetHostname", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetHostnameRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetHostnameRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string nameField;
 
@@ -7355,7 +7355,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// strings.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetHostnameResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetHostnameResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetHostnameResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetHostnameResponse()
         {
@@ -7369,7 +7369,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// support configuration of IP filtering rules through the SetIPAddressFilter command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetIPAddressFilter", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetIPAddressFilterRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetIPAddressFilterRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.IPAddressFilter iPAddressFilterField;
 
@@ -7414,7 +7414,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// support configuration of IP filtering rules through the SetIPAddressFilter command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetIPAddressFilterResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetIPAddressFilterResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetIPAddressFilterResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetIPAddressFilterResponse()
         {
@@ -7430,7 +7430,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// SetSystemDateAndTime to activate NTP operation.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetNTP", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetNTPRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetNTPRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private bool fromDHCPField;
 
@@ -7504,7 +7504,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// SetSystemDateAndTime to activate NTP operation.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetNTPResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetNTPResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetNTPResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetNTPResponse()
         {
@@ -7517,7 +7517,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// of default gateway through the SetNetworkDefaultGateway command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetNetworkDefaultGateway", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetNetworkDefaultGatewayRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetNetworkDefaultGatewayRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] iPv4AddressField;
 
@@ -7594,7 +7594,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// of default gateway through the SetNetworkDefaultGateway command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetNetworkDefaultGatewayResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetNetworkDefaultGatewayResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetNetworkDefaultGatewayResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetNetworkDefaultGatewayResponse()
         {
@@ -7609,7 +7609,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// 802.11 configuration if the IEEE 802.11 configuration element isn’t present in the request.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetNetworkInterfaces", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetNetworkInterfacesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetNetworkInterfacesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string interfaceTokenField;
 
@@ -7676,7 +7676,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// 802.11 configuration if the IEEE 802.11 configuration element isn’t present in the request.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetNetworkInterfacesResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetNetworkInterfacesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetNetworkInterfacesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private bool rebootNeededField;
 
@@ -7728,7 +7728,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// configuration of defined network protocols through the SetNetworkProtocols command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetNetworkProtocols", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetNetworkProtocolsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetNetworkProtocolsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.NetworkProtocol[] networkProtocolsField;
 
@@ -7783,7 +7783,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// configuration of defined network protocols through the SetNetworkProtocols command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetNetworkProtocolsResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetNetworkProtocolsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetNetworkProtocolsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetNetworkProtocolsResponse()
         {
@@ -7795,7 +7795,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// This method allows setting of the password complexity configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetPasswordComplexityConfiguration", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetPasswordComplexityConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetPasswordComplexityConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private int minLenField;
         private bool minLenFieldSpecified;
@@ -8015,7 +8015,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// This method allows setting of the password complexity configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetPasswordComplexityConfigurationResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetPasswordComplexityConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetPasswordComplexityConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetPasswordComplexityConfigurationResponse()
         {
@@ -8027,7 +8027,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// This method allows setting of the password history configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetPasswordHistoryConfiguration", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetPasswordHistoryConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetPasswordHistoryConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private bool enabledField;
 
@@ -8085,7 +8085,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// This method allows setting of the password history configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetPasswordHistoryConfigurationResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetPasswordHistoryConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetPasswordHistoryConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetPasswordHistoryConfigurationResponse()
         {
@@ -8098,7 +8098,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// 2.0. Refer to the DeviceIO service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetRelayOutputSettings", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetRelayOutputSettingsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetRelayOutputSettingsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string relayOutputTokenField;
 
@@ -8157,7 +8157,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// 2.0. Refer to the DeviceIO service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetRelayOutputSettingsResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetRelayOutputSettingsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetRelayOutputSettingsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetRelayOutputSettingsResponse()
         {
@@ -8170,7 +8170,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// Refer to the DeviceIO service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetRelayOutputState", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetRelayOutputStateRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetRelayOutputStateRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string relayOutputTokenField;
 
@@ -8229,7 +8229,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// Refer to the DeviceIO service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetRelayOutputStateResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetRelayOutputStateResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetRelayOutputStateResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetRelayOutputStateResponse()
         {
@@ -8243,7 +8243,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// support configuration of the discovery mode setting through the SetRemoteDiscoveryMode command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetRemoteDiscoveryMode", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetRemoteDiscoveryModeRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetRemoteDiscoveryModeRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.DiscoveryMode remoteDiscoveryModeField;
 
@@ -8291,7 +8291,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// support configuration of the discovery mode setting through the SetRemoteDiscoveryMode command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetRemoteDiscoveryModeResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetRemoteDiscoveryModeResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetRemoteDiscoveryModeResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetRemoteDiscoveryModeResponse()
         {
@@ -8308,7 +8308,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// remove the remote user SetRemoteUser should be called without the RemoteUser parameter.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetRemoteUser", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetRemoteUserRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetRemoteUserRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.RemoteUser remoteUserField;
 
@@ -8356,7 +8356,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// remove the remote user SetRemoteUser should be called without the RemoteUser parameter.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetRemoteUserResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetRemoteUserResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetRemoteUserResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetRemoteUserResponse()
         {
@@ -8372,7 +8372,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetScopes", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetScopesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetScopesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] scopesField;
 
@@ -8428,7 +8428,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetScopesResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetScopesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetScopesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetScopesResponse()
         {
@@ -8440,7 +8440,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// This operation modifies an existing Storage configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetStorageConfiguration", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetStorageConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetStorageConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private StorageConfiguration storageConfigurationField;
 
@@ -8483,7 +8483,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// This operation modifies an existing Storage configuration.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetStorageConfigurationResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetStorageConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetStorageConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetStorageConfigurationResponse()
         {
@@ -8501,7 +8501,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// Clear the DayLightSavings flag if the DST portion of the TimeZone settings should be ignored.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetSystemDateAndTime", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetSystemDateAndTimeRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetSystemDateAndTimeRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.SetDateTimeType dateTimeTypeField;
 
@@ -8607,7 +8607,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// Clear the DayLightSavings flag if the DST portion of the TimeZone settings should be ignored.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetSystemDateAndTimeResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetSystemDateAndTimeResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetSystemDateAndTimeResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetSystemDateAndTimeResponse()
         {
@@ -8619,7 +8619,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// This operation reloads the parameters on the device to their factory default values.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetSystemFactoryDefault", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetSystemFactoryDefaultRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetSystemFactoryDefaultRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.FactoryDefaultType factoryDefaultField;
 
@@ -8665,7 +8665,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// This operation reloads the parameters on the device to their factory default values.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetSystemFactoryDefaultResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetSystemFactoryDefaultResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetSystemFactoryDefaultResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetSystemFactoryDefaultResponse()
         {
@@ -8680,7 +8680,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// and no change requests be processed.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetUser", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetUserRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetUserRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.User[] userField;
 
@@ -8737,7 +8737,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// and no change requests be processed.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetUserResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetUserResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetUserResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetUserResponse()
         {
@@ -8751,7 +8751,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// is created.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetUserRole", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetUserRoleRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetUserRoleRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.UserRole userRoleField;
 
@@ -8796,7 +8796,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// is created.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetUserRoleResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetUserRoleResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetUserRoleResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetUserRoleResponse()
         {
@@ -8809,7 +8809,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// supported or not.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetZeroConfiguration", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetZeroConfigurationRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetZeroConfigurationRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string interfaceTokenField;
 
@@ -8874,7 +8874,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// supported or not.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetZeroConfigurationResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SetZeroConfigurationResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetZeroConfigurationResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetZeroConfigurationResponse()
         {
@@ -8897,7 +8897,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// "application/octetstream".
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("StartFirmwareUpgrade", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class StartFirmwareUpgradeRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class StartFirmwareUpgradeRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public StartFirmwareUpgradeRequest()
         {
@@ -8920,7 +8920,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// "application/octetstream".
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("StartFirmwareUpgradeResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class StartFirmwareUpgradeResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class StartFirmwareUpgradeResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string uploadUriField;
 
@@ -9004,7 +9004,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// "application/octetstream".
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("StartSystemRestore", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class StartSystemRestoreRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class StartSystemRestoreRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public StartSystemRestoreRequest()
         {
@@ -9027,7 +9027,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// "application/octetstream".
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("StartSystemRestoreResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class StartSystemRestoreResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class StartSystemRestoreResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string uploadUriField;
 
@@ -9082,7 +9082,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class StorageConfiguration : SharpOnvifCommon.Xml.OnvifContract
+    public partial class StorageConfiguration : SharpOnvifCommon.Xml.XmlContract
     {
         private StorageConfigurationData dataField;
 
@@ -9093,9 +9093,9 @@ namespace SharpOnvifServer.DeviceMgmt
             set { this.dataField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "StorageConfiguration"; } }
+        protected override string XmlTypeName { get { return "StorageConfiguration"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Device; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Device; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -9117,7 +9117,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class StorageConfigurationData : SharpOnvifCommon.Xml.OnvifContract
+    public partial class StorageConfigurationData : SharpOnvifCommon.Xml.XmlContract
     {
         private string localPathField;
 
@@ -9219,9 +9219,9 @@ namespace SharpOnvifServer.DeviceMgmt
             set { this.regionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "StorageConfigurationData"; } }
+        protected override string XmlTypeName { get { return "StorageConfigurationData"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Device; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Device; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -9289,7 +9289,7 @@ namespace SharpOnvifServer.DeviceMgmt
 
     }
 
-    public partial class StorageConfigurationDataConfigurationRenewal : SharpOnvifCommon.Xml.OnvifContract
+    public partial class StorageConfigurationDataConfigurationRenewal : SharpOnvifCommon.Xml.XmlContract
     {
         private string renewalEndpointField;
 
@@ -9376,7 +9376,7 @@ namespace SharpOnvifServer.DeviceMgmt
 
     }
 
-    public partial class StorageConfigurationDataExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class StorageConfigurationDataExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -9401,7 +9401,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SystemCapabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SystemCapabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private bool discoveryResolveField;
         private bool discoveryResolveFieldSpecified;
@@ -9860,9 +9860,9 @@ namespace SharpOnvifServer.DeviceMgmt
             set { this.hardwareTypeField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SystemCapabilities"; } }
+        protected override string XmlTypeName { get { return "SystemCapabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Device; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Device; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -10034,7 +10034,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// This operation reboots the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SystemReboot", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SystemRebootRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SystemRebootRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public SystemRebootRequest()
         {
@@ -10046,7 +10046,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// This operation reboots the device.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SystemRebootResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class SystemRebootResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SystemRebootResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string messageField;
 
@@ -10101,7 +10101,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// user credentials.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("UpgradeFirmware", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class UpgradeFirmwareRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class UpgradeFirmwareRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string versionField;
 
@@ -10153,7 +10153,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// user credentials.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("UpgradeFirmwareResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class UpgradeFirmwareResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class UpgradeFirmwareResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string expectedDownTimeField;
 
@@ -10199,7 +10199,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// standard.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("UpgradeSystemFirmware", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class UpgradeSystemFirmwareRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class UpgradeSystemFirmwareRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SharpOnvifCommon.Onvif.AttachmentData firmwareField;
 
@@ -10245,7 +10245,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// standard.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("UpgradeSystemFirmwareResponse", Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class UpgradeSystemFirmwareResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class UpgradeSystemFirmwareResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string messageField;
 
@@ -10285,7 +10285,7 @@ namespace SharpOnvifServer.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class UserCredential : SharpOnvifCommon.Xml.OnvifContract
+    public partial class UserCredential : SharpOnvifCommon.Xml.XmlContract
     {
         private string userNameField;
 
@@ -10341,9 +10341,9 @@ namespace SharpOnvifServer.DeviceMgmt
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "UserCredential"; } }
+        protected override string XmlTypeName { get { return "UserCredential"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Device; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Device; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -10381,7 +10381,7 @@ namespace SharpOnvifServer.DeviceMgmt
 
     }
 
-    public partial class UserCredentialExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class UserCredentialExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -10408,14 +10408,14 @@ namespace SharpOnvifServer.DeviceMgmt
     /// <summary>Constructs a contract named by an xsi:type attribute.</summary>
     internal static class XmlTypeFactory
     {
-        public static SharpOnvifCommon.Xml.OnvifContract Create(string ns, string name)
+        public static SharpOnvifCommon.Xml.XmlContract Create(string ns, string name)
         {
             return SharpOnvifCommon.Onvif.XmlTypeFactory.Create(ns, name);
         }
     }
 
     /// <summary>SOAP action URIs for this service's operations.</summary>
-    public static class OnvifActions
+    public static class SoapActions
     {
         public const string GetServices = "http://www.onvif.org/ver10/device/wsdl/GetServices";
         public const string GetServiceCapabilities = "http://www.onvif.org/ver10/device/wsdl/GetServiceCapabilities";

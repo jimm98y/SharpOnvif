@@ -11,7 +11,7 @@
 namespace SharpOnvifClient.Credential
 {
     /// <summary>
-    /// The CredentialPort Onvif service.
+    /// The CredentialPort service.
     /// </summary>
     public interface CredentialPort
     {
@@ -375,7 +375,7 @@ namespace SharpOnvifClient.Credential
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -385,7 +385,7 @@ namespace SharpOnvifClient.Credential
         /// </summary>
         public System.Threading.Tasks.Task<GetServiceCapabilitiesResponse> GetServiceCapabilitiesAsync(GetServiceCapabilitiesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetServiceCapabilities, "http://www.onvif.org/ver10/credential/wsdl", "GetServiceCapabilities", request,
+            return InvokeAsync(SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver10/credential/wsdl", "GetServiceCapabilities", request,
                 () => new GetServiceCapabilitiesResponse(), cancellationToken);
         }
 
@@ -403,7 +403,7 @@ namespace SharpOnvifClient.Credential
         /// </summary>
         public System.Threading.Tasks.Task<GetSupportedFormatTypesResponse> GetSupportedFormatTypesAsync(GetSupportedFormatTypesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetSupportedFormatTypes, "http://www.onvif.org/ver10/credential/wsdl", "GetSupportedFormatTypes", request,
+            return InvokeAsync(SoapActions.GetSupportedFormatTypes, "http://www.onvif.org/ver10/credential/wsdl", "GetSupportedFormatTypes", request,
                 () => new GetSupportedFormatTypesResponse(), cancellationToken);
         }
 
@@ -423,7 +423,7 @@ namespace SharpOnvifClient.Credential
         /// </summary>
         public System.Threading.Tasks.Task<GetCredentialInfoResponse> GetCredentialInfoAsync(GetCredentialInfoRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetCredentialInfo, "http://www.onvif.org/ver10/credential/wsdl", "GetCredentialInfo", request,
+            return InvokeAsync(SoapActions.GetCredentialInfo, "http://www.onvif.org/ver10/credential/wsdl", "GetCredentialInfo", request,
                 () => new GetCredentialInfoResponse(), cancellationToken);
         }
 
@@ -444,7 +444,7 @@ namespace SharpOnvifClient.Credential
         /// </summary>
         public System.Threading.Tasks.Task<GetCredentialInfoListResponse> GetCredentialInfoListAsync(GetCredentialInfoListRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetCredentialInfoList, "http://www.onvif.org/ver10/credential/wsdl", "GetCredentialInfoList", request,
+            return InvokeAsync(SoapActions.GetCredentialInfoList, "http://www.onvif.org/ver10/credential/wsdl", "GetCredentialInfoList", request,
                 () => new GetCredentialInfoListResponse(), cancellationToken);
         }
 
@@ -464,7 +464,7 @@ namespace SharpOnvifClient.Credential
         /// </summary>
         public System.Threading.Tasks.Task<GetCredentialsResponse> GetCredentialsAsync(GetCredentialsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetCredentials, "http://www.onvif.org/ver10/credential/wsdl", "GetCredentials", request,
+            return InvokeAsync(SoapActions.GetCredentials, "http://www.onvif.org/ver10/credential/wsdl", "GetCredentials", request,
                 () => new GetCredentialsResponse(), cancellationToken);
         }
 
@@ -485,7 +485,7 @@ namespace SharpOnvifClient.Credential
         /// </summary>
         public System.Threading.Tasks.Task<GetCredentialListResponse> GetCredentialListAsync(GetCredentialListRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetCredentialList, "http://www.onvif.org/ver10/credential/wsdl", "GetCredentialList", request,
+            return InvokeAsync(SoapActions.GetCredentialList, "http://www.onvif.org/ver10/credential/wsdl", "GetCredentialList", request,
                 () => new GetCredentialListResponse(), cancellationToken);
         }
 
@@ -506,7 +506,7 @@ namespace SharpOnvifClient.Credential
         /// </summary>
         public System.Threading.Tasks.Task<CreateCredentialResponse> CreateCredentialAsync(CreateCredentialRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.CreateCredential, "http://www.onvif.org/ver10/credential/wsdl", "CreateCredential", request,
+            return InvokeAsync(SoapActions.CreateCredential, "http://www.onvif.org/ver10/credential/wsdl", "CreateCredential", request,
                 () => new CreateCredentialResponse(), cancellationToken);
         }
 
@@ -523,7 +523,7 @@ namespace SharpOnvifClient.Credential
         /// </summary>
         public System.Threading.Tasks.Task<SetCredentialResponse> SetCredentialAsync(SetCredentialRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetCredential, "http://www.onvif.org/ver10/credential/wsdl", "SetCredential", request,
+            return InvokeAsync(SoapActions.SetCredential, "http://www.onvif.org/ver10/credential/wsdl", "SetCredential", request,
                 () => new SetCredentialResponse(), cancellationToken);
         }
 
@@ -546,7 +546,7 @@ namespace SharpOnvifClient.Credential
         /// </summary>
         public System.Threading.Tasks.Task<ModifyCredentialResponse> ModifyCredentialAsync(ModifyCredentialRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.ModifyCredential, "http://www.onvif.org/ver10/credential/wsdl", "ModifyCredential", request,
+            return InvokeAsync(SoapActions.ModifyCredential, "http://www.onvif.org/ver10/credential/wsdl", "ModifyCredential", request,
                 () => new ModifyCredentialResponse(), cancellationToken);
         }
 
@@ -565,7 +565,7 @@ namespace SharpOnvifClient.Credential
         /// </summary>
         public System.Threading.Tasks.Task<DeleteCredentialResponse> DeleteCredentialAsync(DeleteCredentialRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeleteCredential, "http://www.onvif.org/ver10/credential/wsdl", "DeleteCredential", request,
+            return InvokeAsync(SoapActions.DeleteCredential, "http://www.onvif.org/ver10/credential/wsdl", "DeleteCredential", request,
                 () => new DeleteCredentialResponse(), cancellationToken);
         }
 
@@ -584,7 +584,7 @@ namespace SharpOnvifClient.Credential
         /// </summary>
         public System.Threading.Tasks.Task<GetCredentialStateResponse> GetCredentialStateAsync(GetCredentialStateRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetCredentialState, "http://www.onvif.org/ver10/credential/wsdl", "GetCredentialState", request,
+            return InvokeAsync(SoapActions.GetCredentialState, "http://www.onvif.org/ver10/credential/wsdl", "GetCredentialState", request,
                 () => new GetCredentialStateResponse(), cancellationToken);
         }
 
@@ -601,7 +601,7 @@ namespace SharpOnvifClient.Credential
         /// </summary>
         public System.Threading.Tasks.Task<EnableCredentialResponse> EnableCredentialAsync(EnableCredentialRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.EnableCredential, "http://www.onvif.org/ver10/credential/wsdl", "EnableCredential", request,
+            return InvokeAsync(SoapActions.EnableCredential, "http://www.onvif.org/ver10/credential/wsdl", "EnableCredential", request,
                 () => new EnableCredentialResponse(), cancellationToken);
         }
 
@@ -618,7 +618,7 @@ namespace SharpOnvifClient.Credential
         /// </summary>
         public System.Threading.Tasks.Task<DisableCredentialResponse> DisableCredentialAsync(DisableCredentialRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DisableCredential, "http://www.onvif.org/ver10/credential/wsdl", "DisableCredential", request,
+            return InvokeAsync(SoapActions.DisableCredential, "http://www.onvif.org/ver10/credential/wsdl", "DisableCredential", request,
                 () => new DisableCredentialResponse(), cancellationToken);
         }
 
@@ -635,7 +635,7 @@ namespace SharpOnvifClient.Credential
         /// </summary>
         public System.Threading.Tasks.Task<ResetAntipassbackViolationResponse> ResetAntipassbackViolationAsync(ResetAntipassbackViolationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.ResetAntipassbackViolation, "http://www.onvif.org/ver10/credential/wsdl", "ResetAntipassbackViolation", request,
+            return InvokeAsync(SoapActions.ResetAntipassbackViolation, "http://www.onvif.org/ver10/credential/wsdl", "ResetAntipassbackViolation", request,
                 () => new ResetAntipassbackViolationResponse(), cancellationToken);
         }
 
@@ -652,7 +652,7 @@ namespace SharpOnvifClient.Credential
         /// </summary>
         public System.Threading.Tasks.Task<GetCredentialIdentifiersResponse> GetCredentialIdentifiersAsync(GetCredentialIdentifiersRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetCredentialIdentifiers, "http://www.onvif.org/ver10/credential/wsdl", "GetCredentialIdentifiers", request,
+            return InvokeAsync(SoapActions.GetCredentialIdentifiers, "http://www.onvif.org/ver10/credential/wsdl", "GetCredentialIdentifiers", request,
                 () => new GetCredentialIdentifiersResponse(), cancellationToken);
         }
 
@@ -671,7 +671,7 @@ namespace SharpOnvifClient.Credential
         /// </summary>
         public System.Threading.Tasks.Task<SetCredentialIdentifierResponse> SetCredentialIdentifierAsync(SetCredentialIdentifierRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetCredentialIdentifier, "http://www.onvif.org/ver10/credential/wsdl", "SetCredentialIdentifier", request,
+            return InvokeAsync(SoapActions.SetCredentialIdentifier, "http://www.onvif.org/ver10/credential/wsdl", "SetCredentialIdentifier", request,
                 () => new SetCredentialIdentifierResponse(), cancellationToken);
         }
 
@@ -689,7 +689,7 @@ namespace SharpOnvifClient.Credential
         /// </summary>
         public System.Threading.Tasks.Task<DeleteCredentialIdentifierResponse> DeleteCredentialIdentifierAsync(DeleteCredentialIdentifierRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeleteCredentialIdentifier, "http://www.onvif.org/ver10/credential/wsdl", "DeleteCredentialIdentifier", request,
+            return InvokeAsync(SoapActions.DeleteCredentialIdentifier, "http://www.onvif.org/ver10/credential/wsdl", "DeleteCredentialIdentifier", request,
                 () => new DeleteCredentialIdentifierResponse(), cancellationToken);
         }
 
@@ -706,7 +706,7 @@ namespace SharpOnvifClient.Credential
         /// </summary>
         public System.Threading.Tasks.Task<GetCredentialAccessProfilesResponse> GetCredentialAccessProfilesAsync(GetCredentialAccessProfilesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetCredentialAccessProfiles, "http://www.onvif.org/ver10/credential/wsdl", "GetCredentialAccessProfiles", request,
+            return InvokeAsync(SoapActions.GetCredentialAccessProfiles, "http://www.onvif.org/ver10/credential/wsdl", "GetCredentialAccessProfiles", request,
                 () => new GetCredentialAccessProfilesResponse(), cancellationToken);
         }
 
@@ -725,7 +725,7 @@ namespace SharpOnvifClient.Credential
         /// </summary>
         public System.Threading.Tasks.Task<SetCredentialAccessProfilesResponse> SetCredentialAccessProfilesAsync(SetCredentialAccessProfilesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetCredentialAccessProfiles, "http://www.onvif.org/ver10/credential/wsdl", "SetCredentialAccessProfiles", request,
+            return InvokeAsync(SoapActions.SetCredentialAccessProfiles, "http://www.onvif.org/ver10/credential/wsdl", "SetCredentialAccessProfiles", request,
                 () => new SetCredentialAccessProfilesResponse(), cancellationToken);
         }
 
@@ -744,7 +744,7 @@ namespace SharpOnvifClient.Credential
         /// </summary>
         public System.Threading.Tasks.Task<DeleteCredentialAccessProfilesResponse> DeleteCredentialAccessProfilesAsync(DeleteCredentialAccessProfilesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeleteCredentialAccessProfiles, "http://www.onvif.org/ver10/credential/wsdl", "DeleteCredentialAccessProfiles", request,
+            return InvokeAsync(SoapActions.DeleteCredentialAccessProfiles, "http://www.onvif.org/ver10/credential/wsdl", "DeleteCredentialAccessProfiles", request,
                 () => new DeleteCredentialAccessProfilesResponse(), cancellationToken);
         }
 
@@ -762,7 +762,7 @@ namespace SharpOnvifClient.Credential
         /// </summary>
         public System.Threading.Tasks.Task<GetWhitelistResponse> GetWhitelistAsync(GetWhitelistRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetWhitelist, "http://www.onvif.org/ver10/credential/wsdl", "GetWhitelist", request,
+            return InvokeAsync(SoapActions.GetWhitelist, "http://www.onvif.org/ver10/credential/wsdl", "GetWhitelist", request,
                 () => new GetWhitelistResponse(), cancellationToken);
         }
 
@@ -781,7 +781,7 @@ namespace SharpOnvifClient.Credential
         /// </summary>
         public System.Threading.Tasks.Task<AddToWhitelistResponse> AddToWhitelistAsync(AddToWhitelistRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.AddToWhitelist, "http://www.onvif.org/ver10/credential/wsdl", "AddToWhitelist", request,
+            return InvokeAsync(SoapActions.AddToWhitelist, "http://www.onvif.org/ver10/credential/wsdl", "AddToWhitelist", request,
                 () => new AddToWhitelistResponse(), cancellationToken);
         }
 
@@ -800,7 +800,7 @@ namespace SharpOnvifClient.Credential
         /// </summary>
         public System.Threading.Tasks.Task<RemoveFromWhitelistResponse> RemoveFromWhitelistAsync(RemoveFromWhitelistRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.RemoveFromWhitelist, "http://www.onvif.org/ver10/credential/wsdl", "RemoveFromWhitelist", request,
+            return InvokeAsync(SoapActions.RemoveFromWhitelist, "http://www.onvif.org/ver10/credential/wsdl", "RemoveFromWhitelist", request,
                 () => new RemoveFromWhitelistResponse(), cancellationToken);
         }
 
@@ -819,7 +819,7 @@ namespace SharpOnvifClient.Credential
         /// </summary>
         public System.Threading.Tasks.Task<DeleteWhitelistResponse> DeleteWhitelistAsync(DeleteWhitelistRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeleteWhitelist, "http://www.onvif.org/ver10/credential/wsdl", "DeleteWhitelist", request,
+            return InvokeAsync(SoapActions.DeleteWhitelist, "http://www.onvif.org/ver10/credential/wsdl", "DeleteWhitelist", request,
                 () => new DeleteWhitelistResponse(), cancellationToken);
         }
 
@@ -837,7 +837,7 @@ namespace SharpOnvifClient.Credential
         /// </summary>
         public System.Threading.Tasks.Task<GetBlacklistResponse> GetBlacklistAsync(GetBlacklistRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetBlacklist, "http://www.onvif.org/ver10/credential/wsdl", "GetBlacklist", request,
+            return InvokeAsync(SoapActions.GetBlacklist, "http://www.onvif.org/ver10/credential/wsdl", "GetBlacklist", request,
                 () => new GetBlacklistResponse(), cancellationToken);
         }
 
@@ -856,7 +856,7 @@ namespace SharpOnvifClient.Credential
         /// </summary>
         public System.Threading.Tasks.Task<AddToBlacklistResponse> AddToBlacklistAsync(AddToBlacklistRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.AddToBlacklist, "http://www.onvif.org/ver10/credential/wsdl", "AddToBlacklist", request,
+            return InvokeAsync(SoapActions.AddToBlacklist, "http://www.onvif.org/ver10/credential/wsdl", "AddToBlacklist", request,
                 () => new AddToBlacklistResponse(), cancellationToken);
         }
 
@@ -875,7 +875,7 @@ namespace SharpOnvifClient.Credential
         /// </summary>
         public System.Threading.Tasks.Task<RemoveFromBlacklistResponse> RemoveFromBlacklistAsync(RemoveFromBlacklistRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.RemoveFromBlacklist, "http://www.onvif.org/ver10/credential/wsdl", "RemoveFromBlacklist", request,
+            return InvokeAsync(SoapActions.RemoveFromBlacklist, "http://www.onvif.org/ver10/credential/wsdl", "RemoveFromBlacklist", request,
                 () => new RemoveFromBlacklistResponse(), cancellationToken);
         }
 
@@ -894,7 +894,7 @@ namespace SharpOnvifClient.Credential
         /// </summary>
         public System.Threading.Tasks.Task<DeleteBlacklistResponse> DeleteBlacklistAsync(DeleteBlacklistRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeleteBlacklist, "http://www.onvif.org/ver10/credential/wsdl", "DeleteBlacklist", request,
+            return InvokeAsync(SoapActions.DeleteBlacklist, "http://www.onvif.org/ver10/credential/wsdl", "DeleteBlacklist", request,
                 () => new DeleteBlacklistResponse(), cancellationToken);
         }
 

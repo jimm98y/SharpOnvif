@@ -5,7 +5,7 @@ namespace WsdlGenerator.Configuration;
 /// <summary>
 /// One place code is written to: a namespace, a directory, and which side of the service to
 /// generate. A run has one target in the general case, and two when the client and the server are
-/// separate assemblies as they are for SharpOnvif itself.
+/// separate assemblies, as they are for this repository.
 /// </summary>
 internal sealed record GenerationTarget(string Namespace, string Directory, bool Client, bool Server);
 
@@ -20,6 +20,15 @@ internal sealed record GenerationTarget(string Namespace, string Directory, bool
 /// </para>
 /// </summary>
 internal sealed record RuntimeTarget(string Namespace, string? Directory);
+
+/// <summary>
+/// One generated service: a WSDL, and the name the code generated from it is filed under.
+/// </summary>
+internal sealed record ServiceDefinition(
+    /// <summary>Name of the namespace and folder, e.g. "DeviceMgmt".</summary>
+    string Name,
+    /// <summary>Where the WSDL is, as a path or an http(s) URL.</summary>
+    string Wsdl);
 
 /// <summary>Everything a generation run needs.</summary>
 internal sealed record GeneratorOptions
@@ -47,15 +56,26 @@ internal sealed record GeneratorOptions
 
     /// <summary>
     /// Namespace of the dispatch a generated service is routed by: where its base class and
-    /// <c>OnvifDispatchResult</c> come from.
+    /// <c>DispatchResult</c> come from.
     /// </summary>
     /// <remarks>
     /// The one thing a generated service names that is not generated. Routing an action to a
-    /// method over ASP.NET Core is a library rather than anything a schema describes, so the
-    /// generator names one instead of writing one. Generate with <c>--client</c> for output that
-    /// names nothing at all.
+    /// method over ASP.NET Core is a library rather than anything a schema describes, so the run
+    /// names one instead of the generator writing one. Generate with <c>--client</c> for output
+    /// that names nothing at all.
     /// </remarks>
-    public string DispatchNamespace { get; init; } = "SharpOnvifServer.Dispatch";
+    public string? DispatchNamespace { get; init; }
+
+    /// <summary>
+    /// Prefix put on a generated type whose schema name is one the framework already uses -
+    /// <c>DateTime</c>, <c>IPAddress</c> - so that both stay usable without an alias. Null leaves
+    /// such a name as the schema wrote it, and the collision to the caller.
+    /// </summary>
+    /// <remarks>
+    /// A run's choice, because it is a naming convention for one family of schemas, and an
+    /// expensive one to change afterwards: the prefix appears in every caller's source.
+    /// </remarks>
+    public string? TypeNamePrefix { get; init; }
 
     /// <summary>
     /// Type a generated client builds its settings from when it is given none: the name of

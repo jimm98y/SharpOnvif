@@ -30,7 +30,7 @@ namespace SharpOnvifCommon.Soap
         }
 
         public bool ReadEnvelopeBody(
-            Stream stream, OnvifContract into, Func<string, string, OnvifContract> resolveXmlType)
+            Stream stream, XmlContract into, Func<string, string, XmlContract> resolveXmlType)
         {
             using (XmlReader xml = SoapEnvelope.CreateReader(stream))
             {

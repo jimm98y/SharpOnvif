@@ -2,7 +2,7 @@ using WsdlGenerator.Xml;
 
 namespace WsdlGenerator.Wsdl;
 
-/// <summary>A wsdl:message part. ONVIF always uses element parts (document/literal).</summary>
+/// <summary>A wsdl:message part. Document/literal services use element parts.</summary>
 internal sealed record WsdlPart(string Name, QName? Element, QName? Type);
 
 internal sealed class WsdlMessage
@@ -21,7 +21,7 @@ internal sealed class WsdlOperation
 
     /// <summary>
     /// SOAP action from the binding. Filled in once the portType is matched with its binding;
-    /// ONVIF derives it from the operation name but it is always read from the document.
+    /// A service usually derives it from the operation name, but it is always read from the document.
     /// </summary>
     public string? SoapAction { get; set; }
 

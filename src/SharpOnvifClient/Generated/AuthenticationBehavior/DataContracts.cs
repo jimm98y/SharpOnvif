@@ -28,7 +28,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// with the highest priority is used.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class AuthenticationPolicy : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AuthenticationPolicy : SharpOnvifCommon.Xml.XmlContract
     {
         private string scheduleTokenField;
 
@@ -64,9 +64,9 @@ namespace SharpOnvifClient.AuthenticationBehavior
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AuthenticationPolicy"; } }
+        protected override string XmlTypeName { get { return "AuthenticationPolicy"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -104,7 +104,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class AuthenticationPolicyExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AuthenticationPolicyExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -115,9 +115,9 @@ namespace SharpOnvifClient.AuthenticationBehavior
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AuthenticationPolicyExtension"; } }
+        protected override string XmlTypeName { get { return "AuthenticationPolicyExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -175,9 +175,9 @@ namespace SharpOnvifClient.AuthenticationBehavior
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AuthenticationProfile"; } }
+        protected override string XmlTypeName { get { return "AuthenticationProfile"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -217,7 +217,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class AuthenticationProfileExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AuthenticationProfileExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -228,9 +228,9 @@ namespace SharpOnvifClient.AuthenticationBehavior
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AuthenticationProfileExtension"; } }
+        protected override string XmlTypeName { get { return "AuthenticationProfileExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -251,7 +251,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// </summary>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(AuthenticationProfile))]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class AuthenticationProfileInfo : SharpOnvifCommon.Xml.OnvifContract
+    public partial class AuthenticationProfileInfo : SharpOnvifCommon.Xml.XmlContract
     {
         private string nameField;
 
@@ -277,9 +277,9 @@ namespace SharpOnvifClient.AuthenticationBehavior
             set { this.descriptionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "AuthenticationProfileInfo"; } }
+        protected override string XmlTypeName { get { return "AuthenticationProfileInfo"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -312,7 +312,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// any value in the token field, the device shall return InvalidArgVal as a generic fault code.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateAuthenticationProfile", Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class CreateAuthenticationProfileRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateAuthenticationProfileRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private AuthenticationProfile authenticationProfileField;
 
@@ -361,7 +361,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// any value in the token field, the device shall return InvalidArgVal as a generic fault code.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateAuthenticationProfileResponse", Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class CreateAuthenticationProfileResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateAuthenticationProfileResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string tokenField;
 
@@ -410,7 +410,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// field, the device shall return InvalidArgVal as a generic fault code.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateSecurityLevel", Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class CreateSecurityLevelRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateSecurityLevelRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SecurityLevel securityLevelField;
 
@@ -459,7 +459,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// field, the device shall return InvalidArgVal as a generic fault code.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("CreateSecurityLevelResponse", Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class CreateSecurityLevelResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class CreateSecurityLevelResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string tokenField;
 
@@ -508,7 +508,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// authentication profile, and consequently a ReferenceInUse fault shall be generated.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteAuthenticationProfile", Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class DeleteAuthenticationProfileRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteAuthenticationProfileRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string tokenField;
 
@@ -557,7 +557,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// authentication profile, and consequently a ReferenceInUse fault shall be generated.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteAuthenticationProfileResponse", Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class DeleteAuthenticationProfileResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteAuthenticationProfileResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public DeleteAuthenticationProfileResponse()
         {
@@ -572,7 +572,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// consequently a ReferenceInUse fault shall be generated.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteSecurityLevel", Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class DeleteSecurityLevelRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteSecurityLevelRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string tokenField;
 
@@ -621,7 +621,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// consequently a ReferenceInUse fault shall be generated.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("DeleteSecurityLevelResponse", Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class DeleteSecurityLevelResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class DeleteSecurityLevelResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public DeleteSecurityLevelResponse()
         {
@@ -637,7 +637,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// than Limit parameter.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAuthenticationProfileInfoList", Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class GetAuthenticationProfileInfoListRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAuthenticationProfileInfoListRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private int limitField;
         private bool limitFieldSpecified;
@@ -724,7 +724,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// than Limit parameter.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAuthenticationProfileInfoListResponse", Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class GetAuthenticationProfileInfoListResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAuthenticationProfileInfoListResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string nextStartReferenceField;
 
@@ -796,7 +796,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// matching the specified tokens. The device shall not return a fault in this case.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAuthenticationProfileInfo", Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class GetAuthenticationProfileInfoRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAuthenticationProfileInfoRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] tokenField;
 
@@ -850,7 +850,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// matching the specified tokens. The device shall not return a fault in this case.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAuthenticationProfileInfoResponse", Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class GetAuthenticationProfileInfoResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAuthenticationProfileInfoResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private AuthenticationProfileInfo[] authenticationProfileInfoField;
 
@@ -906,7 +906,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// the Limit parameter.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAuthenticationProfileList", Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class GetAuthenticationProfileListRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAuthenticationProfileListRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private int limitField;
         private bool limitFieldSpecified;
@@ -993,7 +993,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// the Limit parameter.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAuthenticationProfileListResponse", Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class GetAuthenticationProfileListResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAuthenticationProfileListResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string nextStartReferenceField;
 
@@ -1065,7 +1065,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// matching specified tokens. The device shall not return a fault in this case.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAuthenticationProfiles", Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class GetAuthenticationProfilesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAuthenticationProfilesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] tokenField;
 
@@ -1119,7 +1119,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// matching specified tokens. The device shall not return a fault in this case.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetAuthenticationProfilesResponse", Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class GetAuthenticationProfilesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetAuthenticationProfilesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private AuthenticationProfile[] authenticationProfileField;
 
@@ -1175,7 +1175,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// parameter.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSecurityLevelInfoList", Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class GetSecurityLevelInfoListRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetSecurityLevelInfoListRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private int limitField;
         private bool limitFieldSpecified;
@@ -1262,7 +1262,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// parameter.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSecurityLevelInfoListResponse", Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class GetSecurityLevelInfoListResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetSecurityLevelInfoListResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string nextStartReferenceField;
 
@@ -1334,7 +1334,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// the specified tokens. The device shall not return a fault in this case.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSecurityLevelInfo", Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class GetSecurityLevelInfoRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetSecurityLevelInfoRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] tokenField;
 
@@ -1388,7 +1388,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// the specified tokens. The device shall not return a fault in this case.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSecurityLevelInfoResponse", Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class GetSecurityLevelInfoResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetSecurityLevelInfoResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SecurityLevelInfo[] securityLevelInfoField;
 
@@ -1444,7 +1444,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// parameter.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSecurityLevelList", Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class GetSecurityLevelListRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetSecurityLevelListRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private int limitField;
         private bool limitFieldSpecified;
@@ -1531,7 +1531,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// parameter.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSecurityLevelListResponse", Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class GetSecurityLevelListResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetSecurityLevelListResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private string nextStartReferenceField;
 
@@ -1603,7 +1603,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// specified tokens. The device shall not return a fault in this case.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSecurityLevels", Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class GetSecurityLevelsRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetSecurityLevelsRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private string[] tokenField;
 
@@ -1657,7 +1657,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// specified tokens. The device shall not return a fault in this case.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetSecurityLevelsResponse", Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class GetSecurityLevelsResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetSecurityLevelsResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private SecurityLevel[] securityLevelField;
 
@@ -1709,7 +1709,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// This operation returns the capabilities of the authentication behavior service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilities", Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServiceCapabilitiesRequest : SharpOnvifCommon.Xml.XmlContract
     {
         public GetServiceCapabilitiesRequest()
         {
@@ -1721,7 +1721,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// This operation returns the capabilities of the authentication behavior service.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("GetServiceCapabilitiesResponse", Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class GetServiceCapabilitiesResponse : SharpOnvifCommon.Xml.XmlContract
     {
         private ServiceCapabilities capabilitiesField;
 
@@ -1771,7 +1771,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// authentication profile.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ModifyAuthenticationProfile", Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class ModifyAuthenticationProfileRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ModifyAuthenticationProfileRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private AuthenticationProfile authenticationProfileField;
 
@@ -1820,7 +1820,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// authentication profile.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ModifyAuthenticationProfileResponse", Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class ModifyAuthenticationProfileResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ModifyAuthenticationProfileResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public ModifyAuthenticationProfileResponse()
         {
@@ -1834,7 +1834,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// in the structure shall overwrite the fields in the specified security level.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ModifySecurityLevel", Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class ModifySecurityLevelRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ModifySecurityLevelRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SecurityLevel securityLevelField;
 
@@ -1882,7 +1882,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// in the structure shall overwrite the fields in the specified security level.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("ModifySecurityLevelResponse", Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class ModifySecurityLevelResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ModifySecurityLevelResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public ModifySecurityLevelResponse()
         {
@@ -1891,7 +1891,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class RecognitionGroup : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RecognitionGroup : SharpOnvifCommon.Xml.XmlContract
     {
         private RecognitionMethod[] recognitionMethodField;
 
@@ -1914,9 +1914,9 @@ namespace SharpOnvifClient.AuthenticationBehavior
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RecognitionGroup"; } }
+        protected override string XmlTypeName { get { return "RecognitionGroup"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -1949,7 +1949,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class RecognitionGroupExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RecognitionGroupExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -1960,9 +1960,9 @@ namespace SharpOnvifClient.AuthenticationBehavior
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RecognitionGroupExtension"; } }
+        protected override string XmlTypeName { get { return "RecognitionGroupExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -1984,7 +1984,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// a physical input such as a request-to-exit button.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class RecognitionMethod : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RecognitionMethod : SharpOnvifCommon.Xml.XmlContract
     {
         private string recognitionTypeField;
 
@@ -2023,9 +2023,9 @@ namespace SharpOnvifClient.AuthenticationBehavior
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RecognitionMethod"; } }
+        protected override string XmlTypeName { get { return "RecognitionMethod"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -2057,7 +2057,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class RecognitionMethodExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class RecognitionMethodExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -2068,9 +2068,9 @@ namespace SharpOnvifClient.AuthenticationBehavior
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "RecognitionMethodExtension"; } }
+        protected override string XmlTypeName { get { return "RecognitionMethodExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -2115,9 +2115,9 @@ namespace SharpOnvifClient.AuthenticationBehavior
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SecurityLevel"; } }
+        protected override string XmlTypeName { get { return "SecurityLevel"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -2155,7 +2155,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// This structure defines what security level should be active depending on the state of the schedule.
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class SecurityLevelConstraint : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SecurityLevelConstraint : SharpOnvifCommon.Xml.XmlContract
     {
         private bool activeRegularScheduleField;
 
@@ -2220,9 +2220,9 @@ namespace SharpOnvifClient.AuthenticationBehavior
             set { this.extensionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SecurityLevelConstraint"; } }
+        protected override string XmlTypeName { get { return "SecurityLevelConstraint"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -2264,7 +2264,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class SecurityLevelConstraintExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SecurityLevelConstraintExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -2275,9 +2275,9 @@ namespace SharpOnvifClient.AuthenticationBehavior
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SecurityLevelConstraintExtension"; } }
+        protected override string XmlTypeName { get { return "SecurityLevelConstraintExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -2293,7 +2293,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class SecurityLevelExtension : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SecurityLevelExtension : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -2304,9 +2304,9 @@ namespace SharpOnvifClient.AuthenticationBehavior
             set { this.anyField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SecurityLevelExtension"; } }
+        protected override string XmlTypeName { get { return "SecurityLevelExtension"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -2326,7 +2326,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// </summary>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SecurityLevel))]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class SecurityLevelInfo : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SecurityLevelInfo : SharpOnvifCommon.Xml.XmlContract
     {
         private string nameField;
 
@@ -2369,9 +2369,9 @@ namespace SharpOnvifClient.AuthenticationBehavior
             set { this.descriptionField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "SecurityLevelInfo"; } }
+        protected override string XmlTypeName { get { return "SecurityLevelInfo"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -2407,7 +2407,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// does not change during device operation. The following capabilities are available:
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class ServiceCapabilities : SharpOnvifCommon.Xml.OnvifContract
+    public partial class ServiceCapabilities : SharpOnvifCommon.Xml.XmlContract
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -2533,9 +2533,9 @@ namespace SharpOnvifClient.AuthenticationBehavior
             set { this.supportedAuthenticationModesField = value; }
         }
 
-        protected override string OnvifXmlTypeName { get { return "ServiceCapabilities"; } }
+        protected override string XmlTypeName { get { return "ServiceCapabilities"; } }
 
-        protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
+        protected override string XmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -2607,7 +2607,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// signals support for the ClientSuppliedTokenSupported capability shall implement this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetAuthenticationProfile", Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class SetAuthenticationProfileRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetAuthenticationProfileRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private AuthenticationProfile authenticationProfileField;
 
@@ -2658,7 +2658,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// signals support for the ClientSuppliedTokenSupported capability shall implement this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetAuthenticationProfileResponse", Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class SetAuthenticationProfileResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetAuthenticationProfileResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetAuthenticationProfileResponse()
         {
@@ -2675,7 +2675,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// shall implement this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetSecurityLevel", Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class SetSecurityLevelRequest : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetSecurityLevelRequest : SharpOnvifCommon.Xml.XmlContract
     {
         private SecurityLevel securityLevelField;
 
@@ -2726,7 +2726,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// shall implement this command.
     /// </summary>
     [System.Xml.Serialization.XmlRootAttribute("SetSecurityLevelResponse", Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class SetSecurityLevelResponse : SharpOnvifCommon.Xml.OnvifContract
+    public partial class SetSecurityLevelResponse : SharpOnvifCommon.Xml.XmlContract
     {
         public SetSecurityLevelResponse()
         {
@@ -2737,7 +2737,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// <summary>Constructs a contract named by an xsi:type attribute.</summary>
     internal static class XmlTypeFactory
     {
-        public static SharpOnvifCommon.Xml.OnvifContract Create(string ns, string name)
+        public static SharpOnvifCommon.Xml.XmlContract Create(string ns, string name)
         {
             switch (name)
             {
@@ -2759,7 +2759,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     }
 
     /// <summary>SOAP action URIs for this service's operations.</summary>
-    public static class OnvifActions
+    public static class SoapActions
     {
         public const string GetServiceCapabilities = "http://www.onvif.org/ver10/authenticationbehavior/wsdl/GetServiceCapabilities";
         public const string GetAuthenticationProfileInfo = "http://www.onvif.org/ver10/authenticationbehavior/wsdl/GetAuthenticationProfileInfo";

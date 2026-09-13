@@ -42,8 +42,8 @@ namespace SharpOnvifCommon.Soap
     /// the client has to do at each, and nothing about how any particular scheme works.
     /// <para>
     /// Only the contract is generated. What implements it is not - HTTP Digest and the
-    /// WS-Security UsernameToken are what Onvif asks for, not what WSDL asks for, and a service
-    /// that authenticates some other way is authenticated by some other implementation of this.
+    /// WS-Security UsernameToken are what a particular service asks for, not what WSDL asks for,
+    /// and a service that authenticates another way is served by another implementation of this.
     /// A client given none sends no credentials at all.
     /// </para>
     /// </remarks>

@@ -341,7 +341,7 @@ namespace SharpOnvif.Tests
         // ------------------------------------------------------------------ helpers
 
         private static void AssertRoundTrips<T>(T value, string ns, string elementName)
-            where T : OnvifContract, new()
+            where T : XmlContract, new()
         {
             string reflected = WriteWithXmlSerializer(value, ns, elementName);
             string generated = WriteWithGeneratedWriter(value, ns, elementName);
@@ -355,7 +355,7 @@ namespace SharpOnvif.Tests
                 "reading and writing are not inverses");
         }
 
-        private static string WriteWithGeneratedWriter(OnvifContract value, string ns, string elementName)
+        private static string WriteWithGeneratedWriter(XmlContract value, string ns, string elementName)
         {
             var builder = new StringBuilder();
             using (XmlWriter xml = XmlWriter.Create(builder, new XmlWriterSettings { OmitXmlDeclaration = true }))
@@ -382,7 +382,7 @@ namespace SharpOnvif.Tests
             return builder.ToString();
         }
 
-        private static T ReadWithGeneratedReader<T>(string xml) where T : OnvifContract, new()
+        private static T ReadWithGeneratedReader<T>(string xml) where T : XmlContract, new()
         {
             using (XmlReader reader = XmlReader.Create(new StringReader(xml)))
             {

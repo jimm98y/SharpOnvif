@@ -11,7 +11,7 @@
 namespace SharpOnvifClient.DeviceMgmt
 {
     /// <summary>
-    /// The Device Onvif service.
+    /// The Device service.
     /// </summary>
     public interface Device
     {
@@ -1200,7 +1200,7 @@ namespace SharpOnvifClient.DeviceMgmt
         {
         }
 
-        protected override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
@@ -1210,7 +1210,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<GetServicesResponse> GetServicesAsync(GetServicesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetServices, "http://www.onvif.org/ver10/device/wsdl", "GetServices", request,
+            return InvokeAsync(SoapActions.GetServices, "http://www.onvif.org/ver10/device/wsdl", "GetServices", request,
                 () => new GetServicesResponse(), cancellationToken);
         }
 
@@ -1227,7 +1227,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<GetServiceCapabilitiesResponse> GetServiceCapabilitiesAsync(GetServiceCapabilitiesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetServiceCapabilities, "http://www.onvif.org/ver10/device/wsdl", "GetServiceCapabilities", request,
+            return InvokeAsync(SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver10/device/wsdl", "GetServiceCapabilities", request,
                 () => new GetServiceCapabilitiesResponse(), cancellationToken);
         }
 
@@ -1244,7 +1244,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<GetDeviceInformationResponse> GetDeviceInformationAsync(GetDeviceInformationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetDeviceInformation, "http://www.onvif.org/ver10/device/wsdl", "GetDeviceInformation", request,
+            return InvokeAsync(SoapActions.GetDeviceInformation, "http://www.onvif.org/ver10/device/wsdl", "GetDeviceInformation", request,
                 () => new GetDeviceInformationResponse(), cancellationToken);
         }
 
@@ -1267,7 +1267,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<SetSystemDateAndTimeResponse> SetSystemDateAndTimeAsync(SetSystemDateAndTimeRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetSystemDateAndTime, "http://www.onvif.org/ver10/device/wsdl", "SetSystemDateAndTime", request,
+            return InvokeAsync(SoapActions.SetSystemDateAndTime, "http://www.onvif.org/ver10/device/wsdl", "SetSystemDateAndTime", request,
                 () => new SetSystemDateAndTimeResponse(), cancellationToken);
         }
 
@@ -1287,7 +1287,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<GetSystemDateAndTimeResponse> GetSystemDateAndTimeAsync(GetSystemDateAndTimeRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetSystemDateAndTime, "http://www.onvif.org/ver10/device/wsdl", "GetSystemDateAndTime", request,
+            return InvokeAsync(SoapActions.GetSystemDateAndTime, "http://www.onvif.org/ver10/device/wsdl", "GetSystemDateAndTime", request,
                 () => new GetSystemDateAndTimeResponse(), cancellationToken);
         }
 
@@ -1304,7 +1304,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<SetSystemFactoryDefaultResponse> SetSystemFactoryDefaultAsync(SetSystemFactoryDefaultRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetSystemFactoryDefault, "http://www.onvif.org/ver10/device/wsdl", "SetSystemFactoryDefault", request,
+            return InvokeAsync(SoapActions.SetSystemFactoryDefault, "http://www.onvif.org/ver10/device/wsdl", "SetSystemFactoryDefault", request,
                 () => new SetSystemFactoryDefaultResponse(), cancellationToken);
         }
 
@@ -1324,7 +1324,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<UpgradeSystemFirmwareResponse> UpgradeSystemFirmwareAsync(UpgradeSystemFirmwareRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.UpgradeSystemFirmware, "http://www.onvif.org/ver10/device/wsdl", "UpgradeSystemFirmware", request,
+            return InvokeAsync(SoapActions.UpgradeSystemFirmware, "http://www.onvif.org/ver10/device/wsdl", "UpgradeSystemFirmware", request,
                 () => new UpgradeSystemFirmwareResponse(), cancellationToken);
         }
 
@@ -1341,7 +1341,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<SystemRebootResponse> SystemRebootAsync(SystemRebootRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SystemReboot, "http://www.onvif.org/ver10/device/wsdl", "SystemReboot", request,
+            return InvokeAsync(SoapActions.SystemReboot, "http://www.onvif.org/ver10/device/wsdl", "SystemReboot", request,
                 () => new SystemRebootResponse(), cancellationToken);
         }
 
@@ -1361,7 +1361,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<RestoreSystemResponse> RestoreSystemAsync(RestoreSystemRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.RestoreSystem, "http://www.onvif.org/ver10/device/wsdl", "RestoreSystem", request,
+            return InvokeAsync(SoapActions.RestoreSystem, "http://www.onvif.org/ver10/device/wsdl", "RestoreSystem", request,
                 () => new RestoreSystemResponse(), cancellationToken);
         }
 
@@ -1381,7 +1381,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<GetSystemBackupResponse> GetSystemBackupAsync(GetSystemBackupRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetSystemBackup, "http://www.onvif.org/ver10/device/wsdl", "GetSystemBackup", request,
+            return InvokeAsync(SoapActions.GetSystemBackup, "http://www.onvif.org/ver10/device/wsdl", "GetSystemBackup", request,
                 () => new GetSystemBackupResponse(), cancellationToken);
         }
 
@@ -1399,7 +1399,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<GetSystemLogResponse> GetSystemLogAsync(GetSystemLogRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetSystemLog, "http://www.onvif.org/ver10/device/wsdl", "GetSystemLog", request,
+            return InvokeAsync(SoapActions.GetSystemLog, "http://www.onvif.org/ver10/device/wsdl", "GetSystemLog", request,
                 () => new GetSystemLogResponse(), cancellationToken);
         }
 
@@ -1416,7 +1416,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<GetSystemSupportInformationResponse> GetSystemSupportInformationAsync(GetSystemSupportInformationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetSystemSupportInformation, "http://www.onvif.org/ver10/device/wsdl", "GetSystemSupportInformation", request,
+            return InvokeAsync(SoapActions.GetSystemSupportInformation, "http://www.onvif.org/ver10/device/wsdl", "GetSystemSupportInformation", request,
                 () => new GetSystemSupportInformationResponse(), cancellationToken);
         }
 
@@ -1439,7 +1439,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<GetScopesResponse> GetScopesAsync(GetScopesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetScopes, "http://www.onvif.org/ver10/device/wsdl", "GetScopes", request,
+            return InvokeAsync(SoapActions.GetScopes, "http://www.onvif.org/ver10/device/wsdl", "GetScopes", request,
                 () => new GetScopesResponse(), cancellationToken);
         }
 
@@ -1460,7 +1460,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<SetScopesResponse> SetScopesAsync(SetScopesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetScopes, "http://www.onvif.org/ver10/device/wsdl", "SetScopes", request,
+            return InvokeAsync(SoapActions.SetScopes, "http://www.onvif.org/ver10/device/wsdl", "SetScopes", request,
                 () => new SetScopesResponse(), cancellationToken);
         }
 
@@ -1479,7 +1479,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<AddScopesResponse> AddScopesAsync(AddScopesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.AddScopes, "http://www.onvif.org/ver10/device/wsdl", "AddScopes", request,
+            return InvokeAsync(SoapActions.AddScopes, "http://www.onvif.org/ver10/device/wsdl", "AddScopes", request,
                 () => new AddScopesResponse(), cancellationToken);
         }
 
@@ -1498,7 +1498,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<RemoveScopesResponse> RemoveScopesAsync(RemoveScopesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.RemoveScopes, "http://www.onvif.org/ver10/device/wsdl", "RemoveScopes", request,
+            return InvokeAsync(SoapActions.RemoveScopes, "http://www.onvif.org/ver10/device/wsdl", "RemoveScopes", request,
                 () => new RemoveScopesResponse(), cancellationToken);
         }
 
@@ -1517,7 +1517,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<GetDiscoveryModeResponse> GetDiscoveryModeAsync(GetDiscoveryModeRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetDiscoveryMode, "http://www.onvif.org/ver10/device/wsdl", "GetDiscoveryMode", request,
+            return InvokeAsync(SoapActions.GetDiscoveryMode, "http://www.onvif.org/ver10/device/wsdl", "GetDiscoveryMode", request,
                 () => new GetDiscoveryModeResponse(), cancellationToken);
         }
 
@@ -1536,7 +1536,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<SetDiscoveryModeResponse> SetDiscoveryModeAsync(SetDiscoveryModeRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetDiscoveryMode, "http://www.onvif.org/ver10/device/wsdl", "SetDiscoveryMode", request,
+            return InvokeAsync(SoapActions.SetDiscoveryMode, "http://www.onvif.org/ver10/device/wsdl", "SetDiscoveryMode", request,
                 () => new SetDiscoveryModeResponse(), cancellationToken);
         }
 
@@ -1555,7 +1555,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<GetRemoteDiscoveryModeResponse> GetRemoteDiscoveryModeAsync(GetRemoteDiscoveryModeRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetRemoteDiscoveryMode, "http://www.onvif.org/ver10/device/wsdl", "GetRemoteDiscoveryMode", request,
+            return InvokeAsync(SoapActions.GetRemoteDiscoveryMode, "http://www.onvif.org/ver10/device/wsdl", "GetRemoteDiscoveryMode", request,
                 () => new GetRemoteDiscoveryModeResponse(), cancellationToken);
         }
 
@@ -1574,7 +1574,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<SetRemoteDiscoveryModeResponse> SetRemoteDiscoveryModeAsync(SetRemoteDiscoveryModeRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetRemoteDiscoveryMode, "http://www.onvif.org/ver10/device/wsdl", "SetRemoteDiscoveryMode", request,
+            return InvokeAsync(SoapActions.SetRemoteDiscoveryMode, "http://www.onvif.org/ver10/device/wsdl", "SetRemoteDiscoveryMode", request,
                 () => new SetRemoteDiscoveryModeResponse(), cancellationToken);
         }
 
@@ -1593,7 +1593,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<GetDPAddressesResponse> GetDPAddressesAsync(GetDPAddressesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetDPAddresses, "http://www.onvif.org/ver10/device/wsdl", "GetDPAddresses", request,
+            return InvokeAsync(SoapActions.GetDPAddresses, "http://www.onvif.org/ver10/device/wsdl", "GetDPAddresses", request,
                 () => new GetDPAddressesResponse(), cancellationToken);
         }
 
@@ -1612,7 +1612,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<SetDPAddressesResponse> SetDPAddressesAsync(SetDPAddressesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetDPAddresses, "http://www.onvif.org/ver10/device/wsdl", "SetDPAddresses", request,
+            return InvokeAsync(SoapActions.SetDPAddresses, "http://www.onvif.org/ver10/device/wsdl", "SetDPAddresses", request,
                 () => new SetDPAddressesResponse(), cancellationToken);
         }
 
@@ -1632,7 +1632,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<GetEndpointReferenceResponse> GetEndpointReferenceAsync(GetEndpointReferenceRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetEndpointReference, "http://www.onvif.org/ver10/device/wsdl", "GetEndpointReference", request,
+            return InvokeAsync(SoapActions.GetEndpointReference, "http://www.onvif.org/ver10/device/wsdl", "GetEndpointReference", request,
                 () => new GetEndpointReferenceResponse(), cancellationToken);
         }
 
@@ -1650,7 +1650,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<GetUserRolesResponse> GetUserRolesAsync(GetUserRolesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetUserRoles, "http://www.onvif.org/ver10/device/wsdl", "GetUserRoles", request,
+            return InvokeAsync(SoapActions.GetUserRoles, "http://www.onvif.org/ver10/device/wsdl", "GetUserRoles", request,
                 () => new GetUserRolesResponse(), cancellationToken);
         }
 
@@ -1669,7 +1669,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<SetUserRoleResponse> SetUserRoleAsync(SetUserRoleRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetUserRole, "http://www.onvif.org/ver10/device/wsdl", "SetUserRole", request,
+            return InvokeAsync(SoapActions.SetUserRole, "http://www.onvif.org/ver10/device/wsdl", "SetUserRole", request,
                 () => new SetUserRoleResponse(), cancellationToken);
         }
 
@@ -1686,7 +1686,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<DeleteUserRoleResponse> DeleteUserRoleAsync(DeleteUserRoleRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeleteUserRole, "http://www.onvif.org/ver10/device/wsdl", "DeleteUserRole", request,
+            return InvokeAsync(SoapActions.DeleteUserRole, "http://www.onvif.org/ver10/device/wsdl", "DeleteUserRole", request,
                 () => new DeleteUserRoleResponse(), cancellationToken);
         }
 
@@ -1706,7 +1706,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<GetRemoteUserResponse> GetRemoteUserAsync(GetRemoteUserRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetRemoteUser, "http://www.onvif.org/ver10/device/wsdl", "GetRemoteUser", request,
+            return InvokeAsync(SoapActions.GetRemoteUser, "http://www.onvif.org/ver10/device/wsdl", "GetRemoteUser", request,
                 () => new GetRemoteUserResponse(), cancellationToken);
         }
 
@@ -1728,7 +1728,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<SetRemoteUserResponse> SetRemoteUserAsync(SetRemoteUserRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetRemoteUser, "http://www.onvif.org/ver10/device/wsdl", "SetRemoteUser", request,
+            return InvokeAsync(SoapActions.SetRemoteUser, "http://www.onvif.org/ver10/device/wsdl", "SetRemoteUser", request,
                 () => new SetRemoteUserResponse(), cancellationToken);
         }
 
@@ -1747,7 +1747,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<GetUsersResponse> GetUsersAsync(GetUsersRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetUsers, "http://www.onvif.org/ver10/device/wsdl", "GetUsers", request,
+            return InvokeAsync(SoapActions.GetUsers, "http://www.onvif.org/ver10/device/wsdl", "GetUsers", request,
                 () => new GetUsersResponse(), cancellationToken);
         }
 
@@ -1769,7 +1769,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<CreateUsersResponse> CreateUsersAsync(CreateUsersRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.CreateUsers, "http://www.onvif.org/ver10/device/wsdl", "CreateUsers", request,
+            return InvokeAsync(SoapActions.CreateUsers, "http://www.onvif.org/ver10/device/wsdl", "CreateUsers", request,
                 () => new CreateUsersResponse(), cancellationToken);
         }
 
@@ -1789,7 +1789,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<DeleteUsersResponse> DeleteUsersAsync(DeleteUsersRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeleteUsers, "http://www.onvif.org/ver10/device/wsdl", "DeleteUsers", request,
+            return InvokeAsync(SoapActions.DeleteUsers, "http://www.onvif.org/ver10/device/wsdl", "DeleteUsers", request,
                 () => new DeleteUsersResponse(), cancellationToken);
         }
 
@@ -1809,7 +1809,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<SetUserResponse> SetUserAsync(SetUserRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetUser, "http://www.onvif.org/ver10/device/wsdl", "SetUser", request,
+            return InvokeAsync(SoapActions.SetUser, "http://www.onvif.org/ver10/device/wsdl", "SetUser", request,
                 () => new SetUserResponse(), cancellationToken);
         }
 
@@ -1827,7 +1827,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<GetWsdlUrlResponse> GetWsdlUrlAsync(GetWsdlUrlRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetWsdlUrl, "http://www.onvif.org/ver10/device/wsdl", "GetWsdlUrl", request,
+            return InvokeAsync(SoapActions.GetWsdlUrl, "http://www.onvif.org/ver10/device/wsdl", "GetWsdlUrl", request,
                 () => new GetWsdlUrlResponse(), cancellationToken);
         }
 
@@ -1845,7 +1845,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<GetPasswordComplexityOptionsResponse> GetPasswordComplexityOptionsAsync(GetPasswordComplexityOptionsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetPasswordComplexityOptions, "http://www.onvif.org/ver10/device/wsdl", "GetPasswordComplexityOptions", request,
+            return InvokeAsync(SoapActions.GetPasswordComplexityOptions, "http://www.onvif.org/ver10/device/wsdl", "GetPasswordComplexityOptions", request,
                 () => new GetPasswordComplexityOptionsResponse(), cancellationToken);
         }
 
@@ -1862,7 +1862,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<GetPasswordComplexityConfigurationResponse> GetPasswordComplexityConfigurationAsync(GetPasswordComplexityConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetPasswordComplexityConfiguration, "http://www.onvif.org/ver10/device/wsdl", "GetPasswordComplexityConfiguration", request,
+            return InvokeAsync(SoapActions.GetPasswordComplexityConfiguration, "http://www.onvif.org/ver10/device/wsdl", "GetPasswordComplexityConfiguration", request,
                 () => new GetPasswordComplexityConfigurationResponse(), cancellationToken);
         }
 
@@ -1879,7 +1879,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<SetPasswordComplexityConfigurationResponse> SetPasswordComplexityConfigurationAsync(SetPasswordComplexityConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetPasswordComplexityConfiguration, "http://www.onvif.org/ver10/device/wsdl", "SetPasswordComplexityConfiguration", request,
+            return InvokeAsync(SoapActions.SetPasswordComplexityConfiguration, "http://www.onvif.org/ver10/device/wsdl", "SetPasswordComplexityConfiguration", request,
                 () => new SetPasswordComplexityConfigurationResponse(), cancellationToken);
         }
 
@@ -1896,7 +1896,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<GetPasswordHistoryConfigurationResponse> GetPasswordHistoryConfigurationAsync(GetPasswordHistoryConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetPasswordHistoryConfiguration, "http://www.onvif.org/ver10/device/wsdl", "GetPasswordHistoryConfiguration", request,
+            return InvokeAsync(SoapActions.GetPasswordHistoryConfiguration, "http://www.onvif.org/ver10/device/wsdl", "GetPasswordHistoryConfiguration", request,
                 () => new GetPasswordHistoryConfigurationResponse(), cancellationToken);
         }
 
@@ -1913,7 +1913,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<SetPasswordHistoryConfigurationResponse> SetPasswordHistoryConfigurationAsync(SetPasswordHistoryConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetPasswordHistoryConfiguration, "http://www.onvif.org/ver10/device/wsdl", "SetPasswordHistoryConfiguration", request,
+            return InvokeAsync(SoapActions.SetPasswordHistoryConfiguration, "http://www.onvif.org/ver10/device/wsdl", "SetPasswordHistoryConfiguration", request,
                 () => new SetPasswordHistoryConfigurationResponse(), cancellationToken);
         }
 
@@ -1931,7 +1931,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<GetAuthFailureWarningOptionsResponse> GetAuthFailureWarningOptionsAsync(GetAuthFailureWarningOptionsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetAuthFailureWarningOptions, "http://www.onvif.org/ver10/device/wsdl", "GetAuthFailureWarningOptions", request,
+            return InvokeAsync(SoapActions.GetAuthFailureWarningOptions, "http://www.onvif.org/ver10/device/wsdl", "GetAuthFailureWarningOptions", request,
                 () => new GetAuthFailureWarningOptionsResponse(), cancellationToken);
         }
 
@@ -1948,7 +1948,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<GetAuthFailureWarningConfigurationResponse> GetAuthFailureWarningConfigurationAsync(GetAuthFailureWarningConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetAuthFailureWarningConfiguration, "http://www.onvif.org/ver10/device/wsdl", "GetAuthFailureWarningConfiguration", request,
+            return InvokeAsync(SoapActions.GetAuthFailureWarningConfiguration, "http://www.onvif.org/ver10/device/wsdl", "GetAuthFailureWarningConfiguration", request,
                 () => new GetAuthFailureWarningConfigurationResponse(), cancellationToken);
         }
 
@@ -1965,7 +1965,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<SetAuthFailureWarningConfigurationResponse> SetAuthFailureWarningConfigurationAsync(SetAuthFailureWarningConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetAuthFailureWarningConfiguration, "http://www.onvif.org/ver10/device/wsdl", "SetAuthFailureWarningConfiguration", request,
+            return InvokeAsync(SoapActions.SetAuthFailureWarningConfiguration, "http://www.onvif.org/ver10/device/wsdl", "SetAuthFailureWarningConfiguration", request,
                 () => new SetAuthFailureWarningConfigurationResponse(), cancellationToken);
         }
 
@@ -1983,7 +1983,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<GetCapabilitiesResponse> GetCapabilitiesAsync(GetCapabilitiesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetCapabilities, "http://www.onvif.org/ver10/device/wsdl", "GetCapabilities", request,
+            return InvokeAsync(SoapActions.GetCapabilities, "http://www.onvif.org/ver10/device/wsdl", "GetCapabilities", request,
                 () => new GetCapabilitiesResponse(), cancellationToken);
         }
 
@@ -2001,7 +2001,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<GetHostnameResponse> GetHostnameAsync(GetHostnameRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetHostname, "http://www.onvif.org/ver10/device/wsdl", "GetHostname", request,
+            return InvokeAsync(SoapActions.GetHostname, "http://www.onvif.org/ver10/device/wsdl", "GetHostname", request,
                 () => new GetHostnameResponse(), cancellationToken);
         }
 
@@ -2021,7 +2021,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<SetHostnameResponse> SetHostnameAsync(SetHostnameRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetHostname, "http://www.onvif.org/ver10/device/wsdl", "SetHostname", request,
+            return InvokeAsync(SoapActions.SetHostname, "http://www.onvif.org/ver10/device/wsdl", "SetHostname", request,
                 () => new SetHostnameResponse(), cancellationToken);
         }
 
@@ -2038,7 +2038,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<SetHostnameFromDHCPResponse> SetHostnameFromDHCPAsync(SetHostnameFromDHCPRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetHostnameFromDHCP, "http://www.onvif.org/ver10/device/wsdl", "SetHostnameFromDHCP", request,
+            return InvokeAsync(SoapActions.SetHostnameFromDHCP, "http://www.onvif.org/ver10/device/wsdl", "SetHostnameFromDHCP", request,
                 () => new SetHostnameFromDHCPResponse(), cancellationToken);
         }
 
@@ -2056,7 +2056,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<GetDNSResponse> GetDNSAsync(GetDNSRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetDNS, "http://www.onvif.org/ver10/device/wsdl", "GetDNS", request,
+            return InvokeAsync(SoapActions.GetDNS, "http://www.onvif.org/ver10/device/wsdl", "GetDNS", request,
                 () => new GetDNSResponse(), cancellationToken);
         }
 
@@ -2074,7 +2074,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<SetDNSResponse> SetDNSAsync(SetDNSRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetDNS, "http://www.onvif.org/ver10/device/wsdl", "SetDNS", request,
+            return InvokeAsync(SoapActions.SetDNS, "http://www.onvif.org/ver10/device/wsdl", "SetDNS", request,
                 () => new SetDNSResponse(), cancellationToken);
         }
 
@@ -2092,7 +2092,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<GetNTPResponse> GetNTPAsync(GetNTPRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetNTP, "http://www.onvif.org/ver10/device/wsdl", "GetNTP", request,
+            return InvokeAsync(SoapActions.GetNTP, "http://www.onvif.org/ver10/device/wsdl", "GetNTP", request,
                 () => new GetNTPResponse(), cancellationToken);
         }
 
@@ -2113,7 +2113,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<SetNTPResponse> SetNTPAsync(SetNTPRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetNTP, "http://www.onvif.org/ver10/device/wsdl", "SetNTP", request,
+            return InvokeAsync(SoapActions.SetNTP, "http://www.onvif.org/ver10/device/wsdl", "SetNTP", request,
                 () => new SetNTPResponse(), cancellationToken);
         }
 
@@ -2132,7 +2132,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<GetDynamicDNSResponse> GetDynamicDNSAsync(GetDynamicDNSRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetDynamicDNS, "http://www.onvif.org/ver10/device/wsdl", "GetDynamicDNS", request,
+            return InvokeAsync(SoapActions.GetDynamicDNS, "http://www.onvif.org/ver10/device/wsdl", "GetDynamicDNS", request,
                 () => new GetDynamicDNSResponse(), cancellationToken);
         }
 
@@ -2151,7 +2151,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<SetDynamicDNSResponse> SetDynamicDNSAsync(SetDynamicDNSRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetDynamicDNS, "http://www.onvif.org/ver10/device/wsdl", "SetDynamicDNS", request,
+            return InvokeAsync(SoapActions.SetDynamicDNS, "http://www.onvif.org/ver10/device/wsdl", "SetDynamicDNS", request,
                 () => new SetDynamicDNSResponse(), cancellationToken);
         }
 
@@ -2170,7 +2170,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<GetNetworkInterfacesResponse> GetNetworkInterfacesAsync(GetNetworkInterfacesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetNetworkInterfaces, "http://www.onvif.org/ver10/device/wsdl", "GetNetworkInterfaces", request,
+            return InvokeAsync(SoapActions.GetNetworkInterfaces, "http://www.onvif.org/ver10/device/wsdl", "GetNetworkInterfaces", request,
                 () => new GetNetworkInterfacesResponse(), cancellationToken);
         }
 
@@ -2190,7 +2190,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<SetNetworkInterfacesResponse> SetNetworkInterfacesAsync(SetNetworkInterfacesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetNetworkInterfaces, "http://www.onvif.org/ver10/device/wsdl", "SetNetworkInterfaces", request,
+            return InvokeAsync(SoapActions.SetNetworkInterfaces, "http://www.onvif.org/ver10/device/wsdl", "SetNetworkInterfaces", request,
                 () => new SetNetworkInterfacesResponse(), cancellationToken);
         }
 
@@ -2208,7 +2208,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<GetNetworkProtocolsResponse> GetNetworkProtocolsAsync(GetNetworkProtocolsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetNetworkProtocols, "http://www.onvif.org/ver10/device/wsdl", "GetNetworkProtocols", request,
+            return InvokeAsync(SoapActions.GetNetworkProtocols, "http://www.onvif.org/ver10/device/wsdl", "GetNetworkProtocols", request,
                 () => new GetNetworkProtocolsResponse(), cancellationToken);
         }
 
@@ -2226,7 +2226,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<SetNetworkProtocolsResponse> SetNetworkProtocolsAsync(SetNetworkProtocolsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetNetworkProtocols, "http://www.onvif.org/ver10/device/wsdl", "SetNetworkProtocols", request,
+            return InvokeAsync(SoapActions.SetNetworkProtocols, "http://www.onvif.org/ver10/device/wsdl", "SetNetworkProtocols", request,
                 () => new SetNetworkProtocolsResponse(), cancellationToken);
         }
 
@@ -2244,7 +2244,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<GetNetworkDefaultGatewayResponse> GetNetworkDefaultGatewayAsync(GetNetworkDefaultGatewayRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetNetworkDefaultGateway, "http://www.onvif.org/ver10/device/wsdl", "GetNetworkDefaultGateway", request,
+            return InvokeAsync(SoapActions.GetNetworkDefaultGateway, "http://www.onvif.org/ver10/device/wsdl", "GetNetworkDefaultGateway", request,
                 () => new GetNetworkDefaultGatewayResponse(), cancellationToken);
         }
 
@@ -2262,7 +2262,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<SetNetworkDefaultGatewayResponse> SetNetworkDefaultGatewayAsync(SetNetworkDefaultGatewayRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetNetworkDefaultGateway, "http://www.onvif.org/ver10/device/wsdl", "SetNetworkDefaultGateway", request,
+            return InvokeAsync(SoapActions.SetNetworkDefaultGateway, "http://www.onvif.org/ver10/device/wsdl", "SetNetworkDefaultGateway", request,
                 () => new SetNetworkDefaultGatewayResponse(), cancellationToken);
         }
 
@@ -2282,7 +2282,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<GetZeroConfigurationResponse> GetZeroConfigurationAsync(GetZeroConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetZeroConfiguration, "http://www.onvif.org/ver10/device/wsdl", "GetZeroConfiguration", request,
+            return InvokeAsync(SoapActions.GetZeroConfiguration, "http://www.onvif.org/ver10/device/wsdl", "GetZeroConfiguration", request,
                 () => new GetZeroConfigurationResponse(), cancellationToken);
         }
 
@@ -2300,7 +2300,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<SetZeroConfigurationResponse> SetZeroConfigurationAsync(SetZeroConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetZeroConfiguration, "http://www.onvif.org/ver10/device/wsdl", "SetZeroConfiguration", request,
+            return InvokeAsync(SoapActions.SetZeroConfiguration, "http://www.onvif.org/ver10/device/wsdl", "SetZeroConfiguration", request,
                 () => new SetZeroConfigurationResponse(), cancellationToken);
         }
 
@@ -2319,7 +2319,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<GetIPAddressFilterResponse> GetIPAddressFilterAsync(GetIPAddressFilterRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetIPAddressFilter, "http://www.onvif.org/ver10/device/wsdl", "GetIPAddressFilter", request,
+            return InvokeAsync(SoapActions.GetIPAddressFilter, "http://www.onvif.org/ver10/device/wsdl", "GetIPAddressFilter", request,
                 () => new GetIPAddressFilterResponse(), cancellationToken);
         }
 
@@ -2338,7 +2338,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<SetIPAddressFilterResponse> SetIPAddressFilterAsync(SetIPAddressFilterRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetIPAddressFilter, "http://www.onvif.org/ver10/device/wsdl", "SetIPAddressFilter", request,
+            return InvokeAsync(SoapActions.SetIPAddressFilter, "http://www.onvif.org/ver10/device/wsdl", "SetIPAddressFilter", request,
                 () => new SetIPAddressFilterResponse(), cancellationToken);
         }
 
@@ -2357,7 +2357,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<AddIPAddressFilterResponse> AddIPAddressFilterAsync(AddIPAddressFilterRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.AddIPAddressFilter, "http://www.onvif.org/ver10/device/wsdl", "AddIPAddressFilter", request,
+            return InvokeAsync(SoapActions.AddIPAddressFilter, "http://www.onvif.org/ver10/device/wsdl", "AddIPAddressFilter", request,
                 () => new AddIPAddressFilterResponse(), cancellationToken);
         }
 
@@ -2376,7 +2376,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<RemoveIPAddressFilterResponse> RemoveIPAddressFilterAsync(RemoveIPAddressFilterRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.RemoveIPAddressFilter, "http://www.onvif.org/ver10/device/wsdl", "RemoveIPAddressFilter", request,
+            return InvokeAsync(SoapActions.RemoveIPAddressFilter, "http://www.onvif.org/ver10/device/wsdl", "RemoveIPAddressFilter", request,
                 () => new RemoveIPAddressFilterResponse(), cancellationToken);
         }
 
@@ -2399,7 +2399,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<GetAccessPolicyResponse> GetAccessPolicyAsync(GetAccessPolicyRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetAccessPolicy, "http://www.onvif.org/ver10/device/wsdl", "GetAccessPolicy", request,
+            return InvokeAsync(SoapActions.GetAccessPolicy, "http://www.onvif.org/ver10/device/wsdl", "GetAccessPolicy", request,
                 () => new GetAccessPolicyResponse(), cancellationToken);
         }
 
@@ -2418,7 +2418,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<SetAccessPolicyResponse> SetAccessPolicyAsync(SetAccessPolicyRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetAccessPolicy, "http://www.onvif.org/ver10/device/wsdl", "SetAccessPolicy", request,
+            return InvokeAsync(SoapActions.SetAccessPolicy, "http://www.onvif.org/ver10/device/wsdl", "SetAccessPolicy", request,
                 () => new SetAccessPolicyResponse(), cancellationToken);
         }
 
@@ -2436,7 +2436,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<GetRelayOutputsResponse> GetRelayOutputsAsync(GetRelayOutputsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetRelayOutputs, "http://www.onvif.org/ver10/device/wsdl", "GetRelayOutputs", request,
+            return InvokeAsync(SoapActions.GetRelayOutputs, "http://www.onvif.org/ver10/device/wsdl", "GetRelayOutputs", request,
                 () => new GetRelayOutputsResponse(), cancellationToken);
         }
 
@@ -2454,7 +2454,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<SetRelayOutputSettingsResponse> SetRelayOutputSettingsAsync(SetRelayOutputSettingsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetRelayOutputSettings, "http://www.onvif.org/ver10/device/wsdl", "SetRelayOutputSettings", request,
+            return InvokeAsync(SoapActions.SetRelayOutputSettings, "http://www.onvif.org/ver10/device/wsdl", "SetRelayOutputSettings", request,
                 () => new SetRelayOutputSettingsResponse(), cancellationToken);
         }
 
@@ -2472,7 +2472,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<SetRelayOutputStateResponse> SetRelayOutputStateAsync(SetRelayOutputStateRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetRelayOutputState, "http://www.onvif.org/ver10/device/wsdl", "SetRelayOutputState", request,
+            return InvokeAsync(SoapActions.SetRelayOutputState, "http://www.onvif.org/ver10/device/wsdl", "SetRelayOutputState", request,
                 () => new SetRelayOutputStateResponse(), cancellationToken);
         }
 
@@ -2500,7 +2500,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<SendAuxiliaryCommandResponse> SendAuxiliaryCommandAsync(SendAuxiliaryCommandRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SendAuxiliaryCommand, "http://www.onvif.org/ver10/device/wsdl", "SendAuxiliaryCommand", request,
+            return InvokeAsync(SoapActions.SendAuxiliaryCommand, "http://www.onvif.org/ver10/device/wsdl", "SendAuxiliaryCommand", request,
                 () => new SendAuxiliaryCommandResponse(), cancellationToken);
         }
 
@@ -2517,7 +2517,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<GetDot11CapabilitiesResponse> GetDot11CapabilitiesAsync(GetDot11CapabilitiesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetDot11Capabilities, "http://www.onvif.org/ver10/device/wsdl", "GetDot11Capabilities", request,
+            return InvokeAsync(SoapActions.GetDot11Capabilities, "http://www.onvif.org/ver10/device/wsdl", "GetDot11Capabilities", request,
                 () => new GetDot11CapabilitiesResponse(), cancellationToken);
         }
 
@@ -2535,7 +2535,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<GetDot11StatusResponse> GetDot11StatusAsync(GetDot11StatusRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetDot11Status, "http://www.onvif.org/ver10/device/wsdl", "GetDot11Status", request,
+            return InvokeAsync(SoapActions.GetDot11Status, "http://www.onvif.org/ver10/device/wsdl", "GetDot11Status", request,
                 () => new GetDot11StatusResponse(), cancellationToken);
         }
 
@@ -2553,7 +2553,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<ScanAvailableDot11NetworksResponse> ScanAvailableDot11NetworksAsync(ScanAvailableDot11NetworksRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.ScanAvailableDot11Networks, "http://www.onvif.org/ver10/device/wsdl", "ScanAvailableDot11Networks", request,
+            return InvokeAsync(SoapActions.ScanAvailableDot11Networks, "http://www.onvif.org/ver10/device/wsdl", "ScanAvailableDot11Networks", request,
                 () => new ScanAvailableDot11NetworksResponse(), cancellationToken);
         }
 
@@ -2579,7 +2579,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<GetSystemUrisResponse> GetSystemUrisAsync(GetSystemUrisRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetSystemUris, "http://www.onvif.org/ver10/device/wsdl", "GetSystemUris", request,
+            return InvokeAsync(SoapActions.GetSystemUris, "http://www.onvif.org/ver10/device/wsdl", "GetSystemUris", request,
                 () => new GetSystemUrisResponse(), cancellationToken);
         }
 
@@ -2607,7 +2607,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<StartFirmwareUpgradeResponse> StartFirmwareUpgradeAsync(StartFirmwareUpgradeRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.StartFirmwareUpgrade, "http://www.onvif.org/ver10/device/wsdl", "StartFirmwareUpgrade", request,
+            return InvokeAsync(SoapActions.StartFirmwareUpgrade, "http://www.onvif.org/ver10/device/wsdl", "StartFirmwareUpgrade", request,
                 () => new StartFirmwareUpgradeResponse(), cancellationToken);
         }
 
@@ -2633,7 +2633,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<UpgradeFirmwareResponse> UpgradeFirmwareAsync(UpgradeFirmwareRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.UpgradeFirmware, "http://www.onvif.org/ver10/device/wsdl", "UpgradeFirmware", request,
+            return InvokeAsync(SoapActions.UpgradeFirmware, "http://www.onvif.org/ver10/device/wsdl", "UpgradeFirmware", request,
                 () => new UpgradeFirmwareResponse(), cancellationToken);
         }
 
@@ -2661,7 +2661,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<StartSystemRestoreResponse> StartSystemRestoreAsync(StartSystemRestoreRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.StartSystemRestore, "http://www.onvif.org/ver10/device/wsdl", "StartSystemRestore", request,
+            return InvokeAsync(SoapActions.StartSystemRestore, "http://www.onvif.org/ver10/device/wsdl", "StartSystemRestore", request,
                 () => new StartSystemRestoreResponse(), cancellationToken);
         }
 
@@ -2678,7 +2678,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<GetStorageConfigurationsResponse> GetStorageConfigurationsAsync(GetStorageConfigurationsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetStorageConfigurations, "http://www.onvif.org/ver10/device/wsdl", "GetStorageConfigurations", request,
+            return InvokeAsync(SoapActions.GetStorageConfigurations, "http://www.onvif.org/ver10/device/wsdl", "GetStorageConfigurations", request,
                 () => new GetStorageConfigurationsResponse(), cancellationToken);
         }
 
@@ -2696,7 +2696,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<CreateStorageConfigurationResponse> CreateStorageConfigurationAsync(CreateStorageConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.CreateStorageConfiguration, "http://www.onvif.org/ver10/device/wsdl", "CreateStorageConfiguration", request,
+            return InvokeAsync(SoapActions.CreateStorageConfiguration, "http://www.onvif.org/ver10/device/wsdl", "CreateStorageConfiguration", request,
                 () => new CreateStorageConfigurationResponse(), cancellationToken);
         }
 
@@ -2714,7 +2714,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<GetStorageConfigurationResponse> GetStorageConfigurationAsync(GetStorageConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetStorageConfiguration, "http://www.onvif.org/ver10/device/wsdl", "GetStorageConfiguration", request,
+            return InvokeAsync(SoapActions.GetStorageConfiguration, "http://www.onvif.org/ver10/device/wsdl", "GetStorageConfiguration", request,
                 () => new GetStorageConfigurationResponse(), cancellationToken);
         }
 
@@ -2731,7 +2731,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<SetStorageConfigurationResponse> SetStorageConfigurationAsync(SetStorageConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetStorageConfiguration, "http://www.onvif.org/ver10/device/wsdl", "SetStorageConfiguration", request,
+            return InvokeAsync(SoapActions.SetStorageConfiguration, "http://www.onvif.org/ver10/device/wsdl", "SetStorageConfiguration", request,
                 () => new SetStorageConfigurationResponse(), cancellationToken);
         }
 
@@ -2749,7 +2749,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<DeleteStorageConfigurationResponse> DeleteStorageConfigurationAsync(DeleteStorageConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeleteStorageConfiguration, "http://www.onvif.org/ver10/device/wsdl", "DeleteStorageConfiguration", request,
+            return InvokeAsync(SoapActions.DeleteStorageConfiguration, "http://www.onvif.org/ver10/device/wsdl", "DeleteStorageConfiguration", request,
                 () => new DeleteStorageConfigurationResponse(), cancellationToken);
         }
 
@@ -2766,7 +2766,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<GetGeoLocationResponse> GetGeoLocationAsync(GetGeoLocationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetGeoLocation, "http://www.onvif.org/ver10/device/wsdl", "GetGeoLocation", request,
+            return InvokeAsync(SoapActions.GetGeoLocation, "http://www.onvif.org/ver10/device/wsdl", "GetGeoLocation", request,
                 () => new GetGeoLocationResponse(), cancellationToken);
         }
 
@@ -2783,7 +2783,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<SetGeoLocationResponse> SetGeoLocationAsync(SetGeoLocationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetGeoLocation, "http://www.onvif.org/ver10/device/wsdl", "SetGeoLocation", request,
+            return InvokeAsync(SoapActions.SetGeoLocation, "http://www.onvif.org/ver10/device/wsdl", "SetGeoLocation", request,
                 () => new SetGeoLocationResponse(), cancellationToken);
         }
 
@@ -2800,7 +2800,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<DeleteGeoLocationResponse> DeleteGeoLocationAsync(DeleteGeoLocationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeleteGeoLocation, "http://www.onvif.org/ver10/device/wsdl", "DeleteGeoLocation", request,
+            return InvokeAsync(SoapActions.DeleteGeoLocation, "http://www.onvif.org/ver10/device/wsdl", "DeleteGeoLocation", request,
                 () => new DeleteGeoLocationResponse(), cancellationToken);
         }
 
@@ -2817,7 +2817,7 @@ namespace SharpOnvifClient.DeviceMgmt
         /// </summary>
         public System.Threading.Tasks.Task<SetHashingAlgorithmResponse> SetHashingAlgorithmAsync(SetHashingAlgorithmRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetHashingAlgorithm, "http://www.onvif.org/ver10/device/wsdl", "SetHashingAlgorithm", request,
+            return InvokeAsync(SoapActions.SetHashingAlgorithm, "http://www.onvif.org/ver10/device/wsdl", "SetHashingAlgorithm", request,
                 () => new SetHashingAlgorithmResponse(), cancellationToken);
         }
 
@@ -2831,7 +2831,7 @@ namespace SharpOnvifClient.DeviceMgmt
 
         public System.Threading.Tasks.Task<CreateCertificateResponse> CreateCertificateAsync(CreateCertificateRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.CreateCertificate, "http://www.onvif.org/ver10/device/wsdl", "CreateCertificate", request,
+            return InvokeAsync(SoapActions.CreateCertificate, "http://www.onvif.org/ver10/device/wsdl", "CreateCertificate", request,
                 () => new CreateCertificateResponse(), cancellationToken);
         }
 
@@ -2845,7 +2845,7 @@ namespace SharpOnvifClient.DeviceMgmt
 
         public System.Threading.Tasks.Task<GetCertificatesResponse> GetCertificatesAsync(GetCertificatesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetCertificates, "http://www.onvif.org/ver10/device/wsdl", "GetCertificates", request,
+            return InvokeAsync(SoapActions.GetCertificates, "http://www.onvif.org/ver10/device/wsdl", "GetCertificates", request,
                 () => new GetCertificatesResponse(), cancellationToken);
         }
 
@@ -2859,7 +2859,7 @@ namespace SharpOnvifClient.DeviceMgmt
 
         public System.Threading.Tasks.Task<GetCertificatesStatusResponse> GetCertificatesStatusAsync(GetCertificatesStatusRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetCertificatesStatus, "http://www.onvif.org/ver10/device/wsdl", "GetCertificatesStatus", request,
+            return InvokeAsync(SoapActions.GetCertificatesStatus, "http://www.onvif.org/ver10/device/wsdl", "GetCertificatesStatus", request,
                 () => new GetCertificatesStatusResponse(), cancellationToken);
         }
 
@@ -2873,7 +2873,7 @@ namespace SharpOnvifClient.DeviceMgmt
 
         public System.Threading.Tasks.Task<SetCertificatesStatusResponse> SetCertificatesStatusAsync(SetCertificatesStatusRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetCertificatesStatus, "http://www.onvif.org/ver10/device/wsdl", "SetCertificatesStatus", request,
+            return InvokeAsync(SoapActions.SetCertificatesStatus, "http://www.onvif.org/ver10/device/wsdl", "SetCertificatesStatus", request,
                 () => new SetCertificatesStatusResponse(), cancellationToken);
         }
 
@@ -2887,7 +2887,7 @@ namespace SharpOnvifClient.DeviceMgmt
 
         public System.Threading.Tasks.Task<DeleteCertificatesResponse> DeleteCertificatesAsync(DeleteCertificatesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeleteCertificates, "http://www.onvif.org/ver10/device/wsdl", "DeleteCertificates", request,
+            return InvokeAsync(SoapActions.DeleteCertificates, "http://www.onvif.org/ver10/device/wsdl", "DeleteCertificates", request,
                 () => new DeleteCertificatesResponse(), cancellationToken);
         }
 
@@ -2901,7 +2901,7 @@ namespace SharpOnvifClient.DeviceMgmt
 
         public System.Threading.Tasks.Task<GetPkcs10RequestResponse> GetPkcs10RequestAsync(GetPkcs10RequestRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetPkcs10Request, "http://www.onvif.org/ver10/device/wsdl", "GetPkcs10Request", request,
+            return InvokeAsync(SoapActions.GetPkcs10Request, "http://www.onvif.org/ver10/device/wsdl", "GetPkcs10Request", request,
                 () => new GetPkcs10RequestResponse(), cancellationToken);
         }
 
@@ -2915,7 +2915,7 @@ namespace SharpOnvifClient.DeviceMgmt
 
         public System.Threading.Tasks.Task<LoadCertificatesResponse> LoadCertificatesAsync(LoadCertificatesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.LoadCertificates, "http://www.onvif.org/ver10/device/wsdl", "LoadCertificates", request,
+            return InvokeAsync(SoapActions.LoadCertificates, "http://www.onvif.org/ver10/device/wsdl", "LoadCertificates", request,
                 () => new LoadCertificatesResponse(), cancellationToken);
         }
 
@@ -2929,7 +2929,7 @@ namespace SharpOnvifClient.DeviceMgmt
 
         public System.Threading.Tasks.Task<GetClientCertificateModeResponse> GetClientCertificateModeAsync(GetClientCertificateModeRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetClientCertificateMode, "http://www.onvif.org/ver10/device/wsdl", "GetClientCertificateMode", request,
+            return InvokeAsync(SoapActions.GetClientCertificateMode, "http://www.onvif.org/ver10/device/wsdl", "GetClientCertificateMode", request,
                 () => new GetClientCertificateModeResponse(), cancellationToken);
         }
 
@@ -2943,7 +2943,7 @@ namespace SharpOnvifClient.DeviceMgmt
 
         public System.Threading.Tasks.Task<SetClientCertificateModeResponse> SetClientCertificateModeAsync(SetClientCertificateModeRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetClientCertificateMode, "http://www.onvif.org/ver10/device/wsdl", "SetClientCertificateMode", request,
+            return InvokeAsync(SoapActions.SetClientCertificateMode, "http://www.onvif.org/ver10/device/wsdl", "SetClientCertificateMode", request,
                 () => new SetClientCertificateModeResponse(), cancellationToken);
         }
 
@@ -2957,7 +2957,7 @@ namespace SharpOnvifClient.DeviceMgmt
 
         public System.Threading.Tasks.Task<GetCACertificatesResponse> GetCACertificatesAsync(GetCACertificatesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetCACertificates, "http://www.onvif.org/ver10/device/wsdl", "GetCACertificates", request,
+            return InvokeAsync(SoapActions.GetCACertificates, "http://www.onvif.org/ver10/device/wsdl", "GetCACertificates", request,
                 () => new GetCACertificatesResponse(), cancellationToken);
         }
 
@@ -2971,7 +2971,7 @@ namespace SharpOnvifClient.DeviceMgmt
 
         public System.Threading.Tasks.Task<LoadCertificateWithPrivateKeyResponse> LoadCertificateWithPrivateKeyAsync(LoadCertificateWithPrivateKeyRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.LoadCertificateWithPrivateKey, "http://www.onvif.org/ver10/device/wsdl", "LoadCertificateWithPrivateKey", request,
+            return InvokeAsync(SoapActions.LoadCertificateWithPrivateKey, "http://www.onvif.org/ver10/device/wsdl", "LoadCertificateWithPrivateKey", request,
                 () => new LoadCertificateWithPrivateKeyResponse(), cancellationToken);
         }
 
@@ -2985,7 +2985,7 @@ namespace SharpOnvifClient.DeviceMgmt
 
         public System.Threading.Tasks.Task<GetCertificateInformationResponse> GetCertificateInformationAsync(GetCertificateInformationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetCertificateInformation, "http://www.onvif.org/ver10/device/wsdl", "GetCertificateInformation", request,
+            return InvokeAsync(SoapActions.GetCertificateInformation, "http://www.onvif.org/ver10/device/wsdl", "GetCertificateInformation", request,
                 () => new GetCertificateInformationResponse(), cancellationToken);
         }
 
@@ -2999,7 +2999,7 @@ namespace SharpOnvifClient.DeviceMgmt
 
         public System.Threading.Tasks.Task<LoadCACertificatesResponse> LoadCACertificatesAsync(LoadCACertificatesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.LoadCACertificates, "http://www.onvif.org/ver10/device/wsdl", "LoadCACertificates", request,
+            return InvokeAsync(SoapActions.LoadCACertificates, "http://www.onvif.org/ver10/device/wsdl", "LoadCACertificates", request,
                 () => new LoadCACertificatesResponse(), cancellationToken);
         }
 
@@ -3013,7 +3013,7 @@ namespace SharpOnvifClient.DeviceMgmt
 
         public System.Threading.Tasks.Task<CreateDot1XConfigurationResponse> CreateDot1XConfigurationAsync(CreateDot1XConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.CreateDot1XConfiguration, "http://www.onvif.org/ver10/device/wsdl", "CreateDot1XConfiguration", request,
+            return InvokeAsync(SoapActions.CreateDot1XConfiguration, "http://www.onvif.org/ver10/device/wsdl", "CreateDot1XConfiguration", request,
                 () => new CreateDot1XConfigurationResponse(), cancellationToken);
         }
 
@@ -3027,7 +3027,7 @@ namespace SharpOnvifClient.DeviceMgmt
 
         public System.Threading.Tasks.Task<SetDot1XConfigurationResponse> SetDot1XConfigurationAsync(SetDot1XConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.SetDot1XConfiguration, "http://www.onvif.org/ver10/device/wsdl", "SetDot1XConfiguration", request,
+            return InvokeAsync(SoapActions.SetDot1XConfiguration, "http://www.onvif.org/ver10/device/wsdl", "SetDot1XConfiguration", request,
                 () => new SetDot1XConfigurationResponse(), cancellationToken);
         }
 
@@ -3041,7 +3041,7 @@ namespace SharpOnvifClient.DeviceMgmt
 
         public System.Threading.Tasks.Task<GetDot1XConfigurationResponse> GetDot1XConfigurationAsync(GetDot1XConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetDot1XConfiguration, "http://www.onvif.org/ver10/device/wsdl", "GetDot1XConfiguration", request,
+            return InvokeAsync(SoapActions.GetDot1XConfiguration, "http://www.onvif.org/ver10/device/wsdl", "GetDot1XConfiguration", request,
                 () => new GetDot1XConfigurationResponse(), cancellationToken);
         }
 
@@ -3055,7 +3055,7 @@ namespace SharpOnvifClient.DeviceMgmt
 
         public System.Threading.Tasks.Task<GetDot1XConfigurationsResponse> GetDot1XConfigurationsAsync(GetDot1XConfigurationsRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.GetDot1XConfigurations, "http://www.onvif.org/ver10/device/wsdl", "GetDot1XConfigurations", request,
+            return InvokeAsync(SoapActions.GetDot1XConfigurations, "http://www.onvif.org/ver10/device/wsdl", "GetDot1XConfigurations", request,
                 () => new GetDot1XConfigurationsResponse(), cancellationToken);
         }
 
@@ -3069,7 +3069,7 @@ namespace SharpOnvifClient.DeviceMgmt
 
         public System.Threading.Tasks.Task<DeleteDot1XConfigurationResponse> DeleteDot1XConfigurationAsync(DeleteDot1XConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return InvokeAsync(OnvifActions.DeleteDot1XConfiguration, "http://www.onvif.org/ver10/device/wsdl", "DeleteDot1XConfiguration", request,
+            return InvokeAsync(SoapActions.DeleteDot1XConfiguration, "http://www.onvif.org/ver10/device/wsdl", "DeleteDot1XConfiguration", request,
                 () => new DeleteDot1XConfigurationResponse(), cancellationToken);
         }
 

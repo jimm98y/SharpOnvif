@@ -16,7 +16,7 @@ namespace SharpOnvifServer.Display
     public abstract class DisplayPortBase
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
-        public static SharpOnvifServer.Dispatch.OnvifServiceDispatcher OnvifDispatcher { get; } = new DisplayPortDispatcher();
+        public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new DisplayPortDispatcher();
 
         /// <summary>
         /// Returns the capabilities of the display service. The result is returned in a typed answer.
@@ -238,7 +238,7 @@ namespace SharpOnvifServer.Display
     }
 
     /// <summary>Routes SOAP actions to <see cref="DisplayPortBase"/>.</summary>
-    internal sealed class DisplayPortDispatcher : SharpOnvifServer.Dispatch.OnvifServiceDispatcher
+    internal sealed class DisplayPortDispatcher : SharpOnvifServer.Dispatch.ServiceDispatcher
     {
         public override System.Type ServiceType { get { return typeof(DisplayPortBase); } }
 
@@ -246,16 +246,16 @@ namespace SharpOnvifServer.Display
         {
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
-                case OnvifActions.GetLayout:
-                case OnvifActions.SetLayout:
-                case OnvifActions.GetDisplayOptions:
-                case OnvifActions.GetPaneConfigurations:
-                case OnvifActions.GetPaneConfiguration:
-                case OnvifActions.SetPaneConfigurations:
-                case OnvifActions.SetPaneConfiguration:
-                case OnvifActions.CreatePaneConfiguration:
-                case OnvifActions.DeletePaneConfiguration:
+                case SoapActions.GetServiceCapabilities:
+                case SoapActions.GetLayout:
+                case SoapActions.SetLayout:
+                case SoapActions.GetDisplayOptions:
+                case SoapActions.GetPaneConfigurations:
+                case SoapActions.GetPaneConfiguration:
+                case SoapActions.SetPaneConfigurations:
+                case SoapActions.SetPaneConfiguration:
+                case SoapActions.CreatePaneConfiguration:
+                case SoapActions.DeletePaneConfiguration:
                     return true;
                 default:
                     return false;
@@ -269,70 +269,70 @@ namespace SharpOnvifServer.Display
                 case "GetServiceCapabilities":
                     if (ns == "http://www.onvif.org/ver10/display/wsdl")
                     {
-                        action = OnvifActions.GetServiceCapabilities;
+                        action = SoapActions.GetServiceCapabilities;
                         return true;
                     }
                     break;
                 case "GetLayout":
                     if (ns == "http://www.onvif.org/ver10/display/wsdl")
                     {
-                        action = OnvifActions.GetLayout;
+                        action = SoapActions.GetLayout;
                         return true;
                     }
                     break;
                 case "SetLayout":
                     if (ns == "http://www.onvif.org/ver10/display/wsdl")
                     {
-                        action = OnvifActions.SetLayout;
+                        action = SoapActions.SetLayout;
                         return true;
                     }
                     break;
                 case "GetDisplayOptions":
                     if (ns == "http://www.onvif.org/ver10/display/wsdl")
                     {
-                        action = OnvifActions.GetDisplayOptions;
+                        action = SoapActions.GetDisplayOptions;
                         return true;
                     }
                     break;
                 case "GetPaneConfigurations":
                     if (ns == "http://www.onvif.org/ver10/display/wsdl")
                     {
-                        action = OnvifActions.GetPaneConfigurations;
+                        action = SoapActions.GetPaneConfigurations;
                         return true;
                     }
                     break;
                 case "GetPaneConfiguration":
                     if (ns == "http://www.onvif.org/ver10/display/wsdl")
                     {
-                        action = OnvifActions.GetPaneConfiguration;
+                        action = SoapActions.GetPaneConfiguration;
                         return true;
                     }
                     break;
                 case "SetPaneConfigurations":
                     if (ns == "http://www.onvif.org/ver10/display/wsdl")
                     {
-                        action = OnvifActions.SetPaneConfigurations;
+                        action = SoapActions.SetPaneConfigurations;
                         return true;
                     }
                     break;
                 case "SetPaneConfiguration":
                     if (ns == "http://www.onvif.org/ver10/display/wsdl")
                     {
-                        action = OnvifActions.SetPaneConfiguration;
+                        action = SoapActions.SetPaneConfiguration;
                         return true;
                     }
                     break;
                 case "CreatePaneConfiguration":
                     if (ns == "http://www.onvif.org/ver10/display/wsdl")
                     {
-                        action = OnvifActions.CreatePaneConfiguration;
+                        action = SoapActions.CreatePaneConfiguration;
                         return true;
                     }
                     break;
                 case "DeletePaneConfiguration":
                     if (ns == "http://www.onvif.org/ver10/display/wsdl")
                     {
-                        action = OnvifActions.DeletePaneConfiguration;
+                        action = SoapActions.DeletePaneConfiguration;
                         return true;
                     }
                     break;
@@ -341,7 +341,7 @@ namespace SharpOnvifServer.Display
             return false;
         }
 
-        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.OnvifDispatchResult> InvokeAsync(
+        public override async System.Threading.Tasks.Task<SharpOnvifServer.Dispatch.DispatchResult> InvokeAsync(
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             DisplayPortBase target = (DisplayPortBase)service;
@@ -349,82 +349,82 @@ namespace SharpOnvifServer.Display
 
             switch (action)
             {
-                case OnvifActions.GetServiceCapabilities:
+                case SoapActions.GetServiceCapabilities:
                 {
                     var request = new GetServiceCapabilitiesRequest();
                     reader.ReadInto(request);
                     var response = await target.GetServiceCapabilitiesAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/display/wsdl", "GetServiceCapabilitiesResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/display/wsdl", "GetServiceCapabilitiesResponse");
                 }
-                case OnvifActions.GetLayout:
+                case SoapActions.GetLayout:
                 {
                     var request = new GetLayoutRequest();
                     reader.ReadInto(request);
                     var response = await target.GetLayoutAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/display/wsdl", "GetLayoutResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/display/wsdl", "GetLayoutResponse");
                 }
-                case OnvifActions.SetLayout:
+                case SoapActions.SetLayout:
                 {
                     var request = new SetLayoutRequest();
                     reader.ReadInto(request);
                     var response = await target.SetLayoutAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/display/wsdl", "SetLayoutResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/display/wsdl", "SetLayoutResponse");
                 }
-                case OnvifActions.GetDisplayOptions:
+                case SoapActions.GetDisplayOptions:
                 {
                     var request = new GetDisplayOptionsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetDisplayOptionsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/display/wsdl", "GetDisplayOptionsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/display/wsdl", "GetDisplayOptionsResponse");
                 }
-                case OnvifActions.GetPaneConfigurations:
+                case SoapActions.GetPaneConfigurations:
                 {
                     var request = new GetPaneConfigurationsRequest();
                     reader.ReadInto(request);
                     var response = await target.GetPaneConfigurationsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/display/wsdl", "GetPaneConfigurationsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/display/wsdl", "GetPaneConfigurationsResponse");
                 }
-                case OnvifActions.GetPaneConfiguration:
+                case SoapActions.GetPaneConfiguration:
                 {
                     var request = new GetPaneConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.GetPaneConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/display/wsdl", "GetPaneConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/display/wsdl", "GetPaneConfigurationResponse");
                 }
-                case OnvifActions.SetPaneConfigurations:
+                case SoapActions.SetPaneConfigurations:
                 {
                     var request = new SetPaneConfigurationsRequest();
                     reader.ReadInto(request);
                     var response = await target.SetPaneConfigurationsAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/display/wsdl", "SetPaneConfigurationsResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/display/wsdl", "SetPaneConfigurationsResponse");
                 }
-                case OnvifActions.SetPaneConfiguration:
+                case SoapActions.SetPaneConfiguration:
                 {
                     var request = new SetPaneConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.SetPaneConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/display/wsdl", "SetPaneConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/display/wsdl", "SetPaneConfigurationResponse");
                 }
-                case OnvifActions.CreatePaneConfiguration:
+                case SoapActions.CreatePaneConfiguration:
                 {
                     var request = new CreatePaneConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.CreatePaneConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/display/wsdl", "CreatePaneConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/display/wsdl", "CreatePaneConfigurationResponse");
                 }
-                case OnvifActions.DeletePaneConfiguration:
+                case SoapActions.DeletePaneConfiguration:
                 {
                     var request = new DeletePaneConfigurationRequest();
                     reader.ReadInto(request);
                     var response = await target.DeletePaneConfigurationAsync(request, cancellationToken).ConfigureAwait(false);
-                    return new SharpOnvifServer.Dispatch.OnvifDispatchResult(response, "http://www.onvif.org/ver10/display/wsdl", "DeletePaneConfigurationResponse");
+                    return new SharpOnvifServer.Dispatch.DispatchResult(response, "http://www.onvif.org/ver10/display/wsdl", "DeletePaneConfigurationResponse");
                 }
             }
 
             throw new System.NotImplementedException(action);
         }
 
-        public override SharpOnvifCommon.Xml.OnvifContract ResolveXmlType(string ns, string name)
+        public override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
         }
