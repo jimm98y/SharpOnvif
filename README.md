@@ -88,7 +88,9 @@ public class DeviceImpl : DeviceBase
     }
 }
 ```
-Each operation appears three times on the generated base, each layer defaulting to the next, so you can override whichever suits: an async form taking the request, a synchronous form taking the request, and a synchronous form taking the request's members as arguments. Anything you do not override is reported to the client as the `ter:ActionNotSupported` fault.
+Each operation appears three times on the generated base, each layer defaulting to the next, so you can override whichever suits: an async form taking the request, 
+a synchronous form taking the request, and a synchronous form taking the request's members as arguments. Anything you do not override is reported to the client as 
+the `ter:ActionNotSupported` fault.
 
 Add it as a singleton:
 ```cs
@@ -122,8 +124,11 @@ implementation as `HttpContext.Items[OnvifEvents.ONVIF_SUBSCRIPTION_ID]` - a str
 subscription ID is an unguessable token rather than a counter.
 Your Onvif service should now be discoverable on the network and you should be able to use Onvif Device Manager or similar tool to call your endpoint.
 See `Onvif.Server` sample project for a complete example.
+
 ## SharpOnvifClient
-Onvif client provides .NET Standard 2.0, .NET Framework 4.8.1, NET8.0 and NET10.0 bindings generated from the Onvif WSDLs by `WsdlGenerator`, over `HttpClient`. `SimpleOnvifClient` wraps common API calls to get basic information from the camera and includes both Pull Point as well as Basic event subscriptions. 
+Onvif client provides .NET Standard 2.0, .NET Framework 4.8.1, NET8.0 and NET10.0 bindings generated
+from the Onvif WSDLs by `WsdlGenerator`, over `HttpClient`. `SimpleOnvifClient` wraps common API calls
+to get basic information from the camera and includes both Pull Point as well as Basic event subscriptions. 
 
 [![NuGet version](https://img.shields.io/nuget/v/SharpOnvifClient.svg?style=flat-square)](https://www.nuget.org/packages/SharpOnvifClient)
 
@@ -223,7 +228,8 @@ foreach (var notification in notifications)
 ```
 
 ### Basic event subscription
-Basic event subscription utilizes a callback from the camera when an event occurs. This requires the camera to be able to reach your machine through a firewall/NAT. To listen for incoming notifications, you must run `SimpleOnvifEventListener`:
+Basic event subscription utilizes a callback from the camera when an event occurs. This requires the camera to be able to reach your machine through a firewall/NAT. 
+To listen for incoming notifications, you must run `SimpleOnvifEventListener`:
 ```cs
 // ID 1 will identify this camera in the callback
 const int CAMERA1 = 1;
@@ -241,33 +247,6 @@ eventListener.Start((int cameraID, string ev) =>
 var subscriptionResponse = await client.BasicSubscribeAsync(eventListener.GetOnvifEventListenerUri(CAMERA1));
 ```
 
-#### Securing the callback
-The listener is an inbound endpoint on your machine, and Onvif gives a camera no way to
-authenticate itself to it - a notification arrives as a plain POST, so anything that can reach the
-port can deliver one, and an application that acts on a notification acts on whatever it is told.
-
-The address `GetOnvifEventListenerUri` hands out therefore carries an unguessable token, and a
-request that does not present it is refused before your callback sees it. The camera is asked for
-nothing - it posts where it was told - so this works with every device and is on by default. It
-stops everything that has not seen the address, which is everything scanning the network; it does
-not stop something that has.
-
-Two things are worth adding when you know them:
-```cs
-// Only this camera may deliver.
-eventListener.AllowedSources.Add(IPAddress.Parse("192.168.1.10"));
-
-// Listen on one interface rather than all of them.
-var eventListener = new SimpleOnvifEventListener("192.168.1.5", 9999);
-```
-`RefusedCount` reports how many deliveries were turned away, which is worth logging - a number
-that climbs means something other than your camera is posting to the port.
-
-None of this makes the channel private: the notification crosses the network in the clear, and a
-camera cannot in general be told to use https. Treat a notification as a hint that something
-happened, and read anything that matters from the device over the authenticated connection you
-already have. If you cannot use a long path, `PathToken` can be set to null for the bare address
-the listener used to hand out.
 ### Using the generated clients
 Every Onvif service is in the `SharpOnvifClient` package, each under its own namespace
 (`SharpOnvifClient.DeviceMgmt`, `SharpOnvifClient.Media`, `SharpOnvifClient.PTZ`, and so on), with
@@ -338,27 +317,17 @@ catch (SoapFaultException fault) when (fault.Fault?.Subcode == "ActionNotSupport
 }
 ```
 See `Onvif.Client` sample project for a complete example.
+
 ## Digest authentication
-Onvif supports two types of Digest authentication. Legacy [WS-UsernameToken](https://docs.oasis-open.org/wss/v1.1/wss-v1.1-spec-pr-UsernameTokenProfile-01.htm) authentication carried inside the SOAP headers and HTTP Digest authentication as defined in [RFC 7616](https://www.rfc-editor.org/rfc/rfc7616). Both types of authentication are now supported on both the client and the server.
+Onvif supports two types of Digest authentication. Legacy [WS-UsernameToken](https://docs.oasis-open.org/wss/v1.1/wss-v1.1-spec-pr-UsernameTokenProfile-01.htm) authentication 
+carried inside the SOAP headers and HTTP Digest authentication as defined in [RFC 7616](https://www.rfc-editor.org/rfc/rfc7616). 
+Both types of authentication are now supported on both the client and the server.
 
-### Running more than one instance
+### Load balancing
 HTTP Digest keeps two pieces of state on the server, and both are per process by default: the
-private key a server nonce is minted and validated with, and the record of which nonces have been
-spent, which is what refuses a replayed request. A device, or a single server instance, needs
-nothing here.
-
-Behind a load balancer it is not enough. A nonce is validated by recomputing it, so an instance can
-only validate nonces minted with the key it holds, and an instance keeping the spent-nonce record
-in its own memory accepts a captured request its neighbour has already refused. Give every instance
-the same key, from a secret store, and a replay store all of them can read:
-
-A device that accepts only one of the two schemes still hears from clients that know both: a
-client sends its UsernameToken whether or not this device wants it, having no way to find out
-except by being refused. A token for a scheme the device has switched off is therefore ignored
-rather than treated as an error - it is not a credential here, and the identity comes from the
-digest. Where the device does accept both and a request carries both, both have to hold up, the
-digest first, and they have to name the same user.
-
+private key and the record of which nonces have been seen. To run this service behind a load
+balancer, you will have to store the private key and replay list in a shared location. Then 
+you can configure the service as follows:
 ```cs
 HttpDigestAuthentication.SetNoncePrivateKey(keyFromYourSecretStore);
 
@@ -393,78 +362,13 @@ package, which is what keeps these assemblies free of dependencies altogether. T
 use this - it is given an `ILogger` by the host and logs to that, and the two names are kept apart
 deliberately so that one does not shadow the other where both are in scope.
 
-Discovery additionally raises `Failed`, on `OnvifDiscoveryClient` and on `OnvifDiscoveryListener`,
-because it works on every interface at once and carries on when one of them fails. Worth
-subscribing to: a Probe that never left the machine looks exactly like a network with no cameras
-on it.
-```cs
-discovery.Failed += (_, e) => Console.WriteLine(e);
-// Onvif discovery could not Probe on 192.168.1.5: No route to host
-```
-Probing skips the loopback interface: a Probe cannot be multicast out of it, and a device on this
-machine is listening on the real interfaces as well, so nothing is lost by not asking there.
-
 ### No dependencies
 `SharpOnvifClient`, `SharpOnvifServer` and `SharpOnvifCommon` reference no NuGet packages on any of
-their target frameworks. The one that remained, `System.Runtime.Caching`, was used for a single
-thing - an entry that stops existing at a given moment - which `ExpiringCache` now does in about a
-hundred lines.
+their target frameworks. 
 
 ## Testing
 Only the DeviceMgmt, Media and Events were tested with Hikvision cameras. 
 Server implementation was tested using Onvif Device Manager.
-
-## Generated bindings
-The service bindings are generated by `src/WsdlGenerator`, a WSDL and XML Schema compiler in
-this repository, from the specification documents mirrored in `wsdl/`. Generated sources are
-committed, so a normal build needs no network access and no external tooling. See
-[doc/codegen.md](doc/codegen.md) for how to regenerate them and what the generator does.
-
-What it writes is the contracts, the clients and services, and the runtime underneath them: the
-base class a client derives from, and the interfaces that base class talks through - where it
-reports (`ILog`), how it proves who it is (`IClientAuthentication`), what it was built with
-(`IClientSettings`), what an envelope is (`IMessageCodec`), and how a contract reads and writes
-itself (`IXmlReader`, `IXmlWriter`). Nothing that implements any of those is generated. Onvif's
-implementations are the hand-written half of `SharpOnvifCommon`, which is why generated code names
-no library at all and is compiled that way in the test suite.
-
-The generator is not tied to Onvif. It reads WSDL and XML Schema, so it will generate a client and
-a service for any document/literal SOAP 1.2 WSDL:
-
-```
-dotnet run --project src/WsdlGenerator -- --wsdl ./bank.wsdl --namespace Example.Banking --out ./Generated
-```
-
-All 25 Onvif services ship in `SharpOnvifClient` and `SharpOnvifServer`, one namespace per
-service. The Onvif data model itself - `Profile`, `VideoResolution`, `PTZVector` and the rest of
-`onvif.xsd` - lives once in `SharpOnvifCommon.Onvif` and is shared by both, so a value read by the
-client is the same CLR type a server implementation returns.
-
-Where the Onvif schema names a type after something the framework already has, the generated name
-is prefixed to keep both usable side by side without aliases - `tt:DateTime` becomes
-`OnvifDateTime`, `tt:IPAddress` becomes `OnvifIPAddress`. What goes on the wire is unchanged.
-
-Two enumerations are generated wider than the schema. onvif.xsd still enumerates `tt:VideoEncoding`
-as only JPEG, MPEG4 and H264, so the generated enum also carries `H265`, `AV1`, `H266` and `AV2`;
-`tt:AudioEncoding` likewise gains `OPUS` beside G711, G726 and AAC. The extra values are
-configured for the generator in `ServiceCatalog`, not edited into its output, so regenerating keeps
-them and the conversions to and from their XML form stay in step. Any schema enumeration can be
-widened the same way from the command line:
-
-```
-dotnet run --project src/WsdlGenerator -- --wsdl ./bank.wsdl --namespace Example.Banking \
-    --out ./Generated --enum-value "{http://www.onvif.org/ver10/schema}VideoEncoding=AV1"
-```
-
-There are two solutions, `src/SharpOnvif.Client.sln` and `src/SharpOnvif.Server.sln`, either of
-which builds the shared `SharpOnvifCommon` and the generator alongside its own side. The server
-solution also builds the client, because the end-to-end tests answer the server with the real
-client rather than a hand-built request.
-
-Tests are split the same way: `SharpOnvifCommon.Tests` covers what needs neither side - the digest
-implementation, the cache, the generator - and is in both solutions; `SharpOnvifClient.Tests` and
-`SharpOnvifServer.Tests` cover their own. Running both solutions runs every test, with the common
-ones twice.
 
 ## Credits
 Special thanks to Piotr Stapp for figuring out the SOAP security headers in NET8: https://stapp.space/using-soap-security-in-dotnet-core/.
