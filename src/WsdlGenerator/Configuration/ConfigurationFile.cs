@@ -21,6 +21,11 @@ internal static class ConfigurationFile
         PropertyNameCaseInsensitive = true,
         ReadCommentHandling = JsonCommentHandling.Skip,
         AllowTrailingCommas = true,
+
+        // A key this does not know is a mistake, and a quiet one: misspell typeNamePrefix and
+        // every type whose name collides with a framework one loses its prefix, which compiles
+        // here and collides in every caller's file. Refusing names the key.
+        UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow,
     };
 
     /// <summary>Reads a run from a file. Paths in it are relative to the file itself.</summary>
@@ -102,6 +107,8 @@ internal static class ConfigurationFile
     }
 
     private sealed record Document(
+        /// <summary>Room for a note at the top of the file, which JSON has nowhere else to put.</summary>
+        [property: JsonPropertyName("$comment")] object? Comment,
         [property: JsonPropertyName("mirror")] string? Mirror,
         [property: JsonPropertyName("typeNamePrefix")] string? TypeNamePrefix,
         [property: JsonPropertyName("shared")] Place? Shared,

@@ -86,6 +86,44 @@ namespace SharpOnvif.Tests
         }
 
         [TestMethod]
+        public void RefusesAKeyItDoesNotKnow()
+        {
+            // The quiet one. Misspell typeNamePrefix and every type whose schema name collides
+            // with a framework one loses its prefix - which compiles here and collides in every
+            // caller's file, from a run that reported success.
+            string path = Path.Combine(Path.GetTempPath(), "sharponvif-typo-" + Guid.NewGuid().ToString("N") + ".json");
+
+            try
+            {
+                File.WriteAllText(path, """
+                    {
+                      "typeNamePrefx": "Onvif",
+                      "shared":  { "namespace": "Example.Schema",  "out": "Schema" },
+                      "runtime": { "namespace": "Example.Runtime", "out": "Runtime" },
+                      "targets": [ { "namespace": "Example", "out": ".", "client": true } ],
+                      "services": [ { "name": "Bank", "wsdl": "bank.wsdl" } ]
+                    }
+                    """);
+
+                var error = Assert.ThrowsExactly<SchemaException>(() => ConfigurationFile.Load(path));
+
+                StringAssert.Contains(error.Message, "typeNamePrefx", "say which key");
+            }
+            finally
+            {
+                File.Delete(path);
+            }
+        }
+
+        [TestMethod]
+        public void StillTakesANoteAtTheTopOfTheFile()
+        {
+            // "$comment" is how a note is written in JSON, and refusing unknown keys must not
+            // refuse that - this repository's own file opens with one.
+            Assert.IsNotNull(ConfigurationFile.Load(OnvifConfiguration));
+        }
+
+        [TestMethod]
         public void RefusesAFileThatIsNotThere()
         {
             var error = Assert.ThrowsExactly<SchemaException>(
