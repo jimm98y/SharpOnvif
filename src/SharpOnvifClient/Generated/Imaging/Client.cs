@@ -154,7 +154,7 @@ namespace SharpOnvifClient.Imaging
     /// <summary>
     /// Talks to the ImagingPort service on a device over SOAP 1.2.
     /// </summary>
-    public partial class ImagingPortClient : SharpOnvifCommon.Soap.OnvifClientBase, ImagingPort
+    public partial class ImagingPortClient : SharpOnvifCommon.Soap.SoapClientBase, ImagingPort
     {
         /// <summary>
         /// Creates a client that sends no credentials.

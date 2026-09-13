@@ -26,7 +26,7 @@ namespace SharpOnvifClient.Events
     /// <summary>
     /// Talks to the CreatePullPoint service on a device over SOAP 1.2.
     /// </summary>
-    public partial class CreatePullPointClient : SharpOnvifCommon.Soap.OnvifClientBase, CreatePullPoint
+    public partial class CreatePullPointClient : SharpOnvifCommon.Soap.SoapClientBase, CreatePullPoint
     {
         /// <summary>
         /// Creates a client that sends no credentials.
@@ -150,7 +150,7 @@ namespace SharpOnvifClient.Events
     /// <summary>
     /// Talks to the EventPortType service on a device over SOAP 1.2.
     /// </summary>
-    public partial class EventPortTypeClient : SharpOnvifCommon.Soap.OnvifClientBase, EventPortType
+    public partial class EventPortTypeClient : SharpOnvifCommon.Soap.SoapClientBase, EventPortType
     {
         /// <summary>
         /// Creates a client that sends no credentials.
@@ -309,7 +309,7 @@ namespace SharpOnvifClient.Events
     /// <summary>
     /// Talks to the NotificationConsumer service on a device over SOAP 1.2.
     /// </summary>
-    public partial class NotificationConsumerClient : SharpOnvifCommon.Soap.OnvifClientBase, NotificationConsumer
+    public partial class NotificationConsumerClient : SharpOnvifCommon.Soap.SoapClientBase, NotificationConsumer
     {
         /// <summary>
         /// Creates a client that sends no credentials.
@@ -377,7 +377,7 @@ namespace SharpOnvifClient.Events
     /// <summary>
     /// Talks to the NotificationProducer service on a device over SOAP 1.2.
     /// </summary>
-    public partial class NotificationProducerClient : SharpOnvifCommon.Soap.OnvifClientBase, NotificationProducer
+    public partial class NotificationProducerClient : SharpOnvifCommon.Soap.SoapClientBase, NotificationProducer
     {
         /// <summary>
         /// Creates a client that sends no credentials.
@@ -474,7 +474,7 @@ namespace SharpOnvifClient.Events
     /// <summary>
     /// Talks to the PausableSubscriptionManager service on a device over SOAP 1.2.
     /// </summary>
-    public partial class PausableSubscriptionManagerClient : SharpOnvifCommon.Soap.OnvifClientBase, PausableSubscriptionManager
+    public partial class PausableSubscriptionManagerClient : SharpOnvifCommon.Soap.SoapClientBase, PausableSubscriptionManager
     {
         /// <summary>
         /// Creates a client that sends no credentials.
@@ -592,7 +592,7 @@ namespace SharpOnvifClient.Events
     /// <summary>
     /// Talks to the PullPoint service on a device over SOAP 1.2.
     /// </summary>
-    public partial class PullPointClient : SharpOnvifCommon.Soap.OnvifClientBase, PullPoint
+    public partial class PullPointClient : SharpOnvifCommon.Soap.SoapClientBase, PullPoint
     {
         /// <summary>
         /// Creates a client that sends no credentials.
@@ -732,7 +732,7 @@ namespace SharpOnvifClient.Events
     /// <summary>
     /// Talks to the PullPointSubscription service on a device over SOAP 1.2.
     /// </summary>
-    public partial class PullPointSubscriptionClient : SharpOnvifCommon.Soap.OnvifClientBase, PullPointSubscription
+    public partial class PullPointSubscriptionClient : SharpOnvifCommon.Soap.SoapClientBase, PullPointSubscription
     {
         /// <summary>
         /// Creates a client that sends no credentials.
@@ -873,7 +873,7 @@ namespace SharpOnvifClient.Events
     /// <summary>
     /// Talks to the SubscriptionManager service on a device over SOAP 1.2.
     /// </summary>
-    public partial class SubscriptionManagerClient : SharpOnvifCommon.Soap.OnvifClientBase, SubscriptionManager
+    public partial class SubscriptionManagerClient : SharpOnvifCommon.Soap.SoapClientBase, SubscriptionManager
     {
         /// <summary>
         /// Creates a client that sends no credentials.

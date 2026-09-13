@@ -61,7 +61,7 @@ namespace SharpOnvifClient.Replay
     /// <summary>
     /// Talks to the ReplayPort service on a device over SOAP 1.2.
     /// </summary>
-    public partial class ReplayPortClient : SharpOnvifCommon.Soap.OnvifClientBase, ReplayPort
+    public partial class ReplayPortClient : SharpOnvifCommon.Soap.SoapClientBase, ReplayPort
     {
         /// <summary>
         /// Creates a client that sends no credentials.

@@ -30,7 +30,7 @@ namespace SharpOnvifClient.AdvancedSecurity
     /// <summary>
     /// Talks to the AdvancedSecurityService service on a device over SOAP 1.2.
     /// </summary>
-    public partial class AdvancedSecurityServiceClient : SharpOnvifCommon.Soap.OnvifClientBase, AdvancedSecurityService
+    public partial class AdvancedSecurityServiceClient : SharpOnvifCommon.Soap.SoapClientBase, AdvancedSecurityService
     {
         /// <summary>
         /// Creates a client that sends no credentials.
@@ -131,7 +131,7 @@ namespace SharpOnvifClient.AdvancedSecurity
     /// <summary>
     /// Talks to the AuthorizationServer service on a device over SOAP 1.2.
     /// </summary>
-    public partial class AuthorizationServerClient : SharpOnvifCommon.Soap.OnvifClientBase, AuthorizationServer
+    public partial class AuthorizationServerClient : SharpOnvifCommon.Soap.SoapClientBase, AuthorizationServer
     {
         /// <summary>
         /// Creates a client that sends no credentials.
@@ -378,7 +378,7 @@ namespace SharpOnvifClient.AdvancedSecurity
     /// <summary>
     /// Talks to the Dot1X service on a device over SOAP 1.2.
     /// </summary>
-    public partial class Dot1XClient : SharpOnvifCommon.Soap.OnvifClientBase, Dot1X
+    public partial class Dot1XClient : SharpOnvifCommon.Soap.SoapClientBase, Dot1X
     {
         /// <summary>
         /// Creates a client that sends no credentials.
@@ -624,7 +624,7 @@ namespace SharpOnvifClient.AdvancedSecurity
     /// <summary>
     /// Talks to the JWT service on a device over SOAP 1.2.
     /// </summary>
-    public partial class JWTClient : SharpOnvifCommon.Soap.OnvifClientBase, JWT
+    public partial class JWTClient : SharpOnvifCommon.Soap.SoapClientBase, JWT
     {
         /// <summary>
         /// Creates a client that sends no credentials.
@@ -1211,7 +1211,7 @@ namespace SharpOnvifClient.AdvancedSecurity
     /// <summary>
     /// Talks to the Keystore service on a device over SOAP 1.2.
     /// </summary>
-    public partial class KeystoreClient : SharpOnvifCommon.Soap.OnvifClientBase, Keystore
+    public partial class KeystoreClient : SharpOnvifCommon.Soap.SoapClientBase, Keystore
     {
         /// <summary>
         /// Creates a client that sends no credentials.
@@ -2026,7 +2026,7 @@ namespace SharpOnvifClient.AdvancedSecurity
     /// <summary>
     /// Talks to the MediaSigning service on a device over SOAP 1.2.
     /// </summary>
-    public partial class MediaSigningClient : SharpOnvifCommon.Soap.OnvifClientBase, MediaSigning
+    public partial class MediaSigningClient : SharpOnvifCommon.Soap.SoapClientBase, MediaSigning
     {
         /// <summary>
         /// Creates a client that sends no credentials.
@@ -2362,7 +2362,7 @@ namespace SharpOnvifClient.AdvancedSecurity
     /// <summary>
     /// Talks to the TLSServer service on a device over SOAP 1.2.
     /// </summary>
-    public partial class TLSServerClient : SharpOnvifCommon.Soap.OnvifClientBase, TLSServer
+    public partial class TLSServerClient : SharpOnvifCommon.Soap.SoapClientBase, TLSServer
     {
         /// <summary>
         /// Creates a client that sends no credentials.

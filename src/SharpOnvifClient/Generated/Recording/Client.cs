@@ -298,7 +298,7 @@ namespace SharpOnvifClient.Recording
     /// <summary>
     /// Talks to the RecordingPort service on a device over SOAP 1.2.
     /// </summary>
-    public partial class RecordingPortClient : SharpOnvifCommon.Soap.OnvifClientBase, RecordingPort
+    public partial class RecordingPortClient : SharpOnvifCommon.Soap.SoapClientBase, RecordingPort
     {
         /// <summary>
         /// Creates a client that sends no credentials.

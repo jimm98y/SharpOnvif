@@ -103,7 +103,7 @@ namespace SharpOnvifClient.Thermal
     /// <summary>
     /// Talks to the ThermalPort service on a device over SOAP 1.2.
     /// </summary>
-    public partial class ThermalPortClient : SharpOnvifCommon.Soap.OnvifClientBase, ThermalPort
+    public partial class ThermalPortClient : SharpOnvifCommon.Soap.SoapClientBase, ThermalPort
     {
         /// <summary>
         /// Creates a client that sends no credentials.

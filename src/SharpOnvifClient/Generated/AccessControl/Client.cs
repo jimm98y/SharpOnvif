@@ -327,7 +327,7 @@ namespace SharpOnvifClient.AccessControl
     /// <summary>
     /// Talks to the PACSPort service on a device over SOAP 1.2.
     /// </summary>
-    public partial class PACSPortClient : SharpOnvifCommon.Soap.OnvifClientBase, PACSPort
+    public partial class PACSPortClient : SharpOnvifCommon.Soap.SoapClientBase, PACSPort
     {
         /// <summary>
         /// Creates a client that sends no credentials.

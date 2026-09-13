@@ -273,7 +273,7 @@ namespace SharpOnvifClient.Search
     /// <summary>
     /// Talks to the SearchPort service on a device over SOAP 1.2.
     /// </summary>
-    public partial class SearchPortClient : SharpOnvifCommon.Soap.OnvifClientBase, SearchPort
+    public partial class SearchPortClient : SharpOnvifCommon.Soap.SoapClientBase, SearchPort
     {
         /// <summary>
         /// Creates a client that sends no credentials.

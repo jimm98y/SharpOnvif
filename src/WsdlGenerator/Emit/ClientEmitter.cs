@@ -88,7 +88,7 @@ internal sealed class ClientEmitter
         string name = service.Name + "Client";
 
         writer.Doc($"Talks to the {service.Name} service on a device over SOAP 1.2.");
-        writer.Line($"public partial class {name} : {Runtime}.OnvifClientBase, {CsharpNaming.Escape(service.Name)}");
+        writer.Line($"public partial class {name} : {Runtime}.SoapClientBase, {CsharpNaming.Escape(service.Name)}");
 
         using (writer.Braces())
         {

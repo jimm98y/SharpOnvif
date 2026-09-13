@@ -18,7 +18,7 @@ namespace __RUNTIME__.Soap
     /// it: a challenge is answered once and the answer reused for every later call.
     /// </para>
     /// </summary>
-    public abstract class OnvifClientBase : IDisposable
+    public abstract class SoapClientBase : IDisposable
     {
         private readonly HttpClient _http;
         private readonly bool _ownsHttpClient;
@@ -26,7 +26,7 @@ namespace __RUNTIME__.Soap
         private readonly IMessageCodec _codec;
         private bool _disposed;
 
-        protected OnvifClientBase(string endpointUri, IClientSettings settings)
+        protected SoapClientBase(string endpointUri, IClientSettings settings)
         {
             if (string.IsNullOrWhiteSpace(endpointUri))
                 throw new ArgumentNullException(nameof(endpointUri));

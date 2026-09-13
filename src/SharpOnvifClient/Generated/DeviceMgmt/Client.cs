@@ -1174,7 +1174,7 @@ namespace SharpOnvifClient.DeviceMgmt
     /// <summary>
     /// Talks to the Device service on a device over SOAP 1.2.
     /// </summary>
-    public partial class DeviceClient : SharpOnvifCommon.Soap.OnvifClientBase, Device
+    public partial class DeviceClient : SharpOnvifCommon.Soap.SoapClientBase, Device
     {
         /// <summary>
         /// Creates a client that sends no credentials.

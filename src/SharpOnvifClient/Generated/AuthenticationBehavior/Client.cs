@@ -240,7 +240,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// <summary>
     /// Talks to the AuthenticationBehaviorPort service on a device over SOAP 1.2.
     /// </summary>
-    public partial class AuthenticationBehaviorPortClient : SharpOnvifCommon.Soap.OnvifClientBase, AuthenticationBehaviorPort
+    public partial class AuthenticationBehaviorPortClient : SharpOnvifCommon.Soap.SoapClientBase, AuthenticationBehaviorPort
     {
         /// <summary>
         /// Creates a client that sends no credentials.

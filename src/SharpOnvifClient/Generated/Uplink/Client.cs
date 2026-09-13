@@ -62,7 +62,7 @@ namespace SharpOnvifClient.Uplink
     /// <summary>
     /// Talks to the UplinkPort service on a device over SOAP 1.2.
     /// </summary>
-    public partial class UplinkPortClient : SharpOnvifCommon.Soap.OnvifClientBase, UplinkPort
+    public partial class UplinkPortClient : SharpOnvifCommon.Soap.SoapClientBase, UplinkPort
     {
         /// <summary>
         /// Creates a client that sends no credentials.

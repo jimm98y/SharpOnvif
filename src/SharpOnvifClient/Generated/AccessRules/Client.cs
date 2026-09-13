@@ -139,7 +139,7 @@ namespace SharpOnvifClient.AccessRules
     /// <summary>
     /// Talks to the AccessRulesPort service on a device over SOAP 1.2.
     /// </summary>
-    public partial class AccessRulesPortClient : SharpOnvifCommon.Soap.OnvifClientBase, AccessRulesPort
+    public partial class AccessRulesPortClient : SharpOnvifCommon.Soap.SoapClientBase, AccessRulesPort
     {
         /// <summary>
         /// Creates a client that sends no credentials.

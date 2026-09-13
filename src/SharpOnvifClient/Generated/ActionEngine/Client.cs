@@ -134,7 +134,7 @@ namespace SharpOnvifClient.ActionEngine
     /// <summary>
     /// Talks to the ActionEnginePort service on a device over SOAP 1.2.
     /// </summary>
-    public partial class ActionEnginePortClient : SharpOnvifCommon.Soap.OnvifClientBase, ActionEnginePort
+    public partial class ActionEnginePortClient : SharpOnvifCommon.Soap.SoapClientBase, ActionEnginePort
     {
         /// <summary>
         /// Creates a client that sends no credentials.

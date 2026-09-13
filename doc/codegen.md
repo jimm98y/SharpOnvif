@@ -35,7 +35,7 @@ Soap/IClientAuthentication  how a client proves who it is
 Soap/IMessageCodec          what an envelope is
 Xml/IXmlWriter              how a contract writes itself
 Xml/IXmlReader              how a contract reads itself
-Soap/OnvifClientBase        the base class, which knows only those
+Soap/SoapClientBase        the base class, which knows only those
 Xml/OnvifContract           the base every generated contract derives from
 Xml/SoapFault, Xml/XmlNamespaceDeclaration, Soap/SoapTransportException
 ```

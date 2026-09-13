@@ -118,7 +118,7 @@ namespace SharpOnvifClient.Analytics
     /// <summary>
     /// Talks to the AnalyticsEnginePort service on a device over SOAP 1.2.
     /// </summary>
-    public partial class AnalyticsEnginePortClient : SharpOnvifCommon.Soap.OnvifClientBase, AnalyticsEnginePort
+    public partial class AnalyticsEnginePortClient : SharpOnvifCommon.Soap.SoapClientBase, AnalyticsEnginePort
     {
         /// <summary>
         /// Creates a client that sends no credentials.
@@ -379,7 +379,7 @@ namespace SharpOnvifClient.Analytics
     /// <summary>
     /// Talks to the RuleEnginePort service on a device over SOAP 1.2.
     /// </summary>
-    public partial class RuleEnginePortClient : SharpOnvifCommon.Soap.OnvifClientBase, RuleEnginePort
+    public partial class RuleEnginePortClient : SharpOnvifCommon.Soap.SoapClientBase, RuleEnginePort
     {
         /// <summary>
         /// Creates a client that sends no credentials.

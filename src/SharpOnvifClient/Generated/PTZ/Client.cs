@@ -381,7 +381,7 @@ namespace SharpOnvifClient.PTZ
     /// <summary>
     /// Talks to the PTZ service on a device over SOAP 1.2.
     /// </summary>
-    public partial class PTZClient : SharpOnvifCommon.Soap.OnvifClientBase, PTZ
+    public partial class PTZClient : SharpOnvifCommon.Soap.SoapClientBase, PTZ
     {
         /// <summary>
         /// Creates a client that sends no credentials.

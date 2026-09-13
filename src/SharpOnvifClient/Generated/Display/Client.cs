@@ -137,7 +137,7 @@ namespace SharpOnvifClient.Display
     /// <summary>
     /// Talks to the DisplayPort service on a device over SOAP 1.2.
     /// </summary>
-    public partial class DisplayPortClient : SharpOnvifCommon.Soap.OnvifClientBase, DisplayPort
+    public partial class DisplayPortClient : SharpOnvifCommon.Soap.SoapClientBase, DisplayPort
     {
         /// <summary>
         /// Creates a client that sends no credentials.

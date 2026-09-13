@@ -103,7 +103,7 @@ namespace SharpOnvifClient.Receiver
     /// <summary>
     /// Talks to the ReceiverPort service on a device over SOAP 1.2.
     /// </summary>
-    public partial class ReceiverPortClient : SharpOnvifCommon.Soap.OnvifClientBase, ReceiverPort
+    public partial class ReceiverPortClient : SharpOnvifCommon.Soap.SoapClientBase, ReceiverPort
     {
         /// <summary>
         /// Creates a client that sends no credentials.

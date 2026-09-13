@@ -156,7 +156,7 @@ namespace SharpOnvif.Tests
                 new CodeGenerator(options!).Run();
 
                 string runtime = Path.Combine(output, "Runtime");
-                Assert.IsTrue(File.Exists(Path.Combine(runtime, "Soap", "OnvifClientBase.cs")),
+                Assert.IsTrue(File.Exists(Path.Combine(runtime, "Soap", "SoapClientBase.cs")),
                     "the base class the generated client derives from");
 
                 // And the interfaces it talks through, which is the whole of the rest of it.
@@ -197,10 +197,10 @@ namespace SharpOnvif.Tests
                 }
 
                 string client = File.ReadAllText(Path.Combine(output, "Bank", "Client.cs"));
-                StringAssert.Contains(client, "Example.Banking.Runtime.Soap.OnvifClientBase");
+                StringAssert.Contains(client, "Example.Banking.Runtime.Soap.SoapClientBase");
                 StringAssert.Contains(client, "Example.Banking.Runtime.Xml.OnvifContract");
 
-                string @base = File.ReadAllText(Path.Combine(runtime, "Soap", "OnvifClientBase.cs"));
+                string @base = File.ReadAllText(Path.Combine(runtime, "Soap", "SoapClientBase.cs"));
                 StringAssert.Contains(@base, "namespace Example.Banking.Runtime.Soap");
             }
             finally
@@ -225,11 +225,11 @@ namespace SharpOnvif.Tests
                 Assert.IsFalse(Directory.Exists(Path.Combine(output, "Runtime")),
                     "the runtime went where it was pointed, not where it defaults to");
 
-                string @base = File.ReadAllText(Path.Combine(elsewhere, "Soap", "OnvifClientBase.cs"));
+                string @base = File.ReadAllText(Path.Combine(elsewhere, "Soap", "SoapClientBase.cs"));
                 StringAssert.Contains(@base, "namespace Example.Soap.Soap");
 
                 string client = File.ReadAllText(Path.Combine(output, "Bank", "Client.cs"));
-                StringAssert.Contains(client, "Example.Soap.Soap.OnvifClientBase");
+                StringAssert.Contains(client, "Example.Soap.Soap.SoapClientBase");
             }
             finally
             {
@@ -255,7 +255,7 @@ namespace SharpOnvif.Tests
                 Assert.IsFalse(Directory.Exists(Path.Combine(output, "Runtime")));
 
                 string client = File.ReadAllText(Path.Combine(output, "Bank", "Client.cs"));
-                StringAssert.Contains(client, "Example.Shared.Soap.Soap.OnvifClientBase");
+                StringAssert.Contains(client, "Example.Shared.Soap.Soap.SoapClientBase");
             }
             finally
             {

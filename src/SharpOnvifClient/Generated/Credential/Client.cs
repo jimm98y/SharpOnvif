@@ -349,7 +349,7 @@ namespace SharpOnvifClient.Credential
     /// <summary>
     /// Talks to the CredentialPort service on a device over SOAP 1.2.
     /// </summary>
-    public partial class CredentialPortClient : SharpOnvifCommon.Soap.OnvifClientBase, CredentialPort
+    public partial class CredentialPortClient : SharpOnvifCommon.Soap.SoapClientBase, CredentialPort
     {
         /// <summary>
         /// Creates a client that sends no credentials.

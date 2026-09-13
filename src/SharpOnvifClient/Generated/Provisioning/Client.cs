@@ -99,7 +99,7 @@ namespace SharpOnvifClient.Provisioning
     /// <summary>
     /// Talks to the ProvisioningService service on a device over SOAP 1.2.
     /// </summary>
-    public partial class ProvisioningServiceClient : SharpOnvifCommon.Soap.OnvifClientBase, ProvisioningService
+    public partial class ProvisioningServiceClient : SharpOnvifCommon.Soap.SoapClientBase, ProvisioningService
     {
         /// <summary>
         /// Creates a client that sends no credentials.

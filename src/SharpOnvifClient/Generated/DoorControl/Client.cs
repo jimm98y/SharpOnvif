@@ -288,7 +288,7 @@ namespace SharpOnvifClient.DoorControl
     /// <summary>
     /// Talks to the DoorControlPort service on a device over SOAP 1.2.
     /// </summary>
-    public partial class DoorControlPortClient : SharpOnvifCommon.Soap.OnvifClientBase, DoorControlPort
+    public partial class DoorControlPortClient : SharpOnvifCommon.Soap.SoapClientBase, DoorControlPort
     {
         /// <summary>
         /// Creates a client that sends no credentials.

@@ -234,7 +234,7 @@ namespace SharpOnvifClient.Schedule
     /// <summary>
     /// Talks to the SchedulePort service on a device over SOAP 1.2.
     /// </summary>
-    public partial class SchedulePortClient : SharpOnvifCommon.Soap.OnvifClientBase, SchedulePort
+    public partial class SchedulePortClient : SharpOnvifCommon.Soap.SoapClientBase, SchedulePort
     {
         /// <summary>
         /// Creates a client that sends no credentials.

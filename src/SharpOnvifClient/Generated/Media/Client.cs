@@ -981,7 +981,7 @@ namespace SharpOnvifClient.Media
     /// <summary>
     /// Talks to the Media service on a device over SOAP 1.2.
     /// </summary>
-    public partial class MediaClient : SharpOnvifCommon.Soap.OnvifClientBase, Media
+    public partial class MediaClient : SharpOnvifCommon.Soap.SoapClientBase, Media
     {
         /// <summary>
         /// Creates a client that sends no credentials.

@@ -103,7 +103,7 @@ namespace SharpOnvifClient.AppMgmt
     /// <summary>
     /// Talks to the AppManagement service on a device over SOAP 1.2.
     /// </summary>
-    public partial class AppManagementClient : SharpOnvifCommon.Soap.OnvifClientBase, AppManagement
+    public partial class AppManagementClient : SharpOnvifCommon.Soap.SoapClientBase, AppManagement
     {
         /// <summary>
         /// Creates a client that sends no credentials.

@@ -326,7 +326,7 @@ namespace SharpOnvifClient.DeviceIO
     /// <summary>
     /// Talks to the DeviceIOPort service on a device over SOAP 1.2.
     /// </summary>
-    public partial class DeviceIOPortClient : SharpOnvifCommon.Soap.OnvifClientBase, DeviceIOPort
+    public partial class DeviceIOPortClient : SharpOnvifCommon.Soap.SoapClientBase, DeviceIOPort
     {
         /// <summary>
         /// Creates a client that sends no credentials.
