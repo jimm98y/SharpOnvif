@@ -28,8 +28,25 @@ namespace SharpOnvifServer.Events
 {
     public class NotificationMessage
     {
+        /// <summary>What produced the event, as tt:SimpleItem name/value pairs.</summary>
         public Dictionary<string, string> Source { get; set; } = new Dictionary<string, string>();
+
+        /// <summary>What the event says, as tt:SimpleItem name/value pairs.</summary>
         public Dictionary<string, string> Data { get; set; } = new Dictionary<string, string>();
+
+        /// <summary>
+        /// Source items whose value is a whole element rather than a string, written as
+        /// tt:ElementItem.
+        /// </summary>
+        /// <remarks>
+        /// A tt:SimpleItem carries a string in an attribute and can say no more than that. Onvif
+        /// events that report a shape, a rectangle or an analytics payload use tt:ElementItem
+        /// instead, which holds one element of the schema's own choosing.
+        /// </remarks>
+        public Dictionary<string, XmlElement> SourceElements { get; set; } = new Dictionary<string, XmlElement>();
+
+        /// <summary>Data items whose value is a whole element, written as tt:ElementItem.</summary>
+        public Dictionary<string, XmlElement> DataElements { get; set; } = new Dictionary<string, XmlElement>();
 
         public string TopicNamespacePrefix { get; set; } = "tns1";
         public string TopicNamespace { get; set; } = "http://www.onvif.org/ver10/topics";
@@ -134,32 +151,54 @@ namespace SharpOnvifServer.Events
                 messageNode.Attributes.Append(CreateAttribute(dom, "PropertyOperation", propertyOperation));
             }
 
-            XmlElement source = dom.CreateElement("tt","Source", ns);
-
-            foreach (var sourceItem in message.Source)
-            {
-                XmlElement simpleItem = dom.CreateElement("tt", "SimpleItem", ns);
-                simpleItem.Attributes.Append(CreateAttribute(dom, "Name", sourceItem.Key));
-                simpleItem.Attributes.Append(CreateAttribute(dom, "Value", sourceItem.Value));
-                source.AppendChild(simpleItem);
-            }
-
-            messageNode.AppendChild(source);
-
-            XmlElement data = dom.CreateElement("tt", "Data", ns);
-
-            foreach (var dataItem in message.Data)
-            {
-                XmlElement simpleItem = dom.CreateElement("tt", "SimpleItem", ns);
-                simpleItem.Attributes.Append(CreateAttribute(dom, "Name", dataItem.Key));
-                simpleItem.Attributes.Append(CreateAttribute(dom, "Value", dataItem.Value));
-                data.AppendChild(simpleItem);
-            }
-
-            messageNode.AppendChild(data);
+            messageNode.AppendChild(CreateItemList(dom, ns, "Source", message.Source, message.SourceElements));
+            messageNode.AppendChild(CreateItemList(dom, ns, "Data", message.Data, message.DataElements));
             rootMessageNode.AppendChild(messageNode);
 
             return rootMessageNode;
+        }
+
+        /// <summary>
+        /// A tt:ItemList - the Source or the Data of a message. The schema puts every SimpleItem
+        /// before any ElementItem, so they are written in that order.
+        /// </summary>
+        private static XmlElement CreateItemList(
+            XmlDocument dom,
+            string ns,
+            string elementName,
+            Dictionary<string, string> simpleItems,
+            Dictionary<string, XmlElement> elementItems)
+        {
+            XmlElement list = dom.CreateElement("tt", elementName, ns);
+
+            if (simpleItems != null)
+            {
+                foreach (var item in simpleItems)
+                {
+                    XmlElement simpleItem = dom.CreateElement("tt", "SimpleItem", ns);
+                    simpleItem.Attributes.Append(CreateAttribute(dom, "Name", item.Key));
+                    simpleItem.Attributes.Append(CreateAttribute(dom, "Value", item.Value));
+                    list.AppendChild(simpleItem);
+                }
+            }
+
+            if (elementItems != null)
+            {
+                foreach (var item in elementItems)
+                {
+                    if (item.Value == null) continue;
+
+                    XmlElement elementItem = dom.CreateElement("tt", "ElementItem", ns);
+                    elementItem.Attributes.Append(CreateAttribute(dom, "Name", item.Key));
+
+                    // The content was built against a document of its own, so it is imported
+                    // rather than appended: a node belongs to one document at a time.
+                    elementItem.AppendChild(dom.ImportNode(item.Value, deep: true));
+                    list.AppendChild(elementItem);
+                }
+            }
+
+            return list;
         }
 
         private static XmlAttribute CreateAttribute(XmlDocument dom, string name, string value)

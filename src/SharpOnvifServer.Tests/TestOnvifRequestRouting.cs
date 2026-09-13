@@ -213,6 +213,44 @@ namespace SharpOnvif.Tests
         }
 
         [TestMethod]
+        public async Task RefusesARequestLargerThanItWillRead()
+        {
+            // The envelope is held as a string and read more than once, so its size is paid for
+            // several times over. How much that is cannot be the caller's choice.
+            string padding = new string('x', OnvifEndpoint.MaxRequestBytes + 1024);
+            string envelope =
+                "<?xml version=\"1.0\"?>" +
+                "<s:Envelope xmlns:s=\"http://www.w3.org/2003/05/soap-envelope\">" +
+                "<s:Body><GetDeviceInformation xmlns=\"http://www.onvif.org/ver10/device/wsdl\">" +
+                $"<Padding>{padding}</Padding>" +
+                "</GetDeviceInformation></s:Body></s:Envelope>";
+
+            var (status, body) = await PostAsync(DevicePath, envelope, DeviceInformationAction);
+
+            Assert.AreEqual(HttpStatusCode.RequestEntityTooLarge, status);
+            StringAssert.Contains(body, "larger than this endpoint accepts");
+        }
+
+        [TestMethod]
+        public async Task StillReadsARequestOfAnOrdinarySize()
+        {
+            // The limit has to be well clear of anything real: a configuration being written is
+            // the largest Onvif request there is, and it is nothing like a megabyte.
+            string padding = new string('x', 64 * 1024);
+            string envelope =
+                "<?xml version=\"1.0\"?>" +
+                "<s:Envelope xmlns:s=\"http://www.w3.org/2003/05/soap-envelope\">" +
+                "<s:Body><GetDeviceInformation xmlns=\"http://www.onvif.org/ver10/device/wsdl\">" +
+                $"<Padding>{padding}</Padding>" +
+                "</GetDeviceInformation></s:Body></s:Envelope>";
+
+            var (status, body) = await PostAsync(DevicePath, envelope, DeviceInformationAction);
+
+            Assert.AreEqual(HttpStatusCode.OK, status);
+            StringAssert.Contains(body, "ACME");
+        }
+
+        [TestMethod]
         public async Task FindsTheOperationFromTheBodyElementAlone()
         {
             // Neither form of action; the body element is the last thing left to go on.

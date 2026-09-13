@@ -38,6 +38,13 @@ namespace SharpOnvifServer.Dispatch
         /// </summary>
         internal const string SubscriptionRouteValue = "onvifSubscriptionId";
 
+        /// <summary>
+        /// The largest request this endpoint reads. Onvif requests are small - the largest real
+        /// one is a configuration being written - and Kestrel's own default of 30 MB is a great
+        /// deal of XML to hold as a string and parse more than once.
+        /// </summary>
+        public static int MaxRequestBytes { get; set; } = 2 * 1024 * 1024;
+
         private sealed class Registration
         {
             public OnvifServiceDispatcher Dispatcher;
@@ -59,9 +66,20 @@ namespace SharpOnvifServer.Dispatch
             if (!await IsAuthorizedAsync(context).ConfigureAwait(false)) return;
 
             string envelope;
-            using (var reader = new StreamReader(context.Request.Body, Encoding.UTF8, true, 4096, leaveOpen: true))
+            try
             {
-                envelope = await reader.ReadToEndAsync().ConfigureAwait(false);
+                envelope = await ReadEnvelopeAsync(context).ConfigureAwait(false);
+            }
+            catch (InvalidDataException)
+            {
+                // Refused before it was read, so the size of the request is not also the size of
+                // what answering it costs.
+                context.Response.StatusCode = StatusCodes.Status413PayloadTooLarge;
+                await WriteFaultAsync(context, "Sender", "WellFormed",
+                    "The request is larger than this endpoint accepts.",
+                    OnvifErrors.Namespace, System.Net.HttpStatusCode.RequestEntityTooLarge)
+                    .ConfigureAwait(false);
+                return;
             }
 
             string action = ActionFromContentType(context.Request.ContentType);
@@ -167,6 +185,44 @@ namespace SharpOnvifServer.Dispatch
                 await WriteFaultAsync(context, "Receiver", "Action", error.Message,
                     OnvifErrors.Namespace, System.Net.HttpStatusCode.InternalServerError).ConfigureAwait(false);
             }
+        }
+
+        /// <summary>
+        /// Reads the request body, refusing one larger than <see cref="MaxRequestBytes"/>.
+        /// </summary>
+        /// <remarks>
+        /// The envelope is held as a string and read more than once - to find the action, then to
+        /// deserialise - so its size is paid for several times over. A caller must not be able to
+        /// choose how much that is.
+        /// </remarks>
+        private async Task<string> ReadEnvelopeAsync(HttpContext context)
+        {
+            long? declared = context.Request.ContentLength;
+            if (declared.HasValue && declared.Value > MaxRequestBytes)
+                throw new InvalidDataException("The request declares more than this endpoint accepts.");
+
+            var buffer = new MemoryStream(
+                declared.HasValue ? (int)Math.Min(declared.Value, 64 * 1024) : 4096);
+
+            byte[] chunk = new byte[8192];
+            long total = 0;
+
+            while (true)
+            {
+                int read = await context.Request.Body
+                    .ReadAsync(chunk, 0, chunk.Length, context.RequestAborted).ConfigureAwait(false);
+
+                if (read == 0) break;
+
+                total += read;
+                // A chunked request declares no length, so the limit is enforced as it arrives.
+                if (total > MaxRequestBytes)
+                    throw new InvalidDataException("The request is larger than this endpoint accepts.");
+
+                buffer.Write(chunk, 0, read);
+            }
+
+            return Encoding.UTF8.GetString(buffer.GetBuffer(), 0, (int)buffer.Length);
         }
 
         /// <summary>

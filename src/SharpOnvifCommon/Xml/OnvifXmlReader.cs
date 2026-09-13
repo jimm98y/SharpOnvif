@@ -36,6 +36,12 @@ namespace SharpOnvifCommon.Xml
         /// <summary>The underlying reader, for content this class does not model.</summary>
         public XmlReader Xml { get { return _reader; } }
 
+        /// <summary>
+        /// How deeply a document may nest before it is refused. The deepest thing Onvif describes
+        /// is a handful of elements; this is far above anything a device or a client sends.
+        /// </summary>
+        public static int MaxDepth { get; set; } = 256;
+
         /// <summary>Local name of the element or attribute the reader is positioned on.</summary>
         public string LocalName { get { return _reader.LocalName; } }
 
@@ -123,6 +129,15 @@ namespace SharpOnvifCommon.Xml
         /// </summary>
         public void ReadInto(OnvifContract instance)
         {
+            // Reading nested contracts recurses, so the depth of the document is the depth of the
+            // call stack. A stack overflow cannot be caught, so a document nested deeply enough
+            // would end the process rather than the request: the limit is checked, not hoped for.
+            if (_reader.Depth > MaxDepth)
+            {
+                throw new OnvifFaultException(
+                    "The document is nested more than " + MaxDepth + " elements deep.");
+            }
+
             bool empty = _reader.IsEmptyElement;
 
             ReadAttributes(instance);

@@ -59,6 +59,18 @@ Optionally, add Onvif discovery to make your service discoverable on the network
 ```cs
 builder.Services.AddOnvifDiscovery();
 ```
+The device answers a Probe, and announces itself with a WS-Discovery Hello when it starts and a Bye
+when it stops, so a client learns about it without having to probe. Every announcement names the
+same endpoint reference, which is how a client pairs the Bye with the device that said Hello. That
+address lasts as long as the process unless you give it one that outlives a restart:
+```cs
+builder.Services.AddOnvifDiscovery(new OnvifDiscoveryOptions
+{
+    // From something the device keeps - its serial number or MAC - or a client sees a new
+    // device every time this one is restarted.
+    EndpointReference = "urn:uuid:" + deviceUuid,
+});
+```
 Simple `DeviceImpl` just extends `SharpOnvifServer.DeviceMgmt.DeviceBase` and overrides a method you want to implement - for instance `GetDeviceInformation`:
 ```cs
 public class DeviceImpl : DeviceBase
@@ -142,6 +154,34 @@ if (services.Service.FirstOrDefault(x => x.Namespace == OnvifServices.MEDIA) != 
 }
 ```
 Full list of services that can be supported by the device is available in `SharpOnvifCommon.OnvifServices`.
+
+### Delivering only what a subscriber asked for
+A client subscribing to events says which it wants, and a device that sends it everything else as
+well is not conformant. `TopicFilter` reads the filter out of the subscribe request and answers
+whether a notification is one of them:
+```cs
+TopicFilter topics = TopicFilter.FromFilter(request.Filter);
+...
+if (topics.Matches(notification))
+{
+    // queue it for this subscriber
+}
+```
+It understands a concrete topic, a set of them separated by `|`, `*` for one level, and a trailing
+`//.` for a topic and everything beneath it. An expression written in a dialect it cannot evaluate
+matches everything, so a subscriber is never silently sent nothing.
+
+A notification carries name/value pairs as `tt:SimpleItem`. Anything with a shape to it - a
+rectangle, an analytics payload - goes in `SourceElements` or `DataElements` and is written as
+`tt:ElementItem`:
+```cs
+var message = new NotificationMessage
+{
+    Topic = "RuleEngine/CellMotionDetector/Motion",
+    Data = { { "IsMotion", "true" } },
+    DataElements = { { "Shape", rectangleElement } },
+};
+```
 
 ### Pull Point event subscription
 Pull point event subscription does not require any special networking configuration and it should work in most networks. 
