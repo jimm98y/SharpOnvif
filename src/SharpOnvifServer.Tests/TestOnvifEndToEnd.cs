@@ -255,7 +255,7 @@ namespace SharpOnvif.Tests
         {
             using (var device = new SharpOnvifClient.DeviceMgmt.DeviceClient(_endpoint))
             {
-                var fault = await Assert.ThrowsExactlyAsync<OnvifFaultException>(
+                var fault = await Assert.ThrowsExactlyAsync<SoapFaultException>(
                     () => device.GetHostnameAsync());
 
                 Assert.AreEqual("ActionNotSupported", fault.Fault.Subcode);
@@ -268,7 +268,7 @@ namespace SharpOnvif.Tests
             // The PTZ service is not published here, so its actions have nowhere to go.
             using (var ptz = new SharpOnvifClient.PTZ.PTZClient(_endpoint))
             {
-                var fault = await Assert.ThrowsExactlyAsync<OnvifFaultException>(
+                var fault = await Assert.ThrowsExactlyAsync<SoapFaultException>(
                     () => ptz.GetConfigurationsAsync());
 
                 Assert.AreEqual("ActionNotSupported", fault.Fault.Subcode);

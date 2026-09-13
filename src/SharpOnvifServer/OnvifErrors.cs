@@ -29,7 +29,7 @@ namespace SharpOnvifServer
     /// A fault an Onvif service implementation raises deliberately. The endpoint turns it into a
     /// SOAP 1.2 fault with the requested code, subcode, and HTTP status.
     /// </summary>
-    public class OnvifServerFaultException : OnvifFaultException
+    public class OnvifServerFaultException : SoapFaultException
     {
         public OnvifServerFaultException(
             string code, string subcode, string subcodeNamespace, string reason, HttpStatusCode statusCode)

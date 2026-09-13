@@ -95,7 +95,7 @@ namespace SharpOnvif.Tests
 
             using var client = Client(device, password: "not the password");
 
-            await Assert.ThrowsExactlyAsync<OnvifFaultException>(() => client.GetDeviceInformationAsync());
+            await Assert.ThrowsExactlyAsync<SoapFaultException>(() => client.GetDeviceInformationAsync());
         }
 
         [TestMethod]
@@ -106,7 +106,7 @@ namespace SharpOnvif.Tests
 
             using var anonymous = new DeviceClient(device.Endpoint);
 
-            await Assert.ThrowsExactlyAsync<OnvifFaultException>(() => anonymous.GetDeviceInformationAsync());
+            await Assert.ThrowsExactlyAsync<SoapFaultException>(() => anonymous.GetDeviceInformationAsync());
         }
 
         [TestMethod]
@@ -122,7 +122,7 @@ namespace SharpOnvif.Tests
 
             using var client = Client(device, utcNowOffset: TimeSpan.FromMinutes(-10));
 
-            await Assert.ThrowsExactlyAsync<OnvifFaultException>(() => client.GetDeviceInformationAsync());
+            await Assert.ThrowsExactlyAsync<SoapFaultException>(() => client.GetDeviceInformationAsync());
         }
 
         [TestMethod]
@@ -136,7 +136,7 @@ namespace SharpOnvif.Tests
 
             using var client = Client(device, utcNowOffset: TimeSpan.FromMinutes(10));
 
-            await Assert.ThrowsExactlyAsync<OnvifFaultException>(() => client.GetDeviceInformationAsync());
+            await Assert.ThrowsExactlyAsync<SoapFaultException>(() => client.GetDeviceInformationAsync());
         }
 
         [TestMethod]
@@ -201,7 +201,7 @@ namespace SharpOnvif.Tests
 
             using var client = Client(device);
 
-            await Assert.ThrowsExactlyAsync<OnvifFaultException>(() => client.GetDeviceInformationAsync());
+            await Assert.ThrowsExactlyAsync<SoapFaultException>(() => client.GetDeviceInformationAsync());
         }
     }
 }

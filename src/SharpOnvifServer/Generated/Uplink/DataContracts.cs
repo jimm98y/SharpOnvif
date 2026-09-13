@@ -110,50 +110,50 @@ namespace SharpOnvifServer.Uplink
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Uplink; } }
 
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.maxUplinksFieldSpecified)
             {
-                writer.WriteAttributeString(null, "MaxUplinks", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxUplinksField));
+                writer.WriteAttributeString(null, "MaxUplinks", writer.ToXml(this.maxUplinksField));
             }
-            writer.WriteAttributeString(null, "Protocols", SharpOnvifCommon.Xml.OnvifArray.JoinList(this.protocolsField));
-            writer.WriteAttributeString(null, "AuthorizationModes", SharpOnvifCommon.Xml.OnvifArray.JoinList(this.authorizationModesField));
+            writer.WriteAttributeString(null, "Protocols", writer.JoinList(this.protocolsField));
+            writer.WriteAttributeString(null, "AuthorizationModes", writer.JoinList(this.authorizationModesField));
             if (this.streamingOverUplinkFieldSpecified)
             {
-                writer.WriteAttributeString(null, "StreamingOverUplink", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.streamingOverUplinkField));
+                writer.WriteAttributeString(null, "StreamingOverUplink", writer.ToXml(this.streamingOverUplinkField));
             }
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "MaxUplinks":
-                    this.maxUplinksField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.AttributeValue);
+                    this.maxUplinksField = reader.ToInt32(reader.AttributeValue);
                     this.maxUplinksFieldSpecified = true;
                     return true;
                 case "Protocols":
-                    this.protocolsField = SharpOnvifCommon.Xml.OnvifArray.SplitList(reader.AttributeValue);
+                    this.protocolsField = reader.SplitList(reader.AttributeValue);
                     return true;
                 case "AuthorizationModes":
-                    this.authorizationModesField = SharpOnvifCommon.Xml.OnvifArray.SplitList(reader.AttributeValue);
+                    this.authorizationModesField = reader.SplitList(reader.AttributeValue);
                     return true;
                 case "StreamingOverUplink":
-                    this.streamingOverUplinkField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.streamingOverUplinkField = reader.ToBoolean(reader.AttributeValue);
                     this.streamingOverUplinkFieldSpecified = true;
                     return true;
             }
             return false;
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -263,11 +263,11 @@ namespace SharpOnvifServer.Uplink
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Uplink; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Uplink, "RemoteAddress", this.remoteAddressField);
             writer.WriteElementString(Ns.Ver10Uplink, "CertificateID", this.certificateIDField);
-            writer.WriteElementString(Ns.Ver10Uplink, "UserLevel", SharpOnvifCommon.Xml.OnvifArray.JoinList(this.userLevelField));
+            writer.WriteElementString(Ns.Ver10Uplink, "UserLevel", writer.JoinList(this.userLevelField));
             writer.WriteElementString(Ns.Ver10Uplink, "Status", this.statusField);
             writer.WriteElementString(Ns.Ver10Uplink, "CertPathValidationPolicyID", this.certPathValidationPolicyIDField);
             writer.WriteElementString(Ns.Ver10Uplink, "AuthorizationServer", this.authorizationServerField);
@@ -275,7 +275,7 @@ namespace SharpOnvifServer.Uplink
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -289,7 +289,7 @@ namespace SharpOnvifServer.Uplink
                     return true;
                 case "UserLevel":
                     if (reader.NamespaceUri != Ns.Ver10Uplink) break;
-                    this.userLevelField = SharpOnvifCommon.Xml.OnvifArray.SplitList(reader.ReadElementText());
+                    this.userLevelField = reader.SplitList(reader.ReadElementText());
                     return true;
                 case "Status":
                     if (reader.NamespaceUri != Ns.Ver10Uplink) break;
@@ -308,7 +308,7 @@ namespace SharpOnvifServer.Uplink
                     this.errorField = reader.ReadElementText();
                     return true;
             }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -341,12 +341,12 @@ namespace SharpOnvifServer.Uplink
             this.remoteAddressField = remoteAddress;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Uplink, "RemoteAddress", this.remoteAddressField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -411,12 +411,12 @@ namespace SharpOnvifServer.Uplink
             this.capabilitiesField = capabilities;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Uplink, "Capabilities", this.capabilitiesField, Ns.Ver10Uplink, "Capabilities");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -471,7 +471,7 @@ namespace SharpOnvifServer.Uplink
             this.configurationField = configuration;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.configurationField != null)
             {
@@ -482,13 +482,13 @@ namespace SharpOnvifServer.Uplink
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Configuration":
                     if (reader.NamespaceUri != Ns.Ver10Uplink) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.configurationField, reader.ReadElementObject<Configuration>(() => new Configuration()));
+                    reader.Append(ref this.configurationField, reader.ReadElementObject<Configuration>(() => new Configuration()));
                     return true;
             }
             return false;
@@ -525,12 +525,12 @@ namespace SharpOnvifServer.Uplink
             this.configurationField = configuration;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Uplink, "Configuration", this.configurationField, Ns.Ver10Uplink, "Configuration");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {

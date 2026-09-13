@@ -31,6 +31,7 @@ namespace SharpOnvifCommon.Soap
         private readonly HttpClient _http;
         private readonly bool _ownsHttpClient;
         private readonly IClientSettings _settings;
+        private readonly IMessageCodec _codec;
         private bool _disposed;
 
         protected OnvifClientBase(string endpointUri, IClientSettings settings)
@@ -46,8 +47,12 @@ namespace SharpOnvifCommon.Soap
 
             if (settings == null) throw new ArgumentNullException(nameof(settings));
 
+            if (settings.Codec == null)
+                throw new ArgumentException("The settings carry nothing to write a message with.", nameof(settings));
+
             EndpointUri = endpointUri;
             _settings = settings;
+            _codec = settings.Codec;
 
             if (_settings.HttpClient != null)
             {
@@ -127,15 +132,12 @@ namespace SharpOnvifCommon.Soap
 
             using (HttpResponseMessage response = await SendAsync(action, envelope, cancellationToken).ConfigureAwait(false))
             using (Stream stream = await ReadContentAsync(response).ConfigureAwait(false))
-            using (XmlReader xml = SoapEnvelope.CreateReader(stream))
             {
-                // A fault is raised from here as an OnvifFaultException, including for the 500
-                // status code devices use to carry one.
-                if (!SoapEnvelope.MoveToBody(xml)) return createResponse();
-
                 TResponse result = createResponse();
-                var reader = new OnvifXmlReader(xml, ResolveXmlType);
-                reader.ReadInto(result);
+
+                // A reply carrying a fault is raised from in here, including for the 500 status
+                // code devices use to carry one.
+                _codec.ReadEnvelopeBody(stream, result, ResolveXmlType);
                 return result;
             }
         }
@@ -152,9 +154,10 @@ namespace SharpOnvifCommon.Soap
 
             using (HttpResponseMessage response = await SendAsync(action, envelope, cancellationToken).ConfigureAwait(false))
             using (Stream stream = await ReadContentAsync(response).ConfigureAwait(false))
-            using (XmlReader xml = SoapEnvelope.CreateReader(stream))
             {
-                SoapEnvelope.MoveToBody(xml);
+                // Nothing worth reading is not nothing worth looking at: the reply still has to be
+                // read far enough to find a fault in it.
+                _codec.ReadEnvelopeBody(stream, null, ResolveXmlType);
             }
         }
 
@@ -162,11 +165,11 @@ namespace SharpOnvifCommon.Soap
         {
             // Null when this action carries no credentials, which is what leaves the message with
             // no header element rather than an empty one.
-            Action<OnvifXmlWriter> headers = _settings.Authentication == null
+            Action<IXmlWriter> headers = _settings.Authentication == null
                 ? null
                 : _settings.Authentication.CreateSecurityHeader(action, _settings);
 
-            return SoapEnvelope.Write(_settings.EnvelopePrologue, headers, writer =>
+            return _codec.WriteEnvelope(_settings.EnvelopePrologue, headers, writer =>
             {
                 writer.WriteStartElement(bodyNamespace, bodyElement);
                 writer.WriteContent(request);
@@ -180,7 +183,7 @@ namespace SharpOnvifCommon.Soap
             message.Content = new StringContent(envelope, new UTF8Encoding(false));
 
             // Onvif carries the action as a Content-Type parameter on application/soap+xml.
-            var contentType = new MediaTypeHeaderValue(SoapEnvelope.ContentType);
+            var contentType = new MediaTypeHeaderValue(_codec.ContentType);
             contentType.CharSet = "utf-8";
             contentType.Parameters.Add(new NameValueHeaderValue("action", "\"" + action + "\""));
             message.Content.Headers.ContentType = contentType;
@@ -198,14 +201,14 @@ namespace SharpOnvifCommon.Soap
                 // stopping a device does to a client waiting on a pull. Raised as one Onvif
                 // exception so that an application does not have to know which of the HTTP
                 // stack's exceptions means "the camera went away".
-                throw new OnvifTransportException(
+                throw new SoapTransportException(
                     "The Onvif request to " + EndpointUri + " did not reach the device: " + ex.Message, ex);
             }
             catch (OperationCanceledException ex) when (!cancellationToken.IsCancellationRequested)
             {
                 // Not the caller's cancellation - the client's own timeout. It arrives as a
                 // TaskCanceledException, which says nothing about what went wrong.
-                throw new OnvifTransportException(
+                throw new SoapTransportException(
                     "The Onvif request to " + EndpointUri + " timed out after " + _settings.Timeout + ".", ex)
                 {
                     TimedOut = true,
@@ -222,7 +225,7 @@ namespace SharpOnvifCommon.Soap
                     : await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
                 response.Dispose();
-                throw new OnvifFaultException(
+                throw new SoapFaultException(
                     "The device returned HTTP " + (int)response.StatusCode + " " + response.ReasonPhrase +
                     (body.Length == 0 ? "." : ": " + Truncate(body, 512)));
             }

@@ -586,7 +586,7 @@ namespace SharpOnvifServer.Schedule
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             SchedulePortBase target = (SchedulePortBase)service;
-            var reader = new SharpOnvifCommon.Xml.OnvifXmlReader(body, ResolveXmlType);
+            var reader = CreateReader(body);
 
             switch (action)
             {

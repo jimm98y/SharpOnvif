@@ -130,58 +130,58 @@ namespace SharpOnvifClient.Search
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Search; } }
 
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.metadataSearchFieldSpecified)
             {
-                writer.WriteAttributeString(null, "MetadataSearch", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.metadataSearchField));
+                writer.WriteAttributeString(null, "MetadataSearch", writer.ToXml(this.metadataSearchField));
             }
             if (this.generalStartEventsFieldSpecified)
             {
-                writer.WriteAttributeString(null, "GeneralStartEvents", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.generalStartEventsField));
+                writer.WriteAttributeString(null, "GeneralStartEvents", writer.ToXml(this.generalStartEventsField));
             }
             if (this.nLSearchFieldSpecified)
             {
-                writer.WriteAttributeString(null, "NLSearch", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.nLSearchField));
+                writer.WriteAttributeString(null, "NLSearch", writer.ToXml(this.nLSearchField));
             }
             if (this.imageSearchFieldSpecified)
             {
-                writer.WriteAttributeString(null, "ImageSearch", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.imageSearchField));
+                writer.WriteAttributeString(null, "ImageSearch", writer.ToXml(this.imageSearchField));
             }
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "MetadataSearch":
-                    this.metadataSearchField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.metadataSearchField = reader.ToBoolean(reader.AttributeValue);
                     this.metadataSearchFieldSpecified = true;
                     return true;
                 case "GeneralStartEvents":
-                    this.generalStartEventsField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.generalStartEventsField = reader.ToBoolean(reader.AttributeValue);
                     this.generalStartEventsFieldSpecified = true;
                     return true;
                 case "NLSearch":
-                    this.nLSearchField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.nLSearchField = reader.ToBoolean(reader.AttributeValue);
                     this.nLSearchFieldSpecified = true;
                     return true;
                 case "ImageSearch":
-                    this.imageSearchField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.imageSearchField = reader.ToBoolean(reader.AttributeValue);
                     this.imageSearchFieldSpecified = true;
                     return true;
             }
             return false;
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -220,12 +220,12 @@ namespace SharpOnvifClient.Search
             this.searchTokenField = searchToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Search, "SearchToken", this.searchTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -273,18 +273,18 @@ namespace SharpOnvifClient.Search
             this.endpointField = endpoint;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
-            writer.WriteElementString(Ns.Ver10Search, "Endpoint", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.endpointField));
+            writer.WriteElementString(Ns.Ver10Search, "Endpoint", writer.ToXml(this.endpointField));
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Endpoint":
                     if (reader.NamespaceUri != Ns.Ver10Search) break;
-                    this.endpointField = SharpOnvifCommon.Xml.XmlPrimitives.ToDateTime(reader.ReadElementText());
+                    this.endpointField = reader.ToDateTime(reader.ReadElementText());
                     return true;
             }
             return false;
@@ -431,34 +431,34 @@ namespace SharpOnvifClient.Search
             this.keepAliveTimeField = keepAliveTime;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
-            writer.WriteElementString(Ns.Ver10Search, "StartPoint", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.startPointField));
+            writer.WriteElementString(Ns.Ver10Search, "StartPoint", writer.ToXml(this.startPointField));
             if (this.endPointFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Search, "EndPoint", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.endPointField));
+                writer.WriteElementString(Ns.Ver10Search, "EndPoint", writer.ToXml(this.endPointField));
             }
             writer.WriteElement(Ns.Ver10Search, "Scope", this.scopeField, "http://www.onvif.org/ver10/schema", "SearchScope");
             writer.WriteElement(Ns.Ver10Search, "SearchFilter", this.searchFilterField, "http://www.onvif.org/ver10/schema", "EventFilter");
-            writer.WriteElementString(Ns.Ver10Search, "IncludeStartState", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.includeStartStateField));
+            writer.WriteElementString(Ns.Ver10Search, "IncludeStartState", writer.ToXml(this.includeStartStateField));
             if (this.maxMatchesFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Search, "MaxMatches", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxMatchesField));
+                writer.WriteElementString(Ns.Ver10Search, "MaxMatches", writer.ToXml(this.maxMatchesField));
             }
             writer.WriteElementString(Ns.Ver10Search, "KeepAliveTime", this.keepAliveTimeField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "StartPoint":
                     if (reader.NamespaceUri != Ns.Ver10Search) break;
-                    this.startPointField = SharpOnvifCommon.Xml.XmlPrimitives.ToDateTime(reader.ReadElementText());
+                    this.startPointField = reader.ToDateTime(reader.ReadElementText());
                     return true;
                 case "EndPoint":
                     if (reader.NamespaceUri != Ns.Ver10Search) break;
-                    this.endPointField = SharpOnvifCommon.Xml.XmlPrimitives.ToDateTime(reader.ReadElementText());
+                    this.endPointField = reader.ToDateTime(reader.ReadElementText());
                     this.endPointFieldSpecified = true;
                     return true;
                 case "Scope":
@@ -471,11 +471,11 @@ namespace SharpOnvifClient.Search
                     return true;
                 case "IncludeStartState":
                     if (reader.NamespaceUri != Ns.Ver10Search) break;
-                    this.includeStartStateField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
+                    this.includeStartStateField = reader.ToBoolean(reader.ReadElementText());
                     return true;
                 case "MaxMatches":
                     if (reader.NamespaceUri != Ns.Ver10Search) break;
-                    this.maxMatchesField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.maxMatchesField = reader.ToInt32(reader.ReadElementText());
                     this.maxMatchesFieldSpecified = true;
                     return true;
                 case "KeepAliveTime":
@@ -524,12 +524,12 @@ namespace SharpOnvifClient.Search
             this.searchTokenField = searchToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Search, "SearchToken", this.searchTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -666,33 +666,33 @@ namespace SharpOnvifClient.Search
             this.keepAliveTimeField = keepAliveTime;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
-            writer.WriteElementString(Ns.Ver10Search, "StartPoint", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.startPointField));
+            writer.WriteElementString(Ns.Ver10Search, "StartPoint", writer.ToXml(this.startPointField));
             if (this.endPointFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Search, "EndPoint", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.endPointField));
+                writer.WriteElementString(Ns.Ver10Search, "EndPoint", writer.ToXml(this.endPointField));
             }
             writer.WriteElement(Ns.Ver10Search, "Scope", this.scopeField, "http://www.onvif.org/ver10/schema", "SearchScope");
             writer.WriteElement(Ns.Ver10Search, "MetadataFilter", this.metadataFilterField, "http://www.onvif.org/ver10/schema", "MetadataFilter");
             if (this.maxMatchesFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Search, "MaxMatches", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxMatchesField));
+                writer.WriteElementString(Ns.Ver10Search, "MaxMatches", writer.ToXml(this.maxMatchesField));
             }
             writer.WriteElementString(Ns.Ver10Search, "KeepAliveTime", this.keepAliveTimeField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "StartPoint":
                     if (reader.NamespaceUri != Ns.Ver10Search) break;
-                    this.startPointField = SharpOnvifCommon.Xml.XmlPrimitives.ToDateTime(reader.ReadElementText());
+                    this.startPointField = reader.ToDateTime(reader.ReadElementText());
                     return true;
                 case "EndPoint":
                     if (reader.NamespaceUri != Ns.Ver10Search) break;
-                    this.endPointField = SharpOnvifCommon.Xml.XmlPrimitives.ToDateTime(reader.ReadElementText());
+                    this.endPointField = reader.ToDateTime(reader.ReadElementText());
                     this.endPointFieldSpecified = true;
                     return true;
                 case "Scope":
@@ -705,7 +705,7 @@ namespace SharpOnvifClient.Search
                     return true;
                 case "MaxMatches":
                     if (reader.NamespaceUri != Ns.Ver10Search) break;
-                    this.maxMatchesField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.maxMatchesField = reader.ToInt32(reader.ReadElementText());
                     this.maxMatchesFieldSpecified = true;
                     return true;
                 case "KeepAliveTime":
@@ -753,12 +753,12 @@ namespace SharpOnvifClient.Search
             this.searchTokenField = searchToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Search, "SearchToken", this.searchTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -895,33 +895,33 @@ namespace SharpOnvifClient.Search
             this.keepAliveTimeField = keepAliveTime;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
-            writer.WriteElementString(Ns.Ver10Search, "StartPoint", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.startPointField));
+            writer.WriteElementString(Ns.Ver10Search, "StartPoint", writer.ToXml(this.startPointField));
             if (this.endPointFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Search, "EndPoint", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.endPointField));
+                writer.WriteElementString(Ns.Ver10Search, "EndPoint", writer.ToXml(this.endPointField));
             }
             writer.WriteElement(Ns.Ver10Search, "Scope", this.scopeField, "http://www.onvif.org/ver10/schema", "SearchScope");
             writer.WriteElement(Ns.Ver10Search, "SearchFilter", this.searchFilterField, "http://www.onvif.org/ver10/schema", "PTZPositionFilter");
             if (this.maxMatchesFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Search, "MaxMatches", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxMatchesField));
+                writer.WriteElementString(Ns.Ver10Search, "MaxMatches", writer.ToXml(this.maxMatchesField));
             }
             writer.WriteElementString(Ns.Ver10Search, "KeepAliveTime", this.keepAliveTimeField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "StartPoint":
                     if (reader.NamespaceUri != Ns.Ver10Search) break;
-                    this.startPointField = SharpOnvifCommon.Xml.XmlPrimitives.ToDateTime(reader.ReadElementText());
+                    this.startPointField = reader.ToDateTime(reader.ReadElementText());
                     return true;
                 case "EndPoint":
                     if (reader.NamespaceUri != Ns.Ver10Search) break;
-                    this.endPointField = SharpOnvifCommon.Xml.XmlPrimitives.ToDateTime(reader.ReadElementText());
+                    this.endPointField = reader.ToDateTime(reader.ReadElementText());
                     this.endPointFieldSpecified = true;
                     return true;
                 case "Scope":
@@ -934,7 +934,7 @@ namespace SharpOnvifClient.Search
                     return true;
                 case "MaxMatches":
                     if (reader.NamespaceUri != Ns.Ver10Search) break;
-                    this.maxMatchesField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.maxMatchesField = reader.ToInt32(reader.ReadElementText());
                     this.maxMatchesFieldSpecified = true;
                     return true;
                 case "KeepAliveTime":
@@ -982,12 +982,12 @@ namespace SharpOnvifClient.Search
             this.searchTokenField = searchToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Search, "SearchToken", this.searchTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1077,17 +1077,17 @@ namespace SharpOnvifClient.Search
             this.keepAliveTimeField = keepAliveTime;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Search, "Scope", this.scopeField, "http://www.onvif.org/ver10/schema", "SearchScope");
             if (this.maxMatchesFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Search, "MaxMatches", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxMatchesField));
+                writer.WriteElementString(Ns.Ver10Search, "MaxMatches", writer.ToXml(this.maxMatchesField));
             }
             writer.WriteElementString(Ns.Ver10Search, "KeepAliveTime", this.keepAliveTimeField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1097,7 +1097,7 @@ namespace SharpOnvifClient.Search
                     return true;
                 case "MaxMatches":
                     if (reader.NamespaceUri != Ns.Ver10Search) break;
-                    this.maxMatchesField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.maxMatchesField = reader.ToInt32(reader.ReadElementText());
                     this.maxMatchesFieldSpecified = true;
                     return true;
                 case "KeepAliveTime":
@@ -1142,12 +1142,12 @@ namespace SharpOnvifClient.Search
             this.searchTokenField = searchToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Search, "SearchToken", this.searchTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1260,21 +1260,21 @@ namespace SharpOnvifClient.Search
             this.waitTimeField = waitTime;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Search, "SearchToken", this.searchTokenField);
             if (this.minResultsFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Search, "MinResults", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.minResultsField));
+                writer.WriteElementString(Ns.Ver10Search, "MinResults", writer.ToXml(this.minResultsField));
             }
             if (this.maxResultsFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Search, "MaxResults", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxResultsField));
+                writer.WriteElementString(Ns.Ver10Search, "MaxResults", writer.ToXml(this.maxResultsField));
             }
             writer.WriteElementString(Ns.Ver10Search, "WaitTime", this.waitTimeField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1284,12 +1284,12 @@ namespace SharpOnvifClient.Search
                     return true;
                 case "MinResults":
                     if (reader.NamespaceUri != Ns.Ver10Search) break;
-                    this.minResultsField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.minResultsField = reader.ToInt32(reader.ReadElementText());
                     this.minResultsFieldSpecified = true;
                     return true;
                 case "MaxResults":
                     if (reader.NamespaceUri != Ns.Ver10Search) break;
-                    this.maxResultsField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.maxResultsField = reader.ToInt32(reader.ReadElementText());
                     this.maxResultsFieldSpecified = true;
                     return true;
                 case "WaitTime":
@@ -1332,12 +1332,12 @@ namespace SharpOnvifClient.Search
             this.resultListField = resultList;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Search, "ResultList", this.resultListField, "http://www.onvif.org/ver10/schema", "FindEventResultList");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1444,21 +1444,21 @@ namespace SharpOnvifClient.Search
             this.waitTimeField = waitTime;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Search, "SearchToken", this.searchTokenField);
             if (this.minResultsFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Search, "MinResults", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.minResultsField));
+                writer.WriteElementString(Ns.Ver10Search, "MinResults", writer.ToXml(this.minResultsField));
             }
             if (this.maxResultsFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Search, "MaxResults", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxResultsField));
+                writer.WriteElementString(Ns.Ver10Search, "MaxResults", writer.ToXml(this.maxResultsField));
             }
             writer.WriteElementString(Ns.Ver10Search, "WaitTime", this.waitTimeField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1468,12 +1468,12 @@ namespace SharpOnvifClient.Search
                     return true;
                 case "MinResults":
                     if (reader.NamespaceUri != Ns.Ver10Search) break;
-                    this.minResultsField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.minResultsField = reader.ToInt32(reader.ReadElementText());
                     this.minResultsFieldSpecified = true;
                     return true;
                 case "MaxResults":
                     if (reader.NamespaceUri != Ns.Ver10Search) break;
-                    this.maxResultsField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.maxResultsField = reader.ToInt32(reader.ReadElementText());
                     this.maxResultsFieldSpecified = true;
                     return true;
                 case "WaitTime":
@@ -1510,12 +1510,12 @@ namespace SharpOnvifClient.Search
             this.resultListField = resultList;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Search, "ResultList", this.resultListField, "http://www.onvif.org/ver10/schema", "FindObjectImageResultList");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1567,7 +1567,7 @@ namespace SharpOnvifClient.Search
             this.timeField = time;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.recordingTokensField != null)
             {
@@ -1576,20 +1576,20 @@ namespace SharpOnvifClient.Search
                     writer.WriteElementString(Ns.Ver10Search, "RecordingTokens", this.recordingTokensField[i]);
                 }
             }
-            writer.WriteElementString(Ns.Ver10Search, "Time", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.timeField));
+            writer.WriteElementString(Ns.Ver10Search, "Time", writer.ToXml(this.timeField));
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "RecordingTokens":
                     if (reader.NamespaceUri != Ns.Ver10Search) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.recordingTokensField, reader.ReadElementText());
+                    reader.Append(ref this.recordingTokensField, reader.ReadElementText());
                     return true;
                 case "Time":
                     if (reader.NamespaceUri != Ns.Ver10Search) break;
-                    this.timeField = SharpOnvifCommon.Xml.XmlPrimitives.ToDateTime(reader.ReadElementText());
+                    this.timeField = reader.ToDateTime(reader.ReadElementText());
                     return true;
             }
             return false;
@@ -1625,7 +1625,7 @@ namespace SharpOnvifClient.Search
             this.mediaAttributesField = mediaAttributes;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.mediaAttributesField != null)
             {
@@ -1636,13 +1636,13 @@ namespace SharpOnvifClient.Search
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "MediaAttributes":
                     if (reader.NamespaceUri != Ns.Ver10Search) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.mediaAttributesField, reader.ReadElementObject<SharpOnvifCommon.Onvif.MediaAttributes>(() => new SharpOnvifCommon.Onvif.MediaAttributes()));
+                    reader.Append(ref this.mediaAttributesField, reader.ReadElementObject<SharpOnvifCommon.Onvif.MediaAttributes>(() => new SharpOnvifCommon.Onvif.MediaAttributes()));
                     return true;
             }
             return false;
@@ -1750,21 +1750,21 @@ namespace SharpOnvifClient.Search
             this.waitTimeField = waitTime;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Search, "SearchToken", this.searchTokenField);
             if (this.minResultsFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Search, "MinResults", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.minResultsField));
+                writer.WriteElementString(Ns.Ver10Search, "MinResults", writer.ToXml(this.minResultsField));
             }
             if (this.maxResultsFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Search, "MaxResults", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxResultsField));
+                writer.WriteElementString(Ns.Ver10Search, "MaxResults", writer.ToXml(this.maxResultsField));
             }
             writer.WriteElementString(Ns.Ver10Search, "WaitTime", this.waitTimeField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1774,12 +1774,12 @@ namespace SharpOnvifClient.Search
                     return true;
                 case "MinResults":
                     if (reader.NamespaceUri != Ns.Ver10Search) break;
-                    this.minResultsField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.minResultsField = reader.ToInt32(reader.ReadElementText());
                     this.minResultsFieldSpecified = true;
                     return true;
                 case "MaxResults":
                     if (reader.NamespaceUri != Ns.Ver10Search) break;
-                    this.maxResultsField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.maxResultsField = reader.ToInt32(reader.ReadElementText());
                     this.maxResultsFieldSpecified = true;
                     return true;
                 case "WaitTime":
@@ -1823,12 +1823,12 @@ namespace SharpOnvifClient.Search
             this.resultListField = resultList;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Search, "ResultList", this.resultListField, "http://www.onvif.org/ver10/schema", "FindMetadataResultList");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1935,21 +1935,21 @@ namespace SharpOnvifClient.Search
             this.waitTimeField = waitTime;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Search, "SearchToken", this.searchTokenField);
             if (this.minResultsFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Search, "MinResults", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.minResultsField));
+                writer.WriteElementString(Ns.Ver10Search, "MinResults", writer.ToXml(this.minResultsField));
             }
             if (this.maxResultsFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Search, "MaxResults", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxResultsField));
+                writer.WriteElementString(Ns.Ver10Search, "MaxResults", writer.ToXml(this.maxResultsField));
             }
             writer.WriteElementString(Ns.Ver10Search, "WaitTime", this.waitTimeField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1959,12 +1959,12 @@ namespace SharpOnvifClient.Search
                     return true;
                 case "MinResults":
                     if (reader.NamespaceUri != Ns.Ver10Search) break;
-                    this.minResultsField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.minResultsField = reader.ToInt32(reader.ReadElementText());
                     this.minResultsFieldSpecified = true;
                     return true;
                 case "MaxResults":
                     if (reader.NamespaceUri != Ns.Ver10Search) break;
-                    this.maxResultsField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.maxResultsField = reader.ToInt32(reader.ReadElementText());
                     this.maxResultsFieldSpecified = true;
                     return true;
                 case "WaitTime":
@@ -2001,12 +2001,12 @@ namespace SharpOnvifClient.Search
             this.resultListField = resultList;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Search, "ResultList", this.resultListField, "http://www.onvif.org/ver10/schema", "FindNLSearchResultList");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2120,21 +2120,21 @@ namespace SharpOnvifClient.Search
             this.waitTimeField = waitTime;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Search, "SearchToken", this.searchTokenField);
             if (this.minResultsFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Search, "MinResults", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.minResultsField));
+                writer.WriteElementString(Ns.Ver10Search, "MinResults", writer.ToXml(this.minResultsField));
             }
             if (this.maxResultsFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Search, "MaxResults", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxResultsField));
+                writer.WriteElementString(Ns.Ver10Search, "MaxResults", writer.ToXml(this.maxResultsField));
             }
             writer.WriteElementString(Ns.Ver10Search, "WaitTime", this.waitTimeField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2144,12 +2144,12 @@ namespace SharpOnvifClient.Search
                     return true;
                 case "MinResults":
                     if (reader.NamespaceUri != Ns.Ver10Search) break;
-                    this.minResultsField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.minResultsField = reader.ToInt32(reader.ReadElementText());
                     this.minResultsFieldSpecified = true;
                     return true;
                 case "MaxResults":
                     if (reader.NamespaceUri != Ns.Ver10Search) break;
-                    this.maxResultsField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.maxResultsField = reader.ToInt32(reader.ReadElementText());
                     this.maxResultsFieldSpecified = true;
                     return true;
                 case "WaitTime":
@@ -2193,12 +2193,12 @@ namespace SharpOnvifClient.Search
             this.resultListField = resultList;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Search, "ResultList", this.resultListField, "http://www.onvif.org/ver10/schema", "FindPTZPositionResultList");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2237,12 +2237,12 @@ namespace SharpOnvifClient.Search
             this.recordingTokenField = recordingToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Search, "RecordingToken", this.recordingTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2281,12 +2281,12 @@ namespace SharpOnvifClient.Search
             this.recordingInformationField = recordingInformation;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Search, "RecordingInformation", this.recordingInformationField, "http://www.onvif.org/ver10/schema", "RecordingInformation");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2401,21 +2401,21 @@ namespace SharpOnvifClient.Search
             this.waitTimeField = waitTime;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Search, "SearchToken", this.searchTokenField);
             if (this.minResultsFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Search, "MinResults", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.minResultsField));
+                writer.WriteElementString(Ns.Ver10Search, "MinResults", writer.ToXml(this.minResultsField));
             }
             if (this.maxResultsFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Search, "MaxResults", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxResultsField));
+                writer.WriteElementString(Ns.Ver10Search, "MaxResults", writer.ToXml(this.maxResultsField));
             }
             writer.WriteElementString(Ns.Ver10Search, "WaitTime", this.waitTimeField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2425,12 +2425,12 @@ namespace SharpOnvifClient.Search
                     return true;
                 case "MinResults":
                     if (reader.NamespaceUri != Ns.Ver10Search) break;
-                    this.minResultsField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.minResultsField = reader.ToInt32(reader.ReadElementText());
                     this.minResultsFieldSpecified = true;
                     return true;
                 case "MaxResults":
                     if (reader.NamespaceUri != Ns.Ver10Search) break;
-                    this.maxResultsField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.maxResultsField = reader.ToInt32(reader.ReadElementText());
                     this.maxResultsFieldSpecified = true;
                     return true;
                 case "WaitTime":
@@ -2475,12 +2475,12 @@ namespace SharpOnvifClient.Search
             this.resultListField = resultList;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Search, "ResultList", this.resultListField, "http://www.onvif.org/ver10/schema", "FindRecordingResultList");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2532,12 +2532,12 @@ namespace SharpOnvifClient.Search
             this.summaryField = summary;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Search, "Summary", this.summaryField, "http://www.onvif.org/ver10/schema", "RecordingSummary");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2579,12 +2579,12 @@ namespace SharpOnvifClient.Search
             this.searchTokenField = searchToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Search, "SearchToken", this.searchTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2623,12 +2623,12 @@ namespace SharpOnvifClient.Search
             this.stateField = state;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Search, "State", SharpOnvifCommon.Onvif.EnumXml.ToXml(this.stateField));
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2681,12 +2681,12 @@ namespace SharpOnvifClient.Search
             this.capabilitiesField = capabilities;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Search, "Capabilities", this.capabilitiesField, Ns.Ver10Search, "Capabilities");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2837,34 +2837,34 @@ namespace SharpOnvifClient.Search
             this.keepAliveTimeField = keepAliveTime;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
-            writer.WriteElementString(Ns.Ver10Search, "StartPoint", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.startPointField));
+            writer.WriteElementString(Ns.Ver10Search, "StartPoint", writer.ToXml(this.startPointField));
             if (this.endPointFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Search, "EndPoint", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.endPointField));
+                writer.WriteElementString(Ns.Ver10Search, "EndPoint", writer.ToXml(this.endPointField));
             }
             writer.WriteElementString(Ns.Ver10Search, "RecordingToken", this.recordingTokenField);
             writer.WriteElementString(Ns.Ver10Search, "TargetImageURI", this.targetImageURIField);
-            writer.WriteElementString(Ns.Ver10Search, "TargetImageData", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.targetImageDataField));
+            writer.WriteElementString(Ns.Ver10Search, "TargetImageData", writer.ToXml(this.targetImageDataField));
             if (this.maxMatchesFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Search, "MaxMatches", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxMatchesField));
+                writer.WriteElementString(Ns.Ver10Search, "MaxMatches", writer.ToXml(this.maxMatchesField));
             }
             writer.WriteElementString(Ns.Ver10Search, "KeepAliveTime", this.keepAliveTimeField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "StartPoint":
                     if (reader.NamespaceUri != Ns.Ver10Search) break;
-                    this.startPointField = SharpOnvifCommon.Xml.XmlPrimitives.ToDateTime(reader.ReadElementText());
+                    this.startPointField = reader.ToDateTime(reader.ReadElementText());
                     return true;
                 case "EndPoint":
                     if (reader.NamespaceUri != Ns.Ver10Search) break;
-                    this.endPointField = SharpOnvifCommon.Xml.XmlPrimitives.ToDateTime(reader.ReadElementText());
+                    this.endPointField = reader.ToDateTime(reader.ReadElementText());
                     this.endPointFieldSpecified = true;
                     return true;
                 case "RecordingToken":
@@ -2877,11 +2877,11 @@ namespace SharpOnvifClient.Search
                     return true;
                 case "TargetImageData":
                     if (reader.NamespaceUri != Ns.Ver10Search) break;
-                    this.targetImageDataField = SharpOnvifCommon.Xml.XmlPrimitives.ToByteArray(reader.ReadElementText());
+                    this.targetImageDataField = reader.ToByteArray(reader.ReadElementText());
                     return true;
                 case "MaxMatches":
                     if (reader.NamespaceUri != Ns.Ver10Search) break;
-                    this.maxMatchesField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.maxMatchesField = reader.ToInt32(reader.ReadElementText());
                     this.maxMatchesFieldSpecified = true;
                     return true;
                 case "KeepAliveTime":
@@ -2921,12 +2921,12 @@ namespace SharpOnvifClient.Search
             this.searchTokenField = searchToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Search, "SearchToken", this.searchTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -3087,37 +3087,37 @@ namespace SharpOnvifClient.Search
             this.keepAliveTimeField = keepAliveTime;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
-            writer.WriteElementString(Ns.Ver10Search, "StartPoint", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.startPointField));
+            writer.WriteElementString(Ns.Ver10Search, "StartPoint", writer.ToXml(this.startPointField));
             if (this.endPointFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Search, "EndPoint", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.endPointField));
+                writer.WriteElementString(Ns.Ver10Search, "EndPoint", writer.ToXml(this.endPointField));
             }
             writer.WriteElementString(Ns.Ver10Search, "RecordingToken", this.recordingTokenField);
             writer.WriteElementString(Ns.Ver10Search, "Text", this.textField);
             if (this.similarityFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Search, "Similarity", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.similarityField));
+                writer.WriteElementString(Ns.Ver10Search, "Similarity", writer.ToXml(this.similarityField));
             }
             if (this.maxMatchesFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Search, "MaxMatches", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxMatchesField));
+                writer.WriteElementString(Ns.Ver10Search, "MaxMatches", writer.ToXml(this.maxMatchesField));
             }
             writer.WriteElementString(Ns.Ver10Search, "KeepAliveTime", this.keepAliveTimeField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "StartPoint":
                     if (reader.NamespaceUri != Ns.Ver10Search) break;
-                    this.startPointField = SharpOnvifCommon.Xml.XmlPrimitives.ToDateTime(reader.ReadElementText());
+                    this.startPointField = reader.ToDateTime(reader.ReadElementText());
                     return true;
                 case "EndPoint":
                     if (reader.NamespaceUri != Ns.Ver10Search) break;
-                    this.endPointField = SharpOnvifCommon.Xml.XmlPrimitives.ToDateTime(reader.ReadElementText());
+                    this.endPointField = reader.ToDateTime(reader.ReadElementText());
                     this.endPointFieldSpecified = true;
                     return true;
                 case "RecordingToken":
@@ -3130,12 +3130,12 @@ namespace SharpOnvifClient.Search
                     return true;
                 case "Similarity":
                     if (reader.NamespaceUri != Ns.Ver10Search) break;
-                    this.similarityField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
+                    this.similarityField = reader.ToSingle(reader.ReadElementText());
                     this.similarityFieldSpecified = true;
                     return true;
                 case "MaxMatches":
                     if (reader.NamespaceUri != Ns.Ver10Search) break;
-                    this.maxMatchesField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.maxMatchesField = reader.ToInt32(reader.ReadElementText());
                     this.maxMatchesFieldSpecified = true;
                     return true;
                 case "KeepAliveTime":
@@ -3175,12 +3175,12 @@ namespace SharpOnvifClient.Search
             this.searchTokenField = searchToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Search, "SearchToken", this.searchTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {

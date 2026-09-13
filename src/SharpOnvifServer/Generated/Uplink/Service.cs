@@ -162,7 +162,7 @@ namespace SharpOnvifServer.Uplink
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             UplinkPortBase target = (UplinkPortBase)service;
-            var reader = new SharpOnvifCommon.Xml.OnvifXmlReader(body, ResolveXmlType);
+            var reader = CreateReader(body);
 
             switch (action)
             {

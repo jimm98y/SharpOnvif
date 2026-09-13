@@ -290,7 +290,7 @@ namespace SharpOnvifServer.Analytics
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             AnalyticsEnginePortBase target = (AnalyticsEnginePortBase)service;
-            var reader = new SharpOnvifCommon.Xml.OnvifXmlReader(body, ResolveXmlType);
+            var reader = CreateReader(body);
 
             switch (action)
             {
@@ -571,7 +571,7 @@ namespace SharpOnvifServer.Analytics
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             RuleEnginePortBase target = (RuleEnginePortBase)service;
-            var reader = new SharpOnvifCommon.Xml.OnvifXmlReader(body, ResolveXmlType);
+            var reader = CreateReader(body);
 
             switch (action)
             {
@@ -1081,7 +1081,7 @@ namespace SharpOnvifServer.Analytics
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             AnalyticsBase target = (AnalyticsBase)service;
-            var reader = new SharpOnvifCommon.Xml.OnvifXmlReader(body, ResolveXmlType);
+            var reader = CreateReader(body);
 
             switch (action)
             {

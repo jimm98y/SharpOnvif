@@ -301,7 +301,7 @@ namespace SharpOnvifServer.Provisioning
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Provisioning; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Provisioning, "DefaultTimeout", this.defaultTimeoutField);
             if (this.sourceField != null)
@@ -314,7 +314,7 @@ namespace SharpOnvifServer.Provisioning
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -324,10 +324,10 @@ namespace SharpOnvifServer.Provisioning
                     return true;
                 case "Source":
                     if (reader.NamespaceUri != Ns.Ver10Provisioning) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.sourceField, reader.ReadElementObject<SourceCapabilities>(() => new SourceCapabilities()));
+                    reader.Append(ref this.sourceField, reader.ReadElementObject<SourceCapabilities>(() => new SourceCapabilities()));
                     return true;
             }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -386,14 +386,14 @@ namespace SharpOnvifServer.Provisioning
             this.timeoutField = timeout;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Provisioning, "VideoSource", this.videoSourceField);
             writer.WriteElementString(Ns.Ver10Provisioning, "Direction", EnumXml.ToXml(this.directionField));
             writer.WriteElementString(Ns.Ver10Provisioning, "Timeout", this.timeoutField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -466,12 +466,12 @@ namespace SharpOnvifServer.Provisioning
             this.capabilitiesField = capabilities;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Provisioning, "Capabilities", this.capabilitiesField, Ns.Ver10Provisioning, "Capabilities");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -512,12 +512,12 @@ namespace SharpOnvifServer.Provisioning
             this.videoSourceField = videoSource;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Provisioning, "VideoSource", this.videoSourceField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -558,12 +558,12 @@ namespace SharpOnvifServer.Provisioning
             this.usageField = usage;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Provisioning, "Usage", this.usageField, Ns.Ver10Provisioning, "Usage");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -630,14 +630,14 @@ namespace SharpOnvifServer.Provisioning
             this.timeoutField = timeout;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Provisioning, "VideoSource", this.videoSourceField);
             writer.WriteElementString(Ns.Ver10Provisioning, "Direction", EnumXml.ToXml(this.directionField));
             writer.WriteElementString(Ns.Ver10Provisioning, "Timeout", this.timeoutField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -724,14 +724,14 @@ namespace SharpOnvifServer.Provisioning
             this.timeoutField = timeout;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Provisioning, "VideoSource", this.videoSourceField);
             writer.WriteElementString(Ns.Ver10Provisioning, "Direction", EnumXml.ToXml(this.directionField));
             writer.WriteElementString(Ns.Ver10Provisioning, "Timeout", this.timeoutField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -909,7 +909,7 @@ namespace SharpOnvifServer.Provisioning
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Provisioning; } }
 
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAttributeString(null, "VideoSourceToken", this.videoSourceTokenField);
             writer.WriteAttributeString(null, "MaximumPanMoves", this.maximumPanMovesField);
@@ -918,21 +918,21 @@ namespace SharpOnvifServer.Provisioning
             writer.WriteAttributeString(null, "MaximumRollMoves", this.maximumRollMovesField);
             if (this.autoLevelFieldSpecified)
             {
-                writer.WriteAttributeString(null, "AutoLevel", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.autoLevelField));
+                writer.WriteAttributeString(null, "AutoLevel", writer.ToXml(this.autoLevelField));
             }
             writer.WriteAttributeString(null, "MaximumFocusMoves", this.maximumFocusMovesField);
             if (this.autoFocusFieldSpecified)
             {
-                writer.WriteAttributeString(null, "AutoFocus", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.autoFocusField));
+                writer.WriteAttributeString(null, "AutoFocus", writer.ToXml(this.autoFocusField));
             }
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -952,23 +952,23 @@ namespace SharpOnvifServer.Provisioning
                     this.maximumRollMovesField = reader.AttributeValue;
                     return true;
                 case "AutoLevel":
-                    this.autoLevelField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.autoLevelField = reader.ToBoolean(reader.AttributeValue);
                     this.autoLevelFieldSpecified = true;
                     return true;
                 case "MaximumFocusMoves":
                     this.maximumFocusMovesField = reader.AttributeValue;
                     return true;
                 case "AutoFocus":
-                    this.autoFocusField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.autoFocusField = reader.ToBoolean(reader.AttributeValue);
                     this.autoFocusFieldSpecified = true;
                     return true;
             }
             return false;
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -1001,12 +1001,12 @@ namespace SharpOnvifServer.Provisioning
             this.videoSourceField = videoSource;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Provisioning, "VideoSource", this.videoSourceField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1085,14 +1085,14 @@ namespace SharpOnvifServer.Provisioning
             this.timeoutField = timeout;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Provisioning, "VideoSource", this.videoSourceField);
             writer.WriteElementString(Ns.Ver10Provisioning, "Direction", EnumXml.ToXml(this.directionField));
             writer.WriteElementString(Ns.Ver10Provisioning, "Timeout", this.timeoutField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1205,7 +1205,7 @@ namespace SharpOnvifServer.Provisioning
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Provisioning; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Provisioning, "Pan", this.panField);
             writer.WriteElementString(Ns.Ver10Provisioning, "Tilt", this.tiltField);
@@ -1215,7 +1215,7 @@ namespace SharpOnvifServer.Provisioning
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1240,7 +1240,7 @@ namespace SharpOnvifServer.Provisioning
                     this.focusField = reader.ReadElementText();
                     return true;
             }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -1299,14 +1299,14 @@ namespace SharpOnvifServer.Provisioning
             this.timeoutField = timeout;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Provisioning, "VideoSource", this.videoSourceField);
             writer.WriteElementString(Ns.Ver10Provisioning, "Direction", EnumXml.ToXml(this.directionField));
             writer.WriteElementString(Ns.Ver10Provisioning, "Timeout", this.timeoutField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {

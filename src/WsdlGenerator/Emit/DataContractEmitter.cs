@@ -414,7 +414,7 @@ internal sealed class DataContractEmitter
         if (attributes.Count == 0 && !hasBase) return;
         if (attributes.Count == 0) return;
 
-        writer.Line($"protected override void WriteXmlAttributes({Runtime}.OnvifXmlWriter writer)");
+        writer.Line($"protected override void WriteXmlAttributes({Runtime}.IXmlWriter writer)");
         using (writer.Braces())
         {
             if (hasBase) writer.Line("base.WriteXmlAttributes(writer);");
@@ -447,7 +447,7 @@ internal sealed class DataContractEmitter
 
         if (content.Count == 0) return;
 
-        writer.Line($"protected override void WriteXmlContent({Runtime}.OnvifXmlWriter writer)");
+        writer.Line($"protected override void WriteXmlContent({Runtime}.IXmlWriter writer)");
         using (writer.Braces())
         {
             if (hasBase) writer.Line("base.WriteXmlContent(writer);");
@@ -632,7 +632,7 @@ internal sealed class DataContractEmitter
         var attributes = @class.Members.Where(m => m.Kind == MemberKind.Attribute).ToList();
         if (attributes.Count == 0) return;
 
-        writer.Line($"protected override bool ReadXmlAttribute({Runtime}.OnvifXmlReader reader)");
+        writer.Line($"protected override bool ReadXmlAttribute({Runtime}.IXmlReader reader)");
         using (writer.Braces())
         {
             writer.Line("switch (reader.LocalName)");
@@ -663,7 +663,7 @@ internal sealed class DataContractEmitter
 
         if (elements.Count == 0 && choices.Count == 0 && wildcard is null) return;
 
-        writer.Line($"protected override bool ReadXmlElement({Runtime}.OnvifXmlReader reader)");
+        writer.Line($"protected override bool ReadXmlElement({Runtime}.IXmlReader reader)");
         using (writer.Braces())
         {
             if (elements.Count > 0 || choices.Count > 0)
@@ -705,7 +705,7 @@ internal sealed class DataContractEmitter
             if (wildcard is not null)
             {
                 string read = wildcard.Type.Kind == TypeKind.XmlNode ? "ReadAnyNode" : "ReadAnyElement";
-                writer.Line($"{Runtime}.OnvifArray.Append(ref this.{wildcard.FieldName}, reader.{read}());");
+                writer.Line($"reader.Append(ref this.{wildcard.FieldName}, reader.{read}());");
                 writer.Line("return true;");
             }
             else if (choiceWildcard is not null)
@@ -749,13 +749,13 @@ internal sealed class DataContractEmitter
             writer.Line($"reader.ReadWrappedArray({NsRef(item.Namespace)}, \"{item.LocalName}\", () =>");
             using (writer.Braces())
             {
-                writer.Line($"{Runtime}.OnvifArray.Append(ref {field}, {value});");
+                writer.Line($"reader.Append(ref {field}, {value});");
             }
             writer.Line(");");
         }
         else if (member.IsArray)
         {
-            writer.Line($"{Runtime}.OnvifArray.Append(ref {field}, {value});");
+            writer.Line($"reader.Append(ref {field}, {value});");
         }
         else
         {
@@ -772,14 +772,14 @@ internal sealed class DataContractEmitter
 
         if (member.IsArray)
         {
-            writer.Line($"{Runtime}.OnvifArray.Append(ref this.{member.FieldName}, (object){value});");
+            writer.Line($"reader.Append(ref this.{member.FieldName}, (object){value});");
             if (member.ChoiceIdentifier is { } identifier)
             {
                 var discriminator = FindDiscriminator(@class, identifier);
                 if (discriminator is not null)
                 {
                     string branch = DiscriminatorMember(discriminator.ChoiceIdentifierEnum, option.ElementName);
-                    writer.Line($"{Runtime}.OnvifArray.Append(ref this.{discriminator.FieldName}, {branch});");
+                    writer.Line($"reader.Append(ref this.{discriminator.FieldName}, {branch});");
                 }
             }
         }
@@ -791,14 +791,14 @@ internal sealed class DataContractEmitter
 
     private void EmitReadChoiceWildcard(CSharpWriter writer, CsClass @class, CsMember member)
     {
-        writer.Line($"{Runtime}.OnvifArray.Append(ref this.{member.FieldName}, (object)reader.ReadAnyElement());");
+        writer.Line($"reader.Append(ref this.{member.FieldName}, (object)reader.ReadAnyElement());");
         if (member.ChoiceIdentifier is not { } identifier) return;
 
         var discriminator = FindDiscriminator(@class, identifier);
         if (discriminator is null) return;
 
         string branch = DiscriminatorMember(discriminator.ChoiceIdentifierEnum, "##any:");
-        writer.Line($"{Runtime}.OnvifArray.Append(ref this.{discriminator.FieldName}, {branch});");
+        writer.Line($"reader.Append(ref this.{discriminator.FieldName}, {branch});");
     }
 
     private static CsMember? FindDiscriminator(CsClass @class, string identifier) =>
@@ -819,17 +819,17 @@ internal sealed class DataContractEmitter
 
         if (text is null && mixedWildcard is null) return;
 
-        writer.Line($"protected override void ReadXmlText({Runtime}.OnvifXmlReader reader, string text)");
+        writer.Line($"protected override void ReadXmlText({Runtime}.IXmlReader reader, string text)");
         using (writer.Braces())
         {
             if (mixedWildcard is not null)
             {
                 // The character data belongs in the wildcard, interleaved with its elements.
-                writer.Line($"{Runtime}.OnvifArray.Append(ref this.{mixedWildcard.FieldName}, reader.CreateTextNode(text));");
+                writer.Line($"reader.Append(ref this.{mixedWildcard.FieldName}, reader.CreateTextNode(text));");
             }
             else if (text!.IsArray)
             {
-                writer.Line($"{Runtime}.OnvifArray.Append(ref this.{text.FieldName}, text);");
+                writer.Line($"reader.Append(ref this.{text.FieldName}, text);");
             }
             else
             {
@@ -873,7 +873,7 @@ internal sealed class DataContractEmitter
             string project = item == "string"
                 ? value
                 : "System.Array.ConvertAll(" + value + ", x => " + ScalarToXml(itemType, "x") + ")";
-            return $"{Runtime}.OnvifArray.JoinList({project})";
+            return $"writer.JoinList({project})";
         }
 
         return type.XsdPrimitive switch
@@ -883,11 +883,11 @@ internal sealed class DataContractEmitter
                 or "normalizedString" or "integer" or "nonNegativeInteger" or "positiveInteger"
                 or "negativeInteger" or "nonPositiveInteger" or "gYear" or "gMonth" or "gDay"
                 or "gYearMonth" or "gMonthDay" or "anySimpleType" => value,
-            "date" => $"{Runtime}.XmlPrimitives.ToDateString({value})",
-            "time" => $"{Runtime}.XmlPrimitives.ToTimeString({value})",
-            "hexBinary" => $"{Runtime}.XmlPrimitives.ToHexString({value})",
+            "date" => $"writer.ToDateString({value})",
+            "time" => $"writer.ToTimeString({value})",
+            "hexBinary" => $"writer.ToHexString({value})",
             "QName" => $"writer.QualifiedNameToString({value})",
-            _ => $"{Runtime}.XmlPrimitives.ToString({value})",
+            _ => $"writer.ToXml({value})",
         };
     }
 
@@ -901,7 +901,7 @@ internal sealed class DataContractEmitter
         {
             string item = type.CsName.Substring(0, type.CsName.Length - 2);
             var itemType = type with { CsName = item };
-            string split = $"{Runtime}.OnvifArray.SplitList({text})";
+            string split = $"reader.SplitList({text})";
             return item == "string"
                 ? split
                 : "System.Array.ConvertAll(" + split + ", x => " + ScalarFromXml(itemType, "x") + ")";
@@ -909,21 +909,21 @@ internal sealed class DataContractEmitter
 
         return type.XsdPrimitive switch
         {
-            "boolean" => $"{Runtime}.XmlPrimitives.ToBoolean({text})",
-            "byte" => $"{Runtime}.XmlPrimitives.ToSByte({text})",
-            "unsignedByte" => $"{Runtime}.XmlPrimitives.ToByte({text})",
-            "short" => $"{Runtime}.XmlPrimitives.ToInt16({text})",
-            "unsignedShort" => $"{Runtime}.XmlPrimitives.ToUInt16({text})",
-            "int" => $"{Runtime}.XmlPrimitives.ToInt32({text})",
-            "unsignedInt" => $"{Runtime}.XmlPrimitives.ToUInt32({text})",
-            "long" => $"{Runtime}.XmlPrimitives.ToInt64({text})",
-            "unsignedLong" => $"{Runtime}.XmlPrimitives.ToUInt64({text})",
-            "decimal" => $"{Runtime}.XmlPrimitives.ToDecimal({text})",
-            "float" => $"{Runtime}.XmlPrimitives.ToSingle({text})",
-            "double" => $"{Runtime}.XmlPrimitives.ToDouble({text})",
-            "dateTime" or "date" or "time" => $"{Runtime}.XmlPrimitives.ToDateTime({text})",
-            "base64Binary" => $"{Runtime}.XmlPrimitives.ToByteArray({text})",
-            "hexBinary" => $"{Runtime}.XmlPrimitives.FromHexString({text})",
+            "boolean" => $"reader.ToBoolean({text})",
+            "byte" => $"reader.ToSByte({text})",
+            "unsignedByte" => $"reader.ToByte({text})",
+            "short" => $"reader.ToInt16({text})",
+            "unsignedShort" => $"reader.ToUInt16({text})",
+            "int" => $"reader.ToInt32({text})",
+            "unsignedInt" => $"reader.ToUInt32({text})",
+            "long" => $"reader.ToInt64({text})",
+            "unsignedLong" => $"reader.ToUInt64({text})",
+            "decimal" => $"reader.ToDecimal({text})",
+            "float" => $"reader.ToSingle({text})",
+            "double" => $"reader.ToDouble({text})",
+            "dateTime" or "date" or "time" => $"reader.ToDateTime({text})",
+            "base64Binary" => $"reader.ToByteArray({text})",
+            "hexBinary" => $"reader.FromHexString({text})",
             "QName" => $"reader.ToQualifiedName({text})",
             _ => text,
         };

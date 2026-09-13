@@ -70,6 +70,6 @@ namespace SharpOnvifCommon.Soap
         /// rather than an empty one.
         /// </summary>
         /// <param name="action">The SOAP action being sent, which may be one that needs no credentials.</param>
-        Action<OnvifXmlWriter> CreateSecurityHeader(string action, IClientSettings settings);
+        Action<IXmlWriter> CreateSecurityHeader(string action, IClientSettings settings);
     }
 }

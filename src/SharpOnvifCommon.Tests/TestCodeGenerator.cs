@@ -158,8 +158,25 @@ namespace SharpOnvif.Tests
                 string runtime = Path.Combine(output, "Runtime");
                 Assert.IsTrue(File.Exists(Path.Combine(runtime, "Soap", "OnvifClientBase.cs")),
                     "the base class the generated client derives from");
-                Assert.IsTrue(File.Exists(Path.Combine(runtime, "Xml", "OnvifXmlReader.cs")));
-                Assert.IsTrue(File.Exists(Path.Combine(runtime, "Soap", "IClientSettings.cs")));
+
+                // And the interfaces it talks through, which is the whole of the rest of it.
+                foreach (string contract in new[]
+                {
+                    Path.Combine("ILog.cs"),
+                    Path.Combine("Soap", "IClientSettings.cs"),
+                    Path.Combine("Soap", "IClientAuthentication.cs"),
+                    Path.Combine("Soap", "IMessageCodec.cs"),
+                    Path.Combine("Xml", "IXmlReader.cs"),
+                    Path.Combine("Xml", "IXmlWriter.cs"),
+                    Path.Combine("Xml", "OnvifContract.cs"),
+                })
+                {
+                    Assert.IsTrue(File.Exists(Path.Combine(runtime, contract)), contract);
+                }
+
+                // Nothing that implements any of them.
+                Assert.IsFalse(File.Exists(Path.Combine(runtime, "Xml", "OnvifXmlReader.cs")),
+                    "reading XML is somebody's implementation, not something to generate");
 
                 // Everything a client is built from: the client, the contracts it exchanges, the
                 // shared schema and the runtime underneath them. The generated service is the one

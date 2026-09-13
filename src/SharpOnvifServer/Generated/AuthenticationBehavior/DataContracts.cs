@@ -68,7 +68,7 @@ namespace SharpOnvifServer.AuthenticationBehavior
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Authenticationbehavior, "ScheduleToken", this.scheduleTokenField);
             if (this.securityLevelConstraintField != null)
@@ -81,7 +81,7 @@ namespace SharpOnvifServer.AuthenticationBehavior
             writer.WriteElement(Ns.Ver10Authenticationbehavior, "Extension", this.extensionField, Ns.Ver10Authenticationbehavior, "AuthenticationPolicyExtension");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -91,7 +91,7 @@ namespace SharpOnvifServer.AuthenticationBehavior
                     return true;
                 case "SecurityLevelConstraint":
                     if (reader.NamespaceUri != Ns.Ver10Authenticationbehavior) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.securityLevelConstraintField, reader.ReadElementObject<SecurityLevelConstraint>(() => new SecurityLevelConstraint()));
+                    reader.Append(ref this.securityLevelConstraintField, reader.ReadElementObject<SecurityLevelConstraint>(() => new SecurityLevelConstraint()));
                     return true;
                 case "Extension":
                     if (reader.NamespaceUri != Ns.Ver10Authenticationbehavior) break;
@@ -119,14 +119,14 @@ namespace SharpOnvifServer.AuthenticationBehavior
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -179,7 +179,7 @@ namespace SharpOnvifServer.AuthenticationBehavior
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             base.WriteXmlContent(writer);
             writer.WriteElementString(Ns.Ver10Authenticationbehavior, "DefaultSecurityLevelToken", this.defaultSecurityLevelTokenField);
@@ -193,7 +193,7 @@ namespace SharpOnvifServer.AuthenticationBehavior
             writer.WriteElement(Ns.Ver10Authenticationbehavior, "Extension", this.extensionField, Ns.Ver10Authenticationbehavior, "AuthenticationProfileExtension");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -203,7 +203,7 @@ namespace SharpOnvifServer.AuthenticationBehavior
                     return true;
                 case "AuthenticationPolicy":
                     if (reader.NamespaceUri != Ns.Ver10Authenticationbehavior) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.authenticationPolicyField, reader.ReadElementObject<AuthenticationPolicy>(() => new AuthenticationPolicy()));
+                    reader.Append(ref this.authenticationPolicyField, reader.ReadElementObject<AuthenticationPolicy>(() => new AuthenticationPolicy()));
                     return true;
                 case "Extension":
                     if (reader.NamespaceUri != Ns.Ver10Authenticationbehavior) break;
@@ -232,14 +232,14 @@ namespace SharpOnvifServer.AuthenticationBehavior
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -281,13 +281,13 @@ namespace SharpOnvifServer.AuthenticationBehavior
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Authenticationbehavior, "Name", this.nameField);
             writer.WriteElementString(Ns.Ver10Authenticationbehavior, "Description", this.descriptionField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -335,12 +335,12 @@ namespace SharpOnvifServer.AuthenticationBehavior
             this.authenticationProfileField = authenticationProfile;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Authenticationbehavior, "AuthenticationProfile", this.authenticationProfileField, Ns.Ver10Authenticationbehavior, "AuthenticationProfile");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -384,12 +384,12 @@ namespace SharpOnvifServer.AuthenticationBehavior
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Authenticationbehavior, "Token", this.tokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -433,12 +433,12 @@ namespace SharpOnvifServer.AuthenticationBehavior
             this.securityLevelField = securityLevel;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Authenticationbehavior, "SecurityLevel", this.securityLevelField, Ns.Ver10Authenticationbehavior, "SecurityLevel");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -482,12 +482,12 @@ namespace SharpOnvifServer.AuthenticationBehavior
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Authenticationbehavior, "Token", this.tokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -531,12 +531,12 @@ namespace SharpOnvifServer.AuthenticationBehavior
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Authenticationbehavior, "Token", this.tokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -595,12 +595,12 @@ namespace SharpOnvifServer.AuthenticationBehavior
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Authenticationbehavior, "Token", this.tokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -688,22 +688,22 @@ namespace SharpOnvifServer.AuthenticationBehavior
             this.startReferenceField = startReference;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.limitFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Authenticationbehavior, "Limit", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.limitField));
+                writer.WriteElementString(Ns.Ver10Authenticationbehavior, "Limit", writer.ToXml(this.limitField));
             }
             writer.WriteElementString(Ns.Ver10Authenticationbehavior, "StartReference", this.startReferenceField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Limit":
                     if (reader.NamespaceUri != Ns.Ver10Authenticationbehavior) break;
-                    this.limitField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.limitField = reader.ToInt32(reader.ReadElementText());
                     this.limitFieldSpecified = true;
                     return true;
                 case "StartReference":
@@ -760,7 +760,7 @@ namespace SharpOnvifServer.AuthenticationBehavior
             this.authenticationProfileInfoField = authenticationProfileInfo;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Authenticationbehavior, "NextStartReference", this.nextStartReferenceField);
             if (this.authenticationProfileInfoField != null)
@@ -772,7 +772,7 @@ namespace SharpOnvifServer.AuthenticationBehavior
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -782,7 +782,7 @@ namespace SharpOnvifServer.AuthenticationBehavior
                     return true;
                 case "AuthenticationProfileInfo":
                     if (reader.NamespaceUri != Ns.Ver10Authenticationbehavior) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.authenticationProfileInfoField, reader.ReadElementObject<AuthenticationProfileInfo>(() => new AuthenticationProfileInfo()));
+                    reader.Append(ref this.authenticationProfileInfoField, reader.ReadElementObject<AuthenticationProfileInfo>(() => new AuthenticationProfileInfo()));
                     return true;
             }
             return false;
@@ -819,7 +819,7 @@ namespace SharpOnvifServer.AuthenticationBehavior
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.tokenField != null)
             {
@@ -830,13 +830,13 @@ namespace SharpOnvifServer.AuthenticationBehavior
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Token":
                     if (reader.NamespaceUri != Ns.Ver10Authenticationbehavior) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.tokenField, reader.ReadElementText());
+                    reader.Append(ref this.tokenField, reader.ReadElementText());
                     return true;
             }
             return false;
@@ -873,7 +873,7 @@ namespace SharpOnvifServer.AuthenticationBehavior
             this.authenticationProfileInfoField = authenticationProfileInfo;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.authenticationProfileInfoField != null)
             {
@@ -884,13 +884,13 @@ namespace SharpOnvifServer.AuthenticationBehavior
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "AuthenticationProfileInfo":
                     if (reader.NamespaceUri != Ns.Ver10Authenticationbehavior) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.authenticationProfileInfoField, reader.ReadElementObject<AuthenticationProfileInfo>(() => new AuthenticationProfileInfo()));
+                    reader.Append(ref this.authenticationProfileInfoField, reader.ReadElementObject<AuthenticationProfileInfo>(() => new AuthenticationProfileInfo()));
                     return true;
             }
             return false;
@@ -957,22 +957,22 @@ namespace SharpOnvifServer.AuthenticationBehavior
             this.startReferenceField = startReference;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.limitFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Authenticationbehavior, "Limit", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.limitField));
+                writer.WriteElementString(Ns.Ver10Authenticationbehavior, "Limit", writer.ToXml(this.limitField));
             }
             writer.WriteElementString(Ns.Ver10Authenticationbehavior, "StartReference", this.startReferenceField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Limit":
                     if (reader.NamespaceUri != Ns.Ver10Authenticationbehavior) break;
-                    this.limitField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.limitField = reader.ToInt32(reader.ReadElementText());
                     this.limitFieldSpecified = true;
                     return true;
                 case "StartReference":
@@ -1029,7 +1029,7 @@ namespace SharpOnvifServer.AuthenticationBehavior
             this.authenticationProfileField = authenticationProfile;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Authenticationbehavior, "NextStartReference", this.nextStartReferenceField);
             if (this.authenticationProfileField != null)
@@ -1041,7 +1041,7 @@ namespace SharpOnvifServer.AuthenticationBehavior
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1051,7 +1051,7 @@ namespace SharpOnvifServer.AuthenticationBehavior
                     return true;
                 case "AuthenticationProfile":
                     if (reader.NamespaceUri != Ns.Ver10Authenticationbehavior) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.authenticationProfileField, reader.ReadElementObject<AuthenticationProfile>(() => new AuthenticationProfile()));
+                    reader.Append(ref this.authenticationProfileField, reader.ReadElementObject<AuthenticationProfile>(() => new AuthenticationProfile()));
                     return true;
             }
             return false;
@@ -1088,7 +1088,7 @@ namespace SharpOnvifServer.AuthenticationBehavior
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.tokenField != null)
             {
@@ -1099,13 +1099,13 @@ namespace SharpOnvifServer.AuthenticationBehavior
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Token":
                     if (reader.NamespaceUri != Ns.Ver10Authenticationbehavior) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.tokenField, reader.ReadElementText());
+                    reader.Append(ref this.tokenField, reader.ReadElementText());
                     return true;
             }
             return false;
@@ -1142,7 +1142,7 @@ namespace SharpOnvifServer.AuthenticationBehavior
             this.authenticationProfileField = authenticationProfile;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.authenticationProfileField != null)
             {
@@ -1153,13 +1153,13 @@ namespace SharpOnvifServer.AuthenticationBehavior
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "AuthenticationProfile":
                     if (reader.NamespaceUri != Ns.Ver10Authenticationbehavior) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.authenticationProfileField, reader.ReadElementObject<AuthenticationProfile>(() => new AuthenticationProfile()));
+                    reader.Append(ref this.authenticationProfileField, reader.ReadElementObject<AuthenticationProfile>(() => new AuthenticationProfile()));
                     return true;
             }
             return false;
@@ -1226,22 +1226,22 @@ namespace SharpOnvifServer.AuthenticationBehavior
             this.startReferenceField = startReference;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.limitFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Authenticationbehavior, "Limit", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.limitField));
+                writer.WriteElementString(Ns.Ver10Authenticationbehavior, "Limit", writer.ToXml(this.limitField));
             }
             writer.WriteElementString(Ns.Ver10Authenticationbehavior, "StartReference", this.startReferenceField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Limit":
                     if (reader.NamespaceUri != Ns.Ver10Authenticationbehavior) break;
-                    this.limitField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.limitField = reader.ToInt32(reader.ReadElementText());
                     this.limitFieldSpecified = true;
                     return true;
                 case "StartReference":
@@ -1298,7 +1298,7 @@ namespace SharpOnvifServer.AuthenticationBehavior
             this.securityLevelInfoField = securityLevelInfo;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Authenticationbehavior, "NextStartReference", this.nextStartReferenceField);
             if (this.securityLevelInfoField != null)
@@ -1310,7 +1310,7 @@ namespace SharpOnvifServer.AuthenticationBehavior
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1320,7 +1320,7 @@ namespace SharpOnvifServer.AuthenticationBehavior
                     return true;
                 case "SecurityLevelInfo":
                     if (reader.NamespaceUri != Ns.Ver10Authenticationbehavior) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.securityLevelInfoField, reader.ReadElementObject<SecurityLevelInfo>(() => new SecurityLevelInfo()));
+                    reader.Append(ref this.securityLevelInfoField, reader.ReadElementObject<SecurityLevelInfo>(() => new SecurityLevelInfo()));
                     return true;
             }
             return false;
@@ -1357,7 +1357,7 @@ namespace SharpOnvifServer.AuthenticationBehavior
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.tokenField != null)
             {
@@ -1368,13 +1368,13 @@ namespace SharpOnvifServer.AuthenticationBehavior
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Token":
                     if (reader.NamespaceUri != Ns.Ver10Authenticationbehavior) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.tokenField, reader.ReadElementText());
+                    reader.Append(ref this.tokenField, reader.ReadElementText());
                     return true;
             }
             return false;
@@ -1411,7 +1411,7 @@ namespace SharpOnvifServer.AuthenticationBehavior
             this.securityLevelInfoField = securityLevelInfo;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.securityLevelInfoField != null)
             {
@@ -1422,13 +1422,13 @@ namespace SharpOnvifServer.AuthenticationBehavior
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "SecurityLevelInfo":
                     if (reader.NamespaceUri != Ns.Ver10Authenticationbehavior) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.securityLevelInfoField, reader.ReadElementObject<SecurityLevelInfo>(() => new SecurityLevelInfo()));
+                    reader.Append(ref this.securityLevelInfoField, reader.ReadElementObject<SecurityLevelInfo>(() => new SecurityLevelInfo()));
                     return true;
             }
             return false;
@@ -1495,22 +1495,22 @@ namespace SharpOnvifServer.AuthenticationBehavior
             this.startReferenceField = startReference;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.limitFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Authenticationbehavior, "Limit", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.limitField));
+                writer.WriteElementString(Ns.Ver10Authenticationbehavior, "Limit", writer.ToXml(this.limitField));
             }
             writer.WriteElementString(Ns.Ver10Authenticationbehavior, "StartReference", this.startReferenceField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Limit":
                     if (reader.NamespaceUri != Ns.Ver10Authenticationbehavior) break;
-                    this.limitField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.limitField = reader.ToInt32(reader.ReadElementText());
                     this.limitFieldSpecified = true;
                     return true;
                 case "StartReference":
@@ -1567,7 +1567,7 @@ namespace SharpOnvifServer.AuthenticationBehavior
             this.securityLevelField = securityLevel;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Authenticationbehavior, "NextStartReference", this.nextStartReferenceField);
             if (this.securityLevelField != null)
@@ -1579,7 +1579,7 @@ namespace SharpOnvifServer.AuthenticationBehavior
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1589,7 +1589,7 @@ namespace SharpOnvifServer.AuthenticationBehavior
                     return true;
                 case "SecurityLevel":
                     if (reader.NamespaceUri != Ns.Ver10Authenticationbehavior) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.securityLevelField, reader.ReadElementObject<SecurityLevel>(() => new SecurityLevel()));
+                    reader.Append(ref this.securityLevelField, reader.ReadElementObject<SecurityLevel>(() => new SecurityLevel()));
                     return true;
             }
             return false;
@@ -1626,7 +1626,7 @@ namespace SharpOnvifServer.AuthenticationBehavior
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.tokenField != null)
             {
@@ -1637,13 +1637,13 @@ namespace SharpOnvifServer.AuthenticationBehavior
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Token":
                     if (reader.NamespaceUri != Ns.Ver10Authenticationbehavior) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.tokenField, reader.ReadElementText());
+                    reader.Append(ref this.tokenField, reader.ReadElementText());
                     return true;
             }
             return false;
@@ -1680,7 +1680,7 @@ namespace SharpOnvifServer.AuthenticationBehavior
             this.securityLevelField = securityLevel;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.securityLevelField != null)
             {
@@ -1691,13 +1691,13 @@ namespace SharpOnvifServer.AuthenticationBehavior
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "SecurityLevel":
                     if (reader.NamespaceUri != Ns.Ver10Authenticationbehavior) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.securityLevelField, reader.ReadElementObject<SecurityLevel>(() => new SecurityLevel()));
+                    reader.Append(ref this.securityLevelField, reader.ReadElementObject<SecurityLevel>(() => new SecurityLevel()));
                     return true;
             }
             return false;
@@ -1745,12 +1745,12 @@ namespace SharpOnvifServer.AuthenticationBehavior
             this.capabilitiesField = capabilities;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Authenticationbehavior, "Capabilities", this.capabilitiesField, Ns.Ver10Authenticationbehavior, "ServiceCapabilities");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1794,12 +1794,12 @@ namespace SharpOnvifServer.AuthenticationBehavior
             this.authenticationProfileField = authenticationProfile;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Authenticationbehavior, "AuthenticationProfile", this.authenticationProfileField, Ns.Ver10Authenticationbehavior, "AuthenticationProfile");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1857,12 +1857,12 @@ namespace SharpOnvifServer.AuthenticationBehavior
             this.securityLevelField = securityLevel;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Authenticationbehavior, "SecurityLevel", this.securityLevelField, Ns.Ver10Authenticationbehavior, "SecurityLevel");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1918,7 +1918,7 @@ namespace SharpOnvifServer.AuthenticationBehavior
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.recognitionMethodField != null)
             {
@@ -1930,13 +1930,13 @@ namespace SharpOnvifServer.AuthenticationBehavior
             writer.WriteElement(Ns.Ver10Authenticationbehavior, "Extension", this.extensionField, Ns.Ver10Authenticationbehavior, "RecognitionGroupExtension");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "RecognitionMethod":
                     if (reader.NamespaceUri != Ns.Ver10Authenticationbehavior) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.recognitionMethodField, reader.ReadElementObject<RecognitionMethod>(() => new RecognitionMethod()));
+                    reader.Append(ref this.recognitionMethodField, reader.ReadElementObject<RecognitionMethod>(() => new RecognitionMethod()));
                     return true;
                 case "Extension":
                     if (reader.NamespaceUri != Ns.Ver10Authenticationbehavior) break;
@@ -1964,14 +1964,14 @@ namespace SharpOnvifServer.AuthenticationBehavior
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -2027,14 +2027,14 @@ namespace SharpOnvifServer.AuthenticationBehavior
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Authenticationbehavior, "RecognitionType", this.recognitionTypeField);
-            writer.WriteElementString(Ns.Ver10Authenticationbehavior, "Order", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.orderField));
+            writer.WriteElementString(Ns.Ver10Authenticationbehavior, "Order", writer.ToXml(this.orderField));
             writer.WriteElement(Ns.Ver10Authenticationbehavior, "Extension", this.extensionField, Ns.Ver10Authenticationbehavior, "RecognitionMethodExtension");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2044,7 +2044,7 @@ namespace SharpOnvifServer.AuthenticationBehavior
                     return true;
                 case "Order":
                     if (reader.NamespaceUri != Ns.Ver10Authenticationbehavior) break;
-                    this.orderField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.orderField = reader.ToInt32(reader.ReadElementText());
                     return true;
                 case "Extension":
                     if (reader.NamespaceUri != Ns.Ver10Authenticationbehavior) break;
@@ -2072,14 +2072,14 @@ namespace SharpOnvifServer.AuthenticationBehavior
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -2119,7 +2119,7 @@ namespace SharpOnvifServer.AuthenticationBehavior
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             base.WriteXmlContent(writer);
             if (this.recognitionGroupField != null)
@@ -2132,13 +2132,13 @@ namespace SharpOnvifServer.AuthenticationBehavior
             writer.WriteElement(Ns.Ver10Authenticationbehavior, "Extension", this.extensionField, Ns.Ver10Authenticationbehavior, "SecurityLevelExtension");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "RecognitionGroup":
                     if (reader.NamespaceUri != Ns.Ver10Authenticationbehavior) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.recognitionGroupField, reader.ReadElementObject<RecognitionGroup>(() => new RecognitionGroup()));
+                    reader.Append(ref this.recognitionGroupField, reader.ReadElementObject<RecognitionGroup>(() => new RecognitionGroup()));
                     return true;
                 case "Extension":
                     if (reader.NamespaceUri != Ns.Ver10Authenticationbehavior) break;
@@ -2224,26 +2224,26 @@ namespace SharpOnvifServer.AuthenticationBehavior
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
-            writer.WriteElementString(Ns.Ver10Authenticationbehavior, "ActiveRegularSchedule", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.activeRegularScheduleField));
-            writer.WriteElementString(Ns.Ver10Authenticationbehavior, "ActiveSpecialDaySchedule", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.activeSpecialDayScheduleField));
+            writer.WriteElementString(Ns.Ver10Authenticationbehavior, "ActiveRegularSchedule", writer.ToXml(this.activeRegularScheduleField));
+            writer.WriteElementString(Ns.Ver10Authenticationbehavior, "ActiveSpecialDaySchedule", writer.ToXml(this.activeSpecialDayScheduleField));
             writer.WriteElementString(Ns.Ver10Authenticationbehavior, "AuthenticationMode", this.authenticationModeField);
             writer.WriteElementString(Ns.Ver10Authenticationbehavior, "SecurityLevelToken", this.securityLevelTokenField);
             writer.WriteElement(Ns.Ver10Authenticationbehavior, "Extension", this.extensionField, Ns.Ver10Authenticationbehavior, "SecurityLevelConstraintExtension");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "ActiveRegularSchedule":
                     if (reader.NamespaceUri != Ns.Ver10Authenticationbehavior) break;
-                    this.activeRegularScheduleField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
+                    this.activeRegularScheduleField = reader.ToBoolean(reader.ReadElementText());
                     return true;
                 case "ActiveSpecialDaySchedule":
                     if (reader.NamespaceUri != Ns.Ver10Authenticationbehavior) break;
-                    this.activeSpecialDayScheduleField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
+                    this.activeSpecialDayScheduleField = reader.ToBoolean(reader.ReadElementText());
                     return true;
                 case "AuthenticationMode":
                     if (reader.NamespaceUri != Ns.Ver10Authenticationbehavior) break;
@@ -2279,14 +2279,14 @@ namespace SharpOnvifServer.AuthenticationBehavior
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -2308,14 +2308,14 @@ namespace SharpOnvifServer.AuthenticationBehavior
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -2373,14 +2373,14 @@ namespace SharpOnvifServer.AuthenticationBehavior
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Authenticationbehavior, "Name", this.nameField);
-            writer.WriteElementString(Ns.Ver10Authenticationbehavior, "Priority", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.priorityField));
+            writer.WriteElementString(Ns.Ver10Authenticationbehavior, "Priority", writer.ToXml(this.priorityField));
             writer.WriteElementString(Ns.Ver10Authenticationbehavior, "Description", this.descriptionField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2390,7 +2390,7 @@ namespace SharpOnvifServer.AuthenticationBehavior
                     return true;
                 case "Priority":
                     if (reader.NamespaceUri != Ns.Ver10Authenticationbehavior) break;
-                    this.priorityField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.priorityField = reader.ToInt32(reader.ReadElementText());
                     return true;
                 case "Description":
                     if (reader.NamespaceUri != Ns.Ver10Authenticationbehavior) break;
@@ -2537,62 +2537,62 @@ namespace SharpOnvifServer.AuthenticationBehavior
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
 
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
-            writer.WriteAttributeString(null, "MaxLimit", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxLimitField));
-            writer.WriteAttributeString(null, "MaxAuthenticationProfiles", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxAuthenticationProfilesField));
-            writer.WriteAttributeString(null, "MaxPoliciesPerAuthenticationProfile", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxPoliciesPerAuthenticationProfileField));
-            writer.WriteAttributeString(null, "MaxSecurityLevels", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxSecurityLevelsField));
-            writer.WriteAttributeString(null, "MaxRecognitionGroupsPerSecurityLevel", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxRecognitionGroupsPerSecurityLevelField));
-            writer.WriteAttributeString(null, "MaxRecognitionMethodsPerRecognitionGroup", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxRecognitionMethodsPerRecognitionGroupField));
+            writer.WriteAttributeString(null, "MaxLimit", writer.ToXml(this.maxLimitField));
+            writer.WriteAttributeString(null, "MaxAuthenticationProfiles", writer.ToXml(this.maxAuthenticationProfilesField));
+            writer.WriteAttributeString(null, "MaxPoliciesPerAuthenticationProfile", writer.ToXml(this.maxPoliciesPerAuthenticationProfileField));
+            writer.WriteAttributeString(null, "MaxSecurityLevels", writer.ToXml(this.maxSecurityLevelsField));
+            writer.WriteAttributeString(null, "MaxRecognitionGroupsPerSecurityLevel", writer.ToXml(this.maxRecognitionGroupsPerSecurityLevelField));
+            writer.WriteAttributeString(null, "MaxRecognitionMethodsPerRecognitionGroup", writer.ToXml(this.maxRecognitionMethodsPerRecognitionGroupField));
             if (this.clientSuppliedTokenSupportedFieldSpecified)
             {
-                writer.WriteAttributeString(null, "ClientSuppliedTokenSupported", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.clientSuppliedTokenSupportedField));
+                writer.WriteAttributeString(null, "ClientSuppliedTokenSupported", writer.ToXml(this.clientSuppliedTokenSupportedField));
             }
-            writer.WriteAttributeString(null, "SupportedAuthenticationModes", SharpOnvifCommon.Xml.OnvifArray.JoinList(this.supportedAuthenticationModesField));
+            writer.WriteAttributeString(null, "SupportedAuthenticationModes", writer.JoinList(this.supportedAuthenticationModesField));
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "MaxLimit":
-                    this.maxLimitField = SharpOnvifCommon.Xml.XmlPrimitives.ToUInt32(reader.AttributeValue);
+                    this.maxLimitField = reader.ToUInt32(reader.AttributeValue);
                     return true;
                 case "MaxAuthenticationProfiles":
-                    this.maxAuthenticationProfilesField = SharpOnvifCommon.Xml.XmlPrimitives.ToUInt32(reader.AttributeValue);
+                    this.maxAuthenticationProfilesField = reader.ToUInt32(reader.AttributeValue);
                     return true;
                 case "MaxPoliciesPerAuthenticationProfile":
-                    this.maxPoliciesPerAuthenticationProfileField = SharpOnvifCommon.Xml.XmlPrimitives.ToUInt32(reader.AttributeValue);
+                    this.maxPoliciesPerAuthenticationProfileField = reader.ToUInt32(reader.AttributeValue);
                     return true;
                 case "MaxSecurityLevels":
-                    this.maxSecurityLevelsField = SharpOnvifCommon.Xml.XmlPrimitives.ToUInt32(reader.AttributeValue);
+                    this.maxSecurityLevelsField = reader.ToUInt32(reader.AttributeValue);
                     return true;
                 case "MaxRecognitionGroupsPerSecurityLevel":
-                    this.maxRecognitionGroupsPerSecurityLevelField = SharpOnvifCommon.Xml.XmlPrimitives.ToUInt32(reader.AttributeValue);
+                    this.maxRecognitionGroupsPerSecurityLevelField = reader.ToUInt32(reader.AttributeValue);
                     return true;
                 case "MaxRecognitionMethodsPerRecognitionGroup":
-                    this.maxRecognitionMethodsPerRecognitionGroupField = SharpOnvifCommon.Xml.XmlPrimitives.ToUInt32(reader.AttributeValue);
+                    this.maxRecognitionMethodsPerRecognitionGroupField = reader.ToUInt32(reader.AttributeValue);
                     return true;
                 case "ClientSuppliedTokenSupported":
-                    this.clientSuppliedTokenSupportedField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.clientSuppliedTokenSupportedField = reader.ToBoolean(reader.AttributeValue);
                     this.clientSuppliedTokenSupportedFieldSpecified = true;
                     return true;
                 case "SupportedAuthenticationModes":
-                    this.supportedAuthenticationModesField = SharpOnvifCommon.Xml.OnvifArray.SplitList(reader.AttributeValue);
+                    this.supportedAuthenticationModesField = reader.SplitList(reader.AttributeValue);
                     return true;
             }
             return false;
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -2630,12 +2630,12 @@ namespace SharpOnvifServer.AuthenticationBehavior
             this.authenticationProfileField = authenticationProfile;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Authenticationbehavior, "AuthenticationProfile", this.authenticationProfileField, Ns.Ver10Authenticationbehavior, "AuthenticationProfile");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2698,12 +2698,12 @@ namespace SharpOnvifServer.AuthenticationBehavior
             this.securityLevelField = securityLevel;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Authenticationbehavior, "SecurityLevel", this.securityLevelField, Ns.Ver10Authenticationbehavior, "SecurityLevel");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {

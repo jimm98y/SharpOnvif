@@ -76,7 +76,7 @@ namespace SharpOnvifServer.AdvancedSecurity
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             AdvancedSecurityServiceBase target = (AdvancedSecurityServiceBase)service;
-            var reader = new SharpOnvifCommon.Xml.OnvifXmlReader(body, ResolveXmlType);
+            var reader = CreateReader(body);
 
             switch (action)
             {
@@ -249,7 +249,7 @@ namespace SharpOnvifServer.AdvancedSecurity
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             AuthorizationServerBase target = (AuthorizationServerBase)service;
-            var reader = new SharpOnvifCommon.Xml.OnvifXmlReader(body, ResolveXmlType);
+            var reader = CreateReader(body);
 
             switch (action)
             {
@@ -591,7 +591,7 @@ namespace SharpOnvifServer.AdvancedSecurity
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             Dot1XBase target = (Dot1XBase)service;
-            var reader = new SharpOnvifCommon.Xml.OnvifXmlReader(body, ResolveXmlType);
+            var reader = CreateReader(body);
 
             switch (action)
             {
@@ -748,7 +748,7 @@ namespace SharpOnvifServer.AdvancedSecurity
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             JWTBase target = (JWTBase)service;
-            var reader = new SharpOnvifCommon.Xml.OnvifXmlReader(body, ResolveXmlType);
+            var reader = CreateReader(body);
 
             switch (action)
             {
@@ -1884,7 +1884,7 @@ namespace SharpOnvifServer.AdvancedSecurity
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             KeystoreBase target = (KeystoreBase)service;
-            var reader = new SharpOnvifCommon.Xml.OnvifXmlReader(body, ResolveXmlType);
+            var reader = CreateReader(body);
 
             switch (action)
             {
@@ -2252,7 +2252,7 @@ namespace SharpOnvifServer.AdvancedSecurity
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             MediaSigningBase target = (MediaSigningBase)service;
-            var reader = new SharpOnvifCommon.Xml.OnvifXmlReader(body, ResolveXmlType);
+            var reader = CreateReader(body);
 
             switch (action)
             {
@@ -2806,7 +2806,7 @@ namespace SharpOnvifServer.AdvancedSecurity
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             TLSServerBase target = (TLSServerBase)service;
-            var reader = new SharpOnvifCommon.Xml.OnvifXmlReader(body, ResolveXmlType);
+            var reader = CreateReader(body);
 
             switch (action)
             {
@@ -5067,7 +5067,7 @@ namespace SharpOnvifServer.AdvancedSecurity
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             AdvancedSecurityBase target = (AdvancedSecurityBase)service;
-            var reader = new SharpOnvifCommon.Xml.OnvifXmlReader(body, ResolveXmlType);
+            var reader = CreateReader(body);
 
             switch (action)
             {

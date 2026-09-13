@@ -51,12 +51,12 @@ namespace SharpOnvifClient.Schedule
             this.scheduleField = schedule;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Schedule, "Schedule", this.scheduleField, Ns.Ver10Schedule, "Schedule");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -100,12 +100,12 @@ namespace SharpOnvifClient.Schedule
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Schedule, "Token", this.tokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -149,12 +149,12 @@ namespace SharpOnvifClient.Schedule
             this.specialDayGroupField = specialDayGroup;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Schedule, "SpecialDayGroup", this.specialDayGroupField, Ns.Ver10Schedule, "SpecialDayGroup");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -198,12 +198,12 @@ namespace SharpOnvifClient.Schedule
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Schedule, "Token", this.tokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -246,12 +246,12 @@ namespace SharpOnvifClient.Schedule
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Schedule, "Token", this.tokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -308,12 +308,12 @@ namespace SharpOnvifClient.Schedule
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Schedule, "Token", this.tokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -400,22 +400,22 @@ namespace SharpOnvifClient.Schedule
             this.startReferenceField = startReference;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.limitFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Schedule, "Limit", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.limitField));
+                writer.WriteElementString(Ns.Ver10Schedule, "Limit", writer.ToXml(this.limitField));
             }
             writer.WriteElementString(Ns.Ver10Schedule, "StartReference", this.startReferenceField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Limit":
                     if (reader.NamespaceUri != Ns.Ver10Schedule) break;
-                    this.limitField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.limitField = reader.ToInt32(reader.ReadElementText());
                     this.limitFieldSpecified = true;
                     return true;
                 case "StartReference":
@@ -472,7 +472,7 @@ namespace SharpOnvifClient.Schedule
             this.scheduleInfoField = scheduleInfo;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Schedule, "NextStartReference", this.nextStartReferenceField);
             if (this.scheduleInfoField != null)
@@ -484,7 +484,7 @@ namespace SharpOnvifClient.Schedule
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -494,7 +494,7 @@ namespace SharpOnvifClient.Schedule
                     return true;
                 case "ScheduleInfo":
                     if (reader.NamespaceUri != Ns.Ver10Schedule) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.scheduleInfoField, reader.ReadElementObject<ScheduleInfo>(() => new ScheduleInfo()));
+                    reader.Append(ref this.scheduleInfoField, reader.ReadElementObject<ScheduleInfo>(() => new ScheduleInfo()));
                     return true;
             }
             return false;
@@ -533,7 +533,7 @@ namespace SharpOnvifClient.Schedule
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.tokenField != null)
             {
@@ -544,13 +544,13 @@ namespace SharpOnvifClient.Schedule
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Token":
                     if (reader.NamespaceUri != Ns.Ver10Schedule) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.tokenField, reader.ReadElementText());
+                    reader.Append(ref this.tokenField, reader.ReadElementText());
                     return true;
             }
             return false;
@@ -589,7 +589,7 @@ namespace SharpOnvifClient.Schedule
             this.scheduleInfoField = scheduleInfo;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.scheduleInfoField != null)
             {
@@ -600,13 +600,13 @@ namespace SharpOnvifClient.Schedule
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "ScheduleInfo":
                     if (reader.NamespaceUri != Ns.Ver10Schedule) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.scheduleInfoField, reader.ReadElementObject<ScheduleInfo>(() => new ScheduleInfo()));
+                    reader.Append(ref this.scheduleInfoField, reader.ReadElementObject<ScheduleInfo>(() => new ScheduleInfo()));
                     return true;
             }
             return false;
@@ -673,22 +673,22 @@ namespace SharpOnvifClient.Schedule
             this.startReferenceField = startReference;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.limitFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Schedule, "Limit", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.limitField));
+                writer.WriteElementString(Ns.Ver10Schedule, "Limit", writer.ToXml(this.limitField));
             }
             writer.WriteElementString(Ns.Ver10Schedule, "StartReference", this.startReferenceField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Limit":
                     if (reader.NamespaceUri != Ns.Ver10Schedule) break;
-                    this.limitField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.limitField = reader.ToInt32(reader.ReadElementText());
                     this.limitFieldSpecified = true;
                     return true;
                 case "StartReference":
@@ -745,7 +745,7 @@ namespace SharpOnvifClient.Schedule
             this.scheduleField = schedule;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Schedule, "NextStartReference", this.nextStartReferenceField);
             if (this.scheduleField != null)
@@ -757,7 +757,7 @@ namespace SharpOnvifClient.Schedule
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -767,7 +767,7 @@ namespace SharpOnvifClient.Schedule
                     return true;
                 case "Schedule":
                     if (reader.NamespaceUri != Ns.Ver10Schedule) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.scheduleField, reader.ReadElementObject<Schedule>(() => new Schedule()));
+                    reader.Append(ref this.scheduleField, reader.ReadElementObject<Schedule>(() => new Schedule()));
                     return true;
             }
             return false;
@@ -802,12 +802,12 @@ namespace SharpOnvifClient.Schedule
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Schedule, "Token", this.tokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -848,12 +848,12 @@ namespace SharpOnvifClient.Schedule
             this.scheduleStateField = scheduleState;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Schedule, "ScheduleState", this.scheduleStateField, Ns.Ver10Schedule, "ScheduleState");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -897,7 +897,7 @@ namespace SharpOnvifClient.Schedule
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.tokenField != null)
             {
@@ -908,13 +908,13 @@ namespace SharpOnvifClient.Schedule
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Token":
                     if (reader.NamespaceUri != Ns.Ver10Schedule) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.tokenField, reader.ReadElementText());
+                    reader.Append(ref this.tokenField, reader.ReadElementText());
                     return true;
             }
             return false;
@@ -952,7 +952,7 @@ namespace SharpOnvifClient.Schedule
             this.scheduleField = schedule;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.scheduleField != null)
             {
@@ -963,13 +963,13 @@ namespace SharpOnvifClient.Schedule
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Schedule":
                     if (reader.NamespaceUri != Ns.Ver10Schedule) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.scheduleField, reader.ReadElementObject<Schedule>(() => new Schedule()));
+                    reader.Append(ref this.scheduleField, reader.ReadElementObject<Schedule>(() => new Schedule()));
                     return true;
             }
             return false;
@@ -1017,12 +1017,12 @@ namespace SharpOnvifClient.Schedule
             this.capabilitiesField = capabilities;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Schedule, "Capabilities", this.capabilitiesField, Ns.Ver10Schedule, "ServiceCapabilities");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1094,22 +1094,22 @@ namespace SharpOnvifClient.Schedule
             this.startReferenceField = startReference;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.limitFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Schedule, "Limit", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.limitField));
+                writer.WriteElementString(Ns.Ver10Schedule, "Limit", writer.ToXml(this.limitField));
             }
             writer.WriteElementString(Ns.Ver10Schedule, "StartReference", this.startReferenceField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Limit":
                     if (reader.NamespaceUri != Ns.Ver10Schedule) break;
-                    this.limitField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.limitField = reader.ToInt32(reader.ReadElementText());
                     this.limitFieldSpecified = true;
                     return true;
                 case "StartReference":
@@ -1165,7 +1165,7 @@ namespace SharpOnvifClient.Schedule
             this.specialDayGroupInfoField = specialDayGroupInfo;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Schedule, "NextStartReference", this.nextStartReferenceField);
             if (this.specialDayGroupInfoField != null)
@@ -1177,7 +1177,7 @@ namespace SharpOnvifClient.Schedule
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1187,7 +1187,7 @@ namespace SharpOnvifClient.Schedule
                     return true;
                 case "SpecialDayGroupInfo":
                     if (reader.NamespaceUri != Ns.Ver10Schedule) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.specialDayGroupInfoField, reader.ReadElementObject<SpecialDayGroupInfo>(() => new SpecialDayGroupInfo()));
+                    reader.Append(ref this.specialDayGroupInfoField, reader.ReadElementObject<SpecialDayGroupInfo>(() => new SpecialDayGroupInfo()));
                     return true;
             }
             return false;
@@ -1225,7 +1225,7 @@ namespace SharpOnvifClient.Schedule
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.tokenField != null)
             {
@@ -1236,13 +1236,13 @@ namespace SharpOnvifClient.Schedule
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Token":
                     if (reader.NamespaceUri != Ns.Ver10Schedule) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.tokenField, reader.ReadElementText());
+                    reader.Append(ref this.tokenField, reader.ReadElementText());
                     return true;
             }
             return false;
@@ -1280,7 +1280,7 @@ namespace SharpOnvifClient.Schedule
             this.specialDayGroupInfoField = specialDayGroupInfo;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.specialDayGroupInfoField != null)
             {
@@ -1291,13 +1291,13 @@ namespace SharpOnvifClient.Schedule
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "SpecialDayGroupInfo":
                     if (reader.NamespaceUri != Ns.Ver10Schedule) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.specialDayGroupInfoField, reader.ReadElementObject<SpecialDayGroupInfo>(() => new SpecialDayGroupInfo()));
+                    reader.Append(ref this.specialDayGroupInfoField, reader.ReadElementObject<SpecialDayGroupInfo>(() => new SpecialDayGroupInfo()));
                     return true;
             }
             return false;
@@ -1364,22 +1364,22 @@ namespace SharpOnvifClient.Schedule
             this.startReferenceField = startReference;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.limitFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Schedule, "Limit", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.limitField));
+                writer.WriteElementString(Ns.Ver10Schedule, "Limit", writer.ToXml(this.limitField));
             }
             writer.WriteElementString(Ns.Ver10Schedule, "StartReference", this.startReferenceField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Limit":
                     if (reader.NamespaceUri != Ns.Ver10Schedule) break;
-                    this.limitField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.limitField = reader.ToInt32(reader.ReadElementText());
                     this.limitFieldSpecified = true;
                     return true;
                 case "StartReference":
@@ -1436,7 +1436,7 @@ namespace SharpOnvifClient.Schedule
             this.specialDayGroupField = specialDayGroup;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Schedule, "NextStartReference", this.nextStartReferenceField);
             if (this.specialDayGroupField != null)
@@ -1448,7 +1448,7 @@ namespace SharpOnvifClient.Schedule
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1458,7 +1458,7 @@ namespace SharpOnvifClient.Schedule
                     return true;
                 case "SpecialDayGroup":
                     if (reader.NamespaceUri != Ns.Ver10Schedule) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.specialDayGroupField, reader.ReadElementObject<SpecialDayGroup>(() => new SpecialDayGroup()));
+                    reader.Append(ref this.specialDayGroupField, reader.ReadElementObject<SpecialDayGroup>(() => new SpecialDayGroup()));
                     return true;
             }
             return false;
@@ -1493,7 +1493,7 @@ namespace SharpOnvifClient.Schedule
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.tokenField != null)
             {
@@ -1504,13 +1504,13 @@ namespace SharpOnvifClient.Schedule
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Token":
                     if (reader.NamespaceUri != Ns.Ver10Schedule) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.tokenField, reader.ReadElementText());
+                    reader.Append(ref this.tokenField, reader.ReadElementText());
                     return true;
             }
             return false;
@@ -1545,7 +1545,7 @@ namespace SharpOnvifClient.Schedule
             this.specialDayGroupField = specialDayGroup;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.specialDayGroupField != null)
             {
@@ -1556,13 +1556,13 @@ namespace SharpOnvifClient.Schedule
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "SpecialDayGroup":
                     if (reader.NamespaceUri != Ns.Ver10Schedule) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.specialDayGroupField, reader.ReadElementObject<SpecialDayGroup>(() => new SpecialDayGroup()));
+                    reader.Append(ref this.specialDayGroupField, reader.ReadElementObject<SpecialDayGroup>(() => new SpecialDayGroup()));
                     return true;
             }
             return false;
@@ -1597,12 +1597,12 @@ namespace SharpOnvifClient.Schedule
             this.scheduleField = schedule;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Schedule, "Schedule", this.scheduleField, Ns.Ver10Schedule, "Schedule");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1655,12 +1655,12 @@ namespace SharpOnvifClient.Schedule
             this.specialDayGroupField = specialDayGroup;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Schedule, "SpecialDayGroup", this.specialDayGroupField, Ns.Ver10Schedule, "SpecialDayGroup");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1736,7 +1736,7 @@ namespace SharpOnvifClient.Schedule
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Schedule; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             base.WriteXmlContent(writer);
             writer.WriteElementString(Ns.Ver10Schedule, "Standard", this.standardField);
@@ -1750,7 +1750,7 @@ namespace SharpOnvifClient.Schedule
             writer.WriteElement(Ns.Ver10Schedule, "Extension", this.extensionField, Ns.Ver10Schedule, "ScheduleExtension");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1760,7 +1760,7 @@ namespace SharpOnvifClient.Schedule
                     return true;
                 case "SpecialDays":
                     if (reader.NamespaceUri != Ns.Ver10Schedule) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.specialDaysField, reader.ReadElementObject<SpecialDaysSchedule>(() => new SpecialDaysSchedule()));
+                    reader.Append(ref this.specialDaysField, reader.ReadElementObject<SpecialDaysSchedule>(() => new SpecialDaysSchedule()));
                     return true;
                 case "Extension":
                     if (reader.NamespaceUri != Ns.Ver10Schedule) break;
@@ -1789,14 +1789,14 @@ namespace SharpOnvifClient.Schedule
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Schedule; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -1838,13 +1838,13 @@ namespace SharpOnvifClient.Schedule
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Schedule; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Schedule, "Name", this.nameField);
             writer.WriteElementString(Ns.Ver10Schedule, "Description", this.descriptionField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1923,27 +1923,27 @@ namespace SharpOnvifClient.Schedule
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Schedule; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
-            writer.WriteElementString(Ns.Ver10Schedule, "Active", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.activeField));
+            writer.WriteElementString(Ns.Ver10Schedule, "Active", writer.ToXml(this.activeField));
             if (this.specialDayFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Schedule, "SpecialDay", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.specialDayField));
+                writer.WriteElementString(Ns.Ver10Schedule, "SpecialDay", writer.ToXml(this.specialDayField));
             }
             writer.WriteElement(Ns.Ver10Schedule, "Extension", this.extensionField, Ns.Ver10Schedule, "ScheduleStateExtension");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Active":
                     if (reader.NamespaceUri != Ns.Ver10Schedule) break;
-                    this.activeField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
+                    this.activeField = reader.ToBoolean(reader.ReadElementText());
                     return true;
                 case "SpecialDay":
                     if (reader.NamespaceUri != Ns.Ver10Schedule) break;
-                    this.specialDayField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
+                    this.specialDayField = reader.ToBoolean(reader.ReadElementText());
                     this.specialDayFieldSpecified = true;
                     return true;
                 case "Extension":
@@ -1972,14 +1972,14 @@ namespace SharpOnvifClient.Schedule
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Schedule; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -2156,70 +2156,70 @@ namespace SharpOnvifClient.Schedule
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Schedule; } }
 
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
-            writer.WriteAttributeString(null, "MaxLimit", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxLimitField));
-            writer.WriteAttributeString(null, "MaxSchedules", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxSchedulesField));
-            writer.WriteAttributeString(null, "MaxTimePeriodsPerDay", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxTimePeriodsPerDayField));
-            writer.WriteAttributeString(null, "MaxSpecialDayGroups", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxSpecialDayGroupsField));
-            writer.WriteAttributeString(null, "MaxDaysInSpecialDayGroup", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxDaysInSpecialDayGroupField));
-            writer.WriteAttributeString(null, "MaxSpecialDaysSchedules", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxSpecialDaysSchedulesField));
-            writer.WriteAttributeString(null, "ExtendedRecurrenceSupported", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.extendedRecurrenceSupportedField));
-            writer.WriteAttributeString(null, "SpecialDaysSupported", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.specialDaysSupportedField));
-            writer.WriteAttributeString(null, "StateReportingSupported", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.stateReportingSupportedField));
+            writer.WriteAttributeString(null, "MaxLimit", writer.ToXml(this.maxLimitField));
+            writer.WriteAttributeString(null, "MaxSchedules", writer.ToXml(this.maxSchedulesField));
+            writer.WriteAttributeString(null, "MaxTimePeriodsPerDay", writer.ToXml(this.maxTimePeriodsPerDayField));
+            writer.WriteAttributeString(null, "MaxSpecialDayGroups", writer.ToXml(this.maxSpecialDayGroupsField));
+            writer.WriteAttributeString(null, "MaxDaysInSpecialDayGroup", writer.ToXml(this.maxDaysInSpecialDayGroupField));
+            writer.WriteAttributeString(null, "MaxSpecialDaysSchedules", writer.ToXml(this.maxSpecialDaysSchedulesField));
+            writer.WriteAttributeString(null, "ExtendedRecurrenceSupported", writer.ToXml(this.extendedRecurrenceSupportedField));
+            writer.WriteAttributeString(null, "SpecialDaysSupported", writer.ToXml(this.specialDaysSupportedField));
+            writer.WriteAttributeString(null, "StateReportingSupported", writer.ToXml(this.stateReportingSupportedField));
             if (this.clientSuppliedTokenSupportedFieldSpecified)
             {
-                writer.WriteAttributeString(null, "ClientSuppliedTokenSupported", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.clientSuppliedTokenSupportedField));
+                writer.WriteAttributeString(null, "ClientSuppliedTokenSupported", writer.ToXml(this.clientSuppliedTokenSupportedField));
             }
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "MaxLimit":
-                    this.maxLimitField = SharpOnvifCommon.Xml.XmlPrimitives.ToUInt32(reader.AttributeValue);
+                    this.maxLimitField = reader.ToUInt32(reader.AttributeValue);
                     return true;
                 case "MaxSchedules":
-                    this.maxSchedulesField = SharpOnvifCommon.Xml.XmlPrimitives.ToUInt32(reader.AttributeValue);
+                    this.maxSchedulesField = reader.ToUInt32(reader.AttributeValue);
                     return true;
                 case "MaxTimePeriodsPerDay":
-                    this.maxTimePeriodsPerDayField = SharpOnvifCommon.Xml.XmlPrimitives.ToUInt32(reader.AttributeValue);
+                    this.maxTimePeriodsPerDayField = reader.ToUInt32(reader.AttributeValue);
                     return true;
                 case "MaxSpecialDayGroups":
-                    this.maxSpecialDayGroupsField = SharpOnvifCommon.Xml.XmlPrimitives.ToUInt32(reader.AttributeValue);
+                    this.maxSpecialDayGroupsField = reader.ToUInt32(reader.AttributeValue);
                     return true;
                 case "MaxDaysInSpecialDayGroup":
-                    this.maxDaysInSpecialDayGroupField = SharpOnvifCommon.Xml.XmlPrimitives.ToUInt32(reader.AttributeValue);
+                    this.maxDaysInSpecialDayGroupField = reader.ToUInt32(reader.AttributeValue);
                     return true;
                 case "MaxSpecialDaysSchedules":
-                    this.maxSpecialDaysSchedulesField = SharpOnvifCommon.Xml.XmlPrimitives.ToUInt32(reader.AttributeValue);
+                    this.maxSpecialDaysSchedulesField = reader.ToUInt32(reader.AttributeValue);
                     return true;
                 case "ExtendedRecurrenceSupported":
-                    this.extendedRecurrenceSupportedField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.extendedRecurrenceSupportedField = reader.ToBoolean(reader.AttributeValue);
                     return true;
                 case "SpecialDaysSupported":
-                    this.specialDaysSupportedField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.specialDaysSupportedField = reader.ToBoolean(reader.AttributeValue);
                     return true;
                 case "StateReportingSupported":
-                    this.stateReportingSupportedField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.stateReportingSupportedField = reader.ToBoolean(reader.AttributeValue);
                     return true;
                 case "ClientSuppliedTokenSupported":
-                    this.clientSuppliedTokenSupportedField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.clientSuppliedTokenSupportedField = reader.ToBoolean(reader.AttributeValue);
                     this.clientSuppliedTokenSupportedFieldSpecified = true;
                     return true;
             }
             return false;
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -2252,12 +2252,12 @@ namespace SharpOnvifClient.Schedule
             this.scheduleField = schedule;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Schedule, "Schedule", this.scheduleField, Ns.Ver10Schedule, "Schedule");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2310,12 +2310,12 @@ namespace SharpOnvifClient.Schedule
             this.specialDayGroupField = specialDayGroup;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Schedule, "SpecialDayGroup", this.specialDayGroupField, Ns.Ver10Schedule, "SpecialDayGroup");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2376,14 +2376,14 @@ namespace SharpOnvifClient.Schedule
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Schedule; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             base.WriteXmlContent(writer);
             writer.WriteElementString(Ns.Ver10Schedule, "Days", this.daysField);
             writer.WriteElement(Ns.Ver10Schedule, "Extension", this.extensionField, Ns.Ver10Schedule, "SpecialDayGroupExtension");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2418,14 +2418,14 @@ namespace SharpOnvifClient.Schedule
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Schedule; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -2466,13 +2466,13 @@ namespace SharpOnvifClient.Schedule
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Schedule; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Schedule, "Name", this.nameField);
             writer.WriteElementString(Ns.Ver10Schedule, "Description", this.descriptionField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2537,7 +2537,7 @@ namespace SharpOnvifClient.Schedule
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Schedule; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Schedule, "GroupToken", this.groupTokenField);
             if (this.timeRangeField != null)
@@ -2550,7 +2550,7 @@ namespace SharpOnvifClient.Schedule
             writer.WriteElement(Ns.Ver10Schedule, "Extension", this.extensionField, Ns.Ver10Schedule, "SpecialDaysScheduleExtension");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2560,7 +2560,7 @@ namespace SharpOnvifClient.Schedule
                     return true;
                 case "TimeRange":
                     if (reader.NamespaceUri != Ns.Ver10Schedule) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.timeRangeField, reader.ReadElementObject<TimePeriod>(() => new TimePeriod()));
+                    reader.Append(ref this.timeRangeField, reader.ReadElementObject<TimePeriod>(() => new TimePeriod()));
                     return true;
                 case "Extension":
                     if (reader.NamespaceUri != Ns.Ver10Schedule) break;
@@ -2588,14 +2588,14 @@ namespace SharpOnvifClient.Schedule
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Schedule; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -2661,27 +2661,27 @@ namespace SharpOnvifClient.Schedule
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Schedule; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
-            writer.WriteElementString(Ns.Ver10Schedule, "From", SharpOnvifCommon.Xml.XmlPrimitives.ToTimeString(this.fromField));
+            writer.WriteElementString(Ns.Ver10Schedule, "From", writer.ToTimeString(this.fromField));
             if (this.untilFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Schedule, "Until", SharpOnvifCommon.Xml.XmlPrimitives.ToTimeString(this.untilField));
+                writer.WriteElementString(Ns.Ver10Schedule, "Until", writer.ToTimeString(this.untilField));
             }
             writer.WriteElement(Ns.Ver10Schedule, "Extension", this.extensionField, Ns.Ver10Schedule, "TimePeriodExtension");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "From":
                     if (reader.NamespaceUri != Ns.Ver10Schedule) break;
-                    this.fromField = SharpOnvifCommon.Xml.XmlPrimitives.ToDateTime(reader.ReadElementText());
+                    this.fromField = reader.ToDateTime(reader.ReadElementText());
                     return true;
                 case "Until":
                     if (reader.NamespaceUri != Ns.Ver10Schedule) break;
-                    this.untilField = SharpOnvifCommon.Xml.XmlPrimitives.ToDateTime(reader.ReadElementText());
+                    this.untilField = reader.ToDateTime(reader.ReadElementText());
                     this.untilFieldSpecified = true;
                     return true;
                 case "Extension":
@@ -2710,14 +2710,14 @@ namespace SharpOnvifClient.Schedule
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Schedule; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 

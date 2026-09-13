@@ -106,12 +106,12 @@ namespace SharpOnvifClient.AppMgmt
             this.appIDField = appID;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(null, "AppID", this.appIDField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -322,7 +322,7 @@ namespace SharpOnvifClient.AppMgmt
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Appmgmt; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(null, "AppID", this.appIDField);
             writer.WriteElementString(null, "Name", this.nameField);
@@ -341,11 +341,11 @@ namespace SharpOnvifClient.AppMgmt
                     writer.WriteElementString(null, "Privileges", this.privilegesField[i]);
                 }
             }
-            writer.WriteElementString(null, "InstallationDate", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.installationDateField));
-            writer.WriteElementString(null, "LastUpdate", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.lastUpdateField));
+            writer.WriteElementString(null, "InstallationDate", writer.ToXml(this.installationDateField));
+            writer.WriteElementString(null, "LastUpdate", writer.ToXml(this.lastUpdateField));
             writer.WriteElementString(null, "State", EnumXml.ToXml(this.stateField));
             writer.WriteElementString(null, "Status", this.statusField);
-            writer.WriteElementString(null, "Autostart", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.autostartField));
+            writer.WriteElementString(null, "Autostart", writer.ToXml(this.autostartField));
             writer.WriteElementString(null, "Website", this.websiteField);
             writer.WriteElementString(null, "OpenSource", this.openSourceField);
             writer.WriteElementString(null, "Configuration", this.configurationField);
@@ -359,7 +359,7 @@ namespace SharpOnvifClient.AppMgmt
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -373,16 +373,16 @@ namespace SharpOnvifClient.AppMgmt
                     this.versionField = reader.ReadElementText();
                     return true;
                 case "Licenses":
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.licensesField, reader.ReadElementObject<LicenseInfo>(() => new LicenseInfo()));
+                    reader.Append(ref this.licensesField, reader.ReadElementObject<LicenseInfo>(() => new LicenseInfo()));
                     return true;
                 case "Privileges":
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.privilegesField, reader.ReadElementText());
+                    reader.Append(ref this.privilegesField, reader.ReadElementText());
                     return true;
                 case "InstallationDate":
-                    this.installationDateField = SharpOnvifCommon.Xml.XmlPrimitives.ToDateTime(reader.ReadElementText());
+                    this.installationDateField = reader.ToDateTime(reader.ReadElementText());
                     return true;
                 case "LastUpdate":
-                    this.lastUpdateField = SharpOnvifCommon.Xml.XmlPrimitives.ToDateTime(reader.ReadElementText());
+                    this.lastUpdateField = reader.ToDateTime(reader.ReadElementText());
                     return true;
                 case "State":
                     this.stateField = EnumXml.ParseAppState(reader.ReadElementText());
@@ -391,7 +391,7 @@ namespace SharpOnvifClient.AppMgmt
                     this.statusField = reader.ReadElementText();
                     return true;
                 case "Autostart":
-                    this.autostartField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
+                    this.autostartField = reader.ToBoolean(reader.ReadElementText());
                     return true;
                 case "Website":
                     this.websiteField = reader.ReadElementText();
@@ -403,10 +403,10 @@ namespace SharpOnvifClient.AppMgmt
                     this.configurationField = reader.ReadElementText();
                     return true;
                 case "InterfaceDescription":
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.interfaceDescriptionField, reader.ReadElementText());
+                    reader.Append(ref this.interfaceDescriptionField, reader.ReadElementText());
                     return true;
             }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -490,31 +490,31 @@ namespace SharpOnvifClient.AppMgmt
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Appmgmt; } }
 
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
-            writer.WriteAttributeString(null, "FormatsSupported", SharpOnvifCommon.Xml.OnvifArray.JoinList(this.formatsSupportedField));
+            writer.WriteAttributeString(null, "FormatsSupported", writer.JoinList(this.formatsSupportedField));
             if (this.licensingFieldSpecified)
             {
-                writer.WriteAttributeString(null, "Licensing", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.licensingField));
+                writer.WriteAttributeString(null, "Licensing", writer.ToXml(this.licensingField));
             }
             writer.WriteAttributeString(null, "UploadPath", this.uploadPathField);
             writer.WriteAttributeString(null, "EventTopicPrefix", this.eventTopicPrefixField);
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "FormatsSupported":
-                    this.formatsSupportedField = SharpOnvifCommon.Xml.OnvifArray.SplitList(reader.AttributeValue);
+                    this.formatsSupportedField = reader.SplitList(reader.AttributeValue);
                     return true;
                 case "Licensing":
-                    this.licensingField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.licensingField = reader.ToBoolean(reader.AttributeValue);
                     this.licensingFieldSpecified = true;
                     return true;
                 case "UploadPath":
@@ -527,9 +527,9 @@ namespace SharpOnvifClient.AppMgmt
             return false;
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -562,12 +562,12 @@ namespace SharpOnvifClient.AppMgmt
             this.appIDField = appID;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(null, "AppID", this.appIDField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -620,12 +620,12 @@ namespace SharpOnvifClient.AppMgmt
             this.appIDField = appID;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(null, "AppID", this.appIDField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -663,7 +663,7 @@ namespace SharpOnvifClient.AppMgmt
             this.infoField = info;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.infoField != null)
             {
@@ -674,12 +674,12 @@ namespace SharpOnvifClient.AppMgmt
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Info":
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.infoField, reader.ReadElementObject<AppInfo>(() => new AppInfo()));
+                    reader.Append(ref this.infoField, reader.ReadElementObject<AppInfo>(() => new AppInfo()));
                     return true;
             }
             return false;
@@ -723,12 +723,12 @@ namespace SharpOnvifClient.AppMgmt
             this.deviceIdField = deviceId;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(null, "DeviceId", this.deviceIdField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -780,7 +780,7 @@ namespace SharpOnvifClient.AppMgmt
             this.appField = app;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.appField != null)
             {
@@ -791,12 +791,12 @@ namespace SharpOnvifClient.AppMgmt
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "App":
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.appField, reader.ReadElementObject<GetInstalledAppsResponseApp>(() => new GetInstalledAppsResponseApp()));
+                    reader.Append(ref this.appField, reader.ReadElementObject<GetInstalledAppsResponseApp>(() => new GetInstalledAppsResponseApp()));
                     return true;
             }
             return false;
@@ -833,14 +833,14 @@ namespace SharpOnvifClient.AppMgmt
             set { this.anyField = value; }
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(null, "Name", this.nameField);
             writer.WriteElementString(null, "AppID", this.appIDField);
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -851,7 +851,7 @@ namespace SharpOnvifClient.AppMgmt
                     this.appIDField = reader.ReadElementText();
                     return true;
             }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -896,12 +896,12 @@ namespace SharpOnvifClient.AppMgmt
             this.capabilitiesField = capabilities;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(null, "Capabilities", this.capabilitiesField, Ns.Ver10Appmgmt, "Capabilities");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -955,13 +955,13 @@ namespace SharpOnvifClient.AppMgmt
             this.licenseField = license;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(null, "AppID", this.appIDField);
             writer.WriteElementString(null, "License", this.licenseField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1066,21 +1066,21 @@ namespace SharpOnvifClient.AppMgmt
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Appmgmt; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(null, "Name", this.nameField);
             if (this.validFromFieldSpecified)
             {
-                writer.WriteElementString(null, "ValidFrom", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.validFromField));
+                writer.WriteElementString(null, "ValidFrom", writer.ToXml(this.validFromField));
             }
             if (this.validUntilFieldSpecified)
             {
-                writer.WriteElementString(null, "ValidUntil", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.validUntilField));
+                writer.WriteElementString(null, "ValidUntil", writer.ToXml(this.validUntilField));
             }
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1088,15 +1088,15 @@ namespace SharpOnvifClient.AppMgmt
                     this.nameField = reader.ReadElementText();
                     return true;
                 case "ValidFrom":
-                    this.validFromField = SharpOnvifCommon.Xml.XmlPrimitives.ToDateTime(reader.ReadElementText());
+                    this.validFromField = reader.ToDateTime(reader.ReadElementText());
                     this.validFromFieldSpecified = true;
                     return true;
                 case "ValidUntil":
-                    this.validUntilField = SharpOnvifCommon.Xml.XmlPrimitives.ToDateTime(reader.ReadElementText());
+                    this.validUntilField = reader.ToDateTime(reader.ReadElementText());
                     this.validUntilFieldSpecified = true;
                     return true;
             }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -1131,12 +1131,12 @@ namespace SharpOnvifClient.AppMgmt
             this.appIDField = appID;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(null, "AppID", this.appIDField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {

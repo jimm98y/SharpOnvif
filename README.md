@@ -300,7 +300,7 @@ Every operation also has an overload that takes the request's members directly, 
 var services = await deviceClient.GetServicesAsync(includeCapability: false);
 ```
 A device that cannot be reached, drops the connection, or does not answer in time raises
-`SharpOnvifCommon.Soap.OnvifTransportException`. A device is a thing that reboots and loses power,
+`SharpOnvifCommon.Soap.SoapTransportException`. A device is a thing that reboots and loses power,
 and a pull point spends nearly all its time waiting on a request that any of those cuts short, so
 a loop that polls one has to expect it:
 ```cs
@@ -316,7 +316,7 @@ while (true)
             // handle the notifications
         }
     }
-    catch (OnvifTransportException)
+    catch (SoapTransportException)
     {
         // the device went away; it has forgotten the subscription, so make a new one
     }
@@ -326,13 +326,13 @@ while (true)
 carries what the HTTP stack actually said. A cancellation you asked for is not this - that still
 arrives as an `OperationCanceledException`.
 
-A device that answers with a SOAP fault raises `SharpOnvifCommon.Xml.OnvifFaultException`, which carries the Onvif error subcode:
+A device that answers with a SOAP fault raises `SharpOnvifCommon.Xml.SoapFaultException`, which carries the Onvif error subcode:
 ```cs
 try
 {
     await deviceClient.GetHostnameAsync();
 }
-catch (OnvifFaultException fault) when (fault.Fault?.Subcode == "ActionNotSupported")
+catch (SoapFaultException fault) when (fault.Fault?.Subcode == "ActionNotSupported")
 {
     // the device does not implement this operation
 }

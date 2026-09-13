@@ -342,7 +342,7 @@ namespace SharpOnvifServer.ActionEngine
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             ActionEnginePortBase target = (ActionEnginePortBase)service;
-            var reader = new SharpOnvifCommon.Xml.OnvifXmlReader(body, ResolveXmlType);
+            var reader = CreateReader(body);
 
             switch (action)
             {

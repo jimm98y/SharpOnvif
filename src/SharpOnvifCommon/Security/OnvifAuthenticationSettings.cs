@@ -134,7 +134,7 @@ namespace SharpOnvifCommon.Security
         /// Writes the WS-Security UsernameToken, unless there is nothing to write: no credentials,
         /// the scheme switched off, or an action the device answers without them.
         /// </summary>
-        public Action<OnvifXmlWriter> CreateSecurityHeader(string action, IClientSettings settings)
+        public Action<IXmlWriter> CreateSecurityHeader(string action, IClientSettings settings)
         {
             if (settings == null || settings.Credentials == null) return null;
             if ((Authentication & DigestAuthentication.WsUsernameToken) == 0) return null;

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Xml;
 
-namespace __RUNTIME__.Xml
+namespace SharpOnvifCommon.Xml
 {
     /// <summary>
     /// Reads Onvif data contracts from XML. Generated types dispatch on the current element name
@@ -14,7 +14,7 @@ namespace __RUNTIME__.Xml
     /// reject responses that are otherwise perfectly usable.
     /// </para>
     /// </summary>
-    public sealed class OnvifXmlReader
+    public sealed class OnvifXmlReader : IXmlReader
     {
         private readonly XmlReader _reader;
         private readonly Func<string, string, OnvifContract> _typeFactory;
@@ -157,7 +157,7 @@ namespace __RUNTIME__.Xml
             // would end the process rather than the request: the limit is checked, not hoped for.
             if (_reader.Depth > MaxDepth)
             {
-                throw new OnvifFaultException(
+                throw new SoapFaultException(
                     "The document is nested more than " + MaxDepth + " elements deep.");
             }
 
@@ -464,6 +464,31 @@ namespace __RUNTIME__.Xml
         {
             _reader.Skip();
         }
+
+        /// <summary>
+        /// Reading a value back from its lexical form, reachable through the reader for the same
+        /// reason the writer carries the other direction.
+        /// </summary>
+        public bool ToBoolean(string text) { return XmlPrimitives.ToBoolean(text); }
+
+        public sbyte ToSByte(string text) { return XmlPrimitives.ToSByte(text); }
+        public byte ToByte(string text) { return XmlPrimitives.ToByte(text); }
+        public short ToInt16(string text) { return XmlPrimitives.ToInt16(text); }
+        public ushort ToUInt16(string text) { return XmlPrimitives.ToUInt16(text); }
+        public int ToInt32(string text) { return XmlPrimitives.ToInt32(text); }
+        public uint ToUInt32(string text) { return XmlPrimitives.ToUInt32(text); }
+        public long ToInt64(string text) { return XmlPrimitives.ToInt64(text); }
+        public ulong ToUInt64(string text) { return XmlPrimitives.ToUInt64(text); }
+        public decimal ToDecimal(string text) { return XmlPrimitives.ToDecimal(text); }
+        public float ToSingle(string text) { return XmlPrimitives.ToSingle(text); }
+        public double ToDouble(string text) { return XmlPrimitives.ToDouble(text); }
+        public DateTime ToDateTime(string text) { return XmlPrimitives.ToDateTime(text); }
+        public byte[] ToByteArray(string text) { return XmlPrimitives.ToByteArray(text); }
+        public byte[] FromHexString(string text) { return XmlPrimitives.FromHexString(text); }
+
+        public string[] SplitList(string text) { return OnvifArray.SplitList(text); }
+
+        public void Append<T>(ref T[] array, T item) { OnvifArray.Append(ref array, item); }
     }
 
     /// <summary>Array growth helpers used by generated readers.</summary>

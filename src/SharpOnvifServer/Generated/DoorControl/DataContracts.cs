@@ -433,14 +433,14 @@ namespace SharpOnvifServer.DoorControl
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Doorcontrol; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -562,12 +562,12 @@ namespace SharpOnvifServer.DoorControl
             this.extensionField = extension;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Doorcontrol, "Token", this.tokenField);
             if (this.useExtendedTimeFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Doorcontrol, "UseExtendedTime", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.useExtendedTimeField));
+                writer.WriteElementString(Ns.Ver10Doorcontrol, "UseExtendedTime", writer.ToXml(this.useExtendedTimeField));
             }
             writer.WriteElementString(Ns.Ver10Doorcontrol, "AccessTime", this.accessTimeField);
             writer.WriteElementString(Ns.Ver10Doorcontrol, "OpenTooLongTime", this.openTooLongTimeField);
@@ -575,7 +575,7 @@ namespace SharpOnvifServer.DoorControl
             writer.WriteElement(Ns.Ver10Doorcontrol, "Extension", this.extensionField, Ns.Ver10Doorcontrol, "AccessDoorExtension");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -585,7 +585,7 @@ namespace SharpOnvifServer.DoorControl
                     return true;
                 case "UseExtendedTime":
                     if (reader.NamespaceUri != Ns.Ver10Doorcontrol) break;
-                    this.useExtendedTimeField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
+                    this.useExtendedTimeField = reader.ToBoolean(reader.ReadElementText());
                     this.useExtendedTimeFieldSpecified = true;
                     return true;
                 case "AccessTime":
@@ -664,12 +664,12 @@ namespace SharpOnvifServer.DoorControl
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Doorcontrol, "Token", this.tokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -729,12 +729,12 @@ namespace SharpOnvifServer.DoorControl
             this.doorField = door;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Doorcontrol, "Door", this.doorField, Ns.Ver10Doorcontrol, "Door");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -778,12 +778,12 @@ namespace SharpOnvifServer.DoorControl
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Doorcontrol, "Token", this.tokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -827,12 +827,12 @@ namespace SharpOnvifServer.DoorControl
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Doorcontrol, "Token", this.tokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -919,7 +919,7 @@ namespace SharpOnvifServer.DoorControl
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Doorcontrol; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             base.WriteXmlContent(writer);
             writer.WriteElement(Ns.Ver10Doorcontrol, "Capabilities", this.capabilitiesField, Ns.Ver10Doorcontrol, "DoorCapabilities");
@@ -928,7 +928,7 @@ namespace SharpOnvifServer.DoorControl
             writer.WriteElement(Ns.Ver10Doorcontrol, "Extension", this.extensionField, Ns.Ver10Doorcontrol, "DoorExtension");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1316,138 +1316,138 @@ namespace SharpOnvifServer.DoorControl
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Doorcontrol; } }
 
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.accessFieldSpecified)
             {
-                writer.WriteAttributeString(null, "Access", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.accessField));
+                writer.WriteAttributeString(null, "Access", writer.ToXml(this.accessField));
             }
             if (this.accessTimingOverrideFieldSpecified)
             {
-                writer.WriteAttributeString(null, "AccessTimingOverride", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.accessTimingOverrideField));
+                writer.WriteAttributeString(null, "AccessTimingOverride", writer.ToXml(this.accessTimingOverrideField));
             }
             if (this.lockFieldSpecified)
             {
-                writer.WriteAttributeString(null, "Lock", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.lockField));
+                writer.WriteAttributeString(null, "Lock", writer.ToXml(this.lockField));
             }
             if (this.unlockFieldSpecified)
             {
-                writer.WriteAttributeString(null, "Unlock", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.unlockField));
+                writer.WriteAttributeString(null, "Unlock", writer.ToXml(this.unlockField));
             }
             if (this.blockFieldSpecified)
             {
-                writer.WriteAttributeString(null, "Block", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.blockField));
+                writer.WriteAttributeString(null, "Block", writer.ToXml(this.blockField));
             }
             if (this.doubleLockFieldSpecified)
             {
-                writer.WriteAttributeString(null, "DoubleLock", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.doubleLockField));
+                writer.WriteAttributeString(null, "DoubleLock", writer.ToXml(this.doubleLockField));
             }
             if (this.lockDownFieldSpecified)
             {
-                writer.WriteAttributeString(null, "LockDown", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.lockDownField));
+                writer.WriteAttributeString(null, "LockDown", writer.ToXml(this.lockDownField));
             }
             if (this.lockOpenFieldSpecified)
             {
-                writer.WriteAttributeString(null, "LockOpen", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.lockOpenField));
+                writer.WriteAttributeString(null, "LockOpen", writer.ToXml(this.lockOpenField));
             }
             if (this.doorMonitorFieldSpecified)
             {
-                writer.WriteAttributeString(null, "DoorMonitor", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.doorMonitorField));
+                writer.WriteAttributeString(null, "DoorMonitor", writer.ToXml(this.doorMonitorField));
             }
             if (this.lockMonitorFieldSpecified)
             {
-                writer.WriteAttributeString(null, "LockMonitor", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.lockMonitorField));
+                writer.WriteAttributeString(null, "LockMonitor", writer.ToXml(this.lockMonitorField));
             }
             if (this.doubleLockMonitorFieldSpecified)
             {
-                writer.WriteAttributeString(null, "DoubleLockMonitor", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.doubleLockMonitorField));
+                writer.WriteAttributeString(null, "DoubleLockMonitor", writer.ToXml(this.doubleLockMonitorField));
             }
             if (this.alarmFieldSpecified)
             {
-                writer.WriteAttributeString(null, "Alarm", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.alarmField));
+                writer.WriteAttributeString(null, "Alarm", writer.ToXml(this.alarmField));
             }
             if (this.tamperFieldSpecified)
             {
-                writer.WriteAttributeString(null, "Tamper", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.tamperField));
+                writer.WriteAttributeString(null, "Tamper", writer.ToXml(this.tamperField));
             }
             if (this.faultFieldSpecified)
             {
-                writer.WriteAttributeString(null, "Fault", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.faultField));
+                writer.WriteAttributeString(null, "Fault", writer.ToXml(this.faultField));
             }
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Access":
-                    this.accessField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.accessField = reader.ToBoolean(reader.AttributeValue);
                     this.accessFieldSpecified = true;
                     return true;
                 case "AccessTimingOverride":
-                    this.accessTimingOverrideField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.accessTimingOverrideField = reader.ToBoolean(reader.AttributeValue);
                     this.accessTimingOverrideFieldSpecified = true;
                     return true;
                 case "Lock":
-                    this.lockField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.lockField = reader.ToBoolean(reader.AttributeValue);
                     this.lockFieldSpecified = true;
                     return true;
                 case "Unlock":
-                    this.unlockField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.unlockField = reader.ToBoolean(reader.AttributeValue);
                     this.unlockFieldSpecified = true;
                     return true;
                 case "Block":
-                    this.blockField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.blockField = reader.ToBoolean(reader.AttributeValue);
                     this.blockFieldSpecified = true;
                     return true;
                 case "DoubleLock":
-                    this.doubleLockField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.doubleLockField = reader.ToBoolean(reader.AttributeValue);
                     this.doubleLockFieldSpecified = true;
                     return true;
                 case "LockDown":
-                    this.lockDownField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.lockDownField = reader.ToBoolean(reader.AttributeValue);
                     this.lockDownFieldSpecified = true;
                     return true;
                 case "LockOpen":
-                    this.lockOpenField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.lockOpenField = reader.ToBoolean(reader.AttributeValue);
                     this.lockOpenFieldSpecified = true;
                     return true;
                 case "DoorMonitor":
-                    this.doorMonitorField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.doorMonitorField = reader.ToBoolean(reader.AttributeValue);
                     this.doorMonitorFieldSpecified = true;
                     return true;
                 case "LockMonitor":
-                    this.lockMonitorField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.lockMonitorField = reader.ToBoolean(reader.AttributeValue);
                     this.lockMonitorFieldSpecified = true;
                     return true;
                 case "DoubleLockMonitor":
-                    this.doubleLockMonitorField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.doubleLockMonitorField = reader.ToBoolean(reader.AttributeValue);
                     this.doubleLockMonitorFieldSpecified = true;
                     return true;
                 case "Alarm":
-                    this.alarmField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.alarmField = reader.ToBoolean(reader.AttributeValue);
                     this.alarmFieldSpecified = true;
                     return true;
                 case "Tamper":
-                    this.tamperField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.tamperField = reader.ToBoolean(reader.AttributeValue);
                     this.tamperFieldSpecified = true;
                     return true;
                 case "Fault":
-                    this.faultField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.faultField = reader.ToBoolean(reader.AttributeValue);
                     this.faultFieldSpecified = true;
                     return true;
             }
             return false;
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -1469,14 +1469,14 @@ namespace SharpOnvifServer.DoorControl
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Doorcontrol; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -1527,14 +1527,14 @@ namespace SharpOnvifServer.DoorControl
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Doorcontrol; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Doorcontrol, "Reason", this.reasonField);
             writer.WriteElementString(Ns.Ver10Doorcontrol, "State", EnumXml.ToXml(this.stateField));
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1547,7 +1547,7 @@ namespace SharpOnvifServer.DoorControl
                     this.stateField = EnumXml.ParseDoorFaultState(reader.ReadElementText());
                     return true;
             }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -1586,14 +1586,14 @@ namespace SharpOnvifServer.DoorControl
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Doorcontrol; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             base.WriteXmlContent(writer);
             writer.WriteElement(Ns.Ver10Doorcontrol, "Capabilities", this.capabilitiesField, Ns.Ver10Doorcontrol, "DoorCapabilities");
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1603,7 +1603,7 @@ namespace SharpOnvifServer.DoorControl
                     return true;
             }
             if (base.ReadXmlElement(reader)) return true;
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -1645,13 +1645,13 @@ namespace SharpOnvifServer.DoorControl
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Doorcontrol; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Doorcontrol, "Name", this.nameField);
             writer.WriteElementString(Ns.Ver10Doorcontrol, "Description", this.descriptionField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1827,7 +1827,7 @@ namespace SharpOnvifServer.DoorControl
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Doorcontrol; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.doorPhysicalStateFieldSpecified)
             {
@@ -1851,7 +1851,7 @@ namespace SharpOnvifServer.DoorControl
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1888,7 +1888,7 @@ namespace SharpOnvifServer.DoorControl
                     this.doorModeField = EnumXml.ParseDoorMode(reader.ReadElementText());
                     return true;
             }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -1939,14 +1939,14 @@ namespace SharpOnvifServer.DoorControl
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Doorcontrol; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Doorcontrol, "Reason", this.reasonField);
             writer.WriteElementString(Ns.Ver10Doorcontrol, "State", EnumXml.ToXml(this.stateField));
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1959,7 +1959,7 @@ namespace SharpOnvifServer.DoorControl
                     this.stateField = EnumXml.ParseDoorTamperState(reader.ReadElementText());
                     return true;
             }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -1997,12 +1997,12 @@ namespace SharpOnvifServer.DoorControl
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Doorcontrol, "Token", this.tokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2092,22 +2092,22 @@ namespace SharpOnvifServer.DoorControl
             this.startReferenceField = startReference;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.limitFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Doorcontrol, "Limit", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.limitField));
+                writer.WriteElementString(Ns.Ver10Doorcontrol, "Limit", writer.ToXml(this.limitField));
             }
             writer.WriteElementString(Ns.Ver10Doorcontrol, "StartReference", this.startReferenceField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Limit":
                     if (reader.NamespaceUri != Ns.Ver10Doorcontrol) break;
-                    this.limitField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.limitField = reader.ToInt32(reader.ReadElementText());
                     this.limitFieldSpecified = true;
                     return true;
                 case "StartReference":
@@ -2164,7 +2164,7 @@ namespace SharpOnvifServer.DoorControl
             this.doorInfoField = doorInfo;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Doorcontrol, "NextStartReference", this.nextStartReferenceField);
             if (this.doorInfoField != null)
@@ -2176,7 +2176,7 @@ namespace SharpOnvifServer.DoorControl
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2186,7 +2186,7 @@ namespace SharpOnvifServer.DoorControl
                     return true;
                 case "DoorInfo":
                     if (reader.NamespaceUri != Ns.Ver10Doorcontrol) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.doorInfoField, reader.ReadElementObject<DoorInfo>(() => new DoorInfo()));
+                    reader.Append(ref this.doorInfoField, reader.ReadElementObject<DoorInfo>(() => new DoorInfo()));
                     return true;
             }
             return false;
@@ -2225,7 +2225,7 @@ namespace SharpOnvifServer.DoorControl
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.tokenField != null)
             {
@@ -2236,13 +2236,13 @@ namespace SharpOnvifServer.DoorControl
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Token":
                     if (reader.NamespaceUri != Ns.Ver10Doorcontrol) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.tokenField, reader.ReadElementText());
+                    reader.Append(ref this.tokenField, reader.ReadElementText());
                     return true;
             }
             return false;
@@ -2281,7 +2281,7 @@ namespace SharpOnvifServer.DoorControl
             this.doorInfoField = doorInfo;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.doorInfoField != null)
             {
@@ -2292,13 +2292,13 @@ namespace SharpOnvifServer.DoorControl
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "DoorInfo":
                     if (reader.NamespaceUri != Ns.Ver10Doorcontrol) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.doorInfoField, reader.ReadElementObject<DoorInfo>(() => new DoorInfo()));
+                    reader.Append(ref this.doorInfoField, reader.ReadElementObject<DoorInfo>(() => new DoorInfo()));
                     return true;
             }
             return false;
@@ -2365,22 +2365,22 @@ namespace SharpOnvifServer.DoorControl
             this.startReferenceField = startReference;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.limitFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Doorcontrol, "Limit", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.limitField));
+                writer.WriteElementString(Ns.Ver10Doorcontrol, "Limit", writer.ToXml(this.limitField));
             }
             writer.WriteElementString(Ns.Ver10Doorcontrol, "StartReference", this.startReferenceField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Limit":
                     if (reader.NamespaceUri != Ns.Ver10Doorcontrol) break;
-                    this.limitField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.limitField = reader.ToInt32(reader.ReadElementText());
                     this.limitFieldSpecified = true;
                     return true;
                 case "StartReference":
@@ -2437,7 +2437,7 @@ namespace SharpOnvifServer.DoorControl
             this.doorField = door;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Doorcontrol, "NextStartReference", this.nextStartReferenceField);
             if (this.doorField != null)
@@ -2449,7 +2449,7 @@ namespace SharpOnvifServer.DoorControl
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2459,7 +2459,7 @@ namespace SharpOnvifServer.DoorControl
                     return true;
                 case "Door":
                     if (reader.NamespaceUri != Ns.Ver10Doorcontrol) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.doorField, reader.ReadElementObject<Door>(() => new Door()));
+                    reader.Append(ref this.doorField, reader.ReadElementObject<Door>(() => new Door()));
                     return true;
             }
             return false;
@@ -2496,12 +2496,12 @@ namespace SharpOnvifServer.DoorControl
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Doorcontrol, "Token", this.tokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2544,12 +2544,12 @@ namespace SharpOnvifServer.DoorControl
             this.doorStateField = doorState;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Doorcontrol, "DoorState", this.doorStateField, Ns.Ver10Doorcontrol, "DoorState");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2593,7 +2593,7 @@ namespace SharpOnvifServer.DoorControl
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.tokenField != null)
             {
@@ -2604,13 +2604,13 @@ namespace SharpOnvifServer.DoorControl
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Token":
                     if (reader.NamespaceUri != Ns.Ver10Doorcontrol) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.tokenField, reader.ReadElementText());
+                    reader.Append(ref this.tokenField, reader.ReadElementText());
                     return true;
             }
             return false;
@@ -2648,7 +2648,7 @@ namespace SharpOnvifServer.DoorControl
             this.doorField = door;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.doorField != null)
             {
@@ -2659,13 +2659,13 @@ namespace SharpOnvifServer.DoorControl
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Door":
                     if (reader.NamespaceUri != Ns.Ver10Doorcontrol) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.doorField, reader.ReadElementObject<Door>(() => new Door()));
+                    reader.Append(ref this.doorField, reader.ReadElementObject<Door>(() => new Door()));
                     return true;
             }
             return false;
@@ -2715,12 +2715,12 @@ namespace SharpOnvifServer.DoorControl
             this.capabilitiesField = capabilities;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Doorcontrol, "Capabilities", this.capabilitiesField, Ns.Ver10Doorcontrol, "ServiceCapabilities");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2765,12 +2765,12 @@ namespace SharpOnvifServer.DoorControl
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Doorcontrol, "Token", this.tokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2834,12 +2834,12 @@ namespace SharpOnvifServer.DoorControl
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Doorcontrol, "Token", this.tokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2901,12 +2901,12 @@ namespace SharpOnvifServer.DoorControl
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Doorcontrol, "Token", this.tokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2967,12 +2967,12 @@ namespace SharpOnvifServer.DoorControl
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Doorcontrol, "Token", this.tokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -3035,12 +3035,12 @@ namespace SharpOnvifServer.DoorControl
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Doorcontrol, "Token", this.tokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -3100,12 +3100,12 @@ namespace SharpOnvifServer.DoorControl
             this.doorField = door;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Doorcontrol, "Door", this.doorField, Ns.Ver10Doorcontrol, "Door");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -3242,54 +3242,54 @@ namespace SharpOnvifServer.DoorControl
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Doorcontrol; } }
 
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
-            writer.WriteAttributeString(null, "MaxLimit", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxLimitField));
+            writer.WriteAttributeString(null, "MaxLimit", writer.ToXml(this.maxLimitField));
             if (this.maxDoorsFieldSpecified)
             {
-                writer.WriteAttributeString(null, "MaxDoors", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxDoorsField));
+                writer.WriteAttributeString(null, "MaxDoors", writer.ToXml(this.maxDoorsField));
             }
             if (this.clientSuppliedTokenSupportedFieldSpecified)
             {
-                writer.WriteAttributeString(null, "ClientSuppliedTokenSupported", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.clientSuppliedTokenSupportedField));
+                writer.WriteAttributeString(null, "ClientSuppliedTokenSupported", writer.ToXml(this.clientSuppliedTokenSupportedField));
             }
             if (this.doorManagementSupportedFieldSpecified)
             {
-                writer.WriteAttributeString(null, "DoorManagementSupported", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.doorManagementSupportedField));
+                writer.WriteAttributeString(null, "DoorManagementSupported", writer.ToXml(this.doorManagementSupportedField));
             }
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "MaxLimit":
-                    this.maxLimitField = SharpOnvifCommon.Xml.XmlPrimitives.ToUInt32(reader.AttributeValue);
+                    this.maxLimitField = reader.ToUInt32(reader.AttributeValue);
                     return true;
                 case "MaxDoors":
-                    this.maxDoorsField = SharpOnvifCommon.Xml.XmlPrimitives.ToUInt32(reader.AttributeValue);
+                    this.maxDoorsField = reader.ToUInt32(reader.AttributeValue);
                     this.maxDoorsFieldSpecified = true;
                     return true;
                 case "ClientSuppliedTokenSupported":
-                    this.clientSuppliedTokenSupportedField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.clientSuppliedTokenSupportedField = reader.ToBoolean(reader.AttributeValue);
                     this.clientSuppliedTokenSupportedFieldSpecified = true;
                     return true;
                 case "DoorManagementSupported":
-                    this.doorManagementSupportedField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.doorManagementSupportedField = reader.ToBoolean(reader.AttributeValue);
                     this.doorManagementSupportedFieldSpecified = true;
                     return true;
             }
             return false;
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -3327,12 +3327,12 @@ namespace SharpOnvifServer.DoorControl
             this.doorField = door;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Doorcontrol, "Door", this.doorField, Ns.Ver10Doorcontrol, "Door");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -3462,7 +3462,7 @@ namespace SharpOnvifServer.DoorControl
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Doorcontrol; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Doorcontrol, "ReleaseTime", this.releaseTimeField);
             writer.WriteElementString(Ns.Ver10Doorcontrol, "OpenTime", this.openTimeField);
@@ -3473,7 +3473,7 @@ namespace SharpOnvifServer.DoorControl
             writer.WriteElement(Ns.Ver10Doorcontrol, "Extension", this.extensionField, Ns.Ver10Doorcontrol, "TimingsExtension");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -3527,14 +3527,14 @@ namespace SharpOnvifServer.DoorControl
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Doorcontrol; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -3571,12 +3571,12 @@ namespace SharpOnvifServer.DoorControl
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Doorcontrol, "Token", this.tokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {

@@ -3056,7 +3056,7 @@ namespace SharpOnvifServer.DeviceMgmt
             object service, string action, System.Xml.XmlReader body, System.Threading.CancellationToken cancellationToken)
         {
             DeviceBase target = (DeviceBase)service;
-            var reader = new SharpOnvifCommon.Xml.OnvifXmlReader(body, ResolveXmlType);
+            var reader = CreateReader(body);
 
             switch (action)
             {

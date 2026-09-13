@@ -84,7 +84,7 @@ namespace SharpOnvif.Tests
                 () => new HttpRequestException("An error occurred while sending the request.",
                           new IOException("The response ended prematurely.")))))
             {
-                var failure = await Assert.ThrowsExactlyAsync<OnvifTransportException>(
+                var failure = await Assert.ThrowsExactlyAsync<SoapTransportException>(
                     () => client.GetDeviceInformationAsync());
 
                 StringAssert.Contains(failure.Message, Endpoint, "the address is worth knowing");
@@ -100,7 +100,7 @@ namespace SharpOnvif.Tests
         {
             using (var client = Client(new SilentTransport(), TimeSpan.FromMilliseconds(300)))
             {
-                var failure = await Assert.ThrowsExactlyAsync<OnvifTransportException>(
+                var failure = await Assert.ThrowsExactlyAsync<SoapTransportException>(
                     () => client.GetDeviceInformationAsync());
 
                 Assert.IsTrue(failure.TimedOut, "a device that runs out of time is worth telling apart");

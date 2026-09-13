@@ -64,13 +64,13 @@ namespace SharpOnvifClient.Media2
             this.configurationField = configuration;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "Token", this.tokenField);
             writer.WriteElement(Ns.Ver20Media, "Configuration", this.configurationField, Ns.Ver20Media, "AudioClip");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -144,14 +144,14 @@ namespace SharpOnvifClient.Media2
             this.expiryTimeField = expiryTime;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "Token", this.tokenField);
             writer.WriteElementString(Ns.Ver20Media, "UploadUri", this.uploadUriField);
-            writer.WriteElementString(Ns.Ver20Media, "ExpiryTime", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.expiryTimeField));
+            writer.WriteElementString(Ns.Ver20Media, "ExpiryTime", writer.ToXml(this.expiryTimeField));
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -165,7 +165,7 @@ namespace SharpOnvifClient.Media2
                     return true;
                 case "ExpiryTime":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.expiryTimeField = SharpOnvifCommon.Xml.XmlPrimitives.ToDateTime(reader.ReadElementText());
+                    this.expiryTimeField = reader.ToDateTime(reader.ReadElementText());
                     return true;
             }
             return false;
@@ -231,7 +231,7 @@ namespace SharpOnvifClient.Media2
             this.configurationField = configuration;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "ProfileToken", this.profileTokenField);
             writer.WriteElementString(Ns.Ver20Media, "Name", this.nameField);
@@ -244,7 +244,7 @@ namespace SharpOnvifClient.Media2
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -258,7 +258,7 @@ namespace SharpOnvifClient.Media2
                     return true;
                 case "Configuration":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.configurationField, reader.ReadElementObject<ConfigurationRef>(() => new ConfigurationRef()));
+                    reader.Append(ref this.configurationField, reader.ReadElementObject<ConfigurationRef>(() => new ConfigurationRef()));
                     return true;
             }
             return false;
@@ -336,14 +336,14 @@ namespace SharpOnvifClient.Media2
             this.tTSConfigurationField = tTSConfiguration;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "Token", this.tokenField);
             writer.WriteElement(Ns.Ver20Media, "Configuration", this.configurationField, Ns.Ver20Media, "AudioClip");
             writer.WriteElement(Ns.Ver20Media, "TTSConfiguration", this.tTSConfigurationField, Ns.Ver20Media, "TTSAudio");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -394,12 +394,12 @@ namespace SharpOnvifClient.Media2
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "Token", this.tokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -553,9 +553,9 @@ namespace SharpOnvifClient.Media2
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver20Media; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
-            writer.WriteElementString(Ns.Ver20Media, "Enabled", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.enabledField));
+            writer.WriteElementString(Ns.Ver20Media, "Enabled", writer.ToXml(this.enabledField));
             writer.WriteElementString(Ns.Ver20Media, "Name", this.nameField);
             if (this.audioOutputTokenField != null)
             {
@@ -565,26 +565,26 @@ namespace SharpOnvifClient.Media2
                 }
             }
             writer.WriteElementString(Ns.Ver20Media, "Type", this.typeField);
-            writer.WriteElementString(Ns.Ver20Media, "RepeatCycles", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.repeatCyclesField));
+            writer.WriteElementString(Ns.Ver20Media, "RepeatCycles", writer.ToXml(this.repeatCyclesField));
             if (this.repeatIntervalFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver20Media, "RepeatInterval", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.repeatIntervalField));
+                writer.WriteElementString(Ns.Ver20Media, "RepeatInterval", writer.ToXml(this.repeatIntervalField));
             }
             if (this.audioOutputLevelFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver20Media, "AudioOutputLevel", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.audioOutputLevelField));
+                writer.WriteElementString(Ns.Ver20Media, "AudioOutputLevel", writer.ToXml(this.audioOutputLevelField));
             }
             writer.WriteElementString(Ns.Ver20Media, "ScheduleToken", this.scheduleTokenField);
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Enabled":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.enabledField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
+                    this.enabledField = reader.ToBoolean(reader.ReadElementText());
                     return true;
                 case "Name":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
@@ -592,7 +592,7 @@ namespace SharpOnvifClient.Media2
                     return true;
                 case "AudioOutputToken":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.audioOutputTokenField, reader.ReadElementText());
+                    reader.Append(ref this.audioOutputTokenField, reader.ReadElementText());
                     return true;
                 case "Type":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
@@ -600,16 +600,16 @@ namespace SharpOnvifClient.Media2
                     return true;
                 case "RepeatCycles":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.repeatCyclesField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.repeatCyclesField = reader.ToInt32(reader.ReadElementText());
                     return true;
                 case "RepeatInterval":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.repeatIntervalField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.repeatIntervalField = reader.ToInt32(reader.ReadElementText());
                     this.repeatIntervalFieldSpecified = true;
                     return true;
                 case "AudioOutputLevel":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.audioOutputLevelField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.audioOutputLevelField = reader.ToInt32(reader.ReadElementText());
                     this.audioOutputLevelFieldSpecified = true;
                     return true;
                 case "ScheduleToken":
@@ -617,7 +617,7 @@ namespace SharpOnvifClient.Media2
                     this.scheduleTokenField = reader.ReadElementText();
                     return true;
             }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -711,45 +711,45 @@ namespace SharpOnvifClient.Media2
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver20Media; } }
 
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.maxAudioClipLimitFieldSpecified)
             {
-                writer.WriteAttributeString(null, "MaxAudioClipLimit", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxAudioClipLimitField));
+                writer.WriteAttributeString(null, "MaxAudioClipLimit", writer.ToXml(this.maxAudioClipLimitField));
             }
             if (this.maxAudioClipSizeFieldSpecified)
             {
-                writer.WriteAttributeString(null, "MaxAudioClipSize", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxAudioClipSizeField));
+                writer.WriteAttributeString(null, "MaxAudioClipSize", writer.ToXml(this.maxAudioClipSizeField));
             }
-            writer.WriteAttributeString(null, "SupportedAudioClipFormat", SharpOnvifCommon.Xml.OnvifArray.JoinList(this.supportedAudioClipFormatField));
+            writer.WriteAttributeString(null, "SupportedAudioClipFormat", writer.JoinList(this.supportedAudioClipFormatField));
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver20Media, "TTSCapabilities", this.tTSCapabilitiesField, Ns.Ver20Media, "TTSCapabilities");
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "MaxAudioClipLimit":
-                    this.maxAudioClipLimitField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.AttributeValue);
+                    this.maxAudioClipLimitField = reader.ToInt32(reader.AttributeValue);
                     this.maxAudioClipLimitFieldSpecified = true;
                     return true;
                 case "MaxAudioClipSize":
-                    this.maxAudioClipSizeField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.AttributeValue);
+                    this.maxAudioClipSizeField = reader.ToSingle(reader.AttributeValue);
                     this.maxAudioClipSizeFieldSpecified = true;
                     return true;
                 case "SupportedAudioClipFormat":
-                    this.supportedAudioClipFormatField = SharpOnvifCommon.Xml.OnvifArray.SplitList(reader.AttributeValue);
+                    this.supportedAudioClipFormatField = reader.SplitList(reader.AttributeValue);
                     return true;
             }
             return false;
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -758,7 +758,7 @@ namespace SharpOnvifClient.Media2
                     this.tTSCapabilitiesField = reader.ReadElementObject<TTSCapabilities>(() => new TTSCapabilities());
                     return true;
             }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -1035,44 +1035,44 @@ namespace SharpOnvifClient.Media2
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver20Media; } }
 
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.snapshotUriFieldSpecified)
             {
-                writer.WriteAttributeString(null, "SnapshotUri", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.snapshotUriField));
+                writer.WriteAttributeString(null, "SnapshotUri", writer.ToXml(this.snapshotUriField));
             }
             if (this.rotationFieldSpecified)
             {
-                writer.WriteAttributeString(null, "Rotation", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.rotationField));
+                writer.WriteAttributeString(null, "Rotation", writer.ToXml(this.rotationField));
             }
             if (this.videoSourceModeFieldSpecified)
             {
-                writer.WriteAttributeString(null, "VideoSourceMode", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.videoSourceModeField));
+                writer.WriteAttributeString(null, "VideoSourceMode", writer.ToXml(this.videoSourceModeField));
             }
             if (this.oSDFieldSpecified)
             {
-                writer.WriteAttributeString(null, "OSD", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.oSDField));
+                writer.WriteAttributeString(null, "OSD", writer.ToXml(this.oSDField));
             }
             if (this.temporaryOSDTextFieldSpecified)
             {
-                writer.WriteAttributeString(null, "TemporaryOSDText", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.temporaryOSDTextField));
+                writer.WriteAttributeString(null, "TemporaryOSDText", writer.ToXml(this.temporaryOSDTextField));
             }
             if (this.maskFieldSpecified)
             {
-                writer.WriteAttributeString(null, "Mask", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maskField));
+                writer.WriteAttributeString(null, "Mask", writer.ToXml(this.maskField));
             }
             if (this.sourceMaskFieldSpecified)
             {
-                writer.WriteAttributeString(null, "SourceMask", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.sourceMaskField));
+                writer.WriteAttributeString(null, "SourceMask", writer.ToXml(this.sourceMaskField));
             }
             if (this.webRTCFieldSpecified)
             {
-                writer.WriteAttributeString(null, "WebRTC", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.webRTCField));
+                writer.WriteAttributeString(null, "WebRTC", writer.ToXml(this.webRTCField));
             }
-            writer.WriteAttributeString(null, "WebRTC_codecs", SharpOnvifCommon.Xml.OnvifArray.JoinList(this.webRTC_codecsField));
+            writer.WriteAttributeString(null, "WebRTC_codecs", writer.JoinList(this.webRTC_codecsField));
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver20Media, "ProfileCapabilities", this.profileCapabilitiesField, Ns.Ver20Media, "ProfileCapabilities");
             writer.WriteElement(Ns.Ver20Media, "StreamingCapabilities", this.streamingCapabilitiesField, Ns.Ver20Media, "StreamingCapabilities");
@@ -1081,50 +1081,50 @@ namespace SharpOnvifClient.Media2
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "SnapshotUri":
-                    this.snapshotUriField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.snapshotUriField = reader.ToBoolean(reader.AttributeValue);
                     this.snapshotUriFieldSpecified = true;
                     return true;
                 case "Rotation":
-                    this.rotationField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.rotationField = reader.ToBoolean(reader.AttributeValue);
                     this.rotationFieldSpecified = true;
                     return true;
                 case "VideoSourceMode":
-                    this.videoSourceModeField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.videoSourceModeField = reader.ToBoolean(reader.AttributeValue);
                     this.videoSourceModeFieldSpecified = true;
                     return true;
                 case "OSD":
-                    this.oSDField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.oSDField = reader.ToBoolean(reader.AttributeValue);
                     this.oSDFieldSpecified = true;
                     return true;
                 case "TemporaryOSDText":
-                    this.temporaryOSDTextField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.temporaryOSDTextField = reader.ToBoolean(reader.AttributeValue);
                     this.temporaryOSDTextFieldSpecified = true;
                     return true;
                 case "Mask":
-                    this.maskField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.maskField = reader.ToBoolean(reader.AttributeValue);
                     this.maskFieldSpecified = true;
                     return true;
                 case "SourceMask":
-                    this.sourceMaskField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.sourceMaskField = reader.ToBoolean(reader.AttributeValue);
                     this.sourceMaskFieldSpecified = true;
                     return true;
                 case "WebRTC":
-                    this.webRTCField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.AttributeValue);
+                    this.webRTCField = reader.ToInt32(reader.AttributeValue);
                     this.webRTCFieldSpecified = true;
                     return true;
                 case "WebRTC_codecs":
-                    this.webRTC_codecsField = SharpOnvifCommon.Xml.OnvifArray.SplitList(reader.AttributeValue);
+                    this.webRTC_codecsField = reader.SplitList(reader.AttributeValue);
                     return true;
             }
             return false;
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1145,7 +1145,7 @@ namespace SharpOnvifClient.Media2
                     this.multicastAudioDecoderCapabilitiesField = reader.ReadElementObject<MulticastAudioDecoderCapabilities>(() => new MulticastAudioDecoderCapabilities());
                     return true;
             }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -1186,13 +1186,13 @@ namespace SharpOnvifClient.Media2
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver20Media; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "Type", this.typeField);
             writer.WriteElementString(Ns.Ver20Media, "Token", this.tokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1349,7 +1349,7 @@ namespace SharpOnvifClient.Media2
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver20Media; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver20Media, "VideoSource", this.videoSourceField, "http://www.onvif.org/ver10/schema", "VideoSourceConfiguration");
             writer.WriteElement(Ns.Ver20Media, "AudioSource", this.audioSourceField, "http://www.onvif.org/ver10/schema", "AudioSourceConfiguration");
@@ -1364,7 +1364,7 @@ namespace SharpOnvifClient.Media2
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1409,7 +1409,7 @@ namespace SharpOnvifClient.Media2
                     this.receiverField = reader.ReadElementObject<ReceiverConfiguration>(() => new ReceiverConfiguration());
                     return true;
             }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -1442,12 +1442,12 @@ namespace SharpOnvifClient.Media2
             this.maskField = mask;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver20Media, "Mask", this.maskField, Ns.Ver20Media, "Mask");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1488,12 +1488,12 @@ namespace SharpOnvifClient.Media2
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "Token", this.tokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1534,12 +1534,12 @@ namespace SharpOnvifClient.Media2
             this.oSDField = oSD;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver20Media, "OSD", this.oSDField, "http://www.onvif.org/ver10/schema", "OSDConfiguration");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1580,12 +1580,12 @@ namespace SharpOnvifClient.Media2
             this.oSDTokenField = oSDToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "OSDToken", this.oSDTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1642,7 +1642,7 @@ namespace SharpOnvifClient.Media2
             this.configurationField = configuration;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "Name", this.nameField);
             if (this.configurationField != null)
@@ -1654,7 +1654,7 @@ namespace SharpOnvifClient.Media2
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1664,7 +1664,7 @@ namespace SharpOnvifClient.Media2
                     return true;
                 case "Configuration":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.configurationField, reader.ReadElementObject<ConfigurationRef>(() => new ConfigurationRef()));
+                    reader.Append(ref this.configurationField, reader.ReadElementObject<ConfigurationRef>(() => new ConfigurationRef()));
                     return true;
             }
             return false;
@@ -1701,12 +1701,12 @@ namespace SharpOnvifClient.Media2
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "Token", this.tokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1750,12 +1750,12 @@ namespace SharpOnvifClient.Media2
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "Token", this.tokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1811,12 +1811,12 @@ namespace SharpOnvifClient.Media2
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "Token", this.tokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1869,12 +1869,12 @@ namespace SharpOnvifClient.Media2
             this.oSDTokenField = oSDToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "OSDToken", this.oSDTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1927,12 +1927,12 @@ namespace SharpOnvifClient.Media2
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "Token", this.tokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1990,13 +1990,13 @@ namespace SharpOnvifClient.Media2
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver20Media; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "Encoding", this.encodingField);
-            writer.WriteElementString(Ns.Ver20Media, "Number", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.numberField));
+            writer.WriteElementString(Ns.Ver20Media, "Number", writer.ToXml(this.numberField));
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2006,7 +2006,7 @@ namespace SharpOnvifClient.Media2
                     return true;
                 case "Number":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.numberField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.numberField = reader.ToInt32(reader.ReadElementText());
                     return true;
             }
             return false;
@@ -2056,7 +2056,7 @@ namespace SharpOnvifClient.Media2
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver20Media; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.codecField != null)
             {
@@ -2065,24 +2065,24 @@ namespace SharpOnvifClient.Media2
                     writer.WriteElement(Ns.Ver20Media, "Codec", this.codecField[i], Ns.Ver20Media, "EncoderInstance");
                 }
             }
-            writer.WriteElementString(Ns.Ver20Media, "Total", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.totalField));
+            writer.WriteElementString(Ns.Ver20Media, "Total", writer.ToXml(this.totalField));
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Codec":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.codecField, reader.ReadElementObject<EncoderInstance>(() => new EncoderInstance()));
+                    reader.Append(ref this.codecField, reader.ReadElementObject<EncoderInstance>(() => new EncoderInstance()));
                     return true;
                 case "Total":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.totalField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.totalField = reader.ToInt32(reader.ReadElementText());
                     return true;
             }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -2130,13 +2130,13 @@ namespace SharpOnvifClient.Media2
             this.profileTokenField = profileToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "ConfigurationToken", this.configurationTokenField);
             writer.WriteElementString(Ns.Ver20Media, "ProfileToken", this.profileTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2183,7 +2183,7 @@ namespace SharpOnvifClient.Media2
             this.configurationsField = configurations;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.configurationsField != null)
             {
@@ -2194,13 +2194,13 @@ namespace SharpOnvifClient.Media2
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Configurations":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.configurationsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration>(() => new SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration()));
+                    reader.Append(ref this.configurationsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration>(() => new SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration()));
                     return true;
             }
             return false;
@@ -2237,12 +2237,12 @@ namespace SharpOnvifClient.Media2
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "Token", this.tokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2285,7 +2285,7 @@ namespace SharpOnvifClient.Media2
             this.audioClipItemField = audioClipItem;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.audioClipItemField != null)
             {
@@ -2296,13 +2296,13 @@ namespace SharpOnvifClient.Media2
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "AudioClipItem":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.audioClipItemField, reader.ReadElementObject<GetAudioClipsResponseItem>(() => new GetAudioClipsResponseItem()));
+                    reader.Append(ref this.audioClipItemField, reader.ReadElementObject<GetAudioClipsResponseItem>(() => new GetAudioClipsResponseItem()));
                     return true;
             }
             return false;
@@ -2350,14 +2350,14 @@ namespace SharpOnvifClient.Media2
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver20Media; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "Token", this.tokenField);
             writer.WriteElement(Ns.Ver20Media, "Configuration", this.configurationField, Ns.Ver20Media, "AudioClip");
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2370,7 +2370,7 @@ namespace SharpOnvifClient.Media2
                     this.configurationField = reader.ReadElementObject<AudioClip>(() => new AudioClip());
                     return true;
             }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -2416,13 +2416,13 @@ namespace SharpOnvifClient.Media2
             this.profileTokenField = profileToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "ConfigurationToken", this.configurationTokenField);
             writer.WriteElementString(Ns.Ver20Media, "ProfileToken", this.profileTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2470,7 +2470,7 @@ namespace SharpOnvifClient.Media2
             this.optionsField = options;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.optionsField != null)
             {
@@ -2481,13 +2481,13 @@ namespace SharpOnvifClient.Media2
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Options":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.optionsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.AudioEncoder2ConfigurationOptions>(() => new SharpOnvifCommon.Onvif.AudioEncoder2ConfigurationOptions()));
+                    reader.Append(ref this.optionsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.AudioEncoder2ConfigurationOptions>(() => new SharpOnvifCommon.Onvif.AudioEncoder2ConfigurationOptions()));
                     return true;
             }
             return false;
@@ -2537,13 +2537,13 @@ namespace SharpOnvifClient.Media2
             this.profileTokenField = profileToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "ConfigurationToken", this.configurationTokenField);
             writer.WriteElementString(Ns.Ver20Media, "ProfileToken", this.profileTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2590,7 +2590,7 @@ namespace SharpOnvifClient.Media2
             this.configurationsField = configurations;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.configurationsField != null)
             {
@@ -2601,13 +2601,13 @@ namespace SharpOnvifClient.Media2
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Configurations":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.configurationsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.AudioDecoderConfiguration>(() => new SharpOnvifCommon.Onvif.AudioDecoderConfiguration()));
+                    reader.Append(ref this.configurationsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.AudioDecoderConfiguration>(() => new SharpOnvifCommon.Onvif.AudioDecoderConfiguration()));
                     return true;
             }
             return false;
@@ -2656,13 +2656,13 @@ namespace SharpOnvifClient.Media2
             this.profileTokenField = profileToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "ConfigurationToken", this.configurationTokenField);
             writer.WriteElementString(Ns.Ver20Media, "ProfileToken", this.profileTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2711,7 +2711,7 @@ namespace SharpOnvifClient.Media2
             this.optionsField = options;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.optionsField != null)
             {
@@ -2722,13 +2722,13 @@ namespace SharpOnvifClient.Media2
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Options":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.optionsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.AudioEncoder2ConfigurationOptions>(() => new SharpOnvifCommon.Onvif.AudioEncoder2ConfigurationOptions()));
+                    reader.Append(ref this.optionsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.AudioEncoder2ConfigurationOptions>(() => new SharpOnvifCommon.Onvif.AudioEncoder2ConfigurationOptions()));
                     return true;
             }
             return false;
@@ -2778,13 +2778,13 @@ namespace SharpOnvifClient.Media2
             this.profileTokenField = profileToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "ConfigurationToken", this.configurationTokenField);
             writer.WriteElementString(Ns.Ver20Media, "ProfileToken", this.profileTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2831,7 +2831,7 @@ namespace SharpOnvifClient.Media2
             this.configurationsField = configurations;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.configurationsField != null)
             {
@@ -2842,13 +2842,13 @@ namespace SharpOnvifClient.Media2
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Configurations":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.configurationsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.AudioEncoder2Configuration>(() => new SharpOnvifCommon.Onvif.AudioEncoder2Configuration()));
+                    reader.Append(ref this.configurationsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.AudioEncoder2Configuration>(() => new SharpOnvifCommon.Onvif.AudioEncoder2Configuration()));
                     return true;
             }
             return false;
@@ -2899,13 +2899,13 @@ namespace SharpOnvifClient.Media2
             this.profileTokenField = profileToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "ConfigurationToken", this.configurationTokenField);
             writer.WriteElementString(Ns.Ver20Media, "ProfileToken", this.profileTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2956,12 +2956,12 @@ namespace SharpOnvifClient.Media2
             this.optionsField = options;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver20Media, "Options", this.optionsField, "http://www.onvif.org/ver10/schema", "AudioOutputConfigurationOptions");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -3017,13 +3017,13 @@ namespace SharpOnvifClient.Media2
             this.profileTokenField = profileToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "ConfigurationToken", this.configurationTokenField);
             writer.WriteElementString(Ns.Ver20Media, "ProfileToken", this.profileTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -3070,7 +3070,7 @@ namespace SharpOnvifClient.Media2
             this.configurationsField = configurations;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.configurationsField != null)
             {
@@ -3081,13 +3081,13 @@ namespace SharpOnvifClient.Media2
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Configurations":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.configurationsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.AudioOutputConfiguration>(() => new SharpOnvifCommon.Onvif.AudioOutputConfiguration()));
+                    reader.Append(ref this.configurationsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.AudioOutputConfiguration>(() => new SharpOnvifCommon.Onvif.AudioOutputConfiguration()));
                     return true;
             }
             return false;
@@ -3138,13 +3138,13 @@ namespace SharpOnvifClient.Media2
             this.profileTokenField = profileToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "ConfigurationToken", this.configurationTokenField);
             writer.WriteElementString(Ns.Ver20Media, "ProfileToken", this.profileTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -3195,12 +3195,12 @@ namespace SharpOnvifClient.Media2
             this.optionsField = options;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver20Media, "Options", this.optionsField, "http://www.onvif.org/ver10/schema", "AudioSourceConfigurationOptions");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -3256,13 +3256,13 @@ namespace SharpOnvifClient.Media2
             this.profileTokenField = profileToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "ConfigurationToken", this.configurationTokenField);
             writer.WriteElementString(Ns.Ver20Media, "ProfileToken", this.profileTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -3309,7 +3309,7 @@ namespace SharpOnvifClient.Media2
             this.configurationsField = configurations;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.configurationsField != null)
             {
@@ -3320,13 +3320,13 @@ namespace SharpOnvifClient.Media2
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Configurations":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.configurationsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.AudioSourceConfiguration>(() => new SharpOnvifCommon.Onvif.AudioSourceConfiguration()));
+                    reader.Append(ref this.configurationsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.AudioSourceConfiguration>(() => new SharpOnvifCommon.Onvif.AudioSourceConfiguration()));
                     return true;
             }
             return false;
@@ -3365,13 +3365,13 @@ namespace SharpOnvifClient.Media2
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver20Media; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "ConfigurationToken", this.configurationTokenField);
             writer.WriteElementString(Ns.Ver20Media, "ProfileToken", this.profileTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -3417,12 +3417,12 @@ namespace SharpOnvifClient.Media2
             this.configurationTokenField = configurationToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "ConfigurationToken", this.configurationTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -3460,12 +3460,12 @@ namespace SharpOnvifClient.Media2
             this.optionsField = options;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver20Media, "Options", this.optionsField, Ns.Ver20Media, "MaskOptions");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -3523,13 +3523,13 @@ namespace SharpOnvifClient.Media2
             this.configurationTokenField = configurationToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "Token", this.tokenField);
             writer.WriteElementString(Ns.Ver20Media, "ConfigurationToken", this.configurationTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -3578,7 +3578,7 @@ namespace SharpOnvifClient.Media2
             this.masksField = masks;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.masksField != null)
             {
@@ -3589,13 +3589,13 @@ namespace SharpOnvifClient.Media2
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Masks":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.masksField, reader.ReadElementObject<Mask>(() => new Mask()));
+                    reader.Append(ref this.masksField, reader.ReadElementObject<Mask>(() => new Mask()));
                     return true;
             }
             return false;
@@ -3644,13 +3644,13 @@ namespace SharpOnvifClient.Media2
             this.profileTokenField = profileToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "ConfigurationToken", this.configurationTokenField);
             writer.WriteElementString(Ns.Ver20Media, "ProfileToken", this.profileTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -3699,12 +3699,12 @@ namespace SharpOnvifClient.Media2
             this.optionsField = options;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver20Media, "Options", this.optionsField, "http://www.onvif.org/ver10/schema", "MetadataConfigurationOptions");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -3760,13 +3760,13 @@ namespace SharpOnvifClient.Media2
             this.profileTokenField = profileToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "ConfigurationToken", this.configurationTokenField);
             writer.WriteElementString(Ns.Ver20Media, "ProfileToken", this.profileTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -3813,7 +3813,7 @@ namespace SharpOnvifClient.Media2
             this.configurationsField = configurations;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.configurationsField != null)
             {
@@ -3824,13 +3824,13 @@ namespace SharpOnvifClient.Media2
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Configurations":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.configurationsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.MetadataConfiguration>(() => new SharpOnvifCommon.Onvif.MetadataConfiguration()));
+                    reader.Append(ref this.configurationsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.MetadataConfiguration>(() => new SharpOnvifCommon.Onvif.MetadataConfiguration()));
                     return true;
             }
             return false;
@@ -3866,12 +3866,12 @@ namespace SharpOnvifClient.Media2
             this.configurationTokenField = configurationToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "ConfigurationToken", this.configurationTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -3909,7 +3909,7 @@ namespace SharpOnvifClient.Media2
             this.optionsField = options;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.optionsField != null)
             {
@@ -3920,13 +3920,13 @@ namespace SharpOnvifClient.Media2
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Options":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.optionsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.MulticastAudioDecoderConfigurationOptions>(() => new SharpOnvifCommon.Onvif.MulticastAudioDecoderConfigurationOptions()));
+                    reader.Append(ref this.optionsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.MulticastAudioDecoderConfigurationOptions>(() => new SharpOnvifCommon.Onvif.MulticastAudioDecoderConfigurationOptions()));
                     return true;
             }
             return false;
@@ -3962,12 +3962,12 @@ namespace SharpOnvifClient.Media2
             this.configurationTokenField = configurationToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "ConfigurationToken", this.configurationTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -4008,7 +4008,7 @@ namespace SharpOnvifClient.Media2
             this.configurationsField = configurations;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.configurationsField != null)
             {
@@ -4019,13 +4019,13 @@ namespace SharpOnvifClient.Media2
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Configurations":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.configurationsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.MulticastAudioDecoderConfiguration>(() => new SharpOnvifCommon.Onvif.MulticastAudioDecoderConfiguration()));
+                    reader.Append(ref this.configurationsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.MulticastAudioDecoderConfiguration>(() => new SharpOnvifCommon.Onvif.MulticastAudioDecoderConfiguration()));
                     return true;
             }
             return false;
@@ -4061,12 +4061,12 @@ namespace SharpOnvifClient.Media2
             this.configurationTokenField = configurationToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "ConfigurationToken", this.configurationTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -4104,12 +4104,12 @@ namespace SharpOnvifClient.Media2
             this.oSDOptionsField = oSDOptions;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver20Media, "OSDOptions", this.oSDOptionsField, "http://www.onvif.org/ver10/schema", "OSDConfigurationOptions");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -4168,13 +4168,13 @@ namespace SharpOnvifClient.Media2
             this.configurationTokenField = configurationToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "OSDToken", this.oSDTokenField);
             writer.WriteElementString(Ns.Ver20Media, "ConfigurationToken", this.configurationTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -4223,7 +4223,7 @@ namespace SharpOnvifClient.Media2
             this.oSDsField = oSDs;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.oSDsField != null)
             {
@@ -4234,13 +4234,13 @@ namespace SharpOnvifClient.Media2
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "OSDs":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.oSDsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.OSDConfiguration>(() => new SharpOnvifCommon.Onvif.OSDConfiguration()));
+                    reader.Append(ref this.oSDsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.OSDConfiguration>(() => new SharpOnvifCommon.Onvif.OSDConfiguration()));
                     return true;
             }
             return false;
@@ -4287,7 +4287,7 @@ namespace SharpOnvifClient.Media2
             this.playingAudioClipsField = playingAudioClips;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.playingAudioClipsField != null)
             {
@@ -4298,13 +4298,13 @@ namespace SharpOnvifClient.Media2
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "PlayingAudioClips":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.playingAudioClipsField, reader.ReadElementObject<PlayingAudioClips>(() => new PlayingAudioClips()));
+                    reader.Append(ref this.playingAudioClipsField, reader.ReadElementObject<PlayingAudioClips>(() => new PlayingAudioClips()));
                     return true;
             }
             return false;
@@ -4355,7 +4355,7 @@ namespace SharpOnvifClient.Media2
             this.typeField = type;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "Token", this.tokenField);
             if (this.typeField != null)
@@ -4367,7 +4367,7 @@ namespace SharpOnvifClient.Media2
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -4377,7 +4377,7 @@ namespace SharpOnvifClient.Media2
                     return true;
                 case "Type":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.typeField, reader.ReadElementText());
+                    reader.Append(ref this.typeField, reader.ReadElementText());
                     return true;
             }
             return false;
@@ -4416,7 +4416,7 @@ namespace SharpOnvifClient.Media2
             this.profilesField = profiles;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.profilesField != null)
             {
@@ -4427,13 +4427,13 @@ namespace SharpOnvifClient.Media2
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Profiles":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.profilesField, reader.ReadElementObject<MediaProfile>(() => new MediaProfile()));
+                    reader.Append(ref this.profilesField, reader.ReadElementObject<MediaProfile>(() => new MediaProfile()));
                     return true;
             }
             return false;
@@ -4480,12 +4480,12 @@ namespace SharpOnvifClient.Media2
             this.capabilitiesField = capabilities;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver20Media, "Capabilities", this.capabilitiesField, Ns.Ver20Media, "Capabilities2");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -4532,12 +4532,12 @@ namespace SharpOnvifClient.Media2
             this.profileTokenField = profileToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "ProfileToken", this.profileTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -4583,12 +4583,12 @@ namespace SharpOnvifClient.Media2
             this.uriField = uri;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "Uri", this.uriField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -4651,13 +4651,13 @@ namespace SharpOnvifClient.Media2
             this.profileTokenField = profileToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "Protocol", this.protocolField);
             writer.WriteElementString(Ns.Ver20Media, "ProfileToken", this.profileTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -4710,12 +4710,12 @@ namespace SharpOnvifClient.Media2
             this.uriField = uri;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "Uri", this.uriField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -4774,13 +4774,13 @@ namespace SharpOnvifClient.Media2
             this.profileTokenField = profileToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "ConfigurationToken", this.configurationTokenField);
             writer.WriteElementString(Ns.Ver20Media, "ProfileToken", this.profileTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -4827,7 +4827,7 @@ namespace SharpOnvifClient.Media2
             this.optionsField = options;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.optionsField != null)
             {
@@ -4838,13 +4838,13 @@ namespace SharpOnvifClient.Media2
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Options":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.optionsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.VideoEncoder2ConfigurationOptions>(() => new SharpOnvifCommon.Onvif.VideoEncoder2ConfigurationOptions()));
+                    reader.Append(ref this.optionsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.VideoEncoder2ConfigurationOptions>(() => new SharpOnvifCommon.Onvif.VideoEncoder2ConfigurationOptions()));
                     return true;
             }
             return false;
@@ -4894,13 +4894,13 @@ namespace SharpOnvifClient.Media2
             this.profileTokenField = profileToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "ConfigurationToken", this.configurationTokenField);
             writer.WriteElementString(Ns.Ver20Media, "ProfileToken", this.profileTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -4947,7 +4947,7 @@ namespace SharpOnvifClient.Media2
             this.configurationsField = configurations;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.configurationsField != null)
             {
@@ -4958,13 +4958,13 @@ namespace SharpOnvifClient.Media2
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Configurations":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.configurationsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.VideoEncoder2Configuration>(() => new SharpOnvifCommon.Onvif.VideoEncoder2Configuration()));
+                    reader.Append(ref this.configurationsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.VideoEncoder2Configuration>(() => new SharpOnvifCommon.Onvif.VideoEncoder2Configuration()));
                     return true;
             }
             return false;
@@ -5000,12 +5000,12 @@ namespace SharpOnvifClient.Media2
             this.configurationTokenField = configurationToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "ConfigurationToken", this.configurationTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -5048,12 +5048,12 @@ namespace SharpOnvifClient.Media2
             this.infoField = info;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver20Media, "Info", this.infoField, Ns.Ver20Media, "EncoderInstanceInfo");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -5110,13 +5110,13 @@ namespace SharpOnvifClient.Media2
             this.profileTokenField = profileToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "ConfigurationToken", this.configurationTokenField);
             writer.WriteElementString(Ns.Ver20Media, "ProfileToken", this.profileTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -5167,12 +5167,12 @@ namespace SharpOnvifClient.Media2
             this.optionsField = options;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver20Media, "Options", this.optionsField, "http://www.onvif.org/ver10/schema", "VideoSourceConfigurationOptions");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -5228,13 +5228,13 @@ namespace SharpOnvifClient.Media2
             this.profileTokenField = profileToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "ConfigurationToken", this.configurationTokenField);
             writer.WriteElementString(Ns.Ver20Media, "ProfileToken", this.profileTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -5281,7 +5281,7 @@ namespace SharpOnvifClient.Media2
             this.configurationsField = configurations;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.configurationsField != null)
             {
@@ -5292,13 +5292,13 @@ namespace SharpOnvifClient.Media2
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Configurations":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.configurationsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.VideoSourceConfiguration>(() => new SharpOnvifCommon.Onvif.VideoSourceConfiguration()));
+                    reader.Append(ref this.configurationsField, reader.ReadElementObject<SharpOnvifCommon.Onvif.VideoSourceConfiguration>(() => new SharpOnvifCommon.Onvif.VideoSourceConfiguration()));
                     return true;
             }
             return false;
@@ -5335,12 +5335,12 @@ namespace SharpOnvifClient.Media2
             this.videoSourceTokenField = videoSourceToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "VideoSourceToken", this.videoSourceTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -5383,7 +5383,7 @@ namespace SharpOnvifClient.Media2
             this.videoSourceModesField = videoSourceModes;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.videoSourceModesField != null)
             {
@@ -5394,13 +5394,13 @@ namespace SharpOnvifClient.Media2
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "VideoSourceModes":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.videoSourceModesField, reader.ReadElementObject<VideoSourceMode>(() => new VideoSourceMode()));
+                    reader.Append(ref this.videoSourceModesField, reader.ReadElementObject<VideoSourceMode>(() => new VideoSourceMode()));
                     return true;
             }
             return false;
@@ -5448,7 +5448,7 @@ namespace SharpOnvifClient.Media2
             this.webRTCConfigurationField = webRTCConfiguration;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.webRTCConfigurationField != null)
             {
@@ -5459,13 +5459,13 @@ namespace SharpOnvifClient.Media2
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "WebRTCConfiguration":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.webRTCConfigurationField, reader.ReadElementObject<WebRTCConfiguration>(() => new WebRTCConfiguration()));
+                    reader.Append(ref this.webRTCConfigurationField, reader.ReadElementObject<WebRTCConfiguration>(() => new WebRTCConfiguration()));
                     return true;
             }
             return false;
@@ -5564,12 +5564,12 @@ namespace SharpOnvifClient.Media2
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver20Media; } }
 
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAttributeString(null, "token", this.tokenField);
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "ConfigurationToken", this.configurationTokenField);
             if (this.polygonField != null)
@@ -5583,11 +5583,11 @@ namespace SharpOnvifClient.Media2
             }
             writer.WriteElementString(Ns.Ver20Media, "Type", this.typeField);
             writer.WriteElement(Ns.Ver20Media, "Color", this.colorField, "http://www.onvif.org/ver10/schema", "Color");
-            writer.WriteElementString(Ns.Ver20Media, "Enabled", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.enabledField));
+            writer.WriteElementString(Ns.Ver20Media, "Enabled", writer.ToXml(this.enabledField));
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -5598,7 +5598,7 @@ namespace SharpOnvifClient.Media2
             return false;
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -5610,7 +5610,7 @@ namespace SharpOnvifClient.Media2
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
                     reader.ReadWrappedArray("http://www.onvif.org/ver10/schema", "Point", () =>
                     {
-                        SharpOnvifCommon.Xml.OnvifArray.Append(ref this.polygonField, reader.ReadElementObject<SharpOnvifCommon.Onvif.Vector>(() => new SharpOnvifCommon.Onvif.Vector()));
+                        reader.Append(ref this.polygonField, reader.ReadElementObject<SharpOnvifCommon.Onvif.Vector>(() => new SharpOnvifCommon.Onvif.Vector()));
                     }
                     );
                     return true;
@@ -5624,10 +5624,10 @@ namespace SharpOnvifClient.Media2
                     return true;
                 case "Enabled":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.enabledField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
+                    this.enabledField = reader.ToBoolean(reader.ReadElementText());
                     return true;
             }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -5748,22 +5748,22 @@ namespace SharpOnvifClient.Media2
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver20Media; } }
 
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.rectangleOnlyFieldSpecified)
             {
-                writer.WriteAttributeString(null, "RectangleOnly", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.rectangleOnlyField));
+                writer.WriteAttributeString(null, "RectangleOnly", writer.ToXml(this.rectangleOnlyField));
             }
             if (this.singleColorOnlyFieldSpecified)
             {
-                writer.WriteAttributeString(null, "SingleColorOnly", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.singleColorOnlyField));
+                writer.WriteAttributeString(null, "SingleColorOnly", writer.ToXml(this.singleColorOnlyField));
             }
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
-            writer.WriteElementString(Ns.Ver20Media, "MaxMasks", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxMasksField));
-            writer.WriteElementString(Ns.Ver20Media, "MaxPoints", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxPointsField));
+            writer.WriteElementString(Ns.Ver20Media, "MaxMasks", writer.ToXml(this.maxMasksField));
+            writer.WriteElementString(Ns.Ver20Media, "MaxPoints", writer.ToXml(this.maxPointsField));
             if (this.typesField != null)
             {
                 for (int i = 0; i < this.typesField.Length; i++)
@@ -5775,44 +5775,44 @@ namespace SharpOnvifClient.Media2
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "RectangleOnly":
-                    this.rectangleOnlyField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.rectangleOnlyField = reader.ToBoolean(reader.AttributeValue);
                     this.rectangleOnlyFieldSpecified = true;
                     return true;
                 case "SingleColorOnly":
-                    this.singleColorOnlyField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.singleColorOnlyField = reader.ToBoolean(reader.AttributeValue);
                     this.singleColorOnlyFieldSpecified = true;
                     return true;
             }
             return false;
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "MaxMasks":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.maxMasksField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.maxMasksField = reader.ToInt32(reader.ReadElementText());
                     return true;
                 case "MaxPoints":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.maxPointsField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.maxPointsField = reader.ToInt32(reader.ReadElementText());
                     return true;
                 case "Types":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.typesField, reader.ReadElementText());
+                    reader.Append(ref this.typesField, reader.ReadElementText());
                     return true;
                 case "Color":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
                     this.colorField = reader.ReadElementObject<SharpOnvifCommon.Onvif.ColorOptions>(() => new SharpOnvifCommon.Onvif.ColorOptions());
                     return true;
             }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -5888,22 +5888,22 @@ namespace SharpOnvifClient.Media2
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver20Media; } }
 
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAttributeString(null, "token", this.tokenField);
             if (this.fixedFieldSpecified)
             {
-                writer.WriteAttributeString(null, "fixed", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.fixedField));
+                writer.WriteAttributeString(null, "fixed", writer.ToXml(this.fixedField));
             }
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "Name", this.nameField);
             writer.WriteElement(Ns.Ver20Media, "Configurations", this.configurationsField, Ns.Ver20Media, "ConfigurationSet");
         }
 
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -5911,14 +5911,14 @@ namespace SharpOnvifClient.Media2
                     this.tokenField = reader.AttributeValue;
                     return true;
                 case "fixed":
-                    this.fixedField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.fixedField = reader.ToBoolean(reader.AttributeValue);
                     this.fixedFieldSpecified = true;
                     return true;
             }
             return false;
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -6024,50 +6024,50 @@ namespace SharpOnvifClient.Media2
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver20Media; } }
 
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.multicastAudioDecoderFieldSpecified)
             {
-                writer.WriteAttributeString(null, "MulticastAudioDecoder", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.multicastAudioDecoderField));
+                writer.WriteAttributeString(null, "MulticastAudioDecoder", writer.ToXml(this.multicastAudioDecoderField));
             }
             if (this.sRTPFieldSpecified)
             {
-                writer.WriteAttributeString(null, "SRTP", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.sRTPField));
+                writer.WriteAttributeString(null, "SRTP", writer.ToXml(this.sRTPField));
             }
             if (this.iPv6FieldSpecified)
             {
-                writer.WriteAttributeString(null, "IPv6", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.iPv6Field));
+                writer.WriteAttributeString(null, "IPv6", writer.ToXml(this.iPv6Field));
             }
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "MulticastAudioDecoder":
-                    this.multicastAudioDecoderField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.multicastAudioDecoderField = reader.ToBoolean(reader.AttributeValue);
                     this.multicastAudioDecoderFieldSpecified = true;
                     return true;
                 case "SRTP":
-                    this.sRTPField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.sRTPField = reader.ToBoolean(reader.AttributeValue);
                     this.sRTPFieldSpecified = true;
                     return true;
                 case "IPv6":
-                    this.iPv6Field = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.iPv6Field = reader.ToBoolean(reader.AttributeValue);
                     this.iPv6FieldSpecified = true;
                     return true;
             }
             return false;
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -6155,7 +6155,7 @@ namespace SharpOnvifClient.Media2
             this.repeatCyclesFieldSpecified = true;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "Token", this.tokenField);
             if (this.audioOutputTokenField != null)
@@ -6165,14 +6165,14 @@ namespace SharpOnvifClient.Media2
                     writer.WriteElementString(Ns.Ver20Media, "AudioOutputToken", this.audioOutputTokenField[i]);
                 }
             }
-            writer.WriteElementString(Ns.Ver20Media, "Play", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.playField));
+            writer.WriteElementString(Ns.Ver20Media, "Play", writer.ToXml(this.playField));
             if (this.repeatCyclesFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver20Media, "RepeatCycles", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.repeatCyclesField));
+                writer.WriteElementString(Ns.Ver20Media, "RepeatCycles", writer.ToXml(this.repeatCyclesField));
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -6182,15 +6182,15 @@ namespace SharpOnvifClient.Media2
                     return true;
                 case "AudioOutputToken":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.audioOutputTokenField, reader.ReadElementText());
+                    reader.Append(ref this.audioOutputTokenField, reader.ReadElementText());
                     return true;
                 case "Play":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.playField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
+                    this.playField = reader.ToBoolean(reader.ReadElementText());
                     return true;
                 case "RepeatCycles":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.repeatCyclesField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.repeatCyclesField = reader.ToInt32(reader.ReadElementText());
                     this.repeatCyclesFieldSpecified = true;
                     return true;
             }
@@ -6287,7 +6287,7 @@ namespace SharpOnvifClient.Media2
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver20Media; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "Token", this.tokenField);
             writer.WriteElementString(Ns.Ver20Media, "Name", this.nameField);
@@ -6298,12 +6298,12 @@ namespace SharpOnvifClient.Media2
                     writer.WriteElementString(Ns.Ver20Media, "AudioOutputToken", this.audioOutputTokenField[i]);
                 }
             }
-            writer.WriteElementString(Ns.Ver20Media, "AudioOutputLevel", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.audioOutputLevelField));
-            writer.WriteElementString(Ns.Ver20Media, "RepeatsLeft", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.repeatsLeftField));
+            writer.WriteElementString(Ns.Ver20Media, "AudioOutputLevel", writer.ToXml(this.audioOutputLevelField));
+            writer.WriteElementString(Ns.Ver20Media, "RepeatsLeft", writer.ToXml(this.repeatsLeftField));
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -6317,18 +6317,18 @@ namespace SharpOnvifClient.Media2
                     return true;
                 case "AudioOutputToken":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.audioOutputTokenField, reader.ReadElementText());
+                    reader.Append(ref this.audioOutputTokenField, reader.ReadElementText());
                     return true;
                 case "AudioOutputLevel":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.audioOutputLevelField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.audioOutputLevelField = reader.ToInt32(reader.ReadElementText());
                     return true;
                 case "RepeatsLeft":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.repeatsLeftField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.repeatsLeftField = reader.ToInt32(reader.ReadElementText());
                     return true;
             }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -6387,38 +6387,38 @@ namespace SharpOnvifClient.Media2
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver20Media; } }
 
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.maximumNumberOfProfilesFieldSpecified)
             {
-                writer.WriteAttributeString(null, "MaximumNumberOfProfiles", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maximumNumberOfProfilesField));
+                writer.WriteAttributeString(null, "MaximumNumberOfProfiles", writer.ToXml(this.maximumNumberOfProfilesField));
             }
-            writer.WriteAttributeString(null, "ConfigurationsSupported", SharpOnvifCommon.Xml.OnvifArray.JoinList(this.configurationsSupportedField));
+            writer.WriteAttributeString(null, "ConfigurationsSupported", writer.JoinList(this.configurationsSupportedField));
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "MaximumNumberOfProfiles":
-                    this.maximumNumberOfProfilesField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.AttributeValue);
+                    this.maximumNumberOfProfilesField = reader.ToInt32(reader.AttributeValue);
                     this.maximumNumberOfProfilesFieldSpecified = true;
                     return true;
                 case "ConfigurationsSupported":
-                    this.configurationsSupportedField = SharpOnvifCommon.Xml.OnvifArray.SplitList(reader.AttributeValue);
+                    this.configurationsSupportedField = reader.SplitList(reader.AttributeValue);
                     return true;
             }
             return false;
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -6440,12 +6440,12 @@ namespace SharpOnvifClient.Media2
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver20Media; } }
 
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAttributeString(null, "token", this.tokenField);
         }
 
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -6502,7 +6502,7 @@ namespace SharpOnvifClient.Media2
             this.configurationField = configuration;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "ProfileToken", this.profileTokenField);
             if (this.configurationField != null)
@@ -6514,7 +6514,7 @@ namespace SharpOnvifClient.Media2
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -6524,7 +6524,7 @@ namespace SharpOnvifClient.Media2
                     return true;
                 case "Configuration":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.configurationField, reader.ReadElementObject<ConfigurationRef>(() => new ConfigurationRef()));
+                    reader.Append(ref this.configurationField, reader.ReadElementObject<ConfigurationRef>(() => new ConfigurationRef()));
                     return true;
             }
             return false;
@@ -6585,13 +6585,13 @@ namespace SharpOnvifClient.Media2
             this.configurationField = configuration;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "Token", this.tokenField);
             writer.WriteElement(Ns.Ver20Media, "Configuration", this.configurationField, Ns.Ver20Media, "AudioClip");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -6648,12 +6648,12 @@ namespace SharpOnvifClient.Media2
             this.configurationField = configuration;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver20Media, "Configuration", this.configurationField, "http://www.onvif.org/ver10/schema", "AudioDecoderConfiguration");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -6709,12 +6709,12 @@ namespace SharpOnvifClient.Media2
             this.configurationField = configuration;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver20Media, "Configuration", this.configurationField, "http://www.onvif.org/ver10/schema", "AudioEncoder2Configuration");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -6770,12 +6770,12 @@ namespace SharpOnvifClient.Media2
             this.configurationField = configuration;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver20Media, "Configuration", this.configurationField, "http://www.onvif.org/ver10/schema", "AudioOutputConfiguration");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -6831,12 +6831,12 @@ namespace SharpOnvifClient.Media2
             this.configurationField = configuration;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver20Media, "Configuration", this.configurationField, "http://www.onvif.org/ver10/schema", "AudioSourceConfiguration");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -6901,12 +6901,12 @@ namespace SharpOnvifClient.Media2
             this.configurationField = configuration;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver20Media, "Configuration", this.configurationField, "http://www.onvif.org/ver10/schema", "EQPreset");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -6959,12 +6959,12 @@ namespace SharpOnvifClient.Media2
             this.maskField = mask;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver20Media, "Mask", this.maskField, Ns.Ver20Media, "Mask");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -7020,12 +7020,12 @@ namespace SharpOnvifClient.Media2
             this.configurationField = configuration;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver20Media, "Configuration", this.configurationField, "http://www.onvif.org/ver10/schema", "MetadataConfiguration");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -7082,12 +7082,12 @@ namespace SharpOnvifClient.Media2
             this.configurationField = configuration;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver20Media, "Configuration", this.configurationField, "http://www.onvif.org/ver10/schema", "MulticastAudioDecoderConfiguration");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -7140,12 +7140,12 @@ namespace SharpOnvifClient.Media2
             this.oSDField = oSD;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver20Media, "OSD", this.oSDField, "http://www.onvif.org/ver10/schema", "OSDConfiguration");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -7207,12 +7207,12 @@ namespace SharpOnvifClient.Media2
             this.profileTokenField = profileToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "ProfileToken", this.profileTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -7280,12 +7280,12 @@ namespace SharpOnvifClient.Media2
             this.configurationField = configuration;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver20Media, "Configuration", this.configurationField, "http://www.onvif.org/ver10/schema", "VideoEncoder2Configuration");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -7347,12 +7347,12 @@ namespace SharpOnvifClient.Media2
             this.configurationField = configuration;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver20Media, "Configuration", this.configurationField, "http://www.onvif.org/ver10/schema", "VideoSourceConfiguration");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -7423,13 +7423,13 @@ namespace SharpOnvifClient.Media2
             this.videoSourceModeTokenField = videoSourceModeToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "VideoSourceToken", this.videoSourceTokenField);
             writer.WriteElementString(Ns.Ver20Media, "VideoSourceModeToken", this.videoSourceModeTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -7477,18 +7477,18 @@ namespace SharpOnvifClient.Media2
             this.rebootField = reboot;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
-            writer.WriteElementString(Ns.Ver20Media, "Reboot", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.rebootField));
+            writer.WriteElementString(Ns.Ver20Media, "Reboot", writer.ToXml(this.rebootField));
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Reboot":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.rebootField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
+                    this.rebootField = reader.ToBoolean(reader.ReadElementText());
                     return true;
             }
             return false;
@@ -7524,7 +7524,7 @@ namespace SharpOnvifClient.Media2
             this.webRTCConfigurationField = webRTCConfiguration;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.webRTCConfigurationField != null)
             {
@@ -7535,13 +7535,13 @@ namespace SharpOnvifClient.Media2
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "WebRTCConfiguration":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.webRTCConfigurationField, reader.ReadElementObject<WebRTCConfiguration>(() => new WebRTCConfiguration()));
+                    reader.Append(ref this.webRTCConfigurationField, reader.ReadElementObject<WebRTCConfiguration>(() => new WebRTCConfiguration()));
                     return true;
             }
             return false;
@@ -7592,12 +7592,12 @@ namespace SharpOnvifClient.Media2
             this.profileTokenField = profileToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "ProfileToken", this.profileTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -7646,12 +7646,12 @@ namespace SharpOnvifClient.Media2
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver20Media; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "ProfileToken", this.profileTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -7692,12 +7692,12 @@ namespace SharpOnvifClient.Media2
             this.profileTokenField = profileToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "ProfileToken", this.profileTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -7896,78 +7896,78 @@ namespace SharpOnvifClient.Media2
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver20Media; } }
 
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.rTSPStreamingFieldSpecified)
             {
-                writer.WriteAttributeString(null, "RTSPStreaming", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.rTSPStreamingField));
+                writer.WriteAttributeString(null, "RTSPStreaming", writer.ToXml(this.rTSPStreamingField));
             }
             if (this.rTPMulticastFieldSpecified)
             {
-                writer.WriteAttributeString(null, "RTPMulticast", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.rTPMulticastField));
+                writer.WriteAttributeString(null, "RTPMulticast", writer.ToXml(this.rTPMulticastField));
             }
             if (this.rTP_RTSP_TCPFieldSpecified)
             {
-                writer.WriteAttributeString(null, "RTP_RTSP_TCP", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.rTP_RTSP_TCPField));
+                writer.WriteAttributeString(null, "RTP_RTSP_TCP", writer.ToXml(this.rTP_RTSP_TCPField));
             }
             if (this.nonAggregateControlFieldSpecified)
             {
-                writer.WriteAttributeString(null, "NonAggregateControl", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.nonAggregateControlField));
+                writer.WriteAttributeString(null, "NonAggregateControl", writer.ToXml(this.nonAggregateControlField));
             }
             writer.WriteAttributeString(null, "RTSPWebSocketUri", this.rTSPWebSocketUriField);
             if (this.autoStartMulticastFieldSpecified)
             {
-                writer.WriteAttributeString(null, "AutoStartMulticast", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.autoStartMulticastField));
+                writer.WriteAttributeString(null, "AutoStartMulticast", writer.ToXml(this.autoStartMulticastField));
             }
             if (this.secureRTSPStreamingFieldSpecified)
             {
-                writer.WriteAttributeString(null, "SecureRTSPStreaming", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.secureRTSPStreamingField));
+                writer.WriteAttributeString(null, "SecureRTSPStreaming", writer.ToXml(this.secureRTSPStreamingField));
             }
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "RTSPStreaming":
-                    this.rTSPStreamingField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.rTSPStreamingField = reader.ToBoolean(reader.AttributeValue);
                     this.rTSPStreamingFieldSpecified = true;
                     return true;
                 case "RTPMulticast":
-                    this.rTPMulticastField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.rTPMulticastField = reader.ToBoolean(reader.AttributeValue);
                     this.rTPMulticastFieldSpecified = true;
                     return true;
                 case "RTP_RTSP_TCP":
-                    this.rTP_RTSP_TCPField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.rTP_RTSP_TCPField = reader.ToBoolean(reader.AttributeValue);
                     this.rTP_RTSP_TCPFieldSpecified = true;
                     return true;
                 case "NonAggregateControl":
-                    this.nonAggregateControlField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.nonAggregateControlField = reader.ToBoolean(reader.AttributeValue);
                     this.nonAggregateControlFieldSpecified = true;
                     return true;
                 case "RTSPWebSocketUri":
                     this.rTSPWebSocketUriField = reader.AttributeValue;
                     return true;
                 case "AutoStartMulticast":
-                    this.autoStartMulticastField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.autoStartMulticastField = reader.ToBoolean(reader.AttributeValue);
                     this.autoStartMulticastFieldSpecified = true;
                     return true;
                 case "SecureRTSPStreaming":
-                    this.secureRTSPStreamingField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.secureRTSPStreamingField = reader.ToBoolean(reader.AttributeValue);
                     this.secureRTSPStreamingFieldSpecified = true;
                     return true;
             }
             return false;
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -8030,7 +8030,7 @@ namespace SharpOnvifClient.Media2
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver20Media; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "Content", this.contentField);
             writer.WriteElementString(Ns.Ver20Media, "Language", this.languageField);
@@ -8038,7 +8038,7 @@ namespace SharpOnvifClient.Media2
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -8055,7 +8055,7 @@ namespace SharpOnvifClient.Media2
                     this.voiceTypeField = reader.ReadElementText();
                     return true;
             }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -8128,42 +8128,42 @@ namespace SharpOnvifClient.Media2
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver20Media; } }
 
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.maxContentLengthFieldSpecified)
             {
-                writer.WriteAttributeString(null, "MaxContentLength", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxContentLengthField));
+                writer.WriteAttributeString(null, "MaxContentLength", writer.ToXml(this.maxContentLengthField));
             }
-            writer.WriteAttributeString(null, "TTSLanguage", SharpOnvifCommon.Xml.OnvifArray.JoinList(this.tTSLanguageField));
-            writer.WriteAttributeString(null, "TTSVoiceType", SharpOnvifCommon.Xml.OnvifArray.JoinList(this.tTSVoiceTypeField));
+            writer.WriteAttributeString(null, "TTSLanguage", writer.JoinList(this.tTSLanguageField));
+            writer.WriteAttributeString(null, "TTSVoiceType", writer.JoinList(this.tTSVoiceTypeField));
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "MaxContentLength":
-                    this.maxContentLengthField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.AttributeValue);
+                    this.maxContentLengthField = reader.ToInt32(reader.AttributeValue);
                     this.maxContentLengthFieldSpecified = true;
                     return true;
                 case "TTSLanguage":
-                    this.tTSLanguageField = SharpOnvifCommon.Xml.OnvifArray.SplitList(reader.AttributeValue);
+                    this.tTSLanguageField = reader.SplitList(reader.AttributeValue);
                     return true;
                 case "TTSVoiceType":
-                    this.tTSVoiceTypeField = SharpOnvifCommon.Xml.OnvifArray.SplitList(reader.AttributeValue);
+                    this.tTSVoiceTypeField = reader.SplitList(reader.AttributeValue);
                     return true;
             }
             return false;
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -8285,26 +8285,26 @@ namespace SharpOnvifClient.Media2
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver20Media; } }
 
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAttributeString(null, "token", this.tokenField);
             if (this.enabledFieldSpecified)
             {
-                writer.WriteAttributeString(null, "Enabled", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.enabledField));
+                writer.WriteAttributeString(null, "Enabled", writer.ToXml(this.enabledField));
             }
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
-            writer.WriteElementString(Ns.Ver20Media, "MaxFramerate", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxFramerateField));
+            writer.WriteElementString(Ns.Ver20Media, "MaxFramerate", writer.ToXml(this.maxFramerateField));
             writer.WriteElement(Ns.Ver20Media, "MaxResolution", this.maxResolutionField, "http://www.onvif.org/ver10/schema", "VideoResolution");
-            writer.WriteElementString(Ns.Ver20Media, "Encodings", SharpOnvifCommon.Xml.OnvifArray.JoinList(this.encodingsField));
-            writer.WriteElementString(Ns.Ver20Media, "Reboot", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.rebootField));
+            writer.WriteElementString(Ns.Ver20Media, "Encodings", writer.JoinList(this.encodingsField));
+            writer.WriteElementString(Ns.Ver20Media, "Reboot", writer.ToXml(this.rebootField));
             writer.WriteElementString(Ns.Ver20Media, "Description", this.descriptionField);
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -8312,20 +8312,20 @@ namespace SharpOnvifClient.Media2
                     this.tokenField = reader.AttributeValue;
                     return true;
                 case "Enabled":
-                    this.enabledField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.enabledField = reader.ToBoolean(reader.AttributeValue);
                     this.enabledFieldSpecified = true;
                     return true;
             }
             return false;
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "MaxFramerate":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.maxFramerateField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
+                    this.maxFramerateField = reader.ToSingle(reader.ReadElementText());
                     return true;
                 case "MaxResolution":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
@@ -8333,18 +8333,18 @@ namespace SharpOnvifClient.Media2
                     return true;
                 case "Encodings":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.encodingsField = SharpOnvifCommon.Xml.OnvifArray.SplitList(reader.ReadElementText());
+                    this.encodingsField = reader.SplitList(reader.ReadElementText());
                     return true;
                 case "Reboot":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.rebootField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
+                    this.rebootField = reader.ToBoolean(reader.ReadElementText());
                     return true;
                 case "Description":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
                     this.descriptionField = reader.ReadElementText();
                     return true;
             }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -8464,22 +8464,22 @@ namespace SharpOnvifClient.Media2
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver20Media; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Media, "SignalingServer", this.signalingServerField);
             writer.WriteElementString(Ns.Ver20Media, "CertPathValidationPolicyID", this.certPathValidationPolicyIDField);
             writer.WriteElementString(Ns.Ver20Media, "AuthorizationServer", this.authorizationServerField);
             writer.WriteElementString(Ns.Ver20Media, "DefaultProfile", this.defaultProfileField);
-            writer.WriteElementString(Ns.Ver20Media, "Enabled", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.enabledField));
+            writer.WriteElementString(Ns.Ver20Media, "Enabled", writer.ToXml(this.enabledField));
             if (this.connectedFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver20Media, "Connected", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.connectedField));
+                writer.WriteElementString(Ns.Ver20Media, "Connected", writer.ToXml(this.connectedField));
             }
             writer.WriteElementString(Ns.Ver20Media, "Error", this.errorField);
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -8501,11 +8501,11 @@ namespace SharpOnvifClient.Media2
                     return true;
                 case "Enabled":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.enabledField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
+                    this.enabledField = reader.ToBoolean(reader.ReadElementText());
                     return true;
                 case "Connected":
                     if (reader.NamespaceUri != Ns.Ver20Media) break;
-                    this.connectedField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
+                    this.connectedField = reader.ToBoolean(reader.ReadElementText());
                     this.connectedFieldSpecified = true;
                     return true;
                 case "Error":
@@ -8513,7 +8513,7 @@ namespace SharpOnvifClient.Media2
                     this.errorField = reader.ReadElementText();
                     return true;
             }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 

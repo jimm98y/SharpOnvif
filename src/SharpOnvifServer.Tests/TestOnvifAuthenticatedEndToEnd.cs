@@ -165,7 +165,7 @@ namespace SharpOnvif.Tests
         {
             using (var device = new SharpOnvifClient.DeviceMgmt.DeviceClient(_endpoint))
             {
-                await Assert.ThrowsExactlyAsync<SharpOnvifCommon.Xml.OnvifFaultException>(
+                await Assert.ThrowsExactlyAsync<SharpOnvifCommon.Xml.SoapFaultException>(
                     () => device.GetDeviceInformationAsync());
             }
         }
@@ -300,7 +300,7 @@ namespace SharpOnvif.Tests
         {
             using (var device = new SharpOnvifClient.DeviceMgmt.DeviceClient(_endpoint, UserName, "not-the-password"))
             {
-                await Assert.ThrowsExactlyAsync<SharpOnvifCommon.Xml.OnvifFaultException>(
+                await Assert.ThrowsExactlyAsync<SharpOnvifCommon.Xml.SoapFaultException>(
                     () => device.GetDeviceInformationAsync());
             }
         }

@@ -163,7 +163,7 @@ namespace SharpOnvif.Tests
             await using var device = await DeviceOffering(algorithm, qop);
             using var client = Client(device, password: "not the password");
 
-            await Assert.ThrowsExactlyAsync<OnvifFaultException>(() => client.GetDeviceInformationAsync(),
+            await Assert.ThrowsExactlyAsync<SoapFaultException>(() => client.GetDeviceInformationAsync(),
                 $"{algorithm} with qop={qop} accepted the wrong password");
         }
 
@@ -260,7 +260,7 @@ namespace SharpOnvif.Tests
 
             using var client = Client(device);
 
-            await Assert.ThrowsExactlyAsync<OnvifFaultException>(() => client.GetDeviceInformationAsync());
+            await Assert.ThrowsExactlyAsync<SoapFaultException>(() => client.GetDeviceInformationAsync());
         }
     }
 }

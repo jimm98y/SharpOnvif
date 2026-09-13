@@ -194,7 +194,7 @@ public static class Program
             {
                 subscription = await client.PullPointSubscribeAsync(60);
             }
-            catch (Exception ex) when (ex is OnvifTransportException || ex is OnvifFaultException)
+            catch (Exception ex) when (ex is SoapTransportException || ex is SoapFaultException)
             {
                 // Could not get a subscription at all. Either nothing answered, or something
                 // answered that is not our device - when a device releases its port, whatever
@@ -226,12 +226,12 @@ public static class Program
                     }
                 }
             }
-            catch (OnvifTransportException ex)
+            catch (SoapTransportException ex)
             {
                 Console.WriteLine($"Lost the device: {ex.Message}");
                 if (!await WaitForDevice(client.OnvifUri, Stopping)) return;
             }
-            catch (OnvifFaultException ex)
+            catch (SoapFaultException ex)
             {
                 // The device answered and said no - the subscription expired while nobody was
                 // pulling, say. It is still there, so a new subscription is the answer, and if
@@ -302,7 +302,7 @@ public static class Program
             {
                 await client.BasicSubscriptionRenewAsync(subscriptionResponse.SubscriptionReference.Address.Value);
             }
-            catch (Exception ex) when (ex is OnvifTransportException || ex is OnvifFaultException)
+            catch (Exception ex) when (ex is SoapTransportException || ex is SoapFaultException)
             {
                 // The device went away, or forgot the subscription while we were not looking.
                 Console.WriteLine($"Renewing failed, subscribing again: {ex.Message}");

@@ -27,7 +27,7 @@ namespace SharpOnvifCommon.Soap
         /// Writes a Security header carrying a UsernameToken. <paramref name="utcNowOffset"/>
         /// compensates for a device whose clock is known to be wrong.
         /// </summary>
-        public static void Write(OnvifXmlWriter writer, string userName, string password, TimeSpan utcNowOffset)
+        public static void Write(IXmlWriter writer, string userName, string password, TimeSpan utcNowOffset)
         {
             if (writer == null) throw new ArgumentNullException(nameof(writer));
             if (string.IsNullOrEmpty(userName)) return;

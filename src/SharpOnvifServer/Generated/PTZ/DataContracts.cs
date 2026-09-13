@@ -77,14 +77,14 @@ namespace SharpOnvifServer.PTZ
             this.speedField = speed;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Ptz, "ProfileToken", this.profileTokenField);
             writer.WriteElement(Ns.Ver20Ptz, "Position", this.positionField, "http://www.onvif.org/ver10/schema", "PTZVector");
             writer.WriteElement(Ns.Ver20Ptz, "Speed", this.speedField, "http://www.onvif.org/ver10/schema", "PTZSpeed");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -270,70 +270,70 @@ namespace SharpOnvifServer.PTZ
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver20Ptz; } }
 
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.eFlipFieldSpecified)
             {
-                writer.WriteAttributeString(null, "EFlip", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.eFlipField));
+                writer.WriteAttributeString(null, "EFlip", writer.ToXml(this.eFlipField));
             }
             if (this.reverseFieldSpecified)
             {
-                writer.WriteAttributeString(null, "Reverse", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.reverseField));
+                writer.WriteAttributeString(null, "Reverse", writer.ToXml(this.reverseField));
             }
             if (this.getCompatibleConfigurationsFieldSpecified)
             {
-                writer.WriteAttributeString(null, "GetCompatibleConfigurations", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.getCompatibleConfigurationsField));
+                writer.WriteAttributeString(null, "GetCompatibleConfigurations", writer.ToXml(this.getCompatibleConfigurationsField));
             }
             if (this.moveStatusFieldSpecified)
             {
-                writer.WriteAttributeString(null, "MoveStatus", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.moveStatusField));
+                writer.WriteAttributeString(null, "MoveStatus", writer.ToXml(this.moveStatusField));
             }
             if (this.statusPositionFieldSpecified)
             {
-                writer.WriteAttributeString(null, "StatusPosition", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.statusPositionField));
+                writer.WriteAttributeString(null, "StatusPosition", writer.ToXml(this.statusPositionField));
             }
-            writer.WriteAttributeString(null, "MoveAndTrack", SharpOnvifCommon.Xml.OnvifArray.JoinList(this.moveAndTrackField));
+            writer.WriteAttributeString(null, "MoveAndTrack", writer.JoinList(this.moveAndTrackField));
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "EFlip":
-                    this.eFlipField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.eFlipField = reader.ToBoolean(reader.AttributeValue);
                     this.eFlipFieldSpecified = true;
                     return true;
                 case "Reverse":
-                    this.reverseField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.reverseField = reader.ToBoolean(reader.AttributeValue);
                     this.reverseFieldSpecified = true;
                     return true;
                 case "GetCompatibleConfigurations":
-                    this.getCompatibleConfigurationsField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.getCompatibleConfigurationsField = reader.ToBoolean(reader.AttributeValue);
                     this.getCompatibleConfigurationsFieldSpecified = true;
                     return true;
                 case "MoveStatus":
-                    this.moveStatusField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.moveStatusField = reader.ToBoolean(reader.AttributeValue);
                     this.moveStatusFieldSpecified = true;
                     return true;
                 case "StatusPosition":
-                    this.statusPositionField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.statusPositionField = reader.ToBoolean(reader.AttributeValue);
                     this.statusPositionFieldSpecified = true;
                     return true;
                 case "MoveAndTrack":
-                    this.moveAndTrackField = SharpOnvifCommon.Xml.OnvifArray.SplitList(reader.AttributeValue);
+                    this.moveAndTrackField = reader.SplitList(reader.AttributeValue);
                     return true;
             }
             return false;
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -394,14 +394,14 @@ namespace SharpOnvifServer.PTZ
             this.timeoutField = timeout;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Ptz, "ProfileToken", this.profileTokenField);
             writer.WriteElement(Ns.Ver20Ptz, "Velocity", this.velocityField, "http://www.onvif.org/ver10/schema", "PTZSpeed");
             writer.WriteElementString(Ns.Ver20Ptz, "Timeout", this.timeoutField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -461,12 +461,12 @@ namespace SharpOnvifServer.PTZ
             this.profileTokenField = profileToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Ptz, "ProfileToken", this.profileTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -504,12 +504,12 @@ namespace SharpOnvifServer.PTZ
             this.presetTourTokenField = presetTourToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Ptz, "PresetTourToken", this.presetTourTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -633,22 +633,22 @@ namespace SharpOnvifServer.PTZ
             this.areaWidthFieldSpecified = true;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Ptz, "ProfileToken", this.profileTokenField);
             writer.WriteElement(Ns.Ver20Ptz, "Target", this.targetField, "http://www.onvif.org/ver10/schema", "GeoLocation");
             writer.WriteElement(Ns.Ver20Ptz, "Speed", this.speedField, "http://www.onvif.org/ver10/schema", "PTZSpeed");
             if (this.areaHeightFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver20Ptz, "AreaHeight", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.areaHeightField));
+                writer.WriteElementString(Ns.Ver20Ptz, "AreaHeight", writer.ToXml(this.areaHeightField));
             }
             if (this.areaWidthFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver20Ptz, "AreaWidth", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.areaWidthField));
+                writer.WriteElementString(Ns.Ver20Ptz, "AreaWidth", writer.ToXml(this.areaWidthField));
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -666,12 +666,12 @@ namespace SharpOnvifServer.PTZ
                     return true;
                 case "AreaHeight":
                     if (reader.NamespaceUri != Ns.Ver20Ptz) break;
-                    this.areaHeightField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
+                    this.areaHeightField = reader.ToSingle(reader.ReadElementText());
                     this.areaHeightFieldSpecified = true;
                     return true;
                 case "AreaWidth":
                     if (reader.NamespaceUri != Ns.Ver20Ptz) break;
-                    this.areaWidthField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
+                    this.areaWidthField = reader.ToSingle(reader.ReadElementText());
                     this.areaWidthFieldSpecified = true;
                     return true;
             }
@@ -728,12 +728,12 @@ namespace SharpOnvifServer.PTZ
             this.profileTokenField = profileToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Ptz, "ProfileToken", this.profileTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -779,7 +779,7 @@ namespace SharpOnvifServer.PTZ
             this.pTZConfigurationField = pTZConfiguration;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.pTZConfigurationField != null)
             {
@@ -790,13 +790,13 @@ namespace SharpOnvifServer.PTZ
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "PTZConfiguration":
                     if (reader.NamespaceUri != Ns.Ver20Ptz) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.pTZConfigurationField, reader.ReadElementObject<SharpOnvifCommon.Onvif.PTZConfiguration>(() => new SharpOnvifCommon.Onvif.PTZConfiguration()));
+                    reader.Append(ref this.pTZConfigurationField, reader.ReadElementObject<SharpOnvifCommon.Onvif.PTZConfiguration>(() => new SharpOnvifCommon.Onvif.PTZConfiguration()));
                     return true;
             }
             return false;
@@ -836,12 +836,12 @@ namespace SharpOnvifServer.PTZ
             this.configurationTokenField = configurationToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Ptz, "ConfigurationToken", this.configurationTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -887,12 +887,12 @@ namespace SharpOnvifServer.PTZ
             this.pTZConfigurationOptionsField = pTZConfigurationOptions;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver20Ptz, "PTZConfigurationOptions", this.pTZConfigurationOptionsField, "http://www.onvif.org/ver10/schema", "PTZConfigurationOptions");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -945,12 +945,12 @@ namespace SharpOnvifServer.PTZ
             this.pTZConfigurationTokenField = pTZConfigurationToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Ptz, "PTZConfigurationToken", this.pTZConfigurationTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1003,12 +1003,12 @@ namespace SharpOnvifServer.PTZ
             this.pTZConfigurationField = pTZConfiguration;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver20Ptz, "PTZConfiguration", this.pTZConfigurationField, "http://www.onvif.org/ver10/schema", "PTZConfiguration");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1085,7 +1085,7 @@ namespace SharpOnvifServer.PTZ
             this.pTZConfigurationField = pTZConfiguration;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.pTZConfigurationField != null)
             {
@@ -1096,13 +1096,13 @@ namespace SharpOnvifServer.PTZ
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "PTZConfiguration":
                     if (reader.NamespaceUri != Ns.Ver20Ptz) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.pTZConfigurationField, reader.ReadElementObject<SharpOnvifCommon.Onvif.PTZConfiguration>(() => new SharpOnvifCommon.Onvif.PTZConfiguration()));
+                    reader.Append(ref this.pTZConfigurationField, reader.ReadElementObject<SharpOnvifCommon.Onvif.PTZConfiguration>(() => new SharpOnvifCommon.Onvif.PTZConfiguration()));
                     return true;
             }
             return false;
@@ -1137,12 +1137,12 @@ namespace SharpOnvifServer.PTZ
             this.nodeTokenField = nodeToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Ptz, "NodeToken", this.nodeTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1183,12 +1183,12 @@ namespace SharpOnvifServer.PTZ
             this.pTZNodeField = pTZNode;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver20Ptz, "PTZNode", this.pTZNodeField, "http://www.onvif.org/ver10/schema", "PTZNode");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1247,7 +1247,7 @@ namespace SharpOnvifServer.PTZ
             this.pTZNodeField = pTZNode;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.pTZNodeField != null)
             {
@@ -1258,13 +1258,13 @@ namespace SharpOnvifServer.PTZ
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "PTZNode":
                     if (reader.NamespaceUri != Ns.Ver20Ptz) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.pTZNodeField, reader.ReadElementObject<SharpOnvifCommon.Onvif.PTZNode>(() => new SharpOnvifCommon.Onvif.PTZNode()));
+                    reader.Append(ref this.pTZNodeField, reader.ReadElementObject<SharpOnvifCommon.Onvif.PTZNode>(() => new SharpOnvifCommon.Onvif.PTZNode()));
                     return true;
             }
             return false;
@@ -1306,13 +1306,13 @@ namespace SharpOnvifServer.PTZ
             this.presetTourTokenField = presetTourToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Ptz, "ProfileToken", this.profileTokenField);
             writer.WriteElementString(Ns.Ver20Ptz, "PresetTourToken", this.presetTourTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1354,12 +1354,12 @@ namespace SharpOnvifServer.PTZ
             this.optionsField = options;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver20Ptz, "Options", this.optionsField, "http://www.onvif.org/ver10/schema", "PTZPresetTourOptions");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1407,13 +1407,13 @@ namespace SharpOnvifServer.PTZ
             this.presetTourTokenField = presetTourToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Ptz, "ProfileToken", this.profileTokenField);
             writer.WriteElementString(Ns.Ver20Ptz, "PresetTourToken", this.presetTourTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1455,12 +1455,12 @@ namespace SharpOnvifServer.PTZ
             this.presetTourField = presetTour;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver20Ptz, "PresetTour", this.presetTourField, "http://www.onvif.org/ver10/schema", "PresetTour");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1498,12 +1498,12 @@ namespace SharpOnvifServer.PTZ
             this.profileTokenField = profileToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Ptz, "ProfileToken", this.profileTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1541,7 +1541,7 @@ namespace SharpOnvifServer.PTZ
             this.presetTourField = presetTour;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.presetTourField != null)
             {
@@ -1552,13 +1552,13 @@ namespace SharpOnvifServer.PTZ
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "PresetTour":
                     if (reader.NamespaceUri != Ns.Ver20Ptz) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.presetTourField, reader.ReadElementObject<SharpOnvifCommon.Onvif.PresetTour>(() => new SharpOnvifCommon.Onvif.PresetTour()));
+                    reader.Append(ref this.presetTourField, reader.ReadElementObject<SharpOnvifCommon.Onvif.PresetTour>(() => new SharpOnvifCommon.Onvif.PresetTour()));
                     return true;
             }
             return false;
@@ -1594,12 +1594,12 @@ namespace SharpOnvifServer.PTZ
             this.profileTokenField = profileToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Ptz, "ProfileToken", this.profileTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1641,7 +1641,7 @@ namespace SharpOnvifServer.PTZ
             this.presetField = preset;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.presetField != null)
             {
@@ -1652,13 +1652,13 @@ namespace SharpOnvifServer.PTZ
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Preset":
                     if (reader.NamespaceUri != Ns.Ver20Ptz) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.presetField, reader.ReadElementObject<SharpOnvifCommon.Onvif.PTZPreset>(() => new SharpOnvifCommon.Onvif.PTZPreset()));
+                    reader.Append(ref this.presetField, reader.ReadElementObject<SharpOnvifCommon.Onvif.PTZPreset>(() => new SharpOnvifCommon.Onvif.PTZPreset()));
                     return true;
             }
             return false;
@@ -1705,12 +1705,12 @@ namespace SharpOnvifServer.PTZ
             this.capabilitiesField = capabilities;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver20Ptz, "Capabilities", this.capabilitiesField, Ns.Ver20Ptz, "Capabilities");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1751,12 +1751,12 @@ namespace SharpOnvifServer.PTZ
             this.profileTokenField = profileToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Ptz, "ProfileToken", this.profileTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1797,12 +1797,12 @@ namespace SharpOnvifServer.PTZ
             this.pTZStatusField = pTZStatus;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver20Ptz, "PTZStatus", this.pTZStatusField, "http://www.onvif.org/ver10/schema", "PTZStatus");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1858,13 +1858,13 @@ namespace SharpOnvifServer.PTZ
             this.speedField = speed;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Ptz, "ProfileToken", this.profileTokenField);
             writer.WriteElement(Ns.Ver20Ptz, "Speed", this.speedField, "http://www.onvif.org/ver10/schema", "PTZSpeed");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1950,14 +1950,14 @@ namespace SharpOnvifServer.PTZ
             this.speedField = speed;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Ptz, "ProfileToken", this.profileTokenField);
             writer.WriteElementString(Ns.Ver20Ptz, "PresetToken", this.presetTokenField);
             writer.WriteElement(Ns.Ver20Ptz, "Speed", this.speedField, "http://www.onvif.org/ver10/schema", "PTZSpeed");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2026,13 +2026,13 @@ namespace SharpOnvifServer.PTZ
             this.presetTourField = presetTour;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Ptz, "ProfileToken", this.profileTokenField);
             writer.WriteElement(Ns.Ver20Ptz, "PresetTour", this.presetTourField, "http://www.onvif.org/ver10/schema", "PresetTour");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2170,7 +2170,7 @@ namespace SharpOnvifServer.PTZ
             this.anyField = any;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Ptz, "ProfileToken", this.profileTokenField);
             writer.WriteElementString(Ns.Ver20Ptz, "PresetToken", this.presetTokenField);
@@ -2181,7 +2181,7 @@ namespace SharpOnvifServer.PTZ
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2210,7 +2210,7 @@ namespace SharpOnvifServer.PTZ
                     this.objectIDField = reader.ReadElementText();
                     return true;
             }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -2278,14 +2278,14 @@ namespace SharpOnvifServer.PTZ
             this.operationField = operation;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Ptz, "ProfileToken", this.profileTokenField);
             writer.WriteElementString(Ns.Ver20Ptz, "PresetTourToken", this.presetTourTokenField);
             writer.WriteElementString(Ns.Ver20Ptz, "Operation", SharpOnvifCommon.Onvif.EnumXml.ToXml(this.operationField));
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2376,14 +2376,14 @@ namespace SharpOnvifServer.PTZ
             this.speedField = speed;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Ptz, "ProfileToken", this.profileTokenField);
             writer.WriteElement(Ns.Ver20Ptz, "Translation", this.translationField, "http://www.onvif.org/ver10/schema", "PTZVector");
             writer.WriteElement(Ns.Ver20Ptz, "Speed", this.speedField, "http://www.onvif.org/ver10/schema", "PTZSpeed");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2462,13 +2462,13 @@ namespace SharpOnvifServer.PTZ
             this.presetTokenField = presetToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Ptz, "ProfileToken", this.profileTokenField);
             writer.WriteElementString(Ns.Ver20Ptz, "PresetToken", this.presetTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2533,13 +2533,13 @@ namespace SharpOnvifServer.PTZ
             this.presetTourTokenField = presetTourToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Ptz, "ProfileToken", this.profileTokenField);
             writer.WriteElementString(Ns.Ver20Ptz, "PresetTourToken", this.presetTourTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2610,13 +2610,13 @@ namespace SharpOnvifServer.PTZ
             this.auxiliaryDataField = auxiliaryData;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Ptz, "ProfileToken", this.profileTokenField);
             writer.WriteElementString(Ns.Ver20Ptz, "AuxiliaryData", this.auxiliaryDataField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2662,12 +2662,12 @@ namespace SharpOnvifServer.PTZ
             this.auxiliaryResponseField = auxiliaryResponse;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Ptz, "AuxiliaryResponse", this.auxiliaryResponseField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2719,13 +2719,13 @@ namespace SharpOnvifServer.PTZ
             this.forcePersistenceField = forcePersistence;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver20Ptz, "PTZConfiguration", this.pTZConfigurationField, "http://www.onvif.org/ver10/schema", "PTZConfiguration");
-            writer.WriteElementString(Ns.Ver20Ptz, "ForcePersistence", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.forcePersistenceField));
+            writer.WriteElementString(Ns.Ver20Ptz, "ForcePersistence", writer.ToXml(this.forcePersistenceField));
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2735,7 +2735,7 @@ namespace SharpOnvifServer.PTZ
                     return true;
                 case "ForcePersistence":
                     if (reader.NamespaceUri != Ns.Ver20Ptz) break;
-                    this.forcePersistenceField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
+                    this.forcePersistenceField = reader.ToBoolean(reader.ReadElementText());
                     return true;
             }
             return false;
@@ -2784,12 +2784,12 @@ namespace SharpOnvifServer.PTZ
             this.profileTokenField = profileToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Ptz, "ProfileToken", this.profileTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2877,14 +2877,14 @@ namespace SharpOnvifServer.PTZ
             this.presetTokenField = presetToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Ptz, "ProfileToken", this.profileTokenField);
             writer.WriteElementString(Ns.Ver20Ptz, "PresetName", this.presetNameField);
             writer.WriteElementString(Ns.Ver20Ptz, "PresetToken", this.presetTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -2940,12 +2940,12 @@ namespace SharpOnvifServer.PTZ
             this.presetTokenField = presetToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Ptz, "PresetToken", this.presetTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -3042,20 +3042,20 @@ namespace SharpOnvifServer.PTZ
             this.zoomFieldSpecified = true;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver20Ptz, "ProfileToken", this.profileTokenField);
             if (this.panTiltFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver20Ptz, "PanTilt", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.panTiltField));
+                writer.WriteElementString(Ns.Ver20Ptz, "PanTilt", writer.ToXml(this.panTiltField));
             }
             if (this.zoomFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver20Ptz, "Zoom", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.zoomField));
+                writer.WriteElementString(Ns.Ver20Ptz, "Zoom", writer.ToXml(this.zoomField));
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -3065,12 +3065,12 @@ namespace SharpOnvifServer.PTZ
                     return true;
                 case "PanTilt":
                     if (reader.NamespaceUri != Ns.Ver20Ptz) break;
-                    this.panTiltField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
+                    this.panTiltField = reader.ToBoolean(reader.ReadElementText());
                     this.panTiltFieldSpecified = true;
                     return true;
                 case "Zoom":
                     if (reader.NamespaceUri != Ns.Ver20Ptz) break;
-                    this.zoomField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
+                    this.zoomField = reader.ToBoolean(reader.ReadElementText());
                     this.zoomFieldSpecified = true;
                     return true;
             }

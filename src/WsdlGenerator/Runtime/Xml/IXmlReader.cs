@@ -1,0 +1,109 @@
+// SharpOnvif
+// Copyright (C) 2026 Lukas Volf
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+using System;
+using System.Xml;
+
+namespace __RUNTIME__.Xml
+{
+    /// <summary>
+    /// What a generated contract reads itself with.
+    /// </summary>
+    /// <remarks>
+    /// The mirror of <see cref="IXmlWriter"/>, and generated for the same reason: the reading is
+    /// compiled into the contracts, so they need a contract of their own to compile against, and
+    /// nothing more than that needs generating.
+    /// </remarks>
+    public interface IXmlReader
+    {
+        /// <summary>The reader underneath, for content this interface does not describe.</summary>
+        XmlReader Xml { get; }
+
+        /// <summary>Local name of the element or attribute the reader is on.</summary>
+        string LocalName { get; }
+
+        /// <summary>Namespace of the element or attribute the reader is on.</summary>
+        string NamespaceUri { get; }
+
+        /// <summary>Value of the attribute the reader is on.</summary>
+        string AttributeValue { get; }
+
+        bool IsElement(string ns, string name);
+
+        /// <summary>Reads the text of the current element and moves past its end tag.</summary>
+        string ReadElementText();
+
+        /// <summary>Resolves a prefixed name against the prefixes in scope here.</summary>
+        XmlQualifiedName ToQualifiedName(string text);
+
+        XmlQualifiedName ReadElementQualifiedName();
+
+        /// <summary>Reads the current element into a new contract of the given kind.</summary>
+        T ReadElementObject<T>(Func<T> create) where T : OnvifContract;
+
+        /// <summary>Reads the attributes and children of the current element into a contract.</summary>
+        void ReadInto(OnvifContract instance);
+
+        /// <summary>Whether the current element says xsi:nil.</summary>
+        bool IsNil();
+
+        /// <summary>Calls back for each named child of the current element.</summary>
+        void ReadWrappedArray(string itemNamespace, string itemName, Action onItem);
+
+        /// <summary>Lifts the current element out as a document of its own, prefixes included.</summary>
+        XmlElement ReadAnyElement();
+
+        XmlElement ReadWrappedElement();
+
+        XmlNode CreateTextNode(string text);
+
+        XmlNode ReadAnyNode();
+
+        void Skip();
+
+        /// <summary>A value read back from the lexical form its schema type defines.</summary>
+        bool ToBoolean(string text);
+
+        sbyte ToSByte(string text);
+        byte ToByte(string text);
+        short ToInt16(string text);
+        ushort ToUInt16(string text);
+        int ToInt32(string text);
+        uint ToUInt32(string text);
+        long ToInt64(string text);
+        ulong ToUInt64(string text);
+        decimal ToDecimal(string text);
+        float ToSingle(string text);
+        double ToDouble(string text);
+        DateTime ToDateTime(string text);
+        byte[] ToByteArray(string text);
+        byte[] FromHexString(string text);
+
+        /// <summary>Splits an xs:list into its members.</summary>
+        string[] SplitList(string text);
+
+        /// <summary>
+        /// Adds one more item to a repeated element's array, which is grown one at a time because
+        /// the schema does not say how many there will be.
+        /// </summary>
+        void Append<T>(ref T[] array, T item);
+    }
+}

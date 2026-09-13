@@ -107,12 +107,12 @@ renames in section 3 and the `using` in section 2.
 
 | Situation | 0.9.x | 0.10.0 |
 | --- | --- | --- |
-| The device answered with a SOAP fault | `FaultException` | `SharpOnvifCommon.Xml.OnvifFaultException` |
-| The device could not be reached, dropped the connection, or timed out | `HttpRequestException`, `TaskCanceledException` | `SharpOnvifCommon.Soap.OnvifTransportException` |
+| The device answered with a SOAP fault | `FaultException` | `SharpOnvifCommon.Xml.SoapFaultException` |
+| The device could not be reached, dropped the connection, or timed out | `HttpRequestException`, `TaskCanceledException` | `SharpOnvifCommon.Soap.SoapTransportException` |
 
 A cancellation you requested still arrives as `OperationCanceledException`. A pull point spends
 nearly all its time waiting on a request, so a loop that polls one has to catch
-`OnvifTransportException` and subscribe again - the device has forgotten the subscription.
+`SoapTransportException` and subscribe again - the device has forgotten the subscription.
 
 ### `OnvifDiscoveryClient` is an instance
 

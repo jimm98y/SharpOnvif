@@ -171,7 +171,7 @@ namespace SharpOnvifServer.Dispatch
                 await WriteFaultAsync(context, fault.Fault.Code, fault.Fault.Subcode,
                     fault.Fault.Reason, fault.SubcodeNamespace, fault.StatusCode).ConfigureAwait(false);
             }
-            catch (OnvifFaultException fault)
+            catch (SoapFaultException fault)
             {
                 await WriteFaultAsync(context, "Sender",
                     fault.Fault?.Subcode ?? "InvalidArgVal", fault.Message).ConfigureAwait(false);

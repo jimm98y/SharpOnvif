@@ -95,34 +95,34 @@ namespace SharpOnvifServer.Thermal
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Thermal; } }
 
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.radiometryFieldSpecified)
             {
-                writer.WriteAttributeString(null, "Radiometry", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.radiometryField));
+                writer.WriteAttributeString(null, "Radiometry", writer.ToXml(this.radiometryField));
             }
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Radiometry":
-                    this.radiometryField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.radiometryField = reader.ToBoolean(reader.AttributeValue);
                     this.radiometryFieldSpecified = true;
                     return true;
             }
             return false;
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -183,19 +183,19 @@ namespace SharpOnvifServer.Thermal
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Thermal; } }
 
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAttributeString(null, "token", this.tokenField);
             writer.WriteAttributeString(null, "Type", this.typeField);
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Thermal, "Name", this.nameField);
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -209,7 +209,7 @@ namespace SharpOnvifServer.Thermal
             return false;
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -218,7 +218,7 @@ namespace SharpOnvifServer.Thermal
                     this.nameField = reader.ReadElementText();
                     return true;
             }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -288,7 +288,7 @@ namespace SharpOnvifServer.Thermal
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Thermal; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Thermal, "ColorPalette", this.colorPaletteField, Ns.Ver10Thermal, "ColorPalette");
             writer.WriteElementString(Ns.Ver10Thermal, "Polarity", EnumXml.ToXml(this.polarityField));
@@ -297,7 +297,7 @@ namespace SharpOnvifServer.Thermal
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -318,7 +318,7 @@ namespace SharpOnvifServer.Thermal
                     this.coolerField = reader.ReadElementObject<Cooler>(() => new Cooler());
                     return true;
             }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -376,7 +376,7 @@ namespace SharpOnvifServer.Thermal
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Thermal; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.colorPaletteField != null)
             {
@@ -396,24 +396,24 @@ namespace SharpOnvifServer.Thermal
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "ColorPalette":
                     if (reader.NamespaceUri != Ns.Ver10Thermal) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.colorPaletteField, reader.ReadElementObject<ColorPalette>(() => new ColorPalette()));
+                    reader.Append(ref this.colorPaletteField, reader.ReadElementObject<ColorPalette>(() => new ColorPalette()));
                     return true;
                 case "NUCTable":
                     if (reader.NamespaceUri != Ns.Ver10Thermal) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.nUCTableField, reader.ReadElementObject<NUCTable>(() => new NUCTable()));
+                    reader.Append(ref this.nUCTableField, reader.ReadElementObject<NUCTable>(() => new NUCTable()));
                     return true;
                 case "CoolerOptions":
                     if (reader.NamespaceUri != Ns.Ver10Thermal) break;
                     this.coolerOptionsField = reader.ReadElementObject<CoolerOptions>(() => new CoolerOptions());
                     return true;
             }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -459,18 +459,18 @@ namespace SharpOnvifServer.Thermal
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Thermal; } }
 
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAttributeString(null, "token", this.tokenField);
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Thermal, "Configuration", this.configurationField, Ns.Ver10Thermal, "Configuration");
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -481,7 +481,7 @@ namespace SharpOnvifServer.Thermal
             return false;
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -490,7 +490,7 @@ namespace SharpOnvifServer.Thermal
                     this.configurationField = reader.ReadElementObject<Configuration>(() => new Configuration());
                     return true;
             }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -551,31 +551,31 @@ namespace SharpOnvifServer.Thermal
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Thermal; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
-            writer.WriteElementString(Ns.Ver10Thermal, "Enabled", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.enabledField));
+            writer.WriteElementString(Ns.Ver10Thermal, "Enabled", writer.ToXml(this.enabledField));
             if (this.runTimeFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Thermal, "RunTime", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.runTimeField));
+                writer.WriteElementString(Ns.Ver10Thermal, "RunTime", writer.ToXml(this.runTimeField));
             }
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Enabled":
                     if (reader.NamespaceUri != Ns.Ver10Thermal) break;
-                    this.enabledField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
+                    this.enabledField = reader.ToBoolean(reader.ReadElementText());
                     return true;
                 case "RunTime":
                     if (reader.NamespaceUri != Ns.Ver10Thermal) break;
-                    this.runTimeField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
+                    this.runTimeField = reader.ToSingle(reader.ReadElementText());
                     this.runTimeFieldSpecified = true;
                     return true;
             }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -626,26 +626,26 @@ namespace SharpOnvifServer.Thermal
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Thermal; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.enabledFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Thermal, "Enabled", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.enabledField));
+                writer.WriteElementString(Ns.Ver10Thermal, "Enabled", writer.ToXml(this.enabledField));
             }
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Enabled":
                     if (reader.NamespaceUri != Ns.Ver10Thermal) break;
-                    this.enabledField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.ReadElementText());
+                    this.enabledField = reader.ToBoolean(reader.ReadElementText());
                     this.enabledFieldSpecified = true;
                     return true;
             }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -680,12 +680,12 @@ namespace SharpOnvifServer.Thermal
             this.videoSourceTokenField = videoSourceToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Thermal, "VideoSourceToken", this.videoSourceTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -728,12 +728,12 @@ namespace SharpOnvifServer.Thermal
             this.configurationOptionsField = configurationOptions;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Thermal, "ConfigurationOptions", this.configurationOptionsField, Ns.Ver10Thermal, "ConfigurationOptions");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -774,12 +774,12 @@ namespace SharpOnvifServer.Thermal
             this.videoSourceTokenField = videoSourceToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Thermal, "VideoSourceToken", this.videoSourceTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -820,12 +820,12 @@ namespace SharpOnvifServer.Thermal
             this.configurationField = configuration;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Thermal, "Configuration", this.configurationField, Ns.Ver10Thermal, "Configuration");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -878,7 +878,7 @@ namespace SharpOnvifServer.Thermal
             this.configurationsField = configurations;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.configurationsField != null)
             {
@@ -889,13 +889,13 @@ namespace SharpOnvifServer.Thermal
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Configurations":
                     if (reader.NamespaceUri != Ns.Ver10Thermal) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.configurationsField, reader.ReadElementObject<Configurations>(() => new Configurations()));
+                    reader.Append(ref this.configurationsField, reader.ReadElementObject<Configurations>(() => new Configurations()));
                     return true;
             }
             return false;
@@ -932,12 +932,12 @@ namespace SharpOnvifServer.Thermal
             this.videoSourceTokenField = videoSourceToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Thermal, "VideoSourceToken", this.videoSourceTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -980,12 +980,12 @@ namespace SharpOnvifServer.Thermal
             this.configurationOptionsField = configurationOptions;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Thermal, "ConfigurationOptions", this.configurationOptionsField, Ns.Ver10Thermal, "RadiometryConfigurationOptions");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1026,12 +1026,12 @@ namespace SharpOnvifServer.Thermal
             this.videoSourceTokenField = videoSourceToken;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Thermal, "VideoSourceToken", this.videoSourceTokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1072,12 +1072,12 @@ namespace SharpOnvifServer.Thermal
             this.configurationField = configuration;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Thermal, "Configuration", this.configurationField, Ns.Ver10Thermal, "RadiometryConfiguration");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1130,12 +1130,12 @@ namespace SharpOnvifServer.Thermal
             this.capabilitiesField = capabilities;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Thermal, "Capabilities", this.capabilitiesField, Ns.Ver10Thermal, "Capabilities");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1240,26 +1240,26 @@ namespace SharpOnvifServer.Thermal
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Thermal; } }
 
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAttributeString(null, "token", this.tokenField);
             if (this.lowTemperatureFieldSpecified)
             {
-                writer.WriteAttributeString(null, "LowTemperature", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.lowTemperatureField));
+                writer.WriteAttributeString(null, "LowTemperature", writer.ToXml(this.lowTemperatureField));
             }
             if (this.highTemperatureFieldSpecified)
             {
-                writer.WriteAttributeString(null, "HighTemperature", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.highTemperatureField));
+                writer.WriteAttributeString(null, "HighTemperature", writer.ToXml(this.highTemperatureField));
             }
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Thermal, "Name", this.nameField);
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1267,18 +1267,18 @@ namespace SharpOnvifServer.Thermal
                     this.tokenField = reader.AttributeValue;
                     return true;
                 case "LowTemperature":
-                    this.lowTemperatureField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.AttributeValue);
+                    this.lowTemperatureField = reader.ToSingle(reader.AttributeValue);
                     this.lowTemperatureFieldSpecified = true;
                     return true;
                 case "HighTemperature":
-                    this.highTemperatureField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.AttributeValue);
+                    this.highTemperatureField = reader.ToSingle(reader.AttributeValue);
                     this.highTemperatureFieldSpecified = true;
                     return true;
             }
             return false;
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1287,7 +1287,7 @@ namespace SharpOnvifServer.Thermal
                     this.nameField = reader.ReadElementText();
                     return true;
             }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -1322,13 +1322,13 @@ namespace SharpOnvifServer.Thermal
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Thermal; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Thermal, "RadiometryGlobalParameters", this.radiometryGlobalParametersField, Ns.Ver10Thermal, "RadiometryGlobalParameters");
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1337,7 +1337,7 @@ namespace SharpOnvifServer.Thermal
                     this.radiometryGlobalParametersField = reader.ReadElementObject<RadiometryGlobalParameters>(() => new RadiometryGlobalParameters());
                     return true;
             }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -1372,13 +1372,13 @@ namespace SharpOnvifServer.Thermal
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Thermal; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Thermal, "RadiometryGlobalParameterOptions", this.radiometryGlobalParameterOptionsField, Ns.Ver10Thermal, "RadiometryGlobalParameterOptions");
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1387,7 +1387,7 @@ namespace SharpOnvifServer.Thermal
                     this.radiometryGlobalParameterOptionsField = reader.ReadElementObject<RadiometryGlobalParameterOptions>(() => new RadiometryGlobalParameterOptions());
                     return true;
             }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -1509,7 +1509,7 @@ namespace SharpOnvifServer.Thermal
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Thermal; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Thermal, "ReflectedAmbientTemperature", this.reflectedAmbientTemperatureField, "http://www.onvif.org/ver10/schema", "FloatRange");
             writer.WriteElement(Ns.Ver10Thermal, "Emissivity", this.emissivityField, "http://www.onvif.org/ver10/schema", "FloatRange");
@@ -1522,7 +1522,7 @@ namespace SharpOnvifServer.Thermal
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1559,7 +1559,7 @@ namespace SharpOnvifServer.Thermal
                     this.extOpticsTransmittanceField = reader.ReadElementObject<SharpOnvifCommon.Onvif.FloatRange>(() => new SharpOnvifCommon.Onvif.FloatRange());
                     return true;
             }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -1745,77 +1745,77 @@ namespace SharpOnvifServer.Thermal
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Thermal; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
-            writer.WriteElementString(Ns.Ver10Thermal, "ReflectedAmbientTemperature", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.reflectedAmbientTemperatureField));
-            writer.WriteElementString(Ns.Ver10Thermal, "Emissivity", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.emissivityField));
-            writer.WriteElementString(Ns.Ver10Thermal, "DistanceToObject", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.distanceToObjectField));
+            writer.WriteElementString(Ns.Ver10Thermal, "ReflectedAmbientTemperature", writer.ToXml(this.reflectedAmbientTemperatureField));
+            writer.WriteElementString(Ns.Ver10Thermal, "Emissivity", writer.ToXml(this.emissivityField));
+            writer.WriteElementString(Ns.Ver10Thermal, "DistanceToObject", writer.ToXml(this.distanceToObjectField));
             if (this.relativeHumidityFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Thermal, "RelativeHumidity", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.relativeHumidityField));
+                writer.WriteElementString(Ns.Ver10Thermal, "RelativeHumidity", writer.ToXml(this.relativeHumidityField));
             }
             if (this.atmosphericTemperatureFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Thermal, "AtmosphericTemperature", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.atmosphericTemperatureField));
+                writer.WriteElementString(Ns.Ver10Thermal, "AtmosphericTemperature", writer.ToXml(this.atmosphericTemperatureField));
             }
             if (this.atmosphericTransmittanceFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Thermal, "AtmosphericTransmittance", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.atmosphericTransmittanceField));
+                writer.WriteElementString(Ns.Ver10Thermal, "AtmosphericTransmittance", writer.ToXml(this.atmosphericTransmittanceField));
             }
             if (this.extOpticsTemperatureFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Thermal, "ExtOpticsTemperature", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.extOpticsTemperatureField));
+                writer.WriteElementString(Ns.Ver10Thermal, "ExtOpticsTemperature", writer.ToXml(this.extOpticsTemperatureField));
             }
             if (this.extOpticsTransmittanceFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Thermal, "ExtOpticsTransmittance", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.extOpticsTransmittanceField));
+                writer.WriteElementString(Ns.Ver10Thermal, "ExtOpticsTransmittance", writer.ToXml(this.extOpticsTransmittanceField));
             }
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "ReflectedAmbientTemperature":
                     if (reader.NamespaceUri != Ns.Ver10Thermal) break;
-                    this.reflectedAmbientTemperatureField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
+                    this.reflectedAmbientTemperatureField = reader.ToSingle(reader.ReadElementText());
                     return true;
                 case "Emissivity":
                     if (reader.NamespaceUri != Ns.Ver10Thermal) break;
-                    this.emissivityField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
+                    this.emissivityField = reader.ToSingle(reader.ReadElementText());
                     return true;
                 case "DistanceToObject":
                     if (reader.NamespaceUri != Ns.Ver10Thermal) break;
-                    this.distanceToObjectField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
+                    this.distanceToObjectField = reader.ToSingle(reader.ReadElementText());
                     return true;
                 case "RelativeHumidity":
                     if (reader.NamespaceUri != Ns.Ver10Thermal) break;
-                    this.relativeHumidityField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
+                    this.relativeHumidityField = reader.ToSingle(reader.ReadElementText());
                     this.relativeHumidityFieldSpecified = true;
                     return true;
                 case "AtmosphericTemperature":
                     if (reader.NamespaceUri != Ns.Ver10Thermal) break;
-                    this.atmosphericTemperatureField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
+                    this.atmosphericTemperatureField = reader.ToSingle(reader.ReadElementText());
                     this.atmosphericTemperatureFieldSpecified = true;
                     return true;
                 case "AtmosphericTransmittance":
                     if (reader.NamespaceUri != Ns.Ver10Thermal) break;
-                    this.atmosphericTransmittanceField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
+                    this.atmosphericTransmittanceField = reader.ToSingle(reader.ReadElementText());
                     this.atmosphericTransmittanceFieldSpecified = true;
                     return true;
                 case "ExtOpticsTemperature":
                     if (reader.NamespaceUri != Ns.Ver10Thermal) break;
-                    this.extOpticsTemperatureField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
+                    this.extOpticsTemperatureField = reader.ToSingle(reader.ReadElementText());
                     this.extOpticsTemperatureFieldSpecified = true;
                     return true;
                 case "ExtOpticsTransmittance":
                     if (reader.NamespaceUri != Ns.Ver10Thermal) break;
-                    this.extOpticsTransmittanceField = SharpOnvifCommon.Xml.XmlPrimitives.ToSingle(reader.ReadElementText());
+                    this.extOpticsTransmittanceField = reader.ToSingle(reader.ReadElementText());
                     this.extOpticsTransmittanceFieldSpecified = true;
                     return true;
             }
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -1861,13 +1861,13 @@ namespace SharpOnvifServer.Thermal
             this.configurationField = configuration;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Thermal, "VideoSourceToken", this.videoSourceTokenField);
             writer.WriteElement(Ns.Ver10Thermal, "Configuration", this.configurationField, Ns.Ver10Thermal, "Configuration");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1937,13 +1937,13 @@ namespace SharpOnvifServer.Thermal
             this.configurationField = configuration;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Thermal, "VideoSourceToken", this.videoSourceTokenField);
             writer.WriteElement(Ns.Ver10Thermal, "Configuration", this.configurationField, Ns.Ver10Thermal, "RadiometryConfiguration");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {

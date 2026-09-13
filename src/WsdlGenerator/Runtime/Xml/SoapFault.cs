@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Xml;
 
 namespace __RUNTIME__.Xml
 {
@@ -33,9 +32,9 @@ namespace __RUNTIME__.Xml
             get { return Subcodes.Count == 0 ? null : Subcodes[Subcodes.Count - 1]; }
         }
 
-        public OnvifFaultException ToException()
+        public SoapFaultException ToException()
         {
-            return new OnvifFaultException(this);
+            return new SoapFaultException(this);
         }
 
         public override string ToString()
@@ -47,98 +46,16 @@ namespace __RUNTIME__.Xml
             if (!string.IsNullOrEmpty(Reason)) return Reason;
             return Code ?? "SOAP fault";
         }
-
-        /// <summary>Reads a fault from a reader positioned on the SOAP Fault element.</summary>
-        public static SoapFault Read(XmlReader reader)
-        {
-            var fault = new SoapFault();
-            int faultDepth = reader.Depth;
-
-            if (reader.IsEmptyElement)
-            {
-                reader.Read();
-                return fault;
-            }
-
-            while (reader.Read())
-            {
-                if (reader.NodeType == XmlNodeType.EndElement && reader.Depth == faultDepth) { reader.Read(); break; }
-                if (reader.NodeType != XmlNodeType.Element) continue;
-
-                switch (reader.LocalName)
-                {
-                    case "Code":
-                        ReadCode(reader, fault);
-                        break;
-                    case "Reason":
-                        fault.Reason = ReadReason(reader);
-                        break;
-                    case "Detail":
-                        fault.Detail = reader.ReadInnerXml();
-                        break;
-                }
-            }
-
-            return fault;
-        }
-
-        /// <summary>Reads Code/Value plus the chain of nested Subcode/Value elements.</summary>
-        private static void ReadCode(XmlReader reader, SoapFault fault)
-        {
-            int codeDepth = reader.Depth;
-            if (reader.IsEmptyElement) return;
-
-            bool first = true;
-            while (reader.Read())
-            {
-                if (reader.NodeType == XmlNodeType.EndElement && reader.Depth == codeDepth) return;
-                if (reader.NodeType != XmlNodeType.Element) continue;
-
-                if (reader.LocalName == "Value")
-                {
-                    string value = Localise(reader.ReadElementContentAsString());
-                    if (first) { fault.Code = value; first = false; }
-                    else fault.Subcodes.Add(value);
-                }
-            }
-        }
-
-        /// <summary>Takes the first Text child of Reason; Onvif devices send a single language.</summary>
-        private static string ReadReason(XmlReader reader)
-        {
-            int reasonDepth = reader.Depth;
-            if (reader.IsEmptyElement) return null;
-
-            while (reader.Read())
-            {
-                if (reader.NodeType == XmlNodeType.EndElement && reader.Depth == reasonDepth) return null;
-                if (reader.NodeType == XmlNodeType.Element && reader.LocalName == "Text")
-                    return reader.ReadElementContentAsString();
-            }
-
-            return null;
-        }
-
-        /// <summary>
-        /// Drops the prefix from a fault code QName. The prefix binding is rarely useful and the
-        /// local part is what callers match on.
-        /// </summary>
-        private static string Localise(string value)
-        {
-            if (string.IsNullOrEmpty(value)) return value;
-            int colon = value.IndexOf(':');
-            return colon < 0 ? value : value.Substring(colon + 1);
-        }
     }
 
     /// <summary>Thrown when an Onvif device answers with a SOAP fault.</summary>
-    public class OnvifFaultException : Exception
+    public class SoapFaultException : Exception
     {
-        public OnvifFaultException(string message) : base(message)
+        public SoapFaultException(string message) : base(message)
         {
         }
 
-        public OnvifFaultException(SoapFault fault) : base(fault == null ? "SOAP fault" : fault.ToString())
+        public SoapFaultException(SoapFault fault) : base(fault == null ? "SOAP fault" : fault.ToString())
         {
             Fault = fault;
         }

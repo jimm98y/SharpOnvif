@@ -84,7 +84,7 @@ namespace SharpOnvifServer.AccessRules
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Accessrules; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Accessrules, "ScheduleToken", this.scheduleTokenField);
             writer.WriteElementString(Ns.Ver10Accessrules, "Entity", this.entityField);
@@ -92,7 +92,7 @@ namespace SharpOnvifServer.AccessRules
             writer.WriteElement(Ns.Ver10Accessrules, "Extension", this.extensionField, Ns.Ver10Accessrules, "AccessPolicyExtension");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -134,14 +134,14 @@ namespace SharpOnvifServer.AccessRules
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Accessrules; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -181,7 +181,7 @@ namespace SharpOnvifServer.AccessRules
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Accessrules; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             base.WriteXmlContent(writer);
             if (this.accessPolicyField != null)
@@ -194,13 +194,13 @@ namespace SharpOnvifServer.AccessRules
             writer.WriteElement(Ns.Ver10Accessrules, "Extension", this.extensionField, Ns.Ver10Accessrules, "AccessProfileExtension");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "AccessPolicy":
                     if (reader.NamespaceUri != Ns.Ver10Accessrules) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.accessPolicyField, reader.ReadElementObject<AccessPolicy>(() => new AccessPolicy()));
+                    reader.Append(ref this.accessPolicyField, reader.ReadElementObject<AccessPolicy>(() => new AccessPolicy()));
                     return true;
                 case "Extension":
                     if (reader.NamespaceUri != Ns.Ver10Accessrules) break;
@@ -229,14 +229,14 @@ namespace SharpOnvifServer.AccessRules
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Accessrules; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -278,13 +278,13 @@ namespace SharpOnvifServer.AccessRules
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Accessrules; } }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Accessrules, "Name", this.nameField);
             writer.WriteElementString(Ns.Ver10Accessrules, "Description", this.descriptionField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -334,12 +334,12 @@ namespace SharpOnvifServer.AccessRules
             this.accessProfileField = accessProfile;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Accessrules, "AccessProfile", this.accessProfileField, Ns.Ver10Accessrules, "AccessProfile");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -385,12 +385,12 @@ namespace SharpOnvifServer.AccessRules
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Accessrules, "Token", this.tokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -434,12 +434,12 @@ namespace SharpOnvifServer.AccessRules
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Accessrules, "Token", this.tokenField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -526,22 +526,22 @@ namespace SharpOnvifServer.AccessRules
             this.startReferenceField = startReference;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.limitFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Accessrules, "Limit", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.limitField));
+                writer.WriteElementString(Ns.Ver10Accessrules, "Limit", writer.ToXml(this.limitField));
             }
             writer.WriteElementString(Ns.Ver10Accessrules, "StartReference", this.startReferenceField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Limit":
                     if (reader.NamespaceUri != Ns.Ver10Accessrules) break;
-                    this.limitField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.limitField = reader.ToInt32(reader.ReadElementText());
                     this.limitFieldSpecified = true;
                     return true;
                 case "StartReference":
@@ -597,7 +597,7 @@ namespace SharpOnvifServer.AccessRules
             this.accessProfileInfoField = accessProfileInfo;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Accessrules, "NextStartReference", this.nextStartReferenceField);
             if (this.accessProfileInfoField != null)
@@ -609,7 +609,7 @@ namespace SharpOnvifServer.AccessRules
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -619,7 +619,7 @@ namespace SharpOnvifServer.AccessRules
                     return true;
                 case "AccessProfileInfo":
                     if (reader.NamespaceUri != Ns.Ver10Accessrules) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.accessProfileInfoField, reader.ReadElementObject<AccessProfileInfo>(() => new AccessProfileInfo()));
+                    reader.Append(ref this.accessProfileInfoField, reader.ReadElementObject<AccessProfileInfo>(() => new AccessProfileInfo()));
                     return true;
             }
             return false;
@@ -657,7 +657,7 @@ namespace SharpOnvifServer.AccessRules
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.tokenField != null)
             {
@@ -668,13 +668,13 @@ namespace SharpOnvifServer.AccessRules
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Token":
                     if (reader.NamespaceUri != Ns.Ver10Accessrules) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.tokenField, reader.ReadElementText());
+                    reader.Append(ref this.tokenField, reader.ReadElementText());
                     return true;
             }
             return false;
@@ -712,7 +712,7 @@ namespace SharpOnvifServer.AccessRules
             this.accessProfileInfoField = accessProfileInfo;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.accessProfileInfoField != null)
             {
@@ -723,13 +723,13 @@ namespace SharpOnvifServer.AccessRules
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "AccessProfileInfo":
                     if (reader.NamespaceUri != Ns.Ver10Accessrules) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.accessProfileInfoField, reader.ReadElementObject<AccessProfileInfo>(() => new AccessProfileInfo()));
+                    reader.Append(ref this.accessProfileInfoField, reader.ReadElementObject<AccessProfileInfo>(() => new AccessProfileInfo()));
                     return true;
             }
             return false;
@@ -795,22 +795,22 @@ namespace SharpOnvifServer.AccessRules
             this.startReferenceField = startReference;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.limitFieldSpecified)
             {
-                writer.WriteElementString(Ns.Ver10Accessrules, "Limit", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.limitField));
+                writer.WriteElementString(Ns.Ver10Accessrules, "Limit", writer.ToXml(this.limitField));
             }
             writer.WriteElementString(Ns.Ver10Accessrules, "StartReference", this.startReferenceField);
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Limit":
                     if (reader.NamespaceUri != Ns.Ver10Accessrules) break;
-                    this.limitField = SharpOnvifCommon.Xml.XmlPrimitives.ToInt32(reader.ReadElementText());
+                    this.limitField = reader.ToInt32(reader.ReadElementText());
                     this.limitFieldSpecified = true;
                     return true;
                 case "StartReference":
@@ -866,7 +866,7 @@ namespace SharpOnvifServer.AccessRules
             this.accessProfileField = accessProfile;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Accessrules, "NextStartReference", this.nextStartReferenceField);
             if (this.accessProfileField != null)
@@ -878,7 +878,7 @@ namespace SharpOnvifServer.AccessRules
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -888,7 +888,7 @@ namespace SharpOnvifServer.AccessRules
                     return true;
                 case "AccessProfile":
                     if (reader.NamespaceUri != Ns.Ver10Accessrules) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.accessProfileField, reader.ReadElementObject<AccessProfile>(() => new AccessProfile()));
+                    reader.Append(ref this.accessProfileField, reader.ReadElementObject<AccessProfile>(() => new AccessProfile()));
                     return true;
             }
             return false;
@@ -926,7 +926,7 @@ namespace SharpOnvifServer.AccessRules
             this.tokenField = token;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.tokenField != null)
             {
@@ -937,13 +937,13 @@ namespace SharpOnvifServer.AccessRules
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "Token":
                     if (reader.NamespaceUri != Ns.Ver10Accessrules) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.tokenField, reader.ReadElementText());
+                    reader.Append(ref this.tokenField, reader.ReadElementText());
                     return true;
             }
             return false;
@@ -981,7 +981,7 @@ namespace SharpOnvifServer.AccessRules
             this.accessProfileField = accessProfile;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             if (this.accessProfileField != null)
             {
@@ -992,13 +992,13 @@ namespace SharpOnvifServer.AccessRules
             }
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "AccessProfile":
                     if (reader.NamespaceUri != Ns.Ver10Accessrules) break;
-                    SharpOnvifCommon.Xml.OnvifArray.Append(ref this.accessProfileField, reader.ReadElementObject<AccessProfile>(() => new AccessProfile()));
+                    reader.Append(ref this.accessProfileField, reader.ReadElementObject<AccessProfile>(() => new AccessProfile()));
                     return true;
             }
             return false;
@@ -1046,12 +1046,12 @@ namespace SharpOnvifServer.AccessRules
             this.capabilitiesField = capabilities;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Accessrules, "Capabilities", this.capabilitiesField, Ns.Ver10Accessrules, "ServiceCapabilities");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1097,12 +1097,12 @@ namespace SharpOnvifServer.AccessRules
             this.accessProfileField = accessProfile;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Accessrules, "AccessProfile", this.accessProfileField, Ns.Ver10Accessrules, "AccessProfile");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
@@ -1228,50 +1228,50 @@ namespace SharpOnvifServer.AccessRules
 
         protected override string OnvifXmlTypeNamespace { get { return Ns.Ver10Accessrules; } }
 
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
-            writer.WriteAttributeString(null, "MaxLimit", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxLimitField));
-            writer.WriteAttributeString(null, "MaxAccessProfiles", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxAccessProfilesField));
-            writer.WriteAttributeString(null, "MaxAccessPoliciesPerAccessProfile", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.maxAccessPoliciesPerAccessProfileField));
-            writer.WriteAttributeString(null, "MultipleSchedulesPerAccessPointSupported", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.multipleSchedulesPerAccessPointSupportedField));
+            writer.WriteAttributeString(null, "MaxLimit", writer.ToXml(this.maxLimitField));
+            writer.WriteAttributeString(null, "MaxAccessProfiles", writer.ToXml(this.maxAccessProfilesField));
+            writer.WriteAttributeString(null, "MaxAccessPoliciesPerAccessProfile", writer.ToXml(this.maxAccessPoliciesPerAccessProfileField));
+            writer.WriteAttributeString(null, "MultipleSchedulesPerAccessPointSupported", writer.ToXml(this.multipleSchedulesPerAccessPointSupportedField));
             if (this.clientSuppliedTokenSupportedFieldSpecified)
             {
-                writer.WriteAttributeString(null, "ClientSuppliedTokenSupported", SharpOnvifCommon.Xml.XmlPrimitives.ToString(this.clientSuppliedTokenSupportedField));
+                writer.WriteAttributeString(null, "ClientSuppliedTokenSupported", writer.ToXml(this.clientSuppliedTokenSupportedField));
             }
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
         }
 
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "MaxLimit":
-                    this.maxLimitField = SharpOnvifCommon.Xml.XmlPrimitives.ToUInt32(reader.AttributeValue);
+                    this.maxLimitField = reader.ToUInt32(reader.AttributeValue);
                     return true;
                 case "MaxAccessProfiles":
-                    this.maxAccessProfilesField = SharpOnvifCommon.Xml.XmlPrimitives.ToUInt32(reader.AttributeValue);
+                    this.maxAccessProfilesField = reader.ToUInt32(reader.AttributeValue);
                     return true;
                 case "MaxAccessPoliciesPerAccessProfile":
-                    this.maxAccessPoliciesPerAccessProfileField = SharpOnvifCommon.Xml.XmlPrimitives.ToUInt32(reader.AttributeValue);
+                    this.maxAccessPoliciesPerAccessProfileField = reader.ToUInt32(reader.AttributeValue);
                     return true;
                 case "MultipleSchedulesPerAccessPointSupported":
-                    this.multipleSchedulesPerAccessPointSupportedField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.multipleSchedulesPerAccessPointSupportedField = reader.ToBoolean(reader.AttributeValue);
                     return true;
                 case "ClientSuppliedTokenSupported":
-                    this.clientSuppliedTokenSupportedField = SharpOnvifCommon.Xml.XmlPrimitives.ToBoolean(reader.AttributeValue);
+                    this.clientSuppliedTokenSupportedField = reader.ToBoolean(reader.AttributeValue);
                     this.clientSuppliedTokenSupportedFieldSpecified = true;
                     return true;
             }
             return false;
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
-            SharpOnvifCommon.Xml.OnvifArray.Append(ref this.anyField, reader.ReadAnyElement());
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
 
@@ -1309,12 +1309,12 @@ namespace SharpOnvifServer.AccessRules
             this.accessProfileField = accessProfile;
         }
 
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.OnvifXmlWriter writer)
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Accessrules, "AccessProfile", this.accessProfileField, Ns.Ver10Accessrules, "AccessProfile");
         }
 
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.OnvifXmlReader reader)
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {

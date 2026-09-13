@@ -30,22 +30,30 @@ generated contracts drive directly, and the interfaces the base class talks thro
 
 ```
 ILog                        where a client says what it could not do
-Soap/IClientAuthentication  how a client proves who it is
 Soap/IClientSettings        what a client was built with
-Soap/OnvifClientBase        the base class, which knows only those three
-Soap/OnvifTransportException
-Xml/*                       the contract base, reader, writer, envelope, fault, conversions
+Soap/IClientAuthentication  how a client proves who it is
+Soap/IMessageCodec          what an envelope is
+Xml/IXmlWriter              how a contract writes itself
+Xml/IXmlReader              how a contract reads itself
+Soap/OnvifClientBase        the base class, which knows only those
+Xml/OnvifContract           the base every generated contract derives from
+Xml/SoapFault, Xml/XmlNamespaceDeclaration, Soap/SoapTransportException
 ```
 
-Everything behind those interfaces is not generated. HTTP Digest, the WS-Security UsernameToken,
-the nonce replay store, the loggers and the settings that carry them are Onvif's answers, not
-WSDL's, and they are ordinary hand-written source in `SharpOnvifCommon` - `Security/`, `Soap/`,
-`Logging/` and `Xml/`. Nothing service-specific is emitted at all: a run writes the same runtime
-whatever it is generating from.
+Nothing that implements any of it is generated. HTTP Digest, the WS-Security UsernameToken, the
+nonce replay store, the loggers, the settings that carry them, and the whole XML layer - reader,
+writer, envelope, fault parsing, lexical conversions - are ordinary hand-written source in
+`SharpOnvifCommon`, under `Security/`, `Soap/`, `Logging/` and `Xml/`.
 
-The XML layer stays generated because the generated contracts call it directly, line by line.
-Moving it would put `SharpOnvifCommon` back into every generated file, which is the thing this is
-arranged to avoid.
+Nothing service-specific is emitted either: a run writes the same runtime whatever it generates
+from. The lexical conversions sit on the reader and writer interfaces rather than in a class of
+their own, because a contract always has one of those to hand while it is reading or writing, and
+anywhere else would mean naming a type the generated code is not supposed to know.
+
+One consequence is worth being plain about: generated code **compiles** against nothing, but it
+does not **run** against nothing. A client with no `IXmlWriter` behind it cannot write a message.
+Generating for a service of your own means bringing a runtime implementation - `SharpOnvifCommon`
+is one, at about thirteen hundred lines of `Xml/` - or writing one.
 
 The embedded source is ordinary C# and stays compilable in an editor: it is written in a namespace
 called `__RUNTIME__`, which the generator replaces.

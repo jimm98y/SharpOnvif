@@ -243,7 +243,7 @@ internal sealed class ServerEmitter
         using (writer.Braces())
         {
             writer.Line($"{baseClass} target = ({baseClass})service;");
-            writer.Line($"var reader = new {Xml}.OnvifXmlReader(body, ResolveXmlType);");
+            writer.Line("var reader = CreateReader(body);");
             writer.Line();
             writer.Line("switch (action)");
             using (writer.Braces())

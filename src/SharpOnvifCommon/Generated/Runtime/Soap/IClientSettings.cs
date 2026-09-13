@@ -46,6 +46,12 @@ namespace SharpOnvifCommon.Soap
     /// </remarks>
     public interface IClientSettings
     {
+        /// <summary>
+        /// What writes a message and reads the reply. A client cannot be built without one - there
+        /// is nothing it could fall back to, having no idea what an envelope looks like.
+        /// </summary>
+        IMessageCodec Codec { get; }
+
         /// <summary>Credentials, or null for an unauthenticated client.</summary>
         NetworkCredential Credentials { get; }
 

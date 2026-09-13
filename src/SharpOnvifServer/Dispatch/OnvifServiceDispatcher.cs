@@ -57,5 +57,17 @@ namespace SharpOnvifServer.Dispatch
 
         /// <summary>Resolves an xsi:type in this dispatcher's assembly.</summary>
         public abstract OnvifContract ResolveXmlType(string ns, string name);
+
+        /// <summary>
+        /// Reads a request body with this service's own view of the shared schema types.
+        /// </summary>
+        /// <remarks>
+        /// Here rather than in the generated dispatcher because what reads XML is this library's
+        /// choice: the generated code knows only the interface it drives.
+        /// </remarks>
+        protected IXmlReader CreateReader(XmlReader body)
+        {
+            return new OnvifXmlReader(body, ResolveXmlType);
+        }
     }
 }

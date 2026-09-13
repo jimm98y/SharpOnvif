@@ -2,7 +2,7 @@ using System;
 using System.Globalization;
 using System.Xml;
 
-namespace __RUNTIME__.Xml
+namespace SharpOnvifCommon.Xml
 {
     /// <summary>
     /// Converts between XSD lexical forms and CLR values.

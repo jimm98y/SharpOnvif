@@ -17,6 +17,11 @@ namespace SharpOnvifCommon.Soap
     /// </remarks>
     public class OnvifClientSettings : IClientSettings
     {
+        /// <summary>
+        /// What writes a message and reads the reply. SOAP 1.2, as every Onvif binding uses.
+        /// </summary>
+        public IMessageCodec Codec { get; set; } = SoapMessageCodec.Instance;
+
         /// <summary>Credentials, or null for an unauthenticated client.</summary>
         public NetworkCredential Credentials { get; set; }
 

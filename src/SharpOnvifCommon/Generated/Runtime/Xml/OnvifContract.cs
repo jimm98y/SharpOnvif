@@ -49,7 +49,7 @@ namespace SharpOnvifCommon.Xml
         /// Writes this type's XML attributes. Overrides call <c>base</c> first so inherited
         /// attributes are written before the derived type's.
         /// </summary>
-        protected virtual void WriteXmlAttributes(OnvifXmlWriter writer)
+        protected virtual void WriteXmlAttributes(IXmlWriter writer)
         {
         }
 
@@ -57,7 +57,7 @@ namespace SharpOnvifCommon.Xml
         /// Writes this type's child elements and character content, in schema sequence order.
         /// Overrides call <c>base</c> first.
         /// </summary>
-        protected virtual void WriteXmlContent(OnvifXmlWriter writer)
+        protected virtual void WriteXmlContent(IXmlWriter writer)
         {
         }
 
@@ -66,7 +66,7 @@ namespace SharpOnvifCommon.Xml
         /// Returns false to let the caller ignore an attribute the schema does not describe,
         /// which real devices do send.
         /// </summary>
-        protected virtual bool ReadXmlAttribute(OnvifXmlReader reader)
+        protected virtual bool ReadXmlAttribute(IXmlReader reader)
         {
             return false;
         }
@@ -79,7 +79,7 @@ namespace SharpOnvifCommon.Xml
         /// sequence or omits an optional element still deserializes.
         /// </para>
         /// </summary>
-        protected virtual bool ReadXmlElement(OnvifXmlReader reader)
+        protected virtual bool ReadXmlElement(IXmlReader reader)
         {
             return false;
         }
@@ -89,7 +89,7 @@ namespace SharpOnvifCommon.Xml
         /// still positioned inside the element, so a value whose type is an xs:QName can resolve
         /// its prefix against the namespace scope that is about to close.
         /// </summary>
-        protected virtual void ReadXmlText(OnvifXmlReader reader, string text)
+        protected virtual void ReadXmlText(IXmlReader reader, string text)
         {
         }
 
@@ -112,27 +112,27 @@ namespace SharpOnvifCommon.Xml
         // access alone does not allow. These invokers keep the overridable surface protected while
         // letting the serialization layer reach it.
 
-        internal void InvokeWriteXmlAttributes(OnvifXmlWriter writer)
+        internal void InvokeWriteXmlAttributes(IXmlWriter writer)
         {
             WriteXmlAttributes(writer);
         }
 
-        internal void InvokeWriteXmlContent(OnvifXmlWriter writer)
+        internal void InvokeWriteXmlContent(IXmlWriter writer)
         {
             WriteXmlContent(writer);
         }
 
-        internal bool InvokeReadXmlAttribute(OnvifXmlReader reader)
+        internal bool InvokeReadXmlAttribute(IXmlReader reader)
         {
             return ReadXmlAttribute(reader);
         }
 
-        internal bool InvokeReadXmlElement(OnvifXmlReader reader)
+        internal bool InvokeReadXmlElement(IXmlReader reader)
         {
             return ReadXmlElement(reader);
         }
 
-        internal void InvokeReadXmlText(OnvifXmlReader reader, string text)
+        internal void InvokeReadXmlText(IXmlReader reader, string text)
         {
             ReadXmlText(reader, text);
         }
