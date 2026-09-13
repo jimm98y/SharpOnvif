@@ -277,6 +277,20 @@ namespace SharpOnvifClient
             {
                 using (UdpClient client = new UdpClient(endPoint))
                 {
+                    if (nicAddress.AddressFamily == AddressFamily.InterNetworkV6)
+                    {
+                        // ff02::c is link-local scope, so there is no route to it until the socket
+                        // is told which interface it is on. Without this every IPv6 Probe failed
+                        // with "No route to host", and the failure is only written to Debug - so
+                        // IPv6 discovery quietly found nothing.
+                        int interfaceIndex = FindInterfaceIndex(nicAddress);
+                        if (interfaceIndex > 0)
+                        {
+                            client.Client.SetSocketOption(
+                                SocketOptionLevel.IPv6, SocketOptionName.MulticastInterface, interfaceIndex);
+                        }
+                    }
+
                     void ReceiveCallback(IAsyncResult ar)
                     {
                         try
@@ -336,6 +350,43 @@ namespace SharpOnvifClient
                 cts.Dispose();
                 _discoverySlim.Release();
             }
+        }
+
+        /// <summary>
+        /// The index of the interface an address belongs to, or 0 when it cannot be found.
+        /// </summary>
+        /// <remarks>
+        /// An IPv6 multicast group is reached by interface, and an interface is named by index
+        /// rather than by address, so the address a caller gives has to be traced back to the
+        /// adapter carrying it.
+        /// </remarks>
+        private static int FindInterfaceIndex(IPAddress address)
+        {
+            foreach (NetworkInterface adapter in NetworkInterface.GetAllNetworkInterfaces())
+            {
+                if (adapter.OperationalStatus != OperationalStatus.Up) continue;
+
+                IPInterfaceProperties properties = adapter.GetIPProperties();
+
+                bool carriesIt = false;
+                foreach (var unicast in properties.UnicastAddresses)
+                {
+                    if (unicast.Address.Equals(address)) { carriesIt = true; break; }
+                }
+
+                if (!carriesIt) continue;
+
+                try
+                {
+                    return properties.GetIPv6Properties().Index;
+                }
+                catch (NetworkInformationException)
+                {
+                    return 0;
+                }
+            }
+
+            return 0;
         }
 
         internal static OnvifDiscoveryResult ParseDiscoveryResponse(string response)
