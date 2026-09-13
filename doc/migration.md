@@ -346,6 +346,14 @@ The `NoncePrivateKey` field is gone - it made the key that signs every nonce wri
 in the process. Use `RegenerateNoncePrivateKey()`, or `SetNoncePrivateKey(byte[])` where several
 instances must agree on one.
 
+### `OnvifWsdl` is gone
+
+It listed the address of each service's WSDL as a constant, and nothing in the library read it -
+the generator keeps its own copy of the same 25 addresses, and `wsdl/sources.txt` a third, so the
+one nothing compiles against was the one free to go stale. If you were using it to fetch a
+document, the addresses are in `wsdl/sources.txt` in the repository, and what a device actually
+offers is what `GetServices` reports rather than what any list here says.
+
 ### Unchanged
 
 `IUserRepository`, `AddOnvifDigestAuthentication`, `AddOnvifDiscovery`, `OnvifDiscoveryOptions`,
