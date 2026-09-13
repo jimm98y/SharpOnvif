@@ -51,6 +51,9 @@ public static class Program
     /// <summary>The logger this sample gives to everything it makes.</summary>
     static IOnvifLogger Logger = null;
 
+    /// <summary>One discovery client, reporting through the same logger as the rest.</summary>
+    static OnvifDiscoveryClient Discovery = null;
+
     static async Task MainAsync(string[] args)
     {
         // Ctrl-C stops waiting, rather than killing the process where it stands.
@@ -72,13 +75,14 @@ public static class Program
             IsTraceEnabled = false,
         };
 
-        OnvifDiscoveryClient.Failed += (_, e) => Console.WriteLine($"  ! {e}");
+        Discovery = new OnvifDiscoveryClient(Logger);
+        Discovery.Failed += (_, e) => Console.WriteLine($"  ! {e}");
 
         static bool IsOnThisMachine(OnvifDiscoveryResult candidate) =>
             candidate.Addresses != null &&
             candidate.Addresses.Any(address => address.Contains("127.0.0.1") || address.Contains("[::1]"));
 
-        var devices = await OnvifDiscoveryClient.DiscoverAsync(null, 1000, logger: Logger);
+        var devices = await Discovery.DiscoverAsync(null, 1000);
 
         foreach (var onvifDevice in devices)
         {
@@ -98,7 +102,7 @@ public static class Program
 
             try
             {
-                device = await OnvifDiscoveryClient.WaitForDeviceAsync(IsOnThisMachine, stopping.Token, Logger);
+                device = await Discovery.WaitForDeviceAsync(IsOnThisMachine, stopping.Token);
                 Console.WriteLine($"Device appeared: Manufacturer = {device.Manufacturer}, Model = {device.Hardware}");
             }
             catch (OperationCanceledException)
@@ -253,10 +257,9 @@ public static class Program
 
         try
         {
-            var device = await OnvifDiscoveryClient.WaitForDeviceAsync(
+            var device = await Discovery.WaitForDeviceAsync(
                 candidate => candidate.Addresses.Any(address => SameDevice(address, onvifUri)),
-                cancellationToken,
-                Logger);
+                cancellationToken);
 
             Console.WriteLine($"The device is back: {device.Addresses.FirstOrDefault()}");
             return true;

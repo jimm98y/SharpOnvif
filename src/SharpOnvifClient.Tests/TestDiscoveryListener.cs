@@ -126,7 +126,7 @@ namespace SharpOnvif.Tests
             using (var cancellation = new CancellationTokenSource())
             {
                 Task<OnvifDiscoveryResult> waiting =
-                    OnvifDiscoveryClient.WaitForDeviceAsync(device => false, cancellation.Token);
+                    new OnvifDiscoveryClient().WaitForDeviceAsync(device => false, cancellation.Token);
 
                 cancellation.CancelAfter(TimeSpan.FromSeconds(2));
 

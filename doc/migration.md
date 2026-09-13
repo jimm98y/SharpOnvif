@@ -109,7 +109,8 @@ calls all keep their signatures. The only edits are the response renames in sect
 `BasicSubscribeAsync`, `BasicSubscriptionRenewAsync`, `PullPointUnsubscribeAsync` and
 `BasicSubscriptionUnsubscribeAsync`, and the `using` in section 2.
 
-`OnvifDiscoveryClient.DiscoverAsync` and `SimpleOnvifEventListener` are unchanged.
+`SimpleOnvifEventListener` keeps its shape, though the address it hands out does not - see below.
+`OnvifDiscoveryClient` is no longer a static class; see "OnvifDiscoveryClient is an instance".
 
 ### Service clients
 
@@ -363,9 +364,16 @@ agree on one.
 
 `IUserRepository`, `AddOnvifDigestAuthentication`, `DigestAuthenticationSchemeOptions`,
 `AddOnvifDiscovery`, `OnvifDiscoveryOptions`, `SharpOnvifServer.Events.IEventSource` and the
-`IServer.GetHttpEndpoint` helpers all keep their shapes.
+`IServer.GetHttpEndpoint` helpers all keep their shapes: nothing you already set on them has moved
+or changed meaning.
 
-`IEventSubscriptionManager<T>` and `DefaultEventSubscriptionManager<T>` do not - see above.
+Two of them have gained optional properties you may want -
+`DigestAuthenticationSchemeOptions.HttpDigestNonceReplayStore` for running more than one instance,
+and `OnvifDiscoveryOptions.EndpointReference`, `MetadataVersion` and `AnnounceOnStartAndStop` for
+the announcements described below. Leave them alone and the behaviour is what it was.
+
+`IEventSubscriptionManager<T>` and `DefaultEventSubscriptionManager<T>` do not keep their shapes -
+see above.
 
 ## 6. Behaviour that changed without the signature changing
 
@@ -385,23 +393,74 @@ These compile as they did and behave differently, because they were wrong:
   alarm.
 - A notification missing its topic or its message used to throw from those helpers. They return
   null, which is also what they return for a notification about something else.
+- **A pull point subscription now expires when it says it will.** It follows from the duration
+  fix above: a device that granted `PT1S` used to hold the subscription for a minute, so a client
+  asking for something too short worked by accident. Ask for a usable lifetime - the sample now
+  asks for 60 seconds - and renew it. A device implemented on this library decides what it grants
+  and reports it back in `TerminationTime`, which is what a client should believe rather than what
+  it asked for.
 - **The server now bounds what it will read.** A request larger than
   `OnvifEndpoint.MaxRequestBytes` (2 MB) is answered with a fault rather than read, and a document
   nested deeper than `OnvifXmlReader.MaxDepth` (256) is refused - reading contracts recurses, and a
   stack overflow cannot be caught. Both are far above anything Onvif describes, and both are
   settable if your device really does send more.
 
+### OnvifDiscoveryClient is an instance
+
+It was a static class. It is a normal one now, so that the logger and the `Failed` event belong to
+it rather than to the process - an application watching more than one thing can tell which part of
+it is reporting.
+
+```cs
+- var devices = await OnvifDiscoveryClient.DiscoverAsync();
++ var discovery = new OnvifDiscoveryClient();
++ var devices = await discovery.DiscoverAsync();
+```
+
+`DiscoverAsync`, `WaitForDeviceAsync`, `WaitForDeviceProbeInterval` and `Failed` are instance
+members; the constants - `ONVIF_DISCOVERY_PORT`, the multicast addresses, `ONVIF_MULTICAST_TIMEOUT`
+- are still static. Holding an instance costs nothing: the sockets are opened per call.
+
+### Discovery finds things it did not find before
+
+Four faults, all of them a multicast operation that has to name an interface and did not. Nothing
+in your code changes; what changes is that discovery now works where it silently did not.
+
+- **A device is discoverable from the machine it runs on.** Every socket was bound to an
+  interface's own address, and such a socket is given multicast that arrives from the wire but not
+  multicast looped back from the same machine. A client beside a device never saw its Probe or its
+  Hello. They are bound to `Any` and joined per interface now, which is what the join was always
+  deciding anyway.
+- **IPv6 discovery works.** The device's join used interface index zero, which is not an
+  interface - `ff02::c` is link-local scope, so there is no default to fall back on - and every
+  IPv6 interface failed to start with "Can't assign requested address". The client's Probe had the
+  matching fault on the sending side and failed with "No route to host". Both name the interface
+  now. If you concluded that IPv6 discovery did not work, try it again.
+- **Probing skips the loopback interface.** A Probe cannot be multicast out of it. Nothing is lost:
+  a device on this machine is listening on the real interfaces too, which is how it is found.
+
+Expect more multicast traffic from a device as a result - see the announcements below.
+
+### A hosted device now shuts down
+
+`DiscoveryService` waited on a listener that was sitting in a socket read which closing the socket
+does not interrupt, so `StopAsync` never returned. The host could not stop, had to be killed, and a
+killed host leaves its sockets open and its multicast group joined. If you were killing the process
+to stop it, or wondering why ports stayed busy between runs, that was why. Shutdown is bounded now:
+listeners are given five seconds and the sockets are closed regardless.
+
 ### Diagnostics that used to go nowhere
 
 Failures inside the client were written with `Debug.WriteLine`, which a release build removes. They
 now go to an `IOnvifLogger` the object was given - `SimpleOnvifClient.Logger`,
-`SimpleOnvifEventListener.Logger`, `OnvifClientSettings.Logger`, or the `logger` argument on the
-discovery methods. Given none, an object reports nowhere, so the default behaviour is as quiet as
-before and there is now a way to hear it. The logger belongs to the object rather than the process,
-so two clients can report to different places.
+`SimpleOnvifEventListener.Logger`, `OnvifDiscoveryClient.Logger`, `OnvifDiscoveryListener.Logger`,
+or `OnvifClientSettings.Logger` for a service client built directly. Given none, an object reports
+nowhere, so the default behaviour is as quiet as before and there is now a way to hear it. The
+logger belongs to the object rather than the process, so two of anything can report to different
+places.
 
-Discovery also raises `OnvifDiscoveryClient.Failed` and `OnvifDiscoveryListener.Failed` for
-failures on a single interface, which it carries on past.
+Discovery also raises `Failed`, on the discovery client and on the listener, for failures on a
+single interface, which it carries on past.
 
 ## 7. New in 0.10.0
 
@@ -413,5 +472,26 @@ Worth knowing about once you are building again:
 - HTTP Digest gained mutual authentication (`Authentication-Info` / `rspauth`), nonce-count replay
   protection, and an `INonceReplayStore` for deployments running more than one instance behind one
   address. See the README.
+- **A device announces itself.** It sends a WS-Discovery Hello when it starts and a Bye when it
+  stops, so a client learns of it without probing. Every announcement names the same
+  `OnvifDiscoveryOptions.EndpointReference`; set it from something that survives a restart - a
+  serial number or MAC - or a client sees a new device each time the old one comes back.
+  `AnnounceOnStartAndStop` turns it off, and `MetadataVersion` is now yours to set.
+- **A client can wait for a device instead of giving up.** `WaitForDeviceAsync` listens for that
+  Hello and keeps probing while it waits, for an application that starts before
+  its camera does or has to survive one rebooting. `OnvifDiscoveryListener` is the same mechanism
+  without the waiting, reporting devices arriving and leaving as they do.
+- **`SharpOnvifServer.Events.TopicFilter`** reads the topics a subscriber asked for out of its
+  Filter and says whether a notification is one of them, so an implementation can deliver what was
+  asked for rather than everything. A notification can now also carry `tt:ElementItem`, through
+  `NotificationMessage.SourceElements` and `DataElements` - anything with a shape to it, like a
+  rectangle, which a `SimpleItem` cannot express.
 - `WsdlGenerator` is not specific to Onvif and will generate a client and a service for any
   document/literal SOAP 1.2 WSDL. See [codegen.md](codegen.md).
+
+## 8. If you copy the sample's configuration
+
+`Onvif.Server` moved off port 5000 to 8090, and 5001 to 8443. On macOS the AirPlay Receiver
+listens on 5000 and answers anything else with 403, which to a client is indistinguishable from
+the device refusing it - and it takes the port the moment your device releases it, so it appears
+exactly when you stop the server. If you kept 5000, that is worth knowing about.

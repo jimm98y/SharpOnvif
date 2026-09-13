@@ -129,13 +129,14 @@ Onvif client provides .NET Standard 2.0, .NET Framework 4.8.1, NET8.0 and NET10.
 
 To discover Onvif devices on your network, use:
 ```cs
-var onvifDevices = await OnvifDiscoveryClient.DiscoverAsync();
+var discovery = new OnvifDiscoveryClient();
+var onvifDevices = await discovery.DiscoverAsync();
 ```
 
 A Probe only finds what is on the network at the moment it is sent, which is no help to an
 application that starts before its camera does. To wait for one to appear instead:
 ```cs
-var device = await OnvifDiscoveryClient.WaitForDeviceAsync(cancellationToken: stopping.Token);
+var device = await discovery.WaitForDeviceAsync(cancellationToken: stopping.Token);
 ```
 It listens for the WS-Discovery Hello a device sends when it joins, and keeps probing as well -
 an announcement is UDP multicast, so it can be lost, and one sent before you started listening is
@@ -371,7 +372,7 @@ var logger = new DefaultOnvifLogger { IsLoggingEnabled = true, IsDebugEnabled = 
 
 var client = new SimpleOnvifClient(uri, "admin", "password") { Logger = logger };
 var listener = new SimpleOnvifEventListener(host) { Logger = logger };
-var devices = await OnvifDiscoveryClient.DiscoverAsync(logger: logger);
+var discovery = new OnvifDiscoveryClient(logger);
 ```
 `OnvifClientSettings.Logger` does the same for a service client built directly. Given none, an
 object reports nowhere. Implement `IOnvifLogger` to send it into your own logging, or use
@@ -379,12 +380,12 @@ object reports nowhere. Implement `IOnvifLogger` to send it into your own loggin
 package, which is what keeps these assemblies free of dependencies altogether. The server does not
 use this - it is given an `ILogger` by the host and logs to that.
 
-Discovery additionally raises `OnvifDiscoveryClient.Failed` and `OnvifDiscoveryListener.Failed`,
+Discovery additionally raises `Failed`, on `OnvifDiscoveryClient` and on `OnvifDiscoveryListener`,
 because it works on every interface at once and carries on when one of them fails. Worth
 subscribing to: a Probe that never left the machine looks exactly like a network with no cameras
 on it.
 ```cs
-OnvifDiscoveryClient.Failed += (_, e) => Console.WriteLine(e);
+discovery.Failed += (_, e) => Console.WriteLine(e);
 // Onvif discovery could not Probe on 192.168.1.5: No route to host
 ```
 Probing skips the loopback interface: a Probe cannot be multicast out of it, and a device on this

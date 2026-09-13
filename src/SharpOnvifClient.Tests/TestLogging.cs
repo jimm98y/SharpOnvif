@@ -23,6 +23,7 @@ using System;
 using System.Collections.Generic;
 using SharpOnvifCommon;
 using SharpOnvifCommon.Soap;
+using SharpOnvifClient;
 
 namespace SharpOnvif.Tests
 {
@@ -129,6 +130,26 @@ namespace SharpOnvif.Tests
 
             Assert.AreEqual(1, first.Lines.Count);
             Assert.AreEqual(0, second.Lines.Count, "the other client's logger heard nothing of it");
+        }
+
+        [TestMethod]
+        public void LetsTwoDiscoveryClientsReportToDifferentPlaces()
+        {
+            // Discovery is an instance for the same reason a client is: an application looking at
+            // more than one thing can tell which of them is complaining.
+            var first = new Recorder();
+            var second = new Recorder();
+
+            var a = new OnvifDiscoveryClient(first);
+            var b = new OnvifDiscoveryClient { Logger = second };
+
+            Assert.AreSame(first, a.Logger);
+            Assert.AreSame(second, b.Logger);
+
+            a.Logger.Warning("only the first");
+
+            Assert.AreEqual(1, first.Lines.Count);
+            Assert.AreEqual(0, second.Lines.Count, "the other discovery client heard nothing of it");
         }
 
         [TestMethod]
