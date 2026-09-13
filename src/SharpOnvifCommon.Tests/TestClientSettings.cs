@@ -92,7 +92,7 @@ namespace SharpOnvif.Tests
             if (type == typeof(long)) return 4242L;
             if (type == typeof(NetworkCredential)) return new NetworkCredential("someone", "something");
             if (type == typeof(ILog)) return new DefaultOnvifLogger();
-            if (type == typeof(IClientAuthentication)) return new OnvifClientAuthentication(DigestAuthentication.None);
+            if (type == typeof(IClientAuthentication)) return new OnvifAuthenticationSettings(DigestAuthentication.None);
             if (type == typeof(IMessageCodec)) return new SoapMessageCodec();
             if (type == typeof(HttpMessageHandler)) return new HttpClientHandler();
             if (type == typeof(HttpClient)) return new HttpClient();

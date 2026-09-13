@@ -1,106 +1,97 @@
+// SharpOnvif
+// Copyright (C) 2026 Lukas Volf
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
+// SOFTWARE.
+
 using System;
-using System.Collections.Generic;
+using System.Net.Http;
+using SharpOnvifCommon.Soap;
+using SharpOnvifCommon.Xml;
 
 namespace SharpOnvifCommon.Security
 {
     /// <summary>
-    /// The authentication schemes Onvif defines. They are flags because a device may accept
-    /// either, and both are offered by default so a client works against the widest range of
-    /// hardware without being told which to use.
-    /// </summary>
-    [Flags]
-    public enum DigestAuthentication
-    {
-        None = 0,
-
-        /// <summary>WS-UsernameToken, carried in the SOAP security header.</summary>
-        WsUsernameToken = 1,
-
-        /// <summary>HTTP Digest, negotiated through a 401 challenge.</summary>
-        HttpDigest = 2,
-    }
-
-    /// <summary>
-    /// What a client and a device have to agree on to authenticate: which schemes, which hashing
-    /// algorithms and qualities of protection, whether the username is hashed, and which
-    /// operations need no credentials.
+    /// Authenticates a client the way Onvif does: HTTP Digest at the transport, the WS-Security
+    /// UsernameToken in the message, or both.
     /// </summary>
     /// <remarks>
-    /// A description, and only a description. Read from a device's side it says what it offers
-    /// and will accept; from a client's, what it understands and will send - which is why the two
-    /// are configured with the same type and why this one performs nothing. What acts on it is
-    /// <see cref="OnvifClientAuthentication"/> on the client, and the authentication handler on
-    /// the device.
+    /// Onvif's answer to <see cref="IClientAuthentication"/>, which is all a generated client
+    /// knows. What it does is here; what it was told to do is <see cref="Options"/>, which
+    /// describes a negotiation rather than performing one and is the same object a device is
+    /// configured with.
     /// </remarks>
-    public class OnvifAuthenticationSettings
+    public sealed class OnvifAuthenticationSettings : IClientAuthentication
     {
-        public DigestAuthentication Authentication { get; set; } =
-            DigestAuthentication.WsUsernameToken | DigestAuthentication.HttpDigest;
+        /// <summary>What this authenticates with: the schemes, algorithms and the rest.</summary>
+        public OnvifAuthenticationOptions Options { get; private set; }
 
-        /// <summary>
-        /// Hashing algorithms, in the order they are offered. Accepted values are "MD5",
-        /// "MD5-sess", "SHA-256", "SHA-256-sess", "SHA-512-256", and "SHA-512-256-sess".
-        /// <para>
-        /// RFC 7616 asks for server-preference order, but the Onvif core specification lists MD5
-        /// first and some tools fail to connect when anything else leads, so MD5 stays first.
-        /// </para>
-        /// </summary>
-        public List<string> HttpDigestAlgorithms { get; set; } = new List<string>
-        {
-            "MD5", "MD5-sess", "SHA-256", "SHA-256-sess", "SHA-512-256", "SHA-512-256-sess",
-        };
-
-        /// <summary>Offered quality of protection levels: "auth" and "auth-int".</summary>
-        public List<string> HttpDigestQop { get; set; } = new List<string> { "auth", "auth-int" };
-
-        /// <summary>Whether username hashing is offered.</summary>
-        public bool HttpDigestUserHash { get; set; } = true;
-
-        /// <summary>
-        /// Actions the Onvif core specification places in the PRE_AUTH category, which a device
-        /// must answer without credentials.
-        /// <para>
-        /// Some devices do demand authentication for these anyway. Removing an action from this
-        /// list makes the client authenticate it like any other.
-        /// </para>
-        /// </summary>
-        public List<string> PreAuthActions { get; set; } = new List<string>
-        {
-            "http://www.onvif.org/ver10/device/wsdl/GetWsdlUrl",
-            "http://www.onvif.org/ver10/device/wsdl/GetServices",
-            "http://www.onvif.org/ver10/device/wsdl/GetServiceCapabilities",
-            "http://www.onvif.org/ver10/device/wsdl/GetCapabilities",
-            "http://www.onvif.org/ver10/device/wsdl/GetHostname",
-            "http://www.onvif.org/ver10/device/wsdl/GetSystemDateAndTime",
-            "http://www.onvif.org/ver10/device/wsdl/GetEndpointReference",
-        };
-
-        /// <summary>
-        /// Copies another set of settings, lists included, so that changing one afterwards does
-        /// not change the other.
-        /// </summary>
-        public OnvifAuthenticationSettings(OnvifAuthenticationSettings other)
-        {
-            if (other == null) throw new ArgumentNullException(nameof(other));
-
-            Authentication = other.Authentication;
-            HttpDigestUserHash = other.HttpDigestUserHash;
-
-            HttpDigestAlgorithms = other.HttpDigestAlgorithms == null
-                ? null : new List<string>(other.HttpDigestAlgorithms);
-            HttpDigestQop = other.HttpDigestQop == null
-                ? null : new List<string>(other.HttpDigestQop);
-            PreAuthActions = other.PreAuthActions == null
-                ? null : new List<string>(other.PreAuthActions);
-        }
-
+        /// <summary>Authenticates with everything Onvif defines.</summary>
         public OnvifAuthenticationSettings()
+            : this(new OnvifAuthenticationOptions())
         {
         }
 
+        /// <summary>Authenticates with the given schemes, and the defaults for the rest.</summary>
         public OnvifAuthenticationSettings(DigestAuthentication authentication)
+            : this(new OnvifAuthenticationOptions(authentication))
         {
-            Authentication = authentication;
+        }
+
+        public OnvifAuthenticationSettings(OnvifAuthenticationOptions options)
+        {
+            Options = options ?? new OnvifAuthenticationOptions();
+        }
+
+        /// <summary>
+        /// True when HTTP Digest is in play, which is answered by a handler in the client's own
+        /// pipeline and so cannot be arranged on an HttpClient somebody else built.
+        /// </summary>
+        public bool RequiresOwnTransport(IClientSettings settings)
+        {
+            return settings != null
+                && settings.Credentials != null
+                && (Options.Authentication & DigestAuthentication.HttpDigest) != 0;
+        }
+
+        /// <summary>Puts the digest handler in the pipeline when HTTP Digest is in play.</summary>
+        public HttpMessageHandler CreateTransport(HttpMessageHandler inner, IClientSettings settings)
+        {
+            return RequiresOwnTransport(settings)
+                ? new HttpDigestHandler(settings.Credentials, Options, inner)
+                : inner;
+        }
+
+        /// <summary>
+        /// Writes the WS-Security UsernameToken, unless there is nothing to write: no credentials,
+        /// the scheme switched off, or an action the device answers without them.
+        /// </summary>
+        public Action<IXmlWriter> CreateSecurityHeader(string action, IClientSettings settings)
+        {
+            if (settings == null || settings.Credentials == null) return null;
+            if ((Options.Authentication & DigestAuthentication.WsUsernameToken) == 0) return null;
+            if (Options.IsPreAuth(action)) return null;
+
+            return writer => WsUsernameToken.Write(
+                writer,
+                settings.Credentials.UserName,
+                settings.Credentials.Password,
+                settings.UtcNowOffset);
         }
     }
 }

@@ -285,7 +285,7 @@ Both Onvif digest schemes are offered by default. For full control over authenti
 var settings = new SharpOnvifCommon.Soap.OnvifClientSettings
 {
     Credentials = new System.Net.NetworkCredential("admin", "password"),
-    Authentication = new SharpOnvifCommon.Security.OnvifClientAuthentication(
+    Authentication = new SharpOnvifCommon.Security.OnvifAuthenticationSettings(
         SharpOnvifCommon.Security.DigestAuthentication.HttpDigest),
     Timeout = TimeSpan.FromSeconds(30),
 };

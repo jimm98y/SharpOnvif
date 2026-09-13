@@ -58,11 +58,11 @@ namespace SharpOnvifServer
             {
                 if (options != null)
                 {
-                    // The shared half in one go, so a property added to OnvifAuthenticationSettings
+                    // The shared half in one go, so a property added to OnvifAuthenticationOptions
                     // is not silently dropped here. Copied rather than shared: the de-duplication
                     // below writes to it, and the caller's own options must not change underneath
                     // them.
-                    digestOptions.Onvif = new OnvifAuthenticationSettings(options.Onvif);
+                    digestOptions.Onvif = new OnvifAuthenticationOptions(options.Onvif);
 
                     digestOptions.Onvif.Authentication = options.Onvif.Authentication;
                     digestOptions.Onvif.HttpDigestQop = Distinct(options.Onvif.HttpDigestQop);

@@ -48,8 +48,8 @@ namespace SharpOnvif.Tests
             var device = new DeviceOptions();
 
             // The same type, describing the same negotiation, reached by the same name.
-            Assert.IsInstanceOfType<OnvifAuthenticationSettings>(client.Onvif);
-            Assert.IsInstanceOfType<OnvifAuthenticationSettings>(device.Onvif);
+            Assert.IsInstanceOfType<OnvifAuthenticationOptions>(client.Onvif);
+            Assert.IsInstanceOfType<OnvifAuthenticationOptions>(device.Onvif);
 
             Assert.AreEqual(device.Onvif.Authentication, client.Onvif.Authentication);
             CollectionAssert.AreEqual(device.Onvif.HttpDigestAlgorithms, client.Onvif.HttpDigestAlgorithms);

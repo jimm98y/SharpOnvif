@@ -35,7 +35,7 @@ namespace SharpOnvifClient.Security
     /// </remarks>
     public class DigestAuthenticationSchemeOptions
     {
-        private OnvifAuthenticationSettings _onvif = new OnvifAuthenticationSettings();
+        private OnvifAuthenticationOptions _onvif = new OnvifAuthenticationOptions();
 
         /// <summary>
         /// What this client and a device have to agree on: which schemes to use, which hashing
@@ -46,10 +46,10 @@ namespace SharpOnvifClient.Security
         /// Read from the client's side these say what it understands and will send; from the
         /// device's, what it offers and will accept.
         /// </remarks>
-        public OnvifAuthenticationSettings Onvif
+        public OnvifAuthenticationOptions Onvif
         {
             get { return _onvif; }
-            set { _onvif = value ?? new OnvifAuthenticationSettings(); }
+            set { _onvif = value ?? new OnvifAuthenticationOptions(); }
         }
 
         /// <summary>
@@ -83,8 +83,8 @@ namespace SharpOnvifClient.Security
             if (other == null) throw new ArgumentNullException(nameof(other));
 
             _onvif = other.Onvif == null
-                ? new OnvifAuthenticationSettings()
-                : new OnvifAuthenticationSettings(other.Onvif);
+                ? new OnvifAuthenticationOptions()
+                : new OnvifAuthenticationOptions(other.Onvif);
 
             UtcNowOffset = other.UtcNowOffset;
         }

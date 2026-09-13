@@ -110,7 +110,7 @@ namespace SharpOnvifClient
             _settings = new OnvifClientSettings
             {
                 Credentials = _credentials,
-                Authentication = new OnvifClientAuthentication(this._authentication.Onvif),
+                Authentication = new OnvifAuthenticationSettings(this._authentication.Onvif),
                 UtcNowOffset = this._authentication.UtcNowOffset,
                 DisableExpect100Continue = disableExpect100Continue,
             };
@@ -226,7 +226,7 @@ namespace SharpOnvifClient
         /// The Onvif core specification puts GetServices in the PRE_AUTH category, so the client
         /// sends no WS-UsernameToken for it. Some cameras, Vivotek among them, demand
         /// authentication anyway; removing the action from
-        /// <see cref="SharpOnvifCommon.Security.OnvifAuthenticationSettings.PreAuthActions"/>
+        /// <see cref="SharpOnvifCommon.Security.OnvifAuthenticationOptions.PreAuthActions"/>
         /// makes the client authenticate it like any other call.
         /// </remarks>
         public virtual async Task<GetServicesResponse> GetServicesAsync(bool includeCapability = false)

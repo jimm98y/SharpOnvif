@@ -47,7 +47,7 @@ namespace SharpOnvif.Tests
         private static HttpClient CreateClient(FakeTransport transport, out HttpDigestHandler handler)
         {
             var credentials = new NetworkCredential("admin", "password");
-            handler = new HttpDigestHandler(credentials, new OnvifAuthenticationSettings(), transport);
+            handler = new HttpDigestHandler(credentials, new OnvifAuthenticationOptions(), transport);
             return new HttpClient(handler);
         }
 
@@ -132,7 +132,7 @@ namespace SharpOnvif.Tests
                 FakeTransport.Challenge("realm=\"r\", qop=\"auth\", algorithm=SHA-1, nonce=\"n\""));
 
             var credentials = new NetworkCredential("admin", "password");
-            var settings = new OnvifAuthenticationSettings();
+            var settings = new OnvifAuthenticationOptions();
             settings.HttpDigestAlgorithms.Clear();
             settings.HttpDigestAlgorithms.Add("MD5");
 

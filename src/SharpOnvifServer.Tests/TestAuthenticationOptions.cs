@@ -44,7 +44,7 @@ namespace SharpOnvif.Tests
         {
             // The point of sharing the type: one description of a negotiation, handed to either
             // side of it.
-            var agreed = new OnvifAuthenticationSettings(DigestAuthentication.HttpDigest)
+            var agreed = new OnvifAuthenticationOptions(DigestAuthentication.HttpDigest)
             {
                 HttpDigestAlgorithms = new List<string> { "SHA-512-256" },
                 HttpDigestQop = new List<string> { "auth-int" },
@@ -91,7 +91,7 @@ namespace SharpOnvif.Tests
             // They are one object now, so this is a guard against somebody giving the device its
             // own defaults again: a device that offers what its own client does not ask for.
             var device = new DigestAuthenticationSchemeOptions();
-            var client = new OnvifAuthenticationSettings();
+            var client = new OnvifAuthenticationOptions();
 
             Assert.AreEqual(client.Authentication, device.Onvif.Authentication);
             Assert.AreEqual(client.HttpDigestUserHash, device.Onvif.HttpDigestUserHash);
@@ -163,7 +163,7 @@ namespace SharpOnvif.Tests
 
             Assert.AreEqual("IP Camera", options.HttpDigestRealm);
             CollectionAssert.AreEqual(
-                new OnvifAuthenticationSettings().HttpDigestAlgorithms, options.Onvif.HttpDigestAlgorithms);
+                new OnvifAuthenticationOptions().HttpDigestAlgorithms, options.Onvif.HttpDigestAlgorithms);
         }
 
         /// <summary>The options a device ends up with, as the registration builds them.</summary>
@@ -181,12 +181,12 @@ namespace SharpOnvif.Tests
         [TestMethod]
         public void CopiesTheSettingsRatherThanSharingThem()
         {
-            var original = new OnvifAuthenticationSettings(DigestAuthentication.HttpDigest)
+            var original = new OnvifAuthenticationOptions(DigestAuthentication.HttpDigest)
             {
                 HttpDigestAlgorithms = new List<string> { "MD5" },
             };
 
-            var copy = new OnvifAuthenticationSettings(original);
+            var copy = new OnvifAuthenticationOptions(original);
             copy.HttpDigestAlgorithms.Add("SHA-256");
             copy.Authentication = DigestAuthentication.None;
 

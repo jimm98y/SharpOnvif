@@ -34,7 +34,7 @@ namespace SharpOnvifServer.Security
         public DigestAuthenticationSchemeOptions()
         {  }
 
-        private OnvifAuthenticationSettings _onvif = new OnvifAuthenticationSettings();
+        private OnvifAuthenticationOptions _onvif = new OnvifAuthenticationOptions();
 
         /// <summary>
         /// What this device and a client have to agree on: which schemes are acceptable, which
@@ -50,10 +50,10 @@ namespace SharpOnvifServer.Security
         /// from the client's, what it understands and will send.
         /// </para>
         /// </remarks>
-        public OnvifAuthenticationSettings Onvif
+        public OnvifAuthenticationOptions Onvif
         {
             get { return _onvif; }
-            set { _onvif = value ?? new OnvifAuthenticationSettings(); }
+            set { _onvif = value ?? new OnvifAuthenticationOptions(); }
         }
 
         #region WsUsernameToken

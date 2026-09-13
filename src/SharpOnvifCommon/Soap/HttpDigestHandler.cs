@@ -26,7 +26,7 @@ namespace SharpOnvifCommon.Soap
     public sealed class HttpDigestHandler : DelegatingHandler
     {
         private readonly NetworkCredential _credentials;
-        private readonly OnvifAuthenticationSettings _settings;
+        private readonly OnvifAuthenticationOptions _settings;
         private readonly object _sync = new object();
 
         // Challenge state, valid for the endpoint this handler serves.
@@ -40,11 +40,11 @@ namespace SharpOnvifCommon.Soap
         private string _countedNonce;
         private int _nonceCount;
 
-        public HttpDigestHandler(NetworkCredential credentials, OnvifAuthenticationSettings settings, HttpMessageHandler inner)
+        public HttpDigestHandler(NetworkCredential credentials, OnvifAuthenticationOptions settings, HttpMessageHandler inner)
             : base(inner)
         {
             _credentials = credentials ?? throw new ArgumentNullException(nameof(credentials));
-            _settings = settings ?? new OnvifAuthenticationSettings();
+            _settings = settings ?? new OnvifAuthenticationOptions();
         }
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)

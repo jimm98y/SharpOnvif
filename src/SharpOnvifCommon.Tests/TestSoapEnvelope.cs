@@ -84,16 +84,16 @@ namespace SharpOnvif.Tests
             // The generated client knows only IClientAuthentication. Which implementation it
             // starts with comes from the settings it is built with, and for Onvif that is both
             // schemes plus the PRE_AUTH actions a device answers without credentials.
-            var onvif = new OnvifClientSettings().Authentication as OnvifClientAuthentication;
+            var onvif = new OnvifClientSettings().Authentication as OnvifAuthenticationSettings;
             Assert.IsNotNull(onvif, "a client built here has to authenticate the way Onvif does");
 
             Assert.AreEqual(
                 DigestAuthentication.WsUsernameToken | DigestAuthentication.HttpDigest,
-                onvif.Settings.Authentication);
+                onvif.Options.Authentication);
 
             CollectionAssert.Contains(
-                onvif.Settings.PreAuthActions, "http://www.onvif.org/ver10/device/wsdl/GetSystemDateAndTime");
-            Assert.AreEqual(7, onvif.Settings.PreAuthActions.Count, "the PRE_AUTH category");
+                onvif.Options.PreAuthActions, "http://www.onvif.org/ver10/device/wsdl/GetSystemDateAndTime");
+            Assert.AreEqual(7, onvif.Options.PreAuthActions.Count, "the PRE_AUTH category");
         }
 
         [TestMethod]
@@ -101,12 +101,12 @@ namespace SharpOnvif.Tests
         {
             // Narrowing one client's schemes must not narrow every client's, which is what a
             // shared instance would do.
-            var first = (OnvifClientAuthentication)new OnvifClientSettings().Authentication;
-            first.Settings.Authentication = DigestAuthentication.None;
+            var first = (OnvifAuthenticationSettings)new OnvifClientSettings().Authentication;
+            first.Options.Authentication = DigestAuthentication.None;
 
-            var second = (OnvifClientAuthentication)new OnvifClientSettings().Authentication;
+            var second = (OnvifAuthenticationSettings)new OnvifClientSettings().Authentication;
 
-            Assert.AreNotEqual(DigestAuthentication.None, second.Settings.Authentication);
+            Assert.AreNotEqual(DigestAuthentication.None, second.Options.Authentication);
         }
     }
 }

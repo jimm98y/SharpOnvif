@@ -44,16 +44,16 @@ namespace SharpOnvif.Tests
         {
             // What a client authenticates with is not the description of what it agreed to.
             Assert.IsFalse(
-                typeof(IClientAuthentication).IsAssignableFrom(typeof(OnvifAuthenticationSettings)),
+                typeof(IClientAuthentication).IsAssignableFrom(typeof(OnvifAuthenticationOptions)),
                 "the description has grown behaviour again");
 
-            Assert.IsTrue(typeof(IClientAuthentication).IsAssignableFrom(typeof(OnvifClientAuthentication)));
+            Assert.IsTrue(typeof(IClientAuthentication).IsAssignableFrom(typeof(OnvifAuthenticationSettings)));
         }
 
         [TestMethod]
         public void KnowsWhichActionsNeedNoCredentials()
         {
-            var settings = new OnvifAuthenticationSettings();
+            var settings = new OnvifAuthenticationOptions();
 
             Assert.IsTrue(settings.IsPreAuth(GetSystemDateAndTime));
             Assert.IsFalse(settings.IsPreAuth("http://www.onvif.org/ver10/device/wsdl/SetUser"));
@@ -64,11 +64,11 @@ namespace SharpOnvif.Tests
         {
             // The question gets asked of settings a caller assembled, so none of these is an
             // error - each is an honest "no".
-            OnvifAuthenticationSettings missing = null;
+            OnvifAuthenticationOptions missing = null;
 
             Assert.IsFalse(missing.IsPreAuth(GetSystemDateAndTime));
-            Assert.IsFalse(new OnvifAuthenticationSettings { PreAuthActions = null }.IsPreAuth(GetSystemDateAndTime));
-            Assert.IsFalse(new OnvifAuthenticationSettings().IsPreAuth(null));
+            Assert.IsFalse(new OnvifAuthenticationOptions { PreAuthActions = null }.IsPreAuth(GetSystemDateAndTime));
+            Assert.IsFalse(new OnvifAuthenticationOptions().IsPreAuth(null));
             Assert.IsFalse(missing.Offers(DigestAuthentication.HttpDigest));
         }
 
@@ -77,7 +77,7 @@ namespace SharpOnvif.Tests
         {
             // Some devices demand credentials for these anyway, and taking one off the list is how
             // a client is told so.
-            var settings = new OnvifAuthenticationSettings();
+            var settings = new OnvifAuthenticationOptions();
             settings.PreAuthActions.Remove(GetSystemDateAndTime);
 
             Assert.IsFalse(settings.IsPreAuth(GetSystemDateAndTime));
@@ -86,13 +86,13 @@ namespace SharpOnvif.Tests
         [TestMethod]
         public void SaysWhichSchemesItOffers()
         {
-            var both = new OnvifAuthenticationSettings(
+            var both = new OnvifAuthenticationOptions(
                 DigestAuthentication.HttpDigest | DigestAuthentication.WsUsernameToken);
 
             Assert.IsTrue(both.Offers(DigestAuthentication.HttpDigest));
             Assert.IsTrue(both.Offers(DigestAuthentication.WsUsernameToken));
 
-            var digestOnly = new OnvifAuthenticationSettings(DigestAuthentication.HttpDigest);
+            var digestOnly = new OnvifAuthenticationOptions(DigestAuthentication.HttpDigest);
 
             Assert.IsTrue(digestOnly.Offers(DigestAuthentication.HttpDigest));
             Assert.IsFalse(digestOnly.Offers(DigestAuthentication.WsUsernameToken));
@@ -101,15 +101,15 @@ namespace SharpOnvif.Tests
         [TestMethod]
         public void CarriesTheSettingsItWasBuiltWith()
         {
-            var settings = new OnvifAuthenticationSettings(DigestAuthentication.HttpDigest)
+            var settings = new OnvifAuthenticationOptions(DigestAuthentication.HttpDigest)
             {
                 HttpDigestAlgorithms = new List<string> { "SHA-256" },
             };
 
-            var authentication = new OnvifClientAuthentication(settings);
+            var authentication = new OnvifAuthenticationSettings(settings);
 
-            Assert.AreSame(settings, authentication.Settings);
-            Assert.IsNotNull(new OnvifClientAuthentication((OnvifAuthenticationSettings)null).Settings,
+            Assert.AreSame(settings, authentication.Options);
+            Assert.IsNotNull(new OnvifAuthenticationSettings((OnvifAuthenticationOptions)null).Options,
                 "a client would throw on the next read");
         }
     }

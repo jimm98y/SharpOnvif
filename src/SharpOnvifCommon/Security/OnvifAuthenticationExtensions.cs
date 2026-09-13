@@ -24,7 +24,7 @@ using System;
 namespace SharpOnvifCommon.Security
 {
     /// <summary>
-    /// Questions worth asking of <see cref="OnvifAuthenticationSettings"/>, which is a description
+    /// Questions worth asking of <see cref="OnvifAuthenticationOptions"/>, which is a description
     /// of what two sides agreed and answers none of them itself.
     /// </summary>
     public static class OnvifAuthenticationExtensions
@@ -34,7 +34,7 @@ namespace SharpOnvifCommon.Security
         /// Onvif calls these PRE_AUTH: a handful of operations a device answers to anyone, so a
         /// client can find out what it is talking to before it knows how to talk to it.
         /// </remarks>
-        public static bool IsPreAuth(this OnvifAuthenticationSettings settings, string action)
+        public static bool IsPreAuth(this OnvifAuthenticationOptions settings, string action)
         {
             return settings != null
                 && settings.PreAuthActions != null
@@ -43,7 +43,7 @@ namespace SharpOnvifCommon.Security
         }
 
         /// <summary>True when the settings ask for the given scheme.</summary>
-        public static bool Offers(this OnvifAuthenticationSettings settings, DigestAuthentication scheme)
+        public static bool Offers(this OnvifAuthenticationOptions settings, DigestAuthentication scheme)
         {
             return settings != null && (settings.Authentication & scheme) != 0;
         }

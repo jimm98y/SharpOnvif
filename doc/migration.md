@@ -235,7 +235,7 @@ unguessable strings now:
 What the two sides have to agree on - which schemes, which hashing algorithms, which qualities of
 protection, whether usernames are hashed, which operations need no credentials - was declared twice,
 once for each side, with the same names and the same defaults. It is declared once now, in
-`SharpOnvifCommon.Security.OnvifAuthenticationSettings`, and the device carries an instance of it.
+`SharpOnvifCommon.Security.OnvifAuthenticationOptions`, and the device carries an instance of it.
 
 ```cs
   services.AddOnvifDigestAuthentication(options =>
@@ -248,20 +248,25 @@ once for each side, with the same names and the same defaults. It is declared on
   });
 ```
 
-`OnvifAuthenticationSettings` describes that agreement and does nothing else. What acts on it for
-a client is `OnvifClientAuthentication`, which is what `OnvifClientSettings.Authentication` now
-takes:
+The agreement itself is `OnvifAuthenticationOptions`, which describes and does nothing - the same
+object read from a device's side says what it offers, and from a client's what it will send.
+`OnvifAuthenticationSettings` is what acts on it, and is what a client is given:
 
 ```cs
-- Authentication = new OnvifAuthenticationSettings(DigestAuthentication.HttpDigest)
-+ Authentication = new OnvifClientAuthentication(DigestAuthentication.HttpDigest)
+var settings = new OnvifClientSettings
+{
+    Credentials = new NetworkCredential("admin", "password"),
+    Authentication = new OnvifAuthenticationSettings(DigestAuthentication.HttpDigest),
+};
 ```
 
-`IsPreAuth` moved to an extension method beside it, so a call to it reads the same as long as
-`SharpOnvifCommon.Security` is in scope, and `Offers` joined it for asking about a scheme.
+Pass an `OnvifAuthenticationOptions` to its constructor to say more than which schemes - which
+algorithms, which qualities of protection, which operations need no credentials. `IsPreAuth` is an
+extension method on the options, so it reads as it always did wherever `SharpOnvifCommon.Security`
+is in scope, and `Offers` joined it for asking whether a scheme is in play.
 
 The client's `SharpOnvifClient.Security.DigestAuthenticationSchemeOptions` has the same shape, for
-the same reason. It used to *be* an `OnvifAuthenticationSettings` by inheritance; it carries one
+the same reason. It used to *be* an `OnvifAuthenticationOptions` by inheritance; it carries one
 now, under the same name, with what belongs to the client alone beside it.
 
 ```cs
