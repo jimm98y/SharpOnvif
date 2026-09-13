@@ -26,14 +26,6 @@ using System.Collections.Generic;
 
 namespace SharpOnvifServer.Security
 {
-    [Flags]
-    public enum DigestAuthentication
-    {
-        None = 0,
-        WsUsernameToken = 1,
-        HttpDigest = 2
-    }
-
     public class DigestAuthenticationSchemeOptions : AuthenticationSchemeOptions
     {
         /// <summary>

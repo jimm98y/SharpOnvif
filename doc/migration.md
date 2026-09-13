@@ -225,6 +225,19 @@ unguessable strings now:
 + string subscriptionID = httpContext.Items[OnvifEvents.ONVIF_SUBSCRIPTION_ID] as string;
 ```
 
+### One `DigestAuthentication` instead of two
+
+The client and the server each declared an enum of that name, with the same members and the same
+values, so any code touching both sides needed aliases. There is one now, in
+`SharpOnvifCommon.Security`. `DigestAuthenticationSchemeOptions` itself has not moved.
+
+```cs
+  using SharpOnvifServer.Security;
++ using SharpOnvifCommon.Security;   // for DigestAuthentication
+```
+
+Configuration that sets it numerically - `"Authentication": 3` in appsettings - is unaffected.
+
 ### HTTP Digest helpers
 
 Only a server that calls these directly is affected; the authentication handler calls them for you.
