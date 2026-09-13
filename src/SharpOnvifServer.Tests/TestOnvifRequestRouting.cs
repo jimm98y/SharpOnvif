@@ -156,6 +156,43 @@ namespace SharpOnvif.Tests
         }
 
         [TestMethod]
+        public async Task WillNotLetAnActionBreakOutOfTheTextItIsWrittenInto()
+        {
+            // The action is whatever the caller chose to send. A newline in it, written into a log
+            // entry or a fault reason unchanged, starts what reads as a new line of its own - so a
+            // caller could compose log entries, or fault text, that never happened.
+            const string Forged =
+                "Probe\r\nfail: SharpOnvifServer[0]\r\n      Administrator logged in from 10.0.0.9";
+
+            string envelope =
+                "<?xml version=\"1.0\"?>" +
+                "<s:Envelope xmlns:s=\"http://www.w3.org/2003/05/soap-envelope\" " +
+                "xmlns:a=\"http://www.w3.org/2005/08/addressing\">" +
+                $"<s:Header><a:Action>{Forged}</a:Action></s:Header>" +
+                "<s:Body><Nonexistent xmlns=\"http://www.onvif.org/ver10/device/wsdl\"/></s:Body></s:Envelope>";
+
+            var (status, body) = await PostAsync(DevicePath, envelope, actionInContentType: null);
+
+            // The reply is a fault that quotes the action back, which is the same string the
+            // endpoint logs.
+            StringAssert.Contains(body, "ActionNotSupported");
+
+            int reasonStart = body.IndexOf("Administrator logged in", StringComparison.Ordinal);
+            Assert.IsTrue(reasonStart > 0, "the fault has to quote the action, or this proves nothing");
+
+            string quoted = body.Substring(0, reasonStart);
+            int lastNewline = quoted.LastIndexOf('\n');
+            int lastQuote = quoted.LastIndexOf("action '", StringComparison.Ordinal);
+            Assert.IsTrue(lastQuote > lastNewline,
+                "the action broke onto a line of its own instead of staying inside the text quoting it");
+
+            // The XML parser normalises the CRLF in element content to a single LF before the
+            // endpoint ever sees it, so one escape is what is left to find.
+            StringAssert.Contains(body, "Probe\\nfail:",
+                "the newline has to survive as an escape, so the value is still readable");
+        }
+
+        [TestMethod]
         public async Task FindsTheOperationFromTheBodyElementAlone()
         {
             // Neither form of action; the body element is the last thing left to go on.

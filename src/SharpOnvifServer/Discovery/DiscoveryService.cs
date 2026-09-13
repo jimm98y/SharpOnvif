@@ -1,4 +1,4 @@
-﻿// SharpOnvif
+// SharpOnvif
 // Copyright (C) 2026 Lukas Volf
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -43,6 +43,12 @@ namespace SharpOnvifServer.Discovery
     public class DiscoveryService : IHostedService
     {
         private static readonly Random _rnd = new Random();
+
+        /// <summary>
+        /// How much of a datagram reaches the debug log. A whole Probe is worth seeing; a
+        /// megabyte of whatever a caller chose to send is not.
+        /// </summary>
+        private const int MaxLoggedDatagramLength = 4096;
 
         public const int ONVIF_DISCOVERY_PORT = 3702;
         public static string OnvifDiscoveryAddressIPV4 = "239.255.255.250";
@@ -190,7 +196,11 @@ namespace SharpOnvifServer.Discovery
                             var recvResult = udpClient.Receive(ref remoteEndpoint);
 
                             string message = Encoding.UTF8.GetString(recvResult);
-                            _logger.LogDebug($"Received Discovery request on {nicIPAddress}:\r\n{message}");
+                            // Anyone on the network can send this datagram, so it is rendered as
+                            // printable text: unescaped, its newlines would read as further log
+                            // entries.
+                            _logger.LogDebug(
+                                $"Received Discovery request on {nicIPAddress}: {UntrustedText.Printable(message, MaxLoggedDatagramLength)}");
 
                             var parsedMessage = ReadOnvifEndpoint(message);
                             if (parsedMessage != null && IsSearchingOurTypes(_options.Types, parsedMessage.Types))
@@ -198,7 +208,8 @@ namespace SharpOnvifServer.Discovery
                                 string reply = CreateDiscoveryResponse(_options, _listeningUris.ToArray(), parsedMessage.MessageUuid);
                                 var replyBytes = Encoding.UTF8.GetBytes(reply);
                                 int sentBytes = udpClient.Client.SendTo(replyBytes, remoteEndpoint);
-                                _logger.LogDebug($"Sent Discovery response on {nicIPAddress}:\r\n{reply}");
+                                _logger.LogDebug(
+                                    $"Sent Discovery response on {nicIPAddress}: {UntrustedText.Printable(reply, MaxLoggedDatagramLength)}");
                             }
                         }
                         catch(SocketException socketEx)
@@ -268,7 +279,9 @@ namespace SharpOnvifServer.Discovery
                     ">" +
                     $"<env:Header>" +
                         $"<wsadis:MessageID>urn:uuid:{uuid}</wsadis:MessageID>\r\n" +
-                        $"<wsadis:RelatesTo>{discoveryMessageUuid}</wsadis:RelatesTo>\r\n" +
+                        // The message id came out of the sender's datagram and this document is
+                        // built by concatenation, so nothing else is going to escape it.
+                        $"<wsadis:RelatesTo>{UntrustedText.ForXmlText(discoveryMessageUuid)}</wsadis:RelatesTo>\r\n" +
                         $"<wsadis:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsadis:To>\r\n" +
                         $"<wsadis:Action>http://schemas.xmlsoap.org/ws/2005/04/discovery/ProbeMatches</wsadis:Action>\r\n" +
                     $"</env:Header>\r\n" +

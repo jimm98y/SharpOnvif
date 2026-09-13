@@ -95,7 +95,7 @@ namespace SharpOnvifServer.Dispatch
                     await WriteFaultAsync(context, "Sender", "ActionNotSupported",
                         string.IsNullOrEmpty(action)
                             ? "The request does not name an Onvif operation."
-                            : "The action '" + action + "' is not supported at this endpoint.")
+                            : "The action '" + UntrustedText.Printable(action) + "' is not supported at this endpoint.")
                         .ConfigureAwait(false);
                     return;
                 }
@@ -146,7 +146,7 @@ namespace SharpOnvifServer.Dispatch
                 // The service does not implement this operation. Onvif has a specific fault for
                 // it, and reporting it accurately lets a client fall back rather than give up.
                 await WriteFaultAsync(context, "Receiver", "ActionNotSupported",
-                    "The device does not implement '" + action + "'.").ConfigureAwait(false);
+                    "The device does not implement '" + UntrustedText.Printable(action) + "'.").ConfigureAwait(false);
             }
             catch (OnvifServerFaultException fault)
             {
@@ -160,7 +160,10 @@ namespace SharpOnvifServer.Dispatch
             }
             catch (Exception error)
             {
-                logger?.LogError(error, "Onvif operation {Action} failed.", action);
+                // The action is whatever the caller put in the request, so it is rendered as one
+                // line of printable text before it is logged. A newline in it would otherwise
+                // begin what reads as a new log entry.
+                logger?.LogError(error, "Onvif operation {Action} failed.", UntrustedText.Printable(action));
                 await WriteFaultAsync(context, "Receiver", "Action", error.Message,
                     OnvifErrors.Namespace, System.Net.HttpStatusCode.InternalServerError).ConfigureAwait(false);
             }

@@ -14,4 +14,8 @@
 		<ProjectReference Include="..\SharpOnvifCommon\SharpOnvifCommon.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<InternalsVisibleTo Include="SharpOnvifServer.Tests" />
+	</ItemGroup>
+
 </Project>
