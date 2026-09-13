@@ -1,68 +1,149 @@
-# SharpOnvif code generation
+# WSDL code generation
 
-SharpOnvif no longer uses WCF, CoreWCF, or `svcutil`. The Onvif service bindings are produced by
-`src/WsdlGenerator`, a purpose-built WSDL/XSD compiler in this repository.
+`src/WsdlGenerator` compiles WSDL and XML Schema into C# clients and services. It is not specific
+to ONVIF: it generates from any document/literal SOAP 1.2 WSDL, and everything particular to ONVIF
+is in `onvif.codegen.json` at the root of this repository.
 
-Output goes to four places:
+Generated sources are committed, so a normal build runs no generator and needs no network access.
+
+## Regenerate this repository's bindings
 
 ```
-src/SharpOnvifCommon/Generated/Runtime/**/*.cs               namespace SharpOnvifCommon(.Soap|.Xml)
-src/SharpOnvifCommon/Generated/DataContracts.cs              namespace SharpOnvifCommon.Onvif
-src/SharpOnvifClient/Generated/<Service>/DataContracts.cs    namespace SharpOnvifClient.<Service>
-src/SharpOnvifClient/Generated/<Service>/Client.cs
-src/SharpOnvifServer/Generated/<Service>/DataContracts.cs    namespace SharpOnvifServer.<Service>
-src/SharpOnvifServer/Generated/<Service>/Service.cs
+dotnet run --project src/WsdlGenerator
 ```
 
-The Onvif data model lives in `SharpOnvifCommon.Onvif` and is generated once. Each service gets
-only the types its own WSDL declares, plus its operations.
+Reads `onvif.codegen.json` and rewrites the generated sources in place. Review the diff afterwards.
+
+To pick up upstream specification changes, run `wsdl/fetch.sh` first. It re-downloads every
+document in `wsdl/sources.txt`, mirroring the remote URL layout under `wsdl/` so that relative
+`schemaLocation` and `location` references resolve offline.
+
+## Generate from another WSDL
+
+```
+dotnet run --project src/WsdlGenerator -- \
+    --wsdl ./bank.wsdl \
+    --namespace Example.Banking \
+    --out ./Generated \
+    --client
+```
+
+Produces `Generated/Bank/{DataContracts,Client}.cs` in `Example.Banking.Bank`, the types its
+schemas share in `Example.Banking.Schema`, and the runtime in `Example.Banking.Runtime`.
+
+The service name comes from the file name. Write `--wsdl Accounts=./bank.wsdl` to choose one, and
+repeat `--wsdl` for several services, which then share their common schemas.
+
+Describe anything larger in a configuration file and pass `--config`.
+
+## Command-line options
+
+| Option | Description |
+| --- | --- |
+| `--config <file>` | Read the whole run from a file. Paths in it are relative to it. |
+| `--wsdl <uri>` | A WSDL, as a file path or an `http(s)` URL. Repeatable. `<name>=<uri>` names the service. |
+| `--namespace <ns>` | Root namespace. A service is generated into `<ns>.<Service>`. |
+| `--out <dir>` | Output directory. A service is generated into `<dir>/<Service>`. |
+| `--shared-namespace <ns>` | Namespace for types the services share. Default: `<ns>.Schema`. |
+| `--shared-out <dir>` | Directory for those types. Default: `<dir>/Schema`. |
+| `--runtime-namespace <ns>` | Namespace of the runtime. Default: `<ns>.Runtime`. |
+| `--runtime-out <dir>` | Directory for the runtime. Default: `<dir>/Runtime`. |
+| `--no-runtime` | Do not write the runtime. `--runtime-namespace` names an existing one. |
+| `--settings <type>` | Type a client constructs when given no settings. Implements `IClientSettings`. |
+| `--dispatch <ns>` | Namespace a generated service is routed by. Required with `--server`. |
+| `--client` / `--server` | Generate one side only. Both by default. |
+| `--mirror <dir>` | Resolve every document from a local mirror instead of disk and the network. |
+| `--enum-value <t>=<v>` | Add a value to a schema enumeration. The type is written `{namespace}LocalName`. Repeatable. |
+| `--help`, `-h` | Show usage. |
+
+`--wsdl` and `--config` are alternatives. Given neither, the generator reads `onvif.codegen.json`
+from the repository root.
+
+## Configuration file
+
+A run of any size is described in JSON. Paths are relative to the file.
+
+```json
+{
+  "mirror": "wsdl",
+  "typeNamePrefix": "Onvif",
+  "shared":  { "namespace": "SharpOnvifCommon.Onvif", "out": "src/SharpOnvifCommon/Generated" },
+  "runtime": { "namespace": "SharpOnvifCommon",       "out": "src/SharpOnvifCommon/Generated/Runtime" },
+  "settings": "SharpOnvifCommon.Soap.OnvifClientSettings",
+  "dispatch": "SharpOnvifServer.Dispatch",
+  "targets": [
+    { "namespace": "SharpOnvifClient", "out": "src/SharpOnvifClient/Generated", "client": true },
+    { "namespace": "SharpOnvifServer", "out": "src/SharpOnvifServer/Generated", "server": true }
+  ],
+  "services": [
+    { "name": "DeviceMgmt", "wsdl": "https://www.onvif.org/ver10/device/wsdl/devicemgmt.wsdl" }
+  ],
+  "enumerationValues": [
+    { "type": "{http://www.onvif.org/ver10/schema}VideoEncoding", "value": "H265",
+      "documentation": "H.265 / HEVC. Sent by devices; not listed by onvif.xsd." }
+  ]
+}
+```
+
+| Property | Description |
+| --- | --- |
+| `mirror` | Directory to resolve every document from. Omit to read from disk and the network. |
+| `typeNamePrefix` | Prefix for a type whose schema name collides with a framework type. Omit to leave such names alone. |
+| `shared` | `namespace` and `out` for the types the services share. Required. |
+| `runtime` | `namespace` and `out` for the runtime. Omit `out` to compile against one that already exists. Required. |
+| `settings` | Type a client constructs when given no settings. Omit and a client only ever takes settings it is handed. |
+| `dispatch` | Namespace a generated service is routed by. Required for any target with `"server": true`. |
+| `targets` | Where the per-service code goes: `namespace`, `out`, and `client` or `server`. Required. |
+| `services` | The WSDLs: `name` and `wsdl` each. Names must be unique. Required. |
+| `enumerationValues` | Values to add to a schema enumeration: `type` as `{namespace}LocalName`, `value`, and optional `documentation`. |
+| `$comment` | Ignored, for a note at the top of the file. Any other unknown key is an error naming the key. |
+
+### Remarks
+
+A published schema can trail the implementations that follow it. `enumerationValues` adds a value
+the schema does not list, and the conversions generated beside the enumeration stay in step with
+it, which editing the output would not. Values are appended, so the number behind an existing name
+does not move.
+
+## Output
+
+| Path | Contents |
+| --- | --- |
+| `<shared.out>/DataContracts.cs` | Types the services share, generated once. |
+| `<target.out>/<Service>/DataContracts.cs` | Types that service's own WSDL declares. |
+| `<target.out>/<Service>/Client.cs` | One interface and one client per portType. |
+| `<target.out>/<Service>/Service.cs` | One base class per portType, and its dispatcher. |
+| `<runtime.out>/**` | The runtime, below. |
 
 ## The runtime
 
-The generated code is compiled against a runtime, and that runtime is generated too, from source
-embedded in the generator under `src/WsdlGenerator/Runtime/`, into the namespace and directory a
-run chooses. It is written rather than referenced so that a generated client depends on nothing
-but itself: generate from somebody else's WSDL and the output compiles in a project with no
-references at all.
+Generated code is compiled against a runtime, and that runtime is generated with it. It is written
+rather than referenced so that generated code depends on no library: the output of `--client`
+compiles in a project with no references at all, which `TestGeneratedCodeCompilesAlone` verifies by
+compiling it that way.
 
-What is in it is deliberately narrow - the base class a client derives from, the plumbing the
-generated contracts drive directly, and the interfaces the base class talks through:
+| File | Contents |
+| --- | --- |
+| `ILog.cs` | Where a client reports what it could not do. |
+| `Soap/IClientSettings.cs` | What a client was built with. |
+| `Soap/IClientAuthentication.cs` | How a client proves who it is. |
+| `Soap/IMessageCodec.cs` | What an envelope is. |
+| `Xml/IXmlWriter.cs`, `Xml/IXmlReader.cs` | How a contract writes and reads itself, and the lexical conversions. |
+| `Soap/SoapClientBase.cs` | The base class a generated client derives from. |
+| `Xml/XmlContract.cs` | The base class every generated contract derives from. |
+| `Xml/SoapFault.cs`, `Soap/SoapTransportException.cs`, `Xml/XmlNamespaceDeclaration.cs` | What a caller catches and inspects. |
 
-```
-ILog                        where a client says what it could not do
-Soap/IClientSettings        what a client was built with
-Soap/IClientAuthentication  how a client proves who it is
-Soap/IMessageCodec          what an envelope is
-Xml/IXmlWriter              how a contract writes itself
-Xml/IXmlReader              how a contract reads itself
-Soap/SoapClientBase        the base class, which knows only those
-Xml/OnvifContract           the base every generated contract derives from
-Xml/SoapFault, Xml/XmlNamespaceDeclaration, Soap/SoapTransportException
-```
+Nothing that implements those interfaces is generated. ONVIF's implementations are hand-written in
+`SharpOnvifCommon`: `OnvifXmlReader`, `OnvifXmlWriter`, `SoapEnvelope`, `SoapMessageCodec`,
+`OnvifClientSettings`, `OnvifAuthenticationSettings` and the loggers.
 
-Nothing that implements any of it is generated. HTTP Digest, the WS-Security UsernameToken, the
-nonce replay store, the loggers, the settings that carry them, and the whole XML layer - reader,
-writer, envelope, fault parsing, lexical conversions - are ordinary hand-written source in
-`SharpOnvifCommon`, under `Security/`, `Soap/`, `Logging/` and `Xml/`.
+### Remarks
 
-Nothing service-specific is emitted either: a run writes the same runtime whatever it generates
-from. The lexical conversions sit on the reader and writer interfaces rather than in a class of
-their own, because a contract always has one of those to hand while it is reading or writing, and
-anywhere else would mean naming a type the generated code is not supposed to know.
+Generated code **compiles** against nothing and does not **run** against nothing. Generating for a
+service of your own means bringing an implementation of the runtime interfaces or writing one;
+`SharpOnvifCommon`'s `Xml/` is about 1,300 lines of it.
 
-One consequence is worth being plain about: generated code **compiles** against nothing, but it
-does not **run** against nothing. A client with no `IXmlWriter` behind it cannot write a message.
-Generating for a service of your own means bringing a runtime implementation - `SharpOnvifCommon`
-is one, at about thirteen hundred lines of `Xml/` - or writing one.
-
-### Implementing it
-
-Onvif's implementations are in `SharpOnvifCommon`: `OnvifXmlReader`, `OnvifXmlWriter`,
-`SoapEnvelope` and `SoapMessageCodec`, `OnvifClientSettings`, `OnvifAuthenticationSettings`, and the
-loggers. Be clear-eyed about the split between them. `IXmlReader`, `IXmlWriter` and
-`IMessageCodec` are the work - about thirteen hundred lines of `Xml/` between them - and unless
-your service is not SOAP 1.2 at all, porting those is a better use of a day than writing them.
-`IClientSettings` is the small end, and the whole of it:
+`IClientSettings` is the small end, and `TestGeneratedCodeCompilesAlone` compiles this example:
 
 ```cs
 internal sealed class BankSettings : IClientSettings
@@ -81,171 +162,36 @@ internal sealed class BankSettings : IClientSettings
 }
 ```
 
-A null `Authentication` sends no credentials and a null `Logger` reports nowhere, so a service
-wanting neither needs nothing further. A null `Codec` is refused: there is nothing a client could
-fall back to, having no idea what an envelope looks like. `--settings BankSettings` then gives the
-generated clients their convenience constructors back.
+A null `Authentication` sends no credentials and a null `Logger` reports nowhere. A null `Codec` is
+refused: a client has no idea what an envelope looks like.
 
-`TestGeneratedCodeCompilesAlone` compiles that class, so it is an example that is known to still
-work rather than one that used to.
-
-One constraint is easy to trip over. The reader and writer drive hooks on `OnvifContract` that are
-`internal` to the assembly the runtime is emitted into, so an implementation of `IXmlReader` or
-`IXmlWriter` has to live in **that** assembly. The generated contracts do not: they derive from
-`OnvifContract` and can be anywhere, which is how `SharpOnvifClient` and `SharpOnvifServer` each
-carry their own while the runtime and its implementation sit in `SharpOnvifCommon`. Point
+An implementation of `IXmlReader` or `IXmlWriter` must be in the same assembly as the emitted
+runtime, because it drives hooks on `XmlContract` that are internal to it. Generated contracts need
+not be: they derive from `XmlContract` and can live anywhere, which is how `SharpOnvifClient` and
+`SharpOnvifServer` carry their own while the runtime sits in `SharpOnvifCommon`. Point
 `--runtime-out` at the project that will implement it.
 
-The embedded source is ordinary C# and stays compilable in an editor: it is written in a namespace
-called `__RUNTIME__`, which the generator replaces.
-
-One name reaches the generated clients from the run: `--settings <type>`, something implementing
-`IClientSettings` that a client can construct when it is handed none. This repository names
-`SharpOnvifCommon.Soap.OnvifClientSettings`, which is what keeps `new DeviceClient(uri, user,
-password)` working. Name nothing and a client only ever takes settings it is given, because there
-is nothing it could have built them from.
-
-Change the runtime by editing
-`src/WsdlGenerator/Runtime/` and regenerating - editing the emitted copy loses the change on the
-next run. The generator writes files but never deletes them, so a file that stops being emitted
-has to be removed by hand; `TestCodeGenerator` compares the committed runtime against what a run
-would write, and fails when one is left behind.
-
-## Running the generator
-
-```
-dotnet run --project src/WsdlGenerator
-```
-
-With no arguments it reads `onvif.codegen.json` at the root of this repository and rewrites the
-generated sources in place. **Everything specific to Onvif is in that file** - the twenty-five
-services and their WSDL addresses, the namespaces each side is generated into, the schema values
-to add, the type-name prefix, and the settings and dispatch the generated code names. The
-generator itself knows none of it, and a test fails if a mention creeps back in.
-
-```json
-{
-  "mirror": "wsdl",
-  "typeNamePrefix": "Onvif",
-  "shared":  { "namespace": "SharpOnvifCommon.Onvif", "out": "src/SharpOnvifCommon/Generated" },
-  "runtime": { "namespace": "SharpOnvifCommon",       "out": "src/SharpOnvifCommon/Generated/Runtime" },
-  "settings": "SharpOnvifCommon.Soap.OnvifClientSettings",
-  "dispatch": "SharpOnvifServer.Dispatch",
-  "targets": [
-    { "namespace": "SharpOnvifClient", "out": "src/SharpOnvifClient/Generated", "client": true },
-    { "namespace": "SharpOnvifServer", "out": "src/SharpOnvifServer/Generated", "server": true }
-  ],
-  "services":          [ { "name": "DeviceMgmt", "wsdl": "https://www.onvif.org/ver10/device/wsdl/devicemgmt.wsdl" } ],
-  "enumerationValues": [ { "type": "{http://www.onvif.org/ver10/schema}VideoEncoding", "value": "H265" } ]
-}
-```
-
-Paths in it are relative to the file. Run another one with `--config <file>`: a set of services,
-the namespaces they go into and the values to add do not fit on a command line, and describing
-them there keeps them out of the compiler.
-Generated files are committed, so a normal build never runs the generator and never needs
-network access. Review the diff whenever you regenerate.
-
-To pick up upstream specification changes, run `wsdl/fetch.sh` first. It re-downloads every
-document listed in `wsdl/sources.txt`, mirroring the remote URL layout under `wsdl/` so that
-relative `schemaLocation` and `location` references resolve offline.
-
-## Using it for other services
-
-Nothing in the compiler is specific to Onvif - it reads WSDL and XML Schema - so it will generate
-from any document/literal SOAP 1.2 service:
-
-```
-dotnet run --project src/WsdlGenerator -- \
-    --wsdl ./bank.wsdl \
-    --namespace Example.Banking \
-    --out ./Generated
-```
-
-That produces `Generated/Bank/{DataContracts,Client,Service}.cs` in `Example.Banking.Bank`, the
-types its schemas share in `Example.Banking.Schema`, and the runtime under it in
-`Example.Banking.Runtime`. The service name comes from the file
-name; write `--wsdl Accounts=./bank.wsdl` to choose one. Repeat `--wsdl` for several services, and
-they share their common schemas the same way the Onvif services do.
-
-| option | |
-| --- | --- |
-| `--wsdl <uri>` | A WSDL, as a file path or an http(s) URL. Repeatable. `<name>=<uri>` names the service. |
-| `--namespace <ns>` | Root namespace; a service lands in `<ns>.<Service>`. |
-| `--out <dir>` | Output directory; a service lands in `<dir>/<Service>`. |
-| `--shared-namespace <ns>` | Namespace for shared types. Defaults to `<ns>.Schema`. |
-| `--shared-out <dir>` | Directory for shared types. Defaults to `<dir>/Schema`. |
-| `--runtime-namespace <ns>` | Namespace of the runtime. Defaults to `<ns>.Runtime`. |
-| `--runtime-out <dir>` | Directory for the runtime. Defaults to `<dir>/Runtime`. |
-| `--no-runtime` | Do not write the runtime; compile against the one `--runtime-namespace` names. |
-| `--config <file>` | Read the whole run from a file, as this repository does. |
-| `--settings <type>` | What a client builds its settings from when handed none. |
-| `--dispatch <ns>` | Namespace a generated service is routed by. Defaults to `SharpOnvifServer.Dispatch`. |
-| `--client` / `--server` | Generate one side only. Both by default. |
-| `--mirror <dir>` | Resolve every document from a local mirror rather than from disk and the network. |
-
-Relative `xs:import` and `wsdl:import` references resolve against the document that made them, so
-a WSDL on disk can pull in schemas beside it and one fetched over http can pull in its siblings.
-Pass `--mirror` to keep a run offline and reproducible, which is how this repository generates its
-own bindings.
-
-A generated client depends on nothing but the runtime written beside it - and that is checked by
-compiling it that way: `TestGeneratedCodeCompilesAlone` generates from the banking fixture and
-compiles the result against the framework with every assembly of ours filtered out. Nothing else
-can check it, because everywhere else the emitted runtime is compiled inside `SharpOnvifCommon`,
-where anything it might accidentally reach for happens to exist.
-
-A generated service additionally names the namespace it is routed by, `SharpOnvifServer.Dispatch`
-unless `--dispatch` says otherwise: its base derives `IDispatchedService` from there and carries a
-static `Dispatcher`, which is how routing finds one without reflection. That is the one thing a generated service names that is not
-generated: routing an action to a method over ASP.NET Core is a library rather than anything a
-schema describes, so the generator names one instead of writing one. Generate with `--client` for
-output that references nothing at all.
-
-Run the generator twice into one solution - a second service set, say - with `--no-runtime` on the
-second run and `--runtime-namespace` naming the first one's, so the two share a runtime instead of
-each emitting a copy.
-
-`SharpOnvifCommon.Tests`'s `TestCodeGenerator` runs the generator over a small banking WSDL to keep this
-path working.
-
-## Schema subset
-
-ONVIF uses a narrow slice of XML Schema, and the generator models exactly that slice. Anything
-outside it raises a `SchemaException` naming the file and line rather than silently emitting
-wrong code, so a future specification revision fails loudly instead of quietly.
-
-Supported: `sequence`, `choice`, `any`, `anyAttribute`, `complexContent` extension,
-`simpleContent` extension, `simpleType` restriction/list/union, enumerations, mixed content,
-abstract types, `attributeGroup`, `import`/`include`.
-
-Deliberately unsupported, because nothing in the mirror uses them: substitution groups,
-`xs:group`, `xs:all`, `complexContent` restriction, `redefine`, `notation`.
-
-Every SOAP binding in ONVIF is document/literal over SOAP 1.2, and the generator rejects
-anything else.
+A generated service also names the dispatch it is routed by, `--dispatch`. That is the only thing a
+generated service names that is not generated: routing an action to a method over ASP.NET Core is a
+library rather than anything a schema describes.
 
 ## Operation shapes
 
-Every operation is generated in message-contract style: it takes a generated request contract and
-returns a generated response contract.
+Each operation takes a generated request contract and returns a generated response contract.
 
 ```cs
 Task<GetServicesResponse> GetServicesAsync(GetServicesRequest request, CancellationToken ct = default);
 ```
 
-A convenience overload takes the request's members as arguments instead, for the common case where
-building the request adds nothing:
+An overload takes the request's members as arguments, for the common case where building the
+request adds nothing. The two never collide: they differ in arity or in parameter type.
 
 ```cs
 Task<GetServicesResponse> GetServicesAsync(bool IncludeCapability, CancellationToken ct = default);
 ```
 
-Both return the same contract. The overloads never collide, because they differ in arity or in
-parameter type, and an operation with no inputs still gets the no-argument form.
-
-The server side mirrors this. Each operation appears three times on the generated base class, each
-layer defaulting to the next, so an implementation overrides whichever suits it:
+Each operation appears three times on a generated service base, each layer defaulting to the next.
+Override whichever suits the implementation.
 
 ```cs
 public virtual Task<GetServicesResponse> GetServicesAsync(GetServicesRequest request, CancellationToken ct);
@@ -253,91 +199,38 @@ public virtual GetServicesResponse GetServices(GetServicesRequest request);
 public virtual GetServicesResponse GetServices(bool IncludeCapability);
 ```
 
-The dispatcher calls the first. Override the async form for an operation that needs to await, the
-middle one to work from the request contract, or the last to take the members directly. An
-operation nothing overrides throws `NotImplementedException`, which the endpoint reports as the
-`ter:ActionNotSupported` fault the Onvif specification defines.
+The dispatcher calls the first. An operation nothing overrides throws `NotImplementedException`,
+which the endpoint reports as the `ter:ActionNotSupported` fault.
 
-### Why this differs from the svcutil bindings
+## Type names
 
-`svcutil` rendered some operations in message-contract style and others with the SOAP body
-unwrapped into ordinary arguments and a bare return value:
+A generated type whose name matches one already in scope for a consumer would make both ambiguous.
+With implicit usings `System` is always in scope, so a contract named `DateTime` would be ambiguous
+in any file that also imports the generated namespace.
 
-```cs
-Task<SystemDateTime> GetSystemDateAndTimeAsync();          // what svcutil generated here
-```
+`typeNamePrefix` prefixes those names. The schema name is untouched, so nothing moves on the wire:
+`OnvifDateTime` still serializes as `DateTime`. Eight ONVIF names need it today - `Action`,
+`Attribute`, `DateTime`, `IPAddress`, `NetworkInterface`, `Object`, `Scope` and `TimeZone` - and
+`CsharpNaming.FrameworkTypeNames` lists a wider set, so a future revision introducing a `Stream` or
+a `Task` does not reintroduce the problem.
 
-Which style an operation got was not consistent. The checked-in bindings were generated by
-several `svcutil` and `dotnet-svcutil` invocations over time, and services disagreed with each
-other: every AppMgmt operation was message contract while the other 24 services mixed the two, and
-the client and server bindings for the same service sometimes disagreed as well. There was no
-single rule to reproduce.
+`SharpOnvifClient.Tests`'s `TestNamespaceCoexistence` imports every relevant framework and ONVIF
+namespace at once with no aliases. It exists to be compiled: a name that collided would break the
+build.
 
-Generating one style throughout removes that inconsistency. It does mean an operation svcutil had
-unwrapped now returns its response contract, so a call like the one above becomes:
+## Supported XML Schema
 
-```cs
-var response = await client.GetSystemDateAndTimeAsync();
-SystemDateTime time = response.SystemDateAndTime;
-```
+The generator models the slice of XML Schema that service specifications use. Anything outside it
+raises a `SchemaException` naming the file and line rather than emitting wrong code.
 
-`SimpleOnvifClient` keeps its own convenience shapes and is unaffected.
+**Supported**: `sequence`, `choice`, `any`, `anyAttribute`, `complexContent` extension,
+`simpleContent` extension, `simpleType` restriction, list and union, enumerations, mixed content,
+abstract types, `attributeGroup`, `import` and `include`.
 
-## Shared and service types
+**Not supported**: substitution groups, `xs:group`, `xs:all`, `complexContent` restriction,
+`redefine`, `notation`.
 
-A type belongs to a service when that service's own WSDL declares it: the request and response
-contracts, and whatever else sits in the WSDL's target namespace. Everything else comes from a
-schema the services share - `onvif.xsd` above all, plus `common.xsd`, the PACS and metadata
-schemas, and the OASIS WS-Notification and W3C schemas the event service pulls in.
+Only document/literal SOAP 1.2 bindings are accepted.
 
-Shared types are generated once, into `SharpOnvifCommon.Onvif`, and referenced from both sides.
-That matters for more than size: `SharpOnvifCommon.Onvif.Profile` is one CLR type, so a value the
-client reads can be handed to a server implementation unchanged.
-
-The split is safe because the dependency only runs one way. No type in a shared schema refers to
-one declared by a service, so the common assembly needs no reference back - the generator checks
-this implicitly by failing to resolve such a reference, and no mirrored schema violates it.
-
-Generating the shared schema in full, rather than only the types some operation reaches, keeps the
-common assembly a complete rendering of the Onvif data model. It also removed a per-service
-`GenerateEntireSchema` flag that existed solely so the Analytics and DeviceIO assemblies could
-publish all of `onvif.xsd` the way svcutil had.
-
-Deduplication took the generated output from 4,188 types to 747 shared plus 1,480 per service, of
-which 1,254 are the request and response wrappers for the 627 operations.
-
-## Names that would collide with the framework
-
-A generated type whose name matches one a consumer already has in scope would make both ambiguous
-wherever the two namespaces are imported together. With implicit usings, `System` is always in
-scope, so a contract called `DateTime` would be ambiguous in any file that also imports
-`SharpOnvifCommon.Onvif`.
-
-The generator prefixes those names with `Onvif`. The schema name is untouched, so nothing moves on
-the wire: `OnvifDateTime` still serialises as `DateTime`.
-
-Eight names need it today - `Action`, `Attribute`, `DateTime`, `IPAddress`, `NetworkInterface`,
-`Object`, `Scope` and `TimeZone`. `CsharpNaming.FrameworkTypeNames` lists a wider set than that,
-drawn from the net10.0 reference assemblies for the namespaces a consumer typically imports, so a
-future specification revision introducing a `Stream` or a `Task` does not reintroduce the problem.
-
-`SharpOnvifClient.Tests`'s `TestNamespaceCoexistence` imports every relevant framework and Onvif namespace
-at once with no aliases. It exists to be compiled: a name that collided would break the build.
-
-## Generated type surface
-
-Only types an operation can put on the wire are generated. Measured against the previously
-committed bindings, 22 of the 25 services produce exactly the same set of types, and the
-generator additionally emits types that the current schemas added since the old code was
-generated.
-
-Two services are exceptions and carry `GenerateEntireSchema` in `ServiceCatalog`: svcutil did not
-prune Analytics or DeviceIO, and emitted the whole imported schema closure into them (611 types
-for Analytics's 14 operations). The flag keeps those surfaces intact.
-
-A residual 36 types out of roughly 3,800 are named differently from before, all of them cases
-where svcutil resolved a name collision with a numeric suffix:
-
-- **Events** keeps the WS-Notification wrapper element types under the operation-derived names
-  (`SubscribeRequest` rather than the pair `Subscribe` / `SubscribeRequest`).
-- **DeviceIO** and **Analytics** lose a handful of `...1`-suffixed duplicates.
+Only types an operation can put on the wire are generated. A type a schema declares but that no
+operation reaches is not.
