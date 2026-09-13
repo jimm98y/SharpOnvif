@@ -115,7 +115,7 @@ namespace SharpOnvifCommon.Security
         /// True when HTTP Digest is in play, which is answered by a handler in the client's own
         /// pipeline and so cannot be arranged on an HttpClient somebody else built.
         /// </summary>
-        public bool RequiresOwnTransport(OnvifClientSettings settings)
+        public bool RequiresOwnTransport(IClientSettings settings)
         {
             return settings != null
                 && settings.Credentials != null
@@ -123,7 +123,7 @@ namespace SharpOnvifCommon.Security
         }
 
         /// <summary>Puts the digest handler in the pipeline when HTTP Digest is in play.</summary>
-        public HttpMessageHandler CreateTransport(HttpMessageHandler inner, OnvifClientSettings settings)
+        public HttpMessageHandler CreateTransport(HttpMessageHandler inner, IClientSettings settings)
         {
             return RequiresOwnTransport(settings)
                 ? new HttpDigestHandler(settings.Credentials, this, inner)
@@ -134,7 +134,7 @@ namespace SharpOnvifCommon.Security
         /// Writes the WS-Security UsernameToken, unless there is nothing to write: no credentials,
         /// the scheme switched off, or an action the device answers without them.
         /// </summary>
-        public Action<OnvifXmlWriter> CreateSecurityHeader(string action, OnvifClientSettings settings)
+        public Action<OnvifXmlWriter> CreateSecurityHeader(string action, IClientSettings settings)
         {
             if (settings == null || settings.Credentials == null) return null;
             if ((Authentication & DigestAuthentication.WsUsernameToken) == 0) return null;

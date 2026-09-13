@@ -48,13 +48,13 @@ namespace __RUNTIME__.Soap
         /// A caller who supplies a built <see cref="HttpClient"/> cannot be given one, so the
         /// client refuses rather than quietly sending unauthenticated requests.
         /// </remarks>
-        bool RequiresOwnTransport(OnvifClientSettings settings);
+        bool RequiresOwnTransport(IClientSettings settings);
 
         /// <summary>
         /// Wraps the transport in whatever answers a challenge, or returns it untouched when
         /// nothing has to be answered.
         /// </summary>
-        HttpMessageHandler CreateTransport(HttpMessageHandler inner, OnvifClientSettings settings);
+        HttpMessageHandler CreateTransport(HttpMessageHandler inner, IClientSettings settings);
 
         /// <summary>
         /// Returns what writes the credentials into the SOAP header for this action, or null when
@@ -62,6 +62,6 @@ namespace __RUNTIME__.Soap
         /// rather than an empty one.
         /// </summary>
         /// <param name="action">The SOAP action being sent, which may be one that needs no credentials.</param>
-        Action<OnvifXmlWriter> CreateSecurityHeader(string action, OnvifClientSettings settings);
+        Action<OnvifXmlWriter> CreateSecurityHeader(string action, IClientSettings settings);
     }
 }

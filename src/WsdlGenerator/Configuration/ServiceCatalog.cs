@@ -28,8 +28,7 @@ internal static class ServiceCatalog
         SharedDirectory = Path.Combine(outputRoot, "SharpOnvifCommon", "Generated"),
         Runtime = new RuntimeTarget(
             "SharpOnvifCommon", Path.Combine(outputRoot, "SharpOnvifCommon", "Generated", "Runtime")),
-        EnvelopePrologue = EnvelopePrefixes,
-        AuthenticationType = "SharpOnvifCommon.Security.OnvifAuthenticationSettings",
+        SettingsType = "SharpOnvifCommon.Soap.OnvifClientSettings",
         Targets =
         [
             new GenerationTarget(
@@ -41,21 +40,6 @@ internal static class ServiceCatalog
         ],
         EnumerationExtensions = [.. VideoEncodings, .. AudioEncodings],
     };
-
-    /// <summary>
-    /// Prefixes declared on the envelope of every message, whether or not the body uses them.
-    /// <para>
-    /// The bindings this replaces were CoreWCF-based and declared both, so devices and tools that
-    /// have been talking to SharpOnvif keep seeing what they saw. "tns1" is needed for a second
-    /// reason: an event topic is written as "tns1:Path", and a prefix used in element content has
-    /// to be in scope wherever that content ends up.
-    /// </para>
-    /// </summary>
-    private static readonly IReadOnlyList<EnvelopeDeclaration> EnvelopePrefixes =
-    [
-        new("tt", "http://www.onvif.org/ver10/schema", "OnvifSchema"),
-        new("tns1", "http://www.onvif.org/ver10/topics", "OnvifTopics"),
-    ];
 
     /// <summary>
     /// onvif.xsd still enumerates tt:VideoEncoding as JPEG, MPEG4 and H264, and a generated enum

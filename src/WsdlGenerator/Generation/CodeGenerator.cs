@@ -60,7 +60,7 @@ internal sealed class CodeGenerator
 
         // The runtime first, because everything else is compiled against it.
         int runtimeFiles = _options.Runtime.Directory is { } runtime
-            ? new RuntimeEmitter(_options).Emit(runtime)
+            ? new RuntimeEmitter(_options.Runtime.Namespace).Emit(runtime)
             : 0;
 
         int written = runtimeFiles + EmitShared(sharedModel);
@@ -131,7 +131,7 @@ internal sealed class CodeGenerator
             ? new GeneratedFile(
                 Path.Combine(directory, "Service.cs"), new ServerEmitter(model, @namespace, runtime).Emit())
             : new GeneratedFile(
-                Path.Combine(directory, "Client.cs"), new ClientEmitter(model, @namespace, runtime).Emit());
+                Path.Combine(directory, "Client.cs"), new ClientEmitter(model, @namespace, runtime, _options.SettingsType).Emit());
 
         int written = 0;
         if (contracts.WriteIfChanged()) written++;

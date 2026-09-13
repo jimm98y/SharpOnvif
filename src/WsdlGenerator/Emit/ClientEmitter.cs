@@ -23,10 +23,17 @@ internal sealed class ClientEmitter
     /// <summary>Namespace of the contract, reader and writer.</summary>
     private readonly string Xml;
 
-    public ClientEmitter(CsModel model, string @namespace, string runtime)
+    /// <summary>
+    /// Type a client can build its own settings from, or null when the run named none - in which
+    /// case a client is only ever handed them, having nothing it could construct.
+    /// </summary>
+    private readonly string? _settingsType;
+
+    public ClientEmitter(CsModel model, string @namespace, string runtime, string? settingsType)
     {
         _model = model;
         _namespace = @namespace;
+        _settingsType = settingsType;
         Runtime = runtime + ".Soap";
         Xml = runtime + ".Xml";
     }
@@ -85,20 +92,23 @@ internal sealed class ClientEmitter
 
         using (writer.Braces())
         {
-            writer.Doc("Creates a client that sends no credentials.");
-            writer.Line($"public {name}(string endpointUri)");
-            writer.Line($"    : base(endpointUri, new {Runtime}.OnvifClientSettings())");
-            using (writer.Braces()) { }
-            writer.Line();
+            if (_settingsType is { } settings)
+            {
+                writer.Doc("Creates a client that sends no credentials.");
+                writer.Line($"public {name}(string endpointUri)");
+                writer.Line($"    : base(endpointUri, new {settings}())");
+                using (writer.Braces()) { }
+                writer.Line();
 
-            writer.Doc("Creates a client that authenticates with both Onvif digest schemes.");
-            writer.Line($"public {name}(string endpointUri, string userName, string password)");
-            writer.Line($"    : base(endpointUri, new {Runtime}.OnvifClientSettings(userName, password))");
-            using (writer.Braces()) { }
-            writer.Line();
+                writer.Doc("Creates a client that authenticates however its settings say to.");
+                writer.Line($"public {name}(string endpointUri, string userName, string password)");
+                writer.Line($"    : base(endpointUri, new {settings}(userName, password))");
+                using (writer.Braces()) { }
+                writer.Line();
+            }
 
             writer.Doc("Creates a client with full control over transport and authentication.");
-            writer.Line($"public {name}(string endpointUri, {Runtime}.OnvifClientSettings settings)");
+            writer.Line($"public {name}(string endpointUri, {Runtime}.IClientSettings settings)");
             writer.Line("    : base(endpointUri, settings)");
             using (writer.Braces()) { }
             writer.Line();

@@ -141,7 +141,7 @@ namespace SharpOnvifServer.Dispatch
                         .ConfigureAwait(false);
                 }
 
-                string reply = SoapEnvelope.Write(null, writer =>
+                string reply = SoapEnvelope.Write(OnvifXmlNamespaces.EnvelopePrologue, null, writer =>
                 {
                     if (result.ElementName == null) return;
                     writer.WriteStartElement(result.Namespace, result.ElementName);
@@ -342,7 +342,7 @@ namespace SharpOnvifServer.Dispatch
             HttpContext context, string code, string subcode, string reason,
             string subcodeNamespace, System.Net.HttpStatusCode statusCode)
         {
-            string envelope = SoapEnvelope.Write(null, writer =>
+            string envelope = SoapEnvelope.Write(OnvifXmlNamespaces.EnvelopePrologue, null, writer =>
             {
                 XmlWriter xml = writer.Xml;
                 xml.WriteStartElement("SOAP-ENV", "Fault", OnvifXmlNamespaces.SoapEnvelope);

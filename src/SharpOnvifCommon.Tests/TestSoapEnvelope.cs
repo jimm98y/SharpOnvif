@@ -45,8 +45,11 @@ namespace SharpOnvif.Tests
             // talking to SharpOnvif keep seeing what they saw. "tns1" is needed for a second
             // reason: an event topic is written as "tns1:Path", and a prefix used in element
             // content has to be in scope wherever that content ends up.
-            string envelope = SoapEnvelope.Write(null, writer => writer.WriteStartElement(
-                "http://www.onvif.org/ver10/device/wsdl", "GetDeviceInformation"));
+            string envelope = SoapEnvelope.Write(
+                new OnvifClientSettings().EnvelopePrologue,
+                null,
+                writer => writer.WriteStartElement(
+                    "http://www.onvif.org/ver10/device/wsdl", "GetDeviceInformation"));
 
             StringAssert.Contains(envelope, "xmlns:tt=\"http://www.onvif.org/ver10/schema\"");
             StringAssert.Contains(envelope, "xmlns:tns1=\"http://www.onvif.org/ver10/topics\"");
@@ -57,14 +60,14 @@ namespace SharpOnvif.Tests
         {
             // Including when the body has no use for them, which is the case that would pass
             // unnoticed if the declarations were written only where they happen to be needed.
-            string empty = SoapEnvelope.Write(null, null);
+            string empty = SoapEnvelope.Write(new OnvifClientSettings().EnvelopePrologue, null, null);
 
             StringAssert.Contains(empty, "xmlns:tt=");
             StringAssert.Contains(empty, "xmlns:tns1=");
         }
 
         [TestMethod]
-        public void NamesThePrefixesItWasGeneratedFor()
+        public void NamesThePrefixesItDeclares()
         {
             // The same two namespaces, reachable by name rather than only by prefix.
             Assert.AreEqual("http://www.onvif.org/ver10/schema", OnvifXmlNamespaces.OnvifSchema);
@@ -72,19 +75,16 @@ namespace SharpOnvif.Tests
 
             CollectionAssert.AreEquivalent(
                 new[] { "tt", "tns1" },
-                RuntimeDefaults.EnvelopePrologue.Select(d => d.Prefix).ToArray());
+                OnvifXmlNamespaces.EnvelopePrologue.Select(d => d.Prefix).ToArray());
         }
 
         [TestMethod]
         public void AuthenticatesTheWayOnvifDoesUnlessItIsToldOtherwise()
         {
-            // The other half of what the runtime is generated with. The generated client knows
-            // only IClientAuthentication; which implementation it starts with is named when the
-            // runtime is, and for this build that is Onvif's - both schemes, and the PRE_AUTH
-            // actions a device answers without credentials.
-            IClientAuthentication authentication = RuntimeDefaults.CreateAuthentication();
-
-            var onvif = authentication as OnvifAuthenticationSettings;
+            // The generated client knows only IClientAuthentication. Which implementation it
+            // starts with comes from the settings it is built with, and for Onvif that is both
+            // schemes plus the PRE_AUTH actions a device answers without credentials.
+            var onvif = new OnvifClientSettings().Authentication as OnvifAuthenticationSettings;
             Assert.IsNotNull(onvif, "a client built here has to authenticate the way Onvif does");
 
             Assert.AreEqual(
@@ -101,10 +101,10 @@ namespace SharpOnvif.Tests
         {
             // Narrowing one client's schemes must not narrow every client's, which is what a
             // shared instance would do.
-            var first = (OnvifAuthenticationSettings)RuntimeDefaults.CreateAuthentication();
+            var first = (OnvifAuthenticationSettings)new OnvifClientSettings().Authentication;
             first.Authentication = DigestAuthentication.None;
 
-            var second = (OnvifAuthenticationSettings)RuntimeDefaults.CreateAuthentication();
+            var second = (OnvifAuthenticationSettings)new OnvifClientSettings().Authentication;
 
             Assert.AreNotEqual(DigestAuthentication.None, second.Authentication);
         }

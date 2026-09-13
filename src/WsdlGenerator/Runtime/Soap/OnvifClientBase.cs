@@ -22,10 +22,10 @@ namespace __RUNTIME__.Soap
     {
         private readonly HttpClient _http;
         private readonly bool _ownsHttpClient;
-        private readonly OnvifClientSettings _settings;
+        private readonly IClientSettings _settings;
         private bool _disposed;
 
-        protected OnvifClientBase(string endpointUri, OnvifClientSettings settings)
+        protected OnvifClientBase(string endpointUri, IClientSettings settings)
         {
             if (string.IsNullOrWhiteSpace(endpointUri))
                 throw new ArgumentNullException(nameof(endpointUri));
@@ -36,8 +36,10 @@ namespace __RUNTIME__.Soap
                 throw new ArgumentException("The Onvif endpoint must be an http:// or https:// URI.", nameof(endpointUri));
             }
 
+            if (settings == null) throw new ArgumentNullException(nameof(settings));
+
             EndpointUri = endpointUri;
-            _settings = settings ?? new OnvifClientSettings();
+            _settings = settings;
 
             if (_settings.HttpClient != null)
             {
@@ -67,12 +69,12 @@ namespace __RUNTIME__.Soap
         public string EndpointUri { get; private set; }
 
         /// <summary>The settings the client was created with.</summary>
-        protected OnvifClientSettings Settings { get { return _settings; } }
+        protected IClientSettings Settings { get { return _settings; } }
 
         /// <summary>Where this client reports what it could not do, or null for nowhere.</summary>
         protected ILog Logger { get { return _settings.Logger; } }
 
-        private static HttpClient CreateHttpClient(OnvifClientSettings settings)
+        private static HttpClient CreateHttpClient(IClientSettings settings)
         {
             HttpMessageHandler transport = settings.Transport ?? new HttpClientHandler();
 
@@ -156,7 +158,7 @@ namespace __RUNTIME__.Soap
                 ? null
                 : _settings.Authentication.CreateSecurityHeader(action, _settings);
 
-            return SoapEnvelope.Write(headers, writer =>
+            return SoapEnvelope.Write(_settings.EnvelopePrologue, headers, writer =>
             {
                 writer.WriteStartElement(bodyNamespace, bodyElement);
                 writer.WriteContent(request);

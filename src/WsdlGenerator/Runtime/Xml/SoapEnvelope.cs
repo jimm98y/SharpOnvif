@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml;
@@ -8,10 +9,9 @@ namespace __RUNTIME__.Xml
     /// <summary>
     /// Reads and writes SOAP 1.2 envelopes.
     /// <para>
-    /// The envelope element carries the prefix declarations this runtime was generated with, on
-    /// top of <c>SOAP-ENV</c> for the envelope itself. Onvif's own bindings declare <c>tt</c> for
-    /// the shared schema there, because some devices and tools rely on seeing it up front even
-    /// when the body does not use it.
+    /// The envelope element carries <c>SOAP-ENV</c> for itself, plus whatever prefixes the caller
+    /// asks for. Onvif's own bindings declare <c>tt</c> for the shared schema there, because some
+    /// devices and tools rely on seeing it up front even when the body does not use it.
     /// </para>
     /// </summary>
     public static class SoapEnvelope
@@ -39,21 +39,30 @@ namespace __RUNTIME__.Xml
         /// Writes a complete envelope. <paramref name="writeHeaders"/> may be null; it is called
         /// inside the Header element, and the header is omitted entirely when nothing is written.
         /// </summary>
-        public static string Write(Action<OnvifXmlWriter> writeHeaders, Action<OnvifXmlWriter> writeBody)
+        /// <param name="prologue">
+        /// Prefixes to declare on the envelope element itself, or null for none.
+        /// </param>
+        public static string Write(
+            IEnumerable<XmlNamespaceDeclaration> prologue,
+            Action<OnvifXmlWriter> writeHeaders,
+            Action<OnvifXmlWriter> writeBody)
         {
             var buffer = new StringWriterUtf8();
             using (XmlWriter xml = XmlWriter.Create(buffer, WriterSettings))
             {
                 xml.WriteStartElement("SOAP-ENV", "Envelope", OnvifXmlNamespaces.SoapEnvelope);
 
-                // Declared up front so the whole document can use the conventional prefixes. For
-                // Onvif that means "tt", which devices and tools expect to see on the envelope,
-                // and "tns1", because an event topic is written as "tns1:Path" and needs the topic
-                // namespace in scope wherever it appears.
-                foreach (XmlNamespaceDeclaration declaration in RuntimeDefaults.EnvelopePrologue)
+                // Declared up front so the whole document can use the caller's conventional
+                // prefixes. For Onvif that means "tt", which devices and tools expect to see on
+                // the envelope, and "tns1", because an event topic is written as "tns1:Path" and
+                // needs the topic namespace in scope wherever it appears.
+                if (prologue != null)
                 {
-                    xml.WriteAttributeString(
-                        "xmlns", declaration.Prefix, OnvifXmlNamespaces.Xmlns, declaration.Namespace);
+                    foreach (XmlNamespaceDeclaration declaration in prologue)
+                    {
+                        xml.WriteAttributeString(
+                            "xmlns", declaration.Prefix, OnvifXmlNamespaces.Xmlns, declaration.Namespace);
+                    }
                 }
 
                 var writer = new OnvifXmlWriter(xml);

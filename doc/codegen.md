@@ -29,34 +29,34 @@ What is in it is deliberately narrow - the base class a client derives from, the
 generated contracts drive directly, and the interfaces the base class talks through:
 
 ```
-ILog                      where a client says what it could not do
+ILog                        where a client says what it could not do
 Soap/IClientAuthentication  how a client proves who it is
-Soap/OnvifClientBase      the base class, which knows only those two
-Soap/OnvifClientSettings  what it was built with
+Soap/IClientSettings        what a client was built with
+Soap/OnvifClientBase        the base class, which knows only those three
 Soap/OnvifTransportException
-Xml/*                     the contract base, reader, writer, envelope, fault, conversions
+Xml/*                       the contract base, reader, writer, envelope, fault, conversions
 ```
 
 Everything behind those interfaces is not generated. HTTP Digest, the WS-Security UsernameToken,
-the nonce replay store and the loggers are Onvif's answers, not WSDL's, and they are ordinary
-hand-written source in `SharpOnvifCommon` - `Security/`, `Soap/` and `Logging/`. A service that
-authenticates some other way is served by another implementation of the same interface; a client
-given none sends no credentials.
+the nonce replay store, the loggers and the settings that carry them are Onvif's answers, not
+WSDL's, and they are ordinary hand-written source in `SharpOnvifCommon` - `Security/`, `Soap/`,
+`Logging/` and `Xml/`. Nothing service-specific is emitted at all: a run writes the same runtime
+whatever it is generating from.
 
 The XML layer stays generated because the generated contracts call it directly, line by line.
 Moving it would put `SharpOnvifCommon` back into every generated file, which is the thing this is
 arranged to avoid.
 
 The embedded source is ordinary C# and stays compilable in an editor: it is written in a namespace
-called `__RUNTIME__`, which the generator replaces. Two things it cannot know about itself come
-from the run instead, and are emitted beside it as `RuntimeDefaults`:
+called `__RUNTIME__`, which the generator replaces.
 
-| | |
-| --- | --- |
-| `--envelope-prefix <p=ns>` | Prefixes declared on the envelope element of every message, whether or not the body uses them. Onvif declares `tt` and `tns1`, because devices and tools expect to see them and because an event topic is written as `tns1:Path`. |
-| `--authentication <type>` | What a client authenticates with unless it is told otherwise - something implementing `IClientAuthentication` with a parameterless constructor. This repository names `SharpOnvifCommon.Security.OnvifAuthenticationSettings`. Named nothing, a client sends no credentials. |
+One name reaches the generated clients from the run: `--settings <type>`, something implementing
+`IClientSettings` that a client can construct when it is handed none. This repository names
+`SharpOnvifCommon.Soap.OnvifClientSettings`, which is what keeps `new DeviceClient(uri, user,
+password)` working. Name nothing and a client only ever takes settings it is given, because there
+is nothing it could have built them from.
 
-That is what keeps the embedded source free of Onvif. Change the runtime by editing
+Change the runtime by editing
 `src/WsdlGenerator/Runtime/` and regenerating - editing the emitted copy loses the change on the
 next run. The generator writes files but never deletes them, so a file that stops being emitted
 has to be removed by hand; `TestCodeGenerator` compares the committed runtime against what a run
@@ -105,8 +105,7 @@ they share their common schemas the same way the Onvif services do.
 | `--runtime-namespace <ns>` | Namespace of the runtime. Defaults to `<ns>.Runtime`. |
 | `--runtime-out <dir>` | Directory for the runtime. Defaults to `<dir>/Runtime`. |
 | `--no-runtime` | Do not write the runtime; compile against the one `--runtime-namespace` names. |
-| `--envelope-prefix <p=ns>` | Declare a prefix on every envelope. Repeatable. |
-| `--authentication <type>` | What a client authenticates with unless told otherwise. |
+| `--settings <type>` | What a client builds its settings from when handed none. |
 | `--client` / `--server` | Generate one side only. Both by default. |
 | `--mirror <dir>` | Resolve every document from a local mirror rather than from disk and the network. |
 

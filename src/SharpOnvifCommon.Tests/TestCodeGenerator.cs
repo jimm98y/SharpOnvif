@@ -159,7 +159,7 @@ namespace SharpOnvif.Tests
                 Assert.IsTrue(File.Exists(Path.Combine(runtime, "Soap", "OnvifClientBase.cs")),
                     "the base class the generated client derives from");
                 Assert.IsTrue(File.Exists(Path.Combine(runtime, "Xml", "OnvifXmlReader.cs")));
-                Assert.IsTrue(File.Exists(Path.Combine(runtime, "RuntimeDefaults.cs")));
+                Assert.IsTrue(File.Exists(Path.Combine(runtime, "Soap", "IClientSettings.cs")));
 
                 // Everything a client is built from: the client, the contracts it exchanges, the
                 // shared schema and the runtime underneath them. The generated service is the one
@@ -255,25 +255,24 @@ namespace SharpOnvif.Tests
         }
 
         [TestMethod]
-        public void CarriesWhatTheRuntimeCannotKnowAboutItself()
+        public void BuildsItsOwnSettingsFromTheTypeItWasGiven()
         {
-            // The envelope prefixes and what a client authenticates with are the two things that
-            // are not the same for every service, so they are given to the run rather than written
-            // into the runtime's source - which is what keeps that source free of Onvif.
+            // Which defaults are sensible, what a client authenticates with, what it declares on
+            // its envelopes - none of that is WSDL's business, so the run names a type that knows
+            // and the generator writes none of it.
             string output = NewOutputDirectory();
             try
             {
                 var options = CommandLine.Parse(
                     ["--wsdl", Fixture, "--namespace", "Example.Banking", "--out", output,
-                     "--envelope-prefix", "m=urn:example:money",
-                     "--authentication", "Example.Banking.BankCards"]);
+                     "--settings", "Example.Banking.BankSettings"]);
 
                 new CodeGenerator(options!).Run();
 
-                string defaults = File.ReadAllText(Path.Combine(output, "Runtime", "RuntimeDefaults.cs"));
+                string client = File.ReadAllText(Path.Combine(output, "Bank", "Client.cs"));
 
-                StringAssert.Contains(defaults, "new XmlNamespaceDeclaration(\"m\", \"urn:example:money\")");
-                StringAssert.Contains(defaults, "return new Example.Banking.BankCards();");
+                StringAssert.Contains(client, "new Example.Banking.BankSettings()");
+                StringAssert.Contains(client, "new Example.Banking.BankSettings(userName, password)");
             }
             finally
             {
@@ -282,10 +281,10 @@ namespace SharpOnvif.Tests
         }
 
         [TestMethod]
-        public void SendsNoCredentialsWhenNothingSaysHowTo()
+        public void IsOnlyEverHandedSettingsWhenNoneWereNamed()
         {
-            // Authenticating is the service's business, not WSDL's. A run that names no
-            // implementation gets a client that sends nothing rather than one that cannot be built.
+            // Nothing to construct means no constructor that constructs it, rather than a client
+            // that compiles and then talks to nothing.
             string output = NewOutputDirectory();
             try
             {
@@ -294,9 +293,11 @@ namespace SharpOnvif.Tests
 
                 new CodeGenerator(options!).Run();
 
-                string defaults = File.ReadAllText(Path.Combine(output, "Runtime", "RuntimeDefaults.cs"));
+                string client = File.ReadAllText(Path.Combine(output, "Bank", "Client.cs"));
 
-                StringAssert.Contains(defaults, "return null;");
+                StringAssert.Contains(client, "AccountsClient(string endpointUri, Example.Banking.Runtime.Soap.IClientSettings settings)");
+                Assert.IsFalse(client.Contains("AccountsClient(string endpointUri)", StringComparison.Ordinal),
+                    "there is nothing it could have built those settings from");
             }
             finally
             {
@@ -329,7 +330,7 @@ namespace SharpOnvif.Tests
             try
             {
                 var options = ServiceCatalog.OnvifOptions(repository, Path.Combine(repository, "src"));
-                new RuntimeEmitter(options).Emit(output);
+                new RuntimeEmitter(options.Runtime.Namespace).Emit(output);
 
                 var emitted = Directory.GetFiles(output, "*.cs", SearchOption.AllDirectories)
                     .Select(f => Path.GetRelativePath(output, f))

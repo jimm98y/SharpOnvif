@@ -1,5 +1,4 @@
 using System.Reflection;
-using WsdlGenerator.Configuration;
 using WsdlGenerator.Xml;
 
 namespace WsdlGenerator.Emit;
@@ -13,10 +12,10 @@ namespace WsdlGenerator.Emit;
 /// ours. Its source lives beside this class in Runtime/, embedded in the generator and emitted
 /// verbatim except for the namespace, which the run chooses.
 ///
-/// Two things the runtime cannot know about itself come from the run instead, and are emitted
-/// into RuntimeDefaults: the prefixes to declare on every envelope, and what a client
-/// authenticates with. That is what keeps the embedded source free of Onvif - and of any other
-/// service's idea of how to prove who is calling.
+/// Nothing about any particular service is emitted with it. What a client authenticates with,
+/// what it declares on its envelopes, how long it waits - all of that reaches the runtime through
+/// the interfaces it declares, from whatever implements them. That is what keeps the embedded
+/// source free of Onvif, and of every other service's conventions.
 /// </summary>
 internal sealed class RuntimeEmitter
 {
@@ -29,11 +28,9 @@ internal sealed class RuntimeEmitter
     /// <summary>Name the embedded runtime source is filed under, from the project directory.</summary>
     private const string ResourcePrefix = "WsdlGenerator.Runtime.";
 
-    private const string DefaultsFile = "RuntimeDefaults.cs";
+    private readonly string _namespace;
 
-    private readonly GeneratorOptions _options;
-
-    public RuntimeEmitter(GeneratorOptions options) => _options = options;
+    public RuntimeEmitter(string @namespace) => _namespace = @namespace;
 
     /// <summary>Writes the runtime, and returns how many files that changed.</summary>
     public int Emit(string directory)
@@ -44,13 +41,10 @@ internal sealed class RuntimeEmitter
         {
             var file = new GeneratedFile(
                 Path.Combine(directory, path),
-                GeneratedFile.RuntimeHeader + Environment.NewLine + source.Replace(Token, _options.Runtime.Namespace));
+                GeneratedFile.RuntimeHeader + Environment.NewLine + source.Replace(Token, _namespace));
 
             if (file.WriteIfChanged()) written++;
         }
-
-        var defaults = new GeneratedFile(Path.Combine(directory, DefaultsFile), EmitDefaults());
-        if (defaults.WriteIfChanged()) written++;
 
         return written;
     }
@@ -90,91 +84,4 @@ internal sealed class RuntimeEmitter
         }
     }
 
-    /// <summary>
-    /// Writes what the runtime was generated for: the envelope prologue, what a client
-    /// authenticates with, and a constant for each declared namespace that was given a name.
-    /// </summary>
-    private string EmitDefaults()
-    {
-        string @namespace = _options.Runtime.Namespace;
-
-        var writer = new CSharpWriter();
-        writer.Lines(GeneratedFile.RuntimeHeader);
-        writer.Line();
-        writer.Line($"using {@namespace}.Soap;");
-        writer.Line($"using {@namespace}.Xml;");
-        writer.Line();
-        writer.Line($"namespace {@namespace}");
-
-        using (writer.Braces())
-        {
-            writer.Doc(
-                "What this runtime was generated for. The rest of the runtime is the same whatever " +
-                "the schemas are; this is the part that is not.");
-            writer.Line("public static class RuntimeDefaults");
-
-            using (writer.Braces())
-            {
-                writer.Doc(
-                    "Prefixes declared on the envelope element of every message, whether or not the " +
-                    "body uses them.");
-                writer.Line("public static readonly XmlNamespaceDeclaration[] EnvelopePrologue = new XmlNamespaceDeclaration[]");
-                using (writer.Braces(semicolon: true))
-                {
-                    foreach (var declaration in _options.EnvelopePrologue)
-                    {
-                        writer.Line(
-                            $"new XmlNamespaceDeclaration({Quote(declaration.Prefix)}, {Quote(declaration.Namespace)}),");
-                    }
-                }
-
-                writer.Line();
-                writer.Doc(
-                    "How a client proves who it is unless it is told otherwise. The contract is " +
-                    "generated; what meets it is named when the runtime is, and is null when " +
-                    "nothing was named.");
-                writer.Line("public static IClientAuthentication CreateAuthentication()");
-                using (writer.Braces())
-                {
-                    if (_options.AuthenticationType is { } authentication)
-                    {
-                        writer.Line($"return new {authentication}();");
-                    }
-                    else
-                    {
-                        writer.Line("// Nothing was named, so a client sends no credentials until it is given something.");
-                        writer.Line("return null;");
-                    }
-                }
-            }
-        }
-
-        var named = _options.EnvelopePrologue.Where(d => d.Constant is not null).ToList();
-        if (named.Count > 0)
-        {
-            writer.Line();
-            writer.Line($"namespace {@namespace}.Xml");
-            using (writer.Braces())
-            {
-                writer.Doc("The namespaces this runtime was generated for.");
-                writer.Line("public static partial class OnvifXmlNamespaces");
-                using (writer.Braces())
-                {
-                    bool first = true;
-                    foreach (var declaration in named)
-                    {
-                        if (!first) writer.Line();
-                        first = false;
-
-                        writer.Doc($"Conventionally bound to the \"{declaration.Prefix}\" prefix.");
-                        writer.Line($"public const string {declaration.Constant} = {Quote(declaration.Namespace)};");
-                    }
-                }
-            }
-        }
-
-        return writer.ToString();
-    }
-
-    private static string Quote(string value) => "\"" + value.Replace("\\", "\\\\").Replace("\"", "\\\"") + "\"";
 }

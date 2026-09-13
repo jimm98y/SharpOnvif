@@ -37,7 +37,7 @@ namespace SharpOnvifClient.Events
         }
 
         /// <summary>
-        /// Creates a client that authenticates with both Onvif digest schemes.
+        /// Creates a client that authenticates however its settings say to.
         /// </summary>
         public CreatePullPointClient(string endpointUri, string userName, string password)
             : base(endpointUri, new SharpOnvifCommon.Soap.OnvifClientSettings(userName, password))
@@ -47,7 +47,7 @@ namespace SharpOnvifClient.Events
         /// <summary>
         /// Creates a client with full control over transport and authentication.
         /// </summary>
-        public CreatePullPointClient(string endpointUri, SharpOnvifCommon.Soap.OnvifClientSettings settings)
+        public CreatePullPointClient(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
             : base(endpointUri, settings)
         {
         }
@@ -161,7 +161,7 @@ namespace SharpOnvifClient.Events
         }
 
         /// <summary>
-        /// Creates a client that authenticates with both Onvif digest schemes.
+        /// Creates a client that authenticates however its settings say to.
         /// </summary>
         public EventPortTypeClient(string endpointUri, string userName, string password)
             : base(endpointUri, new SharpOnvifCommon.Soap.OnvifClientSettings(userName, password))
@@ -171,7 +171,7 @@ namespace SharpOnvifClient.Events
         /// <summary>
         /// Creates a client with full control over transport and authentication.
         /// </summary>
-        public EventPortTypeClient(string endpointUri, SharpOnvifCommon.Soap.OnvifClientSettings settings)
+        public EventPortTypeClient(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
             : base(endpointUri, settings)
         {
         }
@@ -320,7 +320,7 @@ namespace SharpOnvifClient.Events
         }
 
         /// <summary>
-        /// Creates a client that authenticates with both Onvif digest schemes.
+        /// Creates a client that authenticates however its settings say to.
         /// </summary>
         public NotificationConsumerClient(string endpointUri, string userName, string password)
             : base(endpointUri, new SharpOnvifCommon.Soap.OnvifClientSettings(userName, password))
@@ -330,7 +330,7 @@ namespace SharpOnvifClient.Events
         /// <summary>
         /// Creates a client with full control over transport and authentication.
         /// </summary>
-        public NotificationConsumerClient(string endpointUri, SharpOnvifCommon.Soap.OnvifClientSettings settings)
+        public NotificationConsumerClient(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
             : base(endpointUri, settings)
         {
         }
@@ -388,7 +388,7 @@ namespace SharpOnvifClient.Events
         }
 
         /// <summary>
-        /// Creates a client that authenticates with both Onvif digest schemes.
+        /// Creates a client that authenticates however its settings say to.
         /// </summary>
         public NotificationProducerClient(string endpointUri, string userName, string password)
             : base(endpointUri, new SharpOnvifCommon.Soap.OnvifClientSettings(userName, password))
@@ -398,7 +398,7 @@ namespace SharpOnvifClient.Events
         /// <summary>
         /// Creates a client with full control over transport and authentication.
         /// </summary>
-        public NotificationProducerClient(string endpointUri, SharpOnvifCommon.Soap.OnvifClientSettings settings)
+        public NotificationProducerClient(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
             : base(endpointUri, settings)
         {
         }
@@ -485,7 +485,7 @@ namespace SharpOnvifClient.Events
         }
 
         /// <summary>
-        /// Creates a client that authenticates with both Onvif digest schemes.
+        /// Creates a client that authenticates however its settings say to.
         /// </summary>
         public PausableSubscriptionManagerClient(string endpointUri, string userName, string password)
             : base(endpointUri, new SharpOnvifCommon.Soap.OnvifClientSettings(userName, password))
@@ -495,7 +495,7 @@ namespace SharpOnvifClient.Events
         /// <summary>
         /// Creates a client with full control over transport and authentication.
         /// </summary>
-        public PausableSubscriptionManagerClient(string endpointUri, SharpOnvifCommon.Soap.OnvifClientSettings settings)
+        public PausableSubscriptionManagerClient(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
             : base(endpointUri, settings)
         {
         }
@@ -603,7 +603,7 @@ namespace SharpOnvifClient.Events
         }
 
         /// <summary>
-        /// Creates a client that authenticates with both Onvif digest schemes.
+        /// Creates a client that authenticates however its settings say to.
         /// </summary>
         public PullPointClient(string endpointUri, string userName, string password)
             : base(endpointUri, new SharpOnvifCommon.Soap.OnvifClientSettings(userName, password))
@@ -613,7 +613,7 @@ namespace SharpOnvifClient.Events
         /// <summary>
         /// Creates a client with full control over transport and authentication.
         /// </summary>
-        public PullPointClient(string endpointUri, SharpOnvifCommon.Soap.OnvifClientSettings settings)
+        public PullPointClient(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
             : base(endpointUri, settings)
         {
         }
@@ -743,7 +743,7 @@ namespace SharpOnvifClient.Events
         }
 
         /// <summary>
-        /// Creates a client that authenticates with both Onvif digest schemes.
+        /// Creates a client that authenticates however its settings say to.
         /// </summary>
         public PullPointSubscriptionClient(string endpointUri, string userName, string password)
             : base(endpointUri, new SharpOnvifCommon.Soap.OnvifClientSettings(userName, password))
@@ -753,7 +753,7 @@ namespace SharpOnvifClient.Events
         /// <summary>
         /// Creates a client with full control over transport and authentication.
         /// </summary>
-        public PullPointSubscriptionClient(string endpointUri, SharpOnvifCommon.Soap.OnvifClientSettings settings)
+        public PullPointSubscriptionClient(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
             : base(endpointUri, settings)
         {
         }
@@ -884,7 +884,7 @@ namespace SharpOnvifClient.Events
         }
 
         /// <summary>
-        /// Creates a client that authenticates with both Onvif digest schemes.
+        /// Creates a client that authenticates however its settings say to.
         /// </summary>
         public SubscriptionManagerClient(string endpointUri, string userName, string password)
             : base(endpointUri, new SharpOnvifCommon.Soap.OnvifClientSettings(userName, password))
@@ -894,7 +894,7 @@ namespace SharpOnvifClient.Events
         /// <summary>
         /// Creates a client with full control over transport and authentication.
         /// </summary>
-        public SubscriptionManagerClient(string endpointUri, SharpOnvifCommon.Soap.OnvifClientSettings settings)
+        public SubscriptionManagerClient(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
             : base(endpointUri, settings)
         {
         }

@@ -992,7 +992,7 @@ namespace SharpOnvifClient.Media
         }
 
         /// <summary>
-        /// Creates a client that authenticates with both Onvif digest schemes.
+        /// Creates a client that authenticates however its settings say to.
         /// </summary>
         public MediaClient(string endpointUri, string userName, string password)
             : base(endpointUri, new SharpOnvifCommon.Soap.OnvifClientSettings(userName, password))
@@ -1002,7 +1002,7 @@ namespace SharpOnvifClient.Media
         /// <summary>
         /// Creates a client with full control over transport and authentication.
         /// </summary>
-        public MediaClient(string endpointUri, SharpOnvifCommon.Soap.OnvifClientSettings settings)
+        public MediaClient(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
             : base(endpointUri, settings)
         {
         }

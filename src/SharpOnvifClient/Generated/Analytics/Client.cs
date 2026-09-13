@@ -129,7 +129,7 @@ namespace SharpOnvifClient.Analytics
         }
 
         /// <summary>
-        /// Creates a client that authenticates with both Onvif digest schemes.
+        /// Creates a client that authenticates however its settings say to.
         /// </summary>
         public AnalyticsEnginePortClient(string endpointUri, string userName, string password)
             : base(endpointUri, new SharpOnvifCommon.Soap.OnvifClientSettings(userName, password))
@@ -139,7 +139,7 @@ namespace SharpOnvifClient.Analytics
         /// <summary>
         /// Creates a client with full control over transport and authentication.
         /// </summary>
-        public AnalyticsEnginePortClient(string endpointUri, SharpOnvifCommon.Soap.OnvifClientSettings settings)
+        public AnalyticsEnginePortClient(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
             : base(endpointUri, settings)
         {
         }
@@ -390,7 +390,7 @@ namespace SharpOnvifClient.Analytics
         }
 
         /// <summary>
-        /// Creates a client that authenticates with both Onvif digest schemes.
+        /// Creates a client that authenticates however its settings say to.
         /// </summary>
         public RuleEnginePortClient(string endpointUri, string userName, string password)
             : base(endpointUri, new SharpOnvifCommon.Soap.OnvifClientSettings(userName, password))
@@ -400,7 +400,7 @@ namespace SharpOnvifClient.Analytics
         /// <summary>
         /// Creates a client with full control over transport and authentication.
         /// </summary>
-        public RuleEnginePortClient(string endpointUri, SharpOnvifCommon.Soap.OnvifClientSettings settings)
+        public RuleEnginePortClient(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
             : base(endpointUri, settings)
         {
         }

@@ -21,17 +21,6 @@ internal sealed record GenerationTarget(string Namespace, string Directory, bool
 /// </summary>
 internal sealed record RuntimeTarget(string Namespace, string? Directory);
 
-/// <summary>
-/// A prefix declared on the envelope element of every message the runtime writes.
-/// </summary>
-/// <param name="Prefix">The prefix, without the xmlns colon.</param>
-/// <param name="Namespace">What it stands for.</param>
-/// <param name="Constant">
-/// Name to publish the namespace under as a constant on <c>OnvifXmlNamespaces</c>, or null to
-/// declare it on the envelope without naming it.
-/// </param>
-internal sealed record EnvelopeDeclaration(string Prefix, string Namespace, string? Constant = null);
-
 /// <summary>Everything a generation run needs.</summary>
 internal sealed record GeneratorOptions
 {
@@ -57,22 +46,18 @@ internal sealed record GeneratorOptions
     public required RuntimeTarget Runtime { get; init; }
 
     /// <summary>
-    /// Prefixes the runtime declares on every envelope it writes. Devices in the wild do expect
-    /// to see the conventional ones, whether or not the message body uses them.
-    /// </summary>
-    public IReadOnlyList<EnvelopeDeclaration> EnvelopePrologue { get; init; } = [];
-
-    /// <summary>
-    /// Type a client authenticates with unless it is told otherwise: the name of something that
-    /// implements the generated <c>IClientAuthentication</c> and can be constructed without
-    /// arguments. Null leaves a generated client sending no credentials.
+    /// Type a generated client builds its settings from when it is given none: the name of
+    /// something implementing the generated <c>IClientSettings</c>, with a parameterless
+    /// constructor and one taking a user name and a password.
     /// </summary>
     /// <remarks>
-    /// Naming it rather than generating it is the point: how a service authenticates is the
-    /// service's business, not WSDL's, so the contract is generated and the implementation is
-    /// whatever the library that owns the runtime provides.
+    /// Naming it rather than generating it is the point. Which defaults are sensible, what a
+    /// client authenticates with, what it declares on its envelopes - all of that is the
+    /// service's business rather than WSDL's, so the contract is generated and everything behind
+    /// it comes from the library that owns the runtime. Null emits only the constructor that
+    /// takes settings, which is all a client strictly needs.
     /// </remarks>
-    public string? AuthenticationType { get; init; }
+    public string? SettingsType { get; init; }
 
     /// <summary>
     /// Values to add to schema enumerations that the schema does not list, for the case where the

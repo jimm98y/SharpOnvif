@@ -1,11 +1,21 @@
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using SharpOnvifCommon.Security;
+using SharpOnvifCommon.Xml;
 
-namespace __RUNTIME__.Soap
+namespace SharpOnvifCommon.Soap
 {
-    /// <summary>How a generated service client talks to a device.</summary>
-    public class OnvifClientSettings
+    /// <summary>
+    /// How a generated service client talks to a device: Onvif's answer to
+    /// <see cref="IClientSettings"/>, which is all the client itself knows about.
+    /// </summary>
+    /// <remarks>
+    /// The defaults are the Onvif ones, and they are here rather than in the generated client
+    /// because they are what talking to cameras taught rather than anything WSDL says.
+    /// </remarks>
+    public class OnvifClientSettings : IClientSettings
     {
         /// <summary>Credentials, or null for an unauthenticated client.</summary>
         public NetworkCredential Credentials { get; set; }
@@ -39,11 +49,11 @@ namespace __RUNTIME__.Soap
         /// How the client proves who it is, or null to send no credentials at all.
         /// </summary>
         /// <remarks>
-        /// It starts as whatever this runtime was generated with, which for Onvif is the pair of
-        /// schemes the specification defines. What implements it is not generated: see
+        /// It starts as the pair of schemes the Onvif specification defines. A service that
+        /// authenticates some other way is served by another implementation of
         /// <see cref="IClientAuthentication"/>.
         /// </remarks>
-        public IClientAuthentication Authentication { get; set; } = RuntimeDefaults.CreateAuthentication();
+        public IClientAuthentication Authentication { get; set; } = new OnvifAuthenticationSettings();
 
         public TimeSpan Timeout { get; set; } = TimeSpan.FromSeconds(60);
 
@@ -88,6 +98,13 @@ namespace __RUNTIME__.Soap
         /// </para>
         /// </summary>
         public HttpClient HttpClient { get; set; }
+
+        /// <summary>
+        /// Declared on the envelope of every message this client sends. Onvif's two conventional
+        /// prefixes by default; assign to send something else, or null to send none.
+        /// </summary>
+        public IEnumerable<XmlNamespaceDeclaration> EnvelopePrologue { get; set; } =
+            OnvifXmlNamespaces.EnvelopePrologue;
 
         public OnvifClientSettings()
         {

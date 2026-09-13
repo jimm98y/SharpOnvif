@@ -41,7 +41,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         }
 
         /// <summary>
-        /// Creates a client that authenticates with both Onvif digest schemes.
+        /// Creates a client that authenticates however its settings say to.
         /// </summary>
         public AdvancedSecurityServiceClient(string endpointUri, string userName, string password)
             : base(endpointUri, new SharpOnvifCommon.Soap.OnvifClientSettings(userName, password))
@@ -51,7 +51,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// <summary>
         /// Creates a client with full control over transport and authentication.
         /// </summary>
-        public AdvancedSecurityServiceClient(string endpointUri, SharpOnvifCommon.Soap.OnvifClientSettings settings)
+        public AdvancedSecurityServiceClient(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
             : base(endpointUri, settings)
         {
         }
@@ -142,7 +142,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         }
 
         /// <summary>
-        /// Creates a client that authenticates with both Onvif digest schemes.
+        /// Creates a client that authenticates however its settings say to.
         /// </summary>
         public AuthorizationServerClient(string endpointUri, string userName, string password)
             : base(endpointUri, new SharpOnvifCommon.Soap.OnvifClientSettings(userName, password))
@@ -152,7 +152,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// <summary>
         /// Creates a client with full control over transport and authentication.
         /// </summary>
-        public AuthorizationServerClient(string endpointUri, SharpOnvifCommon.Soap.OnvifClientSettings settings)
+        public AuthorizationServerClient(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
             : base(endpointUri, settings)
         {
         }
@@ -389,7 +389,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         }
 
         /// <summary>
-        /// Creates a client that authenticates with both Onvif digest schemes.
+        /// Creates a client that authenticates however its settings say to.
         /// </summary>
         public Dot1XClient(string endpointUri, string userName, string password)
             : base(endpointUri, new SharpOnvifCommon.Soap.OnvifClientSettings(userName, password))
@@ -399,7 +399,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// <summary>
         /// Creates a client with full control over transport and authentication.
         /// </summary>
-        public Dot1XClient(string endpointUri, SharpOnvifCommon.Soap.OnvifClientSettings settings)
+        public Dot1XClient(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
             : base(endpointUri, settings)
         {
         }
@@ -635,7 +635,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         }
 
         /// <summary>
-        /// Creates a client that authenticates with both Onvif digest schemes.
+        /// Creates a client that authenticates however its settings say to.
         /// </summary>
         public JWTClient(string endpointUri, string userName, string password)
             : base(endpointUri, new SharpOnvifCommon.Soap.OnvifClientSettings(userName, password))
@@ -645,7 +645,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// <summary>
         /// Creates a client with full control over transport and authentication.
         /// </summary>
-        public JWTClient(string endpointUri, SharpOnvifCommon.Soap.OnvifClientSettings settings)
+        public JWTClient(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
             : base(endpointUri, settings)
         {
         }
@@ -1222,7 +1222,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         }
 
         /// <summary>
-        /// Creates a client that authenticates with both Onvif digest schemes.
+        /// Creates a client that authenticates however its settings say to.
         /// </summary>
         public KeystoreClient(string endpointUri, string userName, string password)
             : base(endpointUri, new SharpOnvifCommon.Soap.OnvifClientSettings(userName, password))
@@ -1232,7 +1232,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// <summary>
         /// Creates a client with full control over transport and authentication.
         /// </summary>
-        public KeystoreClient(string endpointUri, SharpOnvifCommon.Soap.OnvifClientSettings settings)
+        public KeystoreClient(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
             : base(endpointUri, settings)
         {
         }
@@ -2037,7 +2037,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         }
 
         /// <summary>
-        /// Creates a client that authenticates with both Onvif digest schemes.
+        /// Creates a client that authenticates however its settings say to.
         /// </summary>
         public MediaSigningClient(string endpointUri, string userName, string password)
             : base(endpointUri, new SharpOnvifCommon.Soap.OnvifClientSettings(userName, password))
@@ -2047,7 +2047,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// <summary>
         /// Creates a client with full control over transport and authentication.
         /// </summary>
-        public MediaSigningClient(string endpointUri, SharpOnvifCommon.Soap.OnvifClientSettings settings)
+        public MediaSigningClient(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
             : base(endpointUri, settings)
         {
         }
@@ -2373,7 +2373,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         }
 
         /// <summary>
-        /// Creates a client that authenticates with both Onvif digest schemes.
+        /// Creates a client that authenticates however its settings say to.
         /// </summary>
         public TLSServerClient(string endpointUri, string userName, string password)
             : base(endpointUri, new SharpOnvifCommon.Soap.OnvifClientSettings(userName, password))
@@ -2383,7 +2383,7 @@ namespace SharpOnvifClient.AdvancedSecurity
         /// <summary>
         /// Creates a client with full control over transport and authentication.
         /// </summary>
-        public TLSServerClient(string endpointUri, SharpOnvifCommon.Soap.OnvifClientSettings settings)
+        public TLSServerClient(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
             : base(endpointUri, settings)
         {
         }

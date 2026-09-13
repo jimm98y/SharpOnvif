@@ -338,7 +338,7 @@ namespace SharpOnvifClient.AccessControl
         }
 
         /// <summary>
-        /// Creates a client that authenticates with both Onvif digest schemes.
+        /// Creates a client that authenticates however its settings say to.
         /// </summary>
         public PACSPortClient(string endpointUri, string userName, string password)
             : base(endpointUri, new SharpOnvifCommon.Soap.OnvifClientSettings(userName, password))
@@ -348,7 +348,7 @@ namespace SharpOnvifClient.AccessControl
         /// <summary>
         /// Creates a client with full control over transport and authentication.
         /// </summary>
-        public PACSPortClient(string endpointUri, SharpOnvifCommon.Soap.OnvifClientSettings settings)
+        public PACSPortClient(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
             : base(endpointUri, settings)
         {
         }
