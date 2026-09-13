@@ -248,6 +248,26 @@ once for each side, with the same names and the same defaults. It is declared on
   });
 ```
 
+The client's `SharpOnvifClient.Security.DigestAuthenticationSchemeOptions` has the same shape, for
+the same reason. It used to *be* an `OnvifAuthenticationSettings` by inheritance; it carries one
+now, under the same name, with what belongs to the client alone beside it.
+
+```cs
+- new DigestAuthenticationSchemeOptions(DigestAuthentication.HttpDigest)
+- {
+-     HttpDigestUserHash = false,
+- }
++ new DigestAuthenticationSchemeOptions(DigestAuthentication.HttpDigest)
++ {
++     Onvif = { HttpDigestUserHash = false },
++     UtcNowOffset = TimeSpan.FromMinutes(2),     // the client's own
++ }
+```
+
+The constructor taking a `DigestAuthentication` is unchanged, so a caller that only chose schemes
+that way needs no edit. `SimpleOnvifClient.SetCameraUtcNowOffset` is unchanged too - it now sets
+the property above, which is the same offset by another route.
+
 Moved onto `Onvif`: `Authentication`, `HttpDigestAlgorithms`, `HttpDigestQop`, `HttpDigestUserHash`,
 `PreAuthActions`. Unmoved, because they are the device's business alone: `HttpDigestRealm`,
 `HttpDigestNonceLifetimeMilliseconds`, `HttpDigestNonceReplayStore`,
