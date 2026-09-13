@@ -30,6 +30,7 @@ using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using System.Threading;
 using System.Threading.Tasks;
 using SharpOnvifCommon.Onvif;
 using SharpOnvifCommon.Soap;
@@ -45,26 +46,44 @@ public static class Program
 
     static async Task MainAsync(string[] args)
     {
-        var devices = await OnvifDiscoveryClient.DiscoverAsync(null, 1000);
+        // Ctrl-C stops waiting, rather than killing the process where it stands.
+        using var stopping = new CancellationTokenSource();
+        Console.CancelKeyPress += (_, e) => { e.Cancel = true; stopping.Cancel(); };
 
-        if (devices == null || devices.Count == 0)
-        {
-            Console.WriteLine("No ONVIF devices found. Please check your network connection and try again.");
-            return;
-        }
+        static bool IsOnThisMachine(OnvifDiscoveryResult candidate) =>
+            candidate.Addresses != null &&
+            candidate.Addresses.Any(address => address.Contains("127.0.0.1") || address.Contains("[::1]"));
+
+        var devices = await OnvifDiscoveryClient.DiscoverAsync(null, 1000);
 
         foreach (var onvifDevice in devices)
         {
             Console.WriteLine($"Found device: Manufacturer = {onvifDevice.Manufacturer}, Model = {onvifDevice.Hardware}");
         }
 
-        var device = devices.FirstOrDefault(x => x.Addresses != null && x.Addresses.FirstOrDefault(xx => xx.Contains("127.0.0.1") || xx.Contains("[::1]")) != null);
+        var device = devices.FirstOrDefault(IsOnThisMachine);
 
         if (device == null)
         {
-            Console.WriteLine("Please run OnvifService on the localhost as Administrator, or use a different camera URL and credentials.");
+            // A Probe only finds what is on the network at the moment it is sent, and the device
+            // may not be switched on yet. A device announces itself with a WS-Discovery Hello when
+            // it joins, so rather than giving up, wait to be told - WaitForDeviceAsync listens for
+            // that and keeps probing, because an announcement is UDP and can be missed.
+            Console.WriteLine("No Onvif device on this machine yet - waiting for one to announce itself.");
+            Console.WriteLine("Start Onvif.Server, or press Ctrl-C to give up.");
+
+            try
+            {
+                device = await OnvifDiscoveryClient.WaitForDeviceAsync(IsOnThisMachine, stopping.Token);
+                Console.WriteLine($"Device appeared: Manufacturer = {device.Manufacturer}, Model = {device.Hardware}");
+            }
+            catch (OperationCanceledException)
+            {
+                Console.WriteLine("Gave up waiting.");
+                return;
+            }
         }
-        else
+
         {
             DigestAuthentication authentication = DigestAuthentication.HttpDigest | DigestAuthentication.WsUsernameToken;
             using (var client = new SimpleOnvifClient(device.Addresses.First(x => x.Contains("127.0.0.1") || x.Contains("[::1]")),

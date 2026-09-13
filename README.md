@@ -123,13 +123,32 @@ subscription ID is an unguessable token rather than a counter.
 Your Onvif service should now be discoverable on the network and you should be able to use Onvif Device Manager or similar tool to call your endpoint.
 See `Onvif.Server` sample project for a complete example.
 ## SharpOnvifClient
-Onvif client provides NET Framework 4.8.1, NET8.0 and NET10.0 bindings generated from the Onvif WSDLs by `WsdlGenerator`, over `HttpClient`. `SimpleOnvifClient` wraps common API calls to get basic information from the camera and includes both Pull Point as well as Basic event subscriptions. 
+Onvif client provides .NET Standard 2.0, .NET Framework 4.8.1, NET8.0 and NET10.0 bindings generated from the Onvif WSDLs by `WsdlGenerator`, over `HttpClient`. `SimpleOnvifClient` wraps common API calls to get basic information from the camera and includes both Pull Point as well as Basic event subscriptions. 
 
 [![NuGet version](https://img.shields.io/nuget/v/SharpOnvifClient.svg?style=flat-square)](https://www.nuget.org/packages/SharpOnvifClient)
 
 To discover Onvif devices on your network, use:
 ```cs
 var onvifDevices = await OnvifDiscoveryClient.DiscoverAsync();
+```
+
+A Probe only finds what is on the network at the moment it is sent, which is no help to an
+application that starts before its camera does. To wait for one to appear instead:
+```cs
+var device = await OnvifDiscoveryClient.WaitForDeviceAsync(cancellationToken: stopping.Token);
+```
+It listens for the WS-Discovery Hello a device sends when it joins, and keeps probing as well -
+an announcement is UDP multicast, so it can be lost, and one sent before you started listening is
+already gone. Pass a predicate to wait for a particular device. There is no timeout, because
+"wait until the camera is switched on" has no natural one; cancel the token to stop.
+
+`OnvifDiscoveryListener` is the same mechanism without the waiting, for an application that wants
+to keep track of devices coming and going:
+```cs
+var listener = new OnvifDiscoveryListener();
+listener.DeviceAnnounced += (s, e) => Console.WriteLine($"{e.Device.Name} arrived");
+listener.DeviceLeft += (s, e) => Console.WriteLine($"{e.Device.Name} left");
+listener.Start();
 ```
 
 To create the `SimpleOnvifClient`, use:

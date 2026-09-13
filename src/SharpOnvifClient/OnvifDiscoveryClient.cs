@@ -1,4 +1,4 @@
-﻿// SharpOnvif
+// SharpOnvif
 // Copyright (C) 2026 Lukas Volf
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -45,6 +45,97 @@ namespace SharpOnvifClient
         public static string OnvifDiscoveryAddressIPV6 = "ff02::c";
 
         private static readonly SemaphoreSlim _discoverySlim = new SemaphoreSlim(1);
+
+        /// <summary>How often <see cref="WaitForDeviceAsync"/> probes while it waits.</summary>
+        public static TimeSpan WaitForDeviceProbeInterval { get; set; } = TimeSpan.FromSeconds(10);
+
+        /// <summary>
+        /// Waits for a device to appear, for an application that starts before its camera does.
+        /// </summary>
+        /// <remarks>
+        /// <para>
+        /// Two ways at once, because neither is reliable alone. A device announces itself with a
+        /// WS-Discovery Hello when it joins, which is heard the moment it happens - but the
+        /// announcement is UDP multicast, so it can be lost, and one sent before this was called
+        /// is already gone. So the network is also probed every
+        /// <see cref="WaitForDeviceProbeInterval"/>, which finds a device that was already there.
+        /// </para>
+        /// <para>
+        /// Returns as soon as a device matches. Cancel <paramref name="cancellationToken"/> to stop
+        /// waiting; there is no timeout, because "wait until my camera is switched on" has no
+        /// natural one.
+        /// </para>
+        /// </remarks>
+        /// <param name="matches">
+        /// Which device is being waited for, or null for the first one that appears.
+        /// </param>
+        public static async Task<OnvifDiscoveryResult> WaitForDeviceAsync(
+            Func<OnvifDiscoveryResult, bool> matches = null,
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            matches = matches ?? (device => true);
+
+            var found = new TaskCompletionSource<OnvifDiscoveryResult>();
+
+            using (var listener = new OnvifDiscoveryListener())
+            using (cancellationToken.Register(() => found.TrySetCanceled(cancellationToken)))
+            {
+                listener.DeviceAnnounced += (sender, e) =>
+                {
+                    if (Matches(e.Device, matches)) found.TrySetResult(e.Device);
+                };
+
+                listener.Start();
+
+                // Something may have been there all along, or have announced itself in the moment
+                // between this being called and the listener being ready.
+                while (!found.Task.IsCompleted)
+                {
+                    try
+                    {
+                        foreach (var device in await DiscoverAsync(null, 1000).ConfigureAwait(false))
+                        {
+                            if (Matches(device, matches))
+                            {
+                                found.TrySetResult(device);
+                                break;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // A probe that fails - no route, an interface going down - is not the end
+                        // of the wait. The next one may work, and the Hello may arrive anyway.
+                        Debug.WriteLine($"Probing for an Onvif device failed: {ex.Message}");
+                    }
+
+                    if (found.Task.IsCompleted) break;
+
+                    Task waited = await Task.WhenAny(
+                        found.Task, Task.Delay(WaitForDeviceProbeInterval, cancellationToken)).ConfigureAwait(false);
+
+                    if (waited == found.Task) break;
+                }
+
+                return await found.Task.ConfigureAwait(false);
+            }
+        }
+
+        private static bool Matches(OnvifDiscoveryResult device, Func<OnvifDiscoveryResult, bool> matches)
+        {
+            if (device == null || device.Addresses == null || device.Addresses.Length == 0) return false;
+
+            try
+            {
+                return matches(device);
+            }
+            catch (Exception ex)
+            {
+                // The caller's predicate, on data from the network.
+                Debug.WriteLine($"An Onvif device filter threw: {ex.Message}");
+                return false;
+            }
+        }
 
         /// <summary>
         /// Discover ONVIF devices in the local network. Sends multicast messages to all available IP network interfaces.
@@ -247,7 +338,7 @@ namespace SharpOnvifClient
             }
         }
 
-        private static OnvifDiscoveryResult ParseDiscoveryResponse(string response)
+        internal static OnvifDiscoveryResult ParseDiscoveryResponse(string response)
         {
             using (var textReader = new StringReader(response))
             {

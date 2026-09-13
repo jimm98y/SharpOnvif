@@ -33,8 +33,10 @@ The assemblies got smaller despite carrying every service, because the Onvif sch
 duplicated once per service: `SharpOnvifClient.dll` went from 4.57 MB to about 1.7 MB,
 `SharpOnvifServer.dll` from 4.90 MB to about 2.0 MB. There are also no NuGet dependencies left at all -
 CoreWCF, `System.ServiceModel.*`, `System.Runtime.Caching` and `System.Reflection.DispatchProxy` are
-all gone. Target frameworks are unchanged: net481, net8.0 and net10.0 for the client and common,
-net8.0 and net10.0 for the server.
+all gone. Target frameworks gained one: `SharpOnvifClient` and `SharpOnvifCommon` build for
+netstandard2.0 as well as net481, net8.0 and net10.0, so they can be referenced from Xamarin,
+Unity, older .NET Core and anything else that consumes .NET Standard. The server stays on net8.0
+and net10.0, because it is ASP.NET Core.
 
 ## 2. The Onvif data model moved
 
