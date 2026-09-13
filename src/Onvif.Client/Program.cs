@@ -1,4 +1,4 @@
-﻿// SharpOnvif
+// SharpOnvif
 // Copyright (C) 2026 Lukas Volf
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -132,7 +132,9 @@ public static class Program
 
     static async Task PullPointEventSubscription(SimpleOnvifClient client)
     {
-        var subscription = await client.PullPointSubscribeAsync(1);
+        // The device decides what it grants; asking for a second gets a subscription that is
+        // gone before the first pull returns.
+        var subscription = await client.PullPointSubscribeAsync(60);
         while (true)
         {
             var messages = await client.PullPointPullMessagesAsync(subscription.SubscriptionReference.Address.Value);

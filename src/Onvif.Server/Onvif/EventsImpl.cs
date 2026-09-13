@@ -46,6 +46,26 @@ namespace OnvifService.Onvif
             _serviceProvider = serviceProvider;
         }
 
+        /// <summary>
+        /// The shortest subscription this device hands out.
+        /// </summary>
+        /// <remarks>
+        /// Onvif lets the device decide: the client proposes an InitialTerminationTime and the
+        /// device answers with the TerminationTime it actually granted. A client asking for a
+        /// second gets a subscription that is gone before it can pull from it, so a floor is
+        /// applied and reported back.
+        /// </remarks>
+        private static readonly TimeSpan MinimumSubscriptionLifetime = TimeSpan.FromSeconds(30);
+
+        private static DateTime GrantedTermination(DateTime now, string requested)
+        {
+            DateTime termination = OnvifHelpers.FromAbsoluteOrRelativeDateTimeUTC(
+                now, requested, now.AddMinutes(1));
+
+            DateTime floor = now.Add(MinimumSubscriptionLifetime);
+            return termination < floor ? floor : termination;
+        }
+
         #region NotificationProducer
 
         public override SubscribeResponse Subscribe(SubscribeRequest request)
@@ -55,7 +75,7 @@ namespace OnvifService.Onvif
             string notificationEndpoint = request.ConsumerReference.Address.Value;
 
             DateTime now = DateTime.UtcNow;
-            DateTime termination = OnvifHelpers.FromAbsoluteOrRelativeDateTimeUTC(now, request.InitialTerminationTime, now.AddMinutes(1));
+            DateTime termination = GrantedTermination(now, request.InitialTerminationTime);
 
             // Basic uses the notification endpoint from the request
             var subscription = ActivatorUtilities.CreateInstance<SubscriptionManagerImpl>(
@@ -91,7 +111,7 @@ namespace OnvifService.Onvif
             Uri endpointUri = OnvifOperationContext.RequestUri;
 
             DateTime now = DateTime.UtcNow;
-            DateTime termination = OnvifHelpers.FromAbsoluteOrRelativeDateTimeUTC(now, request.InitialTerminationTime, now.AddMinutes(1));
+            DateTime termination = GrantedTermination(now, request.InitialTerminationTime);
 
             // PullPoint uses "" for the notification endpoint
             var subscription = ActivatorUtilities.CreateInstance<SubscriptionManagerImpl>(

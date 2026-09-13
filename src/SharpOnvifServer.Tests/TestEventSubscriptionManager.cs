@@ -117,6 +117,36 @@ namespace SharpOnvif.Tests
         }
 
         [TestMethod]
+        [Timeout(60000)]
+        public void KeepsASubscriptionUntilItsExpirationHasPassed()
+        {
+            // The sweep is what removes a subscription nobody renewed. It must not take one whose
+            // expiration is still ahead of it: a pull is a long poll, so a subscription is
+            // routinely idle for as long as the client asked the device to wait, and removing it
+            // mid-poll answers the client's next call with a subscription that does not exist.
+            var manager = new DefaultEventSubscriptionManager<Subscription>();
+
+            var live = new Subscription { ExpirationTime = DateTime.UtcNow.AddMinutes(5) };
+            var expired = new Subscription { ExpirationTime = DateTime.UtcNow.AddSeconds(-1) };
+
+            string liveId = manager.AddSubscription(live);
+            string expiredId = manager.AddSubscription(expired);
+
+            // The sweep runs on its own timer; the first pass is due within fifteen seconds.
+            var deadline = DateTime.UtcNow.AddSeconds(45);
+            while (manager.GetSubscription(expiredId) != null && DateTime.UtcNow < deadline)
+            {
+                Thread.Sleep(250);
+            }
+
+            Assert.IsNull(manager.GetSubscription(expiredId), "the expired subscription was never swept");
+            Assert.AreEqual(1, expired.Detached, "sweeping has to detach it from its event source");
+
+            Assert.IsNotNull(manager.GetSubscription(liveId), "a subscription still in date was swept with it");
+            Assert.AreEqual(0, live.Detached);
+        }
+
+        [TestMethod]
         [Timeout(30000)]
         public void KeepsServingWhileOneSubscriptionIsDetaching()
         {

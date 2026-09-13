@@ -46,6 +46,12 @@ namespace OnvifService.Onvif
         private readonly string _notificationEndpoint; // endpoint where to send Basic subscription notifications
         private readonly TimeSpan _expirationDelta;
 
+        /// <summary>
+        /// How much longer than the poll it is servicing a subscription is kept alive, covering
+        /// the round trip back to the client and its next call.
+        /// </summary>
+        private static readonly TimeSpan ExpirationGrace = TimeSpan.FromSeconds(10);
+
         // The topics this subscriber asked for. A device that sends everything else as well is
         // not conformant, and floods a client that only wanted to hear about motion.
         private readonly TopicFilter _topics;
@@ -101,11 +107,19 @@ namespace OnvifService.Onvif
                 throw new InvalidOperationException($"{nameof(SubscriptionManagerImpl)}: {nameof(PullMessages)} is not supported on Basic event subscription!");
 
             DateTime now = DateTime.UtcNow;
-            DateTime expiration = now.Add(_expirationDelta); // TODO: review if adding the initial Delta is correct
+            TimeSpan timeout = OnvifHelpers.FromTimeout(request.Timeout);
+
+            // A pull is a long poll: this call holds the request open for the timeout the client
+            // asked for. The subscription has to outlast the poll it is servicing, or the
+            // expiration sweep removes it while it is still waiting and the client is told, on the
+            // next call, about a subscription that was alive when it asked.
+            DateTime expiration = now.Add(_expirationDelta);
+            DateTime survivesThisPull = now.Add(timeout).Add(ExpirationGrace);
+            if (expiration < survivesThisPull) expiration = survivesThisPull;
+
             ExtendExpiration(expiration);
 
             // spinlock wait until timeout
-            TimeSpan timeout = OnvifHelpers.FromTimeout(request.Timeout);
             DateTime waitUntil = now.Add(timeout);
             while(_messages.Count == 0 && DateTime.UtcNow < waitUntil)
             {
