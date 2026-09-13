@@ -28,6 +28,7 @@ using SharpOnvifServer.Events;
 using System;
 using System.Xml;
 using SharpOnvifCommon.Onvif;
+using SharpOnvifServer;
 
 namespace OnvifService.Onvif
 {
@@ -84,7 +85,7 @@ namespace OnvifService.Onvif
             string subscriptionID = _eventSubscriptionManager.AddSubscription(subscription);
             string subscriptionReferenceUri = OnvifHelpers.ChangeUriPath(endpointUri, $"/onvif/Events/Subscription/{subscriptionID}/").ToString();
 
-            _logger.LogDebug($"{nameof(EventsImpl)}: Subscribed Basic {subscriptionID} on {subscriptionReferenceUri}");
+            _logger.LogDebug($"{nameof(EventsImpl)}: Subscribed Basic {subscriptionID} on {UntrustedText.Printable(subscriptionReferenceUri)}");
 
             return new SubscribeResponse()
             {
@@ -120,7 +121,7 @@ namespace OnvifService.Onvif
             string subscriptionID = _eventSubscriptionManager.AddSubscription(subscription);
             string subscriptionReferenceUri = OnvifHelpers.ChangeUriPath(endpointUri, $"/onvif/Events/PullPointSubscription/{subscriptionID}/").ToString();
 
-            _logger.LogDebug($"{nameof(EventsImpl)}: Subscribed PullPoint {subscriptionID} on {subscriptionReferenceUri}");
+            _logger.LogDebug($"{nameof(EventsImpl)}: Subscribed PullPoint {subscriptionID} on {UntrustedText.Printable(subscriptionReferenceUri)}");
 
             return new CreatePullPointSubscriptionResponse()
             {

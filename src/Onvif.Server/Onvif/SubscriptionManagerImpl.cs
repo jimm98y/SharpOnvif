@@ -32,6 +32,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using SharpOnvifCommon.Onvif;
+using SharpOnvifServer;
 
 namespace OnvifService.Onvif
 {
@@ -209,12 +210,12 @@ namespace OnvifService.Onvif
 
                     if (httpResponseMessage.IsSuccessStatusCode)
                     {
-                        _logger.LogDebug($"{nameof(SubscriptionManagerImpl)}: Sent Basic event to {_notificationEndpoint}\r\n{content}\r\n");
+                        _logger.LogDebug($"{nameof(SubscriptionManagerImpl)}: Sent Basic event to {UntrustedText.Printable(_notificationEndpoint)}\r\n{content}\r\n");
                     }
                 }
                 catch(Exception ex)
                 {
-                    _logger.LogError($"{nameof(SubscriptionManagerImpl)}: Failed to send Basic event to {_notificationEndpoint} because of an exception: {ex.Message}.");
+                    _logger.LogError($"{nameof(SubscriptionManagerImpl)}: Failed to send Basic event to {UntrustedText.Printable(_notificationEndpoint)} because of an exception: {ex.Message}.");
                 }
             }
         }

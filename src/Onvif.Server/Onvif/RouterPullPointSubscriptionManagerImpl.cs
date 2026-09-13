@@ -47,7 +47,7 @@ namespace OnvifService.Onvif
 
             string subscriptionID = GetSubscriptionID();
             _eventSubscriptionManager.RemoveSubscription(subscriptionID);
-            _logger.LogDebug($"{nameof(RouterSubscriptionManagerImpl)}: Unsubscribed {subscriptionID}");
+            _logger.LogDebug($"{nameof(RouterSubscriptionManagerImpl)}: Unsubscribed {UntrustedText.Printable(subscriptionID)}");
 
             return ret;
         }

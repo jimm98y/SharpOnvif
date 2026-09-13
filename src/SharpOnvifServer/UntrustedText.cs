@@ -30,6 +30,11 @@ namespace SharpOnvifServer
     /// <summary>
     /// Makes a value that arrived in a request fit to be written somewhere it will be read as
     /// something other than plain data.
+    /// <para>
+    /// Public because a service implementation needs it as much as this library does: a
+    /// profile token, a consumer address, a subscription id out of a URL - all of it arrives
+    /// from a caller, and a log entry is the usual place it ends up.
+    /// </para>
     /// </summary>
     /// <remarks>
     /// A SOAP action, or a discovery datagram, is whatever the sender chose to put there. Written
@@ -38,7 +43,7 @@ namespace SharpOnvifServer
     /// '&lt;' in it is markup. Both are fixed the same way: turn what cannot be data back into
     /// data, and cap how much of it there is.
     /// </remarks>
-    internal static class UntrustedText
+    public static class UntrustedText
     {
         /// <summary>
         /// How much of an untrusted value is kept. Long enough for any real Onvif action, short

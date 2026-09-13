@@ -29,6 +29,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using SharpOnvifCommon.Onvif;
+using SharpOnvifServer;
 
 namespace OnvifService.Onvif
 {
@@ -166,7 +167,7 @@ namespace OnvifService.Onvif
                     Zoom = new Vector1D() { x = Zoom }
                 }
             });
-            _logger.LogInformation($"PTZ: SetPreset: {request.ProfileToken}/{token}");
+            _logger.LogInformation($"PTZ: SetPreset: {UntrustedText.Printable(request.ProfileToken)}/{UntrustedText.Printable(token)}");
             return new SetPresetResponse(token);
         }
 
@@ -186,7 +187,7 @@ namespace OnvifService.Onvif
                 this.Tilt = preset.PTZPosition.PanTilt.y;
                 this.Zoom = preset.PTZPosition.Zoom.x;
 
-                _logger.LogInformation($"PTZ: GoToPreset: {ProfileToken}/{PresetToken} pan: {preset.PTZPosition.PanTilt.x}, tilt: {preset.PTZPosition.PanTilt.y}, zoom: {preset.PTZPosition.Zoom.x}");
+                _logger.LogInformation($"PTZ: GoToPreset: {UntrustedText.Printable(ProfileToken)}/{UntrustedText.Printable(PresetToken)} pan: {preset.PTZPosition.PanTilt.x}, tilt: {preset.PTZPosition.PanTilt.y}, zoom: {preset.PTZPosition.Zoom.x}");
             }
             else
             {
