@@ -22,9 +22,9 @@
 using System;
 using System.IO;
 using System.Linq;
-using SharpOnvif.CodeGen.Configuration;
-using SharpOnvif.CodeGen.Generation;
-using SharpOnvif.CodeGen.Xml;
+using WsdlGenerator.Configuration;
+using WsdlGenerator.Generation;
+using WsdlGenerator.Xml;
 
 namespace SharpOnvif.Tests
 {
@@ -58,7 +58,7 @@ namespace SharpOnvif.Tests
                     ["--wsdl", Fixture, "--namespace", "Example.Banking", "--out", output]);
 
                 Assert.IsNotNull(options);
-                var result = new WsdlCodeGenerator(options).Run();
+                var result = new CodeGenerator(options).Run();
 
                 Assert.AreEqual(2, result.Operations, "GetBalance and Transfer");
                 Assert.AreEqual(1, result.Services.Count);
@@ -105,8 +105,8 @@ namespace SharpOnvif.Tests
                 var options = CommandLine.Parse(
                     ["--wsdl", Fixture, "--namespace", "Example.Banking", "--out", output]);
 
-                int first = new WsdlCodeGenerator(options!).Run().FilesWritten;
-                int second = new WsdlCodeGenerator(options!).Run().FilesWritten;
+                int first = new CodeGenerator(options!).Run().FilesWritten;
+                int second = new CodeGenerator(options!).Run().FilesWritten;
 
                 Assert.AreEqual(4, first);
                 Assert.AreEqual(0, second, "an unchanged run must leave the files alone");
@@ -126,7 +126,7 @@ namespace SharpOnvif.Tests
                 var options = CommandLine.Parse(
                     ["--wsdl", Fixture, "--namespace", "Example.Banking", "--out", output, "--client"]);
 
-                new WsdlCodeGenerator(options!).Run();
+                new CodeGenerator(options!).Run();
 
                 string service = Path.Combine(output, "Bank");
                 Assert.IsTrue(File.Exists(Path.Combine(service, "Client.cs")));

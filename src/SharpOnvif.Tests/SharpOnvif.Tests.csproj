@@ -21,7 +21,7 @@
     <ProjectReference Include="..\SharpOnvifClient\SharpOnvifClient.csproj" />
     <ProjectReference Include="..\SharpOnvifCommon\SharpOnvifCommon.csproj" />
     <ProjectReference Include="..\SharpOnvifServer\SharpOnvifServer.csproj" />
-    <ProjectReference Include="..\SharpOnvif.CodeGen\SharpOnvif.CodeGen.csproj" />
+    <ProjectReference Include="..\WsdlGenerator\WsdlGenerator.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -21,7 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpOnvif.Tests", "SharpOn
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tooling", "Tooling", "{30DC08FC-3E98-6757-484C-7F83F687C538}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpOnvif.CodeGen", "SharpOnvif.CodeGen\SharpOnvif.CodeGen.csproj", "{0C1E3F4F-A8D8-4C43-A341-77F6427DCF67}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WsdlGenerator", "WsdlGenerator\WsdlGenerator.csproj", "{0C1E3F4F-A8D8-4C43-A341-77F6427DCF67}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BF65B804-7979-4745-BC96-F9AF02A7758F}"
 	ProjectSection(SolutionItems) = preProject

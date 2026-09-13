@@ -1,7 +1,7 @@
 # SharpOnvif code generation
 
 SharpOnvif no longer uses WCF, CoreWCF, or `svcutil`. The Onvif service bindings are produced by
-`src/SharpOnvif.CodeGen`, a purpose-built WSDL/XSD compiler in this repository.
+`src/WsdlGenerator`, a purpose-built WSDL/XSD compiler in this repository.
 
 Output goes to three places:
 
@@ -19,7 +19,7 @@ only the types its own WSDL declares, plus its operations.
 ## Running the generator
 
 ```
-dotnet run --project src/SharpOnvif.CodeGen
+dotnet run --project src/WsdlGenerator
 ```
 
 With no arguments it reads the offline schema mirror in `wsdl/` and rewrites this repository's
@@ -37,7 +37,7 @@ Nothing in the compiler is specific to Onvif - it reads WSDL and XML Schema - so
 from any document/literal SOAP 1.2 service:
 
 ```
-dotnet run --project src/SharpOnvif.CodeGen -- \
+dotnet run --project src/WsdlGenerator -- \
     --wsdl ./bank.wsdl \
     --namespace Example.Banking \
     --out ./Generated
