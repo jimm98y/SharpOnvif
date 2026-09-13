@@ -1,4 +1,4 @@
-﻿// SharpOnvif
+// SharpOnvif
 // Copyright (C) 2026 Lukas Volf
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -59,7 +59,7 @@ namespace OnvifService.Onvif
 
             // Basic uses the notification endpoint from the request
             var subscription = ActivatorUtilities.CreateInstance<SubscriptionManagerImpl>(_serviceProvider, termination, termination.Subtract(now), notificationEndpoint);
-            int subscriptionID = _eventSubscriptionManager.AddSubscription(subscription);
+            string subscriptionID = _eventSubscriptionManager.AddSubscription(subscription);
             string subscriptionReferenceUri = OnvifHelpers.ChangeUriPath(endpointUri, $"/onvif/Events/Subscription/{subscriptionID}/").ToString();
 
             _logger.LogDebug($"{nameof(EventsImpl)}: Subscribed Basic {subscriptionID} on {subscriptionReferenceUri}");
@@ -93,7 +93,7 @@ namespace OnvifService.Onvif
 
             // PullPoint uses "" for the notification endpoint
             var subscription = ActivatorUtilities.CreateInstance<SubscriptionManagerImpl>(_serviceProvider, termination, termination.Subtract(now), "");
-            int subscriptionID = _eventSubscriptionManager.AddSubscription(subscription);
+            string subscriptionID = _eventSubscriptionManager.AddSubscription(subscription);
             string subscriptionReferenceUri = OnvifHelpers.ChangeUriPath(endpointUri, $"/onvif/Events/PullPointSubscription/{subscriptionID}/").ToString();
 
             _logger.LogDebug($"{nameof(EventsImpl)}: Subscribed PullPoint {subscriptionID} on {subscriptionReferenceUri}");

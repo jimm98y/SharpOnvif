@@ -68,15 +68,35 @@ namespace SharpOnvif.Tests
             public override SharpOnvifServer.Events.PullMessagesResponse PullMessages(
                 string Timeout, int MessageLimit, System.Xml.XmlElement[] Any)
             {
-                object id = OnvifOperationContext.Current?.Items[OnvifEvents.ONVIF_SUBSCRIPTION_ID];
+                var id = OnvifOperationContext.Current?.Items[OnvifEvents.ONVIF_SUBSCRIPTION_ID] as string;
 
                 return new SharpOnvifServer.Events.PullMessagesResponse
                 {
                     // The subscription the address named, echoed back so the test can see it.
-                    CurrentTime = new DateTime(2026, 1, 1).AddMinutes(id is int value ? value : 0),
+                    // An ID is an opaque token, so it is returned as it arrived.
+                    CurrentTime = new DateTime(2026, 1, 1),
                     TerminationTime = new DateTime(2026, 1, 1),
+                    NotificationMessage = new[] { Echo(id) },
                 };
             }
+        }
+
+        /// <summary>
+        /// Carries the subscription the request was addressed to back to the test, in the topic
+        /// of a notification - which is where a real pull point would put one.
+        /// </summary>
+        private static SharpOnvifCommon.Onvif.NotificationMessageHolderType Echo(string subscriptionId)
+        {
+            var dom = new System.Xml.XmlDocument();
+
+            return new SharpOnvifCommon.Onvif.NotificationMessageHolderType
+            {
+                Topic = new SharpOnvifCommon.Onvif.TopicExpressionType
+                {
+                    Dialect = OnvifEvents.TopicDialectConcreteSet,
+                    Any = new System.Xml.XmlNode[] { dom.CreateTextNode(subscriptionId ?? "(none)") },
+                },
+            };
         }
 
         [ClassInitialize]
@@ -217,14 +237,18 @@ namespace SharpOnvif.Tests
 
             string action = "http://www.onvif.org/ver10/events/wsdl/PullPointSubscription/PullMessagesRequest";
 
-            foreach (string address in new[] { SubscriptionPath + "/7/", SubscriptionPath + "/7" })
+            // An ID is an opaque token now, not a number, so that one client cannot address
+            // another client's subscription by counting.
+            const string SubscriptionId = "Zm9vYmFyYmF6cXV4-_1";
+
+            foreach (string address in new[] { SubscriptionPath + "/" + SubscriptionId + "/",
+                                               SubscriptionPath + "/" + SubscriptionId })
             {
                 var (status, body) = await PostAsync(address, envelope, action);
 
                 Assert.AreEqual(HttpStatusCode.OK, status, $"{address} did not reach the subscription manager");
 
-                // The implementation encodes the subscription it saw into the minutes field.
-                StringAssert.Contains(body, "2026-01-01T00:07:00", $"{address} lost the subscription");
+                StringAssert.Contains(body, SubscriptionId, $"{address} lost the subscription");
             }
         }
 

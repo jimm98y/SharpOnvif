@@ -1,4 +1,4 @@
-﻿// SharpOnvif
+// SharpOnvif
 // Copyright (C) 2026 Lukas Volf
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -20,69 +20,138 @@
 // SOFTWARE.
 
 using System;
+using System.Globalization;
+using System.Xml;
 
 namespace SharpOnvifCommon
 {
     public static class OnvifHelpers
     {
+        /// <summary>
+        /// An Onvif timeout as the xs:duration a device expects.
+        /// </summary>
         public static string GetTimeoutInSeconds(int timeoutInSeconds)
         {
-            return $"PT{timeoutInSeconds}S";
+            return "PT" + timeoutInSeconds.ToString(CultureInfo.InvariantCulture) + "S";
         }
 
+        /// <summary>
+        /// An Onvif timeout as the xs:duration a device expects.
+        /// </summary>
         public static string GetTimeoutInMinutes(int timeoutInMinutes)
         {
-            return $"PT{timeoutInMinutes}M";
+            return "PT" + timeoutInMinutes.ToString(CultureInfo.InvariantCulture) + "M";
         }
 
+        /// <summary>
+        /// Writes a time the way Onvif carries one: UTC, to the millisecond.
+        /// </summary>
+        /// <remarks>
+        /// The value is converted to UTC rather than merely labelled with Z, and formatted with
+        /// the invariant culture - a device reading a time stamped in a non-Gregorian calendar
+        /// would otherwise be told the wrong year.
+        /// </remarks>
         public static string DateTimeToString(DateTime dateTime)
         {
-            return dateTime.ToString("yyyy-MM-ddTHH:mm:ss.fffZ");
+            return ToUtc(dateTime).ToString("yyyy-MM-ddTHH:mm:ss.fffZ", CultureInfo.InvariantCulture);
         }
 
+        /// <summary>
+        /// Reads a time a device sent, as UTC.
+        /// </summary>
+        /// <remarks>
+        /// xs:dateTime first, which is what the specification calls for and what fixes the offset
+        /// of a value that carries one. Devices do send times that are not quite that, so a
+        /// looser parse follows - invariant, because a device's clock is not written in the
+        /// server's culture.
+        /// </remarks>
         public static DateTime StringToDateTime(string dateTime)
         {
-            return DateTime.Parse(dateTime);
+            if (string.IsNullOrEmpty(dateTime))
+                throw new ArgumentNullException(nameof(dateTime));
+
+            try
+            {
+                return XmlConvert.ToDateTime(dateTime.Trim(), XmlDateTimeSerializationMode.Utc);
+            }
+            catch (FormatException)
+            {
+                return DateTime.Parse(
+                    dateTime,
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
+            }
         }
 
+        /// <summary>
+        /// Reads the two forms Onvif and WS-BaseNotification use for a termination time: an
+        /// absolute xs:dateTime, or an xs:duration from now.
+        /// </summary>
+        /// <returns>The moment it names, in UTC.</returns>
         public static DateTime FromAbsoluteOrRelativeDateTimeUTC(DateTime now, string value, DateTime defaultValue)
         {
             if (string.IsNullOrEmpty(value))
                 return defaultValue;
 
-            if(value.ToUpperInvariant().StartsWith("PT"))
+            return IsDuration(value)
+                ? ToUtc(now).Add(FromTimeout(value))
+                : StringToDateTime(value);
+        }
+
+        /// <summary>
+        /// Reads an xs:duration - the form every Onvif timeout takes.
+        /// </summary>
+        /// <remarks>
+        /// The whole grammar, not just the PT&lt;n&gt;S and PT&lt;n&gt;M that Onvif itself tends
+        /// to send: a conformant client is entitled to ask for PT1M30S or PT1H, and did not
+        /// deserve to be refused.
+        /// </remarks>
+        /// <exception cref="NotSupportedException">The value is not an xs:duration.</exception>
+        public static TimeSpan FromTimeout(string timeout)
+        {
+            if (string.IsNullOrEmpty(timeout))
+                return TimeSpan.Zero;
+
+            try
             {
-                return now.Add(FromTimeout(value));
+                return XmlConvert.ToTimeSpan(timeout.Trim());
             }
-            else
+            catch (FormatException ex)
             {
-                return StringToDateTime(value);
+                throw new NotSupportedException("'" + timeout + "' is not a duration.", ex);
+            }
+            catch (OverflowException ex)
+            {
+                throw new NotSupportedException("'" + timeout + "' is too large to be a duration.", ex);
             }
         }
 
-        public static TimeSpan FromTimeout(string timeout)
+        /// <summary>
+        /// True when the value is an xs:duration rather than an xs:dateTime. A duration is the
+        /// only one of the two that begins with P, negative ones with -P.
+        /// </summary>
+        private static bool IsDuration(string value)
         {
-            if(string.IsNullOrEmpty(timeout))
-                return TimeSpan.Zero;
+            string trimmed = value.TrimStart();
+            if (trimmed.Length == 0) return false;
 
-            timeout = timeout.ToUpperInvariant();
-            if(timeout.StartsWith("PT"))
+            if (trimmed[0] == '-') trimmed = trimmed.Substring(1);
+            return trimmed.Length > 0 && (trimmed[0] == 'P' || trimmed[0] == 'p');
+        }
+
+        private static DateTime ToUtc(DateTime value)
+        {
+            switch (value.Kind)
             {
-                int number;
-                if (int.TryParse(timeout.Substring(2, timeout.Length - 3), out number))
-                {
-                    if (timeout.EndsWith("M"))
-                    {
-                        return TimeSpan.FromMinutes(number);
-                    }
-                    else if (timeout.EndsWith("S"))
-                    {
-                        return TimeSpan.FromMinutes(number);
-                    }
-                }
+                case DateTimeKind.Utc:
+                    return value;
+                case DateTimeKind.Local:
+                    return value.ToUniversalTime();
+                default:
+                    // A time with no zone is taken to be the UTC it is about to be labelled as,
+                    // which is what every caller in this library means by one.
+                    return DateTime.SpecifyKind(value, DateTimeKind.Utc);
             }
-
-            throw new NotSupportedException(timeout);
         }
 
         public static Uri ChangeUriPath(Uri serviceBaseUri, string path)

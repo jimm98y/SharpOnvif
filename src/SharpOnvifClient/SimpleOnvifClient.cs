@@ -1,4 +1,4 @@
-﻿// SharpOnvif
+// SharpOnvif
 // Copyright (C) 2026 Lukas Volf
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -134,7 +134,18 @@ namespace SharpOnvifClient
         /// </summary>
         protected TClient GetOrCreateClient<TClient>(string uri, Func<string, TClient> creator) where TClient : class
         {
-            string key = $"{typeof(TClient)}|{uri}";
+            return GetOrCreateClient(uri, uri, creator);
+        }
+
+        /// <summary>
+        /// The same, for a client that is pooled under something other than its address - a pull
+        /// point, whose HTTP timeout depends on how long the caller asked the device to hold the
+        /// request open.
+        /// </summary>
+        protected TClient GetOrCreateClient<TClient>(string poolKey, string uri, Func<string, TClient> creator)
+            where TClient : class
+        {
+            string key = $"{typeof(TClient)}|{poolKey}";
             lock (_syncRoot)
             {
                 object existing;
@@ -145,6 +156,42 @@ namespace SharpOnvifClient
                 _clients.Add(key, client);
                 return client;
             }
+        }
+
+        /// <summary>
+        /// How much longer than a pull's own timeout the client waits for the reply, covering the
+        /// round trip and a device that is a little late.
+        /// </summary>
+        public static TimeSpan PullMessagesHttpTimeoutHeadroom { get; set; } = TimeSpan.FromSeconds(15);
+
+        /// <summary>
+        /// The HTTP timeout a pull of the given length needs.
+        /// </summary>
+        /// <remarks>
+        /// A pull is a long poll: the device holds the request for up to
+        /// <paramref name="pullTimeoutInSeconds"/> and answers sooner only if it has something to
+        /// report. The HTTP timeout has to outlast that - with both at the default of 60 seconds,
+        /// an idle camera answered exactly as the client gave up.
+        /// </remarks>
+        public static TimeSpan GetPullMessagesHttpTimeout(int pullTimeoutInSeconds, TimeSpan configuredTimeout)
+        {
+            TimeSpan needed = TimeSpan.FromSeconds(pullTimeoutInSeconds) + PullMessagesHttpTimeoutHeadroom;
+            return needed > configuredTimeout ? needed : configuredTimeout;
+        }
+
+        /// <summary>The client's settings with a different HTTP timeout.</summary>
+        private OnvifClientSettings WithHttpTimeout(TimeSpan timeout)
+        {
+            return new OnvifClientSettings
+            {
+                Credentials = _settings.Credentials,
+                Authentication = _settings.Authentication,
+                DisableExpect100Continue = _settings.DisableExpect100Continue,
+                MaxResponseContentBytes = _settings.MaxResponseContentBytes,
+                Transport = _settings.Transport,
+                HttpClient = _settings.HttpClient,
+                Timeout = timeout,
+            };
         }
 
         #region Device Management
@@ -271,9 +318,21 @@ namespace SharpOnvifClient
             return subscribeResponse;
         }
 
+        /// <remarks>
+        /// A pull is a long poll: the device holds the request open for up to
+        /// <paramref name="timeoutInSeconds"/> waiting for something to report, and answers
+        /// immediately if something arrives sooner. The HTTP timeout therefore has to outlast it,
+        /// or an idle camera answers exactly on time and the client has already given up - which
+        /// is what the default settings did, both being 60 seconds.
+        /// </remarks>
         public async Task<PullMessagesResponse> PullPointPullMessagesAsync(string subscriptionReferenceAddress, int timeoutInSeconds = 60, int maxMessages = 100)
         {
-            var pullPointClient = GetOrCreateClient(subscriptionReferenceAddress, u => new PullPointSubscriptionClient(u, _settings));
+            TimeSpan httpTimeout = GetPullMessagesHttpTimeout(timeoutInSeconds, _settings.Timeout);
+
+            var pullPointClient = GetOrCreateClient(
+                $"{subscriptionReferenceAddress}|{(int)httpTimeout.TotalSeconds}",
+                subscriptionReferenceAddress,
+                u => new PullPointSubscriptionClient(u, WithHttpTimeout(httpTimeout)));
             var messages = await pullPointClient.PullMessagesAsync(
                 new PullMessagesRequest(
                     OnvifHelpers.GetTimeoutInSeconds(timeoutInSeconds),
@@ -548,7 +607,15 @@ namespace SharpOnvifClient
                 Dictionary<string, string> supportedServices = new Dictionary<string, string>();
                 foreach (var service in services.Service)
                 {
-                    supportedServices.Add(service.Namespace.ToLowerInvariant(), service.XAddr);
+                    if (service == null || string.IsNullOrEmpty(service.Namespace)) continue;
+
+                    // Assigned, not added: devices do list a namespace more than once - the same
+                    // service at two versions, say - and Add would throw and take every call that
+                    // needs a service address down with it. The first address wins, which is the
+                    // one the device put first.
+                    string key = service.Namespace.ToLowerInvariant();
+                    if (!supportedServices.ContainsKey(key))
+                        supportedServices[key] = service.XAddr;
                 }
 
                 _supportedServices = supportedServices;

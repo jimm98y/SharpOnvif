@@ -179,7 +179,10 @@ namespace SharpOnvifServer.Dispatch
             object raw = context.GetRouteValue(SubscriptionRouteValue);
             if (raw == null) return;
 
-            if (int.TryParse(raw.ToString().Trim('/'), out int subscriptionId))
+            // Published as it arrived, less the slashes Onvif puts around it. The subscription
+            // manager decides what an ID means; this only carries it.
+            string subscriptionId = raw.ToString().Trim('/');
+            if (subscriptionId.Length > 0)
                 context.Items[OnvifEvents.ONVIF_SUBSCRIPTION_ID] = subscriptionId;
         }
 

@@ -1,4 +1,4 @@
-﻿// SharpOnvif
+// SharpOnvif
 // Copyright (C) 2026 Lukas Volf
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -50,7 +50,7 @@ namespace OnvifService.Onvif
         {
             var ret = GetSubscriptionManager().Unsubscribe(request);
             
-            int subscriptionID = GetSubscriptionID();
+            string subscriptionID = GetSubscriptionID();
             _eventSubscriptionManager.RemoveSubscription(subscriptionID);
             _logger.LogDebug($"{nameof(RouterSubscriptionManagerImpl)}: Unsubscribed {subscriptionID}");
 
@@ -69,11 +69,10 @@ namespace OnvifService.Onvif
         /// Retrieves the Subscription ID from the <see cref="HttpContext"/>.
         /// </summary>
         /// <returns>Subscription ID of the current request.</returns>
-        private static int GetSubscriptionID()
+        private static string GetSubscriptionID()
         {
             HttpContext httpContext = OnvifOperationContext.Current;
-            int subscriptionID = (int)httpContext.Items[OnvifEvents.ONVIF_SUBSCRIPTION_ID];
-            return subscriptionID;
+            return httpContext?.Items[OnvifEvents.ONVIF_SUBSCRIPTION_ID] as string;
         }
     }
 }

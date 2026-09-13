@@ -42,7 +42,15 @@ namespace SharpOnvifServer.Discovery
     /// </summary>
     public class DiscoveryService : IHostedService
     {
-        private static readonly Random _rnd = new Random();
+        // One listener runs per network interface, so anything shared between them is reached
+        // concurrently. Random is not safe to use that way.
+        [ThreadStatic]
+        private static Random _rndForThread;
+
+        private static Random Rnd
+        {
+            get { return _rndForThread ?? (_rndForThread = new Random(Guid.NewGuid().GetHashCode())); }
+        }
 
         /// <summary>
         /// How much of a datagram reaches the debug log. A whole Probe is worth seeing; a
@@ -254,7 +262,7 @@ namespace SharpOnvifServer.Discovery
             return false;
         }
 
-        private static string CreateDiscoveryResponse(OnvifDiscoveryOptions options, IEnumerable<Uri> httpUri, string discoveryMessageUuid)
+        internal static string CreateDiscoveryResponse(OnvifDiscoveryOptions options, IEnumerable<Uri> httpUri, string discoveryMessageUuid)
         {
             Dictionary<string, string> nsPrefixes = new Dictionary<string, string>
             {
@@ -312,17 +320,20 @@ namespace SharpOnvifServer.Discovery
             return ret.ToString();
         }
 
-        private static string BuildTypes(OnvifDiscoveryOptions options, Dictionary<string, string> nsPrefixes)
+        internal static string BuildTypes(OnvifDiscoveryOptions options, Dictionary<string, string> nsPrefixes)
         {
             if (options.Types == null)
                 return string.Empty;
 
-            StringBuilder ret = new StringBuilder();
+            // d:Types is a list of QNames separated by whitespace. Run together, two types read
+            // as one name that matches neither, and a client filtering on NetworkVideoTransmitter
+            // does not find the device.
+            var names = new List<string>();
             foreach (var type in options.Types)
             {
-                ret.Append($"{nsPrefixes[type.TypeNamespace]}:{type.TypeName}");
+                names.Add($"{nsPrefixes[type.TypeNamespace]}:{type.TypeName}");
             }
-            return ret.ToString();
+            return string.Join(" ", names);
         }
 
         private static string GetPrefix(Dictionary<string, string> nsPrefixes)
@@ -332,7 +343,7 @@ namespace SharpOnvifServer.Discovery
 
             while (true)
             {
-                int num = _rnd.Next(0, 26); // Zero to 25
+                int num = Rnd.Next(0, 26); // Zero to 25
                 char c1 = (char)('a' + num);
                 prefix += c1;
 
@@ -362,11 +373,11 @@ namespace SharpOnvifServer.Discovery
             }
         }
 
-        private static string BuildScopes(OnvifDiscoveryOptions options)
+        internal static string BuildScopes(OnvifDiscoveryOptions options)
         {
-            List<string> scopes = options.Scopes.ToList(); // because we are adding additional scopes here, we need a copy of the collection
-            if (scopes == null)
-                return string.Empty;
+            // A copy, because the scopes below are added to it - and options bound from
+            // configuration need not carry any, so this has to survive there being none.
+            List<string> scopes = options.Scopes == null ? new List<string>() : options.Scopes.ToList();
 
             if (!string.IsNullOrEmpty(options.City))
                 scopes.Add($"{SharpOnvifCommon.Discovery.Scopes.City}{Uri.EscapeDataString(options.City)}");
@@ -391,7 +402,15 @@ namespace SharpOnvifServer.Discovery
 
         private static OnvifDiscoveryMessage ReadOnvifEndpoint(string message)
         {
-            if (!message.Contains("http://schemas.xmlsoap.org/ws/2005/04/discovery/Probe"))
+            // The Probe action is a prefix of the ProbeMatches action, so a plain Contains on it
+            // also matches another device's reply. Only a Probe is answered here.
+            const string ProbeAction = "http://schemas.xmlsoap.org/ws/2005/04/discovery/Probe";
+            int probeAction = message.IndexOf(ProbeAction, StringComparison.Ordinal);
+            if (probeAction < 0)
+                return null;
+
+            int afterAction = probeAction + ProbeAction.Length;
+            if (afterAction < message.Length && char.IsLetter(message[afterAction]))
                 return null;
 
             using (var textReader = new StringReader(message))

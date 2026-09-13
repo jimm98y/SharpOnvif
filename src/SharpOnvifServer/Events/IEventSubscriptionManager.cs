@@ -1,4 +1,4 @@
-﻿// SharpOnvif
+// SharpOnvif
 // Copyright (C) 2026 Lukas Volf
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -32,20 +32,25 @@ namespace SharpOnvifServer.Events
         /// Add a new event subscription.
         /// </summary>
         /// <param name="subscription">New event subscription.</param>
-        /// <returns>Event subscription ID used to identify the subscription in subsequent requests.</returns>
-        int AddSubscription(T subscription);
+        /// <returns>
+        /// Event subscription ID used to identify the subscription in subsequent requests. It
+        /// appears in the address handed to the client, so it has to be unguessable: a
+        /// subscription is addressed by ID alone, and a client that can name another client's
+        /// subscription can read its events and cancel it.
+        /// </returns>
+        string AddSubscription(T subscription);
 
         /// <summary>
         /// Returns an existing Event subscription from its subscription ID.
         /// </summary>
         /// <param name="subscriptionID">Subscription ID used to identify the subscription.</param>
-        /// <returns>Event subscription.</returns>
-        T GetSubscription(int subscriptionID);
+        /// <returns>Event subscription, or null when there is no such subscription.</returns>
+        T GetSubscription(string subscriptionID);
 
         /// <summary>
         /// Removes the Event subscription.
         /// </summary>
         /// <param name="subscriptionID">Subscription ID used to identify the subscription.</param>
-        void RemoveSubscription(int subscriptionID);
+        void RemoveSubscription(string subscriptionID);
     }
 }

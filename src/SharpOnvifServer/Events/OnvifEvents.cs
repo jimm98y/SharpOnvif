@@ -1,4 +1,4 @@
-﻿// SharpOnvif
+// SharpOnvif
 // Copyright (C) 2026 Lukas Volf
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -40,6 +40,11 @@ namespace SharpOnvifServer.Events
 
     public static class OnvifEvents
     {
+        /// <summary>
+        /// Key under which <see cref="Microsoft.AspNetCore.Http.HttpContext.Items"/> carries the
+        /// subscription an addressed request belongs to. The value is the string the address
+        /// ended with.
+        /// </summary>
         public const string ONVIF_SUBSCRIPTION_ID = "OnvifSubscriptionID";
 
         /*

@@ -277,6 +277,35 @@ derive from it.
 
 `OnvifOperationContext.Current` is the `HttpContext` if you need more than the address.
 
+### Event subscriptions are identified by a token, not a number
+
+`IEventSubscriptionManager<T>` used `int` subscription IDs, handed out by a counter and placed in
+the address a client is told to come back to (`/onvif/Events/PullPointSubscription/3/`). Since a
+subscription is addressed by ID alone, any client that could reach the endpoint could reach every
+other client's subscription by counting - reading its events, or cancelling it.
+
+IDs are now unguessable strings, and the three interface methods take `string`:
+
+```cs
+- int  AddSubscription(T subscription);
+- T    GetSubscription(int subscriptionID);
+- void RemoveSubscription(int subscriptionID);
++ string AddSubscription(T subscription);
++ T      GetSubscription(string subscriptionID);
++ void   RemoveSubscription(string subscriptionID);
+```
+
+`HttpContext.Items[OnvifEvents.ONVIF_SUBSCRIPTION_ID]` holds a `string` to match, so an
+implementation that cast it changes with the interface:
+
+```cs
+- int subscriptionID = (int)httpContext.Items[OnvifEvents.ONVIF_SUBSCRIPTION_ID];
++ string subscriptionID = httpContext.Items[OnvifEvents.ONVIF_SUBSCRIPTION_ID] as string;
+```
+
+Nothing else about the flow changes: the ID still goes in the address, and `MapOnvifService` still
+routes the trailing segment to the service.
+
 ### Unchanged
 
 `IUserRepository`, `AddOnvifDigestAuthentication`, `DigestAuthenticationSchemeOptions`,
