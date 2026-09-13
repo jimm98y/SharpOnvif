@@ -35,6 +35,9 @@ static GeneratorOptions OnvifDefaults()
 
 static void Report(GenerationResult result, GeneratorOptions options)
 {
+    if (options.Runtime.Directory is not null)
+        Console.WriteLine($"{"(runtime)",-24} files={result.RuntimeFiles,5}");
+
     Console.WriteLine($"{"(shared schema)",-24} types={result.SharedTypes,5}");
 
     foreach (var (service, types, portTypes, operations) in result.Services)

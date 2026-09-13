@@ -15,17 +15,20 @@ namespace WsdlGenerator.Emit;
 internal sealed class ServerEmitter
 {
     private const string Dispatch = "SharpOnvifServer.Dispatch";
-    private const string Xml = "SharpOnvifCommon.Xml";
     private const string Task = "System.Threading.Tasks.Task";
     private const string Token = "System.Threading.CancellationToken";
 
     private readonly CsModel _model;
     private readonly string _namespace;
 
-    public ServerEmitter(CsModel model, string @namespace)
+    /// <summary>Namespace of the contract, reader and writer.</summary>
+    private readonly string Xml;
+
+    public ServerEmitter(CsModel model, string @namespace, string runtime)
     {
         _model = model;
         _namespace = @namespace;
+        Xml = runtime + ".Xml";
     }
 
     public string Emit()

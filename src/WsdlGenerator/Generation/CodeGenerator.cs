@@ -12,6 +12,7 @@ internal sealed record GenerationResult(
     int FilesWritten,
     int Operations,
     int SharedTypes,
+    int RuntimeFiles,
     IReadOnlyList<(string Service, int Types, int PortTypes, int Operations)> Services);
 
 /// <summary>
@@ -57,7 +58,12 @@ internal sealed class CodeGenerator
             schema, parsed.Select(s => s.Wsdl).ToList(), serviceNamespaces, _options.SharedNamespace);
         var sharedTypes = SharedTypeIndex.From(sharedModel);
 
-        int written = EmitShared(sharedModel);
+        // The runtime first, because everything else is compiled against it.
+        int runtimeFiles = _options.Runtime.Directory is { } runtime
+            ? new RuntimeEmitter(_options).Emit(runtime)
+            : 0;
+
+        int written = runtimeFiles + EmitShared(sharedModel);
         int operations = 0;
         var services = new List<(string, int, int, int)>();
 
@@ -86,14 +92,15 @@ internal sealed class CodeGenerator
         }
 
         return new GenerationResult(
-            written, operations, sharedModel.Classes.Count + sharedModel.Enums.Count, services);
+            written, operations, sharedModel.Classes.Count + sharedModel.Enums.Count, runtimeFiles, services);
     }
 
     private int EmitShared(CsModel model)
     {
         var file = new GeneratedFile(
             Path.Combine(_options.SharedDirectory, "DataContracts.cs"),
-            new DataContractEmitter(model, _options.SharedNamespace, isShared: true).Emit());
+            new DataContractEmitter(
+                model, _options.SharedNamespace, isShared: true, _options.Runtime.Namespace).Emit());
 
         return file.WriteIfChanged() ? 1 : 0;
     }
@@ -115,11 +122,16 @@ internal sealed class CodeGenerator
 
         var contracts = new GeneratedFile(
             Path.Combine(directory, "DataContracts.cs"),
-            new DataContractEmitter(model, @namespace, isShared: false, _options.SharedNamespace).Emit());
+            new DataContractEmitter(
+                model, @namespace, isShared: false, _options.Runtime.Namespace, _options.SharedNamespace).Emit());
+
+        string runtime = _options.Runtime.Namespace;
 
         var api = server
-            ? new GeneratedFile(Path.Combine(directory, "Service.cs"), new ServerEmitter(model, @namespace).Emit())
-            : new GeneratedFile(Path.Combine(directory, "Client.cs"), new ClientEmitter(model, @namespace).Emit());
+            ? new GeneratedFile(
+                Path.Combine(directory, "Service.cs"), new ServerEmitter(model, @namespace, runtime).Emit())
+            : new GeneratedFile(
+                Path.Combine(directory, "Client.cs"), new ClientEmitter(model, @namespace, runtime).Emit());
 
         int written = 0;
         if (contracts.WriteIfChanged()) written++;

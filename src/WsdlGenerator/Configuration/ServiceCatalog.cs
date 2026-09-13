@@ -26,6 +26,10 @@ internal static class ServiceCatalog
         MirrorRoot = Path.Combine(repositoryRoot, "wsdl"),
         SharedNamespace = "SharpOnvifCommon.Onvif",
         SharedDirectory = Path.Combine(outputRoot, "SharpOnvifCommon", "Generated"),
+        Runtime = new RuntimeTarget(
+            "SharpOnvifCommon", Path.Combine(outputRoot, "SharpOnvifCommon", "Generated", "Runtime")),
+        EnvelopePrologue = EnvelopePrefixes,
+        PreAuthActions = PreAuth,
         Targets =
         [
             new GenerationTarget(
@@ -37,6 +41,36 @@ internal static class ServiceCatalog
         ],
         EnumerationExtensions = [.. VideoEncodings, .. AudioEncodings],
     };
+
+    /// <summary>
+    /// Prefixes declared on the envelope of every message, whether or not the body uses them.
+    /// <para>
+    /// The bindings this replaces were CoreWCF-based and declared both, so devices and tools that
+    /// have been talking to SharpOnvif keep seeing what they saw. "tns1" is needed for a second
+    /// reason: an event topic is written as "tns1:Path", and a prefix used in element content has
+    /// to be in scope wherever that content ends up.
+    /// </para>
+    /// </summary>
+    private static readonly IReadOnlyList<EnvelopeDeclaration> EnvelopePrefixes =
+    [
+        new("tt", "http://www.onvif.org/ver10/schema", "OnvifSchema"),
+        new("tns1", "http://www.onvif.org/ver10/topics", "OnvifTopics"),
+    ];
+
+    /// <summary>
+    /// The actions the Onvif core specification places in the PRE_AUTH category, which a device
+    /// must answer without credentials.
+    /// </summary>
+    private static readonly IReadOnlyList<string> PreAuth =
+    [
+        "http://www.onvif.org/ver10/device/wsdl/GetWsdlUrl",
+        "http://www.onvif.org/ver10/device/wsdl/GetServices",
+        "http://www.onvif.org/ver10/device/wsdl/GetServiceCapabilities",
+        "http://www.onvif.org/ver10/device/wsdl/GetCapabilities",
+        "http://www.onvif.org/ver10/device/wsdl/GetHostname",
+        "http://www.onvif.org/ver10/device/wsdl/GetSystemDateAndTime",
+        "http://www.onvif.org/ver10/device/wsdl/GetEndpointReference",
+    ];
 
     /// <summary>
     /// onvif.xsd still enumerates tt:VideoEncoding as JPEG, MPEG4 and H264, and a generated enum

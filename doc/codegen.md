@@ -3,9 +3,10 @@
 SharpOnvif no longer uses WCF, CoreWCF, or `svcutil`. The Onvif service bindings are produced by
 `src/WsdlGenerator`, a purpose-built WSDL/XSD compiler in this repository.
 
-Output goes to three places:
+Output goes to four places:
 
 ```
+src/SharpOnvifCommon/Generated/Runtime/**/*.cs               namespace SharpOnvifCommon(.Xml|.Soap|.Security)
 src/SharpOnvifCommon/Generated/DataContracts.cs              namespace SharpOnvifCommon.Onvif
 src/SharpOnvifClient/Generated/<Service>/DataContracts.cs    namespace SharpOnvifClient.<Service>
 src/SharpOnvifClient/Generated/<Service>/Client.cs
@@ -15,6 +16,32 @@ src/SharpOnvifServer/Generated/<Service>/Service.cs
 
 The Onvif data model lives in `SharpOnvifCommon.Onvif` and is generated once. Each service gets
 only the types its own WSDL declares, plus its operations.
+
+## The runtime
+
+The generated code is compiled against a runtime: the client base class it derives from, the SOAP
+envelope, the XML reader and writer, and the authentication that goes with them. That runtime is
+generated too, from source embedded in the generator under `src/WsdlGenerator/Runtime/`, into the
+namespace and directory a run chooses.
+
+It is written rather than referenced so that a generated client depends on nothing but itself. A
+client generated from somebody else's WSDL compiles in a project with no references at all - not
+to SharpOnvifCommon, not to anything. This repository points the runtime back at
+`SharpOnvifCommon`, which is where it has always lived, so nothing changes for anyone using
+SharpOnvif as a library.
+
+The embedded source is ordinary C# and stays compilable in an editor: it is written in a namespace
+called `__RUNTIME__`, which the generator replaces. Two things it cannot know about itself come
+from the run instead, and are emitted beside it as `RuntimeDefaults`:
+
+| | |
+| --- | --- |
+| `--envelope-prefix <p=ns>` | Prefixes declared on the envelope element of every message, whether or not the body uses them. Onvif declares `tt` and `tns1`, because devices and tools expect to see them and because an event topic is written as `tns1:Path`. |
+| `--pre-auth <action>` | Actions a device answers without credentials, so a client does not authenticate them. Onvif calls these PRE_AUTH. |
+
+That is what keeps the embedded source free of Onvif. Change the runtime by editing
+`src/WsdlGenerator/Runtime/` and regenerating - editing the emitted copy loses the change on the
+next run.
 
 ## Running the generator
 
@@ -43,8 +70,9 @@ dotnet run --project src/WsdlGenerator -- \
     --out ./Generated
 ```
 
-That produces `Generated/Bank/{DataContracts,Client,Service}.cs` in `Example.Banking.Bank`, with
-the types its schemas share in `Example.Banking.Schema`. The service name comes from the file
+That produces `Generated/Bank/{DataContracts,Client,Service}.cs` in `Example.Banking.Bank`, the
+types its schemas share in `Example.Banking.Schema`, and the runtime under it in
+`Example.Banking.Runtime`. The service name comes from the file
 name; write `--wsdl Accounts=./bank.wsdl` to choose one. Repeat `--wsdl` for several services, and
 they share their common schemas the same way the Onvif services do.
 
@@ -55,6 +83,11 @@ they share their common schemas the same way the Onvif services do.
 | `--out <dir>` | Output directory; a service lands in `<dir>/<Service>`. |
 | `--shared-namespace <ns>` | Namespace for shared types. Defaults to `<ns>.Schema`. |
 | `--shared-out <dir>` | Directory for shared types. Defaults to `<dir>/Schema`. |
+| `--runtime-namespace <ns>` | Namespace of the runtime. Defaults to `<ns>.Runtime`. |
+| `--runtime-out <dir>` | Directory for the runtime. Defaults to `<dir>/Runtime`. |
+| `--no-runtime` | Do not write the runtime; compile against the one `--runtime-namespace` names. |
+| `--envelope-prefix <p=ns>` | Declare a prefix on every envelope. Repeatable. |
+| `--pre-auth <action>` | An action the device answers without credentials. Repeatable. |
 | `--client` / `--server` | Generate one side only. Both by default. |
 | `--mirror <dir>` | Resolve every document from a local mirror rather than from disk and the network. |
 
@@ -63,9 +96,15 @@ a WSDL on disk can pull in schemas beside it and one fetched over http can pull 
 Pass `--mirror` to keep a run offline and reproducible, which is how this repository generates its
 own bindings.
 
-Generated code depends on `SharpOnvifCommon`, and the server side additionally on
-`SharpOnvifServer`. Despite the names, neither is Onvif-specific: they carry the SOAP 1.2
-envelope, the XML reading and writing, and the ASP.NET Core dispatch the generated code drives.
+A generated client depends on nothing but the runtime written beside it. A generated service
+additionally depends on `SharpOnvifServer`, which carries the ASP.NET Core dispatch it is routed
+by; that is not Onvif-specific either, but unlike the runtime it is a library rather than
+something the generator writes. Generate with `--client` for output that references nothing at
+all.
+
+Run the generator twice into one solution - a second service set, say - with `--no-runtime` on the
+second run and `--runtime-namespace` naming the first one's, so the two share a runtime instead of
+each emitting a copy.
 
 `SharpOnvifCommon.Tests`'s `TestCodeGenerator` runs the generator over a small banking WSDL to keep this
 path working.

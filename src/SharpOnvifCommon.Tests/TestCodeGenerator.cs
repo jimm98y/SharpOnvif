@@ -23,6 +23,7 @@ using System;
 using System.IO;
 using System.Linq;
 using WsdlGenerator.Configuration;
+using WsdlGenerator.Emit;
 using WsdlGenerator.Generation;
 using WsdlGenerator.Xml;
 
@@ -108,7 +109,9 @@ namespace SharpOnvif.Tests
                 int first = new CodeGenerator(options!).Run().FilesWritten;
                 int second = new CodeGenerator(options!).Run().FilesWritten;
 
-                Assert.AreEqual(4, first);
+                Assert.AreEqual(
+                    Directory.GetFiles(output, "*.cs", SearchOption.AllDirectories).Length, first,
+                    "the first run writes everything there is");
                 Assert.AreEqual(0, second, "an unchanged run must leave the files alone");
             }
             finally
@@ -136,6 +139,219 @@ namespace SharpOnvif.Tests
             {
                 Directory.Delete(output, recursive: true);
             }
+        }
+
+        [TestMethod]
+        public void WritesTheRuntimeTheGeneratedCodeNeeds()
+        {
+            // The point of writing it rather than referencing it: a generated client is compiled
+            // against its own runtime, so it names no library of ours at all. A client that still
+            // mentioned SharpOnvif would not compile anywhere but in this repository.
+            string output = NewOutputDirectory();
+            try
+            {
+                var options = CommandLine.Parse(
+                    ["--wsdl", Fixture, "--namespace", "Example.Banking", "--out", output]);
+
+                new CodeGenerator(options!).Run();
+
+                string runtime = Path.Combine(output, "Runtime");
+                Assert.IsTrue(File.Exists(Path.Combine(runtime, "Soap", "OnvifClientBase.cs")),
+                    "the base class the generated client derives from");
+                Assert.IsTrue(File.Exists(Path.Combine(runtime, "Xml", "OnvifXmlReader.cs")));
+                Assert.IsTrue(File.Exists(Path.Combine(runtime, "RuntimeDefaults.cs")));
+
+                // Everything a client is built from: the client, the contracts it exchanges, the
+                // shared schema and the runtime underneath them. The generated service is the one
+                // exception, and deliberately so - it is routed by the ASP.NET Core dispatch in
+                // SharpOnvifServer, which is a library rather than anything the generator writes.
+                foreach (string file in Directory.GetFiles(output, "*.cs", SearchOption.AllDirectories))
+                {
+                    if (Path.GetFileName(file) == "Service.cs") continue;
+
+                    string source = File.ReadAllText(file);
+
+                    // The name in a licence header is not a dependency; a namespace is.
+                    foreach (string assembly in new[] { "SharpOnvifCommon", "SharpOnvifClient", "SharpOnvifServer" })
+                    {
+                        Assert.IsFalse(source.Contains(assembly, StringComparison.Ordinal),
+                            $"{Path.GetFileName(file)} depends on {assembly}");
+                    }
+                }
+
+                string client = File.ReadAllText(Path.Combine(output, "Bank", "Client.cs"));
+                StringAssert.Contains(client, "Example.Banking.Runtime.Soap.OnvifClientBase");
+                StringAssert.Contains(client, "Example.Banking.Runtime.Xml.OnvifContract");
+
+                string @base = File.ReadAllText(Path.Combine(runtime, "Soap", "OnvifClientBase.cs"));
+                StringAssert.Contains(@base, "namespace Example.Banking.Runtime.Soap");
+            }
+            finally
+            {
+                Directory.Delete(output, recursive: true);
+            }
+        }
+
+        [TestMethod]
+        public void WritesTheRuntimeWhereItWasPointed()
+        {
+            string output = NewOutputDirectory();
+            string elsewhere = NewOutputDirectory();
+            try
+            {
+                var options = CommandLine.Parse(
+                    ["--wsdl", Fixture, "--namespace", "Example.Banking", "--out", output,
+                     "--runtime-namespace", "Example.Soap", "--runtime-out", elsewhere]);
+
+                new CodeGenerator(options!).Run();
+
+                Assert.IsFalse(Directory.Exists(Path.Combine(output, "Runtime")),
+                    "the runtime went where it was pointed, not where it defaults to");
+
+                string @base = File.ReadAllText(Path.Combine(elsewhere, "Soap", "OnvifClientBase.cs"));
+                StringAssert.Contains(@base, "namespace Example.Soap.Soap");
+
+                string client = File.ReadAllText(Path.Combine(output, "Bank", "Client.cs"));
+                StringAssert.Contains(client, "Example.Soap.Soap.OnvifClientBase");
+            }
+            finally
+            {
+                Directory.Delete(output, recursive: true);
+                Directory.Delete(elsewhere, recursive: true);
+            }
+        }
+
+        [TestMethod]
+        public void CompilesAgainstARuntimeItWasToldNotToWrite()
+        {
+            // A second run generating into the same solution must not emit a second copy of the
+            // runtime, but still has to name the one that is already there.
+            string output = NewOutputDirectory();
+            try
+            {
+                var options = CommandLine.Parse(
+                    ["--wsdl", Fixture, "--namespace", "Example.Banking", "--out", output,
+                     "--runtime-namespace", "Example.Shared.Soap", "--no-runtime"]);
+
+                new CodeGenerator(options!).Run();
+
+                Assert.IsFalse(Directory.Exists(Path.Combine(output, "Runtime")));
+
+                string client = File.ReadAllText(Path.Combine(output, "Bank", "Client.cs"));
+                StringAssert.Contains(client, "Example.Shared.Soap.Soap.OnvifClientBase");
+            }
+            finally
+            {
+                Directory.Delete(output, recursive: true);
+            }
+        }
+
+        [TestMethod]
+        public void RefusesToBothWriteAndNotWriteTheRuntime()
+        {
+            Assert.ThrowsExactly<SchemaException>(() => CommandLine.Parse(
+                ["--wsdl", Fixture, "--namespace", "Example", "--out", "out",
+                 "--no-runtime", "--runtime-out", "somewhere"]));
+        }
+
+        [TestMethod]
+        public void CarriesWhatTheRuntimeCannotKnowAboutItself()
+        {
+            // The envelope prefixes and the unauthenticated actions are the two things that are
+            // not the same for every schema, so they are given to the run rather than written into
+            // the runtime's source - which is what keeps that source free of Onvif.
+            string output = NewOutputDirectory();
+            try
+            {
+                var options = CommandLine.Parse(
+                    ["--wsdl", Fixture, "--namespace", "Example.Banking", "--out", output,
+                     "--envelope-prefix", "m=urn:example:money",
+                     "--pre-auth", "urn:example:bank/GetBalance"]);
+
+                new CodeGenerator(options!).Run();
+
+                string defaults = File.ReadAllText(Path.Combine(output, "Runtime", "RuntimeDefaults.cs"));
+
+                StringAssert.Contains(defaults, "new XmlNamespaceDeclaration(\"m\", \"urn:example:money\")");
+                StringAssert.Contains(defaults, "\"urn:example:bank/GetBalance\"");
+            }
+            finally
+            {
+                Directory.Delete(output, recursive: true);
+            }
+        }
+
+        [DataRow("m", DisplayName = "no namespace")]
+        [DataRow("=urn:example:money", DisplayName = "no prefix")]
+        [DataRow("m=", DisplayName = "empty namespace")]
+        [TestMethod]
+        public void RejectsAnEnvelopePrefixItCannotRead(string argument)
+        {
+            Assert.ThrowsExactly<SchemaException>(() => CommandLine.Parse(
+                ["--wsdl", Fixture, "--namespace", "Example", "--out", "out",
+                 "--envelope-prefix", argument]));
+        }
+
+        [TestMethod]
+        public void KeepsTheCommittedRuntimeInStepWithItsSource()
+        {
+            // The runtime in SharpOnvifCommon is generated, but it is committed and built like any
+            // other source, so nothing would notice it drifting from the source it is emitted from
+            // - an edit to the emitted copy, or an edit to the template that was never regenerated.
+            // This is what notices. Run `dotnet run --project src/WsdlGenerator` to settle it.
+            string repository = RepositoryRoot();
+            string committed = Path.Combine(repository, "src", "SharpOnvifCommon", "Generated", "Runtime");
+
+            string output = NewOutputDirectory();
+            try
+            {
+                var options = ServiceCatalog.OnvifOptions(repository, Path.Combine(repository, "src"));
+                new RuntimeEmitter(options).Emit(output);
+
+                var emitted = Directory.GetFiles(output, "*.cs", SearchOption.AllDirectories)
+                    .Select(f => Path.GetRelativePath(output, f))
+                    .OrderBy(f => f, StringComparer.Ordinal)
+                    .ToList();
+
+                CollectionAssert.AreEqual(
+                    emitted,
+                    Directory.GetFiles(committed, "*.cs", SearchOption.AllDirectories)
+                        .Select(f => Path.GetRelativePath(committed, f))
+                        .OrderBy(f => f, StringComparer.Ordinal)
+                        .ToList(),
+                    "the committed runtime is not the set of files the generator writes");
+
+                foreach (string file in emitted)
+                {
+                    Assert.AreEqual(
+                        File.ReadAllText(Path.Combine(output, file)),
+                        File.ReadAllText(Path.Combine(committed, file)),
+                        $"{file} differs from what the generator would write");
+                }
+            }
+            finally
+            {
+                Directory.Delete(output, recursive: true);
+            }
+        }
+
+        /// <summary>
+        /// Walks up to the repository, which is where the schema mirror and the projects live.
+        /// </summary>
+        private static string RepositoryRoot()
+        {
+            var directory = new DirectoryInfo(AppContext.BaseDirectory);
+            while (directory is not null)
+            {
+                if (Directory.Exists(Path.Combine(directory.FullName, "wsdl"))
+                    && Directory.Exists(Path.Combine(directory.FullName, "src")))
+                {
+                    return directory.FullName;
+                }
+                directory = directory.Parent;
+            }
+
+            throw new AssertFailedException("Could not find the repository root from the test binary.");
         }
 
         [TestMethod]

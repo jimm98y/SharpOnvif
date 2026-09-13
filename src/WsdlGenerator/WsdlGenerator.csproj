@@ -17,4 +17,15 @@
 		<InternalsVisibleTo Include="SharpOnvifCommon.Tests" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<!--
+			The runtime under Runtime/ is source the generator writes out, not source it is built
+			from: it is carried along as a resource and emitted into the namespace a run chooses.
+			It stays valid C# so an editor still checks it, which is why the namespace it is
+			written in is a plain identifier.
+		-->
+		<Compile Remove="Runtime/**/*.cs" />
+		<EmbeddedResource Include="Runtime/**/*.cs" />
+	</ItemGroup>
+
 </Project>

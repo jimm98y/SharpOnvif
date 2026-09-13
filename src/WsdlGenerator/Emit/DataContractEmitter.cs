@@ -13,7 +13,6 @@ namespace WsdlGenerator.Emit;
 /// </summary>
 internal sealed class DataContractEmitter
 {
-    private const string Runtime = "SharpOnvifCommon.Xml";
 
     private readonly CsModel _model;
     private readonly string _namespace;
@@ -21,6 +20,9 @@ internal sealed class DataContractEmitter
 
     private readonly bool _isShared;
     private readonly string? _sharedNamespace;
+
+    /// <summary>Namespace of the contract base class, the reader and the writer.</summary>
+    private readonly string Runtime;
 
     /// <param name="isShared">
     /// True for the model of the schemas the services share. Its helpers are called from the
@@ -30,12 +32,17 @@ internal sealed class DataContractEmitter
     /// Where the shared types live, so a service's xsi:type factory can defer to theirs. Null for
     /// the shared model itself.
     /// </param>
-    public DataContractEmitter(CsModel model, string @namespace, bool isShared, string? sharedNamespace = null)
+    /// <param name="runtime">
+    /// Root namespace of the runtime the contracts are read and written by.
+    /// </param>
+    public DataContractEmitter(
+        CsModel model, string @namespace, bool isShared, string runtime, string? sharedNamespace = null)
     {
         _model = model;
         _namespace = @namespace;
         _isShared = isShared;
         _sharedNamespace = sharedNamespace;
+        Runtime = runtime + ".Xml";
     }
 
     private string HelperVisibility => _isShared ? "public" : "internal";
@@ -69,7 +76,7 @@ internal sealed class DataContractEmitter
             }
 
             writer.Line();
-            XmlTypeFactoryEmitter.Emit(writer, _model, HelperVisibility, _isShared ? null : _sharedNamespace);
+            XmlTypeFactoryEmitter.Emit(writer, _model, HelperVisibility, Runtime, _isShared ? null : _sharedNamespace);
 
             writer.Line();
             OnvifActionsEmitter.Emit(writer, _model);
@@ -834,9 +841,9 @@ internal sealed class DataContractEmitter
 
     // ---------------------------------------------------------------- scalar conversions
 
-    private static string ToXmlExpression(CsMember member, string value) => ScalarToXml(member.Type, value);
+    private string ToXmlExpression(CsMember member, string value) => ScalarToXml(member.Type, value);
 
-    private static string FromXmlExpression(CsMember member, string text) => ScalarFromXml(member.Type, text);
+    private string FromXmlExpression(CsMember member, string text) => ScalarFromXml(member.Type, text);
 
     /// <summary>The EnumXml class that declares the conversions for a type, qualified if needed.</summary>
     private static string EnumHelper(CsTypeRef type)
@@ -853,7 +860,7 @@ internal sealed class DataContractEmitter
     }
 
     /// <summary>Renders a CLR value as its XML lexical form.</summary>
-    private static string ScalarToXml(CsTypeRef type, string value)
+    private string ScalarToXml(CsTypeRef type, string value)
     {
         if (type.Kind == TypeKind.Enum) return $"{EnumHelper(type)}.ToXml({value})";
         if (type.Kind == TypeKind.Object) return $"System.Convert.ToString({value}, System.Globalization.CultureInfo.InvariantCulture)";
@@ -885,7 +892,7 @@ internal sealed class DataContractEmitter
     }
 
     /// <summary>Parses an XML lexical form into a CLR value.</summary>
-    private static string ScalarFromXml(CsTypeRef type, string text)
+    private string ScalarFromXml(CsTypeRef type, string text)
     {
         if (type.Kind == TypeKind.Enum) return $"{EnumHelper(type)}.Parse{SimpleName(type)}({text})";
         if (type.Kind == TypeKind.Object) return text;

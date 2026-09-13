@@ -14,11 +14,14 @@ internal sealed class CSharpWriter
     public void Outdent() => _indent--;
 
     /// <summary>Writes an open brace, indents, and returns a scope that closes it.</summary>
-    public Block Braces()
+    /// <param name="semicolon">
+    /// Closes with <c>};</c> rather than <c>}</c>, for the braces of an initializer.
+    /// </param>
+    public Block Braces(bool semicolon = false)
     {
         Line("{");
         Indent();
-        return new Block(this);
+        return new Block(this, semicolon);
     }
 
     public void Line(string text = "")
@@ -93,12 +96,18 @@ internal sealed class CSharpWriter
     internal readonly struct Block : IDisposable
     {
         private readonly CSharpWriter _writer;
-        public Block(CSharpWriter writer) => _writer = writer;
+        private readonly bool _semicolon;
+
+        public Block(CSharpWriter writer, bool semicolon = false)
+        {
+            _writer = writer;
+            _semicolon = semicolon;
+        }
 
         public void Dispose()
         {
             _writer.Outdent();
-            _writer.Line("}");
+            _writer.Line(_semicolon ? "};" : "}");
         }
     }
 }

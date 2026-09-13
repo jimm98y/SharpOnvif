@@ -11,18 +11,24 @@ namespace WsdlGenerator.Emit;
 /// </summary>
 internal sealed class ClientEmitter
 {
-    private const string Runtime = "SharpOnvifCommon.Soap";
-    private const string Xml = "SharpOnvifCommon.Xml";
     private const string Task = "System.Threading.Tasks.Task";
     private const string Token = "System.Threading.CancellationToken";
 
     private readonly CsModel _model;
     private readonly string _namespace;
 
-    public ClientEmitter(CsModel model, string @namespace)
+    /// <summary>Namespace of the client base class and the settings it takes.</summary>
+    private readonly string Runtime;
+
+    /// <summary>Namespace of the contract, reader and writer.</summary>
+    private readonly string Xml;
+
+    public ClientEmitter(CsModel model, string @namespace, string runtime)
     {
         _model = model;
         _namespace = @namespace;
+        Runtime = runtime + ".Soap";
+        Xml = runtime + ".Xml";
     }
 
     public string Emit()

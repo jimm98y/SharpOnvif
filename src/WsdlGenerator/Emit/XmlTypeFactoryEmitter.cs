@@ -11,13 +11,15 @@ namespace WsdlGenerator.Emit;
 /// </summary>
 internal static class XmlTypeFactoryEmitter
 {
-    public static void Emit(CSharpWriter writer, CsModel model, string visibility, string? fallbackNamespace)
+    /// <param name="xml">Namespace of the contract base class the factory returns.</param>
+    public static void Emit(
+        CSharpWriter writer, CsModel model, string visibility, string xml, string? fallbackNamespace)
     {
         writer.Line("/// <summary>Constructs a contract named by an xsi:type attribute.</summary>");
         writer.Line($"{visibility} static class XmlTypeFactory");
         using (writer.Braces())
         {
-            writer.Line("public static SharpOnvifCommon.Xml.OnvifContract Create(string ns, string name)");
+            writer.Line($"public static {xml}.OnvifContract Create(string ns, string name)");
             using (writer.Braces())
             {
                 // Only types that can actually be named by xsi:type are worth listing: a type
