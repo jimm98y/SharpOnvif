@@ -230,7 +230,7 @@ unguessable strings now:
 + string subscriptionID = httpContext.Items[OnvifEvents.ONVIF_SUBSCRIPTION_ID] as string;
 ```
 
-### The device and the client are configured with one type
+### Authentication is configured the same way on both sides
 
 What the two sides have to agree on - which schemes, which hashing algorithms, which qualities of
 protection, whether usernames are hashed, which operations need no credentials - was declared twice,
@@ -293,14 +293,19 @@ objects from it, so a file written for 0.9.x keeps working.
 + AddOnvifDigestAuthentication(Configuration.GetSection("Digest"));
 ```
 
-`UtcNowOffset` moved with the split, from `OnvifAuthenticationSettings` to
-`OnvifClientSettings` - it compensates for a device whose clock is wrong, which is the client's
-business and no part of what the two sides negotiate. `SimpleOnvifClient.SetCameraUtcNowOffset` is
-unchanged.
+`UtcNowOffset` sits with the side it belongs to. It compensates for a device whose clock is wrong,
+which is the client's business and no part of what the two sides negotiate, so it is on the
+client's options and on `OnvifClientSettings` for a generated client - not on the settings a device
+shares with them. `SimpleOnvifClient.SetCameraUtcNowOffset` is unchanged and still the easiest way
+to set it.
 
 ```cs
-- new OnvifClientSettings { Authentication = new OnvifAuthenticationSettings { UtcNowOffset = skew } }
-+ new OnvifClientSettings { UtcNowOffset = skew }
+  new DigestAuthenticationSchemeOptions(DigestAuthentication.WsUsernameToken)
+  {
++     UtcNowOffset = skew,
+  }
+
+  new OnvifClientSettings { UtcNowOffset = skew }     // a generated client, built directly
 ```
 
 ### One `DigestAuthentication` instead of two
@@ -331,10 +336,12 @@ instances must agree on one.
 
 ### Unchanged
 
-`IUserRepository`, `AddOnvifDigestAuthentication`, `DigestAuthenticationSchemeOptions`,
-`AddOnvifDiscovery`, `OnvifDiscoveryOptions`, `SharpOnvifServer.Events.IEventSource` and the
-`IServer.GetHttpEndpoint` helpers keep their shapes: nothing you already set on them has moved or
-changed meaning.
+`IUserRepository`, `AddOnvifDigestAuthentication`, `AddOnvifDiscovery`, `OnvifDiscoveryOptions`,
+`SharpOnvifServer.Events.IEventSource` and the `IServer.GetHttpEndpoint` helpers keep their shapes:
+nothing you already set on them has moved or changed meaning. The server's
+`DigestAuthenticationSchemeOptions` keeps its name and everything the device owns; what the two
+sides agree on moved onto `Onvif`, as above. The client's type of the same name is described there
+too - it is a different type, in `SharpOnvifClient.Security`, and it did change shape.
 
 ## 6. Behaviour that changed without a signature changing
 
@@ -357,6 +364,21 @@ These compile as they did and behave differently, because they were wrong.
   algorithm used to leave the device offering the six defaults and that one, so the setting could
   widen what was offered but never narrow it. `"HttpDigestAlgorithms": [ "SHA-256" ]` means
   SHA-256 alone now, which is what the file looks like it says.
+- **A device that accepts only one scheme no longer refuses clients that offer both.** A client
+  that knows both sends its UsernameToken whether or not this device wants it, having no way to
+  find out except by being refused. Setting `Authentication` to HTTP Digest alone used to fail
+  every such request after the digest had already succeeded, which read as an endless 401. A token
+  for a scheme the device does not accept is ignored now.
+- **A failed HTTP Digest refuses the request.** It used to fall past its own check into the
+  UsernameToken branch below, so a request pairing a wrong digest with a good token authenticated -
+  which made the digest optional for anyone able to produce a token. **If something of yours
+  authenticated with a digest it computed wrongly, it stops working, and it was never
+  authenticating.** Where a device accepts both and a request carries both, both must hold up, the
+  digest first, and they must name the same user.
+- **PRE_AUTH is honoured when the action is addressed rather than typed.** Onvif Device Manager
+  puts the action in a `wsa:Action` header instead of the `Content-Type`. Dispatch has always read
+  it there; authentication did not, so an operation the specification says needs no credentials was
+  asked for them.
 - **The server bounds what it reads.** A request over `OnvifEndpoint.MaxRequestBytes` (2 MB) is
   refused with a fault, and a document nested deeper than `OnvifXmlReader.MaxDepth` (256) is
   refused. Both are far above anything Onvif describes, and both are settable.

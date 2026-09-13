@@ -58,8 +58,8 @@ is one, at about thirteen hundred lines of `Xml/` - or writing one.
 ### Implementing it
 
 Onvif's implementations are in `SharpOnvifCommon`: `OnvifXmlReader`, `OnvifXmlWriter`,
-`SoapEnvelope` and `SoapMessageCodec`, `OnvifClientSettings`, `OnvifAuthenticationSettings`, and
-the loggers. Be clear-eyed about the split between them. `IXmlReader`, `IXmlWriter` and
+`SoapEnvelope` and `SoapMessageCodec`, `OnvifClientSettings`, `OnvifClientAuthentication`, and the
+loggers. Be clear-eyed about the split between them. `IXmlReader`, `IXmlWriter` and
 `IMessageCodec` are the work - about thirteen hundred lines of `Xml/` between them - and unless
 your service is not SOAP 1.2 at all, porting those is a better use of a day than writing them.
 `IClientSettings` is the small end, and the whole of it:
