@@ -101,74 +101,45 @@ namespace SharpOnvifClient
         /// Interfaces that cannot be joined are skipped rather than failing the whole listener -
         /// one unusable interface on a machine is normal.
         /// </summary>
+        /// <summary>
+        /// Listens on the interfaces discovery works over.
+        /// </summary>
+        public OnvifDiscoveryListener()
+            : this(null)
+        {
+        }
+
+        /// <summary>
+        /// Listens on the given interfaces, or on the ones discovery works over when given none.
+        /// </summary>
+        /// <remarks>
+        /// <see cref="OnvifDiscoveryClient"/> hands over the interfaces it sends its probes on, so
+        /// that answers are heard on the adapters the questions went out of. Choosing here as well
+        /// meant two sets of rules, and a machine listening somewhere it never probed.
+        /// </remarks>
+        public OnvifDiscoveryListener(IEnumerable<OnvifDiscoveryInterface> interfaces)
+        {
+            _interfaces = interfaces;
+        }
+
+        private readonly IEnumerable<OnvifDiscoveryInterface> _interfaces;
+
         public void Start()
         {
-            foreach (Interface nic in MulticastInterfaces())
+            // One join per interface for IPv6: an adapter commonly carries several IPv6 addresses,
+            // and they would all be joining the same group on the same interface.
+            var joined = new HashSet<int>();
+
+            foreach (OnvifDiscoveryInterface nic in _interfaces ?? OnvifDiscoveryInterface.Enumerate())
             {
+                if (nic.Address.AddressFamily == AddressFamily.InterNetworkV6 && !joined.Add(nic.Index))
+                    continue;
+
                 Listen(nic);
             }
         }
 
-        /// <summary>
-        /// An address to listen on, and for IPv6 the interface it belongs to - an IPv6 group is
-        /// joined by interface index, not by address.
-        /// </summary>
-        private struct Interface
-        {
-            public Interface(IPAddress address, int index)
-            {
-                Address = address;
-                Index = index;
-            }
-
-            public IPAddress Address;
-            public int Index;
-        }
-
-        private static IEnumerable<Interface> MulticastInterfaces()
-        {
-            // One join per interface for IPv6: a single adapter commonly carries several IPv6
-            // addresses, and they would all be joining the same group on the same interface.
-            var joinedIPv6 = new HashSet<int>();
-
-            foreach (NetworkInterface adapter in NetworkInterface.GetAllNetworkInterfaces())
-            {
-                if (adapter.OperationalStatus != OperationalStatus.Up) continue;
-                if (!adapter.SupportsMulticast) continue;
-
-                IPInterfaceProperties properties = adapter.GetIPProperties();
-
-                int interfaceIndex = -1;
-                try
-                {
-                    interfaceIndex = properties.GetIPv6Properties().Index;
-                }
-                catch (NetworkInformationException)
-                {
-                    // No IPv6 on this adapter; its IPv4 addresses are still worth listening on.
-                }
-
-                foreach (var unicast in properties.UnicastAddresses)
-                {
-                    if (unicast.Address.AddressFamily == AddressFamily.InterNetwork)
-                    {
-                        byte[] bytes = unicast.Address.GetAddressBytes();
-                        if (bytes[0] == 169 && bytes[1] == 254) continue; // link-local
-
-                        yield return new Interface(unicast.Address, 0);
-                    }
-                    else if (unicast.Address.AddressFamily == AddressFamily.InterNetworkV6)
-                    {
-                        if (interfaceIndex < 0) continue;
-                        if (!joinedIPv6.Add(interfaceIndex)) continue;
-
-                        yield return new Interface(unicast.Address, interfaceIndex);
-                    }
-                }
-            }
-        }
-
-        private void Listen(Interface nic)
+        private void Listen(OnvifDiscoveryInterface nic)
         {
             bool isIPv6 = nic.Address.AddressFamily == AddressFamily.InterNetworkV6;
 

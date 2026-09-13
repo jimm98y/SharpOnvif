@@ -107,7 +107,9 @@ namespace SharpOnvifClient
 
             var found = new TaskCompletionSource<OnvifDiscoveryResult>();
 
-            using (var listener = new OnvifDiscoveryListener { Logger = Logger })
+            // The same interfaces the probes go out on, so a machine cannot be probing over one
+            // set of adapters and listening on another.
+            using (var listener = new OnvifDiscoveryListener(OnvifDiscoveryInterface.Enumerate()) { Logger = Logger })
             using (cancellationToken.Register(() => found.TrySetCanceled(cancellationToken)))
             {
                 listener.DeviceAnnounced += (sender, e) =>
@@ -204,60 +206,18 @@ namespace SharpOnvifClient
         /// <returns>A list of discovered devices with make and model.</returns>
         internal async Task<IList<OnvifDiscoveryResult>> DiscoverAllAsync(Action<OnvifDiscoveryResult> onDeviceDiscovered = null, int multicastTimeout = ONVIF_MULTICAST_TIMEOUT, int multicastPort = 0, string deviceType = "NetworkVideoTransmitter")
         {
-            NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
             List<Task<IList<OnvifDiscoveryResult>>> discoveryTasks = new List<Task<IList<OnvifDiscoveryResult>>>();
 
-            foreach (NetworkInterface adapter in nics)
+            foreach (OnvifDiscoveryInterface nic in OnvifDiscoveryInterface.Enumerate())
             {
-                // Not loopback: a Probe cannot be multicast out of it - the send fails with
-                // "Can't assign requested address" - and a device on this machine is listening on
-                // the real interfaces too, so nothing is lost by not asking here.
-                if (adapter.NetworkInterfaceType == NetworkInterfaceType.Loopback)
+                // A probe is sent from the address, and a link-local IPv6 address has no route to
+                // send one on. The listener takes the same interfaces and keeps these, because it
+                // joins by index rather than binding to the address.
+                if (nic.Address.AddressFamily == AddressFamily.InterNetworkV6 && nic.Address.IsIPv6LinkLocal)
                     continue;
 
-                if (!(adapter.NetworkInterfaceType == NetworkInterfaceType.FastEthernetT ||
-                    adapter.NetworkInterfaceType == NetworkInterfaceType.FastEthernetFx ||
-                    adapter.NetworkInterfaceType == NetworkInterfaceType.Ethernet ||
-                    adapter.NetworkInterfaceType == NetworkInterfaceType.Ethernet3Megabit ||
-                    adapter.NetworkInterfaceType == NetworkInterfaceType.GigabitEthernet ||
-                    adapter.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 ||
-                    adapter.NetworkInterfaceType == NetworkInterfaceType.Fddi))
-                    continue;
-
-                if (adapter.OperationalStatus != OperationalStatus.Up)
-                    continue;
-
-                if (!adapter.SupportsMulticast)
-                    continue;
-
-                if (!(adapter.Supports(NetworkInterfaceComponent.IPv4) || adapter.Supports(NetworkInterfaceComponent.IPv6)))
-                    continue;
-
-                IPInterfaceProperties adapterProperties = adapter.GetIPProperties();
-
-                if (adapterProperties.GetIPv4Properties() == null && adapterProperties.GetIPv6Properties() == null)
-                    continue;
-
-                foreach (var ua in adapterProperties.UnicastAddresses)
-                {
-                    if (ua.Address.AddressFamily == AddressFamily.InterNetwork)
-                    {
-                        byte[] ipAddrBytes = ua.Address.GetAddressBytes();
-                        if (ipAddrBytes[0] == 169 && ipAddrBytes[1] == 254)
-                            continue; // skip link-local address
-
-                        var discoveryTask = DiscoverAllAsync(ua.Address.ToString(), onDeviceDiscovered, multicastTimeout, multicastPort, deviceType);
-                        discoveryTasks.Add(discoveryTask);
-                    }
-                    else if (ua.Address.AddressFamily == AddressFamily.InterNetworkV6)
-                    {
-                        if(ua.Address.IsIPv6LinkLocal)
-                            continue; // skip link-local address
-
-                        var discoveryTask = DiscoverAllAsync(ua.Address.ToString(), onDeviceDiscovered, multicastTimeout, multicastPort, deviceType);
-                        discoveryTasks.Add(discoveryTask);
-                    }
-                }
+                discoveryTasks.Add(DiscoverAllAsync(
+                    nic.Address.ToString(), onDeviceDiscovered, multicastTimeout, multicastPort, deviceType));
             }
 
             // Not Task.WhenAll: one interface throwing must not lose the devices the others
