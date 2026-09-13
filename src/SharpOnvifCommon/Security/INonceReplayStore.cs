@@ -20,7 +20,6 @@
 // SOFTWARE.
 
 using System;
-using System.Runtime.Caching;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -75,22 +74,17 @@ namespace SharpOnvifCommon.Security
     /// The default <see cref="INonceReplayStore"/>, holding spent nonces in the memory of this one
     /// process. See the remarks on <see cref="INonceReplayStore"/> for when that is not enough.
     /// </summary>
-    public sealed class MemoryNonceReplayStore : INonceReplayStore, IDisposable
+    public sealed class MemoryNonceReplayStore : INonceReplayStore
     {
-        private readonly MemoryCache _nonceCache;
-        private readonly object _syncRoot = new object();
+        private static readonly Task<bool> Fresh = Task.FromResult(true);
+        private static readonly Task<bool> Replayed = Task.FromResult(false);
 
-        /// <summary>
-        /// Creates a store with its own cache.
-        /// </summary>
-        /// <param name="name">
-        /// Names the underlying cache, for diagnostics and performance counters. It must not be
-        /// "default", which <see cref="MemoryCache"/> reserves for its own shared instance.
-        /// </param>
-        public MemoryNonceReplayStore(string name = "nonce")
-        {
-            _nonceCache = new MemoryCache(name);
-        }
+        // Ordinal: a nonce is an opaque token, and two that differ by a byte are two nonces.
+        private readonly ExpiringCache<string, int> _spent =
+            new ExpiringCache<string, int>(StringComparer.Ordinal);
+
+        // Reading the highest count seen and recording a new one is a single decision.
+        private readonly object _syncRoot = new object();
 
         /// <inheritdoc/>
         public Task<bool> TryUseNonceAsync(string nonce, int nonceCount, DateTimeOffset expiresAt, CancellationToken cancellationToken)
@@ -100,36 +94,17 @@ namespace SharpOnvifCommon.Security
 
             cancellationToken.ThrowIfCancellationRequested();
 
+            // Record the count that was actually presented, not 1. Recording 1 leaves every count
+            // below the one seen still acceptable, so a captured request whose count is higher -
+            // which is what a client sends after retrying a lost request - could be replayed once.
             lock (_syncRoot)
             {
-                object seen = _nonceCache.Get(nonce, null);
+                if (_spent.TryGet(nonce, out int seen) && nonceCount <= seen)
+                    return Replayed;
 
-                // Record the count that was actually presented, not 1. Recording 1 leaves every
-                // count below the one seen still acceptable, so a captured request whose count is
-                // higher - which is what a client sends after retrying a lost request - could be
-                // replayed once.
-                if (seen != null && nonceCount <= (int)seen)
-                    return TaskFromResult(false);
-
-                _nonceCache.Set(nonce, nonceCount, new CacheItemPolicy() { AbsoluteExpiration = expiresAt });
-                return TaskFromResult(true);
+                _spent.Set(nonce, nonceCount, expiresAt);
+                return Fresh;
             }
-        }
-
-        private static Task<bool> TaskFromResult(bool value)
-        {
-            return value ? TrueTask : FalseTask;
-        }
-
-        private static readonly Task<bool> TrueTask = Task.FromResult(true);
-        private static readonly Task<bool> FalseTask = Task.FromResult(false);
-
-        /// <summary>
-        /// Releases the underlying cache.
-        /// </summary>
-        public void Dispose()
-        {
-            _nonceCache.Dispose();
         }
     }
 }

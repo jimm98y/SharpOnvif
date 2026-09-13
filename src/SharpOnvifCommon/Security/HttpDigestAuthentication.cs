@@ -22,7 +22,6 @@
 using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Runtime.Caching;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -805,14 +804,19 @@ namespace SharpOnvifCommon.Security
         #region Nonce prime
 
         private const int OPAQUE_LENGTH = 32;
-        private static MemoryCache _primeCache = new MemoryCache("prime");
-        private static object _primeCacheSyncRoot = new object();
+        private static readonly ExpiringCache<string, (string nonce, string cnonce)?> _primeCache =
+            new ExpiringCache<string, (string nonce, string cnonce)?>(StringComparer.Ordinal);
+
+        // Reading a prime and writing one back is a single decision, so it is taken under one lock
+        // rather than left to the two calls the cache sees.
+        private static readonly object _primeCacheSyncRoot = new object();
 
         public static (string nonce, string cnonce)? GetNoncePrime(string sessionID)
         {
             lock (_primeCacheSyncRoot)
             {
-                return _primeCache.Get(sessionID, null) as (string nonce, string cnonce)?;
+                (string nonce, string cnonce)? prime;
+                return _primeCache.TryGet(sessionID, out prime) ? prime : null;
             }
         }
 
@@ -820,35 +824,29 @@ namespace SharpOnvifCommon.Security
         {
             lock (_primeCacheSyncRoot)
             {
-                _primeCache.Remove(sessionID, null);
+                _primeCache.Remove(sessionID);
             }
         }
 
         public static bool TrySetNoncePrime(string sessionID, (string nonce, string cnonce)? primeCandidate, double lifetimeMilliseconds = 5 * 60 * 1000)
         {
+            var expiresAt = new DateTimeOffset(DateTime.UtcNow.AddMilliseconds(lifetimeMilliseconds));
+
             lock (_primeCacheSyncRoot)
             {
-                var currentPrime = _primeCache.Get(sessionID, null);
-                if (currentPrime == null)
+                // A null value was never storable before and is not treated as a prime now: a
+                // session with nothing recorded against it is a session waiting for its first.
+                (string nonce, string cnonce)? currentPrime;
+                if (!_primeCache.TryGet(sessionID, out currentPrime) || currentPrime == null)
                 {
                     // we have a new prime
-                    CacheItemPolicy cip = new CacheItemPolicy()
-                    {
-                        AbsoluteExpiration = new DateTimeOffset(DateTime.UtcNow.AddMilliseconds(lifetimeMilliseconds))
-                    };
-                    _primeCache.Set(sessionID, primeCandidate, cip);
+                    _primeCache.Set(sessionID, primeCandidate, expiresAt);
                     return true;
                 }
-                else
-                {
-                    // update the expiration
-                    CacheItemPolicy cip = new CacheItemPolicy()
-                    {
-                        AbsoluteExpiration = new DateTimeOffset(DateTime.UtcNow.AddMilliseconds(lifetimeMilliseconds))
-                    };
-                    _primeCache.Set(sessionID, currentPrime, cip);
-                    return false;
-                }
+
+                // The session keeps the prime it started with; only its expiration moves out.
+                _primeCache.Set(sessionID, currentPrime, expiresAt);
+                return false;
             }
         }
 

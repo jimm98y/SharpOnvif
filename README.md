@@ -241,6 +241,12 @@ builder.Services.AddOnvifDigestAuthentication(options =>
 `INonceReplayStore` has one method - it spends a nonce at a nonce count and says whether that count
 had been seen before. `MemoryNonceReplayStore`, the default, holds the record in this process.
 
+### No dependencies
+`SharpOnvifClient`, `SharpOnvifServer` and `SharpOnvifCommon` reference no NuGet packages on any of
+their target frameworks. The one that remained, `System.Runtime.Caching`, was used for a single
+thing - an entry that stops existing at a given moment - which `ExpiringCache` now does in about a
+hundred lines.
+
 ## Testing
 Only the DeviceMgmt, Media and Events were tested with Hikvision cameras. 
 Server implementation was tested using Onvif Device Manager.

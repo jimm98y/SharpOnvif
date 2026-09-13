@@ -6,11 +6,10 @@
 
 	<ItemGroup Condition=" $(TargetFramework.StartsWith('net4')) ">
 		<Reference Include="System.Net.Http" />
-		<PackageReference Include="System.Memory" Version="4.6.3" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="System.Runtime.Caching" Version="10.0.12" />
+		<InternalsVisibleTo Include="SharpOnvif.Tests" />
 	</ItemGroup>
 
 </Project>

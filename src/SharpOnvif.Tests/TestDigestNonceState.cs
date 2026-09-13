@@ -85,7 +85,7 @@ namespace SharpOnvif.Tests
             HttpDigestAuthentication.RegenerateNoncePrivateKey();
 
             Assert.AreEqual(HttpDigestAuthentication.ERROR_NONCE_INVALID,
-                await Validate(nonce, 1, now, new MemoryNonceReplayStore("regenerated")),
+                await Validate(nonce, 1, now, new MemoryNonceReplayStore()),
                 "a nonce is validated by recomputing it, so a new key retires every nonce in flight");
         }
 
@@ -105,7 +105,7 @@ namespace SharpOnvif.Tests
             // The second instance is given the same key from the same secret store.
             HttpDigestAuthentication.SetNoncePrivateKey(sharedKey);
 
-            Assert.AreEqual(0, await Validate(issuedByTheFirstInstance, 1, now, new MemoryNonceReplayStore("shared-key")));
+            Assert.AreEqual(0, await Validate(issuedByTheFirstInstance, 1, now, new MemoryNonceReplayStore()));
         }
 
         [TestMethod]
@@ -122,7 +122,7 @@ namespace SharpOnvif.Tests
             // the caller's array would turn that into a silent change of key.
             Array.Clear(key, 0, key.Length);
 
-            Assert.AreEqual(0, await Validate(nonce, 1, now, new MemoryNonceReplayStore("copied-key")));
+            Assert.AreEqual(0, await Validate(nonce, 1, now, new MemoryNonceReplayStore()));
         }
 
         [TestMethod]
@@ -170,14 +170,14 @@ namespace SharpOnvif.Tests
             var now = DateTimeOffset.UtcNow;
             string nonce = FreshNonce(now);
 
-            var instanceA = new MemoryNonceReplayStore("instance-a");
-            var instanceB = new MemoryNonceReplayStore("instance-b");
+            var instanceA = new MemoryNonceReplayStore();
+            var instanceB = new MemoryNonceReplayStore();
 
             Assert.AreEqual(0, await Validate(nonce, 4, now, instanceA));
             Assert.AreEqual(0, await Validate(nonce, 4, now, instanceB),
                 "a store of its own is a store that has never seen this request");
 
-            var shared = new MemoryNonceReplayStore("shared");
+            var shared = new MemoryNonceReplayStore();
             Assert.AreEqual(0, await Validate(nonce, 4, now, shared));
             Assert.AreEqual(HttpDigestAuthentication.ERROR_NONCE_REUSE, await Validate(nonce, 4, now, shared),
                 "one store for both instances is what refuses the replay");
