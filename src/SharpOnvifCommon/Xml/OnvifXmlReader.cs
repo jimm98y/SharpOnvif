@@ -21,6 +21,12 @@ namespace SharpOnvifCommon.Xml
         private XmlDocument _ownerDocument;
         private readonly IXmlLineInfo _lineInfo;
 
+        // Whether the reader can say where in the document it is. Without that there is no way to
+        // tell a handler that consumed its element from one that did not - and no way to tell the
+        // element apart from an identical sibling, which is what a position would be compared
+        // against. XmlNodeReader, for one, reports nothing.
+        private readonly bool _canTellNodesApart;
+
         /// <param name="reader">Positioned anywhere; the read helpers move it.</param>
         /// <param name="typeFactory">
         /// Resolves an xsi:type name to an instance. Each generated assembly supplies its own,
@@ -31,6 +37,7 @@ namespace SharpOnvifCommon.Xml
             _reader = reader ?? throw new ArgumentNullException(nameof(reader));
             _typeFactory = typeFactory;
             _lineInfo = reader as IXmlLineInfo;
+            _canTellNodesApart = _lineInfo != null && _lineInfo.HasLineInfo();
         }
 
         /// <summary>The underlying reader, for content this class does not model.</summary>
@@ -81,15 +88,27 @@ namespace SharpOnvifCommon.Xml
         /// </summary>
         public XmlQualifiedName ToQualifiedName(string text)
         {
+            return ToQualifiedName(text, null);
+        }
+
+        /// <summary>
+        /// The same, against a namespace scope captured earlier. Used where the value can only be
+        /// read by moving off the element that carried it.
+        /// </summary>
+        private XmlQualifiedName ToQualifiedName(string text, IDictionary<string, string> scope)
+        {
             if (string.IsNullOrEmpty(text)) return null;
 
             text = text.Trim();
             int colon = text.IndexOf(':');
-            if (colon < 0) return new XmlQualifiedName(text, _reader.LookupNamespace(string.Empty) ?? string.Empty);
+            string prefix = colon < 0 ? string.Empty : text.Substring(0, colon);
+            string local = colon < 0 ? text : text.Substring(colon + 1);
 
-            string prefix = text.Substring(0, colon);
-            string local = text.Substring(colon + 1);
-            return new XmlQualifiedName(local, _reader.LookupNamespace(prefix) ?? string.Empty);
+            string ns = null;
+            if (scope != null) scope.TryGetValue(prefix, out ns);
+            if (ns == null) ns = _reader.LookupNamespace(prefix);
+
+            return new XmlQualifiedName(local, ns ?? string.Empty);
         }
 
         /// <summary>
@@ -104,9 +123,13 @@ namespace SharpOnvifCommon.Xml
                 return null;
             }
 
-            // Resolve against the element's own scope: ReadElementContentAsString moves past it.
+            // Captured first: a prefix declared on this very element goes out of scope the moment
+            // the reader leaves it, and reading the content is what leaves it. Resolving
+            // afterwards bound such a prefix to nothing and the name came back in no namespace.
+            IDictionary<string, string> scope = NamespacesInScope();
+
             string raw = _reader.ReadElementContentAsString();
-            return ToQualifiedName(raw);
+            return ToQualifiedName(raw, scope);
         }
 
         // ------------------------------------------------------------------ objects
@@ -164,11 +187,16 @@ namespace SharpOnvifCommon.Xml
                         {
                             _reader.Skip();
                         }
-                        else if (Position() == before)
+                        else if (_canTellNodesApart && Position() == before)
                         {
                             // Generated handlers always consume the element they claim. If one
                             // ever does not, skipping here turns an infinite loop into a lost
                             // element, which is the better failure.
+                            //
+                            // Only where the reader can say it has not moved. Taking "no position"
+                            // for "did not move" skipped the element after every one that was read
+                            // - every second element of every document, for a reader that reports
+                            // no line information.
                             _reader.Skip();
                         }
                         break;
@@ -279,7 +307,7 @@ namespace SharpOnvifCommon.Xml
                 {
                     long before = Position();
                     onItem();
-                    if (Position() == before) _reader.Skip();
+                    if (_canTellNodesApart && Position() == before) _reader.Skip();
                 }
                 else if (_reader.NodeType == XmlNodeType.Element)
                 {

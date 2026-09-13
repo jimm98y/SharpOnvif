@@ -110,6 +110,61 @@ namespace SharpOnvif.Tests
         }
 
         [TestMethod]
+        public void ReadsEveryElementFromAReaderThatCannotSayWhereItIs()
+        {
+            // The reader tells a handler that consumed its element from one that did not by
+            // watching where in the document it is, and not every XmlReader can say - an
+            // XmlNodeReader over an XmlDocument reports nothing. Taking "no position" for "did not
+            // move" skipped the element after every one that was read, which is every second
+            // element of every document.
+            var dom = new XmlDocument();
+            dom.LoadXml(
+                $"<Configuration xmlns=\"{Tt}\">" +
+                  "<Name>main</Name>" +
+                  "<UseCount>3</UseCount>" +
+                  "<Encoding>H264</Encoding>" +
+                  "<SessionTimeout>PT60S</SessionTimeout>" +
+                "</Configuration>");
+
+            using (var nodeReader = new XmlNodeReader(dom))
+            {
+                Assert.IsFalse(nodeReader is IXmlLineInfo, "this test is pointless if the reader can say");
+
+                nodeReader.MoveToContent();
+                var configuration = new OnvifXmlReader(nodeReader)
+                    .ReadElementObject(() => new VideoEncoderConfiguration());
+
+                Assert.AreEqual("main", configuration.Name);
+                Assert.AreEqual(3, configuration.UseCount, "the second element was dropped");
+                Assert.AreEqual(VideoEncoding.H264, configuration.Encoding);
+                Assert.AreEqual("PT60S", configuration.SessionTimeout, "the fourth element was dropped");
+            }
+        }
+
+        [DataRow("<Root><Type xmlns:p=\"urn:example\">p:Thing</Type></Root>",
+                 DisplayName = "declared on the element carrying the name")]
+        [DataRow("<Root xmlns:p=\"urn:example\"><Type>p:Thing</Type></Root>",
+                 DisplayName = "declared on an ancestor")]
+        [TestMethod]
+        public void ResolvesAQualifiedNameWhereverItsPrefixWasDeclared(string xml)
+        {
+            // Reading the content is what moves the reader off the element, so a prefix declared
+            // on that element is out of scope by the time the name is resolved - and the name came
+            // back in no namespace at all.
+            using (XmlReader reader = XmlReader.Create(new StringReader(xml)))
+            {
+                reader.MoveToContent();
+                reader.Read();
+
+                XmlQualifiedName name = new OnvifXmlReader(reader).ReadElementQualifiedName();
+
+                Assert.IsNotNull(name);
+                Assert.AreEqual("Thing", name.Name);
+                Assert.AreEqual("urn:example", name.Namespace);
+            }
+        }
+
+        [TestMethod]
         public void CarriesThePrefixesTheElementWasWrittenUnder()
         {
             // The lifted element leaves its declarations behind. Onvif leans on them: a topic is
