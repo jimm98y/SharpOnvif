@@ -100,6 +100,11 @@ The WCF binding and the authentication proxy are gone:
 they described WCF, and what they configured is now either the default or a property on
 `SharpOnvifCommon.Soap.OnvifClientSettings`.
 
+`SharpOnvifClient.Security.HttpDigestState` and `IHttpMessageState` are gone with them. They held
+what a client had to remember between a challenge and the request answering it - the nonce count,
+the headers, the session nonce - for a WCF behaviour to drive. `HttpDigestHandler` keeps the same
+state itself now, as a handler in the client's own pipeline, so there is nothing left to hand it.
+
 `SimpleOnvifClient` keeps every constructor and method signature. Its only edits are the response
 renames in section 3 and the `using` in section 2.
 
