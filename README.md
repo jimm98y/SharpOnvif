@@ -367,6 +367,11 @@ builder.Services.AddOnvifDigestAuthentication(options =>
     options.HttpDigestNonceReplayStore = new MyDistributedNonceReplayStore();
 });
 ```
+A device holds at most `DefaultEventSubscriptionManager.MaxSubscriptions` (1000) at once and
+refuses the next with a fault. A subscription outlives the request that made it and is swept only
+when it expires, so without a limit a client subscribing in a loop - broken as easily as hostile -
+leaves a device holding every one it asked for.
+
 `INonceReplayStore` has one method - it spends a nonce at a nonce count and says whether that count
 had been seen before. `MemoryNonceReplayStore`, the default, holds the record in this process.
 

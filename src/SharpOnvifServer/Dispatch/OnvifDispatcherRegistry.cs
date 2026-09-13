@@ -14,13 +14,6 @@ namespace SharpOnvifServer.Dispatch
     /// </summary>
     public static class OnvifDispatcherRegistry
     {
-        /// <summary>
-        /// What the generated service base calls the dispatcher it carries. Named here because
-        /// this is the only place that knows it - the generator writes the property, this reads
-        /// it back, and nothing else mentions it.
-        /// </summary>
-        internal const string DispatcherProperty = "Dispatcher";
-
         private static readonly ConcurrentDictionary<Type, ServiceDispatcher> Cache =
             new ConcurrentDictionary<Type, ServiceDispatcher>();
 
@@ -31,16 +24,29 @@ namespace SharpOnvifServer.Dispatch
             return Cache.GetOrAdd(implementationType, Resolve);
         }
 
+        /// <summary>
+        /// Finds the dispatcher a generated service base carries, by what it is rather than by
+        /// what it is called.
+        /// </summary>
+        /// <remarks>
+        /// The generator writes that property and this reads it back, which used to be a string
+        /// agreed in two places and checked in neither: renaming it compiled on both sides and
+        /// stopped every request being routed. A static property of this type is what is being
+        /// looked for, and a name is free to change.
+        /// </remarks>
         private static ServiceDispatcher Resolve(Type implementationType)
         {
             for (Type type = implementationType; type != null && type != typeof(object); type = type.BaseType)
             {
-                PropertyInfo property = type.GetProperty(
-                    DispatcherProperty,
-                    BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly);
-
-                if (property != null && typeof(ServiceDispatcher).IsAssignableFrom(property.PropertyType))
-                    return (ServiceDispatcher)property.GetValue(null);
+                foreach (PropertyInfo property in type.GetProperties(
+                    BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly))
+                {
+                    if (property.GetIndexParameters().Length == 0
+                        && typeof(ServiceDispatcher).IsAssignableFrom(property.PropertyType))
+                    {
+                        return (ServiceDispatcher)property.GetValue(null);
+                    }
+                }
             }
 
             return null;

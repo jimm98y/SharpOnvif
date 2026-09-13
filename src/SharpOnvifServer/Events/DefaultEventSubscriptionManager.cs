@@ -36,6 +36,18 @@ namespace SharpOnvifServer.Events
         /// </summary>
         private const int SubscriptionIdBytes = 16;
 
+        /// <summary>
+        /// Most subscriptions this device will hold at once.
+        /// </summary>
+        /// <remarks>
+        /// A subscription outlives the request that made it and is swept only when it expires, so
+        /// without a limit a client that subscribes in a loop leaves a device holding as many as
+        /// it managed to ask for. Far above what a real client needs - a manager, a display wall
+        /// and a recorder watching one camera is three - and low enough to bound the memory a
+        /// device can be made to hold.
+        /// </remarks>
+        public int MaxSubscriptions { get; set; } = 1000;
+
         private readonly Timer _expirationTimer;
         private object _syncRoot = new object();
 
@@ -75,6 +87,15 @@ namespace SharpOnvifServer.Events
 
             lock (_syncRoot)
             {
+                if (MaxSubscriptions > 0 && _subscriptions.Count >= MaxSubscriptions)
+                {
+                    // Told rather than dropped: a client that is refused can unsubscribe what it
+                    // no longer needs, where one whose subscription silently never fires cannot.
+                    OnvifErrors.ReturnReceiverError(
+                        "The device is holding as many event subscriptions as it can.",
+                        "TooManySubscriptions");
+                }
+
                 string subscriptionID = CreateSubscriptionID();
                 _subscriptions.Add(subscriptionID, subscription);
                 return subscriptionID;

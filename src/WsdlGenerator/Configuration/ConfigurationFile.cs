@@ -59,13 +59,26 @@ internal static class ConfigurationFile
         if (document.Runtime is null)
             throw new SchemaException($"'{full}' does not say where the runtime goes.");
 
+        var services = document.Services
+            .Select(s => new ServiceDefinition(
+                s.Name ?? throw new SchemaException($"A service in '{full}' has no name."),
+                s.Wsdl ?? throw new SchemaException($"Service '{s.Name}' in '{full}' has no wsdl.")))
+            .ToList();
+
+        // Two services of one name are generated into one directory, and the second quietly
+        // replaces the first - a whole service missing from the output, reported as success.
+        string? repeated = services
+            .GroupBy(s => s.Name, StringComparer.Ordinal)
+            .Where(g => g.Count() > 1)
+            .Select(g => g.Key)
+            .FirstOrDefault();
+
+        if (repeated is not null)
+            throw new SchemaException($"'{full}' names the service '{repeated}' more than once.");
+
         return new GeneratorOptions
         {
-            Services = document.Services
-                .Select(s => new ServiceDefinition(
-                    s.Name ?? throw new SchemaException($"A service in '{full}' has no name."),
-                    s.Wsdl ?? throw new SchemaException($"Service '{s.Name}' in '{full}' has no wsdl.")))
-                .ToList(),
+            Services = services,
             MirrorRoot = document.Mirror is null ? null : Resolve(document.Mirror),
             SharedNamespace = document.Shared.Namespace
                 ?? throw new SchemaException($"'{full}' does not name the shared namespace."),

@@ -124,6 +124,37 @@ namespace SharpOnvif.Tests
         }
 
         [TestMethod]
+        public void RefusesTheSameServiceTwice()
+        {
+            // Both go to one directory, so the second replaces the first: a service missing from
+            // the output, from a run that said it wrote everything.
+            string path = Path.Combine(Path.GetTempPath(), "sharponvif-twice-" + Guid.NewGuid().ToString("N") + ".json");
+
+            try
+            {
+                File.WriteAllText(path, """
+                    {
+                      "shared":  { "namespace": "Example.Schema",  "out": "Schema" },
+                      "runtime": { "namespace": "Example.Runtime", "out": "Runtime" },
+                      "targets": [ { "namespace": "Example", "out": ".", "client": true } ],
+                      "services": [
+                        { "name": "Bank", "wsdl": "bank.wsdl" },
+                        { "name": "Bank", "wsdl": "bank-v2.wsdl" }
+                      ]
+                    }
+                    """);
+
+                var error = Assert.ThrowsExactly<SchemaException>(() => ConfigurationFile.Load(path));
+
+                StringAssert.Contains(error.Message, "Bank", "say which one");
+            }
+            finally
+            {
+                File.Delete(path);
+            }
+        }
+
+        [TestMethod]
         public void RefusesAFileThatIsNotThere()
         {
             var error = Assert.ThrowsExactly<SchemaException>(
