@@ -285,7 +285,7 @@ dotnet run --project src/WsdlGenerator -- --wsdl ./bank.wsdl --namespace Example
     --out ./Generated --enum-value "{http://www.onvif.org/ver10/schema}VideoEncoding=AV1"
 ```
 
-There are two solutions, `src/SharpOnvifClient.sln` and `src/SharpOnvifServer.sln`, either of
+There are two solutions, `src/SharpOnvif.Client.sln` and `src/SharpOnvif.Server.sln`, either of
 which builds the shared `SharpOnvifCommon` and the generator alongside its own side. The server
 solution also builds the client, because the end-to-end tests answer the server with the real
 client rather than a hand-built request.
