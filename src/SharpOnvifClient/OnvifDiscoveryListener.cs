@@ -84,59 +84,115 @@ namespace SharpOnvifClient
         public event EventHandler<OnvifAnnouncementEventArgs> DeviceLeft;
 
         /// <summary>
-        /// Starts listening on every interface that can carry multicast. Interfaces that cannot be
-        /// joined are skipped rather than failing the whole listener - one unusable interface on a
-        /// machine is normal.
+        /// Starts listening on every interface that can carry multicast, IPv4 and IPv6 alike.
+        /// Interfaces that cannot be joined are skipped rather than failing the whole listener -
+        /// one unusable interface on a machine is normal.
         /// </summary>
         public void Start()
         {
-            foreach (IPAddress address in MulticastAddresses())
+            foreach (Interface nic in MulticastInterfaces())
             {
-                Listen(address);
+                Listen(nic);
             }
         }
 
-        private static IEnumerable<IPAddress> MulticastAddresses()
+        /// <summary>
+        /// An address to listen on, and for IPv6 the interface it belongs to - an IPv6 group is
+        /// joined by interface index, not by address.
+        /// </summary>
+        private struct Interface
         {
+            public Interface(IPAddress address, int index)
+            {
+                Address = address;
+                Index = index;
+            }
+
+            public IPAddress Address;
+            public int Index;
+        }
+
+        private static IEnumerable<Interface> MulticastInterfaces()
+        {
+            // One join per interface for IPv6: a single adapter commonly carries several IPv6
+            // addresses, and they would all be joining the same group on the same interface.
+            var joinedIPv6 = new HashSet<int>();
+
             foreach (NetworkInterface adapter in NetworkInterface.GetAllNetworkInterfaces())
             {
                 if (adapter.OperationalStatus != OperationalStatus.Up) continue;
                 if (!adapter.SupportsMulticast) continue;
 
-                foreach (var unicast in adapter.GetIPProperties().UnicastAddresses)
+                IPInterfaceProperties properties = adapter.GetIPProperties();
+
+                int interfaceIndex = -1;
+                try
                 {
-                    // IPv4 only: the Onvif IPv6 group cannot be joined on every host, and a device
-                    // that announces at all announces on IPv4.
-                    if (unicast.Address.AddressFamily != AddressFamily.InterNetwork) continue;
+                    interfaceIndex = properties.GetIPv6Properties().Index;
+                }
+                catch (NetworkInformationException)
+                {
+                    // No IPv6 on this adapter; its IPv4 addresses are still worth listening on.
+                }
 
-                    byte[] bytes = unicast.Address.GetAddressBytes();
-                    if (bytes[0] == 169 && bytes[1] == 254) continue; // link-local
+                foreach (var unicast in properties.UnicastAddresses)
+                {
+                    if (unicast.Address.AddressFamily == AddressFamily.InterNetwork)
+                    {
+                        byte[] bytes = unicast.Address.GetAddressBytes();
+                        if (bytes[0] == 169 && bytes[1] == 254) continue; // link-local
 
-                    yield return unicast.Address;
+                        yield return new Interface(unicast.Address, 0);
+                    }
+                    else if (unicast.Address.AddressFamily == AddressFamily.InterNetworkV6)
+                    {
+                        if (interfaceIndex < 0) continue;
+                        if (!joinedIPv6.Add(interfaceIndex)) continue;
+
+                        yield return new Interface(unicast.Address, interfaceIndex);
+                    }
                 }
             }
         }
 
-        private void Listen(IPAddress nicAddress)
+        private void Listen(Interface nic)
         {
+            bool isIPv6 = nic.Address.AddressFamily == AddressFamily.InterNetworkV6;
+
             UdpClient client = null;
             try
             {
-                client = new UdpClient(AddressFamily.InterNetwork);
+                client = new UdpClient(nic.Address.AddressFamily);
 
                 // A device on this machine is already bound to the discovery port, and both of
                 // them are entitled to hear what arrives.
                 client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+
                 // Bound to every address, joined on one interface below. A socket bound to an
                 // interface's own address is not given multicast looped back from this machine,
                 // so a device running beside this one would never be heard.
-                client.Client.Bind(new IPEndPoint(IPAddress.Any, OnvifDiscoveryClient.ONVIF_DISCOVERY_PORT));
-                client.JoinMulticastGroup(
-                    IPAddress.Parse(OnvifDiscoveryClient.OnvifDiscoveryAddressIPV4), nicAddress);
+                client.Client.Bind(new IPEndPoint(
+                    isIPv6 ? IPAddress.IPv6Any : IPAddress.Any,
+                    OnvifDiscoveryClient.ONVIF_DISCOVERY_PORT));
+
+                if (isIPv6)
+                {
+                    // By index: ff02::c is link-local scope, so there is no default interface to
+                    // fall back on and index zero is not an interface at all.
+                    client.JoinMulticastGroup(
+                        nic.Index, IPAddress.Parse(OnvifDiscoveryClient.OnvifDiscoveryAddressIPV6));
+                }
+                else
+                {
+                    client.JoinMulticastGroup(
+                        IPAddress.Parse(OnvifDiscoveryClient.OnvifDiscoveryAddressIPV4), nic.Address);
+                }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Cannot listen for Onvif announcements on {nicAddress}: {ex.Message}");
+                // One interface that cannot carry this - a VM bridge with no IPv6, say - is not a
+                // reason to listen on none of the others.
+                Debug.WriteLine($"Cannot listen for Onvif announcements on {nic.Address}: {ex.Message}");
                 client?.Dispose();
                 return;
             }
@@ -169,7 +225,7 @@ namespace SharpOnvifClient
                     catch (Exception ex)
                     {
                         // One bad datagram is not a reason to stop listening to the network.
-                        Debug.WriteLine($"Onvif announcement on {nicAddress} could not be read: {ex.Message}");
+                        Debug.WriteLine($"Onvif announcement on {nic.Address} could not be read: {ex.Message}");
                     }
                 }
             });

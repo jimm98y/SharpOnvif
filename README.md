@@ -142,6 +142,8 @@ an announcement is UDP multicast, so it can be lost, and one sent before you sta
 already gone. Pass a predicate to wait for a particular device. There is no timeout, because
 "wait until the camera is switched on" has no natural one; cancel the token to stop.
 
+Both listen on every interface that carries multicast, IPv4 and IPv6 alike.
+
 `OnvifDiscoveryListener` is the same mechanism without the waiting, for an application that wants
 to keep track of devices coming and going:
 ```cs
