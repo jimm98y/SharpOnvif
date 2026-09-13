@@ -231,7 +231,7 @@ const int CAMERA1 = 1;
 var eventListener = new SimpleOnvifEventListener();
 eventListener.Start((int cameraID, string ev) =>
 {
-    bool? isTamper = SharpOnvifClient.OnvifEvents.IsTamperDetected(notification);
+    bool? isTamper = SharpOnvifClient.OnvifEvents.IsTamperDetected(ev);
     if(cameraID == CAMERA1)
     {
         // handle the notification message for CAMERA1
