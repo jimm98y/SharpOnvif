@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "OnvifService": {
+    "Onvif.Server": {
       "commandName": "Project",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
