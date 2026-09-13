@@ -313,6 +313,25 @@ routes the trailing segment to the service.
 (`IEventSource`, `IEventSubscriptionManager<T>`, `DefaultEventSubscriptionManager<T>`) and the
 `IServer.GetHttpEndpoint` helpers all keep their shapes.
 
+### Behaviour that changed without the signature changing
+
+These compile as they did and behave differently, because they were wrong:
+
+- **`OnvifHelpers.FromTimeout`** read a duration ending in `S` as minutes, so `PT60S` - what this
+  library writes for a 60 second timeout - came back as an hour. It now reads the whole
+  `xs:duration` grammar, so `PT1M30S` and `PT1H` work too instead of throwing. Any subscription
+  lifetime computed from a relative termination time was sixty times too long and is now right.
+- **`OnvifHelpers.StringToDateTime`** returned a local-time `DateTime` for a value carrying a zone,
+  and parsed in the current culture. It returns UTC and parses invariantly.
+  `DateTimeToString` converts to UTC rather than labelling a local time with `Z`.
+- **`OnvifEvents.IsMotionDetected`** and its tamper and sound counterparts read the state from the
+  named data item of the notification - `IsMotion`, `IsTamper`, `IsSoundDetected` - rather than
+  from any true value anywhere in the message. A camera reporting `IsMotion=false` beside an
+  enabled rule used to report motion. If you relied on the old reading, you were reading a false
+  alarm.
+- A notification missing its topic or its message used to throw from those helpers. They return
+  null, which is also what they return for a notification about something else.
+
 ## 6. New in 0.10.0
 
 Worth knowing about once you are building again:
