@@ -62,7 +62,9 @@ namespace SharpOnvifServer.Security
         /// </param>
         public static async Task AppendAsync(HttpContext context, byte[] responseBody)
         {
-            if (context == null) return;
+            // Doing nothing quietly would hide a caller's mistake, and there is no request to
+            // answer without one.
+            if (context == null) throw new ArgumentNullException(nameof(context));
 
             // The digest this request was admitted on, taken from where the check left it rather
             // than read out of the request again.
