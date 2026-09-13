@@ -30,8 +30,8 @@ come with it, each still under its own namespace (`SharpOnvifClient.Media`,
 `SharpOnvifServer.PTZ`, …), so your `using` directives for those are unchanged.
 
 The assemblies got smaller despite carrying every service, because the Onvif schema is no longer
-duplicated once per service: `SharpOnvifClient.dll` went from 4.57 MB to 1.69 MB,
-`SharpOnvifServer.dll` from 4.90 MB to 2.02 MB. There are also no NuGet dependencies left at all -
+duplicated once per service: `SharpOnvifClient.dll` went from 4.57 MB to about 1.7 MB,
+`SharpOnvifServer.dll` from 4.90 MB to about 2.0 MB. There are also no NuGet dependencies left at all -
 CoreWCF, `System.ServiceModel.*`, `System.Runtime.Caching` and `System.Reflection.DispatchProxy` are
 all gone. Target frameworks are unchanged: net481, net8.0 and net10.0 for the client and common,
 net8.0 and net10.0 for the server.
@@ -59,18 +59,22 @@ If you wrote those names fully qualified, drop the old prefix:
 **Ten types were renamed** so that the Onvif namespaces can be imported alongside the framework
 ones without aliases. The XML on the wire is untouched; only the C# name changed.
 
-| Onvif schema type | 0.9.x | 0.10.0 |
-| --- | --- | --- |
-| `tt:Action` | `Action` | `OnvifAction` |
-| `tt:Attribute` | `Attribute` | `OnvifAttribute` |
-| `tt:Credential` | `Credential` | `OnvifCredential` |
-| `tt:DateTime` | `DateTime` | `OnvifDateTime` |
-| `tt:IPAddress` | `IPAddress` | `OnvifIPAddress` |
-| `tt:NetworkInterface` | `NetworkInterface` | `OnvifNetworkInterface` |
-| `tt:Object` | `Object` | `OnvifObject` |
-| `tt:Scope` | `Scope` | `OnvifScope` |
-| `tt:TimeZone` | `TimeZone` | `OnvifTimeZone` |
-| `tt:Version` | `Version` | `OnvifVersion` |
+| Schema type | 0.9.x | 0.10.0 | Lives in |
+| --- | --- | --- | --- |
+| `tt:DateTime` | `DateTime` | `OnvifDateTime` | `SharpOnvifCommon.Onvif` |
+| `tt:IPAddress` | `IPAddress` | `OnvifIPAddress` | `SharpOnvifCommon.Onvif` |
+| `tt:NetworkInterface` | `NetworkInterface` | `OnvifNetworkInterface` | `SharpOnvifCommon.Onvif` |
+| `tt:Object` | `Object` | `OnvifObject` | `SharpOnvifCommon.Onvif` |
+| `tt:Scope` | `Scope` | `OnvifScope` | `SharpOnvifCommon.Onvif` |
+| `tt:TimeZone` | `TimeZone` | `OnvifTimeZone` | `SharpOnvifCommon.Onvif` |
+| `tt:Version` | `Version` | `OnvifVersion` | `SharpOnvifCommon.Onvif` |
+| `pt:Attribute` | `Attribute` | `OnvifAttribute` | `SharpOnvifCommon.Onvif` |
+| `aev:Action` | `Action` | `OnvifAction` | `…ActionEngine` |
+| `tcr:Credential` | `Credential` | `OnvifCredential` | `…Credential` |
+
+The last two are declared by a single service's own WSDL rather than by a shared schema, so they
+stay in that service's namespace - `SharpOnvifClient.ActionEngine` and `SharpOnvifServer.Credential`
+and so on - and not in `SharpOnvifCommon.Onvif` with the rest.
 
 Where a service declares its own type with a name the shared schema also uses - `Capabilities` is
 the common one - qualify it: `new SharpOnvifServer.PTZ.Capabilities()`.
@@ -167,6 +171,29 @@ catch (OnvifFaultException fault) when (fault.Fault?.Subcode == "ActionNotSuppor
 }
 ```
 
+### A device that does not answer raises an Onvif exception
+
+A client call used to let the HTTP stack's own exceptions through: a dropped connection as an
+`HttpIOException` inside an `HttpRequestException`, a timeout as a `TaskCanceledException`. Neither
+says anything about Onvif, and an application that did not catch all of them crashed when the
+device was stopped. Both are now `SharpOnvifCommon.Soap.OnvifTransportException`, with the original
+exception as `InnerException` and `TimedOut` telling the two apart.
+
+If you catch `HttpRequestException` around an Onvif call, catch `OnvifTransportException` instead.
+A cancellation you requested is unchanged - it still arrives as an `OperationCanceledException`.
+
+### The Basic subscription callback address changed shape
+
+`SimpleOnvifEventListener.GetOnvifEventListenerUri` used to return
+`http://host:port/<cameraID>/`, which anything that found the port could post to. It now carries an
+unguessable token - `http://host:port/<token>/<cameraID>/` - and a notification that does not
+present it is refused before your callback sees it.
+
+Nothing in your code changes as long as you hand the camera whatever
+`GetOnvifEventListenerUri` returns, which is what the sample does. If you built the address
+yourself, or persisted one across runs, it will no longer be accepted: ask the listener for it.
+Setting `PathToken` to null restores the old bare address.
+
 ## 5. Server
 
 ### Registration
@@ -216,10 +243,11 @@ Two things this buys you, both of which used to need workarounds:
   two services on one endpoint, which is why 0.9.x had to publish media and PTZ on
   `/onvif/media_service` and `/onvif/ptz_service`. Map them all on `/onvif/device_service` now.
 - **Subscription addresses route themselves.** Onvif hands a client a reference like
-  `/onvif/Events/PullPointSubscription/3/`; `MapOnvifService` matches the trailing segment and makes
-  it available as `HttpContext.Items[OnvifEvents.ONVIF_SUBSCRIPTION_ID]`. `UseOnvifEvents` used to
-  rewrite the path to arrange this, which cannot work under endpoint routing - routing runs ahead of
-  application middleware, so by the time the rewrite ran the endpoint had already been chosen.
+  `/onvif/Events/PullPointSubscription/aV9xN2sMv1Qb0Zt8/`; `MapOnvifService` matches the trailing segment and
+  makes it available as `HttpContext.Items[OnvifEvents.ONVIF_SUBSCRIPTION_ID]`. `UseOnvifEvents`
+  used to rewrite the path to arrange this, which cannot work under endpoint routing - routing runs
+  ahead of application middleware, so by the time the rewrite ran the endpoint had already been
+  chosen.
 
 ### Implementations
 
@@ -280,9 +308,14 @@ derive from it.
 ### Event subscriptions are identified by a token, not a number
 
 `IEventSubscriptionManager<T>` used `int` subscription IDs, handed out by a counter and placed in
-the address a client is told to come back to (`/onvif/Events/PullPointSubscription/3/`). Since a
-subscription is addressed by ID alone, any client that could reach the endpoint could reach every
-other client's subscription by counting - reading its events, or cancelling it.
+the address a client is told to come back to. Since a subscription is addressed by ID alone, any
+client that could reach the endpoint could reach every other client's subscription by counting -
+reading its events, or cancelling it:
+
+```
+0.9.x   /onvif/Events/PullPointSubscription/3/
+0.10.0  /onvif/Events/PullPointSubscription/aV9xN2sMv1Qb0Zt8/
+```
 
 IDs are now unguessable strings, and the three interface methods take `string`:
 
@@ -306,37 +339,33 @@ implementation that cast it changes with the interface:
 Nothing else about the flow changes: the ID still goes in the address, and `MapOnvifService` still
 routes the trailing segment to the service.
 
+### HTTP Digest helpers
+
+`SharpOnvifCommon.Security.HttpDigestAuthentication` changed in two ways that a server which calls
+it directly will notice. Most servers do not - the authentication handler calls it for you.
+
+```cs
+- int  result = HttpDigestAuthentication.ValidateServerNonce(algorithm, type, nonce, nc, now, …);
++ int  result = await HttpDigestAuthentication.ValidateServerNonceAsync(algorithm, type, nonce, nc, now, …);
+```
+
+Spending a nonce is asynchronous because the store that remembers spent ones can live outside the
+process - see `INonceReplayStore` below.
+
+The `NoncePrivateKey` field is gone. It made the key that signs every nonce readable and writable
+by anything in the process, which is enough to mint nonces the server will accept as its own. Use
+`RegenerateNoncePrivateKey()`, or `SetNoncePrivateKey(byte[])` where several instances have to
+agree on one.
+
 ### Unchanged
 
 `IUserRepository`, `AddOnvifDigestAuthentication`, `DigestAuthenticationSchemeOptions`,
-`AddOnvifDiscovery`, `OnvifDiscoveryOptions`, the `SharpOnvifServer.Events` interfaces
-(`IEventSource`, `IEventSubscriptionManager<T>`, `DefaultEventSubscriptionManager<T>`) and the
+`AddOnvifDiscovery`, `OnvifDiscoveryOptions`, `SharpOnvifServer.Events.IEventSource` and the
 `IServer.GetHttpEndpoint` helpers all keep their shapes.
 
-### The Basic subscription callback address changed shape
+`IEventSubscriptionManager<T>` and `DefaultEventSubscriptionManager<T>` do not - see above.
 
-`SimpleOnvifEventListener.GetOnvifEventListenerUri` used to return
-`http://host:port/<cameraID>/`, which anything that found the port could post to. It now carries an
-unguessable token - `http://host:port/<token>/<cameraID>/` - and a notification that does not
-present it is refused before your callback sees it.
-
-Nothing in your code changes as long as you hand the camera whatever
-`GetOnvifEventListenerUri` returns, which is what the sample does. If you built the address
-yourself, or persisted one across runs, it will no longer be accepted: ask the listener for it.
-Setting `PathToken` to null restores the old bare address.
-
-### A device that does not answer raises an Onvif exception
-
-A client call used to let the HTTP stack's own exceptions through: a dropped connection as an
-`HttpIOException` inside an `HttpRequestException`, a timeout as a `TaskCanceledException`. Neither
-says anything about Onvif, and an application that did not catch all of them crashed when the
-device was stopped. Both are now `SharpOnvifCommon.Soap.OnvifTransportException`, with the original
-exception as `InnerException` and `TimedOut` telling the two apart.
-
-If you catch `HttpRequestException` around an Onvif call, catch `OnvifTransportException` instead.
-A cancellation you requested is unchanged - it still arrives as an `OperationCanceledException`.
-
-### Behaviour that changed without the signature changing
+## 6. Behaviour that changed without the signature changing
 
 These compile as they did and behave differently, because they were wrong:
 
@@ -354,8 +383,13 @@ These compile as they did and behave differently, because they were wrong:
   alarm.
 - A notification missing its topic or its message used to throw from those helpers. They return
   null, which is also what they return for a notification about something else.
+- **The server now bounds what it will read.** A request larger than
+  `OnvifEndpoint.MaxRequestBytes` (2 MB) is answered with a fault rather than read, and a document
+  nested deeper than `OnvifXmlReader.MaxDepth` (256) is refused - reading contracts recurses, and a
+  stack overflow cannot be caught. Both are far above anything Onvif describes, and both are
+  settable if your device really does send more.
 
-## 6. New in 0.10.0
+## 7. New in 0.10.0
 
 Worth knowing about once you are building again:
 

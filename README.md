@@ -116,9 +116,10 @@ header, or the body element, whichever the client sends - Onvif Device Manager u
 for event subscriptions.
 
 An address with a trailing segment reaches the same service, which is how Onvif addresses a
-subscription manager: a request to `/onvif/Events/PullPointSubscription/3/` reaches the service
-mapped at `/onvif/Events/PullPointSubscription`, with the segment available to the implementation
-as `HttpContext.Items[OnvifEvents.ONVIF_SUBSCRIPTION_ID]`.
+subscription manager: a request to `/onvif/Events/PullPointSubscription/aV9xN2sMv1Qb0Zt8/` reaches the
+service mapped at `/onvif/Events/PullPointSubscription`, with the segment available to the
+implementation as `HttpContext.Items[OnvifEvents.ONVIF_SUBSCRIPTION_ID]` - a string, because a
+subscription ID is an unguessable token rather than a counter.
 Your Onvif service should now be discoverable on the network and you should be able to use Onvif Device Manager or similar tool to call your endpoint.
 See `Onvif.Server` sample project for a complete example.
 ## SharpOnvifClient

@@ -66,7 +66,7 @@ app.MapOnvifService<OnvifService.Onvif.MediaImpl>(URI_DEVICE_SERVICE);
 app.MapOnvifService<OnvifService.Onvif.PTZImpl>(URI_DEVICE_SERVICE);
 
 // The subscription managers keep their own addresses: Onvif hands a client a reference like
-// /onvif/Events/PullPointSubscription/3/, and MapOnvifService routes that trailing segment
+// /onvif/Events/PullPointSubscription/aV9xN2sMv1Qb0Zt8/, and MapOnvifService routes that segment
 // through to the implementation.
 app.MapOnvifService<OnvifService.Onvif.EventsImpl>(URI_EVENTS_SERVICE);
 app.MapOnvifService<OnvifService.Onvif.RouterSubscriptionManagerImpl>(URI_EVENTS_SUBSCRIPTION);
