@@ -76,5 +76,17 @@ namespace SharpOnvifClient.Security
         {
             _onvif.Authentication = authentication;
         }
+
+        /// <summary>Copies another set of options, the negotiated settings included.</summary>
+        public DigestAuthenticationSchemeOptions(DigestAuthenticationSchemeOptions other)
+        {
+            if (other == null) throw new ArgumentNullException(nameof(other));
+
+            _onvif = other.Onvif == null
+                ? new OnvifAuthenticationSettings()
+                : new OnvifAuthenticationSettings(other.Onvif);
+
+            UtcNowOffset = other.UtcNowOffset;
+        }
     }
 }

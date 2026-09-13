@@ -93,7 +93,7 @@ namespace SharpOnvifServer.Dispatch
             {
                 // The body is read twice at most: once to find the action when the client did not
                 // put it in the Content-Type header, and once to deserialise.
-                if (string.IsNullOrEmpty(action)) action = ActionFromEnvelope(envelope);
+                if (string.IsNullOrEmpty(action)) action = OnvifRequestAction.FromEnvelope(envelope);
 
                 Registration registration = null;
                 if (!string.IsNullOrEmpty(action))
@@ -281,36 +281,6 @@ namespace SharpOnvifServer.Dispatch
                         return registration;
                     }
                 }
-            }
-
-            return null;
-        }
-
-        /// <summary>
-        /// Reads a wsa:Action header out of the envelope. Onvif Device Manager sends the action
-        /// this way for event subscriptions rather than in the Content-Type header.
-        /// </summary>
-        private static string ActionFromEnvelope(string envelope)
-        {
-            try
-            {
-                using (XmlReader xml = SoapEnvelope.CreateReader(new StringReader(envelope)))
-                {
-                    if (!SoapEnvelope.MoveToEnvelopeChild(xml, "Header")) return null;
-
-                    int headerDepth = xml.Depth;
-                    while (xml.Read())
-                    {
-                        if (xml.NodeType == XmlNodeType.EndElement && xml.Depth == headerDepth) return null;
-                        if (xml.NodeType == XmlNodeType.Element && xml.LocalName == "Action")
-                            return xml.ReadElementContentAsString().Trim();
-                    }
-                }
-            }
-            catch (XmlException)
-            {
-                // Malformed envelopes are reported by the deserialisation path, which produces a
-                // better message than anything this method could.
             }
 
             return null;

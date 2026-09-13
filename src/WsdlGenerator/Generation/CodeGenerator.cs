@@ -129,7 +129,7 @@ internal sealed class CodeGenerator
 
         var api = server
             ? new GeneratedFile(
-                Path.Combine(directory, "Service.cs"), new ServerEmitter(model, @namespace, runtime).Emit())
+                Path.Combine(directory, "Service.cs"), new ServerEmitter(model, @namespace, runtime, _options.DispatchNamespace).Emit())
             : new GeneratedFile(
                 Path.Combine(directory, "Client.cs"), new ClientEmitter(model, @namespace, runtime, _options.SettingsType).Emit());
 

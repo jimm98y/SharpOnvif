@@ -85,6 +85,39 @@ namespace SharpOnvif.Tests
         }
 
         [TestMethod]
+        public void ReadsTheOptionsOnceAndKeepsWhatItRead()
+        {
+            // Half of these used to reach the client by reference and half by value, so changing
+            // them afterwards changed the schemes it offered but not the clock offset it stamped.
+            // Neither does anything now: they are the options it was built with, not a channel.
+            var options = new ClientOptions(DigestAuthentication.WsUsernameToken)
+            {
+                UtcNowOffset = TimeSpan.FromMinutes(1),
+            };
+
+            using var client = new Probe("http://127.0.0.1:1/onvif/device_service", "u", "p", options);
+
+            options.Onvif.Authentication = DigestAuthentication.None;
+            options.Onvif.HttpDigestAlgorithms.Clear();
+            options.UtcNowOffset = TimeSpan.FromHours(9);
+
+            Assert.AreEqual(DigestAuthentication.WsUsernameToken, client.Options.Onvif.Authentication);
+            Assert.AreNotEqual(0, client.Options.Onvif.HttpDigestAlgorithms.Count);
+            Assert.AreEqual(TimeSpan.FromMinutes(1), client.Options.UtcNowOffset);
+        }
+
+        /// <summary>Reaches the options the client kept, which are protected rather than public.</summary>
+        private sealed class Probe : SimpleOnvifClient
+        {
+            public Probe(string uri, string userName, string password, ClientOptions authentication)
+                : base(uri, userName, password, authentication)
+            {
+            }
+
+            public ClientOptions Options { get { return _authentication; } }
+        }
+
+        [TestMethod]
         public async Task SendsTheOffsetItWasConfiguredWith()
         {
             // The offset has to travel from these options into the token the client stamps, which

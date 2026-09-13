@@ -115,6 +115,32 @@ namespace SharpOnvifCommon.Soap
         {
         }
 
+        /// <summary>
+        /// Copies another set of settings.
+        /// </summary>
+        /// <remarks>
+        /// So that a client needing one thing different - a longer timeout for a long poll, say -
+        /// is built from these rather than from a list of the members somebody remembered to
+        /// write out. Such a list goes stale silently: what it forgets is not missing, it is
+        /// whatever the default happens to be.
+        /// </remarks>
+        public OnvifClientSettings(OnvifClientSettings other)
+        {
+            if (other == null) throw new ArgumentNullException(nameof(other));
+
+            Codec = other.Codec;
+            Credentials = other.Credentials;
+            Logger = other.Logger;
+            UtcNowOffset = other.UtcNowOffset;
+            Authentication = other.Authentication;
+            Timeout = other.Timeout;
+            DisableExpect100Continue = other.DisableExpect100Continue;
+            MaxResponseContentBytes = other.MaxResponseContentBytes;
+            Transport = other.Transport;
+            HttpClient = other.HttpClient;
+            EnvelopePrologue = other.EnvelopePrologue;
+        }
+
         public OnvifClientSettings(string userName, string password)
         {
             // No name is not a name to authenticate under. Authentication is left as it is rather

@@ -78,7 +78,7 @@ namespace SharpOnvifServer.Security
 
         protected async override Task<AuthenticateResult> HandleAuthenticateAsync()
         {
-            if(Options.Onvif.Authentication == DigestAuthentication.None || AllowAnonymousAccess(Request.ContentType))
+            if(Options.Onvif.Authentication == DigestAuthentication.None || await AllowAnonymousAccessAsync().ConfigureAwait(false))
             {
                 // use Anonymous user either when auth is turned off, or for selected Onvif actions that do not require authentication
                 var identity = new GenericIdentity(ANONYMOUS_USER);
@@ -259,11 +259,23 @@ namespace SharpOnvifServer.Security
         /// operation and run as another: naming an unquoted operation first and a quoted PRE_AUTH
         /// one second used to satisfy this check while the endpoint dispatched the first.
         /// </remarks>
-        private bool AllowAnonymousAccess(string contentType)
+        private async Task<bool> AllowAnonymousAccessAsync()
         {
             if (Options.Onvif.PreAuthActions == null) return false;
 
-            string action = Dispatch.OnvifRequestAction.FromContentType(contentType);
+            string action = Dispatch.OnvifRequestAction.FromContentType(Request.ContentType);
+
+            if (action == null)
+            {
+                // Onvif Device Manager sends the action as a wsa:Action header instead, and the
+                // endpoint falls back to reading it there - so this has to fall back the same way
+                // and in the same order, or an operation the specification says needs no password
+                // is asked for one.
+                byte[] body = await ReadRequestBodyAsync(null).ConfigureAwait(false);
+                if (body == null || body.Length == 0) return false;
+
+                action = Dispatch.OnvifRequestAction.FromEnvelope(Encoding.UTF8.GetString(body));
+            }
 
             return action != null && Options.Onvif.PreAuthActions.Contains(action);
         }

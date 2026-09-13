@@ -92,7 +92,12 @@ namespace SharpOnvifClient
             if(!onvifUri.StartsWith("http://", StringComparison.OrdinalIgnoreCase) && !onvifUri.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
                 throw new ArgumentException("Onvif URI must start with http:// or https://");
 
-            this._authentication = authentication ?? new DigestAuthenticationSchemeOptions();
+            // Taken as a copy, and read once. Half of it used to be shared with the caller by
+            // reference and half copied by value, so changing the options afterwards changed the
+            // schemes in flight but not the clock offset - a difference nobody would predict.
+            this._authentication = authentication == null
+                ? new DigestAuthenticationSchemeOptions()
+                : new DigestAuthenticationSchemeOptions(authentication);
 
             if (this._authentication.Onvif.Authentication != DigestAuthentication.None)
             {
@@ -199,16 +204,8 @@ namespace SharpOnvifClient
         /// <summary>The client's settings with a different HTTP timeout.</summary>
         private OnvifClientSettings WithHttpTimeout(TimeSpan timeout)
         {
-            return new OnvifClientSettings
+            return new OnvifClientSettings(_settings)
             {
-                Credentials = _settings.Credentials,
-                Authentication = _settings.Authentication,
-                DisableExpect100Continue = _settings.DisableExpect100Continue,
-                MaxResponseContentBytes = _settings.MaxResponseContentBytes,
-                Transport = _settings.Transport,
-                HttpClient = _settings.HttpClient,
-                Logger = _settings.Logger,
-                UtcNowOffset = _settings.UtcNowOffset,
                 Timeout = timeout,
             };
         }

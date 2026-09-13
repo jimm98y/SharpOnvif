@@ -14,7 +14,6 @@ namespace WsdlGenerator.Emit;
 /// </summary>
 internal sealed class ServerEmitter
 {
-    private const string Dispatch = "SharpOnvifServer.Dispatch";
     private const string Task = "System.Threading.Tasks.Task";
     private const string Token = "System.Threading.CancellationToken";
 
@@ -24,11 +23,19 @@ internal sealed class ServerEmitter
     /// <summary>Namespace of the contract, reader and writer.</summary>
     private readonly string Xml;
 
-    public ServerEmitter(CsModel model, string @namespace, string runtime)
+    /// <summary>
+    /// Namespace of the dispatch a generated service is routed by. Unlike everything else a
+    /// service names, this one is not generated - routing a SOAP action to a method over ASP.NET
+    /// Core is a library, and naming it is all the generator can do about that.
+    /// </summary>
+    private readonly string Dispatch;
+
+    public ServerEmitter(CsModel model, string @namespace, string runtime, string dispatch)
     {
         _model = model;
         _namespace = @namespace;
         Xml = runtime + ".Xml";
+        Dispatch = dispatch;
     }
 
     public string Emit()

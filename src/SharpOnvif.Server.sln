@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.10.12201.205 stable
+VisualStudioVersion = 18.10.12201.205
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpOnvifCommon", "SharpOnvifCommon\SharpOnvifCommon.csproj", "{E9F5C071-0F51-4DF6-AE8F-DB7DE27952F8}"
 EndProject
@@ -20,6 +20,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Onvif.Server", "Onvif.Server\Onvif.Server.csproj", "{8AEDA37E-B7E4-4447-8131-F36A4F4E97CA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tooling", "Tooling", "{30DC08FC-3E98-6757-484C-7F83F687C538}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpOnvifClient", "SharpOnvifClient\SharpOnvifClient.csproj", "{C1B9470D-00AE-4A6E-9322-6444E79F1FB1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -103,6 +105,18 @@ Global
 		{8AEDA37E-B7E4-4447-8131-F36A4F4E97CA}.Release|x64.Build.0 = Release|Any CPU
 		{8AEDA37E-B7E4-4447-8131-F36A4F4E97CA}.Release|x86.ActiveCfg = Release|Any CPU
 		{8AEDA37E-B7E4-4447-8131-F36A4F4E97CA}.Release|x86.Build.0 = Release|Any CPU
+		{C1B9470D-00AE-4A6E-9322-6444E79F1FB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1B9470D-00AE-4A6E-9322-6444E79F1FB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1B9470D-00AE-4A6E-9322-6444E79F1FB1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C1B9470D-00AE-4A6E-9322-6444E79F1FB1}.Debug|x64.Build.0 = Debug|Any CPU
+		{C1B9470D-00AE-4A6E-9322-6444E79F1FB1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C1B9470D-00AE-4A6E-9322-6444E79F1FB1}.Debug|x86.Build.0 = Debug|Any CPU
+		{C1B9470D-00AE-4A6E-9322-6444E79F1FB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1B9470D-00AE-4A6E-9322-6444E79F1FB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1B9470D-00AE-4A6E-9322-6444E79F1FB1}.Release|x64.ActiveCfg = Release|Any CPU
+		{C1B9470D-00AE-4A6E-9322-6444E79F1FB1}.Release|x64.Build.0 = Release|Any CPU
+		{C1B9470D-00AE-4A6E-9322-6444E79F1FB1}.Release|x86.ActiveCfg = Release|Any CPU
+		{C1B9470D-00AE-4A6E-9322-6444E79F1FB1}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

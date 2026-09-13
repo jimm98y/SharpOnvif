@@ -114,6 +114,7 @@ they share their common schemas the same way the Onvif services do.
 | `--runtime-out <dir>` | Directory for the runtime. Defaults to `<dir>/Runtime`. |
 | `--no-runtime` | Do not write the runtime; compile against the one `--runtime-namespace` names. |
 | `--settings <type>` | What a client builds its settings from when handed none. |
+| `--dispatch <ns>` | Namespace a generated service is routed by. Defaults to `SharpOnvifServer.Dispatch`. |
 | `--client` / `--server` | Generate one side only. Both by default. |
 | `--mirror <dir>` | Resolve every document from a local mirror rather than from disk and the network. |
 
@@ -122,11 +123,17 @@ a WSDL on disk can pull in schemas beside it and one fetched over http can pull 
 Pass `--mirror` to keep a run offline and reproducible, which is how this repository generates its
 own bindings.
 
-A generated client depends on nothing but the runtime written beside it. A generated service
-additionally depends on `SharpOnvifServer`, which carries the ASP.NET Core dispatch it is routed
-by; that is not Onvif-specific either, but unlike the runtime it is a library rather than
-something the generator writes. Generate with `--client` for output that references nothing at
-all.
+A generated client depends on nothing but the runtime written beside it - and that is checked by
+compiling it that way: `TestGeneratedCodeCompilesAlone` generates from the banking fixture and
+compiles the result against the framework with every assembly of ours filtered out. Nothing else
+can check it, because everywhere else the emitted runtime is compiled inside `SharpOnvifCommon`,
+where anything it might accidentally reach for happens to exist.
+
+A generated service additionally names the namespace it is routed by, `SharpOnvifServer.Dispatch`
+unless `--dispatch` says otherwise. That is the one thing a generated service names that is not
+generated: routing an action to a method over ASP.NET Core is a library rather than anything a
+schema describes, so the generator names one instead of writing one. Generate with `--client` for
+output that references nothing at all.
 
 Run the generator twice into one solution - a second service set, say - with `--no-runtime` on the
 second run and `--runtime-namespace` naming the first one's, so the two share a runtime instead of

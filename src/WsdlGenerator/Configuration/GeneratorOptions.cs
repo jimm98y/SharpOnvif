@@ -46,6 +46,18 @@ internal sealed record GeneratorOptions
     public required RuntimeTarget Runtime { get; init; }
 
     /// <summary>
+    /// Namespace of the dispatch a generated service is routed by: where its base class and
+    /// <c>OnvifDispatchResult</c> come from.
+    /// </summary>
+    /// <remarks>
+    /// The one thing a generated service names that is not generated. Routing an action to a
+    /// method over ASP.NET Core is a library rather than anything a schema describes, so the
+    /// generator names one instead of writing one. Generate with <c>--client</c> for output that
+    /// names nothing at all.
+    /// </remarks>
+    public string DispatchNamespace { get; init; } = "SharpOnvifServer.Dispatch";
+
+    /// <summary>
     /// Type a generated client builds its settings from when it is given none: the name of
     /// something implementing the generated <c>IClientSettings</c>, with a parameterless
     /// constructor and one taking a user name and a password.

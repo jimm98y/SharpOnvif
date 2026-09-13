@@ -19,6 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -113,6 +114,78 @@ namespace SharpOnvif.Tests
                 "GetDeviceInformation");
 
             Assert.AreEqual(HttpStatusCode.Unauthorized, response.StatusCode);
+        }
+
+        /// <summary>A request naming its action the way Onvif Device Manager does.</summary>
+        private static StringContent Addressed(string operation, string action)
+        {
+            var content = new StringContent(
+                "<?xml version=\"1.0\"?>" +
+                "<s:Envelope xmlns:s=\"http://www.w3.org/2003/05/soap-envelope\" " +
+                "xmlns:wsa=\"http://www.w3.org/2005/08/addressing\">" +
+                $"<s:Header><wsa:Action>{action}</wsa:Action></s:Header>" +
+                $"<s:Body><{operation} xmlns=\"http://www.onvif.org/ver10/device/wsdl\"/></s:Body>" +
+                "</s:Envelope>");
+            content.Headers.Clear();
+            return content;
+        }
+
+        private static async Task<HttpResponseMessage> PostAddressedAsync(
+            AuthenticatedDevice device, string operation, string action)
+        {
+            var http = new HttpClient();
+            var request = new HttpRequestMessage(HttpMethod.Post, device.Endpoint)
+            {
+                Content = Addressed(operation, action),
+            };
+
+            // No action in the Content-Type, which is the whole point: it is in the envelope.
+            request.Content.Headers.TryAddWithoutValidation("Content-Type", "application/soap+xml; charset=utf-8");
+
+            return await http.SendAsync(request);
+        }
+
+        [TestMethod]
+        public async Task AnswersAnOperationThatNeedsNoPasswordWhenTheActionIsInTheEnvelope()
+        {
+            // Onvif Device Manager addresses its requests this way. The endpoint has always read
+            // the action from there when the Content-Type carries none; authentication did not,
+            // so a PRE_AUTH operation sent this way was asked for a password the specification
+            // says it does not need.
+            await using var device = await AuthenticatedDevice.StartAsync();
+
+            var response = await PostAddressedAsync(device, "GetSystemDateAndTime", GetSystemDateAndTime);
+
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+        }
+
+        [TestMethod]
+        public async Task StillAsksForAPasswordWhenTheEnvelopeNamesSomethingElse()
+        {
+            // And the fallback has to be the same fallback: whatever authentication reads there,
+            // dispatch reads too, so naming a PRE_AUTH action cannot run anything else.
+            await using var device = await AuthenticatedDevice.StartAsync();
+
+            var response = await PostAddressedAsync(device, "GetDeviceInformation", GetDeviceInformation);
+
+            Assert.AreEqual(HttpStatusCode.Unauthorized, response.StatusCode);
+        }
+
+        [TestMethod]
+        public async Task RefusesAPrivilegedBodyAddressedAsOneThatNeedsNoPassword()
+        {
+            // The envelope names the harmless operation and the body holds another. Dispatch goes
+            // by the action, so what runs is the one that was named - not the one smuggled below.
+            await using var device = await AuthenticatedDevice.StartAsync();
+
+            var response = await PostAddressedAsync(device, "GetDeviceInformation", GetSystemDateAndTime);
+            string body = await response.Content.ReadAsStringAsync();
+
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode, "the action named needs no password");
+            StringAssert.Contains(body, "GetSystemDateAndTimeResponse",
+                "the operation named is the operation that ran");
+            Assert.IsFalse(body.Contains("Manufacturer", StringComparison.Ordinal),
+                "the body underneath was answered instead of the action named");
         }
 
         [TestMethod]
