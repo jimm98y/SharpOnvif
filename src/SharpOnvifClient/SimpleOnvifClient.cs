@@ -125,7 +125,7 @@ namespace SharpOnvifClient
             if (!_authentication.Authentication.HasFlag(DigestAuthentication.WsUsernameToken))
                 throw new NotSupportedException("Time offset is only supported for WsUsernameToken authentication");
 
-            _authentication.UtcNowOffset = utcNowOffset;
+            _settings.UtcNowOffset = utcNowOffset;
         }
 
         /// <summary>
@@ -205,6 +205,7 @@ namespace SharpOnvifClient
                 Transport = _settings.Transport,
                 HttpClient = _settings.HttpClient,
                 Logger = _settings.Logger,
+                UtcNowOffset = _settings.UtcNowOffset,
                 Timeout = timeout,
             };
         }

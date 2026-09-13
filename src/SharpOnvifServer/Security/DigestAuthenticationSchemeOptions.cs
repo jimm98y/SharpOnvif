@@ -48,8 +48,6 @@ namespace SharpOnvifServer.Security
         /// <para>
         /// Read from the device's side these say what it offers and will accept;
         /// from the client's, what it understands and will send.
-        /// <see cref="OnvifAuthenticationSettings.UtcNowOffset"/> has no meaning here - it exists
-        /// for a client compensating for a device whose clock is wrong.
         /// </para>
         /// </remarks>
         public OnvifAuthenticationSettings Onvif

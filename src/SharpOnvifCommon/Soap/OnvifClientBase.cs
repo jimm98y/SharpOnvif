@@ -169,7 +169,7 @@ namespace SharpOnvifCommon.Soap
                     writer,
                     _settings.Credentials.UserName,
                     _settings.Credentials.Password,
-                    _settings.Authentication.UtcNowOffset);
+                    _settings.UtcNowOffset);
             }
 
             return SoapEnvelope.Write(headers, writer =>

@@ -20,6 +20,22 @@ namespace SharpOnvifCommon.Soap
         /// </remarks>
         public IOnvifLogger Logger { get; set; }
 
+        /// <summary>
+        /// How far the device's clock is ahead of this machine's, for a device whose clock is
+        /// wrong.
+        /// </summary>
+        /// <remarks>
+        /// A WS-UsernameToken carries the time it was made, and a device refuses one that drifts
+        /// too far from its own clock. Setting the difference here stamps the token in the
+        /// device's time rather than in this machine's, which is what gets a client past a camera
+        /// nobody can reach to correct.
+        /// <para>
+        /// It belongs to the client and to nothing else, which is why it is here rather than on
+        /// the settings a device shares with it.
+        /// </para>
+        /// </remarks>
+        public TimeSpan UtcNowOffset { get; set; } = TimeSpan.Zero;
+
         /// <summary>Which authentication schemes to use, and how.</summary>
         public OnvifAuthenticationSettings Authentication { get; set; } = new OnvifAuthenticationSettings();
 

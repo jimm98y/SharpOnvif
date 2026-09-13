@@ -47,15 +47,13 @@ namespace SharpOnvif.Tests
         private static DeviceClient Client(
             AuthenticatedDevice device,
             string password = AuthenticatedDevice.Password,
-            Action<OnvifAuthenticationSettings> configure = null)
+            TimeSpan utcNowOffset = default)
         {
-            var authentication = new OnvifAuthenticationSettings(DigestAuthentication.WsUsernameToken);
-            configure?.Invoke(authentication);
-
             return new DeviceClient(device.Endpoint, new OnvifClientSettings
             {
                 Credentials = new System.Net.NetworkCredential(AuthenticatedDevice.UserName, password),
-                Authentication = authentication,
+                Authentication = new OnvifAuthenticationSettings(DigestAuthentication.WsUsernameToken),
+                UtcNowOffset = utcNowOffset,
             });
         }
 
@@ -122,8 +120,7 @@ namespace SharpOnvif.Tests
                 options.WsUsernameTokenMaxTimeDeltaInMilliseconds = 2000;
             });
 
-            using var client = Client(device, configure: authentication =>
-                authentication.UtcNowOffset = TimeSpan.FromMinutes(-10));
+            using var client = Client(device, utcNowOffset: TimeSpan.FromMinutes(-10));
 
             await Assert.ThrowsExactlyAsync<OnvifFaultException>(() => client.GetDeviceInformationAsync());
         }
@@ -137,8 +134,7 @@ namespace SharpOnvif.Tests
                 options.WsUsernameTokenMaxTimeDeltaInMilliseconds = 2000;
             });
 
-            using var client = Client(device, configure: authentication =>
-                authentication.UtcNowOffset = TimeSpan.FromMinutes(10));
+            using var client = Client(device, utcNowOffset: TimeSpan.FromMinutes(10));
 
             await Assert.ThrowsExactlyAsync<OnvifFaultException>(() => client.GetDeviceInformationAsync());
         }
@@ -156,8 +152,7 @@ namespace SharpOnvif.Tests
                 options.WsUsernameTokenMaxTimeDeltaInMilliseconds = 300000; // five minutes
             });
 
-            using var client = Client(device, configure: authentication =>
-                authentication.UtcNowOffset = TimeSpan.FromMinutes(1));
+            using var client = Client(device, utcNowOffset: TimeSpan.FromMinutes(1));
 
             var info = await client.GetDeviceInformationAsync();
 
@@ -174,8 +169,7 @@ namespace SharpOnvif.Tests
                 options.WsUsernameTokenMaxTimeDeltaInMilliseconds = -1;
             });
 
-            using var client = Client(device, configure: authentication =>
-                authentication.UtcNowOffset = TimeSpan.FromHours(-3));
+            using var client = Client(device, utcNowOffset: TimeSpan.FromHours(-3));
 
             var info = await client.GetDeviceInformationAsync();
 

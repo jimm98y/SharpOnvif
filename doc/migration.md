@@ -256,9 +256,15 @@ objects from it, so a file written for 0.9.x keeps working.
 + AddOnvifDigestAuthentication(Configuration.GetSection("Digest"));
 ```
 
-`OnvifAuthenticationSettings.UtcNowOffset` appears on the device as a consequence of sharing the
-type. It has no meaning there - it exists for a client compensating for a device whose clock is
-wrong - and is ignored.
+`UtcNowOffset` moved with the split, from `OnvifAuthenticationSettings` to
+`OnvifClientSettings` - it compensates for a device whose clock is wrong, which is the client's
+business and no part of what the two sides negotiate. `SimpleOnvifClient.SetCameraUtcNowOffset` is
+unchanged.
+
+```cs
+- new OnvifClientSettings { Authentication = new OnvifAuthenticationSettings { UtcNowOffset = skew } }
++ new OnvifClientSettings { UtcNowOffset = skew }
+```
 
 ### One `DigestAuthentication` instead of two
 

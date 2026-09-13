@@ -67,15 +67,6 @@ namespace SharpOnvifCommon.Security
             "http://www.onvif.org/ver10/device/wsdl/GetEndpointReference",
         };
 
-        /// <summary>
-        /// Offset added to the local clock when stamping WS-UsernameToken timestamps.
-        /// <para>
-        /// Devices reject a token whose Created time drifts too far from their own clock. When a
-        /// camera's clock is wrong and cannot be corrected, setting the observed difference here
-        /// makes authentication succeed anyway.
-        /// </para>
-        /// </summary>
-        public TimeSpan UtcNowOffset { get; set; } = TimeSpan.Zero;
 
         /// <summary>
         /// Copies another set of settings, lists included, so that changing one afterwards does
@@ -87,7 +78,6 @@ namespace SharpOnvifCommon.Security
 
             Authentication = other.Authentication;
             HttpDigestUserHash = other.HttpDigestUserHash;
-            UtcNowOffset = other.UtcNowOffset;
 
             HttpDigestAlgorithms = other.HttpDigestAlgorithms == null
                 ? null : new List<string>(other.HttpDigestAlgorithms);
