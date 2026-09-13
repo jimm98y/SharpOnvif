@@ -54,11 +54,11 @@ namespace SharpOnvifCommon.Soap
         /// How the client proves who it is, or null to send no credentials at all.
         /// </summary>
         /// <remarks>
-        /// It starts as the pair of schemes the Onvif specification defines. A service that
-        /// authenticates some other way is served by another implementation of
-        /// <see cref="IClientAuthentication"/>.
+        /// It starts as <see cref="OnvifClientAuthentication"/> with the pair of schemes the Onvif
+        /// specification defines. A service that authenticates some other way is served by another
+        /// implementation of <see cref="IClientAuthentication"/>.
         /// </remarks>
-        public IClientAuthentication Authentication { get; set; } = new OnvifAuthenticationSettings();
+        public IClientAuthentication Authentication { get; set; } = new OnvifClientAuthentication();
 
         public TimeSpan Timeout { get; set; } = TimeSpan.FromSeconds(60);
 

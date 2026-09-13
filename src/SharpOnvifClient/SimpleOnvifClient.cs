@@ -110,7 +110,7 @@ namespace SharpOnvifClient
             _settings = new OnvifClientSettings
             {
                 Credentials = _credentials,
-                Authentication = this._authentication.Onvif,
+                Authentication = new OnvifClientAuthentication(this._authentication.Onvif),
                 UtcNowOffset = this._authentication.UtcNowOffset,
                 DisableExpect100Continue = disableExpect100Continue,
             };
@@ -128,7 +128,7 @@ namespace SharpOnvifClient
         /// </summary>
         public void SetCameraUtcNowOffset(TimeSpan utcNowOffset)
         {
-            if (!_authentication.Onvif.Authentication.HasFlag(DigestAuthentication.WsUsernameToken))
+            if (!_authentication.Onvif.Offers(DigestAuthentication.WsUsernameToken))
                 throw new NotSupportedException("Time offset is only supported for WsUsernameToken authentication");
 
             // Both, so that the options a caller can still read say what the client is doing.

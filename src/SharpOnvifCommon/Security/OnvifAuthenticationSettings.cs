@@ -1,8 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Net.Http;
-using SharpOnvifCommon.Soap;
-using SharpOnvifCommon.Xml;
 
 namespace SharpOnvifCommon.Security
 {
@@ -24,17 +21,18 @@ namespace SharpOnvifCommon.Security
     }
 
     /// <summary>
-    /// How a client authenticates to a device. Shared by the simple client and the generated
-    /// service clients.
+    /// What a client and a device have to agree on to authenticate: which schemes, which hashing
+    /// algorithms and qualities of protection, whether the username is hashed, and which
+    /// operations need no credentials.
     /// </summary>
     /// <remarks>
-    /// This is Onvif's answer to <see cref="IClientAuthentication"/>, which is all the generated
-    /// client knows about: the two schemes the core specification defines, HTTP Digest at the
-    /// transport and the WS-Security UsernameToken in the message. The same object describes what
-    /// a device offers, which is why it is a description rather than a mechanism - what does the
-    /// work is <see cref="HttpDigestHandler"/> and <see cref="WsUsernameToken"/>.
+    /// A description, and only a description. Read from a device's side it says what it offers
+    /// and will accept; from a client's, what it understands and will send - which is why the two
+    /// are configured with the same type and why this one performs nothing. What acts on it is
+    /// <see cref="OnvifClientAuthentication"/> on the client, and the authentication handler on
+    /// the device.
     /// </remarks>
-    public class OnvifAuthenticationSettings : IClientAuthentication
+    public class OnvifAuthenticationSettings
     {
         public DigestAuthentication Authentication { get; set; } =
             DigestAuthentication.WsUsernameToken | DigestAuthentication.HttpDigest;
@@ -103,48 +101,6 @@ namespace SharpOnvifCommon.Security
         public OnvifAuthenticationSettings(DigestAuthentication authentication)
         {
             Authentication = authentication;
-        }
-
-        /// <summary>True when the given SOAP action may be sent without credentials.</summary>
-        public bool IsPreAuth(string action)
-        {
-            return PreAuthActions != null && action != null && PreAuthActions.Contains(action);
-        }
-
-        /// <summary>
-        /// True when HTTP Digest is in play, which is answered by a handler in the client's own
-        /// pipeline and so cannot be arranged on an HttpClient somebody else built.
-        /// </summary>
-        public bool RequiresOwnTransport(IClientSettings settings)
-        {
-            return settings != null
-                && settings.Credentials != null
-                && (Authentication & DigestAuthentication.HttpDigest) != 0;
-        }
-
-        /// <summary>Puts the digest handler in the pipeline when HTTP Digest is in play.</summary>
-        public HttpMessageHandler CreateTransport(HttpMessageHandler inner, IClientSettings settings)
-        {
-            return RequiresOwnTransport(settings)
-                ? new HttpDigestHandler(settings.Credentials, this, inner)
-                : inner;
-        }
-
-        /// <summary>
-        /// Writes the WS-Security UsernameToken, unless there is nothing to write: no credentials,
-        /// the scheme switched off, or an action the device answers without them.
-        /// </summary>
-        public Action<IXmlWriter> CreateSecurityHeader(string action, IClientSettings settings)
-        {
-            if (settings == null || settings.Credentials == null) return null;
-            if ((Authentication & DigestAuthentication.WsUsernameToken) == 0) return null;
-            if (IsPreAuth(action)) return null;
-
-            return writer => WsUsernameToken.Write(
-                writer,
-                settings.Credentials.UserName,
-                settings.Credentials.Password,
-                settings.UtcNowOffset);
         }
     }
 }

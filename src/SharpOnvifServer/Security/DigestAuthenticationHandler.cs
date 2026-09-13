@@ -261,8 +261,6 @@ namespace SharpOnvifServer.Security
         /// </remarks>
         private async Task<bool> AllowAnonymousAccessAsync()
         {
-            if (Options.Onvif.PreAuthActions == null) return false;
-
             string action = Dispatch.OnvifRequestAction.FromContentType(Request.ContentType);
 
             if (action == null)
@@ -277,7 +275,7 @@ namespace SharpOnvifServer.Security
                 action = Dispatch.OnvifRequestAction.FromEnvelope(Encoding.UTF8.GetString(body));
             }
 
-            return action != null && Options.Onvif.PreAuthActions.Contains(action);
+            return Options.Onvif.IsPreAuth(action);
         }
 
         /// <summary>

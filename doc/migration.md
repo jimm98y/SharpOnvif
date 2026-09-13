@@ -248,6 +248,18 @@ once for each side, with the same names and the same defaults. It is declared on
   });
 ```
 
+`OnvifAuthenticationSettings` describes that agreement and does nothing else. What acts on it for
+a client is `OnvifClientAuthentication`, which is what `OnvifClientSettings.Authentication` now
+takes:
+
+```cs
+- Authentication = new OnvifAuthenticationSettings(DigestAuthentication.HttpDigest)
++ Authentication = new OnvifClientAuthentication(DigestAuthentication.HttpDigest)
+```
+
+`IsPreAuth` moved to an extension method beside it, so a call to it reads the same as long as
+`SharpOnvifCommon.Security` is in scope, and `Offers` joined it for asking about a scheme.
+
 The client's `SharpOnvifClient.Security.DigestAuthenticationSchemeOptions` has the same shape, for
 the same reason. It used to *be* an `OnvifAuthenticationSettings` by inheritance; it carries one
 now, under the same name, with what belongs to the client alone beside it.

@@ -64,10 +64,11 @@ namespace SharpOnvif.Tests
             return new DeviceClient(device.Endpoint, new OnvifClientSettings
             {
                 Credentials = new System.Net.NetworkCredential(AuthenticatedDevice.UserName, password),
-                Authentication = new OnvifAuthenticationSettings(DigestAuthentication.HttpDigest)
-                {
-                    HttpDigestUserHash = userHash,
-                },
+                Authentication = new OnvifClientAuthentication(
+                    new OnvifAuthenticationSettings(DigestAuthentication.HttpDigest)
+                    {
+                        HttpDigestUserHash = userHash,
+                    }),
             });
         }
 

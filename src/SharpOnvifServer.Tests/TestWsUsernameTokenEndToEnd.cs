@@ -52,7 +52,7 @@ namespace SharpOnvif.Tests
             return new DeviceClient(device.Endpoint, new OnvifClientSettings
             {
                 Credentials = new System.Net.NetworkCredential(AuthenticatedDevice.UserName, password),
-                Authentication = new OnvifAuthenticationSettings(DigestAuthentication.WsUsernameToken),
+                Authentication = new OnvifClientAuthentication(DigestAuthentication.WsUsernameToken),
                 UtcNowOffset = utcNowOffset,
             });
         }

@@ -269,7 +269,7 @@ namespace SharpOnvif.Tests
             var settings = new SharpOnvifCommon.Soap.OnvifClientSettings
             {
                 Credentials = new System.Net.NetworkCredential(UserName, Password),
-                Authentication = new OnvifAuthenticationSettings(DigestAuthentication.HttpDigest),
+                Authentication = new OnvifClientAuthentication(DigestAuthentication.HttpDigest),
                 HttpClient = new System.Net.Http.HttpClient(),
             };
 
@@ -285,7 +285,7 @@ namespace SharpOnvif.Tests
             var settings = new SharpOnvifCommon.Soap.OnvifClientSettings
             {
                 Credentials = new System.Net.NetworkCredential(UserName, Password),
-                Authentication = new OnvifAuthenticationSettings(DigestAuthentication.WsUsernameToken),
+                Authentication = new OnvifClientAuthentication(DigestAuthentication.WsUsernameToken),
                 HttpClient = new System.Net.Http.HttpClient(),
             };
 
