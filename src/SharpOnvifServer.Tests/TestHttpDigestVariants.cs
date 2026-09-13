@@ -212,6 +212,89 @@ namespace SharpOnvif.Tests
             Assert.AreEqual(AuthenticatedDevice.Manufacturer, info.Manufacturer);
         }
 
+        /// <summary>Sends its content in two halves, with a pause between them.</summary>
+        /// <remarks>
+        /// A body that arrives all at once is read all at once whatever the reading code does, so
+        /// a request that arrives in pieces is the only way to tell the two apart.
+        /// </remarks>
+        private sealed class HalfAtATime : System.Net.Http.HttpContent
+        {
+            private readonly byte[] _body;
+
+            public HalfAtATime(byte[] body)
+            {
+                _body = body;
+                Headers.ContentType =
+                    System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/soap+xml; charset=utf-8");
+            }
+
+            protected override async Task SerializeToStreamAsync(
+                System.IO.Stream stream, System.Net.TransportContext context)
+            {
+                int half = _body.Length / 2;
+
+                await stream.WriteAsync(_body, 0, half);
+                await stream.FlushAsync();
+                await Task.Delay(250);
+                await stream.WriteAsync(_body, half, _body.Length - half);
+                await stream.FlushAsync();
+            }
+
+            /// <summary>
+            /// Unknown, so the request is chunked and the halves go out as they are written
+            /// rather than being buffered whole first.
+            /// </summary>
+            protected override bool TryComputeLength(out long length)
+            {
+                length = 0;
+                return false;
+            }
+        }
+
+        [TestMethod]
+        public async Task AuthenticatesARequestThatArrivesInPieces()
+        {
+            // auth-int digests the body, so the device has to read all of it before it can check
+            // anything. Reading only what the first read happens to bring digests a prefix, which
+            // refuses an honest request for a reason nothing in it explains - and only a sender
+            // that pauses mid-body shows the difference.
+            await using var device = await DeviceOffering("SHA-256", "auth-int", userHash: false);
+
+            string challenge = await ChallengeFor(device);
+            string nonce = Value(challenge, "nonce");
+            string realm = Value(challenge, "realm");
+            string opaque = Value(challenge, "opaque");
+            string path = new Uri(device.Endpoint).AbsolutePath;
+            const string CNonce = "0a4f113b";
+
+            byte[] body = System.Text.Encoding.UTF8.GetBytes(
+                "<?xml version=\"1.0\"?>" +
+                "<s:Envelope xmlns:s=\"http://www.w3.org/2003/05/soap-envelope\">" +
+                "<!--" + new string('x', 128 * 1024) + "-->" +
+                "<s:Body><GetDeviceInformation xmlns=\"http://www.onvif.org/ver10/device/wsdl\"/></s:Body>" +
+                "</s:Envelope>");
+
+            string response = SharpOnvifCommon.Security.HttpDigestAuthentication.CreateWebDigestRFC7616(
+                "SHA-256", AuthenticatedDevice.UserName, realm, AuthenticatedDevice.Password, false,
+                nonce, "POST", path, 1, CNonce, "auth-int", body);
+
+            string authorization = SharpOnvifCommon.Security.HttpDigestAuthentication.CreateAuthorizationRFC7616(
+                AuthenticatedDevice.UserName, realm, nonce, path, response, opaque,
+                "SHA-256", "auth-int", 1, CNonce, userhash: false);
+
+            using var http = new System.Net.Http.HttpClient();
+            var request = new System.Net.Http.HttpRequestMessage(System.Net.Http.HttpMethod.Post, device.Endpoint)
+            {
+                Content = new HalfAtATime(body),
+            };
+            request.Headers.TryAddWithoutValidation("Authorization", authorization);
+
+            using var reply = await http.SendAsync(request);
+
+            Assert.AreEqual(System.Net.HttpStatusCode.OK, reply.StatusCode,
+                "the device digested what it had read so far rather than the request it was sent");
+        }
+
         [TestMethod]
         public async Task AuthenticatesAgainAfterTheNonceHasExpired()
         {

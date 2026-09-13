@@ -87,8 +87,18 @@ namespace SharpOnvif.Tests
 
         private sealed class DeviceImpl : DeviceBase
         {
+            /// <summary>What the last SetHostname carried, so a test can see the whole of it.</summary>
+            public static string LastHostname;
+
             public override GetDeviceInformationResponse GetDeviceInformation() =>
                 new GetDeviceInformationResponse { Manufacturer = Manufacturer, Model = "Test" };
+
+            /// <summary>Echoes what it was sent, for a test that needs a large request.</summary>
+            public override SetHostnameResponse SetHostname(string Name)
+            {
+                LastHostname = Name;
+                return new SetHostnameResponse();
+            }
 
             /// <summary>One operation a device answers without credentials, for the tests that
             /// need the unauthenticated path to reach a real reply.</summary>
@@ -129,6 +139,9 @@ namespace SharpOnvif.Tests
 
             return new AuthenticatedDevice(app, address.TrimEnd('/') + EndpointPath);
         }
+
+        /// <summary>What the last SetHostname carried.</summary>
+        public static string LastHostname { get { return DeviceImpl.LastHostname; } }
 
         public async ValueTask DisposeAsync()
         {

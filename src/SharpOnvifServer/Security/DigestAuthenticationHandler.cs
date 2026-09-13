@@ -118,7 +118,7 @@ namespace SharpOnvifServer.Security
                         byte[] body = null;
                         if (string.Compare("auth-int", webToken.Qop, true) == 0)
                         {
-                            body = await ReadRequestBodyAsync(body).ConfigureAwait(false);
+                            body = await ReadRequestBodyAsync().ConfigureAwait(false);
                         }
 
                         int authenticateWebDigestResult = await AuthenticateWebDigestAsync(Options.HttpDigestRealm, Request.Method, webToken, body).ConfigureAwait(false);
@@ -271,7 +271,7 @@ namespace SharpOnvifServer.Security
                 // endpoint falls back to reading it there - so this has to fall back the same way
                 // and in the same order, or an operation the specification says needs no password
                 // is asked for one.
-                byte[] body = await ReadRequestBodyAsync(null).ConfigureAwait(false);
+                byte[] body = await ReadRequestBodyAsync().ConfigureAwait(false);
                 if (body == null || body.Length == 0) return false;
 
                 action = Dispatch.OnvifRequestAction.FromEnvelope(Encoding.UTF8.GetString(body));
@@ -280,13 +280,47 @@ namespace SharpOnvifServer.Security
             return action != null && Options.Onvif.PreAuthActions.Contains(action);
         }
 
-        private async Task<byte[]> ReadRequestBodyAsync(byte[] body)
+        /// <summary>
+        /// The request body, without consuming it, or null when there is more of it than this
+        /// endpoint would answer.
+        /// </summary>
+        /// <remarks>
+        /// Read to the end rather than taking whatever the first read happens to return: a body
+        /// that arrives in more than one piece was being digested as its first piece, which fails
+        /// an auth-int request for no reason the sender can see.
+        /// <para>
+        /// Capped at what the endpoint will accept, because this runs before the endpoint does -
+        /// so without a cap here, a request too large to ever be dispatched would be buffered in
+        /// full before anything refused it. Nothing is consumed either way: the endpoint still
+        /// reads the same body afterwards.
+        /// </para>
+        /// </remarks>
+        private async Task<byte[]> ReadRequestBodyAsync()
         {
-            ReadResult requestBodyInBytes = await Request.BodyReader.ReadAsync().ConfigureAwait(false);
-            string content = Encoding.UTF8.GetString(requestBodyInBytes.Buffer.ToArray());
-            Request.BodyReader.AdvanceTo(requestBodyInBytes.Buffer.Start, requestBodyInBytes.Buffer.End);
-            body = Encoding.UTF8.GetBytes(content);
-            return body;
+            long maximum = Dispatch.OnvifEndpoint.MaxRequestBytes;
+
+            while (true)
+            {
+                ReadResult read = await Request.BodyReader.ReadAsync().ConfigureAwait(false);
+                ReadOnlySequence<byte> buffer = read.Buffer;
+
+                try
+                {
+                    if (read.IsCanceled) return null;
+                    if (buffer.Length > maximum) return null;
+
+                    // The bytes themselves, not a round trip through a string: an auth-int digest
+                    // covers what was sent, and a body that is not valid UTF-8 does not survive
+                    // being decoded and re-encoded.
+                    if (read.IsCompleted) return buffer.ToArray();
+                }
+                finally
+                {
+                    // Consumed nothing, examined everything - so the next read waits for more,
+                    // and the whole body is still there for the endpoint.
+                    Request.BodyReader.AdvanceTo(buffer.Start, buffer.End);
+                }
+            }
         }
 
         public async Task<int> AuthenticateSoapDigestAsync(string userName, string digest, string nonce, string created)
