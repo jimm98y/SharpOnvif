@@ -302,11 +302,61 @@ namespace SharpOnvifCommon.Xml
         {
             if (_ownerDocument == null) _ownerDocument = new XmlDocument();
 
+            // Captured while the reader is still on the element: what is in scope here is what the
+            // element's content may be leaning on, and the subtree is about to be detached from it.
+            IDictionary<string, string> inScope = NamespacesInScope();
+
+            XmlNode node;
             using (XmlReader subtree = _reader.ReadSubtree())
             {
                 subtree.Read();
-                XmlNode node = _ownerDocument.ReadNode(subtree);
-                return node as XmlElement;
+                node = _ownerDocument.ReadNode(subtree);
+            }
+
+            // ReadSubtree leaves the outer reader on the end tag of what it read, so without this
+            // the caller sees that end tag and takes it for its own. Every element after a
+            // wildcard one was lost that way - an Onvif Subscribe carries its Filter before its
+            // InitialTerminationTime, and the termination time never arrived.
+            _reader.Read();
+
+            var element = node as XmlElement;
+            DeclareInScope(element, inScope);
+            return element;
+        }
+
+        private IDictionary<string, string> NamespacesInScope()
+        {
+            var resolver = _reader as IXmlNamespaceResolver;
+            return resolver == null
+                ? null
+                : resolver.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
+        }
+
+        /// <summary>
+        /// Re-declares on a detached element the prefixes that were in scope where it was read.
+        /// </summary>
+        /// <remarks>
+        /// A wildcard element is lifted out of the document into one of its own, leaving behind
+        /// the declarations its content refers to. Onvif leans on this: a notification's topic is
+        /// the text "tns1:RuleEngine/...", and the prefix is declared on the envelope, so an
+        /// element that does not carry the declaration cannot say what topic it names - and
+        /// writing it back out would produce a prefix bound to nothing.
+        /// </remarks>
+        private static void DeclareInScope(XmlElement element, IDictionary<string, string> inScope)
+        {
+            if (element == null || inScope == null) return;
+
+            foreach (var pair in inScope)
+            {
+                // The default namespace is left alone: the element already carries its own name's
+                // namespace, and redeclaring it here would change what its children mean.
+                if (string.IsNullOrEmpty(pair.Key)) continue;
+                if (element.GetNamespaceOfPrefix(pair.Key).Length > 0) continue;
+
+                XmlAttribute declaration = element.OwnerDocument.CreateAttribute(
+                    "xmlns", pair.Key, OnvifXmlNamespaces.Xmlns);
+                declaration.Value = pair.Value;
+                element.Attributes.Append(declaration);
             }
         }
 

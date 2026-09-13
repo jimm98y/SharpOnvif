@@ -58,7 +58,9 @@ namespace OnvifService.Onvif
             DateTime termination = OnvifHelpers.FromAbsoluteOrRelativeDateTimeUTC(now, request.InitialTerminationTime, now.AddMinutes(1));
 
             // Basic uses the notification endpoint from the request
-            var subscription = ActivatorUtilities.CreateInstance<SubscriptionManagerImpl>(_serviceProvider, termination, termination.Subtract(now), notificationEndpoint);
+            var subscription = ActivatorUtilities.CreateInstance<SubscriptionManagerImpl>(
+                _serviceProvider, termination, termination.Subtract(now), notificationEndpoint,
+                TopicFilter.FromFilter(request.Filter));
             string subscriptionID = _eventSubscriptionManager.AddSubscription(subscription);
             string subscriptionReferenceUri = OnvifHelpers.ChangeUriPath(endpointUri, $"/onvif/Events/Subscription/{subscriptionID}/").ToString();
 
@@ -92,7 +94,9 @@ namespace OnvifService.Onvif
             DateTime termination = OnvifHelpers.FromAbsoluteOrRelativeDateTimeUTC(now, request.InitialTerminationTime, now.AddMinutes(1));
 
             // PullPoint uses "" for the notification endpoint
-            var subscription = ActivatorUtilities.CreateInstance<SubscriptionManagerImpl>(_serviceProvider, termination, termination.Subtract(now), "");
+            var subscription = ActivatorUtilities.CreateInstance<SubscriptionManagerImpl>(
+                _serviceProvider, termination, termination.Subtract(now), "",
+                TopicFilter.FromFilter(request.Filter));
             string subscriptionID = _eventSubscriptionManager.AddSubscription(subscription);
             string subscriptionReferenceUri = OnvifHelpers.ChangeUriPath(endpointUri, $"/onvif/Events/PullPointSubscription/{subscriptionID}/").ToString();
 

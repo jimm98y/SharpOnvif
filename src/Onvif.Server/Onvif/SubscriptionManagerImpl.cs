@@ -1,4 +1,4 @@
-﻿// SharpOnvif
+// SharpOnvif
 // Copyright (C) 2026 Lukas Volf
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -46,6 +46,10 @@ namespace OnvifService.Onvif
         private readonly string _notificationEndpoint; // endpoint where to send Basic subscription notifications
         private readonly TimeSpan _expirationDelta;
 
+        // The topics this subscriber asked for. A device that sends everything else as well is
+        // not conformant, and floods a client that only wanted to hear about motion.
+        private readonly TopicFilter _topics;
+
         private readonly ConcurrentQueue<NotificationMessage> _messages = new ConcurrentQueue<NotificationMessage>();
 
         /// <summary>
@@ -57,6 +61,7 @@ namespace OnvifService.Onvif
             DateTime expirationTime, 
             TimeSpan expirationDelta,
             string notificationEndpoint,
+            TopicFilter topics,
             ILogger<SubscriptionManagerImpl> logger,
             IHttpClientFactory httpClientFactory,
             IEventSource eventSource)
@@ -64,6 +69,7 @@ namespace OnvifService.Onvif
             ExpirationTime = expirationTime;
             _expirationDelta = expirationDelta;
             _notificationEndpoint = notificationEndpoint; // for Basic subscriptions only
+            _topics = topics ?? TopicFilter.MatchAll;
             _logger = logger;
             _httpClientFactory = httpClientFactory;
             _eventSource = eventSource;
@@ -72,6 +78,11 @@ namespace OnvifService.Onvif
 
         private void EventSource_OnEvent(object sender, NotificationEventArgs e)
         {
+            // The event source produces everything the device can report; this subscriber asked
+            // for some of it.
+            if (!_topics.Matches(e.Message))
+                return;
+
             if (string.IsNullOrEmpty(_notificationEndpoint))
             {
                 // PullPoint
