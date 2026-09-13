@@ -82,7 +82,7 @@ namespace SharpOnvifServer.Dispatch
                 return;
             }
 
-            string action = ActionFromContentType(context.Request.ContentType);
+            string action = OnvifRequestAction.FromContentType(context.Request.ContentType);
 
             // Implementations read this to build the absolute URIs Onvif responses carry.
             OnvifOperationContext.Set(context);
@@ -284,22 +284,6 @@ namespace SharpOnvifServer.Dispatch
             }
 
             return null;
-        }
-
-        /// <summary>Reads the action from the Content-Type header's action parameter.</summary>
-        private static string ActionFromContentType(string contentType)
-        {
-            if (string.IsNullOrEmpty(contentType)) return null;
-
-            int start = contentType.IndexOf("action=", StringComparison.OrdinalIgnoreCase);
-            if (start < 0) return null;
-
-            string value = contentType.Substring(start + "action=".Length).Trim();
-
-            // Devices and tools quote this inconsistently, with single or double quotes or none.
-            int end = value.IndexOf(';');
-            if (end >= 0) value = value.Substring(0, end);
-            return value.Trim().Trim('"', '\'');
         }
 
         /// <summary>

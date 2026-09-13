@@ -40,6 +40,14 @@ namespace SharpOnvifServer.Security
     /// </summary>
     public static class DigestAuthenticationInfo
     {
+        private static bool IsDigestAuthenticated(HttpContext context)
+        {
+            return context.Items.TryGetValue(
+                       DigestAuthenticationHandler.CONTEXT_DIGEST_AUTHENTICATED, out object authenticated)
+                   && authenticated is bool held
+                   && held;
+        }
+
         /// <summary>
         /// Appends the header for a request that authenticated with HTTP Digest. Does nothing for
         /// a request that did not, or when the device has no credentials to prove.
@@ -52,6 +60,13 @@ namespace SharpOnvifServer.Security
         public static async Task AppendAsync(HttpContext context, byte[] responseBody)
         {
             if (context == null) return;
+
+            // Only for a request whose digest was checked and held up. rspauth is computed with
+            // the password over values the caller supplies - the nonce, the cnonce, the count, the
+            // realm - so writing it for a request that merely carried a digest hands anyone who
+            // can reach an operation needing no password a digest of the real password over values
+            // of their own choosing, to work on at their leisure.
+            if (!IsDigestAuthenticated(context)) return;
 
             WebDigestAuth webToken = context.Request.GetSecurityHeaderFromHeaders();
             if (webToken == null || string.IsNullOrEmpty(webToken.Response)) return;

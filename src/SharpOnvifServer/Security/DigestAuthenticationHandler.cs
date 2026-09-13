@@ -46,6 +46,13 @@ namespace SharpOnvifServer.Security
         private const string CONTEXT_AUTHENTICATE_WEB_DIGEST_RESULT = "authenticateWebDigestResult_07E740A9-0079-42CF-9FDE-510FDAB3A1D9";
         private const string CONTEXT_OPAQUE = "opaque_E768DBA5-D7A8-4735-BD34-FE9F0D65DE54";
 
+        /// <summary>
+        /// Set only once this request's HTTP Digest has been checked and held up. What proves the
+        /// device knows the password is written from it, and must not be written for a request
+        /// that merely carried a digest.
+        /// </summary>
+        internal const string CONTEXT_DIGEST_AUTHENTICATED = "digestAuthenticated_5C1B0B0E-4E51-4A2E-9E63-0B2D9C6C5E44";
+
         private const int NONCE_SALT_LENGTH = 12;
         private const string NONCE_HASH_ALGORITHM = "SHA-256";
         private const BinarySerializationType PREFERRED_SERIALIZATION = BinarySerializationType.Hex;
@@ -157,6 +164,8 @@ namespace SharpOnvifServer.Security
                                 HttpDigestAuthentication.TrySetNoncePrime(webToken.Opaque, (webToken.Nonce, webToken.CNonce));
                             }
 
+                            Context.Items[CONTEXT_DIGEST_AUTHENTICATED] = true;
+
                             var identity = new GenericIdentity(webToken.UserName);
                             var claimsPrincipal = new ClaimsPrincipal(identity);
                             var ticket = new AuthenticationTicket(claimsPrincipal, Scheme.Name);
@@ -235,14 +244,23 @@ namespace SharpOnvifServer.Security
             return false;
         }
 
+        /// <summary>
+        /// Whether this request names one of the operations the Onvif specification puts in its
+        /// PRE_AUTH class, which a device answers without credentials.
+        /// </summary>
+        /// <remarks>
+        /// The action is read by the same code that dispatches on it, and compared whole rather
+        /// than looked for inside the header. Anything else lets a request authenticate as one
+        /// operation and run as another: naming an unquoted operation first and a quoted PRE_AUTH
+        /// one second used to satisfy this check while the endpoint dispatched the first.
+        /// </remarks>
         private bool AllowAnonymousAccess(string contentType)
         {
-            // according to the Onvif specification, these functions are in the access class PRE_AUTH and do not require any authentication:
-            return
-                contentType != null &&
-                Options.Onvif.PreAuthActions != null && 
-                (Options.Onvif.PreAuthActions.FirstOrDefault(x => contentType.Contains($"action=\"{x}\"")) != null) && 
-                (contentType.Split("action=\"").Count() - 1) == 1;
+            if (Options.Onvif.PreAuthActions == null) return false;
+
+            string action = Dispatch.OnvifRequestAction.FromContentType(contentType);
+
+            return action != null && Options.Onvif.PreAuthActions.Contains(action);
         }
 
         private async Task<byte[]> ReadRequestBodyAsync(byte[] body)

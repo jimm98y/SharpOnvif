@@ -89,6 +89,15 @@ namespace SharpOnvif.Tests
         {
             public override GetDeviceInformationResponse GetDeviceInformation() =>
                 new GetDeviceInformationResponse { Manufacturer = Manufacturer, Model = "Test" };
+
+            /// <summary>One operation a device answers without credentials, for the tests that
+            /// need the unauthenticated path to reach a real reply.</summary>
+            public override GetSystemDateAndTimeResponse GetSystemDateAndTime(
+                GetSystemDateAndTimeRequest request) =>
+                new GetSystemDateAndTimeResponse
+                {
+                    SystemDateAndTime = new SharpOnvifCommon.Onvif.SystemDateTime(),
+                };
         }
 
         /// <summary>Starts a device with the authentication options the test wants.</summary>
