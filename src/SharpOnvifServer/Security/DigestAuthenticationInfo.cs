@@ -40,12 +40,15 @@ namespace SharpOnvifServer.Security
     /// </summary>
     public static class DigestAuthenticationInfo
     {
-        private static bool IsDigestAuthenticated(HttpContext context)
+        /// <summary>
+        /// This request's HTTP Digest, if one was checked and held up, and null otherwise.
+        /// </summary>
+        private static WebDigestAuth ValidatedDigest(HttpContext context)
         {
             return context.Items.TryGetValue(
-                       DigestAuthenticationHandler.CONTEXT_DIGEST_AUTHENTICATED, out object authenticated)
-                   && authenticated is bool held
-                   && held;
+                DigestAuthenticationHandler.CONTEXT_VALIDATED_DIGEST, out object digest)
+                    ? digest as WebDigestAuth
+                    : null;
         }
 
         /// <summary>
@@ -61,15 +64,18 @@ namespace SharpOnvifServer.Security
         {
             if (context == null) return;
 
-            // Only for a request whose digest was checked and held up. rspauth is computed with
-            // the password over values the caller supplies - the nonce, the cnonce, the count, the
-            // realm - so writing it for a request that merely carried a digest hands anyone who
-            // can reach an operation needing no password a digest of the real password over values
-            // of their own choosing, to work on at their leisure.
-            if (!IsDigestAuthenticated(context)) return;
-
-            WebDigestAuth webToken = context.Request.GetSecurityHeaderFromHeaders();
-            if (webToken == null || string.IsNullOrEmpty(webToken.Response)) return;
+            // The digest this request was admitted on, taken from where the check left it rather
+            // than read out of the request again.
+            //
+            // Both halves of that matter. rspauth is computed with the password over the nonce,
+            // the cnonce, the count and the realm - all of them the caller's - so a request that
+            // merely carried a digest, and was let through for asking something that needs no
+            // password, would otherwise be handed a digest of the real password over values it
+            // chose. And proving identity with values that were never the ones verified is how
+            // the two readings of one header drift apart, which is a bug this codebase has had
+            // once already.
+            WebDigestAuth webToken = ValidatedDigest(context);
+            if (webToken == null) return;
 
             var users = context.RequestServices.GetService<IUserRepository>();
             if (users == null) return;

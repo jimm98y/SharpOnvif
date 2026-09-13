@@ -47,11 +47,16 @@ namespace SharpOnvifServer.Security
         private const string CONTEXT_OPAQUE = "opaque_E768DBA5-D7A8-4735-BD34-FE9F0D65DE54";
 
         /// <summary>
-        /// Set only once this request's HTTP Digest has been checked and held up. What proves the
-        /// device knows the password is written from it, and must not be written for a request
-        /// that merely carried a digest.
+        /// Holds this request's HTTP Digest once it has been checked and held up - and nothing at
+        /// all until then.
         /// </summary>
-        internal const string CONTEXT_DIGEST_AUTHENTICATED = "digestAuthenticated_5C1B0B0E-4E51-4A2E-9E63-0B2D9C6C5E44";
+        /// <remarks>
+        /// What proves the device knows the password is computed from it, so it is the checked
+        /// token that is kept rather than the header it came from. Reading that header a second
+        /// time would mean the values used to prove identity were never themselves the values
+        /// that were verified.
+        /// </remarks>
+        internal const string CONTEXT_VALIDATED_DIGEST = "validatedDigest_5C1B0B0E-4E51-4A2E-9E63-0B2D9C6C5E44";
 
         private const int NONCE_SALT_LENGTH = 12;
         private const string NONCE_HASH_ALGORITHM = "SHA-256";
@@ -164,7 +169,7 @@ namespace SharpOnvifServer.Security
                                 HttpDigestAuthentication.TrySetNoncePrime(webToken.Opaque, (webToken.Nonce, webToken.CNonce));
                             }
 
-                            Context.Items[CONTEXT_DIGEST_AUTHENTICATED] = true;
+                            Context.Items[CONTEXT_VALIDATED_DIGEST] = webToken;
 
                             var identity = new GenericIdentity(webToken.UserName);
                             var claimsPrincipal = new ClaimsPrincipal(identity);
