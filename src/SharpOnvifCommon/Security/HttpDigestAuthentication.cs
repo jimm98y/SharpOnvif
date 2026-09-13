@@ -223,11 +223,15 @@ namespace SharpOnvifCommon.Security
                     var cachedNonceCount = _nonceCache.Get(nonce, null);
                     if (cachedNonceCount == null)
                     {
+                        // Record the count that was actually presented, not 1. Recording 1 leaves
+                        // every count below the one seen still acceptable, so a captured request
+                        // whose count is higher - which is what a client sends after retrying a
+                        // lost request - could be replayed once.
                         CacheItemPolicy cip = new CacheItemPolicy()
                         {
                             AbsoluteExpiration = new DateTimeOffset(DateTime.UtcNow.AddMilliseconds(lifetimeMilliseconds))
                         };
-                        _nonceCache.Set(nonce, 1, cip);
+                        _nonceCache.Set(nonce, nc, cip);
                     }
                     else
                     {
@@ -575,16 +579,28 @@ namespace SharpOnvifCommon.Security
             return ToHex(ncBytes);
         }
 
+        /// <summary>
+        /// Reads one parameter out of a Digest header.
+        /// </summary>
+        /// <remarks>
+        /// The key has to begin where a parameter begins, or it matches inside a longer name:
+        /// "nonce" appears within "cnonce" and within "nextnonce", so a header that lists cnonce
+        /// before nonce - field order is not constrained - would otherwise yield the client's
+        /// nonce where the server's belongs.
+        /// </remarks>
         public static string GetValueFromHeader(string header, string key, bool hasQuotes)
         {
+            // A parameter starts at the beginning of the header value, or after a separator.
+            const string start = @"(?<=^|[\s,])";
+
             Regex regHeader;
             if (hasQuotes)
             {
-                regHeader = new Regex($@"{key}=""([^""]*)""", RegexOptions.IgnoreCase);
+                regHeader = new Regex($@"{start}{key}=""([^""]*)""", RegexOptions.IgnoreCase);
             }
             else
             {
-                regHeader = new Regex($@"{key}=([^\s,]*)", RegexOptions.IgnoreCase);
+                regHeader = new Regex($@"{start}{key}=([^\s,]*)", RegexOptions.IgnoreCase);
             }
 
             Match matchHeader = regHeader.Match(header);
@@ -597,6 +613,15 @@ namespace SharpOnvifCommon.Security
             return null;
         }
 
+        /// <summary>
+        /// The hash a digest algorithm name selects. An absent name means MD5, which is what RFC
+        /// 7616 says a missing algorithm parameter stands for.
+        /// </summary>
+        /// <exception cref="NotSupportedException">
+        /// The name is not one of the algorithms this library implements. Falling back to MD5
+        /// would let anything unrecognised - including a name a peer chose - be computed with the
+        /// weakest algorithm available without a word.
+        /// </exception>
         private static HashAlgorithm GetHashAlgorithm(string algorithm)
         {
             switch (algorithm?.ToUpperInvariant())
@@ -609,11 +634,52 @@ namespace SharpOnvifCommon.Security
                 case "SHA-256-SESS":
                     return SHA256.Create();
 
+                case null:
+                case "":
                 case "MD5":
                 case "MD5-SESS":
-                default:
                     return MD5.Create();
+
+                default:
+                    throw new NotSupportedException($"Unsupported digest algorithm '{algorithm}'.");
             }
+        }
+
+        /// <summary>True when the name is one of the algorithms this library implements.</summary>
+        public static bool IsSupportedAlgorithm(string algorithm)
+        {
+            switch (algorithm?.ToUpperInvariant())
+            {
+                case "SHA-512-256":
+                case "SHA-512-256-SESS":
+                case "SHA-256":
+                case "SHA-256-SESS":
+                case null:
+                case "":
+                case "MD5":
+                case "MD5-SESS":
+                    return true;
+
+                default:
+                    return false;
+            }
+        }
+
+        /// <summary>
+        /// Compares two digests without letting how long the comparison takes reveal how much of
+        /// one was right, which would otherwise let a response be recovered a character at a time.
+        /// </summary>
+        public static bool FixedTimeEquals(string left, string right)
+        {
+            if (left == null || right == null) return ReferenceEquals(left, right);
+
+            // The length of a digest is decided by the algorithm, so it is not a secret.
+            if (left.Length != right.Length) return false;
+
+            int difference = 0;
+            for (int i = 0; i < left.Length; i++) difference |= left[i] ^ right[i];
+
+            return difference == 0;
         }
 
         private static int GetHashLength(string algorithm)
@@ -628,10 +694,14 @@ namespace SharpOnvifCommon.Security
                 case "SHA-256-SESS":
                     return 32;
 
+                case null:
+                case "":
                 case "MD5":
                 case "MD5-SESS":
-                default:
                     return 16;
+
+                default:
+                    throw new NotSupportedException($"Unsupported digest algorithm '{algorithm}'.");
             }
         }
 

@@ -87,6 +87,14 @@ namespace SharpOnvifServer.Security
                         return AuthenticateResult.Fail("HTTP Digest has invalid realm.");
                     }
 
+                    if (!IsOfferedAlgorithm(webToken.Algorithm))
+                    {
+                        // The algorithm arrives in the request, so without this a client picks it
+                        // regardless of what the device offered - and an unrecognised name used to
+                        // fall through to MD5. Configuring SHA-256 only has to mean something.
+                        return AuthenticateResult.Fail($"HTTP Digest algorithm '{webToken.Algorithm}' was not offered.");
+                    }
+
                     // store the opaque for the duration of this request
                     if (HttpDigestAuthentication.ValidateOpaque(PREFERRED_SERIALIZATION, webToken.Opaque) == 0)
                     {
@@ -187,6 +195,27 @@ namespace SharpOnvifServer.Security
             }
 
             return AuthenticateResult.Fail("No authentication found");
+        }
+
+        /// <summary>
+        /// True when the algorithm is one this device advertised. An absent algorithm means MD5,
+        /// which RFC 7616 defines as the default, so it is accepted only when MD5 was offered.
+        /// </summary>
+        private bool IsOfferedAlgorithm(string algorithm)
+        {
+            if (!HttpDigestAuthentication.IsSupportedAlgorithm(algorithm)) return false;
+
+            var offered = Options.HttpDigestAlgorithms;
+            if (offered == null || offered.Count == 0) return string.IsNullOrEmpty(algorithm) || algorithm == "MD5";
+
+            string requested = string.IsNullOrEmpty(algorithm) ? "MD5" : algorithm;
+            foreach (string candidate in offered)
+            {
+                string offeredName = string.IsNullOrEmpty(candidate) ? "MD5" : candidate;
+                if (string.Equals(offeredName, requested, StringComparison.OrdinalIgnoreCase)) return true;
+            }
+
+            return false;
         }
 
         private bool AllowAnonymousAccess(string contentType)
@@ -297,14 +326,7 @@ namespace SharpOnvifServer.Security
                         noncePrime,
                         cnoncePrime);
 
-                    if (digest.CompareTo(webToken.Response) == 0)
-                    {
-                        return 0;
-                    }
-                    else
-                    {
-                        return 2;
-                    }
+                    return HttpDigestAuthentication.FixedTimeEquals(digest, webToken.Response) ? 0 : 2;
                 }
                 else
                 {
