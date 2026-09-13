@@ -77,6 +77,26 @@ namespace SharpOnvifCommon.Security
         /// </summary>
         public TimeSpan UtcNowOffset { get; set; } = TimeSpan.Zero;
 
+        /// <summary>
+        /// Copies another set of settings, lists included, so that changing one afterwards does
+        /// not change the other.
+        /// </summary>
+        public OnvifAuthenticationSettings(OnvifAuthenticationSettings other)
+        {
+            if (other == null) throw new ArgumentNullException(nameof(other));
+
+            Authentication = other.Authentication;
+            HttpDigestUserHash = other.HttpDigestUserHash;
+            UtcNowOffset = other.UtcNowOffset;
+
+            HttpDigestAlgorithms = other.HttpDigestAlgorithms == null
+                ? null : new List<string>(other.HttpDigestAlgorithms);
+            HttpDigestQop = other.HttpDigestQop == null
+                ? null : new List<string>(other.HttpDigestQop);
+            PreAuthActions = other.PreAuthActions == null
+                ? null : new List<string>(other.PreAuthActions);
+        }
+
         public OnvifAuthenticationSettings()
         {
         }

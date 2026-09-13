@@ -77,10 +77,10 @@ namespace SharpOnvif.Tests
         {
             return AuthenticatedDevice.StartAsync(options =>
             {
-                options.Authentication = DigestAuthentication.HttpDigest;
-                options.HttpDigestAlgorithms = new List<string> { algorithm };
-                options.HttpDigestQop = new List<string> { qop };
-                options.HttpDigestUserHash = userHash;
+                options.Onvif.Authentication = DigestAuthentication.HttpDigest;
+                options.Onvif.HttpDigestAlgorithms = new List<string> { algorithm };
+                options.Onvif.HttpDigestQop = new List<string> { qop };
+                options.Onvif.HttpDigestUserHash = userHash;
                 options.HttpDigestNonceLifetimeMilliseconds = nonceLifetimeMs;
             });
         }
@@ -237,12 +237,12 @@ namespace SharpOnvif.Tests
             // preference, and the client picks the first it knows.
             await using var device = await AuthenticatedDevice.StartAsync(options =>
             {
-                options.Authentication = DigestAuthentication.HttpDigest;
-                options.HttpDigestAlgorithms = new List<string>
+                options.Onvif.Authentication = DigestAuthentication.HttpDigest;
+                options.Onvif.HttpDigestAlgorithms = new List<string>
                 {
                     "MD5", "MD5-sess", "SHA-256", "SHA-256-sess", "SHA-512-256", "SHA-512-256-sess",
                 };
-                options.HttpDigestQop = new List<string> { "auth", "auth-int" };
+                options.Onvif.HttpDigestQop = new List<string> { "auth", "auth-int" };
             });
 
             using var client = Client(device);
@@ -256,7 +256,7 @@ namespace SharpOnvif.Tests
         public async Task RefusesADigestWhenTheDeviceOnlyTakesTheOlderScheme()
         {
             await using var device = await AuthenticatedDevice.StartAsync(options =>
-                options.Authentication = DigestAuthentication.WsUsernameToken);
+                options.Onvif.Authentication = DigestAuthentication.WsUsernameToken);
 
             using var client = Client(device);
 

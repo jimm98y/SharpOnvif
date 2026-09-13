@@ -34,10 +34,29 @@ namespace SharpOnvifServer.Security
         public DigestAuthenticationSchemeOptions()
         {  }
 
+        private OnvifAuthenticationSettings _onvif = new OnvifAuthenticationSettings();
+
         /// <summary>
-        /// Authentication type allowed.
+        /// What this device and a client have to agree on: which schemes are acceptable, which
+        /// hashing algorithms and qualities of protection, whether usernames are hashed, and which
+        /// operations need no credentials.
         /// </summary>
-        public DigestAuthentication Authentication { get; set; } = DigestAuthentication.WsUsernameToken | DigestAuthentication.HttpDigest;
+        /// <remarks>
+        /// The same type the client is configured with, so the two sides of a negotiation are
+        /// described once. The properties below read and write this object, so either way of
+        /// setting them works and they cannot drift apart.
+        /// <para>
+        /// Read from the device's side these say what it offers and will accept;
+        /// from the client's, what it understands and will send.
+        /// <see cref="OnvifAuthenticationSettings.UtcNowOffset"/> has no meaning here - it exists
+        /// for a client compensating for a device whose clock is wrong.
+        /// </para>
+        /// </remarks>
+        public OnvifAuthenticationSettings Onvif
+        {
+            get { return _onvif; }
+            set { _onvif = value ?? new OnvifAuthenticationSettings(); }
+        }
 
         #region WsUsernameToken
 
@@ -67,30 +86,12 @@ namespace SharpOnvifServer.Security
         ///  
         /// WWW-Authenticate challenges will be generated in the same order they are listed here.
         /// </summary>
-        public List<string> HttpDigestAlgorithms { get; set; } = new List<string>() 
-        { 
-            "MD5",
-            "MD5-sess",
-            "SHA-256",
-            "SHA-256-sess",
-            "SHA-512-256",
-            "SHA-512-256-sess",
-        };
-
         /// <summary>
         /// Offered quality of protection levels. Valid values are "auth" and "auth-int".
         /// </summary>
-        public List<string> HttpDigestQop { get; set; } = new List<string>() 
-        {
-            "auth",
-            "auth-int",
-        };
-
         /// <summary>
         /// Indicates whether the server should offer User hashing.
         /// </summary>
-        public bool HttpDigestUserHash { get; set; } = true;
-
         /// <summary>
         /// How long the server nonce is valid in milliseconds. Defaults to 30 seconds.
         /// </summary>
@@ -122,17 +123,6 @@ namespace SharpOnvifServer.Security
         /// <summary> 
         /// List of actions that should be allowed without authentication. This is needed for example for the GetCapabilities action, which is called by clients before they authenticate.
         /// </summary>
-        public List<string> PreAuthActions { get; set; } = new List<string>()
-        {
-            "http://www.onvif.org/ver10/device/wsdl/GetWsdlUrl",
-            "http://www.onvif.org/ver10/device/wsdl/GetServices",
-            "http://www.onvif.org/ver10/device/wsdl/GetServiceCapabilities",
-            "http://www.onvif.org/ver10/device/wsdl/GetCapabilities",
-            "http://www.onvif.org/ver10/device/wsdl/GetHostname",
-            "http://www.onvif.org/ver10/device/wsdl/GetSystemDateAndTime",
-            "http://www.onvif.org/ver10/device/wsdl/GetEndpointReference",
-        };
-
         #endregion // PreAuth actions
     }
 }

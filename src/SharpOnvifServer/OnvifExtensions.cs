@@ -25,6 +25,7 @@ using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.Extensions.DependencyInjection;
 using SharpOnvifServer.Discovery;
 using SharpOnvifServer.Events;
+using SharpOnvifCommon.Security;
 using SharpOnvifServer.Security;
 using System;
 using System.Collections.Generic;
@@ -56,14 +57,20 @@ namespace SharpOnvifServer
             {
                 if (options != null)
                 {
-                    digestOptions.Authentication = options.Authentication;
-                    digestOptions.HttpDigestQop = Distinct(options.HttpDigestQop);
+                    // The shared half in one go, so a property added to OnvifAuthenticationSettings
+                    // is not silently dropped here. Copied rather than shared: the de-duplication
+                    // below writes to it, and the caller's own options must not change underneath
+                    // them.
+                    digestOptions.Onvif = new OnvifAuthenticationSettings(options.Onvif);
+
+                    digestOptions.Onvif.Authentication = options.Onvif.Authentication;
+                    digestOptions.Onvif.HttpDigestQop = Distinct(options.Onvif.HttpDigestQop);
                     digestOptions.HttpDigestRealm = options.HttpDigestRealm;
-                    digestOptions.HttpDigestUserHash = options.HttpDigestUserHash;
-                    digestOptions.HttpDigestAlgorithms = Distinct(options.HttpDigestAlgorithms);
+                    digestOptions.Onvif.HttpDigestUserHash = options.Onvif.HttpDigestUserHash;
+                    digestOptions.Onvif.HttpDigestAlgorithms = Distinct(options.Onvif.HttpDigestAlgorithms);
                     digestOptions.HttpDigestNonceLifetimeMilliseconds = options.HttpDigestNonceLifetimeMilliseconds;
                     digestOptions.HttpDigestNonceReplayStore = options.HttpDigestNonceReplayStore;
-                    digestOptions.PreAuthActions = Distinct(options.PreAuthActions);
+                    digestOptions.Onvif.PreAuthActions = Distinct(options.Onvif.PreAuthActions);
                     digestOptions.WsUsernameTokenMaxTimeDeltaInMilliseconds = options.WsUsernameTokenMaxTimeDeltaInMilliseconds;
                 }
             });

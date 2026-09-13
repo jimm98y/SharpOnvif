@@ -225,6 +225,48 @@ unguessable strings now:
 + string subscriptionID = httpContext.Items[OnvifEvents.ONVIF_SUBSCRIPTION_ID] as string;
 ```
 
+### The device and the client are configured with one type
+
+What the two sides have to agree on - which schemes, which hashing algorithms, which qualities of
+protection, whether usernames are hashed, which operations need no credentials - was declared twice,
+once for each side, with the same names and the same defaults. It is declared once now, in
+`SharpOnvifCommon.Security.OnvifAuthenticationSettings`, and the device carries an instance of it.
+
+```cs
+  services.AddOnvifDigestAuthentication(options =>
+  {
+      options.HttpDigestRealm = "My IP Camera";          // still the device's own
+-     options.Authentication = DigestAuthentication.HttpDigest;
+-     options.HttpDigestAlgorithms = new List<string> { "SHA-256" };
++     options.Onvif.Authentication = DigestAuthentication.HttpDigest;
++     options.Onvif.HttpDigestAlgorithms = new List<string> { "SHA-256" };
+  });
+```
+
+Moved onto `Onvif`: `Authentication`, `HttpDigestAlgorithms`, `HttpDigestQop`, `HttpDigestUserHash`,
+`PreAuthActions`. Unmoved, because they are the device's business alone: `HttpDigestRealm`,
+`HttpDigestNonceLifetimeMilliseconds`, `HttpDigestNonceReplayStore`,
+`WsUsernameTokenMaxTimeDeltaInMilliseconds`.
+
+**Configuration moves with them**, and this part fails quietly - a file that still names them flat
+binds nothing, and the device comes up with defaults:
+
+```json
+  "DigestAuthenticationOptions": {
+    "HttpDigestRealm": "My IP Camera",
+-   "Authentication": 3,
+-   "HttpDigestAlgorithms": [ "MD5", "SHA-256" ],
++   "Onvif": {
++     "Authentication": 3,
++     "HttpDigestAlgorithms": [ "MD5", "SHA-256" ]
++   }
+  }
+```
+
+`OnvifAuthenticationSettings.UtcNowOffset` appears on the device as a consequence of sharing the
+type. It has no meaning there - it exists for a client compensating for a device whose clock is
+wrong - and is ignored.
+
 ### One `DigestAuthentication` instead of two
 
 The client and the server each declared an enum of that name, with the same members and the same

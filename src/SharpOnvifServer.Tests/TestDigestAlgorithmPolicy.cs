@@ -92,9 +92,9 @@ namespace SharpOnvif.Tests
             builder.Services.AddOnvifDigestAuthentication(options =>
             {
                 options.HttpDigestRealm = Realm;
-                options.HttpDigestAlgorithms = ["SHA-256"];
-                options.HttpDigestUserHash = false;
-                options.PreAuthActions = [];
+                options.Onvif.HttpDigestAlgorithms = ["SHA-256"];
+                options.Onvif.HttpDigestUserHash = false;
+                options.Onvif.PreAuthActions = [];
             });
             builder.Services.AddSingleton<DeviceImpl>();
 

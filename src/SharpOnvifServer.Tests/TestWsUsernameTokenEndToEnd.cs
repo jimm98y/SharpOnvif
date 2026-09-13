@@ -63,7 +63,7 @@ namespace SharpOnvif.Tests
         public async Task AuthenticatesWithATokenTheDeviceAccepts()
         {
             await using var device = await AuthenticatedDevice.StartAsync(
-                options => options.Authentication = DigestAuthentication.WsUsernameToken);
+                options => options.Onvif.Authentication = DigestAuthentication.WsUsernameToken);
 
             using var client = Client(device);
 
@@ -78,7 +78,7 @@ namespace SharpOnvif.Tests
             // Each call carries its own token with its own nonce and timestamp - there is no
             // session - so a scheme that worked once has to keep working.
             await using var device = await AuthenticatedDevice.StartAsync(
-                options => options.Authentication = DigestAuthentication.WsUsernameToken);
+                options => options.Onvif.Authentication = DigestAuthentication.WsUsernameToken);
 
             using var client = Client(device);
 
@@ -93,7 +93,7 @@ namespace SharpOnvif.Tests
         public async Task RefusesTheWrongPassword()
         {
             await using var device = await AuthenticatedDevice.StartAsync(
-                options => options.Authentication = DigestAuthentication.WsUsernameToken);
+                options => options.Onvif.Authentication = DigestAuthentication.WsUsernameToken);
 
             using var client = Client(device, password: "not the password");
 
@@ -104,7 +104,7 @@ namespace SharpOnvif.Tests
         public async Task RefusesARequestCarryingNoToken()
         {
             await using var device = await AuthenticatedDevice.StartAsync(
-                options => options.Authentication = DigestAuthentication.WsUsernameToken);
+                options => options.Onvif.Authentication = DigestAuthentication.WsUsernameToken);
 
             using var anonymous = new DeviceClient(device.Endpoint);
 
@@ -118,7 +118,7 @@ namespace SharpOnvif.Tests
             // refuses one that is too old. Anything beyond the window is stale.
             await using var device = await AuthenticatedDevice.StartAsync(options =>
             {
-                options.Authentication = DigestAuthentication.WsUsernameToken;
+                options.Onvif.Authentication = DigestAuthentication.WsUsernameToken;
                 options.WsUsernameTokenMaxTimeDeltaInMilliseconds = 2000;
             });
 
@@ -133,7 +133,7 @@ namespace SharpOnvif.Tests
         {
             await using var device = await AuthenticatedDevice.StartAsync(options =>
             {
-                options.Authentication = DigestAuthentication.WsUsernameToken;
+                options.Onvif.Authentication = DigestAuthentication.WsUsernameToken;
                 options.WsUsernameTokenMaxTimeDeltaInMilliseconds = 2000;
             });
 
@@ -152,7 +152,7 @@ namespace SharpOnvif.Tests
             // window is wide, so an offset inside the window still authenticates.
             await using var device = await AuthenticatedDevice.StartAsync(options =>
             {
-                options.Authentication = DigestAuthentication.WsUsernameToken;
+                options.Onvif.Authentication = DigestAuthentication.WsUsernameToken;
                 options.WsUsernameTokenMaxTimeDeltaInMilliseconds = 300000; // five minutes
             });
 
@@ -170,7 +170,7 @@ namespace SharpOnvif.Tests
             // A negative window disables the check, for a device that cannot keep time at all.
             await using var device = await AuthenticatedDevice.StartAsync(options =>
             {
-                options.Authentication = DigestAuthentication.WsUsernameToken;
+                options.Onvif.Authentication = DigestAuthentication.WsUsernameToken;
                 options.WsUsernameTokenMaxTimeDeltaInMilliseconds = -1;
             });
 
@@ -188,7 +188,7 @@ namespace SharpOnvif.Tests
             // What a real device does: both schemes accepted, the client choosing. A client that
             // only knows WS-UsernameToken has to get in.
             await using var device = await AuthenticatedDevice.StartAsync(options =>
-                options.Authentication = DigestAuthentication.WsUsernameToken | DigestAuthentication.HttpDigest);
+                options.Onvif.Authentication = DigestAuthentication.WsUsernameToken | DigestAuthentication.HttpDigest);
 
             using var client = Client(device);
 
@@ -203,7 +203,7 @@ namespace SharpOnvif.Tests
             // The other way round: a device that has switched the old scheme off must not accept
             // it, however well-formed the token is.
             await using var device = await AuthenticatedDevice.StartAsync(options =>
-                options.Authentication = DigestAuthentication.HttpDigest);
+                options.Onvif.Authentication = DigestAuthentication.HttpDigest);
 
             using var client = Client(device);
 

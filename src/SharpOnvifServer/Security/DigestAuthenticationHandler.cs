@@ -66,7 +66,7 @@ namespace SharpOnvifServer.Security
 
         protected async override Task<AuthenticateResult> HandleAuthenticateAsync()
         {
-            if(Options.Authentication == DigestAuthentication.None || AllowAnonymousAccess(Request.ContentType))
+            if(Options.Onvif.Authentication == DigestAuthentication.None || AllowAnonymousAccess(Request.ContentType))
             {
                 // use Anonymous user either when auth is turned off, or for selected Onvif actions that do not require authentication
                 var identity = new GenericIdentity(ANONYMOUS_USER);
@@ -75,7 +75,7 @@ namespace SharpOnvifServer.Security
                 return AuthenticateResult.Success(ticket);
             }
 
-            if (Options.Authentication.HasFlag(DigestAuthentication.HttpDigest))
+            if (Options.Onvif.Authentication.HasFlag(DigestAuthentication.HttpDigest))
             {
                 // according to the Onvif specification, we must first authenticate the Digest if it's present
                 WebDigestAuth webToken = Request.GetSecurityHeaderFromHeaders();
@@ -116,7 +116,7 @@ namespace SharpOnvifServer.Security
                             SoapDigestAuth token = await GetSecurityHeaderFromSoapEnvelopeAsync(Request).ConfigureAwait(false);
                             if (token != null)
                             {
-                                if(!Options.Authentication.HasFlag(DigestAuthentication.WsUsernameToken))
+                                if(!Options.Onvif.Authentication.HasFlag(DigestAuthentication.WsUsernameToken))
                                 {
                                     // WsUsernameToken is explicitly disallowed, fail
                                     return AuthenticateResult.Fail($"HTTP Digest authentication succeeded, but WsUsernameToken authentication is not allowed.");
@@ -168,7 +168,7 @@ namespace SharpOnvifServer.Security
                 }
             }
             
-            if(Options.Authentication.HasFlag(DigestAuthentication.WsUsernameToken))
+            if(Options.Onvif.Authentication.HasFlag(DigestAuthentication.WsUsernameToken))
             {
                 SoapDigestAuth token = await GetSecurityHeaderFromSoapEnvelopeAsync(Request).ConfigureAwait(false);
                 if (token != null)
@@ -205,7 +205,7 @@ namespace SharpOnvifServer.Security
         {
             if (!HttpDigestAuthentication.IsSupportedAlgorithm(algorithm)) return false;
 
-            var offered = Options.HttpDigestAlgorithms;
+            var offered = Options.Onvif.HttpDigestAlgorithms;
             if (offered == null || offered.Count == 0) return string.IsNullOrEmpty(algorithm) || algorithm == "MD5";
 
             string requested = string.IsNullOrEmpty(algorithm) ? "MD5" : algorithm;
@@ -223,8 +223,8 @@ namespace SharpOnvifServer.Security
             // according to the Onvif specification, these functions are in the access class PRE_AUTH and do not require any authentication:
             return
                 contentType != null &&
-                Options.PreAuthActions != null && 
-                (Options.PreAuthActions.FirstOrDefault(x => contentType.Contains($"action=\"{x}\"")) != null) && 
+                Options.Onvif.PreAuthActions != null && 
+                (Options.Onvif.PreAuthActions.FirstOrDefault(x => contentType.Contains($"action=\"{x}\"")) != null) && 
                 (contentType.Split("action=\"").Count() - 1) == 1;
         }
 
@@ -343,7 +343,7 @@ namespace SharpOnvifServer.Security
         {
             Response.StatusCode = 401;
 
-            if (Options.Authentication.HasFlag(DigestAuthentication.HttpDigest))
+            if (Options.Onvif.Authentication.HasFlag(DigestAuthentication.HttpDigest))
             {
                 object authenticateWebDigestResult = Context.Items[CONTEXT_AUTHENTICATE_WEB_DIGEST_RESULT];
                 string opaque = Context.Items[CONTEXT_OPAQUE]?.ToString();
@@ -376,8 +376,8 @@ namespace SharpOnvifServer.Security
                 */
 
                 var now = DateTimeOffset.UtcNow;
-                var hashingAlgorithms = Options.HttpDigestAlgorithms == null ? new List<string>() { "MD5" } : Options.HttpDigestAlgorithms.ToList();
-                var allowedQop = Options.HttpDigestQop == null ? "auth" : string.Join(", ", Options.HttpDigestQop.ToList());
+                var hashingAlgorithms = Options.Onvif.HttpDigestAlgorithms == null ? new List<string>() { "MD5" } : Options.Onvif.HttpDigestAlgorithms.ToList();
+                var allowedQop = Options.Onvif.HttpDigestQop == null ? "auth" : string.Join(", ", Options.Onvif.HttpDigestQop.ToList());
 
                 foreach (var algorithm in hashingAlgorithms)
                 {
@@ -392,7 +392,7 @@ namespace SharpOnvifServer.Security
                             opaque,
                             allowedQop,
                             "",
-                            Options.HttpDigestUserHash,
+                            Options.Onvif.HttpDigestUserHash,
                             isStale);
                     Response.Headers.Append("WWW-Authenticate", wwwAuth);
                 }
