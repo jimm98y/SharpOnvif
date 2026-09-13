@@ -158,7 +158,7 @@ namespace SharpOnvifServer.Discovery
                             if (!(_options.NetworkInterfaces == null || _options.NetworkInterfaces.Count == 0 || _options.NetworkInterfaces.Contains("0.0.0.0")) && !_options.NetworkInterfaces.Contains(ua.Address.ToString()))
                                 continue;
                             
-                            Listen(OnvifDiscoveryAddressIPV4, ua.Address);
+                            Listen(OnvifDiscoveryAddressIPV4, ua.Address, 0);
                         }
                         else if(ua.Address.AddressFamily == AddressFamily.InterNetworkV6)
                         {
@@ -168,7 +168,21 @@ namespace SharpOnvifServer.Discovery
                             if (!(_options.NetworkInterfaces == null || _options.NetworkInterfaces.Count == 0 || _options.NetworkInterfaces.Contains("::") || _options.NetworkInterfaces.Contains("[::]")) && !_options.NetworkInterfaces.Contains(ua.Address.ToString()))
                                 continue;
 
-                            Listen(OnvifDiscoveryAddressIPV6, ua.Address);
+                            // An IPv6 multicast group is joined by interface index, and ff02::c
+                            // is link-local scope so there is no default interface to fall back
+                            // on. Without the real index the join fails with "Can't assign
+                            // requested address" - which is what every IPv6 interface did.
+                            int interfaceIndex;
+                            try
+                            {
+                                interfaceIndex = adapterProperties.GetIPv6Properties().Index;
+                            }
+                            catch (NetworkInformationException)
+                            {
+                                continue; // the adapter has no IPv6 to speak of
+                            }
+
+                            Listen(OnvifDiscoveryAddressIPV6, ua.Address, interfaceIndex);
                         }
                     }
                 }
@@ -216,7 +230,7 @@ namespace SharpOnvifServer.Discovery
             }
         }
 
-        private void Listen(string discoveryAddress, IPAddress nicAddress)
+        private void Listen(string discoveryAddress, IPAddress nicAddress, int interfaceIndex)
         {
             string nicIPAddress = nicAddress.ToString();
 
@@ -254,16 +268,15 @@ namespace SharpOnvifServer.Discovery
 
                 if (nicAddress.AddressFamily == AddressFamily.InterNetworkV6)
                 {
-                    IPv6MulticastOption ipv6MulticastOption = new IPv6MulticastOption(IPAddress.Parse(discoveryAddress));
-                    IPAddress group = ipv6MulticastOption.Group;
-                    long interfaceIndex = ipv6MulticastOption.InterfaceIndex;
-                    udpClient.JoinMulticastGroup((int)ipv6MulticastOption.InterfaceIndex, ipv6MulticastOption.Group);
+                    // The interface the caller found this address on. IPv6MulticastOption built
+                    // from the group alone reports interface 0, which is no interface at all.
+                    udpClient.JoinMulticastGroup(interfaceIndex, IPAddress.Parse(discoveryAddress));
 
                     // Joining says where to listen. Announcing has to say where to send, or the
                     // host picks an interface by its routing table and a Hello goes out of the
                     // wrong one - or nowhere, with "No route to host".
                     udpClient.Client.SetSocketOption(
-                        SocketOptionLevel.IPv6, SocketOptionName.MulticastInterface, (int)interfaceIndex);
+                        SocketOptionLevel.IPv6, SocketOptionName.MulticastInterface, interfaceIndex);
                 }
                 else if(nicAddress.AddressFamily == AddressFamily.InterNetwork)
                 {
