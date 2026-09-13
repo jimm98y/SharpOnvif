@@ -217,6 +217,34 @@ eventListener.Start((int cameraID, string ev) =>
 
 var subscriptionResponse = await client.BasicSubscribeAsync(eventListener.GetOnvifEventListenerUri(CAMERA1));
 ```
+
+#### Securing the callback
+The listener is an inbound endpoint on your machine, and Onvif gives a camera no way to
+authenticate itself to it - a notification arrives as a plain POST, so anything that can reach the
+port can deliver one, and an application that acts on a notification acts on whatever it is told.
+
+The address `GetOnvifEventListenerUri` hands out therefore carries an unguessable token, and a
+request that does not present it is refused before your callback sees it. The camera is asked for
+nothing - it posts where it was told - so this works with every device and is on by default. It
+stops everything that has not seen the address, which is everything scanning the network; it does
+not stop something that has.
+
+Two things are worth adding when you know them:
+```cs
+// Only this camera may deliver.
+eventListener.AllowedSources.Add(IPAddress.Parse("192.168.1.10"));
+
+// Listen on one interface rather than all of them.
+var eventListener = new SimpleOnvifEventListener("192.168.1.5", 9999);
+```
+`RefusedCount` reports how many deliveries were turned away, which is worth logging - a number
+that climbs means something other than your camera is posting to the port.
+
+None of this makes the channel private: the notification crosses the network in the clear, and a
+camera cannot in general be told to use https. Treat a notification as a hint that something
+happened, and read anything that matters from the device over the authenticated connection you
+already have. If you cannot use a long path, `PathToken` can be set to null for the bare address
+the listener used to hand out.
 ### Using the generated clients
 Every Onvif service is in the `SharpOnvifClient` package, each under its own namespace
 (`SharpOnvifClient.DeviceMgmt`, `SharpOnvifClient.Media`, `SharpOnvifClient.PTZ`, and so on), with

@@ -313,6 +313,18 @@ routes the trailing segment to the service.
 (`IEventSource`, `IEventSubscriptionManager<T>`, `DefaultEventSubscriptionManager<T>`) and the
 `IServer.GetHttpEndpoint` helpers all keep their shapes.
 
+### The Basic subscription callback address changed shape
+
+`SimpleOnvifEventListener.GetOnvifEventListenerUri` used to return
+`http://host:port/<cameraID>/`, which anything that found the port could post to. It now carries an
+unguessable token - `http://host:port/<token>/<cameraID>/` - and a notification that does not
+present it is refused before your callback sees it.
+
+Nothing in your code changes as long as you hand the camera whatever
+`GetOnvifEventListenerUri` returns, which is what the sample does. If you built the address
+yourself, or persisted one across runs, it will no longer be accepted: ask the listener for it.
+Setting `PathToken` to null restores the old bare address.
+
 ### Behaviour that changed without the signature changing
 
 These compile as they did and behave differently, because they were wrong:
