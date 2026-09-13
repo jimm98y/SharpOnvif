@@ -13,7 +13,7 @@ namespace SharpOnvifServer.Media
     /// <summary>
     /// Base class for a Media implementation.
     /// </summary>
-    public abstract class MediaBase
+    public abstract class MediaBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new MediaDispatcher();

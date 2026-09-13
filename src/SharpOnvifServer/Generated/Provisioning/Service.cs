@@ -13,7 +13,7 @@ namespace SharpOnvifServer.Provisioning
     /// <summary>
     /// Functionality for all provisioning service operations.
     /// </summary>
-    public abstract class ProvisioningServiceBase
+    public abstract class ProvisioningServiceBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new ProvisioningServiceDispatcher();

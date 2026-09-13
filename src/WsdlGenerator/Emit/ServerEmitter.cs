@@ -95,7 +95,7 @@ internal sealed class ServerEmitter
     private void EmitBase(CSharpWriter writer, string className, IReadOnlyList<CsOperation> operations, string? documentation)
     {
         writer.Doc(documentation ?? $"Base class for a {className.Replace("Base", "")} implementation.");
-        writer.Line($"public abstract class {className}");
+        writer.Line($"public abstract class {className} : {Dispatch}.IDispatchedService");
 
         using (writer.Braces())
         {

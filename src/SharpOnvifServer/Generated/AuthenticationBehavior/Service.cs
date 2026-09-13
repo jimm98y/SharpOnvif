@@ -13,7 +13,7 @@ namespace SharpOnvifServer.AuthenticationBehavior
     /// <summary>
     /// Base class for a AuthenticationBehaviorPort implementation.
     /// </summary>
-    public abstract class AuthenticationBehaviorPortBase
+    public abstract class AuthenticationBehaviorPortBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new AuthenticationBehaviorPortDispatcher();

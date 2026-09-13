@@ -13,7 +13,7 @@ namespace SharpOnvifServer.Analytics
     /// <summary>
     /// Base class for a AnalyticsEnginePort implementation.
     /// </summary>
-    public abstract class AnalyticsEnginePortBase
+    public abstract class AnalyticsEnginePortBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new AnalyticsEnginePortDispatcher();
@@ -364,7 +364,7 @@ namespace SharpOnvifServer.Analytics
     /// <summary>
     /// Base class for a RuleEnginePort implementation.
     /// </summary>
-    public abstract class RuleEnginePortBase
+    public abstract class RuleEnginePortBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new RuleEnginePortDispatcher();
@@ -631,7 +631,7 @@ namespace SharpOnvifServer.Analytics
     /// <summary>
     /// Implements every portType the Analytics service publishes.
     /// </summary>
-    public abstract class AnalyticsBase
+    public abstract class AnalyticsBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new AnalyticsDispatcher();

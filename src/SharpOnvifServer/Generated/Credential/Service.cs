@@ -13,7 +13,7 @@ namespace SharpOnvifServer.Credential
     /// <summary>
     /// Base class for a CredentialPort implementation.
     /// </summary>
-    public abstract class CredentialPortBase
+    public abstract class CredentialPortBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new CredentialPortDispatcher();

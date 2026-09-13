@@ -13,7 +13,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// <summary>
     /// Common functionality for all security configuraiton service parts.
     /// </summary>
-    public abstract class AdvancedSecurityServiceBase
+    public abstract class AdvancedSecurityServiceBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new AdvancedSecurityServiceDispatcher();
@@ -101,7 +101,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// <summary>
     /// Configuration of external authorization servers.
     /// </summary>
-    public abstract class AuthorizationServerBase
+    public abstract class AuthorizationServerBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new AuthorizationServerDispatcher();
@@ -295,7 +295,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// <summary>
     /// 802.1X configuration.
     /// </summary>
-    public abstract class Dot1XBase
+    public abstract class Dot1XBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new Dot1XDispatcher();
@@ -658,7 +658,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// <summary>
     /// Json Web Token functionality.
     /// </summary>
-    public abstract class JWTBase
+    public abstract class JWTBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new JWTDispatcher();
@@ -780,7 +780,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// <summary>
     /// Basic keystore functionality.
     /// </summary>
-    public abstract class KeystoreBase
+    public abstract class KeystoreBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new KeystoreDispatcher();
@@ -2119,7 +2119,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// <summary>
     /// Media Signing operations.
     /// </summary>
-    public abstract class MediaSigningBase
+    public abstract class MediaSigningBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new MediaSigningDispatcher();
@@ -2291,7 +2291,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// <summary>
     /// TLS server functionality.
     /// </summary>
-    public abstract class TLSServerBase
+    public abstract class TLSServerBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new TLSServerDispatcher();
@@ -2922,7 +2922,7 @@ namespace SharpOnvifServer.AdvancedSecurity
     /// <summary>
     /// Implements every portType the AdvancedSecurity service publishes.
     /// </summary>
-    public abstract class AdvancedSecurityBase
+    public abstract class AdvancedSecurityBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new AdvancedSecurityDispatcher();

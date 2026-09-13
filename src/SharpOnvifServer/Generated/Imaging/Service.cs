@@ -13,7 +13,7 @@ namespace SharpOnvifServer.Imaging
     /// <summary>
     /// Base class for a ImagingPort implementation.
     /// </summary>
-    public abstract class ImagingPortBase
+    public abstract class ImagingPortBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new ImagingPortDispatcher();

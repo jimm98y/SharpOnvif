@@ -13,7 +13,7 @@ namespace SharpOnvifServer.Recording
     /// <summary>
     /// Base class for a RecordingPort implementation.
     /// </summary>
-    public abstract class RecordingPortBase
+    public abstract class RecordingPortBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new RecordingPortDispatcher();

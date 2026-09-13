@@ -13,7 +13,7 @@ namespace SharpOnvifServer.Uplink
     /// <summary>
     /// Base class for a UplinkPort implementation.
     /// </summary>
-    public abstract class UplinkPortBase
+    public abstract class UplinkPortBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new UplinkPortDispatcher();

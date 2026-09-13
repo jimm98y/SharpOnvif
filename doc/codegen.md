@@ -196,7 +196,8 @@ can check it, because everywhere else the emitted runtime is compiled inside `Sh
 where anything it might accidentally reach for happens to exist.
 
 A generated service additionally names the namespace it is routed by, `SharpOnvifServer.Dispatch`
-unless `--dispatch` says otherwise. That is the one thing a generated service names that is not
+unless `--dispatch` says otherwise: its base derives `IDispatchedService` from there and carries a
+static `Dispatcher`, which is how routing finds one without reflection. That is the one thing a generated service names that is not
 generated: routing an action to a method over ASP.NET Core is a library rather than anything a
 schema describes, so the generator names one instead of writing one. Generate with `--client` for
 output that references nothing at all.

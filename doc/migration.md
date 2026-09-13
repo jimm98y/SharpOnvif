@@ -354,6 +354,14 @@ one nothing compiles against was the one free to go stale. If you were using it 
 document, the addresses are in `wsdl/sources.txt` in the repository, and what a device actually
 offers is what `GetServices` reports rather than what any list here says.
 
+### `OnvifDispatcherRegistry` is gone
+
+It existed to find, by reflection, the dispatcher a generated service base carries. The base
+declares `SharpOnvifServer.Dispatch.IDispatchedService` now, so `MapOnvifService<T>` reads it
+straight off the type parameter, and `T` not being a generated service is a compile error where it
+is mapped rather than an exception when the application starts. Nothing that maps a service the
+ordinary way needs an edit.
+
 ### Unchanged
 
 `IUserRepository`, `AddOnvifDigestAuthentication`, `AddOnvifDiscovery`, `OnvifDiscoveryOptions`,

@@ -13,7 +13,7 @@ namespace SharpOnvifServer.AppMgmt
     /// <summary>
     /// Base class for a AppManagement implementation.
     /// </summary>
-    public abstract class AppManagementBase
+    public abstract class AppManagementBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new AppManagementDispatcher();

@@ -13,7 +13,7 @@ namespace SharpOnvifServer.DoorControl
     /// <summary>
     /// Base class for a DoorControlPort implementation.
     /// </summary>
-    public abstract class DoorControlPortBase
+    public abstract class DoorControlPortBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new DoorControlPortDispatcher();

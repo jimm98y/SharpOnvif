@@ -13,7 +13,7 @@ namespace SharpOnvifServer.DeviceIO
     /// <summary>
     /// Base class for a DeviceIOPort implementation.
     /// </summary>
-    public abstract class DeviceIOPortBase
+    public abstract class DeviceIOPortBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new DeviceIOPortDispatcher();

@@ -13,7 +13,7 @@ namespace SharpOnvifServer.Schedule
     /// <summary>
     /// Base class for a SchedulePort implementation.
     /// </summary>
-    public abstract class SchedulePortBase
+    public abstract class SchedulePortBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new SchedulePortDispatcher();

@@ -13,7 +13,7 @@ namespace SharpOnvifServer.DeviceMgmt
     /// <summary>
     /// Base class for a Device implementation.
     /// </summary>
-    public abstract class DeviceBase
+    public abstract class DeviceBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new DeviceDispatcher();

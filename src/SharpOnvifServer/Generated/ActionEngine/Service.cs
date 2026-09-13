@@ -13,7 +13,7 @@ namespace SharpOnvifServer.ActionEngine
     /// <summary>
     /// Base class for a ActionEnginePort implementation.
     /// </summary>
-    public abstract class ActionEnginePortBase
+    public abstract class ActionEnginePortBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new ActionEnginePortDispatcher();

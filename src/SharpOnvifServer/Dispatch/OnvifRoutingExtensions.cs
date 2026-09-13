@@ -35,18 +35,15 @@ namespace SharpOnvifServer.Dispatch
         /// </typeparam>
         public static IEndpointConventionBuilder MapOnvifService<TService>(
             this IEndpointRouteBuilder routes, string path)
-            where TService : class
+            where TService : class, IDispatchedService
         {
             if (routes == null) throw new ArgumentNullException(nameof(routes));
             if (string.IsNullOrWhiteSpace(path)) throw new ArgumentNullException(nameof(path));
 
-            ServiceDispatcher dispatcher = OnvifDispatcherRegistry.For(typeof(TService));
-            if (dispatcher == null)
-            {
-                throw new InvalidOperationException(
-                    typeof(TService).FullName + " does not derive from a generated Onvif service base, " +
-                    "so there is no dispatcher for it. Derive from a generated base such as DeviceBase.");
-            }
+            // The service says what routes to it, so there is nothing to look up and nothing to
+            // get wrong: a type that is not a generated service does not satisfy the constraint,
+            // and the compiler says so where it is mapped.
+            ServiceDispatcher dispatcher = TService.Dispatcher;
 
             if (!Endpoints.TryGetValue(routes, out var byPath))
             {

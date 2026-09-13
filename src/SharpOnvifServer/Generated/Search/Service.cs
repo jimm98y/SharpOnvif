@@ -13,7 +13,7 @@ namespace SharpOnvifServer.Search
     /// <summary>
     /// Base class for a SearchPort implementation.
     /// </summary>
-    public abstract class SearchPortBase
+    public abstract class SearchPortBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new SearchPortDispatcher();

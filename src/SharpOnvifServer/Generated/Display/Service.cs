@@ -13,7 +13,7 @@ namespace SharpOnvifServer.Display
     /// <summary>
     /// Base class for a DisplayPort implementation.
     /// </summary>
-    public abstract class DisplayPortBase
+    public abstract class DisplayPortBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new DisplayPortDispatcher();

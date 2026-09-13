@@ -13,7 +13,7 @@ namespace SharpOnvifServer.Thermal
     /// <summary>
     /// Base class for a ThermalPort implementation.
     /// </summary>
-    public abstract class ThermalPortBase
+    public abstract class ThermalPortBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new ThermalPortDispatcher();

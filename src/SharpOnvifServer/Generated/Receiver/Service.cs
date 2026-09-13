@@ -13,7 +13,7 @@ namespace SharpOnvifServer.Receiver
     /// <summary>
     /// Base class for a ReceiverPort implementation.
     /// </summary>
-    public abstract class ReceiverPortBase
+    public abstract class ReceiverPortBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new ReceiverPortDispatcher();

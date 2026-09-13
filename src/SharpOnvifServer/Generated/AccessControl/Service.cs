@@ -13,7 +13,7 @@ namespace SharpOnvifServer.AccessControl
     /// <summary>
     /// Base class for a PACSPort implementation.
     /// </summary>
-    public abstract class PACSPortBase
+    public abstract class PACSPortBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new PACSPortDispatcher();

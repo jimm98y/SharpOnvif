@@ -13,7 +13,7 @@ namespace SharpOnvifServer.Events
     /// <summary>
     /// Base class for a CreatePullPoint implementation.
     /// </summary>
-    public abstract class CreatePullPointBase
+    public abstract class CreatePullPointBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new CreatePullPointDispatcher();
@@ -97,7 +97,7 @@ namespace SharpOnvifServer.Events
     /// <summary>
     /// Base class for a EventPortType implementation.
     /// </summary>
-    public abstract class EventPortTypeBase
+    public abstract class EventPortTypeBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new EventPortTypeDispatcher();
@@ -368,7 +368,7 @@ namespace SharpOnvifServer.Events
     /// <summary>
     /// Base class for a NotificationConsumer implementation.
     /// </summary>
-    public abstract class NotificationConsumerBase
+    public abstract class NotificationConsumerBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new NotificationConsumerDispatcher();
@@ -452,7 +452,7 @@ namespace SharpOnvifServer.Events
     /// <summary>
     /// Base class for a NotificationProducer implementation.
     /// </summary>
-    public abstract class NotificationProducerBase
+    public abstract class NotificationProducerBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new NotificationProducerDispatcher();
@@ -568,7 +568,7 @@ namespace SharpOnvifServer.Events
     /// <summary>
     /// Base class for a PausableSubscriptionManager implementation.
     /// </summary>
-    public abstract class PausableSubscriptionManagerBase
+    public abstract class PausableSubscriptionManagerBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new PausableSubscriptionManagerDispatcher();
@@ -748,7 +748,7 @@ namespace SharpOnvifServer.Events
     /// <summary>
     /// Base class for a PullPoint implementation.
     /// </summary>
-    public abstract class PullPointBase
+    public abstract class PullPointBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new PullPointDispatcher();
@@ -896,7 +896,7 @@ namespace SharpOnvifServer.Events
     /// <summary>
     /// Base class for a PullPointSubscription implementation.
     /// </summary>
-    public abstract class PullPointSubscriptionBase
+    public abstract class PullPointSubscriptionBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new PullPointSubscriptionDispatcher();
@@ -1106,7 +1106,7 @@ namespace SharpOnvifServer.Events
     /// <summary>
     /// Base class for a SubscriptionManager implementation.
     /// </summary>
-    public abstract class SubscriptionManagerBase
+    public abstract class SubscriptionManagerBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new SubscriptionManagerDispatcher();
@@ -1222,7 +1222,7 @@ namespace SharpOnvifServer.Events
     /// <summary>
     /// Implements every portType the Events service publishes.
     /// </summary>
-    public abstract class EventsBase
+    public abstract class EventsBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new EventsDispatcher();

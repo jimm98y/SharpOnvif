@@ -13,7 +13,7 @@ namespace SharpOnvifServer.Replay
     /// <summary>
     /// Base class for a ReplayPort implementation.
     /// </summary>
-    public abstract class ReplayPortBase
+    public abstract class ReplayPortBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new ReplayPortDispatcher();

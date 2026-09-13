@@ -13,7 +13,7 @@ namespace SharpOnvifServer.AccessRules
     /// <summary>
     /// Base class for a AccessRulesPort implementation.
     /// </summary>
-    public abstract class AccessRulesPortBase
+    public abstract class AccessRulesPortBase : SharpOnvifServer.Dispatch.IDispatchedService
     {
         /// <summary>Routes SOAP actions to this service's operations.</summary>
         public static SharpOnvifServer.Dispatch.ServiceDispatcher Dispatcher { get; } = new AccessRulesPortDispatcher();
