@@ -70,6 +70,9 @@ namespace SharpOnvifCommon.Soap
         /// <summary>The settings the client was created with.</summary>
         protected OnvifClientSettings Settings { get { return _settings; } }
 
+        /// <summary>Where this client reports what it could not do, or null for nowhere.</summary>
+        protected IOnvifLogger Logger { get { return _settings.Logger; } }
+
         private static bool UsesHttpDigest(OnvifClientSettings settings)
         {
             return settings.Credentials != null

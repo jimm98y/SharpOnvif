@@ -22,6 +22,7 @@
 using System;
 using System.Collections.Generic;
 using SharpOnvifCommon;
+using SharpOnvifCommon.Soap;
 
 namespace SharpOnvif.Tests
 {
@@ -34,7 +35,6 @@ namespace SharpOnvif.Tests
     /// </para>
     /// </summary>
     [TestClass]
-    [DoNotParallelize]
     public sealed class TestLogging
     {
         private sealed class Recorder : IOnvifLogger
@@ -54,25 +54,16 @@ namespace SharpOnvif.Tests
             public bool IsTraceEnabled { get; set; } = true;
         }
 
-        private IOnvifLogger _original;
-
-        [TestInitialize]
-        public void Remember() { _original = Log.Logger; }
-
-        [TestCleanup]
-        public void Restore() { Log.Logger = _original; }
-
         [TestMethod]
         public void ReportsThroughTheLoggerItWasGiven()
         {
             var recorder = new Recorder();
-            Log.Logger = recorder;
 
-            Log.Error("an error");
-            Log.Warning("a warning");
-            Log.Info("something");
-            Log.Debug("detail");
-            Log.Trace("more detail");
+            recorder.Error("an error");
+            recorder.Warning("a warning");
+            recorder.Info("something");
+            recorder.Debug("detail");
+            recorder.Trace("more detail");
 
             CollectionAssert.AreEqual(
                 new[] { "error: an error", "warning: a warning", "info: something", "debug: detail", "trace: more detail" },
@@ -83,9 +74,8 @@ namespace SharpOnvif.Tests
         public void SaysWhatWentWrongAlongsideTheMessage()
         {
             var recorder = new Recorder();
-            Log.Logger = recorder;
 
-            Log.Warning("could not probe", new InvalidOperationException("No route to host"));
+            recorder.Warning("could not probe", new InvalidOperationException("No route to host"));
 
             Assert.AreEqual(1, recorder.Lines.Count);
             StringAssert.Contains(recorder.Lines[0], "could not probe");
@@ -98,17 +88,53 @@ namespace SharpOnvif.Tests
             // A device that answers badly does so on every request, so a message nobody will read
             // must not be built.
             var recorder = new Recorder { IsDebugEnabled = false };
-            Log.Logger = recorder;
 
-            Log.Debug("detail");
+            recorder.Debug("detail");
 
             Assert.AreEqual(0, recorder.Lines.Count);
         }
 
         [TestMethod]
+        public void ReportsNowhereWhenThereIsNoLogger()
+        {
+            // The default everywhere: an object that was given no logger must not need one.
+            IOnvifLogger none = null;
+
+            none.Error("an error");
+            none.Warning("a warning");
+            none.Info("something");
+            none.Debug("detail");
+            none.Trace("more detail");
+        }
+
+        [TestMethod]
+        public void LetsTwoClientsReportToDifferentPlaces()
+        {
+            // The point of hanging the logger off the object rather than the process: an
+            // application watching several cameras can tell which one is complaining.
+            var first = new Recorder();
+            var second = new Recorder();
+
+            using (var a = new SharpOnvifClient.DeviceMgmt.DeviceClient(
+                "http://192.168.1.10/onvif/device_service",
+                new OnvifClientSettings { Logger = first }))
+            using (var b = new SharpOnvifClient.DeviceMgmt.DeviceClient(
+                "http://192.168.1.11/onvif/device_service",
+                new OnvifClientSettings { Logger = second }))
+            {
+                Assert.AreNotSame(a, b);
+            }
+
+            first.Warning("only the first");
+
+            Assert.AreEqual(1, first.Lines.Count);
+            Assert.AreEqual(0, second.Lines.Count, "the other client's logger heard nothing of it");
+        }
+
+        [TestMethod]
         public void SaysNothingUntilItIsSwitchedOn()
         {
-            // The default: a library that is working is quiet.
+            // The default logger: quiet until asked for.
             var logger = new DefaultOnvifLogger();
 
             Assert.IsFalse(logger.IsLoggingEnabled, "logging is opt-in");
@@ -118,19 +144,10 @@ namespace SharpOnvif.Tests
         [TestMethod]
         public void CanBeTurnedOffAltogether()
         {
-            Log.Logger = NullOnvifLogger.Instance;
+            IOnvifLogger nowhere = NullOnvifLogger.Instance;
 
-            Assert.IsFalse(Log.Logger.IsErrorEnabled);
-            Log.Error("this goes nowhere");
-        }
-
-        [TestMethod]
-        public void AlwaysHasSomewhereToReportTo()
-        {
-            Log.Logger = null;
-
-            Assert.IsNotNull(Log.Logger, "a null logger would be a null reference on the next report");
-            Log.Error("this has somewhere to go");
+            Assert.IsFalse(nowhere.IsErrorEnabled);
+            nowhere.Error("this goes nowhere");
         }
     }
 }

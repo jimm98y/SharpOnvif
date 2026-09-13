@@ -159,6 +159,20 @@ namespace SharpOnvifClient
         }
 
         /// <summary>
+        /// Where this client reports what it could not do. Null - the default - reports nowhere.
+        /// </summary>
+        /// <remarks>
+        /// Per client, so two of them in one application can report to different places. Set it
+        /// before the first call: the service clients underneath are made on first use and take
+        /// the logger they are given then.
+        /// </remarks>
+        public IOnvifLogger Logger
+        {
+            get { return _settings.Logger; }
+            set { _settings.Logger = value; }
+        }
+
+        /// <summary>
         /// How much longer than a pull's own timeout the client waits for the reply, covering the
         /// round trip and a device that is a little late.
         /// </summary>
@@ -190,6 +204,7 @@ namespace SharpOnvifClient
                 MaxResponseContentBytes = _settings.MaxResponseContentBytes,
                 Transport = _settings.Transport,
                 HttpClient = _settings.HttpClient,
+                Logger = _settings.Logger,
                 Timeout = timeout,
             };
         }

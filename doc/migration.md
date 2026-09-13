@@ -394,9 +394,11 @@ These compile as they did and behave differently, because they were wrong:
 ### Diagnostics that used to go nowhere
 
 Failures inside the client were written with `Debug.WriteLine`, which a release build removes. They
-now go through `SharpOnvifCommon.Log`, whose default logger writes to the console and is switched
-off - so the default behaviour is as quiet as before, and there is now a way to hear it. Implement
-`IOnvifLogger` to route it into your own logging.
+now go to an `IOnvifLogger` the object was given - `SimpleOnvifClient.Logger`,
+`SimpleOnvifEventListener.Logger`, `OnvifClientSettings.Logger`, or the `logger` argument on the
+discovery methods. Given none, an object reports nowhere, so the default behaviour is as quiet as
+before and there is now a way to hear it. The logger belongs to the object rather than the process,
+so two clients can report to different places.
 
 Discovery also raises `OnvifDiscoveryClient.Failed` and `OnvifDiscoveryListener.Failed` for
 failures on a single interface, which it carries on past.

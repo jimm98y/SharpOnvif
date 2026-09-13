@@ -84,6 +84,7 @@ namespace SharpOnvifClient
         public static void Raise(
             EventHandler<OnvifDiscoveryFailureEventArgs> handler,
             object sender,
+            IOnvifLogger logger,
             OnvifDiscoveryOperation operation,
             string networkInterface,
             Exception error)
@@ -93,7 +94,7 @@ namespace SharpOnvifClient
             // Reported both ways on purpose: the log is where an operator looks afterwards, the
             // event is how an application can say something about it at the time. The text
             // already names the error, so it is not appended a second time.
-            Log.Warning(args.ToString());
+            logger.Warning(args.ToString());
 
             if (handler == null) return;
 
@@ -103,7 +104,7 @@ namespace SharpOnvifClient
             }
             catch (Exception ex)
             {
-                Log.Warning("An Onvif discovery failure handler threw.", ex);
+                logger.Warning("An Onvif discovery failure handler threw.", ex);
             }
         }
     }

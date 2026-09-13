@@ -91,6 +91,12 @@ namespace SharpOnvifClient
         public event EventHandler<OnvifDiscoveryFailureEventArgs> Failed;
 
         /// <summary>
+        /// Where this listener reports what it could not do. Null - the default - reports nowhere.
+        /// Per listener, so two of them in one application can report to different places.
+        /// </summary>
+        public IOnvifLogger Logger { get; set; }
+
+        /// <summary>
         /// Starts listening on every interface that can carry multicast, IPv4 and IPv6 alike.
         /// Interfaces that cannot be joined are skipped rather than failing the whole listener -
         /// one unusable interface on a machine is normal.
@@ -199,7 +205,7 @@ namespace SharpOnvifClient
             {
                 // One interface that cannot carry this - a VM bridge with no IPv6, say - is not a
                 // reason to listen on none of the others.
-                OnvifDiscoveryFailure.Raise(Failed, this, OnvifDiscoveryOperation.Listen,
+                OnvifDiscoveryFailure.Raise(Failed, this, Logger, OnvifDiscoveryOperation.Listen,
                     nic.Address.ToString(), ex);
                 client?.Dispose();
                 return;
@@ -233,7 +239,7 @@ namespace SharpOnvifClient
                     catch (Exception ex)
                     {
                         // One bad datagram is not a reason to stop listening to the network.
-                        OnvifDiscoveryFailure.Raise(Failed, this, OnvifDiscoveryOperation.Receive,
+                        OnvifDiscoveryFailure.Raise(Failed, this, Logger, OnvifDiscoveryOperation.Receive,
                             nic.Address.ToString(), ex);
                     }
                 }
@@ -291,7 +297,7 @@ namespace SharpOnvifClient
             }
             catch (Exception ex)
             {
-                OnvifDiscoveryFailure.Raise(Failed, this, OnvifDiscoveryOperation.Handler, null, ex);
+                OnvifDiscoveryFailure.Raise(Failed, this, Logger, OnvifDiscoveryOperation.Handler, null, ex);
             }
         }
 
@@ -351,7 +357,7 @@ namespace SharpOnvifClient
             }
             catch (Exception ex)
             {
-                Log.Warning("An Onvif announcement listener did not stop cleanly.", ex);
+                Logger.Warning("An Onvif announcement listener did not stop cleanly.", ex);
             }
 
             foreach (UdpClient client in clients)
@@ -362,7 +368,7 @@ namespace SharpOnvifClient
                 }
                 catch (Exception ex)
                 {
-                    Log.Warning("An Onvif announcement socket did not close.", ex);
+                    Logger.Warning("An Onvif announcement socket did not close.", ex);
                 }
             }
 

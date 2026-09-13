@@ -11,6 +11,15 @@ namespace SharpOnvifCommon.Soap
         /// <summary>Credentials, or null for an unauthenticated client.</summary>
         public NetworkCredential Credentials { get; set; }
 
+        /// <summary>
+        /// Where this client reports what it could not do. Null - the default - reports nowhere.
+        /// </summary>
+        /// <remarks>
+        /// Per client rather than per process, so that two clients in one application can report
+        /// to different places, or one of them to nowhere at all.
+        /// </remarks>
+        public IOnvifLogger Logger { get; set; }
+
         /// <summary>Which authentication schemes to use, and how.</summary>
         public OnvifAuthenticationSettings Authentication { get; set; } = new OnvifAuthenticationSettings();
 

@@ -32,6 +32,7 @@ using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
+using SharpOnvifCommon;
 using SharpOnvifCommon.Onvif;
 using SharpOnvifCommon.Soap;
 using SharpOnvifCommon.Xml;
@@ -47,6 +48,9 @@ public static class Program
     /// <summary>Cancelled by Ctrl-C, so that waiting for a device can be given up on.</summary>
     static CancellationToken Stopping = CancellationToken.None;
 
+    /// <summary>The logger this sample gives to everything it makes.</summary>
+    static IOnvifLogger Logger = null;
+
     static async Task MainAsync(string[] args)
     {
         // Ctrl-C stops waiting, rather than killing the process where it stands.
@@ -57,7 +61,10 @@ public static class Program
         // Everything the library could not do, said out loud. Discovery works on every interface
         // at once and carries on when one of them fails, so without this a Probe that never left
         // the machine looks exactly like a network with no cameras on it.
-        SharpOnvifCommon.Log.Logger = new SharpOnvifCommon.DefaultOnvifLogger
+        //
+        // The logger is given to each object rather than set once for the process, so an
+        // application with several cameras can report each of them separately.
+        Logger = new DefaultOnvifLogger
         {
             IsLoggingEnabled = true,
             IsInfoEnabled = false,
@@ -71,7 +78,7 @@ public static class Program
             candidate.Addresses != null &&
             candidate.Addresses.Any(address => address.Contains("127.0.0.1") || address.Contains("[::1]"));
 
-        var devices = await OnvifDiscoveryClient.DiscoverAsync(null, 1000);
+        var devices = await OnvifDiscoveryClient.DiscoverAsync(null, 1000, logger: Logger);
 
         foreach (var onvifDevice in devices)
         {
@@ -91,7 +98,7 @@ public static class Program
 
             try
             {
-                device = await OnvifDiscoveryClient.WaitForDeviceAsync(IsOnThisMachine, stopping.Token);
+                device = await OnvifDiscoveryClient.WaitForDeviceAsync(IsOnThisMachine, stopping.Token, Logger);
                 Console.WriteLine($"Device appeared: Manufacturer = {device.Manufacturer}, Model = {device.Hardware}");
             }
             catch (OperationCanceledException)
@@ -248,7 +255,8 @@ public static class Program
         {
             var device = await OnvifDiscoveryClient.WaitForDeviceAsync(
                 candidate => candidate.Addresses.Any(address => SameDevice(address, onvifUri)),
-                cancellationToken);
+                cancellationToken,
+                Logger);
 
             Console.WriteLine($"The device is back: {device.Addresses.FirstOrDefault()}");
             return true;
@@ -272,7 +280,7 @@ public static class Program
     {
         // we must run as an Administrator for the Basic subscription to work
         string onvifInterfaceIp = FindNetworkInterface(client.OnvifUri);
-        SimpleOnvifEventListener eventListener = new SimpleOnvifEventListener(onvifInterfaceIp);
+        SimpleOnvifEventListener eventListener = new SimpleOnvifEventListener(onvifInterfaceIp) { Logger = Logger };
         eventListener.Start((int cameraID, string ev) =>
         {
             if (OnvifEvents.IsMotionDetected(ev) != null)

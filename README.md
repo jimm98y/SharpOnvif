@@ -363,16 +363,21 @@ builder.Services.AddOnvifDigestAuthentication(options =>
 had been seen before. `MemoryNonceReplayStore`, the default, holds the record in this process.
 
 ### Logging
-The client and the shared code report what they could not do through
-`SharpOnvifCommon.Log`. The default logger writes to the console and is switched off, so a library
-that is working stays quiet:
+The client reports what it could not do through an `IOnvifLogger` it is given. The logger belongs
+to the object, not to the process, so an application watching several cameras can tell which one
+is complaining - or send one of them nowhere:
 ```cs
-Log.Logger = new DefaultOnvifLogger { IsLoggingEnabled = true, IsDebugEnabled = false };
+var logger = new DefaultOnvifLogger { IsLoggingEnabled = true, IsDebugEnabled = false };
+
+var client = new SimpleOnvifClient(uri, "admin", "password") { Logger = logger };
+var listener = new SimpleOnvifEventListener(host) { Logger = logger };
+var devices = await OnvifDiscoveryClient.DiscoverAsync(logger: logger);
 ```
-Implement `IOnvifLogger` to send it into your own logging instead, or use
-`NullOnvifLogger.Instance` to silence it. There is no dependency on any logging package, which is
-what keeps these assemblies free of dependencies altogether. The server does not use this - it is
-given an `ILogger` by the host and logs to that.
+`OnvifClientSettings.Logger` does the same for a service client built directly. Given none, an
+object reports nowhere. Implement `IOnvifLogger` to send it into your own logging, or use
+`NullOnvifLogger.Instance` to be explicit about silence. There is no dependency on any logging
+package, which is what keeps these assemblies free of dependencies altogether. The server does not
+use this - it is given an `ILogger` by the host and logs to that.
 
 Discovery additionally raises `OnvifDiscoveryClient.Failed` and `OnvifDiscoveryListener.Failed`,
 because it works on every interface at once and carries on when one of them fails. Worth
@@ -380,8 +385,10 @@ subscribing to: a Probe that never left the machine looks exactly like a network
 on it.
 ```cs
 OnvifDiscoveryClient.Failed += (_, e) => Console.WriteLine(e);
-// Onvif discovery could not Probe on 127.0.0.1: Can't assign requested address
+// Onvif discovery could not Probe on 192.168.1.5: No route to host
 ```
+Probing skips the loopback interface: a Probe cannot be multicast out of it, and a device on this
+machine is listening on the real interfaces as well, so nothing is lost by not asking there.
 
 ### No dependencies
 `SharpOnvifClient`, `SharpOnvifServer` and `SharpOnvifCommon` reference no NuGet packages on any of

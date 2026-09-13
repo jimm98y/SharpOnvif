@@ -170,7 +170,8 @@ namespace SharpOnvifCommon.Security
             double lifetimeMilliseconds = 30000, // 30 seconds is the default lifetime of the nonce
             bool useNonceReplayProtection = true, // nonce replay protection is stateful
             INonceReplayStore replayStore = null,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default(CancellationToken),
+            IOnvifLogger logger = null)
         {
             if (string.IsNullOrEmpty(nonce))
             {
@@ -210,7 +211,7 @@ namespace SharpOnvifCommon.Security
                 }
                 catch (Exception ex)
                 {
-                    Log.Debug("Nonce is not valid base64 string", ex);
+                    logger.Debug("Nonce is not valid base64 string", ex);
                     return ERROR_NONCE_FORMAT;
                 }
             }
@@ -222,7 +223,7 @@ namespace SharpOnvifCommon.Security
                 }
                 catch (Exception ex)
                 {
-                    Log.Debug("Nonce is not valid hexadecimal string", ex);
+                    logger.Debug("Nonce is not valid hexadecimal string", ex);
                     return ERROR_NONCE_FORMAT;
                 }
             }
@@ -249,13 +250,13 @@ namespace SharpOnvifCommon.Security
             DateTimeOffset nonceDateTime = DateTimeOffset.FromUnixTimeMilliseconds(timestampNonce);
             if (currentTimestamp.CompareTo(nonceDateTime) < 0)
             {
-                Log.Debug("Nonce is from the future");
+                logger.Debug("Nonce is from the future");
                 return ERROR_NONCE_FUTURE;
             }
 
             if (currentTimestamp.Subtract(nonceDateTime).TotalMilliseconds >= lifetimeMilliseconds)
             {
-                Log.Debug("Nonce is expired");
+                logger.Debug("Nonce is expired");
                 return ERROR_NONCE_EXPIRED;
             }
 
@@ -264,7 +265,7 @@ namespace SharpOnvifCommon.Security
             string generatedNonce = GenerateServerNonce(nonceAlgorithm, nonceType, nonceDateTime, etag, salt);
             if(string.Compare(generatedNonce, nonce) != 0)
             {
-                Log.Debug("Nonce is invalid");
+                logger.Debug("Nonce is invalid");
                 return ERROR_NONCE_INVALID;
             }
 
@@ -856,7 +857,7 @@ namespace SharpOnvifCommon.Security
             return BytesToString(opaqueType, opaque);
         }
 
-        public static int ValidateOpaque(BinarySerializationType opaqueType, string opaque)
+        public static int ValidateOpaque(BinarySerializationType opaqueType, string opaque, IOnvifLogger logger = null)
         {
             if (string.IsNullOrEmpty(opaque))
                 return ERROR_NONCE_EMPTY;
@@ -894,7 +895,7 @@ namespace SharpOnvifCommon.Security
                 }
                 catch (Exception ex)
                 {
-                    Log.Debug("Opaque is not valid base64 string", ex);
+                    logger.Debug("Opaque is not valid base64 string", ex);
                     return ERROR_NONCE_FORMAT;
                 }
             }
@@ -906,7 +907,7 @@ namespace SharpOnvifCommon.Security
                 }
                 catch (Exception ex)
                 {
-                    Log.Debug("Opaque is not valid hexadecimal string", ex);
+                    logger.Debug("Opaque is not valid hexadecimal string", ex);
                     return ERROR_NONCE_FORMAT;
                 }
             }

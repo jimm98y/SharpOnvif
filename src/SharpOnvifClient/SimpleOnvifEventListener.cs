@@ -101,6 +101,11 @@ namespace SharpOnvifClient
         public string PathToken { get; set; }
 
         /// <summary>
+        /// Where this listener reports what it could not do. Null - the default - reports nowhere.
+        /// </summary>
+        public IOnvifLogger Logger { get; set; }
+
+        /// <summary>
         /// Addresses a notification may be delivered from. Empty - the default - accepts delivery
         /// from anywhere that can reach the port.
         /// </summary>
@@ -137,7 +142,7 @@ namespace SharpOnvifClient
                     {
                         // Closing the listener is how this loop ends.
                         if (_disposedValue) return;
-                        Log.Warning("Could not accept an Onvif notification.", ex);
+                        Logger.Warning("Could not accept an Onvif notification.", ex);
                         continue;
                     }
 
@@ -149,7 +154,7 @@ namespace SharpOnvifClient
                         }
                         catch (Exception ex)
                         {
-                            Log.Warning("An Onvif notification could not be handled.", ex);
+                            Logger.Warning("An Onvif notification could not be handled.", ex);
                             resp.StatusCode = (int)HttpStatusCode.OK;
                         }
                     }
