@@ -1,4 +1,4 @@
-﻿// SharpOnvif
+// SharpOnvif
 // Copyright (C) 2026 Lukas Volf
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,7 +21,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -32,12 +31,22 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.XPath;
 
+using SharpOnvifCommon;
+
 namespace SharpOnvifClient
 {
     /// <summary>
     /// Discovers Onvif devices on the network by sending a multicast discovery request. 
     /// </summary>
-    public static class OnvifDiscoveryClient
+    /// <summary>
+    /// Finds Onvif devices on the network, by asking and by listening.
+    /// </summary>
+    /// <remarks>
+    /// An instance rather than a static, so that its <see cref="Logger"/> belongs to it: an
+    /// application watching several networks, or several devices, can tell which piece of it is
+    /// reporting. Holding one costs nothing - the sockets are opened per call.
+    /// </remarks>
+    public class OnvifDiscoveryClient
     {
         public const int ONVIF_MULTICAST_TIMEOUT = 5000; // 5s timeout
         public const int ONVIF_DISCOVERY_PORT = 3702;
@@ -47,6 +56,118 @@ namespace SharpOnvifClient
         private static readonly SemaphoreSlim _discoverySlim = new SemaphoreSlim(1);
 
         /// <summary>
+        /// Raised when discovery could not do something on one interface. Discovery carries on -
+        /// an interface that cannot carry multicast is ordinary - which is what makes these worth
+        /// hearing: a Probe that never left the machine looks exactly like a network with nothing
+        /// on it.
+        /// </summary>
+        public event EventHandler<OnvifDiscoveryFailureEventArgs> Failed;
+
+        /// <summary>
+        /// Where this client reports what it could not do. Null - the default - reports nowhere.
+        /// </summary>
+        public ILog Logger { get; set; }
+
+        /// <summary>How often <see cref="WaitForDeviceAsync"/> probes while it waits.</summary>
+        public TimeSpan WaitForDeviceProbeInterval { get; set; } = TimeSpan.FromSeconds(10);
+
+        public OnvifDiscoveryClient()
+        { }
+
+        public OnvifDiscoveryClient(ILog logger)
+        {
+            Logger = logger;
+        }
+
+        /// <summary>
+        /// Waits for a device to appear, for an application that starts before its camera does.
+        /// </summary>
+        /// <remarks>
+        /// <para>
+        /// Two ways at once, because neither is reliable alone. A device announces itself with a
+        /// WS-Discovery Hello when it joins, which is heard the moment it happens - but the
+        /// announcement is UDP multicast, so it can be lost, and one sent before this was called
+        /// is already gone. So the network is also probed every
+        /// <see cref="WaitForDeviceProbeInterval"/>, which finds a device that was already there.
+        /// </para>
+        /// <para>
+        /// Returns as soon as a device matches. Cancel <paramref name="cancellationToken"/> to stop
+        /// waiting; there is no timeout, because "wait until my camera is switched on" has no
+        /// natural one.
+        /// </para>
+        /// </remarks>
+        /// <param name="matches">
+        /// Which device is being waited for, or null for the first one that appears.
+        /// </param>
+        public async Task<OnvifDiscoveryResult> WaitForDeviceAsync(
+            Func<OnvifDiscoveryResult, bool> matches = null,
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            matches = matches ?? (device => true);
+
+            var found = new TaskCompletionSource<OnvifDiscoveryResult>();
+
+            using (var listener = new OnvifDiscoveryListener { Logger = Logger })
+            using (cancellationToken.Register(() => found.TrySetCanceled(cancellationToken)))
+            {
+                listener.DeviceAnnounced += (sender, e) =>
+                {
+                    if (Matches(e.Device, matches)) found.TrySetResult(e.Device);
+                };
+
+                listener.Start();
+
+                // Something may have been there all along, or have announced itself in the moment
+                // between this being called and the listener being ready.
+                while (!found.Task.IsCompleted)
+                {
+                    try
+                    {
+                        foreach (var device in await DiscoverAsync(null, 1000).ConfigureAwait(false))
+                        {
+                            if (Matches(device, matches))
+                            {
+                                found.TrySetResult(device);
+                                break;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // A probe that fails - no route, an interface going down - is not the end
+                        // of the wait. The next one may work, and the Hello may arrive anyway.
+                        OnvifDiscoveryFailure.Raise(Failed, this, Logger, OnvifDiscoveryOperation.Probe, null, ex);
+                    }
+
+                    if (found.Task.IsCompleted) break;
+
+                    Task waited = await Task.WhenAny(
+                        found.Task, Task.Delay(WaitForDeviceProbeInterval, cancellationToken)).ConfigureAwait(false);
+
+                    if (waited == found.Task) break;
+                }
+
+                return await found.Task.ConfigureAwait(false);
+            }
+        }
+
+        private bool Matches(OnvifDiscoveryResult device, Func<OnvifDiscoveryResult, bool> matches)
+        {
+            if (device == null || device.Addresses == null || device.Addresses.Length == 0) return false;
+
+            try
+            {
+                return matches(device);
+            }
+            catch (Exception ex)
+            {
+                // The caller's predicate, on data from the network.
+                OnvifDiscoveryFailure.Raise(Failed, this, Logger, OnvifDiscoveryOperation.Handler, null, ex);
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Discover ONVIF devices in the local network. Sends multicast messages to all available IP network interfaces.
         /// </summary>
         /// <param name="onDeviceDiscovered">Callback to be called when a new device is discovered.</param>
@@ -54,7 +175,7 @@ namespace SharpOnvifClient
         /// <param name="multicastPort">Multicast port - 0 to let the OS choose any free port.</param>
         /// <param name="deviceType">Device type we are searching for.</param>
         /// <returns>A list of discovered devices.</returns>
-        public static async Task<IList<OnvifDiscoveryResult>> DiscoverAsync(Action<OnvifDiscoveryResult> onDeviceDiscovered = null, int multicastTimeout = ONVIF_MULTICAST_TIMEOUT, int multicastPort = 0, string deviceType = "NetworkVideoTransmitter")
+        public async Task<IList<OnvifDiscoveryResult>> DiscoverAsync(Action<OnvifDiscoveryResult> onDeviceDiscovered = null, int multicastTimeout = ONVIF_MULTICAST_TIMEOUT, int multicastPort = 0, string deviceType = "NetworkVideoTransmitter")
         {
             return await DiscoverAllAsync(onDeviceDiscovered, multicastTimeout, multicastPort, deviceType);
         }
@@ -68,7 +189,7 @@ namespace SharpOnvifClient
         /// <param name="multicastPort">Multicast port - 0 to let the OS choose any free port.</param>
         /// <param name="deviceType">Device type we are searching for.</param>
         /// <returns>A list of discovered devices.</returns>
-        public static async Task<IList<OnvifDiscoveryResult>> DiscoverAsync(string ipAddress, Action<OnvifDiscoveryResult> onDeviceDiscovered = null, int multicastTimeout = ONVIF_MULTICAST_TIMEOUT, int multicastPort = 0, string deviceType = "NetworkVideoTransmitter")
+        public async Task<IList<OnvifDiscoveryResult>> DiscoverAsync(string ipAddress, Action<OnvifDiscoveryResult> onDeviceDiscovered = null, int multicastTimeout = ONVIF_MULTICAST_TIMEOUT, int multicastPort = 0, string deviceType = "NetworkVideoTransmitter")
         {
             return await DiscoverAllAsync(ipAddress, onDeviceDiscovered, multicastTimeout, multicastPort, deviceType);
         }
@@ -81,15 +202,20 @@ namespace SharpOnvifClient
         /// <param name="multicastPort">Multicast port - 0 to let the OS choose any free port.</param>
         /// <param name="deviceType">Device type we are searching for.</param>
         /// <returns>A list of discovered devices with make and model.</returns>
-        internal static async Task<IList<OnvifDiscoveryResult>> DiscoverAllAsync(Action<OnvifDiscoveryResult> onDeviceDiscovered = null, int multicastTimeout = ONVIF_MULTICAST_TIMEOUT, int multicastPort = 0, string deviceType = "NetworkVideoTransmitter")
+        internal async Task<IList<OnvifDiscoveryResult>> DiscoverAllAsync(Action<OnvifDiscoveryResult> onDeviceDiscovered = null, int multicastTimeout = ONVIF_MULTICAST_TIMEOUT, int multicastPort = 0, string deviceType = "NetworkVideoTransmitter")
         {
             NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
             List<Task<IList<OnvifDiscoveryResult>>> discoveryTasks = new List<Task<IList<OnvifDiscoveryResult>>>();
 
             foreach (NetworkInterface adapter in nics)
             {
-                if (!(adapter.NetworkInterfaceType == NetworkInterfaceType.Loopback ||
-                    adapter.NetworkInterfaceType == NetworkInterfaceType.FastEthernetT ||
+                // Not loopback: a Probe cannot be multicast out of it - the send fails with
+                // "Can't assign requested address" - and a device on this machine is listening on
+                // the real interfaces too, so nothing is lost by not asking here.
+                if (adapter.NetworkInterfaceType == NetworkInterfaceType.Loopback)
+                    continue;
+
+                if (!(adapter.NetworkInterfaceType == NetworkInterfaceType.FastEthernetT ||
                     adapter.NetworkInterfaceType == NetworkInterfaceType.FastEthernetFx ||
                     adapter.NetworkInterfaceType == NetworkInterfaceType.Ethernet ||
                     adapter.NetworkInterfaceType == NetworkInterfaceType.Ethernet3Megabit ||
@@ -134,7 +260,19 @@ namespace SharpOnvifClient
                 }
             }
 
-            await Task.WhenAll(discoveryTasks);
+            // Not Task.WhenAll: one interface throwing must not lose the devices the others
+            // found, and must not vanish either.
+            foreach (var task in discoveryTasks)
+            {
+                try
+                {
+                    await task;
+                }
+                catch (Exception ex)
+                {
+                    OnvifDiscoveryFailure.Raise(Failed, this, Logger, OnvifDiscoveryOperation.Probe, null, ex);
+                }
+            }
 
             return discoveryTasks.Where(x => x.IsCompleted && !x.IsFaulted && !x.IsCanceled).SelectMany(x => x.Result).GroupBy(r => r.Addresses.FirstOrDefault()).Select(g => g.First()).ToList();
         }
@@ -148,7 +286,7 @@ namespace SharpOnvifClient
         /// <param name="multicastPort"></param>
         /// <param name="deviceType"></param>
         /// <returns>A list of discovered devices with make and model.</returns>
-        internal static async Task<IList<OnvifDiscoveryResult>> DiscoverAllAsync(string ipAddress, Action<OnvifDiscoveryResult> onDeviceDiscovered = null, int multicastTimeout = ONVIF_MULTICAST_TIMEOUT, int multicastPort = 0, string deviceType = "NetworkVideoTransmitter")
+        internal async Task<IList<OnvifDiscoveryResult>> DiscoverAllAsync(string ipAddress, Action<OnvifDiscoveryResult> onDeviceDiscovered = null, int multicastTimeout = ONVIF_MULTICAST_TIMEOUT, int multicastPort = 0, string deviceType = "NetworkVideoTransmitter")
         {
             if (ipAddress == null)
                 throw new ArgumentNullException(nameof(ipAddress));
@@ -186,6 +324,20 @@ namespace SharpOnvifClient
             {
                 using (UdpClient client = new UdpClient(endPoint))
                 {
+                    if (nicAddress.AddressFamily == AddressFamily.InterNetworkV6)
+                    {
+                        // ff02::c is link-local scope, so there is no route to it until the socket
+                        // is told which interface it is on. Without this every IPv6 Probe failed
+                        // with "No route to host", and the failure is only written to Debug - so
+                        // IPv6 discovery quietly found nothing.
+                        int interfaceIndex = FindInterfaceIndex(nicAddress);
+                        if (interfaceIndex > 0)
+                        {
+                            client.Client.SetSocketOption(
+                                SocketOptionLevel.IPv6, SocketOptionName.MulticastInterface, interfaceIndex);
+                        }
+                    }
+
                     void ReceiveCallback(IAsyncResult ar)
                     {
                         try
@@ -194,7 +346,7 @@ namespace SharpOnvifClient
                             byte[] receiveBytes = client.EndReceive(ar, ref remote);
                             string response = Encoding.UTF8.GetString(receiveBytes);
 
-                            var parsed = ParseDiscoveryResponse(response);
+                            var parsed = ParseDiscoveryResponse(response, Logger);
 
                             if (parsed.Addresses != null && parsed.Addresses.Length > 0)
                             {
@@ -211,9 +363,14 @@ namespace SharpOnvifClient
                             if (!cts.IsCancellationRequested)
                                 client.BeginReceive(ReceiveCallback, null);
                         }
-                        catch
+                        catch (Exception ex)
                         {
-                            // ignore exceptions on shutdown
+                            // The socket closing is how this ends, and is not worth reporting.
+                            if (!cts.IsCancellationRequested)
+                            {
+                                OnvifDiscoveryFailure.Raise(
+                                    Failed, this, Logger, OnvifDiscoveryOperation.Receive, ipAddress, ex);
+                            }
                         }
                     }
 
@@ -225,9 +382,12 @@ namespace SharpOnvifClient
                     {
                         await client.SendAsync(message, message.Length, multicastEndpoint);
                     }
-                    catch(System.Net.Sockets.SocketException ex)
+                    catch (System.Net.Sockets.SocketException ex)
                     {
-                        Debug.WriteLine($"Discovery on {ipAddress} failed with an exception: {ex.Message}");
+                        // Sending the Probe is the whole of discovery on this interface. Losing it
+                        // silently is how an IPv6 Probe that could not leave the machine went
+                        // unnoticed for as long as it did.
+                        OnvifDiscoveryFailure.Raise(Failed, this, Logger, OnvifDiscoveryOperation.Probe, ipAddress, ex);
                     }
 
                     await Task.Delay(multicastTimeout, cts.Token);
@@ -247,7 +407,44 @@ namespace SharpOnvifClient
             }
         }
 
-        private static OnvifDiscoveryResult ParseDiscoveryResponse(string response)
+        /// <summary>
+        /// The index of the interface an address belongs to, or 0 when it cannot be found.
+        /// </summary>
+        /// <remarks>
+        /// An IPv6 multicast group is reached by interface, and an interface is named by index
+        /// rather than by address, so the address a caller gives has to be traced back to the
+        /// adapter carrying it.
+        /// </remarks>
+        private static int FindInterfaceIndex(IPAddress address)
+        {
+            foreach (NetworkInterface adapter in NetworkInterface.GetAllNetworkInterfaces())
+            {
+                if (adapter.OperationalStatus != OperationalStatus.Up) continue;
+
+                IPInterfaceProperties properties = adapter.GetIPProperties();
+
+                bool carriesIt = false;
+                foreach (var unicast in properties.UnicastAddresses)
+                {
+                    if (unicast.Address.Equals(address)) { carriesIt = true; break; }
+                }
+
+                if (!carriesIt) continue;
+
+                try
+                {
+                    return properties.GetIPv6Properties().Index;
+                }
+                catch (NetworkInformationException)
+                {
+                    return 0;
+                }
+            }
+
+            return 0;
+        }
+
+        internal static OnvifDiscoveryResult ParseDiscoveryResponse(string response, ILog logger = null)
         {
             using (var textReader = new StringReader(response))
             {
@@ -301,7 +498,7 @@ namespace SharpOnvifClient
                     }
                     catch(Exception ex)
                     {
-                        Debug.WriteLine($"{nameof(OnvifDiscoveryClient)}.{nameof(ParseDiscoveryResponse)} failed to parse scopes:\r\n{ex.Message}\r\nContinuing...");
+                        logger.Warning("A device's discovery scopes could not be read; the rest of it is still usable.", ex);
                     }
                 }
 

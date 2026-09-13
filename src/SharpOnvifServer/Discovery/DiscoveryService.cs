@@ -1,4 +1,4 @@
-﻿// SharpOnvif
+// SharpOnvif
 // Copyright (C) 2026 Lukas Volf
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -42,13 +42,53 @@ namespace SharpOnvifServer.Discovery
     /// </summary>
     public class DiscoveryService : IHostedService
     {
-        private static readonly Random _rnd = new Random();
+        // One listener runs per network interface, so anything shared between them is reached
+        // concurrently. Random is not safe to use that way.
+        [ThreadStatic]
+        private static Random _rndForThread;
+
+        private static Random Rnd
+        {
+            get { return _rndForThread ?? (_rndForThread = new Random(Guid.NewGuid().GetHashCode())); }
+        }
+
+        /// <summary>
+        /// How long to wait before answering a Probe. WS-Discovery asks for a delay chosen at
+        /// random up to APP_MAX_DELAY, so that a network of devices answering the same Probe does
+        /// not reply in one burst the client then has to absorb.
+        /// </summary>
+        internal static int NextProbeDelayMilliseconds()
+        {
+            return Rnd.Next(0, AppMaxDelayMilliseconds + 1);
+        }
+
+        /// <summary>
+        /// How much of a datagram reaches the debug log. A whole Probe is worth seeing; a
+        /// megabyte of whatever a caller chose to send is not.
+        /// </summary>
+        private const int MaxLoggedDatagramLength = 4096;
 
         public const int ONVIF_DISCOVERY_PORT = 3702;
+
+        /// <summary>The WS-Discovery namespace, which is also the To of an announcement.</summary>
+        internal const string DiscoveryNamespace = "http://schemas.xmlsoap.org/ws/2005/04/discovery";
+
+        /// <summary>
+        /// The longest a device waits before answering a Probe. WS-Discovery asks for a delay
+        /// chosen at random up to this, so that a network of devices answering the same Probe does
+        /// not reply in one burst.
+        /// </summary>
+        internal const int AppMaxDelayMilliseconds = 500;
         public static string OnvifDiscoveryAddressIPV4 = "239.255.255.250";
         public static string OnvifDiscoveryAddressIPV6 = "ff02::c"; 
 
+        // Written as interfaces come up, read when the host shuts down.
+        private readonly object _syncRoot = new object();
         private List<UdpClient> _udpClients = new List<UdpClient>();
+
+        // The multicast group each socket joined, which is where an announcement goes out.
+        private readonly List<(UdpClient Client, IPEndPoint Group, string Nic)> _announcers =
+            new List<(UdpClient, IPEndPoint, string)>();
         private readonly CancellationTokenSource _cts = new CancellationTokenSource();
         private List<Task> _listenerTasks = new List<Task>();
 
@@ -118,7 +158,7 @@ namespace SharpOnvifServer.Discovery
                             if (!(_options.NetworkInterfaces == null || _options.NetworkInterfaces.Count == 0 || _options.NetworkInterfaces.Contains("0.0.0.0")) && !_options.NetworkInterfaces.Contains(ua.Address.ToString()))
                                 continue;
                             
-                            Listen(OnvifDiscoveryAddressIPV4, ua.Address);
+                            Listen(OnvifDiscoveryAddressIPV4, ua.Address, 0);
                         }
                         else if(ua.Address.AddressFamily == AddressFamily.InterNetworkV6)
                         {
@@ -128,15 +168,69 @@ namespace SharpOnvifServer.Discovery
                             if (!(_options.NetworkInterfaces == null || _options.NetworkInterfaces.Count == 0 || _options.NetworkInterfaces.Contains("::") || _options.NetworkInterfaces.Contains("[::]")) && !_options.NetworkInterfaces.Contains(ua.Address.ToString()))
                                 continue;
 
-                            Listen(OnvifDiscoveryAddressIPV6, ua.Address);
+                            // An IPv6 multicast group is joined by interface index, and ff02::c
+                            // is link-local scope so there is no default interface to fall back
+                            // on. Without the real index the join fails with "Can't assign
+                            // requested address" - which is what every IPv6 interface did.
+                            int interfaceIndex;
+                            try
+                            {
+                                interfaceIndex = adapterProperties.GetIPv6Properties().Index;
+                            }
+                            catch (NetworkInformationException)
+                            {
+                                continue; // the adapter has no IPv6 to speak of
+                            }
+
+                            Listen(OnvifDiscoveryAddressIPV6, ua.Address, interfaceIndex);
                         }
                     }
                 }
+
+                // Announced once the sockets are up. Without it a client only learns of the device
+                // when it happens to probe, which is why a camera appears in a client minutes
+                // after it was switched on.
+                Announce(DiscoveryMessageType.Hello);
             });
             return Task.CompletedTask;
         }
 
-        private void Listen(string discoveryAddress, IPAddress nicAddress)
+        /// <summary>
+        /// Multicasts a Hello or a Bye on every group the service joined.
+        /// </summary>
+        private void Announce(DiscoveryMessageType messageType)
+        {
+            if (!_options.AnnounceOnStartAndStop) return;
+
+            List<(UdpClient Client, IPEndPoint Group, string Nic)> announcers;
+            lock (_announcers)
+            {
+                announcers = _announcers.ToList();
+            }
+
+            if (announcers.Count == 0) return;
+
+            string message = CreateDiscoveryMessage(
+                messageType, _options, _listeningUris.ToArray(), null, EndpointReferenceOf(_options));
+            byte[] bytes = Encoding.UTF8.GetBytes(message);
+
+            foreach (var announcer in announcers)
+            {
+                try
+                {
+                    announcer.Client.Client.SendTo(bytes, announcer.Group);
+                    _logger.LogInformation($"Announced {messageType} on {announcer.Nic}");
+                }
+                catch (Exception ex)
+                {
+                    // One interface failing is not a reason to stay silent on the others, and a
+                    // Bye that cannot be sent must not stop the service from shutting down.
+                    _logger.LogError($"Failed to announce {messageType} on {announcer.Nic}: {ex.Message}");
+                }
+            }
+        }
+
+        private void Listen(string discoveryAddress, IPAddress nicAddress, int interfaceIndex)
         {
             string nicIPAddress = nicAddress.ToString();
 
@@ -155,23 +249,41 @@ namespace SharpOnvifServer.Discovery
             {
                 // to kill a process owning a port: Get-Process -Id (Get-NetUDPEndpoint -LocalPort 3702).OwningProcess
                 var udpClient = new UdpClient(nicAddress.AddressFamily);
-                _udpClients.Add(udpClient);
+                lock (_syncRoot)
+                {
+                    _udpClients.Add(udpClient);
+                }
 
                 udpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
 
-                // because of the multicast, we cannot use IPAddress.Any - it would have joined the multicast group only on the default NIC on multihomed system
-                udpClient.Client.Bind(new IPEndPoint(IPAddress.Parse(nicIPAddress), ONVIF_DISCOVERY_PORT));
+                // Bound to every address, joined on one interface. Which interface the socket
+                // listens on is decided by the join below, not by the bind - and a socket bound to
+                // one interface's address is not given multicast that was looped back from this
+                // same machine, only multicast that arrived from the wire. That is what made a
+                // device invisible to a client running beside it: the Probe never arrived, and
+                // neither did the Hello.
+                udpClient.Client.Bind(new IPEndPoint(
+                    nicAddress.AddressFamily == AddressFamily.InterNetworkV6 ? IPAddress.IPv6Any : IPAddress.Any,
+                    ONVIF_DISCOVERY_PORT));
 
                 if (nicAddress.AddressFamily == AddressFamily.InterNetworkV6)
                 {
-                    IPv6MulticastOption ipv6MulticastOption = new IPv6MulticastOption(IPAddress.Parse(discoveryAddress));
-                    IPAddress group = ipv6MulticastOption.Group;
-                    long interfaceIndex = ipv6MulticastOption.InterfaceIndex;
-                    udpClient.JoinMulticastGroup((int)ipv6MulticastOption.InterfaceIndex, ipv6MulticastOption.Group);
+                    // The interface the caller found this address on. IPv6MulticastOption built
+                    // from the group alone reports interface 0, which is no interface at all.
+                    udpClient.JoinMulticastGroup(interfaceIndex, IPAddress.Parse(discoveryAddress));
+
+                    // Joining says where to listen. Announcing has to say where to send, or the
+                    // host picks an interface by its routing table and a Hello goes out of the
+                    // wrong one - or nowhere, with "No route to host".
+                    udpClient.Client.SetSocketOption(
+                        SocketOptionLevel.IPv6, SocketOptionName.MulticastInterface, interfaceIndex);
                 }
                 else if(nicAddress.AddressFamily == AddressFamily.InterNetwork)
                 {
                     udpClient.JoinMulticastGroup(IPAddress.Parse(discoveryAddress), IPAddress.Parse(nicIPAddress));
+
+                    udpClient.Client.SetSocketOption(
+                        SocketOptionLevel.IP, SocketOptionName.MulticastInterface, nicAddress.GetAddressBytes());
                 }
                 else
                 {
@@ -180,37 +292,66 @@ namespace SharpOnvifServer.Discovery
 
                 _logger.LogInformation($"DiscoveryService is listening on the {nicIPAddress} network interface");
 
-                var listenerTask = Task.Run(() =>
+                lock (_announcers)
                 {
-                    while (!_cts.IsCancellationRequested)
+                    _announcers.Add((udpClient,
+                        new IPEndPoint(IPAddress.Parse(discoveryAddress), ONVIF_DISCOVERY_PORT),
+                        nicIPAddress));
+                }
+
+                // The token is taken once: the loop must not touch _cts after shutdown has
+                // disposed it.
+                CancellationToken token = _cts.Token;
+
+                var listenerTask = Task.Run(async () =>
+                {
+                    while (!token.IsCancellationRequested)
                     {
                         try
                         {
-                            var remoteEndpoint = new IPEndPoint(IPAddress.Any, 0);
-                            var recvResult = udpClient.Receive(ref remoteEndpoint);
+                            // Awaited, not blocked on. A thread sitting in a synchronous Receive
+                            // is not woken by closing the socket - on Unix it stays in recvfrom -
+                            // so shutdown waited for a task that was never going to finish and the
+                            // process had to be killed.
+                            UdpReceiveResult received = await udpClient.ReceiveAsync(token).ConfigureAwait(false);
 
-                            string message = Encoding.UTF8.GetString(recvResult);
-                            _logger.LogDebug($"Received Discovery request on {nicIPAddress}:\r\n{message}");
+                            string message = Encoding.UTF8.GetString(received.Buffer);
+                            // Anyone on the network can send this datagram, so it is rendered as
+                            // printable text: unescaped, its newlines would read as further log
+                            // entries.
+                            _logger.LogDebug(
+                                $"Received Discovery request on {nicIPAddress}: {UntrustedText.Printable(message, MaxLoggedDatagramLength)}");
 
                             var parsedMessage = ReadOnvifEndpoint(message);
                             if (parsedMessage != null && IsSearchingOurTypes(_options.Types, parsedMessage.Types))
                             {
+                                // WS-Discovery asks a device to wait a random moment before
+                                // answering, so that a network of them does not reply to one Probe
+                                // in a single burst the client then has to absorb.
+                                int delay = NextProbeDelayMilliseconds();
+                                if (delay > 0) await Task.Delay(delay, token).ConfigureAwait(false);
+
                                 string reply = CreateDiscoveryResponse(_options, _listeningUris.ToArray(), parsedMessage.MessageUuid);
                                 var replyBytes = Encoding.UTF8.GetBytes(reply);
-                                int sentBytes = udpClient.Client.SendTo(replyBytes, remoteEndpoint);
-                                _logger.LogDebug($"Sent Discovery response on {nicIPAddress}:\r\n{reply}");
+                                await udpClient.Client
+                                    .SendToAsync(replyBytes, SocketFlags.None, received.RemoteEndPoint, token)
+                                    .ConfigureAwait(false);
+                                _logger.LogDebug(
+                                    $"Sent Discovery response on {nicIPAddress}: {UntrustedText.Printable(reply, MaxLoggedDatagramLength)}");
                             }
                         }
-                        catch(SocketException socketEx)
+                        catch (OperationCanceledException)
                         {
-                            if (socketEx.Message.Contains("WSACancelBlockingCall"))
-                            {
-                                _logger.LogInformation($"Discovery request on {nicIPAddress} was cancelled.");
-                            }
-                            else
-                            {
-                                _logger.LogError($"Failed to process Discovery request on {nicIPAddress}: {socketEx.Message}");
-                            }
+                            // Shutting down, which is the only way out of this loop.
+                            return;
+                        }
+                        catch (ObjectDisposedException)
+                        {
+                            return;
+                        }
+                        catch (SocketException socketEx)
+                        {
+                            _logger.LogError($"Failed to process Discovery request on {nicIPAddress}: {socketEx.Message}");
                         }
                         catch (Exception ex)
                         {
@@ -219,7 +360,10 @@ namespace SharpOnvifServer.Discovery
                     }
                 });
 
-                _listenerTasks.Add(listenerTask);
+                lock (_syncRoot)
+                {
+                    _listenerTasks.Add(listenerTask);
+                }
             }
             catch (Exception ex)
             {
@@ -243,7 +387,48 @@ namespace SharpOnvifServer.Discovery
             return false;
         }
 
-        private static string CreateDiscoveryResponse(OnvifDiscoveryOptions options, IEnumerable<Uri> httpUri, string discoveryMessageUuid)
+        /// <summary>
+        /// The WS-Discovery messages a device sends. All three carry the same description of the
+        /// device and differ only in what wraps it, so they are built together.
+        /// </summary>
+        internal enum DiscoveryMessageType
+        {
+            /// <summary>Answers a Probe, to the client that sent it.</summary>
+            ProbeMatches,
+            /// <summary>Announces the device on joining the network.</summary>
+            Hello,
+            /// <summary>Announces the device leaving it.</summary>
+            Bye,
+        }
+
+        internal static string CreateDiscoveryResponse(
+            OnvifDiscoveryOptions options, IEnumerable<Uri> httpUri, string discoveryMessageUuid)
+        {
+            return CreateDiscoveryMessage(
+                DiscoveryMessageType.ProbeMatches, options, httpUri, discoveryMessageUuid, EndpointReferenceOf(options));
+        }
+
+        /// <summary>
+        /// The device's own address, which every announcement it makes has to agree on: a client
+        /// pairs a Bye with the Hello and the ProbeMatch that named the same endpoint. A fresh one
+        /// per message would look like a different device each time.
+        /// </summary>
+        internal static string EndpointReferenceOf(OnvifDiscoveryOptions options)
+        {
+            if (!string.IsNullOrEmpty(options.EndpointReference))
+                return options.EndpointReference;
+
+            // Stable for as long as the process runs. A device that survives a restart should set
+            // EndpointReference from something that survives with it.
+            return options.RuntimeEndpointReference;
+        }
+
+        internal static string CreateDiscoveryMessage(
+            DiscoveryMessageType messageType,
+            OnvifDiscoveryOptions options,
+            IEnumerable<Uri> httpUri,
+            string relatesToMessageUuid,
+            string endpointReference)
         {
             Dictionary<string, string> nsPrefixes = new Dictionary<string, string>
             {
@@ -261,6 +446,36 @@ namespace SharpOnvifServer.Discovery
             }
 
             string uuid = Guid.NewGuid().ToString().ToLowerInvariant();
+            string action = DiscoveryNamespace + "/" + messageType.ToString();
+
+            // A Probe is answered to the client that sent it; Hello and Bye are announced to
+            // everyone listening on the discovery group.
+            string to = messageType == DiscoveryMessageType.ProbeMatches
+                ? "http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous"
+                : DiscoveryNamespace;
+
+            // Only a reply relates to anything. The id came out of the sender's datagram and this
+            // document is built by concatenation, so nothing else is going to escape it.
+            string relatesTo = messageType == DiscoveryMessageType.ProbeMatches
+                ? $"<wsadis:RelatesTo>{UntrustedText.ForXmlText(relatesToMessageUuid)}</wsadis:RelatesTo>\r\n"
+                : string.Empty;
+
+            // Bye says the device is leaving, so it carries the address and nothing else to act on.
+            string description =
+                $"<wsadis:EndpointReference>" +
+                    $"<wsadis:Address>{UntrustedText.ForXmlText(endpointReference, 512)}</wsadis:Address>\r\n" +
+                $"</wsadis:EndpointReference>\r\n" +
+                (messageType == DiscoveryMessageType.Bye
+                    ? string.Empty
+                    : $"<d:Types>{BuildTypes(options, nsPrefixes)}</d:Types>\r\n" +
+                      $"<d:Scopes>{BuildScopes(options)}</d:Scopes>\r\n" +
+                      $"<d:XAddrs>{BuildAddresses(options, httpUri)}</d:XAddrs>\r\n") +
+                $"<d:MetadataVersion>{options.MetadataVersion}</d:MetadataVersion>\r\n";
+
+            string body = messageType == DiscoveryMessageType.ProbeMatches
+                ? $"<d:ProbeMatches><d:ProbeMatch>{description}</d:ProbeMatch>\r\n</d:ProbeMatches>\r\n"
+                : $"<d:{messageType}>{description}</d:{messageType}>\r\n";
+
             string message =
                 $"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n" +
                 $"<env:Envelope " +
@@ -268,22 +483,12 @@ namespace SharpOnvifServer.Discovery
                     ">" +
                     $"<env:Header>" +
                         $"<wsadis:MessageID>urn:uuid:{uuid}</wsadis:MessageID>\r\n" +
-                        $"<wsadis:RelatesTo>{discoveryMessageUuid}</wsadis:RelatesTo>\r\n" +
-                        $"<wsadis:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsadis:To>\r\n" +
-                        $"<wsadis:Action>http://schemas.xmlsoap.org/ws/2005/04/discovery/ProbeMatches</wsadis:Action>\r\n" +
+                        relatesTo +
+                        $"<wsadis:To>{to}</wsadis:To>\r\n" +
+                        $"<wsadis:Action>{action}</wsadis:Action>\r\n" +
                     $"</env:Header>\r\n" +
                     $"<env:Body>" +
-                        $"<d:ProbeMatches>" +
-                            $"<d:ProbeMatch>" +
-                                $"<wsadis:EndpointReference>" +
-                                    $"<wsadis:Address>urn:uuid:{uuid}</wsadis:Address>\r\n" +
-                                $"</wsadis:EndpointReference>\r\n" +
-                                $"<d:Types>{BuildTypes(options, nsPrefixes)}</d:Types>\r\n" +
-                                $"<d:Scopes>{BuildScopes(options)}</d:Scopes>\r\n" +
-                                $"<d:XAddrs>{BuildAddresses(options, httpUri)}</d:XAddrs>\r\n" +
-                                $"<d:MetadataVersion>10</d:MetadataVersion>\r\n" +
-                            $"</d:ProbeMatch>\r\n" +
-                        $"</d:ProbeMatches>\r\n" +
+                        body +
                     $"</env:Body>\r\n" +
                 $"</env:Envelope>\r\n";
             return message;
@@ -299,17 +504,20 @@ namespace SharpOnvifServer.Discovery
             return ret.ToString();
         }
 
-        private static string BuildTypes(OnvifDiscoveryOptions options, Dictionary<string, string> nsPrefixes)
+        internal static string BuildTypes(OnvifDiscoveryOptions options, Dictionary<string, string> nsPrefixes)
         {
             if (options.Types == null)
                 return string.Empty;
 
-            StringBuilder ret = new StringBuilder();
+            // d:Types is a list of QNames separated by whitespace. Run together, two types read
+            // as one name that matches neither, and a client filtering on NetworkVideoTransmitter
+            // does not find the device.
+            var names = new List<string>();
             foreach (var type in options.Types)
             {
-                ret.Append($"{nsPrefixes[type.TypeNamespace]}:{type.TypeName}");
+                names.Add($"{nsPrefixes[type.TypeNamespace]}:{type.TypeName}");
             }
-            return ret.ToString();
+            return string.Join(" ", names);
         }
 
         private static string GetPrefix(Dictionary<string, string> nsPrefixes)
@@ -319,7 +527,7 @@ namespace SharpOnvifServer.Discovery
 
             while (true)
             {
-                int num = _rnd.Next(0, 26); // Zero to 25
+                int num = Rnd.Next(0, 26); // Zero to 25
                 char c1 = (char)('a' + num);
                 prefix += c1;
 
@@ -349,11 +557,11 @@ namespace SharpOnvifServer.Discovery
             }
         }
 
-        private static string BuildScopes(OnvifDiscoveryOptions options)
+        internal static string BuildScopes(OnvifDiscoveryOptions options)
         {
-            List<string> scopes = options.Scopes.ToList(); // because we are adding additional scopes here, we need a copy of the collection
-            if (scopes == null)
-                return string.Empty;
+            // A copy, because the scopes below are added to it - and options bound from
+            // configuration need not carry any, so this has to survive there being none.
+            List<string> scopes = options.Scopes == null ? new List<string>() : options.Scopes.ToList();
 
             if (!string.IsNullOrEmpty(options.City))
                 scopes.Add($"{SharpOnvifCommon.Discovery.Scopes.City}{Uri.EscapeDataString(options.City)}");
@@ -378,7 +586,15 @@ namespace SharpOnvifServer.Discovery
 
         private static OnvifDiscoveryMessage ReadOnvifEndpoint(string message)
         {
-            if (!message.Contains("http://schemas.xmlsoap.org/ws/2005/04/discovery/Probe"))
+            // The Probe action is a prefix of the ProbeMatches action, so a plain Contains on it
+            // also matches another device's reply. Only a Probe is answered here.
+            const string ProbeAction = "http://schemas.xmlsoap.org/ws/2005/04/discovery/Probe";
+            int probeAction = message.IndexOf(ProbeAction, StringComparison.Ordinal);
+            if (probeAction < 0)
+                return null;
+
+            int afterAction = probeAction + ProbeAction.Length;
+            if (afterAction < message.Length && char.IsLetter(message[afterAction]))
                 return null;
 
             using (var textReader = new StringReader(message))
@@ -414,23 +630,61 @@ namespace SharpOnvifServer.Discovery
             }
         }
 
+        /// <summary>
+        /// How long shutdown waits for the listeners to stop before closing their sockets anyway.
+        /// A host that cannot shut down has to be killed, and a killed host leaks its sockets.
+        /// </summary>
+        private static readonly TimeSpan ShutdownTimeout = TimeSpan.FromSeconds(5);
+
         public async Task StopAsync(CancellationToken cancellationToken)
         {
-            await _cts.CancelAsync();
-            _cts.Dispose();
+            // Before anything is torn down: a Bye needs the sockets it goes out on, and tells
+            // clients the device has gone rather than leaving them to time it out.
+            Announce(DiscoveryMessageType.Bye);
 
-            if (_udpClients.Count > 0)
+            lock (_announcers)
             {
-                foreach (var udpClient in _udpClients)
-                {
-                    udpClient.Dispose();
-                }
+                _announcers.Clear();
+            }
 
+            await _cts.CancelAsync().ConfigureAwait(false);
+
+            Task[] listeners;
+            lock (_syncRoot)
+            {
+                listeners = _listenerTasks.ToArray();
+                _listenerTasks.Clear();
+            }
+
+            // Bounded: a listener that will not stop must not keep the process alive, because a
+            // process that will not exit is one that has to be killed with its sockets still open.
+            Task stopped = Task.WhenAll(listeners);
+            if (await Task.WhenAny(stopped, Task.Delay(ShutdownTimeout)).ConfigureAwait(false) != stopped)
+            {
+                _logger.LogWarning("DiscoveryService listeners did not stop within {Timeout}", ShutdownTimeout);
+            }
+
+            List<UdpClient> clients;
+            lock (_syncRoot)
+            {
+                clients = _udpClients.ToList();
                 _udpClients.Clear();
             }
 
-            await Task.WhenAll(_listenerTasks);
-            _listenerTasks.Clear();
+            foreach (var udpClient in clients)
+            {
+                try
+                {
+                    udpClient.Dispose();
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError($"Failed to close a Discovery socket: {ex.Message}");
+                }
+            }
+
+            // Last: the loops read its token, and disposing it before they stop throws inside them.
+            _cts.Dispose();
         }
     }
 }

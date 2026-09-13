@@ -10,15 +10,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CoreWCF.Http" Version="1.9.1" />
-    <PackageReference Include="CoreWCF.Primitives" Version="1.9.1" />
-    <PackageReference Include="CoreWCF.WebHttp" Version="1.9.1" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SharpOnvifServer.DeviceMgmt\SharpOnvifServer.DeviceMgmt.csproj" />
-    <ProjectReference Include="..\SharpOnvifServer.Events\SharpOnvifServer.Events.csproj" />
-    <ProjectReference Include="..\SharpOnvifServer.Media\SharpOnvifServer.Media.csproj" />
-    <ProjectReference Include="..\SharpOnvifServer.PTZ\SharpOnvifServer.PTZ.csproj" />
     <ProjectReference Include="..\SharpOnvifServer\SharpOnvifServer.csproj" />
   </ItemGroup>
   <ItemGroup>

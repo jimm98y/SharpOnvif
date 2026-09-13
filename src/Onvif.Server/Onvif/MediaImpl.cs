@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
 // SOFTWARE.
 
-using CoreWCF;
+using SharpOnvifServer.Dispatch;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -29,6 +29,7 @@ using SharpOnvifServer;
 using SharpOnvifServer.Media;
 using System.Collections.Generic;
 using System.Linq;
+using SharpOnvifCommon.Onvif;
 
 namespace OnvifService.Onvif
 {
@@ -85,35 +86,34 @@ namespace OnvifService.Onvif
             };
         }
 
-        [return: MessageParameter(Name = "Profile")]
-        public override Profile GetProfile(string ProfileToken)
+        public override GetProfileResponse GetProfile(string ProfileToken)
         {
             if (Profiles == null || !Profiles.ContainsKey(ProfileToken))
                 OnvifErrors.ReturnSenderInvalidArg();
 
-            return CreateMyProfile(Profiles[ProfileToken]);
+            return new GetProfileResponse(CreateMyProfile(Profiles[ProfileToken]));
         }
 
-        public override MediaUri GetSnapshotUri(string ProfileToken)
+        public override GetSnapshotUriResponse GetSnapshotUri(string ProfileToken)
         {
             if (Profiles == null || !Profiles.ContainsKey(ProfileToken))
                 OnvifErrors.ReturnSenderInvalidArg();
 
-            return new MediaUri()
+            return new GetSnapshotUriResponse(new MediaUri()
             {
-                Uri = string.IsNullOrEmpty(Profiles[ProfileToken].VideoSnapshotUri) ? OnvifHelpers.ChangeUriPath(OperationContext.Current.IncomingMessageProperties.Via, "/preview").ToString() : Profiles[ProfileToken].VideoSnapshotUri
-            };
+                Uri = string.IsNullOrEmpty(Profiles[ProfileToken].VideoSnapshotUri) ? OnvifHelpers.ChangeUriPath(OnvifOperationContext.RequestUri, "/preview").ToString() : Profiles[ProfileToken].VideoSnapshotUri
+            });
         }
 
-        public override MediaUri GetStreamUri(StreamSetup StreamSetup, string ProfileToken)
+        public override GetStreamUriResponse GetStreamUri(StreamSetup StreamSetup, string ProfileToken)
         {
             if (Profiles == null || !Profiles.ContainsKey(ProfileToken))
                 OnvifErrors.ReturnSenderInvalidArg();
 
-            return new MediaUri()
+            return new GetStreamUriResponse(new MediaUri()
             {
                 Uri = Profiles[ProfileToken].VideoRtspUri,
-            };
+            });
         }
 
         public override GetVideoSourcesResponse GetVideoSources(GetVideoSourcesRequest request)
@@ -124,31 +124,28 @@ namespace OnvifService.Onvif
             };
         }
 
-        [return: MessageParameter(Name = "Configuration")]
-        public override VideoSourceConfiguration GetVideoSourceConfiguration(string ConfigurationToken)
+        public override GetVideoSourceConfigurationResponse GetVideoSourceConfiguration(string ConfigurationToken)
         {
             if (ConfigurationToken == null || Profiles == null || Profiles.Values.FirstOrDefault(x => x.VideoSourceToken == ConfigurationToken) == null)
                 OnvifErrors.ReturnSenderInvalidArg();
 
-            return GetMyVideoSourceConfiguration(Profiles.Values.First(x => x.VideoSourceToken == ConfigurationToken));
+            return new GetVideoSourceConfigurationResponse(GetMyVideoSourceConfiguration(Profiles.Values.First(x => x.VideoSourceToken == ConfigurationToken)));
         }
 
-        [return: MessageParameter(Name = "Configuration")]
-        public override VideoEncoderConfiguration GetVideoEncoderConfiguration(string ConfigurationToken)
+        public override GetVideoEncoderConfigurationResponse GetVideoEncoderConfiguration(string ConfigurationToken)
         {
             if (ConfigurationToken == null || Profiles == null || Profiles.Values.FirstOrDefault(x => x.VideoEncoderToken == ConfigurationToken) == null)
                 OnvifErrors.ReturnSenderInvalidArg();
 
-            return GetMyVideoEncoderConfiguration(Profiles.Values.First(x => x.VideoEncoderToken == ConfigurationToken));
+            return new GetVideoEncoderConfigurationResponse(GetMyVideoEncoderConfiguration(Profiles.Values.First(x => x.VideoEncoderToken == ConfigurationToken)));
         }
 
-        [return: MessageParameter(Name = "Options")]
-        public override VideoEncoderConfigurationOptions GetVideoEncoderConfigurationOptions(string ConfigurationToken, string ProfileToken)
+        public override GetVideoEncoderConfigurationOptionsResponse GetVideoEncoderConfigurationOptions(string ConfigurationToken, string ProfileToken)
         {
             if (Profiles == null || !Profiles.ContainsKey(ProfileToken) || Profiles.Values.FirstOrDefault(x => x.VideoEncoderToken == ConfigurationToken) == null)
                 OnvifErrors.ReturnSenderInvalidArg();
 
-            return new VideoEncoderConfigurationOptions()
+            return new GetVideoEncoderConfigurationOptionsResponse(new VideoEncoderConfigurationOptions()
             {
                 // TODO: Update to match your video source
                 H264 = new H264Options()
@@ -167,10 +164,9 @@ namespace OnvifService.Onvif
                     }
                 },
                 QualityRange = new IntRange() { Min = 1, Max = 100 },
-            };
+            });
         }
 
-        [return: MessageParameter(Name = "Configurations")]
         public override GetAudioEncoderConfigurationsResponse GetAudioEncoderConfigurations(GetAudioEncoderConfigurationsRequest request)
         {
             return new GetAudioEncoderConfigurationsResponse()
@@ -179,7 +175,6 @@ namespace OnvifService.Onvif
             };
         }
 
-        [return: MessageParameter(Name = "Configurations")]
         public override GetAudioSourceConfigurationsResponse GetAudioSourceConfigurations(GetAudioSourceConfigurationsRequest request)
         {
             return new GetAudioSourceConfigurationsResponse()
@@ -188,7 +183,6 @@ namespace OnvifService.Onvif
             };
         }
 
-        [return: MessageParameter(Name = "Configurations")]
         public override GetVideoEncoderConfigurationsResponse GetVideoEncoderConfigurations(GetVideoEncoderConfigurationsRequest request)
         {
             return new GetVideoEncoderConfigurationsResponse()
@@ -197,7 +191,6 @@ namespace OnvifService.Onvif
             };
         }
 
-        [return: MessageParameter(Name = "Configurations")]
         public override GetVideoSourceConfigurationsResponse GetVideoSourceConfigurations(GetVideoSourceConfigurationsRequest request)
         {
             return new GetVideoSourceConfigurationsResponse()
@@ -206,13 +199,12 @@ namespace OnvifService.Onvif
             };
         }
 
-        [return: MessageParameter(Name = "Options")]
-        public override VideoSourceConfigurationOptions GetVideoSourceConfigurationOptions(string ConfigurationToken, string ProfileToken)
+        public override GetVideoSourceConfigurationOptionsResponse GetVideoSourceConfigurationOptions(string ConfigurationToken, string ProfileToken)
         {
             if (Profiles == null || !Profiles.ContainsKey(ProfileToken) || Profiles.Values.FirstOrDefault(x => x.VideoSourceToken == ConfigurationToken) == null)
                 OnvifErrors.ReturnSenderInvalidArg();
 
-            return new VideoSourceConfigurationOptions()
+            return new GetVideoSourceConfigurationOptionsResponse(new VideoSourceConfigurationOptions()
             {
                 VideoSourceTokensAvailable = new string[] { Profiles[ProfileToken].VideoSourceToken },
                 Extension = new VideoSourceConfigurationOptionsExtension()
@@ -234,10 +226,9 @@ namespace OnvifService.Onvif
                 },
                 MaximumNumberOfProfiles = 10,
                 MaximumNumberOfProfilesSpecified = true,
-            };
+            });
         }
 
-        [return: MessageParameter(Name = "Configurations")]
         public override GetCompatibleVideoEncoderConfigurationsResponse GetCompatibleVideoEncoderConfigurations(GetCompatibleVideoEncoderConfigurationsRequest request)
         {
             if (Profiles == null)
@@ -249,7 +240,6 @@ namespace OnvifService.Onvif
             };
         }
 
-        [return: MessageParameter(Name = "Configurations")]
         public override GetCompatibleAudioDecoderConfigurationsResponse GetCompatibleAudioDecoderConfigurations(GetCompatibleAudioDecoderConfigurationsRequest request)
         {
             return new GetCompatibleAudioDecoderConfigurationsResponse()
@@ -258,7 +248,6 @@ namespace OnvifService.Onvif
             };
         }
 
-        [return: MessageParameter(Name = "Configurations")]
         public override GetAudioOutputConfigurationsResponse GetAudioOutputConfigurations(GetAudioOutputConfigurationsRequest request)
         {
             return new GetAudioOutputConfigurationsResponse()
@@ -267,10 +256,9 @@ namespace OnvifService.Onvif
             };
         }
 
-        [return: MessageParameter(Name = "Options")]
-        public override AudioEncoderConfigurationOptions GetAudioEncoderConfigurationOptions(string ConfigurationToken, string ProfileToken)
+        public override GetAudioEncoderConfigurationOptionsResponse GetAudioEncoderConfigurationOptions(string ConfigurationToken, string ProfileToken)
         {
-            return new AudioEncoderConfigurationOptions()
+            return new GetAudioEncoderConfigurationOptionsResponse(new AudioEncoderConfigurationOptions()
             {
                  Options = new AudioEncoderConfigurationOption[]
                  {
@@ -281,27 +269,31 @@ namespace OnvifService.Onvif
                          SampleRateList = new int[] { 8000, 16000, 32000, 44100 },
                      }
                  }
-            };
+            });
         }
 
-        public override void SetVideoEncoderConfiguration(VideoEncoderConfiguration Configuration, bool ForcePersistence)
+        public override SetVideoEncoderConfigurationResponse SetVideoEncoderConfiguration(VideoEncoderConfiguration Configuration, bool ForcePersistence)
         {
             _logger.LogInformation("MediaImpl: SetVideoEncoderConfiguration");
+            return new SetVideoEncoderConfigurationResponse();
         }
 
-        public override void AddPTZConfiguration(string ProfileToken, string ConfigurationToken)
+        public override AddPTZConfigurationResponse AddPTZConfiguration(string ProfileToken, string ConfigurationToken)
         {
             _logger.LogInformation("MediaImpl: AddPTZConfiguration");
+            return new AddPTZConfigurationResponse();
         }
 
-        public override void AddAudioOutputConfiguration(string ProfileToken, string ConfigurationToken)
+        public override AddAudioOutputConfigurationResponse AddAudioOutputConfiguration(string ProfileToken, string ConfigurationToken)
         {
             _logger.LogInformation("MediaImpl: AddAudioOutputConfiguration");
+            return new AddAudioOutputConfigurationResponse();
         }
 
-        public override void AddAudioDecoderConfiguration(string ProfileToken, string ConfigurationToken)
+        public override AddAudioDecoderConfigurationResponse AddAudioDecoderConfiguration(string ProfileToken, string ConfigurationToken)
         {
             _logger.LogInformation("MediaImpl: AddAudioDecoderConfiguration");
+            return new AddAudioDecoderConfigurationResponse();
         }
 
         private AudioDecoderConfiguration CreateMyAudioDecoderConfiguration(MediaProfile profile)

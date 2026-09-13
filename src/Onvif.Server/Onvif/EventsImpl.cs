@@ -1,4 +1,4 @@
-﻿// SharpOnvif
+// SharpOnvif
 // Copyright (C) 2026 Lukas Volf
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
 // SOFTWARE.
 
-using CoreWCF;
+using SharpOnvifServer.Dispatch;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -27,6 +27,8 @@ using SharpOnvifCommon;
 using SharpOnvifServer.Events;
 using System;
 using System.Xml;
+using SharpOnvifCommon.Onvif;
+using SharpOnvifServer;
 
 namespace OnvifService.Onvif
 {
@@ -45,36 +47,60 @@ namespace OnvifService.Onvif
             _serviceProvider = serviceProvider;
         }
 
+        /// <summary>
+        /// The shortest subscription this device hands out.
+        /// </summary>
+        /// <remarks>
+        /// Onvif lets the device decide: the client proposes an InitialTerminationTime and the
+        /// device answers with the TerminationTime it actually granted. A client asking for a
+        /// second gets a subscription that is gone before it can pull from it, so a floor is
+        /// applied and reported back.
+        /// </remarks>
+        private static readonly TimeSpan MinimumSubscriptionLifetime = TimeSpan.FromSeconds(30);
+
+        private static DateTime GrantedTermination(DateTime now, string requested)
+        {
+            DateTime termination = OnvifHelpers.FromAbsoluteOrRelativeDateTimeUTC(
+                now, requested, now.AddMinutes(1));
+
+            DateTime floor = now.Add(MinimumSubscriptionLifetime);
+            return termination < floor ? floor : termination;
+        }
+
         #region NotificationProducer
 
-        public override SubscribeResponse1 Subscribe(SubscribeRequest request)
+        public override SubscribeResponse Subscribe(SubscribeRequest request)
         {
-            Uri endpointUri = OperationContext.Current.IncomingMessageProperties.Via;
+            Uri endpointUri = OnvifOperationContext.RequestUri;
 
-            string notificationEndpoint = request.Subscribe.ConsumerReference.Address.Value;
+            string notificationEndpoint = request.ConsumerReference.Address.Value;
 
             DateTime now = DateTime.UtcNow;
-            DateTime termination = OnvifHelpers.FromAbsoluteOrRelativeDateTimeUTC(now, request.Subscribe.InitialTerminationTime, now.AddMinutes(1));
+            DateTime termination = GrantedTermination(now, request.InitialTerminationTime);
 
             // Basic uses the notification endpoint from the request
-            var subscription = ActivatorUtilities.CreateInstance<SubscriptionManagerImpl>(_serviceProvider, termination, termination.Subtract(now), notificationEndpoint);
-            int subscriptionID = _eventSubscriptionManager.AddSubscription(subscription);
+            var subscription = ActivatorUtilities.CreateInstance<SubscriptionManagerImpl>(
+                _serviceProvider, termination, termination.Subtract(now), notificationEndpoint,
+                TopicFilter.FromFilter(request.Filter));
+            string subscriptionID = _eventSubscriptionManager.AddSubscription(subscription);
             string subscriptionReferenceUri = OnvifHelpers.ChangeUriPath(endpointUri, $"/onvif/Events/Subscription/{subscriptionID}/").ToString();
 
-            _logger.LogDebug($"{nameof(EventsImpl)}: Subscribed Basic {subscriptionID} on {subscriptionReferenceUri}");
+            _logger.LogDebug($"{nameof(EventsImpl)}: Subscribed Basic {subscriptionID} on {UntrustedText.Printable(subscriptionReferenceUri)}");
 
-            return new SubscribeResponse1(new SubscribeResponse()
+            return new SubscribeResponse()
             {
-                 SubscriptionReference = new EndpointReferenceType()
-                 {
-                     Address = new AttributedURIType()
-                     {
-                         Value = subscriptionReferenceUri
-                     }
-                 },
-                 CurrentTime = now,
-                 TerminationTime = termination
-            });
+                SubscriptionReference = new EndpointReferenceType()
+                {
+                    Address = new AttributedURIType()
+                    {
+                        Value = subscriptionReferenceUri
+                    }
+                },
+                CurrentTime = now,
+                CurrentTimeSpecified = true,
+                TerminationTime = termination,
+                TerminationTimeSpecified = true
+            };
         }
 
         #endregion // NotificationProducer
@@ -83,17 +109,19 @@ namespace OnvifService.Onvif
 
         public override CreatePullPointSubscriptionResponse CreatePullPointSubscription(CreatePullPointSubscriptionRequest request)
         {
-            Uri endpointUri = OperationContext.Current.IncomingMessageProperties.Via;
+            Uri endpointUri = OnvifOperationContext.RequestUri;
 
             DateTime now = DateTime.UtcNow;
-            DateTime termination = OnvifHelpers.FromAbsoluteOrRelativeDateTimeUTC(now, request.InitialTerminationTime, now.AddMinutes(1));
+            DateTime termination = GrantedTermination(now, request.InitialTerminationTime);
 
             // PullPoint uses "" for the notification endpoint
-            var subscription = ActivatorUtilities.CreateInstance<SubscriptionManagerImpl>(_serviceProvider, termination, termination.Subtract(now), "");
-            int subscriptionID = _eventSubscriptionManager.AddSubscription(subscription);
+            var subscription = ActivatorUtilities.CreateInstance<SubscriptionManagerImpl>(
+                _serviceProvider, termination, termination.Subtract(now), "",
+                TopicFilter.FromFilter(request.Filter));
+            string subscriptionID = _eventSubscriptionManager.AddSubscription(subscription);
             string subscriptionReferenceUri = OnvifHelpers.ChangeUriPath(endpointUri, $"/onvif/Events/PullPointSubscription/{subscriptionID}/").ToString();
 
-            _logger.LogDebug($"{nameof(EventsImpl)}: Subscribed PullPoint {subscriptionID} on {subscriptionReferenceUri}");
+            _logger.LogDebug($"{nameof(EventsImpl)}: Subscribed PullPoint {subscriptionID} on {UntrustedText.Printable(subscriptionReferenceUri)}");
 
             return new CreatePullPointSubscriptionResponse()
             {

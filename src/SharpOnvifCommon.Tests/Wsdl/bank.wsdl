@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap12/"
+                  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                  xmlns:tns="urn:example:bank" xmlns:m="urn:example:money"
+                  targetNamespace="urn:example:bank">
+  <wsdl:types>
+    <xs:schema targetNamespace="urn:example:bank" elementFormDefault="qualified">
+      <xs:import namespace="urn:example:money" schemaLocation="schemas/money.xsd"/>
+      <xs:element name="GetBalance">
+        <xs:complexType><xs:sequence>
+          <xs:element name="AccountId" type="xs:string"/>
+        </xs:sequence></xs:complexType>
+      </xs:element>
+      <xs:element name="GetBalanceResponse">
+        <xs:complexType><xs:sequence>
+          <xs:element name="Balance" type="m:Money"/>
+        </xs:sequence></xs:complexType>
+      </xs:element>
+      <xs:element name="Transfer">
+        <xs:complexType><xs:sequence>
+          <xs:element name="From" type="xs:string"/>
+          <xs:element name="To" type="xs:string"/>
+          <xs:element name="Amount" type="m:Money"/>
+        </xs:sequence></xs:complexType>
+      </xs:element>
+      <xs:element name="TransferResponse">
+        <xs:complexType><xs:sequence>
+          <xs:element name="Reference" type="xs:string"/>
+        </xs:sequence></xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="GetBalanceRequest"><wsdl:part name="parameters" element="tns:GetBalance"/></wsdl:message>
+  <wsdl:message name="GetBalanceResponse"><wsdl:part name="parameters" element="tns:GetBalanceResponse"/></wsdl:message>
+  <wsdl:message name="TransferRequest"><wsdl:part name="parameters" element="tns:Transfer"/></wsdl:message>
+  <wsdl:message name="TransferResponse"><wsdl:part name="parameters" element="tns:TransferResponse"/></wsdl:message>
+  <wsdl:portType name="Accounts">
+    <wsdl:operation name="GetBalance">
+      <wsdl:input message="tns:GetBalanceRequest"/><wsdl:output message="tns:GetBalanceResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="Transfer">
+      <wsdl:input message="tns:TransferRequest"/><wsdl:output message="tns:TransferResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AccountsBinding" type="tns:Accounts">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="GetBalance">
+      <soap:operation soapAction="urn:example:bank/GetBalance"/>
+      <wsdl:input><soap:body use="literal"/></wsdl:input>
+      <wsdl:output><soap:body use="literal"/></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Transfer">
+      <soap:operation soapAction="urn:example:bank/Transfer"/>
+      <wsdl:input><soap:body use="literal"/></wsdl:input>
+      <wsdl:output><soap:body use="literal"/></wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+</wsdl:definitions>

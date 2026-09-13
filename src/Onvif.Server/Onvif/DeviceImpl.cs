@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
 // SOFTWARE.
 
-using CoreWCF;
+using SharpOnvifServer.Dispatch;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -27,6 +27,7 @@ using SharpOnvifCommon;
 using SharpOnvifServer.DeviceMgmt;
 using System;
 using System.Linq;
+using SharpOnvifCommon.Onvif;
 
 namespace OnvifService.Onvif
 {
@@ -82,7 +83,7 @@ namespace OnvifService.Onvif
 
         public override GetCapabilitiesResponse GetCapabilities(GetCapabilitiesRequest request)
         {
-            Uri endpointUri = OperationContext.Current.IncomingMessageProperties.Via;
+            Uri endpointUri = OnvifOperationContext.RequestUri;
 
             return new GetCapabilitiesResponse()
             {
@@ -91,14 +92,14 @@ namespace OnvifService.Onvif
                     Device = new DeviceCapabilities()
                     {
                         XAddr = OnvifHelpers.ChangeUriPath(endpointUri, "/onvif/device_service").ToString(),
-                        Network = new NetworkCapabilities1()
+                        Network = new SharpOnvifCommon.Onvif.NetworkCapabilities()
                         {
                             IPFilter = true,
                             ZeroConfiguration = true,
                             IPVersion6 = true,
                             DynDNS = true,
                         },
-                        System = new SystemCapabilities1()
+                        System = new SharpOnvifCommon.Onvif.SystemCapabilities()
                         {
                             SystemLogging = true,
                             SupportedVersions = new OnvifVersion[]
@@ -117,14 +118,14 @@ namespace OnvifService.Onvif
                             RelayOutputsSpecified = true,
                             InputConnectorsSpecified = true
                         },
-                        Security = new SecurityCapabilities1()
+                        Security = new SharpOnvifCommon.Onvif.SecurityCapabilities()
                         {
                             TLS12 = true,
                         }
                     },
                     Media = new MediaCapabilities()
                     {
-                        XAddr = OnvifHelpers.ChangeUriPath(endpointUri, "/onvif/media_service").ToString(),
+                        XAddr = OnvifHelpers.ChangeUriPath(endpointUri, "/onvif/device_service").ToString(),
                         StreamingCapabilities = new RealTimeStreamingCapabilities()
                         {
                             RTP_RTSP_TCP = true,
@@ -138,7 +139,7 @@ namespace OnvifService.Onvif
                     },
                     PTZ = new PTZCapabilities()
                     {
-                        XAddr = OnvifHelpers.ChangeUriPath(endpointUri, "/onvif/ptz_service").ToString(),
+                        XAddr = OnvifHelpers.ChangeUriPath(endpointUri, "/onvif/device_service").ToString(),
                     }
                 }
             };
@@ -156,27 +157,27 @@ namespace OnvifService.Onvif
             };
         }
 
-        public override DNSInformation GetDNS()
+        public override GetDNSResponse GetDNS()
         {
-            return new DNSInformation()
+            return new GetDNSResponse(new DNSInformation()
             {
-                DNSManual = new IPAddress[]
+                DNSManual = new OnvifIPAddress[]
                 {
-                    new IPAddress()
+                    new OnvifIPAddress()
                     {
                         IPv4Address = PrimaryIPv4DNS
                     }
                 }
-            };
+            });
         }
 
         public override GetNetworkInterfacesResponse GetNetworkInterfaces(GetNetworkInterfacesRequest request)
         {
             return new GetNetworkInterfacesResponse()
             {
-                NetworkInterfaces = new NetworkInterface[]
+                NetworkInterfaces = new OnvifNetworkInterface[]
                 {
-                    new NetworkInterface()
+                    new OnvifNetworkInterface()
                     {
                         Enabled = true,
                         Info = new NetworkInterfaceInfo()
@@ -223,30 +224,27 @@ namespace OnvifService.Onvif
             };
         }
 
-        [return: MessageParameter(Name = "NTPInformation")]
-        public override NTPInformation GetNTP()
+        public override GetNTPResponse GetNTP()
         {
-            return new NTPInformation()
+            return new GetNTPResponse(new NTPInformation()
             {
                 NTPManual = new NetworkHost[]
                 {
                     new NetworkHost() { IPv4Address = PrimaryNTPAddress }
                 }
-            };
+            });
         }
 
-        [return: MessageParameter(Name = "HostnameInformation")]
-        public override HostnameInformation GetHostname()
+        public override GetHostnameResponse GetHostname()
         {
-            Uri endpointUri = OperationContext.Current.IncomingMessageProperties.Via;
+            Uri endpointUri = OnvifOperationContext.RequestUri;
 
-            return new HostnameInformation()
+            return new GetHostnameResponse(new HostnameInformation()
             {
                 Name = endpointUri.Host
-            };
+            });
         }
 
-        [return: MessageParameter(Name = "NetworkProtocols")]
         public override GetNetworkProtocolsResponse GetNetworkProtocols(GetNetworkProtocolsRequest request)
         {
             return new GetNetworkProtocolsResponse()
@@ -263,39 +261,37 @@ namespace OnvifService.Onvif
             };
         }
 
-        [return: MessageParameter(Name = "NetworkGateway")]
-        public override NetworkGateway GetNetworkDefaultGateway()
+        public override GetNetworkDefaultGatewayResponse GetNetworkDefaultGateway()
         {
-            return new NetworkGateway()
+            return new GetNetworkDefaultGatewayResponse(new NetworkGateway()
             {
                 IPv4Address = new string[] { PrimaryIPv4Gateway },
                 IPv6Address = new string[] { PrimaryIPv6Gateway }
-            };
+            });
         }
 
-        [return: MessageParameter(Name = "DiscoveryMode")]
-        public override DiscoveryMode GetDiscoveryMode()
+        public override GetDiscoveryModeResponse GetDiscoveryMode()
         {
-            return DiscoveryMode.Discoverable;
+            return new GetDiscoveryModeResponse(DiscoveryMode.Discoverable);
         }
 
         public override GetScopesResponse GetScopes(GetScopesRequest request)
         {
             return new GetScopesResponse()
             {
-                Scopes = new Scope[]
+                Scopes = new OnvifScope[]
                 {
-                    new Scope()
+                    new OnvifScope()
                     {
                         ScopeDef = ScopeDefinition.Fixed,
                         ScopeItem = "onvif://www.onvif.org/type/video_encoder"
                     },
-                    new Scope()
+                    new OnvifScope()
                     {
                         ScopeDef = ScopeDefinition.Fixed,
                         ScopeItem = "onvif://www.onvif.org/Profile/Streaming"
                     },
-                    new Scope()
+                    new OnvifScope()
                     {
                         ScopeDef = ScopeDefinition.Fixed,
                         ScopeItem = "onvif://www.onvif.org/Profile/G"
@@ -306,7 +302,7 @@ namespace OnvifService.Onvif
 
         public override GetServicesResponse GetServices(GetServicesRequest request)
         {
-            Uri endpointUri = OperationContext.Current.IncomingMessageProperties.Via;
+            Uri endpointUri = OnvifOperationContext.RequestUri;
 
             return new GetServicesResponse()
             {
@@ -325,7 +321,7 @@ namespace OnvifService.Onvif
                     new Service()
                     {
                         Namespace = OnvifServices.MEDIA,
-                        XAddr = OnvifHelpers.ChangeUriPath(endpointUri, "/onvif/media_service").ToString(),
+                        XAddr = OnvifHelpers.ChangeUriPath(endpointUri, "/onvif/device_service").ToString(),
                         Version = new OnvifVersion()
                         {
                             Major = 17,
@@ -345,7 +341,7 @@ namespace OnvifService.Onvif
                     new Service()
                     {
                         Namespace = OnvifServices.PTZ,
-                        XAddr = OnvifHelpers.ChangeUriPath(endpointUri, "/onvif/ptz_service").ToString(),
+                        XAddr = OnvifHelpers.ChangeUriPath(endpointUri, "/onvif/device_service").ToString(),
                         Version = new OnvifVersion()
                         {
                             Major = 17,
@@ -356,12 +352,12 @@ namespace OnvifService.Onvif
             };
         }
 
-        public override SystemDateTime GetSystemDateAndTime()
+        public override GetSystemDateAndTimeResponse GetSystemDateAndTime()
         {
             var now = System.DateTime.UtcNow;
-            return new SystemDateTime()
+            return new GetSystemDateAndTimeResponse(new SystemDateTime()
             {
-                UTCDateTime = new SharpOnvifServer.DeviceMgmt.DateTime()
+                UTCDateTime = new SharpOnvifCommon.Onvif.OnvifDateTime()
                 {
                     Date = new Date()
                     {
@@ -376,28 +372,26 @@ namespace OnvifService.Onvif
                         Second = now.Second
                     }
                 }
-            };
+            });
         }
 
-        [return: MessageParameter(Name = "Capabilities")]
-        public override DeviceServiceCapabilities GetServiceCapabilities()
+        public override GetServiceCapabilitiesResponse GetServiceCapabilities()
         {
-            return new DeviceServiceCapabilities();
+            return new GetServiceCapabilitiesResponse(new DeviceServiceCapabilities());
         }
 
-        public override void SetSystemFactoryDefault(FactoryDefaultType FactoryDefault)
+        public override SetSystemFactoryDefaultResponse SetSystemFactoryDefault(FactoryDefaultType FactoryDefault)
         {
             _logger.LogInformation("Device: SetSystemFactoryDefault");
+            return new SetSystemFactoryDefaultResponse();
         }
 
-        [return: MessageParameter(Name = "Message")]
-        public override string SystemReboot()
+        public override SystemRebootResponse SystemReboot()
         {
             _logger.LogInformation("Device: SystemReboot");
-            return "";
+            return new SystemRebootResponse("");
         }
 
-        [return: MessageParameter(Name = "User")]
         public override GetUsersResponse GetUsers(GetUsersRequest request)
         {
             string userName = _configuration.GetValue("UserRepository:UserName", "");
@@ -417,16 +411,14 @@ namespace OnvifService.Onvif
             };
         }
 
-        [return: MessageParameter(Name = "SystemLog")]
-        public override SystemLog GetSystemLog(SystemLogType LogType)
+        public override GetSystemLogResponse GetSystemLog(SystemLogType LogType)
         {
-            return new SystemLog()
+            return new GetSystemLogResponse(new SystemLog()
             {
                 String = "log"
-            };
+            });
         }
 
-        [return: MessageParameter(Name = "NvtCertificate")]
         public override GetCertificatesResponse GetCertificates(GetCertificatesRequest request)
         {
             return new GetCertificatesResponse()
@@ -446,7 +438,6 @@ namespace OnvifService.Onvif
             };
         }
 
-        [return: MessageParameter(Name = "CertificateStatus")]
         public override GetCertificatesStatusResponse GetCertificatesStatus(GetCertificatesStatusRequest request)
         {
             return new GetCertificatesStatusResponse()
@@ -462,22 +453,24 @@ namespace OnvifService.Onvif
             };
         }
 
-        public override void SetSystemDateAndTime(SetDateTimeType DateTimeType, bool DaylightSavings, SharpOnvifServer.DeviceMgmt.TimeZone TimeZone, SharpOnvifServer.DeviceMgmt.DateTime UTCDateTime)
+        public override SetSystemDateAndTimeResponse SetSystemDateAndTime(SetDateTimeType DateTimeType, bool DaylightSavings, SharpOnvifCommon.Onvif.OnvifTimeZone TimeZone, SharpOnvifCommon.Onvif.OnvifDateTime UTCDateTime)
         {
             _logger.LogInformation("Device: SetSystemDateAndTime");
+            return new SetSystemDateAndTimeResponse();
         }
 
-        public override void SetRelayOutputState(string RelayOutputToken, RelayLogicalState LogicalState)
+        public override SetRelayOutputStateResponse SetRelayOutputState(string RelayOutputToken, RelayLogicalState LogicalState)
         {
             _logger.LogInformation("Device: SetRelayOutputState");
+            return new SetRelayOutputStateResponse();
         }
 
-        public override void SetRelayOutputSettings(string RelayOutputToken, RelayOutputSettings Properties)
+        public override SetRelayOutputSettingsResponse SetRelayOutputSettings(string RelayOutputToken, RelayOutputSettings Properties)
         {
             _logger.LogInformation("Device: SetRelayOutputSettings");
+            return new SetRelayOutputSettingsResponse();
         }
 
-        [return: MessageParameter(Name = "RelayOutputs")]
         public override GetRelayOutputsResponse GetRelayOutputs(GetRelayOutputsRequest request)
         {
             return new GetRelayOutputsResponse()

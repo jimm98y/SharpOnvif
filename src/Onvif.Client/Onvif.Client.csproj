@@ -15,8 +15,6 @@
   </ItemGroup>
 	
   <ItemGroup>
-    <ProjectReference Include="..\SharpOnvifClient.DeviceMgmt\SharpOnvifClient.DeviceMgmt.csproj" />
-    <ProjectReference Include="..\SharpOnvifClient.Media2\SharpOnvifClient.Media2.csproj" />
     <ProjectReference Include="..\SharpOnvifClient\SharpOnvifClient.csproj" />
   </ItemGroup>
 

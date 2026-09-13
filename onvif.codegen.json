@@ -1,0 +1,160 @@
+{
+  "$comment": [
+    "How SharpOnvif generates its own bindings. The generator knows nothing about Onvif;",
+    "everything specific to it is here. Paths are relative to this file.",
+    "Run: dotnet run --project src/WsdlGenerator"
+  ],
+  "mirror": "wsdl",
+  "typeNamePrefix": "Onvif",
+  "shared": {
+    "namespace": "SharpOnvifCommon.Onvif",
+    "out": "src/SharpOnvifCommon/Generated"
+  },
+  "runtime": {
+    "namespace": "SharpOnvifCommon",
+    "out": "src/SharpOnvifCommon/Generated/Runtime"
+  },
+  "settings": "SharpOnvifCommon.Soap.OnvifClientSettings",
+  "dispatch": "SharpOnvifServer.Dispatch",
+  "targets": [
+    {
+      "namespace": "SharpOnvifClient",
+      "out": "src/SharpOnvifClient/Generated",
+      "client": true
+    },
+    {
+      "namespace": "SharpOnvifServer",
+      "out": "src/SharpOnvifServer/Generated",
+      "server": true
+    }
+  ],
+  "services": [
+    {
+      "name": "AccessControl",
+      "wsdl": "https://www.onvif.org/ver10/pacs/accesscontrol.wsdl"
+    },
+    {
+      "name": "AccessRules",
+      "wsdl": "https://www.onvif.org/ver10/accessrules/wsdl/accessrules.wsdl"
+    },
+    {
+      "name": "ActionEngine",
+      "wsdl": "https://www.onvif.org/ver10/actionengine.wsdl"
+    },
+    {
+      "name": "AdvancedSecurity",
+      "wsdl": "https://www.onvif.org/ver10/advancedsecurity/wsdl/advancedsecurity.wsdl"
+    },
+    {
+      "name": "Analytics",
+      "wsdl": "https://www.onvif.org/ver20/analytics/wsdl/analytics.wsdl"
+    },
+    {
+      "name": "AppMgmt",
+      "wsdl": "https://www.onvif.org/ver10/appmgmt/wsdl/appmgmt.wsdl"
+    },
+    {
+      "name": "AuthenticationBehavior",
+      "wsdl": "https://www.onvif.org/ver10/authenticationbehavior/wsdl/authenticationbehavior.wsdl"
+    },
+    {
+      "name": "Credential",
+      "wsdl": "https://www.onvif.org/ver10/credential/wsdl/credential.wsdl"
+    },
+    {
+      "name": "DeviceIO",
+      "wsdl": "https://www.onvif.org/ver10/deviceio.wsdl"
+    },
+    {
+      "name": "DeviceMgmt",
+      "wsdl": "https://www.onvif.org/ver10/device/wsdl/devicemgmt.wsdl"
+    },
+    {
+      "name": "Display",
+      "wsdl": "https://www.onvif.org/ver10/display.wsdl"
+    },
+    {
+      "name": "DoorControl",
+      "wsdl": "https://www.onvif.org/ver10/pacs/doorcontrol.wsdl"
+    },
+    {
+      "name": "Events",
+      "wsdl": "https://www.onvif.org/ver10/events/wsdl/event.wsdl"
+    },
+    {
+      "name": "Imaging",
+      "wsdl": "https://www.onvif.org/ver20/imaging/wsdl/imaging.wsdl"
+    },
+    {
+      "name": "Media",
+      "wsdl": "https://www.onvif.org/ver10/media/wsdl/media.wsdl"
+    },
+    {
+      "name": "Media2",
+      "wsdl": "https://www.onvif.org/ver20/media/wsdl/media.wsdl"
+    },
+    {
+      "name": "PTZ",
+      "wsdl": "https://www.onvif.org/ver20/ptz/wsdl/ptz.wsdl"
+    },
+    {
+      "name": "Provisioning",
+      "wsdl": "https://www.onvif.org/ver10/provisioning/wsdl/provisioning.wsdl"
+    },
+    {
+      "name": "Receiver",
+      "wsdl": "https://www.onvif.org/ver10/receiver.wsdl"
+    },
+    {
+      "name": "Recording",
+      "wsdl": "https://www.onvif.org/ver10/recording.wsdl"
+    },
+    {
+      "name": "Replay",
+      "wsdl": "https://www.onvif.org/ver10/replay.wsdl"
+    },
+    {
+      "name": "Schedule",
+      "wsdl": "https://www.onvif.org/ver10/schedule/wsdl/schedule.wsdl"
+    },
+    {
+      "name": "Search",
+      "wsdl": "https://www.onvif.org/ver10/search.wsdl"
+    },
+    {
+      "name": "Thermal",
+      "wsdl": "https://www.onvif.org/ver10/thermal/wsdl/thermal.wsdl"
+    },
+    {
+      "name": "Uplink",
+      "wsdl": "https://www.onvif.org/ver10/uplink/wsdl/uplink.wsdl"
+    }
+  ],
+  "enumerationValues": [
+    {
+      "type": "{http://www.onvif.org/ver10/schema}VideoEncoding",
+      "value": "H265",
+      "documentation": "H.265 / HEVC. Sent by devices; not listed by onvif.xsd."
+    },
+    {
+      "type": "{http://www.onvif.org/ver10/schema}VideoEncoding",
+      "value": "AV1",
+      "documentation": "AV1. Sent by devices; not listed by onvif.xsd."
+    },
+    {
+      "type": "{http://www.onvif.org/ver10/schema}VideoEncoding",
+      "value": "H266",
+      "documentation": "H.266 / VVC. Sent by devices; not listed by onvif.xsd."
+    },
+    {
+      "type": "{http://www.onvif.org/ver10/schema}VideoEncoding",
+      "value": "AV2",
+      "documentation": "AV2. Sent by devices; not listed by onvif.xsd."
+    },
+    {
+      "type": "{http://www.onvif.org/ver10/schema}AudioEncoding",
+      "value": "OPUS",
+      "documentation": "Opus. Not listed by onvif.xsd."
+    }
+  ]
+}

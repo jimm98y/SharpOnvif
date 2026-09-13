@@ -1,4 +1,4 @@
-﻿// SharpOnvif
+// SharpOnvif
 // Copyright (C) 2026 Lukas Volf
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -19,7 +19,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
 // SOFTWARE.
 
-using CoreWCF;
+using SharpOnvifServer;
+using SharpOnvifServer.Dispatch;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using SharpOnvifServer.Events;
@@ -29,7 +30,7 @@ namespace OnvifService.Onvif
     /// <summary>
     /// Routes all incoming Pull Point Subscription Manager requests to the corresponding Subscription Manager instances.
     /// </summary>
-    public class RouterPullPointSubscriptionManagerImpl : PullPointSubscriptionManagerBase
+    public class RouterPullPointSubscriptionManagerImpl : EventsBase
     {
         private readonly ILogger<RouterSubscriptionManagerImpl> _logger;
         private readonly IEventSubscriptionManager<SubscriptionManagerImpl> _eventSubscriptionManager;
@@ -40,13 +41,13 @@ namespace OnvifService.Onvif
             _eventSubscriptionManager = eventSubscriptionManager;
         }
 
-        public override UnsubscribeResponse1 Unsubscribe(UnsubscribeRequest request)
+        public override UnsubscribeResponse Unsubscribe(UnsubscribeRequest request)
         {
             var ret = GetSubscriptionManager().Unsubscribe(request);
 
-            int subscriptionID = GetSubscriptionID();
+            string subscriptionID = GetSubscriptionID();
             _eventSubscriptionManager.RemoveSubscription(subscriptionID);
-            _logger.LogDebug($"{nameof(RouterSubscriptionManagerImpl)}: Unsubscribed {subscriptionID}");
+            _logger.LogDebug($"{nameof(RouterSubscriptionManagerImpl)}: Unsubscribed {UntrustedText.Printable(subscriptionID)}");
 
             return ret;
         }
@@ -61,12 +62,12 @@ namespace OnvifService.Onvif
             return GetSubscriptionManager().Seek(request);
         }
 
-        public override void SetSynchronizationPoint()
+        public override SetSynchronizationPointResponse SetSynchronizationPoint()
         {
-            GetSubscriptionManager().SetSynchronizationPoint();
+            return GetSubscriptionManager().SetSynchronizationPoint();
         }
 
-        public override RenewResponse1 Renew(RenewRequest request)
+        public override RenewResponse Renew(RenewRequest request)
         {
             return GetSubscriptionManager().Renew(request);
         }
@@ -75,7 +76,7 @@ namespace OnvifService.Onvif
         {
             var subscription = _eventSubscriptionManager.GetSubscription(GetSubscriptionID());
             if (subscription == null)
-                throw new EndpointNotFoundException($"Subscription {GetSubscriptionID()} does not exist.");
+                throw new OnvifServerFaultException("Sender", "InvalidArgVal", OnvifErrors.Namespace, $"Subscription {GetSubscriptionID()} does not exist.", System.Net.HttpStatusCode.BadRequest);
             return subscription;
         }
 
@@ -83,11 +84,10 @@ namespace OnvifService.Onvif
         /// Retrieves the Subscription ID from the <see cref="HttpContext"/>.
         /// </summary>
         /// <returns>Subscription ID of the current request.</returns>
-        private static int GetSubscriptionID()
+        private static string GetSubscriptionID()
         {
-            HttpContext httpContext = OperationContext.Current.IncomingMessageProperties["Microsoft.AspNetCore.Http.HttpContext"] as HttpContext;
-            int subscriptionID = (int)httpContext.Items[OnvifEvents.ONVIF_SUBSCRIPTION_ID];
-            return subscriptionID;
+            HttpContext httpContext = OnvifOperationContext.Current;
+            return httpContext?.Items[OnvifEvents.ONVIF_SUBSCRIPTION_ID] as string;
         }
     }
 }

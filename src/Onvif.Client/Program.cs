@@ -1,4 +1,4 @@
-﻿// SharpOnvif
+// SharpOnvif
 // Copyright (C) 2026 Lukas Volf
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,7 +21,7 @@
 
 using SharpOnvifClient;
 using SharpOnvifClient.Events;
-using SharpOnvifClient.Security;
+using SharpOnvifCommon.Security;
 using SharpOnvifCommon;
 using System;
 using System.Collections.Generic;
@@ -29,7 +29,11 @@ using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using System.Threading;
 using System.Threading.Tasks;
+using SharpOnvifCommon.Onvif;
+using SharpOnvifCommon.Soap;
+using SharpOnvifCommon.Xml;
 
 public static class Program
 {
@@ -38,91 +42,121 @@ public static class Program
         await MainAsync(args);
     }
 
+    static CancellationToken Stopping = CancellationToken.None;
+
+    static ILog Logger = null;
+
+    static OnvifDiscoveryClient Discovery = null;
+
     static async Task MainAsync(string[] args)
     {
-        var devices = await OnvifDiscoveryClient.DiscoverAsync(null, 1000);
+        // Ctrl-C stops waiting, rather than killing the process where it stands.
+        using var stopping = new CancellationTokenSource();
+        Console.CancelKeyPress += (_, e) => { e.Cancel = true; stopping.Cancel(); };
+        Stopping = stopping.Token;
 
-        if (devices == null || devices.Count == 0)
+        Logger = new DefaultOnvifLogger
         {
-            Console.WriteLine("No ONVIF devices found. Please check your network connection and try again.");
-            return;
-        }
+            IsLoggingEnabled = true,
+            IsInfoEnabled = false,
+            IsDebugEnabled = false,
+            IsTraceEnabled = false,
+        };
+
+        Discovery = new OnvifDiscoveryClient(Logger);
+        Discovery.Failed += (_, e) => Console.WriteLine($"  ! {e}");
+
+        static bool IsOnThisMachine(OnvifDiscoveryResult candidate) =>
+            candidate.Addresses != null &&
+            candidate.Addresses.Any(address => address.Contains("127.0.0.1") || address.Contains("[::1]"));
+
+        var devices = await Discovery.DiscoverAsync(null, 1000);
 
         foreach (var onvifDevice in devices)
         {
             Console.WriteLine($"Found device: Manufacturer = {onvifDevice.Manufacturer}, Model = {onvifDevice.Hardware}");
         }
 
-        var device = devices.FirstOrDefault(x => x.Addresses != null && x.Addresses.FirstOrDefault(xx => xx.Contains("127.0.0.1") || xx.Contains("[::1]")) != null);
+        var device = devices.FirstOrDefault(IsOnThisMachine);
 
         if (device == null)
         {
-            Console.WriteLine("Please run OnvifService on the localhost as Administrator, or use a different camera URL and credentials.");
-        }
-        else
-        {
-            DigestAuthentication authentication = DigestAuthentication.HttpDigest | DigestAuthentication.WsUsernameToken;
-            using (var client = new SimpleOnvifClient(device.Addresses.First(x => x.Contains("127.0.0.1") || x.Contains("[::1]")),
-                "admin", 
-                "password", 
-                new DigestAuthenticationSchemeOptions(authentication),
-                true))
+            Console.WriteLine("No Onvif device on this machine yet - waiting for one to announce itself.");
+            Console.WriteLine("Start Onvif.Server, or press Ctrl-C to give up.");
+
+            try
             {
-                var services = await client.GetServicesAsync(true);
-                var cameraDateTime = await client.GetSystemDateAndTimeUtcAsync();
-                var cameraTimeOffset = cameraDateTime.Subtract(DateTime.UtcNow);
-                Console.WriteLine($"Camera time: {cameraDateTime}");
-                if (authentication.HasFlag(DigestAuthentication.WsUsernameToken))
-                {
-                    client.SetCameraUtcNowOffset(cameraTimeOffset); // this is only supported when using WsUsernameToken legacy authentication
-                }
+                device = await Discovery.WaitForDeviceAsync(IsOnThisMachine, stopping.Token);
+                Console.WriteLine($"Device appeared: Manufacturer = {device.Manufacturer}, Model = {device.Hardware}");
+            }
+            catch (OperationCanceledException)
+            {
+                Console.WriteLine("Gave up waiting.");
+                return;
+            }
+        }
+
+        DigestAuthentication authentication = DigestAuthentication.HttpDigest | DigestAuthentication.WsUsernameToken;
+        using (var client = new SimpleOnvifClient(device.Addresses.First(x => x.Contains("127.0.0.1") || x.Contains("[::1]")),
+            "admin", 
+            "password", 
+            new OnvifAuthenticationSettings(authentication),
+            true))
+        {
+            var services = await client.GetServicesAsync(true);
+            var cameraDateTime = await client.GetSystemDateAndTimeUtcAsync();
+            var cameraTimeOffset = cameraDateTime.Subtract(DateTime.UtcNow);
+            Console.WriteLine($"Camera time: {cameraDateTime}");
+            if (authentication.HasFlag(DigestAuthentication.WsUsernameToken))
+            {
+                client.SetCameraUtcNowOffset(cameraTimeOffset); // this is only supported when using WsUsernameToken legacy authentication
+            }
                     
-                var deviceInfo = await client.GetDeviceInformationAsync();
-                Console.WriteLine($"Device Manufacturer: {deviceInfo.Manufacturer}");
+            var deviceInfo = await client.GetDeviceInformationAsync();
+            Console.WriteLine($"Device Manufacturer: {deviceInfo.Manufacturer}");
 
-                // check if media profile is available
-                if (services.Service.FirstOrDefault(x => x.Namespace == OnvifServices.MEDIA) != null)
+            // check if media profile is available
+            if (services.Service.FirstOrDefault(x => x.Namespace == OnvifServices.MEDIA) != null)
+            {
+                var profiles = await client.GetProfilesAsync();
+                var streamUri = await client.GetStreamUriAsync(profiles.Profiles.First().token);
+                Console.WriteLine($"Stream URI: {streamUri.Uri}");
+            }
+            else if(services.Service.FirstOrDefault(x => x.Namespace == OnvifServices.MEDIA2) != null)
+            {
+                var profiles = await client.GetProfiles2Async();
+                var streamUri = await client.GetStreamUri2Async(profiles.Profiles.First().token, "RTSP");
+                Console.WriteLine($"Stream URI: {streamUri.Uri}");
+            }
+
+            // check if ptz profile is available
+            if (services.Service.FirstOrDefault(x => x.Namespace == OnvifServices.PTZ) != null)
+            {
+                var profiles = await client.GetProfilesAsync();
+                await client.AbsoluteMoveAsync(profiles.Profiles.First().token, 1f, 1f, 1f, 1f, 1f, 1f);
+
+                var currentPosition = await client.GetStatusAsync(profiles.Profiles.First().token);
+                Console.WriteLine($"Current pan: {currentPosition.Position.PanTilt.x}");
+                Console.WriteLine($"Current tilt: {currentPosition.Position.PanTilt.y}");
+                Console.WriteLine($"Current zoom: {currentPosition.Position.Zoom.x}");
+            }
+
+            // check if event profile is available
+            if (services.Service.FirstOrDefault(x => x.Namespace == OnvifServices.EVENTS) != null)
+            {
+                // basic events vs pull point subscription
+                bool useBasicEvents = false; // = false;
+
+                try
                 {
-                    var profiles = await client.GetProfilesAsync();
-                    var streamUri = await client.GetStreamUriAsync(profiles.Profiles.First().token);
-                    Console.WriteLine($"Stream URI: {streamUri.Uri}");
+                    if (useBasicEvents)
+                        await BasicEventSubscription(client);
+                    else
+                        await PullPointEventSubscription(client);
                 }
-                else if(services.Service.FirstOrDefault(x => x.Namespace == OnvifServices.MEDIA2) != null)
-                {
-                    var profiles = await client.GetProfiles2Async();
-                    var streamUri = await client.GetStreamUri2Async(profiles.Profiles.First().token, "RTSP");
-                    Console.WriteLine($"Stream URI: {streamUri.Uri}");
-                }
-
-                // check if ptz profile is available
-                if (services.Service.FirstOrDefault(x => x.Namespace == OnvifServices.PTZ) != null)
-                {
-                    var profiles = await client.GetProfilesAsync();
-                    await client.AbsoluteMoveAsync(profiles.Profiles.First().token, 1f, 1f, 1f, 1f, 1f, 1f);
-
-                    var currentPosition = await client.GetStatusAsync(profiles.Profiles.First().token);
-                    Console.WriteLine($"Current pan: {currentPosition.Position.PanTilt.x}");
-                    Console.WriteLine($"Current tilt: {currentPosition.Position.PanTilt.y}");
-                    Console.WriteLine($"Current zoom: {currentPosition.Position.Zoom.x}");
-                }
-
-                // check if event profile is available
-                if (services.Service.FirstOrDefault(x => x.Namespace == OnvifServices.EVENTS) != null)
-                {
-                    // basic events vs pull point subscription
-                    bool useBasicEvents = false; // = false;
-
-                    try
-                    {
-                        if (useBasicEvents)
-                            await BasicEventSubscription(client);
-                        else
-                            await PullPointEventSubscription(client);
-                    }
-                    catch (Exception ex) 
-                    { 
-                        Console.WriteLine(ex.Message); 
-                    }
+                catch (Exception ex) 
+                { 
+                    Console.WriteLine(ex.Message); 
                 }
             }
         }
@@ -130,26 +164,82 @@ public static class Program
 
     static async Task PullPointEventSubscription(SimpleOnvifClient client)
     {
-        var subscription = await client.PullPointSubscribeAsync(1);
         while (true)
         {
-            var messages = await client.PullPointPullMessagesAsync(subscription.SubscriptionReference.Address.Value);
-
-            foreach (var ev in messages.NotificationMessage)
+            CreatePullPointSubscriptionResponse subscription;
+            try
             {
-                if (OnvifEvents.IsMotionDetected(ev) != null)
-                    Console.WriteLine($"Motion detected: {OnvifEvents.IsMotionDetected(ev)}");
-                else if (OnvifEvents.IsTamperDetected(ev) != null)
-                    Console.WriteLine($"Tamper detected: {OnvifEvents.IsTamperDetected(ev)}");
+                subscription = await client.PullPointSubscribeAsync(60);
+            }
+            catch (Exception ex) when (ex is SoapTransportException || ex is SoapFaultException)
+            {
+                Console.WriteLine($"Cannot subscribe: {ex.Message}");
+                if (!await WaitForDevice(client.OnvifUri, Stopping)) return;
+                continue;
+            }
+
+            string address = subscription.SubscriptionReference.Address.Value;
+            Console.WriteLine($"Subscribed: {address}");
+
+            try
+            {
+                while (true)
+                {
+                    var messages = await client.PullPointPullMessagesAsync(address);
+
+                    foreach (var ev in messages.NotificationMessage ?? Array.Empty<NotificationMessageHolderType>())
+                    {
+                        if (OnvifEvents.IsMotionDetected(ev) != null)
+                            Console.WriteLine($"Motion detected: {OnvifEvents.IsMotionDetected(ev)}");
+                        else if (OnvifEvents.IsTamperDetected(ev) != null)
+                            Console.WriteLine($"Tamper detected: {OnvifEvents.IsTamperDetected(ev)}");
+                    }
+                }
+            }
+            catch (SoapTransportException ex)
+            {
+                Console.WriteLine($"Lost the device: {ex.Message}");
+                if (!await WaitForDevice(client.OnvifUri, Stopping)) return;
+            }
+            catch (SoapFaultException ex)
+            {
+                Console.WriteLine($"The device refused the pull, subscribing again: {ex.Message}");
             }
         }
+    }
+
+    static async Task<bool> WaitForDevice(string onvifUri, CancellationToken cancellationToken)
+    {
+        Console.WriteLine("Waiting for the device to announce itself...");
+
+        try
+        {
+            var device = await Discovery.WaitForDeviceAsync(
+                candidate => candidate.Addresses.Any(address => SameDevice(address, onvifUri)),
+                cancellationToken);
+
+            Console.WriteLine($"The device is back: {device.Addresses.FirstOrDefault()}");
+            return true;
+        }
+        catch (OperationCanceledException)
+        {
+            Console.WriteLine("Gave up waiting.");
+            return false;
+        }
+    }
+
+    static bool SameDevice(string announced, string onvifUri)
+    {
+        return Uri.TryCreate(announced, UriKind.Absolute, out var a)
+            && Uri.TryCreate(onvifUri, UriKind.Absolute, out var b)
+            && string.Equals(a.Host, b.Host, StringComparison.OrdinalIgnoreCase);
     }
 
     static async Task BasicEventSubscription(SimpleOnvifClient client)
     {
         // we must run as an Administrator for the Basic subscription to work
         string onvifInterfaceIp = FindNetworkInterface(client.OnvifUri);
-        SimpleOnvifEventListener eventListener = new SimpleOnvifEventListener(onvifInterfaceIp);
+        SimpleOnvifEventListener eventListener = new SimpleOnvifEventListener(onvifInterfaceIp) { Logger = Logger };
         eventListener.Start((int cameraID, string ev) =>
         {
             if (OnvifEvents.IsMotionDetected(ev) != null)
@@ -158,12 +248,21 @@ public static class Program
                 Console.WriteLine($"Tamper detected: {OnvifEvents.IsTamperDetected(ev)}");
         });
 
-        SubscribeResponse1 subscriptionResponse = await client.BasicSubscribeAsync(eventListener.GetOnvifEventListenerUri());
+        SubscribeResponse subscriptionResponse = await client.BasicSubscribeAsync(eventListener.GetOnvifEventListenerUri());
 
         while (true)
         {
             await Task.Delay(1000 * 60);
-            var result = await client.BasicSubscriptionRenewAsync(subscriptionResponse.SubscribeResponse.SubscriptionReference.Address.Value);
+
+            try
+            {
+                await client.BasicSubscriptionRenewAsync(subscriptionResponse.SubscriptionReference.Address.Value);
+            }
+            catch (Exception ex) when (ex is SoapTransportException || ex is SoapFaultException)
+            {
+                Console.WriteLine($"Renewing failed, subscribing again: {ex.Message}");
+                subscriptionResponse = await client.BasicSubscribeAsync(eventListener.GetOnvifEventListenerUri());
+            }
         }
     }
 
