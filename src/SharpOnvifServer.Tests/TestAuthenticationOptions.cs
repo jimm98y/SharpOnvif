@@ -22,6 +22,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using SharpOnvifServer;
 using SharpOnvifCommon.Security;
 using SharpOnvifServer.Security;
 
@@ -98,36 +101,81 @@ namespace SharpOnvif.Tests
         }
 
         [TestMethod]
-        public void BindsFromConfiguration()
+        public void BindsTheDeviceAndWhatItNegotiatesFromOneSection()
         {
-            // The shared settings are a section of their own now, and the device's own settings
-            // stay where they were. A configuration written for 0.10.0's earlier shape - all of
-            // them flat - no longer reaches the shared half, which is why this is a documented
-            // break rather than a silent one.
+            // Two objects in code, one element in the file. Which of the two a setting belongs to
+            // is the library's business, not the reader's.
             var configuration = new ConfigurationBuilder()
                 .AddInMemoryCollection(new Dictionary<string, string>
                 {
                     ["Digest:HttpDigestRealm"] = "My IP Camera",
                     ["Digest:HttpDigestNonceLifetimeMilliseconds"] = "12345",
-                    ["Digest:Onvif:Authentication"] = "2",
-                    ["Digest:Onvif:HttpDigestUserHash"] = "false",
-                    ["Digest:Onvif:HttpDigestAlgorithms:0"] = "SHA-256",
-                    ["Digest:Onvif:HttpDigestQop:0"] = "auth",
-                    ["Digest:Onvif:PreAuthActions:0"] = "http://www.onvif.org/ver10/device/wsdl/GetServices",
+                    ["Digest:WsUsernameTokenMaxTimeDeltaInMilliseconds"] = "1000",
+                    ["Digest:Authentication"] = "2",
+                    ["Digest:HttpDigestUserHash"] = "false",
+                    ["Digest:HttpDigestAlgorithms:0"] = "SHA-256",
+                    ["Digest:HttpDigestQop:0"] = "auth",
+                    ["Digest:PreAuthActions:0"] = "http://www.onvif.org/ver10/device/wsdl/GetServices",
                 })
                 .Build();
 
-            var options = configuration.GetSection("Digest").Get<DigestAuthenticationSchemeOptions>();
+            DigestAuthenticationSchemeOptions options = Configured(configuration.GetSection("Digest"));
 
+            // The device's own.
             Assert.AreEqual("My IP Camera", options.HttpDigestRealm);
             Assert.AreEqual(12345, options.HttpDigestNonceLifetimeMilliseconds);
+            Assert.AreEqual(1000, options.WsUsernameTokenMaxTimeDeltaInMilliseconds);
 
+            // And what it negotiates, off the same element.
             Assert.AreEqual(DigestAuthentication.HttpDigest, options.Onvif.Authentication);
             Assert.IsFalse(options.Onvif.HttpDigestUserHash);
+            CollectionAssert.AreEqual(new[] { "SHA-256" }, options.Onvif.HttpDigestAlgorithms);
+            CollectionAssert.AreEqual(new[] { "auth" }, options.Onvif.HttpDigestQop);
+            CollectionAssert.AreEqual(
+                new[] { "http://www.onvif.org/ver10/device/wsdl/GetServices" }, options.Onvif.PreAuthActions);
+        }
+
+        [TestMethod]
+        public void DoesNotAdvertiseADefaultTwiceWhenTheFileRestatesIt()
+        {
+            // Binding a list onto a default appends to it. A file that spells out the defaults -
+            // as the sample's does - would otherwise make the device offer each algorithm twice.
+            var configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(new Dictionary<string, string>
+                {
+                    ["Digest:HttpDigestAlgorithms:0"] = "MD5",
+                    ["Digest:HttpDigestAlgorithms:1"] = "SHA-256",
+                    ["Digest:HttpDigestQop:0"] = "auth",
+                })
+                .Build();
+
+            DigestAuthenticationSchemeOptions options = Configured(configuration.GetSection("Digest"));
+
+            CollectionAssert.AllItemsAreUnique(options.Onvif.HttpDigestAlgorithms);
+            CollectionAssert.AllItemsAreUnique(options.Onvif.HttpDigestQop);
             CollectionAssert.Contains(options.Onvif.HttpDigestAlgorithms, "SHA-256");
-            CollectionAssert.Contains(options.Onvif.HttpDigestQop, "auth");
-            CollectionAssert.Contains(options.Onvif.PreAuthActions,
-                "http://www.onvif.org/ver10/device/wsdl/GetServices");
+        }
+
+        [TestMethod]
+        public void StartsOnDefaultsWhenThereIsNoConfiguration()
+        {
+            DigestAuthenticationSchemeOptions options = Configured(null);
+
+            Assert.AreEqual("IP Camera", options.HttpDigestRealm);
+            CollectionAssert.AreEqual(
+                new OnvifAuthenticationSettings().HttpDigestAlgorithms, options.Onvif.HttpDigestAlgorithms);
+        }
+
+        /// <summary>The options a device ends up with, as the registration builds them.</summary>
+        private static DigestAuthenticationSchemeOptions Configured(IConfiguration section)
+        {
+            var services = new ServiceCollection();
+            services.AddLogging();
+            services.AddOnvifDigestAuthentication(section);
+
+            return services.BuildServiceProvider()
+                .GetRequiredService<IOptionsMonitor<DigestAuthenticationSchemeOptions>>()
+                .Get(OnvifAuthenticationDefaults.AuthenticationScheme);
         }
 
         [TestMethod]

@@ -248,19 +248,12 @@ Moved onto `Onvif`: `Authentication`, `HttpDigestAlgorithms`, `HttpDigestQop`, `
 `HttpDigestNonceLifetimeMilliseconds`, `HttpDigestNonceReplayStore`,
 `WsUsernameTokenMaxTimeDeltaInMilliseconds`.
 
-**Configuration moves with them**, and this part fails quietly - a file that still names them flat
-binds nothing, and the device comes up with defaults:
+Configuration does not move: the settings are still one element, and a new overload binds both
+objects from it, so a file written for 0.9.x keeps working.
 
-```json
-  "DigestAuthenticationOptions": {
-    "HttpDigestRealm": "My IP Camera",
--   "Authentication": 3,
--   "HttpDigestAlgorithms": [ "MD5", "SHA-256" ],
-+   "Onvif": {
-+     "Authentication": 3,
-+     "HttpDigestAlgorithms": [ "MD5", "SHA-256" ]
-+   }
-  }
+```cs
+- AddOnvifDigestAuthentication(Configuration.GetSection("Digest").Get<DigestAuthenticationSchemeOptions>());
++ AddOnvifDigestAuthentication(Configuration.GetSection("Digest"));
 ```
 
 `OnvifAuthenticationSettings.UtcNowOffset` appears on the device as a consequence of sharing the
@@ -317,6 +310,10 @@ These compile as they did and behave differently, because they were wrong.
   true value anywhere in the message. A camera reporting `IsMotion=false` beside an enabled rule
   used to report motion. **If you relied on the old reading, you were reading a false alarm.**
   These also return null instead of throwing for a notification missing its topic or message.
+- **A list in configuration now replaces the default rather than adding to it.** Naming one
+  algorithm used to leave the device offering the six defaults and that one, so the setting could
+  widen what was offered but never narrow it. `"HttpDigestAlgorithms": [ "SHA-256" ]` means
+  SHA-256 alone now, which is what the file looks like it says.
 - **The server bounds what it reads.** A request over `OnvifEndpoint.MaxRequestBytes` (2 MB) is
   refused with a fault, and a document nested deeper than `OnvifXmlReader.MaxDepth` (256) is
   refused. Both are far above anything Onvif describes, and both are settable.

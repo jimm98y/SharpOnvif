@@ -22,6 +22,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SharpOnvifServer.Discovery;
 using SharpOnvifServer.Events;
@@ -77,6 +78,18 @@ namespace SharpOnvifServer
         }
 
         /// <summary>
+        /// Empties a default list when the configuration provides one of its own, so that what the
+        /// file says is what the device does rather than being added to what it already had.
+        /// </summary>
+        private static void Replacing(IConfiguration configuration, string key, List<string> current)
+        {
+            if (current == null || current.Count == 0) return;
+            if (!configuration.GetSection(key).Exists()) return;
+
+            current.Clear();
+        }
+
+        /// <summary>
         /// Removes repeated entries while keeping the order, which for the algorithm list is the
         /// order they are offered in.
         /// <para>
@@ -104,6 +117,50 @@ namespace SharpOnvifServer
         /// </summary>
         /// <param name="services"><see cref="IServiceCollection"/></param>
         /// <param name="options">Digest authentication options callback.</param>
+        /// <summary>
+        /// Add Digest authentication handler, configured from one configuration section.
+        /// </summary>
+        /// <remarks>
+        /// The device's own settings and the ones it negotiates with a client live on different
+        /// objects, because the second is the type a client is configured with too. In a
+        /// configuration file they are one element - splitting them there would only ask the
+        /// reader to know which of the two any given setting belongs to:
+        /// <code>
+        /// "DigestAuthenticationOptions": {
+        ///   "HttpDigestRealm": "My IP Camera",
+        ///   "Authentication": 3,
+        ///   "HttpDigestAlgorithms": [ "MD5", "SHA-256" ]
+        /// }
+        /// </code>
+        /// </remarks>
+        /// <param name="services"><see cref="IServiceCollection"/></param>
+        /// <param name="configuration">The section holding the settings.</param>
+        public static IServiceCollection AddOnvifDigestAuthentication(
+            this IServiceCollection services, IConfiguration configuration)
+        {
+            if (configuration == null)
+                return services.AddOnvifDigestAuthentication();
+
+            return services.AddOnvifDigestAuthentication(options =>
+            {
+                // The binder adds to a list rather than replacing it, so a file naming one
+                // algorithm would leave the device offering the six defaults and that one. A file
+                // that names a list means that list, so the default is cleared first.
+                Replacing(configuration, "HttpDigestAlgorithms", options.Onvif.HttpDigestAlgorithms);
+                Replacing(configuration, "HttpDigestQop", options.Onvif.HttpDigestQop);
+                Replacing(configuration, "PreAuthActions", options.Onvif.PreAuthActions);
+
+                configuration.Bind(options);        // the device's own
+                configuration.Bind(options.Onvif);  // and what it negotiates, from the same element
+
+                // Belt and braces: a file that repeats an entry must not make the device advertise
+                // it twice.
+                options.Onvif.HttpDigestAlgorithms = Distinct(options.Onvif.HttpDigestAlgorithms);
+                options.Onvif.HttpDigestQop = Distinct(options.Onvif.HttpDigestQop);
+                options.Onvif.PreAuthActions = Distinct(options.Onvif.PreAuthActions);
+            });
+        }
+
         public static IServiceCollection AddOnvifDigestAuthentication(this IServiceCollection services, Action<DigestAuthenticationSchemeOptions> options)
         {
             string scheme = OnvifAuthenticationDefaults.AuthenticationScheme;
