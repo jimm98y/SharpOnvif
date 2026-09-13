@@ -14,7 +14,7 @@
 
 	<ItemGroup>
 		<!-- The generator is exercised by the test project, which drives its internals directly. -->
-		<InternalsVisibleTo Include="SharpOnvif.Tests" />
+		<InternalsVisibleTo Include="SharpOnvifCommon.Tests" />
 	</ItemGroup>
 
 </Project>

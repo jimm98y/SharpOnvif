@@ -285,7 +285,15 @@ dotnet run --project src/WsdlGenerator -- --wsdl ./bank.wsdl --namespace Example
     --out ./Generated --enum-value "{http://www.onvif.org/ver10/schema}VideoEncoding=AV1"
 ```
 
-Open `src/SharpOnvif.sln` to build everything.
+There are two solutions, `src/SharpOnvifClient.sln` and `src/SharpOnvifServer.sln`, either of
+which builds the shared `SharpOnvifCommon` and the generator alongside its own side. The server
+solution also builds the client, because the end-to-end tests answer the server with the real
+client rather than a hand-built request.
+
+Tests are split the same way: `SharpOnvifCommon.Tests` covers what needs neither side - the digest
+implementation, the cache, the generator - and is in both solutions; `SharpOnvifClient.Tests` and
+`SharpOnvifServer.Tests` cover their own. Running both solutions runs every test, with the common
+ones twice.
 
 ## Credits
 Special thanks to Piotr Stapp for figuring out the SOAP security headers in NET8: https://stapp.space/using-soap-security-in-dotnet-core/.

@@ -67,7 +67,7 @@ Generated code depends on `SharpOnvifCommon`, and the server side additionally o
 `SharpOnvifServer`. Despite the names, neither is Onvif-specific: they carry the SOAP 1.2
 envelope, the XML reading and writing, and the ASP.NET Core dispatch the generated code drives.
 
-`SharpOnvif.Tests.TestCodeGenerator` runs the generator over a small banking WSDL to keep this
+`SharpOnvifCommon.Tests`'s `TestCodeGenerator` runs the generator over a small banking WSDL to keep this
 path working.
 
 ## Schema subset
@@ -182,7 +182,7 @@ Eight names need it today - `Action`, `Attribute`, `DateTime`, `IPAddress`, `Net
 drawn from the net10.0 reference assemblies for the namespaces a consumer typically imports, so a
 future specification revision introducing a `Stream` or a `Task` does not reintroduce the problem.
 
-`SharpOnvif.Tests.TestNamespaceCoexistence` imports every relevant framework and Onvif namespace
+`SharpOnvifClient.Tests`'s `TestNamespaceCoexistence` imports every relevant framework and Onvif namespace
 at once with no aliases. It exists to be compiled: a name that collided would break the build.
 
 ## Generated type surface

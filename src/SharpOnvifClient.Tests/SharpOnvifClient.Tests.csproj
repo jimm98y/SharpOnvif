@@ -7,11 +7,10 @@
     <Nullable>disable</Nullable>
     <IsPackable>false</IsPackable>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <!-- The three test assemblies share one namespace on purpose: TestNamespaceCoexistence has
+         to compile as a consumer does, from outside the product namespaces. -->
+    <RootNamespace>SharpOnvif.Tests</RootNamespace>
   </PropertyGroup>
-
-  <ItemGroup>
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MSTest" Version="4.4.0" />
@@ -19,14 +18,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SharpOnvifClient\SharpOnvifClient.csproj" />
-    <ProjectReference Include="..\SharpOnvifCommon\SharpOnvifCommon.csproj" />
-    <ProjectReference Include="..\SharpOnvifServer\SharpOnvifServer.csproj" />
-    <ProjectReference Include="..\WsdlGenerator\WsdlGenerator.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <!-- A small WSDL that is not Onvif, for testing the generator against something else. -->
-    <None Include="Wsdl\**" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,3 +25,4 @@
   </ItemGroup>
 
 </Project>
+

@@ -9,7 +9,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<InternalsVisibleTo Include="SharpOnvif.Tests" />
+		<InternalsVisibleTo Include="SharpOnvifCommon.Tests" />
 	</ItemGroup>
 
 </Project>
