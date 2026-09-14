@@ -362,15 +362,17 @@ straight off the type parameter, and `T` not being a generated service is a comp
 is mapped rather than an exception when the application starts. Nothing that maps a service the
 ordinary way needs an edit.
 
+### `DigestAuthenticationSchemeOptions` is gone
+`SharpOnvifClient.Security.DigestAuthenticationSchemeOptions` was removed and replaced by 
+`SharpOnvifCommon.Security.OnvifAuthenticationSettings`.
+
 ### Unchanged
 
 `IUserRepository`, `AddOnvifDigestAuthentication`, `AddOnvifDiscovery`, `OnvifDiscoveryOptions`,
 `SharpOnvifServer.Events.IEventSource` and the `IServer.GetHttpEndpoint` helpers keep their shapes:
 nothing you already set on them has moved or changed meaning. The server's
 `DigestAuthenticationSchemeOptions` keeps its name and everything the device owns; what the two
-sides agree on moved onto `Onvif`, as above. The client's type of that name is still in
-`SharpOnvifClient.Security` and still what `SimpleOnvifClient` takes; what it carries moved onto
-the settings it now derives from, as above.
+sides agree on moved onto `Onvif`, as above. 
 
 ## 6. Behaviour that changed without a signature changing
 
