@@ -74,7 +74,7 @@ public static class Program
 
         foreach (var onvifDevice in devices)
         {
-            Console.WriteLine($"Found device: Manufacturer = {onvifDevice.Manufacturer}, Model = {onvifDevice.Hardware}");
+            Console.WriteLine($"Found device: Manufacturer = {onvifDevice.Manufacturer}, Model = {onvifDevice.Hardware}, Addresses = {string.Join(", ", onvifDevice.Addresses ?? [""])}");
         }
 
         var device = devices.FirstOrDefault(IsOnThisMachine);
@@ -87,7 +87,7 @@ public static class Program
             try
             {
                 device = await Discovery.WaitForDeviceAsync(IsOnThisMachine, stopping.Token);
-                Console.WriteLine($"Device appeared: Manufacturer = {device.Manufacturer}, Model = {device.Hardware}");
+                Console.WriteLine($"Device appeared: Manufacturer = {device.Manufacturer}, Model = {device.Hardware}, Addresses = {string.Join(", ", device.Addresses ?? [""])}");
             }
             catch (OperationCanceledException)
             {
