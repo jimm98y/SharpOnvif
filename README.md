@@ -323,7 +323,7 @@ Onvif supports two types of Digest authentication. Legacy [WS-UsernameToken](htt
 carried inside the SOAP headers and HTTP Digest authentication as defined in [RFC 7616](https://www.rfc-editor.org/rfc/rfc7616). 
 Both types of authentication are now supported on both the client and the server.
 
-### Load balancing
+## Load balancing
 HTTP Digest keeps two pieces of state on the server, and both are per process by default: the
 private key and the record of which nonces have been seen. To run this service behind a load
 balancer, you will have to store the private key and replay list in a shared location. Then 
@@ -344,7 +344,7 @@ leaves a device holding every one it asked for.
 `INonceReplayStore` has one method - it spends a nonce at a nonce count and says whether that count
 had been seen before. `MemoryNonceReplayStore`, the default, holds the record in this process.
 
-### Logging
+## Logging
 The client reports what it could not do through an `ILog` it is given. The logger belongs
 to the object, not to the process, so an application watching several cameras can tell which one
 is complaining - or send one of them nowhere:
@@ -362,7 +362,7 @@ package, which is what keeps these assemblies free of dependencies altogether. T
 use this - it is given an `ILogger` by the host and logs to that, and the two names are kept apart
 deliberately so that one does not shadow the other where both are in scope.
 
-### No dependencies
+## No dependencies
 `SharpOnvifClient`, `SharpOnvifServer` and `SharpOnvifCommon` reference no NuGet packages on any of
 their target frameworks. 
 
