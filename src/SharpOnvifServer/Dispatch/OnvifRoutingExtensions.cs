@@ -1,19 +1,15 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Primitives;
 
 namespace SharpOnvifServer.Dispatch
 {
     /// <summary>Maps Onvif services onto ASP.NET Core endpoints.</summary>
     public static class OnvifRoutingExtensions
     {
-        // Endpoints are keyed by path so that several services can be added to one URL. A device
-        // that exposes everything under /onvif/device_service is legal and common, and the
-        // CoreWCF bindings this replaces could not express it.
-        private static readonly Dictionary<IEndpointRouteBuilder, Dictionary<string, OnvifEndpoint>> Endpoints =
-            new Dictionary<IEndpointRouteBuilder, Dictionary<string, OnvifEndpoint>>();
-
         /// <summary>
         /// Publishes an Onvif service implementation at <paramref name="path"/>.
         /// <para>
@@ -45,11 +41,7 @@ namespace SharpOnvifServer.Dispatch
             // and the compiler says so where it is mapped.
             ServiceDispatcher dispatcher = TService.Dispatcher;
 
-            if (!Endpoints.TryGetValue(routes, out var byPath))
-            {
-                byPath = new Dictionary<string, OnvifEndpoint>(StringComparer.OrdinalIgnoreCase);
-                Endpoints[routes] = byPath;
-            }
+            Dictionary<string, OnvifEndpoint> byPath = MappedPathsOf(routes).ByPath;
 
             if (byPath.TryGetValue(path, out OnvifEndpoint existing))
             {
@@ -68,6 +60,70 @@ namespace SharpOnvifServer.Dispatch
             routes.MapPost(path.TrimEnd('/') + "/{" + OnvifEndpoint.SubscriptionRouteValue + "}", endpoint.HandleAsync);
 
             return routes.MapPost(path, endpoint.HandleAsync);
+        }
+
+        /// <summary>The paths already mapped on this builder, creating the record on first use.</summary>
+        private static MappedPaths MappedPathsOf(IEndpointRouteBuilder routes)
+        {
+            foreach (EndpointDataSource source in routes.DataSources)
+            {
+                if (source is MappedPaths mapped) return mapped;
+            }
+
+            var added = new MappedPaths();
+            routes.DataSources.Add(added);
+            return added;
+        }
+
+        /// <summary>
+        /// What has been mapped where, kept on the builder that was mapped rather than in a static
+        /// of its own.
+        /// </summary>
+        /// <remarks>
+        /// A static keyed by builder was two faults in one. Applications built at the same time
+        /// shared it with nothing between them, and a concurrent write left the dictionary
+        /// corrupted - which is a race in the library, not only in a test that starts several
+        /// hosts at once. It also held every builder and every endpoint it had ever been given for
+        /// the life of the process, because nothing ever removed an application that had finished
+        /// being built.
+        /// <para>
+        /// Routing already keeps a per-builder collection, so the record goes there and lives
+        /// exactly as long as the application it describes. This one contributes no endpoints of
+        /// its own and never changes: it is somewhere to keep the map and nothing more. Two
+        /// threads mapping onto one builder are still the caller's business, the same way they are
+        /// for the MapPost below.
+        /// </para>
+        /// </remarks>
+        private sealed class MappedPaths : EndpointDataSource
+        {
+            // Endpoints are keyed by path so that several services can be added to one URL. A
+            // device that exposes everything under /onvif/device_service is legal and common, and
+            // the CoreWCF bindings this replaces could not express it.
+            public Dictionary<string, OnvifEndpoint> ByPath { get; } =
+                new Dictionary<string, OnvifEndpoint>(StringComparer.OrdinalIgnoreCase);
+
+            public override IReadOnlyList<Endpoint> Endpoints { get { return Array.Empty<Endpoint>(); } }
+
+            public override IChangeToken GetChangeToken() { return NeverChanges.Instance; }
+
+            /// <summary>A change token for a data source that has nothing to announce.</summary>
+            private sealed class NeverChanges : IChangeToken, IDisposable
+            {
+                public static readonly NeverChanges Instance = new NeverChanges();
+
+                public bool HasChanged { get { return false; } }
+
+                public bool ActiveChangeCallbacks { get { return false; } }
+
+                public IDisposable RegisterChangeCallback(Action<object> callback, object state)
+                {
+                    return this;
+                }
+
+                public void Dispose()
+                {
+                }
+            }
         }
 
         /// <summary>Returned when a service joins an endpoint that was already mapped.</summary>
