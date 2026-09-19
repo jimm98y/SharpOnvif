@@ -14860,6 +14860,35 @@ namespace SharpOnvifCommon.Onvif
 
     }
 
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2003/05/soap-envelope")]
+    public partial class Detail : SharpOnvifCommon.Xml.XmlContract
+    {
+        private System.Xml.XmlElement[] anyField;
+
+        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
+        public System.Xml.XmlElement[] Any
+        {
+            get { return this.anyField; }
+            set { this.anyField = value; }
+        }
+
+        protected override string XmlTypeName { get { return "detail"; } }
+
+        protected override string XmlTypeNamespace { get { return Ns.SoapEnvelope; } }
+
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyField, reader.ReadAnyElement());
+            return true;
+        }
+
+    }
+
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
     public partial class DeviceCapabilities : SharpOnvifCommon.Xml.XmlContract
     {
@@ -18722,18 +18751,18 @@ namespace SharpOnvifCommon.Onvif
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2003/05/soap-envelope")]
     public partial class Fault : SharpOnvifCommon.Xml.XmlContract
     {
-        private faultcode codeField;
+        private Faultcode codeField;
 
-        private reasontext[] reasonField;
+        private Reasontext[] reasonField;
 
         private string nodeField;
 
         private string roleField;
 
-        private detail detailField;
+        private Detail detailField;
 
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public faultcode Code
+        public Faultcode Code
         {
             get { return this.codeField; }
             set { this.codeField = value; }
@@ -18741,7 +18770,7 @@ namespace SharpOnvifCommon.Onvif
 
         [System.Xml.Serialization.XmlArrayAttribute(Order=1)]
         [System.Xml.Serialization.XmlArrayItemAttribute("Text", IsNullable=false)]
-        public reasontext[] Reason
+        public Reasontext[] Reason
         {
             get { return this.reasonField; }
             set { this.reasonField = value; }
@@ -18762,7 +18791,7 @@ namespace SharpOnvifCommon.Onvif
         }
 
         [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public detail Detail
+        public Detail Detail
         {
             get { return this.detailField; }
             set { this.detailField = value; }
@@ -18795,13 +18824,13 @@ namespace SharpOnvifCommon.Onvif
             {
                 case "Code":
                     if (reader.NamespaceUri != Ns.SoapEnvelope) break;
-                    this.codeField = reader.ReadElementObject<faultcode>(() => new faultcode());
+                    this.codeField = reader.ReadElementObject<Faultcode>(() => new Faultcode());
                     return true;
                 case "Reason":
                     if (reader.NamespaceUri != Ns.SoapEnvelope) break;
                     reader.ReadWrappedArray(Ns.SoapEnvelope, "Text", () =>
                     {
-                        reader.Append(ref this.reasonField, reader.ReadElementObject<reasontext>(() => new reasontext()));
+                        reader.Append(ref this.reasonField, reader.ReadElementObject<Reasontext>(() => new Reasontext()));
                     }
                     );
                     return true;
@@ -18815,7 +18844,97 @@ namespace SharpOnvifCommon.Onvif
                     return true;
                 case "Detail":
                     if (reader.NamespaceUri != Ns.SoapEnvelope) break;
-                    this.detailField = reader.ReadElementObject<detail>(() => new detail());
+                    this.detailField = reader.ReadElementObject<Detail>(() => new Detail());
+                    return true;
+            }
+            return false;
+        }
+
+    }
+
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2003/05/soap-envelope")]
+    public partial class Faultcode : SharpOnvifCommon.Xml.XmlContract
+    {
+        private faultcodeEnum valueField;
+
+        private Subcode subcodeField;
+
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public faultcodeEnum Value
+        {
+            get { return this.valueField; }
+            set { this.valueField = value; }
+        }
+
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public Subcode Subcode
+        {
+            get { return this.subcodeField; }
+            set { this.subcodeField = value; }
+        }
+
+        protected override string XmlTypeName { get { return "faultcode"; } }
+
+        protected override string XmlTypeNamespace { get { return Ns.SoapEnvelope; } }
+
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteElementString(Ns.SoapEnvelope, "Value", EnumXml.ToXml(this.valueField));
+            writer.WriteElement(Ns.SoapEnvelope, "Subcode", this.subcodeField, Ns.SoapEnvelope, "subcode");
+        }
+
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            switch (reader.LocalName)
+            {
+                case "Value":
+                    if (reader.NamespaceUri != Ns.SoapEnvelope) break;
+                    this.valueField = EnumXml.ParsefaultcodeEnum(reader.ReadElementText());
+                    return true;
+                case "Subcode":
+                    if (reader.NamespaceUri != Ns.SoapEnvelope) break;
+                    this.subcodeField = reader.ReadElementObject<Subcode>(() => new Subcode());
+                    return true;
+            }
+            return false;
+        }
+
+    }
+
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2003/05/soap-envelope")]
+    public partial class Faultreason : SharpOnvifCommon.Xml.XmlContract
+    {
+        private Reasontext[] textField;
+
+        [System.Xml.Serialization.XmlElementAttribute("Text", Order=0)]
+        public Reasontext[] Text
+        {
+            get { return this.textField; }
+            set { this.textField = value; }
+        }
+
+        protected override string XmlTypeName { get { return "faultreason"; } }
+
+        protected override string XmlTypeNamespace { get { return Ns.SoapEnvelope; } }
+
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            if (this.textField != null)
+            {
+                for (int i = 0; i < this.textField.Length; i++)
+                {
+                    writer.WriteElement(Ns.SoapEnvelope, "Text", this.textField[i], Ns.SoapEnvelope, "reasontext");
+                }
+            }
+        }
+
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            switch (reader.LocalName)
+            {
+                case "Text":
+                    if (reader.NamespaceUri != Ns.SoapEnvelope) break;
+                    reader.Append(ref this.textField, reader.ReadElementObject<Reasontext>(() => new Reasontext()));
                     return true;
             }
             return false;
@@ -40677,6 +40796,69 @@ namespace SharpOnvifCommon.Onvif
 
     }
 
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2003/05/soap-envelope")]
+    public partial class Reasontext : SharpOnvifCommon.Xml.XmlContract
+    {
+        private string valueField;
+
+        private string langField;
+
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string Value
+        {
+            get { return this.valueField; }
+            set { this.valueField = value; }
+        }
+
+        /// <summary>
+        /// lang (as an attribute name) denotes an attribute whose value is a language code for the natural
+        /// language of the content of any element; its value is inherited. This name is reserved by virtue of
+        /// its definition in the XML specification.Notes Attempting to install the relevant ISO 2- and 3-letter
+        /// codes as the enumerated possible values is probably never going to be a realistic possibility. See
+        /// BCP 47 at http://www.rfc-editor.org/rfc/bcp/bcp47.txt and the IANA language subtag registry at
+        /// http://www.iana.org/assignments/language-subtag-registry for further information. The union allows
+        /// for the 'un-declaration' of xml:lang with the empty string.
+        /// </summary>
+        [System.Xml.Serialization.XmlAttributeAttribute(Form=System.Xml.Schema.XmlSchemaForm.Qualified, Namespace="http://www.w3.org/XML/1998/namespace")]
+        public string lang
+        {
+            get { return this.langField; }
+            set { this.langField = value; }
+        }
+
+        protected override string XmlTypeName { get { return "reasontext"; } }
+
+        protected override string XmlTypeNamespace { get { return Ns.SoapEnvelope; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAttributeString(Ns.i1998Namespace, "lang", this.langField);
+        }
+
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteText(this.valueField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            switch (reader.LocalName)
+            {
+                case "lang":
+                    if (reader.NamespaceUri != Ns.i1998Namespace) break;
+                    this.langField = reader.AttributeValue;
+                    return true;
+            }
+            return false;
+        }
+
+        protected override void ReadXmlText(SharpOnvifCommon.Xml.IXmlReader reader, string text)
+        {
+            this.valueField = text;
+        }
+
+    }
+
     /// <summary>
     /// Description of a receiver, including its token and configuration.
     /// </summary>
@@ -46207,6 +46389,55 @@ namespace SharpOnvifCommon.Onvif
         protected override void ReadXmlText(SharpOnvifCommon.Xml.IXmlReader reader, string text)
         {
             this.valueField = text;
+        }
+
+    }
+
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2003/05/soap-envelope")]
+    public partial class Subcode : SharpOnvifCommon.Xml.XmlContract
+    {
+        private System.Xml.XmlQualifiedName valueField;
+
+        private Subcode subcode1Field;
+
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public System.Xml.XmlQualifiedName Value
+        {
+            get { return this.valueField; }
+            set { this.valueField = value; }
+        }
+
+        [System.Xml.Serialization.XmlElementAttribute("Subcode", Order=1)]
+        public Subcode Subcode1
+        {
+            get { return this.subcode1Field; }
+            set { this.subcode1Field = value; }
+        }
+
+        protected override string XmlTypeName { get { return "subcode"; } }
+
+        protected override string XmlTypeNamespace { get { return Ns.SoapEnvelope; } }
+
+        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteElementQualifiedName(Ns.SoapEnvelope, "Value", this.valueField);
+            writer.WriteElement(Ns.SoapEnvelope, "Subcode", this.subcode1Field, Ns.SoapEnvelope, "subcode");
+        }
+
+        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            switch (reader.LocalName)
+            {
+                case "Value":
+                    if (reader.NamespaceUri != Ns.SoapEnvelope) break;
+                    this.valueField = reader.ReadElementQualifiedName();
+                    return true;
+                case "Subcode":
+                    if (reader.NamespaceUri != Ns.SoapEnvelope) break;
+                    this.subcode1Field = reader.ReadElementObject<Subcode>(() => new Subcode());
+                    return true;
+            }
+            return false;
         }
 
     }
@@ -53068,125 +53299,6 @@ namespace SharpOnvifCommon.Onvif
 
     }
 
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2003/05/soap-envelope")]
-    public partial class detail : SharpOnvifCommon.Xml.XmlContract
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override string XmlTypeName { get { return "detail"; } }
-
-        protected override string XmlTypeNamespace { get { return Ns.SoapEnvelope; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
-        {
-            reader.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2003/05/soap-envelope")]
-    public partial class faultcode : SharpOnvifCommon.Xml.XmlContract
-    {
-        private faultcodeEnum valueField;
-
-        private subcode subcodeField;
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public faultcodeEnum Value
-        {
-            get { return this.valueField; }
-            set { this.valueField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public subcode Subcode
-        {
-            get { return this.subcodeField; }
-            set { this.subcodeField = value; }
-        }
-
-        protected override string XmlTypeName { get { return "faultcode"; } }
-
-        protected override string XmlTypeNamespace { get { return Ns.SoapEnvelope; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
-        {
-            writer.WriteElementString(Ns.SoapEnvelope, "Value", EnumXml.ToXml(this.valueField));
-            writer.WriteElement(Ns.SoapEnvelope, "Subcode", this.subcodeField, Ns.SoapEnvelope, "subcode");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Value":
-                    if (reader.NamespaceUri != Ns.SoapEnvelope) break;
-                    this.valueField = EnumXml.ParsefaultcodeEnum(reader.ReadElementText());
-                    return true;
-                case "Subcode":
-                    if (reader.NamespaceUri != Ns.SoapEnvelope) break;
-                    this.subcodeField = reader.ReadElementObject<subcode>(() => new subcode());
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2003/05/soap-envelope")]
-    public partial class faultreason : SharpOnvifCommon.Xml.XmlContract
-    {
-        private reasontext[] textField;
-
-        [System.Xml.Serialization.XmlElementAttribute("Text", Order=0)]
-        public reasontext[] Text
-        {
-            get { return this.textField; }
-            set { this.textField = value; }
-        }
-
-        protected override string XmlTypeName { get { return "faultreason"; } }
-
-        protected override string XmlTypeNamespace { get { return Ns.SoapEnvelope; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
-        {
-            if (this.textField != null)
-            {
-                for (int i = 0; i < this.textField.Length; i++)
-                {
-                    writer.WriteElement(Ns.SoapEnvelope, "Text", this.textField[i], Ns.SoapEnvelope, "reasontext");
-                }
-            }
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Text":
-                    if (reader.NamespaceUri != Ns.SoapEnvelope) break;
-                    reader.Append(ref this.textField, reader.ReadElementObject<reasontext>(() => new reasontext()));
-                    return true;
-            }
-            return false;
-        }
-
-    }
-
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2005/05/xmlmime")]
     public partial class hexBinary : SharpOnvifCommon.Xml.XmlContract
     {
@@ -53237,118 +53349,6 @@ namespace SharpOnvifCommon.Onvif
         protected override void ReadXmlText(SharpOnvifCommon.Xml.IXmlReader reader, string text)
         {
             this.valueField = reader.FromHexString(text);
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2003/05/soap-envelope")]
-    public partial class reasontext : SharpOnvifCommon.Xml.XmlContract
-    {
-        private string valueField;
-
-        private string langField;
-
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string Value
-        {
-            get { return this.valueField; }
-            set { this.valueField = value; }
-        }
-
-        /// <summary>
-        /// lang (as an attribute name) denotes an attribute whose value is a language code for the natural
-        /// language of the content of any element; its value is inherited. This name is reserved by virtue of
-        /// its definition in the XML specification.Notes Attempting to install the relevant ISO 2- and 3-letter
-        /// codes as the enumerated possible values is probably never going to be a realistic possibility. See
-        /// BCP 47 at http://www.rfc-editor.org/rfc/bcp/bcp47.txt and the IANA language subtag registry at
-        /// http://www.iana.org/assignments/language-subtag-registry for further information. The union allows
-        /// for the 'un-declaration' of xml:lang with the empty string.
-        /// </summary>
-        [System.Xml.Serialization.XmlAttributeAttribute(Form=System.Xml.Schema.XmlSchemaForm.Qualified, Namespace="http://www.w3.org/XML/1998/namespace")]
-        public string lang
-        {
-            get { return this.langField; }
-            set { this.langField = value; }
-        }
-
-        protected override string XmlTypeName { get { return "reasontext"; } }
-
-        protected override string XmlTypeNamespace { get { return Ns.SoapEnvelope; } }
-
-        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
-        {
-            writer.WriteAttributeString(Ns.i1998Namespace, "lang", this.langField);
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
-        {
-            writer.WriteText(this.valueField);
-        }
-
-        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "lang":
-                    if (reader.NamespaceUri != Ns.i1998Namespace) break;
-                    this.langField = reader.AttributeValue;
-                    return true;
-            }
-            return false;
-        }
-
-        protected override void ReadXmlText(SharpOnvifCommon.Xml.IXmlReader reader, string text)
-        {
-            this.valueField = text;
-        }
-
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2003/05/soap-envelope")]
-    public partial class subcode : SharpOnvifCommon.Xml.XmlContract
-    {
-        private System.Xml.XmlQualifiedName valueField;
-
-        private subcode subcodeField;
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public System.Xml.XmlQualifiedName Value
-        {
-            get { return this.valueField; }
-            set { this.valueField = value; }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public subcode Subcode
-        {
-            get { return this.subcodeField; }
-            set { this.subcodeField = value; }
-        }
-
-        protected override string XmlTypeName { get { return "subcode"; } }
-
-        protected override string XmlTypeNamespace { get { return Ns.SoapEnvelope; } }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
-        {
-            writer.WriteElementQualifiedName(Ns.SoapEnvelope, "Value", this.valueField);
-            writer.WriteElement(Ns.SoapEnvelope, "Subcode", this.subcodeField, Ns.SoapEnvelope, "subcode");
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
-        {
-            switch (reader.LocalName)
-            {
-                case "Value":
-                    if (reader.NamespaceUri != Ns.SoapEnvelope) break;
-                    this.valueField = reader.ReadElementQualifiedName();
-                    return true;
-                case "Subcode":
-                    if (reader.NamespaceUri != Ns.SoapEnvelope) break;
-                    this.subcodeField = reader.ReadElementObject<subcode>(() => new subcode());
-                    return true;
-            }
-            return false;
         }
 
     }

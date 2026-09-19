@@ -24,6 +24,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SharpOnvifCommon.Security;
+using SharpOnvifCommon.Soap;
+using SharpOnvifCommon.Xml;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -35,8 +37,7 @@ using System.Security.Principal;
 using System.Text.Encodings.Web;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
-using System.Xml.Serialization;
+using System.Xml;
 using System.Buffers;
 
 namespace SharpOnvifServer.Security
@@ -137,7 +138,7 @@ namespace SharpOnvifServer.Security
                             // client that has not been told which schemes this device kept.
                             SoapDigestAuth token =
                                 Options.Onvif.Authentication.HasFlag(DigestAuthentication.WsUsernameToken)
-                                    ? await GetSecurityHeaderFromSoapEnvelopeAsync(Request).ConfigureAwait(false)
+                                    ? await GetSecurityHeaderFromSoapEnvelopeAsync().ConfigureAwait(false)
                                     : null;
 
                             if (token != null)
@@ -201,7 +202,7 @@ namespace SharpOnvifServer.Security
             
             if(Options.Onvif.Authentication.HasFlag(DigestAuthentication.WsUsernameToken))
             {
-                SoapDigestAuth token = await GetSecurityHeaderFromSoapEnvelopeAsync(Request).ConfigureAwait(false);
+                SoapDigestAuth token = await GetSecurityHeaderFromSoapEnvelopeAsync().ConfigureAwait(false);
                 if (token != null)
                 {
                     try
@@ -489,40 +490,43 @@ namespace SharpOnvifServer.Security
             }
         }
 
-        private static async Task<SoapDigestAuth> GetSecurityHeaderFromSoapEnvelopeAsync(HttpRequest request)
+        /// <summary>
+        /// The credentials carried in the SOAP Security header, or null when the request carries
+        /// none that can be checked.
+        /// </summary>
+        /// <remarks>
+        /// Read straight off the body with an <see cref="XmlReader"/>, the way the rest of the
+        /// library reads Onvif messages. The whole body is waited for first: a body that arrives
+        /// in more than one read used to be parsed truncated, which threw rather than
+        /// authenticated.
+        /// </remarks>
+        private async Task<SoapDigestAuth> GetSecurityHeaderFromSoapEnvelopeAsync()
         {
-            ReadResult requestBodyInBytes = await request.BodyReader.ReadAsync().ConfigureAwait(false);
-            string body = Encoding.UTF8.GetString(requestBodyInBytes.Buffer.ToArray());
-            request.BodyReader.AdvanceTo(requestBodyInBytes.Buffer.Start, requestBodyInBytes.Buffer.End);
+            byte[] body = await ReadRequestBodyAsync().ConfigureAwait(false);
+            if (body == null || body.Length == 0) return null;
 
-            SoapDigestAuth security = null;
-            if (body?.Contains(@"http://www.w3.org/2003/05/soap-envelope") == true)
+            UsernameToken token;
+            try
             {
-                XNamespace ns = "http://www.w3.org/2003/05/soap-envelope";
-                var soapEnvelope = XDocument.Parse(body);
-                var headers = soapEnvelope.Descendants(ns + "Header").ToList();
-
-                foreach (var header in headers)
+                using (var stream = new MemoryStream(body, false))
+                using (XmlReader reader = SoapEnvelope.CreateReader(stream))
                 {
-                    var securityElement = header.Descendants().FirstOrDefault(x => x.Name.LocalName == "Security");
-                    if (securityElement != null)
-                    {
-                        var userNameTokenElement = securityElement.Descendants().FirstOrDefault(x => x.Name.LocalName == "UsernameToken");
-                        if (userNameTokenElement != null)
-                        {
-                            var serializer = new XmlSerializer(typeof(UsernameToken));
-                            using (var str = new System.IO.MemoryStream(Encoding.UTF8.GetBytes(userNameTokenElement.ToString())))
-                            {
-                                UsernameToken xml = (UsernameToken)serializer.Deserialize(str);
-                                security = new SoapDigestAuth(xml.Username, xml.Password.Text, xml.Nonce.Text, xml.Created);
-                            }
-                            break;
-                        }
-                    }
+                    token = WsUsernameToken.Read(reader);
                 }
             }
+            catch (XmlException)
+            {
+                // A body that is not well-formed XML carries no credentials to check. The
+                // endpoint answers it with a fault of its own; failing here would turn the same
+                // request into an error out of the authentication handler instead.
+                return null;
+            }
 
-            return security;
+            // A token missing the password or the nonce cannot be checked against anything, so it
+            // is no more a credential than an absent one.
+            if (token == null || token.Password == null || token.Nonce == null) return null;
+
+            return new SoapDigestAuth(token.Username, token.Password.Text, token.Nonce.Text, token.Created);
         }
     }
 }

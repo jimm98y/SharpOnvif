@@ -159,7 +159,15 @@ namespace SharpOnvif.Tests
             string slowId = manager.AddSubscription(slow);
             string otherId = manager.AddSubscription(new Subscription());
 
-            Task removing = Task.Run(() => manager.RemoveSubscription(slowId));
+            // A thread of its own rather than the pool. The removal has to be running within the
+            // ten seconds allowed below, and a queued work item is only guaranteed to start once
+            // the pool has a thread free - which, in a suite whose other tests sit blocked in
+            // waits, it need not have. The pool grows by about a thread a second when it is out,
+            // so the wait below expires before the removal has begun and the test reports a
+            // Detach that was never called. Nothing in the manager is slow; only the scheduling
+            // was.
+            var removing = new Thread(() => manager.RemoveSubscription(slowId)) { IsBackground = true };
+            removing.Start();
 
             Assert.IsTrue(slow.DetachEntered.Wait(TimeSpan.FromSeconds(10)), "Detach was never called");
 
@@ -168,7 +176,7 @@ namespace SharpOnvif.Tests
             Assert.IsNotNull(manager.AddSubscription(new Subscription()));
 
             slow.ReleaseDetach.Set();
-            Assert.IsTrue(removing.Wait(TimeSpan.FromSeconds(10)));
+            Assert.IsTrue(removing.Join(TimeSpan.FromSeconds(10)));
         }
     }
 }

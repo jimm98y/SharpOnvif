@@ -69,13 +69,19 @@ namespace SharpOnvif.Tests
         [TestMethod]
         public void NamesThePrefixesItDeclares()
         {
-            // The same two namespaces, reachable by name rather than only by prefix.
-            Assert.AreEqual("http://www.onvif.org/ver10/schema", OnvifXmlNamespaces.OnvifSchema);
-            Assert.AreEqual("http://www.onvif.org/ver10/topics", OnvifXmlNamespaces.OnvifTopics);
-
+            // Prefix and namespace together, because either on its own is satisfied by a prologue
+            // that binds the right prefixes to the wrong namespaces. The two namespaces were
+            // compared against the constants they are declared in, which is a comparison of a
+            // constant with itself: the compiler folds it away and the assertion says nothing.
             CollectionAssert.AreEquivalent(
-                new[] { "tt", "tns1" },
-                OnvifXmlNamespaces.EnvelopePrologue.Select(d => d.Prefix).ToArray());
+                new[]
+                {
+                    "tt=http://www.onvif.org/ver10/schema",
+                    "tns1=http://www.onvif.org/ver10/topics",
+                },
+                OnvifXmlNamespaces.EnvelopePrologue
+                    .Select(d => d.Prefix + "=" + d.Namespace)
+                    .ToArray());
         }
 
         [TestMethod]

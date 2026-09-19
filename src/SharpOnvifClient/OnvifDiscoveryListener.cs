@@ -1,4 +1,4 @@
-// SharpOnvif
+﻿// SharpOnvif
 // Copyright (C) 2026 Lukas Volf
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -75,6 +75,7 @@ namespace SharpOnvifClient
         private readonly object _syncRoot = new object();
         private readonly List<UdpClient> _clients = new List<UdpClient>();
         private readonly List<Task> _listeners = new List<Task>();
+        private readonly List<OnvifDiscoveryInterface> _listening = new List<OnvifDiscoveryInterface>();
         private bool _disposed;
 
         /// <summary>Raised when a device announces that it has joined the network.</summary>
@@ -95,6 +96,28 @@ namespace SharpOnvifClient
         /// Per listener, so two of them in one application can report to different places.
         /// </summary>
         public ILog Logger { get; set; }
+
+        /// <summary>
+        /// The interfaces this listener has a socket open on: what <see cref="Start"/> managed,
+        /// not what it was asked for. Empty before starting, and again once disposed.
+        /// </summary>
+        /// <remarks>
+        /// An interface that cannot carry multicast is skipped rather than failing the whole
+        /// listener, so a listener can be running and hearing less than the caller expects - or,
+        /// on a machine where every adapter was refused, hearing nothing at all while looking
+        /// perfectly alive. The <see cref="Failed"/> event says what went wrong one interface at a
+        /// time; this says what is left.
+        /// </remarks>
+        public IReadOnlyList<OnvifDiscoveryInterface> ListeningOn
+        {
+            get
+            {
+                lock (_syncRoot)
+                {
+                    return _listening.ToArray();
+                }
+            }
+        }
 
         /// <summary>
         /// Starts listening on every interface that can carry multicast, IPv4 and IPv6 alike.
@@ -185,6 +208,7 @@ namespace SharpOnvifClient
             lock (_syncRoot)
             {
                 _clients.Add(client);
+                _listening.Add(nic);
             }
 
             CancellationToken token = _cts.Token;
@@ -318,6 +342,7 @@ namespace SharpOnvifClient
                 clients = new List<UdpClient>(_clients);
                 _listeners.Clear();
                 _clients.Clear();
+                _listening.Clear();
             }
 
             // Bounded: a listener that will not stop must not hold up the application that is
