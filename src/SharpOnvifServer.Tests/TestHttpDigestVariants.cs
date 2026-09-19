@@ -1,4 +1,4 @@
-// SharpOnvif
+﻿// SharpOnvif
 // Copyright (C) 2026 Lukas Volf
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -138,7 +138,7 @@ namespace SharpOnvif.Tests
                 $"the device challenged with {named.Groups[1].Value} rather than {algorithm}");
         }
 
-        [DynamicData(nameof(EveryVariant), DynamicDataSourceType.Method)]
+        [DynamicData(nameof(EveryVariant))]
         [TestMethod]
         public async Task AuthenticatesWithEveryAlgorithmAndQop(string algorithm, string qop)
         {
@@ -155,7 +155,7 @@ namespace SharpOnvif.Tests
                 $"{algorithm} with qop={qop} did not authenticate");
         }
 
-        [DynamicData(nameof(EveryVariant), DynamicDataSourceType.Method)]
+        [DynamicData(nameof(EveryVariant))]
         [TestMethod]
         public async Task RefusesTheWrongPasswordWithEveryAlgorithmAndQop(string algorithm, string qop)
         {
@@ -168,7 +168,7 @@ namespace SharpOnvif.Tests
                 $"{algorithm} with qop={qop} accepted the wrong password");
         }
 
-        [DynamicData(nameof(EveryVariant), DynamicDataSourceType.Method)]
+        [DynamicData(nameof(EveryVariant))]
         [TestMethod]
         public async Task KeepsAuthenticatingAcrossCallsWithEveryAlgorithmAndQop(string algorithm, string qop)
         {
