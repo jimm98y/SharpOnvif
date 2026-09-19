@@ -99,11 +99,39 @@ internal static class CsharpNaming
     /// </param>
     public static string TypeName(string localName, string? prefix)
     {
-        string identifier = Identifier(localName);
+        string identifier = Capitalised(Identifier(localName));
 
         return prefix is { Length: > 0 } && FrameworkTypeNames.Contains(identifier)
             ? prefix + identifier
             : identifier;
+    }
+
+    /// <summary>
+    /// Gives a capital to a type name that is nothing but lower-case ASCII letters, because C#
+    /// has reserved that shape for itself: CS8981 warns that such a name may become a keyword of
+    /// the language. A consumer building with warnings as errors cannot compile the output
+    /// otherwise, and a generated file is not somewhere a warning can be suppressed by hand.
+    /// <para>
+    /// The SOAP 1.2 envelope schema names five of its types that way - detail, faultcode,
+    /// faultreason, reasontext and subcode - and no other schema here does.
+    /// </para>
+    /// <para>
+    /// Only the first letter, and only when nothing else in the name distinguishes it: the
+    /// narrowest change that answers the warning. Casing is otherwise still left alone, because a
+    /// schema's names are part of the public surface. The name on the wire does not move either
+    /// way - the type carries it in XmlTypeName, the way a renamed framework collision does.
+    /// </para>
+    /// </summary>
+    private static string Capitalised(string identifier)
+    {
+        if (identifier.Length == 0) return identifier;
+
+        foreach (char c in identifier)
+        {
+            if (!char.IsAsciiLetterLower(c)) return identifier;
+        }
+
+        return char.ToUpperInvariant(identifier[0]) + identifier.Substring(1);
     }
 
     /// <summary>Escapes a C# keyword so it can still be used as an identifier.</summary>
