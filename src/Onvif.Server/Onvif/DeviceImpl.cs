@@ -28,6 +28,8 @@ using SharpOnvifServer.DeviceMgmt;
 using System;
 using System.Linq;
 using SharpOnvifCommon.Onvif;
+using SharpOnvifServer;
+using OnvifService.Repository;
 
 namespace OnvifService.Onvif
 {
@@ -394,20 +396,22 @@ namespace OnvifService.Onvif
 
         public override GetUsersResponse GetUsers(GetUsersRequest request)
         {
-            string userName = _configuration.GetValue("UserRepository:UserName", "");
-            if (string.IsNullOrWhiteSpace(userName))
-                userName = "admin"; 
+            string[] userNames = _configuration.GetSection(UserRepository.USERS_SECTION)
+                .Get<UserInfo[]>()
+                ?.Where(x => !string.IsNullOrWhiteSpace(x.UserName))
+                .Select(x => x.UserName)
+                .ToArray();
+
+            if (userNames == null || userNames.Length == 0)
+                userNames = new string[] { "admin" };
 
             return new GetUsersResponse()
             {
-                User = new User[]
+                User = userNames.Select(x => new User()
                 {
-                    new User()
-                    {
-                        Username = userName,
-                        UserLevel = UserLevel.Administrator
-                    }
-                }
+                    Username = x,
+                    UserLevel = UserLevel.Administrator
+                }).ToArray()
             };
         }
 
