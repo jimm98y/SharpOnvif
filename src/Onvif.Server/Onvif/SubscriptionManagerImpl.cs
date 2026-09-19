@@ -28,10 +28,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Serialization;
 using SharpOnvifCommon.Onvif;
+using SharpOnvifCommon.Soap;
+using SharpOnvifCommon.Xml;
 using SharpOnvifServer;
 
 namespace OnvifService.Onvif
@@ -52,6 +54,9 @@ namespace OnvifService.Onvif
         /// the round trip back to the client and its next call.
         /// </summary>
         private static readonly TimeSpan ExpirationGrace = TimeSpan.FromSeconds(10);
+
+        /// <summary>The namespace a Notify and the messages it carries are named in.</summary>
+        private const string WsBaseNotification = "http://docs.oasis-open.org/wsn/b-2";
 
         // The topics this subscriber asked for. A device that sends everything else as well is
         // not conformant, and floods a client that only wanted to hear about motion.
@@ -181,42 +186,66 @@ namespace OnvifService.Onvif
 
         private void SendBasicEventNotification(NotificationMessage message)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(NotificationMessageHolderType));
-            using (StringWriter writer = new StringWriter())
-            {
-                var msg = new NotificationMessageHolderType()
+            var notify = new NotifyRequest(
+                new[]
                 {
-                    Topic = new TopicExpressionType()
+                    new NotificationMessageHolderType()
                     {
-                        Dialect = OnvifEvents.TopicDialectConcreteSet,
-                        Any = OnvifEvents.CreateTopicContent(message)
-                    },
-                    Message = OnvifEvents.CreateMessageElement(message)
-                };
-
-                serializer.Serialize(writer, msg);
-
-                string content = writer.ToString();
-
-                var httpClient = _httpClientFactory.CreateClient();
-                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Post, _notificationEndpoint)
-                {
-                    Content = new StringContent(content, Encoding.UTF8, "application/soap+xml")
-                };
-
-                try
-                {
-                    var httpResponseMessage = httpClient.Send(httpRequestMessage);
-
-                    if (httpResponseMessage.IsSuccessStatusCode)
-                    {
-                        _logger.LogDebug($"{nameof(SubscriptionManagerImpl)}: Sent Basic event to {UntrustedText.Printable(_notificationEndpoint)}\r\n{content}\r\n");
+                        Topic = new TopicExpressionType()
+                        {
+                            Dialect = OnvifEvents.TopicDialectConcreteSet,
+                            Any = OnvifEvents.CreateTopicContent(message)
+                        },
+                        Message = OnvifEvents.CreateMessageElement(message)
                     }
-                }
-                catch(Exception ex)
+                },
+                null);
+
+            // A Basic subscription is delivered as a wsnt:Notify in a SOAP envelope, naming the
+            // action the way any other call does, because the subscriber's address is a
+            // NotificationConsumer and Notify is an operation on it.
+            //
+            // Reflecting over the holder type sent a bare NotificationMessageHolderType element
+            // under a soap+xml content type instead - not a SOAP message at all, and carrying no
+            // action to dispatch on. This library's own reader is lenient enough to have found
+            // the event in it anyway, so what this fixes is what a consumer that is not this
+            // library does with it.
+            string content = SoapMessageCodec.Instance.WriteEnvelope(
+                OnvifXmlNamespaces.EnvelopePrologue,
+                null,
+                writer =>
                 {
-                    _logger.LogError($"{nameof(SubscriptionManagerImpl)}: Failed to send Basic event to {UntrustedText.Printable(_notificationEndpoint)} because of an exception: {ex.Message}.");
+                    writer.WriteStartElement(WsBaseNotification, "Notify");
+                    writer.WriteContent(notify);
+                    writer.WriteEndElement();
+                });
+
+            var httpClient = _httpClientFactory.CreateClient();
+            var httpRequestMessage = new HttpRequestMessage(HttpMethod.Post, _notificationEndpoint)
+            {
+                Content = new StringContent(content, new UTF8Encoding(false)),
+            };
+
+            // The action travels as a Content-Type parameter, which is what the consumer
+            // dispatches on.
+            var contentType = new MediaTypeHeaderValue(SoapEnvelope.ContentType);
+            contentType.CharSet = "utf-8";
+            contentType.Parameters.Add(
+                new NameValueHeaderValue("action", "\"" + SharpOnvifServer.Events.SoapActions.Notify + "\""));
+            httpRequestMessage.Content.Headers.ContentType = contentType;
+
+            try
+            {
+                var httpResponseMessage = httpClient.Send(httpRequestMessage);
+
+                if (httpResponseMessage.IsSuccessStatusCode)
+                {
+                    _logger.LogDebug($"{nameof(SubscriptionManagerImpl)}: Sent Basic event to {UntrustedText.Printable(_notificationEndpoint)}\r\n{content}\r\n");
                 }
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError($"{nameof(SubscriptionManagerImpl)}: Failed to send Basic event to {UntrustedText.Printable(_notificationEndpoint)} because of an exception: {ex.Message}.");
             }
         }
 
