@@ -21,21 +21,22 @@ Add Digest authentication for Onvif:
 builder.Services.AddSingleton<IUserRepository, UserRepository>();
 builder.Services.AddOnvifDigestAuthentication();
 ```
-Implement `IUserRepository` to provide user verification and configure your user:
+Implement `IUserRepository` to provide user verification and configure your users. A device can
+have as many users as you like - the repository is asked for one by name, so where they are kept is
+up to you:
 ```cs
 public class UserRepository : IUserRepository
 {
-    public string UserName { get; set; } = "admin";
-    public string Password { get; set; } = "password";
-
-    public Task<UserInfo> GetUser(string userName)
+    public IList<UserInfo> Users { get; } = new List<UserInfo>()
     {
-        if (string.Compare(userName, UserName, false) == 0)
-        {
-            return Task.FromResult(new UserInfo() { UserName = userName, Password = Password });
-        }
+        new UserInfo("admin", "password"),
+        new UserInfo("operator", "secret")
+    };
 
-        return Task.FromResult((UserInfo)null);
+    public UserInfo GetUser(string userName)
+    {
+        // Onvif user names are case sensitive
+        return Users.FirstOrDefault(x => string.Equals(x.UserName, userName, StringComparison.Ordinal));
     }
 
     public Task<UserInfo> GetUserAsync(string userName)
@@ -43,17 +44,30 @@ public class UserRepository : IUserRepository
         return Task.FromResult(GetUser(userName));
     }
 
-    // used only when userhash=TRUE - see the examples for an implementation
+    // used only when userhash=TRUE: the client sends H(user:realm) instead of the user name
     public UserInfo GetUserByHash(string algorithm, string userName, string realm)
     {
-        throw new NotImplementedException();
+        return Users.FirstOrDefault(x => string.Equals(
+            HttpDigestAuthentication.CreateUserNameHashRFC7616(algorithm, x.UserName, realm),
+            userName,
+            StringComparison.OrdinalIgnoreCase));
     }
 
     public Task<UserInfo> GetUserByHashAsync(string algorithm, string userName, string realm)
     {
-        throw new NotImplementedException();
+        return Task.FromResult(GetUserByHash(algorithm, userName, realm));
     }
 }
+```
+Set `UserInfo.IsPasswordAlreadyHashed` when the repository stores HA1 rather than the plaintext
+password. The `Onvif.Server` example keeps its users in the `Users` section of `appsettings.json`:
+```json
+"Users": [
+  {
+    "UserName": "admin",
+    "Password": "password"
+  }
+]
 ```
 Optionally, add Onvif discovery to make your service discoverable on the network:
 ```cs

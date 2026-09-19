@@ -22,12 +22,25 @@
 using Microsoft.Extensions.Configuration;
 using SharpOnvifCommon.Security;
 using SharpOnvifServer;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace OnvifService.Repository
 {
+    /// <summary>
+    /// Users backed by the "Users" section of appsettings.json:
+    /// <code>
+    /// "Users": [ { "UserName": "admin", "Password": "password" } ]
+    /// </code>
+    /// </summary>
     public class UserRepository : IUserRepository
     {
+        /// <summary>
+        /// Configuration section holding the users.
+        /// </summary>
+        public const string USERS_SECTION = "Users";
+
         private readonly IConfiguration _configuration;
 
         public UserRepository(IConfiguration configuration)
@@ -37,10 +50,14 @@ namespace OnvifService.Repository
 
         public UserInfo GetUser(string userName)
         {
-            if (string.Compare(userName, _configuration.GetValue<string>("UserRepository:UserName"), false) == 0)
+            if (string.IsNullOrEmpty(userName))
+                return null;
+
+            foreach (UserInfo user in GetUsers())
             {
-                string password = _configuration.GetValue<string>("UserRepository:Password");
-                return new UserInfo() { UserName = userName, Password = password };
+                // Onvif user names are case sensitive
+                if (string.Equals(user.UserName, userName, StringComparison.Ordinal))
+                    return user;
             }
 
             return null;
@@ -60,12 +77,15 @@ namespace OnvifService.Repository
         /// <returns></returns>
         public UserInfo GetUserByHash(string algorithm, string userName, string realm)
         {
-            // TODO: store this in the users database and use it for lookups
-            if (string.Compare(HttpDigestAuthentication.CreateUserNameHashRFC7616(algorithm, _configuration.GetValue<string>("UserRepository:UserName"), realm), userName, true) == 0)
+            if (string.IsNullOrEmpty(userName))
+                return null;
+
+            // TODO: store the hashes in the users database and use them for lookups
+            foreach (UserInfo user in GetUsers())
             {
-                string user = _configuration.GetValue<string>("UserRepository:UserName");
-                string password = _configuration.GetValue<string>("UserRepository:Password");
-                return new UserInfo() { UserName = user, Password = password };
+                string hash = HttpDigestAuthentication.CreateUserNameHashRFC7616(algorithm, user.UserName, realm);
+                if (string.Equals(hash, userName, StringComparison.OrdinalIgnoreCase))
+                    return user;
             }
 
             return null;
@@ -74,6 +94,16 @@ namespace OnvifService.Repository
         public Task<UserInfo> GetUserByHashAsync(string algorithm, string userName, string realm)
         {
             return Task.FromResult(GetUserByHash(algorithm, userName, realm));
+        }
+
+        /// <summary>
+        /// All configured users. Read on every lookup so that editing appsettings.json takes effect
+        /// without a restart.
+        /// </summary>
+        /// <returns>Configured users, never null.</returns>
+        public IReadOnlyList<UserInfo> GetUsers()
+        {
+            return _configuration.GetSection(USERS_SECTION).Get<UserInfo[]>() ?? Array.Empty<UserInfo>();
         }
     }
 }
