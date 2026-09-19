@@ -37,12 +37,29 @@ internal sealed record GeneratedFile(string Path, string Content)
     /// timestamps stable, so an incremental build does not rebuild every project after a run
     /// that changed nothing.
     /// </summary>
+    /// <remarks>
+    /// With CRLF line endings, which is how the repository stores the generated sources, and the
+    /// same on every platform: the emitters build their text with "\n" so that nothing depends on
+    /// where the generator ran, and what a line ends with is decided once, here.
+    /// <para>
+    /// Writing LF meant the comparison below never matched on a Windows checkout, so every run
+    /// rewrote all hundred-odd files whether or not anything about them had changed - which both
+    /// lost the incremental build this method exists for and buried a real change in a diff of
+    /// the entire output.
+    /// </para>
+    /// </remarks>
     public bool WriteIfChanged()
     {
-        if (File.Exists(Path) && File.ReadAllText(Path) == Content) return false;
+        string content = WithCrLf(Content);
+
+        if (File.Exists(Path) && File.ReadAllText(Path) == content) return false;
 
         Directory.CreateDirectory(System.IO.Path.GetDirectoryName(Path)!);
-        File.WriteAllText(Path, Content);
+        File.WriteAllText(Path, content);
         return true;
     }
+
+    /// <summary>Every line ending as CRLF, whatever the emitters happened to produce.</summary>
+    private static string WithCrLf(string content) =>
+        content.Replace("\r\n", "\n").Replace("\n", "\r\n");
 }
