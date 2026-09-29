@@ -458,6 +458,25 @@ internal sealed class DataContractEmitter
         EmitReadAttribute(writer, @class, hasBase);
         EmitReadElement(writer, @class, hasBase);
         EmitReadText(writer, @class, hasBase);
+        EmitEndRead(writer, @class, hasBase);
+    }
+
+    /// <summary>
+    /// Cuts the arrays read into this type to the items they hold. The reader grows them with
+    /// room to spare, which is what keeps reading a long array linear.
+    /// </summary>
+    private void EmitEndRead(CSharpWriter writer, CsClass @class, bool hasBase)
+    {
+        var arrays = @class.Members.Where(m => m.IsArray).ToList();
+        if (arrays.Count == 0) return;
+
+        writer.Line($"protected override void EndXmlRead({Runtime}.IXmlReader reader)");
+        using (writer.Braces())
+        {
+            if (hasBase) writer.Line("base.EndXmlRead(reader);");
+            foreach (var member in arrays) writer.Line($"reader.Trim(ref this.{member.FieldName});");
+        }
+        writer.Line();
     }
 
     private void EmitWriteAttributes(CSharpWriter writer, CsClass @class, bool hasBase)

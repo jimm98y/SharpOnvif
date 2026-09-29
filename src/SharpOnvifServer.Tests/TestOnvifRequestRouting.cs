@@ -189,6 +189,22 @@ namespace SharpOnvif.Tests
         }
 
         [TestMethod]
+        public async Task AnswersARequestThatIsNotXmlAsTheSendersFault()
+        {
+            // Malformed XML is the caller's mistake. It was answered as the device's own - a 500,
+            // and an error in the log for every request anyone chose to malform.
+            string envelope =
+                "<?xml version=\"1.0\"?>" +
+                "<s:Envelope xmlns:s=\"http://www.w3.org/2003/05/soap-envelope\">" +
+                "<s:Body><GetDeviceInformation xmlns=\"http://www.onvif.org/ver10/device/wsdl\"></s:Body></s:Envelope>";
+
+            var (status, body) = await PostAsync(DevicePath, envelope, DeviceInformationAction);
+
+            Assert.AreEqual(HttpStatusCode.BadRequest, status, body);
+            StringAssert.Contains(body, "Sender");
+        }
+
+        [TestMethod]
         public async Task FindsTheOperationFromAWsAddressingHeader()
         {
             // What Onvif Device Manager sends: no action on the Content-Type, one in the header.

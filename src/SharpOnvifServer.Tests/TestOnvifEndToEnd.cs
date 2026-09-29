@@ -43,6 +43,9 @@ namespace SharpOnvif.Tests
     {
         private const string EndpointPath = "/onvif/device_service";
 
+        /// <summary>What an implementation's exception carries that a caller must not see.</summary>
+        private const string Secret = "hunter2";
+
         private static WebApplication _app;
         private static string _endpoint;
 
@@ -91,6 +94,12 @@ namespace SharpOnvif.Tests
                 throw new SharpOnvifServer.OnvifServerFaultException(
                     "Receiver", new[] { "Action", "EmptyScope" }, SharpOnvifServer.OnvifErrors.Namespace,
                     "Scope list is empty.", System.Net.HttpStatusCode.BadRequest);
+            }
+
+            /// <summary>Fails the way an implementation's own bug or dependency does.</summary>
+            public override SharpOnvifServer.DeviceMgmt.GetNTPResponse GetNTP()
+            {
+                throw new InvalidOperationException("Server=db.internal;Password=" + Secret);
             }
 
             public override SharpOnvifServer.DeviceMgmt.GetSystemDateAndTimeResponse GetSystemDateAndTime()
@@ -282,6 +291,21 @@ namespace SharpOnvif.Tests
                 CollectionAssert.AreEqual(new[] { "Action", "EmptyScope" }, fault.Fault.Subcodes.ToArray(),
                     "the subcodes have to arrive nested, outermost first");
                 Assert.AreEqual("EmptyScope", fault.Fault.Subcode);
+            }
+        }
+
+        [TestMethod]
+        public async Task DoesNotTellTheCallerWhatAnUnexpectedExceptionSaid()
+        {
+            // An exception's message is for the device's maintainer. It was the fault's reason, so
+            // a connection string or a path in it went to whoever sent the request.
+            using (var device = new SharpOnvifClient.DeviceMgmt.DeviceClient(_endpoint))
+            {
+                var fault = await Assert.ThrowsExactlyAsync<SoapFaultException>(() => device.GetNTPAsync());
+
+                Assert.AreEqual("Receiver", fault.Fault.Code);
+                Assert.IsFalse((fault.Fault.Reason ?? "").Contains(Secret), "the exception's message reached the caller");
+                Assert.IsFalse(fault.Message.Contains(Secret), "the exception's message reached the caller");
             }
         }
 

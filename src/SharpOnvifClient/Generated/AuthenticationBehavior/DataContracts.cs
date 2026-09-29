@@ -121,6 +121,12 @@ namespace SharpOnvifClient.AuthenticationBehavior
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.securityLevelConstraintField);
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
@@ -148,6 +154,11 @@ namespace SharpOnvifClient.AuthenticationBehavior
         {
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -256,6 +267,13 @@ namespace SharpOnvifClient.AuthenticationBehavior
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            base.EndXmlRead(reader);
+            reader.Trim(ref this.authenticationPolicyField);
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
@@ -283,6 +301,11 @@ namespace SharpOnvifClient.AuthenticationBehavior
         {
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -832,6 +855,11 @@ namespace SharpOnvifClient.AuthenticationBehavior
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.authenticationProfileInfoField);
+        }
+
     }
 
     /// <summary>
@@ -886,6 +914,11 @@ namespace SharpOnvifClient.AuthenticationBehavior
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.tokenField);
+        }
+
     }
 
     /// <summary>
@@ -938,6 +971,11 @@ namespace SharpOnvifClient.AuthenticationBehavior
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.authenticationProfileInfoField);
         }
 
     }
@@ -1101,6 +1139,11 @@ namespace SharpOnvifClient.AuthenticationBehavior
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.authenticationProfileField);
+        }
+
     }
 
     /// <summary>
@@ -1155,6 +1198,11 @@ namespace SharpOnvifClient.AuthenticationBehavior
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.tokenField);
+        }
+
     }
 
     /// <summary>
@@ -1207,6 +1255,11 @@ namespace SharpOnvifClient.AuthenticationBehavior
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.authenticationProfileField);
         }
 
     }
@@ -1370,6 +1423,11 @@ namespace SharpOnvifClient.AuthenticationBehavior
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.securityLevelInfoField);
+        }
+
     }
 
     /// <summary>
@@ -1424,6 +1482,11 @@ namespace SharpOnvifClient.AuthenticationBehavior
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.tokenField);
+        }
+
     }
 
     /// <summary>
@@ -1476,6 +1539,11 @@ namespace SharpOnvifClient.AuthenticationBehavior
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.securityLevelInfoField);
         }
 
     }
@@ -1639,6 +1707,11 @@ namespace SharpOnvifClient.AuthenticationBehavior
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.securityLevelField);
+        }
+
     }
 
     /// <summary>
@@ -1693,6 +1766,11 @@ namespace SharpOnvifClient.AuthenticationBehavior
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.tokenField);
+        }
+
     }
 
     /// <summary>
@@ -1745,6 +1823,11 @@ namespace SharpOnvifClient.AuthenticationBehavior
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.securityLevelField);
         }
 
     }
@@ -2010,6 +2093,12 @@ namespace SharpOnvifClient.AuthenticationBehavior
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.recognitionMethodField);
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
@@ -2037,6 +2126,11 @@ namespace SharpOnvifClient.AuthenticationBehavior
         {
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -2138,6 +2232,11 @@ namespace SharpOnvifClient.AuthenticationBehavior
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
@@ -2165,6 +2264,11 @@ namespace SharpOnvifClient.AuthenticationBehavior
         {
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -2253,6 +2357,13 @@ namespace SharpOnvifClient.AuthenticationBehavior
             }
             if (base.ReadXmlElement(reader)) return true;
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            base.EndXmlRead(reader);
+            reader.Trim(ref this.recognitionGroupField);
+            reader.Trim(ref this.anyAttrField);
         }
 
     }
@@ -2387,6 +2498,11 @@ namespace SharpOnvifClient.AuthenticationBehavior
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
@@ -2416,6 +2532,11 @@ namespace SharpOnvifClient.AuthenticationBehavior
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
@@ -2443,6 +2564,11 @@ namespace SharpOnvifClient.AuthenticationBehavior
         {
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -2741,6 +2867,12 @@ namespace SharpOnvifClient.AuthenticationBehavior
         {
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
         }
 
     }

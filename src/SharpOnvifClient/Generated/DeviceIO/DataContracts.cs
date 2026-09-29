@@ -459,6 +459,12 @@ namespace SharpOnvifClient.DeviceIO
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
@@ -534,6 +540,13 @@ namespace SharpOnvifClient.DeviceIO
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.idleStateField);
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
@@ -602,6 +615,11 @@ namespace SharpOnvifClient.DeviceIO
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+        }
+
     }
 
     /// <summary>
@@ -659,6 +677,11 @@ namespace SharpOnvifClient.DeviceIO
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -721,6 +744,11 @@ namespace SharpOnvifClient.DeviceIO
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+        }
+
     }
 
     /// <summary>
@@ -779,6 +807,11 @@ namespace SharpOnvifClient.DeviceIO
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -847,6 +880,11 @@ namespace SharpOnvifClient.DeviceIO
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.tokenField);
+        }
+
     }
 
     /// <summary>
@@ -904,6 +942,11 @@ namespace SharpOnvifClient.DeviceIO
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -965,6 +1008,11 @@ namespace SharpOnvifClient.DeviceIO
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+        }
+
     }
 
     /// <summary>
@@ -1024,6 +1072,11 @@ namespace SharpOnvifClient.DeviceIO
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+        }
+
     }
 
     /// <summary>
@@ -1081,6 +1134,11 @@ namespace SharpOnvifClient.DeviceIO
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -1147,6 +1205,11 @@ namespace SharpOnvifClient.DeviceIO
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.tokenField);
         }
 
     }
@@ -1296,6 +1359,11 @@ namespace SharpOnvifClient.DeviceIO
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.digitalInputsField);
+        }
+
     }
 
     /// <summary>
@@ -1408,6 +1476,11 @@ namespace SharpOnvifClient.DeviceIO
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.relayOutputOptionsField);
+        }
+
     }
 
     /// <summary>
@@ -1469,6 +1542,11 @@ namespace SharpOnvifClient.DeviceIO
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.relayOutputsField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
@@ -1511,6 +1589,11 @@ namespace SharpOnvifClient.DeviceIO
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.tokenField);
         }
 
     }
@@ -1728,6 +1811,11 @@ namespace SharpOnvifClient.DeviceIO
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.serialPortField);
+        }
+
     }
 
     /// <summary>
@@ -1845,6 +1933,11 @@ namespace SharpOnvifClient.DeviceIO
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+        }
+
     }
 
     /// <summary>
@@ -1899,6 +1992,11 @@ namespace SharpOnvifClient.DeviceIO
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -1960,6 +2058,11 @@ namespace SharpOnvifClient.DeviceIO
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+        }
+
     }
 
     /// <summary>
@@ -2017,6 +2120,11 @@ namespace SharpOnvifClient.DeviceIO
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -2085,6 +2193,11 @@ namespace SharpOnvifClient.DeviceIO
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.videoOutputsField);
+        }
+
     }
 
     /// <summary>
@@ -2144,6 +2257,11 @@ namespace SharpOnvifClient.DeviceIO
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+        }
+
     }
 
     /// <summary>
@@ -2198,6 +2316,11 @@ namespace SharpOnvifClient.DeviceIO
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -2259,6 +2382,11 @@ namespace SharpOnvifClient.DeviceIO
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+        }
+
     }
 
     /// <summary>
@@ -2316,6 +2444,11 @@ namespace SharpOnvifClient.DeviceIO
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -2384,6 +2517,11 @@ namespace SharpOnvifClient.DeviceIO
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.tokenField);
+        }
+
     }
 
     /// <summary>
@@ -2426,6 +2564,11 @@ namespace SharpOnvifClient.DeviceIO
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.itemsField);
         }
 
     }
@@ -2577,6 +2720,12 @@ namespace SharpOnvifClient.DeviceIO
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.modeField);
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
@@ -2604,6 +2753,11 @@ namespace SharpOnvifClient.DeviceIO
         {
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -2836,6 +2990,11 @@ namespace SharpOnvifClient.DeviceIO
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     /// <summary>
@@ -2890,6 +3049,13 @@ namespace SharpOnvifClient.DeviceIO
             if (base.ReadXmlElement(reader)) return true;
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            base.EndXmlRead(reader);
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
         }
 
     }
@@ -3044,6 +3210,12 @@ namespace SharpOnvifClient.DeviceIO
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
         }
 
     }
@@ -3238,6 +3410,16 @@ namespace SharpOnvifClient.DeviceIO
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.baudRateListField);
+            reader.Trim(ref this.parityBitListField);
+            reader.Trim(ref this.characterLengthListField);
+            reader.Trim(ref this.stopBitListField);
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     /// <summary>
@@ -3313,6 +3495,11 @@ namespace SharpOnvifClient.DeviceIO
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+        }
+
     }
 
     /// <summary>
@@ -3349,6 +3536,11 @@ namespace SharpOnvifClient.DeviceIO
         {
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -3426,6 +3618,11 @@ namespace SharpOnvifClient.DeviceIO
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+        }
+
     }
 
     /// <summary>
@@ -3462,6 +3659,11 @@ namespace SharpOnvifClient.DeviceIO
         {
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -3511,6 +3713,11 @@ namespace SharpOnvifClient.DeviceIO
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.digitalInputsField);
         }
 
     }
@@ -3805,6 +4012,11 @@ namespace SharpOnvifClient.DeviceIO
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+        }
+
     }
 
     /// <summary>
@@ -3841,6 +4053,11 @@ namespace SharpOnvifClient.DeviceIO
         {
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -3918,6 +4135,11 @@ namespace SharpOnvifClient.DeviceIO
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+        }
+
     }
 
     /// <summary>
@@ -3954,6 +4176,11 @@ namespace SharpOnvifClient.DeviceIO
         {
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }

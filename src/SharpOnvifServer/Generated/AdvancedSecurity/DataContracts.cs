@@ -481,6 +481,11 @@ namespace SharpOnvifServer.AdvancedSecurity
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     public partial class AlgorithmIdentifierAnyParameters : SharpOnvifCommon.Xml.XmlContract
@@ -503,6 +508,11 @@ namespace SharpOnvifServer.AdvancedSecurity
         {
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -573,6 +583,13 @@ namespace SharpOnvifServer.AdvancedSecurity
             if (base.ReadXmlElement(reader)) return true;
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            base.EndXmlRead(reader);
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
         }
 
     }
@@ -673,6 +690,11 @@ namespace SharpOnvifServer.AdvancedSecurity
             }
             reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyAttrField);
         }
 
     }
@@ -885,6 +907,12 @@ namespace SharpOnvifServer.AdvancedSecurity
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     /// <summary>
@@ -974,6 +1002,12 @@ namespace SharpOnvifServer.AdvancedSecurity
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
@@ -1046,6 +1080,11 @@ namespace SharpOnvifServer.AdvancedSecurity
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -1127,6 +1166,11 @@ namespace SharpOnvifServer.AdvancedSecurity
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     public partial class CSRAttributeAnyAttribute : SharpOnvifCommon.Xml.XmlContract
@@ -1149,6 +1193,11 @@ namespace SharpOnvifServer.AdvancedSecurity
         {
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -1291,6 +1340,12 @@ namespace SharpOnvifServer.AdvancedSecurity
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
@@ -1417,6 +1472,11 @@ namespace SharpOnvifServer.AdvancedSecurity
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
@@ -1514,6 +1574,11 @@ namespace SharpOnvifServer.AdvancedSecurity
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.trustAnchorField);
+        }
+
     }
 
     public partial class CertPathValidationPolicyAnyParameters : SharpOnvifCommon.Xml.XmlContract
@@ -1536,6 +1601,11 @@ namespace SharpOnvifServer.AdvancedSecurity
         {
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -1603,6 +1673,12 @@ namespace SharpOnvifServer.AdvancedSecurity
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.certificateIDField);
+            reader.Trim(ref this.anyAttrField);
         }
 
     }
@@ -1703,6 +1779,12 @@ namespace SharpOnvifServer.AdvancedSecurity
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.certificateIDField);
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     public partial class CertificationPathAnyElement : SharpOnvifCommon.Xml.XmlContract
@@ -1725,6 +1807,11 @@ namespace SharpOnvifServer.AdvancedSecurity
         {
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -1837,6 +1924,11 @@ namespace SharpOnvifServer.AdvancedSecurity
         {
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -1952,6 +2044,11 @@ namespace SharpOnvifServer.AdvancedSecurity
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.trustAnchorField);
         }
 
     }
@@ -2414,6 +2511,11 @@ namespace SharpOnvifServer.AdvancedSecurity
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.cSRAttributeField);
+        }
+
     }
 
     /// <summary>
@@ -2856,6 +2958,11 @@ namespace SharpOnvifServer.AdvancedSecurity
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.extensionField);
+        }
+
     }
 
     /// <summary>
@@ -3005,6 +3112,12 @@ namespace SharpOnvifServer.AdvancedSecurity
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     /// <summary>
@@ -3092,6 +3205,12 @@ namespace SharpOnvifServer.AdvancedSecurity
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
         }
 
     }
@@ -4181,6 +4300,27 @@ namespace SharpOnvifServer.AdvancedSecurity
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.countryField);
+            reader.Trim(ref this.organizationField);
+            reader.Trim(ref this.organizationalUnitField);
+            reader.Trim(ref this.distinguishedNameQualifierField);
+            reader.Trim(ref this.stateOrProvinceNameField);
+            reader.Trim(ref this.commonNameField);
+            reader.Trim(ref this.serialNumberField);
+            reader.Trim(ref this.localityField);
+            reader.Trim(ref this.titleField);
+            reader.Trim(ref this.surnameField);
+            reader.Trim(ref this.givenNameField);
+            reader.Trim(ref this.initialsField);
+            reader.Trim(ref this.pseudonymField);
+            reader.Trim(ref this.generationQualifierField);
+            reader.Trim(ref this.genericAttributeField);
+            reader.Trim(ref this.multiValuedRDNField);
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     public partial class DistinguishedNameAnyAttribute : SharpOnvifCommon.Xml.XmlContract
@@ -4229,6 +4369,12 @@ namespace SharpOnvifServer.AdvancedSecurity
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.domainComponentField);
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -4318,6 +4464,12 @@ namespace SharpOnvifServer.AdvancedSecurity
         {
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
         }
 
     }
@@ -4421,6 +4573,12 @@ namespace SharpOnvifServer.AdvancedSecurity
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
         }
 
     }
@@ -4590,6 +4748,11 @@ namespace SharpOnvifServer.AdvancedSecurity
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
@@ -4617,6 +4780,11 @@ namespace SharpOnvifServer.AdvancedSecurity
         {
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -4687,6 +4855,11 @@ namespace SharpOnvifServer.AdvancedSecurity
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.crlField);
+        }
+
     }
 
     /// <summary>
@@ -4753,6 +4926,11 @@ namespace SharpOnvifServer.AdvancedSecurity
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.certPathValidationPolicyField);
         }
 
     }
@@ -4823,6 +5001,11 @@ namespace SharpOnvifServer.AdvancedSecurity
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.certificateField);
+        }
+
     }
 
     /// <summary>
@@ -4889,6 +5072,11 @@ namespace SharpOnvifServer.AdvancedSecurity
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.certificationPathIDField);
         }
 
     }
@@ -4963,6 +5151,11 @@ namespace SharpOnvifServer.AdvancedSecurity
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.configurationField);
+        }
+
     }
 
     /// <summary>
@@ -5029,6 +5222,11 @@ namespace SharpOnvifServer.AdvancedSecurity
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.keyAttributeField);
         }
 
     }
@@ -5099,6 +5297,11 @@ namespace SharpOnvifServer.AdvancedSecurity
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.passphraseAttributeField);
+        }
+
     }
 
     /// <summary>
@@ -5163,6 +5366,11 @@ namespace SharpOnvifServer.AdvancedSecurity
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.certPathValidationPolicyIDField);
         }
 
     }
@@ -5240,6 +5448,11 @@ namespace SharpOnvifServer.AdvancedSecurity
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.certificationPathIDField);
+        }
+
     }
 
     /// <summary>
@@ -5308,6 +5521,11 @@ namespace SharpOnvifServer.AdvancedSecurity
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.certificationPathIDField);
         }
 
     }
@@ -5400,6 +5618,11 @@ namespace SharpOnvifServer.AdvancedSecurity
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.configurationField);
         }
 
     }
@@ -6639,6 +6862,15 @@ namespace SharpOnvifServer.AdvancedSecurity
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.trustedIssuersField);
+            reader.Trim(ref this.keyIDField);
+            reader.Trim(ref this.customClaimsField);
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     /// <summary>
@@ -6859,6 +7091,12 @@ namespace SharpOnvifServer.AdvancedSecurity
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     public partial class KeyAttributeExtension : SharpOnvifCommon.Xml.XmlContract
@@ -6881,6 +7119,11 @@ namespace SharpOnvifServer.AdvancedSecurity
         {
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -7608,6 +7851,12 @@ namespace SharpOnvifServer.AdvancedSecurity
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.signatureAlgorithmsField);
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     public partial class KeystoreCapabilitiesAnyElement : SharpOnvifCommon.Xml.XmlContract
@@ -7630,6 +7879,11 @@ namespace SharpOnvifServer.AdvancedSecurity
         {
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -7734,6 +7988,11 @@ namespace SharpOnvifServer.AdvancedSecurity
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     /// <summary>
@@ -7779,6 +8038,11 @@ namespace SharpOnvifServer.AdvancedSecurity
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.attributeField);
         }
 
     }
@@ -7865,6 +8129,12 @@ namespace SharpOnvifServer.AdvancedSecurity
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
         }
 
     }
@@ -9070,6 +9340,11 @@ namespace SharpOnvifServer.AdvancedSecurity
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
@@ -9119,6 +9394,11 @@ namespace SharpOnvifServer.AdvancedSecurity
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+        }
+
     }
 
     public partial class UploadCRLAnyParameters : SharpOnvifCommon.Xml.XmlContract
@@ -9141,6 +9421,11 @@ namespace SharpOnvifServer.AdvancedSecurity
         {
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -10230,6 +10515,12 @@ namespace SharpOnvifServer.AdvancedSecurity
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     /// <summary>
@@ -10334,6 +10625,12 @@ namespace SharpOnvifServer.AdvancedSecurity
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
         }
 
     }

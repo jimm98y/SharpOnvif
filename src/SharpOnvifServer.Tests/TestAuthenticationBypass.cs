@@ -107,6 +107,35 @@ namespace SharpOnvif.Tests
         }
 
         [TestMethod]
+        public async Task DoesNotRunAnotherServicesOperationUnderADeviceActionThatNeedsNoPassword()
+        {
+            // The PRE_AUTH actions are all the device service's. At an address that does not host
+            // it, no service here handles the action, and dispatch fell back to the body without
+            // asking whether the caller may run what the body names - so any Media operation ran
+            // for anyone who put a device PRE_AUTH action in front of it.
+            await using var device = await AuthenticatedDevice.StartAsync();
+
+            var http = new HttpClient();
+            var request = new HttpRequestMessage(HttpMethod.Post, device.MediaEndpoint)
+            {
+                Content = new StringContent(
+                    "<?xml version=\"1.0\"?>" +
+                    "<s:Envelope xmlns:s=\"http://www.w3.org/2003/05/soap-envelope\">" +
+                    "<s:Body><GetProfiles xmlns=\"http://www.onvif.org/ver10/media/wsdl\"/></s:Body></s:Envelope>"),
+            };
+            request.Content.Headers.Clear();
+            request.Content.Headers.TryAddWithoutValidation(
+                "Content-Type", $"application/soap+xml; charset=utf-8; action=\"{GetSystemDateAndTime}\"");
+
+            var response = await http.SendAsync(request);
+            string body = await response.Content.ReadAsStringAsync();
+
+            Assert.AreNotEqual(HttpStatusCode.OK, response.StatusCode, body);
+            Assert.IsFalse(body.Contains(AuthenticatedDevice.ProfileName),
+                "an unauthenticated caller read the profiles by naming a device action that needs no password");
+        }
+
+        [TestMethod]
         public async Task StillAnswersAnOperationThatNeedsNoPassword()
         {
             // The other half: the class exists to be used, so an honest PRE_AUTH request must go

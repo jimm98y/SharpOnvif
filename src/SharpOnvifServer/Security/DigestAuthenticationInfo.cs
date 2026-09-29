@@ -79,11 +79,20 @@ namespace SharpOnvifServer.Security
             WebDigestAuth webToken = ValidatedDigest(context);
             if (webToken == null) return;
 
-            var users = context.RequestServices.GetService<IUserRepository>();
-            if (users == null) return;
+            // The user the digest was checked against, where the check left it. Asked for again
+            // only when it did not, which a caller that validated the digest itself can arrange.
+            UserInfo user = context.Items.TryGetValue(DigestAuthenticationHandler.CONTEXT_VALIDATED_USER, out object validated)
+                ? validated as UserInfo
+                : null;
 
-            UserInfo user = await users.GetUserAsync(webToken).ConfigureAwait(false);
-            if (user == null) return;
+            if (user == null)
+            {
+                var users = context.RequestServices.GetService<IUserRepository>();
+                if (users == null) return;
+
+                user = await users.GetUserAsync(webToken).ConfigureAwait(false);
+                if (user == null) return;
+            }
 
             // The -sess algorithms derive their secret from the first nonce and cnonce of the
             // session, which the device remembers against the opaque it issued.
@@ -122,9 +131,19 @@ namespace SharpOnvifServer.Security
         }
 
         /// <summary>Appends the header for a response whose body is already a string.</summary>
+        /// <remarks>
+        /// The body is encoded only for auth-int, the one quality of protection whose digest covers
+        /// it. Every response was encoded here, digest or none, for nothing.
+        /// </remarks>
         public static Task AppendAsync(HttpContext context, string responseBody)
         {
-            return AppendAsync(context, responseBody == null ? null : Encoding.UTF8.GetBytes(responseBody));
+            ArgumentNullException.ThrowIfNull(context);
+
+            WebDigestAuth webToken = ValidatedDigest(context);
+            if (webToken == null) return Task.CompletedTask;
+
+            bool coversBody = string.Equals(webToken.Qop, "auth-int", StringComparison.OrdinalIgnoreCase);
+            return AppendAsync(context, coversBody && responseBody != null ? Encoding.UTF8.GetBytes(responseBody) : null);
         }
     }
 }

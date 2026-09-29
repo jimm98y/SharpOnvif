@@ -414,6 +414,12 @@ namespace SharpOnvifClient.Events
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlRootAttribute("CreatePullPoint", Namespace="http://docs.oasis-open.org/wsn/b-2")]
@@ -446,6 +452,11 @@ namespace SharpOnvifClient.Events
         {
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -498,6 +509,11 @@ namespace SharpOnvifClient.Events
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -602,6 +618,11 @@ namespace SharpOnvifClient.Events
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+        }
+
     }
 
     /// <summary>
@@ -698,6 +719,11 @@ namespace SharpOnvifClient.Events
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+        }
+
     }
 
     public partial class CreatePullPointSubscriptionSubscriptionPolicy : SharpOnvifCommon.Xml.XmlContract
@@ -720,6 +746,11 @@ namespace SharpOnvifClient.Events
         {
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -813,6 +844,11 @@ namespace SharpOnvifClient.Events
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlRootAttribute("DestroyPullPointResponse", Namespace="http://docs.oasis-open.org/wsn/b-2")]
@@ -845,6 +881,11 @@ namespace SharpOnvifClient.Events
         {
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -1092,6 +1133,12 @@ namespace SharpOnvifClient.Events
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlRootAttribute("GetCurrentMessage", Namespace="http://docs.oasis-open.org/wsn/b-2")]
@@ -1144,6 +1191,11 @@ namespace SharpOnvifClient.Events
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlRootAttribute("GetCurrentMessageResponse", Namespace="http://docs.oasis-open.org/wsn/b-2")]
@@ -1176,6 +1228,11 @@ namespace SharpOnvifClient.Events
         {
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -1268,6 +1325,11 @@ namespace SharpOnvifClient.Events
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.eventBrokerField);
         }
 
     }
@@ -1483,6 +1545,16 @@ namespace SharpOnvifClient.Events
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.topicNamespaceLocationField);
+            reader.Trim(ref this.topicExpressionDialectField);
+            reader.Trim(ref this.messageContentFilterDialectField);
+            reader.Trim(ref this.producerPropertiesFilterDialectField);
+            reader.Trim(ref this.messageContentSchemaLocationField);
+            reader.Trim(ref this.anyField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlRootAttribute("GetMessages", Namespace="http://docs.oasis-open.org/wsn/b-2")]
@@ -1533,6 +1605,11 @@ namespace SharpOnvifClient.Events
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -1591,6 +1668,12 @@ namespace SharpOnvifClient.Events
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.notificationMessageField);
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -1709,6 +1792,12 @@ namespace SharpOnvifClient.Events
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.notificationMessageField);
+            reader.Trim(ref this.anyField);
+        }
+
     }
 
     public partial class NotifyResponse : SharpOnvifCommon.Xml.XmlContract
@@ -1751,6 +1840,11 @@ namespace SharpOnvifClient.Events
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlRootAttribute("PauseSubscriptionResponse", Namespace="http://docs.oasis-open.org/wsn/b-2")]
@@ -1783,6 +1877,11 @@ namespace SharpOnvifClient.Events
         {
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -1865,6 +1964,11 @@ namespace SharpOnvifClient.Events
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -1957,6 +2061,11 @@ namespace SharpOnvifClient.Events
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.notificationMessageField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlRootAttribute("Renew", Namespace="http://docs.oasis-open.org/wsn/b-2")]
@@ -2012,6 +2121,11 @@ namespace SharpOnvifClient.Events
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -2103,6 +2217,11 @@ namespace SharpOnvifClient.Events
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlRootAttribute("ResumeSubscription", Namespace="http://docs.oasis-open.org/wsn/b-2")]
@@ -2137,6 +2256,11 @@ namespace SharpOnvifClient.Events
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlRootAttribute("ResumeSubscriptionResponse", Namespace="http://docs.oasis-open.org/wsn/b-2")]
@@ -2169,6 +2293,11 @@ namespace SharpOnvifClient.Events
         {
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -2266,6 +2395,11 @@ namespace SharpOnvifClient.Events
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -2424,6 +2558,11 @@ namespace SharpOnvifClient.Events
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlRootAttribute("SubscribeResponse", Namespace="http://docs.oasis-open.org/wsn/b-2")]
@@ -2545,6 +2684,11 @@ namespace SharpOnvifClient.Events
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+        }
+
     }
 
     public partial class SubscribeSubscriptionPolicy : SharpOnvifCommon.Xml.XmlContract
@@ -2567,6 +2711,11 @@ namespace SharpOnvifClient.Events
         {
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -2603,6 +2752,11 @@ namespace SharpOnvifClient.Events
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlRootAttribute("UnsubscribeResponse", Namespace="http://docs.oasis-open.org/wsn/b-2")]
@@ -2635,6 +2789,11 @@ namespace SharpOnvifClient.Events
         {
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }

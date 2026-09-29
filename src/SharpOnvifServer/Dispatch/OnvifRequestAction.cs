@@ -69,34 +69,132 @@ namespace SharpOnvifServer.Dispatch
             return string.IsNullOrEmpty(action) ? null : action;
         }
 
-    /// <summary>
-    /// Reads a wsa:Action header out of the envelope. Onvif Device Manager sends the action
-    /// this way for event subscriptions rather than in the Content-Type header.
-    /// </summary>
-    public static string FromEnvelope(string envelope)
-    {
-        try
+        /// <summary>
+        /// Reads a wsa:Action header out of the envelope. Onvif Device Manager sends the action
+        /// this way for event subscriptions rather than in the Content-Type header.
+        /// </summary>
+        public static string FromEnvelope(byte[] envelope)
         {
-            using (XmlReader xml = SoapEnvelope.CreateReader(new StringReader(envelope)))
+            try
             {
-                if (!SoapEnvelope.MoveToEnvelopeChild(xml, "Header")) return null;
-
-                int headerDepth = xml.Depth;
-                while (xml.Read())
+                using (XmlReader xml = SoapEnvelope.CreateReader(new MemoryStream(envelope, false)))
                 {
-                    if (xml.NodeType == XmlNodeType.EndElement && xml.Depth == headerDepth) return null;
-                    if (xml.NodeType == XmlNodeType.Element && xml.LocalName == "Action")
-                        return xml.ReadElementContentAsString().Trim();
+                    ReadToBody(xml, out string action);
+                    return action;
                 }
             }
-        }
-        catch (XmlException)
-        {
-            // Malformed envelopes are reported by the deserialisation path, which produces a
-            // better message than anything this method could.
+            catch (XmlException)
+            {
+                // Malformed envelopes are reported by the deserialisation path, which produces a
+                // better message than anything this method could.
+                return null;
+            }
         }
 
-        return null;
-    }
+        /// <summary>
+        /// Reads a request envelope up to the first element in its Body, reporting on the way the
+        /// action its Header carries, if it carries one. Returns false for a document that is not
+        /// an envelope or whose Body is empty.
+        /// </summary>
+        /// <remarks>
+        /// Authentication reads the header action through this too, so the two cannot disagree
+        /// about which operation a request named: whether a request needs a password is decided
+        /// by that action. The Header counts only where SOAP 1.2 puts it, before the Body.
+        /// </remarks>
+        public static bool ReadToBody(XmlReader xml, out string headerAction)
+        {
+            headerAction = null;
+
+            xml.MoveToContent();
+            if (xml.NodeType != XmlNodeType.Element
+                || xml.LocalName != "Envelope"
+                || xml.NamespaceURI != OnvifXmlNamespaces.SoapEnvelope
+                || xml.IsEmptyElement)
+            {
+                return false;
+            }
+
+            int envelopeDepth = xml.Depth;
+            bool headerRead = false;
+            xml.Read();
+
+            while (!xml.EOF)
+            {
+                if (xml.NodeType == XmlNodeType.EndElement && xml.Depth == envelopeDepth) return false;
+
+                if (xml.NodeType != XmlNodeType.Element)
+                {
+                    xml.Read();
+                    continue;
+                }
+
+                if (xml.Depth == envelopeDepth + 1 && xml.NamespaceURI == OnvifXmlNamespaces.SoapEnvelope)
+                {
+                    if (xml.LocalName == "Body") return MoveToFirstChild(xml);
+
+                    if (xml.LocalName == "Header" && !headerRead)
+                    {
+                        headerRead = true;
+                        headerAction = ReadHeaderAction(xml);
+                        continue;
+                    }
+                }
+
+                xml.Skip();
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// The text of the first Action element inside the Header the reader is on, leaving the
+        /// reader after the Header.
+        /// </summary>
+        private static string ReadHeaderAction(XmlReader xml)
+        {
+            if (xml.IsEmptyElement)
+            {
+                xml.Read();
+                return null;
+            }
+
+            string action = null;
+            int headerDepth = xml.Depth;
+            xml.Read();
+
+            while (!xml.EOF)
+            {
+                if (xml.NodeType == XmlNodeType.EndElement && xml.Depth == headerDepth)
+                {
+                    xml.Read();
+                    break;
+                }
+
+                if (action == null && xml.NodeType == XmlNodeType.Element && xml.LocalName == "Action")
+                {
+                    action = xml.ReadElementContentAsString().Trim();
+                    continue;
+                }
+
+                xml.Read();
+            }
+
+            return action;
+        }
+
+        /// <summary>Moves from the Body start tag to its first element child.</summary>
+        private static bool MoveToFirstChild(XmlReader xml)
+        {
+            if (xml.IsEmptyElement) return false;
+
+            int bodyDepth = xml.Depth;
+            while (xml.Read())
+            {
+                if (xml.NodeType == XmlNodeType.EndElement && xml.Depth == bodyDepth) return false;
+                if (xml.NodeType == XmlNodeType.Element) return true;
+            }
+
+            return false;
+        }
     }
 }

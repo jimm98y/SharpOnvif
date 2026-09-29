@@ -430,6 +430,15 @@ namespace SharpOnvifServer.AppMgmt
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.licensesField);
+            reader.Trim(ref this.privilegesField);
+            reader.Trim(ref this.interfaceDescriptionField);
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/appmgmt/wsdl")]
@@ -566,6 +575,12 @@ namespace SharpOnvifServer.AppMgmt
         {
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
         }
 
     }
@@ -720,6 +735,11 @@ namespace SharpOnvifServer.AppMgmt
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.infoField);
+        }
+
     }
 
     /// <summary>
@@ -837,6 +857,11 @@ namespace SharpOnvifServer.AppMgmt
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.appField);
+        }
+
     }
 
     public partial class GetInstalledAppsResponseApp : SharpOnvifCommon.Xml.XmlContract
@@ -908,6 +933,12 @@ namespace SharpOnvifServer.AppMgmt
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
         }
 
     }
@@ -1173,6 +1204,12 @@ namespace SharpOnvifServer.AppMgmt
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
         }
 
     }

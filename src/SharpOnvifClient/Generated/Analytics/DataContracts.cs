@@ -288,6 +288,12 @@ namespace SharpOnvifClient.Analytics
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/analytics/wsdl")]
@@ -477,6 +483,12 @@ namespace SharpOnvifClient.Analytics
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     /// <summary>
@@ -555,6 +567,11 @@ namespace SharpOnvifClient.Analytics
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.analyticsModuleField);
         }
 
     }
@@ -654,6 +671,11 @@ namespace SharpOnvifClient.Analytics
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.ruleField);
+        }
+
     }
 
     /// <summary>
@@ -741,6 +763,11 @@ namespace SharpOnvifClient.Analytics
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.analyticsModuleNameField);
+        }
+
     }
 
     /// <summary>
@@ -821,6 +848,11 @@ namespace SharpOnvifClient.Analytics
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.ruleNameField);
         }
 
     }
@@ -952,6 +984,11 @@ namespace SharpOnvifClient.Analytics
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.optionsField);
+        }
+
     }
 
     /// <summary>
@@ -1045,6 +1082,11 @@ namespace SharpOnvifClient.Analytics
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.analyticsModuleField);
         }
 
     }
@@ -1164,6 +1206,11 @@ namespace SharpOnvifClient.Analytics
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.ruleOptionsField);
+        }
+
     }
 
     /// <summary>
@@ -1257,6 +1304,11 @@ namespace SharpOnvifClient.Analytics
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.ruleField);
         }
 
     }
@@ -1511,6 +1563,11 @@ namespace SharpOnvifClient.Analytics
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.analyticsModuleField);
+        }
+
     }
 
     /// <summary>
@@ -1690,6 +1747,12 @@ namespace SharpOnvifClient.Analytics
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     /// <summary>
@@ -1756,6 +1819,11 @@ namespace SharpOnvifClient.Analytics
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.analyticsModuleField);
         }
 
     }
@@ -1836,6 +1904,11 @@ namespace SharpOnvifClient.Analytics
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.ruleField);
         }
 
     }
