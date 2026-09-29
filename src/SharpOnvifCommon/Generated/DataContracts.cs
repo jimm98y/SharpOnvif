@@ -3462,6 +3462,54 @@ namespace SharpOnvifCommon.Onvif
             }
         }
 
+        public static System.Xml.XmlQualifiedName ToQName(FaultCodesType value)
+        {
+            switch (value)
+            {
+                case FaultCodesType.tnsInvalidAddressingHeader:
+                    return new System.Xml.XmlQualifiedName("InvalidAddressingHeader", "http://www.w3.org/2005/08/addressing");
+                case FaultCodesType.tnsInvalidAddress:
+                    return new System.Xml.XmlQualifiedName("InvalidAddress", "http://www.w3.org/2005/08/addressing");
+                case FaultCodesType.tnsInvalidEPR:
+                    return new System.Xml.XmlQualifiedName("InvalidEPR", "http://www.w3.org/2005/08/addressing");
+                case FaultCodesType.tnsInvalidCardinality:
+                    return new System.Xml.XmlQualifiedName("InvalidCardinality", "http://www.w3.org/2005/08/addressing");
+                case FaultCodesType.tnsMissingAddressInEPR:
+                    return new System.Xml.XmlQualifiedName("MissingAddressInEPR", "http://www.w3.org/2005/08/addressing");
+                case FaultCodesType.tnsDuplicateMessageID:
+                    return new System.Xml.XmlQualifiedName("DuplicateMessageID", "http://www.w3.org/2005/08/addressing");
+                case FaultCodesType.tnsActionMismatch:
+                    return new System.Xml.XmlQualifiedName("ActionMismatch", "http://www.w3.org/2005/08/addressing");
+                case FaultCodesType.tnsMessageAddressingHeaderRequired:
+                    return new System.Xml.XmlQualifiedName("MessageAddressingHeaderRequired", "http://www.w3.org/2005/08/addressing");
+                case FaultCodesType.tnsDestinationUnreachable:
+                    return new System.Xml.XmlQualifiedName("DestinationUnreachable", "http://www.w3.org/2005/08/addressing");
+                case FaultCodesType.tnsActionNotSupported:
+                    return new System.Xml.XmlQualifiedName("ActionNotSupported", "http://www.w3.org/2005/08/addressing");
+                case FaultCodesType.tnsEndpointUnavailable:
+                    return new System.Xml.XmlQualifiedName("EndpointUnavailable", "http://www.w3.org/2005/08/addressing");
+                default:
+                    return null;
+            }
+        }
+
+        public static FaultCodesType ParseFaultCodesType(System.Xml.XmlQualifiedName name)
+        {
+            if (name == null) return default(FaultCodesType);
+            if (name.Name == "InvalidAddressingHeader" && name.Namespace == "http://www.w3.org/2005/08/addressing") return FaultCodesType.tnsInvalidAddressingHeader;
+            if (name.Name == "InvalidAddress" && name.Namespace == "http://www.w3.org/2005/08/addressing") return FaultCodesType.tnsInvalidAddress;
+            if (name.Name == "InvalidEPR" && name.Namespace == "http://www.w3.org/2005/08/addressing") return FaultCodesType.tnsInvalidEPR;
+            if (name.Name == "InvalidCardinality" && name.Namespace == "http://www.w3.org/2005/08/addressing") return FaultCodesType.tnsInvalidCardinality;
+            if (name.Name == "MissingAddressInEPR" && name.Namespace == "http://www.w3.org/2005/08/addressing") return FaultCodesType.tnsMissingAddressInEPR;
+            if (name.Name == "DuplicateMessageID" && name.Namespace == "http://www.w3.org/2005/08/addressing") return FaultCodesType.tnsDuplicateMessageID;
+            if (name.Name == "ActionMismatch" && name.Namespace == "http://www.w3.org/2005/08/addressing") return FaultCodesType.tnsActionMismatch;
+            if (name.Name == "MessageAddressingHeaderRequired" && name.Namespace == "http://www.w3.org/2005/08/addressing") return FaultCodesType.tnsMessageAddressingHeaderRequired;
+            if (name.Name == "DestinationUnreachable" && name.Namespace == "http://www.w3.org/2005/08/addressing") return FaultCodesType.tnsDestinationUnreachable;
+            if (name.Name == "ActionNotSupported" && name.Namespace == "http://www.w3.org/2005/08/addressing") return FaultCodesType.tnsActionNotSupported;
+            if (name.Name == "EndpointUnavailable" && name.Namespace == "http://www.w3.org/2005/08/addressing") return FaultCodesType.tnsEndpointUnavailable;
+            return default(FaultCodesType);
+        }
+
         public static string ToXml(FrecklesType value)
         {
             switch (value)
@@ -6075,6 +6123,36 @@ namespace SharpOnvifCommon.Onvif
                     return default(faultcodeEnum);
             }
         }
+
+        public static System.Xml.XmlQualifiedName ToQName(faultcodeEnum value)
+        {
+            switch (value)
+            {
+                case faultcodeEnum.tnsDataEncodingUnknown:
+                    return new System.Xml.XmlQualifiedName("DataEncodingUnknown", "http://www.w3.org/2003/05/soap-envelope");
+                case faultcodeEnum.tnsMustUnderstand:
+                    return new System.Xml.XmlQualifiedName("MustUnderstand", "http://www.w3.org/2003/05/soap-envelope");
+                case faultcodeEnum.tnsReceiver:
+                    return new System.Xml.XmlQualifiedName("Receiver", "http://www.w3.org/2003/05/soap-envelope");
+                case faultcodeEnum.tnsSender:
+                    return new System.Xml.XmlQualifiedName("Sender", "http://www.w3.org/2003/05/soap-envelope");
+                case faultcodeEnum.tnsVersionMismatch:
+                    return new System.Xml.XmlQualifiedName("VersionMismatch", "http://www.w3.org/2003/05/soap-envelope");
+                default:
+                    return null;
+            }
+        }
+
+        public static faultcodeEnum ParsefaultcodeEnum(System.Xml.XmlQualifiedName name)
+        {
+            if (name == null) return default(faultcodeEnum);
+            if (name.Name == "DataEncodingUnknown" && name.Namespace == "http://www.w3.org/2003/05/soap-envelope") return faultcodeEnum.tnsDataEncodingUnknown;
+            if (name.Name == "MustUnderstand" && name.Namespace == "http://www.w3.org/2003/05/soap-envelope") return faultcodeEnum.tnsMustUnderstand;
+            if (name.Name == "Receiver" && name.Namespace == "http://www.w3.org/2003/05/soap-envelope") return faultcodeEnum.tnsReceiver;
+            if (name.Name == "Sender" && name.Namespace == "http://www.w3.org/2003/05/soap-envelope") return faultcodeEnum.tnsSender;
+            if (name.Name == "VersionMismatch" && name.Namespace == "http://www.w3.org/2003/05/soap-envelope") return faultcodeEnum.tnsVersionMismatch;
+            return default(faultcodeEnum);
+        }
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
@@ -6085,6 +6163,8 @@ namespace SharpOnvifCommon.Onvif
         private int[] sampleRateRangeField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// List of supported bitrates in kbps.
@@ -6115,9 +6195,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AACDecOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -6140,6 +6232,12 @@ namespace SharpOnvifCommon.Onvif
                 writer.WriteEndElement();
             }
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -6316,6 +6414,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Describe if the object wear opticals.
         /// </summary>
@@ -6403,9 +6503,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Accessory"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanface; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -6418,6 +6530,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.AnalyticsHumanface, "RightEyePatch", this.rightEyePatchField, Ns.AnalyticsHumanface, "AccessoryDescription");
             writer.WriteElement(Ns.AnalyticsHumanface, "LeftEyePatch", this.leftEyePatchField, Ns.AnalyticsHumanface, "AccessoryDescription");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -6475,6 +6593,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Describe if the object wear a accessory .
         /// </summary>
@@ -6524,9 +6644,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AccessoryDescription"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanface; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -6537,6 +6669,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.AnalyticsHumanface, "Color", this.colorField, Ns.OnvifVer10, "ColorDescriptor");
             writer.WriteElementString(Ns.AnalyticsHumanface, "Subtype", this.subtypeField);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -6580,6 +6718,8 @@ namespace SharpOnvifCommon.Onvif
 
         private ActionEngineEventPayloadExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Request Message
         /// </summary>
@@ -6617,9 +6757,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ActionEngineEventPayload"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -6627,6 +6779,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "ResponseInfo", this.responseInfoField, Ns.SoapEnvelope, "Envelope");
             writer.WriteElement(Ns.OnvifVer10, "Fault", this.faultField, Ns.SoapEnvelope, "Fault");
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "ActionEngineEventPayloadExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -6660,6 +6818,8 @@ namespace SharpOnvifCommon.Onvif
     {
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -6667,13 +6827,31 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ActionEngineEventPayloadExtension"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -6692,6 +6870,8 @@ namespace SharpOnvifCommon.Onvif
         private float currentFpsField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public float CurrentBitrate
@@ -6714,15 +6894,33 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ActiveConnection"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "CurrentBitrate", writer.ToXml(this.currentBitrateField));
             writer.WriteElementString(Ns.OnvifVer10, "CurrentFps", writer.ToXml(this.currentFpsField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -6759,6 +6957,8 @@ namespace SharpOnvifCommon.Onvif
         private string frecklesField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Is there scar on the face.
@@ -6840,9 +7040,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AdditionalFeatures"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanface; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -6860,6 +7072,12 @@ namespace SharpOnvifCommon.Onvif
             }
             writer.WriteElementString(Ns.AnalyticsHumanface, "Freckles", this.frecklesField);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -6903,6 +7121,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Analytics service URI.
         /// </summary>
@@ -6940,9 +7160,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AnalyticsCapabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -6950,6 +7182,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.OnvifVer10, "RuleSupport", writer.ToXml(this.ruleSupportField));
             writer.WriteElementString(Ns.OnvifVer10, "AnalyticsModuleSupport", writer.ToXml(this.analyticsModuleSupportField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -6984,6 +7222,8 @@ namespace SharpOnvifCommon.Onvif
         private bool ruleSupportFieldSpecified;
 
         private AnalyticsDeviceExtension extensionField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         [System.Xml.Serialization.XmlElementAttribute(Order=0, DataType="anyURI")]
         public string XAddr
@@ -7020,9 +7260,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AnalyticsDeviceCapabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -7032,6 +7284,12 @@ namespace SharpOnvifCommon.Onvif
                 writer.WriteElementString(Ns.OnvifVer10, "RuleSupport", writer.ToXml(this.ruleSupportField));
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "AnalyticsDeviceExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -7064,6 +7322,8 @@ namespace SharpOnvifCommon.Onvif
 
         private AnalyticsDeviceEngineConfigurationExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute("EngineConfiguration", Order=0)]
         public EngineConfiguration[] EngineConfiguration
         {
@@ -7078,9 +7338,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AnalyticsDeviceEngineConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -7092,6 +7364,12 @@ namespace SharpOnvifCommon.Onvif
                 }
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "AnalyticsDeviceEngineConfigurationExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -7177,6 +7455,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public AnalyticsDeviceEngineConfiguration AnalyticsEngineConfiguration
         {
@@ -7191,15 +7471,35 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AnalyticsEngine"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            base.WriteXmlAttributes(writer);
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             base.WriteXmlContent(writer);
             writer.WriteElement(Ns.OnvifVer10, "AnalyticsEngineConfiguration", this.analyticsEngineConfigurationField, Ns.OnvifVer10, "AnalyticsDeviceEngineConfiguration");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -7225,6 +7525,8 @@ namespace SharpOnvifCommon.Onvif
 
         private AnalyticsEngineConfigurationExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute("AnalyticsModule", Order=0)]
         public Config[] AnalyticsModule
         {
@@ -7239,9 +7541,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AnalyticsEngineConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -7253,6 +7567,12 @@ namespace SharpOnvifCommon.Onvif
                 }
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "AnalyticsEngineConfigurationExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -7320,6 +7640,8 @@ namespace SharpOnvifCommon.Onvif
         private ModeOfOperation modeField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Token of the analytics engine (AnalyticsEngine) being controlled.
@@ -7390,9 +7712,22 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AnalyticsEngineControl"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            base.WriteXmlAttributes(writer);
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -7417,6 +7752,13 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "Subscription", this.subscriptionField, Ns.OnvifVer10, "Config");
             writer.WriteElementString(Ns.OnvifVer10, "Mode", EnumXml.ToXml(this.modeField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -7470,6 +7812,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public SourceIdentification SourceIdentification
         {
@@ -7498,9 +7842,22 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AnalyticsEngineInput"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            base.WriteXmlAttributes(writer);
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -7509,6 +7866,13 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "VideoInput", this.videoInputField, Ns.OnvifVer10, "VideoEncoderConfiguration");
             writer.WriteElement(Ns.OnvifVer10, "MetadataInput", this.metadataInputField, Ns.OnvifVer10, "MetadataInput");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -7542,6 +7906,8 @@ namespace SharpOnvifCommon.Onvif
 
         private AnalyticsEngineInputInfoExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public Config InputInfo
         {
@@ -7556,14 +7922,32 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AnalyticsEngineInputInfo"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.OnvifVer10, "InputInfo", this.inputInfoField, Ns.OnvifVer10, "Config");
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "AnalyticsEngineInputInfoExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -7622,6 +8006,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public string Error
         {
@@ -7643,15 +8029,33 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AnalyticsState"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "Error", this.errorField);
             writer.WriteElementString(Ns.OnvifVer10, "State", this.stateField);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -7682,6 +8086,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Token of the control object whose status is requested.
         /// </summary>
@@ -7706,15 +8112,33 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AnalyticsStateInformation"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "AnalyticsEngineControlToken", this.analyticsEngineControlTokenField);
             writer.WriteElement(Ns.OnvifVer10, "State", this.stateField, Ns.OnvifVer10, "AnalyticsState");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -7741,6 +8165,8 @@ namespace SharpOnvifCommon.Onvif
     {
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -7748,13 +8174,31 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AnyHolder"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -7799,6 +8243,8 @@ namespace SharpOnvifCommon.Onvif
         private LabelInfo[] labelField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public Transformation Transformation
@@ -7912,9 +8358,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Appearance"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -7946,6 +8404,12 @@ namespace SharpOnvifCommon.Onvif
                 }
             }
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -8055,6 +8519,8 @@ namespace SharpOnvifCommon.Onvif
 
         private ArrayOfFileProgressExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Exported file name and export progress information
         /// </summary>
@@ -8072,9 +8538,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ArrayOfFileProgress"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -8086,6 +8564,12 @@ namespace SharpOnvifCommon.Onvif
                 }
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "ArrayOfFileProgressExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -8111,6 +8595,8 @@ namespace SharpOnvifCommon.Onvif
     {
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -8118,13 +8604,31 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ArrayOfFileProgressExtension"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -8145,6 +8649,8 @@ namespace SharpOnvifCommon.Onvif
         private System.Xml.XmlElement[] anyField;
 
         private float ratioField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public Vector Translate
@@ -8174,6 +8680,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.ratioField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AspectRatioTransformation"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -8181,6 +8694,7 @@ namespace SharpOnvifCommon.Onvif
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAttributeString(null, "ratio", writer.ToXml(this.ratioField));
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -8195,10 +8709,12 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "ratio":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.ratioField = reader.ToSingle(reader.AttributeValue);
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -8377,6 +8893,8 @@ namespace SharpOnvifCommon.Onvif
     {
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -8384,13 +8902,31 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AttributedAnyType"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.i08Addressing; } }
 
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -8406,6 +8942,8 @@ namespace SharpOnvifCommon.Onvif
     {
         private System.Xml.XmlQualifiedName valueField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlTextAttribute()]
         public System.Xml.XmlQualifiedName Value
         {
@@ -8413,13 +8951,31 @@ namespace SharpOnvifCommon.Onvif
             set { this.valueField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AttributedQNameType"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.i08Addressing; } }
 
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteText(writer.QualifiedNameToString(this.valueField));
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override void ReadXmlText(SharpOnvifCommon.Xml.IXmlReader reader, string text)
@@ -8434,6 +8990,8 @@ namespace SharpOnvifCommon.Onvif
     {
         private string valueField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlTextAttribute(DataType="anyURI")]
         public string Value
         {
@@ -8441,13 +8999,31 @@ namespace SharpOnvifCommon.Onvif
             set { this.valueField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AttributedURIType"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.i08Addressing; } }
 
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteText(this.valueField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override void ReadXmlText(SharpOnvifCommon.Xml.IXmlReader reader, string text)
@@ -8462,6 +9038,8 @@ namespace SharpOnvifCommon.Onvif
     {
         private ulong valueField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlTextAttribute()]
         public ulong Value
         {
@@ -8469,13 +9047,31 @@ namespace SharpOnvifCommon.Onvif
             set { this.valueField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AttributedUnsignedLongType"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.i08Addressing; } }
 
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteText(writer.ToXml(this.valueField));
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override void ReadXmlText(SharpOnvifCommon.Xml.IXmlReader reader, string text)
@@ -8493,6 +9089,8 @@ namespace SharpOnvifCommon.Onvif
         private AudioAnalyticsStreamExtension extensionField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         [System.Xml.Serialization.XmlElementAttribute("AudioDescriptor", Order=0)]
         public AudioDescriptor[] AudioDescriptor
@@ -8515,9 +9113,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AudioAnalyticsStream"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -8530,6 +9140,12 @@ namespace SharpOnvifCommon.Onvif
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "AudioAnalyticsStreamExtension");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -8556,6 +9172,8 @@ namespace SharpOnvifCommon.Onvif
     {
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -8563,13 +9181,31 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AudioAnalyticsStreamExtension"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -8591,6 +9227,8 @@ namespace SharpOnvifCommon.Onvif
         private int samplerateField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// The bitrate in kbps.
@@ -8641,9 +9279,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AudioAttributes"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -8654,6 +9304,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.OnvifVer10, "Encoding", this.encodingField);
             writer.WriteElementString(Ns.OnvifVer10, "Samplerate", writer.ToXml(this.samplerateField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -8689,6 +9345,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Indicates audio class label
         /// </summary>
@@ -8717,15 +9375,33 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AudioClassCandidate"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "Type", EnumXml.ToXml(this.typeField));
             writer.WriteElementString(Ns.OnvifVer10, "Likelihood", writer.ToXml(this.likelihoodField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -8754,6 +9430,8 @@ namespace SharpOnvifCommon.Onvif
 
         private AudioClassDescriptorExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Array of audio class label and class probability
         /// </summary>
@@ -8771,9 +9449,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AudioClassDescriptor"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -8785,6 +9475,12 @@ namespace SharpOnvifCommon.Onvif
                 }
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "AudioClassDescriptorExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -8810,6 +9506,8 @@ namespace SharpOnvifCommon.Onvif
     {
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -8817,13 +9515,31 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AudioClassDescriptorExtension"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -8847,6 +9563,8 @@ namespace SharpOnvifCommon.Onvif
         private bool rTPPayloadTypeFieldSpecified;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Audio Media Subtype for the audio format. For definitions see tt:AudioEncodingMimeNames and IANA
@@ -8910,9 +9628,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AudioDecoder2Options"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -8940,6 +9670,12 @@ namespace SharpOnvifCommon.Onvif
                 writer.WriteElementString(Ns.OnvifVer10, "RTPPayloadType", writer.ToXml(this.rTPPayloadTypeField));
             }
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -8987,6 +9723,8 @@ namespace SharpOnvifCommon.Onvif
     {
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -8994,14 +9732,34 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AudioDecoderConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            base.WriteXmlAttributes(writer);
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             base.WriteXmlContent(writer);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -9023,6 +9781,8 @@ namespace SharpOnvifCommon.Onvif
         private G726DecOptions g726DecOptionsField;
 
         private AudioDecoderConfigurationOptionsExtension extensionField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// If the device is able to decode AAC encoded audio this section describes the supported
@@ -9064,9 +9824,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AudioDecoderConfigurationOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -9074,6 +9846,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "G711DecOptions", this.g711DecOptionsField, Ns.OnvifVer10, "G711DecOptions");
             writer.WriteElement(Ns.OnvifVer10, "G726DecOptions", this.g726DecOptionsField, Ns.OnvifVer10, "G726DecOptions");
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "AudioDecoderConfigurationOptionsExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -9138,6 +9916,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.DateTime utcTimeField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -9152,6 +9932,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.utcTimeField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AudioDescriptor"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -9159,6 +9946,7 @@ namespace SharpOnvifCommon.Onvif
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAttributeString(null, "UtcTime", writer.ToXml(this.utcTimeField));
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -9171,10 +9959,12 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "UtcTime":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.utcTimeField = reader.ToDateTime(reader.AttributeValue);
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -9199,6 +9989,8 @@ namespace SharpOnvifCommon.Onvif
         private System.Xml.XmlElement[] anyField;
 
         private string secureStreamingProtocolAlgorithmField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Audio Media Subtype for the audio format. For definitions see tt:AudioEncodingMimeNames and IANA
@@ -9258,6 +10050,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.secureStreamingProtocolAlgorithmField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AudioEncoder2Configuration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -9266,6 +10065,7 @@ namespace SharpOnvifCommon.Onvif
         {
             base.WriteXmlAttributes(writer);
             writer.WriteAttributeString(null, "SecureStreamingProtocolAlgorithm", this.secureStreamingProtocolAlgorithmField);
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -9283,10 +10083,13 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "SecureStreamingProtocolAlgorithm":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.secureStreamingProtocolAlgorithmField = reader.AttributeValue;
                     return true;
             }
-            return base.ReadXmlAttribute(reader);
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -9329,6 +10132,8 @@ namespace SharpOnvifCommon.Onvif
         private System.Xml.XmlElement[] anyField;
 
         private string[] secureStreamingProtocolAlgorithmsField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Audio Media Subtype for the audio format. For definitions see tt:AudioEncodingMimeNames and IANA
@@ -9381,6 +10186,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.secureStreamingProtocolAlgorithmsField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AudioEncoder2ConfigurationOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -9388,6 +10200,7 @@ namespace SharpOnvifCommon.Onvif
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAttributeString(null, "SecureStreamingProtocolAlgorithms", writer.JoinList(this.secureStreamingProtocolAlgorithmsField));
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -9419,10 +10232,12 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "SecureStreamingProtocolAlgorithms":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.secureStreamingProtocolAlgorithmsField = reader.SplitList(reader.AttributeValue);
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -9470,6 +10285,8 @@ namespace SharpOnvifCommon.Onvif
         private string sessionTimeoutField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Audio codec used for encoding the audio input (either G.711, G.726 or AAC).
@@ -9528,9 +10345,22 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AudioEncoderConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            base.WriteXmlAttributes(writer);
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -9541,6 +10371,13 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "Multicast", this.multicastField, Ns.OnvifVer10, "MulticastConfiguration");
             writer.WriteElementString(Ns.OnvifVer10, "SessionTimeout", this.sessionTimeoutField);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -9586,6 +10423,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// The enoding used for audio data (either G.711, G.726 or AAC).
         /// </summary>
@@ -9625,9 +10464,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AudioEncoderConfigurationOption"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -9651,6 +10502,12 @@ namespace SharpOnvifCommon.Onvif
                 writer.WriteEndElement();
             }
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -9689,6 +10546,8 @@ namespace SharpOnvifCommon.Onvif
     {
         private AudioEncoderConfigurationOption[] optionsField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// list of supported AudioEncoderConfigurations
         /// </summary>
@@ -9699,9 +10558,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.optionsField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AudioEncoderConfigurationOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -9712,6 +10583,12 @@ namespace SharpOnvifCommon.Onvif
                     writer.WriteElement(Ns.OnvifVer10, "Options", this.optionsField[i], Ns.OnvifVer10, "AudioEncoderConfigurationOption");
                 }
             }
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -9736,6 +10613,8 @@ namespace SharpOnvifCommon.Onvif
     {
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -9743,14 +10622,34 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AudioOutput"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            base.WriteXmlAttributes(writer);
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             base.WriteXmlContent(writer);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -9772,6 +10671,8 @@ namespace SharpOnvifCommon.Onvif
         private int outputLevelField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Token of the physical Audio output.
@@ -9821,9 +10722,22 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AudioOutputConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            base.WriteXmlAttributes(writer);
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -9832,6 +10746,13 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.OnvifVer10, "SendPrimacy", this.sendPrimacyField);
             writer.WriteElementString(Ns.OnvifVer10, "OutputLevel", writer.ToXml(this.outputLevelField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -9873,6 +10794,8 @@ namespace SharpOnvifCommon.Onvif
         private EQPreset[] eQPresetsField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Tokens of the physical Audio outputs (typically one).
@@ -9952,9 +10875,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AudioOutputConfigurationOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -9985,6 +10920,12 @@ namespace SharpOnvifCommon.Onvif
                 }
             }
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -10029,6 +10970,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// number of available audio channels. (1: mono, 2: stereo)
         /// </summary>
@@ -10046,15 +10989,35 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AudioSource"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            base.WriteXmlAttributes(writer);
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             base.WriteXmlContent(writer);
             writer.WriteElementString(Ns.OnvifVer10, "Channels", writer.ToXml(this.channelsField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -10080,6 +11043,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Token of the Audio Source the configuration applies to
         /// </summary>
@@ -10097,15 +11062,35 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AudioSourceConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            base.WriteXmlAttributes(writer);
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             base.WriteXmlContent(writer);
             writer.WriteElementString(Ns.OnvifVer10, "SourceToken", this.sourceTokenField);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -10131,6 +11116,8 @@ namespace SharpOnvifCommon.Onvif
 
         private AudioSourceOptionsExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Tokens of the audio source the configuration can be used for.
         /// </summary>
@@ -10148,9 +11135,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AudioSourceConfigurationOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -10162,6 +11161,12 @@ namespace SharpOnvifCommon.Onvif
                 }
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "AudioSourceOptionsExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -10514,6 +11519,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Describe the Category of the Bag, acceptable values are defined in bd:BagCategory.
         /// </summary>
@@ -10541,15 +11548,33 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Bag"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.AnalyticsHumanbody, "Category", this.categoryField);
             writer.WriteElement(Ns.AnalyticsHumanbody, "Color", this.colorField, Ns.OnvifVer10, "ColorDescriptor");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -10582,6 +11607,8 @@ namespace SharpOnvifCommon.Onvif
         private bool pPMFieldSpecified;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Information encoded in barcode
@@ -10631,9 +11658,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "BarcodeInfo"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -10644,6 +11683,12 @@ namespace SharpOnvifCommon.Onvif
                 writer.WriteElementString(Ns.OnvifVer10, "PPM", writer.ToXml(this.pPMField));
             }
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -10707,6 +11752,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement faultCauseField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -10749,9 +11796,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.faultCauseField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "BaseFaultType"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Bf2; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -10772,6 +11831,12 @@ namespace SharpOnvifCommon.Onvif
                 writer.WriteAnyElement(this.faultCauseField);
                 writer.WriteEndElement();
             }
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -10904,6 +11969,7 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "dialect":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.dialectField = reader.AttributeValue;
                     return true;
             }
@@ -10927,6 +11993,8 @@ namespace SharpOnvifCommon.Onvif
         private string activityField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Acceptable values are defined in bd:Smoking.
@@ -10965,9 +12033,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Behaviour"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -10975,6 +12055,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.AnalyticsHumanbody, "UsingMobile", this.usingMobileField);
             writer.WriteElementString(Ns.AnalyticsHumanbody, "Activity", this.activityField);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -11015,6 +12101,8 @@ namespace SharpOnvifCommon.Onvif
         private GeoOrientation directionField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public Behaviour1Removed Removed
@@ -11074,9 +12162,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Behaviour"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -11089,6 +12189,12 @@ namespace SharpOnvifCommon.Onvif
             }
             writer.WriteElement(Ns.OnvifVer10, "Direction", this.directionField, Ns.OnvifVer10, "GeoOrientation");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -11219,6 +12325,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Describe the Bag of the body,acceptable values are defined in bd:Bag
         /// </summary>
@@ -11308,9 +12416,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Belonging"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -11327,6 +12447,12 @@ namespace SharpOnvifCommon.Onvif
                 writer.WriteElementString(Ns.AnalyticsHumanbody, "Weapon", writer.ToXml(this.weaponField));
             }
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -11379,6 +12505,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Describes a bag the body is wearing.
         /// </summary>
@@ -11426,9 +12554,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Belongings"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -11449,6 +12589,12 @@ namespace SharpOnvifCommon.Onvif
                 }
             }
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -11547,6 +12693,8 @@ namespace SharpOnvifCommon.Onvif
     {
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -11554,13 +12702,31 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Body"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.SoapEnvelope; } }
 
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -11580,6 +12746,8 @@ namespace SharpOnvifCommon.Onvif
         private string bodyShapeField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Describe the Stature of the body, the unit is centimeter.
@@ -11619,9 +12787,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "BodyMetric"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -11631,6 +12811,12 @@ namespace SharpOnvifCommon.Onvif
             }
             writer.WriteElementString(Ns.AnalyticsHumanbody, "BodyShape", this.bodyShapeField);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -11665,6 +12851,8 @@ namespace SharpOnvifCommon.Onvif
         private string styleField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Describe the Category of the Bottoms, acceptable values are defined in bd:BottomsCategory.
@@ -11713,9 +12901,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Bottoms"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -11724,6 +12924,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.AnalyticsHumanbody, "Grain", this.grainField);
             writer.WriteElementString(Ns.AnalyticsHumanbody, "Style", this.styleField);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -11763,6 +12969,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Describe the Color of the Box, acceptable values are defined in tt:ColorDescriptor.
         /// </summary>
@@ -11801,9 +13009,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Box"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -11813,6 +13033,12 @@ namespace SharpOnvifCommon.Onvif
                 writer.WriteElementString(Ns.AnalyticsHumanbody, "Lug", writer.ToXml(this.lugField));
             }
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -11851,6 +13077,8 @@ namespace SharpOnvifCommon.Onvif
         private PTZCapabilities pTZField;
 
         private CapabilitiesExtension extensionField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Analytics capabilities
@@ -11919,9 +13147,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Capabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -11932,6 +13172,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "Media", this.mediaField, Ns.OnvifVer10, "MediaCapabilities");
             writer.WriteElement(Ns.OnvifVer10, "PTZ", this.pTZField, Ns.OnvifVer10, "PTZCapabilities");
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "CapabilitiesExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -12154,6 +13400,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Describe the Category of the Cart, acceptable values are defined in bd:CartCategory.
         /// </summary>
@@ -12181,15 +13429,33 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Cart"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.AnalyticsHumanbody, "Category", this.categoryField);
             writer.WriteElement(Ns.AnalyticsHumanbody, "Color", this.colorField, Ns.OnvifVer10, "ColorDescriptor");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -12221,6 +13487,8 @@ namespace SharpOnvifCommon.Onvif
         private string columnsField;
 
         private string rowsField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Mapping of the cell grid to the Video frame. The cell grid is starting from the upper left corner
@@ -12260,6 +13528,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.rowsField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "CellLayout"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -12268,6 +13543,7 @@ namespace SharpOnvifCommon.Onvif
         {
             writer.WriteAttributeString(null, "Columns", this.columnsField);
             writer.WriteAttributeString(null, "Rows", this.rowsField);
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -12281,13 +13557,16 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "Columns":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.columnsField = reader.AttributeValue;
                     return true;
                 case "Rows":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.rowsField = reader.AttributeValue;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -12373,6 +13652,8 @@ namespace SharpOnvifCommon.Onvif
 
         private CertificateGenerationParametersExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute(Order=0, DataType="token")]
         public string CertificateID
         {
@@ -12408,9 +13689,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "CertificateGenerationParameters"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -12419,6 +13712,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.OnvifVer10, "ValidNotBefore", this.validNotBeforeField);
             writer.WriteElementString(Ns.OnvifVer10, "ValidNotAfter", this.validNotAfterField);
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "CertificateGenerationParametersExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -12505,6 +13804,8 @@ namespace SharpOnvifCommon.Onvif
         private DateTimeRange validityField;
 
         private CertificateInformationExtension extensionField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         [System.Xml.Serialization.XmlElementAttribute(Order=0, DataType="token")]
         public string CertificateID
@@ -12598,9 +13899,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "CertificateInformation"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -12618,6 +13931,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.OnvifVer10, "SignatureAlgorithm", this.signatureAlgorithmField);
             writer.WriteElement(Ns.OnvifVer10, "Validity", this.validityField, Ns.OnvifVer10, "DateTimeRange");
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "CertificateInformationExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -12713,6 +14032,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Certificate id.
         /// </summary>
@@ -12740,15 +14061,33 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "CertificateStatus"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "CertificateID", this.certificateIDField);
             writer.WriteElementString(Ns.OnvifVer10, "Status", writer.ToXml(this.statusField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -12810,6 +14149,7 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "Critical":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.criticalField = reader.ToBoolean(reader.AttributeValue);
                     return true;
             }
@@ -12833,6 +14173,8 @@ namespace SharpOnvifCommon.Onvif
         private BinaryData privateKeyField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         [System.Xml.Serialization.XmlElementAttribute(Order=0, DataType="token")]
         public string CertificateID
@@ -12862,9 +14204,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "CertificateWithPrivateKey"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -12872,6 +14226,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "Certificate", this.certificateField, Ns.OnvifVer10, "BinaryData");
             writer.WriteElement(Ns.OnvifVer10, "PrivateKey", this.privateKeyField, Ns.OnvifVer10, "BinaryData");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -13114,6 +14474,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Describe the Scarf of the body,acceptable values are defined in bd:Scarf.
         /// </summary>
@@ -13171,9 +14533,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Clothing"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -13183,6 +14557,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.AnalyticsHumanbody, "Bottoms", this.bottomsField, Ns.AnalyticsHumanbody, "Bottoms");
             writer.WriteElement(Ns.AnalyticsHumanbody, "Shoes", this.shoesField, Ns.AnalyticsHumanbody, "Shoes");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -13230,6 +14610,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// If the device supports audio encoding this section describes the supported codecs and their
         /// configuration.
@@ -13269,9 +14651,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "CodingCapabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -13279,6 +14673,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "AudioDecodingCapabilities", this.audioDecodingCapabilitiesField, Ns.OnvifVer10, "AudioDecoderConfigurationOptions");
             writer.WriteElement(Ns.OnvifVer10, "VideoDecodingCapabilities", this.videoDecodingCapabilitiesField, Ns.OnvifVer10, "VideoDecoderConfigurationOptions");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -13317,6 +14717,8 @@ namespace SharpOnvifCommon.Onvif
 
         private float likelihoodField;
         private bool likelihoodFieldSpecified;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public float X
@@ -13375,6 +14777,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.likelihoodFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Color"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -13389,6 +14798,7 @@ namespace SharpOnvifCommon.Onvif
             {
                 writer.WriteAttributeString(null, "Likelihood", writer.ToXml(this.likelihoodField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -13396,23 +14806,29 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "X":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.xField = reader.ToSingle(reader.AttributeValue);
                     return true;
                 case "Y":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.yField = reader.ToSingle(reader.AttributeValue);
                     return true;
                 case "Z":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.zField = reader.ToSingle(reader.AttributeValue);
                     return true;
                 case "Colorspace":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.colorspaceField = reader.AttributeValue;
                     return true;
                 case "Likelihood":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.likelihoodField = reader.ToSingle(reader.AttributeValue);
                     this.likelihoodFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
     }
@@ -13436,6 +14852,8 @@ namespace SharpOnvifCommon.Onvif
         private bool yZFieldSpecified;
 
         private string colorspaceField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public float XX
@@ -13522,6 +14940,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.colorspaceField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ColorCovariance"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -13544,6 +14969,7 @@ namespace SharpOnvifCommon.Onvif
                 writer.WriteAttributeString(null, "YZ", writer.ToXml(this.yZField));
             }
             writer.WriteAttributeString(null, "Colorspace", this.colorspaceField);
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -13551,31 +14977,39 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "XX":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.xXField = reader.ToSingle(reader.AttributeValue);
                     return true;
                 case "YY":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.yYField = reader.ToSingle(reader.AttributeValue);
                     return true;
                 case "ZZ":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.zZField = reader.ToSingle(reader.AttributeValue);
                     return true;
                 case "XY":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.xYField = reader.ToSingle(reader.AttributeValue);
                     this.xYFieldSpecified = true;
                     return true;
                 case "XZ":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.xZField = reader.ToSingle(reader.AttributeValue);
                     this.xZFieldSpecified = true;
                     return true;
                 case "YZ":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.yZField = reader.ToSingle(reader.AttributeValue);
                     this.yZFieldSpecified = true;
                     return true;
                 case "Colorspace":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.colorspaceField = reader.AttributeValue;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
     }
@@ -13588,6 +15022,8 @@ namespace SharpOnvifCommon.Onvif
         private object extensionField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         [System.Xml.Serialization.XmlElementAttribute("ColorCluster", Order=0)]
         public ColorDescriptorColorCluster[] ColorCluster
@@ -13610,9 +15046,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ColorDescriptor"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -13623,8 +15071,14 @@ namespace SharpOnvifCommon.Onvif
                     writer.WriteElement(Ns.OnvifVer10, "ColorCluster", this.colorClusterField[i], null, null);
                 }
             }
-            writer.WriteElementString(Ns.OnvifVer10, "Extension", System.Convert.ToString(this.extensionField, System.Globalization.CultureInfo.InvariantCulture));
+            writer.WriteAnyTypeElement(Ns.OnvifVer10, "Extension", this.extensionField);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -13637,7 +15091,7 @@ namespace SharpOnvifCommon.Onvif
                     return true;
                 case "Extension":
                     if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.extensionField = reader.ReadElementText();
+                    this.extensionField = reader.ReadAnyTypeElement();
                     return true;
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
@@ -13656,6 +15110,8 @@ namespace SharpOnvifCommon.Onvif
         private ColorCovariance covarianceField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public Color Color
@@ -13696,6 +15152,18 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.OnvifVer10, "Color", this.colorField, Ns.OnvifVer10, "Color");
@@ -13705,6 +15173,12 @@ namespace SharpOnvifCommon.Onvif
             }
             writer.WriteElement(Ns.OnvifVer10, "Covariance", this.covarianceField, Ns.OnvifVer10, "ColorCovariance");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -13739,6 +15213,8 @@ namespace SharpOnvifCommon.Onvif
     {
         private object[] itemsField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute("ColorList", typeof(Color), Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("ColorspaceRange", typeof(ColorspaceRange), Order=0)]
         public object[] Items
@@ -13747,9 +15223,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.itemsField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ColorOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -13767,6 +15255,12 @@ namespace SharpOnvifCommon.Onvif
                     }
                 }
             }
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -13797,6 +15291,8 @@ namespace SharpOnvifCommon.Onvif
         private FloatRange zField;
 
         private string colorspaceField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public FloatRange X
@@ -13829,9 +15325,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.colorspaceField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ColorspaceRange"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -13839,6 +15347,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "Y", this.yField, Ns.OnvifVer10, "FloatRange");
             writer.WriteElement(Ns.OnvifVer10, "Z", this.zField, Ns.OnvifVer10, "FloatRange");
             writer.WriteElementString(Ns.OnvifVer10, "Colorspace", this.colorspaceField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -13928,9 +15442,11 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "Name":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.nameField = reader.AttributeValue;
                     return true;
                 case "Type":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.typeField = reader.ToQualifiedName(reader.AttributeValue);
                     return true;
             }
@@ -13966,6 +15482,8 @@ namespace SharpOnvifCommon.Onvif
         private bool fixedFieldSpecified;
 
         private string maxInstancesField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// List describing the configuration parameters. The names of the parameters must be unique. If
@@ -14043,6 +15561,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.maxInstancesField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ConfigDescription"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -14055,6 +15580,7 @@ namespace SharpOnvifCommon.Onvif
                 writer.WriteAttributeString(null, "fixed", writer.ToXml(this.fixedField));
             }
             writer.WriteAttributeString(null, "maxInstances", this.maxInstancesField);
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -14075,17 +15601,21 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "Name":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.nameField = reader.ToQualifiedName(reader.AttributeValue);
                     return true;
                 case "fixed":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.fixedField = reader.ToBoolean(reader.AttributeValue);
                     this.fixedFieldSpecified = true;
                     return true;
                 case "maxInstances":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxInstancesField = reader.AttributeValue;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -14254,6 +15784,7 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "token":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.tokenField = reader.AttributeValue;
                     return true;
             }
@@ -14367,6 +15898,8 @@ namespace SharpOnvifCommon.Onvif
 
         private DNSInformationExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Indicates whether or not DNS information is retrieved from DHCP.
         /// </summary>
@@ -14414,9 +15947,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "DNSInformation"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -14443,6 +15988,12 @@ namespace SharpOnvifCommon.Onvif
                 }
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "DNSInformationExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -14536,6 +16087,7 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "token":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.tokenField = reader.AttributeValue;
                     return true;
             }
@@ -14622,6 +16174,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public System.DateTime From
         {
@@ -14643,15 +16197,33 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "DateTimeRange"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "From", writer.ToXml(this.fromField));
             writer.WriteElementString(Ns.OnvifVer10, "Until", writer.ToXml(this.untilField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -14682,6 +16254,8 @@ namespace SharpOnvifCommon.Onvif
         private bool levelFieldSpecified;
 
         private DefoggingExtension extensionField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Parameter to enable/disable or automatic Defogging feature. Its options shall be chosen from
@@ -14722,9 +16296,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Defogging"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -14734,6 +16320,12 @@ namespace SharpOnvifCommon.Onvif
                 writer.WriteElementString(Ns.OnvifVer10, "Level", writer.ToXml(this.levelField));
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "DefoggingExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -14797,6 +16389,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Supported options for Defogging mode. Its options shall be chosen from tt:DefoggingMode Type.
         /// </summary>
@@ -14824,9 +16418,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "DefoggingOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -14839,6 +16445,12 @@ namespace SharpOnvifCommon.Onvif
             }
             writer.WriteElementString(Ns.OnvifVer10, "Level", writer.ToXml(this.levelField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -14865,6 +16477,8 @@ namespace SharpOnvifCommon.Onvif
     {
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -14872,13 +16486,31 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "detail"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.SoapEnvelope; } }
 
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -14903,6 +16535,8 @@ namespace SharpOnvifCommon.Onvif
         private SecurityCapabilities securityField;
 
         private DeviceCapabilitiesExtension extensionField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Device service URI.
@@ -14961,9 +16595,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "DeviceCapabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -14973,6 +16619,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "IO", this.iOField, Ns.OnvifVer10, "IOCapabilities");
             writer.WriteElement(Ns.OnvifVer10, "Security", this.securityField, Ns.OnvifVer10, "SecurityCapabilities");
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "DeviceCapabilitiesExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -15079,6 +16731,7 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "token":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.tokenField = reader.AttributeValue;
                     return true;
             }
@@ -15103,6 +16756,8 @@ namespace SharpOnvifCommon.Onvif
         private int relayOutputsField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         [System.Xml.Serialization.XmlElementAttribute(Order=0, DataType="anyURI")]
         public string XAddr
@@ -15153,9 +16808,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "DeviceIOCapabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -15166,6 +16833,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.OnvifVer10, "AudioOutputs", writer.ToXml(this.audioOutputsField));
             writer.WriteElementString(Ns.OnvifVer10, "RelayOutputs", writer.ToXml(this.relayOutputsField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -15211,6 +16884,8 @@ namespace SharpOnvifCommon.Onvif
         private DigitalIdleState idleStateField;
         private bool idleStateFieldSpecified;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -15239,6 +16914,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.idleStateFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "DigitalInput"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -15250,6 +16932,7 @@ namespace SharpOnvifCommon.Onvif
             {
                 writer.WriteAttributeString(null, "IdleState", EnumXml.ToXml(this.idleStateField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -15263,11 +16946,14 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "IdleState":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.idleStateField = EnumXml.ParseDigitalIdleState(reader.AttributeValue);
                     this.idleStateFieldSpecified = true;
                     return true;
             }
-            return base.ReadXmlAttribute(reader);
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -15287,6 +16973,8 @@ namespace SharpOnvifCommon.Onvif
         private bool fixedLayoutField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         [System.Xml.Serialization.XmlElementAttribute(Order=0, DataType="anyURI")]
         public string XAddr
@@ -15312,15 +17000,33 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "DisplayCapabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "XAddr", this.xAddrField);
             writer.WriteElementString(Ns.OnvifVer10, "FixedLayout", writer.ToXml(this.fixedLayoutField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -15395,6 +17101,8 @@ namespace SharpOnvifCommon.Onvif
 
         private Dot11AvailableNetworksExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute(Order=0, DataType="hexBinary")]
         public byte[] SSID
         {
@@ -15458,9 +17166,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Dot11AvailableNetworks"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -15492,6 +17212,12 @@ namespace SharpOnvifCommon.Onvif
                 writer.WriteElementString(Ns.OnvifVer10, "SignalStrength", EnumXml.ToXml(this.signalStrengthField));
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "Dot11AvailableNetworksExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -15577,6 +17303,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public bool TKIP
         {
@@ -15619,9 +17347,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Dot11Capabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -15631,6 +17371,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.OnvifVer10, "AdHocStationMode", writer.ToXml(this.adHocStationModeField));
             writer.WriteElementString(Ns.OnvifVer10, "WEP", writer.ToXml(this.wEPField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -15679,6 +17425,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute(Order=0, DataType="hexBinary")]
         public byte[] SSID
         {
@@ -15721,9 +17469,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Dot11Configuration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -15733,6 +17493,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.OnvifVer10, "Priority", this.priorityField);
             writer.WriteElement(Ns.OnvifVer10, "Security", this.securityField, Ns.OnvifVer10, "Dot11SecurityConfiguration");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -15775,6 +17541,8 @@ namespace SharpOnvifCommon.Onvif
 
         private Dot11PSKSetExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// According to IEEE802.11-2007 H.4.1 the RSNA PSK consists of 256 bits, or 64 octets when represented
         /// in hex Either Key or Passphrase shall be given, if both are supplied Key shall be used by the device
@@ -15807,15 +17575,33 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Dot11PSKSet"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "Key", writer.ToHexString(this.keyField));
             writer.WriteElementString(Ns.OnvifVer10, "Passphrase", this.passphraseField);
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "Dot11PSKSetExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -15883,6 +17669,8 @@ namespace SharpOnvifCommon.Onvif
 
         private Dot11SecurityConfigurationExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public Dot11SecurityMode Mode
         {
@@ -15929,9 +17717,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Dot11SecurityConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -15943,6 +17743,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "PSK", this.pSKField, Ns.OnvifVer10, "Dot11PSKSet");
             writer.WriteElementString(Ns.OnvifVer10, "Dot1X", this.dot1XField);
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "Dot11SecurityConfigurationExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -15981,6 +17787,8 @@ namespace SharpOnvifCommon.Onvif
     {
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -15988,13 +17796,31 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Dot11SecurityConfigurationExtension"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -16024,6 +17850,8 @@ namespace SharpOnvifCommon.Onvif
         private string activeConfigAliasField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         [System.Xml.Serialization.XmlElementAttribute(Order=0, DataType="hexBinary")]
         public byte[] SSID
@@ -16107,9 +17935,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Dot11Status"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -16129,6 +17969,12 @@ namespace SharpOnvifCommon.Onvif
             }
             writer.WriteElementString(Ns.OnvifVer10, "ActiveConfigAlias", this.activeConfigAliasField);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -16186,6 +18032,8 @@ namespace SharpOnvifCommon.Onvif
 
         private Dot1XConfigurationExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public string Dot1XConfigurationToken
         {
@@ -16238,9 +18086,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Dot1XConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -16257,6 +18117,12 @@ namespace SharpOnvifCommon.Onvif
             }
             writer.WriteElement(Ns.OnvifVer10, "EAPMethodConfiguration", this.eAPMethodConfigurationField, Ns.OnvifVer10, "EAPMethodConfiguration");
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "Dot1XConfigurationExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -16331,6 +18197,8 @@ namespace SharpOnvifCommon.Onvif
     {
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -16338,13 +18206,31 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Dot3Configuration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -16418,6 +18304,8 @@ namespace SharpOnvifCommon.Onvif
 
         private DynamicDNSInformationExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Dynamic DNS type.
         /// </summary>
@@ -16455,9 +18343,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "DynamicDNSInformation"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -16465,6 +18365,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.OnvifVer10, "Name", this.nameField);
             writer.WriteElementString(Ns.OnvifVer10, "TTL", this.tTLField);
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "DynamicDNSInformationExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -16531,6 +18437,8 @@ namespace SharpOnvifCommon.Onvif
 
         private EapMethodExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Confgiuration information for TLS Method.
         /// </summary>
@@ -16559,15 +18467,33 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "EAPMethodConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.OnvifVer10, "TLSConfiguration", this.tLSConfigurationField, Ns.OnvifVer10, "TLSConfiguration");
             writer.WriteElementString(Ns.OnvifVer10, "Password", this.passwordField);
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "EapMethodExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -16599,6 +18525,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Parameter to enable/disable E-Flip feature.
         /// </summary>
@@ -16616,14 +18544,32 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "EFlip"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "Mode", EnumXml.ToXml(this.modeField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -16648,6 +18594,8 @@ namespace SharpOnvifCommon.Onvif
 
         private EFlipOptionsExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Options of EFlip mode parameter.
         /// </summary>
@@ -16665,9 +18613,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "EFlipOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -16679,6 +18639,12 @@ namespace SharpOnvifCommon.Onvif
                 }
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "EFlipOptionsExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -16912,6 +18878,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public AttributedURIType Address
         {
@@ -16940,9 +18908,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "EndpointReferenceType"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.i08Addressing; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -16950,6 +18930,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.i08Addressing, "ReferenceParameters", this.referenceParametersField, Ns.i08Addressing, "ReferenceParametersType");
             writer.WriteElement(Ns.i08Addressing, "Metadata", this.metadataField, Ns.i08Addressing, "MetadataType");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -16984,6 +18970,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public VideoAnalyticsConfiguration VideoAnalyticsConfiguration
         {
@@ -17005,15 +18993,33 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "EngineConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.OnvifVer10, "VideoAnalyticsConfiguration", this.videoAnalyticsConfigurationField, Ns.OnvifVer10, "VideoAnalyticsConfiguration");
             writer.WriteElement(Ns.OnvifVer10, "AnalyticsEngineInputInfo", this.analyticsEngineInputInfoField, Ns.OnvifVer10, "AnalyticsEngineInputInfo");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -17042,6 +19048,8 @@ namespace SharpOnvifCommon.Onvif
 
         private Body bodyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public Header Header
         {
@@ -17056,14 +19064,32 @@ namespace SharpOnvifCommon.Onvif
             set { this.bodyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Envelope"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.SoapEnvelope; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.SoapEnvelope, "Header", this.headerField, Ns.SoapEnvelope, "Header");
             writer.WriteElement(Ns.SoapEnvelope, "Body", this.bodyField, Ns.SoapEnvelope, "Body");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -17096,6 +19122,8 @@ namespace SharpOnvifCommon.Onvif
         private bool wSPausableSubscriptionManagerInterfaceSupportField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Event service URI.
@@ -17144,9 +19172,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "EventCapabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -17155,6 +19195,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.OnvifVer10, "WSPullPointSupport", writer.ToXml(this.wSPullPointSupportField));
             writer.WriteElementString(Ns.OnvifVer10, "WSPausableSubscriptionManagerInterfaceSupport", writer.ToXml(this.wSPausableSubscriptionManagerInterfaceSupportField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -17187,9 +19233,31 @@ namespace SharpOnvifCommon.Onvif
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schema")]
     public partial class EventFilter : FilterType
     {
+        private System.Xml.XmlAttribute[] anyAttrField;
+
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "EventFilter"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            base.WriteXmlAttributes(writer);
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
+        }
 
     }
 
@@ -17307,6 +19375,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public FilterType Filter
         {
@@ -17328,15 +19398,33 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "EventSubscription"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.OnvifVer10, "Filter", this.filterField, Ns.B2, "FilterType");
             writer.WriteElement(Ns.OnvifVer10, "SubscriptionPolicy", this.subscriptionPolicyField, null, null);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -18416,6 +20504,8 @@ namespace SharpOnvifCommon.Onvif
     {
         private Documentation documentationField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public Documentation documentation
         {
@@ -18423,13 +20513,31 @@ namespace SharpOnvifCommon.Onvif
             set { this.documentationField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ExtensibleDocumented"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.T1; } }
 
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.T1, "documentation", this.documentationField, Ns.T1, "Documentation");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -18456,6 +20564,8 @@ namespace SharpOnvifCommon.Onvif
         private string eyeballField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Describe the shape of the eye, acceptable values are defined in fc:EyeShape.
@@ -18494,9 +20604,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Eye"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanface; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -18504,6 +20626,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.AnalyticsHumanface, "Eyelid", this.eyelidField);
             writer.WriteElementString(Ns.AnalyticsHumanface, "Eyeball", this.eyeballField);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -18539,6 +20667,8 @@ namespace SharpOnvifCommon.Onvif
         private string spaceField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Describe the shape of the eyebrow, Short usually means that the width of eye brow is shorter than
@@ -18579,9 +20709,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Eyebrow"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanface; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -18589,6 +20731,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.AnalyticsHumanface, "Color", this.colorField, Ns.OnvifVer10, "ColorDescriptor");
             writer.WriteElementString(Ns.AnalyticsHumanface, "Space", this.spaceField);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -18627,6 +20775,8 @@ namespace SharpOnvifCommon.Onvif
         private bool sideburnFieldSpecified;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Describe if there is mustache on the face.
@@ -18698,9 +20848,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "FacialHair"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanface; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -18717,6 +20879,12 @@ namespace SharpOnvifCommon.Onvif
                 writer.WriteElementString(Ns.AnalyticsHumanface, "Sideburn", writer.ToXml(this.sideburnField));
             }
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -18879,7 +21047,7 @@ namespace SharpOnvifCommon.Onvif
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
-            writer.WriteElementString(Ns.SoapEnvelope, "Value", EnumXml.ToXml(this.valueField));
+            writer.WriteElementQualifiedName(Ns.SoapEnvelope, "Value", EnumXml.ToQName(this.valueField));
             writer.WriteElement(Ns.SoapEnvelope, "Subcode", this.subcodeField, Ns.SoapEnvelope, "subcode");
         }
 
@@ -18889,7 +21057,7 @@ namespace SharpOnvifCommon.Onvif
             {
                 case "Value":
                     if (reader.NamespaceUri != Ns.SoapEnvelope) break;
-                    this.valueField = EnumXml.ParsefaultcodeEnum(reader.ReadElementText());
+                    this.valueField = EnumXml.ParsefaultcodeEnum(reader.ReadElementQualifiedName());
                     return true;
                 case "Subcode":
                     if (reader.NamespaceUri != Ns.SoapEnvelope) break;
@@ -18984,9 +21152,11 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "hfov":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.hfovField = reader.ToSingle(reader.AttributeValue);
                     return true;
                 case "vfov":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.vfovField = reader.ToSingle(reader.AttributeValue);
                     return true;
             }
@@ -19003,6 +21173,8 @@ namespace SharpOnvifCommon.Onvif
         private float progressField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Exported file name
@@ -19031,15 +21203,33 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "FileProgress"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "FileName", this.fileNameField);
             writer.WriteElementString(Ns.OnvifVer10, "Progress", writer.ToXml(this.progressField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -19106,6 +21296,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// The recording where this event was found. Empty string if no recording is associated with this
         /// event.
@@ -19166,9 +21358,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "FindEventResult"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -19178,6 +21382,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "Event", this.eventField, Ns.B2, "NotificationMessageHolderType");
             writer.WriteElementString(Ns.OnvifVer10, "StartStateEvent", writer.ToXml(this.startStateEventField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -19284,6 +21494,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// A reference to the recording containing the metadata.
         /// </summary>
@@ -19321,9 +21533,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "FindMetadataResult"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -19331,6 +21555,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.OnvifVer10, "TrackToken", this.trackTokenField);
             writer.WriteElementString(Ns.OnvifVer10, "Time", writer.ToXml(this.timeField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -19775,6 +22005,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// A reference to the recording containing the PTZ position.
         /// </summary>
@@ -19822,9 +22054,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "FindPTZPositionResult"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -19833,6 +22077,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.OnvifVer10, "Time", writer.ToXml(this.timeField));
             writer.WriteElement(Ns.OnvifVer10, "Position", this.positionField, Ns.OnvifVer10, "PTZVector");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -20092,6 +22342,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public AutoFocusMode AutoFocusMode
         {
@@ -20133,9 +22385,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "FocusConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -20144,6 +22408,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.OnvifVer10, "NearLimit", writer.ToXml(this.nearLimitField));
             writer.WriteElementString(Ns.OnvifVer10, "FarLimit", writer.ToXml(this.farLimitField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -20190,6 +22460,8 @@ namespace SharpOnvifCommon.Onvif
         private FocusConfiguration20Extension extensionField;
 
         private string[] aFModeField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Mode of auto focus. AUTO - The device automatically adjusts focus.MANUAL - The device does not
@@ -20280,6 +22552,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.aFModeField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "FocusConfiguration20"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -20287,6 +22566,7 @@ namespace SharpOnvifCommon.Onvif
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAttributeString(null, "AFMode", writer.JoinList(this.aFModeField));
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -20312,10 +22592,12 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "AFMode":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.aFModeField = reader.SplitList(reader.AttributeValue);
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -20705,6 +22987,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Status of focus position.
         /// </summary>
@@ -20742,9 +23026,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "FocusStatus"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -20752,6 +23048,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.OnvifVer10, "MoveStatus", EnumXml.ToXml(this.moveStatusField));
             writer.WriteElementString(Ns.OnvifVer10, "Error", this.errorField);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -20787,6 +23089,8 @@ namespace SharpOnvifCommon.Onvif
         private string errorField;
 
         private FocusStatus20Extension extensionField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Status of focus position.
@@ -20825,9 +23129,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "FocusStatus20"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -20835,6 +23151,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.OnvifVer10, "MoveStatus", EnumXml.ToXml(this.moveStatusField));
             writer.WriteElementString(Ns.OnvifVer10, "Error", this.errorField);
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "FocusStatus20Extension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -20918,6 +23240,8 @@ namespace SharpOnvifCommon.Onvif
         private string colorspaceField;
 
         private string sourceField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public PTZStatus PTZStatus
@@ -21010,6 +23334,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.sourceField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Frame"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -21019,6 +23350,7 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteAttributeString(null, "UtcTime", writer.ToXml(this.utcTimeField));
             writer.WriteAttributeString(null, "Colorspace", this.colorspaceField);
             writer.WriteAttributeString(null, "Source", this.sourceField);
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -21051,16 +23383,20 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "UtcTime":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.utcTimeField = reader.ToDateTime(reader.AttributeValue);
                     return true;
                 case "Colorspace":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.colorspaceField = reader.AttributeValue;
                     return true;
                 case "Source":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.sourceField = reader.AttributeValue;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -21271,6 +23607,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// List of supported bitrates in kbps.
         /// </summary>
@@ -21300,9 +23638,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "G711DecOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -21325,6 +23675,12 @@ namespace SharpOnvifCommon.Onvif
                 writer.WriteEndElement();
             }
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -21363,6 +23719,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// List of supported bitrates in kbps.
         /// </summary>
@@ -21392,9 +23750,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "G726DecOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -21417,6 +23787,12 @@ namespace SharpOnvifCommon.Onvif
                 writer.WriteEndElement();
             }
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -21489,6 +23865,8 @@ namespace SharpOnvifCommon.Onvif
         private float elevationField;
         private bool elevationFieldSpecified;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -21559,6 +23937,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.elevationFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "GeoLocation"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -21577,6 +23962,7 @@ namespace SharpOnvifCommon.Onvif
             {
                 writer.WriteAttributeString(null, "elevation", writer.ToXml(this.elevationField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -21589,19 +23975,23 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "lon":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.lonField = reader.ToDouble(reader.AttributeValue);
                     this.lonFieldSpecified = true;
                     return true;
                 case "lat":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.latField = reader.ToDouble(reader.AttributeValue);
                     this.latFieldSpecified = true;
                     return true;
                 case "elevation":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.elevationField = reader.ToSingle(reader.AttributeValue);
                     this.elevationFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -21625,6 +24015,8 @@ namespace SharpOnvifCommon.Onvif
 
         private float yawField;
         private bool yawFieldSpecified;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
@@ -21696,6 +24088,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.yawFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "GeoOrientation"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -21714,6 +24113,7 @@ namespace SharpOnvifCommon.Onvif
             {
                 writer.WriteAttributeString(null, "yaw", writer.ToXml(this.yawField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -21726,19 +24126,23 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "roll":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.rollField = reader.ToSingle(reader.AttributeValue);
                     this.rollFieldSpecified = true;
                     return true;
                 case "pitch":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.pitchField = reader.ToSingle(reader.AttributeValue);
                     this.pitchFieldSpecified = true;
                     return true;
                 case "yaw":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.yawField = reader.ToSingle(reader.AttributeValue);
                     this.yawFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -21757,6 +24161,8 @@ namespace SharpOnvifCommon.Onvif
         private RecordingJobConfiguration jobConfigurationField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public string JobToken
@@ -21779,15 +24185,33 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "GetRecordingJobsResponseItem"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "JobToken", this.jobTokenField);
             writer.WriteElement(Ns.OnvifVer10, "JobConfiguration", this.jobConfigurationField, Ns.OnvifVer10, "RecordingJobConfiguration");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -21819,6 +24243,8 @@ namespace SharpOnvifCommon.Onvif
         private GetTracksResponseList tracksField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Token of the recording.
@@ -21857,9 +24283,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "GetRecordingsResponseItem"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -21867,6 +24305,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "Configuration", this.configurationField, Ns.OnvifVer10, "RecordingConfiguration");
             writer.WriteElement(Ns.OnvifVer10, "Tracks", this.tracksField, Ns.OnvifVer10, "GetTracksResponseList");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -21901,6 +24345,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Token of the track.
         /// </summary>
@@ -21928,15 +24374,33 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "GetTracksResponseItem"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "TrackToken", this.trackTokenField);
             writer.WriteElement(Ns.OnvifVer10, "Configuration", this.configurationField, Ns.OnvifVer10, "TrackConfiguration");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -21963,6 +24427,8 @@ namespace SharpOnvifCommon.Onvif
     {
         private GetTracksResponseItem[] trackField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Configuration of a track.
         /// </summary>
@@ -21973,9 +24439,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.trackField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "GetTracksResponseList"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -21986,6 +24464,12 @@ namespace SharpOnvifCommon.Onvif
                     writer.WriteElement(Ns.OnvifVer10, "Track", this.trackField[i], Ns.OnvifVer10, "GetTracksResponseItem");
                 }
             }
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -22011,6 +24495,8 @@ namespace SharpOnvifCommon.Onvif
         private bool wearFieldSpecified;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Describe the Color of Gloves, acceptable values are defined in tt:ColorDescriptor.
@@ -22050,9 +24536,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Gloves"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -22062,6 +24560,12 @@ namespace SharpOnvifCommon.Onvif
                 writer.WriteElementString(Ns.AnalyticsHumanbody, "Wear", writer.ToXml(this.wearField));
             }
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -22155,6 +24659,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// List of supported H.264 Video Resolutions
         /// </summary>
@@ -22202,9 +24708,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "H264DecOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -22225,6 +24743,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "SupportedInputBitrate", this.supportedInputBitrateField, Ns.OnvifVer10, "IntRange");
             writer.WriteElement(Ns.OnvifVer10, "SupportedFrameRate", this.supportedFrameRateField, Ns.OnvifVer10, "IntRange");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -22381,6 +24905,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Supported range of encoded bitrate in kbps.
         /// </summary>
@@ -22398,15 +24924,35 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "H264Options2"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            base.WriteXmlAttributes(writer);
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             base.WriteXmlContent(writer);
             writer.WriteElement(Ns.OnvifVer10, "BitrateRange", this.bitrateRangeField, Ns.OnvifVer10, "IntRange");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -22540,6 +25086,8 @@ namespace SharpOnvifCommon.Onvif
     {
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -22547,13 +25095,31 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Header"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.SoapEnvelope; } }
 
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -22572,6 +25138,8 @@ namespace SharpOnvifCommon.Onvif
         private string nameField;
 
         private HostnameInformationExtension extensionField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Indicates whether the hostname has been obtained from DHCP or not.
@@ -22600,15 +25168,33 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "HostnameInformation"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "FromDHCP", writer.ToXml(this.fromDHCPField));
             writer.WriteElementString(Ns.OnvifVer10, "Name", this.nameField);
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "HostnameInformationExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -22677,6 +25263,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Describe the body metric of the body.
         /// </summary>
@@ -22734,9 +25322,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "HumanBody"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -22746,6 +25346,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.AnalyticsHumanbody, "Behaviour", this.behaviourField, Ns.AnalyticsHumanbody, "Behaviour");
             writer.WriteElement(Ns.AnalyticsHumanbody, "Belongings", this.belongingsField, Ns.AnalyticsHumanbody, "Belongings");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -22818,6 +25424,8 @@ namespace SharpOnvifCommon.Onvif
         private AdditionalFeatures additionalFeaturesField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Describe the age of the face.
@@ -23007,9 +25615,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "HumanFace"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanface; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -23034,6 +25654,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.AnalyticsHumanface, "Accessory", this.accessoryField, Ns.AnalyticsHumanface, "Accessory");
             writer.WriteElement(Ns.AnalyticsHumanface, "AdditionalFeatures", this.additionalFeaturesField, Ns.AnalyticsHumanface, "AdditionalFeatures");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -23127,6 +25753,8 @@ namespace SharpOnvifCommon.Onvif
 
         private IOCapabilitiesExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Number of input connectors.
         /// </summary>
@@ -23176,9 +25804,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "IOCapabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -23191,6 +25831,12 @@ namespace SharpOnvifCommon.Onvif
                 writer.WriteElementString(Ns.OnvifVer10, "RelayOutputs", writer.ToXml(this.relayOutputsField));
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "IOCapabilitiesExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -23228,6 +25874,8 @@ namespace SharpOnvifCommon.Onvif
         private string[] auxiliaryCommandsField;
 
         private IOCapabilitiesExtension2 extensionField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
@@ -23268,9 +25916,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "IOCapabilitiesExtension"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -23287,6 +25947,12 @@ namespace SharpOnvifCommon.Onvif
                 }
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "IOCapabilitiesExtension2");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -23353,6 +26019,8 @@ namespace SharpOnvifCommon.Onvif
 
         private IPAddressFilterExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public IPAddressFilterType Type
         {
@@ -23381,9 +26049,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "IPAddressFilter"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -23403,6 +26083,12 @@ namespace SharpOnvifCommon.Onvif
                 }
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "IPAddressFilterExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -23473,6 +26159,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// List of manually added IPv4 addresses.
         /// </summary>
@@ -23520,9 +26208,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "IPv4Configuration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -23537,6 +26237,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "FromDHCP", this.fromDHCPField, Ns.OnvifVer10, "PrefixedIPv4Address");
             writer.WriteElementString(Ns.OnvifVer10, "DHCP", writer.ToXml(this.dHCPField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -23749,6 +26455,8 @@ namespace SharpOnvifCommon.Onvif
 
         private IPv6ConfigurationExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Indicates whether router advertisment is used.
         /// </summary>
@@ -23827,9 +26535,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "IPv6Configuration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -23867,6 +26587,12 @@ namespace SharpOnvifCommon.Onvif
                 }
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "IPv6ConfigurationExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -24145,6 +26871,8 @@ namespace SharpOnvifCommon.Onvif
 
         private ImageStabilizationExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Parameter to enable/disable Image Stabilization feature.
         /// </summary>
@@ -24183,9 +26911,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ImageStabilization"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -24195,6 +26935,12 @@ namespace SharpOnvifCommon.Onvif
                 writer.WriteElementString(Ns.OnvifVer10, "Level", writer.ToXml(this.levelField));
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "ImageStabilizationExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -24258,6 +27004,8 @@ namespace SharpOnvifCommon.Onvif
 
         private ImageStabilizationOptionsExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Supported options of Image Stabilization mode parameter.
         /// </summary>
@@ -24285,9 +27033,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ImageStabilizationOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -24300,6 +27060,12 @@ namespace SharpOnvifCommon.Onvif
             }
             writer.WriteElement(Ns.OnvifVer10, "Level", this.levelField, Ns.OnvifVer10, "FloatRange");
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "ImageStabilizationOptionsExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -24358,6 +27124,8 @@ namespace SharpOnvifCommon.Onvif
     {
         private string xAddrField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Imaging service URI.
         /// </summary>
@@ -24368,13 +27136,31 @@ namespace SharpOnvifCommon.Onvif
             set { this.xAddrField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ImagingCapabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "XAddr", this.xAddrField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -24415,6 +27201,8 @@ namespace SharpOnvifCommon.Onvif
         private WhiteBalanceOptions whiteBalanceField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public BacklightCompensationOptions BacklightCompensation
@@ -24493,9 +27281,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ImagingOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -24516,6 +27316,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "WideDynamicRange", this.wideDynamicRangeField, Ns.OnvifVer10, "WideDynamicRangeOptions");
             writer.WriteElement(Ns.OnvifVer10, "WhiteBalance", this.whiteBalanceField, Ns.OnvifVer10, "WhiteBalanceOptions");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -24593,6 +27399,8 @@ namespace SharpOnvifCommon.Onvif
         private WhiteBalanceOptions20 whiteBalanceField;
 
         private ImagingOptions20Extension extensionField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Valid range of Backlight Compensation.
@@ -24701,9 +27509,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ImagingOptions20"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -24724,6 +27544,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "WideDynamicRange", this.wideDynamicRangeField, Ns.OnvifVer10, "WideDynamicRangeOptions20");
             writer.WriteElement(Ns.OnvifVer10, "WhiteBalance", this.whiteBalanceField, Ns.OnvifVer10, "WhiteBalanceOptions20");
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "ImagingOptions20Extension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -25040,6 +27866,8 @@ namespace SharpOnvifCommon.Onvif
 
         private ImagingSettingsExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Enabled/disabled BLC mode (on/off).
         /// </summary>
@@ -25202,9 +28030,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ImagingSettings"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -25234,6 +28074,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "WideDynamicRange", this.wideDynamicRangeField, Ns.OnvifVer10, "WideDynamicRange");
             writer.WriteElement(Ns.OnvifVer10, "WhiteBalance", this.whiteBalanceField, Ns.OnvifVer10, "WhiteBalance");
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "ImagingSettingsExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -25328,6 +28174,8 @@ namespace SharpOnvifCommon.Onvif
         private WhiteBalance20 whiteBalanceField;
 
         private ImagingSettingsExtension20 extensionField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Enabled/disabled BLC mode (on/off).
@@ -25491,9 +28339,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ImagingSettings20"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -25523,6 +28383,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "WideDynamicRange", this.wideDynamicRangeField, Ns.OnvifVer10, "WideDynamicRange20");
             writer.WriteElement(Ns.OnvifVer10, "WhiteBalance", this.whiteBalanceField, Ns.OnvifVer10, "WhiteBalance20");
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "ImagingSettingsExtension20");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -25856,6 +28722,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public FocusStatus FocusStatus
         {
@@ -25870,14 +28738,32 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ImagingStatus"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.OnvifVer10, "FocusStatus", this.focusStatusField, Ns.OnvifVer10, "FocusStatus");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -25902,6 +28788,8 @@ namespace SharpOnvifCommon.Onvif
 
         private ImagingStatus20Extension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Status of focus.
         /// </summary>
@@ -25919,14 +28807,32 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ImagingStatus20"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.OnvifVer10, "FocusStatus20", this.focusStatus20Field, Ns.OnvifVer10, "FocusStatus20");
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "ImagingStatus20Extension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -25983,6 +28889,8 @@ namespace SharpOnvifCommon.Onvif
 
         private string hrefField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -25997,6 +28905,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.hrefField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Include"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.XopInclude; } }
@@ -26004,6 +28919,7 @@ namespace SharpOnvifCommon.Onvif
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAttributeString(null, "href", this.hrefField);
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -26016,10 +28932,12 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "href":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.hrefField = reader.AttributeValue;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -26185,15 +29103,19 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "x":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.xField = reader.ToInt32(reader.AttributeValue);
                     return true;
                 case "y":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.yField = reader.ToInt32(reader.AttributeValue);
                     return true;
                 case "width":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.widthField = reader.ToInt32(reader.AttributeValue);
                     return true;
                 case "height":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.heightField = reader.ToInt32(reader.AttributeValue);
                     return true;
             }
@@ -26377,6 +29299,8 @@ namespace SharpOnvifCommon.Onvif
 
         private IrCutFilterAutoAdjustmentExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Specifies which boundaries to automatically toggle Ir cut filter following parameters are applied
         /// to. Its options shall be chosen from tt:IrCutFilterAutoBoundaryType.
@@ -26427,9 +29351,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "IrCutFilterAutoAdjustment"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -26440,6 +29376,12 @@ namespace SharpOnvifCommon.Onvif
             }
             writer.WriteElementString(Ns.OnvifVer10, "ResponseTime", this.responseTimeField);
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "IrCutFilterAutoAdjustmentExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -26510,6 +29452,8 @@ namespace SharpOnvifCommon.Onvif
 
         private IrCutFilterAutoAdjustmentOptionsExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Supported options of boundary types for adjustment of Ir cut filter auto mode. The opptions shall be
         /// chosen from tt:IrCutFilterAutoBoundaryType.
@@ -26559,9 +29503,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "IrCutFilterAutoAdjustmentOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -26578,6 +29534,12 @@ namespace SharpOnvifCommon.Onvif
             }
             writer.WriteElement(Ns.OnvifVer10, "ResponseTimeRange", this.responseTimeRangeField, Ns.OnvifVer10, "DurationRange");
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "IrCutFilterAutoAdjustmentOptionsExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -26645,6 +29607,8 @@ namespace SharpOnvifCommon.Onvif
 
         private ItemListExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Value name pair as defined by the corresponding description.
         /// </summary>
@@ -26672,9 +29636,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ItemList"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -26693,6 +29669,12 @@ namespace SharpOnvifCommon.Onvif
                 }
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "ItemListExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -26731,6 +29713,8 @@ namespace SharpOnvifCommon.Onvif
 
         private ItemListDescriptionExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Description of a simple item. The type must be of cathegory simpleType (xs:string, xs:integer,
         /// xs:float, ...).
@@ -26759,9 +29743,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ItemListDescription"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -26780,6 +29776,12 @@ namespace SharpOnvifCommon.Onvif
                 }
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "ItemListDescriptionExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -26841,9 +29843,11 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "Name":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.nameField = reader.AttributeValue;
                     return true;
                 case "Type":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.typeField = reader.ToQualifiedName(reader.AttributeValue);
                     return true;
             }
@@ -26915,9 +29919,11 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "Name":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.nameField = reader.AttributeValue;
                     return true;
                 case "Type":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.typeField = reader.ToQualifiedName(reader.AttributeValue);
                     return true;
             }
@@ -26964,6 +29970,7 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "Name":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.nameField = reader.AttributeValue;
                     return true;
             }
@@ -27044,9 +30051,11 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "Name":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.nameField = reader.AttributeValue;
                     return true;
                 case "Value":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.valueField = reader.AttributeValue;
                     return true;
             }
@@ -27065,6 +30074,8 @@ namespace SharpOnvifCommon.Onvif
         private IntRange supportedFrameRateField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// List of supported Jpeg Video Resolutions
@@ -27103,9 +30114,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "JpegDecOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -27119,6 +30142,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "SupportedInputBitrate", this.supportedInputBitrateField, Ns.OnvifVer10, "IntRange");
             writer.WriteElement(Ns.OnvifVer10, "SupportedFrameRate", this.supportedFrameRateField, Ns.OnvifVer10, "IntRange");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -27231,6 +30260,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Supported range of encoded bitrate in kbps.
         /// </summary>
@@ -27248,15 +30279,35 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "JpegOptions2"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            base.WriteXmlAttributes(writer);
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             base.WriteXmlContent(writer);
             writer.WriteElement(Ns.OnvifVer10, "BitrateRange", this.bitrateRangeField, Ns.OnvifVer10, "IntRange");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -27286,6 +30337,8 @@ namespace SharpOnvifCommon.Onvif
 
         private float likelihoodField;
         private bool likelihoodFieldSpecified;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public string Authority
@@ -27326,6 +30379,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.likelihoodFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "LabelInfo"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -27336,6 +30396,7 @@ namespace SharpOnvifCommon.Onvif
             {
                 writer.WriteAttributeString(null, "Likelihood", writer.ToXml(this.likelihoodField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -27350,11 +30411,13 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "Likelihood":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.likelihoodField = reader.ToSingle(reader.AttributeValue);
                     this.likelihoodFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -27386,6 +30449,8 @@ namespace SharpOnvifCommon.Onvif
 
         private LayoutExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// List of panes assembling the display layout.
         /// </summary>
@@ -27403,9 +30468,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Layout"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -27417,6 +30494,12 @@ namespace SharpOnvifCommon.Onvif
                 }
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "LayoutExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -27476,6 +30559,8 @@ namespace SharpOnvifCommon.Onvif
 
         private LayoutOptionsExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Lists the possible Pane Layouts of the Video Output
         /// </summary>
@@ -27493,9 +30578,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "LayoutOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -27507,6 +30604,12 @@ namespace SharpOnvifCommon.Onvif
                 }
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "LayoutOptionsExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -27570,6 +30673,8 @@ namespace SharpOnvifCommon.Onvif
         private float focalLengthField;
         private bool focalLengthFieldSpecified;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Offset of the lens center to the imager center in normalized coordinates.
         /// </summary>
@@ -27631,6 +30736,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.focalLengthFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "LensDescription"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -27641,6 +30753,7 @@ namespace SharpOnvifCommon.Onvif
             {
                 writer.WriteAttributeString(null, "FocalLength", writer.ToXml(this.focalLengthField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -27662,11 +30775,13 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "FocalLength":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.focalLengthField = reader.ToSingle(reader.AttributeValue);
                     this.focalLengthFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -27700,6 +30815,8 @@ namespace SharpOnvifCommon.Onvif
 
         private float yField;
         private bool yFieldSpecified;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Optional horizontal offset of the lens center in normalized coordinates.
@@ -27743,6 +30860,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.yFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "LensOffset"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -27757,6 +30881,7 @@ namespace SharpOnvifCommon.Onvif
             {
                 writer.WriteAttributeString(null, "y", writer.ToXml(this.yField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -27764,15 +30889,18 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "x":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.xField = reader.ToSingle(reader.AttributeValue);
                     this.xFieldSpecified = true;
                     return true;
                 case "y":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.yField = reader.ToSingle(reader.AttributeValue);
                     this.yFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
     }
@@ -27788,6 +30916,8 @@ namespace SharpOnvifCommon.Onvif
         private bool transmittanceFieldSpecified;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Angle of incidence.
@@ -27837,9 +30967,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "LensProjection"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -27850,6 +30992,12 @@ namespace SharpOnvifCommon.Onvif
                 writer.WriteElementString(Ns.OnvifVer10, "Transmittance", writer.ToXml(this.transmittanceField));
             }
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -27888,6 +31036,8 @@ namespace SharpOnvifCommon.Onvif
         private StringLikelihood issuingEntityField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// A string of vehicle license plate number.
@@ -27936,9 +31086,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "LicensePlateInfo"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -27947,6 +31109,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "CountryCode", this.countryCodeField, Ns.OnvifVer10, "StringLikelihood");
             writer.WriteElement(Ns.OnvifVer10, "IssuingEntity", this.issuingEntityField, Ns.OnvifVer10, "StringLikelihood");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -27989,6 +31157,8 @@ namespace SharpOnvifCommon.Onvif
 
         private float zField;
         private bool zFieldSpecified;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
@@ -28060,6 +31230,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.zFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "LocalLocation"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -28078,6 +31255,7 @@ namespace SharpOnvifCommon.Onvif
             {
                 writer.WriteAttributeString(null, "z", writer.ToXml(this.zField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -28090,19 +31268,23 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "x":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.xField = reader.ToSingle(reader.AttributeValue);
                     this.xFieldSpecified = true;
                     return true;
                 case "y":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.yField = reader.ToSingle(reader.AttributeValue);
                     this.yFieldSpecified = true;
                     return true;
                 case "z":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.zField = reader.ToSingle(reader.AttributeValue);
                     this.zFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -28126,6 +31308,8 @@ namespace SharpOnvifCommon.Onvif
 
         private float rollField;
         private bool rollFieldSpecified;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
@@ -28197,6 +31381,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.rollFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "LocalOrientation"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -28215,6 +31406,7 @@ namespace SharpOnvifCommon.Onvif
             {
                 writer.WriteAttributeString(null, "roll", writer.ToXml(this.rollField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -28227,19 +31419,23 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "pan":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.panField = reader.ToSingle(reader.AttributeValue);
                     this.panFieldSpecified = true;
                     return true;
                 case "tilt":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.tiltField = reader.ToSingle(reader.AttributeValue);
                     this.tiltFieldSpecified = true;
                     return true;
                 case "roll":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.rollField = reader.ToSingle(reader.AttributeValue);
                     this.rollFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -28417,19 +31613,24 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "Entity":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.entityField = reader.AttributeValue;
                     return true;
                 case "Token":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.tokenField = reader.AttributeValue;
                     return true;
                 case "Fixed":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.fixedField = reader.ToBoolean(reader.AttributeValue);
                     this.fixedFieldSpecified = true;
                     return true;
                 case "GeoSource":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.geoSourceField = reader.AttributeValue;
                     return true;
                 case "AutoGeo":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.autoGeoField = reader.ToBoolean(reader.AttributeValue);
                     this.autoGeoFieldSpecified = true;
                     return true;
@@ -28482,6 +31683,8 @@ namespace SharpOnvifCommon.Onvif
 
         private int dateAndTimeField;
         private bool dateAndTimeFieldSpecified;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public int Total
@@ -28580,6 +31783,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.dateAndTimeFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "MaximumNumberOfOSDs"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -28607,6 +31817,7 @@ namespace SharpOnvifCommon.Onvif
             {
                 writer.WriteAttributeString(null, "DateAndTime", writer.ToXml(this.dateAndTimeField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -28614,30 +31825,37 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "Total":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.totalField = reader.ToInt32(reader.AttributeValue);
                     return true;
                 case "Image":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.imageField = reader.ToInt32(reader.AttributeValue);
                     this.imageFieldSpecified = true;
                     return true;
                 case "PlainText":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.plainTextField = reader.ToInt32(reader.AttributeValue);
                     this.plainTextFieldSpecified = true;
                     return true;
                 case "Date":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.dateField = reader.ToInt32(reader.AttributeValue);
                     this.dateFieldSpecified = true;
                     return true;
                 case "Time":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.timeField = reader.ToInt32(reader.AttributeValue);
                     this.timeFieldSpecified = true;
                     return true;
                 case "DateAndTime":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.dateAndTimeField = reader.ToInt32(reader.AttributeValue);
                     this.dateAndTimeFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
     }
@@ -28657,6 +31875,8 @@ namespace SharpOnvifCommon.Onvif
         private System.DateTime untilField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// A reference to the recording that has these attributes.
@@ -28706,9 +31926,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "MediaAttributes"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -28723,6 +31955,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.OnvifVer10, "From", writer.ToXml(this.fromField));
             writer.WriteElementString(Ns.OnvifVer10, "Until", writer.ToXml(this.untilField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -28763,6 +32001,8 @@ namespace SharpOnvifCommon.Onvif
 
         private MediaCapabilitiesExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Media service URI.
         /// </summary>
@@ -28797,9 +32037,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "MediaCapabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -28807,6 +32059,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "StreamingCapabilities", this.streamingCapabilitiesField, Ns.OnvifVer10, "RealTimeStreamingCapabilities");
             writer.WriteAny(this.anyField);
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "MediaCapabilitiesExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -28839,6 +32097,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public ProfileCapabilities ProfileCapabilities
         {
@@ -28853,14 +32113,32 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "MediaCapabilitiesExtension"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.OnvifVer10, "ProfileCapabilities", this.profileCapabilitiesField, Ns.OnvifVer10, "ProfileCapabilities");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -28890,6 +32168,8 @@ namespace SharpOnvifCommon.Onvif
         private string timeoutField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Stable Uri to be used for requesting the media stream.
@@ -28940,9 +32220,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "MediaUri"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -28951,6 +32243,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.OnvifVer10, "InvalidAfterReboot", writer.ToXml(this.invalidAfterRebootField));
             writer.WriteElementString(Ns.OnvifVer10, "Timeout", this.timeoutField);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -29050,6 +32348,8 @@ namespace SharpOnvifCommon.Onvif
         private bool isPropertyField;
         private bool isPropertyFieldSpecified;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Set of tokens producing this message. The list may only contain SimpleItemDescription items. The set
         /// of tokens identify the component within the WS-Endpoint, which is responsible for the producing the
@@ -29114,6 +32414,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.isPropertyFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "MessageDescription"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -29124,6 +32431,7 @@ namespace SharpOnvifCommon.Onvif
             {
                 writer.WriteAttributeString(null, "IsProperty", writer.ToXml(this.isPropertyField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -29139,11 +32447,13 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "IsProperty":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.isPropertyField = reader.ToBoolean(reader.AttributeValue);
                     this.isPropertyFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -29243,6 +32553,8 @@ namespace SharpOnvifCommon.Onvif
 
         private string[] ptzSpacesField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Indicates that there can be PTZ data in the metadata track in the specified time interval.
         /// </summary>
@@ -29291,6 +32603,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.ptzSpacesField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "MetadataAttributes"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -29298,6 +32617,7 @@ namespace SharpOnvifCommon.Onvif
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAttributeString(null, "PtzSpaces", writer.JoinList(this.ptzSpacesField));
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -29313,10 +32633,12 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "PtzSpaces":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.ptzSpacesField = reader.SplitList(reader.AttributeValue);
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -29373,6 +32695,8 @@ namespace SharpOnvifCommon.Onvif
         private bool shapePolygonFieldSpecified;
 
         private string secureStreamingProtocolAlgorithmField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Optional element to configure which PTZ related data is to include in the metadata stream.
@@ -29544,6 +32868,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.secureStreamingProtocolAlgorithmField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "MetadataConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -29561,6 +32892,7 @@ namespace SharpOnvifCommon.Onvif
                 writer.WriteAttributeString(null, "ShapePolygon", writer.ToXml(this.shapePolygonField));
             }
             writer.WriteAttributeString(null, "SecureStreamingProtocolAlgorithm", this.secureStreamingProtocolAlgorithmField);
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -29585,21 +32917,27 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "CompressionType":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.compressionTypeField = reader.AttributeValue;
                     return true;
                 case "GeoLocation":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.geoLocationField = reader.ToBoolean(reader.AttributeValue);
                     this.geoLocationFieldSpecified = true;
                     return true;
                 case "ShapePolygon":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.shapePolygonField = reader.ToBoolean(reader.AttributeValue);
                     this.shapePolygonFieldSpecified = true;
                     return true;
                 case "SecureStreamingProtocolAlgorithm":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.secureStreamingProtocolAlgorithmField = reader.AttributeValue;
                     return true;
             }
-            return base.ReadXmlAttribute(reader);
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -29695,6 +33033,8 @@ namespace SharpOnvifCommon.Onvif
 
         private string[] secureStreamingProtocolAlgorithmsField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public PTZStatusFilterOptions PTZStatusFilterOptions
         {
@@ -29780,6 +33120,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.secureStreamingProtocolAlgorithmsField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "MetadataConfigurationOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -29795,6 +33142,7 @@ namespace SharpOnvifCommon.Onvif
                 writer.WriteAttributeString(null, "MaxContentFilterSize", writer.ToXml(this.maxContentFilterSizeField));
             }
             writer.WriteAttributeString(null, "SecureStreamingProtocolAlgorithms", writer.JoinList(this.secureStreamingProtocolAlgorithmsField));
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -29810,18 +33158,22 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "GeoLocation":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.geoLocationField = reader.ToBoolean(reader.AttributeValue);
                     this.geoLocationFieldSpecified = true;
                     return true;
                 case "MaxContentFilterSize":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxContentFilterSizeField = reader.ToInt32(reader.AttributeValue);
                     this.maxContentFilterSizeFieldSpecified = true;
                     return true;
                 case "SecureStreamingProtocolAlgorithms":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.secureStreamingProtocolAlgorithmsField = reader.SplitList(reader.AttributeValue);
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -29942,6 +33294,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public string MetadataStreamFilter
         {
@@ -29956,14 +33310,32 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "MetadataFilter"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "MetadataStreamFilter", this.metadataStreamFilterField);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -29988,6 +33360,8 @@ namespace SharpOnvifCommon.Onvif
 
         private MetadataInputExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute("MetadataConfig", Order=0)]
         public Config[] MetadataConfig
         {
@@ -30002,9 +33376,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "MetadataInput"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -30016,6 +33402,12 @@ namespace SharpOnvifCommon.Onvif
                 }
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "MetadataInputExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -30072,6 +33464,8 @@ namespace SharpOnvifCommon.Onvif
 
         private ItemsChoiceType[] itemsElementNameField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Event", typeof(EventStream), Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Extension", typeof(MetadataStreamExtension), Order=0)]
@@ -30093,9 +33487,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.itemsElementNameField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "MetadataStream"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -30129,6 +33535,12 @@ namespace SharpOnvifCommon.Onvif
                     }
                 }
             }
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -30233,6 +33645,8 @@ namespace SharpOnvifCommon.Onvif
     {
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Namespace="http://www.onvif.org/ver10/schema", Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -30240,13 +33654,31 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "MetadataStreamExtension2"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -30262,6 +33694,8 @@ namespace SharpOnvifCommon.Onvif
     {
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -30269,13 +33703,31 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "MetadataType"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.i08Addressing; } }
 
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -30294,6 +33746,8 @@ namespace SharpOnvifCommon.Onvif
         private System.Xml.XmlElement[] anyField;
 
         private string typeField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Motion Expression data structure contains motion expression which is based on Scene Descriptor
@@ -30320,6 +33774,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.typeField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "MotionExpression"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -30327,6 +33788,7 @@ namespace SharpOnvifCommon.Onvif
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAttributeString(null, "Type", this.typeField);
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -30340,10 +33802,12 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "Type":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.typeField = reader.AttributeValue;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -30368,6 +33832,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Contains Rule MotionExpression configuration
         /// </summary>
@@ -30385,14 +33851,32 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "MotionExpressionConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.OnvifVer10, "MotionExpression", this.motionExpressionField, Ns.OnvifVer10, "MotionExpression");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -30420,6 +33904,8 @@ namespace SharpOnvifCommon.Onvif
         private string rowsField;
 
         private byte[] cellsField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
@@ -30461,6 +33947,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.cellsField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "MotionInCells"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -30470,6 +33963,7 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteAttributeString(null, "Columns", this.columnsField);
             writer.WriteAttributeString(null, "Rows", this.rowsField);
             writer.WriteAttributeString(null, "Cells", writer.ToXml(this.cellsField));
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -30482,16 +33976,20 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "Columns":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.columnsField = reader.AttributeValue;
                     return true;
                 case "Rows":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.rowsField = reader.AttributeValue;
                     return true;
                 case "Cells":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.cellsField = reader.ToByteArray(reader.AttributeValue);
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -30707,6 +34205,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// List of supported Mpeg4 Video Resolutions
         /// </summary>
@@ -30754,9 +34254,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Mpeg4DecOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -30777,6 +34289,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "SupportedInputBitrate", this.supportedInputBitrateField, Ns.OnvifVer10, "IntRange");
             writer.WriteElement(Ns.OnvifVer10, "SupportedFrameRate", this.supportedFrameRateField, Ns.OnvifVer10, "IntRange");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -30933,6 +34451,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Supported range of encoded bitrate in kbps.
         /// </summary>
@@ -30950,15 +34470,35 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Mpeg4Options2"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            base.WriteXmlAttributes(writer);
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             base.WriteXmlContent(writer);
             writer.WriteElement(Ns.OnvifVer10, "BitrateRange", this.bitrateRangeField, Ns.OnvifVer10, "IntRange");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -31004,6 +34544,8 @@ namespace SharpOnvifCommon.Onvif
         private SRTPPreShared sRTPPreSharedParametersField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Indicates whether the Multicast Audio Decoder is enabled or disabled.
@@ -31119,9 +34661,22 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "MulticastAudioDecoderConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            base.WriteXmlAttributes(writer);
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -31143,6 +34698,13 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.OnvifVer10, "MediaFormatParameters", this.mediaFormatParametersField);
             writer.WriteElement(Ns.OnvifVer10, "SRTPPreSharedParameters", this.sRTPPreSharedParametersField, Ns.OnvifVer10, "SRTPPreShared");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -31210,6 +34772,8 @@ namespace SharpOnvifCommon.Onvif
 
         private string[] secureStreamingProtocolAlgorithmsField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Supported encoding options for the multicast audio decoder.
         /// </summary>
@@ -31261,6 +34825,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.secureStreamingProtocolAlgorithmsField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "MulticastAudioDecoderConfigurationOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -31268,6 +34839,7 @@ namespace SharpOnvifCommon.Onvif
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAttributeString(null, "SecureStreamingProtocolAlgorithms", writer.JoinList(this.secureStreamingProtocolAlgorithmsField));
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -31283,10 +34855,12 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "SecureStreamingProtocolAlgorithms":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.secureStreamingProtocolAlgorithmsField = reader.SplitList(reader.AttributeValue);
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -31324,6 +34898,8 @@ namespace SharpOnvifCommon.Onvif
         private bool autoStartField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// The multicast address (if this address is set to 0 no multicast streaming is enabled)
@@ -31377,9 +34953,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "MulticastConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -31388,6 +34976,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.OnvifVer10, "TTL", writer.ToXml(this.tTLField));
             writer.WriteElementString(Ns.OnvifVer10, "AutoStart", writer.ToXml(this.autoStartField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -31431,6 +35025,8 @@ namespace SharpOnvifCommon.Onvif
         private OnvifIPAddress sourceSpecificMulticastField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// The multicast address (if this address is set to 0 no multicast streaming is enabled)
@@ -31495,9 +35091,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "MulticastReceiverConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -31513,6 +35121,12 @@ namespace SharpOnvifCommon.Onvif
             }
             writer.WriteElement(Ns.OnvifVer10, "SourceSpecificMulticast", this.sourceSpecificMulticastField, Ns.OnvifVer10, "IPAddress");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -31566,6 +35180,8 @@ namespace SharpOnvifCommon.Onvif
 
         private NTPInformationExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Indicates if NTP information is to be retrieved by using DHCP.
         /// </summary>
@@ -31603,9 +35219,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "NTPInformation"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -31625,6 +35253,12 @@ namespace SharpOnvifCommon.Onvif
                 }
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "NTPInformationExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -31698,6 +35332,8 @@ namespace SharpOnvifCommon.Onvif
         private bool dynDNSFieldSpecified;
 
         private NetworkCapabilitiesExtension extensionField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Indicates whether or not IP filtering is supported.
@@ -31790,9 +35426,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "NetworkCapabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -31813,6 +35461,12 @@ namespace SharpOnvifCommon.Onvif
                 writer.WriteElementString(Ns.OnvifVer10, "DynDNS", writer.ToXml(this.dynDNSField));
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "NetworkCapabilitiesExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -32034,6 +35688,8 @@ namespace SharpOnvifCommon.Onvif
 
         private NetworkHostExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Network host type: IPv4, IPv6 or DNS.
         /// </summary>
@@ -32081,9 +35737,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "NetworkHost"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -32092,6 +35760,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.OnvifVer10, "IPv6Address", this.iPv6AddressField);
             writer.WriteElementString(Ns.OnvifVer10, "DNSname", this.dNSnameField);
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "NetworkHostExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -32534,6 +36208,8 @@ namespace SharpOnvifCommon.Onvif
 
         private NetworkInterfaceSetConfigurationExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Indicates whether or not an interface is enabled.
         /// </summary>
@@ -32613,9 +36289,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "NetworkInterfaceSetConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -32631,6 +36319,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "IPv4", this.iPv4Field, Ns.OnvifVer10, "IPv4NetworkInterfaceSetConfiguration");
             writer.WriteElement(Ns.OnvifVer10, "IPv6", this.iPv6Field, Ns.OnvifVer10, "IPv6NetworkInterfaceSetConfiguration");
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "NetworkInterfaceSetConfigurationExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -32795,6 +36489,8 @@ namespace SharpOnvifCommon.Onvif
 
         private NetworkProtocolExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Network protocol type string.
         /// </summary>
@@ -32832,9 +36528,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "NetworkProtocol"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -32848,6 +36556,12 @@ namespace SharpOnvifCommon.Onvif
                 }
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "NetworkProtocolExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -32916,6 +36630,8 @@ namespace SharpOnvifCommon.Onvif
 
         private NetworkZeroConfigurationExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Unique identifier of network interface.
         /// </summary>
@@ -32953,9 +36669,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "NetworkZeroConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -32969,6 +36697,12 @@ namespace SharpOnvifCommon.Onvif
                 }
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "NetworkZeroConfigurationExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -33111,6 +36845,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Level parameter specified with unitless normalized value from 0.0 to +1.0. Level=0 means no noise
         /// reduction or minimal noise reduction.
@@ -33129,14 +36865,32 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "NoiseReduction"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "Level", writer.ToXml(this.levelField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -33161,6 +36915,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Indicates whether or not support Level parameter for NoiseReduction.
         /// </summary>
@@ -33178,14 +36934,32 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "NoiseReductionOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "Level", writer.ToXml(this.levelField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -33215,6 +36989,8 @@ namespace SharpOnvifCommon.Onvif
         private string noseEndField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Describe the length of the nose, acceptable values are defined in fc:NoseLength. Long usually means
@@ -33265,9 +37041,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Nose"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanface; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -33276,6 +37064,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.AnalyticsHumanface, "NoseWing", this.noseWingField);
             writer.WriteElementString(Ns.AnalyticsHumanface, "NoseEnd", this.noseEndField);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -33331,6 +37125,7 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "qname":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.qnameField = reader.ToQualifiedName(reader.AttributeValue);
                     return true;
             }
@@ -33442,6 +37237,8 @@ namespace SharpOnvifCommon.Onvif
         private int transparentField;
         private bool transparentFieldSpecified;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public Color Color
         {
@@ -33467,6 +37264,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.transparentFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "OSDColor"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -33477,6 +37281,7 @@ namespace SharpOnvifCommon.Onvif
             {
                 writer.WriteAttributeString(null, "Transparent", writer.ToXml(this.transparentField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -33489,11 +37294,13 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "Transparent":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.transparentField = reader.ToInt32(reader.AttributeValue);
                     this.transparentFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -33522,6 +37329,8 @@ namespace SharpOnvifCommon.Onvif
 
         private OSDColorOptionsExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Optional list of supported colors.
         /// </summary>
@@ -33549,15 +37358,33 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "OSDColorOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.OnvifVer10, "Color", this.colorField, Ns.OnvifVer10, "ColorOptions");
             writer.WriteElement(Ns.OnvifVer10, "Transparent", this.transparentField, Ns.OnvifVer10, "IntRange");
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "OSDColorOptionsExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -33587,6 +37414,8 @@ namespace SharpOnvifCommon.Onvif
     {
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -33594,13 +37423,31 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "OSDColorOptionsExtension"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -33625,6 +37472,8 @@ namespace SharpOnvifCommon.Onvif
         private OSDImgConfiguration imageField;
 
         private OSDConfigurationExtension extensionField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Reference to the video source configuration.
@@ -33683,9 +37532,22 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "OSDConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            base.WriteXmlAttributes(writer);
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -33696,6 +37558,13 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "TextString", this.textStringField, Ns.OnvifVer10, "OSDTextConfiguration");
             writer.WriteElement(Ns.OnvifVer10, "Image", this.imageField, Ns.OnvifVer10, "OSDImgConfiguration");
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "OSDConfigurationExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -33738,6 +37607,8 @@ namespace SharpOnvifCommon.Onvif
     {
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -33745,13 +37616,31 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "OSDConfigurationExtension"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -33776,6 +37665,8 @@ namespace SharpOnvifCommon.Onvif
         private OSDImgOptions imageOptionField;
 
         private OSDConfigurationOptionsExtension extensionField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// The maximum number of OSD configurations supported for the specified video source configuration. If
@@ -33842,9 +37733,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "OSDConfigurationOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -33866,6 +37769,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "TextOption", this.textOptionField, Ns.OnvifVer10, "OSDTextOptions");
             writer.WriteElement(Ns.OnvifVer10, "ImageOption", this.imageOptionField, Ns.OnvifVer10, "OSDImgOptions");
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "OSDConfigurationOptionsExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -33907,6 +37816,8 @@ namespace SharpOnvifCommon.Onvif
     {
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -33914,13 +37825,31 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "OSDConfigurationOptionsExtension"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -33937,6 +37866,8 @@ namespace SharpOnvifCommon.Onvif
         private string imgPathField;
 
         private OSDImgConfigurationExtension extensionField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// The URI of the image which to be displayed.
@@ -33955,14 +37886,32 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "OSDImgConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "ImgPath", this.imgPathField);
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "OSDImgConfigurationExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -33988,6 +37937,8 @@ namespace SharpOnvifCommon.Onvif
     {
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -33995,13 +37946,31 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "OSDImgConfigurationExtension"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -34029,6 +37998,8 @@ namespace SharpOnvifCommon.Onvif
 
         private int maxHeightField;
         private bool maxHeightFieldSpecified;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// List of available image URIs.
@@ -34120,6 +38091,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.maxHeightFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "OSDImgOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -34139,6 +38117,7 @@ namespace SharpOnvifCommon.Onvif
             {
                 writer.WriteAttributeString(null, "MaxHeight", writer.ToXml(this.maxHeightField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -34158,22 +38137,27 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "FormatsSupported":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.formatsSupportedField = reader.SplitList(reader.AttributeValue);
                     return true;
                 case "MaxSize":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxSizeField = reader.ToInt32(reader.AttributeValue);
                     this.maxSizeFieldSpecified = true;
                     return true;
                 case "MaxWidth":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxWidthField = reader.ToInt32(reader.AttributeValue);
                     this.maxWidthFieldSpecified = true;
                     return true;
                 case "MaxHeight":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxHeightField = reader.ToInt32(reader.AttributeValue);
                     this.maxHeightFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -34199,6 +38183,8 @@ namespace SharpOnvifCommon.Onvif
     {
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -34206,13 +38192,31 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "OSDImgOptionsExtension"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -34231,6 +38235,8 @@ namespace SharpOnvifCommon.Onvif
         private Vector posField;
 
         private OSDPosConfigurationExtension extensionField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// For OSD position type, following are the pre-defined: UpperLeftUpperRightLowerLeftLowerRightCustom
@@ -34256,15 +38262,33 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "OSDPosConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "Type", this.typeField);
             writer.WriteElement(Ns.OnvifVer10, "Pos", this.posField, Ns.OnvifVer10, "Vector");
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "OSDPosConfigurationExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -34294,6 +38318,8 @@ namespace SharpOnvifCommon.Onvif
     {
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -34301,13 +38327,31 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "OSDPosConfigurationExtension"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -34323,6 +38367,8 @@ namespace SharpOnvifCommon.Onvif
     {
         private string valueField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlTextAttribute()]
         public string Value
         {
@@ -34330,13 +38376,31 @@ namespace SharpOnvifCommon.Onvif
             set { this.valueField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "OSDReference"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteText(this.valueField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override void ReadXmlText(SharpOnvifCommon.Xml.IXmlReader reader, string text)
@@ -34368,6 +38432,8 @@ namespace SharpOnvifCommon.Onvif
 
         private bool isPersistentTextField;
         private bool isPersistentTextFieldSpecified;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// The following OSD Text Type are defined:Plain - The Plain type means the OSD is shown as a text
@@ -34490,6 +38556,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.isPersistentTextFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "OSDTextConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -34500,6 +38573,7 @@ namespace SharpOnvifCommon.Onvif
             {
                 writer.WriteAttributeString(null, "IsPersistentText", writer.ToXml(this.isPersistentTextField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -34522,11 +38596,13 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "IsPersistentText":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.isPersistentTextField = reader.ToBoolean(reader.AttributeValue);
                     this.isPersistentTextFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -34577,6 +38653,8 @@ namespace SharpOnvifCommon.Onvif
     {
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -34584,13 +38662,31 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "OSDTextConfigurationExtension"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -34617,6 +38713,8 @@ namespace SharpOnvifCommon.Onvif
         private OSDColorOptions backgroundColorField;
 
         private OSDTextOptionsExtension extensionField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// List of supported OSD text type. When a device indicates the supported number relating to Text type
@@ -34686,9 +38784,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "OSDTextOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -34717,6 +38827,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "FontColor", this.fontColorField, Ns.OnvifVer10, "OSDColorOptions");
             writer.WriteElement(Ns.OnvifVer10, "BackgroundColor", this.backgroundColorField, Ns.OnvifVer10, "OSDColorOptions");
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "OSDTextOptionsExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -34762,6 +38878,8 @@ namespace SharpOnvifCommon.Onvif
     {
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -34769,13 +38887,31 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "OSDTextOptionsExtension"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -34855,9 +38991,11 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "ObjectId":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.objectId1Field = reader.AttributeValue;
                     return true;
                 case "UUID":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.uUIDField = reader.AttributeValue;
                     return true;
             }
@@ -34897,6 +39035,7 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "CaptureTime":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.captureTimeField = reader.ToDateTime(reader.AttributeValue);
                     return true;
             }
@@ -34914,6 +39053,8 @@ namespace SharpOnvifCommon.Onvif
     {
         private ObjectState[] objectStateField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute("ObjectState", Order=0)]
         public ObjectState[] ObjectState
         {
@@ -34921,9 +39062,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.objectStateField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ObjectTrack"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -34934,6 +39087,12 @@ namespace SharpOnvifCommon.Onvif
                     writer.WriteElement(Ns.OnvifVer10, "ObjectState", this.objectStateField[i], Ns.OnvifVer10, "ObjectState");
                 }
             }
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -34964,6 +39123,8 @@ namespace SharpOnvifCommon.Onvif
         private ObjectTreeExtension extensionField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         [System.Xml.Serialization.XmlElementAttribute("Rename", Order=0)]
         public Rename[] Rename
@@ -35007,9 +39168,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ObjectTree"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -35043,6 +39216,12 @@ namespace SharpOnvifCommon.Onvif
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "ObjectTreeExtension");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -35117,6 +39296,8 @@ namespace SharpOnvifCommon.Onvif
 
         private string valueField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -35144,6 +39325,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.valueField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Attribute"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Pacs; } }
@@ -35152,6 +39340,7 @@ namespace SharpOnvifCommon.Onvif
         {
             writer.WriteAttributeString(null, "Name", this.nameField);
             writer.WriteAttributeString(null, "Value", this.valueField);
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -35164,13 +39353,16 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "Name":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.nameField = reader.AttributeValue;
                     return true;
                 case "Value":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.valueField = reader.AttributeValue;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -35317,6 +39509,8 @@ namespace SharpOnvifCommon.Onvif
 
         private NetworkInterfaceExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Indicates whether or not an interface is enabled.
         /// </summary>
@@ -35374,9 +39568,22 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "NetworkInterface"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            base.WriteXmlAttributes(writer);
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -35387,6 +39594,13 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "IPv4", this.iPv4Field, Ns.OnvifVer10, "IPv4NetworkInterface");
             writer.WriteElement(Ns.OnvifVer10, "IPv6", this.iPv6Field, Ns.OnvifVer10, "IPv6NetworkInterface");
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "NetworkInterfaceExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -35440,6 +39654,8 @@ namespace SharpOnvifCommon.Onvif
 
         private string parentUUIDField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public Appearance Appearance
         {
@@ -35488,6 +39704,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.parentUUIDField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Object"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -35497,6 +39720,7 @@ namespace SharpOnvifCommon.Onvif
             base.WriteXmlAttributes(writer);
             writer.WriteAttributeString(null, "Parent", this.parentField);
             writer.WriteAttributeString(null, "ParentUUID", this.parentUUIDField);
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -35513,13 +39737,17 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "Parent":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.parentField = reader.AttributeValue;
                     return true;
                 case "ParentUUID":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.parentUUIDField = reader.AttributeValue;
                     return true;
             }
-            return base.ReadXmlAttribute(reader);
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -35715,6 +39943,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Object Class Type
         /// </summary>
@@ -35743,15 +39973,33 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "OtherType"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "Type", this.typeField);
             writer.WriteElementString(Ns.OnvifVer10, "Likelihood", writer.ToXml(this.likelihoodField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -35782,6 +40030,8 @@ namespace SharpOnvifCommon.Onvif
 
         private PTControlDirectionExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Optional element to configure related parameters for E-Flip.
         /// </summary>
@@ -35809,15 +40059,33 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "PTControlDirection"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.OnvifVer10, "EFlip", this.eFlipField, Ns.OnvifVer10, "EFlip");
             writer.WriteElement(Ns.OnvifVer10, "Reverse", this.reverseField, Ns.OnvifVer10, "Reverse");
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "PTControlDirectionExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -35847,6 +40115,8 @@ namespace SharpOnvifCommon.Onvif
     {
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Namespace="http://www.onvif.org/ver10/schema", Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -35854,13 +40124,31 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "PTControlDirectionExtension"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -35879,6 +40167,8 @@ namespace SharpOnvifCommon.Onvif
         private ReverseOptions reverseField;
 
         private PTControlDirectionOptionsExtension extensionField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Supported options for EFlip feature.
@@ -35907,15 +40197,33 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "PTControlDirectionOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.OnvifVer10, "EFlip", this.eFlipField, Ns.OnvifVer10, "EFlipOptions");
             writer.WriteElement(Ns.OnvifVer10, "Reverse", this.reverseField, Ns.OnvifVer10, "ReverseOptions");
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "PTControlDirectionOptionsExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -35976,6 +40284,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// PTZ service URI.
         /// </summary>
@@ -35993,14 +40303,32 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "PTZCapabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "XAddr", this.xAddrField);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -36053,6 +40381,8 @@ namespace SharpOnvifCommon.Onvif
 
         private int presetTourRampField;
         private bool presetTourRampFieldSpecified;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// A mandatory reference to the PTZ Node that the PTZ Configuration belongs to.
@@ -36248,6 +40578,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.presetTourRampFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "PTZConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -36267,6 +40604,7 @@ namespace SharpOnvifCommon.Onvif
             {
                 writer.WriteAttributeString(null, "PresetTourRamp", writer.ToXml(this.presetTourRampField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -36291,19 +40629,24 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "MoveRamp":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.moveRampField = reader.ToInt32(reader.AttributeValue);
                     this.moveRampFieldSpecified = true;
                     return true;
                 case "PresetRamp":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.presetRampField = reader.ToInt32(reader.AttributeValue);
                     this.presetRampFieldSpecified = true;
                     return true;
                 case "PresetTourRamp":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.presetTourRampField = reader.ToInt32(reader.AttributeValue);
                     this.presetTourRampFieldSpecified = true;
                     return true;
             }
-            return base.ReadXmlAttribute(reader);
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -36472,6 +40815,8 @@ namespace SharpOnvifCommon.Onvif
 
         private int[] pTZRampsField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// A list of supported coordinate systems including their range limitations.
         /// </summary>
@@ -36527,6 +40872,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.pTZRampsField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "PTZConfigurationOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -36534,6 +40886,7 @@ namespace SharpOnvifCommon.Onvif
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAttributeString(null, "PTZRamps", writer.JoinList(System.Array.ConvertAll(this.pTZRampsField, x => writer.ToXml(x))));
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -36550,10 +40903,12 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "PTZRamps":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.pTZRampsField = System.Array.ConvertAll(reader.SplitList(reader.AttributeValue), x => reader.ToInt32(x));
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -36622,6 +40977,8 @@ namespace SharpOnvifCommon.Onvif
         private bool fieldOfViewField;
         private bool fieldOfViewFieldSpecified;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// True if the metadata stream shall contain the PTZ status (IDLE, MOVING or UNKNOWN).
         /// </summary>
@@ -36663,9 +41020,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.fieldOfViewFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "PTZFilter"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -36675,6 +41044,12 @@ namespace SharpOnvifCommon.Onvif
             {
                 writer.WriteElementString(Ns.OnvifVer10, "FieldOfView", writer.ToXml(this.fieldOfViewField));
             }
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -36802,6 +41177,8 @@ namespace SharpOnvifCommon.Onvif
         private bool geoMoveField;
         private bool geoMoveFieldSpecified;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// A unique identifier that is used to reference PTZ Nodes.
         /// </summary>
@@ -36905,6 +41282,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.geoMoveFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "PTZNode"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -36920,6 +41304,7 @@ namespace SharpOnvifCommon.Onvif
             {
                 writer.WriteAttributeString(null, "GeoMove", writer.ToXml(this.geoMoveField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -36944,15 +41329,19 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "FixedHomePosition":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.fixedHomePositionField = reader.ToBoolean(reader.AttributeValue);
                     this.fixedHomePositionFieldSpecified = true;
                     return true;
                 case "GeoMove":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.geoMoveField = reader.ToBoolean(reader.AttributeValue);
                     this.geoMoveFieldSpecified = true;
                     return true;
             }
-            return base.ReadXmlAttribute(reader);
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -37093,6 +41482,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// The lower boundary of the PTZ volume to look for.
         /// </summary>
@@ -37130,9 +41521,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "PTZPositionFilter"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -37140,6 +41543,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "MaxPosition", this.maxPositionField, Ns.OnvifVer10, "PTZVector");
             writer.WriteElementString(Ns.OnvifVer10, "EnterOrExit", writer.ToXml(this.enterOrExitField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -37174,6 +41583,8 @@ namespace SharpOnvifCommon.Onvif
 
         private string tokenField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// A list of preset position name.
         /// </summary>
@@ -37201,6 +41612,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.tokenField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "PTZPreset"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -37208,6 +41626,7 @@ namespace SharpOnvifCommon.Onvif
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAttributeString(null, "token", this.tokenField);
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -37221,10 +41640,12 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "token":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.tokenField = reader.AttributeValue;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -37285,6 +41706,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Indicates whether or not the AutoStart is supported.
         /// </summary>
@@ -37322,9 +41745,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "PTZPresetTourOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -37332,6 +41767,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "StartingCondition", this.startingConditionField, Ns.OnvifVer10, "PTZPresetTourStartingConditionOptions");
             writer.WriteElement(Ns.OnvifVer10, "TourSpot", this.tourSpotField, Ns.OnvifVer10, "PTZPresetTourSpotOptions");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -37364,6 +41805,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute("Home", typeof(bool), Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("PTZPosition", typeof(PTZVector), Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("PresetToken", typeof(string), Order=0)]
@@ -37381,9 +41824,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "PTZPresetTourPresetDetail"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -37404,6 +41859,12 @@ namespace SharpOnvifCommon.Onvif
                 writer.WriteElement(Ns.OnvifVer10, "TypeExtension", ((PTZPresetTourTypeExtension)this.itemField), Ns.OnvifVer10, "PTZPresetTourTypeExtension");
             }
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -37446,6 +41907,8 @@ namespace SharpOnvifCommon.Onvif
         private Space1DDescription zoomPositionSpaceField;
 
         private PTZPresetTourPresetDetailOptionsExtension extensionField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// A list of available Preset Tokens for tour spots.
@@ -37505,9 +41968,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "PTZPresetTourPresetDetailOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -37525,6 +42000,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "PanTiltPositionSpace", this.panTiltPositionSpaceField, Ns.OnvifVer10, "Space2DDescription");
             writer.WriteElement(Ns.OnvifVer10, "ZoomPositionSpace", this.zoomPositionSpaceField, Ns.OnvifVer10, "Space1DDescription");
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "PTZPresetTourPresetDetailOptionsExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -37598,6 +42079,8 @@ namespace SharpOnvifCommon.Onvif
 
         private PTZPresetTourSpotExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Detail definition of preset position of the tour spot.
         /// </summary>
@@ -37635,9 +42118,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "PTZPresetTourSpot"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -37645,6 +42140,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "Speed", this.speedField, Ns.OnvifVer10, "PTZSpeed");
             writer.WriteElementString(Ns.OnvifVer10, "StayTime", this.stayTimeField);
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "PTZPresetTourSpotExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -37711,6 +42212,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Supported options for detail definition of preset position of the tour spot.
         /// </summary>
@@ -37738,15 +42241,33 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "PTZPresetTourSpotOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.OnvifVer10, "PresetDetail", this.presetDetailField, Ns.OnvifVer10, "PTZPresetTourPresetDetailOptions");
             writer.WriteElement(Ns.OnvifVer10, "StayTime", this.stayTimeField, Ns.OnvifVer10, "DurationRange");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -37783,6 +42304,8 @@ namespace SharpOnvifCommon.Onvif
 
         private bool randomPresetOrderField;
         private bool randomPresetOrderFieldSpecified;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Optional parameter to specify how many times the preset tour is recurred.
@@ -37866,6 +42389,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.randomPresetOrderFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "PTZPresetTourStartingCondition"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -37876,6 +42406,7 @@ namespace SharpOnvifCommon.Onvif
             {
                 writer.WriteAttributeString(null, "RandomPresetOrder", writer.ToXml(this.randomPresetOrderField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -37897,11 +42428,13 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "RandomPresetOrder":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.randomPresetOrderField = reader.ToBoolean(reader.AttributeValue);
                     this.randomPresetOrderFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -37972,6 +42505,8 @@ namespace SharpOnvifCommon.Onvif
 
         private PTZPresetTourStartingConditionOptionsExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Supported range of Recurring Time.
         /// </summary>
@@ -38009,9 +42544,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "PTZPresetTourStartingConditionOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -38025,6 +42572,12 @@ namespace SharpOnvifCommon.Onvif
                 }
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "PTZPresetTourStartingConditionOptionsExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -38091,6 +42644,8 @@ namespace SharpOnvifCommon.Onvif
 
         private PTZPresetTourStatusExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Indicates state of this preset tour by Idle/Touring/Paused.
         /// </summary>
@@ -38118,15 +42673,33 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "PTZPresetTourStatus"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "State", EnumXml.ToXml(this.stateField));
             writer.WriteElement(Ns.OnvifVer10, "CurrentTourSpot", this.currentTourSpotField, Ns.OnvifVer10, "PTZPresetTourSpot");
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "PTZPresetTourStatusExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -38189,6 +42762,8 @@ namespace SharpOnvifCommon.Onvif
 
         private PTZPresetTourSupportedExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Indicates number of preset tours that can be created. Required preset tour operations shall be
         /// available for this PTZ Node if one or more preset tour is supported.
@@ -38217,9 +42792,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "PTZPresetTourSupported"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -38232,6 +42819,12 @@ namespace SharpOnvifCommon.Onvif
                 }
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "PTZPresetTourSupportedExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -38334,6 +42927,8 @@ namespace SharpOnvifCommon.Onvif
         private Space1DDescription[] zoomSpeedSpaceField;
 
         private PTZSpacesExtension extensionField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// The Generic Pan/Tilt Position space is provided by every PTZ node that supports absolute Pan/Tilt,
@@ -38449,9 +43044,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "PTZSpaces"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -38512,6 +43119,12 @@ namespace SharpOnvifCommon.Onvif
                 }
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "PTZSpacesExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -38660,6 +43273,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Specifies the absolute position of the PTZ unit together with the Space references. The default
         /// absolute spaces of the corresponding PTZ configuration MUST be referenced within the Position
@@ -38719,9 +43334,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "PTZStatus"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -38731,6 +43358,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.OnvifVer10, "UtcTime", writer.ToXml(this.utcTimeField));
             writer.WriteElement(Ns.OnvifVer10, "FieldOfView", this.fieldOfViewField, Ns.OnvifVer10, "FieldOfView");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -38783,6 +43416,8 @@ namespace SharpOnvifCommon.Onvif
 
         private bool fieldOfViewSupportedField;
         private bool fieldOfViewSupportedFieldSpecified;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// True if the device is able to stream pan or tilt status information.
@@ -38881,9 +43516,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.fieldOfViewSupportedFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "PTZStatusFilterOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -38903,6 +43550,12 @@ namespace SharpOnvifCommon.Onvif
             {
                 writer.WriteElementString(Ns.OnvifVer10, "FieldOfViewSupported", writer.ToXml(this.fieldOfViewSupportedField));
             }
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -39187,6 +43840,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Optional name of the pane configuration.
         /// </summary>
@@ -39262,9 +43917,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "PaneConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -39275,6 +43942,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.OnvifVer10, "ReceiverToken", this.receiverTokenField);
             writer.WriteElementString(Ns.OnvifVer10, "Token", this.tokenField);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -39325,6 +43998,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Reference to the configuration of the streaming and coding parameters.
         /// </summary>
@@ -39353,15 +44028,33 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "PaneLayout"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "Pane", this.paneField);
             writer.WriteElement(Ns.OnvifVer10, "Area", this.areaField, Ns.OnvifVer10, "Rectangle");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -39393,6 +44086,8 @@ namespace SharpOnvifCommon.Onvif
 
         private PaneOptionExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// List of areas assembling a layout. Coordinate values are in the range [-1.0, 1.0].
         /// </summary>
@@ -39410,9 +44105,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "PaneLayoutOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -39424,6 +44131,12 @@ namespace SharpOnvifCommon.Onvif
                 }
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "PaneOptionExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -39533,6 +44246,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// True if the device supports defining a region only using Rectangle. The rectangle points are still
         /// passed using a Polygon element if the device does not support polygon regions. In this case, the
@@ -39574,9 +44289,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "PolygonOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -39586,6 +44313,12 @@ namespace SharpOnvifCommon.Onvif
             }
             writer.WriteElement(Ns.OnvifVer10, "VertexLimits", this.vertexLimitsField, Ns.OnvifVer10, "IntRange");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -39658,6 +44391,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Describe the pose angle of the face.
         /// </summary>
@@ -39685,15 +44420,33 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "PoseAngle"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanface; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.AnalyticsHumanface, "PoseAngles", this.poseAnglesField, Ns.OnvifVer10, "GeoOrientation");
             writer.WriteElement(Ns.AnalyticsHumanface, "Uncertainty", this.uncertaintyField, Ns.OnvifVer10, "GeoOrientation");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -39842,6 +44595,8 @@ namespace SharpOnvifCommon.Onvif
 
         private string tokenField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Readable name of the preset tour.
         /// </summary>
@@ -39909,6 +44664,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.tokenField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "PresetTour"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -39916,6 +44678,7 @@ namespace SharpOnvifCommon.Onvif
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAttributeString(null, "token", this.tokenField);
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -39939,10 +44702,12 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "token":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.tokenField = reader.AttributeValue;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -39986,6 +44751,8 @@ namespace SharpOnvifCommon.Onvif
 
         private string soapActionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public AttributedURIType Action
         {
@@ -40000,14 +44767,32 @@ namespace SharpOnvifCommon.Onvif
             set { this.soapActionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ProblemActionType"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.i08Addressing; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.i08Addressing, "Action", this.actionField, Ns.i08Addressing, "AttributedURIType");
             writer.WriteElementString(Ns.i08Addressing, "SoapAction", this.soapActionField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -40062,6 +44847,8 @@ namespace SharpOnvifCommon.Onvif
 
         private bool fixedField;
         private bool fixedFieldSpecified;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// User readable name of the profile.
@@ -40184,6 +44971,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.fixedFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Profile"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -40195,6 +44989,7 @@ namespace SharpOnvifCommon.Onvif
             {
                 writer.WriteAttributeString(null, "fixed", writer.ToXml(this.fixedField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -40215,14 +45010,17 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "token":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.tokenField = reader.AttributeValue;
                     return true;
                 case "fixed":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.fixedField = reader.ToBoolean(reader.AttributeValue);
                     this.fixedFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -40278,6 +45076,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Maximum number of profiles.
         /// </summary>
@@ -40295,14 +45095,32 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ProfileCapabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "MaximumNumberOfProfiles", writer.ToXml(this.maximumNumberOfProfilesField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -40330,6 +45148,8 @@ namespace SharpOnvifCommon.Onvif
         private AudioDecoderConfiguration audioDecoderConfigurationField;
 
         private ProfileExtension2 extensionField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
@@ -40365,9 +45185,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ProfileExtension"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -40375,6 +45207,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "AudioOutputConfiguration", this.audioOutputConfigurationField, Ns.OnvifVer10, "AudioOutputConfiguration");
             writer.WriteElement(Ns.OnvifVer10, "AudioDecoderConfiguration", this.audioDecoderConfigurationField, Ns.OnvifVer10, "AudioDecoderConfiguration");
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "ProfileExtension2");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -40489,6 +45327,8 @@ namespace SharpOnvifCommon.Onvif
     {
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -40496,13 +45336,31 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ProfileStatusExtension"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -40554,6 +45412,7 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "Dialect":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.dialectField = reader.AttributeValue;
                     return true;
             }
@@ -40614,6 +45473,7 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "Dialect":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.dialectField = reader.AttributeValue;
                     return true;
             }
@@ -40646,6 +45506,8 @@ namespace SharpOnvifCommon.Onvif
         private bool rTP_RTSP_TCPFieldSpecified;
 
         private RealTimeStreamingCapabilitiesExtension extensionField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Indicates whether or not RTP multicast is supported.
@@ -40717,9 +45579,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "RealTimeStreamingCapabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -40736,6 +45610,12 @@ namespace SharpOnvifCommon.Onvif
                 writer.WriteElementString(Ns.OnvifVer10, "RTP_RTSP_TCP", writer.ToXml(this.rTP_RTSP_TCPField));
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "RealTimeStreamingCapabilitiesExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -40871,6 +45751,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Unique identifier of the receiver.
         /// </summary>
@@ -40898,15 +45780,33 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Receiver"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "Token", this.tokenField);
             writer.WriteElement(Ns.OnvifVer10, "Configuration", this.configurationField, Ns.OnvifVer10, "ReceiverConfiguration");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -40944,6 +45844,8 @@ namespace SharpOnvifCommon.Onvif
         private int maximumRTSPURILengthField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// The address of the receiver service.
@@ -41012,9 +45914,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ReceiverCapabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -41025,6 +45939,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.OnvifVer10, "SupportedReceivers", writer.ToXml(this.supportedReceiversField));
             writer.WriteElementString(Ns.OnvifVer10, "MaximumRTSPURILength", writer.ToXml(this.maximumRTSPURILengthField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -41076,6 +45996,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// The following connection modes are defined:
         /// </summary>
@@ -41113,9 +46035,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ReceiverConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -41123,6 +46057,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.OnvifVer10, "MediaUri", this.mediaUriField);
             writer.WriteElement(Ns.OnvifVer10, "StreamSetup", this.streamSetupField, Ns.OnvifVer10, "StreamSetup");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -41160,6 +46100,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// The connection state of the receiver may have one of the following states:
         /// </summary>
@@ -41187,15 +46129,33 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ReceiverStateInformation"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "State", EnumXml.ToXml(this.stateField));
             writer.WriteElementString(Ns.OnvifVer10, "AutoCreated", writer.ToXml(this.autoCreatedField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -41233,6 +46193,8 @@ namespace SharpOnvifCommon.Onvif
         private int maxStringLengthField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         [System.Xml.Serialization.XmlElementAttribute(Order=0, DataType="anyURI")]
         public string XAddr
@@ -41283,9 +46245,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "RecordingCapabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -41296,6 +46270,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.OnvifVer10, "DynamicTracks", writer.ToXml(this.dynamicTracksField));
             writer.WriteElementString(Ns.OnvifVer10, "MaxStringLength", writer.ToXml(this.maxStringLengthField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -41345,6 +46325,8 @@ namespace SharpOnvifCommon.Onvif
         private RecordingTargetConfiguration targetField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Information about the source of the recording.
@@ -41398,9 +46380,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "RecordingConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -41409,6 +46403,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.OnvifVer10, "MaximumRetentionTime", this.maximumRetentionTimeField);
             writer.WriteElement(Ns.OnvifVer10, "Target", this.targetField, Ns.OnvifVer10, "RecordingTargetConfiguration");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -41452,6 +46452,8 @@ namespace SharpOnvifCommon.Onvif
         private System.Xml.XmlElement[] anyField;
 
         private string modeField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Key ID of the associated key for encryption, formatted as a UUID according to RFC 9562 Section 4.
@@ -41512,6 +46514,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.modeField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "RecordingEncryption"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -41519,6 +46528,7 @@ namespace SharpOnvifCommon.Onvif
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAttributeString(null, "Mode", this.modeField);
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -41541,10 +46551,12 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "Mode":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.modeField = reader.AttributeValue;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -41585,6 +46597,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute("Filter", Order=0)]
         public RecordingEventFilterFilter[] Filter
         {
@@ -41619,9 +46633,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "RecordingEventFilter"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -41635,6 +46661,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.OnvifVer10, "Before", this.beforeField);
             writer.WriteElementString(Ns.OnvifVer10, "After", this.afterField);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -41668,6 +46700,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Topic filter as defined in section 9.6.3 of the ONVIF Core Specification.
         /// </summary>
@@ -41695,11 +46729,29 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "Topic", this.topicField);
             writer.WriteElementString(Ns.OnvifVer10, "Source", this.sourceField);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -41741,6 +46793,8 @@ namespace SharpOnvifCommon.Onvif
         private RecordingStatus recordingStatusField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public string RecordingToken
@@ -41830,9 +46884,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "RecordingInformation"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -41856,6 +46922,12 @@ namespace SharpOnvifCommon.Onvif
             }
             writer.WriteElementString(Ns.OnvifVer10, "RecordingStatus", EnumXml.ToXml(this.recordingStatusField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -41917,6 +46989,8 @@ namespace SharpOnvifCommon.Onvif
         private System.Xml.XmlElement[] anyField;
 
         private string scheduleTokenField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Identifies the recording to which this job shall store the received data.
@@ -41999,6 +47073,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.scheduleTokenField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "RecordingJobConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -42006,6 +47087,7 @@ namespace SharpOnvifCommon.Onvif
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAttributeString(null, "ScheduleToken", this.scheduleTokenField);
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -42030,10 +47112,12 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "ScheduleToken":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.scheduleTokenField = reader.AttributeValue;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -42112,6 +47196,8 @@ namespace SharpOnvifCommon.Onvif
 
         private RecordingJobSourceExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// This field shall be a reference to the source of the data. The type of the source is determined by
         /// the attribute Type in the SourceToken structure. If Type is
@@ -42169,9 +47255,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "RecordingJobSource"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -42188,6 +47286,12 @@ namespace SharpOnvifCommon.Onvif
                 }
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "RecordingJobSourceExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -42257,6 +47361,8 @@ namespace SharpOnvifCommon.Onvif
 
         private RecordingJobStateInformationExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Identification of the recording that the recording job records to.
         /// </summary>
@@ -42294,9 +47400,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "RecordingJobStateInformation"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -42310,6 +47428,12 @@ namespace SharpOnvifCommon.Onvif
                 }
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "RecordingJobStateInformationExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -42378,6 +47502,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Identifies the data source of the recording job.
         /// </summary>
@@ -42415,9 +47541,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "RecordingJobStateSource"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -42425,6 +47563,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.OnvifVer10, "State", this.stateField);
             writer.WriteElement(Ns.OnvifVer10, "Tracks", this.tracksField, Ns.OnvifVer10, "RecordingJobStateTracks");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -42462,6 +47606,8 @@ namespace SharpOnvifCommon.Onvif
         private string stateField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Identifies the track of the data source that provides the data.
@@ -42513,9 +47659,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "RecordingJobStateTrack"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -42524,6 +47682,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.OnvifVer10, "Error", this.errorField);
             writer.WriteElementString(Ns.OnvifVer10, "State", this.stateField);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -42558,6 +47722,8 @@ namespace SharpOnvifCommon.Onvif
     {
         private RecordingJobStateTrack[] trackField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute("Track", Order=0)]
         public RecordingJobStateTrack[] Track
         {
@@ -42565,9 +47731,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.trackField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "RecordingJobStateTracks"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -42578,6 +47756,12 @@ namespace SharpOnvifCommon.Onvif
                     writer.WriteElement(Ns.OnvifVer10, "Track", this.trackField[i], Ns.OnvifVer10, "RecordingJobStateTrack");
                 }
             }
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -42602,6 +47786,8 @@ namespace SharpOnvifCommon.Onvif
         private string destinationField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// If the received RTSP stream contains multiple tracks of the same type, the SourceTag differentiates
@@ -42631,15 +47817,33 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "RecordingJobTrack"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "SourceTag", this.sourceTagField);
             writer.WriteElementString(Ns.OnvifVer10, "Destination", this.destinationField);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -42681,6 +47885,8 @@ namespace SharpOnvifCommon.Onvif
         private string videoSourceTokenField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Identifier for the source chosen by the client that creates the structure. This identifier is opaque
@@ -42753,9 +47959,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "RecordingSourceInformation"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -42766,6 +47984,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.OnvifVer10, "Address", this.addressField);
             writer.WriteElementString(Ns.OnvifVer10, "VideoSourceToken", this.videoSourceTokenField);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -42814,6 +48038,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// The earliest point in time where there is recorded data on the device.
         /// </summary>
@@ -42851,9 +48077,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "RecordingSummary"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -42861,6 +48099,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.OnvifVer10, "DataUntil", writer.ToXml(this.dataUntilField));
             writer.WriteElementString(Ns.OnvifVer10, "NumberRecordings", writer.ToXml(this.numberRecordingsField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -42908,6 +48152,8 @@ namespace SharpOnvifCommon.Onvif
         private string storageStrategyField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Token of a storage configuration.
@@ -43011,9 +48257,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "RecordingTargetConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -43033,6 +48291,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "SegmentDurationOverride", this.segmentDurationOverrideField, null, null);
             writer.WriteElementString(Ns.OnvifVer10, "StorageStrategy", this.storageStrategyField);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -43188,15 +48452,19 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "bottom":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.bottomField = reader.ToSingle(reader.AttributeValue);
                     return true;
                 case "top":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.topField = reader.ToSingle(reader.AttributeValue);
                     return true;
                 case "right":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.rightField = reader.ToSingle(reader.AttributeValue);
                     return true;
                 case "left":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.leftField = reader.ToSingle(reader.AttributeValue);
                     return true;
             }
@@ -43210,6 +48478,8 @@ namespace SharpOnvifCommon.Onvif
     {
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -43217,13 +48487,31 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ReferenceParametersType"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.i08Addressing; } }
 
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -43241,6 +48529,8 @@ namespace SharpOnvifCommon.Onvif
 
         private string relationshipTypeField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlTextAttribute(DataType="anyURI")]
         public string Value
         {
@@ -43255,6 +48545,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.relationshipTypeField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "RelatesToType"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.i08Addressing; } }
@@ -43262,6 +48559,7 @@ namespace SharpOnvifCommon.Onvif
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAttributeString(null, "RelationshipType", this.relationshipTypeField);
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -43274,10 +48572,12 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "RelationshipType":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.relationshipTypeField = reader.AttributeValue;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override void ReadXmlText(SharpOnvifCommon.Xml.IXmlReader reader, string text)
@@ -43475,6 +48775,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public RelayOutputSettings Properties
         {
@@ -43489,15 +48791,35 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "RelayOutput"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            base.WriteXmlAttributes(writer);
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             base.WriteXmlContent(writer);
             writer.WriteElement(Ns.OnvifVer10, "Properties", this.propertiesField, Ns.OnvifVer10, "RelayOutputSettings");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -43605,6 +48927,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public string Username
         {
@@ -43633,9 +48957,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "RemoteUser"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -43643,6 +48979,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.OnvifVer10, "Password", this.passwordField);
             writer.WriteElementString(Ns.OnvifVer10, "UseDerivedPassword", writer.ToXml(this.useDerivedPasswordField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -43724,6 +49066,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// The address of the replay service.
         /// </summary>
@@ -43741,14 +49085,32 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ReplayCapabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "XAddr", this.xAddrField);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -43776,6 +49138,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// The RTSP session timeout.
         /// </summary>
@@ -43793,14 +49157,32 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ReplayConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "SessionTimeout", this.sessionTimeoutField);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -43852,6 +49234,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Parameter to enable/disable Reverse feature.
         /// </summary>
@@ -43869,14 +49253,32 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Reverse"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "Mode", EnumXml.ToXml(this.modeField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -43901,6 +49303,8 @@ namespace SharpOnvifCommon.Onvif
 
         private ReverseOptionsExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Options of Reverse mode parameter.
         /// </summary>
@@ -43918,9 +49322,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ReverseOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -43932,6 +49348,12 @@ namespace SharpOnvifCommon.Onvif
                 }
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "ReverseOptionsExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -43993,6 +49415,8 @@ namespace SharpOnvifCommon.Onvif
 
         private bool mirrorField;
         private bool mirrorFieldSpecified;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Parameter to enable/disable Rotation feature.
@@ -44057,6 +49481,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.mirrorFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Rotate"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -44067,6 +49498,7 @@ namespace SharpOnvifCommon.Onvif
             {
                 writer.WriteAttributeString(null, "Mirror", writer.ToXml(this.mirrorField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -44084,11 +49516,13 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "Mirror":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.mirrorField = reader.ToBoolean(reader.AttributeValue);
                     this.mirrorFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -44157,6 +49591,8 @@ namespace SharpOnvifCommon.Onvif
 
         private bool mirrorField;
         private bool mirrorFieldSpecified;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Supported options of Rotate mode parameter.
@@ -44229,6 +49665,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.mirrorFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "RotateOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -44243,6 +49686,7 @@ namespace SharpOnvifCommon.Onvif
             {
                 writer.WriteAttributeString(null, "Mirror", writer.ToXml(this.mirrorField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -44271,15 +49715,18 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "Reboot":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.rebootField = reader.ToBoolean(reader.AttributeValue);
                     this.rebootFieldSpecified = true;
                     return true;
                 case "Mirror":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.mirrorField = reader.ToBoolean(reader.AttributeValue);
                     this.mirrorFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -44344,6 +49791,8 @@ namespace SharpOnvifCommon.Onvif
 
         private RuleEngineConfigurationExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute("Rule", Order=0)]
         public Config[] Rule
         {
@@ -44358,9 +49807,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "RuleEngineConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -44372,6 +49833,12 @@ namespace SharpOnvifCommon.Onvif
                 }
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "RuleEngineConfigurationExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -44432,6 +49899,8 @@ namespace SharpOnvifCommon.Onvif
 
         private string secureStreamingProtocolAlgorithmField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// SRTP Pre-Shared Key (PSK) represented as a hexadecimal string. This includes both the SRTP master
         /// key, followed by the master salt. The sizes of the key and salt depend on the specified
@@ -44474,6 +49943,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.secureStreamingProtocolAlgorithmField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "SRTPPreShared"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -44481,6 +49957,7 @@ namespace SharpOnvifCommon.Onvif
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAttributeString(null, "SecureStreamingProtocolAlgorithm", this.secureStreamingProtocolAlgorithmField);
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -44495,10 +49972,12 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "SecureStreamingProtocolAlgorithm":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.secureStreamingProtocolAlgorithmField = reader.AttributeValue;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -44529,6 +50008,8 @@ namespace SharpOnvifCommon.Onvif
         private bool wearFieldSpecified;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Describe the Color of the Scarf, acceptable values are defined in ColorDescriptor.
@@ -44568,9 +50049,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Scarf"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -44580,6 +50073,12 @@ namespace SharpOnvifCommon.Onvif
                 writer.WriteElementString(Ns.AnalyticsHumanbody, "Wear", writer.ToXml(this.wearField));
             }
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -44674,6 +50173,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute(Order=0, DataType="anyURI")]
         public string XAddr
         {
@@ -44737,9 +50238,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "SearchCapabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -44754,6 +50267,12 @@ namespace SharpOnvifCommon.Onvif
                 writer.WriteElementString(Ns.OnvifVer10, "ImageSearch", writer.ToXml(this.imageSearchField));
             }
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -44799,6 +50318,8 @@ namespace SharpOnvifCommon.Onvif
 
         private SearchScopeExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// A list of sources that are included in the scope. If this list is included, only data from one of
         /// these sources shall be searched.
@@ -44842,9 +50363,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "SearchScope"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -44864,6 +50397,12 @@ namespace SharpOnvifCommon.Onvif
             }
             writer.WriteElementString(Ns.OnvifVer10, "RecordingInformationFilter", this.recordingInformationFilterField);
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "SearchScopeExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -44943,6 +50482,8 @@ namespace SharpOnvifCommon.Onvif
         private System.Xml.XmlElement[] anyField;
 
         private SecurityCapabilitiesExtension extensionField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Indicates whether or not TLS 1.1 is supported.
@@ -45038,9 +50579,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "SecurityCapabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -45054,6 +50607,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.OnvifVer10, "RELToken", writer.ToXml(this.rELTokenField));
             writer.WriteAny(this.anyField);
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "SecurityCapabilitiesExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -45248,6 +50807,8 @@ namespace SharpOnvifCommon.Onvif
 
         private string sensorIDField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public string Type
         {
@@ -45283,6 +50844,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.sensorIDField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "SensorData"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -45291,6 +50859,7 @@ namespace SharpOnvifCommon.Onvif
         {
             writer.WriteAttributeString(null, "UtcTime", writer.ToXml(this.utcTimeField));
             writer.WriteAttributeString(null, "SensorID", this.sensorIDField);
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -45305,13 +50874,16 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "UtcTime":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.utcTimeField = reader.ToDateTime(reader.AttributeValue);
                     return true;
                 case "SensorID":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.sensorIDField = reader.AttributeValue;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -45349,6 +50921,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// List of SensorID values to include in the metadata stream. If not specified or empty, all sensor IDs
         /// are included (unless other filters exclude them).
@@ -45378,9 +50952,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "SensorDataFilter"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -45399,6 +50985,12 @@ namespace SharpOnvifCommon.Onvif
                 }
             }
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -45429,6 +51021,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// True if the device supports filtering sensor data by SensorID.
         /// </summary>
@@ -45456,15 +51050,33 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "SensorDataFilterOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "SensorIDFilterSupported", writer.ToXml(this.sensorIDFilterSupportedField));
             writer.WriteElementString(Ns.OnvifVer10, "TypeFilterSupported", writer.ToXml(this.typeFilterSupportedField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -45498,6 +51110,8 @@ namespace SharpOnvifCommon.Onvif
         private ShapeDescriptorExtension extensionField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public Rectangle BoundingBox
@@ -45534,9 +51148,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ShapeDescriptor"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -45551,6 +51177,12 @@ namespace SharpOnvifCommon.Onvif
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "ShapeDescriptorExtension");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -45618,6 +51250,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Describe the Category of the Shoes, acceptable values are defined in bd:ShoesCategory.
         /// </summary>
@@ -45645,15 +51279,33 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Shoes"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.AnalyticsHumanbody, "Category", this.categoryField);
             writer.WriteElement(Ns.AnalyticsHumanbody, "Color", this.colorField, Ns.OnvifVer10, "ColorDescriptor");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -45684,6 +51336,8 @@ namespace SharpOnvifCommon.Onvif
 
         private SourceIdentificationExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public string Name
         {
@@ -45705,9 +51359,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "SourceIdentification"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -45720,6 +51386,12 @@ namespace SharpOnvifCommon.Onvif
                 }
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "SourceIdentificationExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -45782,6 +51454,8 @@ namespace SharpOnvifCommon.Onvif
 
         private string typeField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public string Token
         {
@@ -45803,6 +51477,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.typeField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "SourceReference"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -45810,6 +51491,7 @@ namespace SharpOnvifCommon.Onvif
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAttributeString(null, "Type", this.typeField);
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -45823,10 +51505,12 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "Type":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.typeField = reader.AttributeValue;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -46085,14 +51769,17 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "Distance":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.distanceField = reader.ToSingle(reader.AttributeValue);
                     this.distanceFieldSpecified = true;
                     return true;
                 case "ElevationAngle":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.elevationAngleField = reader.ToSingle(reader.AttributeValue);
                     this.elevationAngleFieldSpecified = true;
                     return true;
                 case "AzimuthAngle":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.azimuthAngleField = reader.ToSingle(reader.AttributeValue);
                     this.azimuthAngleFieldSpecified = true;
                     return true;
@@ -46172,6 +51859,8 @@ namespace SharpOnvifCommon.Onvif
 
         private StorageReferencePathExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// identifier of an existing Storage Configuration.
         /// </summary>
@@ -46199,15 +51888,33 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "StorageReferencePath"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "StorageToken", this.storageTokenField);
             writer.WriteElementString(Ns.OnvifVer10, "RelativePath", this.relativePathField);
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "StorageReferencePathExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -46237,6 +51944,8 @@ namespace SharpOnvifCommon.Onvif
     {
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -46244,13 +51953,31 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "StorageReferencePathExtension"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -46269,6 +51996,8 @@ namespace SharpOnvifCommon.Onvif
         private Transport transportField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Defines if a multicast or unicast stream is requested.
@@ -46294,15 +52023,33 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "StreamSetup"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "Stream", EnumXml.ToXml(this.streamField));
             writer.WriteElement(Ns.OnvifVer10, "Transport", this.transportField, Ns.OnvifVer10, "Transport");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -46332,6 +52079,8 @@ namespace SharpOnvifCommon.Onvif
         private float likelihoodField;
         private bool likelihoodFieldSpecified;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlTextAttribute()]
         public string Value
         {
@@ -46357,6 +52106,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.likelihoodFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "StringLikelihood"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -46367,6 +52123,7 @@ namespace SharpOnvifCommon.Onvif
             {
                 writer.WriteAttributeString(null, "Likelihood", writer.ToXml(this.likelihoodField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -46379,11 +52136,13 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "Likelihood":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.likelihoodField = reader.ToSingle(reader.AttributeValue);
                     this.likelihoodFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override void ReadXmlText(SharpOnvifCommon.Xml.IXmlReader reader, string text)
@@ -46547,6 +52306,8 @@ namespace SharpOnvifCommon.Onvif
         private int limitField;
         private bool limitFieldSpecified;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// It optionally contains a list of URLs that provide the location of schema files. These schema files
         /// describe the types and elements used in the analytics module descriptions. Analytics module
@@ -46595,6 +52356,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.limitFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "SupportedAnalyticsModules"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -46605,6 +52373,7 @@ namespace SharpOnvifCommon.Onvif
             {
                 writer.WriteAttributeString(null, "Limit", writer.ToXml(this.limitField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -46631,11 +52400,13 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "Limit":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.limitField = reader.ToInt32(reader.AttributeValue);
                     this.limitFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -46715,6 +52486,7 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "qname":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.qnameField = reader.ToQualifiedName(reader.AttributeValue);
                     return true;
             }
@@ -46734,6 +52506,8 @@ namespace SharpOnvifCommon.Onvif
 
         private int limitField;
         private bool limitFieldSpecified;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Lists the location of all schemas that are referenced in the rules.
@@ -46783,6 +52557,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.limitFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "SupportedRules"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -46793,6 +52574,7 @@ namespace SharpOnvifCommon.Onvif
             {
                 writer.WriteAttributeString(null, "Limit", writer.ToXml(this.limitField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -46819,11 +52601,13 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "Limit":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.limitField = reader.ToInt32(reader.AttributeValue);
                     this.limitFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -46895,6 +52679,8 @@ namespace SharpOnvifCommon.Onvif
         private OnvifVersion[] supportedVersionsField;
 
         private SystemCapabilitiesExtension extensionField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Indicates whether or not WS Discovery resolve requests are supported.
@@ -46973,9 +52759,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "SystemCapabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -46993,6 +52791,12 @@ namespace SharpOnvifCommon.Onvif
                 }
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "SystemCapabilitiesExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -47250,6 +53054,8 @@ namespace SharpOnvifCommon.Onvif
 
         private SystemDateTimeExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Indicates if the time is set manully or through NTP.
         /// </summary>
@@ -47307,9 +53113,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "SystemDateTime"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -47319,6 +53137,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "UTCDateTime", this.uTCDateTimeField, Ns.OnvifVer10, "DateTime");
             writer.WriteElement(Ns.OnvifVer10, "LocalDateTime", this.localDateTimeField, Ns.OnvifVer10, "DateTime");
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "SystemDateTimeExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -47448,6 +53272,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public SystemLogType Type
         {
@@ -47469,15 +53295,33 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "SystemLogUri"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "Type", EnumXml.ToXml(this.typeField));
             writer.WriteElementString(Ns.OnvifVer10, "Uri", this.uriField);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -47547,6 +53391,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute(Order=0, DataType="token")]
         public string CertificateID
         {
@@ -47561,14 +53407,32 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "TLSConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "CertificateID", this.certificateIDField);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -47668,6 +53532,8 @@ namespace SharpOnvifCommon.Onvif
 
         private ToneCompensationExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Parameter to enable/disable or automatic ToneCompensation feature. Its options shall be chosen from
         /// tt:ToneCompensationMode Type.
@@ -47707,9 +53573,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ToneCompensation"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -47719,6 +53597,12 @@ namespace SharpOnvifCommon.Onvif
                 writer.WriteElementString(Ns.OnvifVer10, "Level", writer.ToXml(this.levelField));
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "ToneCompensationExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -47782,6 +53666,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Supported options for Tone Compensation mode. Its options shall be chosen from
         /// tt:ToneCompensationMode Type.
@@ -47810,9 +53696,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ToneCompensationOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -47825,6 +53723,12 @@ namespace SharpOnvifCommon.Onvif
             }
             writer.WriteElementString(Ns.OnvifVer10, "Level", writer.ToXml(this.levelField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -47862,6 +53766,8 @@ namespace SharpOnvifCommon.Onvif
 
         private string dialectField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlTextAttribute()]
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlNode[] Any
@@ -47877,6 +53783,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.dialectField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "TopicExpressionType"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.B2; } }
@@ -47884,6 +53797,7 @@ namespace SharpOnvifCommon.Onvif
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAttributeString(null, "Dialect", this.dialectField);
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -47896,10 +53810,12 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "Dialect":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.dialectField = reader.AttributeValue;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -48008,12 +53924,15 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "name":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.nameField = reader.AttributeValue;
                     return true;
                 case "targetNamespace":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.targetNamespaceField = reader.AttributeValue;
                     return true;
                 case "final":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.finalField = reader.ToBoolean(reader.AttributeValue);
                     this.finalFieldSpecified = true;
                     return true;
@@ -48059,6 +53978,7 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "parent":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.parentField = reader.AttributeValue;
                     return true;
             }
@@ -48211,12 +54131,15 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "name":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.nameField = reader.AttributeValue;
                     return true;
                 case "messageTypes":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.messageTypesField = System.Array.ConvertAll(reader.SplitList(reader.AttributeValue), x => reader.ToQualifiedName(x));
                     return true;
                 case "final":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.finalField = reader.ToBoolean(reader.AttributeValue);
                     this.finalFieldSpecified = true;
                     return true;
@@ -48256,6 +54179,8 @@ namespace SharpOnvifCommon.Onvif
         private string styleField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Describe the Category of the Tops, acceptable values are defined in bd:TopsCategory.
@@ -48304,9 +54229,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Tops"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -48315,6 +54252,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.AnalyticsHumanbody, "Grain", this.grainField);
             writer.WriteElementString(Ns.AnalyticsHumanbody, "Style", this.styleField);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -48356,6 +54299,8 @@ namespace SharpOnvifCommon.Onvif
         private MetadataAttributes metadataAttributesField;
 
         private TrackAttributesExtension extensionField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// The basic information about the track. Note that a track may represent a single contiguous time span
@@ -48408,9 +54353,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "TrackAttributes"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -48419,6 +54376,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "AudioAttributes", this.audioAttributesField, Ns.OnvifVer10, "AudioAttributes");
             writer.WriteElement(Ns.OnvifVer10, "MetadataAttributes", this.metadataAttributesField, Ns.OnvifVer10, "MetadataAttributes");
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "TrackAttributesExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -48489,6 +54452,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Type of the track. It shall be equal to the strings "Video", "Audio" or "Metadata". The track shall
         /// only be able to hold data of that type.
@@ -48517,15 +54482,33 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "TrackConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "TrackType", EnumXml.ToXml(this.trackTypeField));
             writer.WriteElementString(Ns.OnvifVer10, "Description", this.descriptionField);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -48561,6 +54544,8 @@ namespace SharpOnvifCommon.Onvif
         private System.DateTime dataToField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public string TrackToken
@@ -48617,9 +54602,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "TrackInformation"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -48629,6 +54626,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.OnvifVer10, "DataFrom", writer.ToXml(this.dataFromField));
             writer.WriteElementString(Ns.OnvifVer10, "DataTo", writer.ToXml(this.dataToField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -48671,6 +54674,8 @@ namespace SharpOnvifCommon.Onvif
 
         private TransformationExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public Vector Translate
         {
@@ -48692,15 +54697,33 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Transformation"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.OnvifVer10, "Translate", this.translateField, Ns.OnvifVer10, "Vector");
             writer.WriteElement(Ns.OnvifVer10, "Scale", this.scaleField, Ns.OnvifVer10, "Vector");
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "TransformationExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -48820,6 +54843,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Describe the Color of the Bag, acceptable values are defined in tt:ColorDescriptor.
         /// </summary>
@@ -48858,9 +54883,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Umbrella"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -48870,6 +54907,12 @@ namespace SharpOnvifCommon.Onvif
                 writer.WriteElementString(Ns.AnalyticsHumanbody, "Open", writer.ToXml(this.openField));
             }
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -49200,6 +55243,8 @@ namespace SharpOnvifCommon.Onvif
 
         private UserExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Username string.
         /// </summary>
@@ -49237,9 +55282,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "User"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -49247,6 +55304,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.OnvifVer10, "Password", this.passwordField);
             writer.WriteElementString(Ns.OnvifVer10, "UserLevel", EnumXml.ToXml(this.userLevelField));
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "UserExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -49331,6 +55394,8 @@ namespace SharpOnvifCommon.Onvif
 
         private string[] functionsField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Name of the editable user level.
         /// </summary>
@@ -49352,14 +55417,32 @@ namespace SharpOnvifCommon.Onvif
             set { this.functionsField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "UserRole"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "Name", this.nameField);
             writer.WriteElementString(Ns.OnvifVer10, "Functions", writer.JoinList(this.functionsField));
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -49416,9 +55499,11 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "x":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.xField = reader.ToSingle(reader.AttributeValue);
                     return true;
                 case "y":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.yField = reader.ToSingle(reader.AttributeValue);
                     return true;
             }
@@ -49470,9 +55555,11 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "x":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.xField = reader.ToSingle(reader.AttributeValue);
                     return true;
                 case "space":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.spaceField = reader.AttributeValue;
                     return true;
             }
@@ -49534,12 +55621,15 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "x":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.xField = reader.ToSingle(reader.AttributeValue);
                     return true;
                 case "y":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.yField = reader.ToSingle(reader.AttributeValue);
                     return true;
                 case "space":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.spaceField = reader.AttributeValue;
                     return true;
             }
@@ -49560,6 +55650,8 @@ namespace SharpOnvifCommon.Onvif
         private ColorDescriptor colorField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public StringLikelihood Type
@@ -49596,9 +55688,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "VehicleInfo"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -49607,6 +55711,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "Model", this.modelField, Ns.OnvifVer10, "StringLikelihood");
             writer.WriteElement(Ns.OnvifVer10, "Color", this.colorField, Ns.OnvifVer10, "ColorDescriptor");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -49645,6 +55755,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public AnalyticsEngineConfiguration AnalyticsEngineConfiguration
         {
@@ -49666,9 +55778,22 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "VideoAnalyticsConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            base.WriteXmlAttributes(writer);
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -49676,6 +55801,13 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "AnalyticsEngineConfiguration", this.analyticsEngineConfigurationField, Ns.OnvifVer10, "AnalyticsEngineConfiguration");
             writer.WriteElement(Ns.OnvifVer10, "RuleEngineConfiguration", this.ruleEngineConfigurationField, Ns.OnvifVer10, "RuleEngineConfiguration");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -49816,6 +55948,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Average bitrate in kbps.
         /// </summary>
@@ -49885,9 +56019,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "VideoAttributes"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -49900,6 +56046,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.OnvifVer10, "Encoding", this.encodingField);
             writer.WriteElementString(Ns.OnvifVer10, "Framerate", writer.ToXml(this.framerateField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -49945,6 +56097,8 @@ namespace SharpOnvifCommon.Onvif
 
         private VideoDecoderConfigurationOptionsExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// If the device is able to decode Jpeg streams this element describes the supported codecs and
         /// configurations
@@ -49985,9 +56139,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "VideoDecoderConfigurationOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -49995,6 +56161,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "H264DecOptions", this.h264DecOptionsField, Ns.OnvifVer10, "H264DecOptions");
             writer.WriteElement(Ns.OnvifVer10, "Mpeg4DecOptions", this.mpeg4DecOptionsField, Ns.OnvifVer10, "Mpeg4DecOptions");
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "VideoDecoderConfigurationOptionsExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -50082,6 +56254,8 @@ namespace SharpOnvifCommon.Onvif
         private bool signedFieldSpecified;
 
         private string secureStreamingProtocolAlgorithmField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Video Media Subtype for the video format. For definitions see tt:VideoEncodingMimeNames and IANA
@@ -50252,6 +56426,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.secureStreamingProtocolAlgorithmField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "VideoEncoder2Configuration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -50277,6 +56458,7 @@ namespace SharpOnvifCommon.Onvif
                 writer.WriteAttributeString(null, "Signed", writer.ToXml(this.signedField));
             }
             writer.WriteAttributeString(null, "SecureStreamingProtocolAlgorithm", this.secureStreamingProtocolAlgorithmField);
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -50295,29 +56477,37 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "GovLength":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.govLengthField = reader.ToInt32(reader.AttributeValue);
                     this.govLengthFieldSpecified = true;
                     return true;
                 case "AnchorFrameDistance":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.anchorFrameDistanceField = reader.ToInt32(reader.AttributeValue);
                     this.anchorFrameDistanceFieldSpecified = true;
                     return true;
                 case "Profile":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.profileField = reader.AttributeValue;
                     return true;
                 case "GuaranteedFrameRate":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.guaranteedFrameRateField = reader.ToBoolean(reader.AttributeValue);
                     this.guaranteedFrameRateFieldSpecified = true;
                     return true;
                 case "Signed":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.signedField = reader.ToBoolean(reader.AttributeValue);
                     this.signedFieldSpecified = true;
                     return true;
                 case "SecureStreamingProtocolAlgorithm":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.secureStreamingProtocolAlgorithmField = reader.AttributeValue;
                     return true;
             }
-            return base.ReadXmlAttribute(reader);
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -50387,6 +56577,8 @@ namespace SharpOnvifCommon.Onvif
 
         private bool signingSupportedField;
         private bool signingSupportedFieldSpecified;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Video Media Subtype for the video format. For definitions see tt:VideoEncodingMimeNames and IANA
@@ -50586,6 +56778,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.signingSupportedFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "VideoEncoder2ConfigurationOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -50616,6 +56815,7 @@ namespace SharpOnvifCommon.Onvif
             {
                 writer.WriteAttributeString(null, "SigningSupported", writer.ToXml(this.signingSupportedField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -50638,39 +56838,49 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "GovLengthRange":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.govLengthRangeField = System.Array.ConvertAll(reader.SplitList(reader.AttributeValue), x => reader.ToInt32(x));
                     return true;
                 case "MaxAnchorFrameDistance":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxAnchorFrameDistanceField = reader.ToInt32(reader.AttributeValue);
                     this.maxAnchorFrameDistanceFieldSpecified = true;
                     return true;
                 case "FrameRatesSupported":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.frameRatesSupportedField = System.Array.ConvertAll(reader.SplitList(reader.AttributeValue), x => reader.ToSingle(x));
                     return true;
                 case "ProfilesSupported":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.profilesSupportedField = reader.SplitList(reader.AttributeValue);
                     return true;
                 case "ConstantBitRateSupported":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.constantBitRateSupportedField = reader.ToBoolean(reader.AttributeValue);
                     this.constantBitRateSupportedFieldSpecified = true;
                     return true;
                 case "AverageBitRateSupported":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.averageBitRateSupportedField = reader.ToBoolean(reader.AttributeValue);
                     this.averageBitRateSupportedFieldSpecified = true;
                     return true;
                 case "GuaranteedFrameRateSupported":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.guaranteedFrameRateSupportedField = reader.ToBoolean(reader.AttributeValue);
                     this.guaranteedFrameRateSupportedFieldSpecified = true;
                     return true;
                 case "SecureStreamingProtocolAlgorithms":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.secureStreamingProtocolAlgorithmsField = reader.SplitList(reader.AttributeValue);
                     return true;
                 case "SigningSupported":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.signingSupportedField = reader.ToBoolean(reader.AttributeValue);
                     this.signingSupportedFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -50723,6 +56933,8 @@ namespace SharpOnvifCommon.Onvif
 
         private bool guaranteedFrameRateField;
         private bool guaranteedFrameRateFieldSpecified;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Used video codec, either Jpeg, H.264 or Mpeg4
@@ -50835,6 +57047,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.guaranteedFrameRateFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "VideoEncoderConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -50846,6 +57065,7 @@ namespace SharpOnvifCommon.Onvif
             {
                 writer.WriteAttributeString(null, "GuaranteedFrameRate", writer.ToXml(this.guaranteedFrameRateField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -50867,11 +57087,14 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "GuaranteedFrameRate":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.guaranteedFrameRateField = reader.ToBoolean(reader.AttributeValue);
                     this.guaranteedFrameRateFieldSpecified = true;
                     return true;
             }
-            return base.ReadXmlAttribute(reader);
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -50933,6 +57156,8 @@ namespace SharpOnvifCommon.Onvif
 
         private bool guaranteedFrameRateSupportedField;
         private bool guaranteedFrameRateSupportedFieldSpecified;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Range of the quality values. A high value means higher quality.
@@ -51003,6 +57228,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.guaranteedFrameRateSupportedFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "VideoEncoderConfigurationOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -51013,6 +57245,7 @@ namespace SharpOnvifCommon.Onvif
             {
                 writer.WriteAttributeString(null, "GuaranteedFrameRateSupported", writer.ToXml(this.guaranteedFrameRateSupportedField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -51029,11 +57262,13 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "GuaranteedFrameRateSupported":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.guaranteedFrameRateSupportedField = reader.ToBoolean(reader.AttributeValue);
                     this.guaranteedFrameRateSupportedFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -51210,6 +57445,8 @@ namespace SharpOnvifCommon.Onvif
 
         private VideoOutputExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public Layout Layout
         {
@@ -51276,9 +57513,22 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "VideoOutput"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            base.WriteXmlAttributes(writer);
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -51294,6 +57544,13 @@ namespace SharpOnvifCommon.Onvif
                 writer.WriteElementString(Ns.OnvifVer10, "AspectRatio", writer.ToXml(this.aspectRatioField));
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "VideoOutputExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -51336,6 +57593,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Token of the Video Output the configuration applies to
         /// </summary>
@@ -51353,15 +57612,35 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "VideoOutputConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            base.WriteXmlAttributes(writer);
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             base.WriteXmlContent(writer);
             writer.WriteElementString(Ns.OnvifVer10, "OutputToken", this.outputTokenField);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -51385,6 +57664,8 @@ namespace SharpOnvifCommon.Onvif
     {
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -51392,13 +57673,31 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "VideoOutputConfigurationOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
 
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -51527,6 +57826,8 @@ namespace SharpOnvifCommon.Onvif
         private bool constantBitRateField;
         private bool constantBitRateFieldSpecified;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Desired frame rate in fps. The actual rate may be lower due to e.g. performance limitations.
         /// </summary>
@@ -51597,6 +57898,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.constantBitRateFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "VideoRateControl2"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -51607,6 +57915,7 @@ namespace SharpOnvifCommon.Onvif
             {
                 writer.WriteAttributeString(null, "ConstantBitRate", writer.ToXml(this.constantBitRateField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -51625,11 +57934,13 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "ConstantBitRate":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.constantBitRateField = reader.ToBoolean(reader.AttributeValue);
                     this.constantBitRateFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -51722,6 +58033,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Number of the columns of the Video image. If there is a 90-degree rotation, this represents the
         /// number of lines of the Video image.
@@ -51751,15 +58064,33 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "VideoResolution2"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "Width", writer.ToXml(this.widthField));
             writer.WriteElementString(Ns.OnvifVer10, "Height", writer.ToXml(this.heightField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -51794,6 +58125,8 @@ namespace SharpOnvifCommon.Onvif
         private ImagingSettings imagingField;
 
         private VideoSourceExtension extensionField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Frame rate in frames per second.
@@ -51832,9 +58165,22 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "VideoSource"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            base.WriteXmlAttributes(writer);
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -51843,6 +58189,13 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.OnvifVer10, "Resolution", this.resolutionField, Ns.OnvifVer10, "VideoResolution");
             writer.WriteElement(Ns.OnvifVer10, "Imaging", this.imagingField, Ns.OnvifVer10, "ImagingSettings");
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "VideoSourceExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -51884,6 +58237,8 @@ namespace SharpOnvifCommon.Onvif
         private VideoSourceConfigurationExtension extensionField;
 
         private string viewModeField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Reference to the physical input.
@@ -51931,6 +58286,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.viewModeField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "VideoSourceConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -51939,6 +58301,7 @@ namespace SharpOnvifCommon.Onvif
         {
             base.WriteXmlAttributes(writer);
             writer.WriteAttributeString(null, "ViewMode", this.viewModeField);
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -51955,10 +58318,13 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "ViewMode":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.viewModeField = reader.AttributeValue;
                     return true;
             }
-            return base.ReadXmlAttribute(reader);
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -52127,6 +58493,8 @@ namespace SharpOnvifCommon.Onvif
         private int maximumNumberOfProfilesField;
         private bool maximumNumberOfProfilesFieldSpecified;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Supported range for the capturing area. Device that does not support cropped streaming shall express
         /// BoundsRange option as mentioned below BoundsRange-&gt;XRange and BoundsRange-&gt;YRange with same
@@ -52178,6 +58546,13 @@ namespace SharpOnvifCommon.Onvif
             set { this.maximumNumberOfProfilesFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "VideoSourceConfigurationOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
@@ -52188,6 +58563,7 @@ namespace SharpOnvifCommon.Onvif
             {
                 writer.WriteAttributeString(null, "MaximumNumberOfProfiles", writer.ToXml(this.maximumNumberOfProfilesField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -52208,11 +58584,13 @@ namespace SharpOnvifCommon.Onvif
             switch (reader.LocalName)
             {
                 case "MaximumNumberOfProfiles":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maximumNumberOfProfilesField = reader.ToInt32(reader.AttributeValue);
                     this.maximumNumberOfProfilesFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -52458,6 +58836,8 @@ namespace SharpOnvifCommon.Onvif
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Describe the Category of the Weapon, acceptable values are defined in bd:WeaponCategory.
         /// </summary>
@@ -52495,9 +58875,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Weapon"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.AnalyticsHumanbody; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -52505,6 +58897,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElement(Ns.AnalyticsHumanbody, "Color", this.colorField, Ns.OnvifVer10, "ColorDescriptor");
             writer.WriteElementString(Ns.AnalyticsHumanbody, "Pose", this.poseField);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -52540,6 +58938,8 @@ namespace SharpOnvifCommon.Onvif
         private float cbGainField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Auto whitebalancing mode (auto/manual).
@@ -52578,9 +58978,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "WhiteBalance"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -52588,6 +59000,12 @@ namespace SharpOnvifCommon.Onvif
             writer.WriteElementString(Ns.OnvifVer10, "CrGain", writer.ToXml(this.crGainField));
             writer.WriteElementString(Ns.OnvifVer10, "CbGain", writer.ToXml(this.cbGainField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -52625,6 +59043,8 @@ namespace SharpOnvifCommon.Onvif
         private bool cbGainFieldSpecified;
 
         private WhiteBalance20Extension extensionField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// 'AUTO' or 'MANUAL'
@@ -52685,9 +59105,21 @@ namespace SharpOnvifCommon.Onvif
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "WhiteBalance20"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.OnvifVer10; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -52701,6 +59133,12 @@ namespace SharpOnvifCommon.Onvif
                 writer.WriteElementString(Ns.OnvifVer10, "CbGain", writer.ToXml(this.cbGainField));
             }
             writer.WriteElement(Ns.OnvifVer10, "Extension", this.extensionField, Ns.OnvifVer10, "WhiteBalance20Extension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)

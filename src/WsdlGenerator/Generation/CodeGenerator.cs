@@ -50,6 +50,7 @@ internal sealed class CodeGenerator
         // generated beside it alike.
         SchemaExtensions.Apply(schema, _options.EnumerationExtensions);
         SchemaExtensions.Apply(schema, _options.ElementTypeOverrides);
+        SchemaExtensions.Apply(schema, _options.AttributeAdditions);
 
         var serviceNamespaces = parsed
             .SelectMany(s => s.Wsdl.TargetNamespaces)

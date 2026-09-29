@@ -40,6 +40,8 @@ namespace SharpOnvifClient.Receiver
         private int maximumRTSPURILengthField;
         private bool maximumRTSPURILengthFieldSpecified;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -141,6 +143,13 @@ namespace SharpOnvifClient.Receiver
             set { this.maximumRTSPURILengthFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Capabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Receiver; } }
@@ -164,6 +173,7 @@ namespace SharpOnvifClient.Receiver
             {
                 writer.WriteAttributeString(null, "MaximumRTSPURILength", writer.ToXml(this.maximumRTSPURILengthField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -176,26 +186,32 @@ namespace SharpOnvifClient.Receiver
             switch (reader.LocalName)
             {
                 case "RTP_Multicast":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.rTP_MulticastField = reader.ToBoolean(reader.AttributeValue);
                     this.rTP_MulticastFieldSpecified = true;
                     return true;
                 case "RTP_TCP":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.rTP_TCPField = reader.ToBoolean(reader.AttributeValue);
                     this.rTP_TCPFieldSpecified = true;
                     return true;
                 case "RTP_RTSP_TCP":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.rTP_RTSP_TCPField = reader.ToBoolean(reader.AttributeValue);
                     this.rTP_RTSP_TCPFieldSpecified = true;
                     return true;
                 case "SupportedReceivers":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.supportedReceiversField = reader.ToInt32(reader.AttributeValue);
                     return true;
                 case "MaximumRTSPURILength":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maximumRTSPURILengthField = reader.ToInt32(reader.AttributeValue);
                     this.maximumRTSPURILengthFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)

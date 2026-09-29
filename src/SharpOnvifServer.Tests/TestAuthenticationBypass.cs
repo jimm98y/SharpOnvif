@@ -89,6 +89,24 @@ namespace SharpOnvif.Tests
         }
 
         [TestMethod]
+        public async Task DoesNotRunAPrivilegedBodyUnderAnActionThatNeedsNoPassword()
+        {
+            // Where the action and the body name different operations, dispatch follows the body -
+            // but authentication admitted this request for its action. A PRE_AUTH action must not
+            // carry in a body that needs a password.
+            await using var device = await AuthenticatedDevice.StartAsync();
+
+            var response = await PostAsync(
+                device,
+                $"application/soap+xml; charset=utf-8; action=\"{GetSystemDateAndTime}\"",
+                "GetDeviceInformation");
+
+            string body = await response.Content.ReadAsStringAsync();
+            StringAssert.DoesNotMatch(body, new System.Text.RegularExpressions.Regex(AuthenticatedDevice.Manufacturer),
+                "an unauthenticated caller ran an operation that needs a password");
+        }
+
+        [TestMethod]
         public async Task StillAnswersAnOperationThatNeedsNoPassword()
         {
             // The other half: the class exists to be used, so an honest PRE_AUTH request must go

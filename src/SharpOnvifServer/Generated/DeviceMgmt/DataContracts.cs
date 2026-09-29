@@ -4858,6 +4858,8 @@ namespace SharpOnvifServer.DeviceMgmt
     {
         private string[] auxiliaryCommandsField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Lists of commands supported by SendAuxiliaryCommand.
         /// </summary>
@@ -4868,6 +4870,13 @@ namespace SharpOnvifServer.DeviceMgmt
             set { this.auxiliaryCommandsField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "MiscCapabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Device; } }
@@ -4875,6 +4884,7 @@ namespace SharpOnvifServer.DeviceMgmt
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAttributeString(null, "AuxiliaryCommands", writer.JoinList(this.auxiliaryCommandsField));
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -4882,10 +4892,12 @@ namespace SharpOnvifServer.DeviceMgmt
             switch (reader.LocalName)
             {
                 case "AuxiliaryCommands":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.auxiliaryCommandsField = reader.SplitList(reader.AttributeValue);
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
     }
@@ -4919,6 +4931,8 @@ namespace SharpOnvifServer.DeviceMgmt
 
         private bool dHCPv6Field;
         private bool dHCPv6FieldSpecified;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Indicates support for IP filtering.
@@ -5109,6 +5123,13 @@ namespace SharpOnvifServer.DeviceMgmt
             set { this.dHCPv6FieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "NetworkCapabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Device; } }
@@ -5151,6 +5172,7 @@ namespace SharpOnvifServer.DeviceMgmt
             {
                 writer.WriteAttributeString(null, "DHCPv6", writer.ToXml(this.dHCPv6Field));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -5158,43 +5180,53 @@ namespace SharpOnvifServer.DeviceMgmt
             switch (reader.LocalName)
             {
                 case "IPFilter":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.iPFilterField = reader.ToBoolean(reader.AttributeValue);
                     this.iPFilterFieldSpecified = true;
                     return true;
                 case "ZeroConfiguration":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.zeroConfigurationField = reader.ToBoolean(reader.AttributeValue);
                     this.zeroConfigurationFieldSpecified = true;
                     return true;
                 case "IPVersion6":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.iPVersion6Field = reader.ToBoolean(reader.AttributeValue);
                     this.iPVersion6FieldSpecified = true;
                     return true;
                 case "DynDNS":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.dynDNSField = reader.ToBoolean(reader.AttributeValue);
                     this.dynDNSFieldSpecified = true;
                     return true;
                 case "Dot11Configuration":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.dot11ConfigurationField = reader.ToBoolean(reader.AttributeValue);
                     this.dot11ConfigurationFieldSpecified = true;
                     return true;
                 case "Dot1XConfigurations":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.dot1XConfigurationsField = reader.ToInt32(reader.AttributeValue);
                     this.dot1XConfigurationsFieldSpecified = true;
                     return true;
                 case "HostnameFromDHCP":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.hostnameFromDHCPField = reader.ToBoolean(reader.AttributeValue);
                     this.hostnameFromDHCPFieldSpecified = true;
                     return true;
                 case "NTP":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.nTPField = reader.ToInt32(reader.AttributeValue);
                     this.nTPFieldSpecified = true;
                     return true;
                 case "DHCPv6":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.dHCPv6Field = reader.ToBoolean(reader.AttributeValue);
                     this.dHCPv6FieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
     }
@@ -5597,6 +5629,8 @@ namespace SharpOnvifServer.DeviceMgmt
 
         private int maxUserRolesField;
         private bool maxUserRolesFieldSpecified;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Indicates support for TLS 1.0.
@@ -6050,6 +6084,13 @@ namespace SharpOnvifServer.DeviceMgmt
             set { this.maxUserRolesFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "SecurityCapabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Device; } }
@@ -6139,6 +6180,7 @@ namespace SharpOnvifServer.DeviceMgmt
             {
                 writer.WriteAttributeString(null, "MaxUserRoles", writer.ToXml(this.maxUserRolesField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -6146,96 +6188,120 @@ namespace SharpOnvifServer.DeviceMgmt
             switch (reader.LocalName)
             {
                 case "TLS1.0":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.tLS10Field = reader.ToBoolean(reader.AttributeValue);
                     this.tLS10FieldSpecified = true;
                     return true;
                 case "TLS1.1":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.tLS11Field = reader.ToBoolean(reader.AttributeValue);
                     this.tLS11FieldSpecified = true;
                     return true;
                 case "TLS1.2":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.tLS12Field = reader.ToBoolean(reader.AttributeValue);
                     this.tLS12FieldSpecified = true;
                     return true;
                 case "OnboardKeyGeneration":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.onboardKeyGenerationField = reader.ToBoolean(reader.AttributeValue);
                     this.onboardKeyGenerationFieldSpecified = true;
                     return true;
                 case "AccessPolicyConfig":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.accessPolicyConfigField = reader.ToBoolean(reader.AttributeValue);
                     this.accessPolicyConfigFieldSpecified = true;
                     return true;
                 case "DefaultAccessPolicy":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.defaultAccessPolicyField = reader.ToBoolean(reader.AttributeValue);
                     this.defaultAccessPolicyFieldSpecified = true;
                     return true;
                 case "Dot1X":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.dot1XField = reader.ToBoolean(reader.AttributeValue);
                     this.dot1XFieldSpecified = true;
                     return true;
                 case "RemoteUserHandling":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.remoteUserHandlingField = reader.ToBoolean(reader.AttributeValue);
                     this.remoteUserHandlingFieldSpecified = true;
                     return true;
                 case "X.509Token":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.x509TokenField = reader.ToBoolean(reader.AttributeValue);
                     this.x509TokenFieldSpecified = true;
                     return true;
                 case "SAMLToken":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.sAMLTokenField = reader.ToBoolean(reader.AttributeValue);
                     this.sAMLTokenFieldSpecified = true;
                     return true;
                 case "KerberosToken":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.kerberosTokenField = reader.ToBoolean(reader.AttributeValue);
                     this.kerberosTokenFieldSpecified = true;
                     return true;
                 case "UsernameToken":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.usernameTokenField = reader.ToBoolean(reader.AttributeValue);
                     this.usernameTokenFieldSpecified = true;
                     return true;
                 case "HttpDigest":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.httpDigestField = reader.ToBoolean(reader.AttributeValue);
                     this.httpDigestFieldSpecified = true;
                     return true;
                 case "RELToken":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.rELTokenField = reader.ToBoolean(reader.AttributeValue);
                     this.rELTokenFieldSpecified = true;
                     return true;
                 case "JsonWebToken":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.jsonWebTokenField = reader.ToBoolean(reader.AttributeValue);
                     this.jsonWebTokenFieldSpecified = true;
                     return true;
                 case "SupportedEAPMethods":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.supportedEAPMethodsField = System.Array.ConvertAll(reader.SplitList(reader.AttributeValue), x => reader.ToInt32(x));
                     return true;
                 case "MaxUsers":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxUsersField = reader.ToInt32(reader.AttributeValue);
                     this.maxUsersFieldSpecified = true;
                     return true;
                 case "MaxUserNameLength":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxUserNameLengthField = reader.ToInt32(reader.AttributeValue);
                     this.maxUserNameLengthFieldSpecified = true;
                     return true;
                 case "MaxPasswordLength":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxPasswordLengthField = reader.ToInt32(reader.AttributeValue);
                     this.maxPasswordLengthFieldSpecified = true;
                     return true;
                 case "SecurityPolicies":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.securityPoliciesField = reader.SplitList(reader.AttributeValue);
                     return true;
                 case "MaxPasswordHistory":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxPasswordHistoryField = reader.ToInt32(reader.AttributeValue);
                     this.maxPasswordHistoryFieldSpecified = true;
                     return true;
                 case "HashingAlgorithms":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.hashingAlgorithmsField = reader.SplitList(reader.AttributeValue);
                     return true;
                 case "MaxUserRoles":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxUserRolesField = reader.ToInt32(reader.AttributeValue);
                     this.maxUserRolesFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
     }
@@ -6361,6 +6427,8 @@ namespace SharpOnvifServer.DeviceMgmt
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Namespace of the service being described. This parameter allows to match the service capabilities to
         /// the service. Note that only one set of capabilities is supported per namespace.
@@ -6407,9 +6475,21 @@ namespace SharpOnvifServer.DeviceMgmt
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Service"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Device; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -6423,6 +6503,12 @@ namespace SharpOnvifServer.DeviceMgmt
             }
             writer.WriteElement(Ns.Ver10Device, "Version", this.versionField, "http://www.onvif.org/ver10/schema", "OnvifVersion");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -9139,6 +9225,8 @@ namespace SharpOnvifServer.DeviceMgmt
 
         private string regionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Local path
         /// </summary>
@@ -9221,6 +9309,13 @@ namespace SharpOnvifServer.DeviceMgmt
             set { this.regionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "StorageConfigurationData"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Device; } }
@@ -9229,6 +9324,7 @@ namespace SharpOnvifServer.DeviceMgmt
         {
             writer.WriteAttributeString(null, "type", this.typeField);
             writer.WriteAttributeString(null, "Region", this.regionField);
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -9247,13 +9343,16 @@ namespace SharpOnvifServer.DeviceMgmt
             switch (reader.LocalName)
             {
                 case "type":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.typeField = reader.AttributeValue;
                     return true;
                 case "Region":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.regionField = reader.AttributeValue;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -9463,6 +9562,11 @@ namespace SharpOnvifServer.DeviceMgmt
         private string[] addonsField;
 
         private string hardwareTypeField;
+
+        private bool firmwareUpgradeField;
+        private bool firmwareUpgradeFieldSpecified;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Indicates support for WS Discovery resolve requests.
@@ -9862,6 +9966,34 @@ namespace SharpOnvifServer.DeviceMgmt
             set { this.hardwareTypeField = value; }
         }
 
+        /// <summary>
+        /// Indicates support for firmware upgrade through MTOM.
+        /// </summary>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public bool FirmwareUpgrade
+        {
+            get { return this.firmwareUpgradeField; }
+            set { this.firmwareUpgradeField = value; }
+        }
+
+        /// <summary>
+        /// Whether <see cref="FirmwareUpgrade"/> was present. The value type cannot
+        /// otherwise distinguish an absent optional element from a zero one.
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool FirmwareUpgradeSpecified
+        {
+            get { return this.firmwareUpgradeFieldSpecified; }
+            set { this.firmwareUpgradeFieldSpecified = value; }
+        }
+
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "SystemCapabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Device; } }
@@ -9940,6 +10072,11 @@ namespace SharpOnvifServer.DeviceMgmt
             }
             writer.WriteAttributeString(null, "Addons", writer.JoinList(this.addonsField));
             writer.WriteAttributeString(null, "HardwareType", this.hardwareTypeField);
+            if (this.firmwareUpgradeFieldSpecified)
+            {
+                writer.WriteAttributeString(null, "FirmwareUpgrade", writer.ToXml(this.firmwareUpgradeField));
+            }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -9947,87 +10084,114 @@ namespace SharpOnvifServer.DeviceMgmt
             switch (reader.LocalName)
             {
                 case "DiscoveryResolve":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.discoveryResolveField = reader.ToBoolean(reader.AttributeValue);
                     this.discoveryResolveFieldSpecified = true;
                     return true;
                 case "DiscoveryBye":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.discoveryByeField = reader.ToBoolean(reader.AttributeValue);
                     this.discoveryByeFieldSpecified = true;
                     return true;
                 case "RemoteDiscovery":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.remoteDiscoveryField = reader.ToBoolean(reader.AttributeValue);
                     this.remoteDiscoveryFieldSpecified = true;
                     return true;
                 case "SystemBackup":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.systemBackupField = reader.ToBoolean(reader.AttributeValue);
                     this.systemBackupFieldSpecified = true;
                     return true;
                 case "SystemLogging":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.systemLoggingField = reader.ToBoolean(reader.AttributeValue);
                     this.systemLoggingFieldSpecified = true;
                     return true;
                 case "CloudFirmwareUpgrade":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.cloudFirmwareUpgradeField = reader.ToBoolean(reader.AttributeValue);
                     this.cloudFirmwareUpgradeFieldSpecified = true;
                     return true;
                 case "HttpFirmwareUpgrade":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.httpFirmwareUpgradeField = reader.ToBoolean(reader.AttributeValue);
                     this.httpFirmwareUpgradeFieldSpecified = true;
                     return true;
                 case "HttpSystemBackup":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.httpSystemBackupField = reader.ToBoolean(reader.AttributeValue);
                     this.httpSystemBackupFieldSpecified = true;
                     return true;
                 case "HttpSystemLogging":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.httpSystemLoggingField = reader.ToBoolean(reader.AttributeValue);
                     this.httpSystemLoggingFieldSpecified = true;
                     return true;
                 case "HttpSupportInformation":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.httpSupportInformationField = reader.ToBoolean(reader.AttributeValue);
                     this.httpSupportInformationFieldSpecified = true;
                     return true;
                 case "StorageConfiguration":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.storageConfigurationField = reader.ToBoolean(reader.AttributeValue);
                     this.storageConfigurationFieldSpecified = true;
                     return true;
                 case "MaxStorageConfigurations":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxStorageConfigurationsField = reader.ToInt32(reader.AttributeValue);
                     this.maxStorageConfigurationsFieldSpecified = true;
                     return true;
                 case "StorageConfigurationRenewal":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.storageConfigurationRenewalField = reader.ToBoolean(reader.AttributeValue);
                     this.storageConfigurationRenewalFieldSpecified = true;
                     return true;
                 case "GeoLocationEntries":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.geoLocationEntriesField = reader.ToInt32(reader.AttributeValue);
                     this.geoLocationEntriesFieldSpecified = true;
                     return true;
                 case "AutoGeo":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.autoGeoField = reader.SplitList(reader.AttributeValue);
                     return true;
                 case "StorageTypesSupported":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.storageTypesSupportedField = reader.SplitList(reader.AttributeValue);
                     return true;
                 case "DiscoveryNotSupported":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.discoveryNotSupportedField = reader.ToBoolean(reader.AttributeValue);
                     this.discoveryNotSupportedFieldSpecified = true;
                     return true;
                 case "NetworkConfigNotSupported":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.networkConfigNotSupportedField = reader.ToBoolean(reader.AttributeValue);
                     this.networkConfigNotSupportedFieldSpecified = true;
                     return true;
                 case "UserConfigNotSupported":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.userConfigNotSupportedField = reader.ToBoolean(reader.AttributeValue);
                     this.userConfigNotSupportedFieldSpecified = true;
                     return true;
                 case "Addons":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.addonsField = reader.SplitList(reader.AttributeValue);
                     return true;
                 case "HardwareType":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.hardwareTypeField = reader.AttributeValue;
                     return true;
+                case "FirmwareUpgrade":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
+                    this.firmwareUpgradeField = reader.ToBoolean(reader.AttributeValue);
+                    this.firmwareUpgradeFieldSpecified = true;
+                    return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
     }

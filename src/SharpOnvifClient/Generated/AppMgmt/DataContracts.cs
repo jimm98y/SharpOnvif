@@ -90,7 +90,7 @@ namespace SharpOnvifClient.AppMgmt
         /// <summary>
         /// App identifier.
         /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
         public string AppID
         {
             get { return this.appIDField; }
@@ -169,10 +169,12 @@ namespace SharpOnvifClient.AppMgmt
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Unique app identifier of the application instance.
         /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
         public string AppID
         {
             get { return this.appIDField; }
@@ -182,7 +184,7 @@ namespace SharpOnvifClient.AppMgmt
         /// <summary>
         /// User readable application name
         /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
         public string Name
         {
             get { return this.nameField; }
@@ -193,7 +195,7 @@ namespace SharpOnvifClient.AppMgmt
         /// Version of the installed application. The details of the format are outside of the scope of this
         /// specificaton.
         /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
         public string Version
         {
             get { return this.versionField; }
@@ -203,7 +205,7 @@ namespace SharpOnvifClient.AppMgmt
         /// <summary>
         /// Licenses associated with the application.
         /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("Licenses", Order=3)]
+        [System.Xml.Serialization.XmlElementAttribute("Licenses", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
         public LicenseInfo[] Licenses
         {
             get { return this.licensesField; }
@@ -213,7 +215,7 @@ namespace SharpOnvifClient.AppMgmt
         /// <summary>
         /// List of privileges granted to the application.
         /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("Privileges", Order=4)]
+        [System.Xml.Serialization.XmlElementAttribute("Privileges", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
         public string[] Privileges
         {
             get { return this.privilegesField; }
@@ -223,7 +225,7 @@ namespace SharpOnvifClient.AppMgmt
         /// <summary>
         /// Date and time when the application has been installed.
         /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
         public System.DateTime InstallationDate
         {
             get { return this.installationDateField; }
@@ -233,7 +235,7 @@ namespace SharpOnvifClient.AppMgmt
         /// <summary>
         /// Time of last update to this app, i.e. the time when this particular version was installed.
         /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=6)]
         public System.DateTime LastUpdate
         {
             get { return this.lastUpdateField; }
@@ -243,7 +245,7 @@ namespace SharpOnvifClient.AppMgmt
         /// <summary>
         /// InstallationFailed state shall not be used here.
         /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=7)]
         public AppState State
         {
             get { return this.stateField; }
@@ -254,7 +256,7 @@ namespace SharpOnvifClient.AppMgmt
         /// Supplemental information why the application is in the current state. In error cases this field
         /// contains the error reason.
         /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=8)]
         public string Status
         {
             get { return this.statusField; }
@@ -264,7 +266,7 @@ namespace SharpOnvifClient.AppMgmt
         /// <summary>
         /// If set the application will start automatically after booting of the device.
         /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=9)]
         public bool Autostart
         {
             get { return this.autostartField; }
@@ -274,7 +276,7 @@ namespace SharpOnvifClient.AppMgmt
         /// <summary>
         /// Link to supplementary information about the application or its vendor.
         /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=10, DataType="anyURI")]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=10, DataType="anyURI")]
         public string Website
         {
             get { return this.websiteField; }
@@ -284,7 +286,7 @@ namespace SharpOnvifClient.AppMgmt
         /// <summary>
         /// Link to a list of open source licenses used by the application.
         /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=11, DataType="anyURI")]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=11, DataType="anyURI")]
         public string OpenSource
         {
             get { return this.openSourceField; }
@@ -294,7 +296,7 @@ namespace SharpOnvifClient.AppMgmt
         /// <summary>
         /// Optional Uri for backup and restore of the application configuration.
         /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=12, DataType="anyURI")]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=12, DataType="anyURI")]
         public string Configuration
         {
             get { return this.configurationField; }
@@ -304,7 +306,7 @@ namespace SharpOnvifClient.AppMgmt
         /// <summary>
         /// Optional reference to the interface definition of the application.
         /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("InterfaceDescription", Order=13, DataType="anyURI")]
+        [System.Xml.Serialization.XmlElementAttribute("InterfaceDescription", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=13, DataType="anyURI")]
         public string[] InterfaceDescription
         {
             get { return this.interfaceDescriptionField; }
@@ -318,9 +320,21 @@ namespace SharpOnvifClient.AppMgmt
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AppInfo"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Appmgmt; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -357,6 +371,12 @@ namespace SharpOnvifClient.AppMgmt
                 }
             }
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -426,6 +446,8 @@ namespace SharpOnvifClient.AppMgmt
 
         private string eventTopicPrefixField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -486,6 +508,13 @@ namespace SharpOnvifClient.AppMgmt
             set { this.eventTopicPrefixField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Capabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Appmgmt; } }
@@ -499,6 +528,7 @@ namespace SharpOnvifClient.AppMgmt
             }
             writer.WriteAttributeString(null, "UploadPath", this.uploadPathField);
             writer.WriteAttributeString(null, "EventTopicPrefix", this.eventTopicPrefixField);
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -511,20 +541,25 @@ namespace SharpOnvifClient.AppMgmt
             switch (reader.LocalName)
             {
                 case "FormatsSupported":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.formatsSupportedField = reader.SplitList(reader.AttributeValue);
                     return true;
                 case "Licensing":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.licensingField = reader.ToBoolean(reader.AttributeValue);
                     this.licensingFieldSpecified = true;
                     return true;
                 case "UploadPath":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.uploadPathField = reader.AttributeValue;
                     return true;
                 case "EventTopicPrefix":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.eventTopicPrefixField = reader.AttributeValue;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -546,7 +581,7 @@ namespace SharpOnvifClient.AppMgmt
         /// <summary>
         /// App identifier.
         /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
         public string AppID
         {
             get { return this.appIDField; }
@@ -604,7 +639,7 @@ namespace SharpOnvifClient.AppMgmt
         /// <summary>
         /// Optional ID to only retrieve information for a single application.
         /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
         public string AppID
         {
             get { return this.appIDField; }
@@ -647,7 +682,7 @@ namespace SharpOnvifClient.AppMgmt
     {
         private AppInfo[] infoField;
 
-        [System.Xml.Serialization.XmlElementAttribute("Info", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("Info", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
         public AppInfo[] Info
         {
             get { return this.infoField; }
@@ -707,7 +742,7 @@ namespace SharpOnvifClient.AppMgmt
     {
         private string deviceIdField;
 
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
         public string DeviceId
         {
             get { return this.deviceIdField; }
@@ -764,7 +799,7 @@ namespace SharpOnvifClient.AppMgmt
         /// <summary>
         /// List of installed apps providing both user readable name and token.
         /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("App", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("App", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
         public GetInstalledAppsResponseApp[] App
         {
             get { return this.appField; }
@@ -812,14 +847,16 @@ namespace SharpOnvifClient.AppMgmt
 
         private System.Xml.XmlElement[] anyField;
 
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        private System.Xml.XmlAttribute[] anyAttrField;
+
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
         public string Name
         {
             get { return this.nameField; }
             set { this.nameField = value; }
         }
 
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
         public string AppID
         {
             get { return this.appIDField; }
@@ -833,11 +870,29 @@ namespace SharpOnvifClient.AppMgmt
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(null, "Name", this.nameField);
             writer.WriteElementString(null, "AppID", this.appIDField);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -880,7 +935,7 @@ namespace SharpOnvifClient.AppMgmt
         /// <summary>
         /// The capabilities of the service.
         /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
         public Capabilities Capabilities
         {
             get { return this.capabilitiesField; }
@@ -928,7 +983,7 @@ namespace SharpOnvifClient.AppMgmt
         /// <summary>
         /// Application the license shall be associated to.
         /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
         public string AppID
         {
             get { return this.appIDField; }
@@ -938,7 +993,7 @@ namespace SharpOnvifClient.AppMgmt
         /// <summary>
         /// Opaque machine readable license string.
         /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
         public string License
         {
             get { return this.licenseField; }
@@ -1003,10 +1058,12 @@ namespace SharpOnvifClient.AppMgmt
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Textual name of the license
         /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
         public string Name
         {
             get { return this.nameField; }
@@ -1016,7 +1073,7 @@ namespace SharpOnvifClient.AppMgmt
         /// <summary>
         /// Start time of validity
         /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
         public System.DateTime ValidFrom
         {
             get { return this.validFromField; }
@@ -1037,7 +1094,7 @@ namespace SharpOnvifClient.AppMgmt
         /// <summary>
         /// End time of validity
         /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
         public System.DateTime ValidUntil
         {
             get { return this.validUntilField; }
@@ -1062,9 +1119,21 @@ namespace SharpOnvifClient.AppMgmt
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "LicenseInfo"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Appmgmt; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -1078,6 +1147,12 @@ namespace SharpOnvifClient.AppMgmt
                 writer.WriteElementString(null, "ValidUntil", writer.ToXml(this.validUntilField));
             }
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -1115,7 +1190,7 @@ namespace SharpOnvifClient.AppMgmt
         /// <summary>
         /// App to be uninstalled. Possible failures during deinstallation will be delivered via an event.
         /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
         public string AppID
         {
             get { return this.appIDField; }

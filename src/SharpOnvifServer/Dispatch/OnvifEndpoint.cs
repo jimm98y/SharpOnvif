@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using SharpOnvifCommon.Security;
 using SharpOnvifCommon.Xml;
 using SharpOnvifServer.Events;
 using SharpOnvifServer.Security;
@@ -101,11 +103,17 @@ namespace SharpOnvifServer.Dispatch
                     registration = _services.FirstOrDefault(r => r.Dispatcher.CanHandle(action));
                 }
 
-                if (registration == null)
+                // The body element names the operation too, and where the two disagree the body
+                // is the one that describes what was sent. 0.9.x sent the DeviceIO operations with
+                // the device service's actions, which on an address hosting both services named
+                // the wrong one. It also covers a client that sends no action at all.
+                string bodyAction = null;
+                Registration bodyRegistration = ResolveFromBody(envelope, ref bodyAction);
+                if (bodyRegistration != null && bodyAction != action
+                    && (registration == null || MayRunInstead(context, bodyAction)))
                 {
-                    // Last resort: identify the operation from the body element itself, which is
-                    // what a client that sends neither form of action leaves us.
-                    registration = ResolveFromBody(envelope, ref action);
+                    registration = bodyRegistration;
+                    action = bodyAction;
                 }
 
                 if (registration == null)
@@ -268,6 +276,24 @@ namespace SharpOnvifServer.Dispatch
             // Produces the WWW-Authenticate challenge the client needs in order to try again.
             await context.ChallengeAsync(OnvifAuthenticationDefaults.AuthenticationScheme).ConfigureAwait(false);
             return false;
+        }
+
+        /// <summary>
+        /// Whether the caller may run the operation the body names in place of the one its action
+        /// names. Authentication admitted the request for the action, and an action the
+        /// specification lets anyone call must not carry in a body that needs a password.
+        /// </summary>
+        private static bool MayRunInstead(HttpContext context, string bodyAction)
+        {
+            var identity = context.User?.Identity;
+            if (identity == null || !identity.IsAuthenticated) return true;   // no Onvif authentication here
+            if (identity.Name != DigestAuthenticationHandler.ANONYMOUS_USER) return true;   // a real user
+
+            var options = context.RequestServices.GetService<IOptionsMonitor<DigestAuthenticationSchemeOptions>>()?
+                .Get(OnvifAuthenticationDefaults.AuthenticationScheme);
+            if (options == null) return false;
+
+            return options.Onvif.Authentication == DigestAuthentication.None || options.Onvif.IsPreAuth(bodyAction);
         }
 
         private Registration ResolveFromBody(string envelope, ref string action)

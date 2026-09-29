@@ -75,6 +75,12 @@ namespace __RUNTIME__.Xml
 
         void WriteAny(XmlElement[] elements);
 
+        /// <summary>Writes the attributes an xs:anyAttribute wildcard captured.</summary>
+        void WriteAnyAttributes(XmlAttribute[] attributes);
+
+        /// <summary>Writes an element whose type is xs:anyType; nothing for a null value.</summary>
+        void WriteAnyTypeElement(string ns, string name, object value);
+
         void WriteAny(XmlNode[] nodes);
 
         /// <summary>The lexical form of a value, as its schema type defines it.</summary>

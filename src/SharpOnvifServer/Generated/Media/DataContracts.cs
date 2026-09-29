@@ -778,6 +778,8 @@ namespace SharpOnvifServer.Media
         private bool eXICompressionField;
         private bool eXICompressionFieldSpecified;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Media profile capabilities.
         /// </summary>
@@ -931,6 +933,13 @@ namespace SharpOnvifServer.Media
             set { this.eXICompressionFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Capabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Media; } }
@@ -961,6 +970,7 @@ namespace SharpOnvifServer.Media
             {
                 writer.WriteAttributeString(null, "EXICompression", writer.ToXml(this.eXICompressionField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -975,31 +985,38 @@ namespace SharpOnvifServer.Media
             switch (reader.LocalName)
             {
                 case "SnapshotUri":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.snapshotUriField = reader.ToBoolean(reader.AttributeValue);
                     this.snapshotUriFieldSpecified = true;
                     return true;
                 case "Rotation":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.rotationField = reader.ToBoolean(reader.AttributeValue);
                     this.rotationFieldSpecified = true;
                     return true;
                 case "VideoSourceMode":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.videoSourceModeField = reader.ToBoolean(reader.AttributeValue);
                     this.videoSourceModeFieldSpecified = true;
                     return true;
                 case "OSD":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.oSDField = reader.ToBoolean(reader.AttributeValue);
                     this.oSDFieldSpecified = true;
                     return true;
                 case "TemporaryOSDText":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.temporaryOSDTextField = reader.ToBoolean(reader.AttributeValue);
                     this.temporaryOSDTextFieldSpecified = true;
                     return true;
                 case "EXICompression":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.eXICompressionField = reader.ToBoolean(reader.AttributeValue);
                     this.eXICompressionFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -5642,6 +5659,8 @@ namespace SharpOnvifServer.Media
         private int maximumNumberOfProfilesField;
         private bool maximumNumberOfProfilesFieldSpecified;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -5670,6 +5689,13 @@ namespace SharpOnvifServer.Media
             set { this.maximumNumberOfProfilesFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ProfileCapabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Media; } }
@@ -5680,6 +5706,7 @@ namespace SharpOnvifServer.Media
             {
                 writer.WriteAttributeString(null, "MaximumNumberOfProfiles", writer.ToXml(this.maximumNumberOfProfilesField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -5692,11 +5719,13 @@ namespace SharpOnvifServer.Media
             switch (reader.LocalName)
             {
                 case "MaximumNumberOfProfiles":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maximumNumberOfProfilesField = reader.ToInt32(reader.AttributeValue);
                     this.maximumNumberOfProfilesFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -7371,6 +7400,8 @@ namespace SharpOnvifServer.Media
         private bool noRTSPStreamingField;
         private bool noRTSPStreamingFieldSpecified;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -7483,6 +7514,13 @@ namespace SharpOnvifServer.Media
             set { this.noRTSPStreamingFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "StreamingCapabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Media; } }
@@ -7509,6 +7547,7 @@ namespace SharpOnvifServer.Media
             {
                 writer.WriteAttributeString(null, "NoRTSPStreaming", writer.ToXml(this.noRTSPStreamingField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -7521,27 +7560,33 @@ namespace SharpOnvifServer.Media
             switch (reader.LocalName)
             {
                 case "RTPMulticast":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.rTPMulticastField = reader.ToBoolean(reader.AttributeValue);
                     this.rTPMulticastFieldSpecified = true;
                     return true;
                 case "RTP_TCP":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.rTP_TCPField = reader.ToBoolean(reader.AttributeValue);
                     this.rTP_TCPFieldSpecified = true;
                     return true;
                 case "RTP_RTSP_TCP":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.rTP_RTSP_TCPField = reader.ToBoolean(reader.AttributeValue);
                     this.rTP_RTSP_TCPFieldSpecified = true;
                     return true;
                 case "NonAggregateControl":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.nonAggregateControlField = reader.ToBoolean(reader.AttributeValue);
                     this.nonAggregateControlFieldSpecified = true;
                     return true;
                 case "NoRTSPStreaming":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.noRTSPStreamingField = reader.ToBoolean(reader.AttributeValue);
                     this.noRTSPStreamingFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -7571,6 +7616,8 @@ namespace SharpOnvifServer.Media
 
         private bool enabledField;
         private bool enabledFieldSpecified;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Max frame rate in frames per second for this video source mode.
@@ -7664,6 +7711,13 @@ namespace SharpOnvifServer.Media
             set { this.enabledFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "VideoSourceMode"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Media; } }
@@ -7675,6 +7729,7 @@ namespace SharpOnvifServer.Media
             {
                 writer.WriteAttributeString(null, "Enabled", writer.ToXml(this.enabledField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -7692,14 +7747,17 @@ namespace SharpOnvifServer.Media
             switch (reader.LocalName)
             {
                 case "token":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.tokenField = reader.AttributeValue;
                     return true;
                 case "Enabled":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.enabledField = reader.ToBoolean(reader.AttributeValue);
                     this.enabledFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)

@@ -57,7 +57,12 @@ internal sealed class XsdSimpleType : XsdType
     public void Extend(XsdEnumValue value) => _enumerations.Add(value);
 }
 
-internal sealed record XsdEnumValue(string Value, string? Documentation);
+/// <param name="Qualified">
+/// The value resolved against the prefixes in scope where it was declared, for an enumeration of
+/// xs:QName. Its lexical form names a namespace through a prefix, and the schema's prefix is not
+/// the one a document on the wire will use.
+/// </param>
+internal sealed record XsdEnumValue(string Value, string? Documentation, QName? Qualified = null);
 
 internal enum ContentKind
 {
@@ -82,11 +87,23 @@ internal sealed class XsdComplexType : XsdType
     /// <summary>Content model contributed by this type, excluding anything inherited.</summary>
     public XsdParticle? Particle { get; init; }
 
-    public IReadOnlyList<XsdAttribute> Attributes { get; init; } = [];
+    private readonly List<XsdAttribute> _attributes = [];
+
+    public IReadOnlyList<XsdAttribute> Attributes
+    {
+        get => _attributes;
+        init => _attributes.AddRange(value);
+    }
 
     /// <summary>
-    /// True when the type declares xs:anyAttribute. Recorded for fidelity but not emitted:
-    /// svcutil drops these, and matching it keeps the generated surface source-compatible.
+    /// Adds an attribute the schema does not declare. See <see cref="AttributeAddition"/> for why
+    /// a generated type sometimes has to carry more than the schema it came from.
+    /// </summary>
+    public void AddAttribute(XsdAttribute attribute) => _attributes.Add(attribute);
+
+    /// <summary>
+    /// True when the type declares xs:anyAttribute, which becomes an <c>XmlAttribute[] AnyAttr</c>
+    /// member as svcutil generated it.
     /// </summary>
     public bool AllowsAnyAttribute { get; init; }
 

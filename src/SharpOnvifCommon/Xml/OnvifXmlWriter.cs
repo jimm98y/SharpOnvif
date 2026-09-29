@@ -26,10 +26,14 @@ namespace SharpOnvifCommon.Xml
 
         // ------------------------------------------------------------------ elements
 
+        /// <summary>
+        /// Starts an element. An empty or null namespace means the element is unqualified, as a
+        /// schema without elementFormDefault="qualified" declares its local elements, so it is
+        /// written in no namespace rather than in whichever default namespace encloses it.
+        /// </summary>
         public void WriteStartElement(string ns, string name)
         {
-            if (string.IsNullOrEmpty(ns)) _writer.WriteStartElement(name);
-            else _writer.WriteStartElement(name, ns);
+            _writer.WriteStartElement(name, ns ?? string.Empty);
         }
 
         public void WriteEndElement()
@@ -139,6 +143,27 @@ namespace SharpOnvifCommon.Xml
             else _writer.WriteAttributeString(name, ns, value);
         }
 
+        /// <summary>
+        /// Writes the attributes captured by an xs:anyAttribute wildcard back out. Namespace
+        /// declarations among them are left to the writer, which declares what it needs.
+        /// </summary>
+        public void WriteAnyAttributes(XmlAttribute[] attributes)
+        {
+            if (attributes == null) return;
+            for (int i = 0; i < attributes.Length; i++)
+            {
+                XmlAttribute attribute = attributes[i];
+                if (attribute == null || attribute.NamespaceURI == OnvifXmlNamespaces.Xmlns) continue;
+
+                if (string.IsNullOrEmpty(attribute.NamespaceURI))
+                    _writer.WriteAttributeString(attribute.LocalName, attribute.Value);
+                else
+                    _writer.WriteAttributeString(
+                        string.IsNullOrEmpty(attribute.Prefix) ? null : attribute.Prefix,
+                        attribute.LocalName, attribute.NamespaceURI, attribute.Value);
+            }
+        }
+
         // ------------------------------------------------------------------ text
 
         public void WriteText(string value)
@@ -175,6 +200,43 @@ namespace SharpOnvifCommon.Xml
             {
                 if (elements[i] != null) elements[i].WriteTo(_writer);
             }
+        }
+
+        /// <summary>
+        /// Writes an element whose schema type is xs:anyType. What it carries is whatever the
+        /// reader captured: the nodes inside it, attributes included, or plain text. Nothing is
+        /// written for a null value, which is what an absent optional element means.
+        /// </summary>
+        public void WriteAnyTypeElement(string ns, string name, object value)
+        {
+            if (value == null) return;
+
+            WriteStartElement(ns, name);
+            switch (value)
+            {
+                case XmlNode[] nodes:
+                    foreach (XmlNode node in nodes)
+                    {
+                        if (node is XmlAttribute attribute) WriteAnyAttributes(new[] { attribute });
+                    }
+                    foreach (XmlNode node in nodes)
+                    {
+                        if (node == null || node is XmlAttribute) continue;
+                        if (node.NodeType == XmlNodeType.Text || node.NodeType == XmlNodeType.CDATA) _writer.WriteString(node.Value);
+                        else node.WriteTo(_writer);
+                    }
+                    break;
+                case XmlElement element:
+                    element.WriteTo(_writer);
+                    break;
+                case IFormattable formattable:
+                    _writer.WriteString(formattable.ToString(null, System.Globalization.CultureInfo.InvariantCulture));
+                    break;
+                default:
+                    _writer.WriteString(value.ToString());
+                    break;
+            }
+            _writer.WriteEndElement();
         }
 
         /// <summary>

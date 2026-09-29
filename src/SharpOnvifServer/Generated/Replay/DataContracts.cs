@@ -36,6 +36,8 @@ namespace SharpOnvifServer.Replay
 
         private string rTSPWebSocketUriField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -107,6 +109,13 @@ namespace SharpOnvifServer.Replay
             set { this.rTSPWebSocketUriField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Capabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Replay; } }
@@ -123,6 +132,7 @@ namespace SharpOnvifServer.Replay
                 writer.WriteAttributeString(null, "RTP_RTSP_TCP", writer.ToXml(this.rTP_RTSP_TCPField));
             }
             writer.WriteAttributeString(null, "RTSPWebSocketUri", this.rTSPWebSocketUriField);
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -135,21 +145,26 @@ namespace SharpOnvifServer.Replay
             switch (reader.LocalName)
             {
                 case "ReversePlayback":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.reversePlaybackField = reader.ToBoolean(reader.AttributeValue);
                     this.reversePlaybackFieldSpecified = true;
                     return true;
                 case "SessionTimeoutRange":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.sessionTimeoutRangeField = System.Array.ConvertAll(reader.SplitList(reader.AttributeValue), x => reader.ToSingle(x));
                     return true;
                 case "RTP_RTSP_TCP":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.rTP_RTSP_TCPField = reader.ToBoolean(reader.AttributeValue);
                     this.rTP_RTSP_TCPFieldSpecified = true;
                     return true;
                 case "RTSPWebSocketUri":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.rTSPWebSocketUriField = reader.AttributeValue;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)

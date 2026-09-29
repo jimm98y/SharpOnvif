@@ -83,6 +83,8 @@ namespace SharpOnvifServer.Recording
         private bool segmentExportField;
         private bool segmentExportFieldSpecified;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -473,6 +475,13 @@ namespace SharpOnvifServer.Recording
             set { this.segmentExportFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Capabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Recording; } }
@@ -545,6 +554,7 @@ namespace SharpOnvifServer.Recording
             {
                 writer.WriteAttributeString(null, "SegmentExport", writer.ToXml(this.segmentExportField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -557,85 +567,107 @@ namespace SharpOnvifServer.Recording
             switch (reader.LocalName)
             {
                 case "DynamicRecordings":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.dynamicRecordingsField = reader.ToBoolean(reader.AttributeValue);
                     this.dynamicRecordingsFieldSpecified = true;
                     return true;
                 case "DynamicTracks":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.dynamicTracksField = reader.ToBoolean(reader.AttributeValue);
                     this.dynamicTracksFieldSpecified = true;
                     return true;
                 case "Encoding":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.encodingField = reader.SplitList(reader.AttributeValue);
                     return true;
                 case "MaxRate":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxRateField = reader.ToSingle(reader.AttributeValue);
                     this.maxRateFieldSpecified = true;
                     return true;
                 case "MaxTotalRate":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxTotalRateField = reader.ToSingle(reader.AttributeValue);
                     this.maxTotalRateFieldSpecified = true;
                     return true;
                 case "MaxRecordings":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxRecordingsField = reader.ToSingle(reader.AttributeValue);
                     this.maxRecordingsFieldSpecified = true;
                     return true;
                 case "MaxRecordingJobs":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxRecordingJobsField = reader.ToInt32(reader.AttributeValue);
                     this.maxRecordingJobsFieldSpecified = true;
                     return true;
                 case "Options":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.optionsField = reader.ToBoolean(reader.AttributeValue);
                     this.optionsFieldSpecified = true;
                     return true;
                 case "MetadataRecording":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.metadataRecordingField = reader.ToBoolean(reader.AttributeValue);
                     this.metadataRecordingFieldSpecified = true;
                     return true;
                 case "SupportedExportFileFormats":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.supportedExportFileFormatsField = reader.SplitList(reader.AttributeValue);
                     return true;
                 case "EventRecording":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.eventRecordingField = reader.ToBoolean(reader.AttributeValue);
                     this.eventRecordingFieldSpecified = true;
                     return true;
                 case "BeforeEventLimit":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.beforeEventLimitField = reader.AttributeValue;
                     return true;
                 case "AfterEventLimit":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.afterEventLimitField = reader.AttributeValue;
                     return true;
                 case "SupportedTargetFormats":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.supportedTargetFormatsField = reader.SplitList(reader.AttributeValue);
                     return true;
                 case "EncryptionEntryLimit":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.encryptionEntryLimitField = reader.ToInt32(reader.AttributeValue);
                     this.encryptionEntryLimitFieldSpecified = true;
                     return true;
                 case "SupportedEncryptionModes":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.supportedEncryptionModesField = reader.SplitList(reader.AttributeValue);
                     return true;
                 case "OverrideSegmentDuration":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.overrideSegmentDurationField = reader.ToBoolean(reader.AttributeValue);
                     this.overrideSegmentDurationFieldSpecified = true;
                     return true;
                 case "AsymmetricEncryptionSupported":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.asymmetricEncryptionSupportedField = reader.ToBoolean(reader.AttributeValue);
                     this.asymmetricEncryptionSupportedFieldSpecified = true;
                     return true;
                 case "ScheduledRecording":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.scheduledRecordingField = reader.ToBoolean(reader.AttributeValue);
                     this.scheduledRecordingFieldSpecified = true;
                     return true;
                 case "OnboardStorage":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.onboardStorageField = reader.ToBoolean(reader.AttributeValue);
                     this.onboardStorageFieldSpecified = true;
                     return true;
                 case "SegmentExport":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.segmentExportField = reader.ToBoolean(reader.AttributeValue);
                     this.segmentExportFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -2434,6 +2466,8 @@ namespace SharpOnvifServer.Recording
 
         private string[] compatibleSourcesField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Number of spare jobs that can be created for the recording.
         /// </summary>
@@ -2466,6 +2500,13 @@ namespace SharpOnvifServer.Recording
             set { this.compatibleSourcesField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "JobOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Recording; } }
@@ -2477,6 +2518,7 @@ namespace SharpOnvifServer.Recording
                 writer.WriteAttributeString(null, "Spare", writer.ToXml(this.spareField));
             }
             writer.WriteAttributeString(null, "CompatibleSources", writer.JoinList(this.compatibleSourcesField));
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -2484,14 +2526,17 @@ namespace SharpOnvifServer.Recording
             switch (reader.LocalName)
             {
                 case "Spare":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.spareField = reader.ToInt32(reader.AttributeValue);
                     this.spareFieldSpecified = true;
                     return true;
                 case "CompatibleSources":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.compatibleSourcesField = reader.SplitList(reader.AttributeValue);
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
     }
@@ -2864,6 +2909,8 @@ namespace SharpOnvifServer.Recording
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Same precision as defined in the Recording Control specification for segment objects.
         /// </summary>
@@ -2901,12 +2948,30 @@ namespace SharpOnvifServer.Recording
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Recording, "StartTime", writer.ToXml(this.startTimeField));
             writer.WriteElementString(Ns.Ver10Recording, "EndTime", writer.ToXml(this.endTimeField));
             writer.WriteElementString(Ns.Ver10Recording, "MediaType", this.mediaTypeField);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -3487,6 +3552,8 @@ namespace SharpOnvifServer.Recording
         private int spareMetadataField;
         private bool spareMetadataFieldSpecified;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Total spare number of tracks that can be added to this recording.
         /// </summary>
@@ -3571,6 +3638,13 @@ namespace SharpOnvifServer.Recording
             set { this.spareMetadataFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "TrackOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Recording; } }
@@ -3593,6 +3667,7 @@ namespace SharpOnvifServer.Recording
             {
                 writer.WriteAttributeString(null, "SpareMetadata", writer.ToXml(this.spareMetadataField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -3600,23 +3675,28 @@ namespace SharpOnvifServer.Recording
             switch (reader.LocalName)
             {
                 case "SpareTotal":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.spareTotalField = reader.ToInt32(reader.AttributeValue);
                     this.spareTotalFieldSpecified = true;
                     return true;
                 case "SpareVideo":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.spareVideoField = reader.ToInt32(reader.AttributeValue);
                     this.spareVideoFieldSpecified = true;
                     return true;
                 case "SpareAudio":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.spareAudioField = reader.ToInt32(reader.AttributeValue);
                     this.spareAudioFieldSpecified = true;
                     return true;
                 case "SpareMetadata":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.spareMetadataField = reader.ToInt32(reader.AttributeValue);
                     this.spareMetadataFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
     }

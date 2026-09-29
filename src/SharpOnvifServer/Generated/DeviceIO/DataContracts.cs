@@ -174,6 +174,8 @@ namespace SharpOnvifServer.DeviceIO
         private bool digitalInputOptionsField;
         private bool digitalInputOptionsFieldSpecified;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -349,6 +351,13 @@ namespace SharpOnvifServer.DeviceIO
             set { this.digitalInputOptionsFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Capabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10DeviceIO; } }
@@ -387,6 +396,7 @@ namespace SharpOnvifServer.DeviceIO
             {
                 writer.WriteAttributeString(null, "DigitalInputOptions", writer.ToXml(this.digitalInputOptionsField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -399,39 +409,48 @@ namespace SharpOnvifServer.DeviceIO
             switch (reader.LocalName)
             {
                 case "VideoSources":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.videoSourcesField = reader.ToInt32(reader.AttributeValue);
                     this.videoSourcesFieldSpecified = true;
                     return true;
                 case "VideoOutputs":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.videoOutputsField = reader.ToInt32(reader.AttributeValue);
                     this.videoOutputsFieldSpecified = true;
                     return true;
                 case "AudioSources":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.audioSourcesField = reader.ToInt32(reader.AttributeValue);
                     this.audioSourcesFieldSpecified = true;
                     return true;
                 case "AudioOutputs":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.audioOutputsField = reader.ToInt32(reader.AttributeValue);
                     this.audioOutputsFieldSpecified = true;
                     return true;
                 case "RelayOutputs":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.relayOutputsField = reader.ToInt32(reader.AttributeValue);
                     this.relayOutputsFieldSpecified = true;
                     return true;
                 case "SerialPorts":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.serialPortsField = reader.ToInt32(reader.AttributeValue);
                     this.serialPortsFieldSpecified = true;
                     return true;
                 case "DigitalInputs":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.digitalInputsField = reader.ToInt32(reader.AttributeValue);
                     this.digitalInputsFieldSpecified = true;
                     return true;
                 case "DigitalInputOptions":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.digitalInputOptionsField = reader.ToBoolean(reader.AttributeValue);
                     this.digitalInputOptionsFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -448,6 +467,8 @@ namespace SharpOnvifServer.DeviceIO
         private SharpOnvifCommon.Onvif.DigitalIdleState[] idleStateField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Configuration Options for a digital input.
@@ -466,9 +487,21 @@ namespace SharpOnvifServer.DeviceIO
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "DigitalInputConfigurationOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10DeviceIO; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -480,6 +513,12 @@ namespace SharpOnvifServer.DeviceIO
                 }
             }
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -2405,6 +2444,8 @@ namespace SharpOnvifServer.DeviceIO
 
         private string tokenField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Supported Modes.
         /// </summary>
@@ -2464,6 +2505,13 @@ namespace SharpOnvifServer.DeviceIO
             set { this.tokenField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "RelayOutputOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10DeviceIO; } }
@@ -2471,6 +2519,7 @@ namespace SharpOnvifServer.DeviceIO
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAttributeString(null, "token", this.tokenField);
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -2495,10 +2544,12 @@ namespace SharpOnvifServer.DeviceIO
             switch (reader.LocalName)
             {
                 case "token":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.tokenField = reader.AttributeValue;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -2725,6 +2776,8 @@ namespace SharpOnvifServer.DeviceIO
     {
         private object itemField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute("Binary", typeof(byte[]), Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("String", typeof(string), Order=0)]
         public object Item
@@ -2733,9 +2786,21 @@ namespace SharpOnvifServer.DeviceIO
             set { this.itemField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "SerialData"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10DeviceIO; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -2747,6 +2812,12 @@ namespace SharpOnvifServer.DeviceIO
             {
                 writer.WriteElementString(Ns.Ver10DeviceIO, "String", ((string)this.itemField));
             }
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -2775,6 +2846,8 @@ namespace SharpOnvifServer.DeviceIO
     {
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -2782,14 +2855,34 @@ namespace SharpOnvifServer.DeviceIO
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "SerialPort"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10DeviceIO; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            base.WriteXmlAttributes(writer);
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             base.WriteXmlContent(writer);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -2820,6 +2913,8 @@ namespace SharpOnvifServer.DeviceIO
         private string tokenField;
 
         private SerialPortType typeField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// The transfer bitrate.
@@ -2882,6 +2977,13 @@ namespace SharpOnvifServer.DeviceIO
             set { this.typeField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "SerialPortConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10DeviceIO; } }
@@ -2890,6 +2992,7 @@ namespace SharpOnvifServer.DeviceIO
         {
             writer.WriteAttributeString(null, "token", this.tokenField);
             writer.WriteAttributeString(null, "type", EnumXml.ToXml(this.typeField));
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -2906,13 +3009,16 @@ namespace SharpOnvifServer.DeviceIO
             switch (reader.LocalName)
             {
                 case "token":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.tokenField = reader.AttributeValue;
                     return true;
                 case "type":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.typeField = EnumXml.ParseSerialPortType(reader.AttributeValue);
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -2959,6 +3065,8 @@ namespace SharpOnvifServer.DeviceIO
         private System.Xml.XmlElement[] anyField;
 
         private string tokenField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// The list of configurable transfer bitrate.
@@ -3018,6 +3126,13 @@ namespace SharpOnvifServer.DeviceIO
             set { this.tokenField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "SerialPortConfigurationOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10DeviceIO; } }
@@ -3025,6 +3140,7 @@ namespace SharpOnvifServer.DeviceIO
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAttributeString(null, "token", this.tokenField);
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -3073,10 +3189,12 @@ namespace SharpOnvifServer.DeviceIO
             switch (reader.LocalName)
             {
                 case "token":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.tokenField = reader.AttributeValue;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)

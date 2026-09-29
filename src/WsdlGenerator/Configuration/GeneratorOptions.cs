@@ -102,4 +102,10 @@ internal sealed record GeneratorOptions
     /// the published schema has loosened a type that devices still send whole.
     /// </summary>
     public IReadOnlyList<ElementTypeOverride> ElementTypeOverrides { get; init; } = [];
+
+    /// <summary>
+    /// Attributes to add to schema types that do not declare them, for the case where the
+    /// published schema has dropped an attribute that devices still send.
+    /// </summary>
+    public IReadOnlyList<AttributeAddition> AttributeAdditions { get; init; } = [];
 }

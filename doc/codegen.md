@@ -100,6 +100,7 @@ A run of any size is described in JSON. Paths are relative to the file.
 | `targets` | Where the per-service code goes: `namespace`, `out`, and `client` or `server`. Required. |
 | `services` | The WSDLs: `name` and `wsdl` each. Names must be unique. Required. |
 | `enumerationValues` | Values to add to a schema enumeration: `type` as `{namespace}LocalName`, `value`, and optional `documentation`. |
+| `attributes` | Optional, unqualified attributes to add to a complex type that does not declare them: `type` as `{namespace}LocalName`, the `attribute` name, its type `as` `{namespace}LocalName`, and optional `documentation`. |
 | `elementTypes` | Elements to give a named type in place of the one the schema declares: the complex `type` as `{namespace}LocalName`, the local name of its `element`, and the type to give it `as`. |
 | `$comment` | Ignored, for a note at the top of the file. Any other unknown key is an error naming the key. |
 
@@ -114,6 +115,12 @@ A schema can also loosen a type under them. `onvif.xsd` once typed `tt:Transport
 `tt:Transport` and now declares it a wildcard holding one; `elementTypes` gives it the named type
 back, so callers read `Tunnel.Protocol` rather than raw XML. The element's own anonymous type is
 then not generated.
+
+A schema can drop an attribute outright, too. `event.wsdl` no longer declares
+`tev:Capabilities/@WSPullPointSupport`, and `devicemgmt.wsdl` no longer declares
+`tds:SystemCapabilities/@FirmwareUpgrade`, though devices send both. `attributes` declares them
+again so they stay typed properties. Any other attribute a type does not declare is still kept, in
+the `AnyAttr` member a type with `xs:anyAttribute` has.
 
 ## Output
 

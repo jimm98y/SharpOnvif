@@ -218,7 +218,48 @@ internal sealed class DataContractEmitter
                         writer.Line($"    return default({@enum.Name});");
                     }
                 }
+
+                if (@enum.IsQName) EmitQualifiedEnumConverters(writer, @enum);
             }
+        }
+    }
+
+    /// <summary>
+    /// The conversions for an enumeration of xs:QName. Its values are matched and written as a
+    /// namespace and a local name: the prefix a schema happens to use is bound in the schema, not
+    /// in the document on the wire.
+    /// </summary>
+    private static void EmitQualifiedEnumConverters(CSharpWriter writer, CsEnum @enum)
+    {
+        writer.Line();
+        writer.Line($"public static System.Xml.XmlQualifiedName ToQName({@enum.Name} value)");
+        using (writer.Braces())
+        {
+            writer.Line("switch (value)");
+            using (writer.Braces())
+            {
+                foreach (var member in @enum.Members)
+                {
+                    var q = member.QualifiedValue!.Value;
+                    writer.Line($"case {@enum.Name}.{CsharpNaming.Escape(member.Name)}:");
+                    writer.Line($"    return new System.Xml.XmlQualifiedName({Quote(q.LocalName)}, {Quote(q.Namespace)});");
+                }
+                writer.Line("default:");
+                writer.Line("    return null;");
+            }
+        }
+
+        writer.Line();
+        writer.Line($"public static {@enum.Name} Parse{@enum.Name}(System.Xml.XmlQualifiedName name)");
+        using (writer.Braces())
+        {
+            writer.Line($"if (name == null) return default({@enum.Name});");
+            foreach (var member in @enum.Members)
+            {
+                var q = member.QualifiedValue!.Value;
+                writer.Line($"if (name.Name == {Quote(q.LocalName)} && name.Namespace == {Quote(q.Namespace)}) return {@enum.Name}.{CsharpNaming.Escape(member.Name)};");
+            }
+            writer.Line($"return default({@enum.Name});");
         }
     }
 
@@ -258,6 +299,13 @@ internal sealed class DataContractEmitter
             writer.Line();
         }
     }
+
+    /// <summary>
+    /// Form=Unqualified for an element in no namespace. Without it XmlSerializer puts the element
+    /// in the namespace of the type that contains it, which is not where the schema puts it.
+    /// </summary>
+    private static string Unqualified(WsdlGenerator.Xml.QName name) =>
+        name.Namespace.Length == 0 && name.LocalName.Length > 0 ? "Form=System.Xml.Schema.XmlSchemaForm.Unqualified, " : "";
 
     private static string MemberType(CsMember member) =>
         member.IsArray ? member.Type.CsName + "[]" : member.Type.CsName;
@@ -316,6 +364,10 @@ internal sealed class DataContractEmitter
                 writer.Line($"[System.Xml.Serialization.XmlTextAttribute({dataType.TrimStart(',', ' ')})]");
                 break;
 
+            case MemberKind.AnyAttribute:
+                writer.Line("[System.Xml.Serialization.XmlAnyAttributeAttribute()]");
+                break;
+
             case MemberKind.AnyElement:
                 if (member.CapturesText) writer.Line("[System.Xml.Serialization.XmlTextAttribute()]");
                 string wildcardNs = member.WildcardNamespace is { } wns ? $"Namespace=\"{wns}\", " : "";
@@ -340,8 +392,8 @@ internal sealed class DataContractEmitter
                 break;
 
             case MemberKind.Element when member.ArrayItem is { } wrapped:
-                writer.Line($"[System.Xml.Serialization.XmlArrayAttribute(Order={member.Order})]");
-                writer.Line($"[System.Xml.Serialization.XmlArrayItemAttribute(\"{wrapped.LocalName}\", IsNullable=false)]");
+                writer.Line($"[System.Xml.Serialization.XmlArrayAttribute({Unqualified(member.XmlName)}Order={member.Order})]");
+                writer.Line($"[System.Xml.Serialization.XmlArrayItemAttribute(\"{wrapped.LocalName}\", {Unqualified(wrapped)}IsNullable=false)]");
                 break;
 
             default:
@@ -351,7 +403,7 @@ internal sealed class DataContractEmitter
                     ? $"\"{member.XmlName.LocalName}\", "
                     : "";
                 string nillable = member.IsNillable ? ", IsNullable=true" : "";
-                writer.Line($"[System.Xml.Serialization.XmlElementAttribute({elementName}Order={member.Order}{dataType}{nillable})]");
+                writer.Line($"[System.Xml.Serialization.XmlElementAttribute({elementName}{Unqualified(member.XmlName)}Order={member.Order}{dataType}{nillable})]");
                 break;
         }
     }
@@ -411,8 +463,8 @@ internal sealed class DataContractEmitter
     private void EmitWriteAttributes(CSharpWriter writer, CsClass @class, bool hasBase)
     {
         var attributes = @class.Members.Where(m => m.Kind == MemberKind.Attribute).ToList();
-        if (attributes.Count == 0 && !hasBase) return;
-        if (attributes.Count == 0) return;
+        var wildcard = @class.Members.FirstOrDefault(m => m.Kind == MemberKind.AnyAttribute);
+        if (attributes.Count == 0 && wildcard is null) return;
 
         writer.Line($"protected override void WriteXmlAttributes({Runtime}.IXmlWriter writer)");
         using (writer.Braces())
@@ -434,6 +486,8 @@ internal sealed class DataContractEmitter
                     writer.Line(call);
                 }
             }
+
+            if (wildcard is not null) writer.Line($"writer.WriteAnyAttributes(this.{wildcard.FieldName});");
         }
         writer.Line();
     }
@@ -557,6 +611,19 @@ internal sealed class DataContractEmitter
             return;
         }
 
+        if (member.Type.IsQNameEnum)
+        {
+            writer.Line($"writer.WriteElementQualifiedName({ns}, {name}, {EnumHelper(member.Type)}.ToQName({value}));");
+            return;
+        }
+
+        if (member.Type.Kind == TypeKind.Object)
+        {
+            // xs:anyType: whatever was read, carried back out as it came, and nothing when absent.
+            writer.Line($"writer.WriteAnyTypeElement({ns}, {name}, {value});");
+            return;
+        }
+
         if (member.Type.XsdPrimitive == "QName")
         {
             writer.Line($"writer.WriteElementQualifiedName({ns}, {name}, {value});");
@@ -630,27 +697,46 @@ internal sealed class DataContractEmitter
     private void EmitReadAttribute(CSharpWriter writer, CsClass @class, bool hasBase)
     {
         var attributes = @class.Members.Where(m => m.Kind == MemberKind.Attribute).ToList();
-        if (attributes.Count == 0) return;
+        var wildcard = @class.Members.FirstOrDefault(m => m.Kind == MemberKind.AnyAttribute);
+        if (attributes.Count == 0 && wildcard is null) return;
 
         writer.Line($"protected override bool ReadXmlAttribute({Runtime}.IXmlReader reader)");
         using (writer.Braces())
         {
-            writer.Line("switch (reader.LocalName)");
-            using (writer.Braces())
+            if (attributes.Count > 0)
             {
-                foreach (var member in attributes)
+                writer.Line("switch (reader.LocalName)");
+                using (writer.Braces())
                 {
-                    writer.Line($"case \"{member.XmlName.LocalName}\":");
-                    writer.Indent();
-                    if (member.XmlName.Namespace.Length > 0)
-                        writer.Line($"if (reader.NamespaceUri != {NsRef(member.XmlName.Namespace)}) break;");
-                    writer.Line($"this.{member.FieldName} = {FromXmlExpression(member, "reader.AttributeValue")};");
-                    if (member.NeedsSpecified) writer.Line($"this.{member.FieldName}Specified = true;");
-                    writer.Line("return true;");
-                    writer.Outdent();
+                    foreach (var member in attributes)
+                    {
+                        writer.Line($"case \"{member.XmlName.LocalName}\":");
+                        writer.Indent();
+                        // An unqualified attribute is in no namespace, so a vendor's attribute of
+                        // the same local name is left for the wildcard rather than taken for it.
+                        writer.Line(member.XmlName.Namespace.Length > 0
+                            ? $"if (reader.NamespaceUri != {NsRef(member.XmlName.Namespace)}) break;"
+                            : "if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;");
+                        writer.Line($"this.{member.FieldName} = {FromXmlExpression(member, "reader.AttributeValue")};");
+                        if (member.NeedsSpecified) writer.Line($"this.{member.FieldName}Specified = true;");
+                        writer.Line("return true;");
+                        writer.Outdent();
+                    }
                 }
             }
-            writer.Line(hasBase ? "return base.ReadXmlAttribute(reader);" : "return false;");
+
+            if (wildcard is null)
+            {
+                writer.Line(hasBase ? "return base.ReadXmlAttribute(reader);" : "return false;");
+            }
+            else
+            {
+                // An attribute the base declares is the base's; the wildcard keeps only what no
+                // class in the hierarchy declares.
+                if (hasBase) writer.Line("if (base.ReadXmlAttribute(reader)) return true;");
+                writer.Line($"reader.Append(ref this.{wildcard.FieldName}, reader.ReadAnyAttribute());");
+                writer.Line("return true;");
+            }
         }
         writer.Line();
     }
@@ -739,6 +825,9 @@ internal sealed class DataContractEmitter
         {
             TypeKind.Class => $"reader.ReadElementObject<{member.Type.CsName}>(() => new {member.Type.CsName}())",
             TypeKind.XmlElement or TypeKind.XmlNode => "reader.ReadWrappedElement()",
+            TypeKind.Object => "reader.ReadAnyTypeElement()",
+            TypeKind.Enum when member.Type.IsQNameEnum =>
+                $"{EnumHelper(member.Type)}.Parse{SimpleName(member.Type)}(reader.ReadElementQualifiedName())",
             _ => member.Type.XsdPrimitive == "QName"
                 ? "reader.ReadElementQualifiedName()"
                 : FromXmlExpression(member, "reader.ReadElementText()"),
@@ -862,6 +951,8 @@ internal sealed class DataContractEmitter
     /// <summary>Renders a CLR value as its XML lexical form.</summary>
     private string ScalarToXml(CsTypeRef type, string value)
     {
+        if (type.Kind == TypeKind.Enum && type.IsQNameEnum)
+            return $"writer.QualifiedNameToString({EnumHelper(type)}.ToQName({value}))";
         if (type.Kind == TypeKind.Enum) return $"{EnumHelper(type)}.ToXml({value})";
         if (type.Kind == TypeKind.Object) return $"System.Convert.ToString({value}, System.Globalization.CultureInfo.InvariantCulture)";
 
@@ -894,6 +985,8 @@ internal sealed class DataContractEmitter
     /// <summary>Parses an XML lexical form into a CLR value.</summary>
     private string ScalarFromXml(CsTypeRef type, string text)
     {
+        if (type.Kind == TypeKind.Enum && type.IsQNameEnum)
+            return $"{EnumHelper(type)}.Parse{SimpleName(type)}(reader.ToQualifiedName({text}))";
         if (type.Kind == TypeKind.Enum) return $"{EnumHelper(type)}.Parse{SimpleName(type)}({text})";
         if (type.Kind == TypeKind.Object) return text;
 
@@ -921,7 +1014,9 @@ internal sealed class DataContractEmitter
             "decimal" => $"reader.ToDecimal({text})",
             "float" => $"reader.ToSingle({text})",
             "double" => $"reader.ToDouble({text})",
-            "dateTime" or "date" or "time" => $"reader.ToDateTime({text})",
+            "dateTime" => $"reader.ToDateTime({text})",
+            "date" => $"reader.ToDate({text})",
+            "time" => $"reader.ToTime({text})",
             "base64Binary" => $"reader.ToByteArray({text})",
             "hexBinary" => $"reader.FromHexString({text})",
             "QName" => $"reader.ToQualifiedName({text})",

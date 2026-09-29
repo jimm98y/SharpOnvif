@@ -46,6 +46,8 @@ namespace SharpOnvifClient.Analytics
 
         private string[] imageSendingTypeField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -191,6 +193,13 @@ namespace SharpOnvifClient.Analytics
             set { this.imageSendingTypeField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Capabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver20Analytics; } }
@@ -222,6 +231,7 @@ namespace SharpOnvifClient.Analytics
                 writer.WriteAttributeString(null, "SupportedMetadata", writer.ToXml(this.supportedMetadataField));
             }
             writer.WriteAttributeString(null, "ImageSendingType", writer.JoinList(this.imageSendingTypeField));
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -234,34 +244,42 @@ namespace SharpOnvifClient.Analytics
             switch (reader.LocalName)
             {
                 case "RuleSupport":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.ruleSupportField = reader.ToBoolean(reader.AttributeValue);
                     this.ruleSupportFieldSpecified = true;
                     return true;
                 case "AnalyticsModuleSupport":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.analyticsModuleSupportField = reader.ToBoolean(reader.AttributeValue);
                     this.analyticsModuleSupportFieldSpecified = true;
                     return true;
                 case "CellBasedSceneDescriptionSupported":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.cellBasedSceneDescriptionSupportedField = reader.ToBoolean(reader.AttributeValue);
                     this.cellBasedSceneDescriptionSupportedFieldSpecified = true;
                     return true;
                 case "RuleOptionsSupported":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.ruleOptionsSupportedField = reader.ToBoolean(reader.AttributeValue);
                     this.ruleOptionsSupportedFieldSpecified = true;
                     return true;
                 case "AnalyticsModuleOptionsSupported":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.analyticsModuleOptionsSupportedField = reader.ToBoolean(reader.AttributeValue);
                     this.analyticsModuleOptionsSupportedFieldSpecified = true;
                     return true;
                 case "SupportedMetadata":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.supportedMetadataField = reader.ToBoolean(reader.AttributeValue);
                     this.supportedMetadataFieldSpecified = true;
                     return true;
                 case "ImageSendingType":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.imageSendingTypeField = reader.SplitList(reader.AttributeValue);
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -290,6 +308,8 @@ namespace SharpOnvifClient.Analytics
 
         private int maxOccursField;
         private bool maxOccursFieldSpecified;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
@@ -383,6 +403,13 @@ namespace SharpOnvifClient.Analytics
             set { this.maxOccursFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ConfigOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver20Analytics; } }
@@ -401,6 +428,7 @@ namespace SharpOnvifClient.Analytics
             {
                 writer.WriteAttributeString(null, "maxOccurs", writer.ToXml(this.maxOccursField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -413,27 +441,34 @@ namespace SharpOnvifClient.Analytics
             switch (reader.LocalName)
             {
                 case "RuleType":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.ruleTypeField = reader.ToQualifiedName(reader.AttributeValue);
                     return true;
                 case "Name":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.nameField = reader.AttributeValue;
                     return true;
                 case "Type":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.typeField = reader.ToQualifiedName(reader.AttributeValue);
                     return true;
                 case "AnalyticsModule":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.analyticsModuleField = reader.ToQualifiedName(reader.AttributeValue);
                     return true;
                 case "minOccurs":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.minOccursField = reader.ToInt32(reader.AttributeValue);
                     this.minOccursFieldSpecified = true;
                     return true;
                 case "maxOccurs":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxOccursField = reader.ToInt32(reader.AttributeValue);
                     this.maxOccursFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -1577,6 +1612,8 @@ namespace SharpOnvifClient.Analytics
 
         private System.Xml.XmlQualifiedName typeField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Sample frame content starting with the tt:Frame node.
         /// </summary>
@@ -1604,6 +1641,13 @@ namespace SharpOnvifClient.Analytics
             set { this.typeField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "MetadataInfo"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver20Analytics; } }
@@ -1611,6 +1655,7 @@ namespace SharpOnvifClient.Analytics
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAttributeString(null, "Type", writer.QualifiedNameToString(this.typeField));
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -1624,10 +1669,12 @@ namespace SharpOnvifClient.Analytics
             switch (reader.LocalName)
             {
                 case "Type":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.typeField = reader.ToQualifiedName(reader.AttributeValue);
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)

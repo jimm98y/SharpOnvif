@@ -38,6 +38,8 @@ namespace SharpOnvifServer.Search
         private bool imageSearchField;
         private bool imageSearchFieldSpecified;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -126,6 +128,13 @@ namespace SharpOnvifServer.Search
             set { this.imageSearchFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Capabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Search; } }
@@ -148,6 +157,7 @@ namespace SharpOnvifServer.Search
             {
                 writer.WriteAttributeString(null, "ImageSearch", writer.ToXml(this.imageSearchField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -160,23 +170,28 @@ namespace SharpOnvifServer.Search
             switch (reader.LocalName)
             {
                 case "MetadataSearch":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.metadataSearchField = reader.ToBoolean(reader.AttributeValue);
                     this.metadataSearchFieldSpecified = true;
                     return true;
                 case "GeneralStartEvents":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.generalStartEventsField = reader.ToBoolean(reader.AttributeValue);
                     this.generalStartEventsFieldSpecified = true;
                     return true;
                 case "NLSearch":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.nLSearchField = reader.ToBoolean(reader.AttributeValue);
                     this.nLSearchFieldSpecified = true;
                     return true;
                 case "ImageSearch":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.imageSearchField = reader.ToBoolean(reader.AttributeValue);
                     this.imageSearchFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)

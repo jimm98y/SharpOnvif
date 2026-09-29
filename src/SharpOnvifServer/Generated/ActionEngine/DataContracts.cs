@@ -31,6 +31,8 @@ namespace SharpOnvifServer.ActionEngine
 
         private System.Xml.XmlQualifiedName nameField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Action configuration parameter descriptions
         /// </summary>
@@ -51,6 +53,13 @@ namespace SharpOnvifServer.ActionEngine
             set { this.nameField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ActionConfigDescription"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Actionengine; } }
@@ -58,6 +67,7 @@ namespace SharpOnvifServer.ActionEngine
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAttributeString(null, "Name", writer.QualifiedNameToString(this.nameField));
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -70,10 +80,12 @@ namespace SharpOnvifServer.ActionEngine
             switch (reader.LocalName)
             {
                 case "Name":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.nameField = reader.ToQualifiedName(reader.AttributeValue);
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -104,6 +116,8 @@ namespace SharpOnvifServer.ActionEngine
         private string nameField;
 
         private System.Xml.XmlQualifiedName typeField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Action configuration parameter settings.
@@ -142,6 +156,13 @@ namespace SharpOnvifServer.ActionEngine
             set { this.typeField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ActionConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Actionengine; } }
@@ -150,6 +171,7 @@ namespace SharpOnvifServer.ActionEngine
         {
             writer.WriteAttributeString(null, "Name", this.nameField);
             writer.WriteAttributeString(null, "Type", writer.QualifiedNameToString(this.typeField));
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -163,13 +185,16 @@ namespace SharpOnvifServer.ActionEngine
             switch (reader.LocalName)
             {
                 case "Name":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.nameField = reader.AttributeValue;
                     return true;
                 case "Type":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.typeField = reader.ToQualifiedName(reader.AttributeValue);
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -201,6 +226,8 @@ namespace SharpOnvifServer.ActionEngine
         private string maximumTriggersField;
 
         private string maximumActionsField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Limits for each action type
@@ -239,6 +266,13 @@ namespace SharpOnvifServer.ActionEngine
             set { this.maximumActionsField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ActionEngineCapabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Actionengine; } }
@@ -247,6 +281,7 @@ namespace SharpOnvifServer.ActionEngine
         {
             writer.WriteAttributeString(null, "MaximumTriggers", this.maximumTriggersField);
             writer.WriteAttributeString(null, "MaximumActions", this.maximumActionsField);
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -266,13 +301,16 @@ namespace SharpOnvifServer.ActionEngine
             switch (reader.LocalName)
             {
                 case "MaximumTriggers":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maximumTriggersField = reader.AttributeValue;
                     return true;
                 case "MaximumActions":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maximumActionsField = reader.AttributeValue;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -298,6 +336,8 @@ namespace SharpOnvifServer.ActionEngine
     {
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -305,13 +345,31 @@ namespace SharpOnvifServer.ActionEngine
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ActionEngineCapabilitiesExtension"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Actionengine; } }
 
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -334,6 +392,8 @@ namespace SharpOnvifServer.ActionEngine
         private System.Xml.XmlElement[] anyField;
 
         private string tokenField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Action Trigger Configuration
@@ -362,6 +422,13 @@ namespace SharpOnvifServer.ActionEngine
             set { this.tokenField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ActionTrigger"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Actionengine; } }
@@ -369,6 +436,7 @@ namespace SharpOnvifServer.ActionEngine
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAttributeString(null, "Token", this.tokenField);
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -382,10 +450,12 @@ namespace SharpOnvifServer.ActionEngine
             switch (reader.LocalName)
             {
                 case "Token":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.tokenField = reader.AttributeValue;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -418,6 +488,8 @@ namespace SharpOnvifServer.ActionEngine
         private string[] actionTokenField;
 
         private ActionTriggerConfigurationExtension extensionField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Topic expression, for example, to trigger only for relays. Trigger based on event topic.
@@ -457,9 +529,21 @@ namespace SharpOnvifServer.ActionEngine
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ActionTriggerConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Actionengine; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -473,6 +557,12 @@ namespace SharpOnvifServer.ActionEngine
                 }
             }
             writer.WriteElement(Ns.Ver10Actionengine, "Extension", this.extensionField, Ns.Ver10Actionengine, "ActionTriggerConfigurationExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -506,6 +596,8 @@ namespace SharpOnvifServer.ActionEngine
     {
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -513,13 +605,31 @@ namespace SharpOnvifServer.ActionEngine
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ActionTriggerConfigurationExtension"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Actionengine; } }
 
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -544,6 +654,8 @@ namespace SharpOnvifServer.ActionEngine
         private string maximumField;
 
         private string inUseField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
@@ -583,6 +695,13 @@ namespace SharpOnvifServer.ActionEngine
             set { this.inUseField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ActionTypeLimits"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Actionengine; } }
@@ -592,6 +711,7 @@ namespace SharpOnvifServer.ActionEngine
             writer.WriteAttributeString(null, "Type", writer.QualifiedNameToString(this.typeField));
             writer.WriteAttributeString(null, "Maximum", this.maximumField);
             writer.WriteAttributeString(null, "InUse", this.inUseField);
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -604,16 +724,20 @@ namespace SharpOnvifServer.ActionEngine
             switch (reader.LocalName)
             {
                 case "Type":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.typeField = reader.ToQualifiedName(reader.AttributeValue);
                     return true;
                 case "Maximum":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maximumField = reader.AttributeValue;
                     return true;
                 case "InUse":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.inUseField = reader.AttributeValue;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -1372,6 +1496,8 @@ namespace SharpOnvifServer.ActionEngine
 
         private string tokenField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Action configuration contains action type, user given action name, and configuratin parameter
         /// settings.
@@ -1400,6 +1526,13 @@ namespace SharpOnvifServer.ActionEngine
             set { this.tokenField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Action"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Actionengine; } }
@@ -1407,6 +1540,7 @@ namespace SharpOnvifServer.ActionEngine
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAttributeString(null, "Token", this.tokenField);
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -1420,10 +1554,12 @@ namespace SharpOnvifServer.ActionEngine
             switch (reader.LocalName)
             {
                 case "Token":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.tokenField = reader.AttributeValue;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -1454,6 +1590,8 @@ namespace SharpOnvifServer.ActionEngine
 
         private SupportedActionsExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Lists the location of all schemas that are referenced in the supported actions. If the action
         /// descriptions reference data types in the ONVIF schema file,the ONVIF schema file MUST be explicitly
@@ -1483,9 +1621,21 @@ namespace SharpOnvifServer.ActionEngine
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "SupportedActions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Actionengine; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -1504,6 +1654,12 @@ namespace SharpOnvifServer.ActionEngine
                 }
             }
             writer.WriteElement(Ns.Ver10Actionengine, "Extension", this.extensionField, Ns.Ver10Actionengine, "SupportedActionsExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -1533,6 +1689,8 @@ namespace SharpOnvifServer.ActionEngine
     {
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -1540,13 +1698,31 @@ namespace SharpOnvifServer.ActionEngine
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "SupportedActionsExtension"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Actionengine; } }
 
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)

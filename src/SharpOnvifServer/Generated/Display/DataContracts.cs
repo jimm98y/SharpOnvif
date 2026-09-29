@@ -29,6 +29,8 @@ namespace SharpOnvifServer.Display
         private bool fixedLayoutField;
         private bool fixedLayoutFieldSpecified;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -57,6 +59,13 @@ namespace SharpOnvifServer.Display
             set { this.fixedLayoutFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Capabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Display; } }
@@ -67,6 +76,7 @@ namespace SharpOnvifServer.Display
             {
                 writer.WriteAttributeString(null, "FixedLayout", writer.ToXml(this.fixedLayoutField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -79,11 +89,13 @@ namespace SharpOnvifServer.Display
             switch (reader.LocalName)
             {
                 case "FixedLayout":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.fixedLayoutField = reader.ToBoolean(reader.AttributeValue);
                     this.fixedLayoutFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)

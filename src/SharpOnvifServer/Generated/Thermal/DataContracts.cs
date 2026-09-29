@@ -63,6 +63,8 @@ namespace SharpOnvifServer.Thermal
         private bool radiometryField;
         private bool radiometryFieldSpecified;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -91,6 +93,13 @@ namespace SharpOnvifServer.Thermal
             set { this.radiometryFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Capabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Thermal; } }
@@ -101,6 +110,7 @@ namespace SharpOnvifServer.Thermal
             {
                 writer.WriteAttributeString(null, "Radiometry", writer.ToXml(this.radiometryField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -113,11 +123,13 @@ namespace SharpOnvifServer.Thermal
             switch (reader.LocalName)
             {
                 case "Radiometry":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.radiometryField = reader.ToBoolean(reader.AttributeValue);
                     this.radiometryFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -141,6 +153,8 @@ namespace SharpOnvifServer.Thermal
         private string tokenField;
 
         private string typeField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// User readable Color Palette name.
@@ -179,6 +193,13 @@ namespace SharpOnvifServer.Thermal
             set { this.typeField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ColorPalette"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Thermal; } }
@@ -187,6 +208,7 @@ namespace SharpOnvifServer.Thermal
         {
             writer.WriteAttributeString(null, "token", this.tokenField);
             writer.WriteAttributeString(null, "Type", this.typeField);
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -200,13 +222,16 @@ namespace SharpOnvifServer.Thermal
             switch (reader.LocalName)
             {
                 case "token":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.tokenField = reader.AttributeValue;
                     return true;
                 case "Type":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.typeField = reader.AttributeValue;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -236,6 +261,8 @@ namespace SharpOnvifServer.Thermal
         private Cooler coolerField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Current Color Palette in use by the Thermal Device.
@@ -284,9 +311,21 @@ namespace SharpOnvifServer.Thermal
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Configuration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Thermal; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -295,6 +334,12 @@ namespace SharpOnvifServer.Thermal
             writer.WriteElement(Ns.Ver10Thermal, "NUCTable", this.nUCTableField, Ns.Ver10Thermal, "NUCTable");
             writer.WriteElement(Ns.Ver10Thermal, "Cooler", this.coolerField, Ns.Ver10Thermal, "Cooler");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -335,6 +380,8 @@ namespace SharpOnvifServer.Thermal
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// List of Color Palettes available for the requested Thermal VideoSource.
         /// </summary>
@@ -372,9 +419,21 @@ namespace SharpOnvifServer.Thermal
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ConfigurationOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Thermal; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -394,6 +453,12 @@ namespace SharpOnvifServer.Thermal
             }
             writer.WriteElement(Ns.Ver10Thermal, "CoolerOptions", this.coolerOptionsField, Ns.Ver10Thermal, "CoolerOptions");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -428,6 +493,8 @@ namespace SharpOnvifServer.Thermal
 
         private string tokenField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Current Thermal Settings for the VideoSource.
         /// </summary>
@@ -455,6 +522,13 @@ namespace SharpOnvifServer.Thermal
             set { this.tokenField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Configurations"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Thermal; } }
@@ -462,6 +536,7 @@ namespace SharpOnvifServer.Thermal
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteAttributeString(null, "token", this.tokenField);
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -475,10 +550,12 @@ namespace SharpOnvifServer.Thermal
             switch (reader.LocalName)
             {
                 case "token":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.tokenField = reader.AttributeValue;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -1167,6 +1244,8 @@ namespace SharpOnvifServer.Thermal
         private float highTemperatureField;
         private bool highTemperatureFieldSpecified;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// User reabable name for the Non-Uniformity Correction (NUC) Table.
         /// </summary>
@@ -1236,6 +1315,13 @@ namespace SharpOnvifServer.Thermal
             set { this.highTemperatureFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "NUCTable"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Thermal; } }
@@ -1251,6 +1337,7 @@ namespace SharpOnvifServer.Thermal
             {
                 writer.WriteAttributeString(null, "HighTemperature", writer.ToXml(this.highTemperatureField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -1264,18 +1351,22 @@ namespace SharpOnvifServer.Thermal
             switch (reader.LocalName)
             {
                 case "token":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.tokenField = reader.AttributeValue;
                     return true;
                 case "LowTemperature":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.lowTemperatureField = reader.ToSingle(reader.AttributeValue);
                     this.lowTemperatureFieldSpecified = true;
                     return true;
                 case "HighTemperature":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.highTemperatureField = reader.ToSingle(reader.AttributeValue);
                     this.highTemperatureFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -1300,6 +1391,8 @@ namespace SharpOnvifServer.Thermal
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Global Parameters for Radiometry Measurements. Shall exist if Radiometry Capability is reported, and
         /// Global Parameters are supported by the device.
@@ -1318,14 +1411,32 @@ namespace SharpOnvifServer.Thermal
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "RadiometryConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Thermal; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Thermal, "RadiometryGlobalParameters", this.radiometryGlobalParametersField, Ns.Ver10Thermal, "RadiometryGlobalParameters");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -1350,6 +1461,8 @@ namespace SharpOnvifServer.Thermal
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Specifies valid ranges and options for the global radiometry parameters used as default parameter
         /// values for temperature measurement modules (spots and boxes).
@@ -1368,14 +1481,32 @@ namespace SharpOnvifServer.Thermal
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "RadiometryConfigurationOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Thermal; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Thermal, "RadiometryGlobalParameterOptions", this.radiometryGlobalParameterOptionsField, Ns.Ver10Thermal, "RadiometryGlobalParameterOptions");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -1417,6 +1548,8 @@ namespace SharpOnvifServer.Thermal
         private SharpOnvifCommon.Onvif.FloatRange extOpticsTransmittanceField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Valid range of temperature values, in Kelvin.
@@ -1505,9 +1638,21 @@ namespace SharpOnvifServer.Thermal
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "RadiometryGlobalParameterOptions"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Thermal; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -1520,6 +1665,12 @@ namespace SharpOnvifServer.Thermal
             writer.WriteElement(Ns.Ver10Thermal, "ExtOpticsTemperature", this.extOpticsTemperatureField, "http://www.onvif.org/ver10/schema", "FloatRange");
             writer.WriteElement(Ns.Ver10Thermal, "ExtOpticsTransmittance", this.extOpticsTransmittanceField, "http://www.onvif.org/ver10/schema", "FloatRange");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -1596,6 +1747,8 @@ namespace SharpOnvifServer.Thermal
         private bool extOpticsTransmittanceFieldSpecified;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Reflected Ambient Temperature for the environment in which the thermal device and the object being
@@ -1741,9 +1894,21 @@ namespace SharpOnvifServer.Thermal
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "RadiometryGlobalParameters"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Thermal; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -1771,6 +1936,12 @@ namespace SharpOnvifServer.Thermal
                 writer.WriteElementString(Ns.Ver10Thermal, "ExtOpticsTransmittance", writer.ToXml(this.extOpticsTransmittanceField));
             }
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
