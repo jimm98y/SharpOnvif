@@ -156,5 +156,13 @@
       "value": "OPUS",
       "documentation": "Opus. Not listed by onvif.xsd."
     }
+  ],
+  "elementTypes": [
+    {
+      "$comment": "onvif.xsd now declares Tunnel a wildcard holding a tt:Transport; it was typed as one before.",
+      "type": "{http://www.onvif.org/ver10/schema}Transport",
+      "element": "Tunnel",
+      "as": "{http://www.onvif.org/ver10/schema}Transport"
+    }
   ]
 }

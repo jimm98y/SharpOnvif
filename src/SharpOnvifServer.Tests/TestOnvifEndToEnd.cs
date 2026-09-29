@@ -85,6 +85,14 @@ namespace SharpOnvif.Tests
                 };
             }
 
+            /// <summary>Refuses with a subcode refined by a second one, the way Onvif reports most errors.</summary>
+            public override SharpOnvifServer.DeviceMgmt.GetScopesResponse GetScopes()
+            {
+                throw new SharpOnvifServer.OnvifServerFaultException(
+                    "Receiver", new[] { "Action", "EmptyScope" }, SharpOnvifServer.OnvifErrors.Namespace,
+                    "Scope list is empty.", System.Net.HttpStatusCode.BadRequest);
+            }
+
             public override SharpOnvifServer.DeviceMgmt.GetSystemDateAndTimeResponse GetSystemDateAndTime()
             {
                 return new SharpOnvifServer.DeviceMgmt.GetSystemDateAndTimeResponse
@@ -259,6 +267,21 @@ namespace SharpOnvif.Tests
                     () => device.GetHostnameAsync());
 
                 Assert.AreEqual("ActionNotSupported", fault.Fault.Subcode);
+            }
+        }
+
+        [TestMethod]
+        public async Task ReportsEverySubcodeOfAFault()
+        {
+            using (var device = new SharpOnvifClient.DeviceMgmt.DeviceClient(_endpoint))
+            {
+                var fault = await Assert.ThrowsExactlyAsync<SoapFaultException>(
+                    () => device.GetScopesAsync());
+
+                Assert.AreEqual("Receiver", fault.Fault.Code);
+                CollectionAssert.AreEqual(new[] { "Action", "EmptyScope" }, fault.Fault.Subcodes.ToArray(),
+                    "the subcodes have to arrive nested, outermost first");
+                Assert.AreEqual("EmptyScope", fault.Fault.Subcode);
             }
         }
 

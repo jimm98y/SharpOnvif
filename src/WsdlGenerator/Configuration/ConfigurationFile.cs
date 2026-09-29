@@ -97,7 +97,28 @@ internal static class ConfigurationFile
             DispatchNamespace = document.Dispatch,
             TypeNamePrefix = document.TypeNamePrefix,
             EnumerationExtensions = (document.EnumerationValues ?? []).Select(ToEnumerationExtension).ToList(),
+            ElementTypeOverrides = (document.ElementTypes ?? []).Select(ToElementTypeOverride).ToList(),
         };
+    }
+
+    private static ElementTypeOverride ToElementTypeOverride(ElementType value)
+    {
+        if (value.Type is null || value.Element is null || value.As is null)
+            throw new SchemaException("An element type needs a type, an element, and the type to give it as \"as\".");
+
+        return new ElementTypeOverride(ToQName(value.Type), value.Element, ToQName(value.As));
+    }
+
+    private static QName ToQName(string name)
+    {
+        if (!name.StartsWith('{') || !name.Contains('}'))
+        {
+            throw new SchemaException(
+                $"'{name}' names a type as {{namespace}}LocalName. A type in no namespace is {{}}LocalName.");
+        }
+
+        int close = name.IndexOf('}');
+        return new QName(name.Substring(1, close - 1), name.Substring(close + 1));
     }
 
     private static EnumerationExtension ToEnumerationExtension(EnumerationValue value)
@@ -105,18 +126,7 @@ internal static class ConfigurationFile
         if (value.Type is null || value.Value is null)
             throw new SchemaException("An enumeration value needs both a type and a value.");
 
-        if (!value.Type.StartsWith('{') || !value.Type.Contains('}'))
-        {
-            throw new SchemaException(
-                $"'{value.Type}' names a type as {{namespace}}LocalName. A type in no namespace is {{}}LocalName.");
-        }
-
-        int close = value.Type.IndexOf('}');
-
-        return new EnumerationExtension(
-            new QName(value.Type.Substring(1, close - 1), value.Type.Substring(close + 1)),
-            value.Value,
-            value.Documentation);
+        return new EnumerationExtension(ToQName(value.Type), value.Value, value.Documentation);
     }
 
     private sealed record Document(
@@ -130,7 +140,8 @@ internal static class ConfigurationFile
         [property: JsonPropertyName("dispatch")] string? Dispatch,
         [property: JsonPropertyName("targets")] IReadOnlyList<Target>? Targets,
         [property: JsonPropertyName("services")] IReadOnlyList<Service>? Services,
-        [property: JsonPropertyName("enumerationValues")] IReadOnlyList<EnumerationValue>? EnumerationValues);
+        [property: JsonPropertyName("enumerationValues")] IReadOnlyList<EnumerationValue>? EnumerationValues,
+        [property: JsonPropertyName("elementTypes")] IReadOnlyList<ElementType>? ElementTypes);
 
     private sealed record Place(string? Namespace, string? Out);
 
@@ -139,4 +150,11 @@ internal static class ConfigurationFile
     private sealed record Service(string? Name, string? Wsdl);
 
     private sealed record EnumerationValue(string? Type, string? Value, string? Documentation);
+
+    private sealed record ElementType(
+        /// <summary>Why the element is retyped, which is worth saying beside it.</summary>
+        [property: JsonPropertyName("$comment")] object? Comment,
+        string? Type,
+        string? Element,
+        string? As);
 }

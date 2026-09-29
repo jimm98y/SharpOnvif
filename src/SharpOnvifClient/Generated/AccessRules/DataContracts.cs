@@ -248,7 +248,7 @@ namespace SharpOnvifClient.AccessRules
     /// </summary>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(AccessProfile))]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/accessrules/wsdl")]
-    public partial class AccessProfileInfo : SharpOnvifCommon.Xml.XmlContract
+    public partial class AccessProfileInfo : SharpOnvifCommon.Onvif.DataEntity
     {
         private string nameField;
 
@@ -280,6 +280,7 @@ namespace SharpOnvifClient.AccessRules
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
+            base.WriteXmlContent(writer);
             writer.WriteElementString(Ns.Ver10Accessrules, "Name", this.nameField);
             writer.WriteElementString(Ns.Ver10Accessrules, "Description", this.descriptionField);
         }
@@ -297,6 +298,7 @@ namespace SharpOnvifClient.AccessRules
                     this.descriptionField = reader.ReadElementText();
                     return true;
             }
+            if (base.ReadXmlElement(reader)) return true;
             return false;
         }
 

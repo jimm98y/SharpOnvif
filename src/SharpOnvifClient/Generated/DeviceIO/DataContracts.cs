@@ -2771,7 +2771,7 @@ namespace SharpOnvifClient.DeviceIO
     /// Lists all available serial ports of a device
     /// </summary>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/deviceIO/wsdl")]
-    public partial class SerialPort : SharpOnvifCommon.Xml.XmlContract
+    public partial class SerialPort : SharpOnvifCommon.Onvif.DeviceEntity
     {
         private System.Xml.XmlElement[] anyField;
 
@@ -2788,11 +2788,13 @@ namespace SharpOnvifClient.DeviceIO
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
+            base.WriteXmlContent(writer);
             writer.WriteAny(this.anyField);
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
+            if (base.ReadXmlElement(reader)) return true;
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
@@ -3843,6 +3845,12 @@ namespace SharpOnvifClient.DeviceIO
     {
         public static SharpOnvifCommon.Xml.XmlContract Create(string ns, string name)
         {
+            switch (name)
+            {
+                case "SerialPort":
+                    if (ns == "http://www.onvif.org/ver10/deviceIO/wsdl") return new SerialPort();
+                    break;
+            }
             return SharpOnvifCommon.Onvif.XmlTypeFactory.Create(ns, name);
         }
     }

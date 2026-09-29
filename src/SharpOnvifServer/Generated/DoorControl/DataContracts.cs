@@ -1615,7 +1615,7 @@ namespace SharpOnvifServer.DoorControl
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Door))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(DoorInfo))]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
-    public partial class DoorInfoBase : SharpOnvifCommon.Xml.XmlContract
+    public partial class DoorInfoBase : SharpOnvifCommon.Onvif.DataEntity
     {
         private string nameField;
 
@@ -1647,6 +1647,7 @@ namespace SharpOnvifServer.DoorControl
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
+            base.WriteXmlContent(writer);
             writer.WriteElementString(Ns.Ver10Doorcontrol, "Name", this.nameField);
             writer.WriteElementString(Ns.Ver10Doorcontrol, "Description", this.descriptionField);
         }
@@ -1664,6 +1665,7 @@ namespace SharpOnvifServer.DoorControl
                     this.descriptionField = reader.ReadElementText();
                     return true;
             }
+            if (base.ReadXmlElement(reader)) return true;
             return false;
         }
 

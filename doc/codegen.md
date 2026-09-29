@@ -81,6 +81,10 @@ A run of any size is described in JSON. Paths are relative to the file.
   "enumerationValues": [
     { "type": "{http://www.onvif.org/ver10/schema}VideoEncoding", "value": "H265",
       "documentation": "H.265 / HEVC. Sent by devices; not listed by onvif.xsd." }
+  ],
+  "elementTypes": [
+    { "type": "{http://www.onvif.org/ver10/schema}Transport", "element": "Tunnel",
+      "as": "{http://www.onvif.org/ver10/schema}Transport" }
   ]
 }
 ```
@@ -96,6 +100,7 @@ A run of any size is described in JSON. Paths are relative to the file.
 | `targets` | Where the per-service code goes: `namespace`, `out`, and `client` or `server`. Required. |
 | `services` | The WSDLs: `name` and `wsdl` each. Names must be unique. Required. |
 | `enumerationValues` | Values to add to a schema enumeration: `type` as `{namespace}LocalName`, `value`, and optional `documentation`. |
+| `elementTypes` | Elements to give a named type in place of the one the schema declares: the complex `type` as `{namespace}LocalName`, the local name of its `element`, and the type to give it `as`. |
 | `$comment` | Ignored, for a note at the top of the file. Any other unknown key is an error naming the key. |
 
 ### Remarks
@@ -104,6 +109,11 @@ A published schema can trail the implementations that follow it. `enumerationVal
 the schema does not list, and the conversions generated beside the enumeration stay in step with
 it, which editing the output would not. Values are appended, so the number behind an existing name
 does not move.
+
+A schema can also loosen a type under them. `onvif.xsd` once typed `tt:Transport/Tunnel` as a
+`tt:Transport` and now declares it a wildcard holding one; `elementTypes` gives it the named type
+back, so callers read `Tunnel.Protocol` rather than raw XML. The element's own anonymous type is
+then not generated.
 
 ## Output
 

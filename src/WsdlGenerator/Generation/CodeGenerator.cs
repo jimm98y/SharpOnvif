@@ -49,6 +49,7 @@ internal sealed class CodeGenerator
         // Before anything is modelled, so that an added value reaches the enum and the conversions
         // generated beside it alike.
         SchemaExtensions.Apply(schema, _options.EnumerationExtensions);
+        SchemaExtensions.Apply(schema, _options.ElementTypeOverrides);
 
         var serviceNamespaces = parsed
             .SelectMany(s => s.Wsdl.TargetNamespaces)

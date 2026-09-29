@@ -131,6 +131,59 @@ namespace SharpOnvif.Tests
         }
 
         [TestMethod]
+        public void KeepsTheTokenOfAServiceTypeExtendingASharedEntity()
+        {
+            // tds:StorageConfiguration extends tt:DeviceEntity, which lives in the shared assembly
+            // rather than in the device service's own. The token is all the base contributes, and
+            // it is what Set- and DeleteStorageConfiguration name the configuration by.
+            var value = new StorageConfiguration
+            {
+                token = "storage0",
+                Data = new StorageConfigurationData { LocalPath = "/mnt/sd", StorageUri = "file:///mnt/sd", type = "LocalStorage" },
+            };
+
+            Assert.IsInstanceOfType<DeviceEntity>(value);
+
+            string xml = WriteWithGeneratedWriter(value, Tds, "StorageConfiguration");
+            StringAssert.Contains(xml, "token=\"storage0\"", "the token inherited from tt:DeviceEntity was not written");
+
+            AssertRoundTrips(value, Tds, "StorageConfiguration");
+            Assert.AreEqual("storage0", ReadWithGeneratedReader<StorageConfiguration>(xml).token);
+        }
+
+        [TestMethod]
+        public void ReadsWhatAMedia2ReceiverConfigurationInherits()
+        {
+            // tr2:ReceiverConfiguration adds only a token to tt:ReceiverConfiguration. Everything
+            // that says what to receive comes from the base, as does the tunnel of its transport,
+            // which onvif.xsd now declares a wildcard but which holds a tt:Transport all the same.
+            const string xml =
+                "<Receiver xmlns=\"http://www.onvif.org/ver20/media/wsdl\" xmlns:tt=\"http://www.onvif.org/ver10/schema\" token=\"rcv0\">" +
+                "<tt:Mode>AutoConnect</tt:Mode>" +
+                "<tt:MediaUri>rtsp://192.0.2.1/stream</tt:MediaUri>" +
+                "<tt:StreamSetup>" +
+                "<tt:Stream>RTP-Unicast</tt:Stream>" +
+                "<tt:Transport><tt:Protocol>HTTP</tt:Protocol>" +
+                "<tt:Tunnel><tt:Protocol>RTSP</tt:Protocol></tt:Tunnel>" +
+                "</tt:Transport>" +
+                "</tt:StreamSetup>" +
+                "</Receiver>";
+
+            var parsed = ReadWithGeneratedReader<SharpOnvifServer.Media2.ReceiverConfiguration>(xml);
+
+            Assert.IsInstanceOfType<SharpOnvifCommon.Onvif.ReceiverConfiguration>(parsed);
+            Assert.AreEqual("rcv0", parsed.token);
+            Assert.AreEqual(ReceiverMode.AutoConnect, parsed.Mode);
+            Assert.AreEqual("rtsp://192.0.2.1/stream", parsed.MediaUri);
+            Assert.AreEqual(StreamType.RTPUnicast, parsed.StreamSetup.Stream);
+            Assert.AreEqual(TransportProtocol.HTTP, parsed.StreamSetup.Transport.Protocol);
+            Assert.IsNotNull(parsed.StreamSetup.Transport.Tunnel, "the tunnel was lost");
+            Assert.AreEqual(TransportProtocol.RTSP, parsed.StreamSetup.Transport.Tunnel.Protocol);
+
+            AssertRoundTrips(parsed, "http://www.onvif.org/ver20/media/wsdl", "Receiver");
+        }
+
+        [TestMethod]
         public void WritesArraysAndOptionalValueTypesLikeXmlSerializer()
         {
             var value = new GetProfilesResponse

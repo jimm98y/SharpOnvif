@@ -19,6 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using SharpOnvifCommon.Xml;
@@ -33,7 +34,17 @@ namespace SharpOnvifServer
     {
         public OnvifServerFaultException(
             string code, string subcode, string subcodeNamespace, string reason, HttpStatusCode statusCode)
-            : base(BuildFault(code, subcode, reason))
+            : this(code, new[] { subcode }, subcodeNamespace, reason, statusCode)
+        {
+        }
+
+        /// <param name="subcodes">
+        /// A chain of subcodes, outermost first, all in <paramref name="subcodeNamespace"/>: for
+        /// example InvalidArgVal then NoProfile. The fault nests each in the one before it.
+        /// </param>
+        public OnvifServerFaultException(
+            string code, IEnumerable<string> subcodes, string subcodeNamespace, string reason, HttpStatusCode statusCode)
+            : base(BuildFault(code, subcodes, reason))
         {
             SubcodeNamespace = subcodeNamespace;
             StatusCode = statusCode;
@@ -45,10 +56,13 @@ namespace SharpOnvifServer
         /// <summary>HTTP status to answer with.</summary>
         public HttpStatusCode StatusCode { get; private set; }
 
-        private static SoapFault BuildFault(string code, string subcode, string reason)
+        private static SoapFault BuildFault(string code, IEnumerable<string> subcodes, string reason)
         {
             var fault = new SoapFault { Code = code, Reason = reason };
-            fault.Subcodes.Add(subcode);
+            if (subcodes != null)
+            {
+                foreach (string subcode in subcodes) fault.Subcodes.Add(subcode);
+            }
             return fault;
         }
     }

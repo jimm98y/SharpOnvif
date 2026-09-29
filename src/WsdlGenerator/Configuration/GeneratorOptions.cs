@@ -96,4 +96,10 @@ internal sealed record GeneratorOptions
     /// published schema trails what devices actually send.
     /// </summary>
     public IReadOnlyList<EnumerationExtension> EnumerationExtensions { get; init; } = [];
+
+    /// <summary>
+    /// Elements to give a named type in place of the one the schema declares, for the case where
+    /// the published schema has loosened a type that devices still send whole.
+    /// </summary>
+    public IReadOnlyList<ElementTypeOverride> ElementTypeOverrides { get; init; } = [];
 }

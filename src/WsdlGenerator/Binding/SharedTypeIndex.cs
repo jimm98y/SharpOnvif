@@ -12,24 +12,37 @@ namespace WsdlGenerator.Binding;
 /// </summary>
 internal sealed class SharedTypeIndex
 {
-    public static readonly SharedTypeIndex Empty = new(new Dictionary<QName, CsTypeRef>());
+    public static readonly SharedTypeIndex Empty = new(new Dictionary<QName, CsTypeRef>(), new Dictionary<QName, CsClass>());
 
     private readonly Dictionary<QName, CsTypeRef> _types;
+    private readonly Dictionary<QName, CsClass> _classes;
 
-    public SharedTypeIndex(Dictionary<QName, CsTypeRef> types) => _types = types;
+    public SharedTypeIndex(Dictionary<QName, CsTypeRef> types, Dictionary<QName, CsClass> classes)
+    {
+        _types = types;
+        _classes = classes;
+    }
 
     public bool Contains(QName name) => _types.ContainsKey(name);
 
     public bool TryResolve(QName name, out CsTypeRef type) => _types.TryGetValue(name, out type!);
 
+    /// <summary>
+    /// The shared class itself, for a service type that extends it. The class has to be linked,
+    /// not merely named, or the derived class loses every attribute and element it inherits.
+    /// </summary>
+    public bool TryResolveClass(QName name, out CsClass @class) => _classes.TryGetValue(name, out @class!);
+
     /// <summary>Builds the index from a model that has already been named.</summary>
     public static SharedTypeIndex From(CsModel model)
     {
         var types = new Dictionary<QName, CsTypeRef>();
+        var classes = new Dictionary<QName, CsClass>();
 
         foreach (var @class in model.Classes)
         {
             if (@class.XmlName is not { } name) continue;
+            classes[name] = @class;
             types[name] = new CsTypeRef(
                 @class.NameFrom(from: ""), TypeKind.Class, false, XmlTypeName: name);
         }
@@ -43,6 +56,6 @@ internal sealed class SharedTypeIndex
                 model.CsNamespace + "." + @enum.Name, TypeKind.Enum, true);
         }
 
-        return new SharedTypeIndex(types);
+        return new SharedTypeIndex(types, classes);
     }
 }

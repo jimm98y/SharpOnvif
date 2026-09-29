@@ -139,9 +139,23 @@ internal sealed class XsdElement
 {
     public required QName Name { get; init; }
 
+    private QName? _typeName;
+    private XsdType? _inlineType;
+
     /// <summary>Named type, or null when <see cref="InlineType"/> carries an anonymous one.</summary>
-    public QName? TypeName { get; init; }
-    public XsdType? InlineType { get; init; }
+    public QName? TypeName { get => _typeName; init => _typeName = value; }
+    public XsdType? InlineType { get => _inlineType; init => _inlineType = value; }
+
+    /// <summary>
+    /// Gives the element a named type in place of the one it declares. See
+    /// <see cref="ElementTypeOverride"/> for why a generated member sometimes has to be typed more
+    /// precisely than the schema it came from.
+    /// </summary>
+    public void Retype(QName type)
+    {
+        _typeName = type;
+        _inlineType = null;
+    }
 
     /// <summary>Set when this is an xs:element ref="..." to a global element.</summary>
     public QName? Ref { get; init; }

@@ -168,13 +168,16 @@ namespace SharpOnvifServer.Dispatch
             }
             catch (OnvifServerFaultException fault)
             {
-                await WriteFaultAsync(context, fault.Fault.Code, fault.Fault.Subcode,
+                await WriteFaultAsync(context, fault.Fault.Code, fault.Fault.Subcodes,
                     fault.Fault.Reason, fault.SubcodeNamespace, fault.StatusCode).ConfigureAwait(false);
             }
             catch (SoapFaultException fault)
             {
-                await WriteFaultAsync(context, "Sender",
-                    fault.Fault?.Subcode ?? "InvalidArgVal", fault.Message).ConfigureAwait(false);
+                IList<string> subcodes = fault.Fault != null && fault.Fault.Subcodes.Count > 0
+                    ? fault.Fault.Subcodes
+                    : new[] { "InvalidArgVal" };
+                await WriteFaultAsync(context, "Sender", subcodes, fault.Message, OnvifErrors.Namespace,
+                    System.Net.HttpStatusCode.BadRequest).ConfigureAwait(false);
             }
             catch (Exception error)
             {
@@ -288,12 +291,23 @@ namespace SharpOnvifServer.Dispatch
 
         private static Task WriteFaultAsync(HttpContext context, string code, string subcode, string reason)
         {
-            return WriteFaultAsync(context, code, subcode, reason, OnvifErrors.Namespace,
+            return WriteFaultAsync(context, code, new[] { subcode }, reason, OnvifErrors.Namespace,
                 System.Net.HttpStatusCode.BadRequest);
         }
 
-        private static async Task WriteFaultAsync(
+        private static Task WriteFaultAsync(
             HttpContext context, string code, string subcode, string reason,
+            string subcodeNamespace, System.Net.HttpStatusCode statusCode)
+        {
+            return WriteFaultAsync(context, code, new[] { subcode }, reason, subcodeNamespace, statusCode);
+        }
+
+        /// <param name="subcodes">
+        /// The subcode chain, outermost first. Each one after the first is nested in the Subcode
+        /// before it, the way SOAP 1.2 refines a fault: ter:InvalidArgVal, then ter:NoProfile.
+        /// </param>
+        private static async Task WriteFaultAsync(
+            HttpContext context, string code, IList<string> subcodes, string reason,
             string subcodeNamespace, System.Net.HttpStatusCode statusCode)
         {
             string envelope = SoapEnvelope.Write(OnvifXmlNamespaces.EnvelopePrologue, null, writer =>
@@ -303,12 +317,21 @@ namespace SharpOnvifServer.Dispatch
 
                 xml.WriteStartElement("SOAP-ENV", "Code", OnvifXmlNamespaces.SoapEnvelope);
                 xml.WriteElementString("SOAP-ENV", "Value", OnvifXmlNamespaces.SoapEnvelope, "SOAP-ENV:" + code);
-                xml.WriteStartElement("SOAP-ENV", "Subcode", OnvifXmlNamespaces.SoapEnvelope);
-                xml.WriteStartElement("SOAP-ENV", "Value", OnvifXmlNamespaces.SoapEnvelope);
-                xml.WriteAttributeString("xmlns", "ter", OnvifXmlNamespaces.Xmlns, subcodeNamespace);
-                xml.WriteString("ter:" + subcode);
-                xml.WriteEndElement();
-                xml.WriteEndElement();
+
+                int open = 0;
+                foreach (string subcode in subcodes)
+                {
+                    if (string.IsNullOrEmpty(subcode)) continue;
+
+                    xml.WriteStartElement("SOAP-ENV", "Subcode", OnvifXmlNamespaces.SoapEnvelope);
+                    // Declared on the outermost Subcode, so that it is in scope for every nested
+                    // Value as well.
+                    if (open == 0) xml.WriteAttributeString("xmlns", "ter", OnvifXmlNamespaces.Xmlns, subcodeNamespace);
+                    xml.WriteElementString("SOAP-ENV", "Value", OnvifXmlNamespaces.SoapEnvelope, "ter:" + subcode);
+                    open++;
+                }
+                for (; open > 0; open--) xml.WriteEndElement();
+
                 xml.WriteEndElement();
 
                 xml.WriteStartElement("SOAP-ENV", "Reason", OnvifXmlNamespaces.SoapEnvelope);

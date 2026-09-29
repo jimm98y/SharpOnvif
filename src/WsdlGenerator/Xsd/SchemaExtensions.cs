@@ -14,6 +14,17 @@ namespace WsdlGenerator.Xsd;
 /// </remarks>
 internal sealed record EnumerationExtension(QName Type, string Value, string? Documentation = null);
 
+/// <summary>
+/// A named type given to an element of a complex type in place of the one the schema declares.
+/// </summary>
+/// <remarks>
+/// Published schemas also change under the implementations that follow them. An element once typed
+/// can be loosened to a wildcard in a later revision, with only a comment left to say what it
+/// holds, and a wildcard leaves the caller parsing that content out of raw XML. What goes over the
+/// wire is the same either way, so the named type reads it as before.
+/// </remarks>
+internal sealed record ElementTypeOverride(QName Type, string Element, QName ElementType);
+
 internal static class SchemaExtensions
 {
     /// <summary>
@@ -36,6 +47,43 @@ internal static class SchemaExtensions
                 continue;
 
             simple.Extend(new XsdEnumValue(extension.Value, extension.Documentation));
+        }
+    }
+
+    /// <summary>
+    /// Retypes the configured elements, before any code is modelled from the schema, so the
+    /// anonymous type the element declared is never generated.
+    /// </summary>
+    public static void Apply(XsdSchemaSet schema, IReadOnlyList<ElementTypeOverride> overrides)
+    {
+        foreach (var @override in overrides)
+        {
+            if (schema.FindType(@override.Type) is not XsdComplexType complex)
+                throw new SchemaException($"No complex type {@override.Type} to retype '{@override.Element}' in.");
+
+            if (schema.FindType(@override.ElementType) is null)
+                throw new SchemaException($"No type {@override.ElementType} to give {@override.Type}/{@override.Element}.");
+
+            var element = FindElement(complex.Particle, @override.Element)
+                ?? throw new SchemaException($"{@override.Type} declares no element '{@override.Element}'.");
+
+            element.Retype(@override.ElementType);
+        }
+    }
+
+    /// <summary>The local element of that name in a content model, searched through its groups.</summary>
+    private static XsdElement? FindElement(XsdParticle? particle, string localName)
+    {
+        switch (particle)
+        {
+            case XsdElementParticle { Element: var element } when element.Name.LocalName == localName:
+                return element;
+            case XsdSequence sequence:
+                return sequence.Items.Select(item => FindElement(item, localName)).FirstOrDefault(e => e is not null);
+            case XsdChoice choice:
+                return choice.Items.Select(item => FindElement(item, localName)).FirstOrDefault(e => e is not null);
+            default:
+                return null;
         }
     }
 }

@@ -752,11 +752,7 @@ internal sealed class ModelBuilder
         _model.Classes.Add(@class);
         PopulateClass(@class, complex);
 
-        if (complex.BaseType is { } inlineBase && _classesByName.TryGetValue(inlineBase, out var parent))
-        {
-            @class.BaseClass = parent;
-            parent.DerivedClasses.Add(@class);
-        }
+        if (complex.BaseType is { } inlineBase) LinkBase(@class, inlineBase);
 
         return new CsTypeRef(className, TypeKind.Class, false);
     }
@@ -802,14 +798,33 @@ internal sealed class ModelBuilder
         {
             if (_schema.FindType(name) is not XsdComplexType complex) continue;
             if (complex.BaseType is not { } baseName) continue;
-            if (!_classesByName.TryGetValue(baseName, out var parent)) continue;
 
-            @class.BaseClass = parent;
-            if (!parent.DerivedClasses.Contains(@class)) parent.DerivedClasses.Add(@class);
+            LinkBase(@class, baseName);
         }
 
         foreach (var @class in _model.Classes)
             @class.DerivedClasses.Sort((a, b) => string.CompareOrdinal(a.Name, b.Name));
+    }
+
+    /// <summary>
+    /// Makes <paramref name="class"/> extend the class generated for <paramref name="baseName"/>,
+    /// whether that was generated here or into the shared assembly.
+    /// </summary>
+    private void LinkBase(CsClass @class, QName baseName)
+    {
+        if (_classesByName.TryGetValue(baseName, out var parent))
+        {
+            @class.BaseClass = parent;
+            if (!parent.DerivedClasses.Contains(@class)) parent.DerivedClasses.Add(@class);
+        }
+        else if (_shared.TryResolveClass(baseName, out var shared))
+        {
+            // The shared class was generated before this service and is shared by every one of
+            // them, so it does not learn about this derived class: its XmlInclude list and the
+            // shared xsi:type factory stay the same for all services. This service's own factory
+            // lists the derived class, and falls back to the shared one for the rest.
+            @class.BaseClass = shared;
+        }
     }
 
     // ---------------------------------------------------------------- services

@@ -1808,7 +1808,7 @@ namespace SharpOnvifClient.Schedule
     /// </summary>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Schedule))]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class ScheduleInfo : SharpOnvifCommon.Xml.XmlContract
+    public partial class ScheduleInfo : SharpOnvifCommon.Onvif.DataEntity
     {
         private string nameField;
 
@@ -1840,6 +1840,7 @@ namespace SharpOnvifClient.Schedule
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
+            base.WriteXmlContent(writer);
             writer.WriteElementString(Ns.Ver10Schedule, "Name", this.nameField);
             writer.WriteElementString(Ns.Ver10Schedule, "Description", this.descriptionField);
         }
@@ -1857,6 +1858,7 @@ namespace SharpOnvifClient.Schedule
                     this.descriptionField = reader.ReadElementText();
                     return true;
             }
+            if (base.ReadXmlElement(reader)) return true;
             return false;
         }
 
@@ -2436,7 +2438,7 @@ namespace SharpOnvifClient.Schedule
     /// </summary>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SpecialDayGroup))]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
-    public partial class SpecialDayGroupInfo : SharpOnvifCommon.Xml.XmlContract
+    public partial class SpecialDayGroupInfo : SharpOnvifCommon.Onvif.DataEntity
     {
         private string nameField;
 
@@ -2468,6 +2470,7 @@ namespace SharpOnvifClient.Schedule
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
+            base.WriteXmlContent(writer);
             writer.WriteElementString(Ns.Ver10Schedule, "Name", this.nameField);
             writer.WriteElementString(Ns.Ver10Schedule, "Description", this.descriptionField);
         }
@@ -2485,6 +2488,7 @@ namespace SharpOnvifClient.Schedule
                     this.descriptionField = reader.ReadElementText();
                     return true;
             }
+            if (base.ReadXmlElement(reader)) return true;
             return false;
         }
 

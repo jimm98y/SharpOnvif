@@ -9082,7 +9082,7 @@ namespace SharpOnvifClient.DeviceMgmt
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/device/wsdl")]
-    public partial class StorageConfiguration : SharpOnvifCommon.Xml.XmlContract
+    public partial class StorageConfiguration : SharpOnvifCommon.Onvif.DeviceEntity
     {
         private StorageConfigurationData dataField;
 
@@ -9099,6 +9099,7 @@ namespace SharpOnvifClient.DeviceMgmt
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
+            base.WriteXmlContent(writer);
             writer.WriteElement(Ns.Ver10Device, "Data", this.dataField, Ns.Ver10Device, "StorageConfigurationData");
         }
 
@@ -9111,6 +9112,7 @@ namespace SharpOnvifClient.DeviceMgmt
                     this.dataField = reader.ReadElementObject<StorageConfigurationData>(() => new StorageConfigurationData());
                     return true;
             }
+            if (base.ReadXmlElement(reader)) return true;
             return false;
         }
 
@@ -10410,6 +10412,12 @@ namespace SharpOnvifClient.DeviceMgmt
     {
         public static SharpOnvifCommon.Xml.XmlContract Create(string ns, string name)
         {
+            switch (name)
+            {
+                case "StorageConfiguration":
+                    if (ns == "http://www.onvif.org/ver10/device/wsdl") return new StorageConfiguration();
+                    break;
+            }
             return SharpOnvifCommon.Onvif.XmlTypeFactory.Create(ns, name);
         }
     }

@@ -6425,7 +6425,7 @@ namespace SharpOnvifServer.Media2
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl")]
-    public partial class ReceiverConfiguration : SharpOnvifCommon.Xml.XmlContract
+    public partial class ReceiverConfiguration : SharpOnvifCommon.Onvif.ReceiverConfiguration
     {
         private string tokenField;
 
@@ -6442,6 +6442,7 @@ namespace SharpOnvifServer.Media2
 
         protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
+            base.WriteXmlAttributes(writer);
             writer.WriteAttributeString(null, "token", this.tokenField);
         }
 
@@ -6453,7 +6454,7 @@ namespace SharpOnvifServer.Media2
                     this.tokenField = reader.AttributeValue;
                     return true;
             }
-            return false;
+            return base.ReadXmlAttribute(reader);
         }
 
     }
@@ -8524,6 +8525,12 @@ namespace SharpOnvifServer.Media2
     {
         public static SharpOnvifCommon.Xml.XmlContract Create(string ns, string name)
         {
+            switch (name)
+            {
+                case "ReceiverConfiguration":
+                    if (ns == "http://www.onvif.org/ver20/media/wsdl") return new ReceiverConfiguration();
+                    break;
+            }
             return SharpOnvifCommon.Onvif.XmlTypeFactory.Create(ns, name);
         }
     }

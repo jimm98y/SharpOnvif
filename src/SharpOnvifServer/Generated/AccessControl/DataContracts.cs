@@ -531,7 +531,7 @@ namespace SharpOnvifServer.AccessControl
     /// </summary>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(AccessPointInfo))]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class AccessPointInfoBase : SharpOnvifCommon.Xml.XmlContract
+    public partial class AccessPointInfoBase : SharpOnvifCommon.Onvif.DataEntity
     {
         private string nameField;
 
@@ -616,6 +616,7 @@ namespace SharpOnvifServer.AccessControl
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
+            base.WriteXmlContent(writer);
             writer.WriteElementString(Ns.Ver10Accesscontrol, "Name", this.nameField);
             writer.WriteElementString(Ns.Ver10Accesscontrol, "Description", this.descriptionField);
             writer.WriteElementString(Ns.Ver10Accesscontrol, "AreaFrom", this.areaFromField);
@@ -653,6 +654,7 @@ namespace SharpOnvifServer.AccessControl
                     this.entityField = reader.ReadElementText();
                     return true;
             }
+            if (base.ReadXmlElement(reader)) return true;
             return false;
         }
 
@@ -801,7 +803,7 @@ namespace SharpOnvifServer.AccessControl
     /// </summary>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(AreaInfo))]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
-    public partial class AreaInfoBase : SharpOnvifCommon.Xml.XmlContract
+    public partial class AreaInfoBase : SharpOnvifCommon.Onvif.DataEntity
     {
         private string nameField;
 
@@ -833,6 +835,7 @@ namespace SharpOnvifServer.AccessControl
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
+            base.WriteXmlContent(writer);
             writer.WriteElementString(Ns.Ver10Accesscontrol, "Name", this.nameField);
             writer.WriteElementString(Ns.Ver10Accesscontrol, "Description", this.descriptionField);
         }
@@ -850,6 +853,7 @@ namespace SharpOnvifServer.AccessControl
                     this.descriptionField = reader.ReadElementText();
                     return true;
             }
+            if (base.ReadXmlElement(reader)) return true;
             return false;
         }
 

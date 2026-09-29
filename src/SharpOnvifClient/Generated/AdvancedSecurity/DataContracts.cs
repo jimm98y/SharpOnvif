@@ -488,7 +488,7 @@ namespace SharpOnvifClient.AdvancedSecurity
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/advancedsecurity/wsdl")]
-    public partial class AuthorizationServerConfiguration : SharpOnvifCommon.Xml.XmlContract
+    public partial class AuthorizationServerConfiguration : SharpOnvifCommon.Onvif.DeviceEntity
     {
         private AuthorizationServerConfigurationData dataField;
 
@@ -514,6 +514,7 @@ namespace SharpOnvifClient.AdvancedSecurity
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
+            base.WriteXmlContent(writer);
             writer.WriteElement(Ns.Ver10Advancedsecurity, "Data", this.dataField, Ns.Ver10Advancedsecurity, "AuthorizationServerConfigurationData");
             writer.WriteAny(this.anyField);
         }
@@ -527,6 +528,7 @@ namespace SharpOnvifClient.AdvancedSecurity
                     this.dataField = reader.ReadElementObject<AuthorizationServerConfigurationData>(() => new AuthorizationServerConfigurationData());
                     return true;
             }
+            if (base.ReadXmlElement(reader)) return true;
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
         }
@@ -9911,6 +9913,12 @@ namespace SharpOnvifClient.AdvancedSecurity
     {
         public static SharpOnvifCommon.Xml.XmlContract Create(string ns, string name)
         {
+            switch (name)
+            {
+                case "AuthorizationServerConfiguration":
+                    if (ns == "http://www.onvif.org/ver10/advancedsecurity/wsdl") return new AuthorizationServerConfiguration();
+                    break;
+            }
             return SharpOnvifCommon.Onvif.XmlTypeFactory.Create(ns, name);
         }
     }

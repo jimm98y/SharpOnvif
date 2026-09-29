@@ -251,7 +251,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// </summary>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(AuthenticationProfile))]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class AuthenticationProfileInfo : SharpOnvifCommon.Xml.XmlContract
+    public partial class AuthenticationProfileInfo : SharpOnvifCommon.Onvif.DataEntity
     {
         private string nameField;
 
@@ -283,6 +283,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
+            base.WriteXmlContent(writer);
             writer.WriteElementString(Ns.Ver10Authenticationbehavior, "Name", this.nameField);
             writer.WriteElementString(Ns.Ver10Authenticationbehavior, "Description", this.descriptionField);
         }
@@ -300,6 +301,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
                     this.descriptionField = reader.ReadElementText();
                     return true;
             }
+            if (base.ReadXmlElement(reader)) return true;
             return false;
         }
 
@@ -2326,7 +2328,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
     /// </summary>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SecurityLevel))]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
-    public partial class SecurityLevelInfo : SharpOnvifCommon.Xml.XmlContract
+    public partial class SecurityLevelInfo : SharpOnvifCommon.Onvif.DataEntity
     {
         private string nameField;
 
@@ -2375,6 +2377,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
+            base.WriteXmlContent(writer);
             writer.WriteElementString(Ns.Ver10Authenticationbehavior, "Name", this.nameField);
             writer.WriteElementString(Ns.Ver10Authenticationbehavior, "Priority", writer.ToXml(this.priorityField));
             writer.WriteElementString(Ns.Ver10Authenticationbehavior, "Description", this.descriptionField);
@@ -2397,6 +2400,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
                     this.descriptionField = reader.ReadElementText();
                     return true;
             }
+            if (base.ReadXmlElement(reader)) return true;
             return false;
         }
 

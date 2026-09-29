@@ -938,7 +938,7 @@ namespace SharpOnvifClient.Credential
     /// </summary>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(OnvifCredential))]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/credential/wsdl")]
-    public partial class CredentialInfo : SharpOnvifCommon.Xml.XmlContract
+    public partial class CredentialInfo : SharpOnvifCommon.Onvif.DataEntity
     {
         private string descriptionField;
 
@@ -1021,6 +1021,7 @@ namespace SharpOnvifClient.Credential
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
+            base.WriteXmlContent(writer);
             writer.WriteElementString(Ns.Ver10Credential, "Description", this.descriptionField);
             writer.WriteElementString(Ns.Ver10Credential, "CredentialHolderReference", this.credentialHolderReferenceField);
             if (this.validFromFieldSpecified)
@@ -1056,6 +1057,7 @@ namespace SharpOnvifClient.Credential
                     this.validToFieldSpecified = true;
                     return true;
             }
+            if (base.ReadXmlElement(reader)) return true;
             return false;
         }
 

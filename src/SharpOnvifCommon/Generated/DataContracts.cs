@@ -48759,7 +48759,7 @@ namespace SharpOnvifCommon.Onvif
     {
         private TransportProtocol protocolField;
 
-        private TransportTunnel tunnelField;
+        private Transport tunnelField;
 
         /// <summary>
         /// Defines the network protocol for streaming, either UDP=RTP/UDP, RTSP=RTP/RTSP/TCP or
@@ -48776,7 +48776,7 @@ namespace SharpOnvifCommon.Onvif
         /// Deprecated: optional element to describe further tunnel options.
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public TransportTunnel Tunnel
+        public Transport Tunnel
         {
             get { return this.tunnelField; }
             set { this.tunnelField = value; }
@@ -48789,7 +48789,7 @@ namespace SharpOnvifCommon.Onvif
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.OnvifVer10, "Protocol", EnumXml.ToXml(this.protocolField));
-            writer.WriteElement(Ns.OnvifVer10, "Tunnel", this.tunnelField, null, null);
+            writer.WriteElement(Ns.OnvifVer10, "Tunnel", this.tunnelField, Ns.OnvifVer10, "Transport");
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -48802,34 +48802,10 @@ namespace SharpOnvifCommon.Onvif
                     return true;
                 case "Tunnel":
                     if (reader.NamespaceUri != Ns.OnvifVer10) break;
-                    this.tunnelField = reader.ReadElementObject<TransportTunnel>(() => new TransportTunnel());
+                    this.tunnelField = reader.ReadElementObject<Transport>(() => new Transport());
                     return true;
             }
             return false;
-        }
-
-    }
-
-    public partial class TransportTunnel : SharpOnvifCommon.Xml.XmlContract
-    {
-        private System.Xml.XmlElement[] anyField;
-
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get { return this.anyField; }
-            set { this.anyField = value; }
-        }
-
-        protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
-        {
-            writer.WriteAny(this.anyField);
-        }
-
-        protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
-        {
-            reader.Append(ref this.anyField, reader.ReadAnyElement());
-            return true;
         }
 
     }
