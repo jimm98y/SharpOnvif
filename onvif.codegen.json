@@ -164,5 +164,21 @@
       "element": "Tunnel",
       "as": "{http://www.onvif.org/ver10/schema}Transport"
     }
+  ],
+  "attributes": [
+    {
+      "$comment": "Dropped from event.wsdl, still sent by devices and read by clients deciding whether to create a pull point.",
+      "type": "{http://www.onvif.org/ver10/events/wsdl}Capabilities",
+      "attribute": "WSPullPointSupport",
+      "as": "{http://www.w3.org/2001/XMLSchema}boolean",
+      "documentation": "Indicates that the WS Pull Point is supported."
+    },
+    {
+      "$comment": "Dropped from devicemgmt.wsdl, still sent by devices.",
+      "type": "{http://www.onvif.org/ver10/device/wsdl}SystemCapabilities",
+      "attribute": "FirmwareUpgrade",
+      "as": "{http://www.w3.org/2001/XMLSchema}boolean",
+      "documentation": "Indicates support for firmware upgrade through MTOM."
+    }
   ]
 }

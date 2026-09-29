@@ -38,6 +38,8 @@ namespace SharpOnvifServer.AccessRules
 
         private AccessPolicyExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Reference to the schedule used by the access policy.
         /// </summary>
@@ -80,9 +82,21 @@ namespace SharpOnvifServer.AccessRules
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AccessPolicy"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Accessrules; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -90,6 +104,12 @@ namespace SharpOnvifServer.AccessRules
             writer.WriteElementString(Ns.Ver10Accessrules, "Entity", this.entityField);
             writer.WriteElementQualifiedName(Ns.Ver10Accessrules, "EntityType", this.entityTypeField);
             writer.WriteElement(Ns.Ver10Accessrules, "Extension", this.extensionField, Ns.Ver10Accessrules, "AccessPolicyExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -159,6 +179,8 @@ namespace SharpOnvifServer.AccessRules
 
         private AccessProfileExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// A list of access policy structures, where each access policy defines during which schedule an access
         /// point can be accessed.
@@ -177,9 +199,22 @@ namespace SharpOnvifServer.AccessRules
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AccessProfile"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Accessrules; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            base.WriteXmlAttributes(writer);
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -192,6 +227,13 @@ namespace SharpOnvifServer.AccessRules
                 }
             }
             writer.WriteElement(Ns.Ver10Accessrules, "Extension", this.extensionField, Ns.Ver10Accessrules, "AccessProfileExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -1155,6 +1197,8 @@ namespace SharpOnvifServer.AccessRules
         private bool clientSuppliedTokenSupportedField;
         private bool clientSuppliedTokenSupportedFieldSpecified;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -1226,6 +1270,13 @@ namespace SharpOnvifServer.AccessRules
             set { this.clientSuppliedTokenSupportedFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ServiceCapabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Accessrules; } }
@@ -1240,6 +1291,7 @@ namespace SharpOnvifServer.AccessRules
             {
                 writer.WriteAttributeString(null, "ClientSuppliedTokenSupported", writer.ToXml(this.clientSuppliedTokenSupportedField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -1252,23 +1304,29 @@ namespace SharpOnvifServer.AccessRules
             switch (reader.LocalName)
             {
                 case "MaxLimit":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxLimitField = reader.ToUInt32(reader.AttributeValue);
                     return true;
                 case "MaxAccessProfiles":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxAccessProfilesField = reader.ToUInt32(reader.AttributeValue);
                     return true;
                 case "MaxAccessPoliciesPerAccessProfile":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxAccessPoliciesPerAccessProfileField = reader.ToUInt32(reader.AttributeValue);
                     return true;
                 case "MultipleSchedulesPerAccessPointSupported":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.multipleSchedulesPerAccessPointSupportedField = reader.ToBoolean(reader.AttributeValue);
                     return true;
                 case "ClientSuppliedTokenSupported":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.clientSuppliedTokenSupportedField = reader.ToBoolean(reader.AttributeValue);
                     this.clientSuppliedTokenSupportedFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)

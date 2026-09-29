@@ -98,7 +98,16 @@ internal static class ConfigurationFile
             TypeNamePrefix = document.TypeNamePrefix,
             EnumerationExtensions = (document.EnumerationValues ?? []).Select(ToEnumerationExtension).ToList(),
             ElementTypeOverrides = (document.ElementTypes ?? []).Select(ToElementTypeOverride).ToList(),
+            AttributeAdditions = (document.Attributes ?? []).Select(ToAttributeAddition).ToList(),
         };
+    }
+
+    private static AttributeAddition ToAttributeAddition(AttributeEntry value)
+    {
+        if (value.Type is null || value.Attribute is null || value.As is null)
+            throw new SchemaException("An added attribute needs a type, an attribute, and its type as \"as\".");
+
+        return new AttributeAddition(ToQName(value.Type), value.Attribute, ToQName(value.As), value.Documentation);
     }
 
     private static ElementTypeOverride ToElementTypeOverride(ElementType value)
@@ -141,7 +150,8 @@ internal static class ConfigurationFile
         [property: JsonPropertyName("targets")] IReadOnlyList<Target>? Targets,
         [property: JsonPropertyName("services")] IReadOnlyList<Service>? Services,
         [property: JsonPropertyName("enumerationValues")] IReadOnlyList<EnumerationValue>? EnumerationValues,
-        [property: JsonPropertyName("elementTypes")] IReadOnlyList<ElementType>? ElementTypes);
+        [property: JsonPropertyName("elementTypes")] IReadOnlyList<ElementType>? ElementTypes,
+        [property: JsonPropertyName("attributes")] IReadOnlyList<AttributeEntry>? Attributes);
 
     private sealed record Place(string? Namespace, string? Out);
 
@@ -150,6 +160,14 @@ internal static class ConfigurationFile
     private sealed record Service(string? Name, string? Wsdl);
 
     private sealed record EnumerationValue(string? Type, string? Value, string? Documentation);
+
+    private sealed record AttributeEntry(
+        /// <summary>Why the attribute is added, which is worth saying beside it.</summary>
+        [property: JsonPropertyName("$comment")] object? Comment,
+        string? Type,
+        string? Attribute,
+        string? As,
+        string? Documentation);
 
     private sealed record ElementType(
         /// <summary>Why the element is retyped, which is worth saying beside it.</summary>

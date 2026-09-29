@@ -1699,6 +1699,8 @@ namespace SharpOnvifClient.Schedule
 
         private ScheduleExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// An iCalendar structure that defines a number of events. Events can be recurring or non-recurring.
         /// The events can, for instance, be used to control when a camera should record or when a facility is
@@ -1732,9 +1734,22 @@ namespace SharpOnvifClient.Schedule
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Schedule"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Schedule; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            base.WriteXmlAttributes(writer);
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -1748,6 +1763,13 @@ namespace SharpOnvifClient.Schedule
                 }
             }
             writer.WriteElement(Ns.Ver10Schedule, "Extension", this.extensionField, Ns.Ver10Schedule, "ScheduleExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -1877,6 +1899,8 @@ namespace SharpOnvifClient.Schedule
 
         private ScheduleStateExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Indicates that the current time is within the boundaries of the schedule or its special days
         /// schedules’ time periods. For example, if this schedule is being used for triggering automatic
@@ -1921,9 +1945,21 @@ namespace SharpOnvifClient.Schedule
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ScheduleState"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Schedule; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -1933,6 +1969,12 @@ namespace SharpOnvifClient.Schedule
                 writer.WriteElementString(Ns.Ver10Schedule, "SpecialDay", writer.ToXml(this.specialDayField));
             }
             writer.WriteElement(Ns.Ver10Schedule, "Extension", this.extensionField, Ns.Ver10Schedule, "ScheduleStateExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -2016,6 +2058,8 @@ namespace SharpOnvifClient.Schedule
 
         private bool clientSuppliedTokenSupportedField;
         private bool clientSuppliedTokenSupportedFieldSpecified;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
@@ -2154,6 +2198,13 @@ namespace SharpOnvifClient.Schedule
             set { this.clientSuppliedTokenSupportedFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ServiceCapabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Schedule; } }
@@ -2173,6 +2224,7 @@ namespace SharpOnvifClient.Schedule
             {
                 writer.WriteAttributeString(null, "ClientSuppliedTokenSupported", writer.ToXml(this.clientSuppliedTokenSupportedField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -2185,38 +2237,49 @@ namespace SharpOnvifClient.Schedule
             switch (reader.LocalName)
             {
                 case "MaxLimit":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxLimitField = reader.ToUInt32(reader.AttributeValue);
                     return true;
                 case "MaxSchedules":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxSchedulesField = reader.ToUInt32(reader.AttributeValue);
                     return true;
                 case "MaxTimePeriodsPerDay":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxTimePeriodsPerDayField = reader.ToUInt32(reader.AttributeValue);
                     return true;
                 case "MaxSpecialDayGroups":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxSpecialDayGroupsField = reader.ToUInt32(reader.AttributeValue);
                     return true;
                 case "MaxDaysInSpecialDayGroup":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxDaysInSpecialDayGroupField = reader.ToUInt32(reader.AttributeValue);
                     return true;
                 case "MaxSpecialDaysSchedules":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxSpecialDaysSchedulesField = reader.ToUInt32(reader.AttributeValue);
                     return true;
                 case "ExtendedRecurrenceSupported":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.extendedRecurrenceSupportedField = reader.ToBoolean(reader.AttributeValue);
                     return true;
                 case "SpecialDaysSupported":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.specialDaysSupportedField = reader.ToBoolean(reader.AttributeValue);
                     return true;
                 case "StateReportingSupported":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.stateReportingSupportedField = reader.ToBoolean(reader.AttributeValue);
                     return true;
                 case "ClientSuppliedTokenSupported":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.clientSuppliedTokenSupportedField = reader.ToBoolean(reader.AttributeValue);
                     this.clientSuppliedTokenSupportedFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -2356,6 +2419,8 @@ namespace SharpOnvifClient.Schedule
 
         private SpecialDayGroupExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// An iCalendar structure that contains a group of special days. Is of type string (containing an
         /// iCalendar structure).
@@ -2374,15 +2439,35 @@ namespace SharpOnvifClient.Schedule
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "SpecialDayGroup"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Schedule; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            base.WriteXmlAttributes(writer);
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             base.WriteXmlContent(writer);
             writer.WriteElementString(Ns.Ver10Schedule, "Days", this.daysField);
             writer.WriteElement(Ns.Ver10Schedule, "Extension", this.extensionField, Ns.Ver10Schedule, "SpecialDayGroupExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -2506,6 +2591,8 @@ namespace SharpOnvifClient.Schedule
 
         private SpecialDaysScheduleExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Indicates the list of special days in a schedule.
         /// </summary>
@@ -2537,9 +2624,21 @@ namespace SharpOnvifClient.Schedule
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "SpecialDaysSchedule"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Schedule; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -2552,6 +2651,12 @@ namespace SharpOnvifClient.Schedule
                 }
             }
             writer.WriteElement(Ns.Ver10Schedule, "Extension", this.extensionField, Ns.Ver10Schedule, "SpecialDaysScheduleExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -2621,6 +2726,8 @@ namespace SharpOnvifClient.Schedule
 
         private TimePeriodExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Indicates the start time.
         /// </summary>
@@ -2661,9 +2768,21 @@ namespace SharpOnvifClient.Schedule
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "TimePeriod"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Schedule; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -2675,17 +2794,23 @@ namespace SharpOnvifClient.Schedule
             writer.WriteElement(Ns.Ver10Schedule, "Extension", this.extensionField, Ns.Ver10Schedule, "TimePeriodExtension");
         }
 
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
+        }
+
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             switch (reader.LocalName)
             {
                 case "From":
                     if (reader.NamespaceUri != Ns.Ver10Schedule) break;
-                    this.fromField = reader.ToDateTime(reader.ReadElementText());
+                    this.fromField = reader.ToTime(reader.ReadElementText());
                     return true;
                 case "Until":
                     if (reader.NamespaceUri != Ns.Ver10Schedule) break;
-                    this.untilField = reader.ToDateTime(reader.ReadElementText());
+                    this.untilField = reader.ToTime(reader.ReadElementText());
                     this.untilFieldSpecified = true;
                     return true;
                 case "Extension":

@@ -191,6 +191,8 @@ namespace SharpOnvifServer.Credential
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Indicates if anti-passback is violated for the credential.
         /// </summary>
@@ -208,14 +210,32 @@ namespace SharpOnvifServer.Credential
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AntipassbackState"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Credential; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Credential, "AntipassbackViolated", writer.ToXml(this.antipassbackViolatedField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -474,6 +494,8 @@ namespace SharpOnvifServer.Credential
 
         private CredentialDataExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// A format type supported by the device. A list of supported format types is provided in [ISO
         /// 16484-5:2014-09 Annex P]. The BACnet type "CUSTOM" is not used in this specification. Instead device
@@ -506,15 +528,33 @@ namespace SharpOnvifServer.Credential
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "CredentialData"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Credential; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Credential, "Credential", this.credentialField, Ns.Ver10Credential, "Credential");
             writer.WriteElement(Ns.Ver10Credential, "CredentialState", this.credentialStateField, Ns.Ver10Credential, "CredentialState");
             writer.WriteElement(Ns.Ver10Credential, "Extension", this.extensionField, Ns.Ver10Credential, "CredentialDataExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -612,6 +652,8 @@ namespace SharpOnvifServer.Credential
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Contains the details of the credential identifier type. Is of type CredentialIdentifierType.
         /// </summary>
@@ -651,9 +693,21 @@ namespace SharpOnvifServer.Credential
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "CredentialIdentifier"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Credential; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -661,6 +715,12 @@ namespace SharpOnvifServer.Credential
             writer.WriteElementString(Ns.Ver10Credential, "ExemptedFromAuthentication", writer.ToXml(this.exemptedFromAuthenticationField));
             writer.WriteElementString(Ns.Ver10Credential, "Value", writer.ToHexString(this.valueField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -698,6 +758,8 @@ namespace SharpOnvifServer.Credential
 
         private CredentialIdentifierFormatTypeInfoExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// A format type supported by the device. A list of supported format types is provided in [ISO
         /// 16484-5:2014-09 Annex P]. The BACnet type "CUSTOM" is not used in this specification. Instead device
@@ -730,15 +792,33 @@ namespace SharpOnvifServer.Credential
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "CredentialIdentifierFormatTypeInfo"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Credential; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Credential, "FormatType", this.formatTypeField);
             writer.WriteElementString(Ns.Ver10Credential, "Description", this.descriptionField);
             writer.WriteElement(Ns.Ver10Credential, "Extension", this.extensionField, Ns.Ver10Credential, "CredentialIdentifierFormatTypeInfoExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -805,6 +885,8 @@ namespace SharpOnvifServer.Credential
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Contains the details of the credential identifier type.
         /// </summary>
@@ -832,15 +914,33 @@ namespace SharpOnvifServer.Credential
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "CredentialIdentifierItem"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Credential; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElement(Ns.Ver10Credential, "Type", this.typeField, Ns.Ver10Credential, "CredentialIdentifierType");
             writer.WriteElementString(Ns.Ver10Credential, "Value", writer.ToHexString(this.valueField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -950,6 +1050,8 @@ namespace SharpOnvifServer.Credential
         private System.DateTime validToField;
         private bool validToFieldSpecified;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// User readable description for the credential. It shall be up to 1024 characters.
         /// </summary>
@@ -1015,9 +1117,22 @@ namespace SharpOnvifServer.Credential
             set { this.validToFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "CredentialInfo"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Credential; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            base.WriteXmlAttributes(writer);
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -1032,6 +1147,13 @@ namespace SharpOnvifServer.Credential
             {
                 writer.WriteElementString(Ns.Ver10Credential, "ValidTo", writer.ToXml(this.validToField));
             }
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -1078,6 +1200,8 @@ namespace SharpOnvifServer.Credential
 
         private CredentialStateExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// True if the credential is enabled or false if the credential is disabled.
         /// </summary>
@@ -1117,9 +1241,21 @@ namespace SharpOnvifServer.Credential
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "CredentialState"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Credential; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -1127,6 +1263,12 @@ namespace SharpOnvifServer.Credential
             writer.WriteElementString(Ns.Ver10Credential, "Reason", this.reasonField);
             writer.WriteElement(Ns.Ver10Credential, "AntipassbackState", this.antipassbackStateField, Ns.Ver10Credential, "AntipassbackState");
             writer.WriteElement(Ns.Ver10Credential, "Extension", this.extensionField, Ns.Ver10Credential, "CredentialStateExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -3525,6 +3667,8 @@ namespace SharpOnvifServer.Credential
         private uint maxBlacklistedItemsField;
         private bool maxBlacklistedItemsFieldSpecified;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// A list of identifier types that the device supports. Is of type text. Identifier types starting with
         /// the prefix pt: are reserved to define ONVIF-specific types as defined in pt:RecognitionType. Please
@@ -3696,6 +3840,13 @@ namespace SharpOnvifServer.Credential
             set { this.maxBlacklistedItemsFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ServiceCapabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Credential; } }
@@ -3722,6 +3873,7 @@ namespace SharpOnvifServer.Credential
             {
                 writer.WriteAttributeString(null, "MaxBlacklistedItems", writer.ToXml(this.maxBlacklistedItemsField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -3741,43 +3893,55 @@ namespace SharpOnvifServer.Credential
             switch (reader.LocalName)
             {
                 case "MaxLimit":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxLimitField = reader.ToUInt32(reader.AttributeValue);
                     return true;
                 case "CredentialValiditySupported":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.credentialValiditySupportedField = reader.ToBoolean(reader.AttributeValue);
                     return true;
                 case "CredentialAccessProfileValiditySupported":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.credentialAccessProfileValiditySupportedField = reader.ToBoolean(reader.AttributeValue);
                     return true;
                 case "ValiditySupportsTimeValue":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.validitySupportsTimeValueField = reader.ToBoolean(reader.AttributeValue);
                     return true;
                 case "MaxCredentials":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxCredentialsField = reader.ToUInt32(reader.AttributeValue);
                     return true;
                 case "MaxAccessProfilesPerCredential":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxAccessProfilesPerCredentialField = reader.ToUInt32(reader.AttributeValue);
                     return true;
                 case "ResetAntipassbackSupported":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.resetAntipassbackSupportedField = reader.ToBoolean(reader.AttributeValue);
                     return true;
                 case "ClientSuppliedTokenSupported":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.clientSuppliedTokenSupportedField = reader.ToBoolean(reader.AttributeValue);
                     this.clientSuppliedTokenSupportedFieldSpecified = true;
                     return true;
                 case "DefaultCredentialSuspensionDuration":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.defaultCredentialSuspensionDurationField = reader.AttributeValue;
                     return true;
                 case "MaxWhitelistedItems":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxWhitelistedItemsField = reader.ToUInt32(reader.AttributeValue);
                     this.maxWhitelistedItemsFieldSpecified = true;
                     return true;
                 case "MaxBlacklistedItems":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxBlacklistedItemsField = reader.ToUInt32(reader.AttributeValue);
                     this.maxBlacklistedItemsFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)

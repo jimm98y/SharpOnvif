@@ -11,6 +11,8 @@ internal enum MemberKind
     Attribute,
     /// <summary>An xs:any wildcard, surfaced as XmlElement[] (or XmlNode[] for mixed content).</summary>
     AnyElement,
+    /// <summary>An xs:anyAttribute wildcard, surfaced as XmlAttribute[].</summary>
+    AnyAttribute,
     /// <summary>Character content of a simple-content or mixed-content type.</summary>
     Text,
     /// <summary>An xs:choice, surfaced as object or object[] with one branch per option.</summary>
@@ -35,6 +37,8 @@ internal enum TypeKind
     XmlElement,
     /// <summary>System.Xml.XmlNode, used where mixed content means text can appear too.</summary>
     XmlNode,
+    /// <summary>System.Xml.XmlAttribute, for the attributes an xs:anyAttribute wildcard keeps.</summary>
+    XmlAttribute,
     /// <summary>System.Object, used for xs:anyType and for choice members.</summary>
     Object,
 }
@@ -52,7 +56,12 @@ internal sealed record CsTypeRef(
     /// Schema type this refers to, for a generated class. Carried here rather than looked up by
     /// C# name, because a reference may point at the shared assembly's namespace.
     /// </summary>
-    QName? XmlTypeName = null)
+    QName? XmlTypeName = null,
+    /// <summary>
+    /// For an enum, true when it enumerates xs:QName values, which are written and read as
+    /// qualified names so their prefix is bound wherever they appear.
+    /// </summary>
+    bool IsQNameEnum = false)
 {
     public override string ToString() => CsName;
 }
@@ -139,6 +148,8 @@ internal sealed class CsEnumMember
     public required string Name { get; init; }
     /// <summary>Set when the C# name had to be mangled and XmlEnum must carry the wire value.</summary>
     public string? XmlValue { get; init; }
+    /// <summary>The value as a namespace and local name, for an enumeration of xs:QName.</summary>
+    public QName? QualifiedValue { get; init; }
     public string? Documentation { get; init; }
 }
 
@@ -148,6 +159,9 @@ internal sealed class CsEnum
     public required QName XmlName { get; init; }
     public IReadOnlyList<CsEnumMember> Members { get; init; } = [];
     public string? Documentation { get; init; }
+
+    /// <summary>True for an enumeration of xs:QName values.</summary>
+    public bool IsQName => Members.Count > 0 && Members.All(m => m.QualifiedValue is not null);
 
     public override string ToString() => Name;
 }

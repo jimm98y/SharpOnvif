@@ -130,6 +130,7 @@ internal sealed class ModelBuilder
         foreach (var type in reachable) Populate(type);
 
         LinkInheritance();
+        KeepOneAttributeWildcard();
         if (_emitServices) BuildServices();
 
         _model.Classes.Sort((a, b) => string.CompareOrdinal(a.Name, b.Name));
@@ -348,6 +349,7 @@ internal sealed class ModelBuilder
             {
                 Name = name,
                 XmlValue = name == value.Value ? null : value.Value,
+                QualifiedValue = value.Qualified,
                 Documentation = value.Documentation,
             });
         }
@@ -429,6 +431,21 @@ internal sealed class ModelBuilder
                 IsOptional = optional,
                 NeedsSpecified = optional && type.IsValueType,
                 Documentation = resolved.Documentation,
+            });
+        }
+
+        // Attributes the schema does not name, which devices use for vendor extensions and which
+        // later revisions of a schema add. Dropping them loses them on every round trip. A message
+        // wrapper does without: its members become the parameters of an operation.
+        if (complex.AllowsAnyAttribute && !@class.IsMessageWrapper)
+        {
+            @class.Members.Add(new CsMember
+            {
+                Name = MemberName(@class, "AnyAttr"),
+                Type = new CsTypeRef("System.Xml.XmlAttribute", TypeKind.XmlAttribute, false),
+                Kind = MemberKind.AnyAttribute,
+                IsArray = true,
+                IsOptional = true,
             });
         }
     }
@@ -644,7 +661,7 @@ internal sealed class ModelBuilder
             return new CsTypeRef(@class.Name, TypeKind.Class, false, XmlTypeName: @class.XmlName);
 
         if (_enumsByName.TryGetValue(name, out var @enum))
-            return new CsTypeRef(@enum.Name, TypeKind.Enum, true);
+            return new CsTypeRef(@enum.Name, TypeKind.Enum, true, IsQNameEnum: @enum.IsQName);
 
         if (depth > 16) throw new SchemaException($"Type reference chain too deep at {name}.");
 
@@ -696,7 +713,7 @@ internal sealed class ModelBuilder
             if (simple.IsEnumeration)
             {
                 if (_enumsByType.TryGetValue(inline, out var existing))
-                    return new CsTypeRef(existing.Name, TypeKind.Enum, true);
+                    return new CsTypeRef(existing.Name, TypeKind.Enum, true, IsQNameEnum: existing.IsQName);
 
                 // xsd.exe names an inline type after the member that declares it, prefixed by
                 // the owning type: element ErrorCode inside BaseFaultType becomes BaseFaultTypeErrorCode.
@@ -711,7 +728,7 @@ internal sealed class ModelBuilder
                 };
                 _enumsByType[inline] = @enum;
                 _model.Enums.Add(@enum);
-                return new CsTypeRef(name, TypeKind.Enum, true);
+                return new CsTypeRef(name, TypeKind.Enum, true, IsQNameEnum: @enum.IsQName);
             }
 
             if (simple.Variety == SimpleTypeVariety.List)
@@ -824,6 +841,20 @@ internal sealed class ModelBuilder
             // shared xsi:type factory stay the same for all services. This service's own factory
             // lists the derived class, and falls back to the shared one for the rest.
             @class.BaseClass = shared;
+        }
+    }
+
+    /// <summary>
+    /// A type whose base already keeps unknown attributes inherits that, and a second wildcard
+    /// would only split them between two members depending on which class read them.
+    /// </summary>
+    private void KeepOneAttributeWildcard()
+    {
+        foreach (var @class in _model.Classes)
+        {
+            if (@class.BaseClass is null) continue;
+            if (!@class.BaseClass.AllMembers.Any(m => m.Kind == MemberKind.AnyAttribute)) continue;
+            @class.Members.RemoveAll(m => m.Kind == MemberKind.AnyAttribute);
         }
     }
 

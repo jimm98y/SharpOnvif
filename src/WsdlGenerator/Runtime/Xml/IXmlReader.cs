@@ -71,6 +71,12 @@ namespace __RUNTIME__.Xml
         /// <summary>Lifts the current element out as a document of its own, prefixes included.</summary>
         XmlElement ReadAnyElement();
 
+        /// <summary>The attribute the reader is positioned on, detached, for an xs:anyAttribute wildcard.</summary>
+        XmlAttribute ReadAnyAttribute();
+
+        /// <summary>The attributes and child nodes of an element whose type is xs:anyType.</summary>
+        XmlNode[] ReadAnyTypeElement();
+
         XmlElement ReadWrappedElement();
 
         XmlNode CreateTextNode(string text);
@@ -94,6 +100,12 @@ namespace __RUNTIME__.Xml
         float ToSingle(string text);
         double ToDouble(string text);
         DateTime ToDateTime(string text);
+
+        /// <summary>Parses xs:date, keeping the calendar day it names.</summary>
+        DateTime ToDate(string text);
+
+        /// <summary>Parses xs:time, keeping what its zone says: bare stays bare, a zone becomes UTC.</summary>
+        DateTime ToTime(string text);
         byte[] ToByteArray(string text);
         byte[] FromHexString(string text);
 

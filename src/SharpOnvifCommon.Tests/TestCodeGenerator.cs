@@ -26,6 +26,7 @@ using WsdlGenerator.Configuration;
 using WsdlGenerator.Emit;
 using WsdlGenerator.Generation;
 using WsdlGenerator.Xml;
+using WsdlGenerator.Xsd;
 
 namespace SharpOnvif.Tests
 {
@@ -476,6 +477,48 @@ namespace SharpOnvif.Tests
 
                 Assert.AreEqual(1, Occurrences(shared, "case Currency.EUR:"),
                     "the value the schema now carries must not be added a second time");
+            }
+            finally
+            {
+                Directory.Delete(output, recursive: true);
+            }
+        }
+
+        [TestMethod]
+        public void DeclaresAnAttributeTheSchemaDropped()
+        {
+            string output = NewOutputDirectory();
+            try
+            {
+                var options = CommandLine.Parse(
+                    ["--wsdl", Fixture, "--namespace", "Example.Banking", "--out", output,
+                     "--dispatch", "Example.Banking.Dispatch"])!;
+
+                var added = options with
+                {
+                    AttributeAdditions =
+                    [
+                        new AttributeAddition(new QName("urn:example:money", "Money"), "Rounding",
+                            new QName("http://www.w3.org/2001/XMLSchema", "boolean"), "How the amount was rounded."),
+                    ],
+                };
+                new CodeGenerator(added).Run();
+
+                string generated = string.Concat(Directory.GetFiles(output, "*.cs", SearchOption.AllDirectories)
+                    .Select(File.ReadAllText));
+                StringAssert.Contains(generated, "public bool Rounding");
+                StringAssert.Contains(generated, "\"Rounding\"", "the attribute is declared but never read or written");
+
+                var misspelt = options with
+                {
+                    AttributeAdditions =
+                    [
+                        new AttributeAddition(new QName("urn:example:money", "Mony"), "Rounding",
+                            new QName("http://www.w3.org/2001/XMLSchema", "boolean")),
+                    ],
+                };
+                Assert.ThrowsExactly<SchemaException>(() => new CodeGenerator(misspelt).Run(),
+                    "a typo in the type name must not pass silently");
             }
             finally
             {

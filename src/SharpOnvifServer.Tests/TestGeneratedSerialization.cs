@@ -22,7 +22,9 @@
 using System;
 using System.IO;
 using System.Text;
+using System.Linq;
 using System.Xml;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 using SharpOnvifCommon.Xml;
 using SharpOnvifCommon.Onvif;
@@ -181,6 +183,143 @@ namespace SharpOnvif.Tests
             Assert.AreEqual(TransportProtocol.RTSP, parsed.StreamSetup.Transport.Tunnel.Protocol);
 
             AssertRoundTrips(parsed, "http://www.onvif.org/ver20/media/wsdl", "Receiver");
+        }
+
+        [TestMethod]
+        public void KeepsTheAttributesTheSchemaDoesNotName()
+        {
+            // Most Onvif types declare xs:anyAttribute. 0.9.x kept what arrived there in AnyAttr,
+            // and dropping it lost vendor attributes, and attributes later schema versions add,
+            // on every round trip. A vendor attribute that shares a local name with a declared one
+            // is the vendor's, not the declared one.
+            const string xml =
+                "<Configuration xmlns=\"http://www.onvif.org/ver10/media/wsdl\" " +
+                "xmlns:tt=\"http://www.onvif.org/ver10/schema\" xmlns:v=\"urn:vendor\" " +
+                "token=\"venc0\" v:token=\"theirs\" v:profile=\"high\">" +
+                "<tt:Name>H264</tt:Name><tt:UseCount>1</tt:UseCount><tt:Encoding>H264</tt:Encoding>" +
+                "</Configuration>";
+
+            var parsed = ReadWithGeneratedReader<VideoEncoderConfiguration>(xml);
+
+            Assert.AreEqual("venc0", parsed.token);
+            Assert.IsNotNull(parsed.AnyAttr, "the attributes the schema does not name were dropped");
+            CollectionAssert.AreEquivalent(
+                new[] { "{urn:vendor}token=theirs", "{urn:vendor}profile=high" },
+                parsed.AnyAttr.Select(a => "{" + a.NamespaceURI + "}" + a.LocalName + "=" + a.Value).ToArray());
+
+            string written = WriteWithGeneratedWriter(parsed, Trt, "Configuration");
+            StringAssert.Contains(written, "=\"high\"", "a kept attribute was not written back");
+            StringAssert.Contains(written, "=\"theirs\"", "a kept attribute was not written back");
+
+            // One wildcard for the whole hierarchy: ConfigurationEntity declares it, and a second
+            // one on the derived type would split the attributes between two members.
+            Assert.AreEqual(1, typeof(VideoEncoderConfiguration).GetProperties().Count(p => p.Name.StartsWith("AnyAttr")));
+
+            AssertRoundTrips(parsed, Trt, "Configuration");
+        }
+
+        [TestMethod]
+        public void WritesAnUnqualifiedElementInNoNamespace()
+        {
+            // appmgmt.wsdl declares no elementFormDefault, so its local elements are unqualified.
+            // Written without a namespace, an element takes the default namespace of whatever
+            // encloses it - which put AppID in the AppMgmt namespace, where a device does not
+            // look for it.
+            var value = new SharpOnvifServer.AppMgmt.AppInfo
+            {
+                AppID = "app0",
+                Name = "Counter",
+                Version = "1.0",
+            };
+
+            const string AppMgmt = "http://www.onvif.org/ver10/appmgmt/wsdl";
+
+            // XmlSerializer reads the same thing off the generated attributes, which say so too.
+            foreach (string xml in new[] { WriteWithGeneratedWriter(value, AppMgmt, "Info"), WriteWithXmlSerializer(value, AppMgmt, "Info") })
+            {
+                var appId = XDocument.Parse(xml).Root.Elements().First(e => e.Name.LocalName == "AppID");
+                Assert.AreEqual("", appId.Name.NamespaceName, "AppID was written into the enclosing namespace: " + xml);
+            }
+
+            var parsed = ReadWithGeneratedReader<SharpOnvifServer.AppMgmt.AppInfo>(WriteWithGeneratedWriter(value, AppMgmt, "Info"));
+            Assert.AreEqual("app0", parsed.AppID);
+        }
+
+        [TestMethod]
+        public void ReadsTheAttributesALaterSchemaDropped()
+        {
+            // Devices still send these, and clients read WSPullPointSupport to decide whether to
+            // create a pull point, though the published schemas no longer declare either.
+            var events = ReadWithGeneratedReader<SharpOnvifServer.Events.Capabilities>(
+                "<Capabilities xmlns=\"http://www.onvif.org/ver10/events/wsdl\" WSPullPointSupport=\"true\" MaxPullPoints=\"4\"/>");
+
+            Assert.IsTrue(events.WSPullPointSupportSpecified);
+            Assert.IsTrue(events.WSPullPointSupport);
+            AssertRoundTrips(events, "http://www.onvif.org/ver10/events/wsdl", "Capabilities");
+
+            var system = ReadWithGeneratedReader<SharpOnvifServer.DeviceMgmt.SystemCapabilities>(
+                "<System xmlns=\"http://www.onvif.org/ver10/device/wsdl\" FirmwareUpgrade=\"true\"/>");
+
+            Assert.IsTrue(system.FirmwareUpgradeSpecified);
+            Assert.IsTrue(system.FirmwareUpgrade);
+        }
+
+        [TestMethod]
+        public void WritesAnAnyTypeElementOnlyWhenItHasOne()
+        {
+            // tt:ColorDescriptor/Extension is typed xs:anyType. It was written through
+            // Convert.ToString, which turns null into "" - so every ColorDescriptor carried an
+            // empty Extension - and read as text, which dropped any element inside it.
+            string empty = WriteWithGeneratedWriter(new ColorDescriptor(), "urn:test", "Color");
+            Assert.IsFalse(empty.Contains("Extension"), "an absent Extension was written: " + empty);
+
+            const string xml =
+                "<Color xmlns=\"urn:test\" xmlns:tt=\"http://www.onvif.org/ver10/schema\">" +
+                "<tt:Extension><v:Hue xmlns:v=\"urn:vendor\">12</v:Hue></tt:Extension></Color>";
+
+            var parsed = ReadWithGeneratedReader<ColorDescriptor>(xml);
+            string written = WriteWithGeneratedWriter(parsed, "urn:test", "Color");
+
+            var extension = XDocument.Parse(written).Root.Element(XName.Get("Extension", "http://www.onvif.org/ver10/schema"));
+            Assert.IsNotNull(extension, "the Extension that arrived was not written back");
+            Assert.AreEqual("12", extension.Element(XName.Get("Hue", "urn:vendor"))?.Value, "what was inside Extension was lost");
+        }
+
+        [TestMethod]
+        public void KeepsTheZoneOfAScheduleTime()
+        {
+            // tsc:TimePeriod is the one xs:time in Onvif. A bare time is the device's own clock and
+            // goes back bare; one with an offset goes back as the same instant, not as a bare
+            // clock time two hours out.
+            const string Tsc = "http://www.onvif.org/ver10/schedule/wsdl";
+            var parsed = ReadWithGeneratedReader<SharpOnvifServer.Schedule.TimePeriod>(
+                $"<TimePeriod xmlns=\"{Tsc}\"><From>08:00:00</From><Until>18:00:00+02:00</Until></TimePeriod>");
+
+            var written = XDocument.Parse(WriteWithGeneratedWriter(parsed, Tsc, "TimePeriod")).Root;
+
+            Assert.AreEqual("08:00:00.0000000", written.Element(XName.Get("From", Tsc)).Value);
+            Assert.AreEqual("16:00:00.0000000Z", written.Element(XName.Get("Until", Tsc)).Value);
+        }
+
+        [TestMethod]
+        public void WritesAQualifiedNameEnumerationWithItsPrefixBound()
+        {
+            // The SOAP fault codes enumerate xs:QName values, spelled tns:Receiver in the schema.
+            // They were written as that literal text with tns bound nowhere, and read by matching
+            // it, so a device's own prefix never matched.
+            const string Soap = "http://www.w3.org/2003/05/soap-envelope";
+
+            string xml = WriteWithGeneratedWriter(new Faultcode { Value = faultcodeEnum.tnsReceiver }, "urn:test", "Code");
+            var value = XDocument.Parse(xml).Root.Element(XName.Get("Value", Soap));
+            string[] parts = value.Value.Split(':');
+
+            Assert.AreEqual(2, parts.Length, value.Value);
+            Assert.AreEqual(Soap, value.GetNamespaceOfPrefix(parts[0])?.NamespaceName, "the prefix is not bound: " + xml);
+            Assert.AreEqual("Receiver", parts[1]);
+
+            var parsed = ReadWithGeneratedReader<Faultcode>(
+                $"<Code xmlns=\"urn:test\" xmlns:env=\"{Soap}\"><env:Value>env:Sender</env:Value></Code>");
+            Assert.AreEqual(faultcodeEnum.tnsSender, parsed.Value);
         }
 
         [TestMethod]

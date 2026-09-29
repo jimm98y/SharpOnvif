@@ -270,6 +270,8 @@ namespace SharpOnvifClient.Provisioning
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Maximum time before stopping movement after a move operation.
         /// </summary>
@@ -297,9 +299,21 @@ namespace SharpOnvifClient.Provisioning
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Capabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Provisioning; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -312,6 +326,12 @@ namespace SharpOnvifClient.Provisioning
                 }
             }
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -791,6 +811,8 @@ namespace SharpOnvifClient.Provisioning
         private bool autoFocusField;
         private bool autoFocusFieldSpecified;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -905,6 +927,13 @@ namespace SharpOnvifClient.Provisioning
             set { this.autoFocusFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "SourceCapabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Provisioning; } }
@@ -925,6 +954,7 @@ namespace SharpOnvifClient.Provisioning
             {
                 writer.WriteAttributeString(null, "AutoFocus", writer.ToXml(this.autoFocusField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -937,33 +967,42 @@ namespace SharpOnvifClient.Provisioning
             switch (reader.LocalName)
             {
                 case "VideoSourceToken":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.videoSourceTokenField = reader.AttributeValue;
                     return true;
                 case "MaximumPanMoves":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maximumPanMovesField = reader.AttributeValue;
                     return true;
                 case "MaximumTiltMoves":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maximumTiltMovesField = reader.AttributeValue;
                     return true;
                 case "MaximumZoomMoves":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maximumZoomMovesField = reader.AttributeValue;
                     return true;
                 case "MaximumRollMoves":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maximumRollMovesField = reader.AttributeValue;
                     return true;
                 case "AutoLevel":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.autoLevelField = reader.ToBoolean(reader.AttributeValue);
                     this.autoLevelFieldSpecified = true;
                     return true;
                 case "MaximumFocusMoves":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maximumFocusMovesField = reader.AttributeValue;
                     return true;
                 case "AutoFocus":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.autoFocusField = reader.ToBoolean(reader.AttributeValue);
                     this.autoFocusFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -1144,6 +1183,8 @@ namespace SharpOnvifClient.Provisioning
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// The quantity of pan movement events over the life of the device.
         /// </summary>
@@ -1201,9 +1242,21 @@ namespace SharpOnvifClient.Provisioning
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Usage"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Provisioning; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -1213,6 +1266,12 @@ namespace SharpOnvifClient.Provisioning
             writer.WriteElementString(Ns.Ver10Provisioning, "Roll", this.rollField);
             writer.WriteElementString(Ns.Ver10Provisioning, "Focus", this.focusField);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)

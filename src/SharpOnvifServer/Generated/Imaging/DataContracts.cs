@@ -35,6 +35,8 @@ namespace SharpOnvifServer.Imaging
         private bool adaptablePresetField;
         private bool adaptablePresetFieldSpecified;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -106,6 +108,13 @@ namespace SharpOnvifServer.Imaging
             set { this.adaptablePresetFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Capabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver20Imaging; } }
@@ -124,6 +133,7 @@ namespace SharpOnvifServer.Imaging
             {
                 writer.WriteAttributeString(null, "AdaptablePreset", writer.ToXml(this.adaptablePresetField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -136,19 +146,23 @@ namespace SharpOnvifServer.Imaging
             switch (reader.LocalName)
             {
                 case "ImageStabilization":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.imageStabilizationField = reader.ToBoolean(reader.AttributeValue);
                     this.imageStabilizationFieldSpecified = true;
                     return true;
                 case "Presets":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.presetsField = reader.ToBoolean(reader.AttributeValue);
                     this.presetsFieldSpecified = true;
                     return true;
                 case "AdaptablePreset":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.adaptablePresetField = reader.ToBoolean(reader.AttributeValue);
                     this.adaptablePresetFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -801,6 +815,8 @@ namespace SharpOnvifServer.Imaging
 
         private string typeField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Human readable name of the Imaging Preset.
         /// </summary>
@@ -832,6 +848,13 @@ namespace SharpOnvifServer.Imaging
             set { this.typeField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ImagingPreset"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver20Imaging; } }
@@ -840,6 +863,7 @@ namespace SharpOnvifServer.Imaging
         {
             writer.WriteAttributeString(null, "token", this.tokenField);
             writer.WriteAttributeString(null, "type", this.typeField);
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -852,13 +876,16 @@ namespace SharpOnvifServer.Imaging
             switch (reader.LocalName)
             {
                 case "token":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.tokenField = reader.AttributeValue;
                     return true;
                 case "type":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.typeField = reader.AttributeValue;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)

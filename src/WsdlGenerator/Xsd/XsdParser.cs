@@ -232,17 +232,22 @@ internal sealed class XsdParser
 
         if (restriction is not null)
         {
+            QName? baseType = restriction.Attribute("base") is { } b ? QName.Parse(b.Value, restriction) : null;
+            bool qualified = baseType == new QName(Ns.Xsd, "QName");
+
             var enumerations = restriction.Elements(Xs + "enumeration")
-                .Select(e => new XsdEnumValue(
-                    e.Attribute("value")?.Value ?? throw new SchemaException(e, "xs:enumeration requires a value."),
-                    Documentation(e)))
+                .Select(e =>
+                {
+                    string value = e.Attribute("value")?.Value ?? throw new SchemaException(e, "xs:enumeration requires a value.");
+                    return new XsdEnumValue(value, Documentation(e), qualified ? QName.Parse(value, e) : null);
+                })
                 .ToList();
 
             return new XsdSimpleType
             {
                 Name = name,
                 AnonymousFor = anonymousFor,
-                BaseType = restriction.Attribute("base") is { } b ? QName.Parse(b.Value, restriction) : null,
+                BaseType = baseType,
                 Enumerations = enumerations,
                 Documentation = Documentation(simple),
             };

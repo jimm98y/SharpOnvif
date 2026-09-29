@@ -52,6 +52,7 @@ namespace SharpOnvif.Tests
             Assert.AreEqual(2, options.Targets.Count);
             Assert.AreEqual(5, options.EnumerationExtensions.Count, "the codecs onvif.xsd omits");
             Assert.AreEqual(1, options.ElementTypeOverrides.Count, "tt:Transport/Tunnel, which onvif.xsd loosened to a wildcard");
+            Assert.AreEqual(2, options.AttributeAdditions.Count, "the capability attributes the published schemas dropped");
 
             // Relative in the file, absolute once read, so a run does not depend on where it was
             // started from.

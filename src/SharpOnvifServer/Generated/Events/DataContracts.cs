@@ -110,6 +110,11 @@ namespace SharpOnvifServer.Events
         private bool metadataOverMQTTField;
         private bool metadataOverMQTTFieldSpecified;
 
+        private bool wSPullPointSupportField;
+        private bool wSPullPointSupportFieldSpecified;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -275,6 +280,34 @@ namespace SharpOnvifServer.Events
             set { this.metadataOverMQTTFieldSpecified = value; }
         }
 
+        /// <summary>
+        /// Indicates that the WS Pull Point is supported.
+        /// </summary>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public bool WSPullPointSupport
+        {
+            get { return this.wSPullPointSupportField; }
+            set { this.wSPullPointSupportField = value; }
+        }
+
+        /// <summary>
+        /// Whether <see cref="WSPullPointSupport"/> was present. The value type cannot
+        /// otherwise distinguish an absent optional element from a zero one.
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool WSPullPointSupportSpecified
+        {
+            get { return this.wSPullPointSupportFieldSpecified; }
+            set { this.wSPullPointSupportFieldSpecified = value; }
+        }
+
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Capabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Events; } }
@@ -310,6 +343,11 @@ namespace SharpOnvifServer.Events
             {
                 writer.WriteAttributeString(null, "MetadataOverMQTT", writer.ToXml(this.metadataOverMQTTField));
             }
+            if (this.wSPullPointSupportFieldSpecified)
+            {
+                writer.WriteAttributeString(null, "WSPullPointSupport", writer.ToXml(this.wSPullPointSupportField));
+            }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -322,38 +360,52 @@ namespace SharpOnvifServer.Events
             switch (reader.LocalName)
             {
                 case "WSSubscriptionPolicySupport":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.wSSubscriptionPolicySupportField = reader.ToBoolean(reader.AttributeValue);
                     this.wSSubscriptionPolicySupportFieldSpecified = true;
                     return true;
                 case "WSPausableSubscriptionManagerInterfaceSupport":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.wSPausableSubscriptionManagerInterfaceSupportField = reader.ToBoolean(reader.AttributeValue);
                     this.wSPausableSubscriptionManagerInterfaceSupportFieldSpecified = true;
                     return true;
                 case "MaxNotificationProducers":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxNotificationProducersField = reader.ToInt32(reader.AttributeValue);
                     this.maxNotificationProducersFieldSpecified = true;
                     return true;
                 case "MaxPullPoints":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxPullPointsField = reader.ToInt32(reader.AttributeValue);
                     this.maxPullPointsFieldSpecified = true;
                     return true;
                 case "PersistentNotificationStorage":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.persistentNotificationStorageField = reader.ToBoolean(reader.AttributeValue);
                     this.persistentNotificationStorageFieldSpecified = true;
                     return true;
                 case "EventBrokerProtocols":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.eventBrokerProtocolsField = reader.AttributeValue;
                     return true;
                 case "MaxEventBrokers":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxEventBrokersField = reader.ToInt32(reader.AttributeValue);
                     this.maxEventBrokersFieldSpecified = true;
                     return true;
                 case "MetadataOverMQTT":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.metadataOverMQTTField = reader.ToBoolean(reader.AttributeValue);
                     this.metadataOverMQTTFieldSpecified = true;
                     return true;
+                case "WSPullPointSupport":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
+                    this.wSPullPointSupportField = reader.ToBoolean(reader.AttributeValue);
+                    this.wSPullPointSupportFieldSpecified = true;
+                    return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -823,6 +875,8 @@ namespace SharpOnvifServer.Events
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Event broker address in the format "scheme://host:port[/resource]". The supported schemes shall be
         /// returned by the EventBrokerProtocols capability. The resource part of the URL is only valid when
@@ -948,9 +1002,21 @@ namespace SharpOnvifServer.Events
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "EventBrokerConfig"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Events; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -968,6 +1034,12 @@ namespace SharpOnvifServer.Events
             writer.WriteElementString(Ns.Ver10Events, "CertPathValidationPolicyID", this.certPathValidationPolicyIDField);
             writer.WriteElement(Ns.Ver10Events, "MetadataFilter", this.metadataFilterField, Ns.B2, "FilterType");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)

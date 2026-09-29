@@ -403,6 +403,8 @@ namespace SharpOnvifServer.AdvancedSecurity
 
         private AlgorithmIdentifierAnyParameters anyParametersField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// The OID of the algorithm in dot-decimal form.
         /// </summary>
@@ -430,15 +432,33 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.anyParametersField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AlgorithmIdentifier"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Advancedsecurity, "algorithm", this.algorithmField);
             writer.WriteElementString(Ns.Ver10Advancedsecurity, "parameters", writer.ToXml(this.parametersField));
             writer.WriteElement(Ns.Ver10Advancedsecurity, "anyParameters", this.anyParametersField, null, null);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -494,6 +514,8 @@ namespace SharpOnvifServer.AdvancedSecurity
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public AuthorizationServerConfigurationData Data
         {
@@ -508,15 +530,35 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AuthorizationServerConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            base.WriteXmlAttributes(writer);
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             base.WriteXmlContent(writer);
             writer.WriteElement(Ns.Ver10Advancedsecurity, "Data", this.dataField, Ns.Ver10Advancedsecurity, "AuthorizationServerConfigurationData");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -544,6 +586,8 @@ namespace SharpOnvifServer.AdvancedSecurity
         private string[] configurationTypesSupportedField;
 
         private string[] clientAuthenticationMethodsSupportedField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Indicates maximum number of authorization server configurations supported.
@@ -587,6 +631,13 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.clientAuthenticationMethodsSupportedField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AuthorizationServerConfigurationCapabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
@@ -599,6 +650,7 @@ namespace SharpOnvifServer.AdvancedSecurity
             }
             writer.WriteAttributeString(null, "ConfigurationTypesSupported", writer.JoinList(this.configurationTypesSupportedField));
             writer.WriteAttributeString(null, "ClientAuthenticationMethodsSupported", writer.JoinList(this.clientAuthenticationMethodsSupportedField));
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -606,17 +658,21 @@ namespace SharpOnvifServer.AdvancedSecurity
             switch (reader.LocalName)
             {
                 case "MaxConfigurations":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxConfigurationsField = reader.ToInt32(reader.AttributeValue);
                     this.maxConfigurationsFieldSpecified = true;
                     return true;
                 case "ConfigurationTypesSupported":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.configurationTypesSupportedField = reader.SplitList(reader.AttributeValue);
                     return true;
                 case "ClientAuthenticationMethodsSupported":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.clientAuthenticationMethodsSupportedField = reader.SplitList(reader.AttributeValue);
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
     }
@@ -643,6 +699,8 @@ namespace SharpOnvifServer.AdvancedSecurity
         private string typeField;
 
         private string clientAuthField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Authorization server metadata endpoint conforming to RFC8414, such as
@@ -743,6 +801,13 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.clientAuthField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AuthorizationServerConfigurationData"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
@@ -751,6 +816,7 @@ namespace SharpOnvifServer.AdvancedSecurity
         {
             writer.WriteAttributeString(null, "Type", this.typeField);
             writer.WriteAttributeString(null, "ClientAuth", this.clientAuthField);
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -770,13 +836,16 @@ namespace SharpOnvifServer.AdvancedSecurity
             switch (reader.LocalName)
             {
                 case "Type":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.typeField = reader.AttributeValue;
                     return true;
                 case "ClientAuth":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.clientAuthField = reader.AttributeValue;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -830,6 +899,8 @@ namespace SharpOnvifServer.AdvancedSecurity
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// The OID of the attribute.
         /// </summary>
@@ -857,15 +928,33 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "BasicRequestAttribute"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Advancedsecurity, "OID", this.oIDField);
             writer.WriteElementString(Ns.Ver10Advancedsecurity, "value", writer.ToXml(this.valueField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -969,6 +1058,8 @@ namespace SharpOnvifServer.AdvancedSecurity
     {
         private object itemField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlElementAttribute("BasicRequestAttribute", typeof(BasicRequestAttribute), Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("X509v3Extension", typeof(X509v3Extension), Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("anyAttribute", typeof(CSRAttributeAnyAttribute), Order=0)]
@@ -978,9 +1069,21 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.itemField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "CSRAttribute"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -996,6 +1099,12 @@ namespace SharpOnvifServer.AdvancedSecurity
             {
                 writer.WriteElement(Ns.Ver10Advancedsecurity, "anyAttribute", ((CSRAttributeAnyAttribute)this.itemField), null, null);
             }
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -1062,6 +1171,8 @@ namespace SharpOnvifServer.AdvancedSecurity
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// The capabilities of the keystore implementation.
         /// </summary>
@@ -1119,9 +1230,21 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Capabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -1131,6 +1254,12 @@ namespace SharpOnvifServer.AdvancedSecurity
             writer.WriteElement(Ns.Ver10Advancedsecurity, "AuthorizationServer", this.authorizationServerField, Ns.Ver10Advancedsecurity, "AuthorizationServerConfigurationCapabilities");
             writer.WriteElement(Ns.Ver10Advancedsecurity, "MediaSigning", this.mediaSigningField, Ns.Ver10Advancedsecurity, "MediaSigningCapabilities");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -1419,6 +1548,8 @@ namespace SharpOnvifServer.AdvancedSecurity
     {
         private string[] certificateIDField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// A certificate ID.
         /// </summary>
@@ -1429,9 +1560,21 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.certificateIDField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "CertificateIDs"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -1442,6 +1585,12 @@ namespace SharpOnvifServer.AdvancedSecurity
                     writer.WriteElementString(Ns.Ver10Advancedsecurity, "CertificateID", this.certificateIDField[i]);
                 }
             }
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -1470,6 +1619,8 @@ namespace SharpOnvifServer.AdvancedSecurity
 
         private CertificationPathAnyElement anyElementField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// A certificate in the certification path.
         /// </summary>
@@ -1497,9 +1648,21 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.anyElementField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "CertificationPath"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -1512,6 +1675,12 @@ namespace SharpOnvifServer.AdvancedSecurity
             }
             writer.WriteElementString(Ns.Ver10Advancedsecurity, "Alias", this.aliasField);
             writer.WriteElement(Ns.Ver10Advancedsecurity, "anyElement", this.anyElementField, null, null);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -2761,6 +2930,8 @@ namespace SharpOnvifServer.AdvancedSecurity
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Custom claim name.
         /// </summary>
@@ -2788,15 +2959,33 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "CustomClaim"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Advancedsecurity, "Name", this.nameField);
             writer.WriteElementString(Ns.Ver10Advancedsecurity, "SupportedValues", writer.JoinList(this.supportedValuesField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -2830,6 +3019,8 @@ namespace SharpOnvifServer.AdvancedSecurity
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// The attribute type.
         /// </summary>
@@ -2857,15 +3048,33 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "DNAttributeTypeAndValue"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Advancedsecurity, "Type", this.typeField);
             writer.WriteElementString(Ns.Ver10Advancedsecurity, "Value", this.valueField);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -3584,6 +3793,8 @@ namespace SharpOnvifServer.AdvancedSecurity
 
         private DistinguishedNameAnyAttribute anyAttributeField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// A country name as specified in X.500.
         /// </summary>
@@ -3755,9 +3966,21 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.anyAttributeField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "DistinguishedName"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -3874,6 +4097,12 @@ namespace SharpOnvifServer.AdvancedSecurity
                 }
             }
             writer.WriteElement(Ns.Ver10Advancedsecurity, "anyAttribute", this.anyAttributeField, null, null);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -4016,6 +4245,8 @@ namespace SharpOnvifServer.AdvancedSecurity
 
         private string[] dot1XMethodsField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -4043,6 +4274,13 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.dot1XMethodsField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Dot1XCapabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
@@ -4051,6 +4289,7 @@ namespace SharpOnvifServer.AdvancedSecurity
         {
             writer.WriteAttributeString(null, "MaximumNumberOfDot1XConfigurations", this.maximumNumberOfDot1XConfigurationsField);
             writer.WriteAttributeString(null, "Dot1XMethods", writer.JoinList(this.dot1XMethodsField));
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -4063,13 +4302,16 @@ namespace SharpOnvifServer.AdvancedSecurity
             switch (reader.LocalName)
             {
                 case "MaximumNumberOfDot1XConfigurations":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maximumNumberOfDot1XConfigurationsField = reader.AttributeValue;
                     return true;
                 case "Dot1XMethods":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.dot1XMethodsField = reader.SplitList(reader.AttributeValue);
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -4090,6 +4332,8 @@ namespace SharpOnvifServer.AdvancedSecurity
         private Dot1XStage outerField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// The unique identifier of the IEEE 802.1X configuration.
@@ -4128,9 +4372,21 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Dot1XConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -4138,6 +4394,12 @@ namespace SharpOnvifServer.AdvancedSecurity
             writer.WriteElementString(Ns.Ver10Advancedsecurity, "Alias", this.aliasField);
             writer.WriteElement(Ns.Ver10Advancedsecurity, "Outer", this.outerField, Ns.Ver10Advancedsecurity, "Dot1XStage");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -4182,6 +4444,8 @@ namespace SharpOnvifServer.AdvancedSecurity
         private string methodField;
 
         private string certPathValidationPolicyIDField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// The identity used in this authentication method, if required.
@@ -4254,6 +4518,13 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.certPathValidationPolicyIDField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Dot1XStage"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
@@ -4262,6 +4533,7 @@ namespace SharpOnvifServer.AdvancedSecurity
         {
             writer.WriteAttributeString(null, "Method", this.methodField);
             writer.WriteAttributeString(null, "CertPathValidationPolicyID", this.certPathValidationPolicyIDField);
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -4278,13 +4550,16 @@ namespace SharpOnvifServer.AdvancedSecurity
             switch (reader.LocalName)
             {
                 case "Method":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.methodField = reader.AttributeValue;
                     return true;
                 case "CertPathValidationPolicyID":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.certPathValidationPolicyIDField = reader.AttributeValue;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -6220,6 +6495,8 @@ namespace SharpOnvifServer.AdvancedSecurity
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// List of supported aud claims. A JWT must contain at least one of these.
         /// </summary>
@@ -6283,9 +6560,21 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "JWTConfiguration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -6313,6 +6602,12 @@ namespace SharpOnvifServer.AdvancedSecurity
                 }
             }
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -6370,6 +6665,8 @@ namespace SharpOnvifServer.AdvancedSecurity
         private bool securelyStoredFieldSpecified;
 
         private KeyAttributeExtension extensionField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// The ID of the key.
@@ -6479,9 +6776,21 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "KeyAttribute"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -6502,6 +6811,12 @@ namespace SharpOnvifServer.AdvancedSecurity
                 writer.WriteElementString(Ns.Ver10Advancedsecurity, "securelyStored", writer.ToXml(this.securelyStoredField));
             }
             writer.WriteElement(Ns.Ver10Advancedsecurity, "Extension", this.extensionField, null, null);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -6642,6 +6957,8 @@ namespace SharpOnvifServer.AdvancedSecurity
 
         private bool noPrivateKeySharingField;
         private bool noPrivateKeySharingFieldSpecified;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// The signature algorithms supported by the keystore implementation.
@@ -7061,6 +7378,13 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.noPrivateKeySharingFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "KeystoreCapabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
@@ -7131,6 +7455,7 @@ namespace SharpOnvifServer.AdvancedSecurity
             {
                 writer.WriteAttributeString(null, "NoPrivateKeySharing", writer.ToXml(this.noPrivateKeySharingField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -7150,95 +7475,121 @@ namespace SharpOnvifServer.AdvancedSecurity
             switch (reader.LocalName)
             {
                 case "MaximumNumberOfKeys":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maximumNumberOfKeysField = reader.AttributeValue;
                     return true;
                 case "MaximumNumberOfCertificates":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maximumNumberOfCertificatesField = reader.AttributeValue;
                     return true;
                 case "MaximumNumberOfCertificationPaths":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maximumNumberOfCertificationPathsField = reader.AttributeValue;
                     return true;
                 case "SetCertPath":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.setCertPathField = reader.ToBoolean(reader.AttributeValue);
                     this.setCertPathFieldSpecified = true;
                     return true;
                 case "RSAKeyPairGeneration":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.rSAKeyPairGenerationField = reader.ToBoolean(reader.AttributeValue);
                     this.rSAKeyPairGenerationFieldSpecified = true;
                     return true;
                 case "ECCKeyPairGeneration":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.eCCKeyPairGenerationField = reader.ToBoolean(reader.AttributeValue);
                     this.eCCKeyPairGenerationFieldSpecified = true;
                     return true;
                 case "KeyPairGeneration":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.keyPairGenerationField = reader.SplitList(reader.AttributeValue);
                     return true;
                 case "RSAKeyLengths":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.rSAKeyLengthsField = reader.SplitList(reader.AttributeValue);
                     return true;
                 case "EllipticCurves":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.ellipticCurvesField = reader.SplitList(reader.AttributeValue);
                     return true;
                 case "PKCS10ExternalCertificationWithRSA":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.pKCS10ExternalCertificationWithRSAField = reader.ToBoolean(reader.AttributeValue);
                     this.pKCS10ExternalCertificationWithRSAFieldSpecified = true;
                     return true;
                 case "PKCS10":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.pKCS10Field = reader.ToBoolean(reader.AttributeValue);
                     this.pKCS10FieldSpecified = true;
                     return true;
                 case "SelfSignedCertificateCreationWithRSA":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.selfSignedCertificateCreationWithRSAField = reader.ToBoolean(reader.AttributeValue);
                     this.selfSignedCertificateCreationWithRSAFieldSpecified = true;
                     return true;
                 case "SelfSignedCertificateCreation":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.selfSignedCertificateCreationField = reader.ToBoolean(reader.AttributeValue);
                     this.selfSignedCertificateCreationFieldSpecified = true;
                     return true;
                 case "X509Versions":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.x509VersionsField = System.Array.ConvertAll(reader.SplitList(reader.AttributeValue), x => reader.ToInt32(x));
                     return true;
                 case "MaximumNumberOfPassphrases":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maximumNumberOfPassphrasesField = reader.AttributeValue;
                     return true;
                 case "PKCS8RSAKeyPairUpload":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.pKCS8RSAKeyPairUploadField = reader.ToBoolean(reader.AttributeValue);
                     this.pKCS8RSAKeyPairUploadFieldSpecified = true;
                     return true;
                 case "PKCS8":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.pKCS8Field = reader.ToBoolean(reader.AttributeValue);
                     this.pKCS8FieldSpecified = true;
                     return true;
                 case "PKCS12CertificateWithRSAPrivateKeyUpload":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.pKCS12CertificateWithRSAPrivateKeyUploadField = reader.ToBoolean(reader.AttributeValue);
                     this.pKCS12CertificateWithRSAPrivateKeyUploadFieldSpecified = true;
                     return true;
                 case "PKCS12":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.pKCS12Field = reader.ToBoolean(reader.AttributeValue);
                     this.pKCS12FieldSpecified = true;
                     return true;
                 case "PasswordBasedEncryptionAlgorithms":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.passwordBasedEncryptionAlgorithmsField = reader.SplitList(reader.AttributeValue);
                     return true;
                 case "PasswordBasedMACAlgorithms":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.passwordBasedMACAlgorithmsField = reader.SplitList(reader.AttributeValue);
                     return true;
                 case "MaximumNumberOfCRLs":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maximumNumberOfCRLsField = reader.AttributeValue;
                     return true;
                 case "MaximumNumberOfCertificationPathValidationPolicies":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maximumNumberOfCertificationPathValidationPoliciesField = reader.AttributeValue;
                     return true;
                 case "EnforceTLSWebClientAuthExtKeyUsage":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.enforceTLSWebClientAuthExtKeyUsageField = reader.ToBoolean(reader.AttributeValue);
                     this.enforceTLSWebClientAuthExtKeyUsageFieldSpecified = true;
                     return true;
                 case "NoPrivateKeySharing":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.noPrivateKeySharingField = reader.ToBoolean(reader.AttributeValue);
                     this.noPrivateKeySharingFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -7295,6 +7646,8 @@ namespace SharpOnvifServer.AdvancedSecurity
         private bool userMediaSigningKeySupportedField;
         private bool userMediaSigningKeySupportedFieldSpecified;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Indicates whether the device supports signing of media according to the Media Signing Specification.
         /// </summary>
@@ -7338,6 +7691,13 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.userMediaSigningKeySupportedFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "MediaSigningCapabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
@@ -7352,6 +7712,7 @@ namespace SharpOnvifServer.AdvancedSecurity
             {
                 writer.WriteAttributeString(null, "UserMediaSigningKeySupported", writer.ToXml(this.userMediaSigningKeySupportedField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -7359,15 +7720,18 @@ namespace SharpOnvifServer.AdvancedSecurity
             switch (reader.LocalName)
             {
                 case "MediaSigningSupported":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.mediaSigningSupportedField = reader.ToBoolean(reader.AttributeValue);
                     this.mediaSigningSupportedFieldSpecified = true;
                     return true;
                 case "UserMediaSigningKeySupported":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.userMediaSigningKeySupportedField = reader.ToBoolean(reader.AttributeValue);
                     this.userMediaSigningKeySupportedFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
     }
@@ -7428,6 +7792,8 @@ namespace SharpOnvifServer.AdvancedSecurity
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// The ID of the passphrase.
         /// </summary>
@@ -7455,15 +7821,33 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "PassphraseAttribute"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Advancedsecurity, "PassphraseID", this.passphraseIDField);
             writer.WriteElementString(Ns.Ver10Advancedsecurity, "Alias", this.aliasField);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -8650,24 +9034,30 @@ namespace SharpOnvifServer.AdvancedSecurity
             switch (reader.LocalName)
             {
                 case "TLSServerSupported":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.tLSServerSupportedField = reader.SplitList(reader.AttributeValue);
                     return true;
                 case "EnabledVersionsSupported":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.enabledVersionsSupportedField = reader.ToBoolean(reader.AttributeValue);
                     this.enabledVersionsSupportedFieldSpecified = true;
                     return true;
                 case "MaximumNumberOfTLSCertificationPaths":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maximumNumberOfTLSCertificationPathsField = reader.AttributeValue;
                     return true;
                 case "TLSClientAuthSupported":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.tLSClientAuthSupportedField = reader.ToBoolean(reader.AttributeValue);
                     this.tLSClientAuthSupportedFieldSpecified = true;
                     return true;
                 case "CnMapsToUserSupported":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.cnMapsToUserSupportedField = reader.ToBoolean(reader.AttributeValue);
                     this.cnMapsToUserSupportedFieldSpecified = true;
                     return true;
                 case "MaximumNumberOfTLSCertificationPathValidationPolicies":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maximumNumberOfTLSCertificationPathValidationPoliciesField = reader.AttributeValue;
                     return true;
             }
@@ -9705,6 +10095,8 @@ namespace SharpOnvifServer.AdvancedSecurity
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// The ID of the certificate.
         /// </summary>
@@ -9773,9 +10165,21 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "X509Certificate"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -9788,6 +10192,12 @@ namespace SharpOnvifServer.AdvancedSecurity
                 writer.WriteElementString(Ns.Ver10Advancedsecurity, "HasPrivateKey", writer.ToXml(this.hasPrivateKeyField));
             }
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -9836,6 +10246,8 @@ namespace SharpOnvifServer.AdvancedSecurity
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// The OID of the extension field.
         /// </summary>
@@ -9873,9 +10285,21 @@ namespace SharpOnvifServer.AdvancedSecurity
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "X509v3Extension"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Advancedsecurity; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -9883,6 +10307,12 @@ namespace SharpOnvifServer.AdvancedSecurity
             writer.WriteElementString(Ns.Ver10Advancedsecurity, "critical", writer.ToXml(this.criticalField));
             writer.WriteElementString(Ns.Ver10Advancedsecurity, "extnValue", writer.ToXml(this.extnValueField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)

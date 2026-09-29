@@ -25,6 +25,16 @@ internal sealed record EnumerationExtension(QName Type, string Value, string? Do
 /// </remarks>
 internal sealed record ElementTypeOverride(QName Type, string Element, QName ElementType);
 
+/// <summary>
+/// An optional, unqualified attribute given to a complex type that the schema does not declare.
+/// </summary>
+/// <remarks>
+/// A later revision of a schema can drop an attribute that implementations went on sending, and
+/// that callers went on reading. Declaring it again keeps it a typed property, rather than one
+/// more entry among the attributes a wildcard kept.
+/// </remarks>
+internal sealed record AttributeAddition(QName Type, string Attribute, QName AttributeType, string? Documentation = null);
+
 internal static class SchemaExtensions
 {
     /// <summary>
@@ -70,6 +80,36 @@ internal static class SchemaExtensions
             element.Retype(@override.ElementType);
         }
     }
+
+    /// <summary>
+    /// Adds the configured attributes to the types they name, before any code is modelled from
+    /// the schema, so they are read and written like the ones the schema declares.
+    /// </summary>
+    public static void Apply(XsdSchemaSet schema, IReadOnlyList<AttributeAddition> additions)
+    {
+        foreach (var addition in additions)
+        {
+            if (schema.FindType(addition.Type) is not XsdComplexType complex)
+                throw new SchemaException($"No complex type {addition.Type} to add the attribute '{addition.Attribute}' to.");
+
+            if (schema.FindType(addition.AttributeType) is null && !IsBuiltIn(addition.AttributeType))
+                throw new SchemaException($"No type {addition.AttributeType} to give {addition.Type}/@{addition.Attribute}.");
+
+            // A schema that declares it again makes the addition redundant rather than wrong.
+            if (complex.Attributes.Any(a => a.Name.LocalName == addition.Attribute || a.Ref?.LocalName == addition.Attribute))
+                continue;
+
+            complex.AddAttribute(new XsdAttribute
+            {
+                Name = new QName("", addition.Attribute),
+                TypeName = addition.AttributeType,
+                Use = AttributeUse.Optional,
+                Documentation = addition.Documentation,
+            });
+        }
+    }
+
+    private static bool IsBuiltIn(QName type) => type.Namespace == Ns.Xsd;
 
     /// <summary>The local element of that name in a content model, searched through its groups.</summary>
     private static XsdElement? FindElement(XsdParticle? particle, string localName)

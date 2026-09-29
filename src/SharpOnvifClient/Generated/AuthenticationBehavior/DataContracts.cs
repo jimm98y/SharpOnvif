@@ -36,6 +36,8 @@ namespace SharpOnvifClient.AuthenticationBehavior
 
         private AuthenticationPolicyExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Reference to the schedule used by the authentication policy.
         /// </summary>
@@ -64,9 +66,21 @@ namespace SharpOnvifClient.AuthenticationBehavior
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AuthenticationPolicy"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -79,6 +93,12 @@ namespace SharpOnvifClient.AuthenticationBehavior
                 }
             }
             writer.WriteElement(Ns.Ver10Authenticationbehavior, "Extension", this.extensionField, Ns.Ver10Authenticationbehavior, "AuthenticationPolicyExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -146,6 +166,8 @@ namespace SharpOnvifClient.AuthenticationBehavior
 
         private AuthenticationProfileExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// The default security level is used if none of the authentication policies has a schedule covering
         /// the time of access (or if no authentication policies are defined).
@@ -175,9 +197,22 @@ namespace SharpOnvifClient.AuthenticationBehavior
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AuthenticationProfile"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            base.WriteXmlAttributes(writer);
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -191,6 +226,13 @@ namespace SharpOnvifClient.AuthenticationBehavior
                 }
             }
             writer.WriteElement(Ns.Ver10Authenticationbehavior, "Extension", this.extensionField, Ns.Ver10Authenticationbehavior, "AuthenticationProfileExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -1899,6 +1941,8 @@ namespace SharpOnvifClient.AuthenticationBehavior
 
         private RecognitionGroupExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// A list of recognition methods to request for at the access point.
         /// </summary>
@@ -1916,9 +1960,21 @@ namespace SharpOnvifClient.AuthenticationBehavior
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "RecognitionGroup"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -1930,6 +1986,12 @@ namespace SharpOnvifClient.AuthenticationBehavior
                 }
             }
             writer.WriteElement(Ns.Ver10Authenticationbehavior, "Extension", this.extensionField, Ns.Ver10Authenticationbehavior, "RecognitionGroupExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -1994,6 +2056,8 @@ namespace SharpOnvifClient.AuthenticationBehavior
 
         private RecognitionMethodExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// The requested type of recognition. Is of type text. Recognition types starting with the prefix pt:
         /// are reserved to define ONVIF-specific types as defined in pt:RecognitionType. For custom defined
@@ -2025,15 +2089,33 @@ namespace SharpOnvifClient.AuthenticationBehavior
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "RecognitionMethod"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Authenticationbehavior, "RecognitionType", this.recognitionTypeField);
             writer.WriteElementString(Ns.Ver10Authenticationbehavior, "Order", writer.ToXml(this.orderField));
             writer.WriteElement(Ns.Ver10Authenticationbehavior, "Extension", this.extensionField, Ns.Ver10Authenticationbehavior, "RecognitionMethodExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -2099,6 +2181,8 @@ namespace SharpOnvifClient.AuthenticationBehavior
 
         private SecurityLevelExtension extensionField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// The recognition groups are used to define a logical OR between the groups. Each recognition group
         /// consists of one or more recognition methods.
@@ -2117,9 +2201,22 @@ namespace SharpOnvifClient.AuthenticationBehavior
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "SecurityLevel"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            base.WriteXmlAttributes(writer);
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -2132,6 +2229,13 @@ namespace SharpOnvifClient.AuthenticationBehavior
                 }
             }
             writer.WriteElement(Ns.Ver10Authenticationbehavior, "Extension", this.extensionField, Ns.Ver10Authenticationbehavior, "SecurityLevelExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -2168,6 +2272,8 @@ namespace SharpOnvifClient.AuthenticationBehavior
         private string securityLevelTokenField;
 
         private SecurityLevelConstraintExtension extensionField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Corresponds to the Active field in the ScheduleState structure in [ONVIF Schedule Service
@@ -2222,9 +2328,21 @@ namespace SharpOnvifClient.AuthenticationBehavior
             set { this.extensionField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "SecurityLevelConstraint"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -2233,6 +2351,12 @@ namespace SharpOnvifClient.AuthenticationBehavior
             writer.WriteElementString(Ns.Ver10Authenticationbehavior, "AuthenticationMode", this.authenticationModeField);
             writer.WriteElementString(Ns.Ver10Authenticationbehavior, "SecurityLevelToken", this.securityLevelTokenField);
             writer.WriteElement(Ns.Ver10Authenticationbehavior, "Extension", this.extensionField, Ns.Ver10Authenticationbehavior, "SecurityLevelConstraintExtension");
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -2432,6 +2556,8 @@ namespace SharpOnvifClient.AuthenticationBehavior
 
         private string[] supportedAuthenticationModesField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -2537,6 +2663,13 @@ namespace SharpOnvifClient.AuthenticationBehavior
             set { this.supportedAuthenticationModesField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ServiceCapabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Authenticationbehavior; } }
@@ -2554,6 +2687,7 @@ namespace SharpOnvifClient.AuthenticationBehavior
                 writer.WriteAttributeString(null, "ClientSuppliedTokenSupported", writer.ToXml(this.clientSuppliedTokenSupportedField));
             }
             writer.WriteAttributeString(null, "SupportedAuthenticationModes", writer.JoinList(this.supportedAuthenticationModesField));
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -2566,32 +2700,41 @@ namespace SharpOnvifClient.AuthenticationBehavior
             switch (reader.LocalName)
             {
                 case "MaxLimit":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxLimitField = reader.ToUInt32(reader.AttributeValue);
                     return true;
                 case "MaxAuthenticationProfiles":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxAuthenticationProfilesField = reader.ToUInt32(reader.AttributeValue);
                     return true;
                 case "MaxPoliciesPerAuthenticationProfile":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxPoliciesPerAuthenticationProfileField = reader.ToUInt32(reader.AttributeValue);
                     return true;
                 case "MaxSecurityLevels":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxSecurityLevelsField = reader.ToUInt32(reader.AttributeValue);
                     return true;
                 case "MaxRecognitionGroupsPerSecurityLevel":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxRecognitionGroupsPerSecurityLevelField = reader.ToUInt32(reader.AttributeValue);
                     return true;
                 case "MaxRecognitionMethodsPerRecognitionGroup":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxRecognitionMethodsPerRecognitionGroupField = reader.ToUInt32(reader.AttributeValue);
                     return true;
                 case "ClientSuppliedTokenSupported":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.clientSuppliedTokenSupportedField = reader.ToBoolean(reader.AttributeValue);
                     this.clientSuppliedTokenSupportedFieldSpecified = true;
                     return true;
                 case "SupportedAuthenticationModes":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.supportedAuthenticationModesField = reader.SplitList(reader.AttributeValue);
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)

@@ -159,6 +159,8 @@ namespace SharpOnvifClient.AccessControl
 
         private string[] supportedFeedbackTypesField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// A list of security level tokens that this access point supports. See [Authentication Behavior
         /// Service Specification]. This field is optional, and if omitted, the device cannot support
@@ -338,6 +340,13 @@ namespace SharpOnvifClient.AccessControl
             set { this.supportedFeedbackTypesField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AccessPointCapabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Accesscontrol; } }
@@ -367,6 +376,7 @@ namespace SharpOnvifClient.AccessControl
                 writer.WriteAttributeString(null, "IdentifierAccess", writer.ToXml(this.identifierAccessField));
             }
             writer.WriteAttributeString(null, "SupportedFeedbackTypes", writer.JoinList(this.supportedFeedbackTypesField));
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -387,36 +397,45 @@ namespace SharpOnvifClient.AccessControl
             switch (reader.LocalName)
             {
                 case "DisableAccessPoint":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.disableAccessPointField = reader.ToBoolean(reader.AttributeValue);
                     return true;
                 case "Duress":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.duressField = reader.ToBoolean(reader.AttributeValue);
                     this.duressFieldSpecified = true;
                     return true;
                 case "AnonymousAccess":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.anonymousAccessField = reader.ToBoolean(reader.AttributeValue);
                     this.anonymousAccessFieldSpecified = true;
                     return true;
                 case "AccessTaken":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.accessTakenField = reader.ToBoolean(reader.AttributeValue);
                     this.accessTakenFieldSpecified = true;
                     return true;
                 case "ExternalAuthorization":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.externalAuthorizationField = reader.ToBoolean(reader.AttributeValue);
                     this.externalAuthorizationFieldSpecified = true;
                     return true;
                 case "SupportedRecognitionTypes":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.supportedRecognitionTypesField = reader.SplitList(reader.AttributeValue);
                     return true;
                 case "IdentifierAccess":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.identifierAccessField = reader.ToBoolean(reader.AttributeValue);
                     this.identifierAccessFieldSpecified = true;
                     return true;
                 case "SupportedFeedbackTypes":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.supportedFeedbackTypesField = reader.SplitList(reader.AttributeValue);
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -482,6 +501,8 @@ namespace SharpOnvifClient.AccessControl
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// The capabilities for the AccessPoint.
         /// </summary>
@@ -499,15 +520,35 @@ namespace SharpOnvifClient.AccessControl
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AccessPointInfo"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Accesscontrol; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            base.WriteXmlAttributes(writer);
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             base.WriteXmlContent(writer);
             writer.WriteElement(Ns.Ver10Accesscontrol, "Capabilities", this.capabilitiesField, Ns.Ver10Accesscontrol, "AccessPointCapabilities");
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -671,6 +712,8 @@ namespace SharpOnvifClient.AccessControl
 
         private System.Xml.XmlElement[] anyField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         /// <summary>
         /// Indicates that the AccessPoint is enabled. By default this field value shall be True, if the
         /// DisableAccessPoint capabilities is not supported.
@@ -689,14 +732,32 @@ namespace SharpOnvifClient.AccessControl
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AccessPointState"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Accesscontrol; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
             writer.WriteElementString(Ns.Ver10Accesscontrol, "Enabled", writer.ToXml(this.enabledField));
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -792,9 +853,31 @@ namespace SharpOnvifClient.AccessControl
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/accesscontrol/wsdl")]
     public partial class AreaInfo : AreaInfoBase
     {
+        private System.Xml.XmlAttribute[] anyAttrField;
+
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "AreaInfo"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Accesscontrol; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            base.WriteXmlAttributes(writer);
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            if (base.ReadXmlAttribute(reader)) return true;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
+        }
 
     }
 
@@ -3040,6 +3123,8 @@ namespace SharpOnvifClient.AccessControl
         private bool areaManagementSupportedField;
         private bool areaManagementSupportedFieldSpecified;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -3169,6 +3254,13 @@ namespace SharpOnvifClient.AccessControl
             set { this.areaManagementSupportedFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "ServiceCapabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Accesscontrol; } }
@@ -3196,6 +3288,7 @@ namespace SharpOnvifClient.AccessControl
             {
                 writer.WriteAttributeString(null, "AreaManagementSupported", writer.ToXml(this.areaManagementSupportedField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -3208,30 +3301,37 @@ namespace SharpOnvifClient.AccessControl
             switch (reader.LocalName)
             {
                 case "MaxLimit":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxLimitField = reader.ToUInt32(reader.AttributeValue);
                     return true;
                 case "MaxAccessPoints":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxAccessPointsField = reader.ToUInt32(reader.AttributeValue);
                     this.maxAccessPointsFieldSpecified = true;
                     return true;
                 case "MaxAreas":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxAreasField = reader.ToUInt32(reader.AttributeValue);
                     this.maxAreasFieldSpecified = true;
                     return true;
                 case "ClientSuppliedTokenSupported":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.clientSuppliedTokenSupportedField = reader.ToBoolean(reader.AttributeValue);
                     this.clientSuppliedTokenSupportedFieldSpecified = true;
                     return true;
                 case "AccessPointManagementSupported":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.accessPointManagementSupportedField = reader.ToBoolean(reader.AttributeValue);
                     this.accessPointManagementSupportedFieldSpecified = true;
                     return true;
                 case "AreaManagementSupported":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.areaManagementSupportedField = reader.ToBoolean(reader.AttributeValue);
                     this.areaManagementSupportedFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)

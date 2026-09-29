@@ -36,6 +36,8 @@ namespace SharpOnvifClient.Uplink
         private bool streamingOverUplinkField;
         private bool streamingOverUplinkFieldSpecified;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -106,6 +108,13 @@ namespace SharpOnvifClient.Uplink
             set { this.streamingOverUplinkFieldSpecified = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Capabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Uplink; } }
@@ -122,6 +131,7 @@ namespace SharpOnvifClient.Uplink
             {
                 writer.WriteAttributeString(null, "StreamingOverUplink", writer.ToXml(this.streamingOverUplinkField));
             }
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -134,21 +144,26 @@ namespace SharpOnvifClient.Uplink
             switch (reader.LocalName)
             {
                 case "MaxUplinks":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.maxUplinksField = reader.ToInt32(reader.AttributeValue);
                     this.maxUplinksFieldSpecified = true;
                     return true;
                 case "Protocols":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.protocolsField = reader.SplitList(reader.AttributeValue);
                     return true;
                 case "AuthorizationModes":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.authorizationModesField = reader.SplitList(reader.AttributeValue);
                     return true;
                 case "StreamingOverUplink":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.streamingOverUplinkField = reader.ToBoolean(reader.AttributeValue);
                     this.streamingOverUplinkFieldSpecified = true;
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)
@@ -177,6 +192,8 @@ namespace SharpOnvifClient.Uplink
         private string errorField;
 
         private System.Xml.XmlElement[] anyField;
+
+        private System.Xml.XmlAttribute[] anyAttrField;
 
         /// <summary>
         /// Uniform resource locator by which the remote client can be reached.
@@ -259,9 +276,21 @@ namespace SharpOnvifClient.Uplink
             set { this.anyField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Configuration"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver10Uplink; } }
+
+        protected override void WriteXmlAttributes(SharpOnvifCommon.Xml.IXmlWriter writer)
+        {
+            writer.WriteAnyAttributes(this.anyAttrField);
+        }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
         {
@@ -273,6 +302,12 @@ namespace SharpOnvifClient.Uplink
             writer.WriteElementString(Ns.Ver10Uplink, "AuthorizationServer", this.authorizationServerField);
             writer.WriteElementString(Ns.Ver10Uplink, "Error", this.errorField);
             writer.WriteAny(this.anyField);
+        }
+
+        protected override bool ReadXmlAttribute(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)

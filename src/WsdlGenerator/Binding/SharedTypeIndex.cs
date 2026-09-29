@@ -53,7 +53,7 @@ internal sealed class SharedTypeIndex
             // an inline type or a choice discriminator belong to the type that declared them.
             if (@enum.XmlName.Namespace.Length == 0) continue;
             types[@enum.XmlName] = new CsTypeRef(
-                model.CsNamespace + "." + @enum.Name, TypeKind.Enum, true);
+                model.CsNamespace + "." + @enum.Name, TypeKind.Enum, true, IsQNameEnum: @enum.IsQName);
         }
 
         return new SharedTypeIndex(types, classes);

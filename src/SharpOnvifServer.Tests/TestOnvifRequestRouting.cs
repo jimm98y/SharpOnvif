@@ -62,6 +62,16 @@ namespace SharpOnvif.Tests
             }
         }
 
+        /// <summary>A second service on the device's address, as a real device hosts it.</summary>
+        private sealed class DeviceIOImpl : SharpOnvifServer.DeviceIO.DeviceIOPortBase
+        {
+            public override SharpOnvifServer.DeviceIO.GetServiceCapabilitiesResponse GetServiceCapabilities()
+            {
+                return new SharpOnvifServer.DeviceIO.GetServiceCapabilitiesResponse(
+                    new SharpOnvifServer.DeviceIO.Capabilities { RelayOutputs = 7, RelayOutputsSpecified = true });
+            }
+        }
+
         /// <summary>Reports which subscription the request was addressed to.</summary>
         private sealed class SubscriptionImpl : SharpOnvifServer.Events.EventsBase
         {
@@ -107,10 +117,12 @@ namespace SharpOnvif.Tests
             builder.WebHost.UseUrls("http://127.0.0.1:0");
 
             builder.Services.AddSingleton<DeviceImpl>();
+            builder.Services.AddSingleton<DeviceIOImpl>();
             builder.Services.AddSingleton<SubscriptionImpl>();
 
             _app = builder.Build();
             _app.MapOnvifService<DeviceImpl>(DevicePath);
+            _app.MapOnvifService<DeviceIOImpl>(DevicePath);
             _app.MapOnvifService<SubscriptionImpl>(SubscriptionPath);
 
             await _app.StartAsync();
@@ -156,6 +168,24 @@ namespace SharpOnvif.Tests
 
             Assert.AreEqual(HttpStatusCode.OK, status);
             StringAssert.Contains(body, "ACME");
+        }
+
+        [TestMethod]
+        public async Task RoutesByTheBodyWhenTheActionNamesAnotherService()
+        {
+            // 0.9.x sent the DeviceIO operations with the device service's actions. Both services
+            // answer GetServiceCapabilities, so on one address the action alone chose the device
+            // service for a request whose body asked DeviceIO.
+            string envelope =
+                "<?xml version=\"1.0\"?>" +
+                "<s:Envelope xmlns:s=\"http://www.w3.org/2003/05/soap-envelope\">" +
+                "<s:Body><GetServiceCapabilities xmlns=\"http://www.onvif.org/ver10/deviceIO/wsdl\"/></s:Body></s:Envelope>";
+
+            var (status, body) = await PostAsync(
+                DevicePath, envelope, "http://www.onvif.org/ver10/device/wsdl/GetServiceCapabilities");
+
+            Assert.AreEqual(HttpStatusCode.OK, status, body);
+            StringAssert.Contains(body, "RelayOutputs=\"7\"", "the request reached the device service, not DeviceIO");
         }
 
         [TestMethod]

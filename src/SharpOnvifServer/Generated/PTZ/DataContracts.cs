@@ -143,6 +143,8 @@ namespace SharpOnvifServer.PTZ
 
         private string[] moveAndTrackField;
 
+        private System.Xml.XmlAttribute[] anyAttrField;
+
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlElement[] Any
         {
@@ -266,6 +268,13 @@ namespace SharpOnvifServer.PTZ
             set { this.moveAndTrackField = value; }
         }
 
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr
+        {
+            get { return this.anyAttrField; }
+            set { this.anyAttrField = value; }
+        }
+
         protected override string XmlTypeName { get { return "Capabilities"; } }
 
         protected override string XmlTypeNamespace { get { return Ns.Ver20Ptz; } }
@@ -293,6 +302,7 @@ namespace SharpOnvifServer.PTZ
                 writer.WriteAttributeString(null, "StatusPosition", writer.ToXml(this.statusPositionField));
             }
             writer.WriteAttributeString(null, "MoveAndTrack", writer.JoinList(this.moveAndTrackField));
+            writer.WriteAnyAttributes(this.anyAttrField);
         }
 
         protected override void WriteXmlContent(SharpOnvifCommon.Xml.IXmlWriter writer)
@@ -305,30 +315,37 @@ namespace SharpOnvifServer.PTZ
             switch (reader.LocalName)
             {
                 case "EFlip":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.eFlipField = reader.ToBoolean(reader.AttributeValue);
                     this.eFlipFieldSpecified = true;
                     return true;
                 case "Reverse":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.reverseField = reader.ToBoolean(reader.AttributeValue);
                     this.reverseFieldSpecified = true;
                     return true;
                 case "GetCompatibleConfigurations":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.getCompatibleConfigurationsField = reader.ToBoolean(reader.AttributeValue);
                     this.getCompatibleConfigurationsFieldSpecified = true;
                     return true;
                 case "MoveStatus":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.moveStatusField = reader.ToBoolean(reader.AttributeValue);
                     this.moveStatusFieldSpecified = true;
                     return true;
                 case "StatusPosition":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.statusPositionField = reader.ToBoolean(reader.AttributeValue);
                     this.statusPositionFieldSpecified = true;
                     return true;
                 case "MoveAndTrack":
+                    if (!string.IsNullOrEmpty(reader.NamespaceUri)) break;
                     this.moveAndTrackField = reader.SplitList(reader.AttributeValue);
                     return true;
             }
-            return false;
+            reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
+            return true;
         }
 
         protected override bool ReadXmlElement(SharpOnvifCommon.Xml.IXmlReader reader)

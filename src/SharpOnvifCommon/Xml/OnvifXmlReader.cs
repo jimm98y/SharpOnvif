@@ -326,6 +326,41 @@ namespace SharpOnvifCommon.Xml
         /// Captures the current element verbatim, for an xs:any wildcard. All captured nodes in
         /// one read share an owner document, which keeps them usable together.
         /// </summary>
+        /// <summary>
+        /// The attribute the reader is positioned on, detached from the document, for an
+        /// xs:anyAttribute wildcard to keep.
+        /// </summary>
+        public XmlAttribute ReadAnyAttribute()
+        {
+            if (_ownerDocument == null) _ownerDocument = new XmlDocument();
+
+            XmlAttribute attribute = _ownerDocument.CreateAttribute(_reader.Prefix, _reader.LocalName, _reader.NamespaceURI);
+            attribute.Value = _reader.Value;
+            return attribute;
+        }
+
+        /// <summary>
+        /// Reads an element whose schema type is xs:anyType, which may hold anything at all. Its
+        /// attributes and child nodes come back as they are, the shape XmlSerializer gives the
+        /// same content. An element that is present but empty stays present, as an empty array.
+        /// </summary>
+        public XmlNode[] ReadAnyTypeElement()
+        {
+            XmlElement element = ReadAnyElement();
+            if (element == null) return null;
+
+            var nodes = new List<XmlNode>();
+            foreach (XmlAttribute attribute in element.Attributes)
+            {
+                if (attribute.NamespaceURI == OnvifXmlNamespaces.Xmlns) continue;
+                if (attribute.NamespaceURI == OnvifXmlNamespaces.XmlSchemaInstance) continue;
+                nodes.Add(attribute);
+            }
+            foreach (XmlNode child in element.ChildNodes) nodes.Add(child);
+
+            return nodes.ToArray();
+        }
+
         public XmlElement ReadAnyElement()
         {
             if (_ownerDocument == null) _ownerDocument = new XmlDocument();
@@ -483,6 +518,8 @@ namespace SharpOnvifCommon.Xml
         public float ToSingle(string text) { return XmlPrimitives.ToSingle(text); }
         public double ToDouble(string text) { return XmlPrimitives.ToDouble(text); }
         public DateTime ToDateTime(string text) { return XmlPrimitives.ToDateTime(text); }
+        public DateTime ToDate(string text) { return XmlPrimitives.ToDate(text); }
+        public DateTime ToTime(string text) { return XmlPrimitives.ToTime(text); }
         public byte[] ToByteArray(string text) { return XmlPrimitives.ToByteArray(text); }
         public byte[] FromHexString(string text) { return XmlPrimitives.FromHexString(text); }
 
