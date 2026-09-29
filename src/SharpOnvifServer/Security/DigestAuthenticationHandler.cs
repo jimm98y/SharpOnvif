@@ -29,7 +29,6 @@ using SharpOnvifCommon.Xml;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO.Pipelines;
 using System.IO;
 using System.Linq;
 using System.Security.Claims;
@@ -38,7 +37,6 @@ using System.Text.Encodings.Web;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
-using System.Buffers;
 
 namespace SharpOnvifServer.Security
 {
@@ -58,6 +56,12 @@ namespace SharpOnvifServer.Security
         /// that were verified.
         /// </remarks>
         internal const string CONTEXT_VALIDATED_DIGEST = "validatedDigest_5C1B0B0E-4E51-4A2E-9E63-0B2D9C6C5E44";
+
+        /// <summary>
+        /// The user whose password that digest was checked against, so answering the request does
+        /// not ask the user repository a second time.
+        /// </summary>
+        internal const string CONTEXT_VALIDATED_USER = "validatedUser_9F3A6C21-6B4E-4F0B-8D6A-2E7C1B5D4A93";
 
         private const int NONCE_SALT_LENGTH = 12;
         private const string NONCE_HASH_ALGORITHM = "SHA-256";
@@ -273,7 +277,7 @@ namespace SharpOnvifServer.Security
                 byte[] body = await ReadRequestBodyAsync().ConfigureAwait(false);
                 if (body == null || body.Length == 0) return false;
 
-                action = Dispatch.OnvifRequestAction.FromEnvelope(Encoding.UTF8.GetString(body));
+                action = Dispatch.OnvifRequestAction.FromEnvelope(body);
             }
 
             return Options.Onvif.IsPreAuth(action);
@@ -296,29 +300,18 @@ namespace SharpOnvifServer.Security
         /// </remarks>
         private async Task<byte[]> ReadRequestBodyAsync()
         {
-            long maximum = Dispatch.OnvifEndpoint.MaxRequestBytes;
-
-            while (true)
+            // The bytes themselves, not a round trip through a string: an auth-int digest covers
+            // what was sent, and a body that is not valid UTF-8 does not survive being decoded and
+            // re-encoded. Read once and kept, so the pre-auth check, the WS-UsernameToken and the
+            // endpoint behind this share one copy rather than making one each.
+            try
             {
-                ReadResult read = await Request.BodyReader.ReadAsync().ConfigureAwait(false);
-                ReadOnlySequence<byte> buffer = read.Buffer;
-
-                try
-                {
-                    if (read.IsCanceled) return null;
-                    if (buffer.Length > maximum) return null;
-
-                    // The bytes themselves, not a round trip through a string: an auth-int digest
-                    // covers what was sent, and a body that is not valid UTF-8 does not survive
-                    // being decoded and re-encoded.
-                    if (read.IsCompleted) return buffer.ToArray();
-                }
-                finally
-                {
-                    // Consumed nothing, examined everything - so the next read waits for more,
-                    // and the whole body is still there for the endpoint.
-                    Request.BodyReader.AdvanceTo(buffer.Start, buffer.End);
-                }
+                return await Dispatch.OnvifRequestBody.ReadAsync(Context).ConfigureAwait(false);
+            }
+            catch (InvalidDataException)
+            {
+                // Too large to be an Onvif request; the endpoint refuses it with the right status.
+                return null;
             }
         }
 
@@ -413,7 +406,10 @@ namespace SharpOnvifServer.Security
                         noncePrime,
                         cnoncePrime);
 
-                    return HttpDigestAuthentication.FixedTimeEquals(digest, webToken.Response) ? 0 : 2;
+                    if (!HttpDigestAuthentication.FixedTimeEquals(digest, webToken.Response)) return 2;
+
+                    Context.Items[CONTEXT_VALIDATED_USER] = user;
+                    return 0;
                 }
                 else
                 {

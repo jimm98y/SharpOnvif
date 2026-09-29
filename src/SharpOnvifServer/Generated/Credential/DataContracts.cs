@@ -85,6 +85,12 @@ namespace SharpOnvifServer.Credential
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.identifierField);
+            reader.Trim(ref this.anyField);
+        }
+
     }
 
     /// <summary>
@@ -163,6 +169,12 @@ namespace SharpOnvifServer.Credential
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.identifierField);
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -249,6 +261,12 @@ namespace SharpOnvifServer.Credential
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
         }
 
     }
@@ -577,6 +595,11 @@ namespace SharpOnvifServer.Credential
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/credential/wsdl")]
@@ -606,6 +629,11 @@ namespace SharpOnvifServer.Credential
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/credential/wsdl")]
@@ -633,6 +661,11 @@ namespace SharpOnvifServer.Credential
         {
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -744,6 +777,12 @@ namespace SharpOnvifServer.Credential
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     /// <summary>
@@ -841,6 +880,11 @@ namespace SharpOnvifServer.Credential
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/credential/wsdl")]
@@ -868,6 +912,11 @@ namespace SharpOnvifServer.Credential
         {
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -960,6 +1009,12 @@ namespace SharpOnvifServer.Credential
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     /// <summary>
@@ -1027,6 +1082,11 @@ namespace SharpOnvifServer.Credential
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -1183,6 +1243,12 @@ namespace SharpOnvifServer.Credential
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            base.EndXmlRead(reader);
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     /// <summary>
@@ -1295,6 +1361,11 @@ namespace SharpOnvifServer.Credential
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/credential/wsdl")]
@@ -1322,6 +1393,11 @@ namespace SharpOnvifServer.Credential
         {
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -1422,6 +1498,11 @@ namespace SharpOnvifServer.Credential
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.accessProfileTokenField);
         }
 
     }
@@ -1908,6 +1989,11 @@ namespace SharpOnvifServer.Credential
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+        }
+
     }
 
     /// <summary>
@@ -1977,6 +2063,11 @@ namespace SharpOnvifServer.Credential
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.identifierField);
         }
 
     }
@@ -2077,6 +2168,11 @@ namespace SharpOnvifServer.Credential
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.credentialAccessProfileField);
+        }
+
     }
 
     /// <summary>
@@ -2173,6 +2269,11 @@ namespace SharpOnvifServer.Credential
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.credentialIdentifierField);
         }
 
     }
@@ -2336,6 +2437,11 @@ namespace SharpOnvifServer.Credential
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.credentialInfoField);
+        }
+
     }
 
     /// <summary>
@@ -2391,6 +2497,11 @@ namespace SharpOnvifServer.Credential
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.tokenField);
+        }
+
     }
 
     /// <summary>
@@ -2444,6 +2555,11 @@ namespace SharpOnvifServer.Credential
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.credentialInfoField);
         }
 
     }
@@ -2607,6 +2723,11 @@ namespace SharpOnvifServer.Credential
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.credentialField);
+        }
+
     }
 
     /// <summary>
@@ -2758,6 +2879,11 @@ namespace SharpOnvifServer.Credential
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.tokenField);
+        }
+
     }
 
     /// <summary>
@@ -2811,6 +2937,11 @@ namespace SharpOnvifServer.Credential
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.credentialField);
         }
 
     }
@@ -2972,6 +3103,11 @@ namespace SharpOnvifServer.Credential
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.formatTypeInfoField);
+        }
+
     }
 
     /// <summary>
@@ -3122,6 +3258,11 @@ namespace SharpOnvifServer.Credential
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+        }
+
     }
 
     /// <summary>
@@ -3191,6 +3332,11 @@ namespace SharpOnvifServer.Credential
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.identifierField);
         }
 
     }
@@ -3411,6 +3557,14 @@ namespace SharpOnvifServer.Credential
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            base.EndXmlRead(reader);
+            reader.Trim(ref this.credentialIdentifierField);
+            reader.Trim(ref this.credentialAccessProfileField);
+            reader.Trim(ref this.attributeField);
+        }
+
     }
 
     /// <summary>
@@ -3475,6 +3629,12 @@ namespace SharpOnvifServer.Credential
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.identifierField);
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -3555,6 +3715,12 @@ namespace SharpOnvifServer.Credential
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.identifierField);
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -3960,6 +4126,12 @@ namespace SharpOnvifServer.Credential
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.supportedIdentifierTypeField);
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/credential/wsdl")]
@@ -4015,6 +4187,12 @@ namespace SharpOnvifServer.Credential
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.supportedExemptionTypeField);
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -4087,6 +4265,11 @@ namespace SharpOnvifServer.Credential
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.credentialAccessProfileField);
         }
 
     }

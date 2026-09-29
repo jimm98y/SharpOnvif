@@ -264,6 +264,11 @@ namespace SharpOnvifServer.Media2
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.configurationField);
+        }
+
     }
 
     /// <summary>
@@ -641,6 +646,13 @@ namespace SharpOnvifServer.Media2
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.audioOutputTokenField);
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl")]
@@ -794,6 +806,12 @@ namespace SharpOnvifServer.Media2
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
         }
 
     }
@@ -1203,6 +1221,12 @@ namespace SharpOnvifServer.Media2
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl")]
@@ -1487,6 +1511,12 @@ namespace SharpOnvifServer.Media2
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     /// <summary>
@@ -1742,6 +1772,11 @@ namespace SharpOnvifServer.Media2
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.configurationField);
         }
 
     }
@@ -2106,6 +2141,11 @@ namespace SharpOnvifServer.Media2
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl")]
@@ -2198,6 +2238,13 @@ namespace SharpOnvifServer.Media2
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.codecField);
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
         }
 
     }
@@ -2320,6 +2367,11 @@ namespace SharpOnvifServer.Media2
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.configurationsField);
+        }
+
     }
 
     /// <summary>
@@ -2422,6 +2474,11 @@ namespace SharpOnvifServer.Media2
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.audioClipItemField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl")]
@@ -2506,6 +2563,12 @@ namespace SharpOnvifServer.Media2
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
         }
 
     }
@@ -2627,6 +2690,11 @@ namespace SharpOnvifServer.Media2
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.optionsField);
+        }
+
     }
 
     /// <summary>
@@ -2745,6 +2813,11 @@ namespace SharpOnvifServer.Media2
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.configurationsField);
         }
 
     }
@@ -2868,6 +2941,11 @@ namespace SharpOnvifServer.Media2
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.optionsField);
+        }
+
     }
 
     /// <summary>
@@ -2986,6 +3064,11 @@ namespace SharpOnvifServer.Media2
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.configurationsField);
         }
 
     }
@@ -3227,6 +3310,11 @@ namespace SharpOnvifServer.Media2
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.configurationsField);
+        }
+
     }
 
     /// <summary>
@@ -3464,6 +3552,11 @@ namespace SharpOnvifServer.Media2
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.configurationsField);
         }
 
     }
@@ -3735,6 +3828,11 @@ namespace SharpOnvifServer.Media2
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.masksField);
+        }
+
     }
 
     /// <summary>
@@ -3970,6 +4068,11 @@ namespace SharpOnvifServer.Media2
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.configurationsField);
+        }
+
     }
 
     /// <summary>
@@ -4064,6 +4167,11 @@ namespace SharpOnvifServer.Media2
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.optionsField);
         }
 
     }
@@ -4163,6 +4271,11 @@ namespace SharpOnvifServer.Media2
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.configurationsField);
         }
 
     }
@@ -4380,6 +4493,11 @@ namespace SharpOnvifServer.Media2
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.oSDsField);
+        }
+
     }
 
     /// <summary>
@@ -4442,6 +4560,11 @@ namespace SharpOnvifServer.Media2
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.playingAudioClipsField);
         }
 
     }
@@ -4517,6 +4640,11 @@ namespace SharpOnvifServer.Media2
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.typeField);
+        }
+
     }
 
     /// <summary>
@@ -4571,6 +4699,11 @@ namespace SharpOnvifServer.Media2
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.profilesField);
         }
 
     }
@@ -4984,6 +5117,11 @@ namespace SharpOnvifServer.Media2
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.optionsField);
+        }
+
     }
 
     /// <summary>
@@ -5102,6 +5240,11 @@ namespace SharpOnvifServer.Media2
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.configurationsField);
         }
 
     }
@@ -5438,6 +5581,11 @@ namespace SharpOnvifServer.Media2
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.configurationsField);
+        }
+
     }
 
     /// <summary>
@@ -5540,6 +5688,11 @@ namespace SharpOnvifServer.Media2
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.videoSourceModesField);
+        }
+
     }
 
     /// <summary>
@@ -5603,6 +5756,11 @@ namespace SharpOnvifServer.Media2
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.webRTCConfigurationField);
         }
 
     }
@@ -5775,6 +5933,13 @@ namespace SharpOnvifServer.Media2
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.polygonField);
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
         }
 
     }
@@ -5975,6 +6140,13 @@ namespace SharpOnvifServer.Media2
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.typesField);
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     /// <summary>
@@ -6104,6 +6276,11 @@ namespace SharpOnvifServer.Media2
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyAttrField);
         }
 
     }
@@ -6257,6 +6434,12 @@ namespace SharpOnvifServer.Media2
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     /// <summary>
@@ -6381,6 +6564,11 @@ namespace SharpOnvifServer.Media2
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.audioOutputTokenField);
         }
 
     }
@@ -6538,6 +6726,13 @@ namespace SharpOnvifServer.Media2
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.audioOutputTokenField);
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl")]
@@ -6639,6 +6834,12 @@ namespace SharpOnvifServer.Media2
         {
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
         }
 
     }
@@ -6749,6 +6950,11 @@ namespace SharpOnvifServer.Media2
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.configurationField);
         }
 
     }
@@ -7768,6 +7974,11 @@ namespace SharpOnvifServer.Media2
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.webRTCConfigurationField);
+        }
+
     }
 
     /// <summary>
@@ -8210,6 +8421,12 @@ namespace SharpOnvifServer.Media2
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl")]
@@ -8316,6 +8533,12 @@ namespace SharpOnvifServer.Media2
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
         }
 
     }
@@ -8438,6 +8661,12 @@ namespace SharpOnvifServer.Media2
         {
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
         }
 
     }
@@ -8634,6 +8863,12 @@ namespace SharpOnvifServer.Media2
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver20/media/wsdl")]
@@ -8821,6 +9056,12 @@ namespace SharpOnvifServer.Media2
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
         }
 
     }

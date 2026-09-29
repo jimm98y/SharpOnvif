@@ -323,6 +323,47 @@ namespace SharpOnvif.Tests
         }
 
         [TestMethod]
+        public void ReadsALongArrayInLinearTime()
+        {
+            // Arrays grew by one element per item, copying the whole array each time. GetCapabilities
+            // needs no password, and a request of 80,000 Category elements - under two megabytes -
+            // cost twenty seconds and twelve gigabytes. Grown by doubling, 40,000 items cost a few
+            // megabytes; growing by one cost three gigabytes.
+            const int Items = 40_000;
+            var request = new StringBuilder("<GetCapabilities xmlns=\"http://www.onvif.org/ver10/device/wsdl\">");
+            for (int i = 0; i < Items; i++) request.Append("<Category>Media</Category>");
+            request.Append("</GetCapabilities>");
+            string xml = request.ToString();
+
+            long before = GC.GetAllocatedBytesForCurrentThread();
+            var parsed = ReadWithGeneratedReader<GetCapabilitiesRequest>(xml);
+            long allocated = GC.GetAllocatedBytesForCurrentThread() - before;
+
+            Assert.AreEqual(Items, parsed.Category.Length, "the array is not cut to the items it holds");
+            Assert.AreEqual(SharpOnvifCommon.Onvif.CapabilityCategory.Media, parsed.Category[Items - 1]);
+            Assert.IsLessThan(64L * 1024 * 1024, allocated, $"reading {Items} items allocated {allocated / (1024 * 1024)} MB");
+        }
+
+        [TestMethod]
+        public void ReadingIntoAnInstanceAddsToTheArraysItAlreadyHolds()
+        {
+            // An array the reader did not grow is the caller's, so it is extended, not written over.
+            var existing = new GetCapabilitiesRequest { Category = new[] { SharpOnvifCommon.Onvif.CapabilityCategory.All } };
+
+            using (XmlReader reader = XmlReader.Create(new StringReader(
+                "<GetCapabilities xmlns=\"http://www.onvif.org/ver10/device/wsdl\">" +
+                "<Category>Media</Category><Category>PTZ</Category></GetCapabilities>")))
+            {
+                reader.MoveToContent();
+                new OnvifXmlReader(reader).ReadInto(existing);
+            }
+
+            CollectionAssert.AreEqual(
+                new[] { SharpOnvifCommon.Onvif.CapabilityCategory.All, SharpOnvifCommon.Onvif.CapabilityCategory.Media, SharpOnvifCommon.Onvif.CapabilityCategory.PTZ },
+                existing.Category);
+        }
+
+        [TestMethod]
         public void WritesArraysAndOptionalValueTypesLikeXmlSerializer()
         {
             var value = new GetProfilesResponse

@@ -200,6 +200,12 @@ namespace SharpOnvifServer.Search
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     /// <summary>
@@ -1610,6 +1616,11 @@ namespace SharpOnvifServer.Search
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.recordingTokensField);
+        }
+
     }
 
     /// <summary>
@@ -1661,6 +1672,11 @@ namespace SharpOnvifServer.Search
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.mediaAttributesField);
         }
 
     }

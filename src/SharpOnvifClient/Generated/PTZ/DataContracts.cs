@@ -354,6 +354,12 @@ namespace SharpOnvifClient.PTZ
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     /// <summary>
@@ -819,6 +825,11 @@ namespace SharpOnvifClient.PTZ
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.pTZConfigurationField);
+        }
+
     }
 
     /// <summary>
@@ -1125,6 +1136,11 @@ namespace SharpOnvifClient.PTZ
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.pTZConfigurationField);
+        }
+
     }
 
     /// <summary>
@@ -1285,6 +1301,11 @@ namespace SharpOnvifClient.PTZ
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.pTZNodeField);
         }
 
     }
@@ -1581,6 +1602,11 @@ namespace SharpOnvifClient.PTZ
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.presetTourField);
+        }
+
     }
 
     /// <summary>
@@ -1679,6 +1705,11 @@ namespace SharpOnvifClient.PTZ
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.presetField);
         }
 
     }
@@ -2229,6 +2260,11 @@ namespace SharpOnvifClient.PTZ
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }

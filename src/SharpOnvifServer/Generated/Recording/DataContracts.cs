@@ -676,6 +676,12 @@ namespace SharpOnvifServer.Recording
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
+        }
+
     }
 
     /// <summary>
@@ -1462,6 +1468,11 @@ namespace SharpOnvifServer.Recording
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.fileNamesField);
+        }
+
     }
 
     public partial class ExportRecordedDataResponseExtension : SharpOnvifCommon.Xml.XmlContract
@@ -1484,6 +1495,11 @@ namespace SharpOnvifServer.Recording
         {
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -1616,6 +1632,11 @@ namespace SharpOnvifServer.Recording
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -1782,6 +1803,11 @@ namespace SharpOnvifServer.Recording
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
         }
 
     }
@@ -2126,6 +2152,11 @@ namespace SharpOnvifServer.Recording
             return false;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.jobItemField);
+        }
+
     }
 
     /// <summary>
@@ -2286,6 +2317,11 @@ namespace SharpOnvifServer.Recording
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.recordingItemField);
         }
 
     }
@@ -2537,6 +2573,11 @@ namespace SharpOnvifServer.Recording
             }
             reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyAttrField);
         }
 
     }
@@ -2835,6 +2876,11 @@ namespace SharpOnvifServer.Recording
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/recording/wsdl")]
@@ -2895,6 +2941,11 @@ namespace SharpOnvifServer.Recording
                     return true;
             }
             return false;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.segmentField);
         }
 
     }
@@ -2993,6 +3044,12 @@ namespace SharpOnvifServer.Recording
             }
             reader.Append(ref this.anyField, reader.ReadAnyElement());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+            reader.Trim(ref this.anyAttrField);
         }
 
     }
@@ -3477,6 +3534,11 @@ namespace SharpOnvifServer.Recording
             return true;
         }
 
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyField);
+        }
+
     }
 
     /// <summary>
@@ -3697,6 +3759,11 @@ namespace SharpOnvifServer.Recording
             }
             reader.Append(ref this.anyAttrField, reader.ReadAnyAttribute());
             return true;
+        }
+
+        protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
+        {
+            reader.Trim(ref this.anyAttrField);
         }
 
     }

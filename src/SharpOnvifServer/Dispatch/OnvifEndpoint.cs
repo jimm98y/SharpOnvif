@@ -63,14 +63,15 @@ namespace SharpOnvifServer.Dispatch
         /// <summary>Handles one SOAP request.</summary>
         public async Task HandleAsync(HttpContext context)
         {
-            var logger = context.RequestServices.GetService<ILoggerFactory>()?.CreateLogger<OnvifEndpoint>();
+            ILogger logger = Logger(context);
 
             if (!await IsAuthorizedAsync(context).ConfigureAwait(false)) return;
 
-            string envelope;
+            byte[] body;
             try
             {
-                envelope = await ReadEnvelopeAsync(context).ConfigureAwait(false);
+                // Kept from authentication when it had to read the body, so it is read once.
+                body = await OnvifRequestBody.ReadAsync(context).ConfigureAwait(false);
             }
             catch (InvalidDataException)
             {
@@ -84,6 +85,9 @@ namespace SharpOnvifServer.Dispatch
                 return;
             }
 
+            // The client went away before sending all of it.
+            if (body == null) return;
+
             string action = OnvifRequestAction.FromContentType(context.Request.ContentType);
 
             // Implementations read this to build the absolute URIs Onvif responses carry.
@@ -93,51 +97,57 @@ namespace SharpOnvifServer.Dispatch
 
             try
             {
-                // The body is read twice at most: once to find the action when the client did not
-                // put it in the Content-Type header, and once to deserialise.
-                if (string.IsNullOrEmpty(action)) action = OnvifRequestAction.FromEnvelope(envelope);
-
-                Registration registration = null;
-                if (!string.IsNullOrEmpty(action))
-                {
-                    registration = _services.FirstOrDefault(r => r.Dispatcher.CanHandle(action));
-                }
-
-                // The body element names the operation too, and where the two disagree the body
-                // is the one that describes what was sent. 0.9.x sent the DeviceIO operations with
-                // the device service's actions, which on an address hosting both services named
-                // the wrong one. It also covers a client that sends no action at all.
-                string bodyAction = null;
-                Registration bodyRegistration = ResolveFromBody(envelope, ref bodyAction);
-                if (bodyRegistration != null && bodyAction != action
-                    && (registration == null || MayRunInstead(context, bodyAction)))
-                {
-                    registration = bodyRegistration;
-                    action = bodyAction;
-                }
-
-                if (registration == null)
-                {
-                    await WriteFaultAsync(context, "Sender", "ActionNotSupported",
-                        string.IsNullOrEmpty(action)
-                            ? "The request does not name an Onvif operation."
-                            : "The action '" + UntrustedText.Printable(action) + "' is not supported at this endpoint.")
-                        .ConfigureAwait(false);
-                    return;
-                }
-
-                object service = context.RequestServices.GetService(registration.ImplementationType);
-                if (service == null)
-                {
-                    throw new InvalidOperationException(
-                        "No instance of " + registration.ImplementationType.FullName +
-                        " is registered. Add it to the service collection before mapping the endpoint.");
-                }
-
                 DispatchResult result;
-                using (XmlReader xml = SoapEnvelope.CreateReader(new StringReader(envelope)))
+
+                // One reader for the whole request. It passes the Header on the way to the Body,
+                // which is where the action is when the Content-Type did not carry one, and goes
+                // on to deserialise the Body it stopped at.
+                using (XmlReader xml = SoapEnvelope.CreateReader(new MemoryStream(body, false)))
                 {
-                    if (!SoapEnvelope.MoveToBody(xml))
+                    bool hasBody = OnvifRequestAction.ReadToBody(xml, out string headerAction);
+                    if (string.IsNullOrEmpty(action)) action = headerAction;
+
+                    Registration registration = string.IsNullOrEmpty(action) ? null : Find(action);
+
+                    // The body element names the operation too, and where the two disagree the
+                    // body is the one that describes what was sent. 0.9.x sent the DeviceIO
+                    // operations with the device service's actions, which on an address hosting
+                    // both services named the wrong one. It also covers a client that sends no
+                    // action at all.
+                    //
+                    // Authentication admitted the request for its action, though, and an action no
+                    // service here handles is no exception: a PRE_AUTH device action sent to an
+                    // address that hosts only Media is exactly how a body that needs a password
+                    // would get past it.
+                    if (hasBody)
+                    {
+                        Registration bodyRegistration = FindByBody(xml.NamespaceURI, xml.LocalName, out string bodyAction);
+                        if (bodyRegistration != null && bodyAction != action && MayRunInstead(context, bodyAction))
+                        {
+                            registration = bodyRegistration;
+                            action = bodyAction;
+                        }
+                    }
+
+                    if (registration == null)
+                    {
+                        await WriteFaultAsync(context, "Sender", "ActionNotSupported",
+                            string.IsNullOrEmpty(action)
+                                ? "The request does not name an Onvif operation."
+                                : "The action '" + UntrustedText.Printable(action) + "' is not supported at this endpoint.")
+                            .ConfigureAwait(false);
+                        return;
+                    }
+
+                    object service = context.RequestServices.GetService(registration.ImplementationType);
+                    if (service == null)
+                    {
+                        throw new InvalidOperationException(
+                            "No instance of " + registration.ImplementationType.FullName +
+                            " is registered. Add it to the service collection before mapping the endpoint.");
+                    }
+
+                    if (!hasBody)
                     {
                         await WriteFaultAsync(context, "Sender", "WellFormed", "The SOAP body is empty.")
                             .ConfigureAwait(false);
@@ -179,6 +189,13 @@ namespace SharpOnvifServer.Dispatch
                 await WriteFaultAsync(context, fault.Fault.Code, fault.Fault.Subcodes,
                     fault.Fault.Reason, fault.SubcodeNamespace, fault.StatusCode).ConfigureAwait(false);
             }
+            catch (XmlException)
+            {
+                // What the caller sent is not XML. Their mistake rather than ours, and not worth an
+                // error in the log for every request someone malforms on purpose.
+                await WriteFaultAsync(context, "Sender", "WellFormed", "The request is not well-formed XML.")
+                    .ConfigureAwait(false);
+            }
             catch (SoapFaultException fault)
             {
                 IList<string> subcodes = fault.Fault != null && fault.Fault.Subcodes.Count > 0
@@ -193,47 +210,34 @@ namespace SharpOnvifServer.Dispatch
                 // line of printable text before it is logged. A newline in it would otherwise
                 // begin what reads as a new log entry.
                 logger?.LogError(error, "Onvif operation {Action} failed.", UntrustedText.Printable(action));
-                await WriteFaultAsync(context, "Receiver", "Action", error.Message,
+
+                // The exception stays in the log. Its message is written for whoever maintains the
+                // device - a path, a connection string, a type name - and not for whoever sent
+                // the request. A fault the implementation meant a caller to read is an
+                // OnvifServerFaultException, answered above with its own reason.
+                await WriteFaultAsync(context, "Receiver", "Action", "The device could not complete the operation.",
                     OnvifErrors.Namespace, System.Net.HttpStatusCode.InternalServerError).ConfigureAwait(false);
             }
         }
 
         /// <summary>
-        /// Reads the request body, refusing one larger than <see cref="MaxRequestBytes"/>.
+        /// The logger, created on the first request that needs one rather than on every request.
         /// </summary>
-        /// <remarks>
-        /// The envelope is held as a string and read more than once - to find the action, then to
-        /// deserialise - so its size is paid for several times over. A caller must not be able to
-        /// choose how much that is.
-        /// </remarks>
-        private async Task<string> ReadEnvelopeAsync(HttpContext context)
+        private ILogger Logger(HttpContext context)
         {
-            long? declared = context.Request.ContentLength;
-            if (declared.HasValue && declared.Value > MaxRequestBytes)
-                throw new InvalidDataException("The request declares more than this endpoint accepts.");
+            return _logger ??= context.RequestServices.GetService<ILoggerFactory>()?.CreateLogger<OnvifEndpoint>();
+        }
 
-            var buffer = new MemoryStream(
-                declared.HasValue ? (int)Math.Min(declared.Value, 64 * 1024) : 4096);
+        private ILogger _logger;
 
-            byte[] chunk = new byte[8192];
-            long total = 0;
-
-            while (true)
+        /// <summary>The service that handles an action, if one here does.</summary>
+        private Registration Find(string action)
+        {
+            foreach (Registration registration in _services)
             {
-                int read = await context.Request.Body
-                    .ReadAsync(chunk, 0, chunk.Length, context.RequestAborted).ConfigureAwait(false);
-
-                if (read == 0) break;
-
-                total += read;
-                // A chunked request declares no length, so the limit is enforced as it arrives.
-                if (total > MaxRequestBytes)
-                    throw new InvalidDataException("The request is larger than this endpoint accepts.");
-
-                buffer.Write(chunk, 0, read);
+                if (registration.Dispatcher.CanHandle(action)) return registration;
             }
-
-            return Encoding.UTF8.GetString(buffer.GetBuffer(), 0, (int)buffer.Length);
+            return null;
         }
 
         /// <summary>
@@ -296,22 +300,15 @@ namespace SharpOnvifServer.Dispatch
             return options.Onvif.Authentication == DigestAuthentication.None || options.Onvif.IsPreAuth(bodyAction);
         }
 
-        private Registration ResolveFromBody(string envelope, ref string action)
+        /// <summary>The service whose operation the body element is, and that operation's action.</summary>
+        private Registration FindByBody(string ns, string localName, out string action)
         {
-            using (XmlReader xml = SoapEnvelope.CreateReader(new StringReader(envelope)))
+            foreach (Registration registration in _services)
             {
-                if (!SoapEnvelope.MoveToBody(xml)) return null;
-
-                foreach (Registration registration in _services)
-                {
-                    if (registration.Dispatcher.TryResolveAction(xml.NamespaceURI, xml.LocalName, out string resolved))
-                    {
-                        action = resolved;
-                        return registration;
-                    }
-                }
+                if (registration.Dispatcher.TryResolveAction(ns, localName, out action)) return registration;
             }
 
+            action = null;
             return null;
         }
 

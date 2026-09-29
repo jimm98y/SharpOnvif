@@ -47,17 +47,25 @@ namespace SharpOnvif.Tests
         public const string Manufacturer = "ACME";
 
         private const string EndpointPath = "/onvif/device_service";
+        private const string MediaPath = "/onvif/media_service";
+
+        /// <summary>What the Media service's one profile is called, so a test can see it leak.</summary>
+        public const string ProfileName = "Profile-Behind-A-Password";
 
         private readonly WebApplication _app;
 
-        private AuthenticatedDevice(WebApplication app, string endpoint)
+        private AuthenticatedDevice(WebApplication app, string endpoint, string mediaEndpoint)
         {
             _app = app;
             Endpoint = endpoint;
+            MediaEndpoint = mediaEndpoint;
         }
 
         /// <summary>The address a client talks to.</summary>
         public string Endpoint { get; }
+
+        /// <summary>A second address, hosting only Media, as a device with one address per service has.</summary>
+        public string MediaEndpoint { get; }
 
         /// <summary>The one user this device knows.</summary>
         private sealed class OneUser : IUserRepository
@@ -110,6 +118,15 @@ namespace SharpOnvif.Tests
                 };
         }
 
+        private sealed class MediaImpl : SharpOnvifServer.Media.MediaBase
+        {
+            public override SharpOnvifServer.Media.GetProfilesResponse GetProfiles() =>
+                new SharpOnvifServer.Media.GetProfilesResponse
+                {
+                    Profiles = new[] { new SharpOnvifCommon.Onvif.Profile { token = "p0", Name = ProfileName } },
+                };
+        }
+
         /// <summary>Starts a device with the authentication options the test wants.</summary>
         public static async Task<AuthenticatedDevice> StartAsync(
             Action<DigestAuthenticationSchemeOptions> configure = null)
@@ -126,18 +143,20 @@ namespace SharpOnvif.Tests
                 configure?.Invoke(options);
             });
             builder.Services.AddSingleton<DeviceImpl>();
+            builder.Services.AddSingleton<MediaImpl>();
 
             WebApplication app = builder.Build();
             app.UseAuthentication();
             app.UseAuthorization();
             app.MapOnvifService<DeviceImpl>(EndpointPath);
+            app.MapOnvifService<MediaImpl>(MediaPath);
 
             await app.StartAsync();
 
             string address = app.Services.GetRequiredService<IServer>()
                 .Features.Get<IServerAddressesFeature>().Addresses.First();
 
-            return new AuthenticatedDevice(app, address.TrimEnd('/') + EndpointPath);
+            return new AuthenticatedDevice(app, address.TrimEnd('/') + EndpointPath, address.TrimEnd('/') + MediaPath);
         }
 
         /// <summary>What the last SetHostname carried.</summary>

@@ -152,6 +152,14 @@ namespace SharpOnvifCommon.Xml
         /// </summary>
         public void ReadInto(XmlContract instance)
         {
+            ReadContent(instance);
+
+            // Whichever way the element ended, the arrays read into it are cut to size.
+            if (instance != null) instance.InvokeEndXmlRead(this);
+        }
+
+        private void ReadContent(XmlContract instance)
+        {
             // Reading nested contracts recurses, so the depth of the document is the depth of the
             // call stack. A stack overflow cannot be caught, so a document nested deeply enough
             // would end the process rather than the request: the limit is checked, not hoped for.
@@ -525,7 +533,58 @@ namespace SharpOnvifCommon.Xml
 
         public string[] SplitList(string text) { return OnvifArray.SplitList(text); }
 
-        public void Append<T>(ref T[] array, T item) { OnvifArray.Append(ref array, item); }
+        /// <summary>
+        /// Appends to an array member being read. The array grows by doubling, so the items of one
+        /// element cost a number of allocations logarithmic in their count, not one each: growing by
+        /// one copied the whole array per item, and a request of a couple of megabytes of repeated
+        /// elements cost tens of seconds and gigabytes. The spare room is cut off by
+        /// <see cref="Trim{T}"/> when the element that owns the array ends.
+        /// </summary>
+        public void Append<T>(ref T[] array, T item)
+        {
+            int count = 0;
+            if (array != null && (_growing == null || !_growing.TryGetValue(array, out count)))
+            {
+                // Not one of ours - the caller's own, or one already cut to size - so it is full.
+                count = array.Length;
+            }
+
+            if (array == null || count == array.Length)
+            {
+                var grown = new T[Math.Max(4, count * 2)];
+                if (array != null)
+                {
+                    Array.Copy(array, grown, count);
+                    _growing?.Remove(array);
+                }
+                array = grown;
+            }
+
+            array[count] = item;
+            if (_growing == null) _growing = new Dictionary<object, int>(ReferenceComparer.Instance);
+            _growing[array] = count + 1;
+        }
+
+        public void Trim<T>(ref T[] array)
+        {
+            if (array == null || _growing == null || !_growing.TryGetValue(array, out int count)) return;
+
+            _growing.Remove(array);
+            if (count != array.Length) Array.Resize(ref array, count);
+        }
+
+        /// <summary>Arrays <see cref="Append{T}"/> is growing, and how many items each holds.</summary>
+        private Dictionary<object, int> _growing;
+
+        /// <summary>Compares by reference: two arrays with equal contents are still two arrays.</summary>
+        private sealed class ReferenceComparer : IEqualityComparer<object>
+        {
+            public static readonly ReferenceComparer Instance = new ReferenceComparer();
+
+            public new bool Equals(object x, object y) => ReferenceEquals(x, y);
+
+            public int GetHashCode(object obj) => System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(obj);
+        }
     }
 
     /// <summary>Array growth helpers used by generated readers.</summary>

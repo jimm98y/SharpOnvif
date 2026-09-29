@@ -86,6 +86,16 @@ namespace __RUNTIME__.Xml
         }
 
         /// <summary>
+        /// Called once the element has been read, attributes and children both. Arrays are grown
+        /// with room to spare while an element is read, one allocation per doubling rather than one
+        /// per item; overrides give each back to <see cref="IXmlReader.Trim{T}"/> to cut it to
+        /// the items it holds. Overrides call <c>base</c> first.
+        /// </summary>
+        protected virtual void EndXmlRead(IXmlReader reader)
+        {
+        }
+
+        /// <summary>
         /// Local name of this type in the schema, or null for an anonymous type. Used to decide
         /// whether a value needs an xsi:type hint, and to reconstruct it on the way back in.
         /// </summary>
@@ -127,6 +137,11 @@ namespace __RUNTIME__.Xml
         internal void InvokeReadXmlText(IXmlReader reader, string text)
         {
             ReadXmlText(reader, text);
+        }
+
+        internal void InvokeEndXmlRead(IXmlReader reader)
+        {
+            EndXmlRead(reader);
         }
 
         internal string InvokeXmlTypeName

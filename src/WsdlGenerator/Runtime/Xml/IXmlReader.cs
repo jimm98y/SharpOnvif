@@ -117,5 +117,11 @@ namespace __RUNTIME__.Xml
         /// the schema does not say how many there will be.
         /// </summary>
         void Append<T>(ref T[] array, T item);
+
+        /// <summary>
+        /// Cuts an array <see cref="Append{T}"/> grew down to the items it holds. An array this
+        /// reader did not grow is left as it is.
+        /// </summary>
+        void Trim<T>(ref T[] array);
     }
 }
