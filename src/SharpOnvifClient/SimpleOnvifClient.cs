@@ -578,11 +578,13 @@ namespace SharpOnvifClient
                 }).ConfigureAwait(false);
         }
 
-        public async Task<string> SetPresetAsync(string profileToken, string presetName)
+        public Task<string> SetPresetAsync(string profileToken, string presetName) => SetPresetAsync(profileToken, presetName, null);
+
+        public async Task<string> SetPresetAsync(string profileToken, string presetName, string presetToken)
         {
             string ptzURL = await GetServiceUriAsync(OnvifServices.PTZ).ConfigureAwait(false);
             var ptzClient = GetOrCreateClient(ptzURL, u => new PTZClient(u, _settings));
-            var result = await ptzClient.SetPresetAsync(new SetPresetRequest(profileToken, presetName, null)).ConfigureAwait(false);
+            var result = await ptzClient.SetPresetAsync(new SetPresetRequest(profileToken, presetName, presetToken)).ConfigureAwait(false);
             return result.PresetToken;
         }
 
