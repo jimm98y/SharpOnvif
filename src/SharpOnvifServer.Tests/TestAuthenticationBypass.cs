@@ -261,5 +261,31 @@ namespace SharpOnvif.Tests
             Assert.IsFalse(response.Headers.Contains("Authentication-Info"),
                 "the device proved it knows the password to a caller who never proved anything");
         }
+
+        [TestMethod]
+        [DataRow("Digest username=\"\", realm=\"SharpOnvif Test\", nonce=\"n\", uri=\"/onvif/device_service\", response=\"r\"")]
+        [DataRow("Digest username=\"admin\", nonce=\"n\", uri=\"/onvif/device_service\", response=\"r\"")]
+        [DataRow("Digest username=\"admin\", realm=\"SharpOnvif Test\", uri=\"/onvif/device_service\", response=\"r\"")]
+        [DataRow("Digest username=\"admin\", realm=\"SharpOnvif Test\", nonce=\"n\", response=\"r\"")]
+        [DataRow("Digest username=\"admin\", realm=\"SharpOnvif Test\", nonce=\"n\", uri=\"/onvif/device_service\"")]
+        [DataRow("Digest ")]
+        [DataRow("Digest")]
+        public async Task ChallengesADigestHeaderThatIsMissingARequiredParameter(string authorization)
+        {
+            // A Digest header lacking username, realm, nonce, uri or response used to throw while
+            // it was being parsed, outside anything that caught it, and the request ended in a bare
+            // 500. It has to be challenged like any other failed digest.
+            await using var device = await AuthenticatedDevice.StartAsync(
+                options => options.Onvif.Authentication = DigestAuthentication.HttpDigest);
+
+            var response = await PostAsync(
+                device,
+                $"application/soap+xml; charset=utf-8; action=\"{GetDeviceInformation}\"",
+                "GetDeviceInformation",
+                authorization);
+
+            Assert.AreEqual(HttpStatusCode.Unauthorized, response.StatusCode);
+            Assert.IsTrue(response.Headers.WwwAuthenticate.Count > 0, "the 401 carried no Digest challenge");
+        }
     }
 }

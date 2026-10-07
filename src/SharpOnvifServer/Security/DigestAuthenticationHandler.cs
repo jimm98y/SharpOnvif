@@ -97,6 +97,14 @@ namespace SharpOnvifServer.Security
                 // according to the Onvif specification, we must first authenticate the Digest if it's present
                 WebDigestAuth webToken = Request.GetSecurityHeaderFromHeaders();
 
+                if (webToken == null && Request.HasDigestAuthorizationHeader())
+                {
+                    // a Digest header without username, realm, nonce, uri or response gets the usual
+                    // challenge - and, like any other failed digest, must not be excused by a token
+                    // further down the request
+                    return AuthenticateResult.Fail("HTTP Digest header is malformed.");
+                }
+
                 if (webToken != null)
                 {
                     if (string.Compare(webToken.Realm, Options.HttpDigestRealm) != 0)

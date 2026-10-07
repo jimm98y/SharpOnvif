@@ -27,12 +27,29 @@ namespace SharpOnvifServer.Security
 {
     public static class HttpRequestExtensions
     {
+        /// <summary>
+        /// Whether the request carries an Authorization header with the Digest scheme, well-formed or not.
+        /// </summary>
+        public static bool HasDigestAuthorizationHeader(this HttpRequest request)
+        {
+            if (request.Headers.Authorization.Count == 0)
+                return false;
+
+            string auth = request.Headers.Authorization[0];
+            return auth != null &&
+                (auth.StartsWith("Digest ", StringComparison.OrdinalIgnoreCase) || string.Equals(auth.Trim(), "Digest", StringComparison.OrdinalIgnoreCase));
+        }
+
+        /// <summary>
+        /// Parses the Digest Authorization header. Returns null when there is none, or when it lacks
+        /// any of username, realm, nonce, uri or response.
+        /// </summary>
         public static WebDigestAuth GetSecurityHeaderFromHeaders(this HttpRequest request)
         {
             if (request.Headers.Authorization.Count > 0)
             {
                 string auth = request.Headers.Authorization[0];
-                if (auth.StartsWith("Digest ", StringComparison.OrdinalIgnoreCase))
+                if (auth != null && auth.StartsWith("Digest ", StringComparison.OrdinalIgnoreCase))
                 {
                     string realm = HttpDigestAuthentication.GetValueFromHeader(auth, "realm", true);
                     string algorithm = HttpDigestAuthentication.GetValueFromHeader(auth, "algorithm", false) ?? "";
@@ -72,6 +89,16 @@ namespace SharpOnvifServer.Security
                     }
 
                     string userHash = HttpDigestAuthentication.GetValueFromHeader(auth, "userhash", false);
+
+                    if (string.IsNullOrEmpty(userName) ||
+                        string.IsNullOrEmpty(realm) ||
+                        string.IsNullOrEmpty(nonce) ||
+                        string.IsNullOrEmpty(uri) ||
+                        string.IsNullOrEmpty(response))
+                    {
+                        // the header is malformed
+                        return null;
+                    }
 
                     return new WebDigestAuth(algorithm, userName, realm, nonce, uri, response, qop, cnonce, nc, userHash, opaque);
                 }
