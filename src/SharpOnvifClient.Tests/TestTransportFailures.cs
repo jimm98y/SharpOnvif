@@ -61,10 +61,17 @@ namespace SharpOnvif.Tests
         /// <summary>A transport that never answers, like a device that has stopped listening.</summary>
         private sealed class SilentTransport : HttpMessageHandler
         {
+            private readonly CancellationToken _alsoCancelledBy;
+
+            public SilentTransport(CancellationToken alsoCancelledBy = default) { _alsoCancelledBy = alsoCancelledBy; }
+
             protected override async Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request, CancellationToken cancellationToken)
             {
-                await Task.Delay(Timeout.Infinite, cancellationToken).ConfigureAwait(false);
+                using (var either = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, _alsoCancelledBy))
+                {
+                    await Task.Delay(Timeout.Infinite, either.Token).ConfigureAwait(false);
+                }
                 throw new InvalidOperationException("unreachable");
             }
         }
@@ -123,6 +130,32 @@ namespace SharpOnvif.Tests
                 cancellation.Cancel();
 
                 await Assert.ThrowsExactlyAsync<TaskCanceledException>(() => pending);
+            }
+        }
+
+        [TestMethod]
+        [Timeout(30000)]
+        public async Task LetsACancellationTheTransportRaisedThrough()
+        {
+            // A handler in the pipeline ending the request is not the device running late, and
+            // must not be reported as a timeout that never elapsed.
+            using (var client = Client(new BrokenTransport(
+                () => new OperationCanceledException("cancelled by the transport"))))
+            {
+                await Assert.ThrowsExactlyAsync<OperationCanceledException>(
+                    () => client.GetDeviceInformationAsync());
+            }
+        }
+
+        [TestMethod]
+        [Timeout(30000)]
+        public async Task LetsACancellationTheTransportRaisedLaterThrough()
+        {
+            using (var transportCancellation = new CancellationTokenSource(TimeSpan.FromMilliseconds(300)))
+            using (var client = Client(new SilentTransport(transportCancellation.Token)))
+            {
+                await Assert.ThrowsAsync<OperationCanceledException>(
+                    () => client.GetDeviceInformationAsync());
             }
         }
     }

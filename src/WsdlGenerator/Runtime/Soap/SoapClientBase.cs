@@ -86,8 +86,18 @@ namespace __RUNTIME__.Soap
             if (settings.Authentication != null)
                 transport = settings.Authentication.CreateTransport(transport, settings) ?? transport;
 
+            if (settings.Timeout != System.Threading.Timeout.InfiniteTimeSpan &&
+                (settings.Timeout <= TimeSpan.Zero || settings.Timeout.TotalMilliseconds > int.MaxValue))
+            {
+                throw new ArgumentOutOfRangeException(nameof(settings),
+                    "Timeout must be positive and at most Int32.MaxValue milliseconds, or Timeout.InfiniteTimeSpan.");
+            }
+
             var client = new HttpClient(transport, disposeHandler: true);
-            client.Timeout = settings.Timeout;
+
+            // The timeout is applied per call in SendAsync instead, where its own cancellation
+            // source tells it apart from any other - HttpClient's says only "a task was canceled".
+            client.Timeout = System.Threading.Timeout.InfiniteTimeSpan;
             if (settings.MaxResponseContentBytes > 0)
                 client.MaxResponseContentBufferSize = settings.MaxResponseContentBytes;
 
@@ -182,10 +192,18 @@ namespace __RUNTIME__.Soap
 
             if (_settings.DisableExpect100Continue) message.Headers.ExpectContinue = false;
 
+            // Settings.Timeout applies to a client built here. One the caller handed in keeps its own.
+            CancellationTokenSource timeout = null;
+            if (_ownsHttpClient && _settings.Timeout != System.Threading.Timeout.InfiniteTimeSpan)
+            {
+                timeout = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+                timeout.CancelAfter(_settings.Timeout);
+            }
+
             HttpResponseMessage response;
             try
             {
-                response = await _http.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                response = await _http.SendAsync(message, timeout == null ? cancellationToken : timeout.Token).ConfigureAwait(false);
             }
             catch (HttpRequestException ex)
             {
@@ -196,15 +214,20 @@ namespace __RUNTIME__.Soap
                 throw new SoapTransportException(
                     "The request to " + EndpointUri + " did not reach the service: " + ex.Message, ex);
             }
-            catch (OperationCanceledException ex) when (!cancellationToken.IsCancellationRequested)
+            catch (OperationCanceledException ex) when (!cancellationToken.IsCancellationRequested && IsTimeout(ex, timeout))
             {
                 // Not the caller's cancellation - the client's own timeout. It arrives as a
-                // TaskCanceledException, which says nothing about what went wrong.
+                // TaskCanceledException, which says nothing about what went wrong. Any other
+                // cancellation, such as one raised by the transport, is let through as it is.
                 throw new SoapTransportException(
-                    "The request to " + EndpointUri + " timed out after " + _settings.Timeout + ".", ex)
+                    "The request to " + EndpointUri + " timed out after " + (timeout == null ? _http.Timeout : _settings.Timeout) + ".", ex)
                 {
                     TimedOut = true,
                 };
+            }
+            finally
+            {
+                if (timeout != null) timeout.Dispose();
             }
 
             // A fault comes back as a SOAP envelope with a non-success status: 400 for a
@@ -223,6 +246,16 @@ namespace __RUNTIME__.Soap
             }
 
             return response;
+        }
+
+        /// <summary>True when a cancellation is the client's own timeout rather than anything else.</summary>
+        private static bool IsTimeout(OperationCanceledException ex, CancellationTokenSource timeout)
+        {
+            // Ours is the one that fired.
+            if (timeout != null) return timeout.IsCancellationRequested;
+
+            // A caller's own HttpClient says so on .NET 5 and later. Earlier ones cannot tell.
+            return ex.InnerException is TimeoutException;
         }
 
         /// <summary>True when the response body is a SOAP envelope worth parsing.</summary>
