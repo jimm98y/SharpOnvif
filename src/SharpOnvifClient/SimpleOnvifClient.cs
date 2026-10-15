@@ -29,6 +29,7 @@ using SharpOnvifCommon.Soap;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using SharpOnvifCommon.Onvif;
 
@@ -209,10 +210,15 @@ namespace SharpOnvifClient
 
         #region Device Management
 
-        public async Task<GetDeviceInformationResponse> GetDeviceInformationAsync()
+        public Task<GetDeviceInformationResponse> GetDeviceInformationAsync()
+        {
+            return GetDeviceInformationAsync(CancellationToken.None);
+        }
+
+        public async Task<GetDeviceInformationResponse> GetDeviceInformationAsync(CancellationToken cancellationToken)
         {
             var deviceClient = GetOrCreateClient(_onvifUri, u => new DeviceClient(u, _settings));
-            var deviceInfo = await deviceClient.GetDeviceInformationAsync(new GetDeviceInformationRequest()).ConfigureAwait(false);
+            var deviceInfo = await deviceClient.GetDeviceInformationAsync(new GetDeviceInformationRequest(), cancellationToken).ConfigureAwait(false);
             return deviceInfo;
         }
 
@@ -226,10 +232,22 @@ namespace SharpOnvifClient
         /// <see cref="SharpOnvifCommon.Security.OnvifAuthenticationOptions.PreAuthActions"/>
         /// makes the client authenticate it like any other call.
         /// </remarks>
-        public virtual async Task<GetServicesResponse> GetServicesAsync(bool includeCapability = false)
+        public virtual Task<GetServicesResponse> GetServicesAsync(bool includeCapability = false)
+        {
+            return GetServicesAsync(includeCapability, CancellationToken.None);
+        }
+
+        /// <summary>
+        /// Lists the services the device supports.
+        /// </summary>
+        /// <remarks>
+        /// Overriding this one covers calls made with and without a token. Overriding the overload
+        /// without one covers only those - which is all it covered before this one existed.
+        /// </remarks>
+        public virtual async Task<GetServicesResponse> GetServicesAsync(bool includeCapability, CancellationToken cancellationToken)
         {
             var deviceClient = GetOrCreateClient(_onvifUri, u => new DeviceClient(u, _settings));
-            var services = await deviceClient.GetServicesAsync(new GetServicesRequest(includeCapability)).ConfigureAwait(false);
+            var services = await deviceClient.GetServicesAsync(new GetServicesRequest(includeCapability), cancellationToken).ConfigureAwait(false);
             return services;
         }
 
@@ -237,16 +255,26 @@ namespace SharpOnvifClient
         /// Reads the device's clock. Also a PRE_AUTH action, and useful for discovering the
         /// offset that <see cref="SetCameraUtcNowOffset"/> needs when a camera's clock is wrong.
         /// </summary>
-        public async Task<SystemDateTime> GetSystemDateAndTimeAsync()
+        public Task<SystemDateTime> GetSystemDateAndTimeAsync()
+        {
+            return GetSystemDateAndTimeAsync(CancellationToken.None);
+        }
+
+        public async Task<SystemDateTime> GetSystemDateAndTimeAsync(CancellationToken cancellationToken)
         {
             var deviceClient = GetOrCreateClient(_onvifUri, u => new DeviceClient(u, _settings));
-            var cameraTime = await deviceClient.GetSystemDateAndTimeAsync().ConfigureAwait(false);
+            var cameraTime = await deviceClient.GetSystemDateAndTimeAsync(cancellationToken).ConfigureAwait(false);
             return cameraTime.SystemDateAndTime;
         }
 
-        public async Task<System.DateTime> GetSystemDateAndTimeUtcAsync()
+        public Task<System.DateTime> GetSystemDateAndTimeUtcAsync()
         {
-            var cameraTime = await GetSystemDateAndTimeAsync().ConfigureAwait(false);
+            return GetSystemDateAndTimeUtcAsync(CancellationToken.None);
+        }
+
+        public async Task<System.DateTime> GetSystemDateAndTimeUtcAsync(CancellationToken cancellationToken)
+        {
+            var cameraTime = await GetSystemDateAndTimeAsync(cancellationToken).ConfigureAwait(false);
             var cameraDateTime = new System.DateTime(
                 cameraTime.UTCDateTime.Date.Year,
                 cameraTime.UTCDateTime.Date.Month,
@@ -263,27 +291,42 @@ namespace SharpOnvifClient
 
         #region Media
 
-        public async Task<GetProfilesResponse> GetProfilesAsync()
+        public Task<GetProfilesResponse> GetProfilesAsync()
         {
-            string mediaUri = await GetServiceUriAsync(OnvifServices.MEDIA).ConfigureAwait(false);
+            return GetProfilesAsync(CancellationToken.None);
+        }
+
+        public async Task<GetProfilesResponse> GetProfilesAsync(CancellationToken cancellationToken)
+        {
+            string mediaUri = await ResolveServiceUriAsync(OnvifServices.MEDIA, cancellationToken).ConfigureAwait(false);
             var mediaClient = GetOrCreateClient(mediaUri, u => new MediaClient(u, _settings));
-            var profiles = await mediaClient.GetProfilesAsync(new GetProfilesRequest()).ConfigureAwait(false);
+            var profiles = await mediaClient.GetProfilesAsync(new GetProfilesRequest(), cancellationToken).ConfigureAwait(false);
             return profiles;
         }
 
-        public async Task<MediaUri> GetStreamUriAsync(string profileToken, TransportProtocol protocol = TransportProtocol.RTSP)
+        public Task<MediaUri> GetStreamUriAsync(string profileToken, TransportProtocol protocol = TransportProtocol.RTSP)
         {
-            string mediaUri = await GetServiceUriAsync(OnvifServices.MEDIA).ConfigureAwait(false);
+            return GetStreamUriAsync(profileToken, protocol, CancellationToken.None);
+        }
+
+        public async Task<MediaUri> GetStreamUriAsync(string profileToken, TransportProtocol protocol, CancellationToken cancellationToken)
+        {
+            string mediaUri = await ResolveServiceUriAsync(OnvifServices.MEDIA, cancellationToken).ConfigureAwait(false);
             var mediaClient = GetOrCreateClient(mediaUri, u => new MediaClient(u, _settings));
-            var streamUri = await mediaClient.GetStreamUriAsync(new StreamSetup() { Transport = new Transport() { Protocol = protocol } }, profileToken).ConfigureAwait(false);
+            var streamUri = await mediaClient.GetStreamUriAsync(new StreamSetup() { Transport = new Transport() { Protocol = protocol } }, profileToken, cancellationToken).ConfigureAwait(false);
             return streamUri.MediaUri;
         }
 
-        public async Task<MediaUri> GetSnapshotUriAsync(string profileToken)
+        public Task<MediaUri> GetSnapshotUriAsync(string profileToken)
         {
-            string mediaUri = await GetServiceUriAsync(OnvifServices.MEDIA).ConfigureAwait(false);
+            return GetSnapshotUriAsync(profileToken, CancellationToken.None);
+        }
+
+        public async Task<MediaUri> GetSnapshotUriAsync(string profileToken, CancellationToken cancellationToken)
+        {
+            string mediaUri = await ResolveServiceUriAsync(OnvifServices.MEDIA, cancellationToken).ConfigureAwait(false);
             var mediaClient = GetOrCreateClient(mediaUri, u => new MediaClient(u, _settings));
-            var streamUri = await mediaClient.GetSnapshotUriAsync(profileToken).ConfigureAwait(false);
+            var streamUri = await mediaClient.GetSnapshotUriAsync(profileToken, cancellationToken).ConfigureAwait(false);
             return streamUri.MediaUri;
         }
 
@@ -291,27 +334,42 @@ namespace SharpOnvifClient
 
         #region Media2
 
-        public async Task<Media2.GetProfilesResponse> GetProfiles2Async()
+        public Task<Media2.GetProfilesResponse> GetProfiles2Async()
         {
-            string mediaUri = await GetServiceUriAsync(OnvifServices.MEDIA2).ConfigureAwait(false);
+            return GetProfiles2Async(CancellationToken.None);
+        }
+
+        public async Task<Media2.GetProfilesResponse> GetProfiles2Async(CancellationToken cancellationToken)
+        {
+            string mediaUri = await ResolveServiceUriAsync(OnvifServices.MEDIA2, cancellationToken).ConfigureAwait(false);
             var mediaClient = GetOrCreateClient(mediaUri, u => new Media2.Media2Client(u, _settings));
-            var profiles = await mediaClient.GetProfilesAsync(new Media2.GetProfilesRequest()).ConfigureAwait(false);
+            var profiles = await mediaClient.GetProfilesAsync(new Media2.GetProfilesRequest(), cancellationToken).ConfigureAwait(false);
             return profiles;
         }
 
-        public async Task<Media2.GetStreamUriResponse> GetStreamUri2Async(string profileToken, string protocol)
+        public Task<Media2.GetStreamUriResponse> GetStreamUri2Async(string profileToken, string protocol)
         {
-            string mediaUri = await GetServiceUriAsync(OnvifServices.MEDIA2).ConfigureAwait(false);
+            return GetStreamUri2Async(profileToken, protocol, CancellationToken.None);
+        }
+
+        public async Task<Media2.GetStreamUriResponse> GetStreamUri2Async(string profileToken, string protocol, CancellationToken cancellationToken)
+        {
+            string mediaUri = await ResolveServiceUriAsync(OnvifServices.MEDIA2, cancellationToken).ConfigureAwait(false);
             var mediaClient = GetOrCreateClient(mediaUri, u => new Media2.Media2Client(u, _settings));
-            var streamUri = await mediaClient.GetStreamUriAsync(new Media2.GetStreamUriRequest(protocol, profileToken)).ConfigureAwait(false);
+            var streamUri = await mediaClient.GetStreamUriAsync(new Media2.GetStreamUriRequest(protocol, profileToken), cancellationToken).ConfigureAwait(false);
             return streamUri;
         }
 
-        public async Task<Media2.GetSnapshotUriResponse> GetSnapshotUri2Async(string profileToken)
+        public Task<Media2.GetSnapshotUriResponse> GetSnapshotUri2Async(string profileToken)
         {
-            string mediaUri = await GetServiceUriAsync(OnvifServices.MEDIA2).ConfigureAwait(false);
+            return GetSnapshotUri2Async(profileToken, CancellationToken.None);
+        }
+
+        public async Task<Media2.GetSnapshotUriResponse> GetSnapshotUri2Async(string profileToken, CancellationToken cancellationToken)
+        {
+            string mediaUri = await ResolveServiceUriAsync(OnvifServices.MEDIA2, cancellationToken).ConfigureAwait(false);
             var mediaClient = GetOrCreateClient(mediaUri, u => new Media2.Media2Client(u, _settings));
-            var streamUri = await mediaClient.GetSnapshotUriAsync(new Media2.GetSnapshotUriRequest(profileToken)).ConfigureAwait(false);
+            var streamUri = await mediaClient.GetSnapshotUriAsync(new Media2.GetSnapshotUriRequest(profileToken), cancellationToken).ConfigureAwait(false);
             return streamUri;
         }
 
@@ -319,15 +377,20 @@ namespace SharpOnvifClient
 
         #region Pull Point subscription
 
-        public async Task<CreatePullPointSubscriptionResponse> PullPointSubscribeAsync(int initialTerminationTimeInSeconds = 60)
+        public Task<CreatePullPointSubscriptionResponse> PullPointSubscribeAsync(int initialTerminationTimeInSeconds = 60)
         {
-            string eventUri = await GetServiceUriAsync(OnvifServices.EVENTS);
+            return PullPointSubscribeAsync(initialTerminationTimeInSeconds, CancellationToken.None);
+        }
+
+        public async Task<CreatePullPointSubscriptionResponse> PullPointSubscribeAsync(int initialTerminationTimeInSeconds, CancellationToken cancellationToken)
+        {
+            string eventUri = await ResolveServiceUriAsync(OnvifServices.EVENTS, cancellationToken).ConfigureAwait(false);
             var eventPortTypeClient = GetOrCreateClient(eventUri, u => new EventPortTypeClient(u, _settings));
             var subscribeResponse = await eventPortTypeClient.CreatePullPointSubscriptionAsync(
                 new CreatePullPointSubscriptionRequest()
                 {
                     InitialTerminationTime = OnvifHelpers.GetTimeoutInSeconds(initialTerminationTimeInSeconds)
-                }).ConfigureAwait(false);
+                }, cancellationToken).ConfigureAwait(false);
             return subscribeResponse;
         }
 
@@ -338,7 +401,16 @@ namespace SharpOnvifClient
         /// or an idle camera answers exactly on time and the client has already given up - which
         /// is what the default settings did, both being 60 seconds.
         /// </remarks>
-        public async Task<PullMessagesResponse> PullPointPullMessagesAsync(string subscriptionReferenceAddress, int timeoutInSeconds = 60, int maxMessages = 100)
+        public Task<PullMessagesResponse> PullPointPullMessagesAsync(string subscriptionReferenceAddress, int timeoutInSeconds = 60, int maxMessages = 100)
+        {
+            return PullPointPullMessagesAsync(subscriptionReferenceAddress, timeoutInSeconds, maxMessages, CancellationToken.None);
+        }
+
+        /// <remarks>
+        /// The token is what ends a pull the device is still holding open, short of disposing
+        /// the client.
+        /// </remarks>
+        public async Task<PullMessagesResponse> PullPointPullMessagesAsync(string subscriptionReferenceAddress, int timeoutInSeconds, int maxMessages, CancellationToken cancellationToken)
         {
             TimeSpan httpTimeout = GetPullMessagesHttpTimeout(timeoutInSeconds, _settings.Timeout);
 
@@ -350,14 +422,19 @@ namespace SharpOnvifClient
                 new PullMessagesRequest(
                     OnvifHelpers.GetTimeoutInSeconds(timeoutInSeconds),
                     maxMessages,
-                    Array.Empty<System.Xml.XmlElement>())).ConfigureAwait(false);
+                    Array.Empty<System.Xml.XmlElement>()), cancellationToken).ConfigureAwait(false);
             return messages;
         }
 
-        public async Task<UnsubscribeResponse> PullPointUnsubscribeAsync(string subscriptionReferenceAddress)
+        public Task<UnsubscribeResponse> PullPointUnsubscribeAsync(string subscriptionReferenceAddress)
+        {
+            return PullPointUnsubscribeAsync(subscriptionReferenceAddress, CancellationToken.None);
+        }
+
+        public async Task<UnsubscribeResponse> PullPointUnsubscribeAsync(string subscriptionReferenceAddress, CancellationToken cancellationToken)
         {
             var pullPointClient = GetOrCreateClient(subscriptionReferenceAddress, u => new PullPointSubscriptionClient(u, _settings));
-            var unsubscribeResponse = await pullPointClient.UnsubscribeAsync(new UnsubscribeRequest()).ConfigureAwait(false);
+            var unsubscribeResponse = await pullPointClient.UnsubscribeAsync(new UnsubscribeRequest(), cancellationToken).ConfigureAwait(false);
             return unsubscribeResponse;
         }
 
@@ -365,10 +442,15 @@ namespace SharpOnvifClient
 
         #region Basic subscription
 
-        public async Task<SubscribeResponse> BasicSubscribeAsync(string onvifEventListenerUri, int timeoutInSeconds = 60)
+        public Task<SubscribeResponse> BasicSubscribeAsync(string onvifEventListenerUri, int timeoutInSeconds = 60)
+        {
+            return BasicSubscribeAsync(onvifEventListenerUri, timeoutInSeconds, CancellationToken.None);
+        }
+
+        public async Task<SubscribeResponse> BasicSubscribeAsync(string onvifEventListenerUri, int timeoutInSeconds, CancellationToken cancellationToken)
         {
             // Basic events need an exception in Windows Firewall + VS must run as Admin
-            string eventUri = await GetServiceUriAsync(OnvifServices.EVENTS);
+            string eventUri = await ResolveServiceUriAsync(OnvifServices.EVENTS, cancellationToken).ConfigureAwait(false);
             var notificationProducerClient = GetOrCreateClient(eventUri, u => new NotificationProducerClient(u, _settings));
             var subscriptionResult = await notificationProducerClient.SubscribeAsync(new SubscribeRequest()
             {
@@ -380,24 +462,34 @@ namespace SharpOnvifClient
                         Value = onvifEventListenerUri
                     }
                 }
-            }).ConfigureAwait(false);
+            }, cancellationToken).ConfigureAwait(false);
             return subscriptionResult;
         }
 
-        public async Task<RenewResponse> BasicSubscriptionRenewAsync(string subscriptionReferenceAddress, int timeoutInSeconds = 60)
+        public Task<RenewResponse> BasicSubscriptionRenewAsync(string subscriptionReferenceAddress, int timeoutInSeconds = 60)
+        {
+            return BasicSubscriptionRenewAsync(subscriptionReferenceAddress, timeoutInSeconds, CancellationToken.None);
+        }
+
+        public async Task<RenewResponse> BasicSubscriptionRenewAsync(string subscriptionReferenceAddress, int timeoutInSeconds, CancellationToken cancellationToken)
         {
             var subscriptionManagerClient = GetOrCreateClient(subscriptionReferenceAddress, u => new SubscriptionManagerClient(u, _settings));
             var renewResult = await subscriptionManagerClient.RenewAsync(new RenewRequest()
             {
                 TerminationTime = OnvifHelpers.GetTimeoutInSeconds(timeoutInSeconds),
-            }).ConfigureAwait(false);
+            }, cancellationToken).ConfigureAwait(false);
             return renewResult;
         }
 
-        public async Task<UnsubscribeResponse> BasicSubscriptionUnsubscribeAsync(string subscriptionReferenceAddress)
+        public Task<UnsubscribeResponse> BasicSubscriptionUnsubscribeAsync(string subscriptionReferenceAddress)
+        {
+            return BasicSubscriptionUnsubscribeAsync(subscriptionReferenceAddress, CancellationToken.None);
+        }
+
+        public async Task<UnsubscribeResponse> BasicSubscriptionUnsubscribeAsync(string subscriptionReferenceAddress, CancellationToken cancellationToken)
         {
             var subscriptionManagerClient = GetOrCreateClient(subscriptionReferenceAddress, u => new SubscriptionManagerClient(u, _settings));
-            var unsubscribeResult = await subscriptionManagerClient.UnsubscribeAsync(new UnsubscribeRequest()).ConfigureAwait(false);
+            var unsubscribeResult = await subscriptionManagerClient.UnsubscribeAsync(new UnsubscribeRequest(), cancellationToken).ConfigureAwait(false);
             return unsubscribeResult;
         }
 
@@ -405,50 +497,73 @@ namespace SharpOnvifClient
 
         #region PTZ
 
-        public async Task<PTZStatus> GetStatusAsync(string profileToken)
+        public Task<PTZStatus> GetStatusAsync(string profileToken)
         {
-            string ptzURL = await GetServiceUriAsync(OnvifServices.PTZ).ConfigureAwait(false);
+            return GetStatusAsync(profileToken, CancellationToken.None);
+        }
+
+        public async Task<PTZStatus> GetStatusAsync(string profileToken, CancellationToken cancellationToken)
+        {
+            string ptzURL = await ResolveServiceUriAsync(OnvifServices.PTZ, cancellationToken).ConfigureAwait(false);
             var ptzClient = GetOrCreateClient(ptzURL, u => new PTZClient(u, _settings));
-            var status = await ptzClient.GetStatusAsync(profileToken).ConfigureAwait(false);
+            var status = await ptzClient.GetStatusAsync(profileToken, cancellationToken).ConfigureAwait(false);
             return status.PTZStatus;
         }
 
         public Task AbsoluteMoveAsync(string profileToken, float zoom, float zoomSpeed)
         {
+            return AbsoluteMoveAsync(profileToken, zoom, zoomSpeed, CancellationToken.None);
+        }
+
+        public Task AbsoluteMoveAsync(string profileToken, float zoom, float zoomSpeed, CancellationToken cancellationToken)
+        {
             return AbsoluteMoveAsync(
                 profileToken,
                 null,
                 new Vector1D() { x = zoom },
                 null,
-                new Vector1D() { x = zoomSpeed }
+                new Vector1D() { x = zoomSpeed },
+                cancellationToken
             );
         }
 
         public Task AbsoluteMoveAsync(string profileToken, float pan, float tilt, float panSpeed, float tiltSpeed)
         {
+            return AbsoluteMoveAsync(profileToken, pan, tilt, panSpeed, tiltSpeed, CancellationToken.None);
+        }
+
+        public Task AbsoluteMoveAsync(string profileToken, float pan, float tilt, float panSpeed, float tiltSpeed, CancellationToken cancellationToken)
+        {
             return AbsoluteMoveAsync(
                 profileToken,
                 new Vector2D() { x = pan, y = tilt },
                 null,
                 new Vector2D() { x = panSpeed, y = tiltSpeed },
-                null
+                null,
+                cancellationToken
             );
         }
 
         public Task AbsoluteMoveAsync(string profileToken, float pan, float tilt, float zoom, float panSpeed, float tiltSpeed, float zoomSpeed)
+        {
+            return AbsoluteMoveAsync(profileToken, pan, tilt, zoom, panSpeed, tiltSpeed, zoomSpeed, CancellationToken.None);
+        }
+
+        public Task AbsoluteMoveAsync(string profileToken, float pan, float tilt, float zoom, float panSpeed, float tiltSpeed, float zoomSpeed, CancellationToken cancellationToken)
         {
             return AbsoluteMoveAsync(
                 profileToken,
                 new Vector2D() { x = pan, y = tilt },
                 new Vector1D() { x = zoom },
                 new Vector2D() { x = panSpeed, y = tiltSpeed },
-                new Vector1D() { x = zoomSpeed }
+                new Vector1D() { x = zoomSpeed },
+                cancellationToken
             );
         }
 
-        private async Task AbsoluteMoveAsync(string profileToken, Vector2D vectorPanTilt, Vector1D vectorZoom, Vector2D speedPanTilt, Vector1D speedZoom)
+        private async Task AbsoluteMoveAsync(string profileToken, Vector2D vectorPanTilt, Vector1D vectorZoom, Vector2D speedPanTilt, Vector1D speedZoom, CancellationToken cancellationToken)
         {
-            string ptzURL = await GetServiceUriAsync(OnvifServices.PTZ).ConfigureAwait(false);
+            string ptzURL = await ResolveServiceUriAsync(OnvifServices.PTZ, cancellationToken).ConfigureAwait(false);
             var ptzClient = GetOrCreateClient(ptzURL, u => new PTZClient(u, _settings));
             await ptzClient.AbsoluteMoveAsync(
                 profileToken,
@@ -461,45 +576,64 @@ namespace SharpOnvifClient
                 {
                     PanTilt = speedPanTilt,
                     Zoom = speedZoom
-                }).ConfigureAwait(false);
+                },
+                cancellationToken).ConfigureAwait(false);
         }
 
         public Task RelativeMoveAsync(string profileToken, float zoom, float zoomSpeed)
+        {
+            return RelativeMoveAsync(profileToken, zoom, zoomSpeed, CancellationToken.None);
+        }
+
+        public Task RelativeMoveAsync(string profileToken, float zoom, float zoomSpeed, CancellationToken cancellationToken)
         {
             return RelativeMoveAsync(
                 profileToken,
                 null,
                 new Vector1D() { x = zoom },
                 null,
-                new Vector1D() { x = zoomSpeed }
+                new Vector1D() { x = zoomSpeed },
+                cancellationToken
             );
         }
 
         public Task RelativeMoveAsync(string profileToken, float pan, float tilt, float panSpeed, float tiltSpeed)
         {
+            return RelativeMoveAsync(profileToken, pan, tilt, panSpeed, tiltSpeed, CancellationToken.None);
+        }
+
+        public Task RelativeMoveAsync(string profileToken, float pan, float tilt, float panSpeed, float tiltSpeed, CancellationToken cancellationToken)
+        {
             return RelativeMoveAsync(
                 profileToken,
                 new Vector2D() { x = pan, y = tilt },
                 null,
                 new Vector2D() { x = panSpeed, y = tiltSpeed },
-                null
+                null,
+                cancellationToken
             );
         }
 
         public Task RelativeMoveAsync(string profileToken, float pan, float tilt, float zoom, float panSpeed, float tiltSpeed, float zoomSpeed)
+        {
+            return RelativeMoveAsync(profileToken, pan, tilt, zoom, panSpeed, tiltSpeed, zoomSpeed, CancellationToken.None);
+        }
+
+        public Task RelativeMoveAsync(string profileToken, float pan, float tilt, float zoom, float panSpeed, float tiltSpeed, float zoomSpeed, CancellationToken cancellationToken)
         {
             return RelativeMoveAsync(
                 profileToken,
                 new Vector2D() { x = pan, y = tilt },
                 new Vector1D() { x = zoom },
                 new Vector2D() { x = panSpeed, y = tiltSpeed },
-                new Vector1D() { x = zoomSpeed }
+                new Vector1D() { x = zoomSpeed },
+                cancellationToken
             );
         }
 
-        private async Task RelativeMoveAsync(string profileToken, Vector2D vectorPanTilt, Vector1D vectorZoom, Vector2D speedPanTilt, Vector1D speedZoom)
+        private async Task RelativeMoveAsync(string profileToken, Vector2D vectorPanTilt, Vector1D vectorZoom, Vector2D speedPanTilt, Vector1D speedZoom, CancellationToken cancellationToken)
         {
-            string ptzURL = await GetServiceUriAsync(OnvifServices.PTZ).ConfigureAwait(false);
+            string ptzURL = await ResolveServiceUriAsync(OnvifServices.PTZ, cancellationToken).ConfigureAwait(false);
             var ptzClient = GetOrCreateClient(ptzURL, u => new PTZClient(u, _settings));
             await ptzClient.RelativeMoveAsync(
                 profileToken,
@@ -512,39 +646,58 @@ namespace SharpOnvifClient
                 {
                     PanTilt = speedPanTilt,
                     Zoom = speedZoom
-                }).ConfigureAwait(false);
+                },
+                cancellationToken).ConfigureAwait(false);
         }
 
         public Task ContinuousMoveAsync(string profileToken, float zoomSpeed, string timeout = null)
         {
+            return ContinuousMoveAsync(profileToken, zoomSpeed, timeout, CancellationToken.None);
+        }
+
+        public Task ContinuousMoveAsync(string profileToken, float zoomSpeed, string timeout, CancellationToken cancellationToken)
+        {
             return ContinuousMoveAsync(
                 profileToken,
                 null,
                 new Vector1D() { x = zoomSpeed },
-                timeout);
+                timeout,
+                cancellationToken);
         }
 
         public Task ContinuousMoveAsync(string profileToken, float panSpeed, float tiltSpeed, string timeout = null)
         {
+            return ContinuousMoveAsync(profileToken, panSpeed, tiltSpeed, timeout, CancellationToken.None);
+        }
+
+        public Task ContinuousMoveAsync(string profileToken, float panSpeed, float tiltSpeed, string timeout, CancellationToken cancellationToken)
+        {
             return ContinuousMoveAsync(
                 profileToken,
                 new Vector2D() { x = panSpeed, y = tiltSpeed },
                 null,
-                timeout);
+                timeout,
+                cancellationToken);
         }
 
         public Task ContinuousMoveAsync(string profileToken, float panSpeed, float tiltSpeed, float zoomSpeed, string timeout = null)
+        {
+            return ContinuousMoveAsync(profileToken, panSpeed, tiltSpeed, zoomSpeed, timeout, CancellationToken.None);
+        }
+
+        public Task ContinuousMoveAsync(string profileToken, float panSpeed, float tiltSpeed, float zoomSpeed, string timeout, CancellationToken cancellationToken)
         {
             return ContinuousMoveAsync(
                 profileToken,
                 new Vector2D() { x = panSpeed, y = tiltSpeed },
                 new Vector1D() { x = zoomSpeed },
-                timeout);
+                timeout,
+                cancellationToken);
         }
 
-        private async Task ContinuousMoveAsync(string profileToken, Vector2D speedPanTilt, Vector1D speedZoom, string timeout = null)
+        private async Task ContinuousMoveAsync(string profileToken, Vector2D speedPanTilt, Vector1D speedZoom, string timeout, CancellationToken cancellationToken)
         {
-            string ptzURL = await GetServiceUriAsync(OnvifServices.PTZ).ConfigureAwait(false);
+            string ptzURL = await ResolveServiceUriAsync(OnvifServices.PTZ, cancellationToken).ConfigureAwait(false);
             var ptzClient = GetOrCreateClient(ptzURL, u => new PTZClient(u, _settings));
             await ptzClient.ContinuousMoveAsync(new ContinuousMoveRequest(
                 profileToken,
@@ -553,20 +706,30 @@ namespace SharpOnvifClient
                     PanTilt = speedPanTilt,
                     Zoom = speedZoom
                 },
-                timeout)).ConfigureAwait(false);
+                timeout), cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<GetPresetsResponse> GetPresetsAsync(string profileToken)
+        public Task<GetPresetsResponse> GetPresetsAsync(string profileToken)
         {
-            string ptzURL = await GetServiceUriAsync(OnvifServices.PTZ).ConfigureAwait(false);
+            return GetPresetsAsync(profileToken, CancellationToken.None);
+        }
+
+        public async Task<GetPresetsResponse> GetPresetsAsync(string profileToken, CancellationToken cancellationToken)
+        {
+            string ptzURL = await ResolveServiceUriAsync(OnvifServices.PTZ, cancellationToken).ConfigureAwait(false);
             var ptzClient = GetOrCreateClient(ptzURL, u => new PTZClient(u, _settings));
-            var presets = await ptzClient.GetPresetsAsync(new GetPresetsRequest(profileToken)).ConfigureAwait(false);
+            var presets = await ptzClient.GetPresetsAsync(new GetPresetsRequest(profileToken), cancellationToken).ConfigureAwait(false);
             return presets;
         }
 
-        public async Task GoToPresetAsync(string profileToken, string presetToken, float panSpeed, float tiltSpeed, float zoomSpeed)
+        public Task GoToPresetAsync(string profileToken, string presetToken, float panSpeed, float tiltSpeed, float zoomSpeed)
         {
-            string ptzURL = await GetServiceUriAsync(OnvifServices.PTZ).ConfigureAwait(false);
+            return GoToPresetAsync(profileToken, presetToken, panSpeed, tiltSpeed, zoomSpeed, CancellationToken.None);
+        }
+
+        public async Task GoToPresetAsync(string profileToken, string presetToken, float panSpeed, float tiltSpeed, float zoomSpeed, CancellationToken cancellationToken)
+        {
+            string ptzURL = await ResolveServiceUriAsync(OnvifServices.PTZ, cancellationToken).ConfigureAwait(false);
             var ptzClient = GetOrCreateClient(ptzURL, u => new PTZClient(u, _settings));
             await ptzClient.GotoPresetAsync(
                 profileToken,
@@ -575,38 +738,58 @@ namespace SharpOnvifClient
                 {
                     PanTilt = new Vector2D() { x = panSpeed, y = tiltSpeed },
                     Zoom = new Vector1D() { x = zoomSpeed }
-                }).ConfigureAwait(false);
+                },
+                cancellationToken).ConfigureAwait(false);
         }
 
-        public Task<string> SetPresetAsync(string profileToken, string presetName) => SetPresetAsync(profileToken, presetName, null);
+        public Task<string> SetPresetAsync(string profileToken, string presetName) => SetPresetAsync(profileToken, presetName, null, CancellationToken.None);
 
-        public async Task<string> SetPresetAsync(string profileToken, string presetName, string presetToken)
+        public Task<string> SetPresetAsync(string profileToken, string presetName, CancellationToken cancellationToken) => SetPresetAsync(profileToken, presetName, null, cancellationToken);
+
+        public Task<string> SetPresetAsync(string profileToken, string presetName, string presetToken) => SetPresetAsync(profileToken, presetName, presetToken, CancellationToken.None);
+
+        public async Task<string> SetPresetAsync(string profileToken, string presetName, string presetToken, CancellationToken cancellationToken)
         {
-            string ptzURL = await GetServiceUriAsync(OnvifServices.PTZ).ConfigureAwait(false);
+            string ptzURL = await ResolveServiceUriAsync(OnvifServices.PTZ, cancellationToken).ConfigureAwait(false);
             var ptzClient = GetOrCreateClient(ptzURL, u => new PTZClient(u, _settings));
-            var result = await ptzClient.SetPresetAsync(new SetPresetRequest(profileToken, presetName, presetToken)).ConfigureAwait(false);
+            var result = await ptzClient.SetPresetAsync(new SetPresetRequest(profileToken, presetName, presetToken), cancellationToken).ConfigureAwait(false);
             return result.PresetToken;
         }
 
-        public async Task RemovePresetAsync(string profileToken, string presetToken)
+        public Task RemovePresetAsync(string profileToken, string presetToken)
         {
-            string ptzURL = await GetServiceUriAsync(OnvifServices.PTZ).ConfigureAwait(false);
-            var ptzClient = GetOrCreateClient(ptzURL, u => new PTZClient(u, _settings));
-            await ptzClient.RemovePresetAsync(profileToken, presetToken).ConfigureAwait(false);
+            return RemovePresetAsync(profileToken, presetToken, CancellationToken.None);
         }
 
-        public async Task StopAsync(string profileToken, bool panTilt = true, bool zoom = true)
+        public async Task RemovePresetAsync(string profileToken, string presetToken, CancellationToken cancellationToken)
         {
-            string ptzURL = await GetServiceUriAsync(OnvifServices.PTZ).ConfigureAwait(false);
+            string ptzURL = await ResolveServiceUriAsync(OnvifServices.PTZ, cancellationToken).ConfigureAwait(false);
             var ptzClient = GetOrCreateClient(ptzURL, u => new PTZClient(u, _settings));
-            await ptzClient.StopAsync(profileToken, panTilt, zoom).ConfigureAwait(false);
+            await ptzClient.RemovePresetAsync(profileToken, presetToken, cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<GetConfigurationsResponse> GetConfigurationsAsync()
+        public Task StopAsync(string profileToken, bool panTilt = true, bool zoom = true)
         {
-            string ptzURL = await GetServiceUriAsync(OnvifServices.PTZ).ConfigureAwait(false);
+            return StopAsync(profileToken, panTilt, zoom, CancellationToken.None);
+        }
+
+        public async Task StopAsync(string profileToken, bool panTilt, bool zoom, CancellationToken cancellationToken)
+        {
+            string ptzURL = await ResolveServiceUriAsync(OnvifServices.PTZ, cancellationToken).ConfigureAwait(false);
             var ptzClient = GetOrCreateClient(ptzURL, u => new PTZClient(u, _settings));
-            var configurations = await ptzClient.GetConfigurationsAsync(new GetConfigurationsRequest()).ConfigureAwait(false);
+            await ptzClient.StopAsync(profileToken, panTilt, zoom, cancellationToken).ConfigureAwait(false);
+        }
+
+        public Task<GetConfigurationsResponse> GetConfigurationsAsync()
+        {
+            return GetConfigurationsAsync(CancellationToken.None);
+        }
+
+        public async Task<GetConfigurationsResponse> GetConfigurationsAsync(CancellationToken cancellationToken)
+        {
+            string ptzURL = await ResolveServiceUriAsync(OnvifServices.PTZ, cancellationToken).ConfigureAwait(false);
+            var ptzClient = GetOrCreateClient(ptzURL, u => new PTZClient(u, _settings));
+            var configurations = await ptzClient.GetConfigurationsAsync(new GetConfigurationsRequest(), cancellationToken).ConfigureAwait(false);
             return configurations;
         }
 
@@ -614,11 +797,22 @@ namespace SharpOnvifClient
 
         #region Utility
 
-        protected virtual async Task<string> GetServiceUriAsync(string ns)
+        protected virtual Task<string> GetServiceUriAsync(string ns)
+        {
+            return GetServiceUriAsync(ns, CancellationToken.None);
+        }
+
+        /// <remarks>
+        /// Overriding this one covers calls made with and without a token. Overriding the overload
+        /// without one covers only those - which is all it covered before this one existed.
+        /// </remarks>
+        protected virtual async Task<string> GetServiceUriAsync(string ns, CancellationToken cancellationToken)
         {
             if (_supportedServices == null)
             {
-                GetServicesResponse services = await GetServicesAsync().ConfigureAwait(false);
+                GetServicesResponse services = await (cancellationToken.CanBeCanceled
+                    ? GetServicesAsync(false, cancellationToken)
+                    : GetServicesAsync()).ConfigureAwait(false);
                 Dictionary<string, string> supportedServices = new Dictionary<string, string>();
                 foreach (var service in services.Service)
                 {
@@ -641,6 +835,17 @@ namespace SharpOnvifClient
                 return uri;
             else
                 throw new NotSupportedException($"The device does not support {ns} service!");
+        }
+
+        /// <summary>
+        /// Looks up a service address the way a call without a token always has, so that a
+        /// subclass overriding only the token-less overloads keeps being called for those.
+        /// </summary>
+        private Task<string> ResolveServiceUriAsync(string ns, CancellationToken cancellationToken)
+        {
+            return cancellationToken.CanBeCanceled
+                ? GetServiceUriAsync(ns, cancellationToken)
+                : GetServiceUriAsync(ns);
         }
 
         #endregion // Utility

@@ -20,6 +20,8 @@
 // SOFTWARE.
 
 using System;
+using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using SharpOnvifClient;
 using SharpOnvifClient.DeviceMgmt;
@@ -117,6 +119,101 @@ namespace SharpOnvif.Tests
             Assert.IsTrue(http > TimeSpan.FromSeconds(pullSeconds),
                 $"a {pullSeconds}s pull cannot be given a {http.TotalSeconds}s HTTP timeout");
             Assert.IsTrue(http >= configured, "the configured timeout is a floor, not a ceiling");
+        }
+
+        /// <summary>Overrides only the GetServices overload that takes a token.</summary>
+        private sealed class TokenScriptedClient : SimpleOnvifClient
+        {
+            public TokenScriptedClient() : base(Endpoint) { }
+
+            public int GetServicesCalls;
+            public CancellationToken LastToken;
+
+            public override Task<GetServicesResponse> GetServicesAsync(bool includeCapability, CancellationToken cancellationToken)
+            {
+                GetServicesCalls++;
+                LastToken = cancellationToken;
+                return Task.FromResult(new GetServicesResponse
+                {
+                    Service = new[] { Service(OnvifServices.MEDIA, "http://192.168.1.10/onvif/media") },
+                });
+            }
+
+            public Task<string> ResolveAsync(string ns) => GetServiceUriAsync(ns);
+
+            public Task<string> ResolveAsync(string ns, CancellationToken cancellationToken) => GetServiceUriAsync(ns, cancellationToken);
+        }
+
+        [TestMethod]
+        public async Task PassesTheTokenOnWhenItLooksUpAService()
+        {
+            using (var client = new TokenScriptedClient())
+            using (var cancellation = new CancellationTokenSource())
+            {
+                await client.ResolveAsync(OnvifServices.MEDIA, cancellation.Token);
+
+                Assert.AreEqual(cancellation.Token, client.LastToken, "the service list is read under the caller's token");
+            }
+        }
+
+        [TestMethod]
+        public async Task OverridingTheTokenOverloadCoversCallsWithoutOne()
+        {
+            using (var client = new TokenScriptedClient())
+            {
+                Assert.AreEqual("http://192.168.1.10/onvif/media", await client.ResolveAsync(OnvifServices.MEDIA));
+                Assert.AreEqual(1, client.GetServicesCalls);
+            }
+        }
+
+        [TestMethod]
+        public async Task OverridingTheOverloadWithoutATokenStillCoversCallsWithoutOne()
+        {
+            // What a subclass written before the token overloads existed relies on.
+            using (var client = new ScriptedClient(new GetServicesResponse
+            {
+                Service = new[] { Service(OnvifServices.MEDIA, "http://192.168.1.10/onvif/media") },
+            }))
+            {
+                await client.ResolveAsync(OnvifServices.MEDIA);
+                Assert.AreEqual(1, client.GetServicesCalls);
+            }
+        }
+
+        /// <summary>A device that accepts the request and never answers.</summary>
+        private sealed class SilentTransport : HttpMessageHandler
+        {
+            protected override async Task<HttpResponseMessage> SendAsync(
+                HttpRequestMessage request, CancellationToken cancellationToken)
+            {
+                await Task.Delay(Timeout.Infinite, cancellationToken).ConfigureAwait(false);
+                throw new InvalidOperationException("unreachable");
+            }
+        }
+
+        private sealed class SilentDeviceClient : SimpleOnvifClient
+        {
+            public SilentDeviceClient() : base(Endpoint)
+            {
+                _settings.Transport = new SilentTransport();
+            }
+        }
+
+        [TestMethod]
+        [Timeout(30000)]
+        public async Task EndsACallWhenTheCallerCancelsIt()
+        {
+            // Short of disposing the client, the token is the only way to end a call to a device
+            // that does not answer.
+            using (var client = new SilentDeviceClient())
+            using (var cancellation = new CancellationTokenSource())
+            {
+                Task pending = client.GetDeviceInformationAsync(cancellation.Token);
+
+                cancellation.Cancel();
+
+                await Assert.ThrowsAsync<OperationCanceledException>(() => pending);
+            }
         }
     }
 }
