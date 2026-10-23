@@ -97,6 +97,49 @@ namespace SharpOnvif.Tests
                 "there is no nonce parameter here, only a nextnonce");
         }
 
+        [DataRow("Digest realm=\"r\", algorithm=\"SHA-256\", stale=\"true\"", DisplayName = "quoted")]
+        [DataRow("Digest realm=\"r\", algorithm=SHA-256, stale=true", DisplayName = "unquoted")]
+        [TestMethod]
+        public void ReadsATokenParameterWhetherOrNotItIsQuoted(string header)
+        {
+            Assert.AreEqual("SHA-256", HttpDigestAuthentication.GetValueFromHeader(header, "algorithm", false));
+            Assert.AreEqual("true", HttpDigestAuthentication.GetValueFromHeader(header, "stale", false));
+        }
+
+        [DataRow("Digest realm=r, nonce=SERVER, opaque=OPAQUE", DisplayName = "unquoted")]
+        [DataRow("Digest realm=\"r\", nonce=\"SERVER\", opaque=\"OPAQUE\"", DisplayName = "quoted")]
+        [DataRow("Digest realm = \"r\" , nonce= SERVER, opaque =OPAQUE", DisplayName = "whitespace around =")]
+        [TestMethod]
+        public void ReadsAQuotedParameterWhetherOrNotItIsQuoted(string header)
+        {
+            // A device that sends the nonce as a token would otherwise have its challenge
+            // skipped, just as a quoted algorithm was.
+            Assert.AreEqual("r", HttpDigestAuthentication.GetValueFromHeader(header, "realm", true));
+            Assert.AreEqual("SERVER", HttpDigestAuthentication.GetValueFromHeader(header, "nonce", true));
+            Assert.AreEqual("OPAQUE", HttpDigestAuthentication.GetValueFromHeader(header, "opaque", true));
+        }
+
+        [TestMethod]
+        public void ReadsAQuotedStringWithEscapesAndSeparatorsInIt()
+        {
+            const string header = "Digest realm=\"Cam \\\"North\\\", gate \\\\ 2\", nonce=\"n\"";
+
+            Assert.AreEqual("Cam \"North\", gate \\ 2", HttpDigestAuthentication.GetValueFromHeader(header, "realm", true));
+            Assert.AreEqual("n", HttpDigestAuthentication.GetValueFromHeader(header, "nonce", true),
+                "an escaped quote must not end the realm early and leave the rest to be misread");
+        }
+
+        [TestMethod]
+        public void WritesARealmWithQuotesSoThatItReadsBackTheSame()
+        {
+            const string realm = "Cam \"North\" \\ 2";
+            string authorization = HttpDigestAuthentication.CreateAuthorizationRFC7616(
+                "admin", realm, "n", "/onvif/device_service", "r", "o", "MD5", "auth", 1, "c", false);
+
+            Assert.AreEqual(realm, HttpDigestAuthentication.GetValueFromHeader(authorization, "realm", true));
+            Assert.AreEqual("n", HttpDigestAuthentication.GetValueFromHeader(authorization, "nonce", true));
+        }
+
         [TestMethod]
         public void RefusesToComputeADigestForAnAlgorithmItDoesNotImplement()
         {

@@ -70,23 +70,11 @@ namespace SharpOnvifServer.Security
                     string uri = HttpDigestAuthentication.GetValueFromHeader(auth, "uri", true);
                     string opaque = HttpDigestAuthentication.GetValueFromHeader(auth, "opaque", true);
 
-                    // some implementations put quotes around qop (ODM)
+                    // Some implementations (ODM) quote qop and nc, against RFC 7616. GetValueFromHeader
+                    // reads either form.
                     string qop = HttpDigestAuthentication.GetValueFromHeader(auth, "qop", false);
-                    if (!string.IsNullOrEmpty(qop) && qop.Contains("\""))
-                    {
-                        // Note that this is against RFC 7616 that says: For historical reasons, a sender MUST NOT
-                        //  generate the quoted string syntax for the following parameters: qop and nc
-                        qop = qop.Replace("\"", "");
-                    }
-
                     string cnonce = HttpDigestAuthentication.GetValueFromHeader(auth, "cnonce", true);
                     string nc = HttpDigestAuthentication.GetValueFromHeader(auth, "nc", false);
-                    if (!string.IsNullOrEmpty(nc) && nc.Contains("\""))
-                    {
-                        // Note that this is against RFC 7616 that says: For historical reasons, a sender MUST NOT
-                        //  generate the quoted string syntax for the following parameters: qop and nc
-                        nc = nc.Replace("\"", "");
-                    }
 
                     string userHash = HttpDigestAuthentication.GetValueFromHeader(auth, "userhash", false);
 

@@ -407,8 +407,8 @@ namespace SharpOnvifCommon.Security
         {
             string serverNonce = GenerateServerNonce(nonceAlgorithm, binarySerialization, currentTimestamp, etag, salt);
             string responseAlgorithm = (string.IsNullOrEmpty(algorithm) || algorithm == "MD5") ? "" : $", algorithm={algorithm}";
-            string responseOpaque = string.IsNullOrEmpty(opaque) ? "" : $", opaque=\"{opaque}\"";
-            return $"Digest realm=\"{realm}\"{responseAlgorithm}, nonce=\"{serverNonce}\"{responseOpaque}, stale={stale.ToString().ToUpperInvariant()}";
+            string responseOpaque = string.IsNullOrEmpty(opaque) ? "" : $", opaque={Quote(opaque)}";
+            return $"Digest realm={Quote(realm)}{responseAlgorithm}, nonce=\"{serverNonce}\"{responseOpaque}, stale={stale.ToString().ToUpperInvariant()}";
         }
 
         public static string CreateWwwAuthenticateRFC2617(
@@ -425,8 +425,8 @@ namespace SharpOnvifCommon.Security
         {
             string serverNonce = GenerateServerNonce(nonceAlgorithm, nonceSerialization, currentTimestamp, etag, salt);
             string responseAlgorithm = (string.IsNullOrEmpty(algorithm) || algorithm == "MD5") ? "" : $", algorithm={algorithm}";
-            string responseOpaque = string.IsNullOrEmpty(opaque) ? "" : $", opaque=\"{opaque}\"";
-            return $"Digest realm=\"{realm}\", qop=\"{qop}\"{responseAlgorithm}, nonce=\"{serverNonce}\"{responseOpaque}, stale={stale.ToString().ToUpperInvariant()}";
+            string responseOpaque = string.IsNullOrEmpty(opaque) ? "" : $", opaque={Quote(opaque)}";
+            return $"Digest realm={Quote(realm)}, qop=\"{qop}\"{responseAlgorithm}, nonce=\"{serverNonce}\"{responseOpaque}, stale={stale.ToString().ToUpperInvariant()}";
         }
 
         public static string CreateWwwAuthenticateRFC7616(
@@ -447,8 +447,8 @@ namespace SharpOnvifCommon.Security
             string responseAlgorithm = (string.IsNullOrEmpty(algorithm) || algorithm == "MD5") ? "" : $", algorithm={algorithm}";
             string responseCharset = string.IsNullOrEmpty(charset) ? "" : $", charset={charset}"; // UTF-8
             string responseUserhash = userhash ? $", userhash={userhash.ToString().ToUpperInvariant()}" : ""; // see CreateUserNameHashRFC7616
-            string responseOpaque = string.IsNullOrEmpty(opaque) ? "" : $", opaque=\"{opaque}\"";
-            return $"Digest realm=\"{realm}\", qop=\"{qop}\"{responseAlgorithm}, nonce=\"{serverNonce}\"{responseOpaque}{responseCharset}{responseUserhash}, stale={stale.ToString().ToUpperInvariant()}";
+            string responseOpaque = string.IsNullOrEmpty(opaque) ? "" : $", opaque={Quote(opaque)}";
+            return $"Digest realm={Quote(realm)}, qop=\"{qop}\"{responseAlgorithm}, nonce=\"{serverNonce}\"{responseOpaque}{responseCharset}{responseUserhash}, stale={stale.ToString().ToUpperInvariant()}";
         }
 
         public static string CreateAuthorizationRFC2069(
@@ -460,9 +460,9 @@ namespace SharpOnvifCommon.Security
             string opaque, 
             string algorithm)
         {
-            string responseOpaque = string.IsNullOrEmpty(opaque) ? "" : $", opaque=\"{opaque}\"";
+            string responseOpaque = string.IsNullOrEmpty(opaque) ? "" : $", opaque={Quote(opaque)}";
             string responseAlgorithm = string.IsNullOrEmpty(algorithm) || algorithm == "MD5" ? "" : $", algorithm={algorithm}";
-            return $"Digest username=\"{userName}\", realm=\"{realm}\", uri=\"{uri}\"{responseAlgorithm}, nonce=\"{nonce}\", response=\"{response}\"{responseOpaque}";
+            return $"Digest username={Quote(userName)}, realm={Quote(realm)}, uri=\"{uri}\"{responseAlgorithm}, nonce={Quote(nonce)}, response=\"{response}\"{responseOpaque}";
         }
 
         public static string CreateAuthorizationRFC2617(
@@ -477,9 +477,9 @@ namespace SharpOnvifCommon.Security
             int nc, 
             string cnonce)
         {
-            string responseOpaque = string.IsNullOrEmpty(opaque) ? "" : $", opaque=\"{opaque}\"";
+            string responseOpaque = string.IsNullOrEmpty(opaque) ? "" : $", opaque={Quote(opaque)}";
             string responseAlgorithm = string.IsNullOrEmpty(algorithm) || algorithm == "MD5" ? "" : $", algorithm={algorithm}";
-            return $"Digest username=\"{userName}\", realm=\"{realm}\", uri=\"{uri}\"{responseAlgorithm}, nonce=\"{nonce}\", qop={qop}, nc={ConvertIntToNC(nc)}, cnonce=\"{cnonce}\", response=\"{response}\"{responseOpaque}";
+            return $"Digest username={Quote(userName)}, realm={Quote(realm)}, uri=\"{uri}\"{responseAlgorithm}, nonce={Quote(nonce)}, qop={qop}, nc={ConvertIntToNC(nc)}, cnonce=\"{cnonce}\", response=\"{response}\"{responseOpaque}";
         }
 
         public static string CreateAuthorizationRFC7616(
@@ -495,7 +495,7 @@ namespace SharpOnvifCommon.Security
             string cnonce,
             bool userhash)
         {
-            string responseOpaque = string.IsNullOrEmpty(opaque) ? "" : $", opaque=\"{opaque}\"";
+            string responseOpaque = string.IsNullOrEmpty(opaque) ? "" : $", opaque={Quote(opaque)}";
             string responseAlgorithm = string.IsNullOrEmpty(algorithm) || algorithm == "MD5" ? "" : $", algorithm={algorithm}";
             string responseUserhash = userhash ? $", userhash={userhash.ToString().ToLowerInvariant()}" : "";
             string responseUserName;
@@ -506,9 +506,9 @@ namespace SharpOnvifCommon.Security
             }
             else
             {
-                responseUserName = $"username=\"{userName}\"";
+                responseUserName = $"username={Quote(userName)}";
             }
-            return $"Digest {responseUserName}, realm=\"{realm}\", uri=\"{uri}\"{responseAlgorithm}, nonce=\"{nonce}\", qop={qop}, nc={ConvertIntToNC(nc)}, cnonce=\"{cnonce}\", response=\"{response}\"{responseOpaque}{responseUserhash}";
+            return $"Digest {responseUserName}, realm={Quote(realm)}, uri=\"{uri}\"{responseAlgorithm}, nonce={Quote(nonce)}, qop={qop}, nc={ConvertIntToNC(nc)}, cnonce=\"{cnonce}\", response=\"{response}\"{responseOpaque}{responseUserhash}";
         }
 
         public static string CreateAuthenticationInfoRFC2617(string algorithm, string userName, string realm, string password, bool isPasswordAlreadyHashed, string nonce, string uri, int nc, string cnonce, string qop, byte[] entityBody = null, string nextNonce = null, string noncePrime = null, string cnoncePrime = null)
@@ -618,30 +618,49 @@ namespace SharpOnvifCommon.Security
         /// "nonce" appears within "cnonce" and within "nextnonce", so a header that lists cnonce
         /// before nonce - field order is not constrained - would otherwise yield the client's
         /// nonce where the server's belongs.
+        /// <para>
+        /// Every parameter is read whether it arrives as a token or as a quoted-string, because
+        /// the HTTP authentication grammar (RFC 9110, section 11.2) allows either for any
+        /// parameter. RFC 7616's rules on which parameters to quote bind senders, and devices
+        /// get them wrong both ways: Hikvision sends algorithm="MD5", and Onvif Device Manager
+        /// quotes qop and nc. A quoted-string has its backslash escapes removed.
+        /// </para>
         /// </remarks>
+        /// <param name="hasQuotes">
+        /// Whether the specification has the parameter quoted. It no longer changes how the
+        /// value is read, and is kept so existing callers still compile.
+        /// </param>
         public static string GetValueFromHeader(string header, string key, bool hasQuotes)
         {
             // A parameter starts at the beginning of the header value, or after a separator.
             const string start = @"(?<=^|[\s,])";
 
-            Regex regHeader;
-            if (hasQuotes)
-            {
-                regHeader = new Regex($@"{start}{key}=""([^""]*)""", RegexOptions.IgnoreCase);
-            }
-            else
-            {
-                regHeader = new Regex($@"{start}{key}=([^\s,]*)", RegexOptions.IgnoreCase);
-            }
+            var regHeader = new Regex(
+                $@"{start}{key}\s*=\s*(?:""((?:[^""\\]|\\.)*)""|([^\s,]*))",
+                RegexOptions.IgnoreCase | RegexOptions.Singleline);
 
             Match matchHeader = regHeader.Match(header);
 
-            if (matchHeader.Success)
+            if (!matchHeader.Success)
             {
-                return matchHeader.Groups[1].Value;
+                return null;
             }
 
-            return null;
+            if (matchHeader.Groups[1].Success)
+            {
+                return Regex.Replace(matchHeader.Groups[1].Value, @"\\(.)", "$1", RegexOptions.Singleline);
+            }
+
+            return matchHeader.Groups[2].Value;
+        }
+
+        /// <summary>
+        /// Writes a value as a quoted-string, escaping the quotes and backslashes in it so that
+        /// <see cref="GetValueFromHeader"/> on the other side reads back the same value.
+        /// </summary>
+        private static string Quote(string value)
+        {
+            return "\"" + (value ?? "").Replace("\\", "\\\\").Replace("\"", "\\\"") + "\"";
         }
 
         /// <summary>

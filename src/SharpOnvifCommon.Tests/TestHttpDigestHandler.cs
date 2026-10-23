@@ -143,6 +143,27 @@ namespace SharpOnvif.Tests
             Assert.AreEqual(1, transport.Requests.Count, "there is nothing to retry with");
         }
 
+        [DataRow("algorithm=\"MD5\"", DisplayName = "quoted")]
+        [DataRow("algorithm=MD5", DisplayName = "unquoted")]
+        [TestMethod]
+        public async Task AcceptsAChallengeWhateverQuotingItsAlgorithmUses(string algorithm)
+        {
+            // Hikvision quotes the algorithm, which RFC 7616 defines as a token. Reading the
+            // quotes as part of the name made MD5 look unsupported, so no call ever authenticated.
+            var transport = new FakeTransport((request, call) =>
+                call == 1
+                    ? FakeTransport.Challenge("realm=\"r\", qop=\"auth\", nonce=\"n\", " + algorithm + ", stale=\"FALSE\"")
+                    : FakeTransport.Ok());
+
+            var client = CreateClient(transport, out _);
+            var response = await PostAsync(client);
+
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+            Assert.AreEqual(2, transport.Requests.Count);
+            Assert.IsNotNull(transport.Authorizations[1]);
+            Assert.IsFalse(transport.Authorizations[1].Contains("algorithm=\""), "the quotes must not be echoed back");
+        }
+
         [TestMethod]
         public async Task IgnoresAChallengeWithoutQop()
         {
