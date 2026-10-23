@@ -58,7 +58,7 @@ namespace SharpOnvifServer.Security
                     // read username*
                     if (string.IsNullOrEmpty(userName))
                     {
-                        userName = HttpDigestAuthentication.GetValueFromHeader(auth, "username\\*", false); // username*
+                        userName = HttpDigestAuthentication.GetValueFromHeader(auth, "username*", false);
                         if (!string.IsNullOrEmpty(userName) && userName.StartsWith("UTF-8''"))
                         {
                             userName = Uri.UnescapeDataString(userName.Substring("UTF-8''".Length));

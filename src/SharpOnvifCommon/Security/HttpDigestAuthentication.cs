@@ -23,7 +23,6 @@ using System;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -614,10 +613,10 @@ namespace SharpOnvifCommon.Security
         /// Reads one parameter out of a Digest header.
         /// </summary>
         /// <remarks>
-        /// The key has to begin where a parameter begins, or it matches inside a longer name:
-        /// "nonce" appears within "cnonce" and within "nextnonce", so a header that lists cnonce
-        /// before nonce - field order is not constrained - would otherwise yield the client's
-        /// nonce where the server's belongs.
+        /// The header is walked one parameter at a time, so a name is only ever compared against
+        /// whole parameter names: "nonce" is not found inside "cnonce" or "nextnonce", and a
+        /// quoted value is skipped as a unit, so realm="cam, nonce=x" cannot supply a nonce.
+        /// Field order is not constrained, so neither of those may depend on it.
         /// <para>
         /// Every parameter is read whether it arrives as a token or as a quoted-string, because
         /// the HTTP authentication grammar (RFC 9110, section 11.2) allows either for any
@@ -626,32 +625,78 @@ namespace SharpOnvifCommon.Security
         /// quotes qop and nc. A quoted-string has its backslash escapes removed.
         /// </para>
         /// </remarks>
+        /// <param name="header">The header value, with or without the leading scheme.</param>
+        /// <param name="key">
+        /// The parameter name, compared without regard to case. Backslashes are ignored, so the
+        /// "username\\*" earlier versions needed (when the name was a regular expression) still
+        /// reads username*.
+        /// </param>
         /// <param name="hasQuotes">
         /// Whether the specification has the parameter quoted. It no longer changes how the
         /// value is read, and is kept so existing callers still compile.
         /// </param>
+        /// <returns>The value of the first parameter with that name, or null if there is none.</returns>
         public static string GetValueFromHeader(string header, string key, bool hasQuotes)
         {
-            // A parameter starts at the beginning of the header value, or after a separator.
-            const string start = @"(?<=^|[\s,])";
+            if (string.IsNullOrEmpty(header) || string.IsNullOrEmpty(key)) return null;
 
-            var regHeader = new Regex(
-                $@"{start}{key}\s*=\s*(?:""((?:[^""\\]|\\.)*)""|([^\s,]*))",
-                RegexOptions.IgnoreCase | RegexOptions.Singleline);
+            // A parameter name is a token, which cannot contain a backslash.
+            key = key.Replace("\\", "");
 
-            Match matchHeader = regHeader.Match(header);
-
-            if (!matchHeader.Success)
+            int position = 0;
+            while (position < header.Length)
             {
-                return null;
+                // Separators between parameters.
+                while (position < header.Length && (header[position] == ',' || char.IsWhiteSpace(header[position]))) position++;
+
+                int nameStart = position;
+                while (position < header.Length && header[position] != '=' && header[position] != ',' && !char.IsWhiteSpace(header[position])) position++;
+                string name = header.Substring(nameStart, position - nameStart);
+
+                while (position < header.Length && char.IsWhiteSpace(header[position])) position++;
+
+                // A word with no '=' after it is the scheme ("Digest"); it has no value to skip.
+                if (position >= header.Length || header[position] != '=') continue;
+
+                position++;
+                while (position < header.Length && char.IsWhiteSpace(header[position])) position++;
+
+                string value = position < header.Length && header[position] == '"'
+                    ? ReadQuotedString(header, ref position)
+                    : ReadToken(header, ref position);
+
+                if (string.Equals(name, key, StringComparison.OrdinalIgnoreCase)) return value;
             }
 
-            if (matchHeader.Groups[1].Success)
+            return null;
+        }
+
+        /// <summary>
+        /// Reads a quoted-string starting at its opening quote, removing backslash escapes. An
+        /// unterminated one runs to the end of the header.
+        /// </summary>
+        private static string ReadQuotedString(string header, ref int position)
+        {
+            var value = new StringBuilder();
+
+            position++; // the opening quote
+            while (position < header.Length)
             {
-                return Regex.Replace(matchHeader.Groups[1].Value, @"\\(.)", "$1", RegexOptions.Singleline);
+                char c = header[position++];
+                if (c == '"') break;
+                if (c == '\\' && position < header.Length) c = header[position++];
+                value.Append(c);
             }
 
-            return matchHeader.Groups[2].Value;
+            return value.ToString();
+        }
+
+        /// <summary>Reads an unquoted value, which ends at whitespace or the next separator.</summary>
+        private static string ReadToken(string header, ref int position)
+        {
+            int start = position;
+            while (position < header.Length && header[position] != ',' && !char.IsWhiteSpace(header[position])) position++;
+            return header.Substring(start, position - start);
         }
 
         /// <summary>

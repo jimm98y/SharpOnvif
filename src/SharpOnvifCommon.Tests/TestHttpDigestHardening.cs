@@ -20,6 +20,7 @@
 // SOFTWARE.
 
 using System;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using SharpOnvifCommon.Security;
@@ -127,6 +128,54 @@ namespace SharpOnvif.Tests
             Assert.AreEqual("Cam \"North\", gate \\ 2", HttpDigestAuthentication.GetValueFromHeader(header, "realm", true));
             Assert.AreEqual("n", HttpDigestAuthentication.GetValueFromHeader(header, "nonce", true),
                 "an escaped quote must not end the realm early and leave the rest to be misread");
+        }
+
+        [DataRow("Digest realm=\"cam, nonce=EVIL\", nonce=\"REAL\"", DisplayName = "token inside a quoted value")]
+        [DataRow("Digest realm=\"cam, nonce=\\\"EVIL\\\"\", nonce=\"REAL\"", DisplayName = "escaped quoted-string inside a quoted value")]
+        [DataRow("Digest username=\"a nonce=EVIL\", nonce=REAL", DisplayName = "after whitespace inside a quoted value")]
+        [TestMethod]
+        public void DoesNotReadAParameterFromInsideAnotherOnesValue(string header)
+        {
+            Assert.AreEqual("REAL", HttpDigestAuthentication.GetValueFromHeader(header, "nonce", true));
+        }
+
+        [TestMethod]
+        public void ReadsTheExtendedUserNameWithOrWithoutTheOldRegexEscape()
+        {
+            const string header = "Digest username*=UTF-8''J%C3%A4s%C3%B8n, realm=\"r\"";
+
+            Assert.AreEqual("UTF-8''J%C3%A4s%C3%B8n", HttpDigestAuthentication.GetValueFromHeader(header, "username*", false));
+            Assert.AreEqual("UTF-8''J%C3%A4s%C3%B8n", HttpDigestAuthentication.GetValueFromHeader(header, "username\\*", false));
+            Assert.IsNull(HttpDigestAuthentication.GetValueFromHeader(header, "username", true),
+                "username* is a different parameter from username");
+        }
+
+        [DataRow("Digest realm=\"unterminated", "realm", "unterminated", DisplayName = "unterminated quoted-string")]
+        [DataRow("Digest realm=\"ends in a backslash\\", "realm", "ends in a backslash\\", DisplayName = "trailing backslash is kept")]
+        [DataRow("Digest realm=, nonce=\"n\"", "realm", "", DisplayName = "empty value")]
+        [DataRow("Digest realm", "realm", null, DisplayName = "name with no value")]
+        [DataRow("Digest", "realm", null, DisplayName = "scheme only")]
+        [DataRow("", "realm", null, DisplayName = "empty header")]
+        [DataRow(null, "realm", null, DisplayName = "null header")]
+        [DataRow("Digest r.e[a]l+m=x", "r.e[a]l+m", "x", DisplayName = "regex metacharacters in the name are literal")]
+        [TestMethod]
+        public void ReadsMalformedHeadersWithoutThrowing(string header, string key, string expected)
+        {
+            Assert.AreEqual(expected, HttpDigestAuthentication.GetValueFromHeader(header, key, true));
+        }
+
+        [TestMethod]
+        public void ReadsALargeHostileHeaderInLinearTime()
+        {
+            // Many keys each opening a quote that never closes, the shape that costs a
+            // backtracking parser most.
+            string header = new StringBuilder().Insert(0, "nonce=\"x\\, nonce=\"", 100_000).ToString();
+
+            var stopwatch = System.Diagnostics.Stopwatch.StartNew();
+            HttpDigestAuthentication.GetValueFromHeader(header, "opaque", true);
+            stopwatch.Stop();
+
+            Assert.IsLessThan(1000L, stopwatch.ElapsedMilliseconds, "a 1.8 MB header should be read in one pass");
         }
 
         [TestMethod]
