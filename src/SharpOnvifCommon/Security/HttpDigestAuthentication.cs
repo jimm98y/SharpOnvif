@@ -651,7 +651,11 @@ namespace SharpOnvifCommon.Security
 
                 int nameStart = position;
                 while (position < header.Length && header[position] != '=' && header[position] != ',' && !char.IsWhiteSpace(header[position])) position++;
-                string name = header.Substring(nameStart, position - nameStart);
+
+                // Compared in place, and only the value asked for is copied, so walking past the
+                // other parameters allocates nothing.
+                bool isKey = position - nameStart == key.Length &&
+                    string.Compare(header, nameStart, key, 0, key.Length, StringComparison.OrdinalIgnoreCase) == 0;
 
                 while (position < header.Length && char.IsWhiteSpace(header[position])) position++;
 
@@ -662,10 +666,10 @@ namespace SharpOnvifCommon.Security
                 while (position < header.Length && char.IsWhiteSpace(header[position])) position++;
 
                 string value = position < header.Length && header[position] == '"'
-                    ? ReadQuotedString(header, ref position)
-                    : ReadToken(header, ref position);
+                    ? ReadQuotedString(header, ref position, isKey)
+                    : ReadToken(header, ref position, isKey);
 
-                if (string.Equals(name, key, StringComparison.OrdinalIgnoreCase)) return value;
+                if (isKey) return value;
             }
 
             return null;
@@ -673,11 +677,11 @@ namespace SharpOnvifCommon.Security
 
         /// <summary>
         /// Reads a quoted-string starting at its opening quote, removing backslash escapes. An
-        /// unterminated one runs to the end of the header.
+        /// unterminated one runs to the end of the header. Returns null when not capturing.
         /// </summary>
-        private static string ReadQuotedString(string header, ref int position)
+        private static string ReadQuotedString(string header, ref int position, bool capture)
         {
-            var value = new StringBuilder();
+            StringBuilder value = capture ? new StringBuilder() : null;
 
             position++; // the opening quote
             while (position < header.Length)
@@ -685,18 +689,21 @@ namespace SharpOnvifCommon.Security
                 char c = header[position++];
                 if (c == '"') break;
                 if (c == '\\' && position < header.Length) c = header[position++];
-                value.Append(c);
+                value?.Append(c);
             }
 
-            return value.ToString();
+            return value?.ToString();
         }
 
-        /// <summary>Reads an unquoted value, which ends at whitespace or the next separator.</summary>
-        private static string ReadToken(string header, ref int position)
+        /// <summary>
+        /// Reads an unquoted value, which ends at whitespace or the next separator. Returns null
+        /// when not capturing.
+        /// </summary>
+        private static string ReadToken(string header, ref int position, bool capture)
         {
             int start = position;
             while (position < header.Length && header[position] != ',' && !char.IsWhiteSpace(header[position])) position++;
-            return header.Substring(start, position - start);
+            return capture ? header.Substring(start, position - start) : null;
         }
 
         /// <summary>

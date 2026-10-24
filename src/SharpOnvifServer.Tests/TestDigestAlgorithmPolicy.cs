@@ -130,8 +130,11 @@ namespace SharpOnvif.Tests
             return request;
         }
 
-        /// <summary>Answers the device's challenge with a digest computed using one algorithm.</summary>
-        private static async Task<HttpStatusCode> AuthenticateWithAsync(string algorithm)
+        /// <summary>
+        /// Answers the device's challenge with a digest computed using one algorithm, and an
+        /// extra parameter of the given length to make the header longer without changing it.
+        /// </summary>
+        private static async Task<HttpStatusCode> AuthenticateWithAsync(string algorithm, int padding = 0)
         {
             using (var http = new HttpClient())
             {
@@ -152,7 +155,8 @@ namespace SharpOnvif.Tests
 
                 request.Headers.TryAddWithoutValidation("Authorization",
                     HttpDigestAuthentication.CreateAuthorizationRFC7616(
-                        UserName, Realm, nonce, uri, response, opaque, algorithm, "auth", 1, clientNonce, false));
+                        UserName, Realm, nonce, uri, response, opaque, algorithm, "auth", 1, clientNonce, false) +
+                    (padding > 0 ? $", padding=\"{new string('a', padding)}\"" : ""));
 
                 return (await http.SendAsync(request)).StatusCode;
             }
@@ -162,6 +166,15 @@ namespace SharpOnvif.Tests
         public async Task AcceptsTheAlgorithmItOffers()
         {
             Assert.AreEqual(HttpStatusCode.OK, await AuthenticateWithAsync("SHA-256"));
+        }
+
+        [TestMethod]
+        public async Task RefusesAnOtherwiseCorrectDigestWhoseHeaderIsTooLong()
+        {
+            // The same correct digest, accepted at 8 KB and refused once it passes the 16 KB
+            // default - still well inside what Kestrel lets through.
+            Assert.AreEqual(HttpStatusCode.OK, await AuthenticateWithAsync("SHA-256", 8 * 1024));
+            Assert.AreEqual(HttpStatusCode.Unauthorized, await AuthenticateWithAsync("SHA-256", 17 * 1024));
         }
 
         [TestMethod]

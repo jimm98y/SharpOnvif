@@ -164,6 +164,50 @@ namespace SharpOnvif.Tests
             Assert.IsFalse(transport.Authorizations[1].Contains("algorithm=\""), "the quotes must not be echoed back");
         }
 
+        [DataRow(16 * 1024, 17 * 1024, false, DisplayName = "over the default limit")]
+        [DataRow(16 * 1024, 8 * 1024, true, DisplayName = "under the default limit")]
+        [DataRow(0, 17 * 1024, true, DisplayName = "limit turned off")]
+        [TestMethod]
+        public async Task IgnoresAChallengeLongerThanTheLimit(int limit, int padding, bool authenticates)
+        {
+            string challenge = Challenge + ", padding=\"" + new string('a', padding) + "\"";
+            var transport = new FakeTransport((request, call) =>
+                call == 1 ? FakeTransport.Challenge(challenge) : FakeTransport.Ok());
+
+            var settings = new OnvifAuthenticationOptions { HttpDigestMaxHeaderLength = limit };
+            var client = new HttpClient(new HttpDigestHandler(new NetworkCredential("admin", "password"), settings, transport));
+            var response = await PostAsync(client);
+
+            Assert.AreEqual(authenticates ? HttpStatusCode.OK : HttpStatusCode.Unauthorized, response.StatusCode);
+            Assert.AreEqual(authenticates ? 2 : 1, transport.Requests.Count);
+        }
+
+        [TestMethod]
+        public async Task TreatsAnAuthenticationInfoLongerThanTheLimitAsAbsent()
+        {
+            // The rspauth here is wrong and would be refused if it were read at all.
+            string info = "rspauth=\"00000000000000000000000000000000\", padding=\"" + new string('a', 17 * 1024) + "\"";
+            HttpClient Client(int limit)
+            {
+                var transport = new FakeTransport((request, call) =>
+                {
+                    if (call == 1) return FakeTransport.Challenge(Challenge);
+                    var ok = FakeTransport.Ok();
+                    ok.Headers.TryAddWithoutValidation("Authentication-Info", info);
+                    return ok;
+                });
+
+                var settings = new OnvifAuthenticationOptions { HttpDigestMaxHeaderLength = limit };
+                return new HttpClient(new HttpDigestHandler(new NetworkCredential("admin", "password"), settings, transport));
+            }
+
+            var response = await PostAsync(Client(16 * 1024));
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+
+            // With the limit off, the same header is read and its rspauth refused.
+            await Assert.ThrowsExactlyAsync<System.Security.Authentication.AuthenticationException>(() => PostAsync(Client(0)));
+        }
+
         [TestMethod]
         public async Task IgnoresAChallengeWithoutQop()
         {

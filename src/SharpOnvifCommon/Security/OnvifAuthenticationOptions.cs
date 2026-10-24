@@ -57,6 +57,27 @@ namespace SharpOnvifCommon.Security
         public bool HttpDigestUserHash { get; set; } = true;
 
         /// <summary>
+        /// The longest Digest header, in characters, that is read at all: a WWW-Authenticate or
+        /// Authentication-Info header on the client, an Authorization header on the device. Zero
+        /// or less turns the check off.
+        /// <para>
+        /// A real Digest header is a few hundred characters, and stays under 1 KB even with
+        /// SHA-512-256 and a hashed username. The transport limits headers first - 64 KB in
+        /// HttpClient, 32 KB in Kestrel - but those are often raised for unrelated reasons, and
+        /// a longer header costs time and memory to read for no possible benefit. On the client
+        /// a challenge over the limit is ignored, as an unusable one would be, and the 401 is
+        /// returned; on the device the request is refused with a new challenge.
+        /// </para>
+        /// </summary>
+        public int HttpDigestMaxHeaderLength { get; set; } = 16 * 1024;
+
+        /// <summary>Whether a Digest header of this length is short enough to be read.</summary>
+        public bool IsWithinHttpDigestMaxHeaderLength(string header)
+        {
+            return header != null && (HttpDigestMaxHeaderLength <= 0 || header.Length <= HttpDigestMaxHeaderLength);
+        }
+
+        /// <summary>
         /// Actions the Onvif core specification places in the PRE_AUTH category, which a device
         /// must answer without credentials.
         /// <para>
@@ -85,6 +106,7 @@ namespace SharpOnvifCommon.Security
 
             Authentication = other.Authentication;
             HttpDigestUserHash = other.HttpDigestUserHash;
+            HttpDigestMaxHeaderLength = other.HttpDigestMaxHeaderLength;
 
             HttpDigestAlgorithms = other.HttpDigestAlgorithms == null
                 ? null : new List<string>(other.HttpDigestAlgorithms);

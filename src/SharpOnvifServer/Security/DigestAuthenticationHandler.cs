@@ -94,6 +94,14 @@ namespace SharpOnvifServer.Security
 
             if (Options.Onvif.Authentication.HasFlag(DigestAuthentication.HttpDigest))
             {
+                if (Request.HasDigestAuthorizationHeader() &&
+                    !Options.Onvif.IsWithinHttpDigestMaxHeaderLength(Request.Headers.Authorization[0]))
+                {
+                    // refused before it is read; like a malformed digest, it must not be excused
+                    // by a token further down the request
+                    return AuthenticateResult.Fail("HTTP Digest header is too long.");
+                }
+
                 // according to the Onvif specification, we must first authenticate the Digest if it's present
                 WebDigestAuth webToken = Request.GetSecurityHeaderFromHeaders();
 

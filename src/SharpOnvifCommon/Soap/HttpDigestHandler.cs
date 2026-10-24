@@ -97,6 +97,7 @@ namespace SharpOnvifCommon.Soap
 
                 string challenge = header.Parameter;
                 if (string.IsNullOrEmpty(challenge)) continue;
+                if (!_settings.IsWithinHttpDigestMaxHeaderLength(challenge)) continue;
 
                 // The Onvif core specification does not permit the qop-less RFC 2069 form.
                 string qop = HttpDigestAuthentication.GetValueFromHeader(challenge, "qop", true);
@@ -234,6 +235,9 @@ namespace SharpOnvifCommon.Soap
             string info = null;
             foreach (string value in values) { info = value; break; }
             if (string.IsNullOrEmpty(info)) return;
+
+            // Treated as absent, like the rspauth some devices never send.
+            if (!_settings.IsWithinHttpDigestMaxHeaderLength(info)) return;
 
             string rspauth = HttpDigestAuthentication.GetValueFromHeader(info, "rspauth", true);
             string cnonce = HttpDigestAuthentication.GetValueFromHeader(info, "cnonce", true);
