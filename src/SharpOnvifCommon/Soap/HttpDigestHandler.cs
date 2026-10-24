@@ -238,7 +238,7 @@ namespace SharpOnvifCommon.Soap
             string rspauth = HttpDigestAuthentication.GetValueFromHeader(info, "rspauth", true);
             string cnonce = HttpDigestAuthentication.GetValueFromHeader(info, "cnonce", true);
             string nc = HttpDigestAuthentication.GetValueFromHeader(info, "nc", false);
-            string qop = (HttpDigestAuthentication.GetValueFromHeader(info, "qop", false) ?? "").Replace("\"", "");
+            string qop = HttpDigestAuthentication.GetValueFromHeader(info, "qop", false) ?? "";
             string nextNonce = HttpDigestAuthentication.GetValueFromHeader(info, "nextnonce", true);
 
             if (string.IsNullOrEmpty(rspauth))
