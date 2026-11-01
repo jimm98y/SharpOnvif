@@ -6,6 +6,20 @@
 		<Nullable>disable</Nullable>
 	</PropertyGroup>
 
+	<!-- No reflection: the contracts' serialization, and the server's dispatch, are generated. The trim and AOT
+	     analyzers check that it stays so, where they exist. -->
+	<PropertyGroup Condition=" $([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0')) ">
+		<IsAotCompatible>true</IsAotCompatible>
+	</PropertyGroup>
+
+	<!-- configuration.Bind, as AddOnvifDigestAuthentication uses it, generated at compile time rather than reflected.
+	     The generator reports, and leaves alone, what a file cannot hold - the options' TimeProvider and
+	     HttpDigestNonceReplayStore, services given in code - and its reports cannot be silenced at the call. -->
+	<PropertyGroup>
+		<EnableConfigurationBindingGenerator>true</EnableConfigurationBindingGenerator>
+		<NoWarn>$(NoWarn);SYSLIB1100;SYSLIB1101</NoWarn>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 	</ItemGroup>

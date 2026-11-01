@@ -4,6 +4,12 @@
 		<TargetFrameworks>netstandard2.0;net481;net8.0;net10.0</TargetFrameworks>
 	</PropertyGroup>
 
+	<!-- No reflection: the contracts' serialization, and the server's dispatch, are generated. The trim and AOT
+	     analyzers check that it stays so, where they exist. -->
+	<PropertyGroup Condition=" $([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0')) ">
+		<IsAotCompatible>true</IsAotCompatible>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<ProjectReference Include="..\SharpOnvifCommon\SharpOnvifCommon.csproj" />
 	</ItemGroup>

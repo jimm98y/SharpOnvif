@@ -19,15 +19,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SharpOnvifServer;
 using SharpOnvifServer.Dispatch;
 
 var builder = WebApplication.CreateBuilder();
-
-builder.Services.AddControllers();
 
 builder.Services.AddSingleton<SharpOnvifServer.IUserRepository, OnvifService.Repository.UserRepository>();
 builder.Services.AddOnvifDigestAuthentication(builder.Configuration.GetSection("DigestAuthenticationOptions"));
@@ -72,6 +72,8 @@ app.MapOnvifService<OnvifService.Onvif.EventsImpl>(URI_EVENTS_SERVICE);
 app.MapOnvifService<OnvifService.Onvif.RouterSubscriptionManagerImpl>(URI_EVENTS_SUBSCRIPTION);
 app.MapOnvifService<OnvifService.Onvif.RouterPullPointSubscriptionManagerImpl>(URI_EVENTS_PULLPOINT_SUBSCRIPTION);
 
-app.MapControllers();
+// The snapshot GetSnapshotUri hands out. A minimal API rather than an MVC controller, which native AOT cannot compile.
+app.MapGet("/preview", () => Results.File(System.IO.File.OpenRead("vaultboy.jpg"), "image/jpeg"))
+   .RequireAuthorization(new AuthorizeAttribute { AuthenticationSchemes = "Digest" });
 
 app.Run();
